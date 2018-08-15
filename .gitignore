@@ -48,3 +48,4 @@ CTestTestfile.cmake
 
 
 # End of https://www.gitignore.io/api/c++,cmake
+build/
