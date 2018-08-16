@@ -12,4 +12,4 @@ add_executable(crayg
         src/crayg.cpp
         .gitignore
         CMakeLists.txt
-        README.md src/Image.cpp src/Image.h src/Vector3f.cpp src/Vector3f.h src/Vector3fTests.cpp)
+        README.md src/Image.cpp src/Image.h src/Vector3f.cpp src/Vector3f.h src/Vector3fTests.cpp src/BmpImageWriter.cpp src/BmpImageWriter.h)
