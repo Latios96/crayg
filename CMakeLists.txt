@@ -12,4 +12,4 @@ add_executable(crayg
         src/crayg.cpp
         .gitignore
         CMakeLists.txt
-        README.md src/Image.cpp src/Image.h src/Vector3f.cpp src/Vector3f.h src/Vector3fTests.cpp src/BmpImageWriter.cpp src/BmpImageWriter.h)
+        README.md src/Image.cpp src/Image.h src/Vector3f.cpp src/Vector3f.h src/Vector3fTests.cpp src/BmpImageWriter.cpp src/BmpImageWriter.h src/Camera.cpp src/Camera.h src/PineHoleCameraModel.cpp src/PineHoleCameraModel.h src/Ray.cpp src/Ray.h)

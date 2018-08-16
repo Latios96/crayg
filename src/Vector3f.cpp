@@ -16,23 +16,23 @@ Vector3f::Vector3f(float _x, float _y, float _z) {
     z = _z;
 }
 
-Vector3f Vector3f::add(const Vector3f &otherVector) {
+Vector3f Vector3f::add(const Vector3f &otherVector) const {
     return {x + otherVector.x, y + otherVector.y, z + otherVector.z};
 }
 
-Vector3f Vector3f::substract(const Vector3f &otherVector) {
+Vector3f Vector3f::substract(const Vector3f &otherVector)const {
     return {x - otherVector.x, y - otherVector.y, z - otherVector.z};
 }
 
-Vector3f Vector3f::multiplyScalar(float scalar) {
+Vector3f Vector3f::multiplyScalar(float scalar) const {
     return {x*scalar, y*scalar, z*scalar};
 }
 
-float Vector3f::length() {
+float Vector3f::length() const {
     return static_cast<float>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
 }
 
-Vector3f Vector3f::normalize() {
+Vector3f Vector3f::normalize() const {
     float length = this->length();
     // TODO optimize with computing 1/length and multiply with vector components
     return {x / length, y / length, z / length};

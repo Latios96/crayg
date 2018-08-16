@@ -34,8 +34,8 @@ void BmpImageWriter::write_image(const Image &image, const std::string image_nam
             y=j;
             Vector3f value = image.get_value(i,j);
             r = static_cast<int>(value.x * 255);
-            g = static_cast<int>(value.x * 255);
-            b = static_cast<int>(value.x * 255);
+            g = static_cast<int>(value.y * 255);
+            b = static_cast<int>(value.z * 255);
             if (r > 255) r = 255;
             if (g > 255) g = 255;
             if (b > 255) b = 255;

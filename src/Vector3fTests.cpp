@@ -3,7 +3,7 @@
 //
 
 //#include "catch.hpp"
-#include "Vector3f.h"
+//#include "Vector3f.h"
 /*
 bool compareWithPrecision(float A, float B, float epsilon = 0.001f)
 {
