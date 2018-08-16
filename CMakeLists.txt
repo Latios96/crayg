@@ -9,7 +9,7 @@ set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fs
 set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_STATIC_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 
 add_executable(crayg
-        src/helloworld.cpp
+        src/crayg.cpp
         .gitignore
         CMakeLists.txt
-        README.md src/Image.cpp src/Image.h src/Vector3f.cpp src/Vector3f.h src/tests.cpp)
+        README.md src/Image.cpp src/Image.h src/Vector3f.cpp src/Vector3f.h src/Vector3fTests.cpp)

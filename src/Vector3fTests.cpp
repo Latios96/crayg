@@ -1,15 +1,15 @@
 //
 // Created by jan on 15.08.18.
 //
-//#define CATCH_CONFIG_MAIN
+
 //#include "catch.hpp"
 #include "Vector3f.h"
-
+/*
 bool compareWithPrecision(float A, float B, float epsilon = 0.001f)
 {
     return (fabs(A - B) < epsilon);
 }
-/*
+
 TEST_CASE("Vector3f Addition") {
     Vector3f myVector(1,1,1);
     Vector3f otherVector(1,2,3);

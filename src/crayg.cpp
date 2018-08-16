@@ -2,12 +2,11 @@
 #include <cstring>
 #include "Image.h"
 
-
 // todo use proper Color class
 
 class BmpImageWriter{
 public:
-    void write_image(const Image &image, std::string image_name){
+    void write_image(const Image &image, const std::string image_name){
 
         // https://stackoverflow.com/questions/2654480/writing-bmp-image-in-pure-c-c-without-other-libraries
 
@@ -31,7 +30,9 @@ public:
         {
             for (int j = 0; j<h; j++)
             {
-                x = i; y = (h - 1) - j;
+                x = i;
+                //y = (h - 1) - j;
+                y=j;
                 Vector3f value = image.get_value(i,j);
                 r = static_cast<int>(value.x * 255);
                 g = static_cast<int>(value.x * 255);
@@ -82,13 +83,13 @@ int main(int argc, char* argv[]) {
 	/*int result = Catch::Session().run(argc, argv);
 
 	// global clean-up...
-	system("PAUSE");
 	return result;*/
     Image myImage(100,100);
 
-    for (int i=0; i<100;i++){
-        myImage.set_value(i,50, 1,1,1);
-    }
+    /*for (int i=0; i<100;i++){
+        myImage.set_value(i,10, 1,1,1);
+    }*/
+    myImage.set_value(10,10,1,1,1);
 
     BmpImageWriter imageWriter;
     imageWriter.write_image(myImage, "");
