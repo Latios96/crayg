@@ -43,3 +43,7 @@ Vector3f Vector3f::crossProduct(const Vector3f &otherVector) {
             z * otherVector.x - otherVector.z * x,
             x * otherVector.y - otherVector.x * y};
 }
+
+Vector3f Vector3f::operator+(const Vector3f &otherVector) const {
+    return add(otherVector);
+}

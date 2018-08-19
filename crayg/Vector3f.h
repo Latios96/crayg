@@ -19,6 +19,8 @@ public:
 
     Vector3f(float _x, float _y, float _z);
 
+    Vector3f operator +(const Vector3f &otherVector) const;
+
     // TODO use operator overloading
     Vector3f add(const Vector3f &otherVector) const ;
 

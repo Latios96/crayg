@@ -32,15 +32,15 @@ public:
      */
     Image(int width, int height);
 
-    int get_width() const;
+    int getWidth() const;
 
-    int get_height() const;
+    int getHeight() const;
 
-    void set_value(int x, int y, const Vector3f &color);
+    void setValue(int x, int y, const Vector3f &color);
 
-    void set_value(int x, int y, float r, float g, float b);
+    void setValue(int x, int y, float r, float g, float b);
 
-    Vector3f get_value(int x, int y) const;
+    Vector3f getValue(int x, int y) const;
 
     ~Image() {
         delete[] values;

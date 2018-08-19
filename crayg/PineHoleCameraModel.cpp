@@ -36,8 +36,8 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
 }
 
 Ray PineHoleCameraModel::createPrimaryRay(float x, float y) {
-    auto f = getPixelCenter(x, y);
-    Vector3f rayDirection= f.substract(camera.getPosition()).normalize();
+    Vector3f pixelCenter = getPixelCenter(x, y);
+    Vector3f rayDirection= pixelCenter.substract(camera.getPosition()).normalize();
     return {camera.getPosition(), rayDirection};
 }
 

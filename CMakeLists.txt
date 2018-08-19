@@ -1,15 +1,12 @@
-# cmake_minimum_required(VERSION <specify CMake version here>)
+cmake_minimum_required(VERSION 2.8)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 project(crayg)
 
-set(CMAKE_CXX_STANDARD 14)
+enable_testing()
 
-include_directories(src)
-
-set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_STATIC_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-
-add_executable(crayg
-        src/crayg.cpp
-        .gitignore
-        CMakeLists.txt
-        README.md src/Image.cpp src/Image.h src/Vector3f.cpp src/Vector3f.h src/Vector3fTests.cpp src/BmpImageWriter.cpp src/BmpImageWriter.h src/Camera.cpp src/Camera.h src/PineHoleCameraModel.cpp src/PineHoleCameraModel.h src/Ray.cpp src/Ray.h)
+add_subdirectory(main)
+add_subdirectory(test)
+add_subdirectory(crayg)

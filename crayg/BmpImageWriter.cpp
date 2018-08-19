@@ -3,14 +3,16 @@
 //
 
 #include <cstring>
+#include <cstdio>
+#include <cstdlib>
 #include "BmpImageWriter.h"
 
 void BmpImageWriter::write_image(const Image &image, const std::string image_name){
 
     // https://stackoverflow.com/questions/2654480/writing-bmp-image-in-pure-c-c-without-other-libraries
 
-    const int w = image.get_width(); /* Put here what ever width you want */
-    const int h = image.get_height(); /* Put here what ever height you want */
+    const int w = image.getWidth(); /* Put here what ever width you want */
+    const int h = image.getHeight(); /* Put here what ever height you want */
 
     FILE *f;
     unsigned char *img = NULL;
@@ -32,7 +34,7 @@ void BmpImageWriter::write_image(const Image &image, const std::string image_nam
             x = i;
             //y = (h - 1) - j;
             y=j;
-            Vector3f value = image.get_value(i,j);
+            Vector3f value = image.getValue(i,j);
             r = static_cast<int>(value.x * 255);
             g = static_cast<int>(value.y * 255);
             b = static_cast<int>(value.z * 255);
