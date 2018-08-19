@@ -21,7 +21,12 @@ public:
 
     Vector3f operator +(const Vector3f &otherVector) const;
 
-    // TODO use operator overloading
+    Vector3f operator -(const Vector3f &otherVector) const;
+
+    Vector3f operator *(float scalar) const;
+
+    Vector3f operator *(const Vector3f &otherVector) const;
+
     Vector3f add(const Vector3f &otherVector) const ;
 
     Vector3f substract(const Vector3f &otherVector) const ;
@@ -36,7 +41,7 @@ public:
         return {x*-1, y*-1, z*-1};
     }
 
-    Vector3f crossProduct(const Vector3f &otherVector);
+    Vector3f crossProduct(const Vector3f &otherVector) const ;
 
 };
 

@@ -38,7 +38,7 @@ Vector3f Vector3f::normalize() const {
     return {x / length, y / length, z / length};
 }
 
-Vector3f Vector3f::crossProduct(const Vector3f &otherVector) {
+Vector3f Vector3f::crossProduct(const Vector3f &otherVector) const {
     return {y * otherVector.z - otherVector.y * z,
             z * otherVector.x - otherVector.z * x,
             x * otherVector.y - otherVector.x * y};
@@ -46,4 +46,16 @@ Vector3f Vector3f::crossProduct(const Vector3f &otherVector) {
 
 Vector3f Vector3f::operator+(const Vector3f &otherVector) const {
     return add(otherVector);
+}
+
+Vector3f Vector3f::operator-(const Vector3f &otherVector) const {
+    return substract(otherVector);
+}
+
+Vector3f Vector3f::operator*(float scalar) const {
+    return multiplyScalar(scalar);
+}
+
+Vector3f Vector3f::operator*(const Vector3f &otherVector) const {
+    return crossProduct(otherVector);
 }
