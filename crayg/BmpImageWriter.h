@@ -11,7 +11,7 @@
 
 class BmpImageWriter{
 public:
-    void write_image(const Image &image, const std::string image_name);
+    void writeImage(const Image &image, const std::string image_name);
 
 };
 

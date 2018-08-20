@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     }
 
     BmpImageWriter imageWriter;
-    imageWriter.write_image(myImage, "");
+    imageWriter.writeImage(myImage, "");
 
     return 0;
 }

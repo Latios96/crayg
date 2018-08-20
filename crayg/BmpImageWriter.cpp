@@ -6,7 +6,7 @@
 #include <cstdio>
 #include "BmpImageWriter.h"
 
-void BmpImageWriter::write_image(const Image &image, const std::string image_name){
+void BmpImageWriter::writeImage(const Image &image, const std::string image_name){
 
     // https://stackoverflow.com/questions/2654480/writing-bmp-image-in-pure-c-c-without-other-libraries
 

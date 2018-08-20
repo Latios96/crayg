@@ -7,7 +7,8 @@
 
 
 #include "Vector3f.h"
-
+// TODO copy constructor
+// TODO docs
 class Image {
 
 private:
