@@ -11,7 +11,7 @@
 PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight) : camera(camera),
                                                                                             imageWidth(imageWidth),
                                                                                             imageHeight(imageHeight) {
-    imageRatio = static_cast<float>(imageHeight) / static_cast<float>(imageWidth);
+    imageRatio = static_cast<float>(imageWidth) / static_cast<float>(imageHeight);
 
     // create view vector
     viewVector = camera.getCenterOfInterest().substract(camera.getPosition()).normalize();

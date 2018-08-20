@@ -4,7 +4,6 @@
 
 #include <cstring>
 #include <cstdio>
-#include <cstdlib>
 #include "BmpImageWriter.h"
 
 void BmpImageWriter::write_image(const Image &image, const std::string image_name){

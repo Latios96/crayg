@@ -11,6 +11,9 @@ set(crayg_SRCS
         PineHoleCameraModel.cpp
         Ray.h
         Ray.cpp
+        Intersectable.h
+        Sphere.h
+        Sphere.cpp
 )
 
 # Declare the library
