@@ -42,3 +42,4 @@ include_directories("${source_dir}/googletest/include"
 add_subdirectory(testfoo)
 add_subdirectory(testvector)
 add_subdirectory(testimage)
+add_subdirectory(testsphere)
