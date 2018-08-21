@@ -50,6 +50,8 @@ public:
      * @return
      */
     Color operator*(float scalar);
+
+    // todo == and != operator
     /**
      * Clamps the color components to 1
      * @return

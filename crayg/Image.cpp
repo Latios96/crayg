@@ -42,3 +42,15 @@ Vector3f Image::getValue(int x, int y) const {
     int index = this->index(x,y);
     return {values[index], values[index+1], values[index+2]};
 }
+
+Image::Image(const Image &image) {
+    this->width = image.width;
+    this->height = image.height;
+
+    int size = width * height * 3;
+    values = new float[size];
+
+    for(int i=0; i<size;i++){
+        values[i] = image.values[i];
+    }
+}

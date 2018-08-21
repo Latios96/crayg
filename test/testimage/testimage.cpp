@@ -20,3 +20,26 @@ TEST(ImageTest, constructImage) {
         }
     }
 }
+TEST(ImageTest_constructImage_Test, copyImage){
+    Image myImage(200,100);
+
+    for(int x=0;x<myImage.getWidth();x++){
+        for(int y=0;y<myImage.getHeight();y++){
+            myImage.setValue(x,y, x*y,x*y,x*y);
+        }
+    }
+
+    Image otherImage(myImage);
+    
+    EXPECT_EQ(myImage.getHeight(), otherImage.getHeight());
+    EXPECT_EQ(myImage.getWidth(), otherImage.getWidth());
+
+    for(int x=0;x<otherImage.getWidth();x++){
+        for(int y=0;y<otherImage.getHeight();y++){
+            Vector3f color = otherImage.getValue(x,y);
+            EXPECT_EQ(color.x, x*y);
+            EXPECT_EQ(color.y, x*y);
+            EXPECT_EQ(color.z, x*y);
+        }
+    }
+}

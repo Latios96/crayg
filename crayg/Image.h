@@ -34,6 +34,8 @@ public:
      */
     Image(int width, int height);
 
+    Image(const Image &image);
+
     int getWidth() const;
 
     int getHeight() const;
