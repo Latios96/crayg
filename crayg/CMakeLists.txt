@@ -14,6 +14,8 @@ set(crayg_SRCS
         Intersectable.h
         Sphere.h
         Sphere.cpp
+        Color.h
+        Color.cpp
 )
 
 # Declare the library

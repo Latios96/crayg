@@ -9,6 +9,7 @@
 #include "Vector3f.h"
 // TODO copy constructor
 // TODO docs
+// TODO use Color class
 class Image {
 
 private:
