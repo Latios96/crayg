@@ -113,3 +113,21 @@ TEST(VectorTest, crossProductOperator) {
     EXPECT_EQ(result.y, -4);
     EXPECT_EQ(result.z, 3);
 }
+
+TEST(VectorTest, operatorEqual) {
+    Vector3f myVector(1,2,3);
+    Vector3f otherVector(1, 2, 3);
+    Vector3f anotherVector(0, 0, 0);
+
+    ASSERT_TRUE(myVector == otherVector);
+    ASSERT_FALSE(myVector == anotherVector);
+}
+
+TEST(VectorTest, operatorNotEqual) {
+    Vector3f myVector(1,2,3);
+    Vector3f otherVector(1, 2, 3);
+    Vector3f anotherVector(0, 0, 0);
+
+    ASSERT_FALSE(myVector != otherVector);
+    ASSERT_TRUE(myVector != anotherVector);
+}

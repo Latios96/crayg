@@ -63,3 +63,11 @@ Vector3f Vector3f::operator*(const Vector3f &otherVector) const {
 float Vector3f::scalarProduct(const Vector3f &otherVector) const {
     return x * otherVector.x + y * otherVector.y + z * otherVector.z;
 }
+
+bool Vector3f::operator==(const Vector3f &otherVector) const {
+    return this->x == otherVector.x && this->y == otherVector.y && this->z == otherVector.z; 
+}
+
+bool Vector3f::operator!=(const Vector3f &otherVector) const {
+    return !(this->x == otherVector.x && this->y == otherVector.y && this->z == otherVector.z);
+}

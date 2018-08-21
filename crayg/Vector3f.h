@@ -27,6 +27,10 @@ public:
 
     Vector3f operator *(const Vector3f &otherVector) const;
 
+    bool operator ==(const Vector3f &otherVector) const;
+
+    bool operator !=(const Vector3f &otherVector) const;
+
     Vector3f add(const Vector3f &otherVector) const ;
 
     Vector3f substract(const Vector3f &otherVector) const ;
