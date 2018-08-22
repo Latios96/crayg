@@ -10,10 +10,10 @@ int main(int argc, char *argv[])
 {
     Image myImage(800,600);
 
-    Camera camera(Vector3f(0,0,5), Vector3f(0,1,0), Vector3f(0,0,-1), 20.0f);
+    Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
     PineHoleCameraModel cameraModel(camera,myImage.getWidth(),myImage.getHeight());
 
-    Sphere sphere(3.0f);
+    Sphere sphere(Vector3f(5,0,-10), 3.0f);
 
     for(int x=0; x<myImage.getWidth();x++){
         for(int y=0; y<myImage.getHeight();y++){

@@ -16,6 +16,8 @@ set(crayg_SRCS
         Sphere.cpp
         Color.h
         Color.cpp
+        Transformable.h
+        Transformable.cpp
 )
 
 # Declare the library
