@@ -9,7 +9,7 @@
 #include "Intersectable.h"
 #include "Transformable.h"
 
-class Sphere : Intersectable, Transformable {
+class Sphere : public Intersectable, public Transformable {
 public:
     Vector3f intersect(Ray ray) override;
     bool intersects(Ray ray) override;
@@ -17,6 +17,8 @@ public:
     Sphere(Vector3f position, float radius);
 
     float getRadius() const;
+
+
 
 private:
     float radius;

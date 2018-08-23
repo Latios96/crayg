@@ -9,9 +9,9 @@ Vector3f Sphere::intersect(Ray ray) {
 }
 
 bool Sphere::intersects(Ray ray) {
-    
+
     ray.startPoint = ray.startPoint + getPosition().invert();
-    
+
     float b = 2.0f * (ray.startPoint.x * ray.direction.x +
             ray.startPoint.y * ray.direction.y +
             ray.startPoint.z * ray.direction.z);
@@ -30,3 +30,4 @@ Sphere::Sphere(Vector3f position, float radius) : Transformable(position), radiu
 float Sphere::getRadius() const {
     return radius;
 }
+

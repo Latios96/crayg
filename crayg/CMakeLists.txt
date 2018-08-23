@@ -18,6 +18,8 @@ set(crayg_SRCS
         Color.cpp
         Transformable.h
         Transformable.cpp
+        Scene.h
+        Scene.cpp
 )
 
 # Declare the library
