@@ -23,6 +23,7 @@ TEST(SphereTest, intersects) {
     // intersects should return true
     ASSERT_FALSE(mySphere.intersects(notIntersectingRay));
 }
+// todo intersection test with transformation
 TEST(SphereTest, transformation){
     Sphere mySphere(Vector3f(1,2,3),3.0f);
     

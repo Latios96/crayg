@@ -92,3 +92,21 @@ TEST(ColorTest, getRgbValues) {
     EXPECT_EQ(std::get<1>(values) , 51);
     EXPECT_EQ(std::get<2>(values) , 76);
 }
+
+TEST(ColorTest, equalOperator){
+    Color myColor(0.1f,0.2f, 0.3f);
+    Color myOtherColor(0.1f,0.2f, 0.3f);
+    Color myOtherOtherColor(0.4f,0.5f, 0.6f);
+
+    ASSERT_TRUE(myColor == myOtherColor);
+    ASSERT_FALSE(myColor == myOtherOtherColor);
+}
+
+TEST(ColorTest, notEqualOperator){
+    Color myColor(0.1f,0.2f, 0.3f);
+    Color myOtherColor(0.1f,0.2f, 0.3f);
+    Color myOtherOtherColor(0.4f,0.5f, 0.6f);
+
+    ASSERT_FALSE(myColor != myOtherColor);
+    ASSERT_TRUE(myColor != myOtherOtherColor);
+}

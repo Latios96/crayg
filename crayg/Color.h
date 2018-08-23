@@ -50,7 +50,15 @@ public:
      * @return
      */
     Color operator*(float scalar);
+    
+    /**
+     * Two colors are equal if their r,g,b components are equal
+     * @param color 
+     * @return 
+     */
+    bool operator == (const Color &color);
 
+    bool operator != (const Color &color);
     // todo == and != operator
     /**
      * Clamps the color components to 1

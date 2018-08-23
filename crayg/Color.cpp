@@ -45,3 +45,11 @@ std::tuple<int, int, int> Color::getRgbValues() {
     return std::make_tuple(std::min(255,int_r), std::min(255,int_g), std::min(255,int_b));
 }
 
+bool Color::operator==(const Color &color) {
+    return (r== color.r && g== color.g && b== color.b);
+}
+
+bool Color::operator!=(const Color &color) {
+    return !(r== color.r && g== color.g && b== color.b);
+}
+
