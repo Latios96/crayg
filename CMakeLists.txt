@@ -7,6 +7,6 @@ project(crayg)
 
 enable_testing()
 
-add_subdirectory(main)
+add_subdirectory(standalone)
 add_subdirectory(test)
 add_subdirectory(crayg)
