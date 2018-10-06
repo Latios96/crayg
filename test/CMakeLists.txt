@@ -1,46 +1,28 @@
-find_package(Threads REQUIRED)
 
-# Enable ExternalProject CMake module
-include(ExternalProject)
+set(UNIT_TEST_LIST
+        string_utils.cpp
+        testcolor.cpp
+        testimage.cpp
+        testsphere.cpp
+        testvector.cpp
+        )
 
-# Download and install GoogleTest
-ExternalProject_Add(
-    gtest
-    URL https://github.com/google/googletest/archive/master.zip
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
-    # Disable install step
-    INSTALL_COMMAND ""
-)
+foreach(NAME IN LISTS UNIT_TEST_LIST)
+  list(APPEND UNIT_TEST_SOURCE_LIST ${NAME})
+endforeach()
 
-# Get GTest source and binary directories from CMake project
-ExternalProject_Get_Property(gtest source_dir binary_dir)
+set(TARGET_NAME tests)
 
-# Create a libgtest target to be used as a dependency by test programs
-add_library(libgtest IMPORTED STATIC GLOBAL)
-add_dependencies(libgtest gtest)
+add_executable(${TARGET_NAME}
+  main.cpp
+  ${UNIT_TEST_SOURCE_LIST})
 
-# Set libgtest properties
-set_target_properties(libgtest PROPERTIES
-    "IMPORTED_LOCATION" "${binary_dir}/googlemock/gtest/libgtest.a"
-    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
-)
+target_link_libraries(${TARGET_NAME}
+  PUBLIC crayg)
 
-# Create a libgmock target to be used as a dependency by test programs
-add_library(libgmock IMPORTED STATIC GLOBAL)
-add_dependencies(libgmock gtest)
+target_include_directories(${TARGET_NAME}
+  PUBLIC ../externals/catch2/)
 
-# Set libgmock properties
-set_target_properties(libgmock PROPERTIES
-    "IMPORTED_LOCATION" "${binary_dir}/googlemock/libgmock.a"
-    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
-)
-
-# I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
-include_directories("${source_dir}/googletest/include"
-                    "${source_dir}/googlemock/include")
-
-add_subdirectory(testfoo)
-add_subdirectory(testvector)
-add_subdirectory(testimage)
-add_subdirectory(testsphere)
-add_subdirectory(testcolor)
+add_test(
+  NAME ${TARGET_NAME}
+  COMMAND ${TARGET_NAME} -o report.xml -r junit)

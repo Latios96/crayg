@@ -1,31 +1,30 @@
 #include <Sphere.h>
-#include "gtest/gtest.h"
+#include <catch.hpp>
 
 
-
-TEST(SphereTest, createSphere) {
+TEST_CASE( "createSphere", "[Sphere]" ) {
     Sphere mySphere(Vector3f(0,0,0),3.0f);
 
     // make sure radius is correctly set
-    EXPECT_EQ(mySphere.getRadius(), 3.0f);
+    REQUIRE(mySphere.getRadius() == 3.0f);
 }
 
-TEST(SphereTest, intersects) {
+TEST_CASE( "intersects", "[Sphere]" ) {
     Sphere mySphere(Vector3f(0,0,0),3.0f);
 
     // test intersecting ray
     Ray intersectingRay(Vector3f(1,0,0), Vector3f(-1,0,0));
     // intersects should return true
-    ASSERT_TRUE(mySphere.intersects(intersectingRay));
+    REQUIRE(mySphere.intersects(intersectingRay));
 
     // test not intersecting ray
     Ray notIntersectingRay(Vector3f(0,0,5), Vector3f(-1,0,0));
     // intersects should return true
-    ASSERT_FALSE(mySphere.intersects(notIntersectingRay));
+    REQUIRE_FALSE(mySphere.intersects(notIntersectingRay));
 }
 // todo intersection test with transformation
-TEST(SphereTest, transformation){
+TEST_CASE( "transformation", "[Sphere]" ) {
     Sphere mySphere(Vector3f(1,2,3),3.0f);
     
-    EXPECT_EQ(mySphere.getPosition(), Vector3f(1,2,3));
+    REQUIRE(mySphere.getPosition() == Vector3f(1,2,3));
 }
