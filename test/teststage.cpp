@@ -31,7 +31,7 @@ TEST_CASE("An AttributeImpl should be created",  "[Stage]"){
     std::unique_ptr<Stage> stage (new Stage());
     int oldAttributeCount = stage->getStats().attributeCount;
 
-    int impl = stage->createIntAttributeImpl();
+    AttributeImpl<int>* impl = stage->createIntAttributeImpl();
 
     // attribute count should be increased by one
     REQUIRE(stage->getStats().attributeCount == oldAttributeCount+1);

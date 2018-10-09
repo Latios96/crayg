@@ -23,7 +23,7 @@ set(crayg_SRCS
         Stage.cpp
         Stage.h
         Prim.cpp
-        Prim.h)
+        Prim.h Attribute.cpp Attribute.h AttributeImpl.cpp AttributeImpl.h)
 
 # Declare the library
 add_library(crayg STATIC

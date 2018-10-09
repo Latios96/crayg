@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "AttributeImpl.h"
 
 struct StageStats{
     int primCount;
@@ -17,15 +18,20 @@ struct StageStats{
 class Stage {
 public:
 
-    int createIntAttributeImpl();
+    AttributeImpl<int>* createIntAttributeImpl();
 
-    std::map<std::string, int>* createPrimMap(const std::string& path);
+    std::map<std::string, GenericAttributeImpl*>* createPrimMap(const std::string& path);
 
     StageStats getStats();
+
+    void printNice();
+
+    virtual ~Stage();
+
 private:
     // todo use AttributeImpl here
-    std::map<std::string, std::map<std::string, int>*> primMaps;
-    std::vector<int> attributeImpls;
+    std::map<std::string, std::map<std::string, GenericAttributeImpl*>*> primMaps;
+    std::vector<GenericAttributeImpl*> attributeImpls;
 };
 
 

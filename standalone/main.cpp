@@ -2,6 +2,8 @@
 #include <Image.h>
 #include <Sphere.h>
 #include <Scene.h>
+#include <Stage.h>
+#include <Prim.h>
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
 #include "BmpImageWriter.h"
@@ -38,6 +40,12 @@ int main(int argc, char *argv[])
 
     BmpImageWriter imageWriter;
     imageWriter.writeImage(myImage, "");
+
+    Stage* stage = new Stage();
+    TestPrim testPrim = TestPrim::defineTestPrim("test", *stage);
+    testPrim.getSizeAttribute().setValue(10);
+    stage->printNice();
+    delete stage;
 
     return 0;
 }
