@@ -17,7 +17,7 @@ StageStats Stage::getStats() {
     return stats;
 }
 
-std::map<std::string, int>*  Stage::createPrimMap(std::string path) {
+std::map<std::string, int>*  Stage::createPrimMap(const std::string& path) {
     auto * prim = new std::map<std::string, int>();
     primMaps[path] = prim;
     return prim;

@@ -1,6 +1,5 @@
 
 set(UNIT_TEST_LIST
-        string_utils.cpp
         testcolor.cpp
         testimage.cpp
         testsphere.cpp
@@ -16,7 +15,7 @@ set(TARGET_NAME tests)
 
 add_executable(${TARGET_NAME}
   main.cpp
-  ${UNIT_TEST_SOURCE_LIST})
+  ${UNIT_TEST_SOURCE_LIST} testprim.cpp)
 
 target_link_libraries(${TARGET_NAME}
   PUBLIC crayg)

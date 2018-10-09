@@ -19,7 +19,7 @@ public:
 
     int createIntAttributeImpl();
 
-    std::map<std::string, int>* createPrimMap(std::string path);
+    std::map<std::string, int>* createPrimMap(const std::string& path);
 
     StageStats getStats();
 private:
