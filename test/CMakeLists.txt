@@ -5,6 +5,7 @@ set(UNIT_TEST_LIST
         testimage.cpp
         testsphere.cpp
         testvector.cpp
+        teststage.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)

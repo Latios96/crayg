@@ -6,6 +6,7 @@ bool compareWithPrecision(float A, float B, float epsilon = 0.001f)
     return (fabs(A - B) < epsilon);
 }
 
+// todo we can do this better with https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md#test-cases-and-sections
 TEST_CASE( "addTwoVectors", "[Vector]" ) {
     Vector3f myVector(1,1,1);
     Vector3f otherVector(1,2,3);
