@@ -9,6 +9,7 @@
 #include <map>
 #include <vector>
 #include "AttributeImpl.h"
+#include "Vector3f.h"
 
 struct StageStats{
     int primCount;
@@ -17,8 +18,6 @@ struct StageStats{
 
 class Stage {
 public:
-
-    /*AttributeImpl<int>* createIntAttributeImpl();*/
 
     std::map<std::string, GenericAttributeImpl*>* createPrimMap(const std::string& path);
 
@@ -42,6 +41,9 @@ std::string getTypeName(){
     if (typeid(T) == typeid(int)){
         return "int";
     }
+    if (typeid(T) == typeid(Vector3f)){
+        return "Vector3f";
+    }
     else{
         return "unknown";
     }
@@ -49,8 +51,8 @@ std::string getTypeName(){
 
 template<typename T>
 AttributeImpl<T> *Stage::createAttributeImpl() {
-    AttributeImpl<T>* intAttrImpl = new AttributeImpl<int>();
-    intAttrImpl->attr_type = getTypeName<int>();
+    AttributeImpl<T>* intAttrImpl = new AttributeImpl<T>();
+    intAttrImpl->attr_type = getTypeName<T>();
     attributeImpls.push_back(intAttrImpl);
     return intAttrImpl;
 }

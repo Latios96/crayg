@@ -13,6 +13,11 @@ public:
     bool isInt(){
         return attr_type == "int";
     }
+    bool isVector3f(){
+        return attr_type == "Vector3f";
+    }
+
+    // todo destructor needs to be virtual i think
 };
 
 template<typename T>

@@ -23,7 +23,16 @@ set(crayg_SRCS
         prims/Stage.cpp
         prims/Stage.h
         prims/Prim.cpp
-        prims/Prim.h prims/Attribute.cpp prims/Attribute.h prims/AttributeImpl.cpp prims/AttributeImpl.h)
+        prims/Prim.h
+        prims/Attribute.cpp
+        prims/Attribute.h
+        prims/AttributeImpl.cpp
+        prims/AttributeImpl.h
+        prims/SpherePrim.cpp
+        prims/SpherePrim.h
+        prims/ImageablePrim.h
+        prims/TransformablePrim.cpp
+        prims/TransformablePrim.h prims/ImageablePrim.cpp)
 
 # Declare the library
 add_library(crayg STATIC

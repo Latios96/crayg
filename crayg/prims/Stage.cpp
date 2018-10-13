@@ -31,13 +31,21 @@ Stage::~Stage() {
 AttributeImpl<int>* getAsIntImpl(GenericAttributeImpl* impl){
     return static_cast<AttributeImpl<int>*>(impl);
 }
+AttributeImpl<Vector3f>* getAsVector3fImpl(GenericAttributeImpl* impl){
+    return static_cast<AttributeImpl<Vector3f>*>(impl);
+}
 void Stage::printNice() {
     for(auto primMap : primMaps){
         std::cout << primMap.first << std::endl;
         for(auto primAttr : *(primMap.second)){
             std::cout << "   " << primAttr.second->attr_type << " " << primAttr.first;
             if (primAttr.second->isInt()){
-                std::cout << " " << getAsIntImpl(primAttr.second)->value << std::endl;
+                AttributeImpl<int> *impl = getAsIntImpl(primAttr.second);
+                std::cout << " " << impl->value << std::endl;
+            }
+            else if (primAttr.second->isVector3f()){
+                Vector3f value = getAsVector3fImpl(primAttr.second)->value;
+                std::cout << " " << "x=" << value.x << "y=" << value.y << "z=" << value.z<< std::endl;
             }
         }
     }

@@ -4,6 +4,7 @@
 #include <Scene.h>
 #include <prims/Stage.h>
 #include <prims/Prim.h>
+#include <prims/SpherePrim.h>
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
 #include "BmpImageWriter.h"
@@ -11,7 +12,7 @@
 
 int main(int argc, char *argv[])
 {
-    Image myImage(800,600);
+    /*Image myImage(800,600);
 
     Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
     PineHoleCameraModel cameraModel(camera,myImage.getWidth(),myImage.getHeight());
@@ -39,13 +40,14 @@ int main(int argc, char *argv[])
     }
 
     BmpImageWriter imageWriter;
-    imageWriter.writeImage(myImage, "");
+    imageWriter.writeImage(myImage, "");*/
 
-    /*Stage* stage = new Stage();
-    TestPrim testPrim = TestPrim::defineTestPrim("test", *stage);
-    testPrim.getSizeAttribute().setValue(10);
+    Stage* stage = new Stage();
+    SpherePrim spherePrim = SpherePrim::defineSpherePrim("/sphere", *stage);
+    spherePrim.getSizeAttribute().setValue(5);
+    spherePrim.getPositionAttribute().setValue(Vector3f(1,2,3));
     stage->printNice();
-    delete stage;*/
+    delete stage;
 
     return 0;
 }

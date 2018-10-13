@@ -5,6 +5,8 @@
 #include <catch.hpp>
 #include <prims/Stage.h>
 #include <prims/Prim.h>
+#include <prims/SpherePrim.h>
+
 
 TEST_CASE("createPrim", "[Prim]"){
     Stage* stage = new Stage();
@@ -47,3 +49,5 @@ TEST_CASE("createTestPrim", "[Prim]"){
     REQUIRE(prim.getSizeAttribute().getValue() == 10);
 
 }
+
+
