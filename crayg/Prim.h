@@ -18,22 +18,18 @@ public:
 
     // todo get attributes
 
+
 protected:
     Prim(std::map<std::string, GenericAttributeImpl*> *primMap) : primMap(primMap) {}
     std::map<std::string, GenericAttributeImpl*>* primMap;
-};
 
-class TestPrim : Prim{
-public:
-    static TestPrim defineTestPrim(const std::string& path, Stage& stage);
-
-    TestPrim(std::map<std::string, GenericAttributeImpl *> *primMap);
-
-    Attribute<int> getSizeAttribute(){
-        return Attribute<int>(static_cast<AttributeImpl<int>*>(primMap->at("size")));
+    Attribute<int> getAsIntAttribute(const std::string &attributeName){
+        return {static_cast<AttributeImpl<int>*>(primMap->at(attributeName))};
     }
-private:
-    //GenericAttributeImpl* sizeAttributeImpl;
+
+    void defineIntAttribute(const std::string &attributeName, Stage &stage);
 };
+
+
 
 #endif //CRAYG_PRIM_H

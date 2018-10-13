@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Stage.h"
 
-
+// todo make generic method instead?
 AttributeImpl<int>* Stage::createIntAttributeImpl() {
     AttributeImpl<int>* intAttrImpl = new AttributeImpl<int>();
     intAttrImpl->attr_type = "int";

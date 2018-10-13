@@ -9,14 +9,11 @@ Prim Prim::definePrim(const std::string &path, Stage &stage) {
     return {primMap};
 }
 
-TestPrim TestPrim::defineTestPrim(const std::string &path, Stage &stage) {
-    auto primMap =  stage.createPrimMap(path);
+void Prim::defineIntAttribute(const std::string &attributeName, Stage &stage) {
     AttributeImpl<int> *intAttributeImpl = stage.createIntAttributeImpl();
     primMap->insert(std::make_pair("size", intAttributeImpl));
-
-    return TestPrim(primMap);
 }
 
-TestPrim::TestPrim(std::map<std::string, GenericAttributeImpl *> *primMap) : Prim(primMap) {}
+
 
 

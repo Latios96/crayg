@@ -41,11 +41,5 @@ int main(int argc, char *argv[])
     BmpImageWriter imageWriter;
     imageWriter.writeImage(myImage, "");
 
-    Stage* stage = new Stage();
-    TestPrim testPrim = TestPrim::defineTestPrim("test", *stage);
-    testPrim.getSizeAttribute().setValue(10);
-    stage->printNice();
-    delete stage;
-
     return 0;
 }
