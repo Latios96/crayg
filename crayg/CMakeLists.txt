@@ -20,10 +20,10 @@ set(crayg_SRCS
         Transformable.cpp
         Scene.h
         Scene.cpp
-        Stage.cpp
-        Stage.h
-        Prim.cpp
-        Prim.h Attribute.cpp Attribute.h AttributeImpl.cpp AttributeImpl.h)
+        prims/Stage.cpp
+        prims/Stage.h
+        prims/Prim.cpp
+        prims/Prim.h prims/Attribute.cpp prims/Attribute.h prims/AttributeImpl.cpp prims/AttributeImpl.h)
 
 # Declare the library
 add_library(crayg STATIC

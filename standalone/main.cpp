@@ -2,8 +2,8 @@
 #include <Image.h>
 #include <Sphere.h>
 #include <Scene.h>
-#include <Stage.h>
-#include <Prim.h>
+#include <prims/Stage.h>
+#include <prims/Prim.h>
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
 #include "BmpImageWriter.h"

@@ -3,10 +3,10 @@
 //
 
 #include <catch.hpp>
-#include <Stage.h>
-#include <Prim.h>
+#include <prims/Stage.h>
+#include <prims/Prim.h>
 
-TEST_CASE("A prim should be created in the stage for given path", "[Prim]"){
+TEST_CASE("createPrim", "[Prim]"){
     Stage* stage = new Stage();
 
     Prim::definePrim("some_path", *stage);
@@ -38,7 +38,7 @@ public:
 };
 TestPrim::TestPrim(std::map<std::string, GenericAttributeImpl *> *primMap) : Prim(primMap) {}
 
-TEST_CASE("Define a Test Prim and set / read the test Attribute", "[Prim]"){
+TEST_CASE("createTestPrim", "[Prim]"){
     Stage stage;
 
     TestPrim prim = TestPrim::defineTestPrim("some_path", stage);
