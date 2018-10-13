@@ -22,7 +22,7 @@ TEST_CASE("correctPrimAttributeCount", "[Stage]") {
     }
 
     SECTION("correctAttributeCount") {
-        stage.createIntAttributeImpl();
+        stage.createAttributeImpl<int>();
         StageStats stats = stage.getStats();
         REQUIRE(stats.attributeCount == 1);
     }
@@ -35,7 +35,7 @@ TEST_CASE("correctPrimAttributeCount", "[Stage]") {
     SECTION("createAttributeImpl") {
         int oldAttributeCount = stage.getStats().attributeCount;
 
-        AttributeImpl<int> *impl = stage.createIntAttributeImpl();
+        AttributeImpl<int> *impl = stage.createAttributeImpl<int>();
 
         // attribute count should be increased by one
         REQUIRE(stage.getStats().attributeCount == oldAttributeCount + 1);

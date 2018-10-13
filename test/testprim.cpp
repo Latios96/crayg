@@ -24,7 +24,7 @@ public:
         TestPrim testPrim(primMap);
 
         // define Attributes
-        testPrim.defineIntAttribute("size", stage);
+        testPrim.defineAttribute<int>("size", stage);
 
         // now finally create the test prim
         return testPrim;
@@ -33,7 +33,7 @@ public:
     explicit TestPrim(std::map<std::string, GenericAttributeImpl *> *primMap);
 
     Attribute<int> getSizeAttribute(){
-        return getAsIntAttribute("size");
+        return getAsAttribute<int>("size");
     }
 };
 TestPrim::TestPrim(std::map<std::string, GenericAttributeImpl *> *primMap) : Prim(primMap) {}

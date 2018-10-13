@@ -18,11 +18,14 @@ struct StageStats{
 class Stage {
 public:
 
-    AttributeImpl<int>* createIntAttributeImpl();
+    /*AttributeImpl<int>* createIntAttributeImpl();*/
 
     std::map<std::string, GenericAttributeImpl*>* createPrimMap(const std::string& path);
 
     StageStats getStats();
+
+    template <typename T>
+    AttributeImpl<T>* createAttributeImpl();
 
     void printNice();
 
@@ -34,5 +37,22 @@ private:
     std::vector<GenericAttributeImpl*> attributeImpls;
 };
 
+template <typename T>
+std::string getTypeName(){
+    if (typeid(T) == typeid(int)){
+        return "int";
+    }
+    else{
+        return "unknown";
+    }
+};
+
+template<typename T>
+AttributeImpl<T> *Stage::createAttributeImpl() {
+    AttributeImpl<T>* intAttrImpl = new AttributeImpl<int>();
+    intAttrImpl->attr_type = getTypeName<int>();
+    attributeImpls.push_back(intAttrImpl);
+    return intAttrImpl;
+}
 
 #endif //CRAYG_STAGE_H

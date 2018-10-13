@@ -9,10 +9,7 @@ Prim Prim::definePrim(const std::string &path, Stage &stage) {
     return {primMap};
 }
 
-void Prim::defineIntAttribute(const std::string &attributeName, Stage &stage) {
-    AttributeImpl<int> *intAttributeImpl = stage.createIntAttributeImpl();
-    primMap->insert(std::make_pair("size", intAttributeImpl));
-}
+
 
 
 
