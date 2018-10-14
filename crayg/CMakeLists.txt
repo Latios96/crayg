@@ -28,12 +28,12 @@ set(crayg_SRCS
         prims/Attribute.h
         prims/AttributeImpl.cpp
         prims/AttributeImpl.h
-        prims/SpherePrim.cpp
-        prims/SpherePrim.h
-        prims/ImageablePrim.h
-        prims/TransformablePrim.cpp
-        prims/TransformablePrim.h
-        prims/ImageablePrim.cpp)
+        schemas/SpherePrim.cpp
+        schemas/SpherePrim.h
+        schemas/ImageablePrim.h
+        schemas/TransformablePrim.cpp
+        schemas/TransformablePrim.h
+        schemas/ImageablePrim.cpp)
 
 # Declare the library
 add_library(crayg STATIC

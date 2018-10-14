@@ -6,7 +6,7 @@
 #define CRAYG_SPHEREPRIM_H
 
 
-#include "Prim.h"
+#include "prims/Prim.h"
 #include "TransformablePrim.h"
 
 class SpherePrim : public TransformablePrim{

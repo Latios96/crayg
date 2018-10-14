@@ -6,7 +6,7 @@
 #define CRAYG_IMAGABLEPRIM_H
 
 
-#include "Prim.h"
+#include "prims/Prim.h"
 
 class ImageablePrim : public Prim{
 public:

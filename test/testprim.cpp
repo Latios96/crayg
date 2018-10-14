@@ -5,7 +5,7 @@
 #include <catch.hpp>
 #include <prims/Stage.h>
 #include <prims/Prim.h>
-#include <prims/SpherePrim.h>
+#include <schemas/SpherePrim.h>
 
 
 TEST_CASE("createPrim", "[Prim]"){

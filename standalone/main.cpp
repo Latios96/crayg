@@ -4,7 +4,7 @@
 #include <Scene.h>
 #include <prims/Stage.h>
 #include <prims/Prim.h>
-#include <prims/SpherePrim.h>
+#include <schemas/SpherePrim.h>
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
 #include "BmpImageWriter.h"
