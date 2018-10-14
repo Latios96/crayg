@@ -31,6 +31,10 @@ protected:
     void defineAttribute(const std::string &attributeName, Stage &stage);
 
     void definePrimAttributes(Stage &stage);
+
+    Attribute<std::string> getTypeAttribute(){
+        return getAsAttribute<std::string>("type");
+    }
 };
 
 template<typename T>

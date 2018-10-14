@@ -16,12 +16,20 @@ public:
         auto primMap =  stage.createPrimMap(path);
 
         SpherePrim spherePrim(primMap);
+        spherePrim.definePrimAttributes(stage);
         spherePrim.defineImageableAttributes(stage);
         spherePrim.defineTransformableAttributes(stage);
         spherePrim.defineSphereAttributes(stage);
 
+        // author the type Attribute
+        spherePrim.getTypeAttribute().setValue("SpherePrim");
+
         // now finally create the test prim
         return spherePrim;
+    }
+
+    static SpherePrim getSpherePrimAt(const std::string &path, Stage &stage){
+        return {stage.getPrimMapAt(path)};
     }
 
     SpherePrim(std::map<std::string, GenericAttributeImpl *> *primMap);

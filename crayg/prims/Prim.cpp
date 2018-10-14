@@ -9,7 +9,7 @@ Prim Prim::definePrim(const std::string &path, Stage &stage) {
     return {primMap};
 }
 void Prim::definePrimAttributes(Stage &stage) {
-
+    defineAttribute<std::string>("type", stage);
 }
 
 

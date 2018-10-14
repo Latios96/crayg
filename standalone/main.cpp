@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
     spherePrim.getSizeAttribute().setValue(5);
     spherePrim.getPositionAttribute().setValue(Vector3f(1,2,3));
     stage->printNice();
+
     delete stage;
 
     return 0;

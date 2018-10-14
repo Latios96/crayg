@@ -34,6 +34,10 @@ AttributeImpl<int>* getAsIntImpl(GenericAttributeImpl* impl){
 AttributeImpl<Vector3f>* getAsVector3fImpl(GenericAttributeImpl* impl){
     return static_cast<AttributeImpl<Vector3f>*>(impl);
 }
+
+AttributeImpl<std::string>* getAsStringImpl(GenericAttributeImpl* impl){
+    return static_cast<AttributeImpl<std::string>*>(impl);
+}
 void Stage::printNice() {
     for(auto primMap : primMaps){
         std::cout << primMap.first << std::endl;
@@ -43,12 +47,20 @@ void Stage::printNice() {
                 AttributeImpl<int> *impl = getAsIntImpl(primAttr.second);
                 std::cout << " " << impl->value << std::endl;
             }
+            else if (primAttr.second->isString()){
+                std::string value = getAsStringImpl(primAttr.second)->value;
+                std::cout << " " << value << std::endl;
+            }
             else if (primAttr.second->isVector3f()){
                 Vector3f value = getAsVector3fImpl(primAttr.second)->value;
-                std::cout << " " << "x=" << value.x << "y=" << value.y << "z=" << value.z<< std::endl;
+                std::cout << " " << "x=" << value.x << " y=" << value.y << " z=" << value.z<< std::endl;
             }
         }
     }
+}
+
+std::map<std::string, GenericAttributeImpl *>* Stage::getPrimMapAt(const std::string &path) {
+    return primMaps[path];
 }
 
 

@@ -15,13 +15,15 @@ public:
         // get the prims attribute map
         auto primMap =  stage.createPrimMap(path);
 
-        TransformablePrim testPrim(primMap);
-        testPrim.definePrimAttributes(stage);
-        testPrim.defineImageableAttributes(stage);
-        testPrim.defineTransformableAttributes(stage);
+        TransformablePrim transformablePrim(primMap);
+        transformablePrim.definePrimAttributes(stage);
+        transformablePrim.defineImageableAttributes(stage);
+        transformablePrim.defineTransformableAttributes(stage);
 
-        // now finally create the test prim
-        return testPrim;
+        // author the type Attribute
+        transformablePrim.getTypeAttribute().setValue("TransformablePrim");
+
+        return transformablePrim;
     }
 
     TransformablePrim(std::map<std::string, GenericAttributeImpl *> *primMap);
