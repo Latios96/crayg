@@ -45,3 +45,6 @@ add_library(crayg STATIC
 target_include_directories(crayg PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+target_include_directories(crayg
+PUBLIC ../externals/rapidjson/)

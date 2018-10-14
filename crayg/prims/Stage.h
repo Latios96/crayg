@@ -31,6 +31,10 @@ public:
 
     void printNice();
 
+    void writeToFile(std::string fileName);
+
+    void readFromFile(std::string fileName);
+
     virtual ~Stage();
 
 private:
@@ -56,7 +60,7 @@ std::string getTypeName(){
 };
 
 template<typename T>
-AttributeImpl<T> *Stage::createAttributeImpl() {
+AttributeImpl<T>* Stage::createAttributeImpl() {
     AttributeImpl<T>* intAttrImpl = new AttributeImpl<T>();
     intAttrImpl->attr_type = getTypeName<T>();
     attributeImpls.push_back(intAttrImpl);

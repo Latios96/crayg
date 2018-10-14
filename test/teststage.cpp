@@ -6,6 +6,7 @@
 #include <Scene.h>
 #include <prims/Stage.h>
 #include <prims/Prim.h>
+#include <prims/SpherePrim.h>
 
 
 TEST_CASE("createStage", "[Stage]"){
@@ -48,6 +49,23 @@ TEST_CASE("correctPrimAttributeCount", "[Stage]") {
 
         REQUIRE(primMap != nullptr);
         REQUIRE(stage.getStats().primCount == oldPrimCount + 1);
+    }
+
+    SECTION("writeReadStage") {
+        SpherePrim spherePrim = SpherePrim::defineSpherePrim("/some_path", stage);
+        spherePrim.getSizeAttribute().setValue(78);
+        int primCount = stage.getStats().primCount;
+        
+        stage.writeToFile("writeReadStageTest.stage");
+        
+        Stage newStage;
+        
+        newStage.readFromFile("writeReadStageTest.stage");
+        SpherePrim newSpherePrim = SpherePrim::getSpherePrimAt("/some_path", stage);
+        int newPrimCount = newStage.getStats().primCount;
+        
+        REQUIRE(spherePrim.getSizeAttribute().getValue() == newSpherePrim.getSizeAttribute().getValue());
+        REQUIRE(primCount == newPrimCount);
     }
 }
 
