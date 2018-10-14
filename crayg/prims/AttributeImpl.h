@@ -14,6 +14,9 @@ public:
     bool isInt(){
         return attr_type == "int";
     }
+    bool isFloat(){
+        return attr_type == "float";
+    }
     bool isVector3f(){
         return attr_type == "Vector3f";
     }

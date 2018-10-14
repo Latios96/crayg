@@ -36,6 +36,9 @@ Stage::~Stage() {
 AttributeImpl<int>* getAsIntImpl(GenericAttributeImpl* impl){
     return static_cast<AttributeImpl<int>*>(impl);
 }
+AttributeImpl<float>* getAsFloatImpl(GenericAttributeImpl* impl){
+    return static_cast<AttributeImpl<float>*>(impl);
+}
 AttributeImpl<Vector3f>* getAsVector3fImpl(GenericAttributeImpl* impl){
     return static_cast<AttributeImpl<Vector3f>*>(impl);
 }
@@ -50,6 +53,10 @@ void Stage::printNice() {
             std::cout << "   " << primAttr.second->attr_type << " " << primAttr.first;
             if (primAttr.second->isInt()){
                 AttributeImpl<int> *impl = getAsIntImpl(primAttr.second);
+                std::cout << " " << impl->value << std::endl;
+            }
+            else if (primAttr.second->isFloat()){
+                AttributeImpl<float> *impl = getAsFloatImpl(primAttr.second);
                 std::cout << " " << impl->value << std::endl;
             }
             else if (primAttr.second->isString()){
@@ -95,6 +102,13 @@ void Stage::writeToFile(const std::string fileName) {
                 int value = getAsIntImpl(primAttr.second)->value;
                 writer.Int(value);
             }
+            else if (primAttr.second->isFloat()){
+                writer.Key("type");
+                writer.String("float");
+                writer.Key("value");
+                float value = getAsFloatImpl(primAttr.second)->value;
+                writer.Double(value);
+            }
             else if (primAttr.second->isString()){
                 writer.Key("type");
                 writer.String("String");
@@ -130,6 +144,7 @@ void Stage::readFromFile(std::string fileName) {
     rapidjson::Document d;
     d.ParseStream(isw);
 
+    // todo check if prims exists
     rapidjson::Value& prims = d["Prims"];
     if (prims.IsObject()){
         // for every prim
@@ -142,12 +157,19 @@ void Stage::readFromFile(std::string fileName) {
 
             for (rapidjson::Value::ConstMemberIterator primMemberItr = prim.MemberBegin(); primMemberItr != prim.MemberEnd(); ++primMemberItr) {
                 const rapidjson::Value& primAttr = prim[primMemberItr->name.GetString()];
+                // todo check if type exists
                 std::string attributeType = primAttr["type"].GetString();
 
+                // todo check if value exists
                 // create the attribute
                 if (attributeType == "int"){
                     AttributeImpl<int>* impl = createAttributeImpl<int>();
                     impl->value = primAttr["value"].GetInt();
+                    primMap->insert(std::make_pair(primMemberItr->name.GetString(), impl));
+                }
+                else if (attributeType == "float"){
+                    AttributeImpl<float>* impl = createAttributeImpl<float>();
+                    impl->value = primAttr["value"].GetFloat();
                     primMap->insert(std::make_pair(primMemberItr->name.GetString(), impl));
                 }
                 else if (attributeType == "String"){

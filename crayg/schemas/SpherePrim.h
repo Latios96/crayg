@@ -34,8 +34,8 @@ public:
 
     SpherePrim(std::map<std::string, GenericAttributeImpl *> *primMap);
 
-    Attribute<int> getSizeAttribute(){
-        return getAsAttribute<int>("size");
+    Attribute<float> getRadiusAttribute(){
+        return getAsAttribute<float>("radius");
     }
 
 protected:

@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
     Stage* stage = new Stage();
     SpherePrim spherePrim = SpherePrim::defineSpherePrim("/sphere", *stage);
-    spherePrim.getSizeAttribute().setValue(5);
+    spherePrim.getRadiusAttribute().setValue(5);
     spherePrim.getPositionAttribute().setValue(Vector3f(1,2,3));
     stage->writeToFile("test.stage");
 

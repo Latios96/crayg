@@ -23,6 +23,10 @@ target_link_libraries(${TARGET_NAME}
 target_include_directories(${TARGET_NAME}
   PUBLIC ../externals/catch2/)
 
+# set_target_properties(${TARGET_NAME}
+        # PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping"
+#                   LINK_FLAGS "-fprofile-arcs")
+
 add_test(
   NAME ${TARGET_NAME}
   COMMAND ${TARGET_NAME} -o report.xml -r junit)

@@ -53,7 +53,7 @@ TEST_CASE("correctPrimAttributeCount", "[Stage]") {
 
     SECTION("writeReadStage") {
         SpherePrim spherePrim = SpherePrim::defineSpherePrim("/some_path", stage);
-        spherePrim.getSizeAttribute().setValue(78);
+        spherePrim.getRadiusAttribute().setValue(78);
         int primCount = stage.getStats().primCount;
         
         stage.writeToFile("writeReadStageTest.stage");
@@ -64,7 +64,7 @@ TEST_CASE("correctPrimAttributeCount", "[Stage]") {
         SpherePrim newSpherePrim = SpherePrim::getSpherePrimAt("/some_path", stage);
         int newPrimCount = newStage.getStats().primCount;
         
-        REQUIRE(spherePrim.getSizeAttribute().getValue() == newSpherePrim.getSizeAttribute().getValue());
+        REQUIRE(spherePrim.getRadiusAttribute().getValue() == newSpherePrim.getRadiusAttribute().getValue());
         REQUIRE(primCount == newPrimCount);
     }
 }

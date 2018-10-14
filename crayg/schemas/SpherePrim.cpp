@@ -9,6 +9,6 @@ SpherePrim::SpherePrim(std::map<std::string, GenericAttributeImpl *> *primMap) :
 }
 
 void SpherePrim::defineSphereAttributes(Stage &stage) {
-    defineAttribute<int>("size", stage);
+    defineAttribute<float>("radius", stage);
 }
 

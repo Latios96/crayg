@@ -48,6 +48,9 @@ std::string getTypeName(){
     if (typeid(T) == typeid(int)){
         return "int";
     }
+    if (typeid(T) == typeid(float)){
+        return "float";
+    }
     else if (typeid(T) == typeid(Vector3f)){
         return "Vector3f";
     }
