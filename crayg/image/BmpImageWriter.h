@@ -8,10 +8,11 @@
 
 #include <string>
 #include "Image.h"
+#include "ImageWriter.h"
 
-class BmpImageWriter{
+class BmpImageWriter : public ImageWriter{
 public:
-    void writeImage(const Image &image, const std::string image_name);
+    void writeImage(const Image &image, const std::string image_name) override;
 
 };
 

@@ -5,9 +5,10 @@
 #include <prims/Stage.h>
 #include <prims/Prim.h>
 #include <schemas/SpherePrim.h>
+#include <image/ImageWriter.h>
+#include <image/ImageWriterFactory.h>
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
-#include "image/BmpImageWriter.h"
 
 
 int main(int argc, char *argv[])
@@ -35,13 +36,11 @@ int main(int argc, char *argv[])
             if(sceneIntersector.intersects(ray)){
                 myImage.setValue(x,y,1,1,1);
             }
-            //default value is 0,0,0
-            //myImage.setValue(x,y,ray.direction.x/2.0f+0.5f, ray.direction.y/2.0f+0.5f, ray.direction.z/2.0f+0.5f);
         }
     }
 
-    BmpImageWriter imageWriter;
-    imageWriter.writeImage(myImage, "");
+    std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
+    imageWriter->writeImage(myImage, "");
 
     return 0;
 }
