@@ -24,8 +24,8 @@ target_include_directories(${TARGET_NAME}
   PUBLIC ../externals/catch2/)
 
 set_target_properties(${TARGET_NAME}
-        PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage"
-                LINK_FLAGS "-fprofile-arcs")
+        PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
+                LINK_FLAGS "--coverage")
 
 add_test(
   NAME ${TARGET_NAME}

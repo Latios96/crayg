@@ -4,26 +4,19 @@
 
 #include "Scene.h"
 
-Scene::~Scene() {
-    for(auto object : objects){
-        delete object;
-    }
-}
 
 void Scene::addObject(Intersectable* intersectable) {
-    objects.push_back(intersectable);
+    objects.push_back(std::shared_ptr<Intersectable>(intersectable));
 }
 
-Scene::Scene() {
-
-}
+Scene::Scene() = default;
 
 Vector3f Scene::intersect(Ray ray) {
     return Vector3f();
 }
 
 bool Scene::intersects(Ray ray) {
-    for(Intersectable* intersectable : objects){
+    for(const std::shared_ptr<Intersectable> &intersectable : objects){
         if (intersectable->intersects(ray)) {
             return true;
         }

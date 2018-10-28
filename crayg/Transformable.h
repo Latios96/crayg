@@ -16,6 +16,7 @@ public:
 
     void setPosition(Vector3f position);
 
+
 private:
     Vector3f position;
 };

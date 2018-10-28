@@ -23,7 +23,9 @@ public:
      * @return true if intersects else false
      */
     virtual bool intersects(Ray ray)=0;
+
 };
+
 
 
 #endif //CRAYG_INTERSECTABLE_H

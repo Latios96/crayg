@@ -6,22 +6,20 @@
 #define CRAYG_SCENE_H
 
 
-#include "Intersectable.h"
 #include <vector>
+#include "Intersectable.h"
 
-class Scene : Intersectable{
+class Scene/* : public Intersectable*/{
 public:
     Scene();
 
     void addObject(Intersectable* intersectable);
 
-    Vector3f intersect(Ray ray) override;
-    bool intersects(Ray ray) override;
-
-    ~Scene();
+    Vector3f intersect(Ray ray);
+    bool intersects(Ray ray);
 
 private:
-    std::vector<Intersectable*> objects;
+    std::vector<std::shared_ptr<Intersectable>> objects;
 
 };
 
