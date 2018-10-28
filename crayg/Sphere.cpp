@@ -31,3 +31,12 @@ float Sphere::getRadius() const {
     return radius;
 }
 
+Sphere::~Sphere() {
+
+}
+
+
+
+
+
+

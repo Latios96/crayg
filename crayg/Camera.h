@@ -6,7 +6,7 @@
 #define CRAYG_CAMERA_H
 
 
-#include "Vector3f.h"
+#include "foundation/Vector3f.h"
 
 class Camera {
 private:

@@ -1,21 +1,21 @@
 set(crayg_SRCS
-        Vector3f.h
-        Vector3f.cpp
-        Image.h
-        Image.cpp
-        BmpImageWriter.h
-        BmpImageWriter.cpp
+        foundation/Vector3f.h
+        foundation/Vector3f.cpp
+        image/Image.h
+        image/Image.cpp
+        image/BmpImageWriter.h
+        image/BmpImageWriter.cpp
         Camera.h
         Camera.cpp
         PineHoleCameraModel.h
         PineHoleCameraModel.cpp
-        Ray.h
-        Ray.cpp
+        foundation/Ray.h
+        foundation/Ray.cpp
         Intersectable.h
         Sphere.h
         Sphere.cpp
-        Color.h
-        Color.cpp
+        foundation/Color.h
+        foundation/Color.cpp
         Transformable.h
         Transformable.cpp
         Scene.h

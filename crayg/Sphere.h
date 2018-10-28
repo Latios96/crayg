@@ -18,11 +18,12 @@ public:
 
     float getRadius() const;
 
-
+    virtual ~Sphere();
 
 private:
     float radius;
 };
+
 
 
 #endif //CRAYG_SPHERE_H

@@ -9,7 +9,7 @@
 #include <map>
 #include <vector>
 #include "AttributeImpl.h"
-#include "Vector3f.h"
+#include "foundation/Vector3f.h"
 #include <typeinfo>
 
 struct StageStats{

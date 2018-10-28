@@ -1,4 +1,4 @@
-#include <Image.h>
+#include <image/Image.h>
 #include <catch.hpp>
 
 

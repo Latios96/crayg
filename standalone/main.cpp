@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Image.h>
+#include <image/Image.h>
 #include <Sphere.h>
 #include <Scene.h>
 #include <prims/Stage.h>
@@ -7,17 +7,51 @@
 #include <schemas/SpherePrim.h>
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
-#include "BmpImageWriter.h"
+#include "image/BmpImageWriter.h"
 
+class Base
+{
+public:
+    virtual ~Base() = 0;
+    virtual void method();
+};
+
+Base::~Base()
+{
+    // Compulsory virtual destructor definition,
+    // even if it's empty
+}
+
+void Base::method()
+{
+    // Default implementation.
+    // Derived classes can just inherit it, if needed
+}
+
+class OtherBase{
+
+};
+
+// We can now derive from Base, inheriting the
+// implementation of method()
+//
+class Derived : public Base, public OtherBase
+{
+public:
+    ~Derived()
+    {}
+};
 
 int main(int argc, char *argv[])
 {
-    /*Image myImage(800,600);
+    Derived derived;
+    Image myImage(800,600);
 
     Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
     PineHoleCameraModel cameraModel(camera,myImage.getWidth(),myImage.getHeight());
 
     Scene scene;
+    SceneIntersector sceneIntersector(scene);
 
     std::cout << "Generating spheres..." << std::endl;
     for(int i=-5; i<5; i+=1){
@@ -31,7 +65,7 @@ int main(int argc, char *argv[])
         for(int y=0; y<myImage.getHeight();y++){
             Ray ray = cameraModel.createPrimaryRay(x,y);
 
-            if(scene.intersects(ray)){
+            if(sceneIntersector.intersects(ray)){
                 myImage.setValue(x,y,1,1,1);
             }
             //default value is 0,0,0
@@ -40,21 +74,7 @@ int main(int argc, char *argv[])
     }
 
     BmpImageWriter imageWriter;
-    imageWriter.writeImage(myImage, "");*/
-
-    Stage* stage = new Stage();
-    SpherePrim spherePrim = SpherePrim::defineSpherePrim("/sphere", *stage);
-    spherePrim.getRadiusAttribute().setValue(5);
-    spherePrim.getPositionAttribute().setValue(Vector3f(1,2,3));
-    stage->writeToFile("test.stage");
-
-    delete stage;
-
-    Stage* stage2 = new Stage();
-    stage2->readFromFile("test.stage");
-    stage2->printNice();
-
-    delete stage2;
+    imageWriter.writeImage(myImage, "");
 
     return 0;
 }

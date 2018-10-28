@@ -15,3 +15,6 @@ void Transformable::setPosition(Vector3f position) {
 Transformable::Transformable(Vector3f position) : position(position) {}
 
 
+
+
+
