@@ -18,6 +18,7 @@ public:
 
     float getRadius() const;
 
+    virtual ~Sphere();
 
 private:
     float radius;

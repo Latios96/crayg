@@ -24,6 +24,8 @@ public:
      */
     virtual bool intersects(Ray ray)=0;
 
+    virtual ~Intersectable() = default;
+
 };
 
 
