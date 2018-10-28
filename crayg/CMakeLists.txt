@@ -33,7 +33,16 @@ set(crayg_SRCS
         schemas/ImageablePrim.h
         schemas/TransformablePrim.cpp
         schemas/TransformablePrim.h
-        schemas/ImageablePrim.cpp intersectors/Intersector.h intersectors/SphereIntersector.cpp intersectors/SphereIntersector.h image/ImageWriter.h image/ImageWriterFactory.h)
+        schemas/ImageablePrim.cpp
+        intersectors/Intersector.h
+        intersectors/SphereIntersector.cpp
+        intersectors/SphereIntersector.h
+        image/ImageWriter.h
+        image/ImageWriterFactory.h
+        SceneCreator.h
+        image/LineByLineIterator.h
+        image/ImageIterators.h
+        utils/ToStringHelper.h)
 
 # Declare the library
 add_library(crayg STATIC

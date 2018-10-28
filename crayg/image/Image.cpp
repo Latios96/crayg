@@ -54,3 +54,5 @@ Image::Image(const Image &image) {
         values[i] = image.values[i];
     }
 }
+
+PixelPosition::PixelPosition(int x, int y) : x(x), y(y) {}

@@ -52,5 +52,12 @@ public:
 
 };
 
+struct PixelPosition{
+    int x;
+    int y;
+
+    PixelPosition(int x, int y);
+};
+
 
 #endif //CRAYG_IMAGE_H

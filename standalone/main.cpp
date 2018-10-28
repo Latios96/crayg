@@ -7,8 +7,10 @@
 #include <schemas/SpherePrim.h>
 #include <image/ImageWriter.h>
 #include <image/ImageWriterFactory.h>
+#include <utils/ToStringHelper.h>
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
+#include "image/ImageIterators.h"
 
 
 int main(int argc, char *argv[])
@@ -28,6 +30,17 @@ int main(int argc, char *argv[])
     }
     std::cout << "Sphere generation done." << std::endl;
 
+    std::cout << ToStringHelper("Pixel")
+            .addMember("x", 6)
+            .addMember("y", 7)
+            .finish() << std::endl;
+
+    for(auto pixel : ImageIterators::lineByLine(myImage)){
+        /*std::cout << ToStringHelper("Pixel")
+            .addMember("x", pixel.x)
+            .addMember("y", pixel.y)
+            .finish() << std::endl;*/
+    };
 
     for(int x=0; x<myImage.getWidth();x++){
         for(int y=0; y<myImage.getHeight();y++){
