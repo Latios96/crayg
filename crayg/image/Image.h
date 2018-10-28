@@ -6,7 +6,7 @@
 #define CRAYG_IMAGE_H
 
 
-#include "Vector3f.h"
+#include "foundation/Vector3f.h"
 // TODO copy constructor
 // TODO docs
 // TODO use Color class

@@ -56,3 +56,5 @@ cmake-build-debug/*
 cl
 code_coverage.info
 code_coverage_report/*
+
+report\.xml

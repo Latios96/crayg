@@ -6,8 +6,8 @@
 #define CRAYG_INTERSECTABLE_H
 
 
-#include "Vector3f.h"
-#include "Ray.h"
+#include "foundation/Vector3f.h"
+#include "foundation/Ray.h"
 
 class Intersectable {
 public:
@@ -25,6 +25,8 @@ public:
     virtual bool intersects(Ray ray)=0;
 
     virtual ~Intersectable() = default;
+
+    // todo intersectable should contain a factory method for an Intersector?
 
 };
 

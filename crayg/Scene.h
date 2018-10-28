@@ -9,19 +9,25 @@
 #include <vector>
 #include "Intersectable.h"
 
-class Scene/* : public Intersectable*/{
+class Scene{
 public:
     Scene();
 
     void addObject(Intersectable* intersectable);
 
-    Vector3f intersect(Ray ray);
-    bool intersects(Ray ray);
-
-private:
     std::vector<std::shared_ptr<Intersectable>> objects;
 
 };
+class SceneIntersector : public Intersectable{
+public:
+    explicit SceneIntersector(Scene &scene);
 
+    Vector3f intersect(Ray ray) override;
+    bool intersects(Ray ray) override;
+
+private:
+    Scene &scene;
+
+};
 
 #endif //CRAYG_SCENE_H

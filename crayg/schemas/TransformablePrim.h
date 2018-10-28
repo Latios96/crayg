@@ -7,7 +7,7 @@
 
 
 #include "ImageablePrim.h"
-#include "Vector3f.h"
+#include "foundation/Vector3f.h"
 
 class TransformablePrim : public ImageablePrim{
 public:

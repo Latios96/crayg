@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Image.h>
+#include <image/Image.h>
 #include <Sphere.h>
 #include <Scene.h>
 #include <prims/Stage.h>
@@ -7,7 +7,7 @@
 #include <schemas/SpherePrim.h>
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
-#include "BmpImageWriter.h"
+#include "image/BmpImageWriter.h"
 
 class Base
 {
@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
     PineHoleCameraModel cameraModel(camera,myImage.getWidth(),myImage.getHeight());
 
     Scene scene;
+    SceneIntersector sceneIntersector(scene);
 
     std::cout << "Generating spheres..." << std::endl;
     for(int i=-5; i<5; i+=1){
@@ -64,7 +65,7 @@ int main(int argc, char *argv[])
         for(int y=0; y<myImage.getHeight();y++){
             Ray ray = cameraModel.createPrimaryRay(x,y);
 
-            if(scene.intersects(ray)){
+            if(sceneIntersector.intersects(ray)){
                 myImage.setValue(x,y,1,1,1);
             }
             //default value is 0,0,0

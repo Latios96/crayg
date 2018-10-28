@@ -7,7 +7,7 @@
 
 
 #include "Camera.h"
-#include "Ray.h"
+#include "foundation/Ray.h"
 
 class PineHoleCameraModel {
 private:
