@@ -27,7 +27,6 @@ public:
 
 private:
     Scene &scene;
-
 };
 
 #endif //CRAYG_SCENE_H

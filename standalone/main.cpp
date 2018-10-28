@@ -9,42 +9,9 @@
 #include "PineHoleCameraModel.h"
 #include "image/BmpImageWriter.h"
 
-class Base
-{
-public:
-    virtual ~Base() = 0;
-    virtual void method();
-};
-
-Base::~Base()
-{
-    // Compulsory virtual destructor definition,
-    // even if it's empty
-}
-
-void Base::method()
-{
-    // Default implementation.
-    // Derived classes can just inherit it, if needed
-}
-
-class OtherBase{
-
-};
-
-// We can now derive from Base, inheriting the
-// implementation of method()
-//
-class Derived : public Base, public OtherBase
-{
-public:
-    ~Derived()
-    {}
-};
 
 int main(int argc, char *argv[])
 {
-    Derived derived;
     Image myImage(800,600);
 
     Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
