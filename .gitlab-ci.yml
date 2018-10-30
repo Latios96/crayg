@@ -1,12 +1,12 @@
-image: gcc
+image: ubuntu:14.04
 
-build:
-  stage: build
+job:
   script:
-    - rm -rf build/
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make -j 4
-    - ./test/tests -o report.xml -r junit
-
+  - apt-get update
+  - apt-get install -y git cmake g++ gcovr
+  - git submodule update --init --recursive
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make -j 2
+  - ./test/tests -o report.xml -r junit
