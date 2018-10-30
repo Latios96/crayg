@@ -1,0 +1,12 @@
+image: gcc
+
+build:
+  stage: build
+  script:
+    - rm -rf build/
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make -j 4
+    - ./test/tests -o report.xml -r junit
+
