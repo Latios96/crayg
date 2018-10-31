@@ -10,6 +10,7 @@
 
 class Transformable {
 public:
+    Transformable();
     Transformable(Vector3f position);
 
     Vector3f getPosition() const;

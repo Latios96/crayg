@@ -79,6 +79,7 @@ void Stage::writeToFile(const std::string fileName) {
     std::ofstream ofs(fileName);
     rapidjson::OStreamWrapper osw(ofs);
     rapidjson::PrettyWriter<rapidjson::OStreamWrapper> writer(osw);
+
     writer.StartObject();
 
     writer.Key("Prims");

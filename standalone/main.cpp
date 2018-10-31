@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "PineHoleCameraModel.h"
 #include "image/ImageIterators.h"
+#include "sceneIO/SceneWriter.h"
 
 
 int main(int argc, char *argv[])
@@ -54,6 +55,9 @@ int main(int argc, char *argv[])
 
     std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
     imageWriter->writeImage(myImage, "");
+
+    SceneWriter sceneWriter(scene);
+    sceneWriter.write();
 
     return 0;
 }

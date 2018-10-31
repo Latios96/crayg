@@ -42,7 +42,12 @@ set(crayg_SRCS
         SceneCreator.h
         image/LineByLineIterator.h
         image/ImageIterators.h
-        utils/ToStringHelper.h)
+        utils/ToStringHelper.h
+        sceneIO/SceneWriter.cpp
+        sceneIO/SceneWriter.h
+        sceneIO/Serializable.h
+        sceneIO/JsonSerializer.cpp
+        sceneIO/JsonSerializer.h)
 
 # Declare the library
 add_library(crayg STATIC

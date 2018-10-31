@@ -8,8 +8,26 @@
 
 #include "Intersectable.h"
 #include "Transformable.h"
+#include "string"
+#include "sceneIO/Serializable.h"
 
-class Sphere : public Intersectable, public Transformable {
+
+class Deserializer{
+public:
+    int readInt();
+};
+
+class SceneObject : public Intersectable,
+                    public Transformable,
+                    public Serializable{
+public:
+    SceneObject();
+
+    explicit SceneObject(Vector3f position);
+    void serialize(Serializer& serializer) override;
+};
+
+class Sphere :  public SceneObject{
 public:
     Vector3f intersect(Ray ray) override;
     bool intersects(Ray ray) override;
@@ -17,6 +35,8 @@ public:
     Sphere(Vector3f position, float radius);
 
     float getRadius() const;
+
+    void serialize(Serializer& serializer) override;
 
     virtual ~Sphere();
 

@@ -8,14 +8,15 @@
 
 #include <vector>
 #include "Intersectable.h"
+#include "Sphere.h"
 
 class Scene{
 public:
     Scene();
 
-    void addObject(Intersectable* intersectable);
+    void addObject(SceneObject* sceneObject);
 
-    std::vector<std::shared_ptr<Intersectable>> objects;
+    std::vector<std::shared_ptr<SceneObject>> objects;
 
 };
 class SceneIntersector : public Intersectable{

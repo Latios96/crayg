@@ -25,7 +25,7 @@ bool Sphere::intersects(Ray ray) {
     return d >= 0.0f;
 }
 
-Sphere::Sphere(Vector3f position, float radius) : Transformable(position), radius(radius) {}
+Sphere::Sphere(Vector3f position, float radius) : SceneObject(position), radius(radius) {}
 
 float Sphere::getRadius() const {
     return radius;
@@ -35,8 +35,19 @@ Sphere::~Sphere() {
 
 }
 
+void Sphere::serialize(Serializer &serializer) {
+    SceneObject::serialize(serializer);
+    serializer.writeType("Sphere");
+    serializer.writeFloat("radius", radius);
+}
 
 
+void SceneObject::serialize(Serializer &serializer) {
+    serializer.writeVector3f("position", this->getPosition());
+}
 
+SceneObject::SceneObject(Vector3f position) : Transformable(position) {
 
+}
 
+SceneObject::SceneObject() = default;
