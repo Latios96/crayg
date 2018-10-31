@@ -8,7 +8,7 @@
 
 #include "Camera.h"
 #include "foundation/Ray.h"
-
+// todo add tests
 class PineHoleCameraModel {
 private:
     Camera &camera;

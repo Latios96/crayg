@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     Scene scene;
     SceneIntersector sceneIntersector(scene);
 
+    // todo move to scene creator
     std::cout << "Generating spheres..." << std::endl;
     for(int i=-5; i<5; i+=1){
         Sphere* sphere = new Sphere(Vector3f(i,0,-10), 3.0f);

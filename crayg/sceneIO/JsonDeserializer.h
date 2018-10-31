@@ -8,7 +8,7 @@
 
 #include <rapidjson/document.h>
 #include "Serializable.h"
-
+// todo add tests
 class JsonDeserializer : public Deserializer{
 public:
     explicit JsonDeserializer(rapidjson::Value& jsonObject);

@@ -10,7 +10,7 @@
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/prettywriter.h>
 #include "Serializable.h"
-
+// todo add tests
 class JsonSerializer : public Serializer{
 
 public:

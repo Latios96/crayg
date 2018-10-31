@@ -6,6 +6,7 @@
 #define CRAYG_SCENEWRITER_H
 
 #include "Scene.h"
+// todo add tests
 class SceneWriter {
 public:
     void write(std::string path);

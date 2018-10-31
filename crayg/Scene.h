@@ -19,6 +19,7 @@ public:
     std::vector<std::shared_ptr<SceneObject>> objects;
 
 };
+// todo add tests
 class SceneIntersector : public Intersectable{
 public:
     explicit SceneIntersector(Scene &scene);

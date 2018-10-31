@@ -6,7 +6,8 @@
 #define CRAYG_SCENEREADER_H
 
 #include <Scene.h>
-
+// todo add tests
+// todo make more robust with error messages
 class SceneReader {
 public:
     void read(std::string path);
