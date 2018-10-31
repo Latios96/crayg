@@ -2,7 +2,7 @@
 #include <catch.hpp>
 
 
-TEST_CASE( "constructImage", "[Image]" ) {
+TEST_CASE( "Image/constructImage", "[Image]" ) {
     Image myImage(200,100);
 
     // make sure size is correct
@@ -20,7 +20,7 @@ TEST_CASE( "constructImage", "[Image]" ) {
         }
     }
 }
-TEST_CASE( "copyImage", "[Image]" ) {
+TEST_CASE( "Image/copyImage", "[Image]" ) {
     Image myImage(200,100);
 
     for(int x=0;x<myImage.getWidth();x++){

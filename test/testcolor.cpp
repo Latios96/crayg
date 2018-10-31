@@ -3,21 +3,21 @@
 
 
 
-TEST_CASE("createColorDefault", "[Color]"){
+TEST_CASE("Color/createColorDefault", "[Color]"){
     Color myColor;
     REQUIRE(myColor.r == 0);
     REQUIRE(myColor.g == 0);
     REQUIRE(myColor.b == 0);
 }
 
-TEST_CASE("createColor", "[Color]"){
+TEST_CASE("Color/createColor", "[Color]"){
     Color myColor(1,2,3);
     REQUIRE(myColor.r == 1);
     REQUIRE(myColor.g == 2);
     REQUIRE(myColor.b == 3);
 }
 
-TEST_CASE("operatorAdd", "[Color]"){
+TEST_CASE("Color/operatorAdd", "[Color]"){
     Color myColor(1,2,3);
     Color otherColor(4,5,6);
 
@@ -28,7 +28,7 @@ TEST_CASE("operatorAdd", "[Color]"){
     REQUIRE(result.b == 9);
 }
 
-TEST_CASE("operatorSubstract", "[Color]"){
+TEST_CASE("Color/operatorSubstract", "[Color]"){
     Color myColor(1,2,3);
     Color otherColor(4,5,6);
 
@@ -39,7 +39,7 @@ TEST_CASE("operatorSubstract", "[Color]"){
     REQUIRE(result.b == -3);
 }
 
-TEST_CASE("operatorMultiplyColor", "[Color]"){
+TEST_CASE("Color/operatorMultiplyColor", "[Color]"){
     Color myColor(1,2,3);
     Color otherColor(4,5,6);
 
@@ -50,7 +50,7 @@ TEST_CASE("operatorMultiplyColor", "[Color]"){
     REQUIRE(result.b == 18);
 }
 
-TEST_CASE("operatorMultiplyScalar", "[Color]"){
+TEST_CASE("Color/operatorMultiplyScalar", "[Color]"){
     Color myColor(1,2,3);
 
     Color result = myColor * 2;
@@ -60,7 +60,7 @@ TEST_CASE("operatorMultiplyScalar", "[Color]"){
     REQUIRE(result.b == 6);
 }
 
-TEST_CASE("clamp", "[Color]"){
+TEST_CASE("Color/clamp", "[Color]"){
     Color myColor(2,3,4);
 
     Color result = myColor.clamp();
@@ -70,7 +70,7 @@ TEST_CASE("clamp", "[Color]"){
     REQUIRE(result.b == 1);
 }
 
-TEST_CASE("getRgbValuesClamped", "[Color]"){
+TEST_CASE("Color/getRgbValuesClamped", "[Color]"){
     Color myColor(2,3,4);
 
     std::tuple<int, int, int> values = myColor.getRgbValues();
@@ -80,7 +80,7 @@ TEST_CASE("getRgbValuesClamped", "[Color]"){
     REQUIRE(std::get<2>(values) == 255);
 }
 
-TEST_CASE("getRgbValues", "[Color]"){
+TEST_CASE("Color/getRgbValues", "[Color]"){
     Color myColor(0.1f,0.2f, 0.3f);
 
     std::tuple<int, int, int> values = myColor.getRgbValues();
@@ -90,7 +90,7 @@ TEST_CASE("getRgbValues", "[Color]"){
     REQUIRE(std::get<2>(values) == 76);
 }
 
-TEST_CASE("equalOperator", "[Color]"){
+TEST_CASE("Color/equalOperator", "[Color]"){
     Color myColor(0.1f,0.2f, 0.3f);
     Color myOtherColor(0.1f,0.2f, 0.3f);
     Color myOtherOtherColor(0.4f,0.5f, 0.6f);
@@ -99,7 +99,7 @@ TEST_CASE("equalOperator", "[Color]"){
     REQUIRE_FALSE(myColor == myOtherOtherColor);
 }
 
-TEST_CASE("notEqualOperator", "[Color]"){
+TEST_CASE("Color/notEqualOperator", "[Color]"){
     Color myColor(0.1f,0.2f, 0.3f);
     Color myOtherColor(0.1f,0.2f, 0.3f);
     Color myOtherOtherColor(0.4f,0.5f, 0.6f);
