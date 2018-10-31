@@ -41,6 +41,15 @@ void Sphere::serialize(Serializer &serializer) {
     serializer.writeFloat("radius", radius);
 }
 
+void Sphere::deserialize(Deserializer &deserializer) {
+    SceneObject::deserialize(deserializer);
+    radius = deserializer.readFloat("radius");
+}
+
+Sphere::Sphere() {
+    radius = 0;
+}
+
 
 void SceneObject::serialize(Serializer &serializer) {
     serializer.writeVector3f("position", this->getPosition());
@@ -48,6 +57,10 @@ void SceneObject::serialize(Serializer &serializer) {
 
 SceneObject::SceneObject(Vector3f position) : Transformable(position) {
 
+}
+
+void SceneObject::deserialize(Deserializer &deserializer) {
+    setPosition(deserializer.readVector3f("position"));
 }
 
 SceneObject::SceneObject() = default;

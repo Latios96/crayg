@@ -12,8 +12,8 @@
 
 SceneWriter::SceneWriter(Scene &scene) : scene(scene) {}
 
-void SceneWriter::write() {
-    std::ofstream ofs("test.json");
+void SceneWriter::write(std::string path) {
+    std::ofstream ofs(path);
     rapidjson::OStreamWrapper osw(ofs);
     rapidjson::PrettyWriter<rapidjson::OStreamWrapper> writer(osw);
 

@@ -8,7 +8,7 @@
 #include "Scene.h"
 class SceneWriter {
 public:
-    void write();
+    void write(std::string path);
 
     explicit SceneWriter(Scene &scene);
 

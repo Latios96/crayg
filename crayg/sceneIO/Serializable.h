@@ -16,8 +16,17 @@ public:
     virtual void writeType(std::string name)=0;
 };
 
+class Deserializer{
+public:
+    virtual int readInt(std::string name)=0;
+    virtual float readFloat(std::string name)=0;
+    virtual Vector3f readVector3f(std::string name)=0;
+};
+
 class Serializable{
+public:
     virtual void serialize(Serializer& serializer)=0;
+    virtual void deserialize(Deserializer& deserializer)=0;
 };
 
 

@@ -43,6 +43,6 @@ void JsonSerializer::writeVector3f(std::string name, Vector3f value) {
 }
 
 void JsonSerializer::writeType(std::string name) {
-    writer.Key(name.c_str());
+    writer.Key("type");
     writer.String(name.c_str());
 }

@@ -12,6 +12,7 @@
 #include "PineHoleCameraModel.h"
 #include "image/ImageIterators.h"
 #include "sceneIO/SceneWriter.h"
+#include "sceneIO/SceneReader.h"
 
 
 int main(int argc, char *argv[])
@@ -36,12 +37,6 @@ int main(int argc, char *argv[])
             .addMember("y", 7)
             .finish() << std::endl;
 
-    for(auto pixel : ImageIterators::lineByLine(myImage)){
-        /*std::cout << ToStringHelper("Pixel")
-            .addMember("x", pixel.x)
-            .addMember("y", pixel.y)
-            .finish() << std::endl;*/
-    };
 
     for(int x=0; x<myImage.getWidth();x++){
         for(int y=0; y<myImage.getHeight();y++){
@@ -56,8 +51,19 @@ int main(int argc, char *argv[])
     std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
     imageWriter->writeImage(myImage, "");
 
+    std::cout << "write" << std::endl;
+
     SceneWriter sceneWriter(scene);
-    sceneWriter.write();
+    sceneWriter.write("test.json");
+
+    std::cout << "read" << std::endl;
+    Scene newScene;
+    SceneReader sceneReader(newScene);
+    sceneReader.read("test.json");
+
+    std::cout << "done" << std::endl;
+
+    std::cout << newScene.objects.size() << std::endl;
 
     return 0;
 }
