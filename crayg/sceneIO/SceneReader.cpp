@@ -7,10 +7,13 @@
 #include <fstream>
 #include "SceneReader.h"
 #include "JsonDeserializer.h"
+#include "utils/StopWatch.h"
 
 SceneReader::SceneReader(Scene &scene) : scene(scene) {}
 
 void SceneReader::read(std::string path) {
+    StopWatch stopwatch("Scene reading");
+
     std::ifstream ifs(path);
     rapidjson::IStreamWrapper isw(ifs);
     rapidjson::Document d;
@@ -32,13 +35,15 @@ void SceneReader::read(std::string path) {
                 scene.addObject(sphere);
             }
             else{
-                // todo unkown type
+                // todo unknown type
             }
         }
     }
     else{
         // todo error
     }
+
+    stopwatch.end();
 
 
 }

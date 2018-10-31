@@ -7,12 +7,16 @@
 #include <fstream>
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/prettywriter.h>
+#include <utils/StopWatch.h>
 #include "SceneWriter.h"
 #include "JsonSerializer.h"
+#include "utils/StopWatch.h"
 
 SceneWriter::SceneWriter(Scene &scene) : scene(scene) {}
 
 void SceneWriter::write(std::string path) {
+    StopWatch stopwatch("Scene writing");
+
     std::ofstream ofs(path);
     rapidjson::OStreamWrapper osw(ofs);
     rapidjson::PrettyWriter<rapidjson::OStreamWrapper> writer(osw);
@@ -28,4 +32,6 @@ void SceneWriter::write(std::string path) {
 
     serializer.finish();
     ofs.close();
+
+    stopwatch.end();
 }
