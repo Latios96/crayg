@@ -52,4 +52,4 @@ target_include_directories(crayg PUBLIC
 )
 
 target_include_directories(crayg
-PUBLIC ../externals/rapidjson/)
+PUBLIC ../externals/rapidjson/ ../externals/fmt/)

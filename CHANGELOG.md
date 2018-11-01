@@ -6,8 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Easy scene serialization
+- Changelog.md
 ### Changed
 - removed Prim-Stage-Schema Experiments
-
-
 ## [0.1.0]
+

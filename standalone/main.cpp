@@ -11,10 +11,14 @@
 #include "image/ImageIterators.h"
 #include "sceneIO/SceneWriter.h"
 #include "sceneIO/SceneReader.h"
+#define FMT_HEADER_ONLY
+#include "fmt/format.h"
 
+const std::string VERSION = "0.0.0";
 
 int main(int argc, char *argv[])
 {
+    std::cout << fmt::format("Crayg Renderer version {}\n", VERSION);
     Image myImage(800,600);
 
     Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
