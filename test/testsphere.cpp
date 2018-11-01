@@ -1,4 +1,4 @@
-#include <Sphere.h>
+#include <scene/Sphere.h>
 #include <catch.hpp>
 #include <fakeit.hpp>
 using namespace fakeit;

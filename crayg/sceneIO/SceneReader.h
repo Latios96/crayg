@@ -5,7 +5,7 @@
 #ifndef CRAYG_SCENEREADER_H
 #define CRAYG_SCENEREADER_H
 
-#include <Scene.h>
+#include <scene/Scene.h>
 // todo add tests
 // todo make more robust with error messages
 class SceneReader {

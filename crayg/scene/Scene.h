@@ -20,6 +20,7 @@ public:
 
 };
 // todo add tests
+// todo move to own header/cpp file in intersectors
 class SceneIntersector : public Intersectable{
 public:
     explicit SceneIntersector(Scene &scene);

@@ -11,7 +11,7 @@
 // todo add virtual destructor
 class ImageWriter{
 public:
-    virtual void writeImage(const Image &image, const std::string image_name) = 0;
+    virtual void writeImage(const Image &image, std::string image_name) = 0;
 
 };
 

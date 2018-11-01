@@ -7,7 +7,7 @@
 
 
 #include "Vector3f.h"
-
+// todo implement ==, !=
 struct Ray {
     Vector3f startPoint, direction;
     float length;

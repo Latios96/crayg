@@ -5,7 +5,7 @@
 #ifndef CRAYG_SCENEWRITER_H
 #define CRAYG_SCENEWRITER_H
 
-#include "Scene.h"
+#include "scene/Scene.h"
 // todo add tests
 class SceneWriter {
 public:

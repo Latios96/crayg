@@ -3,7 +3,7 @@
 //
 
 #include <catch.hpp>
-#include <Scene.h>
+#include <scene/Scene.h>
 #include <prims/Stage.h>
 #include <prims/Prim.h>
 #include <schemas/SpherePrim.h>

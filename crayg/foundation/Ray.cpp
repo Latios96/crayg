@@ -4,7 +4,7 @@
 
 #include <limits>
 #include "Ray.h"
-// todo implement ==, !=
+
 Ray::Ray(Vector3f startPoint, Vector3f direction){
     this->startPoint = startPoint;
     this->direction = direction;

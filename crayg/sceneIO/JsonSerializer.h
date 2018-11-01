@@ -11,6 +11,7 @@
 #include <rapidjson/prettywriter.h>
 #include "Serializable.h"
 // todo add tests
+// todo create abstract class Serializer for things like init, startObject, endObject, finish -> more general
 class JsonSerializer : public Serializer{
 
 public:

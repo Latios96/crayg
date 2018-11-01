@@ -5,21 +5,21 @@ set(crayg_SRCS
         image/Image.cpp
         image/BmpImageWriter.h
         image/BmpImageWriter.cpp
-        Camera.h
-        Camera.cpp
+        scene/Camera.h
+        scene/Camera.cpp
         PineHoleCameraModel.h
         PineHoleCameraModel.cpp
         foundation/Ray.h
         foundation/Ray.cpp
         Intersectable.h
-        Sphere.h
-        Sphere.cpp
+        scene/Sphere.h
+        scene/Sphere.cpp
         foundation/Color.h
         foundation/Color.cpp
-        Transformable.h
-        Transformable.cpp
-        Scene.h
-        Scene.cpp
+        scene/Transformable.h
+        scene/Transformable.cpp
+        scene/Scene.h
+        scene/Scene.cpp
         prims/Stage.cpp
         prims/Stage.h
         prims/Prim.cpp
@@ -39,7 +39,7 @@ set(crayg_SRCS
         intersectors/SphereIntersector.h
         image/ImageWriter.h
         image/ImageWriterFactory.h
-        SceneCreator.h
+        scene/SceneCreator.h
         image/LineByLineIterator.h
         image/ImageIterators.h
         utils/ToStringHelper.h
