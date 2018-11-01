@@ -9,7 +9,6 @@
 #include <scene/Scene.h>
 #include "Intersectable.h"
 
-// todo add tests
 class SceneIntersector : public Intersectable{
 public:
     explicit SceneIntersector(Scene &scene);

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - added tests for BmpImageWriter
+- SceneIntersector: added tests
 
 ## [0.1.0]
 ### Added
