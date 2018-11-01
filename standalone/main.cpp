@@ -2,9 +2,6 @@
 #include <image/Image.h>
 #include <scene/Sphere.h>
 #include <scene/Scene.h>
-#include <prims/Stage.h>
-#include <prims/Prim.h>
-#include <schemas/SpherePrim.h>
 #include <image/ImageWriter.h>
 #include <image/ImageWriterFactory.h>
 #include <utils/ToStringHelper.h>

@@ -20,23 +20,7 @@ set(crayg_SRCS
         scene/Transformable.cpp
         scene/Scene.h
         scene/Scene.cpp
-        prims/Stage.cpp
-        prims/Stage.h
-        prims/Prim.cpp
-        prims/Prim.h
-        prims/Attribute.cpp
-        prims/Attribute.h
-        prims/AttributeImpl.cpp
-        prims/AttributeImpl.h
-        schemas/SpherePrim.cpp
-        schemas/SpherePrim.h
-        schemas/ImageablePrim.h
-        schemas/TransformablePrim.cpp
-        schemas/TransformablePrim.h
-        schemas/ImageablePrim.cpp
         intersectors/Intersector.h
-        intersectors/SphereIntersector.cpp
-        intersectors/SphereIntersector.h
         image/ImageWriter.h
         image/ImageWriterFactory.h
         scene/SceneCreator.h
@@ -47,7 +31,14 @@ set(crayg_SRCS
         sceneIO/SceneWriter.h
         sceneIO/Serializable.h
         sceneIO/JsonSerializer.cpp
-        sceneIO/JsonSerializer.h sceneIO/JsonDeserializer.cpp sceneIO/JsonDeserializer.h sceneIO/SceneReader.cpp sceneIO/SceneReader.h utils/StopWatch.h intersectors/SceneIntersector.cpp intersectors/SceneIntersector.h)
+        sceneIO/JsonSerializer.h
+        sceneIO/JsonDeserializer.cpp
+        sceneIO/JsonDeserializer.h
+        sceneIO/SceneReader.cpp
+        sceneIO/SceneReader.h
+        utils/StopWatch.h
+        intersectors/SceneIntersector.cpp
+        intersectors/SceneIntersector.h)
 
 # Declare the library
 add_library(crayg STATIC
