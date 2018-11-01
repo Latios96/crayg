@@ -10,18 +10,3 @@ void Scene::addObject(SceneObject* intersectable) {
 }
 
 Scene::Scene() = default;
-
-Vector3f SceneIntersector::intersect(Ray ray) {
-    return {};
-}
-
-bool SceneIntersector::intersects(Ray ray) {
-    for(const std::shared_ptr<Intersectable> &intersectable : scene.objects){
-        if (intersectable->intersects(ray)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-SceneIntersector::SceneIntersector(Scene &scene) : scene(scene) {}

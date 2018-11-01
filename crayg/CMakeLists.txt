@@ -47,7 +47,7 @@ set(crayg_SRCS
         sceneIO/SceneWriter.h
         sceneIO/Serializable.h
         sceneIO/JsonSerializer.cpp
-        sceneIO/JsonSerializer.h sceneIO/JsonDeserializer.cpp sceneIO/JsonDeserializer.h sceneIO/SceneReader.cpp sceneIO/SceneReader.h utils/StopWatch.h)
+        sceneIO/JsonSerializer.h sceneIO/JsonDeserializer.cpp sceneIO/JsonDeserializer.h sceneIO/SceneReader.cpp sceneIO/SceneReader.h utils/StopWatch.h intersectors/SceneIntersector.cpp intersectors/SceneIntersector.h)
 
 # Declare the library
 add_library(crayg STATIC

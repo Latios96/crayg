@@ -19,17 +19,5 @@ public:
     std::vector<std::shared_ptr<SceneObject>> objects;
 
 };
-// todo add tests
-// todo move to own header/cpp file in intersectors
-class SceneIntersector : public Intersectable{
-public:
-    explicit SceneIntersector(Scene &scene);
-
-    Vector3f intersect(Ray ray) override;
-    bool intersects(Ray ray) override;
-
-private:
-    Scene &scene;
-};
 
 #endif //CRAYG_SCENE_H

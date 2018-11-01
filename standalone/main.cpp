@@ -8,6 +8,7 @@
 #include <image/ImageWriter.h>
 #include <image/ImageWriterFactory.h>
 #include <utils/ToStringHelper.h>
+#include <intersectors/SceneIntersector.h>
 #include "scene/Camera.h"
 #include "PineHoleCameraModel.h"
 #include "image/ImageIterators.h"
