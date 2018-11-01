@@ -7,10 +7,8 @@
 #include <cstdio>
 #include "BmpImageWriter.h"
 
-// todo add tests
-// todo use parameter image_name in code
-// todo make image_name lowerCamelCase
-void BmpImageWriter::writeImage(const Image &image, const std::string image_name){
+
+void BmpImageWriter::writeImage(const Image &image, const std::string imageName){
 
     // https://stackoverflow.com/questions/2654480/writing-bmp-image-in-pure-c-c-without-other-libraries
 
@@ -68,7 +66,7 @@ void BmpImageWriter::writeImage(const Image &image, const std::string image_name
     bmpinfoheader[10] = (unsigned char)(h >> 16);
     bmpinfoheader[11] = (unsigned char)(h >> 24);
 
-    f = fopen("img.bmp", "wb");
+    f = fopen(imageName.c_str(), "wb");
     fwrite(bmpfileheader, 1, 14, f);
     fwrite(bmpinfoheader, 1, 40, f);
     for (int i = 0; i<h; i++)

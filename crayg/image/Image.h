@@ -9,7 +9,6 @@
 #include "foundation/Vector3f.h"
 // TODO copy constructor
 // TODO docs
-// TODO use Color class
 class Image {
 
 private:
@@ -40,6 +39,7 @@ public:
 
     int getHeight() const;
 
+    // TODO use Color class
     void setValue(int x, int y, const Vector3f &color);
 
     void setValue(int x, int y, float r, float g, float b);
