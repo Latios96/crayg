@@ -11,4 +11,5 @@ target_link_libraries(crayg-standalone
     crayg
 )
 
+
 install(TARGETS crayg-standalone DESTINATION bin)

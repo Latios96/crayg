@@ -1,0 +1,11 @@
+language: cpp
+compiler: clang
+os: osx
+
+script:
+- rm -rf build/
+- mkdir build
+- cd build
+- cmake ..
+- make -j 4
+- make test

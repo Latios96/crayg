@@ -6,9 +6,9 @@
 #define CRAYG_PINEHOLECAMERAMODEL_H
 
 
-#include "Camera.h"
-#include "Ray.h"
-
+#include "scene/Camera.h"
+#include "foundation/Ray.h"
+// todo add tests
 class PineHoleCameraModel {
 private:
     Camera &camera;
