@@ -7,7 +7,7 @@
 
 
 #include <vector>
-#include "Intersectable.h"
+#include "intersectors/Intersectable.h"
 #include "Sphere.h"
 
 class Scene{

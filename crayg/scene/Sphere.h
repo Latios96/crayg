@@ -6,7 +6,7 @@
 #define CRAYG_SPHERE_H
 
 
-#include "Intersectable.h"
+#include "intersectors/Intersectable.h"
 #include "Transformable.h"
 #include "string"
 #include "sceneIO/Serializable.h"
