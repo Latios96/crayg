@@ -14,7 +14,7 @@
 #define FMT_HEADER_ONLY
 #include "fmt/format.h"
 
-const std::string VERSION = "0.0.0";
+const std::string VERSION = "0.1.0";
 
 int main(int argc, char *argv[])
 {
