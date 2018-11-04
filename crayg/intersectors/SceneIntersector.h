@@ -9,6 +9,7 @@
 #include <scene/Scene.h>
 #include "Intersectable.h"
 
+// todo add init method -> builds BVH Tree
 class SceneIntersector : public Intersectable{
 public:
     explicit SceneIntersector(Scene &scene);
