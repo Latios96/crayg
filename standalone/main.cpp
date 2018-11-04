@@ -16,11 +16,21 @@
 #include "fmt/format.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
+#include <cxxopts.hpp>
 
 const std::string VERSION = "0.1.0";
 
 int main(int argc, char *argv[])
 {
+    cxxopts::Options options("Crayg Renderer", "CLI Interface for Crayg renderer");
+
+    options.add_options()
+            ("s,scene", "Scene to render", cxxopts::value<std::string>())
+            ("o,output", "path to the rendered image", cxxopts::value<std::string>())
+            ;
+
+    auto result = options.parse(argc, argv);
+
     auto console = spdlog::stdout_color_mt("console");
 
     console->info("Crayg Renderer version {}", VERSION);
@@ -32,15 +42,12 @@ int main(int argc, char *argv[])
     Scene scene;
     SceneIntersector sceneIntersector(scene);
 
-    // todo move to scene creator
-    console->info("Generating spheres...");
+    // read scene
+    std::string scenePath = result["scene"].as<std::string>();
+    SceneReader sceneReader(scene);
+    sceneReader.read(scenePath);
 
-    for(int i=-5; i<5; i+=1){
-        Sphere* sphere = new Sphere(Vector3f(i,0,-10), 3.0f);
-        scene.addObject(sphere);
-    }
-    console->info("Sphere generation done.");
-
+    // render the scene
     Renderer renderer(scene, camera, myImage);
     renderer.renderScene();
 

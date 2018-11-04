@@ -51,4 +51,4 @@ target_include_directories(crayg PUBLIC
 )
 
 target_include_directories(crayg
-PUBLIC ../externals/rapidjson/ ../externals/fmt/ ../externals/spdlog)
+PUBLIC ../externals/rapidjson/ ../externals/fmt/ ../externals/spdlog ../externals/cxxopts)

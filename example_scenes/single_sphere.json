@@ -1,0 +1,13 @@
+{
+    "SceneObjects": [
+        {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "type": "Sphere",
+            "radius": 1.5
+        }
+    ]
+}

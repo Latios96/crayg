@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ImageWriter: added virtual destructor
 - Added Renderer Class
 - Add logger support
+- Added CLI interface, reads scene from cli args
 
 ## [0.1.0]
 ### Added
