@@ -12,8 +12,9 @@
 // todo add virtual destructor
 class BmpImageWriter : public ImageWriter{
 public:
-    void writeImage(const Image &image, const std::string imageName) override;
+    void writeImage(const Image &image, std::string imageName) override;
 
+    virtual ~BmpImageWriter();
 };
 
 

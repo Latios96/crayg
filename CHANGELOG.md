@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SceneIntersector: added tests
 - SceneWriter: added tests
 - JsonSerializer: Created abstract class SerializerImplementation for better abstraction
+- ImageWriter: added virtual destructor
 
 ## [0.1.0]
 ### Added

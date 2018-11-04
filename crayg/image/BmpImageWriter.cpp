@@ -86,3 +86,7 @@ void BmpImageWriter::writeImage(const Image &image, const std::string imageName)
     }
 
 }
+
+BmpImageWriter::~BmpImageWriter() {
+
+}

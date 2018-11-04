@@ -13,6 +13,8 @@ class ImageWriter{
 public:
     virtual void writeImage(const Image &image, std::string image_name) = 0;
 
+    virtual ~ImageWriter() = default;
+
 };
 
 #endif //CRAYG_IMAGEWRITERS_H
