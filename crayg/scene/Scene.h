@@ -9,7 +9,7 @@
 #include <vector>
 #include "intersectors/Intersectable.h"
 #include "Sphere.h"
-
+// todo add camera member and Rendersettings
 class Scene{
 public:
     Scene();
@@ -19,5 +19,4 @@ public:
     std::vector<std::shared_ptr<SceneObject>> objects;
 
 };
-
 #endif //CRAYG_SCENE_H
