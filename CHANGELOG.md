@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - added tests for BmpImageWriter
 - SceneIntersector: added tests
+- SceneWriter: added tests
+- JsonSerializer: Created abstract class SerializerImplementation for better abstraction
 
 ## [0.1.0]
 ### Added

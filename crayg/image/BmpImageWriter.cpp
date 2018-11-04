@@ -5,7 +5,10 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
+#include <iostream>
 #include "BmpImageWriter.h"
+#define FMT_HEADER_ONLY
+#include "fmt/format.h"
 
 
 void BmpImageWriter::writeImage(const Image &image, const std::string imageName){
@@ -67,12 +70,19 @@ void BmpImageWriter::writeImage(const Image &image, const std::string imageName)
     bmpinfoheader[11] = (unsigned char)(h >> 24);
 
     f = fopen(imageName.c_str(), "wb");
-    fwrite(bmpfileheader, 1, 14, f);
-    fwrite(bmpinfoheader, 1, 40, f);
-    for (int i = 0; i<h; i++)
-    {
-        fwrite(img + (w*(h - i - 1) * 3), 3, w, f);
-        fwrite(bmppad, 1, (4 - (w * 3) % 4) % 4, f);
+    if (f){
+        fwrite(bmpfileheader, 1, 14, f);
+        fwrite(bmpinfoheader, 1, 40, f);
+        for (int i = 0; i<h; i++)
+        {
+            fwrite(img + (w*(h - i - 1) * 3), 3, w, f);
+            fwrite(bmppad, 1, (4 - (w * 3) % 4) % 4, f);
+        }
+        fclose(f);
     }
-    fclose(f);
+    else{
+        // todo throw exeption??
+        std::cout << fmt::format("Error when opening file  {}\n", imageName);
+    }
+
 }

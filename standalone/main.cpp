@@ -52,12 +52,13 @@ int main(int argc, char *argv[])
     }
 
     std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
-    imageWriter->writeImage(myImage, "");
+    imageWriter->writeImage(myImage, "img.bmp");
 
     std::cout << "write" << std::endl;
 
-    SceneWriter sceneWriter(scene);
-    sceneWriter.write("test.json");
+    JsonSerializer serializer("test.json");
+    SceneWriter sceneWriter(scene, serializer);
+    sceneWriter.write();
 
     std::cout << "read" << std::endl;
     Scene newScene;
