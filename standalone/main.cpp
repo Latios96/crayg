@@ -18,7 +18,7 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include <cxxopts.hpp>
 
-const std::string VERSION = "0.1.0";
+const std::string VERSION = "0.2.0";
 
 int main(int argc, char *argv[])
 {
