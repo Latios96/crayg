@@ -1,10 +1,6 @@
 #include <foundation/Vector3f.h>
 #include <catch.hpp>
-
-bool compareWithPrecision(float A, float B, float epsilon = 0.001f)
-{
-    return (fabs(A - B) < epsilon);
-}
+#include "utils/utils.h"
 
 // todo we can do this better with https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md#test-cases-and-sections
 TEST_CASE( "addTwoVectors", "[Vector]" ) {
@@ -129,4 +125,16 @@ TEST_CASE( "operatorNotEqual", "[Vector]" ) {
 
     REQUIRE_FALSE(myVector != otherVector);
     REQUIRE(myVector != anotherVector);
+}
+
+TEST_CASE("Vector/shouldCreateInvalid", "[Vector]" ){
+    Vector3f invalid = Vector3f::createInvalid();
+    REQUIRE(invalid.x == std::numeric_limits<float>::max());
+    REQUIRE(invalid.y == std::numeric_limits<float>::max());
+    REQUIRE(invalid.z == std::numeric_limits<float>::max());
+}
+
+TEST_CASE("Vector/shouldBeInvalid", "[Vector]" ){
+    Vector3f invalid = Vector3f::createInvalid();
+    REQUIRE_FALSE(invalid.isValid());
 }

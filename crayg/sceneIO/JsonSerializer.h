@@ -10,23 +10,27 @@
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/prettywriter.h>
 #include "Serializable.h"
+#include "SerializerImplementation.h"
+
 // todo add tests
-// todo create abstract class Serializer for things like init, startObject, endObject, finish -> more general
-class JsonSerializer : public Serializer{
+class JsonSerializer : public SerializerImplementation{
 
 public:
-    explicit JsonSerializer(rapidjson::PrettyWriter<rapidjson::OStreamWrapper> &writer) : writer(writer) {}
-    void init();
-    void startObject();
-    void endObject();
-    void finish();
+    explicit JsonSerializer(const std::string &path);
+
+    void init() override;
+    void startObject() override;
+    void endObject() override;
+    void finish() override;
     void writeInt(std::string name, int value) override;
     void writeFloat(std::string name, float value) override;
     void writeVector3f(std::string name, Vector3f value) override;
     void writeType(std::string name) override;
 
 private:
-    rapidjson::PrettyWriter<rapidjson::OStreamWrapper>& writer;
+    std::shared_ptr<std::ofstream> ofs;
+    std::shared_ptr<rapidjson::OStreamWrapper> osw;
+    std::shared_ptr<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>> writer;
 };
 
 

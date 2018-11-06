@@ -53,3 +53,7 @@ bool Color::operator!=(const Color &color) const{
     return !(r== color.r && g== color.g && b== color.b);
 }
 
+Color Color::operator+(float value) {
+    return {r+value, g+value, b+value};
+}
+

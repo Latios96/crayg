@@ -5,12 +5,13 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
+#include <iostream>
 #include "BmpImageWriter.h"
+#define FMT_HEADER_ONLY
+#include "fmt/format.h"
 
-// todo add tests
-// todo use parameter image_name in code
-// todo make image_name lowerCamelCase
-void BmpImageWriter::writeImage(const Image &image, const std::string image_name){
+
+void BmpImageWriter::writeImage(const Image &image, const std::string imageName){
 
     // https://stackoverflow.com/questions/2654480/writing-bmp-image-in-pure-c-c-without-other-libraries
 
@@ -68,13 +69,24 @@ void BmpImageWriter::writeImage(const Image &image, const std::string image_name
     bmpinfoheader[10] = (unsigned char)(h >> 16);
     bmpinfoheader[11] = (unsigned char)(h >> 24);
 
-    f = fopen("img.bmp", "wb");
-    fwrite(bmpfileheader, 1, 14, f);
-    fwrite(bmpinfoheader, 1, 40, f);
-    for (int i = 0; i<h; i++)
-    {
-        fwrite(img + (w*(h - i - 1) * 3), 3, w, f);
-        fwrite(bmppad, 1, (4 - (w * 3) % 4) % 4, f);
+    f = fopen(imageName.c_str(), "wb");
+    if (f){
+        fwrite(bmpfileheader, 1, 14, f);
+        fwrite(bmpinfoheader, 1, 40, f);
+        for (int i = 0; i<h; i++)
+        {
+            fwrite(img + (w*(h - i - 1) * 3), 3, w, f);
+            fwrite(bmppad, 1, (4 - (w * 3) % 4) % 4, f);
+        }
+        fclose(f);
     }
-    fclose(f);
+    else{
+        // todo throw exeption??
+        std::cout << fmt::format("Error when opening file  {}\n", imageName);
+    }
+
+}
+
+BmpImageWriter::~BmpImageWriter() {
+
 }

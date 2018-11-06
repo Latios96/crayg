@@ -4,8 +4,43 @@
 
 #include "Sphere.h"
 
-Vector3f Sphere::intersect(Ray ray) {
-    return Vector3f();
+Ray Sphere::intersect(Ray ray) {
+    ray.startPoint = ray.startPoint + getPosition().invert();
+
+    float b = 2.0f * (ray.startPoint.x * ray.direction.x +
+                      ray.startPoint.y * ray.direction.y +
+                      ray.startPoint.z * ray.direction.z);
+
+    float c = ray.startPoint.x * ray.startPoint.x +
+              ray.startPoint.y * ray.startPoint.y +
+              ray.startPoint.z * ray.startPoint.z - radius * radius;
+
+    float d = b*b - (4.0f * c);
+
+    const bool noIntersection = d < 0.0f;
+    const bool isTangent = d == 0;
+
+    if(noIntersection){
+        return Ray::createInvalid();
+    }
+    else if(isTangent){
+        // only one solution, calculate t
+        const float t0 = (float) (b * (-1.0) / 2.0);
+        return {ray.startPoint - getPosition().invert(), ray.direction, t0};
+    }
+    else{
+        const double sqrtD = sqrt(d);
+
+        const float t0 = (float) ((b *-1.0 - sqrtD) / 2.0);
+
+        // if t0 > 0 its the point we want to render
+        if(t0>0){
+            return {ray.startPoint - getPosition().invert(), ray.direction, t0};
+        }
+        else{
+            return Ray::createInvalid();
+        }
+    }
 }
 
 bool Sphere::intersects(Ray ray) {
@@ -48,6 +83,10 @@ void Sphere::deserialize(Deserializer &deserializer) {
 
 Sphere::Sphere() {
     radius = 0;
+}
+
+Vector3f Sphere::getNormal(Vector3f point) {
+    return (point - getPosition()).normalize();
 }
 
 

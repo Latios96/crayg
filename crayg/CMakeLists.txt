@@ -27,7 +27,6 @@ set(crayg_SRCS
         image/LineByLineIterator.h
         image/ImageIterators.h
         utils/ToStringHelper.h
-        sceneIO/SceneWriter.cpp
         sceneIO/SceneWriter.h
         sceneIO/Serializable.h
         sceneIO/JsonSerializer.cpp
@@ -38,7 +37,7 @@ set(crayg_SRCS
         sceneIO/SceneReader.h
         utils/StopWatch.h
         intersectors/SceneIntersector.cpp
-        intersectors/SceneIntersector.h)
+        intersectors/SceneIntersector.h sceneIO/SceneWriter.cpp sceneIO/SerializerImplementation.h Renderer.cpp Renderer.h utils/utils.h scene/Light.h scene/Light.cpp)
 
 # Declare the library
 add_library(crayg STATIC
@@ -52,4 +51,4 @@ target_include_directories(crayg PUBLIC
 )
 
 target_include_directories(crayg
-PUBLIC ../externals/rapidjson/ ../externals/fmt/)
+PUBLIC ../externals/rapidjson/ ../externals/fmt/ ../externals/spdlog ../externals/cxxopts)

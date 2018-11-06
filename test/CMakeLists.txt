@@ -16,7 +16,7 @@ set(TARGET_NAME tests)
 
 add_executable(${TARGET_NAME}
   main.cpp
-  ${UNIT_TEST_SOURCE_LIST})
+  ${UNIT_TEST_SOURCE_LIST} testbmpimagewriter.cpp testsceneintersector.cpp testscenewriter.cpp testray.cpp testlight.cpp)
 
 target_link_libraries(${TARGET_NAME}
   PUBLIC crayg)

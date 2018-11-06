@@ -24,11 +24,11 @@ int Image::getHeight() const {
     return height;
 }
 
-void Image::setValue(int x, int y, const Vector3f &color){
+void Image::setValue(int x, int y, const Color &color){
     int index = this->index(x,y);
-    values[index] = color.x;
-    values[index +1 ] = color.y;
-    values[index + 2] = color.z;
+    values[index] = color.r;
+    values[index +1 ] = color.g;
+    values[index + 2] = color.b;
 }
 
 void Image::setValue(int x, int y, float r, float g, float b) {

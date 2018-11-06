@@ -1,37 +1,21 @@
 //
-// Created by Jan Honsbrok on 30.10.18.
+// Created by Jan Honsbrok on 01.11.18.
 //
 
-
-
-#include <fstream>
-#include <rapidjson/ostreamwrapper.h>
-#include <rapidjson/prettywriter.h>
-#include <utils/StopWatch.h>
 #include "SceneWriter.h"
-#include "JsonSerializer.h"
-#include "utils/StopWatch.h"
 
-SceneWriter::SceneWriter(Scene &scene) : scene(scene) {}
-
-void SceneWriter::write(std::string path) {
+void SceneWriter::write() {
     StopWatch stopwatch("Scene writing");
 
-    std::ofstream ofs(path);
-    rapidjson::OStreamWrapper osw(ofs);
-    rapidjson::PrettyWriter<rapidjson::OStreamWrapper> writer(osw);
-
-    JsonSerializer serializer(writer);
-    serializer.init();
+    serializerImpl.init();
 
     for (const auto &obj : scene.objects){
-        serializer.startObject();
-        obj->serialize(serializer);
-        serializer.endObject();
+        serializerImpl.startObject();
+        obj->serialize(serializerImpl);
+        serializerImpl.endObject();
     }
 
-    serializer.finish();
-    ofs.close();
+    serializerImpl.finish();
 
     stopwatch.end();
-}
+};

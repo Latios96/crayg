@@ -21,11 +21,12 @@ public:
     explicit SceneObject(Vector3f position);
     void serialize(Serializer& serializer) override;
     void deserialize(Deserializer& deserializer) override;
+    virtual Vector3f getNormal(Vector3f point)=0;
 };
 
 class Sphere :  public SceneObject{
 public:
-    Vector3f intersect(Ray ray) override;
+    Ray intersect(Ray ray) override;
     bool intersects(Ray ray) override;
     Sphere();
 
@@ -36,6 +37,8 @@ public:
     void serialize(Serializer& serializer) override;
 
     void deserialize(Deserializer& deserializer) override;
+
+    Vector3f getNormal(Vector3f point) override;
 
     virtual ~Sphere();
 

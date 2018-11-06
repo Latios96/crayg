@@ -15,6 +15,11 @@ public:
     Ray(Vector3f startPoint, Vector3f direction);
 
     Ray(Vector3f startPoint, Vector3f direction, float length);
+
+    static Ray createInvalid();
+
+    bool isValid();
+
 };
 
 

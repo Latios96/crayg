@@ -9,13 +9,24 @@
 #include <scene/Scene.h>
 #include "Intersectable.h"
 
-// todo add tests
-class SceneIntersector : public Intersectable{
+struct Intersection{
+public:
+    Intersection(const Ray &ray, Vector3f location, SceneObject *object) : ray(ray), location(location), object(object) {}
+
+    Ray ray;
+    Vector3f location;
+    SceneObject* object;
+
+    bool isValid();
+};
+
+// todo add init method -> builds BVH Tree
+class SceneIntersector{
 public:
     explicit SceneIntersector(Scene &scene);
 
-    Vector3f intersect(Ray ray) override;
-    bool intersects(Ray ray) override;
+    Intersection intersect(Ray ray);
+    bool intersects(Ray ray);
 
 private:
     Scene &scene;

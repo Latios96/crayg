@@ -25,12 +25,22 @@ public:
      */
     Color(float r, float g, float b);
 
+    static Color createGrey(float grey){
+        return {grey, grey, grey};
+    }
+
     /**
      * Adds the two colors component-wise, r+r, g+g, b+b
      * @param otherColor
      * @return
      */
     Color operator+(const Color &otherColor);
+    /**
+     * Adds the given float to all components of this color
+     * @param value value to add to all components
+     * @return new color with all components increased by value
+     */
+    Color operator+(float value);
     /**
      * Subtracts the two colors component-wise, r-r, g-g, b-b
      * @param otherColor

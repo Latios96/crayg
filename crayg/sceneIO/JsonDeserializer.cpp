@@ -11,7 +11,7 @@ int JsonDeserializer::readInt(std::string name) {
 }
 
 float JsonDeserializer::readFloat(std::string name) {
-    return 0;
+    return jsonObject[name.c_str()].GetFloat();
 }
 
 Vector3f JsonDeserializer::readVector3f(std::string name) {

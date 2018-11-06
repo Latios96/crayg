@@ -17,7 +17,7 @@ TEST_CASE("Color/createColor", "[Color]"){
     REQUIRE(myColor.b == 3);
 }
 
-TEST_CASE("Color/operatorAdd", "[Color]"){
+TEST_CASE("Color/operatorAddColor", "[Color]"){
     Color myColor(1,2,3);
     Color otherColor(4,5,6);
 
@@ -26,6 +26,15 @@ TEST_CASE("Color/operatorAdd", "[Color]"){
     REQUIRE(result.r == 5);
     REQUIRE(result.g == 7);
     REQUIRE(result.b == 9);
+}
+TEST_CASE("Color/operatorAddFloat", "[Color]"){
+    Color myColor(1,2,3);
+
+    Color result = myColor + 1;
+
+    REQUIRE(result.r == 2.0f);
+    REQUIRE(result.g == 3.0f);
+    REQUIRE(result.b == 4.0f);
 }
 
 TEST_CASE("Color/operatorSubstract", "[Color]"){

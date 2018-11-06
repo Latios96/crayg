@@ -71,3 +71,13 @@ bool Vector3f::operator==(const Vector3f &otherVector) const {
 bool Vector3f::operator!=(const Vector3f &otherVector) const {
     return !(this->x == otherVector.x && this->y == otherVector.y && this->z == otherVector.z);
 }
+
+Vector3f Vector3f::createInvalid() {
+    auto max = std::numeric_limits<float>::max();
+    return {max, max, max};
+}
+
+bool Vector3f::isValid() {
+    auto max = std::numeric_limits<float>::max();
+    return x != max && y != max && z != max;
+}

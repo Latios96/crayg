@@ -5,17 +5,20 @@
 #ifndef CRAYG_SCENEWRITER_H
 #define CRAYG_SCENEWRITER_H
 
+#include <utils/StopWatch.h>
 #include "scene/Scene.h"
-// todo add tests
+#include "JsonSerializer.h"
+
 class SceneWriter {
 public:
-    void write(std::string path);
+    void write();
 
-    explicit SceneWriter(Scene &scene);
+    explicit SceneWriter(Scene &scene, SerializerImplementation& serializerImpl) : scene(scene),
+    serializerImpl(serializerImpl) {}
 
 private:
     Scene& scene;
+    SerializerImplementation& serializerImpl;
 };
-
 
 #endif //CRAYG_SCENEWRITER_H
