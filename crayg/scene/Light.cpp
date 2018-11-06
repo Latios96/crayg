@@ -15,6 +15,7 @@ void Light::setIntensity(float intensity) {
 void Light::serialize(Serializer &serializer) {
     serializer.writeVector3f("position", this->getPosition());
     serializer.writeFloat("intensity", intensity);
+    serializer.writeType("Light");
 }
 
 void Light::deserialize(Deserializer &deserializer) {

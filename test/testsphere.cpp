@@ -34,9 +34,7 @@ TEST_CASE("Sphere") {
     }
     SECTION("intersectNotReturnsMax"){
         auto hitRay = mySphere.intersect(Ray(Vector3f(1, 10, -5), Vector3f(0, 0, 1)));
-        REQUIRE(hitRay.startPoint == Vector3f());
-        REQUIRE(hitRay.direction == Vector3f());
-        REQUIRE(hitRay.length == std::numeric_limits<float>::max());
+        REQUIRE_FALSE(hitRay.isValid());
     }
 
     SECTION("serialize"){
