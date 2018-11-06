@@ -9,6 +9,8 @@
 #include <vector>
 #include "intersectors/Intersectable.h"
 #include "Sphere.h"
+#include "Light.h"
+
 // todo add camera member and Rendersettings
 class Scene{
 public:
@@ -16,7 +18,10 @@ public:
 
     void addObject(SceneObject* sceneObject);
 
+    void addLight(Light* sceneObject);
+
     std::vector<std::shared_ptr<SceneObject>> objects;
+    std::vector<std::shared_ptr<Light>> lights;
 
 };
 #endif //CRAYG_SCENE_H

@@ -8,6 +8,7 @@
 #include "SceneReader.h"
 #include "JsonDeserializer.h"
 #include "utils/StopWatch.h"
+#include "scene/Light.h"
 
 SceneReader::SceneReader(Scene &scene) : scene(scene) {}
 
@@ -33,6 +34,12 @@ void SceneReader::read(std::string path) {
                 JsonDeserializer deserializer(obj);
                 sphere->deserialize(deserializer);
                 scene.addObject(sphere);
+            }
+            else if (type == "Light"){
+                Light* light = new Light();
+                JsonDeserializer deserializer(obj);
+                light->deserialize(deserializer);
+                scene.addLight(light);
             }
             else{
                 // todo unknown type

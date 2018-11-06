@@ -18,7 +18,7 @@ Intersection SceneIntersector::intersect(Ray ray) {
 }
 
 bool SceneIntersector::intersects(Ray ray) {
-    for(const std::shared_ptr<Intersectable> &intersectable : scene.objects){
+    for(const auto &intersectable : scene.objects){
         if (intersectable->intersects(ray)) {
             return true;
         }
