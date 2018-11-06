@@ -16,6 +16,8 @@ public:
     Ray ray;
     Vector3f location;
     SceneObject* object;
+
+    bool isValid();
 };
 
 // todo add init method -> builds BVH Tree

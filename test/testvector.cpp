@@ -126,3 +126,15 @@ TEST_CASE( "operatorNotEqual", "[Vector]" ) {
     REQUIRE_FALSE(myVector != otherVector);
     REQUIRE(myVector != anotherVector);
 }
+
+TEST_CASE("Vector/shouldCreateInvalid", "[Vector]" ){
+    Vector3f invalid = Vector3f::createInvalid();
+    REQUIRE(invalid.x == std::numeric_limits<float>::max());
+    REQUIRE(invalid.y == std::numeric_limits<float>::max());
+    REQUIRE(invalid.z == std::numeric_limits<float>::max());
+}
+
+TEST_CASE("Vector/shouldBeInvalid", "[Vector]" ){
+    Vector3f invalid = Vector3f::createInvalid();
+    REQUIRE_FALSE(invalid.isValid());
+}

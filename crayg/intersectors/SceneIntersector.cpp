@@ -10,9 +10,10 @@ Intersection SceneIntersector::intersect(Ray ray) {
     for(const auto &intersectable : scene.objects){
         Ray intersectionRay = intersectable->intersect(ray);
 
-        if(intersectionRay.length < hitRay.length )
+        if(intersectionRay.isValid() && intersectionRay.length < hitRay.length ){
             hitRay = intersectionRay;
-        hitObject = intersectable.get();
+            hitObject = intersectable.get();
+        }
     }
     return {hitRay, hitRay.startPoint + (hitRay.direction * hitRay.length), hitObject};
 }
@@ -27,3 +28,7 @@ bool SceneIntersector::intersects(Ray ray) {
 }
 
 SceneIntersector::SceneIntersector(Scene &scene) : scene(scene) {}
+
+bool Intersection::isValid() {
+    return object != nullptr;
+}

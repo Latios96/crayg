@@ -21,6 +21,7 @@ public:
     explicit SceneObject(Vector3f position);
     void serialize(Serializer& serializer) override;
     void deserialize(Deserializer& deserializer) override;
+    virtual Vector3f getNormal(Vector3f point)=0;
 };
 
 class Sphere :  public SceneObject{
@@ -36,6 +37,8 @@ public:
     void serialize(Serializer& serializer) override;
 
     void deserialize(Deserializer& deserializer) override;
+
+    Vector3f getNormal(Vector3f point) override;
 
     virtual ~Sphere();
 

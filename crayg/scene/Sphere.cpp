@@ -21,7 +21,7 @@ Ray Sphere::intersect(Ray ray) {
     const bool isTangent = d == 0;
 
     if(noIntersection){
-        return {Vector3f(), Vector3f(), std::numeric_limits<float>::max()};
+        return Ray::createInvalid();
     }
     else if(isTangent){
         // only one solution, calculate t
@@ -38,7 +38,7 @@ Ray Sphere::intersect(Ray ray) {
             return {ray.startPoint - getPosition().invert(), ray.direction, t0};
         }
         else{
-            return {Vector3f(), Vector3f(), std::numeric_limits<float>::max()};
+            return Ray::createInvalid();
         }
     }
 }
@@ -83,6 +83,10 @@ void Sphere::deserialize(Deserializer &deserializer) {
 
 Sphere::Sphere() {
     radius = 0;
+}
+
+Vector3f Sphere::getNormal(Vector3f point) {
+    return (point - getPosition()).normalize();
 }
 
 

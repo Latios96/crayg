@@ -6,6 +6,7 @@
 #define CRAYG_IMAGE_H
 
 
+#include <foundation/Color.h>
 #include "foundation/Vector3f.h"
 // TODO copy constructor
 // TODO docs
@@ -39,8 +40,7 @@ public:
 
     int getHeight() const;
 
-    // TODO use Color class
-    void setValue(int x, int y, const Vector3f &color);
+    void setValue(int x, int y, const Color &color);
 
     void setValue(int x, int y, float r, float g, float b);
 

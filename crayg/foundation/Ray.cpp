@@ -17,4 +17,12 @@ Ray::Ray(Vector3f startPoint, Vector3f direction, float length){
     this->length = length;
 }
 
+Ray Ray::createInvalid() {
+    return {Vector3f::createInvalid(), Vector3f::createInvalid(), std::numeric_limits<float>::max()};
+}
+
+bool Ray::isValid() {
+    return startPoint.isValid() && direction.isValid() && length != std::numeric_limits<float>::max();
+}
+
 

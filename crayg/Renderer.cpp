@@ -27,9 +27,31 @@ void Renderer::renderScene() {
         Ray ray = cameraModel.createPrimaryRay(pixel.x,pixel.y);
 
         // if intersects, set white color
-        if(sceneIntersector.intersects(ray)){
-            image.setValue(pixel.x,pixel.y,1,1,1);
+        auto intersection = sceneIntersector.intersect(ray);
+        if(intersection.isValid()){
+            image.setValue(pixel.x, pixel.y, shadePoint(intersection.location, *intersection.object));
+            //image.setValue(pixel.x, pixel.y, 1,1,1);
         }
     }
     spdlog::get("console")->info("Rendering done.");
+}
+
+Color Renderer::shadePoint(Vector3f point, SceneObject& object) {
+    // get normal at point
+    Vector3f normal = object.getNormal(point);
+    // for every light
+    Color color = Color::createGrey(0.2f); // todo take value from rendersettings
+
+    for (const auto& light : scene.lights){
+        Vector3f lightVector = (light->getPosition() - point).normalize();
+        float scalar = normal.scalarProduct(lightVector);
+        if (scalar >0){
+            color = color+scalar;
+        }
+    }
+    // calculate light vector
+    // skalar produkt zwischen normale und
+
+    return color;
+
 }

@@ -49,6 +49,10 @@ public:
 
     Vector3f crossProduct(const Vector3f &otherVector) const ;
 
+    static Vector3f createInvalid();
+
+    bool isValid();
+
 };
 
 
