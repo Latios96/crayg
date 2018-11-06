@@ -2,6 +2,7 @@
 #include <catch.hpp>
 #include <fakeit.hpp>
 using namespace fakeit;
+#include "utils/utils.h"
 
 TEST_CASE("Sphere") {
     Sphere mySphere(Vector3f(0, 0, 0), 3.0f);
@@ -22,6 +23,22 @@ TEST_CASE("Sphere") {
         // intersects should return true
         REQUIRE_FALSE(mySphere.intersects(notIntersectingRay));
     }
+
+    SECTION("intersect"){
+        Sphere mySphere(Vector3f(1, 0, 0), 3.0f);
+        auto hitRay = mySphere.intersect(Ray(Vector3f(5, 0, 0), Vector3f(-1, 0, 0)));
+        Vector3f hitLocation = hitRay.startPoint + (hitRay.direction * hitRay.length);
+        REQUIRE(compareWithPrecision(hitLocation.x, 4));
+        REQUIRE(compareWithPrecision(hitLocation.y, 0));
+        REQUIRE(compareWithPrecision(hitLocation.z, 0));
+    }
+    SECTION("intersectNotReturnsMax"){
+        auto hitRay = mySphere.intersect(Ray(Vector3f(1, 10, -5), Vector3f(0, 0, 1)));
+        REQUIRE(hitRay.startPoint == Vector3f());
+        REQUIRE(hitRay.direction == Vector3f());
+        REQUIRE(hitRay.length == std::numeric_limits<float>::max());
+    }
+
     SECTION("serialize"){
         fakeit::Mock<Serializer> mockSerializer;
         fakeit::When(Method(mockSerializer,writeFloat)).AlwaysReturn();

@@ -16,7 +16,7 @@ public:
      * @param ray ray in world space to intersect with
      * @return the location of the object Surface
      */
-    virtual Vector3f intersect(Ray ray)=0;
+    virtual Ray intersect(Ray ray)=0;
     /**
      * Returns if the ray intersects with the object, so implementation can optimize
      * @param ray ray in world space to intersect with

@@ -1,10 +1,6 @@
 #include <foundation/Vector3f.h>
 #include <catch.hpp>
-
-bool compareWithPrecision(float A, float B, float epsilon = 0.001f)
-{
-    return (fabs(A - B) < epsilon);
-}
+#include "utils/utils.h"
 
 // todo we can do this better with https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md#test-cases-and-sections
 TEST_CASE( "addTwoVectors", "[Vector]" ) {

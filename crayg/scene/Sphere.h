@@ -25,7 +25,7 @@ public:
 
 class Sphere :  public SceneObject{
 public:
-    Vector3f intersect(Ray ray) override;
+    Ray intersect(Ray ray) override;
     bool intersects(Ray ray) override;
     Sphere();
 
