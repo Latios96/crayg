@@ -46,7 +46,7 @@ set(crayg_SRCS
         scene/Light.h
         scene/Light.cpp
         scene/SceneObject.cpp
-        scene/SceneObject.h)
+        scene/SceneObject.h scene/GroundPlane.cpp scene/GroundPlane.h)
 
 # Declare the library
 add_library(crayg STATIC

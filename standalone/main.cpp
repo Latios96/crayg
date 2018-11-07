@@ -38,6 +38,14 @@ int main(int argc, char *argv[])
     Image myImage(800,600);
 
     Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
+    /*Camera camera(Vector3f(2.437052995026952f,
+                           2.642462443303262f,
+                           7.590531325024573f),
+                    Vector3f(0,1,0),
+                    Vector3f(4.1744385725905886e-14f,
+                             4.884981308350689e-15f,
+                             4.529709940470639e-14f).normalize(),
+                    6.0f*180.0f/3.141f);*/
 
     Scene scene;
     SceneIntersector sceneIntersector(scene);
@@ -53,7 +61,13 @@ int main(int argc, char *argv[])
 
     console->info("writing image..");
     std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
-    imageWriter->writeImage(myImage, "img.bmp");
+
+    if (result["output"].count()){
+        imageWriter->writeImage(myImage, result["output"].as<std::string>());
+    }
+    else{
+        imageWriter->writeImage(myImage, "img.bmp");
+    }
     console->info("writing image done.");
 
     return 0;

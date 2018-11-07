@@ -13,13 +13,15 @@
 
 class Sphere :  public SceneObject{
 public:
-    Ray intersect(Ray ray) override;
-    bool intersects(Ray ray) override;
+
     Sphere();
 
     Sphere(Vector3f position, float radius);
 
     float getRadius() const;
+
+    Ray intersect(Ray ray) override;
+    bool intersects(Ray ray) override;
 
     void serialize(Serializer& serializer) override;
 
