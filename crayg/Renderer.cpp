@@ -35,7 +35,7 @@ void Renderer::renderScene() {
     }
     spdlog::get("console")->info("Rendering done.");
 }
-
+// todo add tests
 Color Renderer::shadePoint(Vector3f point, SceneObject& object) {
     // get normal at point
     Vector3f normal = object.getNormal(point);
@@ -43,14 +43,16 @@ Color Renderer::shadePoint(Vector3f point, SceneObject& object) {
     Color color = Color::createGrey(0.2f); // todo take value from rendersettings
 
     for (const auto& light : scene.lights){
+        // calculate light vector
         Vector3f lightVector = (light->getPosition() - point).normalize();
+
+        // skalar produkt zwischen normale und lightVector
         float scalar = normal.scalarProduct(lightVector);
+
         if (scalar >0){
             color = color+scalar;
         }
     }
-    // calculate light vector
-    // skalar produkt zwischen normale und
 
     return color;
 

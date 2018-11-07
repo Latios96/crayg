@@ -8,7 +8,6 @@
 #include <scene/Scene.h>
 // todo add tests
 // todo make more robust with error messages
-// todo make template class, so we can better test it
 class SceneReader {
 public:
     void read(std::string path);

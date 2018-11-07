@@ -9,6 +9,7 @@
 #include "scene/Camera.h"
 #include "foundation/Ray.h"
 // todo add tests
+// todo proper virtual class
 class PineHoleCameraModel {
 private:
     Camera &camera;
