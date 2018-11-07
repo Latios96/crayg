@@ -47,7 +47,7 @@ Color Renderer::shadePoint(Vector3f point, SceneObject& object) {
         Vector3f lightVector = (light->getPosition() - point).normalize();
 
         // skalar produkt zwischen normale und lightVector
-        float scalar = normal.scalarProduct(lightVector);
+        float scalar = normal.scalarProduct(lightVector) * light->getIntensity();
 
         if (scalar >0){
             color = color+scalar;

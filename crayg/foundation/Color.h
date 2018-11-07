@@ -69,7 +69,6 @@ public:
     bool operator == (const Color &color) const;
 
     bool operator != (const Color &color) const;
-    // todo == and != operator
     /**
      * Clamps the color components to 1
      * @return
