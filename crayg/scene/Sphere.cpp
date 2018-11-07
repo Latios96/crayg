@@ -89,17 +89,3 @@ Vector3f Sphere::getNormal(Vector3f point) {
     return (point - getPosition()).normalize();
 }
 
-
-void SceneObject::serialize(Serializer &serializer) {
-    serializer.writeVector3f("position", this->getPosition());
-}
-
-SceneObject::SceneObject(Vector3f position) : Transformable(position) {
-
-}
-
-void SceneObject::deserialize(Deserializer &deserializer) {
-    setPosition(deserializer.readVector3f("position"));
-}
-
-SceneObject::SceneObject() = default;

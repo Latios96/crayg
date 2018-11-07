@@ -37,7 +37,16 @@ set(crayg_SRCS
         sceneIO/SceneReader.h
         utils/StopWatch.h
         intersectors/SceneIntersector.cpp
-        intersectors/SceneIntersector.h sceneIO/SceneWriter.cpp sceneIO/SerializerImplementation.h Renderer.cpp Renderer.h utils/utils.h scene/Light.h scene/Light.cpp)
+        intersectors/SceneIntersector.h
+        sceneIO/SceneWriter.cpp
+        sceneIO/SerializerImplementation.h
+        Renderer.cpp
+        Renderer.h
+        utils/utils.h
+        scene/Light.h
+        scene/Light.cpp
+        scene/SceneObject.cpp
+        scene/SceneObject.h)
 
 # Declare the library
 add_library(crayg STATIC
