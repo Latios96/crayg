@@ -60,3 +60,7 @@ code_coverage_report/*
 report\.xml
 
 img\.bmp
+
+maya_scene\.bmp
+
+maya_scene\.json
