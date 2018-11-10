@@ -22,6 +22,12 @@ const std::string VERSION = "0.2.0";
 
 int main(int argc, char *argv[])
 {
+    /*std::string line("v 1.6831 3.0852 -0.9792");
+    std::istringstream v(std::stof(line));
+    double x,y,z;
+    v>>x;v>>y;v>>z;
+    std::cout << ToStringHelper("Vector3f").addMember("x", x).addMember("y",y).addMember("z", z).finish() << std::endl;*/
+
     cxxopts::Options options("Crayg Renderer", "CLI Interface for Crayg renderer");
 
     options.add_options()
