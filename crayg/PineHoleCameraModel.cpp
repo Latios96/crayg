@@ -6,8 +6,6 @@
 
 #include "PineHoleCameraModel.h"
 
-
-
 PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight) : camera(camera),
                                                                                             imageWidth(imageWidth),
                                                                                             imageHeight(imageHeight) {
@@ -23,7 +21,7 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
     upVector = sideVector.crossProduct(viewVector).normalize();
 
     // create width and height, define the size of the view plane
-    imagePlaneHeight = 2.0f * std::tan(camera.getFieldOfView() * 2.0f);
+    imagePlaneHeight = 2.0f * std::tan(camera.getFieldOfView()/2.0f);
 
     imagePlaneWidth = imageRatio * imagePlaneHeight;
 
@@ -46,7 +44,7 @@ Vector3f PineHoleCameraModel::getPixelCenter(float x, float y) {
     but we get the pixels supplies in image coordinates, where 0,0 is upper left corner
     so convert x and y*/
     x = static_cast<float>(imageWidth) - x;
-    /*y = static_cast<float>(imageHeight) - y;*/
+    y = static_cast<float>(imageHeight) - y;
 
 
     float wScale = 2.0f*(x+0.5f)/ static_cast<float>(imageWidth)-1.0f;
