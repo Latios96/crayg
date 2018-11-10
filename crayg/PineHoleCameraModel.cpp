@@ -45,8 +45,8 @@ Vector3f PineHoleCameraModel::getPixelCenter(float x, float y) {
     /*for the formula, we expect 0,0 to be in down left corner
     but we get the pixels supplies in image coordinates, where 0,0 is upper left corner
     so convert x and y*/
-    /*x = static_cast<float>(imageWidth) - x;
-    y = static_cast<float>(imageHeight) - y;*/
+    x = static_cast<float>(imageWidth) - x;
+    /*y = static_cast<float>(imageHeight) - y;*/
 
 
     float wScale = 2.0f*(x+0.5f)/ static_cast<float>(imageWidth)-1.0f;

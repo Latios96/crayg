@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - respect light intensity in lambert
+### Changed
+- mirror x axis to match maya
 ### Fixed
 - sphere would move down in image when positive y coordinate
 ## [0.1.0]

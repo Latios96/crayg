@@ -37,15 +37,15 @@ int main(int argc, char *argv[])
 
     Image myImage(800,600);
 
-    Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
-    /*Camera camera(Vector3f(2.437052995026952f,
-                           2.642462443303262f,
-                           7.590531325024573f),
+    //Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
+    Camera camera(Vector3f(0,
+                           5,
+                           -8),
                     Vector3f(0,1,0),
-                    Vector3f(4.1744385725905886e-14f,
-                             4.884981308350689e-15f,
-                             4.529709940470639e-14f).normalize(),
-                    6.0f*180.0f/3.141f);*/
+                    Vector3f(0,
+                             0,
+                             0),
+                    6.0f*180.0f/3.141f); // == 35mm in Maya
 
     Scene scene;
     SceneIntersector sceneIntersector(scene);
