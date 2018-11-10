@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - respect light intensity in lambert
 - scene now contains the camera
 - warning when reading if attribute does not exists
+- proper virtual class for CameraModel
 ### Changed
 - mirror x axis to match maya
 ### Fixed
