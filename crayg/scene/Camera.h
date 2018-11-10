@@ -7,8 +7,9 @@
 
 
 #include "foundation/Vector3f.h"
+#include "sceneIO/Serializable.h"
 
-class Camera {
+class Camera : public Serializable{
 private:
     Vector3f position;
     Vector3f userUpVector;
@@ -16,6 +17,7 @@ private:
     float fieldOfView;
 
 public:
+    Camera();
     Camera(const Vector3f &position, const Vector3f &upVector, const Vector3f &centerOfInterest, float fieldOfView);
 
     const Vector3f &getPosition() const;
@@ -23,8 +25,12 @@ public:
     const Vector3f &getUserUpVector() const;
 
     const Vector3f &getCenterOfInterest() const;
-
+    // todo how to we expect the
     float getFieldOfView() const;
+
+    void serialize(Serializer& serializer) override;
+
+    void deserialize(Deserializer& deserializer) override;
 };
 
 

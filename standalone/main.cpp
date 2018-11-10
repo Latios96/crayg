@@ -37,16 +37,6 @@ int main(int argc, char *argv[])
 
     Image myImage(800,600);
 
-    //Camera camera(Vector3f(0,0,10), Vector3f(0,1,0), Vector3f(0,0,-1), 6.0f*180.0f/3.141f);
-    Camera camera(Vector3f(0,
-                           5,
-                           -8),
-                    Vector3f(0,1,0),
-                    Vector3f(0,
-                             0,
-                             0),
-                    6.0f*180.0f/3.141f); // == 35mm in Maya
-
     Scene scene;
     SceneIntersector sceneIntersector(scene);
 
@@ -56,7 +46,7 @@ int main(int argc, char *argv[])
     sceneReader.read(scenePath);
 
     // render the scene
-    Renderer renderer(scene, camera, myImage);
+    Renderer renderer(scene, myImage);
     renderer.renderScene();
 
     console->info("writing image..");

@@ -8,12 +8,12 @@
 #include "Renderer.h"
 #include "PineHoleCameraModel.h"
 
-Renderer::Renderer(Scene &scene, Camera &camera, Image &image) : scene(scene), camera(camera), image(image) {}
+Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
 
 void Renderer::renderScene() {
 
     // create camera model
-    PineHoleCameraModel cameraModel(camera,image.getWidth(),image.getHeight());
+    PineHoleCameraModel cameraModel(*scene.camera,image.getWidth(),image.getHeight());
 
     spdlog::get("console")->info("Creating SceneIntersector...");
     // create scene intersector

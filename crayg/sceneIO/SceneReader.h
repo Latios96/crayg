@@ -5,6 +5,10 @@
 #ifndef CRAYG_SCENEREADER_H
 #define CRAYG_SCENEREADER_H
 
+static const char *const SCENE_OBJECTS = "SceneObjects";
+
+static const char *const CAMERA = "Camera";
+
 #include <scene/Scene.h>
 // todo add tests
 // todo make more robust with error messages

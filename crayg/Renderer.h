@@ -13,12 +13,11 @@
 
 class Renderer {
 public:
-    Renderer(Scene &scene, Camera &camera, Image &image);
+    Renderer(Scene &scene, Image &image);
 
     void renderScene();
 private:
     Scene& scene;
-    Camera& camera;
     Image& image;
 
     Color shadePoint(Vector3f point, SceneObject& object);

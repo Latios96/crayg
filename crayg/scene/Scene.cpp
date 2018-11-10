@@ -13,4 +13,8 @@ void Scene::addLight(Light *light) {
     lights.push_back(std::shared_ptr<Light>(light));
 }
 
+Scene::~Scene() {
+    delete camera;
+}
+
 Scene::Scene() = default;

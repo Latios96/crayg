@@ -22,3 +22,20 @@ const Vector3f &Camera::getCenterOfInterest() const {
 float Camera::getFieldOfView() const {
     return fieldOfView;
 }
+
+void Camera::serialize(Serializer &serializer) {
+    serializer.writeType("Camera");
+    serializer.writeVector3f("position", position);
+    serializer.writeVector3f("centerOfInterest", centerOfInterest);
+    serializer.writeVector3f("userUpVector", userUpVector);
+    serializer.writeFloat("fieldOfView", fieldOfView);
+}
+
+void Camera::deserialize(Deserializer &deserializer) {
+    position = deserializer.readVector3f("position");
+    centerOfInterest = deserializer.readVector3f("centerOfInterest");
+    userUpVector = deserializer.readVector3f("userUpVector");
+    fieldOfView = deserializer.readFloat("fieldOfView");
+}
+
+Camera::Camera() = default;

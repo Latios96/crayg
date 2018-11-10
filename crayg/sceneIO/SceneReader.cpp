@@ -11,18 +11,11 @@
 #include "scene/Light.h"
 #include "scene/GroundPlane.h"
 
+
 SceneReader::SceneReader(Scene &scene) : scene(scene) {}
 
-
-void SceneReader::read(std::string path) {
-    StopWatch stopwatch("Scene reading");
-
-    std::ifstream ifs(path);
-    rapidjson::IStreamWrapper isw(ifs);
-    rapidjson::Document d;
-    d.ParseStream(isw);
-
-    rapidjson::Value& sceneObjects = d["SceneObjects"];
+void readSceneObjects(Scene &scene, rapidjson::Document &d){
+    rapidjson::Value& sceneObjects = d[SCENE_OBJECTS];
 
     if (sceneObjects.IsArray()){
         auto array = sceneObjects.GetArray();
@@ -57,8 +50,66 @@ void SceneReader::read(std::string path) {
     else{
         // todo error
     }
+}
+
+void readCamera(Scene &scene, rapidjson::Document &d){
+    rapidjson::Value& cameraObject = d[CAMERA];
+
+    if (cameraObject.IsObject()){
+        Camera* camera = new Camera();
+        JsonDeserializer deserializer(cameraObject);
+        camera->deserialize(deserializer);
+        scene.camera = camera;
+    }
+
+}
+
+struct DocumentValidationResult{
+public:
+    const bool hasSceneObjects;
+    const bool hasCamera;
+    const bool hasMandatoryMembers;
+
+    
+};
+
+DocumentValidationResult documentHasMandatoryMembers(rapidjson::Document &d){
+    const bool hasSceneObjects = d.HasMember(SCENE_OBJECTS);
+    const bool hasCamera = d.HasMember(CAMERA);
+    const bool hasMandatoryMembers = hasSceneObjects && hasCamera;
+    
+    return {hasSceneObjects, hasCamera, hasMandatoryMembers};
+}
+
+void SceneReader::read(std::string path) {
+    StopWatch stopwatch("Scene reading");
+
+    std::ifstream ifs(path);
+    rapidjson::IStreamWrapper isw(ifs);
+    rapidjson::Document document;
+    document.ParseStream(isw);
+    
+    // validate
+    auto result = documentHasMandatoryMembers(document);
+    if(result.hasMandatoryMembers){
+        // now read the data
+
+        readSceneObjects(scene, document);
+
+        readCamera(scene, document);   
+    }
+    else{
+        std::cout << "Error: scene misses following keys";
+        if(result.hasCamera == false){
+            std::cout << " \"Camera\"";
+        }
+        if(result.hasSceneObjects == false){
+            std::cout << " \"SceneObjects\"";
+        }
+        std::cout << std::endl;
+        exit(-2);
+    }
 
     stopwatch.end();
-
 
 }
