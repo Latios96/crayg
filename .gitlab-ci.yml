@@ -3,7 +3,7 @@ image: ubuntu:latest
 job:
   script:
   - apt-get update
-  - apt-get apt-get install -yq cmake g++
+  - apt-get install -yq cmake g++
   - export CC=clang; export CXX=g++
   - mkdir build
   - cd build
