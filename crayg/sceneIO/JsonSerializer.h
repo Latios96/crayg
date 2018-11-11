@@ -11,6 +11,7 @@
 #include <rapidjson/prettywriter.h>
 #include "Serializable.h"
 #include "SerializerImplementation.h"
+#include <memory>
 
 // todo add tests
 class JsonSerializer : public SerializerImplementation{

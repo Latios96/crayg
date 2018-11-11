@@ -11,6 +11,7 @@
 #include "Sphere.h"
 #include "Light.h"
 #include "Camera.h"
+#include <memory>
 
 // todo add camera member and Rendersettings
 class Scene{
