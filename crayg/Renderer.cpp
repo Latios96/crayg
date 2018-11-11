@@ -7,8 +7,11 @@
 #include <spdlog/spdlog.h>
 #include "Renderer.h"
 #include "PineHoleCameraModel.h"
+#include "utils/ProgressReporter.h"
 
 Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
+
+
 
 void Renderer::renderScene() {
 
@@ -19,9 +22,13 @@ void Renderer::renderScene() {
     // create scene intersector
     SceneIntersector sceneIntersector(scene);
 
-    // for every pixel
-    // todo report progress
+
     spdlog::get("console")->info("Starting rendering..");
+
+    auto pixelCount = image.getHeight() * image.getWidth();
+    ProgressReporter reporter(pixelCount,
+            [] (int progress) -> void {spdlog::get("console")->info("Rendering done by {}%", progress);});
+
     for(auto pixel : ImageIterators::lineByLine(image)){
         // create ray
         Ray ray = cameraModel.createPrimaryRay(pixel.x,pixel.y);
@@ -32,6 +39,7 @@ void Renderer::renderScene() {
             image.setValue(pixel.x, pixel.y, shadePoint(intersection.location, *intersection.object));
             //image.setValue(pixel.x, pixel.y, 1,1,1);
         }
+        reporter.iterationDone();
     }
     spdlog::get("console")->info("Rendering done.");
 }
