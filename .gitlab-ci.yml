@@ -14,4 +14,4 @@ job:
   - ./standalone/crayg-standalone -s ../example_scenes/three_spheres.json -o three_spheres.bmp
   artifacts:
     reports:
-      junit: ./build/test/report.xml
+      junit: ./build/report.xml
