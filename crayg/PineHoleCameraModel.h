@@ -11,7 +11,6 @@
 #include "CameraModel.h"
 
 // todo add tests
-// todo proper virtual class
 class PineHoleCameraModel : public CameraModel{
 private:
     Camera &camera;

@@ -9,13 +9,23 @@
 
 
 #include <functional>
+#include <spdlog/spdlog.h>
 
+// todo add time remaining
 class ProgressReporter{
 public:
     ProgressReporter(int maxIterations, std::function<void(int)> progressionCallback) : maxIterations(
             maxIterations), progressionCallback(std::move(progressionCallback)), iterationsDone(0) {}
 
+    static ProgressReporter createLoggingProgressReporter(int maxIterations, std::string logMessage){
+        std::function<void(int)> logProgress = [logMessage] (int progress) -> void {
+            spdlog::get("console")->info(logMessage.c_str(), progress);
+        };
+        return {maxIterations, logProgress};
+    }
+
     void iterationDone(){
+
         iterationsDone++;
 
         int newProgress = (int) ((float) iterationsDone) / ((float) maxIterations) * 100;

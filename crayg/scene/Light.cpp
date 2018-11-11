@@ -22,3 +22,4 @@ void Light::deserialize(Deserializer &deserializer) {
     setPosition(deserializer.readVector3f("position"));
     setIntensity(deserializer.readFloat("intensity"));
 }
+

@@ -29,6 +29,13 @@ public:
         return {grey, grey, grey};
     }
 
+    static Color createBlack(){
+        return {};
+    }
+    static Color createWhite(){
+        return {1,1,1};
+    }
+
     /**
      * Adds the two colors component-wise, r+r, g+g, b+b
      * @param otherColor
