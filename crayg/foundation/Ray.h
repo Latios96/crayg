@@ -20,6 +20,8 @@ public:
 
     bool isValid();
 
+    Vector3f constructIntersectionPoint();
+
 };
 
 

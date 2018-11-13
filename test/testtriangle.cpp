@@ -51,8 +51,6 @@ TEST_CASE("TriangleIntersects") {
 
     SECTION("hitLocationCaBeCorrectlyConstructed") {
         auto hitRay = TRIANGLE.intersect(RAY_HITTING_TRIANGLE);
-        // todo create constructIntersectionPoint method in Ray
-        Vector3f hitLocation = hitRay.startPoint + (hitRay.direction * hitRay.length);
-        REQUIRE(hitLocation == Vector3f(0.25f, 0.25f, 0));
+        REQUIRE(hitRay.constructIntersectionPoint() == Vector3f(0.25f, 0.25f, 0));
     }
 }

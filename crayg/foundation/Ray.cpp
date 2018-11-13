@@ -25,4 +25,8 @@ bool Ray::isValid() {
     return startPoint.isValid() && direction.isValid() && length != std::numeric_limits<float>::max();
 }
 
+Vector3f Ray::constructIntersectionPoint() {
+    return startPoint + (direction * length);
+}
+
 
