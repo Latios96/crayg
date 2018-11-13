@@ -17,6 +17,7 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include <cxxopts.hpp>
+#include <scene/TriangeMesh.h>
 
 const std::string VERSION = "0.2.0";
 
@@ -44,12 +45,30 @@ int main(int argc, char *argv[])
     Image myImage(800,600);
 
     Scene scene;
-    SceneIntersector sceneIntersector(scene);
+
 
     // read scene
-    std::string scenePath = result["scene"].as<std::string>();
-    SceneReader sceneReader(scene);
-    sceneReader.read(scenePath);
+    //std::string scenePath = result["scene"].as<std::string>();
+    //SceneReader sceneReader(scene);
+    //sceneReader.read(scenePath);
+
+    scene.camera = new Camera({0, 5, -8}, {0,1,0}, {0,0,0});
+    scene.camera->setFocalLength(35);
+    scene.camera->setFilmbackSize(36);
+
+    TriangleMesh *cube = new TriangleMesh();
+    TriangleMesh::createCube(*cube);
+    scene.addObject(cube);
+
+    auto sphere = new Sphere({-5,0,0}, 2);
+    scene.addObject(sphere);
+
+    Light *light = new Light();
+    light->setPosition({0,5,1});
+    light->setIntensity(1);
+    scene.addLight(light);
+
+    SceneIntersector sceneIntersector(scene);
 
     // render the scene
     Renderer renderer(scene, myImage);

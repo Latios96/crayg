@@ -98,4 +98,10 @@ bool Triangle::intersects(Ray ray){
     }
 }
 
-Triangle::Triangle(const Vector3f &v0, const Vector3f &v1, const Vector3f &v2) : v0(v0), v1(v1), v2(v2) {}
+Triangle::Triangle(const Vector3f v0, const Vector3f v1, const Vector3f v2) : v0(v0), v1(v1), v2(v2) {}
+
+Triangle::Triangle() {
+    v0 = Vector3f();
+    v1 = Vector3f();
+    v2 = Vector3f();
+}
