@@ -10,8 +10,7 @@
 
 Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
 
-
-
+// todo init should not be in renderScene
 void Renderer::renderScene() {
     init();
 
