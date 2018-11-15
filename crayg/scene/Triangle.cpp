@@ -5,7 +5,7 @@
 #include "Triangle.h"
 
 Ray Triangle::intersect(Ray ray) {
-    Vector3f normal = (v1 - v0).crossProduct((v2 - v0));
+    Vector3f normal = (v1 - v0).crossProduct((v2 - v0)).normalize();
 
     const float scalar = normal.scalarProduct(ray.direction);
 
@@ -15,7 +15,10 @@ Ray Triangle::intersect(Ray ray) {
         return Ray::createInvalid();
     }
     else{
-        const float t = - (normal.scalarProduct(ray.startPoint) + v0.length()) / scalar;
+        //const float t = - (normal.scalarProduct(ray.startPoint) + v0.length()) / scalar;
+        float d = normal.scalarProduct(v0);
+
+        const float t = - (normal.scalarProduct(ray.startPoint) + d) / scalar;
 
         if(t>0){
             Vector3f hitLocation = ray.startPoint + (ray.direction*t);

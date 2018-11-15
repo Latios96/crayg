@@ -11,13 +11,16 @@ bool TriangleMesh::intersects(Ray ray) {
 Ray TriangleMesh::intersect(Ray ray) {
     std::vector<Triangle> triangles;
     getTriangles(triangles);
+
+    Ray hitRay = Ray::createInvalid();
+
     for (Triangle triangle : triangles){
         Ray intersectionRay = triangle.intersect(ray);
-        if (intersectionRay.isValid()){
-            return intersectionRay;
+        if (intersectionRay.length < hitRay.length){
+            hitRay = intersectionRay;
         }
     }
-    return Ray::createInvalid();
+    return hitRay;
 }
 
 void TriangleMesh::getTriangles(std::vector<Triangle> &triangles) {
@@ -36,4 +39,54 @@ void TriangleMesh::deserialize(Deserializer &deserializer) {
 
 Vector3f TriangleMesh::getNormal(Vector3f point) {
     return Vector3f(0,1,0);
+}
+
+void TriangleMesh::createCube(TriangleMesh &mesh) {
+    mesh.points.push_back({-1, -1, 1});
+    mesh.points.push_back({1, -1, 1});
+    mesh.points.push_back({-1, 1, 1});
+    mesh.points.push_back({1, 1, 1});
+    mesh.points.push_back({-1, 1, -1});
+    mesh.points.push_back({1, 1, -1});
+    mesh.points.push_back({-1, -1, -1});
+    mesh.points.push_back({1, -1, -1});
+
+    mesh.faceIndexes.push_back(0);
+    mesh.faceIndexes.push_back(1);
+    mesh.faceIndexes.push_back(2);
+
+    mesh.faceIndexes.push_back(2);
+    mesh.faceIndexes.push_back(1);
+    mesh.faceIndexes.push_back(3);
+
+    mesh.faceIndexes.push_back(2);
+    mesh.faceIndexes.push_back(3);
+    mesh.faceIndexes.push_back(4);
+    mesh.faceIndexes.push_back(4);
+    mesh.faceIndexes.push_back(3);
+    mesh.faceIndexes.push_back(5);
+    mesh.faceIndexes.push_back(4);
+    mesh.faceIndexes.push_back(5);
+    mesh.faceIndexes.push_back(6);
+    mesh.faceIndexes.push_back(6);
+    mesh.faceIndexes.push_back(5);
+    mesh.faceIndexes.push_back(7);
+    mesh.faceIndexes.push_back(6);
+    mesh.faceIndexes.push_back(7);
+    mesh.faceIndexes.push_back(0);
+    mesh.faceIndexes.push_back(0);
+    mesh.faceIndexes.push_back(7);
+    mesh.faceIndexes.push_back(1);
+    mesh.faceIndexes.push_back(1);
+    mesh.faceIndexes.push_back(7);
+    mesh.faceIndexes.push_back(3);
+    mesh.faceIndexes.push_back(3);
+    mesh.faceIndexes.push_back(7);
+    mesh.faceIndexes.push_back(5);
+    mesh.faceIndexes.push_back(6);
+    mesh.faceIndexes.push_back(0);
+    mesh.faceIndexes.push_back(4);
+    mesh.faceIndexes.push_back(4);
+    mesh.faceIndexes.push_back(0);
+    mesh.faceIndexes.push_back(2);
 }

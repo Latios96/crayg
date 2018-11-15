@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     //SceneReader sceneReader(scene);
     //sceneReader.read(scenePath);
 
-    scene.camera = new Camera({0, 5, -8}, {0,1,0}, {0,0,0});
+    scene.camera = new Camera({3, 5, -8}, {0,1,0}, {0,0,0});
     scene.camera->setFocalLength(35);
     scene.camera->setFilmbackSize(36);
 
@@ -60,8 +60,11 @@ int main(int argc, char *argv[])
     TriangleMesh::createCube(*cube);
     scene.addObject(cube);
 
-    auto sphere = new Sphere({-5,0,0}, 2);
+    auto sphere = new Sphere({-5,0,0}, 1);
     scene.addObject(sphere);
+    auto sphere2 = new Sphere({-5,0,2}, 1.5);
+    scene.addObject(sphere2);
+
 
     Light *light = new Light();
     light->setPosition({0,5,1});

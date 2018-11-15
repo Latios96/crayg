@@ -10,7 +10,7 @@ Intersection SceneIntersector::intersect(Ray ray) {
     for(const auto &intersectable : scene.objects){
         Ray intersectionRay = intersectable->intersect(ray);
 
-        if(intersectionRay.isValid() && intersectionRay.length < hitRay.length ){
+        if(intersectionRay.length < hitRay.length ){
             hitRay = intersectionRay;
             hitObject = intersectable.get();
         }

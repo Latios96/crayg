@@ -12,69 +12,7 @@
 
 class TriangleMesh : public SceneObject{
 public:
-    static void createCube(TriangleMesh &mesh){
-        mesh.points.push_back({-1,-1, 1});
-        mesh.points.push_back({1,-1, 1});
-        mesh.points.push_back({-1,-1, -1});
-        mesh.points.push_back({1,-1, -1});
-
-        mesh.points.push_back({-1,1,1});
-        mesh.points.push_back({1,1,1});
-        mesh.points.push_back({-1,1,-1});
-        mesh.points.push_back({1,1,-1});
-
-        mesh.faceIndexes.push_back(0);
-        mesh.faceIndexes.push_back(4);
-        mesh.faceIndexes.push_back(5);
-
-        mesh.faceIndexes.push_back(0);
-        mesh.faceIndexes.push_back(5);
-        mesh.faceIndexes.push_back(1);
-
-        mesh.faceIndexes.push_back(1);
-        mesh.faceIndexes.push_back(5);
-        mesh.faceIndexes.push_back(7);
-
-        mesh.faceIndexes.push_back(1);
-        mesh.faceIndexes.push_back(7);
-        mesh.faceIndexes.push_back(3);
-
-        mesh.faceIndexes.push_back(2);
-        mesh.faceIndexes.push_back(3);
-        mesh.faceIndexes.push_back(6);
-
-        mesh.faceIndexes.push_back(2);
-        mesh.faceIndexes.push_back(3);
-        mesh.faceIndexes.push_back(7);
-
-        mesh.faceIndexes.push_back(2);
-        mesh.faceIndexes.push_back(6);
-        mesh.faceIndexes.push_back(7);
-
-        mesh.faceIndexes.push_back(0);
-        mesh.faceIndexes.push_back(2);
-        mesh.faceIndexes.push_back(3);
-
-        mesh.faceIndexes.push_back(0);
-        mesh.faceIndexes.push_back(3);
-        mesh.faceIndexes.push_back(1);
-
-        mesh.faceIndexes.push_back(4);
-        mesh.faceIndexes.push_back(6);
-        mesh.faceIndexes.push_back(7);
-
-        mesh.faceIndexes.push_back(7);
-        mesh.faceIndexes.push_back(6);
-        mesh.faceIndexes.push_back(5);
-        /*mesh.points.push_back({0,0,0});
-        mesh.points.push_back({0,1,0});
-        mesh.points.push_back({1,0,0});
-
-        mesh.faceIndexes.push_back(0);
-        mesh.faceIndexes.push_back(1);
-        mesh.faceIndexes.push_back(2);*/
-    }
-
+    static void createCube(TriangleMesh &mesh);
     Ray intersect(Ray ray) override;
     bool intersects(Ray ray) override;
 
