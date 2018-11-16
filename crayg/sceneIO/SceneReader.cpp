@@ -36,6 +36,12 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d){
                 plane->deserialize(deserializer);
                 scene.addObject(plane);
             }
+            else if (type == "TriangleMesh"){
+                TriangleMesh* mesh = new TriangleMesh();
+                JsonDeserializer deserializer(obj);
+                mesh->deserialize(deserializer);
+                scene.addObject(mesh);
+            }
             else if (type == "Light"){
                 Light* light = new Light();
                 JsonDeserializer deserializer(obj);
@@ -43,7 +49,7 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d){
                 scene.addLight(light);
             }
             else{
-                // todo unknown type
+                std::cout << fmt::format("Unknown type {}", type);
             }
         }
     }

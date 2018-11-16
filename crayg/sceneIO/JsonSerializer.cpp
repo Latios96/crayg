@@ -36,6 +36,10 @@ void JsonSerializer::writeFloat(std::string name, float value) {
 
 void JsonSerializer::writeVector3f(std::string name, Vector3f value) {
     writer->Key(name.c_str());
+    writeVector3fImpl(value);
+}
+
+void JsonSerializer::writeVector3fImpl(const Vector3f &value) const {
     writer->StartArray();
     writer->Double(value.x);
     writer->Double(value.y);
@@ -52,4 +56,22 @@ JsonSerializer::JsonSerializer(const std::string &path){
     ofs = std::shared_ptr<std::ofstream>(new std::ofstream(path));
     osw = std::shared_ptr<rapidjson::OStreamWrapper>(new rapidjson::OStreamWrapper(*ofs));
     writer = std::shared_ptr<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>>(new rapidjson::PrettyWriter<rapidjson::OStreamWrapper>(*osw));
+}
+
+void JsonSerializer::writeVector3fArray(std::string name, std::vector<Vector3f> &value) {
+    writer->Key(name.c_str());
+    writer->StartArray();
+    for(Vector3f vec : value){
+        writeVector3fImpl(vec);
+    }
+    writer->EndArray();
+}
+
+void JsonSerializer::writeIntArray(std::string name, std::vector<int> &value) {
+    writer->Key(name.c_str());
+    writer->StartArray();
+    for(int i : value){
+        writer->Int(i);
+    }
+    writer->EndArray();
 }

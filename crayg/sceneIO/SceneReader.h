@@ -10,6 +10,7 @@ static const char *const SCENE_OBJECTS = "SceneObjects";
 static const char *const CAMERA = "Camera";
 
 #include <scene/Scene.h>
+#include "scene/TriangeMesh.h"
 // todo add tests
 // todo make more robust with error messages
 class SceneReader {

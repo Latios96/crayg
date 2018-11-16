@@ -31,10 +31,14 @@ void TriangleMesh::getTriangles(std::vector<Triangle> &triangles) {
 
 void TriangleMesh::serialize(Serializer &serializer) {
     SceneObject::serialize(serializer);
+    serializer.writeVector3fArray("points", points);
+    serializer.writeIntArray("faceIndexes", faceIndexes);
 }
 
 void TriangleMesh::deserialize(Deserializer &deserializer) {
     SceneObject::deserialize(deserializer);
+    deserializer.readVector3fArray("points", points);
+    deserializer.readIntArray("faceIndexes", faceIndexes);
 }
 
 Vector3f TriangleMesh::getNormal(Vector3f point) {

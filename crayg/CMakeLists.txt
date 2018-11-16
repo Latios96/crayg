@@ -46,7 +46,18 @@ set(crayg_SRCS
         scene/Light.h
         scene/Light.cpp
         scene/SceneObject.cpp
-        scene/SceneObject.h scene/GroundPlane.cpp scene/GroundPlane.h CameraModel.h utils/ProgressReporter.cpp utils/ProgressReporter.h ShadingMethod.cpp ShadingMethod.h scene/Triangle.cpp scene/Triangle.h scene/TriangeMesh.cpp scene/TriangeMesh.h scene/Shape.h)
+        scene/SceneObject.h
+        scene/GroundPlane.cpp
+        scene/GroundPlane.h
+        CameraModel.h
+        utils/ProgressReporter.cpp
+        utils/ProgressReporter.h
+        ShadingMethod.cpp
+        ShadingMethod.h
+        scene/Triangle.cpp
+        scene/Triangle.h
+        scene/TriangeMesh.cpp
+        scene/TriangeMesh.h)
 
 # Declare the library
 add_library(crayg STATIC

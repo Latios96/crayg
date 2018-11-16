@@ -13,6 +13,7 @@
 #include "SerializerImplementation.h"
 #include <memory>
 
+
 // todo add tests
 class JsonSerializer : public SerializerImplementation{
 
@@ -27,11 +28,15 @@ public:
     void writeFloat(std::string name, float value) override;
     void writeVector3f(std::string name, Vector3f value) override;
     void writeType(std::string name) override;
+    void writeVector3fArray(std::string name, std::vector<Vector3f> &value) override;
+    void writeIntArray(std::string name, std::vector<int> &value) override;
 
 private:
     std::shared_ptr<std::ofstream> ofs;
     std::shared_ptr<rapidjson::OStreamWrapper> osw;
     std::shared_ptr<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>> writer;
+
+    void writeVector3fImpl(const Vector3f &value) const;
 };
 
 

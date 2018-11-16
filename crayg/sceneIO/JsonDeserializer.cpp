@@ -41,3 +41,32 @@ Vector3f JsonDeserializer::readVector3f(std::string name) {
         exit(-1);
     }
 }
+
+void JsonDeserializer::readVector3fArray(std::string name, std::vector<Vector3f> &target) {
+    if (jsonObject.HasMember(name.c_str())){
+        const auto array = jsonObject[name.c_str()].GetArray();
+        for(auto &vec3f : array){
+            auto x = vec3f.GetArray()[0].GetFloat();
+            auto y = vec3f.GetArray()[0].GetFloat();
+            auto z = vec3f.GetArray()[0].GetFloat();
+            target.push_back({x, y,z});
+        }
+    }
+    else{
+        std::cout << fmt::format("Could not read Vector3f Array with name '{}'", name) << std::endl;
+        exit(-1);
+    }
+}
+
+void JsonDeserializer::readIntArray(std::string name, std::vector<int> &target) {
+    if (jsonObject.HasMember(name.c_str())){
+        const auto array = jsonObject[name.c_str()].GetArray();
+        for(auto &value : array){
+            target.push_back(value.GetInt());
+        }
+    }
+    else{
+        std::cout << fmt::format("Could not read int Array with name '{}'", name) << std::endl;
+        exit(-1);
+    }
+}

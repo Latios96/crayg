@@ -24,7 +24,7 @@ public:
 
     std::vector<Vector3f> points;
     std::vector<int> faceIndexes;
-
+    // todo replace with iterator
     void getTriangles(std::vector<Triangle> &triangles);
 };
 
