@@ -47,7 +47,7 @@ Vector3f TriangleMesh::getNormal(Vector3f point) {
 
 void TriangleMesh::createCube(TriangleMesh &mesh) {
     mesh.points.push_back({-1, -1, 1});
-    mesh.points.push_back({1, -1, 1});
+    mesh.points.push_back({-1, -1, 1});
     mesh.points.push_back({-1, 1, 1});
     mesh.points.push_back({1, 1, 1});
     mesh.points.push_back({-1, 1, -1});

@@ -47,8 +47,8 @@ void JsonDeserializer::readVector3fArray(std::string name, std::vector<Vector3f>
         const auto array = jsonObject[name.c_str()].GetArray();
         for(auto &vec3f : array){
             auto x = vec3f.GetArray()[0].GetFloat();
-            auto y = vec3f.GetArray()[0].GetFloat();
-            auto z = vec3f.GetArray()[0].GetFloat();
+            auto y = vec3f.GetArray()[1].GetFloat();
+            auto z = vec3f.GetArray()[2].GetFloat();
             target.push_back({x, y,z});
         }
     }
