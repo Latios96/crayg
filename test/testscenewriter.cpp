@@ -36,5 +36,6 @@ TEST_CASE("SceneWriter"){
         fakeit::Verify(Method(mockSerializerImpl,finish)).Exactly(1);
 
     }
+    // todo test scene with camera
 
 }
