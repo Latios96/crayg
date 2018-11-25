@@ -8,8 +8,6 @@
 
 #include <foundation/Color.h>
 #include "foundation/Vector3f.h"
-// TODO copy constructor
-// TODO docs
 class Image {
 
 private:

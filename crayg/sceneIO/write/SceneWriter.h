@@ -15,11 +15,9 @@ public:
 
     explicit SceneWriter(Scene &scene, SerializerImplementation& serializerImpl) : scene(scene),
     serializerImpl(serializerImpl) {}
-    // todo add a factory for a JsonSceneWriter, but somewhere else than here
 
 private:
     Scene& scene;
-    // todo use a shared_ptr for this
     SerializerImplementation& serializerImpl;
 };
 

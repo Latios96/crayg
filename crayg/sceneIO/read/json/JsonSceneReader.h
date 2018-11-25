@@ -11,7 +11,7 @@ static const char *const CAMERA = "Camera";
 #include <sceneIO/read/SceneReader.h>
 
 // todo add tests
-// todo make more robust with error messages
+// todo make more robust with error messages and exceptions
 class JsonSceneReader : public SceneReader{
 public:
     JsonSceneReader(const std::string &path, Scene &scene);

@@ -23,8 +23,4 @@ private:
 };
 
 
-// todo refractor into own class
-// todo add tests
-
-
 #endif //CRAYG_SHADINGMETHODS_H

@@ -81,7 +81,7 @@ void BmpImageWriter::writeImage(const Image &image, const std::string imageName)
         fclose(f);
     }
     else{
-        // todo throw exeption??
+        // todo throw exeption
         std::cout << fmt::format("Error when opening file  {}\n", imageName);
     }
 
