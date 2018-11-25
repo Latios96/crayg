@@ -6,10 +6,25 @@
 #define CRAYG_SCENEWRITERFACTORY_H
 
 #include <string>
+#include <memory>
 #include "sceneIO/write/SceneWriter.h"
 
+class SceneWriterFacade{
+public:
+    SceneWriterFacade(SceneWriter *writer, SerializerImplementation *serializerImplementation);
+    
+    void write();
+    
+    virtual ~SceneWriterFacade();
+
+private:
+    SceneWriter *writer;
+    SerializerImplementation *serializerImplementation;
+};
+
 class SceneWriterFactory {
-    static std::shared_ptr<SceneWriter> createSceneWriter(std::string scenePath);
+public:
+    static std::shared_ptr<SceneWriterFacade> createSceneWriter(std::string scenePath, Scene &scene);
 };
 
 

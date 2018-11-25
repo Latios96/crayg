@@ -19,7 +19,7 @@
 #include <cxxopts.hpp>
 #include <scene/TriangeMesh.h>
 #include <sceneIO/read/json/JsonDeserializer.h>
-
+// todo clean up includes
 const std::string VERSION = "0.2.0";
 
 int main(int argc, char *argv[])

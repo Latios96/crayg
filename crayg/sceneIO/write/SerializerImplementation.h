@@ -13,6 +13,10 @@ public:
     virtual void startObject()=0;
     virtual void endObject()=0;
     virtual void finish()=0;
+
+    virtual ~SerializerImplementation(){
+
+    };
 };
 
 #endif //CRAYG_SERIALIZERIMPLEMENTATION_H
