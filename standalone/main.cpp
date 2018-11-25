@@ -18,7 +18,8 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include <cxxopts.hpp>
 #include <scene/TriangeMesh.h>
-#include <sceneIO/read/json/JsonDeserializer.h>
+#include "sceneIO/SceneReaderFactory.h"
+
 // todo clean up includes
 const std::string VERSION = "0.2.0";
 
@@ -47,11 +48,10 @@ int main(int argc, char *argv[])
 
     Scene scene;
 
-
     // read scene
     std::string scenePath = result["scene"].as<std::string>();
-    SceneReader sceneReader(scene);
-    sceneReader.read(scenePath);
+    auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
+    sceneReader->read();
 
     /*scene.camera = new Camera({3, 5, -8}, {0,1,0}, {0,0,0});
     scene.camera->setFocalLength(35);
