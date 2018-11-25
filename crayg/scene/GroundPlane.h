@@ -10,9 +10,9 @@
 
 class GroundPlane : public SceneObject{
 public:
-    Ray intersect(Ray ray) override;
+    Imageable::Intersection intersect(Ray ray) override;
 
-    bool intersects(Ray ray) override;
+    bool isIntersecting(Ray ray) override;
 
     void serialize(Serializer& serializer) override;
 

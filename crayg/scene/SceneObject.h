@@ -8,8 +8,9 @@
 #include "intersectors/Intersectable.h"
 #include "Transformable.h"
 #include "sceneIO/Serializable.h"
+#include "Imageable.h"
 
-class SceneObject : public Intersectable,
+class SceneObject : public Imageable,
                     public Transformable,
                     public Serializable{
 public:
@@ -18,7 +19,6 @@ public:
     explicit SceneObject(Vector3f position);
     void serialize(Serializer& serializer) override;
     void deserialize(Deserializer& deserializer) override;
-    virtual Vector3f getNormal(Vector3f point)=0;
 };
 
 

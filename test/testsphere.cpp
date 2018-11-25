@@ -24,7 +24,7 @@ TEST_CASE("Sphere") {
         REQUIRE_FALSE(mySphere.intersects(notIntersectingRay));
     }
 
-    SECTION("intersect"){
+    SECTION("intersect_"){
         Sphere mySphere(Vector3f(1, 0, 0), 3.0f);
         auto hitRay = mySphere.intersect(Ray(Vector3f(5, 0, 0), Vector3f(-1, 0, 0)));
         Vector3f hitLocation = hitRay.startPoint + (hitRay.direction * hitRay.length);

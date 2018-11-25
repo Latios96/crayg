@@ -9,8 +9,6 @@
 #include "string"
 #include "scene/SceneObject.h"
 
-
-
 class Sphere :  public SceneObject{
 public:
 
@@ -20,8 +18,8 @@ public:
 
     float getRadius() const;
 
-    Ray intersect(Ray ray) override;
-    bool intersects(Ray ray) override;
+    Sphere::Intersection intersect(Ray ray) override;
+    bool isIntersecting(Ray ray) override;
 
     void serialize(Serializer& serializer) override;
 

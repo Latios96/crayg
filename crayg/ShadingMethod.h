@@ -15,7 +15,7 @@ class ShadingMethod {
 public:
     ShadingMethod(Scene &scene);
 
-    Color lambertShading(Vector3f point, SceneObject& object);
+    Color lambertShading(Vector3f point, Imageable &object);
     Color colorForLight(const Vector3f &point, const Vector3f &normal, const std::shared_ptr<Light> &light) const;
 private:
     Scene &scene;

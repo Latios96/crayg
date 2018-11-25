@@ -13,7 +13,7 @@ void GroundPlane::deserialize(Deserializer &deserializer) {
     SceneObject::deserialize(deserializer);
 }
 
-bool GroundPlane::intersects(Ray ray) {
+bool GroundPlane::isIntersecting(Ray ray){
     auto scalar = normal.scalarProduct(ray.direction);
     return scalar != 0;
 }
@@ -22,18 +22,18 @@ Vector3f GroundPlane::getNormal(Vector3f point) {
     return normal;
 }
 
-Ray GroundPlane::intersect(Ray ray) {
+Imageable::Intersection GroundPlane::intersect(Ray ray) {
     const float scalar = normal.scalarProduct(ray.direction);
 
     if(scalar == 0){
-        return Ray::createInvalid();
+        return {std::numeric_limits<float>::max(), nullptr};
     }
     else{
         const float t = - (normal.scalarProduct(ray.startPoint) + getPosition().length()) / scalar;
 
         if(t>0){
-            return {ray.startPoint, ray.direction, t};
+            return {t, this};
         }
-        return Ray::createInvalid();
+        return {std::numeric_limits<float>::max(), nullptr};
     }
 }

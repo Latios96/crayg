@@ -8,7 +8,7 @@ TEST_CASE("TriangleIntersection"){
     TriangleMesh cube;
     TriangleMesh::createCube(cube);
 
-    SECTION("intersect"){
+    SECTION("intersect_"){
         Ray ray({0.99f,0.99f,-2}, {0,0,1});
         Ray hitRay = cube.intersect(ray);
         //REQUIRE(hitRay.isValid());

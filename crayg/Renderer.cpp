@@ -38,8 +38,9 @@ void Renderer::renderPixel(const PixelPosition &pixel) {
     Ray ray = cameraModel->createPrimaryRay(pixel.x, pixel.y);
 
     auto intersection = sceneIntersector->intersect(ray);
-    if(intersection.isValid()){
-        Color shadedColor = lambertMethod->lambertShading(intersection.location, *intersection.object);
+    if(intersection.imageable){
+        Vector3f location = ray.startPoint + (ray.direction * intersection.rayParameter);
+        Color shadedColor = lambertMethod->lambertShading(location, *intersection.imageable);
         image.setValue(pixel.x, pixel.y, shadedColor);
     }
 }

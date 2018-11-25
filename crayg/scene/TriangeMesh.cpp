@@ -4,23 +4,23 @@
 
 #include "TriangeMesh.h"
 
-bool TriangleMesh::intersects(Ray ray) {
+bool TriangleMesh::isIntersecting(Ray ray){
     return false;
 }
 
-Ray TriangleMesh::intersect(Ray ray) {
+Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     std::vector<Triangle> triangles;
     getTriangles(triangles);
 
-    Ray hitRay = Ray::createInvalid();
+    Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
     for (Triangle triangle : triangles){
-        Ray intersectionRay = triangle.intersect(ray);
-        if (intersectionRay.length < hitRay.length){
-            hitRay = intersectionRay;
+        Imageable::Intersection intersection = triangle.intersect(ray);
+        if (intersection.rayParameter < hitIntersection.rayParameter){
+            hitIntersection = intersection;
         }
     }
-    return hitRay;
+    return hitIntersection;
 }
 
 void TriangleMesh::getTriangles(std::vector<Triangle> &triangles) {

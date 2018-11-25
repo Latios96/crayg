@@ -4,7 +4,7 @@
 
 #include "Triangle.h"
 
-Ray Triangle::intersect(Ray ray) {
+Triangle::Intersection Triangle::intersect(Ray ray) {
     Vector3f normal = (v1 - v0).crossProduct((v2 - v0)).normalize();
 
     const float scalar = normal.scalarProduct(ray.direction);
@@ -12,7 +12,7 @@ Ray Triangle::intersect(Ray ray) {
     const bool raysAreParallel = scalar == 0;
 
     if(raysAreParallel){
-        return Ray::createInvalid();
+        return {std::numeric_limits<float>::max(), nullptr};
     }
     else{
         //const float t = - (normal.scalarProduct(ray.startPoint) + v0.length()) / scalar;
@@ -31,30 +31,30 @@ Ray Triangle::intersect(Ray ray) {
             Vector3f vp0 = hitLocation - v0;
             C = edge0.crossProduct(vp0);
             if (normal.scalarProduct(C)<0){
-                return Ray::createInvalid();
+                return {std::numeric_limits<float>::max(), nullptr};
             }
 
             Vector3f edge1 = v2 - v1;
             Vector3f vp1 = hitLocation - v1;
             C = edge1.crossProduct(vp1);
             if (normal.scalarProduct(C)<0){
-                return Ray::createInvalid();
+                return {std::numeric_limits<float>::max(), nullptr};
             }
 
             Vector3f edge2 = v0 - v2;
             Vector3f vp2 = hitLocation - v2;
             C = edge2.crossProduct(vp2);
             if (normal.scalarProduct(C)<0){
-                return Ray::createInvalid();
+                return {std::numeric_limits<float>::max(), nullptr};
             }
-            return {ray.startPoint, ray.direction, t};;
+            return {t, this};
 
         }
-        return Ray::createInvalid();
+        return {std::numeric_limits<float>::max(), nullptr};
     }
 }
 
-bool Triangle::intersects(Ray ray){
+bool Triangle::isIntersecting(Ray ray){
     Vector3f normal = (v1 - v0).crossProduct((v2 - v0));
 
     const float scalar = normal.scalarProduct(ray.direction);
@@ -108,3 +108,8 @@ Triangle::Triangle() {
     v1 = Vector3f();
     v2 = Vector3f();
 }
+
+Vector3f Triangle::getNormal(Vector3f point) {
+    return {0,1,0};
+}
+

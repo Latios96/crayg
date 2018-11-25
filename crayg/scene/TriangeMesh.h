@@ -13,8 +13,8 @@
 class TriangleMesh : public SceneObject{
 public:
     static void createCube(TriangleMesh &mesh);
-    Ray intersect(Ray ray) override;
-    bool intersects(Ray ray) override;
+    Intersection intersect(Ray ray) override;
+    bool isIntersecting(Ray ray) override;
 
     void serialize(Serializer& serializer) override;
 

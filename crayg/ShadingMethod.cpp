@@ -4,7 +4,7 @@
 
 #include "ShadingMethod.h"
 
-Color ShadingMethod::lambertShading(Vector3f point, SceneObject &object) {
+Color ShadingMethod::lambertShading(Vector3f point, Imageable &object) {
     Vector3f normal = object.getNormal(point);
 
     Color color = Color::createGrey(0.2f); // todo take value from rendersettings

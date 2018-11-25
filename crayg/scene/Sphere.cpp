@@ -4,7 +4,7 @@
 
 #include "Sphere.h"
 
-Ray Sphere::intersect(Ray ray) {
+Sphere::Intersection Sphere::intersect(Ray ray) {
     ray.startPoint = ray.startPoint + getPosition().invert();
 
     float b = 2.0f * (ray.startPoint.x * ray.direction.x +
@@ -21,12 +21,12 @@ Ray Sphere::intersect(Ray ray) {
     const bool isTangent = d == 0;
 
     if(noIntersection){
-        return Ray::createInvalid();
+        return {std::numeric_limits<float>::max(), nullptr};
     }
     else if(isTangent){
         // only one solution, calculate t
         const float t0 = (float) (b * (-1.0) / 2.0);
-        return {ray.startPoint - getPosition().invert(), ray.direction, t0};
+        return {t0, this};
     }
     else{
         const double sqrtD = sqrt(d);
@@ -35,15 +35,15 @@ Ray Sphere::intersect(Ray ray) {
 
         // if t0 > 0 its the point we want to render
         if(t0>0){
-            return {ray.startPoint - getPosition().invert(), ray.direction, t0};
+            return {t0, this};
         }
         else{
-            return Ray::createInvalid();
+            return {std::numeric_limits<float>::max(), nullptr};
         }
     }
 }
 
-bool Sphere::intersects(Ray ray) {
+bool Sphere::isIntersecting(Ray ray) {
 
     ray.startPoint = ray.startPoint + getPosition().invert();
 
