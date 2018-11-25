@@ -13,8 +13,10 @@ static const char *const CAMERA = "Camera";
 #include "scene/TriangeMesh.h"
 // todo add tests
 // todo make more robust with error messages
+// todo take path with constructor
 class SceneReader {
 public:
+    // todo make this virtual, create a factory with a method for a JsonSceneReader
     void read(std::string path);
 
     explicit SceneReader(Scene &scene);

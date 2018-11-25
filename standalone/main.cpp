@@ -10,15 +10,15 @@
 #include "scene/Camera.h"
 #include "PineHoleCameraModel.h"
 #include "image/ImageIterators.h"
-#include "sceneIO/SceneWriter.h"
-#include "sceneIO/SceneReader.h"
+#include "sceneIO/write/SceneWriter.h"
+#include "sceneIO/read/SceneReader.h"
 #define FMT_HEADER_ONLY
 #include "fmt/format.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include <cxxopts.hpp>
 #include <scene/TriangeMesh.h>
-#include <sceneIO/JsonDeserializer.h>
+#include <sceneIO/read/json/JsonDeserializer.h>
 
 const std::string VERSION = "0.2.0";
 

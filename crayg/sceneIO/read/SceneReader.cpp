@@ -6,7 +6,7 @@
 #include <rapidjson/document.h>
 #include <fstream>
 #include "SceneReader.h"
-#include "JsonDeserializer.h"
+#include "sceneIO/read/json/JsonDeserializer.h"
 #include "utils/StopWatch.h"
 #include "scene/Light.h"
 #include "scene/GroundPlane.h"

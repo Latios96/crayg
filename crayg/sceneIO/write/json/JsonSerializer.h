@@ -9,8 +9,8 @@
 #include <fstream>
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/prettywriter.h>
-#include "Serializable.h"
-#include "SerializerImplementation.h"
+#include "sceneIO/Serializable.h"
+#include "sceneIO/write/SerializerImplementation.h"
 #include <memory>
 
 

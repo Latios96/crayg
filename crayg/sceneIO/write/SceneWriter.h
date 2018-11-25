@@ -7,7 +7,7 @@
 
 #include <utils/StopWatch.h>
 #include "scene/Scene.h"
-#include "JsonSerializer.h"
+#include "sceneIO/write/json/JsonSerializer.h"
 
 class SceneWriter {
 public:
@@ -15,9 +15,11 @@ public:
 
     explicit SceneWriter(Scene &scene, SerializerImplementation& serializerImpl) : scene(scene),
     serializerImpl(serializerImpl) {}
+    // todo add a factory for a JsonSceneWriter, but somewhere else than here
 
 private:
     Scene& scene;
+    // todo use a shared_ptr for this
     SerializerImplementation& serializerImpl;
 };
 

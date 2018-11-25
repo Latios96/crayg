@@ -27,19 +27,19 @@ set(crayg_SRCS
         image/LineByLineIterator.h
         image/ImageIterators.h
         utils/ToStringHelper.h
-        sceneIO/SceneWriter.h
+        sceneIO/write/SceneWriter.h
         sceneIO/Serializable.h
-        sceneIO/JsonSerializer.cpp
-        sceneIO/JsonSerializer.h
-        sceneIO/JsonDeserializer.cpp
-        sceneIO/JsonDeserializer.h
-        sceneIO/SceneReader.cpp
-        sceneIO/SceneReader.h
+        sceneIO/write/json/JsonSerializer.cpp
+        sceneIO/write/json/JsonSerializer.h
+        sceneIO/read/json/JsonDeserializer.cpp
+        sceneIO/read/json/JsonDeserializer.h
+        sceneIO/read/SceneReader.cpp
+        sceneIO/read/SceneReader.h
         utils/StopWatch.h
         intersectors/SceneIntersector.cpp
         intersectors/SceneIntersector.h
-        sceneIO/SceneWriter.cpp
-        sceneIO/SerializerImplementation.h
+        sceneIO/write/SceneWriter.cpp
+        sceneIO/write/SerializerImplementation.h
         Renderer.cpp
         Renderer.h
         utils/utils.h
@@ -57,7 +57,7 @@ set(crayg_SRCS
         scene/Triangle.cpp
         scene/Triangle.h
         scene/TriangeMesh.cpp
-        scene/TriangeMesh.h)
+        scene/TriangeMesh.h sceneIO/SceneWriterFactory.cpp sceneIO/SceneWriterFactory.h sceneIO/write/Serializer.h sceneIO/read/Deserializer.h)
 
 # Declare the library
 add_library(crayg STATIC
