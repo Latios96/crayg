@@ -17,17 +17,17 @@ TEST_CASE("TriangleIntersects") {
     Ray RAY_MISSING_TRIANGLE_PARALLEL({-1,0.25f, -1}, {1,0,0});
 
     SECTION("intersectsShouldBeTrue") {
-        REQUIRE(TRIANGLE.intersects(RAY_HITTING_TRIANGLE));
+        REQUIRE(TRIANGLE.isIntersecting(RAY_HITTING_TRIANGLE));
     }
 
     SECTION("intersectsShouldBeFalse") {
-        REQUIRE_FALSE(TRIANGLE.intersects(RAY_MISSING_TRIANGLE_LEFT));
-        REQUIRE_FALSE(TRIANGLE.intersects(RAY_MISSING_TRIANGLE_TOP));
-        REQUIRE_FALSE(TRIANGLE.intersects(RAY_MISSING_TRIANGLE_BOTTOM));
+        REQUIRE_FALSE(TRIANGLE.isIntersecting(RAY_MISSING_TRIANGLE_LEFT));
+        REQUIRE_FALSE(TRIANGLE.isIntersecting(RAY_MISSING_TRIANGLE_TOP));
+        REQUIRE_FALSE(TRIANGLE.isIntersecting(RAY_MISSING_TRIANGLE_BOTTOM));
     }
 
     SECTION("intersectsShouldBeFalseParallel") {
-        REQUIRE_FALSE(TRIANGLE.intersects(RAY_MISSING_TRIANGLE_PARALLEL));
+        REQUIRE_FALSE(TRIANGLE.isIntersecting(RAY_MISSING_TRIANGLE_PARALLEL));
     }
 
     SECTION("intersectShouldBeValid") {
@@ -45,12 +45,13 @@ TEST_CASE("TriangleIntersects") {
     }
 
     SECTION("hitRayShouldHaveCorrectLength") {
-        auto hitRay = TRIANGLE.intersect(RAY_HITTING_TRIANGLE);
-        REQUIRE(hitRay.length == 1);
+        auto hitIntersection = TRIANGLE.intersect(RAY_HITTING_TRIANGLE);
+        REQUIRE(hitIntersection.rayParameter == 1);
     }
 
     SECTION("hitLocationCaBeCorrectlyConstructed") {
-        auto hitRay = TRIANGLE.intersect(RAY_HITTING_TRIANGLE);
-        REQUIRE(hitRay.constructIntersectionPoint() == Vector3f(0.25f, 0.25f, 0));
+        auto hitIntersection = TRIANGLE.intersect(RAY_HITTING_TRIANGLE);
+        const Vector3f hitRay = RAY_HITTING_TRIANGLE.constructIntersectionPoint(hitIntersection.rayParameter);
+        REQUIRE(hitRay == Vector3f(0.25f, 0.25f, 0));
     }
 }

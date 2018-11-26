@@ -29,4 +29,8 @@ Vector3f Ray::constructIntersectionPoint() {
     return startPoint + (direction * length);
 }
 
+Vector3f Ray::constructIntersectionPoint(float t) {
+    return startPoint + (direction * t);
+}
+
 

@@ -20,6 +20,10 @@ public:
 
         float rayParameter;
         Imageable *imageable;
+
+        bool isValid(){
+            return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
+        }
     };
     virtual Intersection intersect(Ray ray)=0;
 };

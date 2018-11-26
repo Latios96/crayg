@@ -8,7 +8,7 @@
 
 #include "foundation/Vector3f.h"
 #include "foundation/Ray.h"
-
+// todo delete Intersectable__
 class Intersectable__ {
 public:
     /**
