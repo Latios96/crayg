@@ -9,8 +9,9 @@ Imageable::Intersection SceneIntersector::intersect(Ray ray) {
     for(const auto &intersectable : scene.objects){
         Imageable::Intersection intersection = intersectable->intersect(ray);
 
-        if(intersection.rayParameter< hitIntersection.rayParameter ){
-            hitIntersection = intersection;
+        if(intersection.rayParameter < hitIntersection.rayParameter && intersection.imageable){
+            hitIntersection.rayParameter = intersection.rayParameter;
+            hitIntersection.imageable = intersection.imageable;
         }
     }
     return hitIntersection;

@@ -9,12 +9,10 @@ bool TriangleMesh::isIntersecting(Ray ray){
 }
 
 Imageable::Intersection TriangleMesh::intersect(Ray ray) {
-    std::vector<Triangle> triangles;
-    getTriangles(triangles);
 
     Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-    for (Triangle triangle : triangles){
+    for (Triangle &triangle : triangles){
         Imageable::Intersection intersection = triangle.intersect(ray);
         if (intersection.rayParameter < hitIntersection.rayParameter){
             hitIntersection = intersection;
@@ -25,7 +23,10 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
 
 void TriangleMesh::getTriangles(std::vector<Triangle> &triangles) {
     for(int i=0; i<faceIndexes.size(); i=i+3){
-        triangles.push_back({points[faceIndexes[i]], points[faceIndexes[i+1]], points[faceIndexes[i+2]]});
+        const Vector3f v0 = points[faceIndexes[i]];
+        const Vector3f v1 = points[faceIndexes[i + 1]];
+        const Vector3f v2 = points[faceIndexes[i + 2]];
+        triangles.push_back({v0, v1, v2});
     }
 }
 
@@ -93,4 +94,9 @@ void TriangleMesh::createCube(TriangleMesh &mesh) {
     mesh.faceIndexes.push_back(4);
     mesh.faceIndexes.push_back(0);
     mesh.faceIndexes.push_back(2);
+}
+
+void TriangleMesh::beforeRender() {
+    Imageable::beforeRender();
+    getTriangles(triangles);
 }

@@ -16,7 +16,17 @@ public:
 
     class Intersection{
     public:
+        Intersection(){
+            rayParameter = std::numeric_limits<float>::max();
+            imageable = nullptr;
+        }
+
         Intersection(float rayParameter, Imageable *imageable);
+
+        Intersection(const Intersection &intersection){
+            this->rayParameter = intersection.rayParameter;
+            this->imageable = intersection.imageable;
+        }
 
         float rayParameter;
         Imageable *imageable;
@@ -26,6 +36,10 @@ public:
         }
     };
     virtual Intersection intersect(Ray ray)=0;
+
+    virtual void beforeRender(){
+
+    };
 };
 
 

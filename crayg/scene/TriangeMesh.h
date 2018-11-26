@@ -26,6 +26,10 @@ public:
     std::vector<int> faceIndexes;
     // todo replace with iterator
     void getTriangles(std::vector<Triangle> &triangles);
+
+    void beforeRender() override;
+private:
+    std::vector<Triangle> triangles;
 };
 
 

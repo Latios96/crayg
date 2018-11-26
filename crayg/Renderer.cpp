@@ -20,8 +20,10 @@ void Renderer::renderScene() {
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount, "Rendering done by {}%");
 
     for(auto pixel : ImageIterators::lineByLine(image)){
-        renderPixel(pixel);
-        reporter.iterationDone();
+        //if (pixel.x == 371 && pixel.y == 259){
+            renderPixel(pixel);
+            reporter.iterationDone();
+        //}
     }
     spdlog::get("console")->info("Rendering done.");
 }
@@ -29,6 +31,11 @@ void Renderer::renderScene() {
 void Renderer::init(){
     cameraModel = std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, image.getWidth(), image.getHeight()));
     lambertMethod = std::shared_ptr<ShadingMethod>(new ShadingMethod(scene));
+
+    spdlog::get("console")->info("Execute Imageable::beforeRender...");
+    for(auto &imageable : scene.objects){
+        imageable->beforeRender();
+    }
 
     spdlog::get("console")->info("Creating SceneIntersector...");
     sceneIntersector = std::shared_ptr<SceneIntersector>(new SceneIntersector(scene));
@@ -40,7 +47,8 @@ void Renderer::renderPixel(const PixelPosition &pixel) {
     auto intersection = sceneIntersector->intersect(ray);
     if(intersection.imageable){
         Vector3f location = ray.startPoint + (ray.direction * intersection.rayParameter);
-        Color shadedColor = lambertMethod->lambertShading(location, *intersection.imageable);
+        Imageable &object = *intersection.imageable;
+        Color shadedColor = lambertMethod->lambertShading(location, object);
         image.setValue(pixel.x, pixel.y, shadedColor);
     }
 }
