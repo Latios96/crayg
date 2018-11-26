@@ -9,19 +9,9 @@ TEST_CASE("TriangleIntersection"){
     TriangleMesh::createCube(cube);
 
     SECTION("intersect_"){
-        // todo whats this?
-        /*Ray ray({0.99f,0.99f,-2}, {0,0,1});
-        Ray hitRay = cube.intersect(ray);
-        //REQUIRE(hitRay.isValid());
-        Vector3f loc = hitRay.constructIntersectionPoint();
-
-        Triangle tri({-1,0,0}, {1, 1, 0}, {1,0,0});
-        Vector3f locTri = tri.intersect(ray).constructIntersectionPoint();*/
-
-        Ray ray2({1.1f,1.1f,-2}, {0,0,1});
-        const Imageable::Intersection intersection = cube.intersect(ray2);
-        Vector3f hitLocation = ray2.constructIntersectionPoint(intersection.rayParameter);
+        Ray ray({1.1f,1.1f,-2}, {0,0,1});
+        const Imageable::Intersection intersection = cube.intersect(ray);
+        Vector3f hitLocation = ray.constructIntersectionPoint(intersection.rayParameter);
         REQUIRE_FALSE(hitLocation.isValid());
-
     }
 }
