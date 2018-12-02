@@ -6,6 +6,5 @@
 
 #include "sceneIO/read/SceneReader.h"
 
-SceneReader::SceneReader(std::string path, Scene &scene): path{std::move(path)}, scene{scene} {
-
+SceneReader::SceneReader(std::string path, Scene &scene) : path{std::move(path)}, scene(scene) {
 }

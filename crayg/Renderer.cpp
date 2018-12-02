@@ -20,12 +20,11 @@ void Renderer::renderScene() {
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount, "Rendering done by {}%");
 
     for(auto pixel : ImageIterators::lineByLine(image)){
-        //if (pixel.x == 371 && pixel.y == 259){
             renderPixel(pixel);
             reporter.iterationDone();
-        //}
     }
     spdlog::get("console")->info("Rendering done.");
+    reporter.finish();
 }
 
 void Renderer::init(){
