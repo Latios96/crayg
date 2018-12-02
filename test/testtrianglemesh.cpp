@@ -7,7 +7,7 @@
 TEST_CASE("TriangleIntersection"){
     TriangleMesh cube;
     TriangleMesh::createCube(cube);
-
+    
     SECTION("intersect_"){
         Ray ray({1.1f,1.1f,-2}, {0,0,1});
         const Imageable::Intersection intersection = cube.intersect(ray);

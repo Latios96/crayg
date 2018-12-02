@@ -18,6 +18,7 @@ public:
     Vector3f getNormal(Vector3f point) override;
 
 private:
+    // todo store only face indices
     Vector3f v0, v1, v2;
 };
 

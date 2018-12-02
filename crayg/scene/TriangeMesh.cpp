@@ -22,10 +22,11 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
 }
 
 void TriangleMesh::getTriangles(std::vector<Triangle> &triangles) {
+    Vector3f transform = getPosition();
     for(int i=0; i<faceIndexes.size(); i=i+3){
-        const Vector3f v0 = points[faceIndexes[i]];
-        const Vector3f v1 = points[faceIndexes[i + 1]];
-        const Vector3f v2 = points[faceIndexes[i + 2]];
+        const Vector3f v0 = points[faceIndexes[i]] + transform;
+        const Vector3f v1 = points[faceIndexes[i + 1]] + transform;
+        const Vector3f v2 = points[faceIndexes[i + 2]] + transform;
         triangles.push_back({v0, v1, v2});
     }
 }

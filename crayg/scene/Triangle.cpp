@@ -111,6 +111,6 @@ Triangle::Triangle() {
 
 Vector3f Triangle::getNormal(Vector3f point) {
     const Vector3f normal = (v2 - v0).crossProduct(v1 - v0).normalize();
-    return normal;
+    return normal.invert();
 }
 
