@@ -26,7 +26,7 @@ TEST_CASE("BmpImageWriter"){
         REQUIRE(remove(TEST_IMAGE_NAME) == 0);
     }
 
-    SECTION("writeImageFileExists"){
+    SECTION("fileShouldExistAfterWrite"){
         writer.writeImage(image, TEST_IMAGE_NAME);
         REQUIRE(fexists(TEST_IMAGE_NAME));
     }
