@@ -67,7 +67,9 @@ set(crayg_SRCS
         sceneIO/read/json/JsonSceneReader.cpp
         sceneIO/read/json/JsonSceneReader.h
         scene/Imageable.cpp
-        scene/Imageable.h)
+        scene/Imageable.h
+        foundation/BoundingBox.h
+        foundation/BoundingBox.cpp)
 
 # Declare the library
 add_library(crayg STATIC
