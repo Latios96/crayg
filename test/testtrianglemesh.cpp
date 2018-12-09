@@ -14,4 +14,17 @@ TEST_CASE("TriangleIntersection"){
         Vector3f hitLocation = ray.constructIntersectionPoint(intersection.rayParameter);
         REQUIRE_FALSE(hitLocation.isValid());
     }
+    
+    /*SECTION("testTransform"){
+        Triangle triangle({2,0,0}, {2,1,0}, {2,1,1});
+        Ray ray({3,0.25,0}, {-1,0,0});
+        auto intersection = triangle.intersect(ray);
+        REQUIRE(intersection.rayParameter == 5);
+    }
+    SECTION("testTransformBackfacing"){
+        Triangle triangle({2,0,0}, {2,1,0}, {2,1,1});
+        Ray ray({-2,0.25,0}, {1,0,0});
+        auto intersection = triangle.intersect(ray);
+        REQUIRE(intersection.rayParameter > 3);
+    }*/
 }

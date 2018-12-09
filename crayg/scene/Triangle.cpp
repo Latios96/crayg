@@ -10,6 +10,8 @@ Triangle::Intersection Triangle::intersect(Ray ray) {
     const float scalar = normal.scalarProduct(ray.direction);
 
     const bool raysAreParallel = scalar == 0;
+    auto angleBetweenVectorsAsRadiant = scalar / (normal.length() * ray.direction.length());
+    const bool isBackFacing = angleBetweenVectorsAsRadiant > 0;
 
     if(raysAreParallel){
         return {std::numeric_limits<float>::max(), nullptr};
@@ -30,7 +32,8 @@ Triangle::Intersection Triangle::intersect(Ray ray) {
             Vector3f edge0 = v1 - v0;
             Vector3f vp0 = hitLocation - v0;
             C = edge0.crossProduct(vp0);
-            if (normal.scalarProduct(C)<0){
+            auto scal = normal.scalarProduct(C);
+            if (scal < 0){
                 return {std::numeric_limits<float>::max(), nullptr};
             }
 
@@ -53,6 +56,7 @@ Triangle::Intersection Triangle::intersect(Ray ray) {
         return {std::numeric_limits<float>::max(), nullptr};
     }
 }
+
 
 bool Triangle::isIntersecting(Ray ray){
     Vector3f normal = (v1 - v0).crossProduct((v2 - v0));
