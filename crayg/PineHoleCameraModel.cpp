@@ -6,8 +6,6 @@
 
 #include "PineHoleCameraModel.h"
 
-
-
 PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight) : camera(camera),
                                                                                             imageWidth(imageWidth),
                                                                                             imageHeight(imageHeight) {
@@ -23,7 +21,7 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
     upVector = sideVector.crossProduct(viewVector).normalize();
 
     // create width and height, define the size of the view plane
-    imagePlaneHeight = 2.0f * std::tan(camera.getFieldOfView() * 2.0f);
+    imagePlaneHeight = 2.0f * std::tan(camera.getFieldOfView()/2.0f);
 
     imagePlaneWidth = imageRatio * imagePlaneHeight;
 

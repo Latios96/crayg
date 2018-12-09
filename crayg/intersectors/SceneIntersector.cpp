@@ -3,24 +3,23 @@
 //
 
 #include "SceneIntersector.h"
-Intersection SceneIntersector::intersect(Ray ray) {
-    Ray hitRay(Vector3f(), Vector3f(), std::numeric_limits<float>::max());
-    SceneObject* hitObject = nullptr;
+Imageable::Intersection SceneIntersector::intersect(Ray ray) {
+    Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
     for(const auto &intersectable : scene.objects){
-        Ray intersectionRay = intersectable->intersect(ray);
+        Imageable::Intersection intersection = intersectable->intersect(ray);
 
-        if(intersectionRay.isValid() && intersectionRay.length < hitRay.length ){
-            hitRay = intersectionRay;
-            hitObject = intersectable.get();
+        if(intersection.rayParameter < hitIntersection.rayParameter && intersection.imageable){
+            hitIntersection.rayParameter = intersection.rayParameter;
+            hitIntersection.imageable = intersection.imageable;
         }
     }
-    return {hitRay, hitRay.startPoint + (hitRay.direction * hitRay.length), hitObject};
+    return hitIntersection;
 }
 
-bool SceneIntersector::intersects(Ray ray) {
+bool SceneIntersector::isIntersecting(Ray ray){
     for(const auto &intersectable : scene.objects){
-        if (intersectable->intersects(ray)) {
+        if (intersectable->isIntersecting(ray)) {
             return true;
         }
     }

@@ -15,19 +15,9 @@ TEST_CASE("SceneIntersector"){
 
     SceneIntersector intersector(scene);
 
-    SECTION("intersects"){
-        // Rays which should be hits
-        REQUIRE(intersector.intersects(Ray(Vector3f(1,0,-5), Vector3f(0,0,1))));
-        REQUIRE(intersector.intersects(Ray(Vector3f(-2,0,-5), Vector3f(0,0,1))));
-
-        // Rays which should not be hits
-        REQUIRE(intersector.intersects(Ray(Vector3f(0,0,0), Vector3f(0,0,1))));
+    SECTION("isIntersectingReturnsTrue") {
+        REQUIRE(intersector.isIntersecting(Ray(Vector3f(1, 0, -5), Vector3f(0, 0, 1))));
+        REQUIRE(intersector.isIntersecting(Ray(Vector3f(-2, 0, -5), Vector3f(0, 0, 1))));
+        REQUIRE(intersector.isIntersecting(Ray(Vector3f(0,0,0), Vector3f(0,0,1))));
     }
-
-    /*SECTION("intersect"){
-        auto hitLocation = intersector.intersect(Ray(Vector3f(1, 0, 5), Vector3f(0, 0, -1)));
-        REQUIRE(compareWithPrecision(hitLocation.x, 1));
-        REQUIRE(compareWithPrecision(hitLocation.y, 0));
-        REQUIRE(compareWithPrecision(hitLocation.z, 1));
-    }*/
 }

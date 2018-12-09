@@ -14,6 +14,11 @@ void SceneWriter::write() {
         obj->serialize(serializerImpl);
         serializerImpl.endObject();
     }
+    if(scene.camera){
+        serializerImpl.startObject();
+        scene.camera->serialize(serializerImpl);
+        serializerImpl.endObject();
+    }
 
     serializerImpl.finish();
 

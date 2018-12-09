@@ -10,6 +10,7 @@
 
 class Light : public Serializable, public Transformable{
 public:
+
     void serialize(Serializer& serializer) override;
 
     void deserialize(Deserializer& deserializer) override;

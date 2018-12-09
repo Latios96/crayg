@@ -1,12 +1,17 @@
-image: ubuntu:14.04
+image: ubuntu:latest
 
 job:
   script:
   - apt-get update
-  - apt-get install -y git g++ libc++-dev cmake clang gcovr
-  - export CC=clang; export CXX=clang++
+  - apt-get install -yq cmake g++
+  - export CXX=g++
   - mkdir build
   - cd build
   - cmake ..
   - make -j 2
   - ./test/tests -o report.xml -r junit
+  - ./standalone/crayg-standalone -s ../example_scenes/single_sphere.json -o single_sphere.bmp
+  - ./standalone/crayg-standalone -s ../example_scenes/three_spheres.json -o three_spheres.bmp
+  artifacts:
+    reports:
+      junit: ./build/report.xml

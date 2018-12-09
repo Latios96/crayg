@@ -9,7 +9,7 @@
 #include <string>
 #include "Image.h"
 #include "ImageWriter.h"
-// todo add virtual destructor
+
 class BmpImageWriter : public ImageWriter{
 public:
     void writeImage(const Image &image, std::string imageName) override;

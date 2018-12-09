@@ -7,6 +7,7 @@
 
 
 #include <cmath>
+#include <limits>
 
 class Vector3f {
 public:

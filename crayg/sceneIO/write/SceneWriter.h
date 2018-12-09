@@ -7,7 +7,7 @@
 
 #include <utils/StopWatch.h>
 #include "scene/Scene.h"
-#include "JsonSerializer.h"
+#include "sceneIO/write/json/JsonSerializer.h"
 
 class SceneWriter {
 public:

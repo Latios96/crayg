@@ -34,8 +34,9 @@ float Vector3f::length() const {
 
 Vector3f Vector3f::normalize() const {
     float length = this->length();
-    // TODO optimize with computing 1/length and multiply with vector components
-    return {x / length, y / length, z / length};
+    float oneByLength = 1 / length;
+
+    return {x * oneByLength, y * oneByLength, z * oneByLength};
 }
 
 Vector3f Vector3f::crossProduct(const Vector3f &otherVector) const {
@@ -49,7 +50,8 @@ Vector3f Vector3f::operator+(const Vector3f &otherVector) const {
 }
 
 Vector3f Vector3f::operator-(const Vector3f &otherVector) const {
-    return substract(otherVector);
+    // return substract(otherVector);
+    return {x - otherVector.x, y - otherVector.y, z - otherVector.z};
 }
 
 Vector3f Vector3f::operator*(float scalar) const {

@@ -8,4 +8,4 @@ script:
 - cd build
 - cmake ..
 - make -j 4
-- make test
+- ./test/tests

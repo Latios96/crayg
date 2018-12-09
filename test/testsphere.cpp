@@ -12,29 +12,32 @@ TEST_CASE("Sphere") {
         REQUIRE(mySphere.getRadius() == 3.0f);
     }
 
-    SECTION("intersects") {
+    SECTION("isIntersecting") {
         // test intersecting ray
         Ray intersectingRay(Vector3f(1, 0, 0), Vector3f(-1, 0, 0));
         // intersects should return true
-        REQUIRE(mySphere.intersects(intersectingRay));
+        REQUIRE(mySphere.isIntersecting(intersectingRay));
 
         // test not intersecting ray
         Ray notIntersectingRay(Vector3f(0, 0, 5), Vector3f(-1, 0, 0));
         // intersects should return true
-        REQUIRE_FALSE(mySphere.intersects(notIntersectingRay));
+        REQUIRE_FALSE(mySphere.isIntersecting(notIntersectingRay));
     }
 
-    SECTION("intersect"){
+    SECTION("intersect_"){
         Sphere mySphere(Vector3f(1, 0, 0), 3.0f);
-        auto hitRay = mySphere.intersect(Ray(Vector3f(5, 0, 0), Vector3f(-1, 0, 0)));
-        Vector3f hitLocation = hitRay.startPoint + (hitRay.direction * hitRay.length);
+        Ray ray (Vector3f(5, 0, 0), Vector3f(-1, 0, 0));
+
+        float t = mySphere.intersect(ray).rayParameter;
+        Vector3f hitLocation = ray.constructIntersectionPoint(t);
+
         REQUIRE(compareWithPrecision(hitLocation.x, 4));
         REQUIRE(compareWithPrecision(hitLocation.y, 0));
         REQUIRE(compareWithPrecision(hitLocation.z, 0));
     }
     SECTION("intersectNotReturnsMax"){
         auto hitRay = mySphere.intersect(Ray(Vector3f(1, 10, -5), Vector3f(0, 0, 1)));
-        REQUIRE_FALSE(hitRay.isValid());
+        REQUIRE(hitRay.rayParameter == std::numeric_limits<float>::max());
     }
 
     SECTION("serialize"){
@@ -73,7 +76,7 @@ TEST_CASE( "Sphere/transformation") {
 TEST_CASE( "Sphere/intersectsTransformed") {
     Sphere mySphere(Vector3f(1,2,3),1.0f);
 
-    REQUIRE(mySphere.intersects(Ray(Vector3f(1,2,6), Vector3f(0,0,-1))));
+    REQUIRE(mySphere.isIntersecting(Ray(Vector3f(1,2,6), Vector3f(0,0,-1))));
 }
 
 

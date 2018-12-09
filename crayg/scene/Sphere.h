@@ -6,33 +6,20 @@
 #define CRAYG_SPHERE_H
 
 
-#include "intersectors/Intersectable.h"
-#include "Transformable.h"
 #include "string"
-#include "sceneIO/Serializable.h"
-
-
-class SceneObject : public Intersectable,
-                    public Transformable,
-                    public Serializable{
-public:
-    SceneObject();
-
-    explicit SceneObject(Vector3f position);
-    void serialize(Serializer& serializer) override;
-    void deserialize(Deserializer& deserializer) override;
-    virtual Vector3f getNormal(Vector3f point)=0;
-};
+#include "scene/SceneObject.h"
 
 class Sphere :  public SceneObject{
 public:
-    Ray intersect(Ray ray) override;
-    bool intersects(Ray ray) override;
+
     Sphere();
 
     Sphere(Vector3f position, float radius);
 
     float getRadius() const;
+
+    Sphere::Intersection intersect(Ray ray) override;
+    bool isIntersecting(Ray ray) override;
 
     void serialize(Serializer& serializer) override;
 

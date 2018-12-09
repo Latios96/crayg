@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- respect light intensity in lambert
+- scene now contains the camera
+- warning when reading if attribute does not exists
+- proper virtual class for CameraModel
+- Maya export script
+- triangle Intersection
+### Changed
+- made architecture more useful
+- mirror x axis to match maya
+### Fixed
+- sphere would move down in image when positive y coordinate
+## [0.1.0]
+### Added
 - added tests for BmpImageWriter
 - SceneIntersector: added tests
 - SceneWriter: added tests

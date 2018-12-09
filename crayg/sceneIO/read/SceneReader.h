@@ -6,17 +6,17 @@
 #define CRAYG_SCENEREADER_H
 
 #include <scene/Scene.h>
-// todo add tests
-// todo make more robust with error messages
-// todo make template class, so we can better test it
+#include "scene/TriangeMesh.h"
+
 class SceneReader {
 public:
-    void read(std::string path);
+    virtual void read()=0;
 
-    explicit SceneReader(Scene &scene);
+    explicit SceneReader(std::string path, Scene &scene);
 
-private:
+protected:
     Scene& scene;
+    std::string path;
 };
 
 

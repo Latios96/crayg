@@ -5,7 +5,7 @@
 #include <catch.hpp>
 #include <scene/Scene.h>
 #include <fakeit.hpp>
-#include "sceneIO/SceneWriter.h"
+#include "sceneIO/write/SceneWriter.h"
 
 TEST_CASE("SceneWriter"){
     Scene scene;
@@ -36,5 +36,6 @@ TEST_CASE("SceneWriter"){
         fakeit::Verify(Method(mockSerializerImpl,finish)).Exactly(1);
 
     }
+    // todo test scene with camera
 
 }

@@ -8,8 +8,10 @@
 
 #include "scene/Camera.h"
 #include "foundation/Ray.h"
+#include "CameraModel.h"
+
 // todo add tests
-class PineHoleCameraModel {
+class PineHoleCameraModel : public CameraModel{
 private:
     Camera &camera;
     float imageRatio;
@@ -23,7 +25,7 @@ private:
 public:
     PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight);
 
-    Ray createPrimaryRay(float x, float y);
+    Ray createPrimaryRay(float x, float y) override;
 };
 
 

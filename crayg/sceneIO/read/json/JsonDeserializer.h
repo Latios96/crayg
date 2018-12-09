@@ -7,7 +7,7 @@
 
 
 #include <rapidjson/document.h>
-#include "Serializable.h"
+#include "sceneIO/Serializable.h"
 // todo add tests
 class JsonDeserializer : public Deserializer{
 public:
@@ -16,6 +16,8 @@ public:
     int readInt(std::string name) override;
     float readFloat(std::string name) override;
     Vector3f readVector3f(std::string name) override;
+    void readVector3fArray(std::string name, std::vector<Vector3f> &target) override;
+    void readIntArray(std::string name, std::vector<int> &target) override;
 private:
     rapidjson::Value& jsonObject;
 };

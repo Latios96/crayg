@@ -10,18 +10,25 @@
 #include <scene/Camera.h>
 #include <image/Image.h>
 #include <foundation/Color.h>
+#include "PineHoleCameraModel.h"
+#include <intersectors/SceneIntersector.h>
+#include "ShadingMethod.h"
 
 class Renderer {
 public:
-    Renderer(Scene &scene, Camera &camera, Image &image);
+    Renderer(Scene &scene, Image &image);
 
     void renderScene();
 private:
     Scene& scene;
-    Camera& camera;
     Image& image;
+    std::shared_ptr<CameraModel> cameraModel;
+    std::shared_ptr<SceneIntersector> sceneIntersector;
+    std::shared_ptr<ShadingMethod> lambertMethod;
 
-    Color shadePoint(Vector3f point, SceneObject& object);
+    void renderPixel(const PixelPosition &pixel);
+
+    void init();
 };
 
 

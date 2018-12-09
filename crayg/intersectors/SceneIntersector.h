@@ -25,8 +25,8 @@ class SceneIntersector{
 public:
     explicit SceneIntersector(Scene &scene);
 
-    Intersection intersect(Ray ray);
-    bool intersects(Ray ray);
+    Imageable::Intersection intersect(Ray ray);
+    bool isIntersecting(Ray ray);
 
 private:
     Scene &scene;
