@@ -82,5 +82,9 @@ target_include_directories(crayg PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+set_target_properties(crayg
+        PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
+        LINK_FLAGS "--coverage")
+
 target_include_directories(crayg
 PUBLIC ../externals/rapidjson/ ../externals/fmt/ ../externals/spdlog ../externals/cxxopts)
