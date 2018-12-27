@@ -2,6 +2,7 @@
 // Created by Jan Honsbrok on 11.11.18.
 //
 
+//#include <iostream>
 #include "ShadingMethod.h"
 
 Color ShadingMethod::lambertShading(Vector3f point, Imageable &object) {

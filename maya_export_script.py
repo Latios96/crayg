@@ -1,5 +1,6 @@
 import pymel.core as pm
 import maya.OpenMaya as om
+import maya.api.OpenMaya as om2
 
 import json
 
@@ -71,41 +72,33 @@ class TriangleMeshWriter(TransformableWriter):
 
     def __init__(self, obj):
         super(TriangleMeshWriter, self).__init__(obj)
-        self._mesh = self._obj.getShape().__apimfn__()
+        self._mesh = self._obj.getShape()
 
     def write(self):
         obj_dict = super(TriangleMeshWriter, self).write()
         obj_dict['type'] = 'TriangleMesh'
 
-        self._write_points(obj_dict)
-        self._write_face_indexes(obj_dict)
-        
-        return obj_dict
+        pm.select(self._mesh)
+        selection = om2.MGlobal.getActiveSelectionList()
+        mesh = om2.MFnMesh(selection.getDependNode(0))
+        all_points = mesh.getPoints()
 
-    def _write_face_indexes(self, obj_dict):
-        mayaFaceIndexes = om.MIntArray()
+        faceIt = om2.MItMeshPolygon(selection.getDependNode(0))
 
+        crayg_points = [[x[0], x[1], x[2]] for x in all_points]
         face_indexes = []
-
-        for i in range(self._mesh.numPolygons()):
-            self._mesh.getPolygonVertices(i, mayaFaceIndexes)
-            for i in range(mayaFaceIndexes.length()):
-                face_indexes.append(mayaFaceIndexes[i])
-
+        while not faceIt.isDone():
+            faceIt.next(faceIt)
+            num_triangles =  faceIt.numTriangles()
+            for i in range(num_triangles):
+                points, indexes = faceIt.getTriangle(i)
+                face_indexes.extend(indexes)
+        print crayg_points
+        print face_indexes
+        obj_dict['points'] = crayg_points
         obj_dict['faceIndexes'] = face_indexes
 
-    def _write_points(self, obj_dict):
-        points = om.MFloatPointArray()
-        self._mesh.getPoints(points)
-        points_list = []
-        for i in range(points.length()):
-            points_list.append([points[i][0], points[i][1], points[i][2]])
-
-        obj_dict['points'] = points_list
-        
-
-
-
+        return obj_dict
 
 
 def all_spheres():
@@ -142,14 +135,15 @@ def main():
 
     for collector, Writer in collector_writer.iteritems():
         for obj in collector():
-            writer = Writer(obj)
-            scene_objects.append(writer.write())
+            if obj.visibility.get():
+                writer = Writer(obj)
+                scene_objects.append(writer.write())
 
     cam = render_cam()
     camera_writer = CameraWriter(cam)
     scene['Camera'] = camera_writer.write()
 
-    with open('/Users/Jan/workspace/crayg/maya_scene.json', 'w') as f:
+    with open('/home/jan/workspace/crayg/maya_scene.json', 'w') as f:
         json.dump(scene, f, indent=4)
 
 
