@@ -6,6 +6,16 @@ set(UNIT_TEST_LIST
         testvector.cpp
         testToStringHelper.cpp
         testLineByLineIterator.cpp
+        testbmpimagewriter.cpp
+        testsceneintersector.cpp
+        testscenewriter.cpp
+        testray.cpp
+        testlight.cpp
+        testprogressreporter.cpp
+        testshadingmethod.cpp
+        testtriangle.cpp
+        testtrianglemesh.cpp
+        testRemainingTimeCalculator.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)
@@ -16,7 +26,7 @@ set(TARGET_NAME tests)
 
 add_executable(${TARGET_NAME}
   main.cpp
-  ${UNIT_TEST_SOURCE_LIST} testbmpimagewriter.cpp testsceneintersector.cpp testscenewriter.cpp testray.cpp testlight.cpp testprogressreporter.cpp testshadingmethod.cpp testtriangle.cpp testtrianglemesh.cpp)
+  ${UNIT_TEST_SOURCE_LIST})
 
 target_link_libraries(${TARGET_NAME}
   PUBLIC crayg)

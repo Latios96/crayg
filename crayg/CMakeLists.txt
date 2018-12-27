@@ -69,7 +69,9 @@ set(crayg_SRCS
         scene/Imageable.cpp
         scene/Imageable.h
         foundation/BoundingBox.h
-        foundation/BoundingBox.cpp)
+        foundation/BoundingBox.cpp
+        utils/RemainingTimeCalculator.h
+        utils/RemainingTimeCalculator.cpp)
 
 # Declare the library
 add_library(crayg STATIC
