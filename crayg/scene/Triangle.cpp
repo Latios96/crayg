@@ -2,9 +2,59 @@
 // Created by Jan Honsbrok on 12.11.18.
 //
 
+#include <iostream>
 #include "Triangle.h"
 
 Triangle::Intersection Triangle::intersect(Ray ray) {
+
+    return getIntersectionMullerTrumbore(ray);
+}
+// todo extract algorithms
+Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) {
+    //Vec3 v0v1 = sub(*v1, *v0);
+    Vector3f v0v1 = v1 - v0;
+
+    //Vec3 v0v2 = sub(*v2, *v0);
+    Vector3f v0v2 = v2 - v0;
+
+    //Vec3 pvec = cross(r->dir, v0v2);
+    Vector3f pvec = ray.direction.crossProduct(v0v2);
+
+    //float det = dot(v0v1, pvec);
+    float det = v0v1.scalarProduct(pvec);
+
+
+    if (det < 0.000001){
+        return {std::numeric_limits<float>::max(), nullptr};
+    }
+
+    float invDet = 1.0f / det;
+
+    //Vec3 tvec = sub(r->orig, *v0);
+    Vector3f tvec = ray.startPoint - v0;
+
+    //float u = dot(tvec, pvec) * invDet;
+    float u = tvec.scalarProduct(pvec) * invDet;
+
+    if (u < 0 || u > 1){
+        return {std::numeric_limits<float>::max(), nullptr};
+    }
+
+    //Vec3 qvec = cross(tvec, v0v1);
+    Vector3f qvec = tvec.crossProduct(v0v1);
+
+    //float v = dot(r->dir, qvec) * invDet;
+    float v = ray.direction.scalarProduct(qvec) * invDet;
+
+    if (v < 0 || u + v > 1){
+        return {std::numeric_limits<float>::max(), nullptr};
+    }
+    // dot(v0v2, qvec) * invDet;
+    return {v0v2.scalarProduct(qvec) * invDet, this};
+}
+
+
+Imageable::Intersection Triangle::getIntersectionMyImpl(const Ray &ray) {
     Vector3f normal = (v1 - v0).crossProduct((v2 - v0)).normalize();
 
     const float scalar = normal.scalarProduct(ray.direction);

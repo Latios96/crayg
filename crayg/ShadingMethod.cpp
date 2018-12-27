@@ -2,18 +2,23 @@
 // Created by Jan Honsbrok on 11.11.18.
 //
 
+//#include <iostream>
 #include "ShadingMethod.h"
 
 Color ShadingMethod::lambertShading(Vector3f point, Imageable &object) {
     Vector3f normal = object.getNormal(point);
 
-    Color color = Color::createGrey(0.2f); // todo take value from rendersettings
+    Color color = Color::createGrey(0.1f); // todo take value from rendersettings
 
     for (const auto& light : scene.lights){
         color = color + colorForLight(point, normal, light);
     }
 
+    //std::cout << point.x << " " << point.y << " " << point.z << " " << std::endl;
     return color;
+
+    //return {normal.x, normal.y, normal.z};
+    //return {point.x, point.y, point.z};
         
 }
 

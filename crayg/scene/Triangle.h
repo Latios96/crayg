@@ -20,6 +20,10 @@ public:
 private:
     // todo store only face indices
     Vector3f v0, v1, v2;
+
+    Intersection getIntersectionMyImpl(const Ray &ray);
+
+    Intersection getIntersectionMullerTrumbore(const Ray &ray);
 };
 
 

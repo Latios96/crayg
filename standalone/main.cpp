@@ -38,9 +38,6 @@ int main(int argc, char *argv[])
     auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
     sceneReader->read();
 
-    SceneIntersector sceneIntersector(scene);
-
-    // render the scene
     Renderer renderer(scene, myImage);
     renderer.renderScene();
 
