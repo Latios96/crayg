@@ -5,7 +5,7 @@
 #include "SceneWriter.h"
 
 void SceneWriter::write() {
-    StopWatch stopwatch("Scene writing");
+    StopWatch stopwatch = StopWatch::createStopWatch("Scene writing");
 
     serializerImpl.init();
 
