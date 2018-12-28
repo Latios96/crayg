@@ -17,13 +17,11 @@ void Renderer::renderScene() {
     spdlog::get("console")->info("Starting rendering..");
 
     int pixelCount = image.getHeight() * image.getWidth();
-    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount, "Rendering done by {}%");
+    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount, "Rendering done by {}%, estimated time remaining: {}s");
 
     for(auto pixel : ImageIterators::lineByLine(image)){
-        //if (pixel.x == 278 && pixel.y == 272){
-            renderPixel(pixel);
-            reporter.iterationDone();
-            //}
+        renderPixel(pixel);
+        reporter.iterationDone();
     }
     spdlog::get("console")->info("Rendering done.");
     reporter.finish();

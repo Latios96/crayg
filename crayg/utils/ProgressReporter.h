@@ -12,18 +12,22 @@
 #include <spdlog/spdlog.h>
 #define FMT_HEADER_ONLY
 #include "fmt/format.h"
+#include "RemainingTimeCalculator.h"
 
 // todo add time remaining
 class ProgressReporter{
 public:
-    ProgressReporter(int maxIterations, std::function<void(int)> progressionCallback) : maxIterations(
-            maxIterations), progressionCallback(std::move(progressionCallback)), iterationsDone(0) {
+    ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback) :
+    maxIterations(maxIterations),
+    progressionCallback(std::move(progressionCallback)),
+    iterationsDone(0),
+    remainingTimeCalculator(std::chrono::steady_clock::now()) {
         startTime = std::chrono::steady_clock::now();
     }
 
     static ProgressReporter createLoggingProgressReporter(int maxIterations, std::string logMessage){
-        std::function<void(int)> logProgress = [logMessage] (int progress) -> void {
-            spdlog::get("console")->info(logMessage.c_str(), progress);
+        std::function<void(int, float)> logProgress = [logMessage] (int progress, float timeRemaining) -> void {
+            spdlog::get("console")->info(logMessage.c_str(), progress, timeRemaining);
         };
         return {maxIterations, logProgress};
     }
@@ -36,7 +40,8 @@ public:
         if (newProgress > progress){
             progress = newProgress;
             if(progress % 10 == 0){
-                progressionCallback(progress);
+                const float remainingTime = remainingTimeCalculator.getRemainingTimeByProgress(progress);
+                progressionCallback(progress, remainingTime);
             }
         }
     }
@@ -52,8 +57,9 @@ public:
 private:
     int maxIterations;
     int progress;
-    std::function<void(int)> progressionCallback;
+    std::function<void(int, float)> progressionCallback;
     std::chrono::steady_clock::time_point startTime;
+    RemainingTimeCalculator remainingTimeCalculator;
 };
 
 
