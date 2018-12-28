@@ -6,7 +6,7 @@
 #define CRAYG_SCENEREADER_H
 
 #include <scene/Scene.h>
-#include "scene/TriangeMesh.h"
+#include "scene/TriangleMesh.h"
 
 class SceneReader {
 public:

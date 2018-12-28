@@ -56,8 +56,8 @@ set(crayg_SRCS
         ShadingMethod.h
         scene/Triangle.cpp
         scene/Triangle.h
-        scene/TriangeMesh.cpp
-        scene/TriangeMesh.h
+        scene/TriangleMesh.cpp
+        scene/TriangleMesh.h
         sceneIO/SceneWriterFactory.cpp
         sceneIO/SceneWriterFactory.h
         sceneIO/write/Serializer.h

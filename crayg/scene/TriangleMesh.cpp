@@ -2,7 +2,7 @@
 // Created by Jan Honsbrok on 13.11.18.
 //
 
-#include "TriangeMesh.h"
+#include "TriangleMesh.h"
 
 bool TriangleMesh::isIntersecting(Ray ray){
     return false;
@@ -32,6 +32,7 @@ void TriangleMesh::getTriangles(std::vector<Triangle> &triangles) {
 
 void TriangleMesh::serialize(Serializer &serializer) {
     SceneObject::serialize(serializer);
+    serializer.writeType("TriangleMesh");
     serializer.writeVector3fArray("points", points);
     serializer.writeIntArray("faceIndexes", faceIndexes);
 }

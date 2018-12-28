@@ -14,7 +14,7 @@ set(UNIT_TEST_LIST
         testprogressreporter.cpp
         testshadingmethod.cpp
         testtriangle.cpp
-        testtrianglemesh.cpp
+        testTriangleMesh.cpp
         testRemainingTimeCalculator.cpp
         )
 
