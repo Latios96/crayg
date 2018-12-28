@@ -1,7 +1,6 @@
 language: cpp
 compiler: clang
 os: osx
-
 script:
 - rm -rf build/
 - mkdir build
@@ -9,3 +8,11 @@ script:
 - cmake ..
 - make -j 4
 - ./test/tests
+deploy:
+  provider: releases
+  api_key:
+    secure: Vdpy9YFwLSYXyhl/id79K8qPrn9Jj0a5qwj+SOZ+DcfUDXnEgYtsuFipwnhtjO+cTkqF/rYJvtqsuI7j2BmYRysB55IH5M5w8dDMzDulB6criR0QsdtaxqjEyz2JPjyhjJYTgsYeoqlbbhON1P+to9cNQJZFIN0ksAJT9XruPz3fAFprhzg26EAdK/urLEzkLsJEEs3BPqJG/UULEiCYVEJoYZr0z2dnIHSfnmCuvJBF8Fa7xd5raFIILjoHnbR4M9dTxngXDICmZM0IT+SbCtSB6qJTIiYa3tYakMqe9r3jelSyM64hVlifdzh6+H7eW2qV4spU7WhA0uWmNCmgiqBqXcw3520ghLM9oANODta9bZ5p93cQ2fKl5PEFoi49WCls9U7Wnz3VF9ntdDBh9Qb1eQsSFgrRrJIrH9kuS34FS3/hLFMhhgcP3bCDaryWX4GVdvtWpV+7/P/+ADDaBAZd5pzy3TFonZkPaARratZYrDaPapgRlrxnlLgKY1Gkr/izN7V7KHRgIVCfiKRn6IrZXn35p29qLWwR9ncATU+GM8lBeDgE3Oi3/QVmxQtpKSpjKQ78+Zs8nmRlxcm0bU/um8WZVbRjYcQ2iA1TtoyoNgp8hTH0jpT+1clCBtAiQ8sxMxF5FH5UXSWXjNp0vgWIwmp9Q2XIUOV2iMlB7oA=
+  file: build/standalone/crayg-standalone
+  on:
+    repo: Latios96/crayg
+    tags: true
