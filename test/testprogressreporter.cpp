@@ -6,13 +6,13 @@
 #include "utils/ProgressReporter.h"
 #include <fakeit.hpp>
 
-void _report(int progress){
+void _report(int progress, float timeRemaining){
 
 }
 
 int callCount = 0;
 
-void _storeCallCount(int progress){
+void _storeCallCount(int progress, float timeRemaining){
     callCount++;
 }
 
