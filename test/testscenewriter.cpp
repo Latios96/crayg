@@ -5,9 +5,12 @@
 #include <catch.hpp>
 #include <scene/Scene.h>
 #include <fakeit.hpp>
+#include "spdlog/spdlog.h"
+#include <spdlog/sinks/stdout_color_sinks.h>
 #include "sceneIO/write/SceneWriter.h"
 
 TEST_CASE("SceneWriter"){
+    auto console = spdlog::stdout_color_mt("console");
     Scene scene;
 
     scene.addObject(new Sphere(Vector3f(1,0,0), 1));

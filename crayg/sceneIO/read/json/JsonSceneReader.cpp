@@ -87,7 +87,7 @@ DocumentValidationResult documentHasMandatoryMembers(rapidjson::Document &d){
 }
 
 void JsonSceneReader::read() {
-    StopWatch stopwatch("Scene reading");
+    StopWatch stopwatch = StopWatch::createStopWatch("Scene reading");
 
     std::ifstream ifs(path);
     rapidjson::IStreamWrapper isw(ifs);
