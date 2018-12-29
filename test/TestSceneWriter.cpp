@@ -43,6 +43,4 @@ TEST_CASE("SceneWriter"){
 
     }
 
-    delete camera;
-
 }
