@@ -14,7 +14,7 @@
 #include "fmt/format.h"
 #include "RemainingTimeCalculator.h"
 
-// todo add time remaining
+// todo move into .cpp file
 class ProgressReporter{
 public:
     ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback) :

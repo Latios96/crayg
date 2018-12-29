@@ -16,6 +16,7 @@ set(UNIT_TEST_LIST
         testtriangle.cpp
         testTriangleMesh.cpp
         testRemainingTimeCalculator.cpp
+        testGroundPlane.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)
