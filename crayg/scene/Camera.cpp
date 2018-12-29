@@ -50,7 +50,6 @@ float Camera::getFocalLength() const {
 }
 
 
-
 float Camera::getFilmbackSize() const {
     return filmbackSize;
 }

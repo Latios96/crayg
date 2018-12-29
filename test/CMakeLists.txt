@@ -1,23 +1,23 @@
 
 set(UNIT_TEST_LIST
-        testcolor.cpp
-        testimage.cpp
-        testsphere.cpp
-        testvector.cpp
-        testToStringHelper.cpp
-        testLineByLineIterator.cpp
-        testbmpimagewriter.cpp
-        testsceneintersector.cpp
-        testscenewriter.cpp
-        testray.cpp
-        testlight.cpp
-        testprogressreporter.cpp
-        testshadingmethod.cpp
-        testtriangle.cpp
-        testTriangleMesh.cpp
-        testRemainingTimeCalculator.cpp
-        testGroundPlane.cpp
-        testCamera.cpp
+        TestColor.cpp
+        TestImage.cpp
+        TestSphere.cpp
+        TestVector.cpp
+        TestToStringHelper.cpp
+        TestLineByLineIterator.cpp
+        TestBmpImageWriter.cpp
+        TestSceneIntersector.cpp
+        TestSceneWriter.cpp
+        TestRay.cpp
+        TestLight.cpp
+        TestProgressReporter.cpp
+        TestShadingMethod.cpp
+        TestTriangle.cpp
+        TestTriangleMesh.cpp
+        TestRemainingTimeCalculator.cpp
+        TestGroundPlane.cpp
+        TestCamera.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)
