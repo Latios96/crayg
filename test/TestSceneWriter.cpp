@@ -13,8 +13,11 @@ TEST_CASE("SceneWriter"){
     auto console = spdlog::stdout_color_mt("console");
     Scene scene;
 
+    Camera* camera = new Camera();
+
     scene.addObject(new Sphere(Vector3f(1,0,0), 1));
     scene.addObject(new Sphere(Vector3f(-2,0,0), 1));
+    scene.camera = camera;
 
     fakeit::Mock<SerializerImplementation> mockSerializerImpl;
 
@@ -34,11 +37,12 @@ TEST_CASE("SceneWriter"){
         sceneWriter.write();
 
         fakeit::Verify(Method(mockSerializerImpl,init)).Exactly(1);
-        fakeit::Verify(Method(mockSerializerImpl,startObject)).Exactly(2);
-        fakeit::Verify(Method(mockSerializerImpl,endObject)).Exactly(2);
+        fakeit::Verify(Method(mockSerializerImpl,startObject)).Exactly(3);
+        fakeit::Verify(Method(mockSerializerImpl,endObject)).Exactly(3);
         fakeit::Verify(Method(mockSerializerImpl,finish)).Exactly(1);
 
     }
-    // todo test scene with camera
+
+    delete camera;
 
 }
