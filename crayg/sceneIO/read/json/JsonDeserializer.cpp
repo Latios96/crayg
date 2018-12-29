@@ -15,8 +15,7 @@ int JsonDeserializer::readInt(std::string name) {
         return jsonObject[name.c_str()].GetInt();
     }
     else{
-        std::cout << fmt::format("Could not read int with name '{}'", name) << std::endl;
-        exit(-1);
+        throw std::invalid_argument(fmt::format("Could not read int with name '{}'", name));
     }
 }
 
@@ -25,8 +24,7 @@ float JsonDeserializer::readFloat(std::string name) {
         return jsonObject[name.c_str()].GetFloat();
     }
     else{
-        std::cout << fmt::format("Could not read float with name '{}'", name) << std::endl;
-        exit(-1);
+        throw std::invalid_argument(fmt::format("Could not read float with name '{}'", name));
     }
 
 }
@@ -37,8 +35,7 @@ Vector3f JsonDeserializer::readVector3f(std::string name) {
         return {array[0].GetFloat(), array[1].GetFloat(), array[2].GetFloat()};
     }
     else{
-        std::cout << fmt::format("Could not read Vector3f with name '{}'", name) << std::endl;
-        exit(-1);
+        throw std::invalid_argument(fmt::format("Could not read Vector3f with name '{}'", name));
     }
 }
 
@@ -53,8 +50,7 @@ void JsonDeserializer::readVector3fArray(std::string name, std::vector<Vector3f>
         }
     }
     else{
-        std::cout << fmt::format("Could not read Vector3f Array with name '{}'", name) << std::endl;
-        exit(-1);
+        throw std::invalid_argument(fmt::format("Could not read Vector3f Array with name '{}'", name));
     }
 }
 
@@ -66,7 +62,6 @@ void JsonDeserializer::readIntArray(std::string name, std::vector<int> &target) 
         }
     }
     else{
-        std::cout << fmt::format("Could not read int Array with name '{}'", name) << std::endl;
-        exit(-1);
+        throw std::invalid_argument(fmt::format("Could not read int Array with name '{}'", name));
     }
 }

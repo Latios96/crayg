@@ -18,6 +18,7 @@ set(UNIT_TEST_LIST
         TestRemainingTimeCalculator.cpp
         TestGroundPlane.cpp
         TestCamera.cpp
+        TestJsonDeserializer.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)
