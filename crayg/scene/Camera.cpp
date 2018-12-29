@@ -4,8 +4,12 @@
 
 #include "Camera.h"
 
-Camera::Camera(const Vector3f &position, const Vector3f &upVector, const Vector3f &centerOfInterest)
-        : position(position), userUpVector(upVector), centerOfInterest(centerOfInterest) {}
+Camera::Camera(const Vector3f &position, const Vector3f &userUpVector, const Vector3f &centerOfInterest,
+               float focalLength, float filmbackSize) : position(position), userUpVector(userUpVector),
+                                                        centerOfInterest(centerOfInterest), focalLength(focalLength),
+                                                        filmbackSize(filmbackSize) {}
+
+Camera::Camera() = default;
 
 const Vector3f &Camera::getPosition() const {
     return position;
@@ -45,16 +49,12 @@ float Camera::getFocalLength() const {
     return focalLength;
 }
 
-void Camera::setFocalLength(float focalLength) {
-    Camera::focalLength = focalLength;
-}
+
 
 float Camera::getFilmbackSize() const {
     return filmbackSize;
 }
 
-void Camera::setFilmbackSize(float filmbackSize) {
-    Camera::filmbackSize = filmbackSize;
-}
 
-Camera::Camera() = default;
+
+

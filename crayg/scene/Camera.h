@@ -19,7 +19,9 @@ private:
 
 public:
     Camera();
-    Camera(const Vector3f &position, const Vector3f &upVector, const Vector3f &centerOfInterest);
+
+    Camera(const Vector3f &position, const Vector3f &userUpVector, const Vector3f &centerOfInterest, float focalLength,
+           float filmbackSize);
 
     const Vector3f &getPosition() const;
 
@@ -39,19 +41,9 @@ public:
      */
     float getFocalLength() const;
     /**
-     * Sets the focalLength, expected in mm
-     * @param focalLength focalLength in mm
-     */
-    void setFocalLength(float focalLength);
-    /**
      * @return filmbackSize in mm
      */
     float getFilmbackSize() const;
-    /**
-     * Sets the filmbackSize, expected in mm
-     * @param filmbackSize filmbackSize in mm, for example 36mm
-     */
-    void setFilmbackSize(float filmbackSize);
 
     void serialize(Serializer& serializer) override;
 
