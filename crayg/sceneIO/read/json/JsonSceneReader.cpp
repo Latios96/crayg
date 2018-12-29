@@ -53,7 +53,7 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d){
         }
     }
     else{
-        // todo error
+        throw SceneObjectsIsNotArray();
     }
 }
 
@@ -74,8 +74,6 @@ public:
     const bool hasSceneObjects;
     const bool hasCamera;
     const bool hasMandatoryMembers;
-
-
 };
 
 DocumentValidationResult documentHasMandatoryMembers(rapidjson::Document &d){
@@ -98,26 +96,23 @@ void JsonSceneReader::read() {
     auto result = documentHasMandatoryMembers(document);
     if(result.hasMandatoryMembers){
         // now read the data
-
         readSceneObjects(scene, document);
 
         readCamera(scene, document);
     }
     else{
-        std::cout << "Error: scene misses following keys";
-
-        const bool hasNoCamera = result.hasCamera == false;
-        if(hasNoCamera){
-            std::cout << " \"Camera\"";
-        }
+        //std::string message = "Error: scene misses following keys";
 
         const bool hasNoSceneObjects = result.hasSceneObjects == false;
         if(hasNoSceneObjects){
-            std::cout << " \"SceneObjects\"";
+            throw SceneObjectsMissing();
         }
-        std::cout << std::endl;
-        // todo use exceptions
-        exit(-2);
+
+        const bool hasNoCamera = result.hasCamera == false;
+        if(hasNoCamera){
+            throw CameraIsMissing();
+        }
+
     }
 
     stopwatch.end();

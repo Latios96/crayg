@@ -19,6 +19,7 @@ set(UNIT_TEST_LIST
         TestGroundPlane.cpp
         TestCamera.cpp
         TestJsonDeserializer.cpp
+        TestJsonSceneReader.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)
