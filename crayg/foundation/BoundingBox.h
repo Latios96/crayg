@@ -8,6 +8,7 @@
 
 #include <ostream>
 #include "Vector3f.h"
+#include "Ray.h"
 
 class BoundingBox {
 
@@ -20,6 +21,8 @@ public:
     bool operator!=(const BoundingBox &rhs) const;
 
     Vector3f min, max;
+
+    bool isIntersecting(const Ray &ray);
 };
 
 
