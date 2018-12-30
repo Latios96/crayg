@@ -101,3 +101,5 @@ void TriangleMesh::beforeRender() {
     Imageable::beforeRender();
     getTriangles(triangles);
 }
+
+
