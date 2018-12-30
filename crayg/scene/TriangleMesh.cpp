@@ -9,16 +9,21 @@ bool TriangleMesh::isIntersecting(Ray ray){
 }
 
 Imageable::Intersection TriangleMesh::intersect(Ray ray) {
-    ray.startPoint = ray.startPoint + getPosition().invert();
-    Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
+    if(boundingBox.isIntersecting(ray)){
+        ray.startPoint = ray.startPoint + getPosition().invert();
+        Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-    for (Triangle &triangle : triangles){
-        Imageable::Intersection intersection = triangle.intersect(ray);
-        if (intersection.rayParameter < hitIntersection.rayParameter){
-            hitIntersection = intersection;
+        for (Triangle &triangle : triangles){
+            Imageable::Intersection intersection = triangle.intersect(ray);
+            if (intersection.rayParameter < hitIntersection.rayParameter){
+                hitIntersection = intersection;
+            }
         }
+        return hitIntersection;    
     }
-    return hitIntersection;
+    else{
+        return {std::numeric_limits<float>::max(), nullptr};
+    }
 }
 
 void TriangleMesh::getTriangles(std::vector<Triangle> &triangles) {
@@ -100,6 +105,30 @@ void TriangleMesh::createCube(TriangleMesh &mesh) {
 void TriangleMesh::beforeRender() {
     Imageable::beforeRender();
     getTriangles(triangles);
+    Vector3f min, max;
+    for(int i=0; i<points.size(); i++){
+        Vector3f point = points[i];
+        if (point.x < min.x){
+            min.x = point.x;
+        }
+        if (point.y < min.y){
+            min.y = point.y;
+        }
+        if (point.z < min.z){
+            min.z = point.z;
+        }
+
+        if (point.x > max.x){
+            max.x = point.x;
+        }
+        if (point.y > max.y){
+            max.y = point.y;
+        }
+        if (point.z > max.z){
+            max.z = point.z;
+        }
+    }
+    boundingBox = BoundingBox(min, max);
 }
 
 
