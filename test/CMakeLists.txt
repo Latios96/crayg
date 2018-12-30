@@ -20,6 +20,7 @@ set(UNIT_TEST_LIST
         TestCamera.cpp
         TestJsonDeserializer.cpp
         TestJsonSceneReader.cpp
+        TestBoundingBox.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)
