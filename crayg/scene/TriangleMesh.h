@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <foundation/BoundingBox.h>
 #include "SceneObject.h"
 #include "Triangle.h"
 
@@ -30,6 +31,7 @@ public:
     void beforeRender() override;
 private:
     std::vector<Triangle> triangles;
+    BoundingBox boundingBox;
 };
 
 
