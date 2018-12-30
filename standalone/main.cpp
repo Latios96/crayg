@@ -12,7 +12,7 @@
 #include <cxxopts.hpp>
 #include "sceneIO/SceneReaderFactory.h"
 
-const std::string VERSION = "1.2.1";
+const std::string VERSION = "1.3.0";
 
 int main(int argc, char *argv[])
 {
