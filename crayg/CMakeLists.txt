@@ -71,7 +71,12 @@ set(crayg_SRCS
         foundation/BoundingBox.h
         foundation/BoundingBox.cpp
         utils/RemainingTimeCalculator.h
-        utils/RemainingTimeCalculator.cpp)
+        utils/RemainingTimeCalculator.cpp
+        lightSamplers/LightSampler.h
+        lightSamplers/LightSampler.cpp
+        lightSamplers/PointLightSampler.h
+        lightSamplers/PointLightSampler.cpp
+        )
 
 # Declare the library
 add_library(crayg STATIC

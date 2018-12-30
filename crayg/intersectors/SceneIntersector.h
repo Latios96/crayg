@@ -20,13 +20,17 @@ public:
     bool isValid();
 };
 
+
+
 // todo add init method -> builds BVH Tree
 class SceneIntersector{
 public:
     explicit SceneIntersector(Scene &scene);
 
-    Imageable::Intersection intersect(Ray ray);
+    virtual Imageable::Intersection intersect(Ray ray);
     bool isIntersecting(Ray ray);
+
+    virtual ~SceneIntersector();
 
 private:
     Scene &scene;
