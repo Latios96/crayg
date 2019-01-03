@@ -5,8 +5,11 @@
 #ifndef CRAYG_LIGHT_H
 #define CRAYG_LIGHT_H
 
-
 #include "Sphere.h"
+
+enum LightType{
+    POINT_LIGHT
+};
 
 class Light : public Serializable, public Transformable{
 public:
@@ -17,6 +20,8 @@ public:
     float getIntensity() const;
 
     void setIntensity(float intensity);
+
+    const LightType lightType=POINT_LIGHT;
 
 private:
     float intensity;

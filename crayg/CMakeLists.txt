@@ -76,6 +76,7 @@ set(crayg_SRCS
         lightSamplers/LightSampler.cpp
         lightSamplers/PointLightSampler.h
         lightSamplers/PointLightSampler.cpp
+        lightSamplers/LightSamplerFactory.h
         )
 
 # Declare the library

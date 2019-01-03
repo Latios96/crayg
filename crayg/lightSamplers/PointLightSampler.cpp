@@ -8,15 +8,14 @@ PointLightSampler::PointLightSampler(SceneIntersector &sceneIntersector, const L
         sceneIntersector), light(light) {}
 
 float PointLightSampler::calculateShadowFactor(const Vector3f &point) {
-    // todo check if light has intensity of 0.0
-    // todo quadratic falloff
+
     const Vector3f shadowVector = light.getPosition() - point;
-    Ray shadowRay(point, shadowVector);
+    Ray shadowRay(point, shadowVector.normalize());
     const Imageable::Intersection intersection = sceneIntersector.intersect(shadowRay);
     
     const bool hasIntersection = intersection.imageable != nullptr;
     if (hasIntersection){
-        const bool intersectionIsBehindLight = shadowVector.length() < intersection.rayParameter;
+        const bool intersectionIsBehindLight = shadowVector.length() <= intersection.rayParameter;
         if (intersectionIsBehindLight){
             return NO_SHADOW; 
         }

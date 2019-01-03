@@ -8,11 +8,13 @@ using namespace fakeit;
 #include <lightSamplers/PointLightSampler.h>
 
 
-
+// for some reason fakeit did not work here
 class MockSceneIntersector: public SceneIntersector{
 public:
-    MockSceneIntersector(Scene &scene, const Imageable::Intersection &return_value) : SceneIntersector(scene),
-                                                                                      return_value(return_value) {}
+    MockSceneIntersector(Scene &scene, const Imageable::Intersection &return_value)
+            : SceneIntersector(scene) {
+        this->return_value = return_value;
+    }
     Imageable::Intersection intersect(Ray ray) override {
         return return_value;
     };
@@ -39,7 +41,7 @@ TEST_CASE("PointLightSampler"){
 
     SECTION("intersectionIsBehindLight"){
         Scene scene;
-        MockSceneIntersector mockIntersector(scene, {10,(Imageable*) 2});
+        MockSceneIntersector mockIntersector(scene, {10, (Imageable *) 2});
         PointLightSampler pointLightSampler(mockIntersector, light);
 
         const float shadowFactor = pointLightSampler.calculateShadowFactor({0, 0, 0});
@@ -48,7 +50,7 @@ TEST_CASE("PointLightSampler"){
 
     SECTION("intersectionIsBeforeLight"){
         Scene scene;
-        MockSceneIntersector mockIntersector(scene, {2,(Imageable*) 2});
+        MockSceneIntersector mockIntersector(scene, {2, (Imageable *) 2});
         PointLightSampler pointLightSampler(mockIntersector, light);
 
         const float shadowFactor = pointLightSampler.calculateShadowFactor({0, 0, 0});
