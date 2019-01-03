@@ -16,6 +16,11 @@ public:
 
     class Intersection{
     public:
+
+        static Intersection createInvalid(){
+            return {std::numeric_limits<float>::max(), nullptr};
+        }
+
         Intersection(){
             rayParameter = std::numeric_limits<float>::max();
             imageable = nullptr;
