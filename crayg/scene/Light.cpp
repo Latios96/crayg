@@ -2,6 +2,7 @@
 // Created by Jan Honsbrok on 04.11.18.
 //
 
+#include <lightSamplers/PointLightSampler.h>
 #include "Light.h"
 
 float Light::getIntensity() const {
@@ -22,4 +23,7 @@ void Light::deserialize(Deserializer &deserializer) {
     setPosition(deserializer.readVector3f("position"));
     setIntensity(deserializer.readFloat("intensity"));
 }
+
+
+
 

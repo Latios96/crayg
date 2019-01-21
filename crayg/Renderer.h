@@ -12,6 +12,7 @@
 #include <foundation/Color.h>
 #include "PineHoleCameraModel.h"
 #include <intersectors/SceneIntersector.h>
+#include <lightSamplers/LightSampler.h>
 #include "ShadingMethod.h"
 
 class Renderer {
@@ -25,7 +26,7 @@ private:
     std::shared_ptr<CameraModel> cameraModel;
     std::shared_ptr<SceneIntersector> sceneIntersector;
     std::shared_ptr<ShadingMethod> lambertMethod;
-
+    std::vector<std::shared_ptr<LightSampler>> lightSamplers;
     void renderPixel(const PixelPosition &pixel);
 
     void init();

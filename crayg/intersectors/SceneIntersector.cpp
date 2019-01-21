@@ -28,6 +28,10 @@ bool SceneIntersector::isIntersecting(Ray ray){
 
 SceneIntersector::SceneIntersector(Scene &scene) : scene(scene) {}
 
+SceneIntersector::~SceneIntersector() {
+
+}
+
 bool Intersection::isValid() {
     return object != nullptr;
 }
