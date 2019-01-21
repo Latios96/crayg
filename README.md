@@ -1,7 +1,7 @@
 # crayg
 [![Build Status](https://travis-ci.com/Latios96/crayg.svg?token=fvycq6PG6anYyQZpnfAt&branch=master)](https://travis-ci.com/Latios96/crayg)
 
-![alt demo image][images/three_spheres.bmp]
+![demo image](images/three_spheres.png)
 ## Building
 ### Linux
 ```shell
