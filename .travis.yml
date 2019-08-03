@@ -14,8 +14,6 @@ matrix:
         - source venv/bin/activate
     - os: osx
       compiler: clang
-    - os: osx
-      compiler: gcc
 
 script:
   - pip install conan
