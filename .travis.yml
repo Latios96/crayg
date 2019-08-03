@@ -6,6 +6,8 @@ os:
   - linux
   - osx
 before_script:
+  - virtualenv venv
+  - source venv/bin/activate
   - pip install conan --user
 script:
 - rm -rf build/
