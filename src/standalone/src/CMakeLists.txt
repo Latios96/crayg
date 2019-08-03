@@ -1,11 +1,13 @@
-set(Main_Lib_SRCS
+set(CRAYG_STANDALONE_LIB crayg-standalone-lib)
+
+set(CRAYG_STANDALONE_LIB_SRCS
         CliParser.h
         CliParser.cpp)
 
 set(Main_Executable_SRCS
         main.cpp)
 
-add_library(Main_Lib STATIC ${Main_Lib_SRCS})
+add_library(Main_Lib STATIC ${CRAYG_STANDALONE_LIB_SRCS})
 
 add_executable(crayg-standalone
         ${Main_Executable_SRCS})
