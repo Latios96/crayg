@@ -2,7 +2,7 @@
 // Created by Jan Honsbrok on 13.11.18.
 //
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <scene/Triangle.h>
 #include "utils/utils.h"
 

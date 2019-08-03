@@ -69,3 +69,5 @@ code_coverage_clean\.info
 
 diagram*
 .diagram*
+
+venv/*

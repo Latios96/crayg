@@ -1,18 +1,17 @@
-#define FMT_HEADER_ONLY
-#include "fmt/format.h"
 #include <iostream>
+#include "fmt/format.h"
 #include <image/Image.h>
 #include <scene/Scene.h>
 #include <image/ImageWriter.h>
 #include <image/ImageWriterFactory.h>
 #include <intersectors/SceneIntersector.h>
 #include <Renderer.h>
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include <cxxopts.hpp>
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <cxxopts.hpp> // todo better cli parsing
 #include "sceneIO/SceneReaderFactory.h"
 
-const std::string VERSION = "1.4.0";
+const std::string VERSION = "1.4.0"; // todo move version to c
 
 int main(int argc, char *argv[])
 {

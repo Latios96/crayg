@@ -2,7 +2,7 @@
 // Created by Jan Honsbrok on 01.11.18.
 //
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include <fakeit.hpp>
 #include "spdlog/spdlog.h"

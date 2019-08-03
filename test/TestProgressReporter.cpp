@@ -2,7 +2,7 @@
 // Created by Jan Honsbrok on 11.11.18.
 //
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include "utils/ProgressReporter.h"
 #include <fakeit.hpp>
 

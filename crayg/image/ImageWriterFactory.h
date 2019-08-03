@@ -5,11 +5,11 @@
 #include "ImageWriter.h"
 #include "BmpImageWriter.h"
 
-enum ImageWriterType {BMP};
+enum ImageWriterType { BMP };
 
-ImageWriter* createImageWriter(ImageWriterType type){
-switch(type){
+ImageWriter *createImageWriter(ImageWriterType type) {
+  switch (type) {
     case BMP: return new BmpImageWriter;
     default: return new BmpImageWriter;
-}
+  }
 };

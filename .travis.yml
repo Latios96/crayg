@@ -1,17 +1,29 @@
 language: cpp
-compiler:
-  - clang
-  - gcc
-os:
-  - linux
-  - osx
+
+matrix:
+  include:
+    - os: linux
+      compiler: clang
+      before_script:
+        - virtualenv venv
+        - source venv/bin/activate
+    - os: linux
+      compiler: gcc
+      before_script:
+        - virtualenv venv
+        - source venv/bin/activate
+    - os: osx
+      compiler: clang
+
 script:
-- rm -rf build/
-- mkdir build
-- cd build
-- cmake ..
-- make -j 4
-- ./test/tests
+  - pip install conan
+  - rm -rf build/
+  - mkdir build
+  - cd build
+  - conan install .. --build missing
+  - cmake ..
+  - make -j 4
+  - ./bin/tests
 deploy:
   provider: releases
   api_key:

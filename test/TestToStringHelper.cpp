@@ -1,7 +1,7 @@
 //
 // Created by Jan Honsbrok on 28.10.18.
 //
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <utils/ToStringHelper.h>
 
 TEST_CASE("ToStringHelper", "[ToStringHelper]") {

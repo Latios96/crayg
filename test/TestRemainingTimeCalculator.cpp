@@ -2,7 +2,7 @@
 // Created by jan on 27.12.18.
 //
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <utils/RemainingTimeCalculator.h>
 
 

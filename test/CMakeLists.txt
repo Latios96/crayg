@@ -38,7 +38,7 @@ target_link_libraries(${TARGET_NAME}
   PUBLIC crayg)
 
 target_include_directories(${TARGET_NAME}
-  PUBLIC ../externals/catch2/ ../externals/fakeIt)
+  PUBLIC ../externals/fakeIt)
 
 set_target_properties(${TARGET_NAME}
         PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"

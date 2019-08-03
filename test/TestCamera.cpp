@@ -1,7 +1,7 @@
 //
 // Created by jan on 29.12.18.
 //
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <fakeit.hpp>
 #include <foundation/Vector3f.h>
 #include <scene/Camera.h>

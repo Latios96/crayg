@@ -1,7 +1,7 @@
 //
 // Created by jan on 29.12.18.
 //
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <sceneIO/read/json/JsonDeserializer.h>
 
 TEST_CASE("JsonDeserializer"){
