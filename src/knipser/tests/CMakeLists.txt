@@ -5,4 +5,4 @@ target_link_libraries(knipser-test-testregistration
 
 add_test(
         NAME knipser-test-testregistration
-        COMMAND ${CRAYG_STANDALONE_TESTS} -o crayg-standalone-tests-report.xml -r junit)
+        COMMAND knipser-test-testregistration -o knipser-test-testregistration-report.xml -r junit)
