@@ -23,7 +23,7 @@ script:
   - conan install .. --build missing
   - cmake ..
   - make -j 4
-  - ./test/tests
+  - ./bin/tests
 deploy:
   provider: releases
   api_key:

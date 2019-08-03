@@ -8,8 +8,8 @@ cd build
 conan install .. --s compiler.version=7.3 --build missing
 cmake ..
 make -j 4
-./test/tests
+./bin/tests
 
-./standalone/crayg-standalone -s ../example_scenes/single_sphere.json -o single_sphere.bmp
-./standalone/crayg-standalone -s ../example_scenes/three_spheres.json -o three_spheres.bmp
-./standalone/crayg-standalone -s ../example_scenes/poly_cube.json -o poly_cube.bmp
+./bin/crayg-standalone -s ../example_scenes/single_sphere.json -o single_sphere.bmp
+./bin/crayg-standalone -s ../example_scenes/three_spheres.json -o three_spheres.bmp
+./bin/crayg-standalone -s ../example_scenes/poly_cube.json -o poly_cube.bmp
