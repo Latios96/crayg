@@ -5,6 +5,8 @@ compiler:
 os:
   - linux
   - osx
+before_script:
+  - pip install conan
 script:
 - rm -rf build/
 - mkdir build

@@ -90,9 +90,16 @@ target_include_directories(crayg PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+# todo link flags only when doing debug build
 set_target_properties(crayg
         PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
         LINK_FLAGS "--coverage")
 
 target_include_directories(crayg
-PUBLIC ../externals/rapidjson/ ../externals/fmt/ ../externals/spdlog ../externals/cxxopts)
+        PUBLIC
+        ../externals/rapidjson/
+        #../externals/fmt/
+        ../externals/spdlog
+        ../externals/cxxopts)
+
+target_link_libraries(crayg ${CONAN_LIBRARIES})
