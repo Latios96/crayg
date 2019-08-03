@@ -6,6 +6,7 @@ conan install .. --build missing
 cmake ..
 make -j 4
 ./bin/tests
+./bin/crayg-standalone-tests
 
 ./bin/crayg-standalone -s ../example_scenes/single_sphere.json -o single_sphere.bmp
 ./bin/crayg-standalone -s ../example_scenes/three_spheres.json -o three_spheres.bmp

@@ -6,7 +6,7 @@
 #include <rapidjson/istreamwrapper.h>
 #include <rapidjson/document.h>
 #include <fstream>
-#include "sceneIO/read/json/JsonDeserializer.h"
+#include "JsonDeserializer.h"
 #include "utils/StopWatch.h"
 #include "scene/Light.h"
 #include "scene/GroundPlane.h"
@@ -86,6 +86,7 @@ DocumentValidationResult documentHasMandatoryMembers(rapidjson::Document &d){
 
 void JsonSceneReader::read() {
     StopWatch stopwatch = StopWatch::createStopWatch("Scene reading");
+    spdlog::get("console")->info("Reading scene {}", path);
 
     std::ifstream ifs(path);
     rapidjson::IStreamWrapper isw(ifs);

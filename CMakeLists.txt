@@ -14,6 +14,4 @@ enable_testing()
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-add_subdirectory(standalone)
-add_subdirectory(test)
-add_subdirectory(crayg)
+add_subdirectory(src)

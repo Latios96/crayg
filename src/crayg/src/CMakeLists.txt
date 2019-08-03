@@ -76,27 +76,20 @@ set(crayg_SRCS
         lightSamplers/LightSampler.cpp
         lightSamplers/PointLightSampler.h
         lightSamplers/PointLightSampler.cpp
-        lightSamplers/LightSamplerFactory.h
-        )
+        lightSamplers/LightSamplerFactory.h)
 
 # Declare the library
 add_library(crayg STATIC
-    ${crayg_SRCS}
-)
+        ${crayg_SRCS})
 
 # Specify here the include directories exported
 # by this library
 target_include_directories(crayg PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}
-)
+        ${CMAKE_CURRENT_SOURCE_DIR})
 
 # todo link flags only when doing debug build
 set_target_properties(crayg
         PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
         LINK_FLAGS "--coverage")
-
-target_include_directories(crayg
-        PUBLIC
-        ../externals/cxxopts)
 
 target_link_libraries(crayg ${CONAN_LIBS})

@@ -1,0 +1,2 @@
+add_subdirectory(crayg)
+add_subdirectory(standalone)

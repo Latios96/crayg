@@ -13,12 +13,12 @@ TEST_CASE("Sphere") {
     }
 
     SECTION("isIntersecting") {
-        // test intersecting ray
+        // tests intersecting ray
         Ray intersectingRay(Vector3f(1, 0, 0), Vector3f(-1, 0, 0));
         // intersects should return true
         REQUIRE(mySphere.isIntersecting(intersectingRay));
 
-        // test not intersecting ray
+        // tests not intersecting ray
         Ray notIntersectingRay(Vector3f(0, 0, 5), Vector3f(-1, 0, 0));
         // intersects should return true
         REQUIRE_FALSE(mySphere.isIntersecting(notIntersectingRay));

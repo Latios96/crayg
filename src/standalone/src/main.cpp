@@ -8,32 +8,30 @@
 #include <Renderer.h>
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
-#include <cxxopts.hpp> // todo better cli parsing
 #include "sceneIO/SceneReaderFactory.h"
+#include "CliParser.h"
 
 const std::string VERSION = "1.4.0"; // todo move version to c
 
-int main(int argc, char *argv[])
-{
-    cxxopts::Options options("Crayg Renderer", "CLI Interface for Crayg renderer");
+int main(int argc, char *argv[]) {
+    CliParser cliParser(argc, argv);
+    CliParseResult parseResult = cliParser.parse();
 
-    options.add_options()
-            ("s,scene", "Scene to render", cxxopts::value<std::string>())
-            ("o,output", "path to the rendered image", cxxopts::value<std::string>())
-            ;
-
-    auto result = options.parse(argc, argv);
+    if (!parseResult.isValid()) {
+        spdlog::error(*parseResult.error);
+        exit(1);
+    }
 
     auto console = spdlog::stdout_color_mt("console");
 
     console->info("Crayg Renderer version {}", VERSION);
 
-    Image myImage(800,600);
+    Image myImage(800, 600);
 
     Scene scene;
 
     // read scene
-    std::string scenePath = result["scene"].as<std::string>();
+    std::string scenePath = parseResult.args->scenePath;
     auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
     sceneReader->read();
 
@@ -43,13 +41,8 @@ int main(int argc, char *argv[])
     console->info("writing image..");
     std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
 
-    if (result["output"].count()){
-        imageWriter->writeImage(myImage, result["output"].as<std::string>());
-    }
-    else{
-        imageWriter->writeImage(myImage, "img.bmp");
-    }
-    console->info("writing image done.");
+    imageWriter->writeImage(myImage, parseResult.args->imageOutputPath);
 
+    console->info("writing image done.");
     return 0;
 }

@@ -31,14 +31,14 @@ endforeach()
 set(TARGET_NAME tests)
 
 add_executable(${TARGET_NAME}
-  main.cpp
+        main.cpp
   ${UNIT_TEST_SOURCE_LIST})
 
 target_link_libraries(${TARGET_NAME}
   PUBLIC crayg)
 
 target_include_directories(${TARGET_NAME}
-  PUBLIC ../externals/fakeIt)
+  PUBLIC ../../externals/fakeIt)
 
 set_target_properties(${TARGET_NAME}
         PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"

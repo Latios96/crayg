@@ -7,7 +7,7 @@
 
 
 #include "string"
-#include "scene/SceneObject.h"
+#include "SceneObject.h"
 
 class Sphere :  public SceneObject{
 public:
