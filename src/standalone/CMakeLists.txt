@@ -1,5 +1,5 @@
 set(Main_SRCS
-    main.cpp
+        main.cpp
 )
 
 add_executable(crayg-standalone
