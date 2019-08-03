@@ -6,8 +6,8 @@
 #include <image/ImageWriterFactory.h>
 #include <intersectors/SceneIntersector.h>
 #include <Renderer.h>
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 #include <cxxopts.hpp> // todo better cli parsing
 #include "sceneIO/SceneReaderFactory.h"
 

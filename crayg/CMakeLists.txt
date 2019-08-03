@@ -97,9 +97,6 @@ set_target_properties(crayg
 
 target_include_directories(crayg
         PUBLIC
-        ../externals/rapidjson/
-        #../externals/fmt/
-        ../externals/spdlog
         ../externals/cxxopts)
 
-target_link_libraries(crayg ${CONAN_LIBRARIES})
+target_link_libraries(crayg ${CONAN_LIBS})

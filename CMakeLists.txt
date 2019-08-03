@@ -6,22 +6,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
 
-function(enableConan)
-    # execute_process(
-    #         COMMAND conan install .. --build missing
-    #         RESULT_VARIABLE CONAN_RESULT
-    # )
-
-    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-    conan_basic_setup()
-
-endfunction()
 
 project(crayg)
 set(CMAKE_CXX_STANDARD 11)
 
 enable_testing()
-enableConan()
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 add_subdirectory(standalone)
 add_subdirectory(test)
