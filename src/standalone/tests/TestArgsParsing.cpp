@@ -13,7 +13,7 @@ int argc = argv_vector.size(); \
 char ** argv = argv_vector.data();
 
 TEST_CASE("shouldParseArgsValid") {
-    std::vector<std::string> arguments = {"test", "-s", "/some_scene_path", "-o", "/some_image_path"};
+    std::vector<std::string> arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path"};
     ARGC_ARGV_(arguments);
 
     CliParser cli_parser(argc, argv);
@@ -35,18 +35,18 @@ void assertHasError(const std::vector<std::string> &arguments) {
 }
 
 TEST_CASE("invalidArgsShouldContainError") {
-    std::vector<std::string> arguments = {"test"};
+    std::vector<std::string> arguments = {"tests"};
     assertHasError(arguments);
 
-    arguments = {"test", "-s", "/some_scene_path"};
+    arguments = {"tests", "-s", "/some_scene_path"};
     assertHasError(arguments);
 
-    arguments = {"test", "-o", "/some_image_path"};
+    arguments = {"tests", "-o", "/some_image_path"};
     assertHasError(arguments);
 
-    arguments = {"test", "-s"};
+    arguments = {"tests", "-s"};
     assertHasError(arguments);
 
-    arguments = {"test", "-o"};
+    arguments = {"tests", "-o"};
     assertHasError(arguments);
 }

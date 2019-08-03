@@ -77,7 +77,7 @@ Imageable::Intersection Triangle::getIntersectionMyImpl(const Ray &ray) {
 
             Vector3f C;
 
-            // do inside / outside test
+            // do inside / outside tests
 
             Vector3f edge0 = v1 - v0;
             Vector3f vp0 = hitLocation - v0;
@@ -126,7 +126,7 @@ bool Triangle::isIntersecting(Ray ray){
 
             Vector3f C;
 
-            // do inside / outside test
+            // do inside / outside tests
 
             Vector3f edge0 = v1 - v0;
             Vector3f vp0 = hitLocation - v0;
