@@ -1,5 +1,5 @@
 #include <foundation/Vector3f.h>
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include "utils/utils.h"
 
 // todo we can do this better with https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md#test-cases-and-sections

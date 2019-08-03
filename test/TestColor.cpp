@@ -1,5 +1,5 @@
 #include <foundation/Color.h>
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 
 

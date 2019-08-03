@@ -1,7 +1,7 @@
 //
 // Created by Jan Honsbrok on 11.11.18.
 //
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include <ShadingMethod.h>
 #include <fakeit.hpp>

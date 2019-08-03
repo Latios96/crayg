@@ -1,5 +1,5 @@
 #include <image/Image.h>
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 
 
 TEST_CASE( "Image/constructImage", "[Image]" ) {

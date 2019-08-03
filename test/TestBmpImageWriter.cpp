@@ -2,7 +2,7 @@
 // Created by Jan Honsbrok on 01.11.18.
 //
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <image/BmpImageWriter.h>
 

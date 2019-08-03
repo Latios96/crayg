@@ -1,7 +1,7 @@
 //
 // Created by Jan Honsbrok on 15.11.18.
 //
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <fakeit.hpp>
 using namespace fakeit;
 #include <scene/TriangleMesh.h>

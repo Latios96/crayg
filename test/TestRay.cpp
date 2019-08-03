@@ -1,7 +1,7 @@
 //
 // Created by Jan Honsbrok on 06.11.18.
 //
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include "foundation/Ray.h"
 
 TEST_CASE("Ray/shouldCreateInvalid", "[Ray]"){

@@ -1,7 +1,7 @@
 //
 // Created by jan on 30.12.18.
 //
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <fakeit.hpp>
 using namespace fakeit;
 #include <intersectors/SceneIntersector.h>

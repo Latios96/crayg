@@ -2,7 +2,7 @@
 // Created by jan on 30.12.18.
 //
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <foundation/BoundingBox.h>
 
 TEST_CASE("BoundingBox"){
