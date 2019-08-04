@@ -65,7 +65,7 @@ class OpenimageioConan(ConanFile):
         cmake.definitions["BUILD_TESTING"] = False
         cmake.definitions["USE_DICOM"] = False
         cmake.definitions["USE_FFMPEG"] = False
-        cmake.definitions["USE_EXTERNAL_PUGIXML"] = True
+        cmake.definitions["USE_EXTERNAL_PUGIXML"] = False
         cmake.definitions["USE_GIF"] = False
         cmake.definitions["USE_FIELD3D"] = False
         cmake.definitions["USE_JPEGTURBO"] = False
