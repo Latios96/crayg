@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8.12)
+project(cmake_wrapper)
+include(conanbuildinfo.cmake)
+conan_basic_setup()
+#set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/source_subfolder/src/cmake/modules ${CMAKE_MODULE_PATH})
+list(APPEND CMAKE_FIND_LIBRARY_SUFFIXES _s.lib _s.a)
+add_subdirectory("source_subfolder")

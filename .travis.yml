@@ -18,6 +18,9 @@ matrix:
 script:
   - pip install conan
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+  - maindir=$(pwd)
+  - cd conan_packages/OpenImageIO
+  - conan create . Latios/stable --build missing
   - rm -rf build/
   - mkdir build
   - cd build
