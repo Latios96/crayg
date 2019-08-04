@@ -9,10 +9,6 @@ std::shared_ptr<TestRegistry> TestRegistry::instance;
 void TestRegistry::setInstance(const std::shared_ptr<TestRegistry> &instance) {
     TestRegistry::instance = instance;
 }
-bool TestRegistry::registerTest(std::string name, std::function<void(TestContext)> testCallback) {
-    tests.emplace_back(name, testCallback);
-    return true;
-}
 std::shared_ptr<TestRegistry> &TestRegistry::getInstance() {
     if (!TestRegistry::instance) {
         TestRegistry::instance = std::make_shared<TestRegistry>();
@@ -21,4 +17,8 @@ std::shared_ptr<TestRegistry> &TestRegistry::getInstance() {
 }
 const std::vector<KnipserTest> &TestRegistry::getTests() const {
     return tests;
+}
+bool TestRegistry::registerTest(const KnipserTest& knipserTest) {
+    tests.push_back(knipserTest);
+    return true;
 }

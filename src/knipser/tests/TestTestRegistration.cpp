@@ -15,7 +15,7 @@ KNIPSER_REGISTER_TEST(singleSphere, [](const TestContext &context){
 
 TEST_CASE("testsShouldBeRegistered"){
     REQUIRE(TestRegistry::getInstance()->getTests().size() == 2);
-    REQUIRE(TestRegistry::getInstance()->getTests()[0].getName() == "threeSpheres");
-    REQUIRE(TestRegistry::getInstance()->getTests()[1].getName() == "singleSphere");
+    REQUIRE(TestRegistry::getInstance()->getTests()[0].name == "threeSpheres");
+    REQUIRE(TestRegistry::getInstance()->getTests()[1].name == "singleSphere");
 }
 

@@ -10,13 +10,13 @@
 #include "KnipserTest.h"
 
 #define KNIPSER_REGISTER_TEST(name, lambda)\
-bool testRegistrationResult_##name = TestRegistry::getInstance()->registerTest(std::string(#name), lambda);
+bool testRegistrationResult_##name = TestRegistry::getInstance()->registerTest(KnipserTest(std::string(#name), lambda));
 
 class TestRegistry {
  public:
     static std::shared_ptr<TestRegistry> &getInstance();
     static void setInstance(const std::shared_ptr<TestRegistry> &instance);
-    bool registerTest(std::string name, std::function<void(TestContext)> testCallback);
+    bool registerTest(const KnipserTest& knipserTest);
     const std::vector<KnipserTest> &getTests() const;
  private:
     static std::shared_ptr<TestRegistry> instance;

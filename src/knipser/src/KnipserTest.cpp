@@ -3,11 +3,9 @@
 //
 
 #include "KnipserTest.h"
-KnipserTest::KnipserTest(const std::string &name, const std::function<void(TestContext)> &testCallback)
-    : name(name), testCallback(testCallback) {}
-const std::string &KnipserTest::getName() const {
-    return name;
-}
-const std::function<void(TestContext)> &KnipserTest::getTestCallback() const {
-    return testCallback;
-}
+
+#include <utility>
+
+KnipserTest::KnipserTest(std::string name, std::function<void(TestContext)> testCallback)
+    : name(std::move(name)), testCallback(std::move(testCallback)) {}
+

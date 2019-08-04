@@ -11,12 +11,10 @@
 
 class KnipserTest {
  public:
-    KnipserTest(const std::string &name, const std::function<void(TestContext)> &testCallback);
-    const std::string &getName() const;
-    const std::function<void(TestContext)> &getTestCallback() const;
- private:
-    std::string name;
-    std::function<void(TestContext)> testCallback;
+    KnipserTest(std::string name, std::function<void(TestContext)> testCallback);
+
+    const std::string name;
+    const std::function<void(TestContext)> testCallback;
 };
 
 #endif //CRAYG_SRC_KNIPSER_SRC_KNIPSERTEST_H_
