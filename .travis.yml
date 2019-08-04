@@ -21,6 +21,7 @@ script:
   - maindir=$(pwd)
   - cd conan_packages/OpenImageIO
   - conan create . Latios/stable --build missing
+  - cd $maindir
   - rm -rf build/
   - mkdir build
   - cd build
