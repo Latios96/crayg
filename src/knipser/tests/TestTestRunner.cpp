@@ -14,7 +14,7 @@ TEST_CASE("TestResult"){
 
         REQUIRE(passedTestResult.test == myTest);
         REQUIRE(passedTestResult.passed);
-        REQUIRE(passedTestResult.message == "");
+        REQUIRE(passedTestResult.message.empty());
     }
 
     SECTION("should create failed test"){
@@ -37,7 +37,7 @@ TEST_CASE("passing test should generate passing result"){
     REQUIRE(testResults.size() == 1);
     REQUIRE(testResults[0].test == passingTest);
     REQUIRE(testResults[0].passed);
-    REQUIRE(testResults[0].message == "");
+    REQUIRE(testResults[0].message.empty());
 }
 
 TEST_CASE("failing test should generate failing result with message"){
