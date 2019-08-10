@@ -15,6 +15,10 @@ class KnipserTest {
 
     const std::string name;
     const std::function<void(TestContext)> testCallback;
+
+    bool operator==(const KnipserTest &rhs) const;
+
+    bool operator!=(const KnipserTest &rhs) const;
 };
 
 #endif //CRAYG_SRC_KNIPSER_SRC_KNIPSERTEST_H_

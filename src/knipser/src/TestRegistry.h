@@ -6,6 +6,7 @@
 #define CRAYG_SRC_KNIPSER_SRC_TESTREGISTRY_H_
 
 #include <memory>
+#include <vector>
 #include "TestContext.h"
 #include "KnipserTest.h"
 
