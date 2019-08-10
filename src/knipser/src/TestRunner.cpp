@@ -30,14 +30,3 @@ TestResult TestRunner::executeTest(const KnipserTest &test) {
 }
 
 
-TestResult TestResult::createFailed(KnipserTest test, std::string message) {
-    return TestResult(test, false, message);
-}
-
-TestResult TestResult::createPassed(KnipserTest test) {
-    return TestResult(test, true, "");
-}
-
-TestResult::TestResult(const KnipserTest &test, const bool passed, const std::string &message) : test(test),
-                                                                                                 passed(passed),
-                                                                                                 message(message) {}

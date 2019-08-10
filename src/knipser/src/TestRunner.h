@@ -7,18 +7,10 @@
 
 #include "KnipserTest.h"
 #include "TestRegistry.h"
+#include "TestResult.h"
 #include <vector>
 
-struct TestResult {
-public:
-    TestResult(const KnipserTest &test, const bool passed, const std::string &message);
 
-    static TestResult createFailed(KnipserTest test, std::string message);
-    static TestResult createPassed(KnipserTest test);
-    const KnipserTest test;
-    const bool passed;
-    const std::string message;
-};
 
 class TestRunner {
 public:

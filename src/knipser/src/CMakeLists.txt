@@ -7,7 +7,11 @@ add_library(knipser
         TestContext.h
         TestContext.cpp
         TestRunner.h
-        TestRunner.cpp)
+        TestRunner.cpp
+        ReportGenerator.h
+        ReportGenerator.cpp
+        TestResult.h
+        TestResult.cpp)
 
 
 target_include_directories(knipser PUBLIC

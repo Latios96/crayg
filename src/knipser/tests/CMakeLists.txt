@@ -15,3 +15,12 @@ target_link_libraries(knipser-test-testrunner
 add_test(
         NAME knipser-test-testrunner
         COMMAND knipser-test-testrunner -o knipser-test-testrunner-report.xml -r junit)
+
+add_executable(knipser-test-testresult TestTestResult.cpp)
+
+target_link_libraries(knipser-test-testresult
+        ${CONAN_LIBS} knipser)
+
+add_test(
+        NAME knipser-test-testresult
+        COMMAND knipser-test-testresult -o knipser-test-testresult-report.xml -r junit)
