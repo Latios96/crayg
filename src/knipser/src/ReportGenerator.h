@@ -12,7 +12,8 @@ class ReportGenerator {
 public:
     explicit ReportGenerator(const std::vector<TestResult> &testResults);
     virtual void generateReport(std::ostream &ostream) = 0;
-private:
+
+protected:
     const std::vector<TestResult> testResults;
 };
 
