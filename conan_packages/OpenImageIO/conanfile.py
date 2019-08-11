@@ -30,7 +30,6 @@ class OpenimageioConan(ConanFile):
         "libpng/1.6.34@bincrafters/stable",
         "openexr/2.3.0@conan/stable",
         "libjpeg/9c@bincrafters/stable",
-        "pugixml/1.9@bincrafters/stable",
         "tsl-robin-map/0.6.1@tessil/stable"
     )
 
