@@ -2,8 +2,8 @@
 // Created by Jan Honsbrok on 2019-08-11.
 //
 
-#ifndef CRAYG_BASICASSERTION_H
-#define CRAYG_BASICASSERTION_H
+#ifndef CRAYG_KNIPSERASSERTIONS_H
+#define CRAYG_KNIPSERASSERTIONS_H
 
 #include <string>
 
@@ -22,9 +22,7 @@ public:
 protected:
     const std::string file;
     const int lineNumber;
-
-
 };
 
 
-#endif //CRAYG_BASICASSERTION_H
+#endif //CRAYG_KNIPSERASSERTIONS_H

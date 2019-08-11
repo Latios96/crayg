@@ -16,8 +16,8 @@ add_library(knipser
         PlainReportGenerator.cpp
         RunConfig.h
         RunConfig.cpp
-        BasicAssertion.h
-        BasicAssertion.cpp)
+        KnipserAssertions.h
+        KnipserAssertions.cpp)
 
 
 target_include_directories(knipser PUBLIC

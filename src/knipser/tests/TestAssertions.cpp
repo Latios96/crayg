@@ -2,7 +2,7 @@
 // Created by Jan Honsbrok on 2019-08-11.
 //
 #include <catch2/catch.hpp>
-#include <BasicAssertion.h>
+#include <KnipserAssertions.h>
 
 TEST_CASE("create BasicAssertion"){
 

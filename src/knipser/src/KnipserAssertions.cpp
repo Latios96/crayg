@@ -3,7 +3,7 @@
 //
 
 #include <fmt/format.h>
-#include "BasicAssertion.h"
+#include "KnipserAssertions.h"
 
 BasicAssertion::BasicAssertion(const std::string &file, const int lineNumber) : file(file), lineNumber(lineNumber) {}
 

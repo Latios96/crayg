@@ -11,7 +11,7 @@ add_executable(knipser-main-tests TestTestRunner.cpp
         TestTestResult.cpp
         TestPlainReportGenerator.cpp
         TestTestContext.cpp
-        TestBasicAssertion.cpp
+        TestAssertions.cpp
         main.cpp)
 
 target_link_libraries(knipser-main-tests
