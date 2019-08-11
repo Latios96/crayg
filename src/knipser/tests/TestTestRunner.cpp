@@ -38,17 +38,5 @@ TEST_CASE("failing test should generate failing result with message") {
     REQUIRE(testResults[0].message == "std::exception");
 }
 
-TEST_CASE("context should have correct path") {
-    TestRegistry testRegistry;
-    RunConfig runConfig("demo");
-    const KnipserTest failingTest = KnipserTest(std::string("failing test"), [](const TestContext &context) {
-        REQUIRE(context.getOutputFolder() == "demo/failing test");
-    });
-    testRegistry.registerTest(failingTest);
-
-    TestRunner testRunner(testRegistry, runConfig);
-    testRunner.execute();
-
-}
 
 
