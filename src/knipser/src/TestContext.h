@@ -12,6 +12,7 @@ public:
     explicit TestContext(std::string outputFolder);
 
     void setImageOutputName(const std::string &imageOutputName);
+    bool imageOutputIsSet();
 
     const std::string getOutputFolder() const;
     const std::string getOutputFilename() const;

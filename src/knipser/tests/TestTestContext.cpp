@@ -20,5 +20,14 @@ TEST_CASE("TestTestContext"){
         testContext.setImageOutputName("test.exr");
         REQUIRE_THROWS_AS(testContext.setImageOutputName("test.exr"), std::logic_error);
     }
+
+    SECTION("imageOutputIsSetIsFalse"){
+        REQUIRE_FALSE(testContext.imageOutputIsSet());
+    }
+
+    SECTION("imageOutputIsSetIsTrue"){
+        testContext.setImageOutputName("test");
+        REQUIRE(testContext.imageOutputIsSet());
+    }
 }
 

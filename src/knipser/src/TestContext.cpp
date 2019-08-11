@@ -30,5 +30,9 @@ void TestContext::setImageOutputName(const std::string &imageOutputName) {
 
 }
 
+bool TestContext::imageOutputIsSet() {
+    return imageOutputSet;
+}
+
 
 
