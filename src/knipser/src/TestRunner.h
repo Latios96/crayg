@@ -8,18 +8,22 @@
 #include "KnipserTest.h"
 #include "TestRegistry.h"
 #include "TestResult.h"
+#include "RunConfig.h"
 #include <vector>
 
 
 
 class TestRunner {
 public:
-    explicit TestRunner(const TestRegistry &testRegistry);
+    explicit TestRunner(const TestRegistry &testRegistry, const RunConfig &runConfig);
     std::vector<TestResult> execute();
 private:
     TestRegistry testRegistry;
+    RunConfig runConfig;
 
     TestResult executeTest(const KnipserTest &test);
+
+    TestContext createTestContext(const KnipserTest &test);
 };
 
 

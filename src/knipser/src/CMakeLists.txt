@@ -13,7 +13,9 @@ add_library(knipser
         TestResult.h
         TestResult.cpp
         PlainReportGenerator.h
-        PlainReportGenerator.cpp)
+        PlainReportGenerator.cpp
+        RunConfig.h
+        RunConfig.cpp)
 
 
 target_include_directories(knipser PUBLIC

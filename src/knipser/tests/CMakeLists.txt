@@ -10,6 +10,7 @@ add_test(
 add_executable(knipser-main-tests TestTestRunner.cpp
         TestTestResult.cpp
         TestPlainReportGenerator.cpp
+        TestTestContext.cpp
         main.cpp)
 
 target_link_libraries(knipser-main-tests
