@@ -9,13 +9,18 @@
 
 class TestContext {
 public:
-    TestContext(std::string outputFolder);
+    explicit TestContext(std::string outputFolder);
+
+    void setImageOutputName(const std::string &imageOutputName);
 
     const std::string getOutputFolder() const;
-    const std::string getOutputFilename(const std::string &nameWithExtension) const;
+    const std::string getOutputFilename() const;
 
 private:
     const std::string outputFolder;
+    std::string imageOutputName;
+    bool imageOutputSet = false;
+
 };
 
 #endif //CRAYG_SRC_KNIPSER_SRC_TESTCONTEXT_H_

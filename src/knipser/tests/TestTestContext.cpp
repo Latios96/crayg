@@ -12,7 +12,13 @@ TEST_CASE("TestTestContext"){
     }
 
     SECTION("shouldReturnCorrectOutputName"){
-        REQUIRE(testContext.getOutputFilename("test.exr") == "demo/test.exr");
+        testContext.setImageOutputName("test.exr");
+        REQUIRE(testContext.getOutputFilename() == "demo/test.exr");
+    }
+
+    SECTION("canNotSetImageOutputNameSecondTime"){
+        testContext.setImageOutputName("test.exr");
+        REQUIRE_THROWS_AS(testContext.setImageOutputName("test.exr"), std::logic_error);
     }
 }
 
