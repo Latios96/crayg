@@ -9,16 +9,20 @@
 
 class TestContext {
 public:
-    explicit TestContext(std::string outputFolder);
+    explicit TestContext(std::string outputFolder, std::string referenceFolder);
 
     void setImageOutputName(const std::string &imageOutputName);
     bool imageOutputIsSet();
 
-    const std::string getOutputFolder() const;
-    const std::string getOutputFilename() const;
+    std::string getOutputFolder() const;
+    std::string getOutputFilename() const;
 
-private:
+    std::string getReferenceFolder() const;
+    std::string getReferenceFilename() const;
+
+ private:
     const std::string outputFolder;
+    const std::string referenceFolder;
     std::string imageOutputName;
     bool imageOutputSet = false;
 

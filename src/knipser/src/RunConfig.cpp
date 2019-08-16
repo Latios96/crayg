@@ -4,4 +4,7 @@
 
 #include "RunConfig.h"
 
-RunConfig::RunConfig(const std::string &outputFolder) : outputFolder(outputFolder) {}
+#include <utility>
+
+RunConfig::RunConfig(std::string outputFolder, std::string referenceFolder)
+    : outputFolder(std::move(outputFolder)), referenceFolder(std::move(referenceFolder)) {}

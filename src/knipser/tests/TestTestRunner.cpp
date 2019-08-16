@@ -8,7 +8,7 @@
 
 TEST_CASE("passing test should generate passing result") {
     TestRegistry testRegistry;
-    RunConfig runConfig("demo");
+    RunConfig runConfig("demo", "demoReference");
     const KnipserTest passingTest = KnipserTest(std::string("passing test"), [](const TestContext &context) {});
     testRegistry.registerTest(passingTest);
 
@@ -23,7 +23,7 @@ TEST_CASE("passing test should generate passing result") {
 
 TEST_CASE("failing test should generate failing result with message") {
     TestRegistry testRegistry;
-    RunConfig runConfig("demo");
+    RunConfig runConfig("demo", "demoReference");
     const KnipserTest failingTest = KnipserTest(std::string("failing test"), [](const TestContext &context) {
         throw std::exception();
     });

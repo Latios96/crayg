@@ -42,7 +42,7 @@ private:
 };
 
 TEST_CASE("ImageOutputExistsAssertion") {
-    TestContext testContext("demo");
+    TestContext testContext("demo", "demoReference");
 
     SECTION("imageOutputNotSetShouldThrow") {
         ImageOutputExistsAssertion assertion("TestBasicAssertion.cpp", 10);

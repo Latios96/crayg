@@ -15,7 +15,7 @@
 
 class TestRunner {
 public:
-    explicit TestRunner(const TestRegistry &testRegistry, const RunConfig &runConfig);
+    explicit TestRunner(TestRegistry testRegistry, RunConfig runConfig);
     std::vector<TestResult> execute();
 private:
     TestRegistry testRegistry;

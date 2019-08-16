@@ -7,9 +7,10 @@
 #include "TestRunner.h"
 #include <boost/filesystem.hpp>
 #include <functional>
+#include <utility>
 
-TestRunner::TestRunner(const TestRegistry &testRegistry, const RunConfig &runConfig) : testRegistry(testRegistry),
-                                                                                       runConfig(runConfig) {}
+TestRunner::TestRunner(TestRegistry testRegistry, RunConfig runConfig) : testRegistry(std::move(testRegistry)),
+                                                                         runConfig(std::move(runConfig)) {}
 
 std::vector<TestResult> TestRunner::execute() {
     std::vector<TestResult> testResults;
@@ -37,7 +38,6 @@ TestResult TestRunner::executeTest(const KnipserTest &test) {
         return TestResult::createFailed(test, e.what());
     }
 
-
 }
 
 TestContext TestRunner::createTestContext(const KnipserTest &test) {
@@ -45,7 +45,7 @@ TestContext TestRunner::createTestContext(const KnipserTest &test) {
 
     boost::filesystem::create_directories(testOutputFolder);
 
-    return TestContext(testOutputFolder.string());
+    return TestContext(testOutputFolder.string(), runConfig.referenceFolder);
 }
 
 

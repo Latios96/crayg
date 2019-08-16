@@ -8,11 +8,11 @@
 #include <string>
 
 class RunConfig {
-public:
-    RunConfig(const std::string &outputFolder);
+ public:
+    RunConfig(std::string outputFolder, std::string referenceFolder);
 
     const std::string outputFolder;
+    const std::string referenceFolder;
 };
-
 
 #endif //CRAYG_RUNCONFIG_H

@@ -5,7 +5,7 @@
 #include <TestContext.h>
 
 TEST_CASE("TestTestContext"){
-    TestContext testContext("demo");
+    TestContext testContext("demo", "demoReference");
 
     SECTION("shouldReturnCorrectOutputFolder"){
         REQUIRE(testContext.getOutputFolder() == "demo");
@@ -28,6 +28,15 @@ TEST_CASE("TestTestContext"){
     SECTION("imageOutputIsSetIsTrue"){
         testContext.setImageOutputName("test");
         REQUIRE(testContext.imageOutputIsSet());
+    }
+
+    SECTION("shouldReturnCorrectReferenceFolder"){
+        REQUIRE(testContext.getReferenceFolder() == "demoReference");
+    }
+
+    SECTION("shouldReturnCorrectReferenceName"){
+        testContext.setImageOutputName("test.exr");
+        REQUIRE(testContext.getReferenceFilename() == "demoReference/test.exr");
     }
 }
 

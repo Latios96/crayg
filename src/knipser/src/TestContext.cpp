@@ -7,16 +7,18 @@
 #include "TestContext.h"
 #include <boost/filesystem.hpp>
 
-const std::string TestContext::getOutputFolder() const {
+std::string TestContext::getOutputFolder() const {
     return outputFolder;
 }
 
-const std::string TestContext::getOutputFilename() const {
+std::string TestContext::getOutputFilename() const {
     return boost::filesystem::path(outputFolder)
-            .append(imageOutputName).string();
+        .append(imageOutputName).string();
 }
 
-TestContext::TestContext(std::string outputFolder) : outputFolder(std::move(outputFolder)) {}
+TestContext::TestContext(std::string outputFolder, std::string referenceFolder) : outputFolder(std::move(outputFolder)),
+                                                                                  referenceFolder(std::move(
+                                                                                      referenceFolder)) {}
 
 void TestContext::setImageOutputName(const std::string &imageOutputName) {
     if (imageOutputSet) {
@@ -26,12 +28,18 @@ void TestContext::setImageOutputName(const std::string &imageOutputName) {
     imageOutputSet = true;
     TestContext::imageOutputName = imageOutputName;
 
-
-
 }
 
 bool TestContext::imageOutputIsSet() {
     return imageOutputSet;
+}
+std::string TestContext::getReferenceFolder() const {
+    return referenceFolder;
+}
+std::string TestContext::getReferenceFilename() const {
+    return boost::filesystem::path(referenceFolder)
+        .append(imageOutputName).string();
+
 }
 
 
