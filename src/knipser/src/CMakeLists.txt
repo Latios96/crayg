@@ -23,3 +23,8 @@ add_library(knipser
 target_include_directories(knipser PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         )
+
+target_include_directories(knipser
+        PUBLIC ../../externals/ghc)
+
+target_link_libraries(knipser ${CONAN_LIBS})
