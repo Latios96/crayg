@@ -34,3 +34,5 @@ void ImageOutputExistsAssertion::doAssert(TestContext &testContext) {
 bool ImageOutputExistsAssertion::exists(const boost::filesystem::path &path) const {
     return boost::filesystem::exists(path);
 }
+
+

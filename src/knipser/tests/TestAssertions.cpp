@@ -26,18 +26,17 @@ TEST_CASE("BasicAssertion") {
     }
 }
 
-
 class ImageOutputExistsAssertionUnderTest : public ImageOutputExistsAssertion {
-public:
+ public:
     ImageOutputExistsAssertionUnderTest(bool doesExists)
-            : ImageOutputExistsAssertion("TestBasicAssertion.cpp", 10), doesExists(doesExists) {}
+        : ImageOutputExistsAssertion("TestBasicAssertion.cpp", 10), doesExists(doesExists) {}
 
-protected:
+ protected:
     bool exists(const boost::filesystem::path &path) const override {
         return doesExists;
     }
 
-private:
+ private:
     bool doesExists;
 };
 
@@ -60,6 +59,36 @@ TEST_CASE("ImageOutputExistsAssertion") {
         ImageOutputExistsAssertionUnderTest assertion(true);
         testContext.setImageOutputName("test.exr");
         assertion.doAssert(testContext);
+    }
+}
+
+class AlwaysOkImageComparator : public ImageComparator {
+ public:
+    AlwaysOkImageComparator(const std::string &left, const std::string &right) : ImageComparator(left, right) {}
+    ImageComparatorResult compareImages() override {
+        return {OK, 0};
+    }
+};
+
+class AlwaysErrorImageComparator : public ImageComparator {
+ public:
+    AlwaysErrorImageComparator(const std::string &left, const std::string &right) : ImageComparator(left, right) {}
+    ImageComparatorResult compareImages() override {
+        return {ERROR, 10};
+    }
+};
+
+TEST_CASE("ImagesAreEqualAssertion") {
+    TestContext testContext("demo", "demoReference");
+
+    SECTION("imagesAreNotEqualShouldThrow") {
+        ImagesAreEqualAssertion<AlwaysErrorImageComparator> assertion("TestBasicAssertion.cpp", 10);
+        REQUIRE_THROWS_AS(assertion.doAssert(testContext), KnipserException);
+    }
+
+    SECTION("imagesAreEqualShouldNotThrow") {
+        ImagesAreEqualAssertion<AlwaysOkImageComparator> assertion("TestBasicAssertion.cpp", 10);
+        REQUIRE_NOTHROW(assertion.doAssert(testContext));
     }
 }
 

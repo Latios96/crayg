@@ -17,7 +17,9 @@ add_library(knipser
         RunConfig.h
         RunConfig.cpp
         KnipserAssertions.h
-        KnipserAssertions.cpp)
+        KnipserAssertions.cpp
+        ImageComparator.h
+        ImageComparator.cpp)
 
 
 target_include_directories(knipser PUBLIC
