@@ -1,5 +1,5 @@
 #include <iostream>
-#include <OpenImageIO/oiioversion.h>
+#include <OpenImageIO/imageio.h>
 #include <cstdlib>
 
 int main() {
