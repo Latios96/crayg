@@ -5,7 +5,7 @@ rapidjson/1.1.0@bincrafters/stable
 catch2/2.5.0@bincrafters/stable
 optional-lite/2.3.0@bincrafters/stable
 cli11/1.6.1@bincrafters/stable
-boost/[>=1.56.0]@conan/stable
+boost/1.70.0@conan/stable
 OpenImageIO/2.0.3@Latios/stable
 openexr/2.3.0@Latios/stable
 [generators]
