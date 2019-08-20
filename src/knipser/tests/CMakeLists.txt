@@ -21,3 +21,7 @@ target_link_libraries(knipser-main-tests
 add_test(
         NAME knipser-main-tests
         COMMAND knipser-main-tests -o knipser-main-tests-report.xml -r junit)
+
+
+add_custom_command(TARGET knipser-main-tests PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/test_image_black.png $<TARGET_FILE_DIR:knipser-main-tests>/test_image_black.png)
+add_custom_command(TARGET knipser-main-tests PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/test_image_white.png $<TARGET_FILE_DIR:knipser-main-tests>/test_image_white.png)
