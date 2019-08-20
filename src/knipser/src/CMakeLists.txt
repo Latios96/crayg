@@ -29,4 +29,4 @@ target_include_directories(knipser PUBLIC
 target_include_directories(knipser
         PUBLIC ../../externals/ghc)
 
-target_link_libraries(knipser ${CONAN_LIBS})
+target_link_libraries(knipser ${CONAN_LIBS} dl)

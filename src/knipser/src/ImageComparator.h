@@ -4,7 +4,11 @@
 
 #ifndef CRAYG_SRC_KNIPSER_SRC_IMAGECOMPARATOR_H_
 #define CRAYG_SRC_KNIPSER_SRC_IMAGECOMPARATOR_H_
+
 #include <string>
+#include <OpenImageIO/imagebuf.h>
+#include <OpenImageIO/imagebufalgo.h>
+
 enum ImageComparatorResultStatus {
     OK, WARNING, ERROR
 };
@@ -31,13 +35,14 @@ class ImageComparator {
  public:
     ImageComparator(std::string left, std::string right);
     virtual ImageComparatorResult compareImages() = 0;
- private:
+ protected:
     std::string left, right;
 };
 
 class OpenImageIoImageComparator : public ImageComparator {
  public:
     OpenImageIoImageComparator(const std::string &left, const std::string &right);
+    ImageComparatorResult compareImages() override;
 
 };
 
