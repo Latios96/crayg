@@ -71,4 +71,4 @@ diagram*
 .diagram*
 
 venv/*
-conan_packages/OpenImageIO/test_package/build/*
+conan_packages/OpenImageIO/test_package__/build/*

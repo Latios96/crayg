@@ -14,3 +14,7 @@ make -j 4
 ./bin/crayg-standalone -s ../example_scenes/single_sphere.json -o single_sphere.bmp
 ./bin/crayg-standalone -s ../example_scenes/three_spheres.json -o three_spheres.bmp
 ./bin/crayg-standalone -s ../example_scenes/poly_cube.json -o poly_cube.bmp
+
+cd bin
+./knipser-main-tests
+./knipser-test-testregistration

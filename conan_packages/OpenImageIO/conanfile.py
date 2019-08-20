@@ -1,6 +1,7 @@
 from conans import ConanFile, CMake, tools
 import os
 
+
 class OpenimageioConan(ConanFile):
     name = "OpenImageIO"
     version = "2.0.3"
@@ -36,7 +37,6 @@ class OpenimageioConan(ConanFile):
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
 
-
     def source(self):
         source_url = "https://github.com/OpenImageIO/oiio/archive/Release-{}.tar.gz".format(self.version)
         tools.get(source_url, sha256='b33a1e9d7ab34914e173a1dd97dc14889c05d2c057df8a54553a187300e0aa05')
@@ -50,6 +50,10 @@ class OpenimageioConan(ConanFile):
         for f in bad_cmake_files:
             tools.replace_in_file(f, r"${CMAKE_SOURCE_DIR}", r"${PROJECT_SOURCE_DIR}", strict=False)
             tools.replace_in_file(f, r"${CMAKE_BINARY_DIR}", r"${PROJECT_BINARY_DIR}", strict=False)
+
+        tools.replace_in_file("{}/src/include/CMakeLists.txt".format(self._source_subfolder),
+                              'DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/OpenImageIO/fmt',
+                              'DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/OpenImageIO/fmt__')
 
     def _configure_cmake(self):
         cmake = CMake(self)
@@ -98,4 +102,3 @@ class OpenimageioConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
-

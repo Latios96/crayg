@@ -33,6 +33,9 @@ script:
   - make -j 4
   - ./bin/tests
   - ./bin/crayg-standalone-tests
+  - cd bin
+  - ./knipser-main-tests
+  - ./knipser-test-testregistration
 deploy:
   provider: releases
   api_key:
