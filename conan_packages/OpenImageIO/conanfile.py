@@ -28,7 +28,7 @@ class OpenimageioConan(ConanFile):
         "boost/[>=1.56.0]@conan/stable",
         "libtiff/4.0.9@bincrafters/stable",
         "libpng/1.6.34@bincrafters/stable",
-        "openexr/2.3.0@conan/stable",
+        "openexr/2.3.0@Latios/stable",
         "libjpeg/9c@bincrafters/stable",
         "tsl-robin-map/0.6.1@tessil/stable"
     )
