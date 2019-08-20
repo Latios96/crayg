@@ -19,10 +19,10 @@ script:
   - pip install conan
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
   - maindir=$(pwd)
-  - cd conan_packages/OpenImageIO
+  - cd conan_packages/openexr
   - conan create . Latios/stable --build missing
   - cd ..
-  - cd openexr
+  - cd OpenImageIO
   - conan create . Latios/stable --build missing
   - cd $maindir
   - rm -rf build/
