@@ -14,25 +14,31 @@ struct ImageComparatorResult {
     ImageComparatorResultStatus status;
     float error;
 
-    bool isOk(){
+    bool isOk() {
         return status == ImageComparatorResultStatus::OK;
     }
 
-    bool isWarning(){
+    bool isWarning() {
         return status == ImageComparatorResultStatus::WARNING;
     }
 
-    bool isError(){
+    bool isError() {
         return status == ImageComparatorResultStatus::ERROR;
     }
 };
 
 class ImageComparator {
  public:
-    ImageComparator(const std::string &left, const std::string &right);
+    ImageComparator(std::string left, std::string right);
     virtual ImageComparatorResult compareImages() = 0;
  private:
     std::string left, right;
+};
+
+class OpenImageIoImageComparator : public ImageComparator {
+ public:
+    OpenImageIoImageComparator(const std::string &left, const std::string &right);
+
 };
 
 #endif //CRAYG_SRC_KNIPSER_SRC_IMAGECOMPARATOR_H_

@@ -3,8 +3,12 @@
 //
 
 #include "ImageComparator.h"
-ImageComparator::ImageComparator(const std::string &left, const std::string &right) : left(left), right(right) {}
 
+#include <utility>
+ImageComparator::ImageComparator(std::string left, std::string right) : left(std::move(left)), right(std::move(right)) {}
 
 ImageComparatorResult::ImageComparatorResult(ImageComparatorResultStatus status, float error)
     : status(status), error(error) {}
+
+OpenImageIoImageComparator::OpenImageIoImageComparator(const std::string &left, const std::string &right)
+    : ImageComparator(left, right) {}
