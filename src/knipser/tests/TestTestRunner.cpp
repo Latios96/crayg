@@ -5,7 +5,6 @@
 #include <TestRunner.h>
 #include "TestRegistry.h"
 
-
 TEST_CASE("passing test should generate passing result") {
     TestRegistry testRegistry;
     RunConfig runConfig("demo", "demoReference");
@@ -19,6 +18,7 @@ TEST_CASE("passing test should generate passing result") {
     REQUIRE(testResults[0].test == passingTest);
     REQUIRE(testResults[0].passed);
     REQUIRE(testResults[0].message.empty());
+    REQUIRE(testResults[0].testContext == TestContext("demo/passing test", "demoReference"));
 }
 
 TEST_CASE("failing test should generate failing result with message") {
@@ -36,6 +36,7 @@ TEST_CASE("failing test should generate failing result with message") {
     REQUIRE(testResults[0].test == failingTest);
     REQUIRE_FALSE(testResults[0].passed);
     REQUIRE(testResults[0].message == "std::exception");
+    REQUIRE(testResults[0].testContext == TestContext("demo/failing test", "demoReference"));
 }
 
 

@@ -10,19 +10,24 @@
 TEST_CASE("TestResult"){
     const KnipserTest myTest = KnipserTest(std::string("my test"), [](const TestContext &context) {});
 
+    TestContext testContext("demo", "reference");
+
     SECTION("should create passed test"){
-        TestResult passedTestResult = TestResult::createPassed(myTest);
+        TestResult passedTestResult = TestResult::createPassed(myTest, testContext);
 
         REQUIRE(passedTestResult.test == myTest);
         REQUIRE(passedTestResult.passed);
         REQUIRE(passedTestResult.message.empty());
+        REQUIRE(passedTestResult.testContext == testContext);
     }
 
     SECTION("should create failed test"){
-        TestResult passedTestResult = TestResult::createFailed(myTest, "my message");
+        TestResult failedTestResult = TestResult::createFailed(myTest, "my message", testContext);
 
-        REQUIRE(passedTestResult.test == myTest);
-        REQUIRE_FALSE(passedTestResult.passed);
-        REQUIRE(passedTestResult.message == "my message");
+        REQUIRE(failedTestResult.test == myTest);
+        REQUIRE_FALSE(failedTestResult.passed);
+        REQUIRE(failedTestResult.message == "my message");
+        REQUIRE(failedTestResult.testContext == testContext);
     }
+
 }

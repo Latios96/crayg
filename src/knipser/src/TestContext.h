@@ -8,7 +8,7 @@
 #include <string>
 
 class TestContext {
-public:
+ public:
     explicit TestContext(std::string outputFolder, std::string referenceFolder);
 
     void setImageOutputName(const std::string &imageOutputName);

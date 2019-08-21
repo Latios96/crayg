@@ -31,11 +31,11 @@ TestResult TestRunner::executeTest(const KnipserTest &test) {
         test.testCallback(testContext);
 
         std::cout << "[OK]" << std::endl;
-        return TestResult::createPassed(test);
+        return TestResult::createPassed(test, testContext);
     }
     catch (std::exception &e) {
         std::cout << "[FAILED]" << std::endl;
-        return TestResult::createFailed(test, e.what());
+        return TestResult::createFailed(test, e.what(), testContext);
     }
 
 }

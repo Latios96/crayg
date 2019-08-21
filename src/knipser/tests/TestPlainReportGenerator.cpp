@@ -12,7 +12,7 @@ TEST_CASE("PlainReportGenerator"){
     std::vector<TestResult> results;
 
     SECTION("should report passed test"){
-        results.push_back(TestResult::createPassed(myTest));
+        results.push_back(TestResult::createPassed(myTest, TestContext("demo", "reference")));
         PlainReportGenerator plainReportGenerator(results);
 
         std::stringstream ss;
