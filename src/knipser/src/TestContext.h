@@ -20,6 +20,9 @@ public:
     std::string getReferenceFolder() const;
     std::string getReferenceFilename() const;
 
+    bool operator==(const TestContext &rhs) const;
+    bool operator!=(const TestContext &rhs) const;
+
  private:
     const std::string outputFolder;
     const std::string referenceFolder;
