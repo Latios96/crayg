@@ -11,7 +11,7 @@
 struct TestResult {
 public:
     TestResult(const KnipserTest &test, bool passed, const std::string &message);
-
+    // todo store context test was ran with
     static TestResult createFailed(KnipserTest test, std::string message);
     static TestResult createPassed(KnipserTest test);
     const KnipserTest test;

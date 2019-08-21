@@ -9,7 +9,7 @@ static const char *const TEST_IMAGE_WHITE = "test_image_white.png";
 static const char *const TEST_IMAGE_BLACK = "test_image_black.png";
 
 TEST_CASE("ImageComparator") {
-
+    // TODO use cpplocate to locate test data
     SECTION("Result should be OK") {
         OpenImageIoImageComparator comparator(TEST_IMAGE_WHITE, TEST_IMAGE_WHITE);
         REQUIRE(comparator.compareImages().isOk());
