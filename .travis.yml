@@ -18,6 +18,13 @@ matrix:
 script:
   - pip install conan
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+  - maindir=$(pwd)
+  - cd conan_packages/openexr
+  - conan create . Latios/stable --build missing
+  - cd ..
+  - cd OpenImageIO
+  - conan create . Latios/stable --build missing
+  - cd $maindir
   - rm -rf build/
   - mkdir build
   - cd build
@@ -26,6 +33,9 @@ script:
   - make -j 4
   - ./bin/tests
   - ./bin/crayg-standalone-tests
+  - cd bin
+  - ./knipser-main-tests
+  - ./knipser-test-testregistration
 deploy:
   provider: releases
   api_key:

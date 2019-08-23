@@ -1,2 +1,3 @@
 add_subdirectory(crayg)
 add_subdirectory(standalone)
+add_subdirectory(knipser)
