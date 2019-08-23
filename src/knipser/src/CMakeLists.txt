@@ -19,14 +19,17 @@ add_library(knipser
         KnipserAssertions.h
         KnipserAssertions.cpp
         ImageComparator.h
-        ImageComparator.cpp)
+        ImageComparator.cpp
+        KnipserApp.h
+        KnipserApp.cpp)
 
 
 target_include_directories(knipser PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         )
 
-target_include_directories(knipser
-        PUBLIC ../../externals/ghc)
-
 target_link_libraries(knipser ${CONAN_LIBS} dl)
+
+add_executable(knipser-main main.cpp)
+target_link_libraries(knipser-main knipser)
+install(TARGETS knipser-main DESTINATION bin)

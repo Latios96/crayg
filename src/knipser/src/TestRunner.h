@@ -15,10 +15,10 @@
 
 class TestRunner {
 public:
-    explicit TestRunner(TestRegistry testRegistry, RunConfig runConfig);
+    explicit TestRunner(TestRegistry &testRegistry, RunConfig runConfig);
     std::vector<TestResult> execute();
 private:
-    TestRegistry testRegistry;
+    TestRegistry &testRegistry;
     RunConfig runConfig;
 
     TestResult executeTest(const KnipserTest &test);

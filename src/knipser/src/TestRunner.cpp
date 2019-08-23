@@ -9,7 +9,7 @@
 #include <functional>
 #include <utility>
 
-TestRunner::TestRunner(TestRegistry testRegistry, RunConfig runConfig) : testRegistry(std::move(testRegistry)),
+TestRunner::TestRunner(TestRegistry &testRegistry, RunConfig runConfig) : testRegistry(testRegistry),
                                                                          runConfig(std::move(runConfig)) {}
 
 std::vector<TestResult> TestRunner::execute() {
