@@ -1,5 +1,9 @@
 language: cpp
 
+cache:
+  directories:
+    - ~/.conan/
+
 matrix:
   include:
     - os: linux
