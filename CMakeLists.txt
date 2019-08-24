@@ -17,6 +17,12 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
+execute_process(COMMAND conan create . Latios/stable --build missing
+        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/conan_packages/openexr)
+
+execute_process(COMMAND conan create . Latios/stable --build missing
+        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/conan_packages/OpenImageIO)
+
 conan_cmake_run(REQUIRES fmt/5.3.0@bincrafters/stable
         spdlog/1.3.1@bincrafters/stable
         rapidjson/1.1.0@bincrafters/stable
