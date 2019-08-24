@@ -78,12 +78,10 @@ set(crayg_SRCS
         lightSamplers/PointLightSampler.cpp
         lightSamplers/LightSamplerFactory.h)
 
-# Declare the library
+
 add_library(crayg STATIC
         ${crayg_SRCS})
 
-# Specify here the include directories exported
-# by this library
 target_include_directories(crayg PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})
 
