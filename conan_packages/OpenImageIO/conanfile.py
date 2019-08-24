@@ -31,7 +31,8 @@ class OpenimageioConan(ConanFile):
         "libpng/1.6.34@bincrafters/stable",
         "openexr/2.3.0@Latios/stable",
         "libjpeg/9c@bincrafters/stable",
-        "tsl-robin-map/0.6.1@tessil/stable"
+        "tsl-robin-map/0.6.1@tessil/stable",
+        "libwebp/1.0.0@bincrafters/stable"
     )
 
     _source_subfolder = "source_subfolder"
@@ -85,6 +86,7 @@ class OpenimageioConan(ConanFile):
         cmake.definitions["USE_PTEX"] = False
         cmake.definitions["USE_PYTHON"] = False
         cmake.definitions["USE_QT"] = False
+        cmake.definitions["USE_WEBP"] = False
         cmake.definitions["USE_SIMD"] = "0"
         cmake.definitions["USE_fPIC"] = self.options.fPIC
         cmake.definitions["LINKSTATIC"] = not self.options["boost"].shared
