@@ -1,25 +1,39 @@
 # crayg
 [![Build Status](https://travis-ci.com/Latios96/crayg.svg?token=fvycq6PG6anYyQZpnfAt&branch=master)](https://travis-ci.com/Latios96/crayg)
 
+Personal Raytracer project to get familiar with C++ in general and how to do CI and TDD in C++.
+
 ![demo image](images/three_spheres.png)
 ## Building
-### Linux
+### Prerequisites
+This project uses [Conan](https://conan.io/), a C++ Package Manager, to manage its dependencies.
+Conan is written in Python, so you can install it easily with pip
+```shell
+pip install conan
+```
+You also need to add the bincrafters remote to conan. Otherwise conan can not find all dependencies.
+```shell
+conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+```
+
+### Linux & Mac OS
 ```shell
 mkdir build
 cd build
 cmake ..
-make
-```
-### Run the tests
-```shell
-cd build
-make test
+make -j 4
 ```
 
 ### Windows (experimental)
 ```shell
 mkdir build
 cd build
-cmake -G "Visual Studio 15 2017 Win64" ..
+cmake -G "Visual Studio 15 2017 Win64" .. --build
+```
+
+Run the tests
+```shell
+cd build
+ctest -V
 ```
 
