@@ -53,7 +53,7 @@ class ImagesAreEqualAssertion : public BasicAssertion {
 
     }
 
-    void doAssert(TestContext &testContext) {
+    void doAssert(const TestContext &testContext) {
         T imageComparator(testContext.getReferenceFilename(), testContext.getOutputFilename());
         ImageComparatorResult result = imageComparator.compareImages();
         BasicAssertion::doAssert(!result.isError(),
@@ -62,5 +62,6 @@ class ImagesAreEqualAssertion : public BasicAssertion {
                              testContext.getOutputFilename()));
     }
 };
+
 
 #endif //CRAYG_KNIPSERASSERTIONS_H

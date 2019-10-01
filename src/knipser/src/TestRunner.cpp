@@ -10,7 +10,7 @@
 #include <utility>
 
 TestRunner::TestRunner(TestRegistry &testRegistry, RunConfig runConfig) : testRegistry(testRegistry),
-                                                                         runConfig(std::move(runConfig)) {}
+                                                                          runConfig(std::move(runConfig)) {}
 
 std::vector<TestResult> TestRunner::execute() {
     std::vector<TestResult> testResults;
@@ -25,6 +25,7 @@ std::vector<TestResult> TestRunner::execute() {
 
 TestResult TestRunner::executeTest(const KnipserTest &test) {
     TestContext testContext = createTestContext(test);
+    testContext.setImageOutputName(test.name + ".png");
     try {
         std::cout << fmt::format("[RUN] {}", test.name) << std::endl;
 

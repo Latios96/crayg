@@ -9,6 +9,7 @@
 #include <image/ImageWriterFactory.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include "KnipserApp.h"
+#include "KnipserAssertions.h"
 
 void renderScene(const std::string& scenePath, const std::string imageOutputPath){
     Image myImage(800, 600);
@@ -27,12 +28,15 @@ void renderScene(const std::string& scenePath, const std::string imageOutputPath
 }
 
 KNIPSER_REGISTER_TEST(singleSphere, [](const TestContext &context){
-    renderScene(context.getReferenceFolder() + "/single_sphere.json", context.getOutputFilename());
+    renderScene(context.getReferenceFolder() + "/singleSphere.json", context.getOutputFilename());
+    ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion (__FILE__, __LINE__);
+    imagesAreEqualAssertion.doAssert(context);
 });
-
-KNIPSER_REGISTER_TEST(threeSpheres, [](const TestContext &context){
-    renderScene(context.getReferenceFolder() + "/three_spheres.json", context.getOutputFilename());
-});
+bool testRegistrationResult_threeSpheres = TestRegistry::getInstance()->registerTest(KnipserTest(std::string("threeSpheres"), [](const TestContext &context){
+    renderScene(context.getReferenceFolder() + "/threeSpheres.json", context.getOutputFilename());
+    ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion (__FILE__, __LINE__);
+    imagesAreEqualAssertion.doAssert(context);
+}));
 
 int main(int argc, char **argv) {
     auto console = spdlog::stdout_color_mt("console");
