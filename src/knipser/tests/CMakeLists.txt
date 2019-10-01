@@ -23,6 +23,12 @@ add_test(
         COMMAND knipser-main-tests -o knipser-main-tests-report.xml -r junit
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+function(add_test_resource target_name absolute_path)
+    message("add_test_resource " ${target_name})
+    get_filename_component(file_name ${absolute_path} NAME)
+    message("add_test_resource " ${CMAKE_COMMAND} -E copy ${absolute_path} $<TARGET_FILE_DIR:${target_name}>/${file_name})
+    add_custom_command(TARGET ${target_name} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${absolute_path} $<TARGET_FILE_DIR:${target_name}>/${file_name})
+endfunction(add_test_resource)
 
-add_custom_command(TARGET knipser-main-tests PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/test_image_black.png $<TARGET_FILE_DIR:knipser-main-tests>/test_image_black.png)
-add_custom_command(TARGET knipser-main-tests PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/test_image_white.png $<TARGET_FILE_DIR:knipser-main-tests>/test_image_white.png)
+add_test_resource(knipser-main-tests ${CMAKE_CURRENT_SOURCE_DIR}/test_image_black.png)
+add_test_resource(knipser-main-tests ${CMAKE_CURRENT_SOURCE_DIR}/test_image_white.png)
