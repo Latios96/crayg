@@ -1,0 +1,66 @@
+{
+    "SceneObjects": [
+        {
+            "position": [
+                -3.930653016692025, 
+                1,
+                0.0
+            ], 
+            "radius": 1.0, 
+            "type": "Sphere"
+        },
+        {
+            "position": [
+                -0.11379871142684816,
+                1,
+                -4.912843558333231
+            ],
+            "radius": 1.0,
+            "type": "Sphere"
+        }, 
+        {
+            "position": [
+                2.4158709370041582, 
+                1,
+                0.830149738616262
+            ], 
+            "radius": 1.0, 
+            "type": "Sphere"
+        }, 
+        {
+            "position": [
+                0.0, 
+                2.742641103067735, 
+                0.0
+            ], 
+            "intensity": 1.0,
+            "type": "Light"
+        }, 
+        {
+            "position": [
+                0.0, 
+                0.0,
+                0.0
+            ], 
+            "type": "GroundPlane"
+        }
+    ], 
+    "Camera": {
+        "position": [
+            0,
+            5,
+            -8
+        ], 
+        "centerOfInterest": [
+            0,0,0
+        ], 
+        "userUpVector": [
+            0.0, 
+            1.0, 
+            0.0
+        ],
+        "focalLength": 35.0,
+        "filmbackSize": 36.0,
+        "type": "Camera"
+    }
+}

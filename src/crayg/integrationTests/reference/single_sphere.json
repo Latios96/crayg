@@ -1,0 +1,48 @@
+{
+    "SceneObjects": [
+        {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "type": "Sphere",
+            "radius": 1.5
+        },
+        {
+            "position": [
+                0.0,
+                3.0,
+                3.0
+            ],
+            "type": "Light",
+            "intensity": 1.0
+        },
+        {
+            "position": [
+                0.0,
+                -1.5,
+                0.0
+            ],
+            "type": "GroundPlane"
+        }
+    ],
+    "Camera": {
+        "position": [
+            0,
+            0,
+            10
+        ],
+        "centerOfInterest": [
+            0,0,-1
+        ],
+        "userUpVector": [
+            0.0,
+            1.0,
+            0.0
+        ],
+        "focalLength": 35.0,
+        "filmbackSize": 36.0,
+        "type": "Camera"
+    }
+}
