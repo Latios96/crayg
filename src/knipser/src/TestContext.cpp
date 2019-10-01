@@ -43,8 +43,7 @@ std::string TestContext::getReferenceFilename() const {
 }
 bool TestContext::operator==(const TestContext &rhs) const {
     return outputFolder == rhs.outputFolder &&
-        referenceFolder == rhs.referenceFolder &&
-        imageOutputName == rhs.imageOutputName;
+        referenceFolder == rhs.referenceFolder;
 }
 bool TestContext::operator!=(const TestContext &rhs) const {
     return !(rhs == *this);
