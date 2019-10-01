@@ -38,7 +38,7 @@ void Image::setValue(int x, int y, float r, float g, float b) {
     values[index + 2] = b;
 }
 
-Vector3f Image::getValue(int x, int y) const {
+Color Image::getValue(int x, int y) const {
     int index = this->index(x,y);
     return {values[index], values[index+1], values[index+2]};
 }

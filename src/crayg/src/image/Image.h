@@ -42,7 +42,7 @@ public:
 
     void setValue(int x, int y, float r, float g, float b);
 
-    Vector3f getValue(int x, int y) const;
+    Color getValue(int x, int y) const;
 
     ~Image() {
         delete[] values;
