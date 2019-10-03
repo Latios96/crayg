@@ -12,14 +12,13 @@
 
 class SceneObject : public Imageable,
                     public Transformable,
-                    public Serializable{
-public:
+                    public Serializable {
+ public:
     SceneObject();
 
     explicit SceneObject(Vector3f position);
-    void serialize(Serializer& serializer) override;
-    void deserialize(Deserializer& deserializer) override;
+    void serialize(Serializer &serializer) override;
+    void deserialize(Deserializer &deserializer) override;
 };
-
 
 #endif //CRAYG_SCENEOBJECT_H

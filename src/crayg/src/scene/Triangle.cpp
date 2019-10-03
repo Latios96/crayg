@@ -23,8 +23,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     //float det = dot(v0v1, pvec);
     float det = v0v1.scalarProduct(pvec);
 
-
-    if (det < 0.000001){
+    if (det < 0.000001) {
         return {std::numeric_limits<float>::max(), nullptr};
     }
 
@@ -36,7 +35,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     //float u = dot(tvec, pvec) * invDet;
     float u = tvec.scalarProduct(pvec) * invDet;
 
-    if (u < 0 || u > 1){
+    if (u < 0 || u > 1) {
         return {std::numeric_limits<float>::max(), nullptr};
     }
 
@@ -46,13 +45,12 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     //float v = dot(r->dir, qvec) * invDet;
     float v = ray.direction.scalarProduct(qvec) * invDet;
 
-    if (v < 0 || u + v > 1){
+    if (v < 0 || u + v > 1) {
         return {std::numeric_limits<float>::max(), nullptr};
     }
     // dot(v0v2, qvec) * invDet;
     return {v0v2.scalarProduct(qvec) * invDet, this};
 }
-
 
 Imageable::Intersection Triangle::getIntersectionMyImpl(const Ray &ray) {
     Vector3f normal = (v1 - v0).crossProduct((v2 - v0)).normalize();
@@ -63,17 +61,16 @@ Imageable::Intersection Triangle::getIntersectionMyImpl(const Ray &ray) {
     auto angleBetweenVectorsAsRadiant = scalar / (normal.length() * ray.direction.length());
     const bool isBackFacing = angleBetweenVectorsAsRadiant > 0;
 
-    if(raysAreParallel){
+    if (raysAreParallel) {
         return {std::numeric_limits<float>::max(), nullptr};
-    }
-    else{
+    } else {
         //const float t = - (normal.scalarProduct(ray.startPoint) + v0.length()) / scalar;
         float d = normal.scalarProduct(v0);
 
-        const float t = - (normal.scalarProduct(ray.startPoint) + d) / scalar;
+        const float t = -(normal.scalarProduct(ray.startPoint) + d) / scalar;
 
-        if(t>0){
-            Vector3f hitLocation = ray.startPoint + (ray.direction*t);
+        if (t > 0) {
+            Vector3f hitLocation = ray.startPoint + (ray.direction * t);
 
             Vector3f C;
 
@@ -83,21 +80,21 @@ Imageable::Intersection Triangle::getIntersectionMyImpl(const Ray &ray) {
             Vector3f vp0 = hitLocation - v0;
             C = edge0.crossProduct(vp0);
             auto scal = normal.scalarProduct(C);
-            if (scal < 0){
+            if (scal < 0) {
                 return {std::numeric_limits<float>::max(), nullptr};
             }
 
             Vector3f edge1 = v2 - v1;
             Vector3f vp1 = hitLocation - v1;
             C = edge1.crossProduct(vp1);
-            if (normal.scalarProduct(C)<0){
+            if (normal.scalarProduct(C) < 0) {
                 return {std::numeric_limits<float>::max(), nullptr};
             }
 
             Vector3f edge2 = v0 - v2;
             Vector3f vp2 = hitLocation - v2;
             C = edge2.crossProduct(vp2);
-            if (normal.scalarProduct(C)<0){
+            if (normal.scalarProduct(C) < 0) {
                 return {std::numeric_limits<float>::max(), nullptr};
             }
             return {t, this};
@@ -107,22 +104,20 @@ Imageable::Intersection Triangle::getIntersectionMyImpl(const Ray &ray) {
     }
 }
 
-
-bool Triangle::isIntersecting(Ray ray){
+bool Triangle::isIntersecting(Ray ray) {
     Vector3f normal = (v1 - v0).crossProduct((v2 - v0));
 
     const float scalar = normal.scalarProduct(ray.direction);
 
     const bool raysAreParallel = scalar == 0;
 
-    if(raysAreParallel){
+    if (raysAreParallel) {
         return false;
-    }
-    else{
-        const float t = - (normal.scalarProduct(ray.startPoint) + v0.length()) / scalar;
+    } else {
+        const float t = -(normal.scalarProduct(ray.startPoint) + v0.length()) / scalar;
 
-        if(t>0){
-            Vector3f hitLocation = ray.startPoint + (ray.direction*t);
+        if (t > 0) {
+            Vector3f hitLocation = ray.startPoint + (ray.direction * t);
 
             Vector3f C;
 
@@ -131,21 +126,21 @@ bool Triangle::isIntersecting(Ray ray){
             Vector3f edge0 = v1 - v0;
             Vector3f vp0 = hitLocation - v0;
             C = edge0.crossProduct(vp0);
-            if (normal.scalarProduct(C)<0){
+            if (normal.scalarProduct(C) < 0) {
                 return false;
             }
 
             Vector3f edge1 = v2 - v1;
             Vector3f vp1 = hitLocation - v1;
             C = edge1.crossProduct(vp1);
-            if (normal.scalarProduct(C)<0){
+            if (normal.scalarProduct(C) < 0) {
                 return false;
             }
 
             Vector3f edge2 = v0 - v2;
             Vector3f vp2 = hitLocation - v2;
             C = edge2.crossProduct(vp2);
-            if (normal.scalarProduct(C)<0){
+            if (normal.scalarProduct(C) < 0) {
                 return false;
             }
             return true;

@@ -8,8 +8,8 @@
 enum ImageWriterType { BMP };
 
 ImageWriter *createImageWriter(ImageWriterType type) {
-  switch (type) {
-    case BMP: return new BmpImageWriter;
-    default: return new BmpImageWriter;
-  }
+    switch (type) {
+        case BMP: return new BmpImageWriter;
+        default: return new BmpImageWriter;
+    }
 };

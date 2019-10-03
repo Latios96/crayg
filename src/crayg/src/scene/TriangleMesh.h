@@ -5,21 +5,20 @@
 #ifndef CRAYG_TRIANGEMESH_H
 #define CRAYG_TRIANGEMESH_H
 
-
 #include <vector>
 #include <foundation/BoundingBox.h>
 #include "SceneObject.h"
 #include "Triangle.h"
 
-class TriangleMesh : public SceneObject{
-public:
+class TriangleMesh : public SceneObject {
+ public:
     static void createCube(TriangleMesh &mesh);
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
 
-    void serialize(Serializer& serializer) override;
+    void serialize(Serializer &serializer) override;
 
-    void deserialize(Deserializer& deserializer) override;
+    void deserialize(Deserializer &deserializer) override;
 
     Vector3f getNormal(Vector3f point) override;
 
@@ -29,10 +28,9 @@ public:
     void getTriangles(std::vector<Triangle> &triangles);
 
     void beforeRender() override;
-private:
+ private:
     std::vector<Triangle> triangles;
     BoundingBox boundingBox;
 };
-
 
 #endif //CRAYG_TRIANGEMESH_H

@@ -9,59 +9,53 @@
 
 JsonDeserializer::JsonDeserializer(rapidjson::Value &jsonObject) : jsonObject(jsonObject) {}
 
-
 int JsonDeserializer::readInt(std::string name) {
-    if (jsonObject.HasMember(name.c_str())){
+    if (jsonObject.HasMember(name.c_str())) {
         return jsonObject[name.c_str()].GetInt();
-    }
-    else{
+    } else {
         throw std::invalid_argument(fmt::format("Could not read int with name '{}'", name));
     }
 }
 
 float JsonDeserializer::readFloat(std::string name) {
-    if (jsonObject.HasMember(name.c_str())){
+    if (jsonObject.HasMember(name.c_str())) {
         return jsonObject[name.c_str()].GetFloat();
-    }
-    else{
+    } else {
         throw std::invalid_argument(fmt::format("Could not read float with name '{}'", name));
     }
 
 }
 
 Vector3f JsonDeserializer::readVector3f(std::string name) {
-    if (jsonObject.HasMember(name.c_str())){
+    if (jsonObject.HasMember(name.c_str())) {
         const auto array = jsonObject[name.c_str()].GetArray();
         return {array[0].GetFloat(), array[1].GetFloat(), array[2].GetFloat()};
-    }
-    else{
+    } else {
         throw std::invalid_argument(fmt::format("Could not read Vector3f with name '{}'", name));
     }
 }
 
 void JsonDeserializer::readVector3fArray(std::string name, std::vector<Vector3f> &target) {
-    if (jsonObject.HasMember(name.c_str())){
+    if (jsonObject.HasMember(name.c_str())) {
         const auto array = jsonObject[name.c_str()].GetArray();
-        for(auto &vec3f : array){
+        for (auto &vec3f : array) {
             auto x = vec3f.GetArray()[0].GetFloat();
             auto y = vec3f.GetArray()[1].GetFloat();
             auto z = vec3f.GetArray()[2].GetFloat();
-            target.push_back({x, y,z});
+            target.push_back({x, y, z});
         }
-    }
-    else{
+    } else {
         throw std::invalid_argument(fmt::format("Could not read Vector3f Array with name '{}'", name));
     }
 }
 
 void JsonDeserializer::readIntArray(std::string name, std::vector<int> &target) {
-    if (jsonObject.HasMember(name.c_str())){
+    if (jsonObject.HasMember(name.c_str())) {
         const auto array = jsonObject[name.c_str()].GetArray();
-        for(auto &value : array){
+        for (auto &value : array) {
             target.push_back(value.GetInt());
         }
-    }
-    else{
+    } else {
         throw std::invalid_argument(fmt::format("Could not read int Array with name '{}'", name));
     }
 }

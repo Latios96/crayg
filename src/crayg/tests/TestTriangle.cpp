@@ -6,15 +6,14 @@
 #include <scene/Triangle.h>
 #include "utils/utils.h"
 
-
 TEST_CASE("TriangleIntersects") {
 
-    Triangle TRIANGLE({0,0,0},{0,1,0},{1,0,0});
-    Ray RAY_HITTING_TRIANGLE({0.25f,0.25f, -1}, {0,0,1});
-    Ray RAY_MISSING_TRIANGLE_LEFT({-1,0.25f, -1}, {0,0,1});
-    Ray RAY_MISSING_TRIANGLE_TOP({0.25f,1, -1}, {0,0,1});
-    Ray RAY_MISSING_TRIANGLE_BOTTOM({0.25f,-1, -1}, {0,0,1});
-    Ray RAY_MISSING_TRIANGLE_PARALLEL({-1,0.25f, -1}, {1,0,0});
+    Triangle TRIANGLE({0, 0, 0}, {0, 1, 0}, {1, 0, 0});
+    Ray RAY_HITTING_TRIANGLE({0.25f, 0.25f, -1}, {0, 0, 1});
+    Ray RAY_MISSING_TRIANGLE_LEFT({-1, 0.25f, -1}, {0, 0, 1});
+    Ray RAY_MISSING_TRIANGLE_TOP({0.25f, 1, -1}, {0, 0, 1});
+    Ray RAY_MISSING_TRIANGLE_BOTTOM({0.25f, -1, -1}, {0, 0, 1});
+    Ray RAY_MISSING_TRIANGLE_PARALLEL({-1, 0.25f, -1}, {1, 0, 0});
 
     SECTION("intersectsShouldBeTrue") {
         REQUIRE(TRIANGLE.isIntersecting(RAY_HITTING_TRIANGLE));

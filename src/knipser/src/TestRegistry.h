@@ -17,7 +17,7 @@ class TestRegistry {
  public:
     static std::shared_ptr<TestRegistry> &getInstance();
     static void setInstance(const std::shared_ptr<TestRegistry> &instance);
-    bool registerTest(const KnipserTest& knipserTest);
+    bool registerTest(const KnipserTest &knipserTest);
     const std::vector<KnipserTest> &getTests() const;
  private:
     static std::shared_ptr<TestRegistry> instance;

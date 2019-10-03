@@ -18,7 +18,7 @@ std::shared_ptr<TestRegistry> &TestRegistry::getInstance() {
 const std::vector<KnipserTest> &TestRegistry::getTests() const {
     return tests;
 }
-bool TestRegistry::registerTest(const KnipserTest& knipserTest) {
+bool TestRegistry::registerTest(const KnipserTest &knipserTest) {
     tests.push_back(knipserTest);
     return true;
 }

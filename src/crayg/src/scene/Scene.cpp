@@ -4,8 +4,7 @@
 
 #include "Scene.h"
 
-
-void Scene::addObject(SceneObject* intersectable) {
+void Scene::addObject(SceneObject *intersectable) {
     objects.push_back(std::shared_ptr<SceneObject>(intersectable));
 }
 

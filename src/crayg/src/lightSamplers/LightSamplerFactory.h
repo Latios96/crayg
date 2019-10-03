@@ -12,10 +12,10 @@
 
 #endif //CRAYG_LIGHTSAMPLERFACTORY_H
 
-class LightSamplerFactory{
-public:
-    static std::shared_ptr<LightSampler> createLightSampler(Light &light, SceneIntersector &intersector){
-        if(light.lightType == POINT_LIGHT){
+class LightSamplerFactory {
+ public:
+    static std::shared_ptr<LightSampler> createLightSampler(Light &light, SceneIntersector &intersector) {
+        if (light.lightType == POINT_LIGHT) {
             return std::shared_ptr<LightSampler>(new PointLightSampler(intersector, light));
         }
     }

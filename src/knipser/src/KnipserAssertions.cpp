@@ -5,7 +5,6 @@
 #include <fmt/format.h>
 #include "KnipserAssertions.h"
 
-
 BasicAssertion::BasicAssertion(const std::string &file, const int lineNumber) : file(file), lineNumber(lineNumber) {}
 
 std::string BasicAssertion::createMessage(const std::string &assertionMessage) const {
@@ -18,9 +17,8 @@ void BasicAssertion::doAssert(bool expression, const std::string &message) {
     }
 }
 
-
 ImageOutputExistsAssertion::ImageOutputExistsAssertion(const std::string &file, const int lineNumber) : BasicAssertion(
-        file, lineNumber) {}
+    file, lineNumber) {}
 
 void ImageOutputExistsAssertion::doAssert(TestContext &testContext) {
     BasicAssertion::doAssert(testContext.imageOutputIsSet(),

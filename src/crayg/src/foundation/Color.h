@@ -9,8 +9,8 @@
 
 // todo what about alpha?
 class Color {
-public:
-    float r,g,b;
+ public:
+    float r, g, b;
 
     /**
      * Creates a new Color instance and defaults to Black (0,0,0)
@@ -25,15 +25,15 @@ public:
      */
     Color(float r, float g, float b);
 
-    static Color createGrey(float grey){
+    static Color createGrey(float grey) {
         return {grey, grey, grey};
     }
 
-    static Color createBlack(){
+    static Color createBlack() {
         return {};
     }
-    static Color createWhite(){
-        return {1,1,1};
+    static Color createWhite() {
+        return {1, 1, 1};
     }
 
     /**
@@ -67,15 +67,15 @@ public:
      * @return
      */
     Color operator*(float scalar);
-    
+
     /**
      * Two colors are equal if their r,g,b components are equal
      * @param color 
      * @return 
      */
-    bool operator == (const Color &color) const;
+    bool operator==(const Color &color) const;
 
-    bool operator != (const Color &color) const;
+    bool operator!=(const Color &color) const;
     /**
      * Clamps the color components to 1
      * @return
@@ -90,6 +90,5 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Color &color);
 
 };
-
 
 #endif //CRAYG_COLOR_H

@@ -15,7 +15,7 @@ struct CliArgs {
     std::string imageOutputPath;
 };
 
-struct CliParseResult{
+struct CliParseResult {
  public:
     CliParseResult(nonstd::optional<CliArgs> args, nonstd::optional<std::string> error)
         : args(std::move(args)), error(std::move(error)) {}
@@ -23,7 +23,7 @@ struct CliParseResult{
     nonstd::optional<CliArgs> args;
     nonstd::optional<std::string> error;
 
-    bool isValid(){
+    bool isValid() {
         return !error && args;
     }
 };

@@ -4,7 +4,7 @@
 
 #include "Vector3f.h"
 
-Vector3f::Vector3f()  {
+Vector3f::Vector3f() {
     x = 0;
     y = 0;
     z = 0;
@@ -20,12 +20,12 @@ Vector3f Vector3f::add(const Vector3f &otherVector) const {
     return {x + otherVector.x, y + otherVector.y, z + otherVector.z};
 }
 
-Vector3f Vector3f::substract(const Vector3f &otherVector)const {
+Vector3f Vector3f::substract(const Vector3f &otherVector) const {
     return {x - otherVector.x, y - otherVector.y, z - otherVector.z};
 }
 
 Vector3f Vector3f::multiplyScalar(float scalar) const {
-    return {x*scalar, y*scalar, z*scalar};
+    return {x * scalar, y * scalar, z * scalar};
 }
 
 float Vector3f::length() const {
@@ -67,7 +67,7 @@ float Vector3f::scalarProduct(const Vector3f &otherVector) const {
 }
 
 bool Vector3f::operator==(const Vector3f &otherVector) const {
-    return this->x == otherVector.x && this->y == otherVector.y && this->z == otherVector.z; 
+    return this->x == otherVector.x && this->y == otherVector.y && this->z == otherVector.z;
 }
 
 bool Vector3f::operator!=(const Vector3f &otherVector) const {

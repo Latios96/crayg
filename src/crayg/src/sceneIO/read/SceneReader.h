@@ -9,15 +9,14 @@
 #include "scene/TriangleMesh.h"
 
 class SceneReader {
-public:
-    virtual void read()=0;
+ public:
+    virtual void read() = 0;
 
     explicit SceneReader(std::string path, Scene &scene);
 
-protected:
-    Scene& scene;
+ protected:
+    Scene &scene;
     std::string path;
 };
-
 
 #endif //CRAYG_SCENEREADER_H

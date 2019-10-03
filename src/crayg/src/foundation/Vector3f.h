@@ -5,12 +5,11 @@
 #ifndef CRAYG_VECTOR3F_H
 #define CRAYG_VECTOR3F_H
 
-
 #include <cmath>
 #include <limits>
 
 class Vector3f {
-public:
+ public:
     float x, y, z;
 
     /**
@@ -20,41 +19,40 @@ public:
 
     Vector3f(float _x, float _y, float _z);
 
-    Vector3f operator +(const Vector3f &otherVector) const;
+    Vector3f operator+(const Vector3f &otherVector) const;
 
-    Vector3f operator -(const Vector3f &otherVector) const;
+    Vector3f operator-(const Vector3f &otherVector) const;
 
-    Vector3f operator *(float scalar) const;
+    Vector3f operator*(float scalar) const;
 
-    Vector3f operator *(const Vector3f &otherVector) const;
+    Vector3f operator*(const Vector3f &otherVector) const;
 
-    bool operator ==(const Vector3f &otherVector) const;
+    bool operator==(const Vector3f &otherVector) const;
 
-    bool operator !=(const Vector3f &otherVector) const;
+    bool operator!=(const Vector3f &otherVector) const;
 
-    Vector3f add(const Vector3f &otherVector) const ;
+    Vector3f add(const Vector3f &otherVector) const;
 
-    Vector3f substract(const Vector3f &otherVector) const ;
+    Vector3f substract(const Vector3f &otherVector) const;
 
-    Vector3f multiplyScalar(float scalar) const ;
+    Vector3f multiplyScalar(float scalar) const;
 
     float scalarProduct(const Vector3f &otherVector) const;
 
     float length() const;
 
-    Vector3f normalize() const ;
+    Vector3f normalize() const;
 
     Vector3f invert() const {
-        return {x*-1, y*-1, z*-1};
+        return {x * -1, y * -1, z * -1};
     }
 
-    Vector3f crossProduct(const Vector3f &otherVector) const ;
+    Vector3f crossProduct(const Vector3f &otherVector) const;
 
     static Vector3f createInvalid();
 
     bool isValid();
 
 };
-
 
 #endif //CRAYG_VECTOR3F_H

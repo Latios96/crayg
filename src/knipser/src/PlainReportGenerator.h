@@ -5,18 +5,16 @@
 #ifndef CRAYG_PLAINREPORTGENERATOR_H
 #define CRAYG_PLAINREPORTGENERATOR_H
 
-
 #include "ReportGenerator.h"
 
 class PlainReportGenerator : public ReportGenerator {
-public:
+ public:
     PlainReportGenerator(const std::vector<TestResult> &testResults);
 
     void generateReport(std::ostream &ostream) override;
 
-private:
+ private:
     std::string getTestResultString(TestResult result);
 };
-
 
 #endif //CRAYG_PLAINREPORTGENERATOR_H

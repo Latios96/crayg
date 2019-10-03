@@ -13,14 +13,13 @@ bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) 
     std::string extension = path.extension().string();
     std::unique_ptr<ImageWriter> imageWriter;
 
-    if(extension == ".bmp"){
+    if (extension == ".bmp") {
         imageWriter = std::unique_ptr<ImageWriter>(new BmpImageWriter());
-    }
-    else if(extension == ".png"){
+    } else if (extension == ".png") {
         imageWriter = std::unique_ptr<ImageWriter>(new OpenImageIoImageWriter());
     }
 
-    if(!imageWriter){
+    if (!imageWriter) {
         return false;
     }
 

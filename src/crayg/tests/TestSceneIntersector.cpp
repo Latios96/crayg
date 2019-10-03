@@ -7,17 +7,17 @@
 #include "intersectors/SceneIntersector.h"
 #include "foundation/Ray.h"
 
-TEST_CASE("SceneIntersector"){
+TEST_CASE("SceneIntersector") {
     Scene scene;
 
-    scene.addObject(new Sphere(Vector3f(1,0,0), 1));
-    scene.addObject(new Sphere(Vector3f(-2,0,0), 1));
+    scene.addObject(new Sphere(Vector3f(1, 0, 0), 1));
+    scene.addObject(new Sphere(Vector3f(-2, 0, 0), 1));
 
     SceneIntersector intersector(scene);
 
     SECTION("isIntersectingReturnsTrue") {
         REQUIRE(intersector.isIntersecting(Ray(Vector3f(1, 0, -5), Vector3f(0, 0, 1))));
         REQUIRE(intersector.isIntersecting(Ray(Vector3f(-2, 0, -5), Vector3f(0, 0, 1))));
-        REQUIRE(intersector.isIntersecting(Ray(Vector3f(0,0,0), Vector3f(0,0,1))));
+        REQUIRE(intersector.isIntersecting(Ray(Vector3f(0, 0, 0), Vector3f(0, 0, 1))));
     }
 }

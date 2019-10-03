@@ -5,26 +5,24 @@
 #ifndef CRAYG_SCENEINTERSECTOR_H
 #define CRAYG_SCENEINTERSECTOR_H
 
-
 #include <scene/Scene.h>
 #include "Intersectable.h"
 
-struct Intersection{
-public:
-    Intersection(const Ray &ray, Vector3f location, SceneObject *object) : ray(ray), location(location), object(object) {}
+struct Intersection {
+ public:
+    Intersection(const Ray &ray, Vector3f location, SceneObject *object)
+        : ray(ray), location(location), object(object) {}
 
     Ray ray;
     Vector3f location;
-    SceneObject* object;
+    SceneObject *object;
 
     bool isValid();
 };
 
-
-
 // todo add init method -> builds BVH Tree
-class SceneIntersector{
-public:
+class SceneIntersector {
+ public:
     explicit SceneIntersector(Scene &scene);
 
     virtual Imageable::Intersection intersect(Ray ray);
@@ -32,9 +30,8 @@ public:
 
     virtual ~SceneIntersector();
 
-private:
+ private:
     Scene &scene;
 };
-
 
 #endif //CRAYG_SCENEINTERSECTOR_H

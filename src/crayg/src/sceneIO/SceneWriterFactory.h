@@ -9,23 +9,22 @@
 #include <memory>
 #include "sceneIO/write/SceneWriter.h"
 
-class SceneWriterFacade{
-public:
+class SceneWriterFacade {
+ public:
     SceneWriterFacade(SceneWriter *writer, SerializerImplementation *serializerImplementation);
-    
+
     void write();
-    
+
     virtual ~SceneWriterFacade();
 
-private:
+ private:
     SceneWriter *writer;
     SerializerImplementation *serializerImplementation;
 };
 
 class SceneWriterFactory {
-public:
+ public:
     static std::shared_ptr<SceneWriterFacade> createSceneWriter(std::string scenePath, Scene &scene);
 };
-
 
 #endif //CRAYG_SCENEWRITERFACTORY_H

@@ -9,12 +9,12 @@ void SceneWriter::write() {
 
     serializerImpl.init();
 
-    for (const auto &obj : scene.objects){
+    for (const auto &obj : scene.objects) {
         serializerImpl.startObject();
         obj->serialize(serializerImpl);
         serializerImpl.endObject();
     }
-    if(scene.camera){
+    if (scene.camera) {
         serializerImpl.startObject();
         scene.camera->serialize(serializerImpl);
         serializerImpl.endObject();

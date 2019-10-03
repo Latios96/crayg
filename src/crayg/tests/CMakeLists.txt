@@ -26,26 +26,26 @@ set(UNIT_TEST_LIST
         TestOpenImageIoImageWriter.cpp
         )
 
-foreach(NAME IN LISTS UNIT_TEST_LIST)
-  list(APPEND UNIT_TEST_SOURCE_LIST ${NAME})
-endforeach()
+foreach (NAME IN LISTS UNIT_TEST_LIST)
+    list(APPEND UNIT_TEST_SOURCE_LIST ${NAME})
+endforeach ()
 
 set(TARGET_NAME tests)
 
 add_executable(${TARGET_NAME}
         main.cpp
-  ${UNIT_TEST_SOURCE_LIST})
+        ${UNIT_TEST_SOURCE_LIST})
 
 target_link_libraries(${TARGET_NAME}
-  PUBLIC crayg)
+        PUBLIC crayg)
 
 target_include_directories(${TARGET_NAME}
-  PUBLIC ../../externals/fakeIt)
+        PUBLIC ../../externals/fakeIt)
 
 set_target_properties(${TARGET_NAME}
         PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
-                LINK_FLAGS "--coverage")
+        LINK_FLAGS "--coverage")
 
 add_test(
-  NAME ${TARGET_NAME}
-  COMMAND ${TARGET_NAME} -o report.xml -r junit)
+        NAME ${TARGET_NAME}
+        COMMAND ${TARGET_NAME} -o report.xml -r junit)

@@ -5,12 +5,11 @@
 #ifndef CRAYG_SPHERE_H
 #define CRAYG_SPHERE_H
 
-
 #include "string"
 #include "SceneObject.h"
 
-class Sphere :  public SceneObject{
-public:
+class Sphere : public SceneObject {
+ public:
 
     Sphere();
 
@@ -21,18 +20,16 @@ public:
     Sphere::Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
 
-    void serialize(Serializer& serializer) override;
+    void serialize(Serializer &serializer) override;
 
-    void deserialize(Deserializer& deserializer) override;
+    void deserialize(Deserializer &deserializer) override;
 
     Vector3f getNormal(Vector3f point) override;
 
     virtual ~Sphere();
 
-private:
+ private:
     float radius;
 };
-
-
 
 #endif //CRAYG_SPHERE_H

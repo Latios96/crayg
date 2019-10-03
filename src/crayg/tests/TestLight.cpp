@@ -21,7 +21,7 @@ TEST_CASE("Light") {
         myLight.serialize(s);
 
         fakeit::Verify(Method(mockSerializer, writeFloat).Using("intensity", 3.0f));
-        fakeit::Verify(Method(mockSerializer, writeVector3f).Using("position", Vector3f(1,2,3)));
+        fakeit::Verify(Method(mockSerializer, writeVector3f).Using("position", Vector3f(1, 2, 3)));
         fakeit::Verify(Method(mockSerializer, writeType).Using("Light"));
     }
 

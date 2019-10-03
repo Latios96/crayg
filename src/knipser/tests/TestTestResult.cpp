@@ -6,13 +6,12 @@
 #include <KnipserTest.h>
 #include <TestResult.h>
 
-
-TEST_CASE("TestResult"){
+TEST_CASE("TestResult") {
     const KnipserTest myTest = KnipserTest(std::string("my test"), [](const TestContext &context) {});
 
     TestContext testContext("demo", "reference");
 
-    SECTION("should create passed test"){
+    SECTION("should create passed test") {
         TestResult passedTestResult = TestResult::createPassed(myTest, testContext);
 
         REQUIRE(passedTestResult.test == myTest);
@@ -21,7 +20,7 @@ TEST_CASE("TestResult"){
         REQUIRE(passedTestResult.testContext == testContext);
     }
 
-    SECTION("should create failed test"){
+    SECTION("should create failed test") {
         TestResult failedTestResult = TestResult::createFailed(myTest, "my message", testContext);
 
         REQUIRE(failedTestResult.test == myTest);

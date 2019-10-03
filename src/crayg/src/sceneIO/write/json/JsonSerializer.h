@@ -5,7 +5,6 @@
 #ifndef CRAYG_JSONSERIALIZER_H
 #define CRAYG_JSONSERIALIZER_H
 
-
 #include <fstream>
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/prettywriter.h>
@@ -13,11 +12,10 @@
 #include "sceneIO/write/SerializerImplementation.h"
 #include <memory>
 
-
 // todo add tests
-class JsonSerializer : public SerializerImplementation{
+class JsonSerializer : public SerializerImplementation {
 
-public:
+ public:
     explicit JsonSerializer(const std::string &path);
 
     void init() override;
@@ -31,14 +29,12 @@ public:
     void writeVector3fArray(std::string name, std::vector<Vector3f> &value) override;
     void writeIntArray(std::string name, std::vector<int> &value) override;
 
-private:
+ private:
     std::shared_ptr<std::ofstream> ofs;
     std::shared_ptr<rapidjson::OStreamWrapper> osw;
     std::shared_ptr<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>> writer;
 
     void writeVector3fImpl(const Vector3f &value) const;
 };
-
-
 
 #endif //CRAYG_JSONSERIALIZER_H

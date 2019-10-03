@@ -18,8 +18,8 @@ TEST_CASE("ToStringHelper", "[ToStringHelper]") {
 
     SECTION("twoMembers") {
         helper
-        .addMember("myMember", 1)
-        .addMember("myMember2", 2);
+            .addMember("myMember", 1)
+            .addMember("myMember2", 2);
         REQUIRE(helper.finish() == "TestClass{myMember=1,myMember2=2}");
     }
 }

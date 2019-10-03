@@ -5,12 +5,11 @@
 #ifndef CRAYG_IMAGE_H
 #define CRAYG_IMAGE_H
 
-
 #include <foundation/Color.h>
 #include "foundation/Vector3f.h"
 class Image {
 
-private:
+ private:
     int width, height;
     float *values;
 
@@ -21,10 +20,10 @@ private:
      * @return index in the 1d array
      */
     int index(int x, int y) const {
-        return (x + width * y)*3;
+        return (x + width * y) * 3;
     }
 
-public:
+ public:
     /**
      * Creates a new Image of given dimensions. All Pixel values are initialized to 0.
      * @param width width of the new image
@@ -52,12 +51,11 @@ public:
 
 };
 
-struct PixelPosition{
+struct PixelPosition {
     int x;
     int y;
 
     PixelPosition(int x, int y);
 };
-
 
 #endif //CRAYG_IMAGE_H

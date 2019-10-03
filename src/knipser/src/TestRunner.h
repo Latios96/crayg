@@ -11,13 +11,11 @@
 #include "RunConfig.h"
 #include <vector>
 
-
-
 class TestRunner {
-public:
+ public:
     explicit TestRunner(TestRegistry &testRegistry, RunConfig runConfig);
     std::vector<TestResult> execute();
-private:
+ private:
     TestRegistry &testRegistry;
     RunConfig runConfig;
 
@@ -25,6 +23,5 @@ private:
 
     TestContext createTestContext(const KnipserTest &test);
 };
-
 
 #endif //CRAYG_TESTRUNNER_H

@@ -5,22 +5,20 @@
 #ifndef CRAYG_SHADINGMETHODS_H
 #define CRAYG_SHADINGMETHODS_H
 
-
 #include <foundation/Color.h>
 #include <foundation/Vector3f.h>
 #include <scene/SceneObject.h>
 #include <scene/Scene.h>
 
 class ShadingMethod {
-public:
+ public:
     ShadingMethod(Scene &scene);
 
     Color lambertShading(Vector3f point, Imageable &object);
     Color colorForLight(const Vector3f &point, const Vector3f &normal, const std::shared_ptr<Light> &light) const;
-private:
+ private:
     Scene &scene;
 
 };
-
 
 #endif //CRAYG_SHADINGMETHODS_H

@@ -9,13 +9,12 @@
 #include "TestResult.h"
 
 class ReportGenerator {
-public:
+ public:
     explicit ReportGenerator(const std::vector<TestResult> &testResults);
     virtual void generateReport(std::ostream &ostream) = 0;
 
-protected:
+ protected:
     const std::vector<TestResult> testResults;
 };
-
 
 #endif //CRAYG_REPORTGENERATOR_H

@@ -7,30 +7,29 @@ using namespace fakeit;
 #include <intersectors/SceneIntersector.h>
 #include <lightSamplers/PointLightSampler.h>
 
-
 // for some reason fakeit did not work here
-class MockSceneIntersector: public SceneIntersector{
-public:
+class MockSceneIntersector : public SceneIntersector {
+ public:
     MockSceneIntersector(Scene &scene, const Imageable::Intersection &return_value)
-            : SceneIntersector(scene) {
+        : SceneIntersector(scene) {
         this->return_value = return_value;
     }
     Imageable::Intersection intersect(Ray ray) override {
         return return_value;
     };
-private:
+ private:
     Imageable::Intersection return_value;
 };
 
-TEST_CASE("PointLightSampler"){
+TEST_CASE("PointLightSampler") {
     const float NO_SHADOW = 1.0f;
     const float FULL_SHADOW = 0.0f;
 
     Light light;
-    light.setPosition({0,5,0});
+    light.setPosition({0, 5, 0});
     light.setIntensity(1.0);
 
-    SECTION("noIntersectionShouldReturnNoShadow"){
+    SECTION("noIntersectionShouldReturnNoShadow") {
         Scene scene;
         MockSceneIntersector mockIntersector(scene, Imageable::Intersection::createInvalid());
         PointLightSampler pointLightSampler(mockIntersector, light);
@@ -39,7 +38,7 @@ TEST_CASE("PointLightSampler"){
         REQUIRE(shadowFactor == NO_SHADOW);
     }
 
-    SECTION("intersectionIsBehindLight"){
+    SECTION("intersectionIsBehindLight") {
         Scene scene;
         MockSceneIntersector mockIntersector(scene, {10, (Imageable *) 2});
         PointLightSampler pointLightSampler(mockIntersector, light);
@@ -48,7 +47,7 @@ TEST_CASE("PointLightSampler"){
         REQUIRE(shadowFactor == NO_SHADOW);
     }
 
-    SECTION("intersectionIsBeforeLight"){
+    SECTION("intersectionIsBeforeLight") {
         Scene scene;
         MockSceneIntersector mockIntersector(scene, {2, (Imageable *) 2});
         PointLightSampler pointLightSampler(mockIntersector, light);

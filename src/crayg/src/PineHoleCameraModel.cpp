@@ -21,7 +21,7 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
     upVector = sideVector.crossProduct(viewVector).normalize();
 
     // create width and height, define the size of the view plane
-    imagePlaneHeight = 2.0f * std::tan(camera.getFieldOfView()/2.0f);
+    imagePlaneHeight = 2.0f * std::tan(camera.getFieldOfView() / 2.0f);
 
     imagePlaneWidth = imageRatio * imagePlaneHeight;
 
@@ -35,7 +35,7 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
 
 Ray PineHoleCameraModel::createPrimaryRay(float x, float y) {
     Vector3f pixelCenter = getPixelCenter(x, y);
-    Vector3f rayDirection= pixelCenter.substract(camera.getPosition()).normalize();
+    Vector3f rayDirection = pixelCenter.substract(camera.getPosition()).normalize();
     return {camera.getPosition(), rayDirection};
 }
 
@@ -46,9 +46,8 @@ Vector3f PineHoleCameraModel::getPixelCenter(float x, float y) {
     x = static_cast<float>(imageWidth) - x;
     y = static_cast<float>(imageHeight) - y;
 
-
-    float wScale = 2.0f*(x+0.5f)/ static_cast<float>(imageWidth)-1.0f;
-    float hScale = 2.0f*(y+0.5f)/static_cast<float>(imageHeight)-1.0f;
+    float wScale = 2.0f * (x + 0.5f) / static_cast<float>(imageWidth) - 1.0f;
+    float hScale = 2.0f * (y + 0.5f) / static_cast<float>(imageHeight) - 1.0f;
 
     return planeCenter.add(sideVector.multiplyScalar(wScale)).add(upVector.multiplyScalar(hScale));
 }

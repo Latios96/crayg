@@ -8,7 +8,7 @@
 #include <foundation/Ray.h>
 
 class CameraModel {
-public:
+ public:
     virtual Ray createPrimaryRay(float x, float y) = 0;
 
     virtual ~CameraModel() = default;

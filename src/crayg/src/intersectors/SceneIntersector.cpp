@@ -6,10 +6,10 @@
 Imageable::Intersection SceneIntersector::intersect(Ray ray) {
     Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-    for(const auto &intersectable : scene.objects){
+    for (const auto &intersectable : scene.objects) {
         Imageable::Intersection intersection = intersectable->intersect(ray);
 
-        if(intersection.rayParameter < hitIntersection.rayParameter && intersection.imageable){
+        if (intersection.rayParameter < hitIntersection.rayParameter && intersection.imageable) {
             hitIntersection.rayParameter = intersection.rayParameter;
             hitIntersection.imageable = intersection.imageable;
         }
@@ -17,8 +17,8 @@ Imageable::Intersection SceneIntersector::intersect(Ray ray) {
     return hitIntersection;
 }
 
-bool SceneIntersector::isIntersecting(Ray ray){
-    for(const auto &intersectable : scene.objects){
+bool SceneIntersector::isIntersecting(Ray ray) {
+    for (const auto &intersectable : scene.objects) {
         if (intersectable->isIntersecting(ray)) {
             return true;
         }

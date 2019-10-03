@@ -4,11 +4,10 @@
 
 #include "SceneWriterFactory.h"
 
-
-
 SceneWriterFacade::SceneWriterFacade(SceneWriter *writer,
-        SerializerImplementation *serializerImplementation) : writer(writer),
-        serializerImplementation(serializerImplementation) {}
+                                     SerializerImplementation *serializerImplementation) : writer(writer),
+                                                                                           serializerImplementation(
+                                                                                               serializerImplementation) {}
 
 SceneWriterFacade::~SceneWriterFacade() {
     delete writer;

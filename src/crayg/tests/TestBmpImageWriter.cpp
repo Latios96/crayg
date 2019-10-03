@@ -14,25 +14,25 @@ static const char *const TEST_IMAGE_NAME = "testImageWrite.bmp";
 // helper to check if file exists
 bool fexists(const char *filename) {
     std::ifstream ifile(filename);
-    return (bool)ifile;
+    return (bool) ifile;
 }
 
-TEST_CASE("BmpImageWriter"){
+TEST_CASE("BmpImageWriter") {
     // setup
-    Image image(20,10);
+    Image image(20, 10);
     BmpImageWriter writer;
 
-    if (fexists(TEST_IMAGE_NAME)){
+    if (fexists(TEST_IMAGE_NAME)) {
         REQUIRE(remove(TEST_IMAGE_NAME) == 0);
     }
 
-    SECTION("fileShouldExistAfterWrite"){
+    SECTION("fileShouldExistAfterWrite") {
         writer.writeImage(image, TEST_IMAGE_NAME);
         REQUIRE(fexists(TEST_IMAGE_NAME));
     }
 
     // tear down
-    if (fexists(TEST_IMAGE_NAME)){
+    if (fexists(TEST_IMAGE_NAME)) {
         REQUIRE(remove(TEST_IMAGE_NAME) == 0);
     }
 }

@@ -7,31 +7,30 @@
 
 #include <string>
 
-class ToStringHelper{
-public:
-    explicit ToStringHelper(const std::string &className){
+class ToStringHelper {
+ public:
+    explicit ToStringHelper(const std::string &className) {
         repr.append(className);
     }
 
-    template <typename T>
-    ToStringHelper& addMember(const std::string &name, T value){
-        if (!hasMembers){
+    template<typename T>
+    ToStringHelper &addMember(const std::string &name, T value) {
+        if (!hasMembers) {
             repr.append("{");
             hasMembers = true;
             repr.append(name)
-                    .append("=")
-                    .append(std::to_string(value));
-        }
-        else{
+                .append("=")
+                .append(std::to_string(value));
+        } else {
             repr.append(",")
-                    .append(name)
-                    .append("=")
-                    .append(std::to_string(value));
+                .append(name)
+                .append("=")
+                .append(std::to_string(value));
         }
         return *this;
     };
 
-    std::string& finish(){
+    std::string &finish() {
         if (!hasMembers) {
             repr.append("{");
         }
@@ -39,10 +38,9 @@ public:
         return repr;
     }
 
-private:
+ private:
     std::string repr;
     bool hasMembers = false;
 };
-
 
 #endif //CRAYG_TOSTRINGHELPER_H

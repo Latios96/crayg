@@ -18,5 +18,5 @@ TEST_CASE("ImageComparator") {
     SECTION("Result should be ERROR") {
         OpenImageIoImageComparator comparator(TEST_IMAGE_WHITE, TEST_IMAGE_BLACK);
         REQUIRE(comparator.compareImages().isError());
-   }
+    }
 }

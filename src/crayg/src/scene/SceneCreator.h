@@ -7,7 +7,7 @@
 
 #include "Scene.h"
 
-class SceneCreator{
+class SceneCreator {
     virtual void createScene(Scene &scene);
 };
 #endif //CRAYG_SCENECREATOR_H

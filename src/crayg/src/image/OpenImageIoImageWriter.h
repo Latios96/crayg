@@ -7,7 +7,7 @@
 
 static const int RGB_CHANNEL_COUNT = 3;
 #include "ImageWriter.h"
-class OpenImageIoImageWriter : public ImageWriter{
+class OpenImageIoImageWriter : public ImageWriter {
  public:
     void writeImage(const Image &image, std::string image_name) override;
 

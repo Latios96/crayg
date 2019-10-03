@@ -4,37 +4,37 @@
 #include <catch2/catch.hpp>
 #include <TestContext.h>
 
-TEST_CASE("TestTestContext"){
+TEST_CASE("TestTestContext") {
     TestContext testContext("demo", "demoReference");
 
-    SECTION("shouldReturnCorrectOutputFolder"){
+    SECTION("shouldReturnCorrectOutputFolder") {
         REQUIRE(testContext.getOutputFolder() == "demo");
     }
 
-    SECTION("shouldReturnCorrectOutputName"){
+    SECTION("shouldReturnCorrectOutputName") {
         testContext.setImageOutputName("test.exr");
         REQUIRE(testContext.getOutputFilename() == "demo/test.exr");
     }
 
-    SECTION("canNotSetImageOutputNameSecondTime"){
+    SECTION("canNotSetImageOutputNameSecondTime") {
         testContext.setImageOutputName("test.exr");
         REQUIRE_THROWS_AS(testContext.setImageOutputName("test.exr"), std::logic_error);
     }
 
-    SECTION("imageOutputIsSetIsFalse"){
+    SECTION("imageOutputIsSetIsFalse") {
         REQUIRE_FALSE(testContext.imageOutputIsSet());
     }
 
-    SECTION("imageOutputIsSetIsTrue"){
+    SECTION("imageOutputIsSetIsTrue") {
         testContext.setImageOutputName("test");
         REQUIRE(testContext.imageOutputIsSet());
     }
 
-    SECTION("shouldReturnCorrectReferenceFolder"){
+    SECTION("shouldReturnCorrectReferenceFolder") {
         REQUIRE(testContext.getReferenceFolder() == "demoReference");
     }
 
-    SECTION("shouldReturnCorrectReferenceName"){
+    SECTION("shouldReturnCorrectReferenceName") {
         testContext.setImageOutputName("test.exr");
         REQUIRE(testContext.getReferenceFilename() == "demoReference/test.exr");
     }

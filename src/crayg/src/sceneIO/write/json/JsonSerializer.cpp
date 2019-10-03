@@ -52,16 +52,18 @@ void JsonSerializer::writeType(std::string name) {
     writer->String(name.c_str());
 }
 
-JsonSerializer::JsonSerializer(const std::string &path){
+JsonSerializer::JsonSerializer(const std::string &path) {
     ofs = std::shared_ptr<std::ofstream>(new std::ofstream(path));
     osw = std::shared_ptr<rapidjson::OStreamWrapper>(new rapidjson::OStreamWrapper(*ofs));
-    writer = std::shared_ptr<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>>(new rapidjson::PrettyWriter<rapidjson::OStreamWrapper>(*osw));
+    writer =
+        std::shared_ptr<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>>(new rapidjson::PrettyWriter<rapidjson::OStreamWrapper>(
+            *osw));
 }
 
 void JsonSerializer::writeVector3fArray(std::string name, std::vector<Vector3f> &value) {
     writer->Key(name.c_str());
     writer->StartArray();
-    for(Vector3f vec : value){
+    for (Vector3f vec : value) {
         writeVector3fImpl(vec);
     }
     writer->EndArray();
@@ -70,7 +72,7 @@ void JsonSerializer::writeVector3fArray(std::string name, std::vector<Vector3f> 
 void JsonSerializer::writeIntArray(std::string name, std::vector<int> &value) {
     writer->Key(name.c_str());
     writer->StartArray();
-    for(int i : value){
+    for (int i : value) {
         writer->Int(i);
     }
     writer->EndArray();

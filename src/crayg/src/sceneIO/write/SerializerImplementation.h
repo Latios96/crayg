@@ -7,14 +7,14 @@
 
 #include "sceneIO/Serializable.h"
 
-class SerializerImplementation : public Serializer{
-public:
-    virtual void init()=0;
-    virtual void startObject()=0;
-    virtual void endObject()=0;
-    virtual void finish()=0;
+class SerializerImplementation : public Serializer {
+ public:
+    virtual void init() = 0;
+    virtual void startObject() = 0;
+    virtual void endObject() = 0;
+    virtual void finish() = 0;
 
-    virtual ~SerializerImplementation(){
+    virtual ~SerializerImplementation() {
 
     };
 };

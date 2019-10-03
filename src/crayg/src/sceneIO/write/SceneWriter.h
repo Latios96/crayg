@@ -10,15 +10,15 @@
 #include "sceneIO/write/json/JsonSerializer.h"
 
 class SceneWriter {
-public:
+ public:
     void write();
 
-    explicit SceneWriter(Scene &scene, SerializerImplementation& serializerImpl) : scene(scene),
-    serializerImpl(serializerImpl) {}
+    explicit SceneWriter(Scene &scene, SerializerImplementation &serializerImpl) : scene(scene),
+                                                                                   serializerImpl(serializerImpl) {}
 
-private:
-    Scene& scene;
-    SerializerImplementation& serializerImpl;
+ private:
+    Scene &scene;
+    SerializerImplementation &serializerImpl;
 };
 
 #endif //CRAYG_SCENEWRITER_H

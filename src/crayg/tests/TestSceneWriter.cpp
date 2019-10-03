@@ -9,36 +9,35 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include "sceneIO/write/SceneWriter.h"
 
-TEST_CASE("SceneWriter"){
+TEST_CASE("SceneWriter") {
     Scene scene;
 
-    Camera* camera = new Camera();
+    Camera *camera = new Camera();
 
-    scene.addObject(new Sphere(Vector3f(1,0,0), 1));
-    scene.addObject(new Sphere(Vector3f(-2,0,0), 1));
+    scene.addObject(new Sphere(Vector3f(1, 0, 0), 1));
+    scene.addObject(new Sphere(Vector3f(-2, 0, 0), 1));
     scene.camera = camera;
 
     fakeit::Mock<SerializerImplementation> mockSerializerImpl;
 
-    fakeit::When(Method(mockSerializerImpl,init)).AlwaysReturn();
-    fakeit::When(Method(mockSerializerImpl,startObject)).AlwaysReturn();
-    fakeit::When(Method(mockSerializerImpl,endObject)).AlwaysReturn();
-    fakeit::When(Method(mockSerializerImpl,finish)).AlwaysReturn();
+    fakeit::When(Method(mockSerializerImpl, init)).AlwaysReturn();
+    fakeit::When(Method(mockSerializerImpl, startObject)).AlwaysReturn();
+    fakeit::When(Method(mockSerializerImpl, endObject)).AlwaysReturn();
+    fakeit::When(Method(mockSerializerImpl, finish)).AlwaysReturn();
 
-    fakeit::When(Method(mockSerializerImpl,writeFloat)).AlwaysReturn();
-    fakeit::When(Method(mockSerializerImpl,writeVector3f)).AlwaysReturn();
-    fakeit::When(Method(mockSerializerImpl,writeType)).AlwaysReturn();
-
+    fakeit::When(Method(mockSerializerImpl, writeFloat)).AlwaysReturn();
+    fakeit::When(Method(mockSerializerImpl, writeVector3f)).AlwaysReturn();
+    fakeit::When(Method(mockSerializerImpl, writeType)).AlwaysReturn();
 
     SceneWriter sceneWriter(scene, mockSerializerImpl.get());
 
-    SECTION("writeSceneCallCountMatchesObjectCound"){
+    SECTION("writeSceneCallCountMatchesObjectCound") {
         sceneWriter.write();
 
-        fakeit::Verify(Method(mockSerializerImpl,init)).Exactly(1);
-        fakeit::Verify(Method(mockSerializerImpl,startObject)).Exactly(3);
-        fakeit::Verify(Method(mockSerializerImpl,endObject)).Exactly(3);
-        fakeit::Verify(Method(mockSerializerImpl,finish)).Exactly(1);
+        fakeit::Verify(Method(mockSerializerImpl, init)).Exactly(1);
+        fakeit::Verify(Method(mockSerializerImpl, startObject)).Exactly(3);
+        fakeit::Verify(Method(mockSerializerImpl, endObject)).Exactly(3);
+        fakeit::Verify(Method(mockSerializerImpl, finish)).Exactly(1);
 
     }
 

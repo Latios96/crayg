@@ -11,10 +11,10 @@
 
 class KnipserTest {
  public:
-    KnipserTest(std::string name, std::function<void(TestContext&)> testCallback);
+    KnipserTest(std::string name, std::function<void(TestContext &)> testCallback);
 
     const std::string name;
-    const std::function<void(TestContext&)> testCallback;
+    const std::function<void(TestContext &)> testCallback;
 
     bool operator==(const KnipserTest &rhs) const;
 

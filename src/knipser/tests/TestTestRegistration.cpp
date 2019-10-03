@@ -5,15 +5,15 @@
 #include <catch2/catch.hpp>
 #include "TestRegistry.h"
 
-KNIPSER_REGISTER_TEST(threeSpheres, [](TestContext &context){
+KNIPSER_REGISTER_TEST(threeSpheres, [](TestContext &context) {
 
 });
 
-KNIPSER_REGISTER_TEST(singleSphere, [](TestContext &context){
+KNIPSER_REGISTER_TEST(singleSphere, [](TestContext &context) {
 
 });
 
-TEST_CASE("testsShouldBeRegistered"){
+TEST_CASE("testsShouldBeRegistered") {
     REQUIRE(TestRegistry::getInstance()->getTests().size() == 2);
     REQUIRE(TestRegistry::getInstance()->getTests()[0].name == "threeSpheres");
     REQUIRE(TestRegistry::getInstance()->getTests()[1].name == "singleSphere");

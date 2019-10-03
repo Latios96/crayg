@@ -5,19 +5,18 @@
 #ifndef CRAYG_CAMERA_H
 #define CRAYG_CAMERA_H
 
-
 #include "foundation/Vector3f.h"
 #include "sceneIO/Serializable.h"
 
-class Camera : public Serializable{
-private:
+class Camera : public Serializable {
+ private:
     Vector3f position;
     Vector3f userUpVector;
     Vector3f centerOfInterest;
     float focalLength;
     float filmbackSize;
 
-public:
+ public:
     Camera();
 
     Camera(const Vector3f &position, const Vector3f &userUpVector, const Vector3f &centerOfInterest, float focalLength,
@@ -45,10 +44,9 @@ public:
      */
     float getFilmbackSize() const;
 
-    void serialize(Serializer& serializer) override;
+    void serialize(Serializer &serializer) override;
 
-    void deserialize(Deserializer& deserializer) override;
+    void deserialize(Deserializer &deserializer) override;
 };
-
 
 #endif //CRAYG_CAMERA_H

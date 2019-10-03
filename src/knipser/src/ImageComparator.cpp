@@ -19,10 +19,9 @@ ImageComparatorResult OpenImageIoImageComparator::compareImages() {
     OIIO::ImageBuf rightInput(right);
 
     auto result = OIIO::ImageBufAlgo::compare(leftInput, rightInput, 0.5, 0.0);
-    if (result.error){
+    if (result.error) {
         return {ERROR, static_cast<float>(result.maxerror)};
-    }
-    else{
+    } else {
         return {OK, 0.0};
     }
 }

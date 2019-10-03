@@ -6,12 +6,12 @@
 #include <sstream>
 #include <fmt/format.h>
 
-TEST_CASE("PlainReportGenerator"){
+TEST_CASE("PlainReportGenerator") {
     const KnipserTest myTest = KnipserTest(std::string("my test"), [](const TestContext &context) {});
 
     std::vector<TestResult> results;
 
-    SECTION("should report passed test"){
+    SECTION("should report passed test") {
         results.push_back(TestResult::createPassed(myTest, TestContext("demo", "reference")));
         PlainReportGenerator plainReportGenerator(results);
 
@@ -23,7 +23,7 @@ TEST_CASE("PlainReportGenerator"){
         REQUIRE(ss.str().find("OK") != -1);
     }
 
-    SECTION("should report failed test"){
+    SECTION("should report failed test") {
 
     }
 

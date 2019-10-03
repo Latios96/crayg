@@ -5,12 +5,11 @@
 #ifndef CRAYG_REMAININGTIMECALCULATOR_H
 #define CRAYG_REMAININGTIMECALCULATOR_H
 
-
 #include <chrono>
 
 class RemainingTimeCalculator {
 
-public:
+ public:
     explicit RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime);
 
     /**
@@ -20,9 +19,8 @@ public:
      */
     float getRemainingTimeByProgress(int progress);
 
-private:
+ private:
     std::chrono::steady_clock::time_point startTime;
 };
-
 
 #endif //CRAYG_REMAININGTIMECALCULATOR_H

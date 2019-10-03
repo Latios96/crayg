@@ -5,13 +5,12 @@
 #ifndef CRAYG_INTERSECTOR_H
 #define CRAYG_INTERSECTOR_H
 
-
 #include "foundation/Vector3f.h"
 #include "foundation/Ray.h"
 
-template <typename T>
+template<typename T>
 class Intersector {
-public:
+ public:
     /**
      * Intersects the given ray with the implementing object.
      * @param ray ray in world space to intersect with
@@ -27,7 +26,7 @@ public:
 
     explicit Intersector(T objectToIntersect) : sphereToIntersect(objectToIntersect) {}
 
-private:
+ private:
     T sphereToIntersect;
 };
 

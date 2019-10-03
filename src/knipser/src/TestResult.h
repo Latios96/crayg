@@ -5,11 +5,10 @@
 #ifndef CRAYG_TESTRESULT_H
 #define CRAYG_TESTRESULT_H
 
-
 #include "KnipserTest.h"
 
 struct TestResult {
-public:
+ public:
     TestResult(const KnipserTest &test,
                const bool passed,
                const std::string &message,
@@ -22,6 +21,5 @@ public:
     const std::string message;
     const TestContext testContext;
 };
-
 
 #endif //CRAYG_TESTRESULT_H

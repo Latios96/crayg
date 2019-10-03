@@ -7,25 +7,24 @@
 
 #include "Sphere.h"
 
-enum LightType{
+enum LightType {
     POINT_LIGHT
 };
 
-class Light : public Serializable, public Transformable{
-public:
+class Light : public Serializable, public Transformable {
+ public:
 
-    void serialize(Serializer& serializer) override;
+    void serialize(Serializer &serializer) override;
 
-    void deserialize(Deserializer& deserializer) override;
+    void deserialize(Deserializer &deserializer) override;
     float getIntensity() const;
 
     void setIntensity(float intensity);
 
-    const LightType lightType=POINT_LIGHT;
+    const LightType lightType = POINT_LIGHT;
 
-private:
+ private:
     float intensity;
 };
-
 
 #endif //CRAYG_LIGHT_H

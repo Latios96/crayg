@@ -11,10 +11,10 @@
 #include "sceneIO/read/Deserializer.h"
 #include <vector>
 
-class Serializable{
-public:
-    virtual void serialize(Serializer& serializer)=0;
-    virtual void deserialize(Deserializer& deserializer)=0;
+class Serializable {
+ public:
+    virtual void serialize(Serializer &serializer) = 0;
+    virtual void deserialize(Deserializer &deserializer) = 0;
 };
 
 #endif //CRAYG_SERIALIZABLE_H

@@ -27,7 +27,7 @@ ExitMessage KnipserApp::execute() {
     return createExitMessage(testResults);
 }
 ExitMessage KnipserApp::createExitMessage(const std::vector<TestResult> &testResults) {
-    if(testResults.empty()){
+    if (testResults.empty()) {
         return {1, "No tests found!"};
     }
     return exitMessageFromTestResults(testResults);
@@ -54,7 +54,11 @@ ExitMessage KnipserApp::exitMessageFromTestResults(const std::vector<TestResult>
     plainReportGenerator.generateReport(ss);
 
     std::string
-        message = fmt::format("\n{}\nRan {} tests, {} passed and {} failed", ss.str(), testResults.size(), passedCount, failedCount);
+        message = fmt::format("\n{}\nRan {} tests, {} passed and {} failed",
+                              ss.str(),
+                              testResults.size(),
+                              passedCount,
+                              failedCount);
 
     return {exitCode, message};
 }

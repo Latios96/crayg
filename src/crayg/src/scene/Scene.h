@@ -5,7 +5,6 @@
 #ifndef CRAYG_SCENE_H
 #define CRAYG_SCENE_H
 
-
 #include <vector>
 #include "intersectors/Intersectable.h"
 #include "Sphere.h"
@@ -14,18 +13,18 @@
 #include <memory>
 
 // todo add Rendersettings
-class Scene{
-public:
+class Scene {
+ public:
     Scene();
 
-    void addObject(SceneObject* sceneObject);
+    void addObject(SceneObject *sceneObject);
 
-    void addLight(Light* sceneObject);
+    void addLight(Light *sceneObject);
 
     std::vector<std::shared_ptr<SceneObject>> objects;
     std::vector<std::shared_ptr<Light>> lights;
 
-    Camera* camera= nullptr;
+    Camera *camera = nullptr;
 
     virtual ~Scene();
 };

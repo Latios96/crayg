@@ -5,11 +5,10 @@
 #ifndef CRAYG_TRANSFORMABLE_H
 #define CRAYG_TRANSFORMABLE_H
 
-
 #include "foundation/Vector3f.h"
 
 class Transformable {
-public:
+ public:
     Transformable();
     Transformable(Vector3f position);
 
@@ -17,10 +16,8 @@ public:
 
     void setPosition(Vector3f position);
 
-
-private:
+ private:
     Vector3f position;
 };
-
 
 #endif //CRAYG_TRANSFORMABLE_H

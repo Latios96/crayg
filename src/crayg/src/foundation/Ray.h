@@ -5,13 +5,12 @@
 #ifndef CRAYG_RAY_H
 #define CRAYG_RAY_H
 
-
 #include "Vector3f.h"
 // todo implement ==, !=
 struct Ray {
     Vector3f startPoint, direction;
     float length;
-public:
+ public:
     Ray(Vector3f startPoint, Vector3f direction);
 
     Ray(Vector3f startPoint, Vector3f direction, float length);
@@ -25,6 +24,5 @@ public:
     Vector3f constructIntersectionPoint(float t);
 
 };
-
 
 #endif //CRAYG_RAY_H

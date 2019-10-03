@@ -8,7 +8,7 @@ BoundingBox::BoundingBox(const Vector3f &min, const Vector3f &max) : min(min), m
 
 bool BoundingBox::operator==(const BoundingBox &rhs) const {
     return min == rhs.min &&
-           max == rhs.max;
+        max == rhs.max;
 }
 
 bool BoundingBox::operator!=(const BoundingBox &rhs) const {

@@ -6,36 +6,36 @@
 #include "utils/ProgressReporter.h"
 #include <fakeit.hpp>
 
-void _report(int progress, float timeRemaining){
+void _report(int progress, float timeRemaining) {
 
 }
 
 int callCount = 0;
 
-void _storeCallCount(int progress, float timeRemaining){
+void _storeCallCount(int progress, float timeRemaining) {
     callCount++;
 }
 
-TEST_CASE("ProgressReporter"){
-    ProgressReporter reporter (100, &_report);
+TEST_CASE("ProgressReporter") {
+    ProgressReporter reporter(100, &_report);
 
-    SECTION("iterationsDoneShouldBeZero"){
+    SECTION("iterationsDoneShouldBeZero") {
         REQUIRE(reporter.iterationsDone == 0);
     }
 
-    SECTION("iterationsDoneShouldBeIncreasedByOne"){
+    SECTION("iterationsDoneShouldBeIncreasedByOne") {
         reporter.iterationDone();
         REQUIRE(reporter.iterationsDone == 1);
     }
 
-    SECTION("progressCallbackShouldBeCalledEvery10"){
-        ProgressReporter reporter (100, &_storeCallCount);
+    SECTION("progressCallbackShouldBeCalledEvery10") {
+        ProgressReporter reporter(100, &_storeCallCount);
 
         REQUIRE(callCount == 0);
         reporter.iterationDone();
         REQUIRE(callCount == 0);
 
-        for(int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             reporter.iterationDone();
         }
         // todo for some reason this sometimes fails and most of the time not
