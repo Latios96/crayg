@@ -34,7 +34,7 @@ TestResult TestRunner::executeTest(const KnipserTest &test) {
         return TestResult::createPassed(test, testContext);
     }
     catch (std::exception &e) {
-        std::cout << "[FAILED]" << std::endl;
+        std::cout << fmt::format("[FAILED]:\n {}", e.what()) << std::endl;
         return TestResult::createFailed(test, e.what(), testContext);
     }
 

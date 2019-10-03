@@ -16,7 +16,7 @@ class KnipserException : public std::exception {
     explicit KnipserException(const std::string &message) : message(message) {}
 
     const char *what() const throw() {
-        return "basic KnipserException";
+        return message.c_str();
     }
 
  private:
@@ -57,13 +57,17 @@ class ImagesAreEqualAssertion : public BasicAssertion {
         T imageComparator(testContext.getReferenceFilename(), testContext.getOutputFilename());
         ImageComparatorResult result = imageComparator.compareImages();
         BasicAssertion::doAssert(!result.isError(),
-                 fmt::format("Images {} and {} are not equal!!!",
-                             testContext.getReferenceFilename(),
-                             testContext.getOutputFilename()));
+                                 fmt::format("Images {} and {} are not equal!!!",
+                                             testContext.getReferenceFilename(),
+                                             testContext.getOutputFilename()));
     }
 };
 
 #define ASSERT_IMAGES_ARE_EQUAL(context) ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion(__FILE__, __LINE__); \
+BasicAssertion referenceImageExists(__FILE__, __LINE__); \
+referenceImageExists.doAssert(boost::filesystem::exists(context.getReferenceFilename()), fmt::format("Reference image {} does not exist!", context.getReferenceFilename())); \
+BasicAssertion outputFileNameExists(__FILE__, __LINE__); \
+outputFileNameExists.doAssert(boost::filesystem::exists(context.getOutputFilename()), fmt::format("Output image {} does not exist!", context.getOutputFilename())); \
 imagesAreEqualAssertion.doAssert(context);
 
 #endif //CRAYG_KNIPSERASSERTIONS_H
