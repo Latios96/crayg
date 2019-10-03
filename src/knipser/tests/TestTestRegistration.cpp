@@ -5,11 +5,11 @@
 #include <catch2/catch.hpp>
 #include "TestRegistry.h"
 
-KNIPSER_REGISTER_TEST(threeSpheres, [](const TestContext &context){
+KNIPSER_REGISTER_TEST(threeSpheres, [](TestContext &context){
 
 });
 
-KNIPSER_REGISTER_TEST(singleSphere, [](const TestContext &context){
+KNIPSER_REGISTER_TEST(singleSphere, [](TestContext &context){
 
 });
 

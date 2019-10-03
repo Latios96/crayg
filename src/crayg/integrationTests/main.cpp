@@ -27,16 +27,16 @@ void renderScene(const std::string& scenePath, const std::string imageOutputPath
     imageWriter->writeImage(myImage, imageOutputPath);
 }
 
-KNIPSER_REGISTER_TEST(singleSphere, [](const TestContext &context){
+KNIPSER_REGISTER_TEST(singleSphere, [](TestContext &context){
     renderScene(context.getReferenceFolder() + "/singleSphere.json", context.getOutputFilename());
     ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion (__FILE__, __LINE__);
     imagesAreEqualAssertion.doAssert(context);
-});
-bool testRegistrationResult_threeSpheres = TestRegistry::getInstance()->registerTest(KnipserTest(std::string("threeSpheres"), [](const TestContext &context){
+})
+KNIPSER_REGISTER_TEST(threeSpheres, [](TestContext &context){
     renderScene(context.getReferenceFolder() + "/threeSpheres.json", context.getOutputFilename());
     ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion (__FILE__, __LINE__);
     imagesAreEqualAssertion.doAssert(context);
-}));
+})
 
 int main(int argc, char **argv) {
     auto console = spdlog::stdout_color_mt("console");
