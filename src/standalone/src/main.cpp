@@ -10,6 +10,7 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
+#include "Logger.h"
 
 const std::string VERSION = "1.4.0"; // todo move version to c
 
@@ -22,9 +23,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    auto console = spdlog::stdout_color_mt("console");
-
-    console->info("Crayg Renderer version {}", VERSION);
+    Logger::info("Crayg Renderer version {}", VERSION);
 
     Image myImage(800, 600);
 
@@ -38,11 +37,11 @@ int main(int argc, char *argv[]) {
     Renderer renderer(scene, myImage);
     renderer.renderScene();
 
-    console->info("writing image..");
+    Logger::info("writing image..");
     std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
 
     imageWriter->writeImage(myImage, parseResult.args->imageOutputPath);
 
-    console->info("writing image done.");
+    Logger::info("writing image done.");
     return 0;
 }

@@ -10,7 +10,6 @@
 #include "sceneIO/write/SceneWriter.h"
 
 TEST_CASE("SceneWriter"){
-    auto console = spdlog::stdout_color_mt("console");
     Scene scene;
 
     Camera* camera = new Camera();

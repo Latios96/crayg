@@ -11,6 +11,7 @@
 #include "Renderer.h"
 #include "PineHoleCameraModel.h"
 #include "utils/ProgressReporter.h"
+#include "Logger.h"
 
 Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
 
@@ -18,33 +19,35 @@ Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
 void Renderer::renderScene() {
     init();
 
-    spdlog::get("console")->info("Starting rendering..");
+    Logger::info("Starting rendering..");
 
     int pixelCount = image.getHeight() * image.getWidth();
-    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount, "Rendering done by {}%, estimated time remaining: {}s");
+    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount,
+                                                                                "Rendering done by {}%, estimated time remaining: {}s");
 
-    for(auto pixel : ImageIterators::lineByLine(image)){
+    for (auto pixel : ImageIterators::lineByLine(image)) {
         renderPixel(pixel);
         reporter.iterationDone();
     }
-    spdlog::get("console")->info("Rendering done.");
+    Logger::info("Rendering done.");
     reporter.finish();
 }
 
-void Renderer::init(){
-    cameraModel = std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, image.getWidth(), image.getHeight()));
+void Renderer::init() {
+    cameraModel =
+        std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, image.getWidth(), image.getHeight()));
     lambertMethod = std::make_shared<ShadingMethod>(scene);
 
-    spdlog::get("console")->info("Execute Imageable::beforeRender...");
-    for(auto &imageable : scene.objects){
+    Logger::info("Execute Imageable::beforeRender...");
+    for (auto &imageable : scene.objects) {
         imageable->beforeRender();
     }
 
-    spdlog::get("console")->info("Creating SceneIntersector...");
+    Logger::info("Creating SceneIntersector...");
     sceneIntersector = std::make_shared<SceneIntersector>(scene);
 
-    spdlog::get("console")->info("Creating LightSamplers...");
-    for(auto &light : scene.lights){
+    Logger::info("Creating LightSamplers...");
+    for (auto &light : scene.lights) {
         lightSamplers.push_back(LightSamplerFactory::createLightSampler(*light, *sceneIntersector));
     }
 }
@@ -55,13 +58,13 @@ void Renderer::renderPixel(const PixelPosition &pixel) {
     auto intersection = sceneIntersector->intersect(ray);
 
     const bool hasHit = intersection.imageable != nullptr;
-    if(hasHit){
+    if (hasHit) {
         Vector3f location = ray.startPoint + (ray.direction * intersection.rayParameter);
         Imageable &object = *intersection.imageable;
         Color shadedColor = lambertMethod->lambertShading(location, object);
 
         float shadow = 1.0;
-        for(auto &lightSampler : lightSamplers){
+        for (auto &lightSampler : lightSamplers) {
             shadow = lightSampler->calculateShadowFactor(location + (object.getNormal(location) * 0.001));
         }
 

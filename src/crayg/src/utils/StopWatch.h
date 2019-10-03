@@ -13,6 +13,7 @@
 
 #define FMT_HEADER_ONLY
 #include "fmt/format.h"
+#include "Logger.h"
 
 class StopWatch{
 public:
@@ -25,7 +26,7 @@ public:
 
     static StopWatch createStopWatch(std::string name){
         std::function<void(std::string)> callback = [] (std::string message) -> void {
-            spdlog::get("console")->info(message.c_str());
+           Logger::info(message.c_str());
         };
         return StopWatch(name, callback);
     }

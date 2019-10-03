@@ -13,6 +13,7 @@
 #define FMT_HEADER_ONLY
 #include "fmt/format.h"
 #include "RemainingTimeCalculator.h"
+#include "Logger.h"
 
 // todo move into .cpp file
 class ProgressReporter{
@@ -27,7 +28,7 @@ public:
 
     static ProgressReporter createLoggingProgressReporter(int maxIterations, std::string logMessage){
         std::function<void(int, float)> logProgress = [logMessage] (int progress, float timeRemaining) -> void {
-            spdlog::get("console")->info(logMessage.c_str(), progress, timeRemaining);
+           Logger::info(logMessage.c_str(), progress, timeRemaining);
         };
         return {maxIterations, logProgress};
     }
@@ -50,7 +51,7 @@ public:
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end - startTime).count();
 
-        spdlog::get("console")->info("Rendering took {} seconds.", microseconds *0.0000006);
+       Logger::info("Rendering took {} seconds.", microseconds *0.0000006);
     }
 
     int iterationsDone;
