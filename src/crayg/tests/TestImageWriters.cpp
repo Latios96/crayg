@@ -29,6 +29,19 @@ TEST_CASE("ImageWriters") {
         }
     }
 
+    SECTION("PNG") {
+        if (boost::filesystem::exists(TEST_IMAGE_PNG)) {
+            REQUIRE(remove(TEST_IMAGE_PNG) == 0);
+        }
+
+        REQUIRE(ImageWriters::writeImage(image, TEST_IMAGE_PNG));
+        REQUIRE(boost::filesystem::exists(TEST_IMAGE_PNG));
+
+        if (boost::filesystem::exists(TEST_IMAGE_PNG)) {
+            REQUIRE(remove(TEST_IMAGE_PNG) == 0);
+        }
+    }
+
     SECTION("unknown") {
         REQUIRE_FALSE(ImageWriters::writeImage(image, TEST_IMAGE_UNKNOWN));
         REQUIRE_FALSE(boost::filesystem::exists(TEST_IMAGE_UNKNOWN));
