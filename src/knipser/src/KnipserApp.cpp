@@ -2,6 +2,7 @@
 // Created by jan on 23/08/2019.
 //
 #include <KnipserApp.h>
+#include "PlainReportGenerator.h"
 
 ExitMessage KnipserApp::execute() {
     CLI::App app{"Integration testing framework for projects with image output", "Knipser"};
@@ -48,9 +49,12 @@ ExitMessage KnipserApp::exitMessageFromTestResults(const std::vector<TestResult>
     if (failedCount > 0) {
         exitCode = 1;
     }
+    PlainReportGenerator plainReportGenerator(testResults);
+    std::stringstream ss;
+    plainReportGenerator.generateReport(ss);
 
     std::string
-        message = fmt::format("Ran {} tests, {} passed and {} failed", testResults.size(), passedCount, failedCount);
+        message = fmt::format("\n{}\nRan {} tests, {} passed and {} failed", ss.str(), testResults.size(), passedCount, failedCount);
 
     return {exitCode, message};
 }

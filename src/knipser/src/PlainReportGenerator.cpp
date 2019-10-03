@@ -16,7 +16,7 @@ void PlainReportGenerator::generateReport(std::ostream &ostream) {
 PlainReportGenerator::PlainReportGenerator(const std::vector<TestResult> &testResults) : ReportGenerator(testResults) {}
 
 std::string PlainReportGenerator::getTestResultString(TestResult result) {
-    return fmt::format("{}\t: {}\n",
+    return fmt::format("{}\t: {}",
             result.test.name,
-            result.passed ? "OK" : fmt::format("FAILED: {}", result.message));
+            result.passed ? "OK" : fmt::format("FAILED: \n{}\n", result.message));
 }
