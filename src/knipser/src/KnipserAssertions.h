@@ -63,5 +63,7 @@ class ImagesAreEqualAssertion : public BasicAssertion {
     }
 };
 
+#define ASSERT_IMAGES_ARE_EQUAL(context) ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion(__FILE__, __LINE__); \
+imagesAreEqualAssertion.doAssert(context);
 
 #endif //CRAYG_KNIPSERASSERTIONS_H
