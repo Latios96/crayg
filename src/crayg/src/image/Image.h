@@ -44,6 +44,8 @@ public:
 
     Color getValue(int x, int y) const;
 
+    float *getValues() const;
+
     ~Image() {
         delete[] values;
     }

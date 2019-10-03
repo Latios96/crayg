@@ -28,6 +28,8 @@ set(crayg_SRCS
         image/ImageIterators.h
         image/ImageWriters.h
         image/ImageWriters.cpp
+        image/OpenImageIoImageWriter.h
+        image/OpenImageIoImageWriter.cpp
         utils/ToStringHelper.h
         sceneIO/write/SceneWriter.h
         sceneIO/Serializable.h
@@ -92,4 +94,4 @@ target_include_directories(crayg PUBLIC
 #        PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
 #        LINK_FLAGS "--coverage")
 
-target_link_libraries(crayg ${CONAN_LIBS})
+target_link_libraries(crayg ${CONAN_LIBS} dl)

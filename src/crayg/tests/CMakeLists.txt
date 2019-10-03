@@ -23,6 +23,7 @@ set(UNIT_TEST_LIST
         TestBoundingBox.cpp
         TestPointLightSampler.cpp
         TestImageWriters.cpp
+        TestOpenImageIoImageWriter.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)
