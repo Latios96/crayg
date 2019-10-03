@@ -22,6 +22,7 @@ set(UNIT_TEST_LIST
         TestJsonSceneReader.cpp
         TestBoundingBox.cpp
         TestPointLightSampler.cpp
+        TestImageWriters.cpp
         )
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)

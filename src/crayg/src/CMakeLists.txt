@@ -26,6 +26,8 @@ set(crayg_SRCS
         scene/SceneCreator.h
         image/LineByLineIterator.h
         image/ImageIterators.h
+        image/ImageWriters.h
+        image/ImageWriters.cpp
         utils/ToStringHelper.h
         sceneIO/write/SceneWriter.h
         sceneIO/Serializable.h
