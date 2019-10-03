@@ -28,7 +28,7 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
 }
 
 KNIPSER_REGISTER_TEST(singleSphere, [](TestContext &context) {
-    context.setImageOutputName("singleSphere.png");
+    context.setImageOutputName("singleSphere.bmp");
     renderScene(context.getReferenceFolder() + "/singleSphere.json", context.getOutputFilename());
 
     ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion(__FILE__, __LINE__);
@@ -36,7 +36,7 @@ KNIPSER_REGISTER_TEST(singleSphere, [](TestContext &context) {
 })
 
 KNIPSER_REGISTER_TEST(threeSpheres, [](TestContext &context) {
-    context.setImageOutputName("threeSpheres.png");
+    context.setImageOutputName("threeSpheres.bmp");
     renderScene(context.getReferenceFolder() + "/threeSpheres.json", context.getOutputFilename());
 
     ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion(__FILE__, __LINE__);
