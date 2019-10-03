@@ -25,17 +25,15 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
 }
 
 KNIPSER_REGISTER_TEST(singleSphere, [](TestContext &context) {
-    context.setImageOutputName("singleSphere.bmp");
+    context.setImageOutputName("singleSphere.png");
     renderScene(context.getReferenceFolder() + "/singleSphere.json", context.getOutputFilename());
 
-    ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion(__FILE__, __LINE__);
-    imagesAreEqualAssertion.doAssert(context);
+    ASSERT_IMAGES_ARE_EQUAL(context);
 })
 
 KNIPSER_REGISTER_TEST(threeSpheres, [](TestContext &context) {
-    context.setImageOutputName("threeSpheres.bmp");
+    context.setImageOutputName("threeSpheres.png");
     renderScene(context.getReferenceFolder() + "/threeSpheres.json", context.getOutputFilename());
 
-    ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion(__FILE__, __LINE__);
-    imagesAreEqualAssertion.doAssert(context);
+    ASSERT_IMAGES_ARE_EQUAL(context);
 })
