@@ -80,7 +80,9 @@ set(crayg_SRCS
         lightSamplers/LightSampler.cpp
         lightSamplers/PointLightSampler.h
         lightSamplers/PointLightSampler.cpp
-        lightSamplers/LightSamplerFactory.h)
+        lightSamplers/LightSamplerFactory.h
+        Logger.h
+        Logger.cpp)
 
 
 add_library(crayg STATIC
