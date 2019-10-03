@@ -25,7 +25,6 @@ std::vector<TestResult> TestRunner::execute() {
 
 TestResult TestRunner::executeTest(const KnipserTest &test) {
     TestContext testContext = createTestContext(test);
-    testContext.setImageOutputName(test.name + ".png");
     try {
         std::cout << fmt::format("[RUN] {}", test.name) << std::endl;
 
