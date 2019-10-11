@@ -18,7 +18,7 @@ TEST_CASE("passing test should generate passing result") {
     REQUIRE(testResults[0].test == passingTest);
     REQUIRE(testResults[0].passed);
     REQUIRE(testResults[0].message.empty());
-    REQUIRE(testResults[0].testContext == TestContext("demo/passing test", "demoReference"));
+    REQUIRE(testResults[0].testContext == TestContext("demo/passing test", "demoReference/passing test"));
 }
 
 TEST_CASE("failing test should generate failing result with message") {
@@ -36,7 +36,7 @@ TEST_CASE("failing test should generate failing result with message") {
     REQUIRE(testResults[0].test == failingTest);
     REQUIRE_FALSE(testResults[0].passed);
     REQUIRE(testResults[0].message == "std::exception");
-    REQUIRE(testResults[0].testContext == TestContext("demo/failing test", "demoReference"));
+    REQUIRE(testResults[0].testContext == TestContext("demo/failing test", "demoReference/failing test"));
 }
 
 

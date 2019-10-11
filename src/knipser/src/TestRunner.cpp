@@ -42,10 +42,11 @@ TestResult TestRunner::executeTest(const KnipserTest &test) {
 
 TestContext TestRunner::createTestContext(const KnipserTest &test) {
     auto testOutputFolder = boost::filesystem::path(runConfig.outputFolder).append(test.name);
+    auto testReferenceFolder = boost::filesystem::path(runConfig.referenceFolder).append(test.name);
 
     boost::filesystem::create_directories(testOutputFolder);
 
-    return TestContext(testOutputFolder.string(), runConfig.referenceFolder);
+    return TestContext(testOutputFolder.string(), testReferenceFolder.string());
 }
 
 
