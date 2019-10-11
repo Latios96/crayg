@@ -64,11 +64,12 @@ void Renderer::renderPixel(const PixelPosition &pixel) {
         Color shadedColor = lambertMethod->lambertShading(location, object);
 
         float shadow = 1.0;
+
+        // NOTE: this is ugly, but only this way we can avoid cyclic includes between Light, Scene and SceneIntersector at the moment
         for (auto &lightSampler : lightSamplers) {
             shadow = lightSampler->calculateShadowFactor(location + (object.getNormal(location) * 0.001));
         }
 
-        //image.setValue(pixel.x, pixel.y, Color::createGrey(shadow));
         image.setValue(pixel.x, pixel.y, shadedColor * shadow);
     }
 }
