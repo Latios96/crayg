@@ -82,7 +82,9 @@ set(crayg_SRCS
         lightSamplers/PointLightSampler.cpp
         lightSamplers/LightSamplerFactory.h
         Logger.h
-        Logger.cpp)
+        Logger.cpp
+        samplers/UnitSphereSampler.h
+        samplers/UnitSphereSampler.cpp)
 
 
 add_library(crayg STATIC
