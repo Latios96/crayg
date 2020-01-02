@@ -5,7 +5,6 @@
 //
 
 #include <image/ImageIterators.h>
-#include <spdlog/spdlog.h>
 #include <lightSamplers/LightSamplerFactory.h>
 #include <numeric>
 #include "Renderer.h"
@@ -29,6 +28,7 @@ void Renderer::renderScene() {
         renderPixel(pixel);
         reporter.iterationDone();
     }
+
     Logger::info("Rendering done.");
     reporter.finish();
 }
@@ -53,8 +53,22 @@ void Renderer::init() {
 }
 
 void Renderer::renderPixel(const PixelPosition &pixel) {
-    Ray ray = cameraModel->createPrimaryRay(pixel.x, pixel.y);
+    std::vector<Color> sampleColors;
+    int maxSampleCount = 4;
+    float stepSize = 1.0f / maxSampleCount;
+    for (int i = 0; i < maxSampleCount; i++) {
+        for (int a = 0; a < maxSampleCount; a++) {
+            sampleColors.push_back(renderSample(pixel.x - 0.5f + stepSize * i, pixel.y - 0.5f + stepSize * a));
+        }
+    }
 
+    Color pixelColor =
+        std::accumulate(sampleColors.begin(), sampleColors.end(), Color::createBlack()) / sampleColors.size();
+    image.setValue(pixel.x, pixel.y, pixelColor);
+
+}
+Color Renderer::renderSample(float x, float y) {
+    Ray ray = cameraModel->createPrimaryRay(x, y);
     auto intersection = sceneIntersector->intersect(ray);
 
     const bool hasHit = intersection.imageable != nullptr;
@@ -70,7 +84,8 @@ void Renderer::renderPixel(const PixelPosition &pixel) {
             shadow = lightSampler->calculateShadowFactor(location + (object.getNormal(location) * 0.001));
         }
 
-        image.setValue(pixel.x, pixel.y, shadedColor * shadow);
+        return shadedColor * shadow;
     }
+    return Color::createBlack();
 }
 

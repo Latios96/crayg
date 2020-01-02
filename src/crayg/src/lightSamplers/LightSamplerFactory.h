@@ -18,5 +18,6 @@ class LightSamplerFactory {
         if (light.lightType == POINT_LIGHT) {
             return std::shared_ptr<LightSampler>(new PointLightSampler(intersector, light));
         }
+        return std::shared_ptr<LightSampler>(new PointLightSampler(intersector, light));
     }
 };

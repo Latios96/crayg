@@ -29,6 +29,7 @@ class Renderer {
     void renderPixel(const PixelPosition &pixel);
 
     void init();
+    Color renderSample(float x, float y);
 };
 
 #endif //CRAYG_RENDERER_H
