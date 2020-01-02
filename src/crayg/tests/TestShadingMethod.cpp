@@ -4,17 +4,16 @@
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include <ShadingMethod.h>
-#include <fakeit.hpp>
 
 TEST_CASE("ShadingMethod") {
     Scene scene;
 
-    Light *light = new Light();
+    auto *light = new Light();
     light->setPosition(Vector3f(5, 0, 0));
     light->setIntensity(1);
     scene.addLight(light);
 
-    Sphere *sphere = new Sphere(Vector3f(), 1);
+    auto *sphere = new Sphere(Vector3f(), 1);
     scene.addObject(sphere);
 
     ShadingMethod lambertMethod(scene);
@@ -43,7 +42,7 @@ TEST_CASE("ShadingMethod") {
     }
 
     SECTION("everyLightIsConsidered") {
-        Light *light2 = new Light();
+        auto *light2 = new Light();
         light2->setPosition(Vector3f(-5, 0, 0));
         light2->setIntensity(1);
         scene.addLight(light2);
@@ -59,7 +58,7 @@ TEST_CASE("ShadingMethod") {
 }
 TEST_CASE("ShadingMethod/noLightsInSceneReturnsAmbientColor") {
     Scene scene2;
-    Sphere *sphere2 = new Sphere(Vector3f(), 1);
+    auto *sphere2 = new Sphere(Vector3f(), 1);
     scene2.addObject(sphere2);
     ShadingMethod shadingMethod2(scene2);
 
