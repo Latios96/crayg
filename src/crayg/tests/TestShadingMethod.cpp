@@ -21,17 +21,17 @@ TEST_CASE("ShadingMethod") {
 
     SECTION("colorForLightIsAmbientColor") {
         Color shadedColor = lambertMethod.lambertShading(Vector3f(-1, 0, 0), *sphere);
-        REQUIRE(shadedColor == Color::createGrey(0.2f));
+        REQUIRE(shadedColor == Color::createGrey(0.0f));
     }
     SECTION("colorForLightIsWhite") {
         Color shadedColor = lambertMethod.lambertShading(Vector3f(1, 0, 0), *sphere);
-        REQUIRE(shadedColor == Color::createGrey(1.2f));
+        REQUIRE(shadedColor == Color::createWhite());
     }
 
     SECTION("lightIntensityIsApplied") {
         light->setIntensity(2);
         Color shadedColor = lambertMethod.lambertShading(Vector3f(1, 0, 0), *sphere);
-        REQUIRE(shadedColor == Color::createGrey(2.2));
+        REQUIRE(shadedColor == Color::createGrey(2));
     }
 
     SECTION("noNegativeColorsAreProduced") {
@@ -51,10 +51,10 @@ TEST_CASE("ShadingMethod") {
         // we have one light on each side of the sphere on the x axis,
         // so on both sides color should be white
         Color shadedColor = lambertMethod.lambertShading(Vector3f(1, 0, 0), *sphere);
-        REQUIRE(shadedColor == Color::createGrey(1.2f));
+        REQUIRE(shadedColor == Color::createWhite());
 
         Color shadedColor2 = lambertMethod.lambertShading(Vector3f(-1, 0, 0), *sphere);
-        REQUIRE(shadedColor2 == Color::createGrey(1.2f));
+        REQUIRE(shadedColor2 == Color::createWhite());
     }
 }
 TEST_CASE("ShadingMethod/noLightsInSceneReturnsAmbientColor") {
@@ -64,5 +64,5 @@ TEST_CASE("ShadingMethod/noLightsInSceneReturnsAmbientColor") {
     ShadingMethod shadingMethod2(scene2);
 
     Color shadedColor = shadingMethod2.lambertShading(Vector3f(-1, 0, 0), *sphere2);
-    REQUIRE(shadedColor == Color::createGrey(0.2f));
+    REQUIRE(shadedColor == Color::createGrey(0.0f));
 }

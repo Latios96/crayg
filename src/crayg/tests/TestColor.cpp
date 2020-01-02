@@ -114,3 +114,9 @@ TEST_CASE("Color/notEqualOperator", "[Color]") {
     REQUIRE_FALSE(myColor != myOtherColor);
     REQUIRE(myColor != myOtherOtherColor);
 }
+
+TEST_CASE("Color/divide", "[Color]") {
+    Color color(1, 2, 3);
+    const Color dividedColor = color / 2;
+    REQUIRE(dividedColor == Color(0.5, 1, 1.5));
+}

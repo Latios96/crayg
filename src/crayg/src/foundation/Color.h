@@ -69,6 +69,13 @@ class Color {
     Color operator*(float scalar);
 
     /**
+     * Divides every Component with the given scalar and returns a new color value.
+     * @param otherColor
+     * @return
+     */
+    Color operator/(float scalar);
+
+    /**
      * Two colors are equal if their r,g,b components are equal
      * @param color 
      * @return 

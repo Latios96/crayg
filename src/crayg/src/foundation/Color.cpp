@@ -56,4 +56,7 @@ bool Color::operator!=(const Color &color) const {
 Color Color::operator+(float value) {
     return {r + value, g + value, b + value};
 }
+Color Color::operator/(float scalar) {
+    return {r / scalar, g / scalar, b / scalar};
+}
 
