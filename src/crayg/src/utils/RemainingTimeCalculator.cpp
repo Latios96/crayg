@@ -24,3 +24,4 @@ float RemainingTimeCalculator::getRemainingTimeByProgress(int progress) {
         return secondsPerPercent * (100 - progress);
     }
 }
+RemainingTimeCalculator::RemainingTimeCalculator()= default;

@@ -12,6 +12,7 @@
 #include "PineHoleCameraModel.h"
 #include <intersectors/SceneIntersector.h>
 #include <lightSamplers/LightSampler.h>
+#include <utils/ProgressReporter.h>
 #include "ShadingMethod.h"
 
 class Renderer {
@@ -30,6 +31,8 @@ class Renderer {
 
     void init();
     Color renderSample(float x, float y);
+    void renderSerial(ProgressReporter &reporter);
+    void renderParallel(ProgressReporter &reporter);
 };
 
 #endif //CRAYG_RENDERER_H

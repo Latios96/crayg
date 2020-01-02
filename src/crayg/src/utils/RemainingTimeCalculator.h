@@ -10,6 +10,7 @@
 class RemainingTimeCalculator {
 
  public:
+    RemainingTimeCalculator();
     explicit RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime);
 
     /**

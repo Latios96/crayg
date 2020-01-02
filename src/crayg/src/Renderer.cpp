@@ -11,6 +11,7 @@
 #include "PineHoleCameraModel.h"
 #include "utils/ProgressReporter.h"
 #include "Logger.h"
+#include <tbb/parallel_for.h>
 
 Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
 
@@ -24,13 +25,29 @@ void Renderer::renderScene() {
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount,
                                                                                 "Rendering done by {}%, estimated time remaining: {}s");
 
-    for (auto pixel : ImageIterators::lineByLine(image)) {
-        renderPixel(pixel);
-        reporter.iterationDone();
+    bool serialRendering = false;
+    if (serialRendering) {
+        renderSerial(reporter);
+    } else {
+        renderParallel(reporter);
     }
 
     Logger::info("Rendering done.");
     reporter.finish();
+}
+void Renderer::renderParallel(ProgressReporter &reporter) {
+    tbb::parallel_for(0, image.getWidth(), 1, [this, &reporter](int x) {
+        for (int y = 0; y < image.getHeight(); y++) {
+            renderPixel(PixelPosition(x, y));
+            reporter.iterationDone();
+        }
+    });
+}
+void Renderer::renderSerial(ProgressReporter &reporter) {
+    for (auto pixel : ImageIterators::lineByLine(image)) {
+        renderPixel(pixel);
+        reporter.iterationDone();
+    }
 }
 
 void Renderer::init() {

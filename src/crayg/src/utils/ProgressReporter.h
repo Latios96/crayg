@@ -24,6 +24,13 @@ class ProgressReporter {
         remainingTimeCalculator(std::chrono::steady_clock::now()) {
         startTime = std::chrono::steady_clock::now();
     }
+    ProgressReporter(const ProgressReporter &progressReporter){
+        maxIterations = progressReporter.maxIterations;
+        progressionCallback = progressReporter.progressionCallback;
+        iterationsDone = progressReporter.iterationsDone.load();
+        remainingTimeCalculator = progressReporter.remainingTimeCalculator;
+        startTime = progressReporter.startTime;
+    }
 
     static ProgressReporter createLoggingProgressReporter(int maxIterations, std::string logMessage) {
         std::function<void(int, float)> logProgress = [logMessage](int progress, float timeRemaining) -> void {
@@ -53,10 +60,10 @@ class ProgressReporter {
         Logger::info("Rendering took {} seconds.", microseconds * 0.0000006);
     }
 
-    int iterationsDone;
+    std::atomic<int> iterationsDone = {0};
  private:
     int maxIterations;
-    int progress;
+    int progress=0;
     std::function<void(int, float)> progressionCallback;
     std::chrono::steady_clock::time_point startTime;
     RemainingTimeCalculator remainingTimeCalculator;
