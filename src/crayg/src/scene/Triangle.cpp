@@ -49,7 +49,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
         return {std::numeric_limits<float>::max(), nullptr};
     }
     // dot(v0v2, qvec) * invDet;
-    return {v0v2.scalarProduct(qvec) * invDet, this};
+    return {v0v2.scalarProduct(qvec) * invDet, shared_from_this()};
 }
 
 Imageable::Intersection Triangle::getIntersectionMyImpl(const Ray &ray) {
@@ -97,7 +97,7 @@ Imageable::Intersection Triangle::getIntersectionMyImpl(const Ray &ray) {
             if (normal.scalarProduct(C) < 0) {
                 return {std::numeric_limits<float>::max(), nullptr};
             }
-            return {t, this};
+            return {t, shared_from_this()};
 
         }
         return {std::numeric_limits<float>::max(), nullptr};

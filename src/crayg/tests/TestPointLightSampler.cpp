@@ -40,7 +40,7 @@ TEST_CASE("PointLightSampler") {
 
     SECTION("intersectionIsBehindLight") {
         Scene scene;
-        MockSceneIntersector mockIntersector(scene, {10, (Imageable *) 2});
+        MockSceneIntersector mockIntersector(scene, {10, std::make_shared<Sphere>()});
         PointLightSampler pointLightSampler(mockIntersector, light);
 
         const float shadowFactor = pointLightSampler.calculateShadowFactor({0, 0, 0});
@@ -49,7 +49,7 @@ TEST_CASE("PointLightSampler") {
 
     SECTION("intersectionIsBeforeLight") {
         Scene scene;
-        MockSceneIntersector mockIntersector(scene, {2, (Imageable *) 2});
+        MockSceneIntersector mockIntersector(scene, {2, std::make_shared<Sphere>()});
         PointLightSampler pointLightSampler(mockIntersector, light);
 
         const float shadowFactor = pointLightSampler.calculateShadowFactor({0, 0, 0});

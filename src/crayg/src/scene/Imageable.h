@@ -24,7 +24,7 @@
             imageable = nullptr;
         }
 
-        Intersection(float rayParameter, Imageable *imageable);
+        Intersection(float rayParameter, std::shared_ptr<Imageable> imageable);
 
         Intersection(const Intersection &intersection) {
             this->rayParameter = intersection.rayParameter;
@@ -32,7 +32,7 @@
         }
 
         float rayParameter;
-        Imageable *imageable;
+        std::shared_ptr<Imageable> imageable;
 
         bool isValid() {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();

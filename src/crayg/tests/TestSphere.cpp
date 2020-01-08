@@ -5,30 +5,30 @@ using namespace fakeit;
 #include "utils/utils.h"
 
 TEST_CASE("Sphere") {
-    Sphere mySphere(Vector3f(0, 0, 0), 3.0f);
+    auto mySphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 3.0f);
 
     SECTION("createSphere") {
         // make sure radius is correctly set
-        REQUIRE(mySphere.getRadius() == 3.0f);
+        REQUIRE(mySphere->getRadius() == 3.0f);
     }
 
     SECTION("isIntersecting") {
         // tests intersecting ray
         Ray intersectingRay(Vector3f(1, 0, 0), Vector3f(-1, 0, 0));
         // intersects should return true
-        REQUIRE(mySphere.isIntersecting(intersectingRay));
+        REQUIRE(mySphere->isIntersecting(intersectingRay));
 
         // tests not intersecting ray
         Ray notIntersectingRay(Vector3f(0, 0, 5), Vector3f(-1, 0, 0));
         // intersects should return true
-        REQUIRE_FALSE(mySphere.isIntersecting(notIntersectingRay));
+        REQUIRE_FALSE(mySphere->isIntersecting(notIntersectingRay));
     }
 
     SECTION("intersect_") {
-        Sphere mySphere(Vector3f(1, 0, 0), 3.0f);
+        auto mySphere = std::make_shared<Sphere>(Vector3f(1, 0, 0), 3.0f);
         Ray ray(Vector3f(5, 0, 0), Vector3f(-1, 0, 0));
 
-        float t = mySphere.intersect(ray).rayParameter;
+        float t = mySphere->intersect(ray).rayParameter;
         Vector3f hitLocation = ray.constructIntersectionPoint(t);
 
         REQUIRE(compareWithPrecision(hitLocation.x, 4));
@@ -36,7 +36,7 @@ TEST_CASE("Sphere") {
         REQUIRE(compareWithPrecision(hitLocation.z, 0));
     }
     SECTION("intersectNotReturnsMax") {
-        auto hitRay = mySphere.intersect(Ray(Vector3f(1, 10, -5), Vector3f(0, 0, 1)));
+        auto hitRay = mySphere->intersect(Ray(Vector3f(1, 10, -5), Vector3f(0, 0, 1)));
         REQUIRE(hitRay.rayParameter == std::numeric_limits<float>::max());
     }
 
@@ -47,7 +47,7 @@ TEST_CASE("Sphere") {
         fakeit::When(Method(mockSerializer, writeType)).AlwaysReturn();
 
         Serializer &s = mockSerializer.get();
-        mySphere.serialize(s);
+        mySphere->serialize(s);
 
         fakeit::Verify(Method(mockSerializer, writeFloat).Using("radius", 3.0f));
         fakeit::Verify(Method(mockSerializer, writeVector3f).Using("position", Vector3f()));
@@ -60,22 +60,22 @@ TEST_CASE("Sphere") {
         When(Method(mockDeserializer, readVector3f).Using("position")).Return(Vector3f(1, 2, 3));
 
         Deserializer &s = mockDeserializer.get();
-        mySphere.deserialize(s);
+        mySphere->deserialize(s);
 
-        REQUIRE(mySphere.getPosition() == Vector3f(1, 2, 3));
-        REQUIRE(mySphere.getRadius() == 3.0f);
+        REQUIRE(mySphere->getPosition() == Vector3f(1, 2, 3));
+        REQUIRE(mySphere->getRadius() == 3.0f);
     }
 }
 
 TEST_CASE("Sphere/transformation") {
-    Sphere mySphere(Vector3f(1, 2, 3), 3.0f);
+    auto mySphere = std::make_shared<Sphere>(Vector3f(1, 2, 3), 3.0f);
 
-    REQUIRE(mySphere.getPosition() == Vector3f(1, 2, 3));
+    REQUIRE(mySphere->getPosition() == Vector3f(1, 2, 3));
 }
 TEST_CASE("Sphere/intersectsTransformed") {
-    Sphere mySphere(Vector3f(1, 2, 3), 1.0f);
+    auto mySphere = std::make_shared<Sphere>(Vector3f(1, 2, 3), 1.0f);
 
-    REQUIRE(mySphere.isIntersecting(Ray(Vector3f(1, 2, 6), Vector3f(0, 0, -1))));
+    REQUIRE(mySphere->isIntersecting(Ray(Vector3f(1, 2, 6), Vector3f(0, 0, -1))));
 }
 
 

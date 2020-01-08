@@ -5,11 +5,11 @@
 #include "PointCloud.h"
 #include "Sphere.h"
 bool PointCloud::isIntersecting(Ray ray) {
-    Sphere sphere;
+    auto sphere = std::make_shared<Sphere>();
     for (unsigned long i = 0; i < points.size(); i++) {
-        sphere.setPosition(points[i]);
-        sphere.setRadius(radii[i]);
-        if (sphere.isIntersecting(ray)) {
+        sphere->setPosition(points[i]);
+        sphere->setRadius(radii[i]);
+        if (sphere->isIntersecting(ray)) {
             return true;
         }
     }
@@ -19,7 +19,7 @@ Vector3f PointCloud::getNormal(Vector3f point) {
     return {};
 }
 Imageable::Intersection PointCloud::intersect(Ray ray) {
-    auto *sphere = new Sphere(); // TODO THIS IS LEAKING MEMORY
+    auto sphere = std::make_shared<Sphere>();
     for (unsigned long i = 0; i < points.size(); i++) {
         sphere->setPosition(points[i]);
         sphere->setRadius(radii[i]);

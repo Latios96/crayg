@@ -4,5 +4,7 @@
 
 #include "Imageable.h"
 
-Imageable::Intersection::Intersection(float rayParameter, Imageable *imageable) : rayParameter(rayParameter),
-                                                                                  imageable(imageable) {}
+#include <utility>
+
+Imageable::Intersection::Intersection(float rayParameter, std::shared_ptr<Imageable> imageable) : rayParameter(rayParameter),
+                                                                                  imageable(std::move(imageable)) {}
