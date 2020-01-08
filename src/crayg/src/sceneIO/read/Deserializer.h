@@ -16,6 +16,7 @@ class Deserializer {
     virtual Vector3f readVector3f(std::string name) = 0;
     virtual void readVector3fArray(std::string name, std::vector<Vector3f> &target) = 0;
     virtual void readIntArray(std::string name, std::vector<int> &target) = 0;
+    virtual void readFloatArray(std::string name, std::vector<float> &target) = 0;
 };
 
 #endif //CRAYG_DESERIALIZER_H

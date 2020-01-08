@@ -1,0 +1,55 @@
+//
+// Created by Jan Honsbrok on 02.01.20.
+//
+
+#include "PointCloud.h"
+#include "Sphere.h"
+bool PointCloud::isIntersecting(Ray ray) {
+    Sphere sphere;
+    for (unsigned long i = 0; i < points.size(); i++) {
+        sphere.setPosition(points[i]);
+        sphere.setRadius(radii[i]);
+        if (sphere.isIntersecting(ray)) {
+            return true;
+        }
+    }
+    return false;
+}
+Vector3f PointCloud::getNormal(Vector3f point) {
+    return {};
+}
+Imageable::Intersection PointCloud::intersect(Ray ray) {
+    auto *sphere = new Sphere(); // TODO THIS IS LEAKING MEMORY
+    for (unsigned long i = 0; i < points.size(); i++) {
+        sphere->setPosition(points[i]);
+        sphere->setRadius(radii[i]);
+        Intersection intersection = sphere->intersect(ray);
+        if (intersection.isValid()) {
+            return intersection;
+        }
+    }
+    return Intersection::createInvalid();
+}
+void PointCloud::serialize(Serializer &serializer) {
+    SceneObject::serialize(serializer);
+    serializer.writeType("PointCloud");
+    serializer.writeVector3fArray("points", points);
+    serializer.writeFloatArray("radii", radii);
+}
+void PointCloud::deserialize(Deserializer &deserializer) {
+    SceneObject::deserialize(deserializer);
+    deserializer.readVector3fArray("points", points);
+    deserializer.readFloatArray("radii", radii);
+}
+const std::vector<Vector3f> &PointCloud::getPoints() const {
+    return points;
+}
+void PointCloud::setPoints(const std::vector<Vector3f> &points) {
+    PointCloud::points = points;
+}
+const std::vector<float> &PointCloud::getRadii() const {
+    return radii;
+}
+void PointCloud::setRadii(const std::vector<float> &radii) {
+    PointCloud::radii = radii;
+}

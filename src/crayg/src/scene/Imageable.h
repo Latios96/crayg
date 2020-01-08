@@ -11,7 +11,6 @@
 class Imageable : public Intersectable {
  public:
     virtual Vector3f getNormal(Vector3f point) = 0;
-    // todo add getColor()
 
     class Intersection {
      public:

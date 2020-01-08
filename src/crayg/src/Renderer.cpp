@@ -71,7 +71,7 @@ void Renderer::init() {
 
 void Renderer::renderPixel(const PixelPosition &pixel) {
     std::vector<Color> sampleColors;
-    int maxSampleCount = 4;
+    int maxSampleCount = 2;
     float stepSize = 1.0f / maxSampleCount;
     for (int i = 0; i < maxSampleCount; i++) {
         for (int a = 0; a < maxSampleCount; a++) {

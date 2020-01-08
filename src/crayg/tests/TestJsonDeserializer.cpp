@@ -9,7 +9,8 @@ TEST_CASE("JsonDeserializer") {
 "myInt": 2,
 "mvVector3f": [1,2,3],
 "myVector3fArray": [[1,2,3],[4,5,6]],
-"myIntArray": [1,2,3]
+"myIntArray": [1,2,3],
+"myFloatArray": [0.1,0.2,0.3]
 })";
     rapidjson::StringStream s(json);
     rapidjson::Document d;
@@ -62,6 +63,20 @@ TEST_CASE("JsonDeserializer") {
     SECTION("readIntArrayShouldThrowException") {
         std::vector<int> intArray;
         REQUIRE_THROWS_AS(jsonDeserializer.readIntArray("e", intArray), std::invalid_argument);
+    }
+
+    SECTION("readFloatArrayShouldReturn{0.1,0.2,0.3}") {
+        std::vector<float> floatArray;
+        jsonDeserializer.readFloatArray("myFloatArray", floatArray);
+        REQUIRE(floatArray.size() == 3);
+        REQUIRE(floatArray[0] == 0.1f);
+        REQUIRE(floatArray[1] == 0.2f);
+        REQUIRE(floatArray[2] == 0.3f);
+    }
+
+    SECTION("readFloatArrayShouldThrowException") {
+        std::vector<float> floatArray;
+        REQUIRE_THROWS_AS(jsonDeserializer.readFloatArray("e", floatArray), std::invalid_argument);
     }
 
 }

@@ -59,3 +59,13 @@ void JsonDeserializer::readIntArray(std::string name, std::vector<int> &target) 
         throw std::invalid_argument(fmt::format("Could not read int Array with name '{}'", name));
     }
 }
+void JsonDeserializer::readFloatArray(std::string name, std::vector<float> &target) {
+    if (jsonObject.HasMember(name.c_str())) {
+        const auto array = jsonObject[name.c_str()].GetArray();
+        for (auto &value : array) {
+            target.push_back(value.GetFloat());
+        }
+    } else {
+        throw std::invalid_argument(fmt::format("Could not read float Array with name '{}'", name));
+    }
+}

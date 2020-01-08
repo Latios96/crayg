@@ -37,3 +37,10 @@ KNIPSER_REGISTER_TEST(threeSpheres, [](TestContext &context) {
 
     ASSERT_IMAGES_ARE_EQUAL(context);
 })
+
+KNIPSER_REGISTER_TEST(pointCloud, [](TestContext &context) {
+    context.setImageOutputName("pointCloud.png");
+    renderScene(context.getReferenceFolder() + "/pointCloud.json", context.getOutputFilename());
+
+    ASSERT_IMAGES_ARE_EQUAL(context);
+})

@@ -77,3 +77,11 @@ void JsonSerializer::writeIntArray(std::string name, std::vector<int> &value) {
     }
     writer->EndArray();
 }
+void JsonSerializer::writeFloatArray(std::string name, std::vector<float> &value) {
+    writer->Key(name.c_str());
+    writer->StartArray();
+    for (int i : value) {
+        writer->Double(i);
+    }
+    writer->EndArray();
+}

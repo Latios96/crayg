@@ -15,6 +15,7 @@ class Sphere : public SceneObject {
 
     Sphere(Vector3f position, float radius);
 
+    void setRadius(float radius);
     float getRadius() const;
 
     Sphere::Intersection intersect(Ray ray) override;

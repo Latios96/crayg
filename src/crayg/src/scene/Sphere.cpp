@@ -85,4 +85,7 @@ Sphere::Sphere() {
 Vector3f Sphere::getNormal(Vector3f point) {
     return (point - getPosition()).normalize();
 }
+void Sphere::setRadius(float radius) {
+    Sphere::radius = radius;
+}
 

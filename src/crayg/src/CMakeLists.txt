@@ -53,6 +53,8 @@ set(crayg_SRCS
         scene/SceneObject.h
         scene/GroundPlane.cpp
         scene/GroundPlane.h
+        scene/PointCloud.h
+        scene/PointCloud.cpp
         CameraModel.h
         utils/ProgressReporter.cpp
         utils/ProgressReporter.h

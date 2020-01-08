@@ -6,6 +6,7 @@
 #include <rapidjson/istreamwrapper.h>
 #include <rapidjson/document.h>
 #include <fstream>
+#include <scene/PointCloud.h>
 #include "JsonDeserializer.h"
 #include "utils/StopWatch.h"
 #include "scene/Light.h"
@@ -43,8 +44,14 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
                 JsonDeserializer deserializer(obj);
                 light->deserialize(deserializer);
                 scene.addLight(light);
-            } else {
-                std::cout << fmt::format("Unknown type {}", type);
+            }
+            else if (type == "PointCloud") {
+                PointCloud *pointCloud = new PointCloud();
+                JsonDeserializer deserializer(obj);
+                pointCloud->deserialize(deserializer);
+                scene.addObject(pointCloud);
+            }else {
+                Logger::warning("Unknown type {}\n", type);
             }
         }
     } else {
