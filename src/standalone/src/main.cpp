@@ -9,6 +9,7 @@
 const std::string VERSION = "1.4.0"; // todo move version to c
 
 int main(int argc, char *argv[]) {
+    Logger::initialize();
     CliParser cliParser(argc, argv);
     CliParseResult parseResult = cliParser.parse();
 

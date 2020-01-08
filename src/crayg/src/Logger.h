@@ -6,6 +6,7 @@
 #define CRAYG_LOGGER_H_
 
 #include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 class Logger {
  public:
@@ -53,6 +54,7 @@ class Logger {
 
     template<typename T>
     static void critical(const T &msg);
+    static void initialize();
 };
 
 template<typename... Args>
@@ -107,6 +109,9 @@ void Logger::warning(const T &msg) {
 template<typename T>
 void Logger::critical(const T &msg) {
     spdlog::critical(msg);
+}
+void Logger::initialize() {
+    auto console = spdlog::stdout_color_mt("console");
 }
 
 #endif //RASPITOLIGHT_SRC_CORE_LIB_LOGGER_H_
