@@ -12,10 +12,10 @@
 TEST_CASE("SceneWriter") {
     Scene scene;
 
-    Camera *camera = new Camera();
+    std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 
-    scene.addObject(new Sphere(Vector3f(1, 0, 0), 1));
-    scene.addObject(new Sphere(Vector3f(-2, 0, 0), 1));
+    scene.addObject(std::make_shared<Sphere>(Vector3f(1, 0, 0), 1));
+    scene.addObject(std::make_shared<Sphere>(Vector3f(-2, 0, 0), 1));
     scene.camera = camera;
 
     fakeit::Mock<SerializerImplementation> mockSerializerImpl;

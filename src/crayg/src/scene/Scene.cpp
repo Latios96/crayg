@@ -4,16 +4,11 @@
 
 #include "Scene.h"
 
-void Scene::addObject(SceneObject *intersectable) {
-    objects.push_back(std::shared_ptr<SceneObject>(intersectable));
+void Scene::addLight(const std::shared_ptr<Light>& light) {
+    lights.push_back(light);
 }
-
-void Scene::addLight(Light *light) {
-    lights.push_back(std::shared_ptr<Light>(light));
-}
-
-Scene::~Scene() {
-    delete camera;
+void Scene::addObject(const std::shared_ptr<SceneObject>& sceneObject) {
+    objects.push_back(sceneObject);
 }
 
 Scene::Scene() = default;

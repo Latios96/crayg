@@ -8,12 +8,12 @@
 TEST_CASE("ShadingMethod") {
     Scene scene;
 
-    auto *light = new Light();
+    std::shared_ptr<Light> light = std::make_shared<Light>();
     light->setPosition(Vector3f(5, 0, 0));
     light->setIntensity(1);
     scene.addLight(light);
 
-    auto *sphere = new Sphere(Vector3f(), 1);
+    std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(), 1);
     scene.addObject(sphere);
 
     ShadingMethod lambertMethod(scene);
@@ -21,8 +21,7 @@ TEST_CASE("ShadingMethod") {
     SECTION("colorForLightIsAmbientColor") {
         Color shadedColor = lambertMethod.lambertShading(Vector3f(-1, 0, 0), *sphere);
         REQUIRE(shadedColor == Color::createGrey(0.0f));
-    }
-    SECTION("colorForLightIsWhite") {
+    }SECTION("colorForLightIsWhite") {
         Color shadedColor = lambertMethod.lambertShading(Vector3f(1, 0, 0), *sphere);
         REQUIRE(shadedColor == Color::createWhite());
     }
@@ -42,7 +41,7 @@ TEST_CASE("ShadingMethod") {
     }
 
     SECTION("everyLightIsConsidered") {
-        auto *light2 = new Light();
+        std::shared_ptr<Light> light2 = std::make_shared<Light>();
         light2->setPosition(Vector3f(-5, 0, 0));
         light2->setIntensity(1);
         scene.addLight(light2);
@@ -58,7 +57,7 @@ TEST_CASE("ShadingMethod") {
 }
 TEST_CASE("ShadingMethod/noLightsInSceneReturnsAmbientColor") {
     Scene scene2;
-    auto *sphere2 = new Sphere(Vector3f(), 1);
+    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1);
     scene2.addObject(sphere2);
     ShadingMethod shadingMethod2(scene2);
 

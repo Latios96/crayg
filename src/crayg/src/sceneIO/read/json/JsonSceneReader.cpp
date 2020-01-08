@@ -21,36 +21,34 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         auto array = sceneObjects.GetArray();
 
         for (rapidjson::Value &obj : array) {
-            // read type
             std::string type(obj["type"].GetString());
 
             if (type == "Sphere") {
-                Sphere *sphere(new Sphere());
+                std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>();
                 JsonDeserializer deserializer(obj);
                 sphere->deserialize(deserializer);
                 scene.addObject(sphere);
             } else if (type == "GroundPlane") {
-                GroundPlane *plane = new GroundPlane();
+                std::shared_ptr<GroundPlane> plane = std::make_shared<GroundPlane>();
                 JsonDeserializer deserializer(obj);
                 plane->deserialize(deserializer);
                 scene.addObject(plane);
             } else if (type == "TriangleMesh") {
-                TriangleMesh *mesh = new TriangleMesh();
+                std::shared_ptr<TriangleMesh> mesh = std::make_shared<TriangleMesh>();
                 JsonDeserializer deserializer(obj);
                 mesh->deserialize(deserializer);
                 scene.addObject(mesh);
             } else if (type == "Light") {
-                Light *light = new Light();
+                std::shared_ptr<Light> light = std::make_shared<Light>();
                 JsonDeserializer deserializer(obj);
                 light->deserialize(deserializer);
                 scene.addLight(light);
-            }
-            else if (type == "PointCloud") {
-                PointCloud *pointCloud = new PointCloud();
+            } else if (type == "PointCloud") {
+                std::shared_ptr<PointCloud> pointCloud = std::make_shared<PointCloud>();
                 JsonDeserializer deserializer(obj);
                 pointCloud->deserialize(deserializer);
                 scene.addObject(pointCloud);
-            }else {
+            } else {
                 Logger::warning("Unknown type {}\n", type);
             }
         }
@@ -63,7 +61,7 @@ void readCamera(Scene &scene, rapidjson::Document &d) {
     rapidjson::Value &cameraObject = d[CAMERA];
 
     if (cameraObject.IsObject()) {
-        Camera *camera = new Camera();
+        std::shared_ptr<Camera> camera = std::make_shared<Camera>();
         JsonDeserializer deserializer(cameraObject);
         camera->deserialize(deserializer);
         scene.camera = camera;

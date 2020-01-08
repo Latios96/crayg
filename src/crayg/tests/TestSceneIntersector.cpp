@@ -10,8 +10,8 @@
 TEST_CASE("SceneIntersector") {
     Scene scene;
 
-    scene.addObject(new Sphere(Vector3f(1, 0, 0), 1));
-    scene.addObject(new Sphere(Vector3f(-2, 0, 0), 1));
+    scene.addObject(std::make_shared<Sphere>(Vector3f(1, 0, 0), 1));
+    scene.addObject(std::make_shared<Sphere>(Vector3f(-2, 0, 0), 1));
 
     SceneIntersector intersector(scene);
 

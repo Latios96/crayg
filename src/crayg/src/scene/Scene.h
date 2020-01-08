@@ -16,15 +16,13 @@ class Scene {
  public:
     Scene();
 
-    void addObject(SceneObject *sceneObject);
-
-    void addLight(Light *sceneObject);
+    void addObject(const std::shared_ptr<SceneObject>& sceneObject);
+    void addLight(const std::shared_ptr<Light>& sceneObject);
 
     std::vector<std::shared_ptr<SceneObject>> objects;
     std::vector<std::shared_ptr<Light>> lights;
+    std::shared_ptr<Camera> camera = nullptr;
 
-    Camera *camera = nullptr;
-
-    virtual ~Scene();
+    virtual ~Scene() = default;
 };
 #endif //CRAYG_SCENE_H
