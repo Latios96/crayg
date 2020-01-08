@@ -49,7 +49,7 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
                 pointCloud->deserialize(deserializer);
                 scene.addObject(pointCloud);
             } else {
-                Logger::warning("Unknown type {}\n", type);
+                Logger::warning("Unknown type {}", type);
             }
         }
     } else {
