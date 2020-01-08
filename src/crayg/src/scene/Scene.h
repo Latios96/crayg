@@ -6,7 +6,6 @@
 #define CRAYG_SCENE_H
 
 #include <vector>
-#include "intersectors/Intersectable.h"
 #include "Sphere.h"
 #include "Light.h"
 #include "Camera.h"

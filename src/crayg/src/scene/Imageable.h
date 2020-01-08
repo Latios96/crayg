@@ -5,10 +5,10 @@
 #ifndef CRAYG_IMAGEABLE_H
 #define CRAYG_IMAGEABLE_H
 
-#include <intersectors/Intersectable.h>
 #include <foundation/Color.h>
+#include <foundation/Ray.h>
 
-class Imageable : public Intersectable {
+class Imageable{
  public:
     virtual Vector3f getNormal(Vector3f point) = 0;
 
@@ -38,7 +38,10 @@ class Imageable : public Intersectable {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
         }
     };
+
     virtual Intersection intersect(Ray ray) = 0;
+
+    virtual bool isIntersecting(Ray ray) = 0;
 
     virtual void beforeRender() {
 

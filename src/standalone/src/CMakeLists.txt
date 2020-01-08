@@ -23,9 +23,9 @@ target_include_directories(Main_Lib PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         )
 
-set_target_properties(crayg-standalone
-        PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
-        LINK_FLAGS "--coverage")
+#set_target_properties(crayg-standalone
+#        PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
+#        LINK_FLAGS "--coverage")
 
 
 install(TARGETS crayg-standalone DESTINATION bin)
