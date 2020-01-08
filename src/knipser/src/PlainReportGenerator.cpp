@@ -7,6 +7,7 @@
 #include "PlainReportGenerator.h"
 
 void PlainReportGenerator::generateReport(std::ostream &ostream) {
+    ostream << "Result:\n";
     for (auto &result : testResults) {
         ostream << getTestResultString(result) << std::endl;
     }
