@@ -34,7 +34,7 @@ TEST_CASE("ShadingMethod") {
 
     SECTION("noNegativeColorsAreProduced") {
         Color shadedColor = lambertMethod.colorForLight(Vector3f(-1, 0, 0), Vector3f(-1, 0, 0), scene.lights[0]);
-        // todo add method with predicate to light?
+
         REQUIRE(shadedColor.r >= 0);
         REQUIRE(shadedColor.g >= 0);
         REQUIRE(shadedColor.b >= 0);

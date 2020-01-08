@@ -7,7 +7,6 @@
 
 #include <ostream>
 
-// todo what about alpha?
 class Color {
  public:
     float r, g, b;

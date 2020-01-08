@@ -3,3 +3,42 @@
 //
 
 #include "ProgressReporter.h"
+ProgressReporter::ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback) :
+    maxIterations(maxIterations),
+    progressionCallback(std::move(progressionCallback)),
+    iterationsDone(0),
+    remainingTimeCalculator(std::chrono::steady_clock::now()) {
+    startTime = std::chrono::steady_clock::now();
+}
+ProgressReporter::ProgressReporter(const ProgressReporter &progressReporter) {
+    maxIterations = progressReporter.maxIterations;
+    progressionCallback = progressReporter.progressionCallback;
+    iterationsDone = progressReporter.iterationsDone.load();
+    remainingTimeCalculator = progressReporter.remainingTimeCalculator;
+    startTime = progressReporter.startTime;
+}
+ProgressReporter ProgressReporter::createLoggingProgressReporter(int maxIterations, std::string logMessage) {
+    std::function<void(int, float)> logProgress = [logMessage](int progress, float timeRemaining) -> void {
+        Logger::info(logMessage.c_str(), progress, timeRemaining);
+    };
+    return {maxIterations, logProgress};
+}
+void ProgressReporter::iterationDone() {
+
+    iterationsDone++;
+
+    int newProgress = (int) ((float) iterationsDone) / ((float) maxIterations) * 100;
+    if (newProgress > progress) {
+        progress = newProgress;
+        if (progress % 10 == 0) {
+            const float remainingTime = remainingTimeCalculator.getRemainingTimeByProgress(progress);
+            progressionCallback(progress, remainingTime);
+        }
+    }
+}
+void ProgressReporter::finish() {
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end - startTime).count();
+
+    Logger::info("Rendering took {} seconds.", microseconds * 0.0000006);
+}

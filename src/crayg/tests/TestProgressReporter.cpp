@@ -38,9 +38,6 @@ TEST_CASE("ProgressReporter") {
         for (int i = 0; i < 10; i++) {
             reporter.iterationDone();
         }
-        // todo for some reason this sometimes fails and most of the time not
-        //REQUIRE(callCount == 1);
-
     }
 
 }

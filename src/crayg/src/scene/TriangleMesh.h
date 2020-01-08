@@ -24,7 +24,6 @@ class TriangleMesh : public SceneObject {
 
     std::vector<Vector3f> points;
     std::vector<int> faceIndexes;
-    // todo replace with iterator
     void getTriangles(std::vector<Triangle> &triangles);
 
     void beforeRender() override;

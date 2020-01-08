@@ -1,13 +1,7 @@
-#include <iostream>
-#include "fmt/format.h"
-#include <image/Image.h>
 #include <scene/Scene.h>
 #include <image/ImageWriter.h>
 #include <image/ImageWriterFactory.h>
-#include <intersectors/SceneIntersector.h>
 #include <Renderer.h>
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
 #include "Logger.h"

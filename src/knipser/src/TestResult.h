@@ -13,7 +13,7 @@ struct TestResult {
                const bool passed,
                const std::string &message,
                TestContext testContext);
-    // todo store context test was ran with
+
     static TestResult createFailed(KnipserTest test, std::string message, TestContext context);
     static TestResult createPassed(KnipserTest test, TestContext context);
     const KnipserTest test;

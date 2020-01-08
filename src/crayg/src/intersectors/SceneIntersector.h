@@ -20,7 +20,6 @@ struct Intersection {
     bool isValid();
 };
 
-// todo add init method -> builds BVH Tree
 class SceneIntersector {
  public:
     explicit SceneIntersector(Scene &scene);

@@ -2,7 +2,6 @@
 #include <catch2/catch.hpp>
 #include "utils/utils.h"
 
-// todo we can do this better with https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md#test-cases-and-sections
 TEST_CASE("addTwoVectors", "[Vector]") {
     Vector3f myVector(1, 1, 1);
     Vector3f otherVector(1, 2, 3);
