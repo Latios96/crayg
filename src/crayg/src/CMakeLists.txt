@@ -11,7 +11,6 @@ set(crayg_SRCS
         PineHoleCameraModel.cpp
         foundation/Ray.h
         foundation/Ray.cpp
-        intersectors/Intersectable.h
         scene/Sphere.h
         scene/Sphere.cpp
         foundation/Color.h
