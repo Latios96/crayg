@@ -8,7 +8,7 @@
 #include <foundation/Color.h>
 #include <foundation/Ray.h>
 
-class Imageable{
+ class Imageable: public std::enable_shared_from_this<Imageable>{
  public:
     virtual Vector3f getNormal(Vector3f point) = 0;
 
