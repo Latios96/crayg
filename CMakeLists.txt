@@ -5,9 +5,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(crayg)
 set(CMAKE_CXX_STANDARD 11)
 
+option(BUILD_WITH_COVERAGE "Activate --coverage to check for Code Coverage" OFF)
+
 enable_testing()
-#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-#conan_basic_setup()
 
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")

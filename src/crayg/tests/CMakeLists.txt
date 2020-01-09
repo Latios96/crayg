@@ -44,9 +44,12 @@ target_link_libraries(${TARGET_NAME}
 target_include_directories(${TARGET_NAME}
         PUBLIC ../../externals/fakeIt)
 
-set_target_properties(${TARGET_NAME}
-        PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
-        LINK_FLAGS "--coverage")
+if (${BUILD_WITH_COVERAGE})
+    set_target_properties(${TARGET_NAME}
+            PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
+            LINK_FLAGS "--coverage")
+endif ()
+
 
 add_test(
         NAME ${TARGET_NAME}

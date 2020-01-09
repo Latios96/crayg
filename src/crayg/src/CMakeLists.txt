@@ -94,9 +94,11 @@ add_library(crayg STATIC
 target_include_directories(crayg PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})
 
-# todo link flags only when doing debug build
-#set_target_properties(crayg
-#        PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
-#        LINK_FLAGS "--coverage")
+
+if (${BUILD_WITH_COVERAGE})
+    set_target_properties(crayg
+            PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
+            LINK_FLAGS "--coverage")
+endif ()
 
 target_link_libraries(crayg ${CONAN_LIBS} dl)
