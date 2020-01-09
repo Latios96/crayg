@@ -21,7 +21,9 @@ add_library(knipser
         ImageComparator.h
         ImageComparator.cpp
         KnipserApp.h
-        KnipserApp.cpp)
+        KnipserApp.cpp
+        TestPattern.h
+        TestPattern.cpp)
 
 
 target_include_directories(knipser PUBLIC
