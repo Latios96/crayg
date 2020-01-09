@@ -2,7 +2,7 @@
 // Created by Jan on 26.05.2019.
 //
 #include <Logger.h>
-void Logger::set_level(LevelEnum level) {
+void Logger::setLevel(LevelEnum level) {
     if (level == LevelEnum::trace) {
         spdlog::set_level(spdlog::level::trace);
     } else if (level == LevelEnum::debug) {

@@ -20,7 +20,7 @@ class Logger {
         critical = 5,
         off = 6
     };
-    static void set_level(LevelEnum level);
+    static void setLevel(LevelEnum level);
 
     template<typename... Args>
     static void trace(const char *fmt, const Args &... args);
@@ -54,7 +54,10 @@ class Logger {
 
     template<typename T>
     static void critical(const T &msg);
-    static void initialize();
+
+    static void initialize(){
+        auto console = spdlog::stdout_color_mt("console");
+    }
 };
 
 template<typename... Args>
@@ -109,9 +112,6 @@ void Logger::warning(const T &msg) {
 template<typename T>
 void Logger::critical(const T &msg) {
     spdlog::critical(msg);
-}
-void Logger::initialize() {
-    auto console = spdlog::stdout_color_mt("console");
 }
 
 #endif //RASPITOLIGHT_SRC_CORE_LIB_LOGGER_H_
