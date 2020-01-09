@@ -14,6 +14,7 @@ add_executable(knipser-main-tests TestTestRunner.cpp
         TestAssertions.cpp
         TestImageComparator.cpp
         TestTestPattern.cpp
+        TestTestPatternStringParser.cpp
         main.cpp)
 
 target_link_libraries(knipser-main-tests

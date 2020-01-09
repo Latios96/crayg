@@ -23,7 +23,9 @@ add_library(knipser
         KnipserApp.h
         KnipserApp.cpp
         TestPattern.h
-        TestPattern.cpp)
+        TestPattern.cpp
+        TestPatternStringParser.h
+        TestPatternStringParser.cpp)
 
 
 target_include_directories(knipser PUBLIC

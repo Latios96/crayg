@@ -6,6 +6,7 @@
 #define CRAYG_SRC_KNIPSER_SRC_TESTPATTERN_H_
 
 #include <string>
+#include <ostream>
 
 class TestPattern {
  public:
@@ -13,6 +14,11 @@ class TestPattern {
     const std::string pattern;
 
     bool matches(const std::string &testName) const;
+
+    bool operator==(const TestPattern &rhs) const;
+    bool operator!=(const TestPattern &rhs) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const TestPattern &pattern);
 };
 
 #endif //CRAYG_SRC_KNIPSER_SRC_TESTPATTERN_H_
