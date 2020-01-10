@@ -11,17 +11,18 @@
 #include <utility>
 
 TestRunner::TestRunner(TestRegistry &testRegistry, RunConfig runConfig) : testRegistry(testRegistry),
-                                                                          runConfig(std::move(runConfig)) {}
+                                                                          runConfig(std::move(runConfig)),
+                                                                          predicate(runConfig.testPatterns) {
+}
 
 std::vector<TestResult> TestRunner::execute() {
+    std::cout << fmt::format("Found {} tests", testRegistry.getTests().size()) << std::endl;
+
     std::vector<TestResult> testResults;
-    ExecuteTestPredicate predicate(runConfig.testPatterns);
 
     for (auto &test : testRegistry.getTests()) {
-        if (predicate.shouldExecute(test)) {
-            TestResult result = executeTest(test);
-            testResults.push_back(result);
-        }
+        TestResult result = executeTest(test);
+        testResults.push_back(result);
     }
 
     return testResults;
@@ -29,6 +30,11 @@ std::vector<TestResult> TestRunner::execute() {
 
 TestResult TestRunner::executeTest(const KnipserTest &test) {
     TestContext testContext = createTestContext(test);
+
+    if (!predicate.shouldExecute(test)) {
+        return TestResult::createSkipped(test, testContext);
+    }
+
     try {
         std::cout << fmt::format("[RUN] {}", test.name) << std::endl;
 

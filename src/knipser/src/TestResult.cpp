@@ -5,16 +5,31 @@
 #include "TestResult.h"
 
 TestResult TestResult::createFailed(KnipserTest test, std::string message, TestContext context) {
-    return TestResult(test, false, message, context);
+    return TestResult(test, TestResultState::FAILED, message, context);
 }
 
 TestResult TestResult::createPassed(KnipserTest test, TestContext context) {
-    return TestResult(test, true, "", context);
+    return TestResult(test, TestResultState::PASSED, "", context);
+}
+
+TestResult TestResult::createSkipped(KnipserTest test, TestContext context) {
+    return TestResult(test, TestResultState::SKIPPED, "", context);
+}
+
+bool TestResult::isFailed() const {
+    return state == TestResultState::FAILED;
+}
+bool TestResult::isPassed() const {
+    return state == TestResultState::PASSED;
+}
+bool TestResult::isSkipped() const {
+    return state == TestResultState::SKIPPED;
 }
 
 TestResult::TestResult(const KnipserTest &test,
-                       const bool passed,
+                       const TestResultState state,
                        const std::string &message,
                        TestContext testContext) : test(test),
-                                                  passed(passed),
+                                                  state(state),
                                                   message(message), testContext(testContext) {}
+

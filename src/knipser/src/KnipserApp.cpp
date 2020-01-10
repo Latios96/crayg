@@ -3,9 +3,10 @@
 //
 #include <KnipserApp.h>
 #include "PlainReportGenerator.h"
+#include "TestPatternStringParser.h"
 
 ExitMessage KnipserApp::execute() {
-    CLI::App app{"Integration testing framework for projects with image output", "Knipser"};
+    CLI::App app {"Integration testing framework for projects with image output", "Knipser"};
 
     std::string outputFolder;
     app.add_option("-o,--output", outputFolder, "Path where test results are saved")->required();
@@ -13,13 +14,19 @@ ExitMessage KnipserApp::execute() {
     std::string referenceFolder;
     app.add_option("-r,--reference", referenceFolder, "Path where reference images are stored")->required();
 
+    std::string testPatternString;
+    app.add_option("-t,--test-patterns", testPatternString, "Comma-seperated list of test name pattern to ne executed");
+
     try {
         (app).parse((argc), (argv));
     } catch (const CLI::ParseError &e) {
         return {1, e.what()};
     }
 
-    RunConfig runConfig(outputFolder, referenceFolder);
+    TestPatternStringParser parser(testPatternString);
+    const std::vector<TestPattern> testPatterns = parser.parse();
+
+    RunConfig runConfig(outputFolder, referenceFolder, testPatterns);
 
     TestRunner testRunner(*TestRegistry::getInstance(), runConfig);
     const std::vector<TestResult> testResults = testRunner.execute();
@@ -36,12 +43,15 @@ ExitMessage KnipserApp::createExitMessage(const std::vector<TestResult> &testRes
 ExitMessage KnipserApp::exitMessageFromTestResults(const std::vector<TestResult> &testResults) const {
     int passedCount = 0;
     int failedCount = 0;
+    int skippedCount = 0;
 
     for (auto &testResult : testResults) {
-        if (testResult.passed) {
+        if (testResult.isPassed()) {
             passedCount++;
-        } else {
+        } else if (testResult.isFailed()) {
             failedCount++;
+        } else {
+            skippedCount++;
         }
     }
 
@@ -54,10 +64,11 @@ ExitMessage KnipserApp::exitMessageFromTestResults(const std::vector<TestResult>
     plainReportGenerator.generateReport(ss);
 
     std::string
-        message = fmt::format("\n{}\nRan {} tests, {} passed and {} failed",
+        message = fmt::format("\n{}\nRan {} tests, {} passed, {} skipped and {} failed",
                               ss.str(),
                               testResults.size(),
                               passedCount,
+                              skippedCount,
                               failedCount);
 
     return {exitCode, message};

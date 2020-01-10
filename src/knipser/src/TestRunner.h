@@ -9,6 +9,7 @@
 #include "TestRegistry.h"
 #include "TestResult.h"
 #include "RunConfig.h"
+#include "ExecuteTestPredicate.h"
 #include <vector>
 
 class TestRunner {
@@ -18,6 +19,7 @@ class TestRunner {
  private:
     TestRegistry &testRegistry;
     RunConfig runConfig;
+    ExecuteTestPredicate predicate;
 
     TestResult executeTest(const KnipserTest &test);
 
