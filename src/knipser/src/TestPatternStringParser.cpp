@@ -6,29 +6,21 @@
 
 #include <utility>
 #include <sstream>
+#include <boost/algorithm/string.hpp>
 
 TestPatternStringParser::TestPatternStringParser(std::string parseString) : parseString(std::move(parseString)) {}
 
 std::vector<TestPattern> TestPatternStringParser::parse() const {
+    std::vector<std::string> splitResults;
+    boost::algorithm::split(splitResults, parseString, boost::algorithm::is_any_of(","));
+
     std::vector<TestPattern> patterns;
-    std::string token;
-    std::istringstream tokenStream(parseString);
-    while (std::getline(tokenStream, token, ',')) {
-        token = trim(token);
-        if (!token.empty()) {
-            patterns.emplace_back(token);
+    for(auto& patternString : splitResults){
+        patternString = boost::algorithm::trim_copy(patternString);
+        if (!patternString.empty()) {
+            patterns.emplace_back(patternString);
         }
     }
     return patterns;
 }
-std::string TestPatternStringParser::trim(const std::string &s) const {
-    std::string::const_iterator it = s.begin();
-    while (it != s.end() && isspace(*it))
-        it++;
 
-    std::string::const_reverse_iterator rit = s.rbegin();
-    while (rit.base() != it && isspace(*rit))
-        rit++;
-
-    return std::string(it, rit.base());
-}

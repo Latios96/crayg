@@ -15,7 +15,6 @@ class TestPatternStringParser {
     std::vector<TestPattern> parse() const;
  private:
     std::string parseString;
-    std::string trim(const std::string &s) const;
 };
 
 #endif //CRAYG_SRC_KNIPSER_SRC_TESTPATTERNSTRINGPARSER_H_
