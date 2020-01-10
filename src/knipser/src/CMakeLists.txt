@@ -25,7 +25,7 @@ add_library(knipser
         TestPattern.h
         TestPattern.cpp
         TestPatternStringParser.h
-        TestPatternStringParser.cpp)
+        TestPatternStringParser.cpp ExecuteTestPredicate.cpp ExecuteTestPredicate.h)
 
 
 target_include_directories(knipser PUBLIC

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fmt/format.h>
 #include "TestRunner.h"
+#include "ExecuteTestPredicate.h"
 #include <boost/filesystem.hpp>
 #include <functional>
 #include <utility>
@@ -14,10 +15,13 @@ TestRunner::TestRunner(TestRegistry &testRegistry, RunConfig runConfig) : testRe
 
 std::vector<TestResult> TestRunner::execute() {
     std::vector<TestResult> testResults;
+    ExecuteTestPredicate predicate(runConfig.testPatterns);
 
     for (auto &test : testRegistry.getTests()) {
-        TestResult result = executeTest(test);
-        testResults.push_back(result);
+        if (predicate.shouldExecute(test)) {
+            TestResult result = executeTest(test);
+            testResults.push_back(result);
+        }
     }
 
     return testResults;
