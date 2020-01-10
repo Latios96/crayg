@@ -16,7 +16,7 @@ TEST_CASE("passing test should generate passing result", "[TestRunner]") {
 
     REQUIRE(testResults.size() == 1);
     REQUIRE(testResults[0].test == passingTest);
-    REQUIRE(testResults[0].passed);
+    REQUIRE(testResults[0].isPassed());
     REQUIRE(testResults[0].message.empty());
     REQUIRE(testResults[0].testContext == TestContext("demo/passing test", "demoReference/passing test"));
 }
@@ -34,7 +34,7 @@ TEST_CASE("failing test should generate failing result with message", "[TestRunn
 
     REQUIRE(testResults.size() == 1);
     REQUIRE(testResults[0].test == failingTest);
-    REQUIRE_FALSE(testResults[0].passed);
+    REQUIRE(testResults[0].isFailed());
     REQUIRE(testResults[0].message == "std::exception");
     REQUIRE(testResults[0].testContext == TestContext("demo/failing test", "demoReference/failing test"));
 }
@@ -49,6 +49,7 @@ TEST_CASE("TestRunner should execute test based on predicate", "[TestRunner]") {
     const std::vector<TestResult> testResults = testRunner.execute();
 
     REQUIRE(testResults.size() == 1);
+    REQUIRE(testResults[0].isPassed());
 }
 
 TEST_CASE("TestRunner should not execute test based on predicate", "[TestRunner]") {
@@ -60,7 +61,8 @@ TEST_CASE("TestRunner should not execute test based on predicate", "[TestRunner]
     TestRunner testRunner(testRegistry, runConfig);
     const std::vector<TestResult> testResults = testRunner.execute();
 
-    REQUIRE(testResults.empty());
+    REQUIRE(testResults.size() == 1);
+    REQUIRE(testResults[0].isSkipped());
 }
 
 

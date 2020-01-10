@@ -15,7 +15,7 @@ TEST_CASE("TestResult") {
         TestResult passedTestResult = TestResult::createPassed(myTest, testContext);
 
         REQUIRE(passedTestResult.test == myTest);
-        REQUIRE(passedTestResult.passed);
+        REQUIRE(passedTestResult.isPassed());
         REQUIRE(passedTestResult.message.empty());
         REQUIRE(passedTestResult.testContext == testContext);
     }
@@ -24,7 +24,7 @@ TEST_CASE("TestResult") {
         TestResult failedTestResult = TestResult::createFailed(myTest, "my message", testContext);
 
         REQUIRE(failedTestResult.test == myTest);
-        REQUIRE_FALSE(failedTestResult.passed);
+        REQUIRE(failedTestResult.isFailed());
         REQUIRE(failedTestResult.message == "my message");
         REQUIRE(failedTestResult.testContext == testContext);
     }
