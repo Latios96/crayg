@@ -14,7 +14,8 @@ class PlainReportGenerator : public ReportGenerator {
     void generateReport(std::ostream &ostream) override;
 
  private:
-    std::string getTestResultString(TestResult result);
+    std::string getTestResultString(const TestResult &result, unsigned long maxNameLength) const;
+    unsigned long getMaxNameLength() const;
 };
 
 #endif //CRAYG_PLAINREPORTGENERATOR_H
