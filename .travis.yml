@@ -3,19 +3,23 @@ language: cpp
 cache:
   directories:
     - ~/.conan/
-
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-7
+      - g++-7
 matrix:
   include:
-    - os: linux
-      compiler: clang
-      before_script:
-        - virtualenv venv
-        - source venv/bin/activate
     - os: linux
       compiler: gcc
       before_script:
         - virtualenv venv
         - source venv/bin/activate
+        - export CC="${CC}-7";
+        - export CC="${CXX}-7";
+       env: GCC_VERSION=7
     - os: osx
       compiler: clang
 
