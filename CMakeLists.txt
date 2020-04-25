@@ -36,7 +36,7 @@ conan_cmake_run(REQUIRES fmt/5.3.0@bincrafters/stable
         #openexr/2.3.0@Latios/stable
         openimageio/2.1.11.2@ppodsiadly/stable
         TBB/2019_U9@conan/stable
-        OPTIONS TBB:shared=True
+        #OPTIONS TBB:shared=True
         BASIC_SETUP
         BUILD missing)
 
