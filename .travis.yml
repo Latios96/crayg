@@ -9,17 +9,18 @@ matrix:
     - os: linux
       compiler: clang
       before_script:
-        - pip3 install conan
+        - virtualenv venv
+        - source venv/bin/activate
     - os: linux
       compiler: gcc
       before_script:
         - virtualenv venv
         - source venv/bin/activate
-        - pip install conan
     - os: osx
       compiler: clang
 
 script:
+  - pip install conan
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
   - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
   - rm -rf build/
