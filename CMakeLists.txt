@@ -9,6 +9,8 @@ option(BUILD_WITH_COVERAGE "Activate --coverage to check for Code Coverage" OFF)
 
 enable_testing()
 
+unset(ENV{CI})
+
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
     file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
