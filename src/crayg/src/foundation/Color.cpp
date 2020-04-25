@@ -4,6 +4,7 @@
 
 #include <tuple>
 #include "Color.h"
+#include <algorithm>
 
 std::ostream &operator<<(std::ostream &os, const Color &color) {
     os << "r: " << color.r << " g: " << color.g << " b: " << color.b;

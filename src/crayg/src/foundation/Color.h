@@ -6,6 +6,7 @@
 #define CRAYG_COLOR_H
 
 #include <ostream>
+#include <tuple>
 
 class Color {
  public:
