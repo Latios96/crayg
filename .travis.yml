@@ -18,7 +18,7 @@ matrix:
         - virtualenv venv
         - source venv/bin/activate
         - export CC="${CC}-7";
-        - export CC="${CXX}-7";
+        - export CXX="${CXX}-7";
       env: GCC_VERSION=7
     - os: osx
       compiler: clang
