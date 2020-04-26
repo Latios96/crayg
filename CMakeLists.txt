@@ -11,13 +11,18 @@ enable_testing()
 
 unset(ENV{CI})
 
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
     file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
             "${CMAKE_BINARY_DIR}/conan.cmake")
-endif()
+endif ()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
+
+set(TBB_OPTIONS "")
+if (WIN32)
+    set(TBB_OPTIONS TBB:shared=True)
+endif ()
 
 conan_cmake_run(REQUIRES
         fmt/5.3.0@bincrafters/stable
@@ -29,7 +34,7 @@ conan_cmake_run(REQUIRES
         boost/1.72.0
         openimageio/2.1.11.2@ppodsiadly/stable
         TBB/2019_U9@conan/stable
-        OPTIONS TBB:shared=True
+        OPTIONS ${TBB_OPTIONS}
         IMPORTS bin,*.dll->./bin lib,*.dylib*->./bin
         BASIC_SETUP
         BUILD missing)
