@@ -74,7 +74,7 @@ class AlwaysErrorImageComparator : public ImageComparator {
  public:
     AlwaysErrorImageComparator(const std::string &left, const std::string &right) : ImageComparator(left, right) {}
     ImageComparatorResult compareImages() override {
-        return {ERROR, 10};
+        return {IMAGE_ERROR, 10};
     }
 };
 

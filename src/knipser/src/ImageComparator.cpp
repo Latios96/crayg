@@ -5,6 +5,8 @@
 #include "ImageComparator.h"
 
 #include <utility>
+#include <OpenImageIO/imagebuf.h>
+#include <OpenImageIO/imagebufalgo.h>
 ImageComparator::ImageComparator(std::string left, std::string right)
     : left(std::move(left)), right(std::move(right)) {}
 
@@ -15,13 +17,13 @@ OpenImageIoImageComparator::OpenImageIoImageComparator(const std::string &left, 
     : ImageComparator(left, right) {}
 ImageComparatorResult OpenImageIoImageComparator::compareImages() {
 
-    OIIO::ImageBuf leftInput(left);
-    OIIO::ImageBuf rightInput(right);
+  OIIO::ImageBuf leftInput(left);
+  OIIO::ImageBuf rightInput(right);
 
-    auto result = OIIO::ImageBufAlgo::compare(leftInput, rightInput, 0.5, 0.0);
-    if (result.error) {
-        return {ERROR, static_cast<float>(result.maxerror)};
-    } else {
-        return {OK, 0.0};
-    }
+  auto result = OIIO::ImageBufAlgo::compare(leftInput, rightInput, 0.5, 0.0);
+  if (result.error) {
+    return {IMAGE_ERROR, static_cast<float>(result.maxerror)};
+  } else {
+    return {OK, 0.0};
+  }
 }

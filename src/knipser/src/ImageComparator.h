@@ -6,11 +6,10 @@
 #define CRAYG_SRC_KNIPSER_SRC_IMAGECOMPARATOR_H_
 
 #include <string>
-#include <OpenImageIO/imagebuf.h>
-#include <OpenImageIO/imagebufalgo.h>
+
 
 enum ImageComparatorResultStatus {
-    OK, WARNING, ERROR
+    OK, WARNING, IMAGE_ERROR
 };
 struct ImageComparatorResult {
  public:
@@ -27,7 +26,7 @@ struct ImageComparatorResult {
     }
 
     bool isError() {
-        return status == ImageComparatorResultStatus::ERROR;
+        return status == ImageComparatorResultStatus::IMAGE_ERROR;
     }
 };
 
