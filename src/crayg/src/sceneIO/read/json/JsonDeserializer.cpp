@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include "JsonDeserializer.h"
-#define FMT_HEADER_ONLY
 #include "fmt/format.h"
 
 JsonDeserializer::JsonDeserializer(rapidjson::Value &jsonObject) : jsonObject(jsonObject) {}

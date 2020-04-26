@@ -11,7 +11,6 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 
-#define FMT_HEADER_ONLY
 #include "fmt/format.h"
 #include "Logger.h"
 
