@@ -45,7 +45,7 @@ matrix:
         - choco install python --version=3.7.2
         - C:/Python37/python --version
       script:
-        - build_travis.bat
+        - cmd.exe /C build_travis.bat
 
 
 deploy:
