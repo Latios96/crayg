@@ -8,8 +8,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
     - name: install conan
-      run: pip3 install conan
+      run: |
+        pip install conan
+        conan --version
     - name: add bincrafters remote
       run: conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
     - name: add ppodsiadly remote
