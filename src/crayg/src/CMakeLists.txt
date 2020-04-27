@@ -101,8 +101,4 @@ if (${BUILD_WITH_COVERAGE})
             LINK_FLAGS "--coverage")
 endif ()
 
-target_link_libraries(crayg ${CONAN_LIBS})
-
-if (UNIX)
-    target_link_libraries(crayg dl)
-endif ()
+target_link_libraries(crayg ${CONAN_LIBS} ${CMAKE_DL_LIBS})

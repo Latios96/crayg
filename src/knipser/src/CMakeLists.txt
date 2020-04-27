@@ -32,10 +32,7 @@ target_include_directories(knipser PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         )
 
-target_link_libraries(knipser ${CONAN_LIBS})
-if (UNIX)
-    target_link_libraries(crayg dl)
-endif ()
+target_link_libraries(knipser ${CONAN_LIBS} ${CMAKE_DL_LIBS})
 
 add_executable(knipser-main main.cpp)
 target_link_libraries(knipser-main knipser)
