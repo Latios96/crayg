@@ -41,6 +41,8 @@ matrix:
         - make -j 4
         - ctest -V
     - os: windows
+      before_script:
+        - choco install python --version=3.7.2
       script:
         - pip install conan
         - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
