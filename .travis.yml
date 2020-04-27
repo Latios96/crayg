@@ -44,11 +44,11 @@ matrix:
       before_script:
         - choco install python --version=3.7.2
         - C:/Python37/python --version
-      env: PATH=C:/Python37;C:/Python37/Scripts;%PATH%
       script:
-        - C:/Python37/Scripts/pip install conan
-        - C:/Python37/Scripts/conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
-        - C:/Python37/Scripts/conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
+        - set PATH=C:/Python37;C:/Python37/Scripts;%PATH%
+        - pip install conan
+        - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
+        - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
         - call "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvarsall.bat" x64
         - mkdir build
         - cd build
