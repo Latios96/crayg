@@ -63,7 +63,7 @@ jobs:
     - name: add ppodsiadly remote
       run: conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
     - name: install headers
-      run: sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+      run: sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.15.pkg -target /
     - name: prepare build
       run: mkdir build
     - name: run CMake
