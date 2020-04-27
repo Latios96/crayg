@@ -20,13 +20,14 @@ jobs:
       run: conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
     - name: add ppodsiadly remote
       run: conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
-    - name: create build folder
-      run: |
-        mkdir build
-        cd build
+    - name: prepare build
+      run: mkdir build
     - name: run CMake
+      working-directory: build
       run: cmake .. -DCMAKE_BUILD_TYPE=Release
     - name: run make
+      working-directory: build
       run : make -j 4
     - name: run tests
+      working-directory: build
       run: ctest -V
