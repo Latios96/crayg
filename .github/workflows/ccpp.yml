@@ -5,6 +5,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          os: [ ubuntu-latest, macos-latest]
 
     steps:
     - uses: actions/checkout@v2
@@ -33,7 +36,7 @@ jobs:
       run: cmake .. -DCMAKE_BUILD_TYPE=Release
     - name: run make
       working-directory: build
-      run : make -j 4
+      run : make -j 2
     - name: run tests
       working-directory: build
       run: ctest -V
