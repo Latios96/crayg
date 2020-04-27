@@ -8,6 +8,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Cache Conan packages
+      id: cache-primes
+      uses: actions/cache@v1
+      with:
+        path: ~/.conan/
+        key: ${{ runner.os }}-conan-packages
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
