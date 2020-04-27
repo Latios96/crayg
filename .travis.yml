@@ -24,6 +24,7 @@ matrix:
       compiler: clang
 
 script:
+  - cmake --version 
   - pip install conan
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
   - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
