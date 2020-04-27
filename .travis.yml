@@ -43,6 +43,7 @@ matrix:
     - os: windows
       before_script:
         - choco install python --version=3.7.2
+        - C:\Python37\python --version
       script:
         - C:\tools\python\Scripts\pip install conan
         - C:\tools\python\Scripts\conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
