@@ -20,19 +20,38 @@ matrix:
         - export CC="${CC}-7";
         - export CXX="${CXX}-7";
       env: GCC_VERSION=7
+      script:
+        - pip install conan
+        - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
+        - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
+        - mkdir build
+        - cd build
+        - cmake .. -DCMAKE_BUILD_TYPE=Release
+        - make -j 4
+        - ctest -V
     - os: osx
       compiler: clang
+      script:
+        - pip install conan
+        - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
+        - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
+        - mkdir build
+        - cd build
+        - cmake .. -DCMAKE_BUILD_TYPE=Release
+        - make -j 4
+        - ctest -V
+    - os: windows
+      script:
+        - pip install conan
+        - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
+        - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
+        - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+        - mkdir build
+        - cd build
+        - cmake -G "Visual Studio 15 2017 Win64" ..
+        - cmake --build .
 
-script:
-  - pip install conan
-  - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
-  - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
-  - rm -rf build/
-  - mkdir build
-  - cd build
-  - cmake .. -DCMAKE_BUILD_TYPE=Release
-  - make -j 4
-  - ctest -V
+
 deploy:
   provider: releases
   api_key:
