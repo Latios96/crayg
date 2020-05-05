@@ -3,9 +3,9 @@ name: C/C++ CI
 on: [push]
 
 jobs:
-  build-ubuntu:
-    name:  ubuntu-latest
-    runs-on:  ubuntu-latest
+  build-windows:
+    name:  windows-2016
+    runs-on:  windows-2016
 
     steps:
     - uses: actions/checkout@v2
@@ -32,47 +32,9 @@ jobs:
     - name: run CMake
       working-directory: build
       run: cmake .. -DCMAKE_BUILD_TYPE=Release
-    - name: run make
+    - name: build
       working-directory: build
-      run : make -j 2
-    - name: run tests
-      working-directory: build
-      run: ctest -V
-  build-macos:
-    name: macos-latest
-    runs-on: macos-latest
-    env:
-      CPATH: /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
-    steps:
-    - uses: actions/checkout@v2
-    - name: Cache Conan packages
-      id: cache-primes
-      uses: actions/cache@v1
-      with:
-        path: ~/.conan/
-        key: ${{ runner.os }}-conan-packages
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
-    - name: install conan
-      run: |
-        pip install conan
-        conan --version
-    - name: add bincrafters remote
-      run: conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
-    - name: add ppodsiadly remote
-      run: conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
-    - name: test oiio install
-      run: conan install openimageio/2.1.11.2@ppodsiadly/stable --build missing
-    - name: prepare build
-      run: mkdir build
-    - name: run CMake
-      working-directory: build
-      run: cmake .. -DCMAKE_BUILD_TYPE=Release
-    - name: run make
-      working-directory: build
-      run : make -j 2
+      run : cmake --build . --config Release
     - name: run tests
       working-directory: build
       run: ctest -V
