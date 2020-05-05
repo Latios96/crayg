@@ -19,11 +19,6 @@ endif ()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-set(TBB_OPTIONS "")
-if (WIN32)
-    set(TBB_OPTIONS TBB:shared=True)
-endif ()
-
 conan_cmake_run(REQUIRES
         fmt/5.3.0@bincrafters/stable
         spdlog/1.3.1@bincrafters/stable
@@ -33,8 +28,6 @@ conan_cmake_run(REQUIRES
         cli11/1.6.1@bincrafters/stable
         boost/1.72.0
         openimageio/2.1.11.2@ppodsiadly/stable
-        TBB/2019_U9@conan/stable
-        OPTIONS ${TBB_OPTIONS}
         IMPORTS bin,*.dll->./bin lib,*.dylib*->./bin
         BASIC_SETUP
         BUILD missing)
