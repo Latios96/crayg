@@ -7,13 +7,14 @@ Personal Raytracer project to get familiar with C++ in general and how to do CI 
 ## Building
 ### Prerequisites
 This project uses [Conan](https://conan.io/), a C++ Package Manager, to manage its dependencies.
-Conan is written in Python, so you can install it easily with pip
+Conan is written in Python, so you can install it easily with pip:
 ```shell
 pip install conan
 ```
-You also need to add the bincrafters remote to conan. Otherwise conan can not find all dependencies.
+You also need to add some additional remotes. Otherwise conan can not find all dependencies.
 ```shell
 conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan
 ```
 
 ### Linux & Mac OS
