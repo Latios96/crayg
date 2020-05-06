@@ -36,8 +36,5 @@ jobs:
       working-directory: build
       run : cmake --build . --config Release
     - name: run tests
-      working-directory: build\bin
-      run: ctest -V
-    - name: run tests
       working-directory: build
-      run: ctest -V
+      run: ctest -C Release -V
