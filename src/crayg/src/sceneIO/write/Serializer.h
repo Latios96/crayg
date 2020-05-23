@@ -7,7 +7,7 @@
 
 #include <string>
 #include <vector>
-#include <foundation/Vector3f.h>
+#include <basics/Vector3f.h>
 
 class Serializer {
  public:

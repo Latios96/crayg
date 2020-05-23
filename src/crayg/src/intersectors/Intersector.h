@@ -5,8 +5,8 @@
 #ifndef CRAYG_INTERSECTOR_H
 #define CRAYG_INTERSECTOR_H
 
-#include "foundation/Vector3f.h"
-#include "foundation/Ray.h"
+#include "basics/Vector3f.h"
+#include "basics/Ray.h"
 
 template<typename T>
 class Intersector {

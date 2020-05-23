@@ -100,7 +100,7 @@ Color Renderer::renderSample(float x, float y) {
             shadow = lightSampler->calculateShadowFactor(location + (object.getNormal(location) * 0.001));
         }
 
-        return shadedColor * shadow;
+        return shadedColor;// * shadow;
     }
     return Color::createBlack();
 }

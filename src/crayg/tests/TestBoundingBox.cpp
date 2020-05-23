@@ -3,7 +3,7 @@
 //
 
 #include <catch2/catch.hpp>
-#include <foundation/BoundingBox.h>
+#include <found/BoundingBox.h>
 
 TEST_CASE("BoundingBox") {
     BoundingBox boundingBox({0, 0, 0}, {1, 1, 1});

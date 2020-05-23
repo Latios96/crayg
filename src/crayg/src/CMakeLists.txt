@@ -1,6 +1,6 @@
 set(crayg_SRCS
-        foundation/Vector3f.h
-        foundation/Vector3f.cpp
+        basics/Vector3f.h
+        basics/Vector3f.cpp
         image/Image.h
         image/Image.cpp
         image/BmpImageWriter.h
@@ -9,12 +9,12 @@ set(crayg_SRCS
         scene/Camera.cpp
         PineHoleCameraModel.h
         PineHoleCameraModel.cpp
-        foundation/Ray.h
-        foundation/Ray.cpp
+        basics/Ray.h
+        basics/Ray.cpp
         scene/Sphere.h
         scene/Sphere.cpp
-        foundation/Color.h
-        foundation/Color.cpp
+        basics/Color.h
+        basics/Color.cpp
         scene/Transformable.h
         scene/Transformable.cpp
         scene/Scene.h
@@ -73,8 +73,8 @@ set(crayg_SRCS
         sceneIO/read/json/JsonSceneReader.h
         scene/Imageable.cpp
         scene/Imageable.h
-        foundation/BoundingBox.h
-        foundation/BoundingBox.cpp
+        basics/BoundingBox.h
+        basics/BoundingBox.cpp
         utils/RemainingTimeCalculator.h
         utils/RemainingTimeCalculator.cpp
         lightSamplers/LightSampler.h

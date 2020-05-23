@@ -5,7 +5,7 @@
 #ifndef CRAYG_CAMERAMODEL_H
 #define CRAYG_CAMERAMODEL_H
 
-#include <foundation/Ray.h>
+#include <basics/Ray.h>
 
 class CameraModel {
  public:

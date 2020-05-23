@@ -5,8 +5,8 @@
 #ifndef CRAYG_IMAGE_H
 #define CRAYG_IMAGE_H
 
-#include <foundation/Color.h>
-#include "foundation/Vector3f.h"
+#include "basics/Color.h"
+#include "basics/Vector3f.h"
 class Image {
 
  private:

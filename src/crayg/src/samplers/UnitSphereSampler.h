@@ -5,7 +5,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SAMPLERS_UNITSPHERESAMPLER_H_
 #define CRAYG_SRC_CRAYG_SRC_SAMPLERS_UNITSPHERESAMPLER_H_
 
-#include <foundation/Vector3f.h>
+#include <basics/Vector3f.h>
 
 class UnitSphereSampler {
  public:

@@ -6,7 +6,7 @@
 #define CRAYG_PINEHOLECAMERAMODEL_H
 
 #include "scene/Camera.h"
-#include "foundation/Ray.h"
+#include "basics/Ray.h"
 #include "CameraModel.h"
 
 // todo add tests

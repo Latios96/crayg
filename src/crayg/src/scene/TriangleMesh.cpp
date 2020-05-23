@@ -10,11 +10,10 @@ bool TriangleMesh::isIntersecting(Ray ray) {
 
 Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     if (boundingBox.isIntersecting(ray)) {
-        ray.startPoint = ray.startPoint + getPosition().invert();
         Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-        for (Triangle &triangle : triangles) {
-            Imageable::Intersection intersection = triangle.intersect(ray);
+        for (std::shared_ptr<Triangle> &triangle : triangles) {
+            Imageable::Intersection intersection = triangle->intersect(ray);
             if (intersection.rayParameter < hitIntersection.rayParameter) {
                 hitIntersection = intersection;
             }
@@ -25,12 +24,13 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     }
 }
 
-void TriangleMesh::getTriangles(std::vector<Triangle> &triangles) {
+void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Triangle>> &triangles) {
+
     for (int i = 0; i < faceIndexes.size(); i = i + 3) {
         Vector3f v0 = points[faceIndexes[i]];
         Vector3f v1 = points[faceIndexes[i + 1]];
         Vector3f v2 = points[faceIndexes[i + 2]];
-        triangles.push_back({v0, v1, v2});
+        triangles.push_back(std::make_shared<Triangle>(v0, v1, v2));
     }
 }
 

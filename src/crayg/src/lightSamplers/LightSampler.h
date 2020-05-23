@@ -5,8 +5,8 @@
 #ifndef CRAYG_LIGHTSAMPLER_H
 #define CRAYG_LIGHTSAMPLER_H
 
-#include <foundation/Vector3f.h>
-#include <intersectors/SceneIntersector.h>
+#include "basics/Vector3f.h"
+#include "intersectors/SceneIntersector.h"
 
 class LightSampler {
  public:

@@ -3,7 +3,7 @@
 //
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
-#include <foundation/Vector3f.h>
+#include <found/Vector3f.h>
 #include <scene/Camera.h>
 
 using namespace fakeit;

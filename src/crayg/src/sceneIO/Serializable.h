@@ -6,7 +6,7 @@
 #define CRAYG_SERIALIZABLE_H
 
 #include <string>
-#include "foundation/Vector3f.h"
+#include "basics/Vector3f.h"
 #include "sceneIO/write/Serializer.h"
 #include "sceneIO/read/Deserializer.h"
 #include <vector>

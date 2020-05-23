@@ -1,4 +1,4 @@
-#include <foundation/Color.h>
+#include <found/Color.h>
 #include <catch2/catch.hpp>
 
 TEST_CASE("Color/createColorDefault", "[Color]") {

@@ -5,7 +5,7 @@
 #ifndef CRAYG_CAMERA_H
 #define CRAYG_CAMERA_H
 
-#include "foundation/Vector3f.h"
+#include "basics/Vector3f.h"
 #include "sceneIO/Serializable.h"
 
 class Camera : public Serializable {

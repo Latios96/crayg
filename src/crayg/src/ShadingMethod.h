@@ -5,8 +5,8 @@
 #ifndef CRAYG_SHADINGMETHODS_H
 #define CRAYG_SHADINGMETHODS_H
 
-#include <foundation/Color.h>
-#include <foundation/Vector3f.h>
+#include <basics/Color.h>
+#include <basics/Vector3f.h>
 #include <scene/SceneObject.h>
 #include <scene/Scene.h>
 

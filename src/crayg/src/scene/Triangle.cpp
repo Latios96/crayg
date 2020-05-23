@@ -9,6 +9,7 @@ Triangle::Intersection Triangle::intersect(Ray ray) {
 
     return getIntersectionMullerTrumbore(ray);
 }
+
 Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) {
     //Vec3 v0v1 = sub(*v1, *v0);
     Vector3f v0v1 = v1 - v0;

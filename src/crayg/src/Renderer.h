@@ -8,7 +8,7 @@
 #include <scene/Scene.h>
 #include <scene/Camera.h>
 #include <image/Image.h>
-#include <foundation/Color.h>
+#include <basics/Color.h>
 #include "PineHoleCameraModel.h"
 #include <intersectors/SceneIntersector.h>
 #include <lightSamplers/LightSampler.h>

@@ -6,7 +6,7 @@
 #define CRAYG_TRIANGEMESH_H
 
 #include <vector>
-#include <foundation/BoundingBox.h>
+#include <basics/BoundingBox.h>
 #include "SceneObject.h"
 #include "Triangle.h"
 
@@ -24,11 +24,11 @@ class TriangleMesh : public SceneObject {
 
     std::vector<Vector3f> points;
     std::vector<int> faceIndexes;
-    void getTriangles(std::vector<Triangle> &triangles);
+    void getTriangles(std::vector<std::shared_ptr<Triangle>> &triangles);
 
     void beforeRender() override;
  private:
-    std::vector<Triangle> triangles;
+    std::vector<std::shared_ptr<Triangle>> triangles;
     BoundingBox boundingBox;
 };
 

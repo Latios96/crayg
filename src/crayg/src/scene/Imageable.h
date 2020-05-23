@@ -5,8 +5,8 @@
 #ifndef CRAYG_IMAGEABLE_H
 #define CRAYG_IMAGEABLE_H
 
-#include <foundation/Color.h>
-#include <foundation/Ray.h>
+#include <basics/Color.h>
+#include <basics/Ray.h>
 #include <memory>
 
 class Imageable : public std::enable_shared_from_this<Imageable> {

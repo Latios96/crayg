@@ -5,7 +5,7 @@
 #ifndef CRAYG_TRANSFORMABLE_H
 #define CRAYG_TRANSFORMABLE_H
 
-#include "foundation/Vector3f.h"
+#include "basics/Vector3f.h"
 
 class Transformable {
  public:

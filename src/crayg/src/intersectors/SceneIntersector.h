@@ -6,7 +6,7 @@
 #define CRAYG_SCENEINTERSECTOR_H
 
 #include <scene/Scene.h>
-#include <foundation/Ray.h>
+#include <basics/Ray.h>
 
 struct Intersection {
  public:
