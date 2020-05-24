@@ -2,7 +2,7 @@
 // Created by Jan Honsbrok on 06.11.18.
 //
 #include <catch2/catch.hpp>
-#include "found/Ray.h"
+#include "basics/Ray.h"
 
 TEST_CASE("Ray/shouldCreateInvalid", "[Ray]") {
     Ray invalid = Ray::createInvalid();
