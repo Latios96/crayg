@@ -34,14 +34,43 @@ void Renderer::renderScene() {
     Logger::info("Rendering done.");
     reporter.finish();
 }
+
 void Renderer::renderParallel(ProgressReporter &reporter) {
-    for(int x = 0; x < image.getWidth(); x++) {
-        for (int y = 0; y < image.getHeight(); y++) {
-            renderPixel(PixelPosition(x, y));
-            reporter.iterationDone();
+    unsigned int workerCount = std::thread::hardware_concurrency();
+    Logger::info("Worker count: {}, task count: {}", workerCount, image.getWidth());
+    std::vector<std::thread> threads;
+    if (image.getWidth() < workerCount) {
+        for (int worker = 0; worker < image.getWidth(); worker++) {
+            int start = worker;
+            int end = worker + 1;
+            threads.push_back(std::thread([this, start, end]() {
+                for (int x = start; x < end; x++) {
+                    for (int y = 0; y < image.getHeight(); y++) {
+                        renderPixel(PixelPosition(x, y));
+                    }
+                };
+                Logger::info("Chunk {}-{} done", start, end);
+            }));
         }
-    };
+    } else {
+        for (int worker = 0; worker < workerCount; worker++) {
+            int start = worker * (image.getWidth() / workerCount);
+            int end = worker * (image.getWidth() / workerCount) + (image.getWidth() / workerCount);
+            threads.push_back(std::thread([this, start, end]() {
+                for (int x = start; x < end; x++) {
+                    for (int y = 0; y < image.getHeight(); y++) {
+                        renderPixel(PixelPosition(x, y));
+                    }
+                };
+                Logger::info("Chunk {}-{} done", start, end);
+            }));
+        }
+    }
+    for (auto &thread : threads) {
+        thread.join();
+    }
 }
+
 void Renderer::renderSerial(ProgressReporter &reporter) {
     for (auto pixel : ImageIterators::lineByLine(image)) {
         renderPixel(pixel);
@@ -51,7 +80,7 @@ void Renderer::renderSerial(ProgressReporter &reporter) {
 
 void Renderer::init() {
     cameraModel =
-        std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, image.getWidth(), image.getHeight()));
+            std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, image.getWidth(), image.getHeight()));
     lambertMethod = std::make_shared<ShadingMethod>(scene);
 
     Logger::info("Execute Imageable::beforeRender...");
@@ -79,10 +108,11 @@ void Renderer::renderPixel(const PixelPosition &pixel) {
     }
 
     Color pixelColor =
-        std::accumulate(sampleColors.begin(), sampleColors.end(), Color::createBlack()) / sampleColors.size();
+            std::accumulate(sampleColors.begin(), sampleColors.end(), Color::createBlack()) / sampleColors.size();
     image.setValue(pixel.x, pixel.y, pixelColor);
 
 }
+
 Color Renderer::renderSample(float x, float y) {
     Ray ray = cameraModel->createPrimaryRay(x, y);
     auto intersection = sceneIntersector->intersect(ray);
@@ -100,8 +130,8 @@ Color Renderer::renderSample(float x, float y) {
             shadow = lightSampler->calculateShadowFactor(location + (object.getNormal(location) * 0.001));
         }
 
-        return shadedColor;// * shadow;
+        return (shadedColor + 0.4f) * shadow;
     }
-    return Color::createBlack();
+    return Color::createGrey(0.5f);
 }
 
