@@ -24,7 +24,7 @@ void Renderer::renderScene() {
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount,
                                                                                 "Rendering done by {}%, estimated time remaining: {}s");
 
-    bool serialRendering = false;
+    bool serialRendering = true;
     if (serialRendering) {
         renderSerial(reporter);
     } else {
@@ -99,7 +99,7 @@ void Renderer::init() {
 
 void Renderer::renderPixel(const PixelPosition &pixel) {
     std::vector<Color> sampleColors;
-    int maxSampleCount = 2;
+    int maxSampleCount = 4;
     float stepSize = 1.0f / static_cast<float>(maxSampleCount);
     for (int i = 0; i < maxSampleCount; i++) {
         for (int a = 0; a < maxSampleCount; a++) {
@@ -130,8 +130,8 @@ Color Renderer::renderSample(float x, float y) {
             shadow = lightSampler->calculateShadowFactor(location + (object.getNormal(location) * 0.001));
         }
 
-        return (shadedColor + 0.4f) * shadow;
+        return shadedColor * shadow;
     }
-    return Color::createGrey(0.5f);
+    return Color::createBlack();
 }
 
