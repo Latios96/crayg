@@ -52,6 +52,7 @@ build/
 build/
 .idea/*
 cmake-build-debug/*
+cmake-build-release/*
 
 cl
 code_coverage.info
