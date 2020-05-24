@@ -56,13 +56,13 @@ void Renderer::renderParallel(ProgressReporter &reporter) {
         for (int worker = 0; worker < workerCount; worker++) {
             int start = worker * (image.getWidth() / workerCount);
             int end = worker * (image.getWidth() / workerCount) + (image.getWidth() / workerCount);
-            threads.push_back(std::thread([this, start, end]() {
+            threads.push_back(std::thread([this, start, end, &reporter]() {
                 for (int x = start; x < end; x++) {
                     for (int y = 0; y < image.getHeight(); y++) {
                         renderPixel(PixelPosition(x, y));
+                        reporter.iterationDone();
                     }
                 };
-                Logger::info("Chunk {}-{} done", start, end);
             }));
         }
     }
