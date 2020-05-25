@@ -20,8 +20,8 @@ endif ()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_run(REQUIRES
-        fmt/5.3.0@bincrafters/stable
-        spdlog/1.3.1@bincrafters/stable
+        fmt/6.2.0
+        spdlog/1.6.0
         rapidjson/1.1.0@bincrafters/stable
         catch2/2.5.0@bincrafters/stable
         optional-lite/2.3.0@bincrafters/stable
