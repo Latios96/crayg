@@ -3,6 +3,7 @@
 //
 #include <catch2/catch.hpp>
 #include <TestContext.h>
+#include "KnipserTestUtils.h"
 
 TEST_CASE("TestTestContext") {
     TestContext testContext("demo", "demoReference");
@@ -13,7 +14,7 @@ TEST_CASE("TestTestContext") {
 
     SECTION("shouldReturnCorrectOutputName") {
         testContext.setImageOutputName("test.exr");
-        REQUIRE(testContext.getOutputFilename() == "demo/test.exr");
+        REQUIRE(testContext.getOutputFilename() == withOsSeperators("demo/test.exr"));
     }
 
     SECTION("canNotSetImageOutputNameSecondTime") {
@@ -36,7 +37,7 @@ TEST_CASE("TestTestContext") {
 
     SECTION("shouldReturnCorrectReferenceName") {
         testContext.setImageOutputName("test.exr");
-        REQUIRE(testContext.getReferenceFilename() == "demoReference/test.exr");
+        REQUIRE(testContext.getReferenceFilename() == withOsSeperators("demoReference/test.exr"));
     }
 }
 
