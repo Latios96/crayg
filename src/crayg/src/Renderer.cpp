@@ -11,6 +11,7 @@
 #include "PineHoleCameraModel.h"
 #include "utils/ProgressReporter.h"
 #include "Logger.h"
+#include <thread>
 
 Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
 
