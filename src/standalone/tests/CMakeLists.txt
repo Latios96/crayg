@@ -9,4 +9,4 @@ target_link_libraries(${CRAYG_STANDALONE_TESTS}
 
 add_test(
         NAME ${CRAYG_STANDALONE_TESTS}
-        COMMAND ${CRAYG_STANDALONE_TESTS} -o crayg-standalone-tests-report.xml -r junit)
+        COMMAND ${CRAYG_STANDALONE_TESTS})

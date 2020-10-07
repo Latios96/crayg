@@ -4,7 +4,7 @@ target_link_libraries(knipser-test-testregistration
         ${CONAN_LIBS} knipser)
 add_test(
         NAME knipser-test-testregistration
-        COMMAND knipser-test-testregistration -o knipser-test-testregistration-report.xml -r junit)
+        COMMAND knipser-test-testregistration)
 
 
 add_executable(knipser-main-tests TestTestRunner.cpp
@@ -25,7 +25,7 @@ target_link_libraries(knipser-main-tests
 
 add_test(
         NAME knipser-main-tests
-        COMMAND knipser-main-tests -o knipser-main-tests-report.xml -r junit
+        COMMAND knipser-main-tests
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 function(add_test_resource target_name absolute_path)
