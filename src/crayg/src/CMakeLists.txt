@@ -29,6 +29,8 @@ set(crayg_SRCS
         image/ImageWriters.cpp
         image/OpenImageIoImageWriter.h
         image/OpenImageIoImageWriter.cpp
+        image/Bucket.h
+        image/Bucket.cpp
         utils/ToStringHelper.h
         sceneIO/write/SceneWriter.h
         sceneIO/Serializable.h
