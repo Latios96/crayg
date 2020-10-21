@@ -25,7 +25,7 @@ void Renderer::renderScene() {
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount,
                                                                                 "Rendering done by {}%, estimated time remaining: {}s");
 
-    bool serialRendering = true;
+    bool serialRendering = false;
     if (serialRendering) {
         renderSerial(reporter);
     } else {
