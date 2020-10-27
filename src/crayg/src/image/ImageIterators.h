@@ -4,24 +4,25 @@
 
 #include "LineByLineIterator.h"
 
-template<typename T>
+template<typename T, typename I>
 class IteratorAdapter {
  public:
-    IteratorAdapter(const Image &image) : image(image) {}
+    IteratorAdapter(const I &i) : i(i) {}
 
     T begin() {
-        return T(0, 0, image);
+        return T(0, 0, i);
     }
     T end() {
-        return T(image.getWidth() - 1, image.getHeight() - 1, image);
+        return T(i.getWidth() - 1, i.getHeight() - 1, i);
     }
  private:
-    const Image &image;
+    const I &i;
 };
 
 class ImageIterators {
  public:
-    static IteratorAdapter<LineByLineIterator> lineByLine(Image &image) {
-        return {image};
+    template<typename I>
+    static IteratorAdapter<LineByLineIterator<I>, I> lineByLine(I &i) {
+        return {i};
     }
 };

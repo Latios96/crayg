@@ -11,28 +11,28 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
     Image image(20, 10);
 
     SECTION("testIncrementNormal") {
-        LineByLineIterator iterator(0, 0, image);
+        LineByLineIterator<Image> iterator(0, 0, image);
         ++iterator;
         REQUIRE((*iterator).x == 1);
         REQUIRE((*iterator).y == 0);
     }
 
     SECTION("testIncrementLineEnd") {
-        LineByLineIterator iterator(19, 0, image);
+        LineByLineIterator<Image> iterator(19, 0, image);
         ++iterator;
         REQUIRE((*iterator).x == 0);
         REQUIRE((*iterator).y == 1);
     }
 
     SECTION("testNotEqualIsEqual") {
-        LineByLineIterator iterator(19, 0, image);
-        LineByLineIterator otherIterator(19, 0, image);
+        LineByLineIterator<Image> iterator(19, 0, image);
+        LineByLineIterator<Image> otherIterator(19, 0, image);
 
         REQUIRE_FALSE(iterator != otherIterator);
     }
     SECTION("testEqual") {
-        LineByLineIterator iterator(19, 0, image);
-        LineByLineIterator otherIterator(19, 9, image);
+        LineByLineIterator<Image> iterator(19, 0, image);
+        LineByLineIterator<Image> otherIterator(19, 9, image);
 
         REQUIRE(iterator != otherIterator);
     }

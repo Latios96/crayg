@@ -6,17 +6,17 @@
 #define CRAYG_IMAGEITERATOR_H
 
 #include "Image.h"
-
+template<typename I>
 class LineByLineIterator {
  public:
 
-    explicit LineByLineIterator(int lX, int lY, const Image &image) : image(image) {
+    explicit LineByLineIterator(int lX, int lY, const I &i) : i(i) {
         lastX = lX;
         lastY = lY;
     }
 
     LineByLineIterator &operator++() {
-        if (lastX + 1 < image.getWidth()) {
+        if (lastX + 1 < i.getWidth()) {
             lastX++;
         } else {
             lastY++;
@@ -32,7 +32,7 @@ class LineByLineIterator {
     };
  private:
     int lastX, lastY;
-    const Image &image;
+    const I &i;
 };
 
 #endif //CRAYG_IMAGEITERATOR_H
