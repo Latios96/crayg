@@ -26,6 +26,7 @@ set(UNIT_TEST_LIST
         TestOpenImageIoImageWriter.cpp
         TestUnitImageSampler.cpp
         TestPointCloud.cpp
+        TestImageBucketIterator.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
