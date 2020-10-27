@@ -11,7 +11,7 @@
 #include "PineHoleCameraModel.h"
 #include "utils/ProgressReporter.h"
 #include "Logger.h"
-#include <thread>
+#include <tbb/parallel_for.h>
 
 Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
 
@@ -37,39 +37,12 @@ void Renderer::renderScene() {
 }
 
 void Renderer::renderParallel(ProgressReporter &reporter) {
-    unsigned int workerCount = std::thread::hardware_concurrency();
-    Logger::info("Worker count: {}, task count: {}", workerCount, image.getWidth());
-    std::vector<std::thread> threads;
-    if (image.getWidth() < workerCount) {
-        for (int worker = 0; worker < image.getWidth(); worker++) {
-            int start = worker;
-            int end = worker + 1;
-            threads.push_back(std::thread([this, start, end]() {
-                for (int x = start; x < end; x++) {
-                    for (int y = 0; y < image.getHeight(); y++) {
-                        renderPixel(PixelPosition(x, y));
-                    }
-                };
-                Logger::info("Chunk {}-{} done", start, end);
-            }));
+    tbb::parallel_for(0, image.getWidth(), 1, [this, &reporter](int x) {
+        for (int y = 0; y < image.getHeight(); y++) {
+            renderPixel(PixelPosition(x, y));
+            reporter.iterationDone();
         }
-    } else {
-        for (int worker = 0; worker < workerCount; worker++) {
-            int start = worker * (image.getWidth() / workerCount);
-            int end = worker * (image.getWidth() / workerCount) + (image.getWidth() / workerCount);
-            threads.push_back(std::thread([this, start, end, &reporter]() {
-                for (int x = start; x < end; x++) {
-                    for (int y = 0; y < image.getHeight(); y++) {
-                        renderPixel(PixelPosition(x, y));
-                        reporter.iterationDone();
-                    }
-                };
-            }));
-        }
-    }
-    for (auto &thread : threads) {
-        thread.join();
-    }
+    });
 }
 
 void Renderer::renderSerial(ProgressReporter &reporter) {
