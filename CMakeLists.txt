@@ -32,6 +32,7 @@ conan_cmake_run(REQUIRES
         IMPORTS bin,*.dll->./bin lib,*.dylib*->./bin
         BASIC_SETUP
         BUILD missing
-        OPTIONS openimageio:with_jpeg2000=False)
+        OPTIONS openimageio:with_jpeg2000=False libtiff:jpeg=libjpeg-turbo
+        )
 
 add_subdirectory(src)
