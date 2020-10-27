@@ -55,4 +55,4 @@ endif ()
 
 add_test(
         NAME ${TARGET_NAME}
-        COMMAND ${TARGET_NAME})
+        COMMAND ${TARGET_NAME} --durations yes)
