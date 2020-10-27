@@ -23,7 +23,8 @@ conan_cmake_run(REQUIRES
         fmt/6.2.0
         spdlog/1.6.0
         rapidjson/1.1.0@bincrafters/stable
-        catch2/2.13.2
+        #catch2/2.13.2
+        catch2/2.5.0@bincrafters/stable
         optional-lite/2.3.0@bincrafters/stable
         cli11/1.6.1@bincrafters/stable
         boost/1.72.0
