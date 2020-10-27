@@ -29,6 +29,7 @@ conan_cmake_run(REQUIRES
         boost/1.72.0
         openimageio/2.1.11.2@ppodsiadly/stable
         tinyobjloader/1.0.6
+        libjpeg-turbo/2.0.5
         IMPORTS bin,*.dll->./bin lib,*.dylib*->./bin
         BASIC_SETUP
         BUILD missing)
