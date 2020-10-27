@@ -29,11 +29,14 @@ conan_cmake_run(REQUIRES
         boost/1.72.0
         openimageio/2.1.11.2@ppodsiadly/stable
         tinyobjloader/1.0.6
-        tbb/2019_u9
-        IMPORTS bin,*.dll->./bin lib,*.dylib*->./bin
+        tbb/2020.2
+        IMPORTS bin,*.dll->./bin lib,*.dylib*->./lib lib,*.so*->./lib
         BASIC_SETUP
         BUILD missing
         OPTIONS openimageio:with_jpeg2000=False libtiff:jpeg=libjpeg-turbo
+        KEEP_RPATHS
         )
+
+
 
 add_subdirectory(src)
