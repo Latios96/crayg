@@ -21,7 +21,6 @@ set(crayg_SRCS
         scene/Scene.cpp
         intersectors/Intersector.h
         image/ImageWriter.h
-        image/ImageWriterFactory.h
         scene/SceneCreator.h
         image/LineByLineIterator.h
         image/ImageIterators.h
