@@ -4,7 +4,6 @@
 #include <Renderer.h>
 #include <image/ImageWriter.h>
 #include <sceneIO/SceneReaderFactory.h>
-#include <image/ImageWriterFactory.h>
 #include <image/ImageWriters.h>
 #include "KnipserAssertions.h"
 #include "KnipserApp.h"
