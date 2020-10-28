@@ -5,7 +5,6 @@
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include "intersectors/SceneIntersector.h"
-#include "basics/Ray.h"
 
 TEST_CASE("SceneIntersector") {
     Scene scene;
