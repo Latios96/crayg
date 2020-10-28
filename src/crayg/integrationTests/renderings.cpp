@@ -1,11 +1,11 @@
 //
 // Created by jan on 03/10/2019.
-//#include <image/Image.h>
 #include <scene/Scene.h>
 #include <Renderer.h>
 #include <image/ImageWriter.h>
 #include <sceneIO/SceneReaderFactory.h>
 #include <image/ImageWriterFactory.h>
+#include <image/ImageWriters.h>
 #include "KnipserAssertions.h"
 #include "KnipserApp.h"
 void renderScene(const std::string &scenePath, const std::string imageOutputPath) {
@@ -19,9 +19,7 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
     Renderer renderer(scene, myImage);
     renderer.renderScene();
 
-    std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
-
-    imageWriter->writeImage(myImage, imageOutputPath);
+    ImageWriters::writeImage(myImage, imageOutputPath);
 }
 
 KNIPSER_REGISTER_TEST(singleSphere, [](TestContext &context) {

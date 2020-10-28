@@ -13,7 +13,7 @@ static const char *const TEST_IMAGE_BMP = "ImageWriters_bmp.bmp";
 static const char *const TEST_IMAGE_PNG = "ImageWriters_png.png";
 static const char *const TEST_IMAGE_UNKNOWN = "ImageWriters_unknown.unknown";
 
-TEST_CASE("ImageWriters") {
+TEST_CASE("ImageWriters/ImageWriterType") {
     Image image(20, 10);
 
     SECTION("BMP") {
@@ -43,7 +43,7 @@ TEST_CASE("ImageWriters") {
     }
 
     SECTION("unknown") {
-        REQUIRE_FALSE(ImageWriters::writeImage(image, TEST_IMAGE_UNKNOWN));
+        REQUIRE_THROWS_AS(ImageWriters::writeImage(image, TEST_IMAGE_UNKNOWN), std::runtime_error);
         REQUIRE_FALSE(boost::filesystem::exists(TEST_IMAGE_UNKNOWN));
     }
 }

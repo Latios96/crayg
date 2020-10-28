@@ -1,7 +1,7 @@
 #include <scene/Scene.h>
 #include <image/ImageWriter.h>
-#include <image/ImageWriterFactory.h>
 #include <Renderer.h>
+#include <image/ImageWriters.h>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
 #include "Logger.h"
@@ -33,9 +33,7 @@ int main(int argc, char *argv[]) {
     renderer.renderScene();
 
     Logger::info("writing image..");
-    std::unique_ptr<ImageWriter> imageWriter(createImageWriter(ImageWriterType::BMP));
-
-    imageWriter->writeImage(myImage, parseResult.args->imageOutputPath);
+    ImageWriters::writeImage(myImage, parseResult.args->imageOutputPath);
 
     Logger::info("writing image done.");
     return 0;
