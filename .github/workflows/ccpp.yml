@@ -7,7 +7,7 @@ jobs:
     name:  windows-2016
     runs-on:  windows-2016
     env:
-      CONAN_USE_ALWAYS_SHORT_PATHS=True
+      CONAN_USE_ALWAYS_SHORT_PATHS: True
     steps:
     - uses: actions/checkout@v2
     - uses: actions/cache@v2
