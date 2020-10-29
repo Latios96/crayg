@@ -43,6 +43,3 @@ jobs:
     - name: run tests
       working-directory: build
       run: ctest -C Release -V
-    - name: echo conan user folder
-      working-directory: build
-      run: dir C:/Users/runneradmin/.conan
