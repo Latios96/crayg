@@ -12,7 +12,7 @@ jobs:
     - uses: actions/cache@v2
       name: Cache Conan user packages
       with:
-        path: ~/.conan/
+        path: C:/Users/runneradmin/.conan
         key: windows-2016-conan-user
         restore-keys: |
           windows-2016-conan-user
