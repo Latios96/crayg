@@ -9,6 +9,8 @@
 class ImageBucket {
  public:
     ImageBucket(int x, int y, int width, int height);
+    ImageBucket(const ImageBucket &imageBucket);
+    ImageBucket();
     bool operator==(const ImageBucket &rhs) const;
     bool operator!=(const ImageBucket &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const ImageBucket &bucket);
@@ -17,7 +19,7 @@ class ImageBucket {
     const int getWidth() const;
     const int getHeight() const;
  private:
-    const int x, y, width, height;
+    int x, y, width, height;
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_

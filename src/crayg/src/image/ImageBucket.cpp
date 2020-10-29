@@ -34,3 +34,9 @@ const int ImageBucket::getWidth() const {
 const int ImageBucket::getHeight() const {
     return height;
 }
+ImageBucket::ImageBucket(const ImageBucket &imageBucket)
+    : x(imageBucket.x), y(imageBucket.y), width(imageBucket.width), height(imageBucket.height) {
+}
+ImageBucket::ImageBucket() : x(0), y(0), width(0), height(0) {
+
+}
