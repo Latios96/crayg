@@ -28,7 +28,6 @@ set(UNIT_TEST_LIST
         TestPointCloud.cpp
         TestImageBucketIterator.cpp
         TestImageIterators.cpp
-        stacktrace_registration.h
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
