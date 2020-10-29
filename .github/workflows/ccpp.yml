@@ -14,7 +14,7 @@ jobs:
       name: Cache Conan user packages
       with:
         path: C:/Users/runneradmin/.conan
-        key: windows-2016-conan-user
+        key: conan-user-packages-windows-2016
     - uses: actions/cache@v2
       name: Cache Conan packages
       with:
