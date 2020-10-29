@@ -42,8 +42,26 @@ TEST_CASE("ImageBucketSequences", "[ImageBucketSequences]") {
                                                      ImageBucket(16, 8, 2, 2), ImageBucket(18, 8, 2, 2)}));
     }
 
-    SECTION("testLineByLineSequenceEmptyImage"){
-        Image image(0,0);
+    SECTION("testLineByLineSequenceWorksCorrectlyNotFullBucket") {
+        Image image(22, 11);
+
+        const std::vector<ImageBucket> buckets = ImageBucketSequences::lineByLine(image, 5);
+
+        REQUIRE(buckets == std::vector<ImageBucket>({ImageBucket(0, 0, 5, 5), ImageBucket(5, 0, 5, 5),
+                                                     ImageBucket(10, 0, 5, 5), ImageBucket(15, 0, 5, 5),
+                                                     ImageBucket(20, 0, 2, 5),
+
+                                                     ImageBucket(0, 5, 5, 5), ImageBucket(5, 5, 5, 5),
+                                                     ImageBucket(10, 5, 5, 5), ImageBucket(15, 5, 5, 5),
+                                                     ImageBucket(20, 5, 2, 5),
+
+                                                     ImageBucket(0, 10, 5, 1), ImageBucket(5, 10, 5, 1),
+                                                     ImageBucket(10, 10, 5, 1), ImageBucket(15, 10, 5, 1),
+                                                     ImageBucket(20, 10, 2, 1)}));
+    }
+
+    SECTION("testLineByLineSequenceEmptyImage") {
+        Image image(0, 0);
 
         const std::vector<ImageBucket> buckets = ImageBucketSequences::lineByLine(image, 2);
 

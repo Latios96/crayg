@@ -12,6 +12,8 @@
 class ImageBucketSequences {
  public:
     static std::vector<ImageBucket> lineByLine(const Image &image, int bucketWidth);
+ private:
+    static int fitImage(int pos, int bucketWidth, int dimension);
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKETSEQUENCES_H_
