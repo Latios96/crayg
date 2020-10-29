@@ -9,14 +9,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Cache Conan packages
-      id: cache-primes
-      uses: actions/cache@v1
+    - uses: actions/cache@v1
+      name: Cache Conan user packages
       with:
-        path: |
-          ~/.conan/
-          C:/.conan
-        key: windows-2016-conan-packages
+        path: ~/.conan/
+        key: ${{ runner.os }}-conan-user-${{ hashFiles('~/.conan/') }}
+        restore-keys: |
+          ${{ runner.os }}-conan-user-
+    - uses: actions/cache@v1
+        name: Cache Conan packages
+        with:
+          path: C:/.conan
+          key: ${{ runner.os }}-conan-${{ hashFiles('C:/.conan') }}
+          restore-keys: |
+            ${{ runner.os }}-conan-
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
