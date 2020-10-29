@@ -4,6 +4,8 @@
 
 #include "JsonSerializer.h"
 
+#include <memory>
+
 void JsonSerializer::init() {
     writer->StartObject();
     writer->Key("SceneObjects");
@@ -53,11 +55,11 @@ void JsonSerializer::writeType(std::string name) {
 }
 
 JsonSerializer::JsonSerializer(const std::string &path) {
-    ofs = std::shared_ptr<std::ofstream>(new std::ofstream(path));
-    osw = std::shared_ptr<rapidjson::OStreamWrapper>(new rapidjson::OStreamWrapper(*ofs));
+    ofs = std::make_shared<std::ofstream>(path);
+    osw = std::make_shared<rapidjson::OStreamWrapper>(*ofs);
     writer =
-        std::shared_ptr<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>>(new rapidjson::PrettyWriter<rapidjson::OStreamWrapper>(
-            *osw));
+        std::make_shared<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>>(
+            *osw);
 }
 
 void JsonSerializer::writeVector3fArray(std::string name, std::vector<Vector3f> &value) {
