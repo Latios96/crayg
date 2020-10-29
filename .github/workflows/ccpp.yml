@@ -13,16 +13,16 @@ jobs:
       name: Cache Conan user packages
       with:
         path: ~/.conan/
-        key: ${{ runner.os }}-conan-user-${{ hashFiles('~/.conan/') }}
+        key: windows-2016-conan-user
         restore-keys: |
-          ${{ runner.os }}-conan-user-
+          windows-2016-conan-user
     - uses: actions/cache@v1
       name: Cache Conan packages
       with:
         path: C:/.conan
-        key: ${{ runner.os }}-conan-${{ hashFiles('C:/.conan') }}
+        key: windows-2016-conan-user
         restore-keys: |
-          ${{ runner.os }}-conan-
+          windows-2016-conan-user
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
