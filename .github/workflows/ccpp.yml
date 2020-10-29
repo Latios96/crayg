@@ -7,13 +7,13 @@ jobs:
     name:  windows-2016
     runs-on:  windows-2016
     env:
-      CONAN_USE_ALWAYS_SHORT_PATHS: True
+      CONAN_USER_HOME: C:/conan_user_home
     steps:
     - uses: actions/checkout@v2
     - uses: actions/cache@v2
       name: Cache Conan user packages
       with:
-        path: C:/Users/runneradmin/.conan
+        path: C:/conan_user_home
         key: conan-user-packages-windows-2016
     - uses: actions/cache@v2
       name: Cache Conan packages
