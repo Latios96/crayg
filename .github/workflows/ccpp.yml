@@ -20,9 +20,9 @@ jobs:
       name: Cache Conan packages
       with:
         path: C:/.conan
-        key: windows-2016-conan-user
+        key: windows-2016-conan
         restore-keys: |
-          windows-2016-conan-user
+          windows-2016-conan
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
