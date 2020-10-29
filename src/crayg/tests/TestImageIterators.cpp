@@ -15,26 +15,22 @@ TEST_CASE("ImageIterators", "[ImageIterators]") {
 
     SECTION("testLineByLineWithImage") {
         Image image(5, 5);
+        std::vector<PixelPosition> visitedPositions;
 
-        int counter = 0;
         for (auto pixel : ImageIterators::lineByLine(image)) {
-            REQUIRE(pixel.x == positions[counter].x);
-            REQUIRE(pixel.y == positions[counter].y);
-            counter++;
+            visitedPositions.push_back(pixel);
         }
-        REQUIRE(counter == 24);
+        REQUIRE(visitedPositions == positions);
     }
 
     SECTION("testLineByLineWithBucket") {
         ImageBucket bucket(0, 0, 5, 5);
+        std::vector<PixelPosition> visitedPositions;
 
-        int counter = 0;
         for (auto pixel : ImageIterators::lineByLine(bucket)) {
-            REQUIRE(pixel.x == positions[counter].x);
-            REQUIRE(pixel.y == positions[counter].y);
-            counter++;
+            visitedPositions.push_back(pixel);
         }
-        REQUIRE(counter == 24);
+        REQUIRE(visitedPositions == positions);
 
     }
 

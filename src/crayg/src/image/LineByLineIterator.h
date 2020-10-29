@@ -22,13 +22,14 @@ class LineByLineIterator {
             lastY++;
             lastX = 0;
         }
+
         return *this;
     }
 
     PixelPosition operator*() const { return {lastX, lastY}; }
 
     bool operator!=(const LineByLineIterator &o) const {
-        return o.lastX != lastX || o.lastY != lastY;
+        return lastX < i.getWidth() && lastY < i.getHeight();
     };
  private:
     int lastX, lastY;
