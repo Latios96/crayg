@@ -23,3 +23,31 @@ TEST_CASE("ImageAlgorithmsBucketIsContainedInImage") {
         REQUIRE_FALSE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket(99, 99, 10, 10), image));
     }
 }
+
+TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
+    Image image(10, 10);
+
+    SECTION("shouldNotCopyBecauseNotBucketIsNotContained"){
+        BucketImageBuffer bucketImageBuffer(0, 0, 50, 5);
+
+        ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
+
+        REQUIRE(image.getValue(0, 0) == Color::createBlack());
+        REQUIRE(image.getValue(4, 4) == Color::createBlack());
+        REQUIRE(image.getValue(5, 5) == Color::createBlack());
+        REQUIRE(image.getValue(9, 9) == Color::createBlack());
+    }
+
+    SECTION("shouldCopyCorrectly") {
+        BucketImageBuffer bucketImageBuffer(0, 0, 5, 5);
+        ImageAlgorithms::fill(bucketImageBuffer.image, Color::createWhite());
+
+        ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
+
+        REQUIRE(image.getValue(0, 0) == Color::createWhite());
+        REQUIRE(image.getValue(4, 4) == Color::createWhite());
+        REQUIRE(image.getValue(5, 5) == Color::createBlack());
+        REQUIRE(image.getValue(9, 9) == Color::createBlack());
+    }
+
+}

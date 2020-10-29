@@ -3,7 +3,7 @@
 //
 
 #include "ImageAlgorithms.h"
-#include "ImageIterators.h"
+
 void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image) {
     const bool isContained = bucketIsContainedInImage(bucketImageBuffer.imageBucket, image);
 
@@ -11,10 +11,10 @@ void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bu
         return;
     }
 
-    for (auto pixel : ImageIterators::lineByLine(image)) {
-        image.setValue(pixel.x + bucketImageBuffer.imageBucket.getX(),
-                       pixel.y + bucketImageBuffer.imageBucket.getY(),
-                       image.getValue(pixel.x, pixel.y));
+    for (auto pixel : ImageIterators::lineByLine(bucketImageBuffer.image)) {
+        image.setValue(pixel.x,
+                       pixel.y,
+                       bucketImageBuffer.image.getValue(pixel.x, pixel.y));
     }
 }
 bool ImageAlgorithms::bucketIsContainedInImage(const ImageBucket &bucket, Image &image) {

@@ -5,6 +5,7 @@
 #ifndef CRAYG_IMAGE_H
 #define CRAYG_IMAGE_H
 
+#include <ostream>
 #include "basics/Color.h"
 #include "basics/Vector3f.h"
 class Image {
@@ -56,6 +57,9 @@ struct PixelPosition {
     int y;
 
     PixelPosition(int x, int y);
+    bool operator==(const PixelPosition &rhs) const;
+    bool operator!=(const PixelPosition &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const PixelPosition &position);
 };
 
 #endif //CRAYG_IMAGE_H

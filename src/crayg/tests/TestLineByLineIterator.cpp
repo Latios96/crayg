@@ -24,12 +24,6 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
         REQUIRE((*iterator).y == 1);
     }
 
-    SECTION("testNotEqualIsEqual") {
-        LineByLineIterator<Image> iterator(19, 0, image);
-        LineByLineIterator<Image> otherIterator(19, 0, image);
-
-        REQUIRE_FALSE(iterator != otherIterator);
-    }
     SECTION("testEqual") {
         LineByLineIterator<Image> iterator(19, 0, image);
         LineByLineIterator<Image> otherIterator(19, 9, image);
@@ -49,6 +43,6 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
             REQUIRE(pixel.y == positions[counter].y);
             counter++;
         }
-        REQUIRE(counter == 20 * 10 - 1);
+        REQUIRE(counter == 20 * 10);
     }
 }

@@ -59,3 +59,14 @@ float *Image::getValues() const {
 }
 
 PixelPosition::PixelPosition(int x, int y) : x(x), y(y) {}
+bool PixelPosition::operator==(const PixelPosition &rhs) const {
+    return x == rhs.x &&
+        y == rhs.y;
+}
+bool PixelPosition::operator!=(const PixelPosition &rhs) const {
+    return !(rhs == *this);
+}
+std::ostream &operator<<(std::ostream &os, const PixelPosition &position) {
+    os << "x: " << position.x << " y: " << position.y;
+    return os;
+}
