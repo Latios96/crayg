@@ -15,7 +15,7 @@ jobs:
       with:
         path: |
             ~/.conan/
-            C:\.conan
+            C:/.conan
         key: ${{ runner.os }}-conan-packages
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
