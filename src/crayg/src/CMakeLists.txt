@@ -36,6 +36,8 @@ set(crayg_SRCS
         image/BucketImageBuffer.cpp
         image/ImageAlgorithms.h
         image/ImageAlgorithms.cpp
+        image/OutputDriver.h
+        image/OutputDriver.cpp
         utils/ToStringHelper.h
         sceneIO/write/SceneWriter.h
         sceneIO/Serializable.h
