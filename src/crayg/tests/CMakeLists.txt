@@ -28,6 +28,7 @@ set(UNIT_TEST_LIST
         TestPointCloud.cpp
         TestImageBucketIterator.cpp
         TestImageIterators.cpp
+        TestBucketImageBuffer.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)

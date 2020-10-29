@@ -32,6 +32,8 @@ set(crayg_SRCS
         image/ImageBucket.cpp
         image/ImageBucketSequences.h
         image/ImageBucketSequences.cpp
+        image/BucketImageBuffer.h
+        image/BucketImageBuffer.cpp
         utils/ToStringHelper.h
         sceneIO/write/SceneWriter.h
         sceneIO/Serializable.h
