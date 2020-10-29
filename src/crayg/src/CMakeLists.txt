@@ -38,6 +38,8 @@ set(crayg_SRCS
         image/ImageAlgorithms.cpp
         image/OutputDriver.h
         image/OutputDriver.cpp
+        image/ImageOutputDriver.h
+        image/ImageOutputDriver.cpp
         utils/ToStringHelper.h
         sceneIO/write/SceneWriter.h
         sceneIO/Serializable.h

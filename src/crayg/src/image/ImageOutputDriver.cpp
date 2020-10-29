@@ -1,0 +1,14 @@
+//
+// Created by Jan on 29.10.2020.
+//
+
+#include "ImageOutputDriver.h"
+#include "ImageAlgorithms.h"
+void ImageOutputDriver::prepareBucket(const ImageBucket &imageBucket) {
+
+}
+void ImageOutputDriver::writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) {
+    ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
+}
+ImageOutputDriver::ImageOutputDriver(Image &image) : image(image) {}
+ImageOutputDriver::~ImageOutputDriver() = default;
