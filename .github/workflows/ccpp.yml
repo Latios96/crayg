@@ -6,7 +6,8 @@ jobs:
   build-windows:
     name:  windows-2016
     runs-on:  windows-2016
-
+    env:
+      CONAN_USE_ALWAYS_SHORT_PATHS=True
     steps:
     - uses: actions/checkout@v2
     - uses: actions/cache@v2
@@ -14,15 +15,11 @@ jobs:
       with:
         path: C:/Users/runneradmin/.conan
         key: windows-2016-conan-user
-        restore-keys: |
-          windows-2016-conan-user
     - uses: actions/cache@v2
       name: Cache Conan packages
       with:
         path: C:/.conan
         key: windows-2016-conan
-        restore-keys: |
-          windows-2016-conan
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
