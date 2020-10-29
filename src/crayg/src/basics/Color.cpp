@@ -5,9 +5,14 @@
 #include <tuple>
 #include "Color.h"
 #include <algorithm>
+#include <utils/ToStringHelper.h>
 
 std::ostream &operator<<(std::ostream &os, const Color &color) {
-    os << "r: " << color.r << " g: " << color.g << " b: " << color.b;
+    os << ToStringHelper("Color")
+        .addMember("r", color.r)
+        .addMember("g", color.g)
+        .addMember("b", color.b)
+        .finish();
     return os;
 }
 
