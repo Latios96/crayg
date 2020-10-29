@@ -14,8 +14,8 @@ jobs:
       uses: actions/cache@v1
       with:
         path: |
-            ~/.conan/
-            C:/.conan
+          ~/.conan/
+          C:/.conan
         key: windows-2016-conan-packages
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
