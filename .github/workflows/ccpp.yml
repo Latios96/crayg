@@ -9,14 +9,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/cache@v1
+    - uses: actions/cache@v2
       name: Cache Conan user packages
       with:
         path: ~/.conan/
         key: windows-2016-conan-user
         restore-keys: |
           windows-2016-conan-user
-    - uses: actions/cache@v1
+    - uses: actions/cache@v2
       name: Cache Conan packages
       with:
         path: C:/.conan
