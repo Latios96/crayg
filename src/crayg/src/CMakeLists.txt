@@ -1,6 +1,8 @@
 set(crayg_SRCS
         basics/Vector3f.h
         basics/Vector3f.cpp
+        basics/Resolution.h
+        basics/Resolution.cpp
         image/Image.h
         image/Image.cpp
         image/BmpImageWriter.h
