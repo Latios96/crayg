@@ -25,7 +25,7 @@ void Renderer::renderScene() {
 
     Logger::info("Starting rendering..");
 
-    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.getResolution(), 20);
+    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, 20);
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(bucketSequence.size(),
                                                                                 "Rendering done by {}%, estimated time remaining: {}s");
 
@@ -61,7 +61,7 @@ void Renderer::renderParallel(ProgressReporter &reporter,
 }
 
 void Renderer::renderSerial(ProgressReporter &reporter) {
-    for (auto pixel : ImageIterators::lineByLine(scene.renderSettings.getResolution())) {
+    for (auto pixel : ImageIterators::lineByLine(scene.renderSettings.resolution)) {
         renderPixel(pixel);
         reporter.iterationDone();
     }
@@ -70,8 +70,8 @@ void Renderer::renderSerial(ProgressReporter &reporter) {
 void Renderer::init() {
     cameraModel =
         std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera,
-                                                             scene.renderSettings.getResolution().getWidth(),
-                                                             scene.renderSettings.getResolution().getHeight()));
+                                                             scene.renderSettings.resolution.getWidth(),
+                                                             scene.renderSettings.resolution.getHeight()));
     lambertMethod = std::make_shared<ShadingMethod>(scene);
 
     Logger::info("Execute Imageable::beforeRender...");
@@ -90,10 +90,9 @@ void Renderer::init() {
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
     std::vector<Color> sampleColors;
-    int maxSampleCount = 4;
-    float stepSize = 1.0f / static_cast<float>(maxSampleCount);
-    for (int i = 0; i < maxSampleCount; i++) {
-        for (int a = 0; a < maxSampleCount; a++) {
+    float stepSize = 1.0f / static_cast<float>(scene.renderSettings.maxSamples);
+    for (int i = 0; i < scene.renderSettings.maxSamples; i++) {
+        for (int a = 0; a < scene.renderSettings.maxSamples; a++) {
             sampleColors.push_back(renderSample(pixel.x - 0.5f + stepSize * i, pixel.y - 0.5f + stepSize * a));
         }
     }

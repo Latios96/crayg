@@ -13,7 +13,8 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
     ImageOutputDriver imageOutputDriver(myImage);
 
     Scene scene;
-    scene.renderSettings.setResolution(resolution);
+    scene.renderSettings.resolution = resolution;
+    scene.renderSettings.maxSamples = 4;
 
     auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
     sceneReader->read();

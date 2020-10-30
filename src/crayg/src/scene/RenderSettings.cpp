@@ -3,16 +3,14 @@
 //
 
 #include "RenderSettings.h"
-RenderSettings::RenderSettings(const Resolution &resolution) : resolution(resolution) {}
-const Resolution &RenderSettings::getResolution() const {
-    return resolution;
-}
+RenderSettings::RenderSettings(const Resolution &resolution, int maxSamples)
+    : resolution(resolution), maxSamples(maxSamples) {}
+
 RenderSettings::RenderSettings() : resolution(Resolution(0, 0)) {
+    maxSamples = 4;
+}
+RenderSettings::RenderSettings(const RenderSettings &renderSettings)
+    : resolution(renderSettings.resolution), maxSamples(renderSettings.maxSamples) {
 
 }
-RenderSettings::RenderSettings(const RenderSettings &renderSettings) : resolution(renderSettings.resolution) {
 
-}
-void RenderSettings::setResolution(const Resolution &resolution) {
-    RenderSettings::resolution = resolution;
-}

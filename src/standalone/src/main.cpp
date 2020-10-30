@@ -23,7 +23,8 @@ int main(int argc, char *argv[]) {
     Image myImage(800, 600);
 
     Scene scene;
-    scene.renderSettings.setResolution(Resolution(800,600));
+    scene.renderSettings.resolution = Resolution(800,600);
+    scene.renderSettings.maxSamples = 4;
 
     // read scene
     std::string scenePath = parseResult.args->scenePath;

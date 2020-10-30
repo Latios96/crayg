@@ -10,11 +10,9 @@ class RenderSettings {
  public:
     RenderSettings();
     RenderSettings(const RenderSettings &renderSettings);
-    explicit RenderSettings(const Resolution &resolution);
-    const Resolution &getResolution() const;
-    void setResolution(const Resolution &resolution);
- private:
+    explicit RenderSettings(const Resolution &resolution, int maxSamples);
     Resolution resolution;
+    int maxSamples;
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
