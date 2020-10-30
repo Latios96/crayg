@@ -7,6 +7,7 @@
 
 static const char *const SCENE_OBJECTS = "SceneObjects";
 static const char *const CAMERA = "Camera";
+static const char *const RENDER_SETTINGS = "RenderSettings";
 
 #include <sceneIO/read/SceneReader.h>
 
@@ -25,6 +26,11 @@ class CameraIsMissing : public std::exception {
 class SceneObjectsIsNotArray : public std::exception {
     const char *what() const noexcept override {
         return "Value at \"SceneObjects\" key is not an array!";
+    }
+};
+class RenderSettingsAreMissing : public std::exception {
+    const char *what() const noexcept override {
+        return "Scene contains no RenderSettings!";
     }
 };
 

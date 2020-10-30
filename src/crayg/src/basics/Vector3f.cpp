@@ -2,6 +2,7 @@
 // Created by jan on 15.08.18.
 //
 
+#include <utils/ToStringHelper.h>
 #include "Vector3f.h"
 
 Vector3f::Vector3f() {
@@ -82,4 +83,12 @@ Vector3f Vector3f::createInvalid() {
 bool Vector3f::isValid() {
     auto max = std::numeric_limits<float>::max();
     return x != max && y != max && z != max;
+}
+std::ostream &operator<<(std::ostream &os, const Vector3f &f) {
+    os << ToStringHelper("Vector3f")
+        .addMember("x", f.x)
+        .addMember("y", f.y)
+        .addMember("z", f.z)
+        .finish();
+    return os;
 }

@@ -66,22 +66,35 @@ void readCamera(Scene &scene, rapidjson::Document &d) {
         camera->deserialize(deserializer);
         scene.camera = camera;
     }
+}
 
+void readRenderSettings(Scene &scene, rapidjson::Document &d) {
+    rapidjson::Value &renderSettingsObject = d[RENDER_SETTINGS];
+
+    if (renderSettingsObject.IsObject()) {
+        int width = renderSettingsObject["width"].GetInt();
+        int height = renderSettingsObject["height"].GetInt();
+        int maxSamples = renderSettingsObject["maxSamples"].GetInt();
+        RenderSettings renderSettings(Resolution(width, height), maxSamples);
+        scene.renderSettings = renderSettings;
+    }
 }
 
 struct DocumentValidationResult {
  public:
     const bool hasSceneObjects;
     const bool hasCamera;
+    const bool hasRenderSettings;
     const bool hasMandatoryMembers;
 };
 
 DocumentValidationResult documentHasMandatoryMembers(rapidjson::Document &d) {
     const bool hasSceneObjects = d.HasMember(SCENE_OBJECTS);
     const bool hasCamera = d.HasMember(CAMERA);
-    const bool hasMandatoryMembers = hasSceneObjects && hasCamera;
+    const bool hasRenderSettings = d.HasMember("RenderSettings");
+    const bool hasMandatoryMembers = hasSceneObjects && hasCamera && hasRenderSettings;
 
-    return {hasSceneObjects, hasCamera, hasMandatoryMembers};
+    return {hasSceneObjects, hasCamera, hasRenderSettings, hasMandatoryMembers};
 }
 
 void JsonSceneReader::read() {
@@ -98,19 +111,27 @@ void JsonSceneReader::read() {
     if (result.hasMandatoryMembers) {
         // now read the data
         readSceneObjects(scene, document);
-
         readCamera(scene, document);
+        readRenderSettings(scene, document);
     } else {
         //std::string message = "Error: scene misses following keys";
 
         const bool hasNoSceneObjects = result.hasSceneObjects == false;
         if (hasNoSceneObjects) {
+            Logger::error("SceneObjects are missing!");
             throw SceneObjectsMissing();
         }
 
         const bool hasNoCamera = result.hasCamera == false;
         if (hasNoCamera) {
+            Logger::error("Camera is missing!");
             throw CameraIsMissing();
+        }
+
+        const bool hasRenderSettings = result.hasRenderSettings == false;
+        if (hasRenderSettings) {
+            Logger::error("RenderSettings is missing!");
+            throw RenderSettingsAreMissing();
         }
 
     }

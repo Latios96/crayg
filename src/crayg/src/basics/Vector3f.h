@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <limits>
+#include <ostream>
 
 class Vector3f {
  public:
@@ -52,6 +53,8 @@ class Vector3f {
     static Vector3f createInvalid();
 
     bool isValid();
+
+    friend std::ostream &operator<<(std::ostream &os, const Vector3f &f);
 
 };
 

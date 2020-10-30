@@ -37229,5 +37229,10 @@
     "focalLength": 35.0,
     "filmbackSize": 36.0,
     "type": "Camera"
+  },
+  "RenderSettings": {
+    "width": 800,
+    "height": 600,
+    "maxSamples": 4
   }
 }
