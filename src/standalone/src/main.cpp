@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
     Image myImage(800, 600);
 
     Scene scene;
+    scene.renderSettings.setResolution(Resolution(800,600));
 
     // read scene
     std::string scenePath = parseResult.args->scenePath;
@@ -31,7 +32,7 @@ int main(int argc, char *argv[]) {
 
     ImageOutputDriver imageOutputDriver(myImage);
 
-    Renderer renderer(scene, myImage.getResolution(), imageOutputDriver);
+    Renderer renderer(scene,imageOutputDriver);
     renderer.renderScene();
 
     Logger::info("writing image..");

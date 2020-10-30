@@ -86,6 +86,8 @@ set(crayg_SRCS
         sceneIO/read/json/JsonSceneReader.h
         scene/Imageable.cpp
         scene/Imageable.h
+        scene/RenderSettings.h
+        scene/RenderSettings.cpp
         basics/BoundingBox.h
         basics/BoundingBox.cpp
         utils/RemainingTimeCalculator.h

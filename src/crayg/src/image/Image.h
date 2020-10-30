@@ -32,6 +32,7 @@ class Image {
      * @param height height of the new image
      */
     Image(int width, int height);
+    Image(const Resolution &resolution);
 
     Image(const Image &image);
 
@@ -52,6 +53,7 @@ class Image {
     }
 
     Resolution getResolution() const;
+    void init(int width, int height);
 };
 
 struct PixelPosition {

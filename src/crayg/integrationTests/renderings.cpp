@@ -8,14 +8,17 @@
 #include "KnipserAssertions.h"
 #include "KnipserApp.h"
 void renderScene(const std::string &scenePath, const std::string imageOutputPath) {
-    Image myImage(800, 600);
+    const Resolution resolution = Resolution(800, 600);
+    Image myImage(resolution);
+    ImageOutputDriver imageOutputDriver(myImage);
 
     Scene scene;
+    scene.renderSettings.setResolution(resolution);
 
     auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
     sceneReader->read();
 
-    Renderer renderer(scene, myImage);
+    Renderer renderer(scene, imageOutputDriver);
     renderer.renderScene();
 
     ImageWriters::writeImage(myImage, imageOutputPath);

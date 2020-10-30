@@ -5,8 +5,11 @@
 #include "Image.h"
 
 Image::Image(int width, int height) {
-    this->width = width;
-    this->height = height;
+    init(width, height);
+}
+void Image::init(int width, int height) {
+    Image::width = width;
+    Image::height = height;
 
     int size = width * height * 3;
     values = new float[size];
@@ -59,6 +62,9 @@ float *Image::getValues() const {
 }
 Resolution Image::getResolution() const {
     return Resolution(width, height);
+}
+Image::Image(const Resolution &resolution) {
+    init(resolution.getWidth(), resolution.getHeight());
 }
 
 PixelPosition::PixelPosition(int x, int y) : x(x), y(y) {}

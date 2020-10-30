@@ -21,7 +21,7 @@ struct Resolution {
     const int getWidth() const;
     const int getHeight() const;
  private:
-    const int width, height;
+    int width, height;
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_BASICS_RESOLUTION_H_

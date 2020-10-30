@@ -10,5 +10,6 @@ void Scene::addLight(const std::shared_ptr<Light>& light) {
 void Scene::addObject(const std::shared_ptr<SceneObject>& sceneObject) {
     objects.push_back(sceneObject);
 }
+Scene::Scene(const RenderSettings &renderSettings) : renderSettings(renderSettings) {}
 
 Scene::Scene() = default;

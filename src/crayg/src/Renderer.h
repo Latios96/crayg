@@ -15,16 +15,16 @@
 #include <utils/ProgressReporter.h>
 #include <image/ImageOutputDriver.h>
 #include <basics/Resolution.h>
+#include <scene/RenderSettings.h>
 #include "ShadingMethod.h"
 
 class Renderer {
  public:
-    Renderer(Scene &scene, Resolution resolution, OutputDriver &outputDriver);
+    Renderer(Scene &scene, OutputDriver &outputDriver);
 
     void renderScene();
  private:
     Scene &scene;
-    Resolution &resolution;
     OutputDriver &outputDriver;
     std::shared_ptr<CameraModel> cameraModel;
     std::shared_ptr<SceneIntersector> sceneIntersector;

@@ -15,8 +15,8 @@
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 
-Renderer::Renderer(Scene &scene, Resolution resolution, OutputDriver &outputDriver)
-    : scene(scene), resolution(resolution), outputDriver(outputDriver) {
+Renderer::Renderer(Scene &scene, OutputDriver &outputDriver)
+    : scene(scene), outputDriver(outputDriver) {
 
 }
 // todo init should not be in renderScene
@@ -25,7 +25,7 @@ void Renderer::renderScene() {
 
     Logger::info("Starting rendering..");
 
-    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(resolution, 20);
+    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.getResolution(), 20);
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(bucketSequence.size(),
                                                                                 "Rendering done by {}%, estimated time remaining: {}s");
 
@@ -61,7 +61,7 @@ void Renderer::renderParallel(ProgressReporter &reporter,
 }
 
 void Renderer::renderSerial(ProgressReporter &reporter) {
-    for (auto pixel : ImageIterators::lineByLine(resolution)) {
+    for (auto pixel : ImageIterators::lineByLine(scene.renderSettings.getResolution())) {
         renderPixel(pixel);
         reporter.iterationDone();
     }
@@ -69,7 +69,9 @@ void Renderer::renderSerial(ProgressReporter &reporter) {
 
 void Renderer::init() {
     cameraModel =
-        std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, resolution.getWidth(), resolution.getHeight()));
+        std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera,
+                                                             scene.renderSettings.getResolution().getWidth(),
+                                                             scene.renderSettings.getResolution().getHeight()));
     lambertMethod = std::make_shared<ShadingMethod>(scene);
 
     Logger::info("Execute Imageable::beforeRender...");
