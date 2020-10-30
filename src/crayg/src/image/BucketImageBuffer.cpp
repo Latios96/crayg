@@ -8,3 +8,7 @@ BucketImageBuffer::BucketImageBuffer(int x, int y, int width, int height) : imag
                                                                                                     y,
                                                                                                     width,
                                                                                                     height)) {}
+BucketImageBuffer::BucketImageBuffer(const ImageBucket &imageBucket)
+    : imageBucket(imageBucket), image(Image(imageBucket.getWidth(), imageBucket.getHeight())) {
+
+}

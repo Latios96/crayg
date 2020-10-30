@@ -10,7 +10,8 @@ void TestRegistry::setInstance(const std::shared_ptr<TestRegistry> &instance) {
     TestRegistry::instance = instance;
 }
 std::shared_ptr<TestRegistry> &TestRegistry::getInstance() {
-    if (!TestRegistry::instance) {
+    std::shared_ptr<TestRegistry> &ptr = TestRegistry::instance;
+    if (!ptr) {
         TestRegistry::instance = std::make_shared<TestRegistry>();
     }
     return TestRegistry::instance;

@@ -6,5 +6,6 @@
 
 int main(int argc, char **argv) {
     Logger::initialize();
+    std::cout << TestRegistry::getInstance()->getTests().size() << std::endl;
     KNIPSER_MAIN;
 }

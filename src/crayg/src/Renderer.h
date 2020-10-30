@@ -13,6 +13,7 @@
 #include <intersectors/SceneIntersector.h>
 #include <lightSamplers/LightSampler.h>
 #include <utils/ProgressReporter.h>
+#include <image/ImageOutputDriver.h>
 #include "ShadingMethod.h"
 
 class Renderer {
@@ -27,12 +28,12 @@ class Renderer {
     std::shared_ptr<SceneIntersector> sceneIntersector;
     std::shared_ptr<ShadingMethod> lambertMethod;
     std::vector<std::shared_ptr<LightSampler>> lightSamplers;
-    void renderPixel(const PixelPosition &pixel);
+    Color renderPixel(const PixelPosition &pixel);
 
     void init();
     Color renderSample(float x, float y);
     void renderSerial(ProgressReporter &reporter);
-    void renderParallel(ProgressReporter &reporter);
+    void renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence, ImageOutputDriver &imageOutputDriver);
 };
 
 #endif //CRAYG_RENDERER_H

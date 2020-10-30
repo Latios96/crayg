@@ -5,6 +5,7 @@
 //
 
 #include <image/ImageIterators.h>
+#include <image/ImageBucketSequences.h>
 #include <lightSamplers/LightSamplerFactory.h>
 #include <numeric>
 #include "Renderer.h"
@@ -12,6 +13,7 @@
 #include "utils/ProgressReporter.h"
 #include "Logger.h"
 #include <tbb/parallel_for.h>
+#include <image/BucketImageBuffer.h>
 
 Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
 
@@ -21,28 +23,41 @@ void Renderer::renderScene() {
 
     Logger::info("Starting rendering..");
 
-    int pixelCount = image.getHeight() * image.getWidth();
-    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(pixelCount,
+    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(image, 20);
+    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(bucketSequence.size(),
                                                                                 "Rendering done by {}%, estimated time remaining: {}s");
+    ImageOutputDriver outputDriver(image);
 
     bool serialRendering = false;
     if (serialRendering) {
         renderSerial(reporter);
     } else {
-        renderParallel(reporter);
+        renderParallel(reporter, bucketSequence, outputDriver);
     }
 
     Logger::info("Rendering done.");
     reporter.finish();
 }
 
-void Renderer::renderParallel(ProgressReporter &reporter) {
-    tbb::parallel_for(0, image.getWidth(), 1, [this, &reporter](int x) {
-        for (int y = 0; y < image.getHeight(); y++) {
-            renderPixel(PixelPosition(x, y));
-            reporter.iterationDone();
-        }
-    });
+void Renderer::renderParallel(ProgressReporter &reporter,
+                              const std::vector<ImageBucket> &bucketSequence,
+                              ImageOutputDriver &imageOutputDriver) {
+    tbb::parallel_for(static_cast<std::size_t>(0),
+                      bucketSequence.size(),
+                      [this, &reporter, &imageOutputDriver, &bucketSequence](int i) {
+                          ImageBucket imageBucket = bucketSequence[i];
+                          BucketImageBuffer bucketImageBuffer(imageBucket);
+                          imageOutputDriver.prepareBucket(bucketImageBuffer.imageBucket);
+
+                          for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+                              Color pixelColor =
+                                  renderPixel(PixelPosition(imageBucket.getX() + pixel.x,
+                                                            imageBucket.getY() + pixel.y));
+                              bucketImageBuffer.image.setValue(pixel.x, pixel.y, pixelColor);
+                          }
+                          imageOutputDriver.writeBucketImageBuffer(bucketImageBuffer);
+                          reporter.iterationDone();
+                      });
 }
 
 void Renderer::renderSerial(ProgressReporter &reporter) {
@@ -54,7 +69,7 @@ void Renderer::renderSerial(ProgressReporter &reporter) {
 
 void Renderer::init() {
     cameraModel =
-            std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, image.getWidth(), image.getHeight()));
+        std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, image.getWidth(), image.getHeight()));
     lambertMethod = std::make_shared<ShadingMethod>(scene);
 
     Logger::info("Execute Imageable::beforeRender...");
@@ -71,7 +86,7 @@ void Renderer::init() {
     }
 }
 
-void Renderer::renderPixel(const PixelPosition &pixel) {
+Color Renderer::renderPixel(const PixelPosition &pixel) {
     std::vector<Color> sampleColors;
     int maxSampleCount = 4;
     float stepSize = 1.0f / static_cast<float>(maxSampleCount);
@@ -82,9 +97,8 @@ void Renderer::renderPixel(const PixelPosition &pixel) {
     }
 
     Color pixelColor =
-            std::accumulate(sampleColors.begin(), sampleColors.end(), Color::createBlack()) / sampleColors.size();
-    image.setValue(pixel.x, pixel.y, pixelColor);
-
+        std::accumulate(sampleColors.begin(), sampleColors.end(), Color::createBlack()) / sampleColors.size();
+    return pixelColor;
 }
 
 Color Renderer::renderSample(float x, float y) {

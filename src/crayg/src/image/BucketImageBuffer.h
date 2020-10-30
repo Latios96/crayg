@@ -12,6 +12,7 @@ struct BucketImageBuffer {
     ImageBucket imageBucket;
     Image image;
     BucketImageBuffer(int x, int y, int width, int height);
+    BucketImageBuffer(const ImageBucket &imageBucket);
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_
