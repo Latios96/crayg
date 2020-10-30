@@ -14,16 +14,18 @@
 #include <lightSamplers/LightSampler.h>
 #include <utils/ProgressReporter.h>
 #include <image/ImageOutputDriver.h>
+#include <basics/Resolution.h>
 #include "ShadingMethod.h"
 
 class Renderer {
  public:
-    Renderer(Scene &scene, Image &image);
+    Renderer(Scene &scene, Resolution resolution, OutputDriver &outputDriver);
 
     void renderScene();
  private:
     Scene &scene;
-    Image &image;
+    Resolution &resolution;
+    OutputDriver &outputDriver;
     std::shared_ptr<CameraModel> cameraModel;
     std::shared_ptr<SceneIntersector> sceneIntersector;
     std::shared_ptr<ShadingMethod> lambertMethod;
@@ -33,7 +35,8 @@ class Renderer {
     void init();
     Color renderSample(float x, float y);
     void renderSerial(ProgressReporter &reporter);
-    void renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence, ImageOutputDriver &imageOutputDriver);
+    void renderParallel(ProgressReporter &reporter,
+                        const std::vector<ImageBucket> &bucketSequence);
 };
 
 #endif //CRAYG_RENDERER_H

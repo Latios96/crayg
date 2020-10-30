@@ -6,6 +6,7 @@
 #define CRAYG_IMAGE_H
 
 #include <ostream>
+#include <basics/Resolution.h>
 #include "basics/Color.h"
 #include "basics/Vector3f.h"
 class Image {
@@ -50,6 +51,7 @@ class Image {
         delete[] values;
     }
 
+    Resolution getResolution() const;
 };
 
 struct PixelPosition {

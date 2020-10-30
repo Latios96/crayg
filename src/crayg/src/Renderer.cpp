@@ -15,24 +15,25 @@
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 
-Renderer::Renderer(Scene &scene, Image &image) : scene(scene), image(image) {}
+Renderer::Renderer(Scene &scene, Resolution resolution, OutputDriver &outputDriver)
+    : scene(scene), resolution(resolution), outputDriver(outputDriver) {
 
+}
 // todo init should not be in renderScene
 void Renderer::renderScene() {
     init();
 
     Logger::info("Starting rendering..");
 
-    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(image, 20);
+    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(resolution, 20);
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(bucketSequence.size(),
                                                                                 "Rendering done by {}%, estimated time remaining: {}s");
-    ImageOutputDriver outputDriver(image);
 
     bool serialRendering = false;
     if (serialRendering) {
         renderSerial(reporter);
     } else {
-        renderParallel(reporter, bucketSequence, outputDriver);
+        renderParallel(reporter, bucketSequence);
     }
 
     Logger::info("Rendering done.");
@@ -40,14 +41,13 @@ void Renderer::renderScene() {
 }
 
 void Renderer::renderParallel(ProgressReporter &reporter,
-                              const std::vector<ImageBucket> &bucketSequence,
-                              ImageOutputDriver &imageOutputDriver) {
+                              const std::vector<ImageBucket> &bucketSequence) {
     tbb::parallel_for(static_cast<std::size_t>(0),
                       bucketSequence.size(),
-                      [this, &reporter, &imageOutputDriver, &bucketSequence](int i) {
+                      [this, &reporter, &bucketSequence](int i) {
                           ImageBucket imageBucket = bucketSequence[i];
                           BucketImageBuffer bucketImageBuffer(imageBucket);
-                          imageOutputDriver.prepareBucket(bucketImageBuffer.imageBucket);
+                          outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
                           for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
                               Color pixelColor =
@@ -55,13 +55,13 @@ void Renderer::renderParallel(ProgressReporter &reporter,
                                                             imageBucket.getY() + pixel.y));
                               bucketImageBuffer.image.setValue(pixel.x, pixel.y, pixelColor);
                           }
-                          imageOutputDriver.writeBucketImageBuffer(bucketImageBuffer);
+                          outputDriver.writeBucketImageBuffer(bucketImageBuffer);
                           reporter.iterationDone();
                       });
 }
 
 void Renderer::renderSerial(ProgressReporter &reporter) {
-    for (auto pixel : ImageIterators::lineByLine(image)) {
+    for (auto pixel : ImageIterators::lineByLine(resolution)) {
         renderPixel(pixel);
         reporter.iterationDone();
     }
@@ -69,7 +69,7 @@ void Renderer::renderSerial(ProgressReporter &reporter) {
 
 void Renderer::init() {
     cameraModel =
-        std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, image.getWidth(), image.getHeight()));
+        std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, resolution.getWidth(), resolution.getHeight()));
     lambertMethod = std::make_shared<ShadingMethod>(scene);
 
     Logger::info("Execute Imageable::beforeRender...");
@@ -122,4 +122,5 @@ Color Renderer::renderSample(float x, float y) {
     }
     return Color::createBlack();
 }
+
 

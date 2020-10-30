@@ -38,3 +38,12 @@ std::ostream &operator<<(std::ostream &os, const Resolution &resolution) {
 Resolution::Resolution() : width(0), height(0) {
 
 }
+const int Resolution::getWidth() const {
+    return width;
+}
+const int Resolution::getHeight() const {
+    return height;
+}
+Resolution::Resolution(const Resolution &resolution) : width(resolution.width), height(resolution.height) {
+
+}

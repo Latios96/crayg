@@ -11,7 +11,21 @@
 
 class ImageBucketSequences {
  public:
-    static std::vector<ImageBucket> lineByLine(const Image &image, int bucketWidth);
+    template<typename I>
+    static std::vector<ImageBucket> lineByLine(const I &i, int bucketWidth) {
+        std::vector<ImageBucket> buckets;
+
+        for (int y = 0; y < i.getHeight(); y += bucketWidth) {
+            for (int x = 0; x < i.getWidth(); x += bucketWidth) {
+                buckets.emplace_back(x,
+                                     y,
+                                     fitImage(x, bucketWidth, i.getWidth()),
+                                     fitImage(y, bucketWidth, i.getHeight()));
+            }
+        }
+
+        return buckets;
+    }
  private:
     static int fitImage(int pos, int bucketWidth, int dimension);
 };

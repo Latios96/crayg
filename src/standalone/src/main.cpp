@@ -29,7 +29,9 @@ int main(int argc, char *argv[]) {
     auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
     sceneReader->read();
 
-    Renderer renderer(scene, myImage);
+    ImageOutputDriver imageOutputDriver(myImage);
+
+    Renderer renderer(scene, myImage.getResolution(), imageOutputDriver);
     renderer.renderScene();
 
     Logger::info("writing image..");

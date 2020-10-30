@@ -57,6 +57,9 @@ Image::Image(const Image &image) {
 float *Image::getValues() const {
     return values;
 }
+Resolution Image::getResolution() const {
+    return Resolution(width, height);
+}
 
 PixelPosition::PixelPosition(int x, int y) : x(x), y(y) {}
 bool PixelPosition::operator==(const PixelPosition &rhs) const {

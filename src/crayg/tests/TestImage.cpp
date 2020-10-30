@@ -42,3 +42,9 @@ TEST_CASE("Image/copyImage", "[Image]") {
         }
     }
 }
+
+TEST_CASE("Image/getResolution", "[Image]") {
+    Image image(10, 20);
+
+    REQUIRE(image.getResolution() == Resolution(10, 20));
+}
