@@ -14,12 +14,12 @@ jobs:
       name: Cache Conan user packages
       with:
         path: C:/conan_user_home
-        key: conan-user-packages-windows-2016
+        key: conan-user-packages-windows-2016-2
     - uses: actions/cache@v2
       name: Cache Conan packages
       with:
         path: C:/.conan
-        key: windows-2016-conan-packages
+        key: windows-2016-conan-packages-2
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
