@@ -45,7 +45,7 @@ matrix:
         - choco install python --version=3.7.2
         - C:/Python37/python --version
       script:
-        - export PATH=$PATH;C:/Python37;C:/Python37/Scripts
+        - export PATH=%PATH%;C:/Python37;C:/Python37/Scripts
         - echo %PATH%
         - pip install conan
         - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
