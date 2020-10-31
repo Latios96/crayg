@@ -28,7 +28,7 @@ ExitMessage KnipserApp::execute() {
 
     RunConfig runConfig(outputFolder, referenceFolder, testPatterns);
 
-    TestRunner testRunner(*TestRegistry::getInstance(), runConfig);
+    TestRunner testRunner(testRegistry, runConfig);
     const std::vector<TestResult> testResults = testRunner.execute();
 
     return createExitMessage(testResults);

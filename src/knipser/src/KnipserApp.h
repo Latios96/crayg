@@ -11,7 +11,7 @@
 #include <fmt/format.h>
 #include "CLI/CLI.hpp"
 
-#define KNIPSER_MAIN KnipserApp app(argc, argv);ExitMessage exitMessage = app.execute();std::cout << exitMessage.message << std::endl;return exitMessage.exitCode
+#define KNIPSER_MAIN(testRegistry) KnipserApp app(argc, argv, testRegistry);ExitMessage exitMessage = app.execute();std::cout << exitMessage.message << std::endl;return exitMessage.exitCode
 
 struct ExitMessage {
  public:
@@ -22,7 +22,7 @@ struct ExitMessage {
 
 class KnipserApp {
  public:
-    KnipserApp(int argc, char **argv) : argc(argc), argv(argv) {}
+    KnipserApp(int argc, char **argv, TestRegistry &testRegistry) : argc(argc), argv(argv), testRegistry(testRegistry) {}
 
     ExitMessage execute();
 
@@ -32,6 +32,7 @@ class KnipserApp {
     int argc;
     char **argv;
     ExitMessage exitMessageFromTestResults(const std::vector<TestResult> &testResults) const;
+    TestRegistry &testRegistry;
 };
 
 #endif //CRAYG_SRC_KNIPSER_SRC_KNIPSERAPP_H_

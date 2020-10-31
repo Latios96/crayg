@@ -3,9 +3,16 @@
 //
 #include "Logger.h"
 #include "KnipserApp.h"
+#include "imageTests.h"
+#include "renderTests.h"
 
 int main(int argc, char **argv) {
     Logger::initialize();
-    std::cout << TestRegistry::getInstance()->getTests().size() << std::endl;
-    KNIPSER_MAIN;
+
+    TestRegistry testRegistry;
+    testRegistry
+        .registerTests(imageTests())
+        .registerTests(renderTests());
+
+    KNIPSER_MAIN(testRegistry);
 }

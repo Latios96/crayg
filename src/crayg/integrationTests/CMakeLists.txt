@@ -1,4 +1,4 @@
-add_executable(crayg-integration-tests main.cpp images.cpp renderings.cpp)
+add_executable(crayg-integration-tests main.cpp imageTests.h renderTests.h)
 target_link_libraries(crayg-integration-tests crayg knipser)
 
 add_test(
