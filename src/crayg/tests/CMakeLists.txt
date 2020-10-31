@@ -8,7 +8,6 @@ set(UNIT_TEST_LIST
         TestLineByLineIterator.cpp
         TestBmpImageWriter.cpp
         TestSceneIntersector.cpp
-        TestSceneWriter.cpp
         TestRay.cpp
         TestLight.cpp
         TestProgressReporter.cpp

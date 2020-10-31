@@ -17,11 +17,16 @@ class JsonSerializer : public SerializerImplementation {
 
  public:
     explicit JsonSerializer(const std::string &path);
-
-    void init() override;
+    void start() override;
+    void end() override;
+    void startSceneObjects() override;
+    void endSceneObjects() override;
+    void startCamera() override;
+    void endCamera() override;
+    void startRenderSettings() override;
+    void endRenderSettings() override;
     void startObject() override;
     void endObject() override;
-    void finish() override;
     void writeInt(std::string name, int value) override;
     void writeFloat(std::string name, float value) override;
     void writeVector3f(std::string name, Vector3f value) override;

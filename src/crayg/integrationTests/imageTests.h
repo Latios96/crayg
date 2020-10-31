@@ -26,6 +26,7 @@ void writeAndCheckTestImage(TestContext &context, std::string imageOutputName) {
     ASSERT_IMAGES_ARE_EQUAL(context);
 };
 
+std::vector<KnipserTest> imageTests();
 std::vector<KnipserTest> imageTests() {
     return {
         KnipserTest("writeBmpImage", [](TestContext &context) {

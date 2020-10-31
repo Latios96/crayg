@@ -5,12 +5,14 @@
 #include "KnipserApp.h"
 #include "imageTests.h"
 #include "renderTests.h"
+#include "sceneIO.h"
 
 int main(int argc, char **argv) {
     Logger::initialize();
 
     TestRegistry testRegistry;
     testRegistry
+        .registerTests(sceneIoTests())
         .registerTests(imageTests())
         .registerTests(renderTests());
 

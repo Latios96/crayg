@@ -1,30 +1,8 @@
 //
 // Created by jan on 03/10/2019.
-#include <scene/Scene.h>
-#include <Renderer.h>
-#include <image/ImageWriter.h>
-#include <sceneIO/SceneReaderFactory.h>
-#include <image/ImageWriters.h>
 #include "KnipserAssertions.h"
 #include "KnipserApp.h"
-
-void renderScene(const std::string &scenePath, const std::string imageOutputPath) {
-    const Resolution resolution = Resolution(800, 600);
-    Image myImage(resolution);
-    ImageOutputDriver imageOutputDriver(myImage);
-
-    Scene scene;
-    scene.renderSettings.resolution = resolution;
-    scene.renderSettings.maxSamples = 4;
-
-    auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
-    sceneReader->read();
-
-    Renderer renderer(scene, imageOutputDriver);
-    renderer.renderScene();
-
-    ImageWriters::writeImage(myImage, imageOutputPath);
-}
+#include "renderUtils.h"
 
 std::vector<KnipserTest> renderTests() {
     return {
@@ -46,6 +24,5 @@ std::vector<KnipserTest> renderTests() {
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         })
-
     };
 }

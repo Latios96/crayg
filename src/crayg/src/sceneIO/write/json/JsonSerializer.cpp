@@ -6,10 +6,18 @@
 
 #include <memory>
 
-void JsonSerializer::init() {
-    writer->StartObject();
+void JsonSerializer::startSceneObjects() {
     writer->Key("SceneObjects");
     writer->StartArray();
+}
+
+void JsonSerializer::endSceneObjects() {
+    writer->EndArray();
+}
+
+void JsonSerializer::writeInt(std::string name, int value) {
+    writer->Key(name.c_str());
+    writer->Int(value);
 }
 
 void JsonSerializer::startObject() {
@@ -18,17 +26,6 @@ void JsonSerializer::startObject() {
 
 void JsonSerializer::endObject() {
     writer->EndObject();
-}
-
-void JsonSerializer::finish() {
-    writer->EndArray();
-    writer->EndObject();
-    ofs->close();
-}
-
-void JsonSerializer::writeInt(std::string name, int value) {
-    writer->Key(name.c_str());
-    writer->Int(value);
 }
 
 void JsonSerializer::writeFloat(std::string name, float value) {
@@ -86,4 +83,21 @@ void JsonSerializer::writeFloatArray(std::string name, std::vector<float> &value
         writer->Double(i);
     }
     writer->EndArray();
+}
+void JsonSerializer::startCamera() {
+    writer->Key("Camera");
+}
+void JsonSerializer::endCamera() {
+}
+void JsonSerializer::startRenderSettings() {
+    writer->Key("RenderSettings");
+}
+void JsonSerializer::endRenderSettings() {
+}
+void JsonSerializer::start() {
+    writer->StartObject();
+}
+void JsonSerializer::end() {
+    writer->EndObject();
+    ofs->close();
 }
