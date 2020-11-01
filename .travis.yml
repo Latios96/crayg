@@ -25,7 +25,7 @@ matrix:
 
 script:
   - cmake --version 
-  - pip install conan
+  - pip3 install conan
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
   - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
   - rm -rf build/
