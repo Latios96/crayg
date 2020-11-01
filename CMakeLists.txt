@@ -30,6 +30,8 @@ conan_cmake_run(REQUIRES
         openimageio/2.1.11.2@ppodsiadly/stable
         tinyobjloader/1.0.6
         tbb/2020.2
+        qt/5.15.1@bincrafters/stable
+        freetype/2.10.2
         IMPORTS bin,*.dll->./bin lib,*.dylib*->./lib lib,*.so*->./lib
         BASIC_SETUP
         BUILD missing
