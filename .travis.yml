@@ -19,14 +19,18 @@ matrix:
       before_script:
         - export CC="${CC}-7";
         - export CXX="${CXX}-7";
+        - python --version
+        - pip --version
+        - pip install conan
       env: GCC_VERSION=7
     - os: osx
       compiler: clang
       osx_image: xcode10
+      before_script:
+        - pip3 install conan
 
 script:
-  - cmake --version 
-  - pip3 install conan
+  - cmake --version
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
   - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
   - rm -rf build/
