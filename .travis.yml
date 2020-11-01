@@ -24,6 +24,7 @@ matrix:
       env: GCC_VERSION=7
     - os: osx
       compiler: clang
+      osx_image: xcode10
 
 script:
   - cmake --version 
