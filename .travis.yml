@@ -1,4 +1,4 @@
-language: cpp
+language: python
 
 cache:
   directories:
@@ -17,10 +17,8 @@ matrix:
     - os: linux
       compiler: gcc
       before_script:
-        - export CC="${CC}-7";
-        - export CXX="${CXX}-7";
-        - echo $CC
-        - echo $CXX
+        - export CC=gcc-7
+        - export CXX=g++-7
         - python --version
         - pip --version
         - pip install conan
