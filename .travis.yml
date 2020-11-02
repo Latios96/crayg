@@ -28,6 +28,9 @@ matrix:
         - python --version
         - pip --version
         - pip install conan
+        - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
+        - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
+        - conan install qt/5.15.1@bincrafters/stable --build
       env: GCC_VERSION=7
       python:
         "3.7"
@@ -37,11 +40,11 @@ matrix:
       osx_image: xcode10
       before_script:
         - pip3 install conan
+        - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
+        - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
 
 script:
   - cmake --version
-  - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
-  - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
   - rm -rf build/
   - mkdir build
   - cd build
