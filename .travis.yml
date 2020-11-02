@@ -10,6 +10,7 @@ addons:
       - g++-7
       - libgl1-mesa-dev
       - xorg-dev
+      - libxcb-render-util0-dev
 
 matrix:
   include:
