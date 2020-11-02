@@ -35,7 +35,7 @@ conan_cmake_run(REQUIRES
         IMPORTS bin,*.dll->./bin lib,*.dylib*->./lib lib,*.so*->./lib
         BASIC_SETUP
         BUILD missing
-        OPTIONS openimageio:with_jpeg2000=False libtiff:jpeg=libjpeg-turbo qt:with_libjpeg=False qt:with_sqlite3=False qt:with_mysql=False harfbuzz:with_glib=False qt:with_glib=False
+        OPTIONS openimageio:with_jpeg2000=False libtiff:jpeg=libjpeg-turbo qt:with_libjpeg=False qt:with_sqlite3=False qt:with_mysql=False qt:qtmultimedia=False
         KEEP_RPATHS
         )
 
