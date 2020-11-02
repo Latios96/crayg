@@ -29,7 +29,8 @@ matrix:
         - python --version
         - pip --version
         - pip install conan
-        - conan user
+        - chmod +x .travis/install.sh
+        - ./.travis/install.sh
       env: GCC_VERSION=7
       python:
         "3.7"
