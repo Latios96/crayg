@@ -20,6 +20,7 @@ addons:
 matrix:
   include:
     - os: linux
+      dist: bionic
       language: python
       compiler: gcc
       before_script:
