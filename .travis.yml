@@ -12,6 +12,7 @@ addons:
       - xorg-dev
       - libxcb-render-util0-dev
       - libxcb-xkb-dev
+      - libxcb-icccm4-dev
 
 matrix:
   include:
