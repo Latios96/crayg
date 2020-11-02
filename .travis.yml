@@ -9,6 +9,7 @@ addons:
       - gcc-7
       - g++-7
       - libgl1-mesa-dev
+      - xorg-dev
 
 matrix:
   include:
