@@ -28,10 +28,19 @@ jobs:
       run: |
         pip install conan
         conan --version
-    - name: add bincrafters remote
-      run: conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
-    - name: add ppodsiadly remote
-      run: conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
+    - name: add remotes
+      run: |
+        conan remote list
+        python scripts/add_conan_remotes.py
+        conan remote list
+    - name: conan login
+      run: conan user ci_github_actions -p -r=framebffr
+      env:
+        CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+    - name: build dependencies
+      run: conan install . --build missing
+    - name: upload dependencies
+      run: conan upload * --all --confirm -r=framebffr --parallel
     - name: prepare build
       run: mkdir build
     - name: run CMake
