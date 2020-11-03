@@ -6,8 +6,6 @@ jobs:
   build-windows:
     name:  windows-2016
     runs-on:  windows-2016
-    env:
-      CONAN_USER_HOME: C:/conan_user_home
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.7
