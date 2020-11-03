@@ -22,9 +22,7 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 conan_cmake_run(CONANFILE conanfile.txt
         BASIC_SETUP
         BUILD missing
-        KEEP_RPATHS
-        SETTINGS arch=x86_64
-        )
+        KEEP_RPATHS)
 
 
 
