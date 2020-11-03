@@ -22,5 +22,10 @@ harfbuzz:with_glib=False
 qt:with_glib=False
 qt:qtmultimedia=False
 
+[imports]
+bin,*.dll->./bin
+lib,*.dylib*->./lib
+lib,*.so*->./lib
+
 [generators]
 cmake
