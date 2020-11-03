@@ -30,10 +30,12 @@ conan_cmake_run(REQUIRES
         openimageio/2.1.11.2@ppodsiadly/stable
         tinyobjloader/1.0.6
         tbb/2020.2
+        qt/5.15.1@bincrafters/stable
+        freetype/2.10.2
         IMPORTS bin,*.dll->./bin lib,*.dylib*->./lib lib,*.so*->./lib
         BASIC_SETUP
         BUILD missing
-        OPTIONS openimageio:with_jpeg2000=False libtiff:jpeg=libjpeg-turbo
+        OPTIONS openimageio:with_jpeg2000=False libtiff:jpeg=libjpeg-turbo qt:with_libjpeg=False qt:with_sqlite3=False qt:with_mysql=False harfbuzz:with_glib=False qt:with_glib=False qt:qtmultimedia=False
         KEEP_RPATHS
         )
 
