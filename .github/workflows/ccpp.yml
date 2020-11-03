@@ -33,7 +33,7 @@ jobs:
       run: mkdir build
     - name: run CMake
       working-directory: build
-      run: cmake .. -DCMAKE_BUILD_TYPE=Release
+      run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 Win64"
       shell: cmd
     - name: build
       working-directory: build
