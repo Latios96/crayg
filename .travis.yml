@@ -45,7 +45,7 @@ script:
   - conan remote list
   - conan user ci_github_actions -p -r=framebffr
   - conan install . --build missing
-  - conan upload * --all --confirm -r=framebffr --parallel
+  - conan upload "*" --all --confirm -r=framebffr --parallel
   - cmake --version
   - rm -rf build/
   - mkdir build
