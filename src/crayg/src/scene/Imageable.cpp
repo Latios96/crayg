@@ -6,5 +6,7 @@
 
 #include <utility>
 
-Imageable::Intersection::Intersection(float rayParameter, std::shared_ptr<Imageable> imageable) : rayParameter(rayParameter),
-                                                                                  imageable(std::move(imageable)) {}
+Imageable::Intersection::Intersection(float rayParameter, std::shared_ptr<Imageable> imageable) : rayParameter(
+    rayParameter),
+                                                                                                  imageable(std::move(
+                                                                                                      imageable)) {}

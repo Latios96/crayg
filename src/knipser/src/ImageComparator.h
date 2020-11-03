@@ -7,7 +7,6 @@
 
 #include <string>
 
-
 enum ImageComparatorResultStatus {
     OK, WARNING, IMAGE_ERROR
 };

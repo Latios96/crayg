@@ -34,8 +34,7 @@ TEST_CASE("Sphere") {
         REQUIRE(compareWithPrecision(hitLocation.x, 4));
         REQUIRE(compareWithPrecision(hitLocation.y, 0));
         REQUIRE(compareWithPrecision(hitLocation.z, 0));
-    }
-    SECTION("intersectNotReturnsMax") {
+    }SECTION("intersectNotReturnsMax") {
         auto hitRay = mySphere->intersect(Ray(Vector3f(1, 10, -5), Vector3f(0, 0, 1)));
         REQUIRE(hitRay.rayParameter == std::numeric_limits<float>::max());
     }

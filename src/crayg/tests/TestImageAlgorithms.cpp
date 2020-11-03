@@ -27,7 +27,7 @@ TEST_CASE("ImageAlgorithmsBucketIsContainedInImage") {
 TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
     Image image(10, 10);
 
-    SECTION("shouldNotCopyBecauseNotBucketIsNotContained"){
+    SECTION("shouldNotCopyBecauseNotBucketIsNotContained") {
         BucketImageBuffer bucketImageBuffer(0, 0, 50, 5);
 
         ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);

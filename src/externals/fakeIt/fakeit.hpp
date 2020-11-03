@@ -135,7 +135,7 @@ struct MockObject {
 struct MethodInfo {
 
     static unsigned int nextMethodOrdinal() {
-        static std::atomic_uint ordinal{0};
+        static std::atomic_uint ordinal {0};
         return ++ordinal;
     }
 
@@ -181,7 +181,7 @@ namespace fakeit {
 struct Invocation : Destructible {
 
     static unsigned int nextInvocationOrdinal() {
-        static std::atomic_uint invocationOrdinal{0};
+        static std::atomic_uint invocationOrdinal {0};
         return ++invocationOrdinal;
     }
 
@@ -327,7 +327,7 @@ struct ActualInvocation : public Invocation {
     ActualInvocation(unsigned int ordinal,
                      MethodInfo &method,
                      const typename fakeit::production_arg<arglist>::type... args) :
-        Invocation(ordinal, method), _matcher{nullptr}, actualArguments{std::forward<arglist>(args)...} {
+        Invocation(ordinal, method), _matcher {nullptr}, actualArguments {std::forward<arglist>(args)...} {
     }
 
     ArgumentsTuple<arglist...> &getActualArguments() {
@@ -5255,266 +5255,258 @@ class VTUtils {
 
 }
 #ifdef _MSC_VER
-                                                                                                                        namespace fakeit {
+namespace fakeit {
 
-    typedef unsigned long DWORD;
+typedef unsigned long DWORD;
 
-    struct TypeDescriptor {
-        TypeDescriptor() :
-                ptrToVTable(0), spare(0) {
+struct TypeDescriptor {
+    TypeDescriptor() :
+        ptrToVTable(0), spare(0) {
 
-            int **tiVFTPtr = (int **) (&typeid(void));
-            int *i = (int *) tiVFTPtr[0];
-			char *type_info_vft_ptr = (char *) i;
-            ptrToVTable = type_info_vft_ptr;
+        int **tiVFTPtr = (int **) (&typeid(void));
+        int *i = (int *) tiVFTPtr[0];
+        char *type_info_vft_ptr = (char *) i;
+        ptrToVTable = type_info_vft_ptr;
+    }
+
+    char *ptrToVTable;
+    DWORD spare;
+    char name[8];
+};
+
+struct PMD {
+
+    int mdisp;
+
+    int pdisp;
+    int vdisp;
+
+    PMD() :
+        mdisp(0), pdisp(-1), vdisp(0) {
+    }
+};
+
+struct RTTIBaseClassDescriptor {
+    RTTIBaseClassDescriptor() :
+        pTypeDescriptor(nullptr), numContainedBases(0), attributes(0) {
+    }
+
+    const std::type_info *pTypeDescriptor;
+    DWORD numContainedBases;
+    struct PMD where;
+    DWORD attributes;
+};
+
+template<typename C, typename... baseclasses>
+struct RTTIClassHierarchyDescriptor {
+    RTTIClassHierarchyDescriptor() :
+        signature(0),
+        attributes(0),
+        numBaseClasses(0),
+        pBaseClassArray(nullptr) {
+        pBaseClassArray = new RTTIBaseClassDescriptor *[1 + sizeof...(baseclasses)];
+        addBaseClass<C, baseclasses...>();
+    }
+
+    ~RTTIClassHierarchyDescriptor() {
+        for (int i = 0; i < 1 + sizeof...(baseclasses); i++) {
+            RTTIBaseClassDescriptor *desc = pBaseClassArray[i];
+            delete desc;
         }
+        delete[] pBaseClassArray;
+    }
 
-		char *ptrToVTable;
-        DWORD spare;
-        char name[8];
-    };
+    DWORD signature;
+    DWORD attributes;
+    DWORD numBaseClasses;
+    RTTIBaseClassDescriptor **pBaseClassArray;
 
-    struct PMD {
-
-
-
-        int mdisp;
-
-        int pdisp;
-        int vdisp;
-
-        PMD() :
-                mdisp(0), pdisp(-1), vdisp(0) {
+    template<typename BaseType>
+    void addBaseClass() {
+        static_assert(std::is_base_of<BaseType, C>::value, "C must be a derived class of BaseType");
+        RTTIBaseClassDescriptor *desc = new RTTIBaseClassDescriptor();
+        desc->pTypeDescriptor = &typeid(BaseType);
+        pBaseClassArray[numBaseClasses] = desc;
+        for (unsigned int i = 0; i < numBaseClasses; i++) {
+            pBaseClassArray[i]->numContainedBases++;
         }
-    };
+        numBaseClasses++;
+    }
 
-    struct RTTIBaseClassDescriptor {
-        RTTIBaseClassDescriptor() :
-                pTypeDescriptor(nullptr), numContainedBases(0), attributes(0) {
-        }
+    template<typename head, typename B1, typename... tail>
+    void addBaseClass() {
+        static_assert(std::is_base_of<B1, head>::value, "invalid inheritance list");
+        addBaseClass<head>();
+        addBaseClass<B1, tail...>();
+    }
 
-        const std::type_info *pTypeDescriptor;
-        DWORD numContainedBases;
-        struct PMD where;
-        DWORD attributes;
-    };
+};
 
-    template<typename C, typename... baseclasses>
-    struct RTTIClassHierarchyDescriptor {
-        RTTIClassHierarchyDescriptor() :
-                signature(0),
-                attributes(0),
-                numBaseClasses(0),
-                pBaseClassArray(nullptr) {
-            pBaseClassArray = new RTTIBaseClassDescriptor *[1 + sizeof...(baseclasses)];
-            addBaseClass < C, baseclasses...>();
-        }
-
-        ~RTTIClassHierarchyDescriptor() {
-            for (int i = 0; i < 1 + sizeof...(baseclasses); i++) {
-                RTTIBaseClassDescriptor *desc = pBaseClassArray[i];
-                delete desc;
-            }
-            delete[] pBaseClassArray;
-        }
-
-        DWORD signature;
-        DWORD attributes;
-        DWORD numBaseClasses;
-        RTTIBaseClassDescriptor **pBaseClassArray;
-
-        template<typename BaseType>
-        void addBaseClass() {
-            static_assert(std::is_base_of<BaseType, C>::value, "C must be a derived class of BaseType");
-            RTTIBaseClassDescriptor *desc = new RTTIBaseClassDescriptor();
-            desc->pTypeDescriptor = &typeid(BaseType);
-            pBaseClassArray[numBaseClasses] = desc;
-            for (unsigned int i = 0; i < numBaseClasses; i++) {
-                pBaseClassArray[i]->numContainedBases++;
-            }
-            numBaseClasses++;
-        }
-
-        template<typename head, typename B1, typename... tail>
-        void addBaseClass() {
-            static_assert(std::is_base_of<B1, head>::value, "invalid inheritance list");
-            addBaseClass<head>();
-            addBaseClass<B1, tail...>();
-        }
-
-    };
-
-	template<typename C, typename... baseclasses>
-	struct RTTICompleteObjectLocator {
+template<typename C, typename... baseclasses>
+struct RTTICompleteObjectLocator {
 #ifdef _WIN64
-		RTTICompleteObjectLocator(const std::type_info &unused) :
-			signature(0), offset(0), cdOffset(0),
-			typeDescriptorOffset(0), classDescriptorOffset(0)
-		{
-		}
+    RTTICompleteObjectLocator(const std::type_info &unused) :
+        signature(0), offset(0), cdOffset(0),
+        typeDescriptorOffset(0), classDescriptorOffset(0) {
+    }
 
-		DWORD signature;
-		DWORD offset;
-		DWORD cdOffset;
-		DWORD typeDescriptorOffset;
-		DWORD classDescriptorOffset;
+    DWORD signature;
+    DWORD offset;
+    DWORD cdOffset;
+    DWORD typeDescriptorOffset;
+    DWORD classDescriptorOffset;
 #else
-		RTTICompleteObjectLocator(const std::type_info &info) :
-			signature(0), offset(0), cdOffset(0),
-			pTypeDescriptor(&info),
-			pClassDescriptor(new RTTIClassHierarchyDescriptor<C, baseclasses...>()) {
-		}
+    RTTICompleteObjectLocator(const std::type_info &info) :
+        signature(0), offset(0), cdOffset(0),
+        pTypeDescriptor(&info),
+        pClassDescriptor(new RTTIClassHierarchyDescriptor<C, baseclasses...>()) {
+    }
 
-		~RTTICompleteObjectLocator() {
-			delete pClassDescriptor;
-		}
+    ~RTTICompleteObjectLocator() {
+        delete pClassDescriptor;
+    }
 
-		DWORD signature;
-		DWORD offset;
-		DWORD cdOffset;
-		const std::type_info *pTypeDescriptor;
-		struct RTTIClassHierarchyDescriptor<C, baseclasses...> *pClassDescriptor;
+    DWORD signature;
+    DWORD offset;
+    DWORD cdOffset;
+    const std::type_info *pTypeDescriptor;
+    struct RTTIClassHierarchyDescriptor<C, baseclasses...> *pClassDescriptor;
 #endif
-	};
+};
 
+struct VirtualTableBase {
 
-    struct VirtualTableBase {
+    static VirtualTableBase &getVTable(void *instance) {
+        fakeit::VirtualTableBase *vt = (fakeit::VirtualTableBase *) (instance);
+        return *vt;
+    }
 
-        static VirtualTableBase &getVTable(void *instance) {
-            fakeit::VirtualTableBase *vt = (fakeit::VirtualTableBase *) (instance);
+    VirtualTableBase(void **firstMethod) : _firstMethod(firstMethod) {}
+
+    void *getCookie(int index) {
+        return _firstMethod[-2 - index];
+    }
+
+    void setCookie(int index, void *value) {
+        _firstMethod[-2 - index] = value;
+    }
+
+    void *getMethod(unsigned int index) const {
+        return _firstMethod[index];
+    }
+
+    void setMethod(unsigned int index, void *method) {
+        _firstMethod[index] = method;
+    }
+
+ protected:
+    void **_firstMethod;
+};
+
+template<class C, class... baseclasses>
+struct VirtualTable : public VirtualTableBase {
+
+    class Handle {
+
+        friend struct VirtualTable<C, baseclasses...>;
+
+        void **firstMethod;
+
+        Handle(void **method) : firstMethod(method) {}
+
+     public:
+
+        VirtualTable<C, baseclasses...> &restore() {
+            VirtualTable<C, baseclasses...> *vt = (VirtualTable<C, baseclasses...> *) this;
             return *vt;
         }
-
-        VirtualTableBase(void **firstMethod) : _firstMethod(firstMethod) { }
-
-        void *getCookie(int index) {
-            return _firstMethod[-2 - index];
-        }
-
-        void setCookie(int index, void *value) {
-            _firstMethod[-2 - index] = value;
-        }
-
-        void *getMethod(unsigned int index) const {
-            return _firstMethod[index];
-        }
-
-        void setMethod(unsigned int index, void *method) {
-            _firstMethod[index] = method;
-        }
-
-    protected:
-        void **_firstMethod;
     };
 
-    template<class C, class... baseclasses>
-    struct VirtualTable : public VirtualTableBase {
+    static VirtualTable<C, baseclasses...> &getVTable(C &instance) {
+        fakeit::VirtualTable<C, baseclasses...> *vt = (fakeit::VirtualTable<C, baseclasses...> *) (&instance);
+        return *vt;
+    }
 
-        class Handle {
-
-            friend struct VirtualTable<C, baseclasses...>;
-
-            void **firstMethod;
-
-            Handle(void **method) : firstMethod(method) { }
-
-        public:
-
-            VirtualTable<C, baseclasses...> &restore() {
-                VirtualTable<C, baseclasses...> *vt = (VirtualTable<C, baseclasses...> *) this;
-                return *vt;
-            }
-        };
-
-        static VirtualTable<C, baseclasses...> &getVTable(C &instance) {
-            fakeit::VirtualTable<C, baseclasses...> *vt = (fakeit::VirtualTable<C, baseclasses...> *) (&instance);
-            return *vt;
+    void copyFrom(VirtualTable<C, baseclasses...> &from) {
+        unsigned int size = VTUtils::getVTSize<C>();
+        for (unsigned int i = 0; i < size; i++) {
+            _firstMethod[i] = from.getMethod(i);
         }
+    }
 
-        void copyFrom(VirtualTable<C, baseclasses...> &from) {
-            unsigned int size = VTUtils::getVTSize<C>();
-            for (unsigned int i = 0; i < size; i++) {
-                _firstMethod[i] = from.getMethod(i);
-            }
+    VirtualTable() : VirtualTable(buildVTArray()) {
+    }
+
+    ~VirtualTable() {
+
+    }
+
+    void dispose() {
+        _firstMethod--;
+        RTTICompleteObjectLocator<C, baseclasses...>
+            *locator = (RTTICompleteObjectLocator<C, baseclasses...> *) _firstMethod[0];
+        delete locator;
+        _firstMethod -= numOfCookies;
+        delete[] _firstMethod;
+    }
+
+    unsigned int dtor(int) {
+        C *c = (C *) this;
+        C &cRef = *c;
+        auto vt = VirtualTable<C, baseclasses...>::getVTable(cRef);
+        void *dtorPtr = vt.getCookie(numOfCookies - 1);
+        void (*method)(C *) = reinterpret_cast<void (*)(C *)>(dtorPtr);
+        method(c);
+        return 0;
+    }
+
+    void setDtor(void *method) {
+
+        void *dtorPtr = union_cast<void *>(&VirtualTable<C, baseclasses...>::dtor);
+        unsigned int index = VTUtils::getDestructorOffset<C>();
+        _firstMethod[index] = dtorPtr;
+        setCookie(numOfCookies - 1, method);
+    }
+
+    unsigned int getSize() {
+        return VTUtils::getVTSize<C>();
+    }
+
+    void initAll(void *value) {
+        auto size = getSize();
+        for (unsigned int i = 0; i < size; i++) {
+            setMethod(i, value);
         }
+    }
 
-        VirtualTable() : VirtualTable(buildVTArray()) {
-        }
+    Handle createHandle() {
+        Handle h(_firstMethod);
+        return h;
+    }
 
-        ~VirtualTable() {
+ private:
 
-        }
-
-        void dispose() {
-            _firstMethod--;
-            RTTICompleteObjectLocator<C, baseclasses...> *locator = (RTTICompleteObjectLocator<C, baseclasses...> *) _firstMethod[0];
-            delete locator;
-            _firstMethod -= numOfCookies;
-            delete[] _firstMethod;
-        }
-
-
-        unsigned int dtor(int) {
-            C *c = (C *) this;
-            C &cRef = *c;
-            auto vt = VirtualTable<C, baseclasses...>::getVTable(cRef);
-            void *dtorPtr = vt.getCookie(numOfCookies - 1);
-            void(*method)(C *) = reinterpret_cast<void (*)(C *)>(dtorPtr);
-            method(c);
-            return 0;
-        }
-
-        void setDtor(void *method) {
-
-
-
-
-
-            void *dtorPtr = union_cast<void *>(&VirtualTable<C, baseclasses...>::dtor);
-            unsigned int index = VTUtils::getDestructorOffset<C>();
-            _firstMethod[index] = dtorPtr;
-            setCookie(numOfCookies - 1, method);
-        }
-
-        unsigned int getSize() {
-            return VTUtils::getVTSize<C>();
-        }
-
-        void initAll(void *value) {
-            auto size = getSize();
-            for (unsigned int i = 0; i < size; i++) {
-                setMethod(i, value);
-            }
-        }
-
-        Handle createHandle() {
-            Handle h(_firstMethod);
-            return h;
-        }
-
-    private:
-
-        class SimpleType {
-        };
-
-        static_assert(sizeof(unsigned int (SimpleType::*)()) == sizeof(unsigned int (C::*)()),
-            "Can't mock a type with multiple inheritance or with non-polymorphic base class");
-        static const unsigned int numOfCookies = 3;
-
-        static void **buildVTArray() {
-            int vtSize = VTUtils::getVTSize<C>();
-            auto array = new void *[vtSize + numOfCookies + 1]{};
-            RTTICompleteObjectLocator<C, baseclasses...> *objectLocator = new RTTICompleteObjectLocator<C, baseclasses...>(
-                    typeid(C));
-            array += numOfCookies;
-            array[0] = objectLocator;
-            array++;
-            return array;
-        }
-
-        VirtualTable(void **firstMethod) : VirtualTableBase(firstMethod) {
-        }
+    class SimpleType {
     };
+
+    static_assert(sizeof(unsigned int (SimpleType::*)()) == sizeof(unsigned int (C::*)()),
+                  "Can't mock a type with multiple inheritance or with non-polymorphic base class");
+    static const unsigned int numOfCookies = 3;
+
+    static void **buildVTArray() {
+        int vtSize = VTUtils::getVTSize<C>();
+        auto array = new void *[vtSize + numOfCookies + 1] {};
+        RTTICompleteObjectLocator<C, baseclasses...> *objectLocator = new RTTICompleteObjectLocator<C, baseclasses...>(
+            typeid(C));
+        array += numOfCookies;
+        array[0] = objectLocator;
+        array++;
+        return array;
+    }
+
+    VirtualTable(void **firstMethod) : VirtualTableBase(firstMethod) {
+    }
+};
 }
 #else
 #ifndef __clang__
@@ -5706,7 +5698,7 @@ namespace fakeit {
 #endif
 
 #ifdef _MSC_VER
-                                                                                                                        #pragma warning( push )
+#pragma warning( push )
 #pragma warning( disable : 4200 )
 #endif
 
@@ -5981,7 +5973,7 @@ struct DynamicProxy {
      public:
         DataMemeberWrapper(DATA_TYPE *dataMem, const arglist &... initargs) :
             dataMember(dataMem) {
-            new(dataMember) DATA_TYPE{initargs ...};
+            new(dataMember) DATA_TYPE {initargs ...};
         }
 
         ~DataMemeberWrapper() override {
@@ -6175,7 +6167,7 @@ struct DefaultValue<C, typename std::enable_if<!is_constructible_type<C>::value>
 template<class C>
 struct DefaultValue<C, typename std::enable_if<is_constructible_type<C>::value>::type> {
     static C &value() {
-        static typename naked_type<C>::type val{};
+        static typename naked_type<C>::type val {};
         return val;
     }
 };
@@ -6190,7 +6182,7 @@ struct DefaultValue<void> {
 template<>
 struct DefaultValue<bool> {
     static bool &value() {
-        static bool value{false};
+        static bool value {false};
         return value;
     }
 };
@@ -6198,7 +6190,7 @@ struct DefaultValue<bool> {
 template<>
 struct DefaultValue<char> {
     static char &value() {
-        static char value{0};
+        static char value {0};
         return value;
     }
 };
@@ -6206,7 +6198,7 @@ struct DefaultValue<char> {
 template<>
 struct DefaultValue<char16_t> {
     static char16_t &value() {
-        static char16_t value{0};
+        static char16_t value {0};
         return value;
     }
 };
@@ -6214,7 +6206,7 @@ struct DefaultValue<char16_t> {
 template<>
 struct DefaultValue<char32_t> {
     static char32_t &value() {
-        static char32_t value{0};
+        static char32_t value {0};
         return value;
     }
 };
@@ -6222,7 +6214,7 @@ struct DefaultValue<char32_t> {
 template<>
 struct DefaultValue<wchar_t> {
     static wchar_t &value() {
-        static wchar_t value{0};
+        static wchar_t value {0};
         return value;
     }
 };
@@ -6230,7 +6222,7 @@ struct DefaultValue<wchar_t> {
 template<>
 struct DefaultValue<short> {
     static short &value() {
-        static short value{0};
+        static short value {0};
         return value;
     }
 };
@@ -6238,7 +6230,7 @@ struct DefaultValue<short> {
 template<>
 struct DefaultValue<int> {
     static int &value() {
-        static int value{0};
+        static int value {0};
         return value;
     }
 };
@@ -6246,7 +6238,7 @@ struct DefaultValue<int> {
 template<>
 struct DefaultValue<long> {
     static long &value() {
-        static long value{0};
+        static long value {0};
         return value;
     }
 };
@@ -6254,7 +6246,7 @@ struct DefaultValue<long> {
 template<>
 struct DefaultValue<long long> {
     static long long &value() {
-        static long long value{0};
+        static long long value {0};
         return value;
     }
 };
@@ -6262,7 +6254,7 @@ struct DefaultValue<long long> {
 template<>
 struct DefaultValue<std::string> {
     static std::string &value() {
-        static std::string value{};
+        static std::string value {};
         return value;
     }
 };
@@ -6624,7 +6616,7 @@ struct UserDefinedInvocationMatcher : ActualInvocation<arglist...>::Matcher {
     virtual ~UserDefinedInvocationMatcher() = default;
 
     UserDefinedInvocationMatcher(std::function<bool(arglist &...)> match)
-        : matcher{match} {
+        : matcher {match} {
     }
 
     virtual bool matches(ActualInvocation<arglist...> &invocation) override {
@@ -6683,7 +6675,7 @@ class RecordedMethodBody : public MethodInvocationHandler<R, arglist...>,
 
         MatchedInvocationHandler(typename ActualInvocation<arglist...>::Matcher *matcher,
                                  ActualInvocationHandler<R, arglist...> *invocationHandler) :
-            _matcher{matcher}, _invocationHandler{invocationHandler} {
+            _matcher {matcher}, _invocationHandler {invocationHandler} {
         }
 
         virtual R handleMethodInvocation(ArgumentsTuple<arglist...> &args) override {
@@ -6742,7 +6734,7 @@ class RecordedMethodBody : public MethodInvocationHandler<R, arglist...>,
  public:
 
     RecordedMethodBody(FakeitContext &fakeit, std::string name) :
-        _fakeit(fakeit), _method{MethodInfo::nextMethodOrdinal(), name} {}
+        _fakeit(fakeit), _method {MethodInfo::nextMethodOrdinal(), name} {}
 
     virtual ~RecordedMethodBody() NO_THROWS {
     }
@@ -6759,7 +6751,7 @@ class RecordedMethodBody : public MethodInvocationHandler<R, arglist...>,
     void addMethodInvocationHandler(typename ActualInvocation<arglist...>::Matcher *matcher,
                                     ActualInvocationHandler<R, arglist...> *invocationHandler) {
         ActualInvocationHandler<R, arglist...> *mock = buildMatchedInvocationHandler(matcher, invocationHandler);
-        std::shared_ptr<Destructible> destructable{mock};
+        std::shared_ptr<Destructible> destructable {mock};
         _invocationHandlers.push_back(destructable);
     }
 
@@ -6780,7 +6772,7 @@ class RecordedMethodBody : public MethodInvocationHandler<R, arglist...>,
                                                                  std::forward<const typename fakeit::production_arg<
                                                                      arglist>::type>(args)...);
 
-        std::shared_ptr<Destructible> actualInvocationDtor{actualInvocation};
+        std::shared_ptr<Destructible> actualInvocationDtor {actualInvocation};
 
         auto invocationHandler = getInvocationHandlerForActualArgs(*actualInvocation);
         if (invocationHandler) {
@@ -6795,7 +6787,7 @@ class RecordedMethodBody : public MethodInvocationHandler<R, arglist...>,
 
         UnexpectedMethodCallEvent event(UnexpectedType::Unmatched, *actualInvocation);
         _fakeit.handle(event);
-        std::string format{_fakeit.format(event)};
+        std::string format {_fakeit.format(event)};
         UnexpectedMethodCallException e(format);
         throw e;
     }
@@ -6815,7 +6807,7 @@ class RecordedMethodBody : public MethodInvocationHandler<R, arglist...>,
     }
 
     void setMethodDetails(const std::string &mockName, const std::string &methodName) {
-        const std::string fullName{mockName + "." + methodName};
+        const std::string fullName {mockName + "." + methodName};
         _method.setName(fullName);
     }
 
@@ -7250,13 +7242,13 @@ struct ActionSequence : ActualInvocationHandler<R, arglist...> {
     };
 
     void append(Action<R, arglist...> *action) {
-        std::shared_ptr<Destructible> destructable{action};
+        std::shared_ptr<Destructible> destructable {action};
         _recordedActions.insert(_recordedActions.end() - 1, destructable);
     }
 
     void clear() {
         _recordedActions.clear();
-        auto actionPtr = std::shared_ptr<Destructible>{new NoMoreRecordedAction()};
+        auto actionPtr = std::shared_ptr<Destructible> {new NoMoreRecordedAction()};
         _recordedActions.push_back(actionPtr);
     }
 
@@ -7527,7 +7519,7 @@ class MethodMockingContext :
  protected:
 
     MethodMockingContext(Context *stubbingContext)
-        : _impl{new Implementation(stubbingContext)} {
+        : _impl {new Implementation(stubbingContext)} {
     }
 
     MethodMockingContext(MethodMockingContext &) = default;
@@ -7573,13 +7565,13 @@ class MethodMockingContext :
     }
 
     void setMatchingCriteria(std::function<bool(arglist &...)> predicate) {
-        typename ActualInvocation<arglist...>::Matcher *matcher{
+        typename ActualInvocation<arglist...>::Matcher *matcher {
             new UserDefinedInvocationMatcher<arglist...>(predicate)};
         _impl->setInvocationMatcher(matcher);
     }
 
     void setMatchingCriteria(const std::vector<Destructible *> &matchers) {
-        typename ActualInvocation<arglist...>::Matcher *matcher{
+        typename ActualInvocation<arglist...>::Matcher *matcher {
             new ArgumentsMatcherInvocationMatcher<arglist...>(matchers)};
         _impl->setInvocationMatcher(matcher);
     }
@@ -8011,7 +8003,7 @@ class MockImpl : private MockObject<C>, public virtual ActualInvocationsSource {
     }
 
     MockImpl(FakeitContext &fakeit, C &obj, bool isSpy)
-        : _proxy{obj}, _instance(&obj), _isOwner(!isSpy), _fakeit(fakeit) {
+        : _proxy {obj}, _instance(&obj), _isOwner(!isSpy), _fakeit(fakeit) {
     }
 
     template<typename R, typename ... arglist>
@@ -8825,9 +8817,9 @@ class UsingFunctor {
 
     template<typename ... list>
     UsingProgress operator()(const ActualInvocationsSource &head, const list &... tail) {
-        std::vector<ActualInvocationsSource *> allMocks{&InvocationUtils::remove_const(head),
-                                                        &InvocationUtils::remove_const(tail)...};
-        InvocationsSourceProxy aggregateInvocationsSource{new AggregateInvocationsSource(allMocks)};
+        std::vector<ActualInvocationsSource *> allMocks {&InvocationUtils::remove_const(head),
+                                                         &InvocationUtils::remove_const(tail)...};
+        InvocationsSourceProxy aggregateInvocationsSource {new AggregateInvocationsSource(allMocks)};
         UsingProgress progress(_fakeit, aggregateInvocationsSource);
         return progress;
     }
@@ -8849,12 +8841,12 @@ class VerifyFunctor {
 
     template<typename ... list>
     SequenceVerificationProgress operator()(const Sequence &sequence, const list &... tail) {
-        std::vector<Sequence *> allSequences{&InvocationUtils::remove_const(sequence),
-                                             &InvocationUtils::remove_const(tail)...};
+        std::vector<Sequence *> allSequences {&InvocationUtils::remove_const(sequence),
+                                              &InvocationUtils::remove_const(tail)...};
 
         std::vector<ActualInvocationsSource *> involvedSources;
         InvocationUtils::collectInvolvedMocks(allSequences, involvedSources);
-        InvocationsSourceProxy aggregateInvocationsSource{new AggregateInvocationsSource(involvedSources)};
+        InvocationsSourceProxy aggregateInvocationsSource {new AggregateInvocationsSource(involvedSources)};
 
         UsingProgress usingProgress(_fakeit, aggregateInvocationsSource);
         return usingProgress.Verify(sequence, tail...);
@@ -8996,9 +8988,9 @@ class VerifyNoOtherInvocationsFunctor {
     template<typename ... list>
     VerifyNoOtherInvocationsVerificationProgress operator()(const ActualInvocationsSource &head,
                                                             const list &... tail) {
-        std::vector<ActualInvocationsSource *> invocationSources{&InvocationUtils::remove_const(head),
-                                                                 &InvocationUtils::remove_const(tail)...};
-        VerifyNoOtherInvocationsVerificationProgress progress{_fakeit, invocationSources};
+        std::vector<ActualInvocationsSource *> invocationSources {&InvocationUtils::remove_const(head),
+                                                                  &InvocationUtils::remove_const(tail)...};
+        VerifyNoOtherInvocationsVerificationProgress progress {_fakeit, invocationSources};
         return progress;
     }
 };
@@ -9047,14 +9039,14 @@ class VerifyUnverifiedFunctor {
 
     template<typename ... list>
     SequenceVerificationProgress operator()(const Sequence &sequence, const list &... tail) {
-        std::vector<Sequence *> allSequences{&InvocationUtils::remove_const(sequence),
-                                             &InvocationUtils::remove_const(tail)...};
+        std::vector<Sequence *> allSequences {&InvocationUtils::remove_const(sequence),
+                                              &InvocationUtils::remove_const(tail)...};
 
         std::vector<ActualInvocationsSource *> involvedSources;
         InvocationUtils::collectInvolvedMocks(allSequences, involvedSources);
 
-        InvocationsSourceProxy aggregateInvocationsSource{new AggregateInvocationsSource(involvedSources)};
-        InvocationsSourceProxy unverifiedInvocationsSource{
+        InvocationsSourceProxy aggregateInvocationsSource {new AggregateInvocationsSource(involvedSources)};
+        InvocationsSourceProxy unverifiedInvocationsSource {
             new UnverifiedInvocationsSource(aggregateInvocationsSource)};
 
         UsingProgress usingProgress(_fakeit, unverifiedInvocationsSource);
@@ -9072,10 +9064,10 @@ class UnverifiedFunctor {
 
     template<typename ... list>
     UnverifiedInvocationsSource operator()(const ActualInvocationsSource &head, const list &... tail) {
-        std::vector<ActualInvocationsSource *> allMocks{&InvocationUtils::remove_const(head),
-                                                        &InvocationUtils::remove_const(tail)...};
-        InvocationsSourceProxy aggregateInvocationsSource{new AggregateInvocationsSource(allMocks)};
-        UnverifiedInvocationsSource unverifiedInvocationsSource{aggregateInvocationsSource};
+        std::vector<ActualInvocationsSource *> allMocks {&InvocationUtils::remove_const(head),
+                                                         &InvocationUtils::remove_const(tail)...};
+        InvocationsSourceProxy aggregateInvocationsSource {new AggregateInvocationsSource(allMocks)};
+        UnverifiedInvocationsSource unverifiedInvocationsSource {aggregateInvocationsSource};
         return unverifiedInvocationsSource;
     }
 

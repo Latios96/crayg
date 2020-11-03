@@ -49,9 +49,9 @@ bool TestContext::operator!=(const TestContext &rhs) const {
     return !(rhs == *this);
 }
 std::ostream &operator<<(std::ostream &os, const TestContext &context) {
-  os << "outputFolder: " << context.outputFolder << " referenceFolder: " << context.referenceFolder
-     << " imageOutputName: " << context.imageOutputName << " imageOutputSet: " << context.imageOutputSet;
-  return os;
+    os << "outputFolder: " << context.outputFolder << " referenceFolder: " << context.referenceFolder
+       << " imageOutputName: " << context.imageOutputName << " imageOutputSet: " << context.imageOutputSet;
+    return os;
 }
 
 

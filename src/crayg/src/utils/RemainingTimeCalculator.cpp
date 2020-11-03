@@ -4,7 +4,7 @@
 
 #include "RemainingTimeCalculator.h"
 
-RemainingTimeCalculator::RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime) : startTime{
+RemainingTimeCalculator::RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime) : startTime {
     startTime} {
 
 }
@@ -24,4 +24,4 @@ float RemainingTimeCalculator::getRemainingTimeByProgress(int progress) {
         return secondsPerPercent * (100 - progress);
     }
 }
-RemainingTimeCalculator::RemainingTimeCalculator()= default;
+RemainingTimeCalculator::RemainingTimeCalculator() = default;

@@ -6,7 +6,6 @@ TEST_CASE("TestTestPatternStringParser") {
     SECTION("parse") {
         REQUIRE(TestPatternStringParser("").parse() == std::vector<TestPattern>());
 
-
         REQUIRE(TestPatternStringParser("myAwesomeTest").parse()
                     == std::vector<TestPattern> {TestPattern("myAwesomeTest")});
 

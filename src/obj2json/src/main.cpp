@@ -38,7 +38,7 @@ int main() {
 
     // copy points to mesh
     for (int i = 0; i < attrib.vertices.size() / 3; i++) {
-        float x = attrib.vertices[i * 3]-3;
+        float x = attrib.vertices[i * 3] - 3;
         float y = attrib.vertices[i * 3 + 1];
         float z = attrib.vertices[i * 3 + 2];
         mesh->points.emplace_back(x, y, z);

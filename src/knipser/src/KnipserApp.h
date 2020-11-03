@@ -22,7 +22,8 @@ struct ExitMessage {
 
 class KnipserApp {
  public:
-    KnipserApp(int argc, char **argv, TestRegistry &testRegistry) : argc(argc), argv(argv), testRegistry(testRegistry) {}
+    KnipserApp(int argc, char **argv, TestRegistry &testRegistry)
+        : argc(argc), argv(argv), testRegistry(testRegistry) {}
 
     ExitMessage execute();
 

@@ -19,7 +19,8 @@ TEST_CASE("passing test should generate passing result", "[TestRunner]") {
     REQUIRE(testResults[0].test == passingTest);
     REQUIRE(testResults[0].isPassed());
     REQUIRE(testResults[0].message.empty());
-    REQUIRE(testResults[0].testContext == TestContext(withOsSeperators("demo/passing test"), withOsSeperators("demoReference/passing test")));
+    REQUIRE(testResults[0].testContext
+                == TestContext(withOsSeperators("demo/passing test"), withOsSeperators("demoReference/passing test")));
 }
 
 TEST_CASE("failing test should generate failing result with message", "[TestRunner]") {
@@ -37,7 +38,8 @@ TEST_CASE("failing test should generate failing result with message", "[TestRunn
     REQUIRE(testResults[0].test == failingTest);
     REQUIRE(testResults[0].isFailed());
     REQUIRE(testResults[0].message != "");
-    REQUIRE(testResults[0].testContext == TestContext(withOsSeperators("demo/failing test"), withOsSeperators("demoReference/failing test")));
+    REQUIRE(testResults[0].testContext
+                == TestContext(withOsSeperators("demo/failing test"), withOsSeperators("demoReference/failing test")));
 }
 
 TEST_CASE("TestRunner should execute test based on predicate", "[TestRunner]") {

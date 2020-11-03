@@ -6,7 +6,7 @@
 #define CRAYG_TESTRESULT_H
 
 #include "KnipserTest.h"
-enum TestResultState{
+enum TestResultState {
     FAILED, PASSED, SKIPPED
 };
 struct TestResult {

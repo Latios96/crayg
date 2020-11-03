@@ -36,7 +36,7 @@ std::string PlainReportGenerator::getTestResultString(const TestResult &result, 
 
     return fmt::format("{}{} : {}",
                        result.test.name,
-                       std::string(missingSpacesCount,' '),
+                       std::string(missingSpacesCount, ' '),
                        messageString);
 }
 

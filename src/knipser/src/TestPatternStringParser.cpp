@@ -15,7 +15,7 @@ std::vector<TestPattern> TestPatternStringParser::parse() const {
     boost::algorithm::split(splitResults, parseString, boost::algorithm::is_any_of(","));
 
     std::vector<TestPattern> patterns;
-    for(auto& patternString : splitResults){
+    for (auto &patternString : splitResults) {
         patternString = boost::algorithm::trim_copy(patternString);
         if (!patternString.empty()) {
             patterns.emplace_back(patternString);

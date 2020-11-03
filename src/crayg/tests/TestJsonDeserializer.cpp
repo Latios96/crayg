@@ -19,15 +19,13 @@ TEST_CASE("JsonDeserializer") {
 
     SECTION("readFloatShouldReturn1.0") {
         REQUIRE(jsonDeserializer.readFloat("myFloat") == 1.0);
-    }
-    SECTION("readFloatShouldThrowException") {
+    }SECTION("readFloatShouldThrowException") {
         REQUIRE_THROWS_AS(jsonDeserializer.readFloat("myNotExistingFloat"), std::invalid_argument);
     }
 
     SECTION("readIntShouldReturn2") {
         REQUIRE(jsonDeserializer.readInt("myInt") == 2);
-    }
-    SECTION("readIntShouldThrowException") {
+    }SECTION("readIntShouldThrowException") {
         REQUIRE_THROWS_AS(jsonDeserializer.readInt("myNotExistingInt"), std::invalid_argument);
     }
 
@@ -45,8 +43,7 @@ TEST_CASE("JsonDeserializer") {
         REQUIRE(vector3fArray.size() == 2);
         REQUIRE(vector3fArray[0] == Vector3f(1, 2, 3));
         REQUIRE(vector3fArray[1] == Vector3f(4, 5, 6));
-    }
-    SECTION("readVector3fArrayShouldThrowException") {
+    }SECTION("readVector3fArrayShouldThrowException") {
         std::vector<Vector3f> vector3fArray;
         REQUIRE_THROWS_AS(jsonDeserializer.readVector3fArray("mvVectoeer3f", vector3fArray), std::invalid_argument);
     }

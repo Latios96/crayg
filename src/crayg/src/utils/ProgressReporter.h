@@ -25,7 +25,7 @@ class ProgressReporter {
     std::atomic<int> iterationsDone = {0};
  private:
     int maxIterations;
-    int progress=0;
+    int progress = 0;
     std::function<void(int, float)> progressionCallback;
     std::chrono::steady_clock::time_point startTime;
     RemainingTimeCalculator remainingTimeCalculator;

@@ -18,8 +18,8 @@ class Scene {
     Scene();
     Scene(const RenderSettings &renderSettings);
 
-    void addObject(const std::shared_ptr<SceneObject>& sceneObject);
-    void addLight(const std::shared_ptr<Light>& sceneObject);
+    void addObject(const std::shared_ptr<SceneObject> &sceneObject);
+    void addLight(const std::shared_ptr<Light> &sceneObject);
 
     std::vector<std::shared_ptr<SceneObject>> objects;
     std::vector<std::shared_ptr<Light>> lights;

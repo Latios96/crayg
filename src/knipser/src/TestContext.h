@@ -23,7 +23,7 @@ class TestContext {
 
     bool operator==(const TestContext &rhs) const;
     bool operator!=(const TestContext &rhs) const;
-  friend std::ostream &operator<<(std::ostream &os, const TestContext &context);
+    friend std::ostream &operator<<(std::ostream &os, const TestContext &context);
  private:
     const std::string outputFolder;
     const std::string referenceFolder;

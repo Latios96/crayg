@@ -29,8 +29,7 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
         LineByLineIterator<Image> otherIterator(19, 9, image);
 
         REQUIRE(iterator != otherIterator);
-    }
-    SECTION("testIterate") {
+    }SECTION("testIterate") {
         std::vector<PixelPosition> positions;
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {

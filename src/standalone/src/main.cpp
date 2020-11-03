@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     Image myImage(800, 600);
 
     Scene scene;
-    scene.renderSettings.resolution = Resolution(800,600);
+    scene.renderSettings.resolution = Resolution(800, 600);
     scene.renderSettings.maxSamples = 4;
 
     // read scene
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 
     ImageOutputDriver imageOutputDriver(myImage);
 
-    Renderer renderer(scene,imageOutputDriver);
+    Renderer renderer(scene, imageOutputDriver);
     renderer.renderScene();
 
     Logger::info("writing image..");

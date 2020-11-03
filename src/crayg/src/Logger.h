@@ -55,7 +55,7 @@ class Logger {
     template<typename T>
     static void critical(const T &msg);
 
-    static void initialize(){
+    static void initialize() {
         auto console = spdlog::stdout_color_mt("console");
     }
 };

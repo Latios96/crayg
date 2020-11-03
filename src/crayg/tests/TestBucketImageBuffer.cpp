@@ -11,7 +11,7 @@ struct ImageWrapper {
 TEST_CASE("BucketImageBuffer") {
 
     SECTION("shouldConstructCorrectly") {
-        BucketImageBuffer bucketImageBuffer(0,1,20,30);
+        BucketImageBuffer bucketImageBuffer(0, 1, 20, 30);
 
         REQUIRE(bucketImageBuffer.imageBucket.getX() == 0);
         REQUIRE(bucketImageBuffer.imageBucket.getY() == 1);

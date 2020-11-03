@@ -17,7 +17,7 @@ void BmpImageWriter::writeImage(const Image &image, const std::string imageName)
 
     auto *img = (unsigned char *) malloc(3 * width * height);
     memset(img, 0, sizeof(&img));
-    
+
     int x;
     int y;
     int r;
