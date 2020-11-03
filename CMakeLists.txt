@@ -20,23 +20,10 @@ endif ()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_run(REQUIRES
-        fmt/6.2.0
-        spdlog/1.6.0
-        rapidjson/1.1.0@bincrafters/stable
-        catch2/2.13.2
-        optional-lite/2.3.0@bincrafters/stable
-        cli11/1.6.1@bincrafters/stable
-        boost/1.72.0
-        openimageio/2.1.11.2@ppodsiadly/stable
-        tinyobjloader/1.0.6
-        tbb/2020.2
-        qt/5.15.1@bincrafters/stable
-        freetype/2.10.2
-        IMPORTS bin,*.dll->./bin lib,*.dylib*->./lib lib,*.so*->./lib
         BASIC_SETUP
         BUILD missing
-        OPTIONS openimageio:with_jpeg2000=False libtiff:jpeg=libjpeg-turbo qt:with_libjpeg=False qt:with_sqlite3=False qt:with_mysql=False harfbuzz:with_glib=False qt:with_glib=False qt:qtmultimedia=False
         KEEP_RPATHS
+        SETTINGS arch=x86_64
         )
 
 
