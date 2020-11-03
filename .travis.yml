@@ -1,6 +1,4 @@
-cache:
-  directories:
-    - ~/.conan/
+
 addons:
   apt:
     sources:
@@ -42,9 +40,13 @@ matrix:
         - pip3 install conan
 
 script:
+  - conan remote list
+  - python scripts/add_conan_remotes.py
+  - conan remote list
+  - conan user ci_github_actions -p -r=framebffr
+  - conan install . --build missing
+  - conan upload * --all --confirm -r=framebffr --parallel
   - cmake --version
-  - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan -f
-  - conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan -f
   - rm -rf build/
   - mkdir build
   - cd build
