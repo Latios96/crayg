@@ -29,3 +29,4 @@ lib,*.so*->./lib
 
 [generators]
 cmake
+qt
