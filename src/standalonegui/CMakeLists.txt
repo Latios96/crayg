@@ -1,6 +1,6 @@
 
 
-configure_file(${CMAKE_BINARY_DIR}/qt.conf ${CMAKE_BINARY_DIR}/bin COPYONLY)
+configure_file(${CMAKE_BINARY_DIR}/qt.conf ${CMAKE_BINARY_DIR}/bin/qt.conf COPYONLY)
 
 find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
@@ -16,8 +16,8 @@ target_include_directories(crayg-framebuffer PUBLIC
 target_link_libraries(crayg-framebuffer Qt5::Core Qt5::Widgets ${CONAN_LIBS})
 
 
-add_executable(standalone_gui
+add_executable(standalone-gui
         main.cpp
         FrameBufferWidget.h
         FrameBufferWidget.cpp)
-target_link_libraries(standalone_gui Qt5::Core Qt5::Widgets ${CONAN_LIBS})
+target_link_libraries(standalone-gui crayg-framebuffer Qt5::Core Qt5::Widgets ${CONAN_LIBS})
