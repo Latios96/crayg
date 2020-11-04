@@ -1,5 +1,7 @@
 # crayg
 [![Build Status](https://travis-ci.com/Latios96/crayg.svg?token=fvycq6PG6anYyQZpnfAt&branch=master)](https://travis-ci.com/Latios96/crayg)
+[![Build Status](https://github.com/Latios96/crayg/workflows/Github%20Actions%20CI/badge.svg)](https://github.com/Latios96/crayg/workflows/ccpp/badge.svg)
+
 
 Personal Raytracer project to get familiar with C++ in general and how to do CI and TDD in C++.
 
