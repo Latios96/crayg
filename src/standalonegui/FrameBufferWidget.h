@@ -13,17 +13,19 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <iostream>
+#include "ImageWidget.h"
 
 class FrameBufferWidget : public QWidget {
  Q_OBJECT
  public:
-    explicit FrameBufferWidget(QWidget *parent = nullptr) : QWidget(parent) {
+    explicit FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr)
+        : QWidget(parent), imageWidget(imageWidget) {
         setupUI();
     }
     ~FrameBufferWidget() override = default;
  private:
     void setupUI();
-    QImage image;
+    ImageWidget &imageWidget;
 };
 
 #endif //CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_

@@ -25,7 +25,7 @@ void Renderer::renderScene() {
 
     Logger::info("Starting rendering..");
 
-    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, 20);
+    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, 60);
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(bucketSequence.size(),
                                                                                 "Rendering done by {}%, estimated time remaining: {}s");
 

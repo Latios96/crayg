@@ -3,15 +3,10 @@
 //
 
 #include "FrameBufferWidget.h"
+#include "ImageWidget.h"
 void FrameBufferWidget::setupUI() {
-    image = QImage(1920, 1080, QImage::Format_RGB16);
-    image.load("M:/Pictures/inspiration/220_fightoutside.png");
-
-    auto qLabel = new QLabel();
-    qLabel->setPixmap(QPixmap::fromImage(image));
-
     auto scrollArea = new QScrollArea();
-    scrollArea->setWidget(qLabel);
+    scrollArea->setWidget(&imageWidget);
     scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     auto layout = new QVBoxLayout();
     layout->addWidget(scrollArea);
@@ -19,11 +14,11 @@ void FrameBufferWidget::setupUI() {
 
     const QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
 
-    if (image.size().width() > availableSize.width() - 100 &&
-        image.size().height() > availableSize.height() - 100) {
+    if (imageWidget.size().width() > availableSize.width() - 100 &&
+        imageWidget.size().height() > availableSize.height() - 100) {
         resize(availableSize * 3.0f / 5.0f);
     } else {
-        resize(QSize(image.size().width() + 40, image.size().height() + 40));
+        resize(QSize(imageWidget.size().width() + 40, imageWidget.size().height() + 40));
     }
 
 }
