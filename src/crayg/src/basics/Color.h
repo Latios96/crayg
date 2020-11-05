@@ -41,39 +41,39 @@ class Color {
      * @param otherColor
      * @return
      */
-    Color operator+(const Color &otherColor);
+    Color operator+(const Color &otherColor) const;
     /**
      * Adds the given float to all components of this color
      * @param value value to add to all components
      * @return new color with all components increased by value
      */
-    Color operator+(float value);
+    Color operator+(float value) const;
     /**
      * Subtracts the two colors component-wise, r-r, g-g, b-b
      * @param otherColor
      * @return
      */
-    Color operator-(const Color &otherColor);
+    Color operator-(const Color &otherColor) const;
     /**
      * Multiplies the two colors component-wise, r*r, g*g, b*b
      * @param otherColor
      * @return
      */
-    Color operator*(const Color &otherColor);
+    Color operator*(const Color &otherColor) const;
 
     /**
      * Multiplies every Component with the given scalar and returns a new color value.
      * @param otherColor
      * @return
      */
-    Color operator*(float scalar);
+    Color operator*(float scalar) const;
 
     /**
      * Divides every Component with the given scalar and returns a new color value.
      * @param otherColor
      * @return
      */
-    Color operator/(float scalar);
+    Color operator/(float scalar) const;
 
     /**
      * Two colors are equal if their r,g,b components are equal
@@ -87,12 +87,12 @@ class Color {
      * Clamps the color components to 1
      * @return
      */
-    Color clamp();
+    Color clamp() const;
     /**
      * Returns the color components as int between 0-255. If float components are larger than 1, they are clamped.
      * @return
      */
-    std::tuple<int, int, int> getRgbValues();
+    std::tuple<int, int, int> getRgbValues() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Color &color);
 

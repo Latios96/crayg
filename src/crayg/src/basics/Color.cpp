@@ -24,27 +24,27 @@ Color::Color() {
 
 Color::Color(float r, float g, float b) : r(r), g(g), b(b) {}
 
-Color Color::operator+(const Color &otherColor) {
+Color Color::operator+(const Color &otherColor) const {
     return {r + otherColor.r, g + otherColor.g, b + otherColor.b};
 }
 
-Color Color::operator-(const Color &otherColor) {
+Color Color::operator-(const Color &otherColor) const {
     return {r - otherColor.r, g - otherColor.g, b - otherColor.b};
 }
 
-Color Color::operator*(const Color &otherColor) {
+Color Color::operator*(const Color &otherColor) const {
     return {r * otherColor.r, g * otherColor.g, b * otherColor.b};
 }
 
-Color Color::operator*(float scalar) {
+Color Color::operator*(float scalar) const {
     return {r * scalar, g * scalar, b * scalar};
 }
 
-Color Color::clamp() {
+Color Color::clamp() const {
     return {std::min(1.0f, r), std::min(1.0f, g), std::min(1.0f, b)};
 }
 
-std::tuple<int, int, int> Color::getRgbValues() {
+std::tuple<int, int, int> Color::getRgbValues() const {
     int int_r = static_cast<int>(r * 255);
     int int_g = static_cast<int>(g * 255);
     int int_b = static_cast<int>(b * 255);
@@ -59,10 +59,10 @@ bool Color::operator!=(const Color &color) const {
     return !(r == color.r && g == color.g && b == color.b);
 }
 
-Color Color::operator+(float value) {
+Color Color::operator+(float value) const {
     return {r + value, g + value, b + value};
 }
-Color Color::operator/(float scalar) {
+Color Color::operator/(float scalar) const {
     return {r / scalar, g / scalar, b / scalar};
 }
 
