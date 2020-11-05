@@ -7,19 +7,19 @@ set(CRAYG_STANDALONE_LIB_SRCS
 set(Main_Executable_SRCS
         main.cpp)
 
-add_library(Main_Lib STATIC ${CRAYG_STANDALONE_LIB_SRCS})
+add_library(${CRAYG_STANDALONE_LIB} STATIC ${CRAYG_STANDALONE_LIB_SRCS})
 
 add_executable(crayg-standalone
         ${Main_Executable_SRCS})
 
 
 target_link_libraries(crayg-standalone
-        Main_Lib)
+        ${CRAYG_STANDALONE_LIB})
 
-target_link_libraries(Main_Lib
+target_link_libraries(${CRAYG_STANDALONE_LIB}
         crayg)
 
-target_include_directories(Main_Lib PUBLIC
+target_include_directories(${CRAYG_STANDALONE_LIB} PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         )
 

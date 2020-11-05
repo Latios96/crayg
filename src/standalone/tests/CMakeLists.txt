@@ -5,7 +5,7 @@ add_executable(${CRAYG_STANDALONE_TESTS}
         TestArgsParsing.cpp)
 
 target_link_libraries(${CRAYG_STANDALONE_TESTS}
-        Main_Lib)
+        crayg-standalone-lib)
 
 add_test(
         NAME ${CRAYG_STANDALONE_TESTS}
