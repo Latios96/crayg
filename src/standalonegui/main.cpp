@@ -43,14 +43,14 @@ int main(int argc, char **argv) {
 
     Renderer renderer(scene, imageWidgetOutputDriver);
 
-    std::thread t1([&renderer, &myImage, &parseResult]() {
+    std::thread renderThread([&renderer, &myImage, &parseResult]() {
         renderer.renderScene();
 
         Logger::info("writing image..");
         ImageWriters::writeImage(myImage, parseResult.args->imageOutputPath);
         Logger::info("writing image done.");
     });
-    t1.detach();
+    renderThread.detach();
 
     return QApplication::exec();
 }
