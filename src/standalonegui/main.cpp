@@ -11,6 +11,7 @@
 #include "Logger.h"
 #include "ImageWidgetOutputDriver.h"
 #include "CraygInfo.h"
+#include <thread>
 
 
 int main(int argc, char **argv) {
