@@ -24,4 +24,4 @@ target_link_libraries(crayg-framebuffer crayg Qt5::Core Qt5::Widgets ${CONAN_LIB
 
 add_executable(standalone-gui
         main.cpp)
-target_link_libraries(standalone-gui crayg-framebuffer Main_Lib Qt5::Core Qt5::Widgets ${CONAN_LIBS})
+target_link_libraries(standalone-gui crayg crayg-framebuffer Main_Lib Qt5::Core Qt5::Widgets ${CONAN_LIBS})

@@ -100,7 +100,10 @@ set(crayg_SRCS
         Logger.h
         Logger.cpp
         samplers/UnitSphereSampler.h
-        samplers/UnitSphereSampler.cpp)
+        samplers/UnitSphereSampler.cpp
+        CraygInfo.h
+        CraygInfo.cpp
+        )
 
 
 add_library(crayg STATIC

@@ -10,8 +10,8 @@
 #include "CliParser.h"
 #include "Logger.h"
 #include "ImageWidgetOutputDriver.h"
+#include "CraygInfo.h"
 
-const std::string VERSION = "1.4.0"; // todo move version to c
 
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    Logger::info("Crayg Renderer version {}", VERSION);
+    Logger::info("Crayg Renderer version {}", CraygInfo::VERSION);
 
     Scene scene;
 

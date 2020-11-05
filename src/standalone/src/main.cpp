@@ -2,11 +2,10 @@
 #include <image/ImageWriter.h>
 #include <Renderer.h>
 #include <image/ImageWriters.h>
+#include <CraygInfo.h>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
 #include "Logger.h"
-
-const std::string VERSION = "1.4.0"; // todo move version to c
 
 int main(int argc, char *argv[]) {
     Logger::initialize();
@@ -18,7 +17,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    Logger::info("Crayg Renderer version {}", VERSION);
+    Logger::info("Crayg Renderer version {}", CraygInfo::VERSION);
 
     Image myImage(800, 600);
 
