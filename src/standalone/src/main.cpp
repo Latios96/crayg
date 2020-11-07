@@ -19,16 +19,13 @@ int main(int argc, char *argv[]) {
 
     Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
 
-    Image myImage(800, 600);
-
     Scene scene;
-    scene.renderSettings.resolution = Resolution(800, 600);
-    scene.renderSettings.maxSamples = 4;
 
-    // read scene
     std::string scenePath = parseResult.args->scenePath;
     auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
     sceneReader->read();
+
+    Image myImage(scene.renderSettings.resolution);
 
     ImageOutputDriver imageOutputDriver(myImage);
 
