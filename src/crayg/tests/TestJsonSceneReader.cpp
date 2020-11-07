@@ -116,6 +116,12 @@ TEST_CASE("JsonSceneReader") {
     remove("SCENE_OBJECTS_IS_NOT_ARRAY.json");
     remove("NO_RENDER_SETTINGS.json");
     remove("CORRECT_SCENE.json");
+}
 
+TEST_CASE("JsonSceneReader not existing file should throw") {
+    Scene scene;
+    JsonSceneReader jsonSceneReader("aer.json", scene);
+
+    REQUIRE_THROWS_AS(jsonSceneReader.read(), std::runtime_error);
 }
 

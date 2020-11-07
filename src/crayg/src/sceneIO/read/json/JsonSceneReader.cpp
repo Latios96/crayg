@@ -7,6 +7,8 @@
 #include <rapidjson/document.h>
 #include <fstream>
 #include <scene/PointCloud.h>
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem.hpp>
 #include "JsonDeserializer.h"
 #include "utils/StopWatch.h"
 #include "scene/Light.h"
@@ -98,6 +100,10 @@ DocumentValidationResult documentHasMandatoryMembers(rapidjson::Document &d) {
 }
 
 void JsonSceneReader::read() {
+    boost::filesystem::path boostPath(path);
+    if (!boost::filesystem::exists(boostPath)) {
+        throw std::runtime_error(fmt::format("Could not read scene \"{}\", file does not exist!", path));
+    }
     StopWatch stopwatch = StopWatch::createStopWatch("Scene reading");
     Logger::info("Reading scene {}", path);
 
