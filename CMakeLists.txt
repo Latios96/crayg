@@ -26,7 +26,17 @@ conan_cmake_run(CONANFILE conanfile.txt
 
 add_subdirectory(src)
 
+execute_process(
+        COMMAND git describe --tags
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_COMMIT_HASH
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+)
 
+add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
+
+
+# Create distribution target
 set(CRAYG_EXECUTABLE_EXTENSION "")
 if (WIN32)
     set(CRAYG_EXECUTABLE_EXTENSION .exe)
@@ -46,5 +56,6 @@ set(CRAYG_PACKAGE_CONTENTS ${CRAYG_EXECUTABLES} ${CRAYG_LIBS_TO_PACKAGE} bin/qt.
 
 
 add_custom_target(createDistribution
-        COMMAND tar -czvf "crayg-${CRAYG_ARCHITECTURE}.tar.gz" -C ${CMAKE_BINARY_DIR} ${CRAYG_PACKAGE_CONTENTS}
+        COMMAND tar -czvf "crayg-${GIT_COMMIT_HASH}-${CRAYG_ARCHITECTURE}.tar.gz" -C ${CMAKE_BINARY_DIR} ${CRAYG_PACKAGE_CONTENTS}
         DEPENDS crayg crayg-standalone standalone-gui obj2json)
+
