@@ -26,6 +26,7 @@ conan_cmake_run(CONANFILE conanfile.txt
 
 add_subdirectory(src)
 
+
 set(CRAYG_EXECUTABLE_EXTENSION "")
 if (WIN32)
     set(CRAYG_EXECUTABLE_EXTENSION .exe)
@@ -41,9 +42,9 @@ if (APPLE)
 endif ()
 set(CRAYG_EXECUTABLES bin/crayg-standalone${CRAYG_EXECUTABLE_EXTENSION} bin/standalone-gui${CRAYG_EXECUTABLE_EXTENSION} bin/obj2json${CRAYG_EXECUTABLE_EXTENSION})
 set(CRAYG_LIBS_TO_PACKAGE bin/*.dll)
-set(CRAYG_PACKAGE_CONTENTS ${CRAYG_EXECUTABLES} ${CRAYG_LIBS_TO_PACKAGE} bin/qt.conf)
+set(CRAYG_PACKAGE_CONTENTS ${CRAYG_EXECUTABLES} ${CRAYG_LIBS_TO_PACKAGE} bin/qt.conf bin/plugins)
 
 
-add_custom_target(createZip
+add_custom_target(createDistribution
         COMMAND tar -czvf "crayg-${CRAYG_ARCHITECTURE}.tar.gz" -C ${CMAKE_BINARY_DIR} ${CRAYG_PACKAGE_CONTENTS}
         DEPENDS crayg crayg-standalone standalone-gui obj2json)
