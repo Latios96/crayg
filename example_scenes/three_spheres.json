@@ -64,8 +64,8 @@
         "type": "Camera"
     },
     "RenderSettings": {
-        "width": 800,
-        "height": 600,
-        "maxSamples": 4
+        "width": 1600,
+        "height": 1200,
+        "maxSamples": 8
     }
 }

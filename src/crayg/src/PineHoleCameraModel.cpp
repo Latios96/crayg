@@ -12,7 +12,7 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
     imageRatio = static_cast<float>(imageWidth) / static_cast<float>(imageHeight);
 
     // create view vector
-    viewVector = camera.getCenterOfInterest().substract(camera.getPosition()).normalize();
+    viewVector = camera.getCenterOfInterest() - (camera.getPosition()).normalize();
 
     // create site vector
     sideVector = viewVector.crossProduct(camera.getUserUpVector()).normalize();
@@ -26,16 +26,16 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
     imagePlaneWidth = imageRatio * imagePlaneHeight;
 
     // should have length of image plane
-    sideVector = sideVector.multiplyScalar(imagePlaneWidth / 2.0f);
+    sideVector = sideVector * (imagePlaneWidth / 2.0f);
     // upVector should have length of imagePlane
-    upVector = upVector.multiplyScalar(imagePlaneHeight / 2.0f);
+    upVector = upVector * (imagePlaneHeight / 2.0f);
 
-    planeCenter = camera.getPosition().add(viewVector);
+    planeCenter = camera.getPosition() + (viewVector);
 }
 
 Ray PineHoleCameraModel::createPrimaryRay(float x, float y) {
     Vector3f pixelCenter = getPixelCenter(x, y);
-    Vector3f rayDirection = pixelCenter.substract(camera.getPosition()).normalize();
+    Vector3f rayDirection = (pixelCenter - camera.getPosition()).normalize();
     return {camera.getPosition(), rayDirection};
 }
 
@@ -49,5 +49,5 @@ Vector3f PineHoleCameraModel::getPixelCenter(float x, float y) {
     float wScale = 2.0f * (x + 0.5f) / static_cast<float>(imageWidth) - 1.0f;
     float hScale = 2.0f * (y + 0.5f) / static_cast<float>(imageHeight) - 1.0f;
 
-    return planeCenter.add(sideVector.multiplyScalar(wScale)).add(upVector.multiplyScalar(hScale));
+    return planeCenter + (sideVector * (wScale))+(upVector*hScale);
 }
