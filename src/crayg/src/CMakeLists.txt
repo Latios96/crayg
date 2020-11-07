@@ -1,9 +1,6 @@
 set(crayg_SRCS
-        basics/Vector3fNaiveImpl.h
-        basics/Vector3fNaiveImpl.cpp
-        basics/Vector3fSimdImpl.h
-        basics/Vector3fSimdImpl.cpp
         basics/Vector3f.h
+        basics/Vector3f.cpp
         basics/Resolution.h
         basics/Resolution.cpp
         image/Image.h

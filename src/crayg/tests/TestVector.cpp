@@ -6,7 +6,7 @@ TEST_CASE("addTwoVectors", "[Vector]") {
     Vector3f myVector(1, 1, 1);
     Vector3f otherVector(1, 2, 3);
 
-    Vector3f result = myVector + otherVector;
+    Vector3f result = myVector.add(otherVector);
 
     REQUIRE(result.x == 2);
     REQUIRE(result.y == 3);
@@ -28,7 +28,7 @@ TEST_CASE("subtractTwoVectors", "[Vector]") {
     Vector3f myVector(1, 1, 1);
     Vector3f otherVector(1, 2, 3);
 
-    Vector3f result = myVector - otherVector;
+    Vector3f result = myVector.substract(otherVector);
 
     REQUIRE(result.x == 0);
     REQUIRE(result.y == -1);
@@ -54,7 +54,7 @@ TEST_CASE("length", "[Vector]") {
 
 TEST_CASE("multiplyScalar", "[Vector]") {
     Vector3f myVector(5, 6, 8);
-    Vector3f result = myVector * 5;
+    Vector3f result = myVector.multiplyScalar(5);
 
     REQUIRE(result.x == 25);
     REQUIRE(result.y == 30);
@@ -91,7 +91,7 @@ TEST_CASE("invert", "[Vector]") {
 TEST_CASE("crossProduct", "[Vector]") {
     Vector3f myVector(1, 2, 3);
     Vector3f otherVector(1, 5, 7);
-    Vector3f result = myVector * (otherVector);
+    Vector3f result = myVector.crossProduct(otherVector);
 
     REQUIRE(result.x == -1);
     REQUIRE(result.y == -4);
