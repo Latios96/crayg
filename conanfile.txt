@@ -5,12 +5,13 @@ rapidjson/1.1.0@bincrafters/stable
 catch2/2.13.2
 optional-lite/2.3.0@bincrafters/stable
 cli11/1.6.1@bincrafters/stable
-boost/1.72.0
+boost/1.70.0
 openimageio/2.1.11.2@ppodsiadly/stable
 tinyobjloader/1.0.6
 tbb/2020.2
 qt/5.15.1@bincrafters/stable
 freetype/2.10.2
+USD/20.08@latios96/stable
 
 [options]
 openimageio:with_jpeg2000=False
@@ -21,11 +22,13 @@ qt:with_mysql=False
 harfbuzz:with_glib=False
 qt:with_glib=False
 qt:qtmultimedia=False
+USD:with_imaging=False
 
 [imports]
 bin,*.dll->./bin
 lib,*.dylib*->./lib
 lib,*.so*->./lib
+lib,usd*->./bin
 
 [generators]
 cmake
