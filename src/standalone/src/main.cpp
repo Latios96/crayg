@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    Logger::info("Crayg Renderer version {}", CraygInfo::VERSION);
+    Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
 
     Image myImage(800, 600);
 

@@ -11,6 +11,15 @@ enable_testing()
 
 unset(ENV{CI})
 
+execute_process(
+        COMMAND git describe --tags
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_COMMIT_HASH
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
+
 if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
     file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
@@ -25,16 +34,6 @@ conan_cmake_run(CONANFILE conanfile.txt
         KEEP_RPATHS)
 
 add_subdirectory(src)
-
-execute_process(
-        COMMAND git describe --tags
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        OUTPUT_VARIABLE GIT_COMMIT_HASH
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-
-add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
-
 
 # Create distribution target
 set(CRAYG_EXECUTABLE_EXTENSION "")
