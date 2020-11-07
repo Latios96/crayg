@@ -34,9 +34,10 @@ class Renderer {
 
     void init();
     Color renderSample(float x, float y);
-    void renderSerial(ProgressReporter &reporter);
+    void renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
     void renderParallel(ProgressReporter &reporter,
                         const std::vector<ImageBucket> &bucketSequence);
+    void renderBucket(const ImageBucket &imageBucket);
 };
 
 #endif //CRAYG_RENDERER_H

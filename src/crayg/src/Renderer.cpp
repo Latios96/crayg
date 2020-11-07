@@ -31,7 +31,7 @@ void Renderer::renderScene() {
 
     bool serialRendering = false;
     if (serialRendering) {
-        renderSerial(reporter);
+        renderSerial(reporter, bucketSequence);
     } else {
         renderParallel(reporter, bucketSequence);
     }
@@ -46,23 +46,26 @@ void Renderer::renderParallel(ProgressReporter &reporter,
                       bucketSequence.size(),
                       [this, &reporter, &bucketSequence](int i) {
                           ImageBucket imageBucket = bucketSequence[i];
-                          BucketImageBuffer bucketImageBuffer(imageBucket);
-                          outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
-
-                          for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
-                              Color pixelColor =
-                                  renderPixel(PixelPosition(imageBucket.getX() + pixel.x,
-                                                            imageBucket.getY() + pixel.y));
-                              bucketImageBuffer.image.setValue(pixel.x, pixel.y, pixelColor);
-                          }
-                          outputDriver.writeBucketImageBuffer(bucketImageBuffer);
+                          renderBucket(imageBucket);
                           reporter.iterationDone();
                       });
 }
+void Renderer::renderBucket(const ImageBucket &imageBucket) {
+    BucketImageBuffer bucketImageBuffer(imageBucket);
+    outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
-void Renderer::renderSerial(ProgressReporter &reporter) {
-    for (auto pixel : ImageIterators::lineByLine(scene.renderSettings.resolution)) {
-        renderPixel(pixel);
+    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+        Color pixelColor =
+            renderPixel(PixelPosition(imageBucket.getX() + pixel.x,
+                                      imageBucket.getY() + pixel.y));
+        bucketImageBuffer.image.setValue(pixel.x, pixel.y, pixelColor);
+    }
+    outputDriver.writeBucketImageBuffer(bucketImageBuffer);
+}
+
+void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence) {
+    for (auto &imageBucket: bucketSequence) {
+        renderBucket(imageBucket);
         reporter.iterationDone();
     }
 }
