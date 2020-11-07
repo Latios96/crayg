@@ -25,16 +25,16 @@ jobs:
       run: conan user ci_github_actions -p -r=framebffr
       env:
         CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
-    - name: build dependencies
-      run: conan install . --build missing
-    - name: upload dependencies
-      run: conan upload * --all --confirm -r=framebffr --parallel
-    - name: prepare build
-      run: mkdir build
-    - name: run CMake
-      working-directory: build
-      run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 Win64"
-      shell: cmd
+      - name: build dependencies
+        run: conan install . --build missing
+      - name: upload dependencies
+        run: conan upload * --all --confirm -r=framebffr --parallel
+      - name: prepare build
+        run: mkdir build
+      - name: run CMake
+        working-directory: build
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 Win64"
+        shell: cmd
       - name: build
         working-directory: build
         run: cmake --build . --config Release
