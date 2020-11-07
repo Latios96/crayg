@@ -7,7 +7,7 @@ jobs:
     name:  windows-2016
     runs-on:  windows-2016
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
@@ -35,11 +35,15 @@ jobs:
       working-directory: build
       run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 Win64"
       shell: cmd
-    - name: build
-      working-directory: build
-      run : cmake --build . --config Release
-      shell: cmd
-    - name: run tests
-      working-directory: build
-      run: ctest -C Release -V
-      shell: cmd
+      - name: build
+        working-directory: build
+        run: cmake --build . --config Release
+        shell: cmd
+      - name: run tests
+        working-directory: build
+        run: ctest -C Release -V
+        shell: cmd
+      - name: create package
+        working-directory: build
+        run: cmake --build . --config Release --target createDistribution
+        shell: cmd
