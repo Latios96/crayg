@@ -8,6 +8,6 @@
 #include "Vector3fSimdImpl.h"
 #include "Vector3fNaiveImpl.h"
 
-using Vector3f = Vector3fNaiveImpl;
+using Vector3f = Vector3fSimdImpl;
 
 #endif //CRAYG_VECTOR3F_H
