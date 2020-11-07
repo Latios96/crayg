@@ -51,7 +51,7 @@ if (APPLE)
 endif ()
 set(CRAYG_EXECUTABLES bin/crayg-standalone${CRAYG_EXECUTABLE_EXTENSION} bin/standalone-gui${CRAYG_EXECUTABLE_EXTENSION} bin/obj2json${CRAYG_EXECUTABLE_EXTENSION})
 set(CRAYG_LIBS_TO_PACKAGE bin/*.dll)
-set(CRAYG_PACKAGE_CONTENTS ${CRAYG_EXECUTABLES} ${CRAYG_LIBS_TO_PACKAGE} bin/qt.conf bin/plugins)
+set(CRAYG_PACKAGE_CONTENTS ${CRAYG_EXECUTABLES} ${CRAYG_LIBS_TO_PACKAGE} bin/plugins)
 
 
 add_custom_target(createDistribution
