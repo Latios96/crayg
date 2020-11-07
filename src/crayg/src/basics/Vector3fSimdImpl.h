@@ -128,7 +128,7 @@ _MM_ALIGN16 class Vector3fSimdImpl
         struct { float x, y, z; };
         __m128 mmvalue;
     };
-    bool Vector3fSimdImpl::isValid() const {
+    bool isValid() const {
         auto max = std::numeric_limits<float>::max();
         return x != max && y != max && z != max;
     }
