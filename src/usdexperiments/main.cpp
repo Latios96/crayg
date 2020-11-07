@@ -8,7 +8,6 @@
 #include <iostream>
 
 int main() {
-    //pxr::SdfLayerRefPtr rootLayer = pxr::SdfLayer::FindOrOpen("N:\\Archiv\\2017\\The_Cement_Mixer\\Assets\\Prop\\Cement_Mixer\\Cement_Mixer_Maya\\Cement_Mixer_test.usd");
     auto stage = pxr::UsdStage::Open(
         R"(N:\Archiv\2017\The_Cement_Mixer\Assets\Prop\Cement_Mixer\Cement_Mixer_Maya\Cement_Mixer_test.usd)",
         pxr::UsdStage::LoadAll);
