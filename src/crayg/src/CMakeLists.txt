@@ -3,6 +3,8 @@ set(crayg_SRCS
         basics/Vector3f.cpp
         basics/Matrix4x4f.h
         basics/Matrix4x4f.cpp
+        basics/Transform.h
+        basics/Transform.cpp
         basics/Resolution.h
         basics/Resolution.cpp
         image/Image.h
