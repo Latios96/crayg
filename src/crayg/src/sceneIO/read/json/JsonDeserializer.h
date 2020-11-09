@@ -11,7 +11,7 @@
 class JsonDeserializer : public Deserializer {
  public:
     explicit JsonDeserializer(rapidjson::Value &jsonObject);
-
+    bool hasProperty(std::string name) override;
     int readInt(std::string name) override;
     float readFloat(std::string name) override;
     Vector3f readVector3f(std::string name) override;

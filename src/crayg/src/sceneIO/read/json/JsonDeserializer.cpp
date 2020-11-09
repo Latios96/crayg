@@ -68,3 +68,6 @@ void JsonDeserializer::readFloatArray(std::string name, std::vector<float> &targ
         throw std::invalid_argument(fmt::format("Could not read float Array with name '{}'", name));
     }
 }
+bool JsonDeserializer::hasProperty(std::string name) {
+    return jsonObject.HasMember(name.c_str());
+}

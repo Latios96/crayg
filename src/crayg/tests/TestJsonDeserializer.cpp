@@ -17,6 +17,14 @@ TEST_CASE("JsonDeserializer") {
     d.ParseStream(s);
     JsonDeserializer jsonDeserializer(d);
 
+    SECTION("hasPropertyShouldReturnTrue") {
+        REQUIRE(jsonDeserializer.hasProperty("myFloat"));
+    }
+
+    SECTION("hasPropertyShouldReturnFalse") {
+        REQUIRE_FALSE(jsonDeserializer.hasProperty("dtr"));
+    }
+
     SECTION("readFloatShouldReturn1.0") {
         REQUIRE(jsonDeserializer.readFloat("myFloat") == 1.0);
     }
