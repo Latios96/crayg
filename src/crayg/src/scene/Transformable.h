@@ -5,6 +5,7 @@
 #ifndef CRAYG_TRANSFORMABLE_H
 #define CRAYG_TRANSFORMABLE_H
 
+#include <basics/Transform.h>
 #include "basics/Vector3f.h"
 
 class Transformable {
@@ -18,6 +19,7 @@ class Transformable {
 
  private:
     Vector3f position;
+    Transform transform;
 };
 
 #endif //CRAYG_TRANSFORMABLE_H
