@@ -26,13 +26,13 @@ class Matrix4x4f {
                float v13,
                float v23,
                float v33);
-    float values[4][4] = {{1, 0, 0, 0},
-                          {0, 1, 0, 0},
-                          {0, 0, 1, 0},
-                          {0, 0, 0, 1}};
+    float values[4][4] = {1, 0, 0, 0,
+                          0, 1, 0, 0,
+                          0, 0, 1, 0,
+                          0, 0, 0, 1};
     friend std::ostream &operator<<(std::ostream &os, const Matrix4x4f &f);
 
-    Matrix4x4f operator*(const Vector3f &vec) const;
+    Matrix4x4f operator*(const Matrix4x4f &vec) const;
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_BASICS_MATRIX4X4F_H_
