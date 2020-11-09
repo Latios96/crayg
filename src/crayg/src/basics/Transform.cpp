@@ -33,4 +33,11 @@ Vector3f Transform::apply(const Vector3f &vector3f) {
     };
 
 }
+Transform Transform::fromPosition(const Vector3f &vector3f) {
+    Matrix4x4f matrix4X4f;
+    matrix4X4f.values[0][3] = vector3f.x;
+    matrix4X4f.values[1][3] = vector3f.y;
+    matrix4X4f.values[2][3] = vector3f.z;
+    return Transform(matrix4X4f);
+}
 

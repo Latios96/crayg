@@ -11,6 +11,12 @@ TEST_CASE("Transform Construction", "[Transform]") {
 
         REQUIRE(transform.matrix == Matrix4x4f());
     }
+
+    SECTION("should create from position") {
+        Transform transform = Transform::fromPosition({1, 2, 3});
+
+        REQUIRE(transform.apply({1, 2, 3}) == Vector3f(2, 4, 6));
+    }
 }
 
 TEST_CASE("apply to vector", "[Transform]") {

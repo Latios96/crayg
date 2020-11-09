@@ -10,13 +10,12 @@ class Transform {
  public:
     Transform();
     explicit Transform(const Matrix4x4f &matrix);
-    // point aka vec3
+    static Transform fromPosition(const Vector3f &vector3f);
     // normal
     // transform xyz
     // transform rotate xyz
     // scale xyz
     Vector3f apply(const Vector3f &vector3f);
-
     const Matrix4x4f matrix;
 };
 
