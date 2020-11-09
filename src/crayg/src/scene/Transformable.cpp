@@ -17,6 +17,7 @@ Vector3f Transformable::getPosition() const {
 
 void Transformable::setPosition(const Vector3f &position) {
     Transformable::position = position;
+    this->transform = Transform::fromPosition(position);
 }
 
 

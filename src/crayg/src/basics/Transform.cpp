@@ -52,5 +52,9 @@ bool Transform::operator==(const Transform &rhs) const {
 bool Transform::operator!=(const Transform &rhs) const {
     return !(rhs == *this);
 }
+Transform &Transform::operator=(const Transform &rhs) {
+    matrix = rhs.matrix;
+    return *this;
+}
 
 

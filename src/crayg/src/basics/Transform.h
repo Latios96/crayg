@@ -21,8 +21,9 @@ class Transform {
 
     bool operator==(const Transform &rhs) const;
     bool operator!=(const Transform &rhs) const;
+    Transform &operator=(const Transform &rhs);
 
-    const Matrix4x4f matrix;
+    Matrix4x4f matrix;
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
