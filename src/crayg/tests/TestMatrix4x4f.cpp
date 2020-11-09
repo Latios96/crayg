@@ -3,10 +3,11 @@
 //
 #include <catch2/catch.hpp>
 #include <basics/Matrix4x4f.h>
+#include <sstream>
 
-TEST_CASE("construction", "[Matrix4x4f]"){
+TEST_CASE("construction", "[Matrix4x4f]") {
 
-    SECTION("default constructor should create identity matrix"){
+    SECTION("default constructor should create identity matrix") {
         Matrix4x4f matrix4X4F;
 
         REQUIRE(matrix4X4F.values[0][0] == 1);
@@ -26,6 +27,13 @@ TEST_CASE("construction", "[Matrix4x4f]"){
         REQUIRE(matrix4X4F.values[2][3] == 0);
         REQUIRE(matrix4X4F.values[3][3] == 1);
     }
+}
+
+TEST_CASE("outstream", "[Matrix4x4f]") {
+    Matrix4x4f matrix4X4F;
+    std::stringstream ss;
+    ss << matrix4X4F;
+    REQUIRE("Matrix4x4f(values={1.0 0.0 0.0 0.0, 0.0 1.0 0.0 0.0, 0.0 0.0 1.0 0.0, 0.0 0.0 0.0 1.0})" == ss.str());
 }
 
 // equal
