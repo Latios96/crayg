@@ -6,6 +6,7 @@
 #include "Transform.h"
 Transform::Transform() = default;
 Transform::Transform(const Matrix4x4f &matrix) : matrix(matrix) {}
+Transform::Transform(const Transform &transform) = default;
 
 Transform Transform::fromPosition(const Vector3f &vector3f) {
     Matrix4x4f matrix4X4f;
@@ -45,4 +46,11 @@ Vector3f Transform::apply(const Vector3f &vector3f) const {
 Vector3f Transform::toPosition() const {
     return {matrix.values[0][3], matrix.values[1][3], matrix.values[2][3]};
 }
+bool Transform::operator==(const Transform &rhs) const {
+    return matrix == rhs.matrix;
+}
+bool Transform::operator!=(const Transform &rhs) const {
+    return !(rhs == *this);
+}
+
 

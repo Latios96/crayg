@@ -11,12 +11,16 @@ class Transform {
  public:
     Transform();
     explicit Transform(const Matrix4x4f &matrix);
+    Transform(const Transform &transform);
     static Transform fromPosition(const Vector3f &vector3f);
     // normal
     // transform rotate xyz
     // scale xyz
     Vector3f apply(const Vector3f &vector3f) const;
     Vector3f toPosition() const;
+
+    bool operator==(const Transform &rhs) const;
+    bool operator!=(const Transform &rhs) const;
 
     const Matrix4x4f matrix;
 };

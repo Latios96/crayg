@@ -17,6 +17,14 @@ TEST_CASE("Transform Construction", "[Transform]") {
 
         REQUIRE(transform.apply({1, 2, 3}) == Vector3f(2, 4, 6));
     }
+
+    SECTION("should copy") {
+        Transform transform = Transform::fromPosition({1, 2, 3});
+
+        Transform copy = transform;
+
+        REQUIRE(copy == transform);
+    }
 }
 
 TEST_CASE("apply transform to vector", "[Transform]") {
