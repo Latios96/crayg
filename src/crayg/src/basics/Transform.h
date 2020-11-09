@@ -15,7 +15,9 @@ class Transform {
     // normal
     // transform rotate xyz
     // scale xyz
-    Vector3f apply(const Vector3f &vector3f);
+    Vector3f apply(const Vector3f &vector3f) const;
+    Vector3f toPosition() const;
+
     const Matrix4x4f matrix;
 };
 

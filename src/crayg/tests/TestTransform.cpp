@@ -19,7 +19,7 @@ TEST_CASE("Transform Construction", "[Transform]") {
     }
 }
 
-TEST_CASE("apply to vector", "[Transform]") {
+TEST_CASE("apply transform to vector", "[Transform]") {
     SECTION("apply identiy matrix should not change") {
         Vector3f vector3f(1, 2, 3);
         Transform transform;
@@ -53,4 +53,11 @@ TEST_CASE("apply to vector", "[Transform]") {
         const Vector3f &f = transform.apply(vector3f);
         REQUIRE(f == Vector3f(1, 2, 4));
     }
+}
+TEST_CASE("transform to position", "[Transform]") {
+    const Vector3f position = Vector3f(1, 2, 3);
+
+    Transform transform = Transform::fromPosition(position);
+
+    REQUIRE(transform.toPosition() == position);
 }
