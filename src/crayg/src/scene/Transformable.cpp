@@ -4,21 +4,19 @@
 
 #include "Transformable.h"
 
-Transformable::Transformable() : position(Vector3f()) {
+Transformable::Transformable() = default;
 
-}
-
-Transformable::Transformable(const Vector3f &position)
-    : position(position), transform(Transform::fromPosition(position)) {}
+Transformable::Transformable(const Vector3f &position) :
+    transform(Transform::fromPosition(position)) {}
 
 Vector3f Transformable::getPosition() const {
-    return position;
+    return transform.toPosition();
 }
 
 void Transformable::setPosition(const Vector3f &position) {
-    Transformable::position = position;
     this->transform = Transform::fromPosition(position);
 }
+
 
 
 

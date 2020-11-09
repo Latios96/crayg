@@ -11,14 +11,13 @@
 class Transformable {
  public:
     Transformable();
-    Transformable(const Vector3f &position);
+    explicit Transformable(const Vector3f &position);
 
     Vector3f getPosition() const;
 
     void setPosition(const Vector3f &position);
 
  private:
-    Vector3f position;
     Transform transform;
 };
 
