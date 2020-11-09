@@ -4,6 +4,7 @@
 #include <catch2/catch.hpp>
 #include <basics/Matrix4x4f.h>
 #include <sstream>
+#include <Logger.h>
 
 TEST_CASE("construction", "[Matrix4x4f]") {
 
@@ -79,6 +80,22 @@ TEST_CASE("multiply matrices", "[Matrix4x4f]") {
     REQUIRE(result.values[3][3] == 1528);
 }
 
+TEST_CASE("equal operator", "[Matrix4x4f]") {
+    SECTION("should be equal") {
+        Matrix4x4f m1;
+        Matrix4x4f m2;
+
+        REQUIRE(m1 == m2);
+    }
+
+    SECTION("should not be equal") {
+        Matrix4x4f m1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        Matrix4x4f m2(17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+
+        REQUIRE(m1 != m2);
+    }
+}
+
+
+
 // equal
-// outstream
-// format for spdlog

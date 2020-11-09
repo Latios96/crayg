@@ -31,7 +31,8 @@ class Matrix4x4f {
                           0, 0, 1, 0,
                           0, 0, 0, 1};
     friend std::ostream &operator<<(std::ostream &os, const Matrix4x4f &f);
-
+    bool operator==(const Matrix4x4f &rhs) const;
+    bool operator!=(const Matrix4x4f &rhs) const;
     Matrix4x4f operator*(const Matrix4x4f &vec) const;
 };
 

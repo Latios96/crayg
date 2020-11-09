@@ -70,5 +70,18 @@ Matrix4x4f Matrix4x4f::operator*(const Matrix4x4f &vec) const {
     }
     return r;
 }
+bool Matrix4x4f::operator==(const Matrix4x4f &rhs) const {
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            if (values[i][j] != rhs.values[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+bool Matrix4x4f::operator!=(const Matrix4x4f &rhs) const {
+    return !(rhs == *this);
+}
 
 Matrix4x4f::Matrix4x4f() = default;
