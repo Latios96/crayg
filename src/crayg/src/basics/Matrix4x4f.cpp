@@ -83,5 +83,8 @@ bool Matrix4x4f::operator==(const Matrix4x4f &rhs) const {
 bool Matrix4x4f::operator!=(const Matrix4x4f &rhs) const {
     return !(rhs == *this);
 }
+Matrix4x4f::Matrix4x4f(const Matrix4x4f &matrix4X4F) {
+    memcpy(values, matrix4X4F.values, sizeof(float) * 16);
+}
 
 Matrix4x4f::Matrix4x4f() = default;

@@ -4,9 +4,8 @@
 #include <catch2/catch.hpp>
 #include <basics/Matrix4x4f.h>
 #include <sstream>
-#include <Logger.h>
 
-TEST_CASE("construction", "[Matrix4x4f]") {
+TEST_CASE("construct Matrix4x4f", "[Matrix4x4f]") {
 
     SECTION("default constructor should create identity matrix") {
         Matrix4x4f matrix4X4F;
@@ -47,6 +46,14 @@ TEST_CASE("construction", "[Matrix4x4f]") {
         REQUIRE(matrix4X4F.values[3][1] == 14);
         REQUIRE(matrix4X4F.values[3][2] == 15);
         REQUIRE(matrix4X4F.values[3][3] == 16);
+    }
+
+    SECTION("copy constructor") {
+        Matrix4x4f matrix4X4F(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+
+        Matrix4x4f copy = matrix4X4F;
+
+        REQUIRE(matrix4X4F == copy);
     }
 }
 

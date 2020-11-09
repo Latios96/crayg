@@ -10,6 +10,7 @@
 class Matrix4x4f {
  public:
     Matrix4x4f();
+    Matrix4x4f(const Matrix4x4f &matrix4X4F);
     Matrix4x4f(float v00,
                float v10,
                float v20,
