@@ -30,6 +30,7 @@ set(UNIT_TEST_LIST
         TestBucketImageBuffer.cpp
         TestImageAlgorithms.cpp
         TestImageOutputDriver.cpp
+        TestMatrix4x4f.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
