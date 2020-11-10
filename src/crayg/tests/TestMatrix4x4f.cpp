@@ -61,7 +61,11 @@ TEST_CASE("outstream", "[Matrix4x4f]") {
     Matrix4x4f matrix4X4F;
     std::stringstream ss;
     ss << matrix4X4F;
-    REQUIRE("Matrix4x4f(values={1.0 0.0 0.0 0.0, 0.0 1.0 0.0 0.0, 0.0 0.0 1.0 0.0, 0.0 0.0 0.0 1.0})" == ss.str());
+    REQUIRE("Matrix4x4f(values={\n"
+            "1.00 0.00 0.00 0.00\n"
+            "0.00 1.00 0.00 0.00\n"
+            "0.00 0.00 1.00 0.00\n"
+            "0.00 0.00 0.00 1.00})" == ss.str());
 }
 
 TEST_CASE("multiply matrices", "[Matrix4x4f]") {
@@ -133,7 +137,7 @@ TEST_CASE("Matrix4x4f equality", "[Matrix4x4f]") {
 
 TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
 
-    /*SECTION("transformation only") {
+    SECTION("transformation only") {
         Matrix4x4f matrix(1, 0, 0, 1,
                           0, 1, 0, 2,
                           0, 0, 1, 3,
@@ -187,9 +191,9 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
                                                 0, 0, 0, 1);
 
         REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
-    }*/
+    }
 
-    SECTION("all combined") {
+    /*SECTION("all combined") {
         Matrix4x4f matrix(2, 2, 0, 5,
                           2, 2, 0, 6,
                           0, 0, 4, 7,
@@ -201,7 +205,7 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
                                                 0, 0, 0, 1);
 
         REQUIRE(matrix.invert() == expectedInverse);
-    }
+    }*/
 
 }
 
