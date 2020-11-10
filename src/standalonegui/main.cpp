@@ -13,45 +13,50 @@
 #include "CraygInfo.h"
 #include <thread>
 
-
 int main(int argc, char **argv) {
-    QApplication a(argc, argv);
     Logger::initialize();
+    try {
+        QApplication a(argc, argv);
 
-    CliParser cliParser(argc, argv);
-    CliParseResult parseResult = cliParser.parse();
+        CliParser cliParser(argc, argv);
+        CliParseResult parseResult = cliParser.parse();
 
-    if (!parseResult.isValid()) {
-        spdlog::error(*parseResult.error);
-        exit(1);
+        if (!parseResult.isValid()) {
+            spdlog::error(*parseResult.error);
+            exit(1);
+        }
+
+        Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
+
+        Scene scene;
+
+        std::string scenePath = parseResult.args->scenePath;
+        auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
+        sceneReader->read();
+
+        Image myImage(scene.renderSettings.resolution);
+
+        auto imageWidget = new ImageWidget(scene.renderSettings.resolution);
+        ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
+
+        FrameBufferWidget frameBufferWidget(*imageWidget);
+        frameBufferWidget.show();
+
+        Renderer renderer(scene, imageWidgetOutputDriver);
+
+        std::thread renderThread([&renderer, &myImage, &parseResult]() {
+            renderer.renderScene();
+
+            Logger::info("writing image..");
+            ImageWriters::writeImage(myImage, parseResult.args->imageOutputPath);
+            Logger::info("writing image done.");
+        });
+        renderThread.detach();
+
+        return QApplication::exec();
     }
-
-    Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
-
-    Scene scene;
-
-    std::string scenePath = parseResult.args->scenePath;
-    auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
-    sceneReader->read();
-
-    Image myImage(scene.renderSettings.resolution);
-
-    auto imageWidget = new ImageWidget(scene.renderSettings.resolution);
-    ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
-
-    FrameBufferWidget frameBufferWidget(*imageWidget);
-    frameBufferWidget.show();
-
-    Renderer renderer(scene, imageWidgetOutputDriver);
-
-    std::thread renderThread([&renderer, &myImage, &parseResult]() {
-        renderer.renderScene();
-
-        Logger::info("writing image..");
-        ImageWriters::writeImage(myImage, parseResult.args->imageOutputPath);
-        Logger::info("writing image done.");
-    });
-    renderThread.detach();
-
-    return QApplication::exec();
+    catch (std::exception &e) {
+        Logger::error("Caught exception: {}", e.what());
+        return -1;
+    }
 }
