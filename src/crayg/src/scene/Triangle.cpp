@@ -111,6 +111,23 @@ Triangle::Triangle() {
 Vector3f Triangle::getNormal(Vector3f point) {
     const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
     return normal.invert();
+    /*Vector3f a = v1() - v0(), b = v2() - v0(), c = point - v0();
+    float d00 = a.scalarProduct(a);
+    float d01 = a.scalarProduct(b);
+    float d11 = b.scalarProduct(b);
+    float d20 = c.scalarProduct(a);
+    float d21 = c.scalarProduct(b);
+    float denom = d00 * d11 - d01 * d01;
+    float v = (d11 * d20 - d01 * d21) / denom;
+    float w = (d00 * d21 - d01 * d20) / denom;
+    float u = 1.0f - v - w;
+
+    auto normalV0 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex]];
+    auto normalV1 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex + 1]];
+    auto normalV2 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex + 2]];
+
+    const Vector3f &x = normalV0 * u + normalV1 * v + normalV2 * w;
+    return x.normalize();*/
 }
 Vector3f Triangle::v0() {
     return triangleMesh->points[triangleMesh->faceIndexes[faceIndex]];
@@ -120,5 +137,9 @@ Vector3f Triangle::v1() {
 }
 Vector3f Triangle::v2() {
     return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 2]];
+}
+Vector3f Triangle::getNormal() {
+    const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
+    return normal.invert();
 }
 

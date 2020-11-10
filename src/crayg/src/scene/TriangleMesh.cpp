@@ -134,12 +134,13 @@ void TriangleMesh::createBounds() {
     boundingBox = BoundingBox(min, max);
 }
 void TriangleMesh::createNormals() {
-    normals.resize(faceIndexes.size());
+    normals.resize(points.size());
     for (auto &triangle : triangles) {
-        Vector3f normal = triangle->getNormal(Vector3f());
-        normals[triangle->faceIndex].add(normal);
-        normals[triangle->faceIndex + 1].add(normal);
-        normals[triangle->faceIndex + 2].add(normal);
+        Vector3f normal = triangle->getNormal();
+        const int x = faceIndexes[triangle->faceIndex];
+        normals[x] = normals[x].add(normal);
+        normals[faceIndexes[triangle->faceIndex + 1]] = normals[faceIndexes[triangle->faceIndex + 1]].add(normal);
+        normals[faceIndexes[triangle->faceIndex + 2]] = normals[faceIndexes[triangle->faceIndex + 2]].add(normal);
     }
     for (int i = 0; i < normals.size(); i = i + 3) {
         normals[i] = normals[i].normalize();

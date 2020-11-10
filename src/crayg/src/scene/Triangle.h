@@ -18,6 +18,7 @@ class Triangle : public Imageable {
     bool isIntersecting(Ray ray) override;
     Imageable::Intersection intersect(Ray ray) override;
     Vector3f getNormal(Vector3f point) override;
+    Vector3f getNormal();
 
     Vector3f v0();
     Vector3f v1();
