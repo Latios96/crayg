@@ -99,8 +99,8 @@ void TriangleMesh::createCube(TriangleMesh &mesh) {
 
 void TriangleMesh::beforeRender() {
     Imageable::beforeRender();
-    for (int i = 0; i < points.size(); i++) {
-        points[i] = transform.apply(points[i]);
+    for (auto &point : points) {
+        point = transform.apply(point);
     }
     getTriangles(triangles);
     createBounds();
@@ -109,8 +109,7 @@ void TriangleMesh::beforeRender() {
 
 void TriangleMesh::createBounds() {
     Vector3f min, max;
-    for (int i = 0; i < points.size(); i++) {
-        Vector3f point = points[i];
+    for (const auto &point : points) {
         if (point.x < min.x) {
             min.x = point.x;
         }
@@ -142,8 +141,8 @@ void TriangleMesh::createNormals() {
         normals[faceIndexes[triangle->faceIndex + 1]] = normals[faceIndexes[triangle->faceIndex + 1]].add(normal);
         normals[faceIndexes[triangle->faceIndex + 2]] = normals[faceIndexes[triangle->faceIndex + 2]].add(normal);
     }
-    for (int i = 0; i < normals.size(); i++) {
-        normals[i] = normals[i].normalize();
+    for (auto &normal : normals) {
+        normal = normal.normalize();
     }
 }
 
