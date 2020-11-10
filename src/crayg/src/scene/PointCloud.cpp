@@ -7,7 +7,7 @@
 bool PointCloud::isIntersecting(Ray ray) {
     auto sphere = std::make_shared<Sphere>();
     for (unsigned long i = 0; i < points.size(); i++) {
-        sphere->setPosition(points[i]);
+        sphere->setPosition(transform.apply(points[i]));
         sphere->setRadius(radii[i]);
         if (sphere->isIntersecting(ray)) {
             return true;
@@ -21,7 +21,7 @@ Vector3f PointCloud::getNormal(Vector3f point) {
 Imageable::Intersection PointCloud::intersect(Ray ray) {
     auto sphere = std::make_shared<Sphere>();
     for (unsigned long i = 0; i < points.size(); i++) {
-        sphere->setPosition(points[i]);
+        sphere->setPosition(transform.apply(points[i]));
         sphere->setRadius(radii[i]);
         Intersection intersection = sphere->intersect(ray);
         if (intersection.isValid()) {
