@@ -16,9 +16,7 @@ class Transform {
     static Transform withPosition(const Vector3f &vector3f);
     static Transform withRotation(float x, float y, float z);
     static Transform withScale(float x, float y, float z);
-    static Transform withTranslationAndRotation(float x, float y, float z);
 
-    // normal
     Vector3f apply(const Vector3f &vector3f) const;
     Ray apply(const Ray &ray) const;
 
