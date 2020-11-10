@@ -17,7 +17,7 @@ class Transformable {
 
     void setPosition(const Vector3f &position);
 
- private:
+ protected:
     Transform transform;
 };
 

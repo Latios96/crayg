@@ -30,6 +30,7 @@ class TriangleMesh : public SceneObject {
  private:
     std::vector<std::shared_ptr<Triangle>> triangles;
     BoundingBox boundingBox;
+    void createBounds();
 };
 
 #endif //CRAYG_TRIANGEMESH_H

@@ -103,7 +103,13 @@ void TriangleMesh::createCube(TriangleMesh &mesh) {
 
 void TriangleMesh::beforeRender() {
     Imageable::beforeRender();
+    for (int i = 0; i < points.size(); i++) {
+        points[i] = transform.apply(points[i]);
+    }
     getTriangles(triangles);
+    createBounds();
+}
+void TriangleMesh::createBounds() {
     Vector3f min, max;
     for (int i = 0; i < points.size(); i++) {
         Vector3f point = points[i];
