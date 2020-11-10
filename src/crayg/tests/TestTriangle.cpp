@@ -4,11 +4,21 @@
 
 #include <catch2/catch.hpp>
 #include <scene/Triangle.h>
+#include <scene/TriangleMesh.h>
 #include "utils/utils.h"
 
 TEST_CASE("TriangleIntersects") {
 
-    auto TRIANGLE = std::make_shared<Triangle>(Vector3f(0, 0, 0), Vector3f(0, 1, 0), Vector3f(1, 0, 0));
+    TriangleMesh triangleMesh;
+    triangleMesh.points.emplace_back(0, 0, 0);
+    triangleMesh.points.emplace_back(0, 1, 0);
+    triangleMesh.points.emplace_back(1, 0, 0);
+    triangleMesh.faceIndexes.push_back(0);
+    triangleMesh.faceIndexes.push_back(1);
+    triangleMesh.faceIndexes.push_back(2);
+    triangleMesh.beforeRender();
+
+    auto TRIANGLE = std::make_shared<Triangle>(&triangleMesh, 0);
     Ray RAY_HITTING_TRIANGLE({0.25f, 0.25f, -1}, {0, 0, 1});
     Ray RAY_MISSING_TRIANGLE_LEFT({-1, 0.25f, -1}, {0, 0, 1});
     Ray RAY_MISSING_TRIANGLE_TOP({0.25f, 1, -1}, {0, 0, 1});
