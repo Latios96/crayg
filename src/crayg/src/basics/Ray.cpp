@@ -3,6 +3,7 @@
 //
 
 #include <limits>
+#include <utils/ToStringHelper.h>
 #include "Ray.h"
 
 Ray::Ray(Vector3f startPoint, Vector3f direction) {
@@ -25,11 +26,11 @@ bool Ray::isValid() {
     return startPoint.isValid() && direction.isValid() && length != std::numeric_limits<float>::max();
 }
 
-Vector3f Ray::constructIntersectionPoint() {
+Vector3f Ray::constructIntersectionPoint() const {
     return startPoint + (direction * length);
 }
 
-Vector3f Ray::constructIntersectionPoint(float t) {
+Vector3f Ray::constructIntersectionPoint(float t) const {
     return startPoint + (direction * t);
 }
 
@@ -41,6 +42,10 @@ bool Ray::operator==(const Ray &rhs) const {
 
 bool Ray::operator!=(const Ray &rhs) const {
     return !(rhs == *this);
+}
+std::ostream &operator<<(std::ostream &os, const Ray &ray) {
+    os << "startPoint: " << ray.startPoint << " direction: " << ray.direction << " length: " << ray.length;
+    return os;
 }
 
 
