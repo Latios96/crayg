@@ -13,12 +13,13 @@ class Transform {
     Transform();
     explicit Transform(const Matrix4x4f &matrix);
     Transform(const Transform &transform);
-    static Transform fromPosition(const Vector3f &vector3f);
+    static Transform withPosition(const Vector3f &vector3f);
+    static Transform withRotation(float x, float y, float z);
+
     // normal
-    // transform rotate xyz
-    // scale xyz
     Vector3f apply(const Vector3f &vector3f) const;
     Ray apply(const Ray &ray) const;
+
     Vector3f toPosition() const;
 
     bool operator==(const Transform &rhs) const;

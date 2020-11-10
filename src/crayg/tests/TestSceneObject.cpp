@@ -33,7 +33,7 @@ TEST_CASE("deserialize SceneObject", "[SceneObject]") {
         Deserializer &s = mockDeserializer.get();
         sceneObject->deserialize(s);
 
-        REQUIRE(sceneObject->getTransform() == Transform::fromPosition({1, 2, 3}));
+        REQUIRE(sceneObject->getTransform() == Transform::withPosition({1, 2, 3}));
     }
 
     SECTION("scene containing transform should be read correctly") {

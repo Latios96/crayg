@@ -8,7 +8,7 @@ Transform::Transform() = default;
 Transform::Transform(const Matrix4x4f &matrix) : matrix(matrix) {}
 Transform::Transform(const Transform &transform) = default;
 
-Transform Transform::fromPosition(const Vector3f &vector3f) {
+Transform Transform::withPosition(const Vector3f &vector3f) {
     Matrix4x4f matrix4X4f;
     matrix4X4f.values[0][3] = vector3f.x;
     matrix4X4f.values[1][3] = vector3f.y;
@@ -58,6 +58,17 @@ Transform &Transform::operator=(const Transform &rhs) {
 }
 Ray Transform::apply(const Ray &ray) const {
     return {apply(ray.startPoint), apply(ray.direction), ray.length};
+}
+Transform Transform::withRotation(float x, float y, float z) {
+    Matrix4x4f matrix4X4f;
+    return Transform(matrix4X4f * Matrix4x4f::rotateX(x) * Matrix4x4f::rotateY(y) * Matrix4x4f::rotateZ(z));
+}
+Transform Transform::withScale(float x, float y, float z) {
+    Matrix4x4f matrix4X4f;
+    matrix4X4f.values[0][0] = x;
+    matrix4X4f.values[1][1] = y;
+    matrix4X4f.values[2][2] = z;
+    return Transform(matrix4X4f);
 }
 
 

@@ -12,19 +12,31 @@ TEST_CASE("Transform Construction", "[Transform]") {
         REQUIRE(transform.matrix == Matrix4x4f());
     }
 
-    SECTION("should create from position") {
-        Transform transform = Transform::fromPosition({1, 2, 3});
+    SECTION("should create with position") {
+        Transform transform = Transform::withPosition({1, 2, 3});
 
         REQUIRE(transform.apply({1, 2, 3}) == Vector3f(2, 4, 6));
     }
 
+    SECTION("should create with rotation") {
+        Transform transform = Transform::withRotation(10, 20, 30);
+
+        Transform expectedTransform = Transform(Matrix4x4f(0.81, -0.46, 0.34, 0,
+                                                           0.54, 0.83, -0.16, 0,
+                                                           -0.20, 0.31, 0.925, 0,
+                                                           0, 0, 0, 1));
+
+        REQUIRE(transform.matrix.isEqualTo(expectedTransform.matrix, 0.01));
+    }
+
     SECTION("should copy") {
-        Transform transform = Transform::fromPosition({1, 2, 3});
+        Transform transform = Transform::withPosition({1, 2, 3});
 
         Transform copy = transform;
 
         REQUIRE(copy == transform);
     }
+
 }
 
 TEST_CASE("apply transform to vector", "[Transform]") {
@@ -73,16 +85,10 @@ TEST_CASE("apply transform to Ray", "[Transform]") {
 
     SECTION("should transform") {
         Ray ray({1, 2, 3}, {4, 5, 6});
-        Transform transform = Transform::fromPosition({1, 2, 3});
+        Transform transform = Transform::withPosition({1, 2, 3});
 
         REQUIRE(transform.apply(ray) == Ray({2, 4, 6}, {5, 7, 9}));
     }
 }
 
-TEST_CASE("transform to position", "[Transform]") {
-    const Vector3f position = Vector3f(1, 2, 3);
 
-    Transform transform = Transform::fromPosition(position);
-
-    REQUIRE(transform.toPosition() == position);
-}
