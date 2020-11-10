@@ -44,7 +44,7 @@ void JsonDeserializer::readVector3fArray(std::string name, std::vector<Vector3f>
             target.push_back({x, y, z});
         }
     } else {
-        throw std::invalid_argument(fmt::format("Could not read Vector3f Array with name '{}'", name));
+        throw std::invalid_argument(fmt::format("Could not read Vector3f array with name '{}'", name));
     }
 }
 
@@ -55,7 +55,7 @@ void JsonDeserializer::readIntArray(std::string name, std::vector<int> &target) 
             target.push_back(value.GetInt());
         }
     } else {
-        throw std::invalid_argument(fmt::format("Could not read int Array with name '{}'", name));
+        throw std::invalid_argument(fmt::format("Could not read int array with name '{}'", name));
     }
 }
 void JsonDeserializer::readFloatArray(std::string name, std::vector<float> &target) {
@@ -65,9 +65,36 @@ void JsonDeserializer::readFloatArray(std::string name, std::vector<float> &targ
             target.push_back(value.GetFloat());
         }
     } else {
-        throw std::invalid_argument(fmt::format("Could not read float Array with name '{}'", name));
+        throw std::invalid_argument(fmt::format("Could not read float array with name '{}'", name));
     }
 }
 bool JsonDeserializer::hasProperty(std::string name) {
     return jsonObject.HasMember(name.c_str());
+}
+Matrix4x4f JsonDeserializer::readMatrix4x4f(std::string name) {
+    float values[4][4];
+    if (!jsonObject.HasMember(name.c_str())) {
+        throw std::invalid_argument(fmt::format("Could not read Matrix4x4f with name '{}'", name));
+    }
+    const auto array = jsonObject[name.c_str()].GetArray();
+    if (array.Size() != 16) {
+        throw std::invalid_argument(fmt::format("Could not read Matrix4x4f, array has {} values", array.Size()));
+    }
+    return Matrix4x4f(array[0].GetFloat(),
+                      array[1].GetFloat(),
+                      array[2].GetFloat(),
+                      array[3].GetFloat(),
+                      array[4].GetFloat(),
+                      array[5].GetFloat(),
+                      array[6].GetFloat(),
+                      array[7].GetFloat(),
+                      array[8].GetFloat(),
+                      array[9].GetFloat(),
+                      array[10].GetFloat(),
+                      array[11].GetFloat(),
+                      array[12].GetFloat(),
+                      array[13].GetFloat(),
+                      array[14].GetFloat(),
+                      array[15].GetFloat());
+
 }

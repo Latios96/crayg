@@ -10,7 +10,9 @@ TEST_CASE("JsonDeserializer") {
 "mvVector3f": [1,2,3],
 "myVector3fArray": [[1,2,3],[4,5,6]],
 "myIntArray": [1,2,3],
-"myFloatArray": [0.1,0.2,0.3]
+"myFloatArray": [0.1,0.2,0.3],
+"myMatrix4x4f": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+"myMatrix4x4fInvalid": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0]
 })";
     rapidjson::StringStream s(json);
     rapidjson::Document d;
@@ -88,6 +90,21 @@ TEST_CASE("JsonDeserializer") {
     SECTION("readFloatArrayShouldThrowException") {
         std::vector<float> floatArray;
         REQUIRE_THROWS_AS(jsonDeserializer.readFloatArray("e", floatArray), std::invalid_argument);
+    }
+
+    SECTION("readMatrix4x4fShouldReturnCorrect") {
+        const Matrix4x4f expectedMatrix;
+        const Matrix4x4f matrix = jsonDeserializer.readMatrix4x4f("myMatrix4x4f");
+
+        REQUIRE(matrix == expectedMatrix);
+    }
+
+    SECTION("readFloatArrayShouldThrowExceptionWrongArraySize") {
+        REQUIRE_THROWS_AS(jsonDeserializer.readMatrix4x4f("myMatrix4x4fInvalid"), std::invalid_argument);
+    }
+
+    SECTION("readFloatArrayShouldThrowExceptionNotFound") {
+        REQUIRE_THROWS_AS(jsonDeserializer.readMatrix4x4f("e"), std::invalid_argument);
     }
 
 }
