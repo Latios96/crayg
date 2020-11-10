@@ -56,5 +56,8 @@ Transform &Transform::operator=(const Transform &rhs) {
     matrix = rhs.matrix;
     return *this;
 }
+Ray Transform::apply(const Ray &ray) const {
+    return {apply(ray.startPoint), apply(ray.direction), ray.length};
+}
 
 

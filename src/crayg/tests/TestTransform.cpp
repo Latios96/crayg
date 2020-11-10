@@ -62,6 +62,23 @@ TEST_CASE("apply transform to vector", "[Transform]") {
         REQUIRE(f == Vector3f(1, 2, 4));
     }
 }
+
+TEST_CASE("apply transform to Ray", "[Transform]") {
+    SECTION("apply identiy matrix should not change") {
+        Ray ray({1, 2, 3}, {4, 5, 6});
+        Transform transform;
+
+        REQUIRE(transform.apply(ray) == ray);
+    }
+
+    SECTION("should transform") {
+        Ray ray({1, 2, 3}, {4, 5, 6});
+        Transform transform = Transform::fromPosition({1, 2, 3});
+
+        REQUIRE(transform.apply(ray) == Ray({2, 4, 6}, {5, 7, 9}));
+    }
+}
+
 TEST_CASE("transform to position", "[Transform]") {
     const Vector3f position = Vector3f(1, 2, 3);
 

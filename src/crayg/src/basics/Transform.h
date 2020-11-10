@@ -6,6 +6,7 @@
 #define CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
 
 #include "Matrix4x4f.h"
+#include "Ray.h"
 
 class Transform {
  public:
@@ -17,6 +18,7 @@ class Transform {
     // transform rotate xyz
     // scale xyz
     Vector3f apply(const Vector3f &vector3f) const;
+    Ray apply(const Ray &ray) const;
     Vector3f toPosition() const;
 
     bool operator==(const Transform &rhs) const;
