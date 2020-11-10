@@ -7,11 +7,14 @@
 
 #include <scene/Imageable.h>
 
+class TriangleMesh;
+
 class Triangle : public Imageable {
  public:
     static int intersections;
     Triangle();
-    Triangle(const Vector3f v0, const Vector3f v1, const Vector3f v2);
+    Triangle(const Vector3f &v0, const Vector3f &v1, const Vector3f &v2);
+    Triangle(const Vector3f &v0, const Vector3f &v1, const Vector3f &v2, TriangleMesh *triangleMesh, int faceIndex);
 
     bool isIntersecting(Ray ray) override;
     Imageable::Intersection intersect(Ray ray) override;
@@ -19,7 +22,8 @@ class Triangle : public Imageable {
 
  private:
     Vector3f v0, v1, v2;
-
+    TriangleMesh *triangleMesh;
+    int faceIndex;
     Intersection getIntersectionMyImpl(const Ray &ray);
 
     Intersection getIntersectionMullerTrumbore(const Ray &ray);
