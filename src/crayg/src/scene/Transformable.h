@@ -14,8 +14,9 @@ class Transformable {
     explicit Transformable(const Vector3f &position);
 
     Vector3f getPosition() const;
-
     void setPosition(const Vector3f &position);
+
+    const Transform getTransform() const;
 
  protected:
     Transform transform;

@@ -13,7 +13,11 @@ SceneObject::SceneObject(Vector3f position) : Transformable(position) {
 }
 
 void SceneObject::deserialize(Deserializer &deserializer) {
-    setPosition(deserializer.readVector3f("position"));
+    if (deserializer.hasProperty("position")) {
+        setPosition(deserializer.readVector3f("position"));
+        return;
+    }
+    transform = Transform(deserializer.readMatrix4x4f("transform"));
 }
 
 SceneObject::SceneObject() = default;

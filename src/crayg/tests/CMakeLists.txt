@@ -32,6 +32,7 @@ set(UNIT_TEST_LIST
         TestImageOutputDriver.cpp
         TestMatrix4x4f.cpp
         TestTransform.cpp
+        TestSceneObject.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
