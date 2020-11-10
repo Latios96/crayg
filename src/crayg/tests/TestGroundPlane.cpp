@@ -16,11 +16,12 @@ TEST_CASE("GroundPlaneSerialization") {
         fakeit::Mock<Serializer> mockSerializer;
         fakeit::When(Method(mockSerializer, writeVector3f)).AlwaysReturn();
         fakeit::When(Method(mockSerializer, writeType)).AlwaysReturn();
+        fakeit::When(Method(mockSerializer, writeMatrix4x4f)).AlwaysReturn();
 
         Serializer &s = mockSerializer.get();
         myGroundPlane.serialize(s);
 
-        fakeit::Verify(Method(mockSerializer, writeVector3f).Using("position", Vector3f()));
+        fakeit::Verify(Method(mockSerializer, writeMatrix4x4f).Using("transform", Matrix4x4f()));
         fakeit::Verify(Method(mockSerializer, writeType).Using("GroundPlane"));
     }
 

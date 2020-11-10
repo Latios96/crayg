@@ -101,3 +101,13 @@ void JsonSerializer::end() {
     writer->EndObject();
     ofs->close();
 }
+void JsonSerializer::writeMatrix4x4f(std::string name, Matrix4x4f matrix4X4f) {
+    writer->Key(name.c_str());
+    writer->StartArray();
+    for (auto &row : matrix4X4f.values) {
+        for (float column : row) {
+            writer->Double(column);
+        }
+    }
+    writer->EndArray();
+}

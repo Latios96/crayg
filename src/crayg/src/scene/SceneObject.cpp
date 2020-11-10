@@ -5,7 +5,7 @@
 #include "SceneObject.h"
 
 void SceneObject::serialize(Serializer &serializer) {
-    serializer.writeVector3f("position", this->getPosition());
+    serializer.writeMatrix4x4f("transform", this->getTransform().matrix);
 }
 
 SceneObject::SceneObject(Vector3f position) : Transformable(position) {

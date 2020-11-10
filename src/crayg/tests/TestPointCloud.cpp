@@ -20,6 +20,7 @@ TEST_CASE("PointCloud") {
         fakeit::Mock<Serializer> mockSerializer;
         fakeit::When(Method(mockSerializer, writeVector3fArray)).AlwaysReturn();
         fakeit::When(Method(mockSerializer, writeVector3f)).AlwaysReturn();
+        fakeit::When(Method(mockSerializer, writeMatrix4x4f)).AlwaysReturn();
         fakeit::When(Method(mockSerializer, writeFloatArray)).AlwaysReturn();
         fakeit::When(Method(mockSerializer, writeType)).AlwaysReturn();
 
@@ -28,7 +29,7 @@ TEST_CASE("PointCloud") {
 
         fakeit::Verify(Method(mockSerializer, writeVector3fArray)).Once();
         fakeit::Verify(Method(mockSerializer, writeVector3fArray)).Once();
-        fakeit::Verify(Method(mockSerializer, writeVector3f).Using("position", Vector3f()));
+        fakeit::Verify(Method(mockSerializer, writeMatrix4x4f).Using("transform", Matrix4x4f()));
         fakeit::Verify(Method(mockSerializer, writeType).Using("PointCloud"));
     }
 

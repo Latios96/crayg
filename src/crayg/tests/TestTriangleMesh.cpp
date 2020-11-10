@@ -23,6 +23,7 @@ TEST_CASE("TriangleMesh") {
         fakeit::When(Method(mockSerializer, writeVector3fArray)).AlwaysReturn();
         fakeit::When(Method(mockSerializer, writeVector3f)).AlwaysReturn();
         fakeit::When(Method(mockSerializer, writeType)).AlwaysReturn();
+        fakeit::When(Method(mockSerializer, writeMatrix4x4f)).AlwaysReturn();
 
         Serializer &s = mockSerializer.get();
         cube.serialize(s);
@@ -31,7 +32,7 @@ TEST_CASE("TriangleMesh") {
         //fakeit::Verify(Method(mockSerializer,writeIntArray).Using("faceIndexes", cube.faceIndexes));
         fakeit::Verify(Method(mockSerializer, writeIntArray)).Once();
         fakeit::Verify(Method(mockSerializer, writeVector3fArray)).Once();
-        fakeit::Verify(Method(mockSerializer, writeVector3f).Using("position", Vector3f()));
+        fakeit::Verify(Method(mockSerializer, writeMatrix4x4f).Using("transform", Matrix4x4f()));
         fakeit::Verify(Method(mockSerializer, writeType).Using("TriangleMesh"));
     }
 
