@@ -30,12 +30,15 @@ class Matrix4x4f {
     float values[4][4] = {1, 0, 0, 0,
                           0, 1, 0, 0,
                           0, 0, 1, 0,
-                          0, 0, 0, 1};
+                          0, 0, 0, 1}; //[ROW][COLUMN]
     friend std::ostream &operator<<(std::ostream &os, const Matrix4x4f &f);
     bool operator==(const Matrix4x4f &rhs) const;
     bool operator!=(const Matrix4x4f &rhs) const;
+    bool isEqualTo(const Matrix4x4f &rhs) const;
+    bool isEqualTo(const Matrix4x4f &rhs, float epsilon) const;
     Matrix4x4f &operator=(const Matrix4x4f &rhs);
     Matrix4x4f operator*(const Matrix4x4f &vec) const;
+    Matrix4x4f invert();
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_BASICS_MATRIX4X4F_H_

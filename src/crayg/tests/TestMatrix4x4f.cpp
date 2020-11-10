@@ -87,7 +87,7 @@ TEST_CASE("multiply matrices", "[Matrix4x4f]") {
     REQUIRE(result.values[3][3] == 1528);
 }
 
-TEST_CASE("equal operator", "[Matrix4x4f]") {
+TEST_CASE("Matrix4x4f equality", "[Matrix4x4f]") {
     SECTION("should be equal") {
         Matrix4x4f m1;
         Matrix4x4f m2;
@@ -101,6 +101,108 @@ TEST_CASE("equal operator", "[Matrix4x4f]") {
 
         REQUIRE(m1 != m2);
     }
+
+    SECTION("should be equal to") {
+        Matrix4x4f m1;
+        Matrix4x4f m2;
+
+        REQUIRE(m1.isEqualTo(m2));
+    }
+
+    SECTION("should not be equal to") {
+        Matrix4x4f m1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        Matrix4x4f m2(2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+
+        REQUIRE_FALSE(m1.isEqualTo(m2));
+    }
+
+    SECTION("should be equal to with epsilon") {
+        Matrix4x4f m1;
+        Matrix4x4f m2;
+
+        REQUIRE(m1.isEqualTo(m2));
+    }
+
+    SECTION("should not be equal to") {
+        Matrix4x4f m1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        Matrix4x4f m2(1.1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+
+        REQUIRE_FALSE(m1.isEqualTo(m2, 0.05));
+    }
+}
+
+TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
+
+    /*SECTION("transformation only") {
+        Matrix4x4f matrix(1, 0, 0, 1,
+                          0, 1, 0, 2,
+                          0, 0, 1, 3,
+                          0, 0, 0, 1);
+
+        Matrix4x4f expectedInverse = Matrix4x4f(1, 0, 0, -1,
+                                                0, 1, 0, -2,
+                                                0, 0, 1, -3,
+                                                0, 0, 0, 1);
+
+        REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.001f));
+    }
+
+    SECTION("scale only") {
+        Matrix4x4f matrix(2, 0, 0, 0,
+                          0, 3, 0, 0,
+                          0, 0, 4, 0,
+                          0, 0, 0, 1);
+
+        Matrix4x4f expectedInverse = Matrix4x4f(0.5f, 0, 0, 0,
+                                                0, 0.33f, 0, 0,
+                                                0, 0, 0.25f, 0,
+                                                0, 0, 0, 1);
+
+        REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
+    }
+
+    SECTION("rotate only") {
+        Matrix4x4f matrix(2, -1, 0, 0,
+                          1, 2, 0, 0,
+                          0, 0, 0, 0,
+                          0, 0, 0, 1);
+
+        Matrix4x4f expectedInverse = Matrix4x4f(0.4f, 0.2, 0, 0,
+                                                -0.2, 0.4, 0, 0,
+                                                0, 0, 0, 0,
+                                                0, 0, 0, 1);
+
+        REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
+    }
+
+    SECTION("all combined") {
+        Matrix4x4f matrix(2, -1, 0, 5,
+                          1, 2, 0, 6,
+                          0, 0, 4, 7,
+                          0, 0, 0, 1);
+
+        Matrix4x4f expectedInverse = Matrix4x4f(0.4f, 0.2, 0, -3.2,
+                                                -0.2, 0.4, 0, -1.4,
+                                                0, 0, 0.25f, -1.75,
+                                                0, 0, 0, 1);
+
+        REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
+    }*/
+
+    SECTION("all combined") {
+        Matrix4x4f matrix(2, 2, 0, 5,
+                          2, 2, 0, 6,
+                          0, 0, 4, 7,
+                          0, 0, 0, 1);
+
+        Matrix4x4f expectedInverse = Matrix4x4f(0.4f, 0.2, 0, -3.2,
+                                                -0.2, 0.4, 0, -1.4,
+                                                0, 0, 0.25f, -1.75,
+                                                0, 0, 0, 1);
+
+        REQUIRE(matrix.invert() == expectedInverse);
+    }
+
 }
 
 

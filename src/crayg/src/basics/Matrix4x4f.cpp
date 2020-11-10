@@ -3,26 +3,28 @@
 //
 
 #include <fmt/format.h>
+#include <iostream>
 #include "Matrix4x4f.h"
 
 std::ostream &operator<<(std::ostream &os, const Matrix4x4f &matrix4X4F) {
-    os << fmt::format("Matrix4x4f(values={{{} {} {} {}, {} {} {} {}, {} {} {} {}, {} {} {} {}}})",
-                      matrix4X4F.values[0][0],
-                      matrix4X4F.values[0][1],
-                      matrix4X4F.values[0][2],
-                      matrix4X4F.values[0][3],
-                      matrix4X4F.values[1][0],
-                      matrix4X4F.values[1][1],
-                      matrix4X4F.values[1][2],
-                      matrix4X4F.values[1][3],
-                      matrix4X4F.values[2][0],
-                      matrix4X4F.values[2][1],
-                      matrix4X4F.values[2][2],
-                      matrix4X4F.values[2][3],
-                      matrix4X4F.values[3][0],
-                      matrix4X4F.values[3][1],
-                      matrix4X4F.values[3][2],
-                      matrix4X4F.values[3][3]);
+    os << fmt::format(
+        "Matrix4x4f(values={{\n{:.2f} {:.2f} {:.2f} {:.2f}\n{:.2f} {:.2f} {:.2f} {:.2f}\n{:.2f} {:.2f} {:.2f} {:.2f}\n{:.2f} {:.2f} {:.2f} {:.2f}}})",
+        matrix4X4F.values[0][0],
+        matrix4X4F.values[0][1],
+        matrix4X4F.values[0][2],
+        matrix4X4F.values[0][3],
+        matrix4X4F.values[1][0],
+        matrix4X4F.values[1][1],
+        matrix4X4F.values[1][2],
+        matrix4X4F.values[1][3],
+        matrix4X4F.values[2][0],
+        matrix4X4F.values[2][1],
+        matrix4X4F.values[2][2],
+        matrix4X4F.values[2][3],
+        matrix4X4F.values[3][0],
+        matrix4X4F.values[3][1],
+        matrix4X4F.values[3][2],
+        matrix4X4F.values[3][3]);
     return os;
 }
 
@@ -89,6 +91,47 @@ Matrix4x4f::Matrix4x4f(const Matrix4x4f &matrix4X4F) {
 Matrix4x4f &Matrix4x4f::operator=(const Matrix4x4f &rhs) {
     memcpy(values, rhs.values, sizeof(float) * 16);
     return *this;
+}
+Matrix4x4f Matrix4x4f::invert() {
+    Matrix4x4f result = *this;
+
+    for (int columnIndex = 0; columnIndex < 4; columnIndex++) {
+        float factor = 1.0f / result.values[columnIndex][columnIndex];
+
+        // scale elements in column, so required element is 1
+        result.values[columnIndex][columnIndex] = 1; // set to one, so we dont have to care about that in the loop
+        for (int r = 0; r < 4; r++) {
+            result.values[columnIndex][r] = result.values[columnIndex][r] * factor;
+        }
+        // substract other rows to zero out
+        for (int rowIndex = 0; rowIndex < 4; rowIndex++) {
+            if (rowIndex != columnIndex) {
+                float rowFactor = result.values[rowIndex][columnIndex];
+                result.values[rowIndex][columnIndex] = 0; // set to zero, so we dont have to care about that in the loop
+                for (int c = 0; c < 4; c++) {
+                    result.values[rowIndex][c] -= result.values[columnIndex][c] * rowFactor;
+                }
+            }
+        }
+    }
+
+    return result;
+}
+bool Matrix4x4f::isEqualTo(const Matrix4x4f &rhs) const {
+    return *this == rhs;
+
+}
+bool Matrix4x4f::isEqualTo(const Matrix4x4f &rhs, float epsilon) const {
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            float difference = values[i][j] - rhs.values[i][j];
+            float absDifference = std::abs(difference);
+            if (absDifference > epsilon) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 Matrix4x4f::Matrix4x4f() = default;
