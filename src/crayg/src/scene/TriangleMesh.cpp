@@ -142,7 +142,7 @@ void TriangleMesh::createNormals() {
         normals[faceIndexes[triangle->faceIndex + 1]] = normals[faceIndexes[triangle->faceIndex + 1]].add(normal);
         normals[faceIndexes[triangle->faceIndex + 2]] = normals[faceIndexes[triangle->faceIndex + 2]].add(normal);
     }
-    for (int i = 0; i < normals.size(); i = i + 3) {
+    for (int i = 0; i < normals.size(); i++) {
         normals[i] = normals[i].normalize();
     }
 }

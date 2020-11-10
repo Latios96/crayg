@@ -109,9 +109,7 @@ Triangle::Triangle() {
 }
 
 Vector3f Triangle::getNormal(Vector3f point) {
-    const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
-    return normal.invert();
-    /*Vector3f a = v1() - v0(), b = v2() - v0(), c = point - v0();
+    Vector3f a = v1() - v0(), b = v2() - v0(), c = point - v0();
     float d00 = a.scalarProduct(a);
     float d01 = a.scalarProduct(b);
     float d11 = b.scalarProduct(b);
@@ -126,8 +124,8 @@ Vector3f Triangle::getNormal(Vector3f point) {
     auto normalV1 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex + 1]];
     auto normalV2 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex + 2]];
 
-    const Vector3f &x = normalV0 * u + normalV1 * v + normalV2 * w;
-    return x.normalize();*/
+    const Vector3f normal = normalV0 * u + normalV1 * v + normalV2 * w;
+    return normal.normalize();
 }
 Vector3f Triangle::v0() {
     return triangleMesh->points[triangleMesh->faceIndexes[faceIndex]];
