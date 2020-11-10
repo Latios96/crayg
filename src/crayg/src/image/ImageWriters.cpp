@@ -8,6 +8,7 @@
 #include "OpenImageIoImageWriter.h"
 #include <boost/filesystem.hpp>
 #include <fmt/format.h>
+#include <Logger.h>
 
 bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) {
     boost::filesystem::path path(imagePath);
@@ -21,6 +22,7 @@ bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) 
     } else if (extension == ".exr") {
         imageWriter = std::unique_ptr<ImageWriter>(new OpenImageIoImageWriter());
     } else {
+        Logger::error("No ImageWriter found for extension {}", extension);
         throw std::runtime_error(fmt::format("No ImageWriter found for extension {}", extension));
     }
 
