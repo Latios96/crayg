@@ -70,5 +70,8 @@ Transform Transform::withScale(float x, float y, float z) {
     matrix4X4f.values[2][2] = z;
     return Transform(matrix4X4f);
 }
+Transform Transform::withTranslationAndRotation(float x, float y, float z) {
+    return Transform();
+}
 
 

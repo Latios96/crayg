@@ -29,6 +29,12 @@ TEST_CASE("Transform Construction", "[Transform]") {
         REQUIRE(transform.matrix.isEqualTo(expectedTransform.matrix, 0.01));
     }
 
+    SECTION("should create with scale") {
+        Transform transform = Transform::withScale(2, 3, 4);
+
+        REQUIRE(transform.apply({1, 2, 3}) == Vector3f(2, 6, 12));
+    }
+
     SECTION("should copy") {
         Transform transform = Transform::withPosition({1, 2, 3});
 
