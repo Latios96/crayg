@@ -193,22 +193,37 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
         REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
     }
 
-    /*SECTION("all combined") {
-        Matrix4x4f matrix(2, 2, 0, 5,
-                          2, 2, 0, 6,
-                          0, 0, 4, 7,
-                          0, 0, 0, 1);
-
-        Matrix4x4f expectedInverse = Matrix4x4f(0.4f, 0.2, 0, -3.2,
-                                                -0.2, 0.4, 0, -1.4,
-                                                0, 0, 0.25f, -1.75,
-                                                0, 0, 0, 1);
-
-        REQUIRE(matrix.invert() == expectedInverse);
-    }*/
-
 }
 
+TEST_CASE("Matrix4x4 rotation factory methods", "[Matrix4x4f]") {
 
+    SECTION("rotate x") {
+        Matrix4x4f matrix4X4f = Matrix4x4f::rotateX(90);
+        Matrix4x4f expectedMatrix(1, 0, 0, 0,
+                                  0, 0, -1, 0,
+                                  0, 1, 0, 0,
+                                  0, 0, 0, 1);
 
-// equal
+        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001));
+    }
+
+    SECTION("rotate y") {
+        Matrix4x4f matrix4X4f = Matrix4x4f::rotateY(90);
+        Matrix4x4f expectedMatrix(0, 0, 1, 0,
+                                  0, 1, 0, 0,
+                                  -1, 0, 0, 0,
+                                  0, 0, 0, 1);
+
+        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001));
+    }
+
+    SECTION("rotate z") {
+        Matrix4x4f matrix4X4f = Matrix4x4f::rotateZ(90);
+        Matrix4x4f expectedMatrix(0, -1, 0, 0,
+                                  1, 0, 0, 0,
+                                  0, 0, 1, 0,
+                                  0, 0, 0, 1);
+
+        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001));
+    }
+}

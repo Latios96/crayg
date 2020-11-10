@@ -27,10 +27,11 @@ class Matrix4x4f {
                float v13,
                float v23,
                float v33);
-    float values[4][4] = {1, 0, 0, 0,
-                          0, 1, 0, 0,
-                          0, 0, 1, 0,
-                          0, 0, 0, 1}; //[ROW][COLUMN]
+
+    static Matrix4x4f rotateX(float angleInDegrees);
+    static Matrix4x4f rotateY(float angleInDegrees);
+    static Matrix4x4f rotateZ(float angleInDegrees);
+
     friend std::ostream &operator<<(std::ostream &os, const Matrix4x4f &f);
     bool operator==(const Matrix4x4f &rhs) const;
     bool operator!=(const Matrix4x4f &rhs) const;
@@ -39,6 +40,11 @@ class Matrix4x4f {
     Matrix4x4f &operator=(const Matrix4x4f &rhs);
     Matrix4x4f operator*(const Matrix4x4f &vec) const;
     Matrix4x4f invert();
+
+    float values[4][4] = {1, 0, 0, 0,
+                          0, 1, 0, 0,
+                          0, 0, 1, 0,
+                          0, 0, 0, 1}; //[ROW][COLUMN]
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_BASICS_MATRIX4X4F_H_

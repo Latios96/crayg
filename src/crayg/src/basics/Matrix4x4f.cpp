@@ -1,7 +1,8 @@
 //
 // Created by Jan on 09.11.2020.
 //
-
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include <fmt/format.h>
 #include <iostream>
 #include "Matrix4x4f.h"
@@ -132,6 +133,27 @@ bool Matrix4x4f::isEqualTo(const Matrix4x4f &rhs, float epsilon) const {
         }
     }
     return true;
+}
+Matrix4x4f Matrix4x4f::rotateX(float angleInDegrees) {
+    float angleInRadians = (angleInDegrees * M_PI / 180.0);
+    return Matrix4x4f(1, 0, 0, 0,
+                      0, std::cos(angleInRadians), -std::sin(angleInRadians), 0,
+                      0, std::sin(angleInRadians), std::cos(angleInRadians), 0,
+                      0, 0, 0, 1);
+}
+Matrix4x4f Matrix4x4f::rotateY(float angleInDegrees) {
+    float angleInRadians = (angleInDegrees * M_PI / 180.0);
+    return Matrix4x4f(std::cos(angleInRadians), 0, std::sin(angleInRadians), 0,
+                      0, 1, 0, 0,
+                      -std::sin(angleInRadians), 0, std::cos(angleInRadians), 0,
+                      0, 0, 0, 1);
+}
+Matrix4x4f Matrix4x4f::rotateZ(float angleInDegrees) {
+    float angleInRadians = (angleInDegrees * M_PI / 180.0);
+    return Matrix4x4f(std::cos(angleInRadians), -std::sin(angleInRadians), 0, 0,
+                      std::sin(angleInRadians), std::cos(angleInRadians), 0, 0,
+                      0, 0, 1, 0,
+                      0, 0, 0, 1);
 }
 
 Matrix4x4f::Matrix4x4f() = default;
