@@ -6,7 +6,7 @@
 #define CRAYG_RAY_H
 
 #include "Vector3f.h"
-// todo implement ==, !=
+
 struct Ray {
     Vector3f startPoint, direction;
     float length;
@@ -22,7 +22,8 @@ struct Ray {
     Vector3f constructIntersectionPoint();
 
     Vector3f constructIntersectionPoint(float t);
-
+    bool operator==(const Ray &rhs) const;
+    bool operator!=(const Ray &rhs) const;
 };
 
 #endif //CRAYG_RAY_H

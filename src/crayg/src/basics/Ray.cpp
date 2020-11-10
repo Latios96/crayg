@@ -33,4 +33,14 @@ Vector3f Ray::constructIntersectionPoint(float t) {
     return startPoint + (direction * t);
 }
 
+bool Ray::operator==(const Ray &rhs) const {
+    return startPoint == rhs.startPoint &&
+        direction == rhs.direction &&
+        length == rhs.length;
+}
+
+bool Ray::operator!=(const Ray &rhs) const {
+    return !(rhs == *this);
+}
+
 
