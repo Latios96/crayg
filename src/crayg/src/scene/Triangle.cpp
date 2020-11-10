@@ -13,10 +13,10 @@ Triangle::Intersection Triangle::intersect(Ray ray) {
 
 Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) {
     //Vec3 v0v1 = sub(*v1, *v0);
-    Vector3f v0v1 = v1 - v0;
+    Vector3f v0v1 = v1() - v0();
 
     //Vec3 v0v2 = sub(*v2, *v0);
-    Vector3f v0v2 = v2 - v0;
+    Vector3f v0v2 = v2() - v0();
 
     //Vec3 pvec = cross(r->dir, v0v2);
     Vector3f pvec = ray.direction.crossProduct(v0v2);
@@ -31,7 +31,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     float invDet = 1.0f / det;
 
     //Vec3 tvec = sub(r->orig, *v0);
-    Vector3f tvec = ray.startPoint - v0;
+    Vector3f tvec = ray.startPoint - v0();
 
     //float u = dot(tvec, pvec) * invDet;
     float u = tvec.scalarProduct(pvec) * invDet;
@@ -53,7 +53,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     return {v0v2.scalarProduct(qvec) * invDet, shared_from_this()};
 }
 bool Triangle::isIntersecting(Ray ray) {
-    Vector3f normal = (v1 - v0).crossProduct((v2 - v0));
+    Vector3f normal = (v1() - v0()).crossProduct((v2() - v0()));
 
     const float scalar = normal.scalarProduct(ray.direction);
 
@@ -62,7 +62,7 @@ bool Triangle::isIntersecting(Ray ray) {
     if (raysAreParallel) {
         return false;
     } else {
-        const float t = -(normal.scalarProduct(ray.startPoint) + v0.length()) / scalar;
+        const float t = -(normal.scalarProduct(ray.startPoint) + v0().length()) / scalar;
 
         if (t > 0) {
             Vector3f hitLocation = ray.startPoint + (ray.direction * t);
@@ -71,22 +71,22 @@ bool Triangle::isIntersecting(Ray ray) {
 
             // do inside / outside tests
 
-            Vector3f edge0 = v1 - v0;
-            Vector3f vp0 = hitLocation - v0;
+            Vector3f edge0 = v1() - v0();
+            Vector3f vp0 = hitLocation - v0();
             C = edge0.crossProduct(vp0);
             if (normal.scalarProduct(C) < 0) {
                 return false;
             }
 
-            Vector3f edge1 = v2 - v1;
-            Vector3f vp1 = hitLocation - v1;
+            Vector3f edge1 = v2() - v1();
+            Vector3f vp1 = hitLocation - v1();
             C = edge1.crossProduct(vp1);
             if (normal.scalarProduct(C) < 0) {
                 return false;
             }
 
-            Vector3f edge2 = v0 - v2;
-            Vector3f vp2 = hitLocation - v2;
+            Vector3f edge2 = v0() - v2();
+            Vector3f vp2 = hitLocation - v2();
             C = edge2.crossProduct(vp2);
             if (normal.scalarProduct(C) < 0) {
                 return false;
@@ -98,26 +98,27 @@ bool Triangle::isIntersecting(Ray ray) {
     }
 }
 
-Triangle::Triangle(const Vector3f &v0,
-                   const Vector3f &v1,
-                   const Vector3f &v2,
-                   TriangleMesh *triangleMesh,
-                   int faceIndex)
-    : v0(v0), v1(v1), v2(v2), triangleMesh(triangleMesh), faceIndex(faceIndex) {}
+Triangle::Triangle(
+    TriangleMesh *triangleMesh,
+    int faceIndex)
+    : triangleMesh(triangleMesh), faceIndex(faceIndex) {}
 
 Triangle::Triangle() {
-    v0 = Vector3f();
-    v1 = Vector3f();
-    v2 = Vector3f();
     triangleMesh = nullptr;
     faceIndex = 0;
 }
 
-Triangle::Triangle(const Vector3f &v0, const Vector3f &v1, const Vector3f &v2) : v0(v0), v1(v1), v2(v2), triangleMesh(
-    nullptr), faceIndex(0) {};
-
 Vector3f Triangle::getNormal(Vector3f point) {
-    const Vector3f normal = (v2 - v0).crossProduct(v1 - v0).normalize();
+    const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
     return normal.invert();
+}
+Vector3f Triangle::v0() {
+    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex]];
+}
+Vector3f Triangle::v1() {
+    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 1]];
+}
+Vector3f Triangle::v2() {
+    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 2]];
 }
 

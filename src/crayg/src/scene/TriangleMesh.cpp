@@ -25,12 +25,8 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
 }
 
 void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Triangle>> &triangles) {
-
     for (int i = 0; i < faceIndexes.size(); i = i + 3) {
-        Vector3f v0 = points[faceIndexes[i]];
-        Vector3f v1 = points[faceIndexes[i + 1]];
-        Vector3f v2 = points[faceIndexes[i + 2]];
-        triangles.push_back(std::make_shared<Triangle>(v0, v1, v2, this, i));
+        triangles.push_back(std::make_shared<Triangle>(this, i));
     }
 }
 
@@ -139,14 +135,11 @@ void TriangleMesh::createBounds() {
 }
 void TriangleMesh::createNormals() {
     normals.resize(faceIndexes.size());
-    for (int i = 0; i < faceIndexes.size(); i = i + 3) {
-        Vector3f v0 = points[faceIndexes[i]];
-        Vector3f v1 = points[faceIndexes[i + 1]];
-        Vector3f v2 = points[faceIndexes[i + 2]];
-        Vector3f normal = std::make_shared<Triangle>(v0, v1, v2, this, i)->getNormal(v0);
-        normals[i].add(normal);
-        normals[i + 1].add(normal);
-        normals[i + 2].add(normal);
+    for (auto &triangle : triangles) {
+        Vector3f normal = triangle->getNormal(Vector3f());
+        normals[triangle->faceIndex].add(normal);
+        normals[triangle->faceIndex + 1].add(normal);
+        normals[triangle->faceIndex + 2].add(normal);
     }
     for (int i = 0; i < normals.size(); i = i + 3) {
         normals[i] = normals[i].normalize();
