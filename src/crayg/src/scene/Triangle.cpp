@@ -6,6 +6,16 @@
 #include "Triangle.h"
 #include "TriangleMesh.h"
 
+Vector3f Triangle::v0() {
+    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex]];
+}
+Vector3f Triangle::v1() {
+    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 1]];
+}
+Vector3f Triangle::v2() {
+    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 2]];
+}
+
 Triangle::Intersection Triangle::intersect(Ray ray) {
 
     return getIntersectionMullerTrumbore(ray);
@@ -127,15 +137,7 @@ Vector3f Triangle::getNormal(Vector3f point) {
     const Vector3f normal = normalV0 * u + normalV1 * v + normalV2 * w;
     return normal.normalize();
 }
-Vector3f Triangle::v0() {
-    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex]];
-}
-Vector3f Triangle::v1() {
-    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 1]];
-}
-Vector3f Triangle::v2() {
-    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 2]];
-}
+
 Vector3f Triangle::getNormal() {
     const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
     return normal.invert();
