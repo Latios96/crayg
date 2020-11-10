@@ -37,6 +37,7 @@ TEST_CASE("TriangleMesh") {
 
     SECTION("deserialize") {
         fakeit::Mock<Deserializer> mockDeserializer;
+        When(Method(mockDeserializer, hasProperty).Using("position")).Return(true);
         When(Method(mockDeserializer, readVector3fArray)).AlwaysReturn();
         When(Method(mockDeserializer, readIntArray)).AlwaysReturn();
         When(Method(mockDeserializer, readVector3f).Using("position")).Return(Vector3f(1, 2, 3));

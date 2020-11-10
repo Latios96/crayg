@@ -34,7 +34,9 @@ TEST_CASE("Sphere") {
         REQUIRE(compareWithPrecision(hitLocation.x, 4));
         REQUIRE(compareWithPrecision(hitLocation.y, 0));
         REQUIRE(compareWithPrecision(hitLocation.z, 0));
-    }SECTION("intersectNotReturnsMax") {
+    }
+
+    SECTION("intersectNotReturnsMax") {
         auto hitRay = mySphere->intersect(Ray(Vector3f(1, 10, -5), Vector3f(0, 0, 1)));
         REQUIRE(hitRay.rayParameter == std::numeric_limits<float>::max());
     }
@@ -55,6 +57,7 @@ TEST_CASE("Sphere") {
 
     SECTION("deserialize") {
         fakeit::Mock<Deserializer> mockDeserializer;
+        When(Method(mockDeserializer, hasProperty).Using("position")).Return(true);
         When(Method(mockDeserializer, readFloat).Using("radius")).Return(3.0f);
         When(Method(mockDeserializer, readVector3f).Using("position")).Return(Vector3f(1, 2, 3));
 
@@ -71,6 +74,7 @@ TEST_CASE("Sphere/transformation") {
 
     REQUIRE(mySphere->getPosition() == Vector3f(1, 2, 3));
 }
+
 TEST_CASE("Sphere/intersectsTransformed") {
     auto mySphere = std::make_shared<Sphere>(Vector3f(1, 2, 3), 1.0f);
 

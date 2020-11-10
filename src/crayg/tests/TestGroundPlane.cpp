@@ -26,6 +26,7 @@ TEST_CASE("GroundPlaneSerialization") {
 
     SECTION("deserialize") {
         fakeit::Mock<Deserializer> mockDeserializer;
+        When(Method(mockDeserializer, hasProperty).Using("position")).Return(true);
         When(Method(mockDeserializer, readVector3f).Using("position")).Return(Vector3f(1, 2, 3));
 
         Deserializer &s = mockDeserializer.get();
