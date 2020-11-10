@@ -44,18 +44,18 @@ void TriangleMesh::deserialize(Deserializer &deserializer) {
 }
 
 Vector3f TriangleMesh::getNormal(Vector3f point) {
-    return Vector3f(0, 1, 0);
+    return {0, 1, 0};
 }
 
 void TriangleMesh::createCube(TriangleMesh &mesh) {
-    mesh.points.push_back({-1, -1, 1});
-    mesh.points.push_back({-1, -1, 1});
-    mesh.points.push_back({-1, 1, 1});
-    mesh.points.push_back({1, 1, 1});
-    mesh.points.push_back({-1, 1, -1});
-    mesh.points.push_back({1, 1, -1});
-    mesh.points.push_back({-1, -1, -1});
-    mesh.points.push_back({1, -1, -1});
+    mesh.points.emplace_back(-1, -1, 1);
+    mesh.points.emplace_back(-1, -1, 1);
+    mesh.points.emplace_back(-1, 1, 1);
+    mesh.points.emplace_back(1, 1, 1);
+    mesh.points.emplace_back(-1, 1, -1);
+    mesh.points.emplace_back(1, 1, -1);
+    mesh.points.emplace_back(-1, -1, -1);
+    mesh.points.emplace_back(1, -1, -1);
 
     mesh.faceIndexes.push_back(0);
     mesh.faceIndexes.push_back(1);
