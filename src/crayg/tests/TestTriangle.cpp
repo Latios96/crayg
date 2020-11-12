@@ -5,6 +5,7 @@
 #include <catch2/catch.hpp>
 #include <scene/Triangle.h>
 #include <scene/TriangleMesh.h>
+#include <iostream>
 #include "utils/utils.h"
 
 TEST_CASE("TriangleIntersects") {
@@ -63,4 +64,22 @@ TEST_CASE("TriangleIntersects") {
         const Vector3f hitRay = RAY_HITTING_TRIANGLE.constructIntersectionPoint(hitIntersection.rayParameter);
         REQUIRE(hitRay == Vector3f(0.25f, 0.25f, 0));
     }
+}
+
+TEST_CASE("BarycentricCoordinates") {
+    TriangleMesh triangleMesh;
+    triangleMesh.points.emplace_back(0, 0, 0);
+    triangleMesh.points.emplace_back(0, 1, 0);
+    triangleMesh.points.emplace_back(1, 0, 0);
+    triangleMesh.faceIndexes.push_back(0);
+    triangleMesh.faceIndexes.push_back(1);
+    triangleMesh.faceIndexes.push_back(2);
+    triangleMesh.beforeRender();
+
+    Triangle triangle(&triangleMesh, 0);
+
+    auto barycentric2 = triangle.toBarycentricCoordinates({0.25, 0.25, 0.25});
+    REQUIRE(barycentric2.alpha == 0.5);
+    REQUIRE(barycentric2.beta == 0.25);
+    REQUIRE(barycentric2.gamma == 0.25);
 }

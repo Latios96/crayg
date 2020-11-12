@@ -9,6 +9,10 @@
 
 class TriangleMesh;
 
+struct BarycentricCoordinates {
+    float alpha, beta, gamma;
+};
+
 class Triangle : public Imageable {
  public:
     Triangle();
@@ -25,9 +29,20 @@ class Triangle : public Imageable {
 
     TriangleMesh *triangleMesh;
     int faceIndex;
+
+    BarycentricCoordinates toBarycentricCoordinates(const Vector3f &point);
+    template<typename T>
+    T interpolateLinear(const BarycentricCoordinates &coordinates, const T &value1, const T &value2, const T &value3);
  private:
     Intersection getIntersectionMullerTrumbore(const Ray &ray);
-
 };
+
+template<typename T>
+T Triangle::interpolateLinear(const BarycentricCoordinates &coordinates,
+                              const T &value1,
+                              const T &value2,
+                              const T &value3) {
+    return value1 * coordinates.alpha + value2 * coordinates.beta + value3 * coordinates.gamma;
+}
 
 #endif //CRAYG_TRIANGLE_H

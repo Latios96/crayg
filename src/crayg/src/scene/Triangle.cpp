@@ -119,27 +119,27 @@ Triangle::Triangle() {
 }
 
 Vector3f Triangle::getNormal(Vector3f point) {
-    Vector3f a = v1() - v0(), b = v2() - v0(), c = point - v0();
-    float d00 = a.scalarProduct(a);
-    float d01 = a.scalarProduct(b);
-    float d11 = b.scalarProduct(b);
-    float d20 = c.scalarProduct(a);
-    float d21 = c.scalarProduct(b);
-    float denom = d00 * d11 - d01 * d01;
-    float v = (d11 * d20 - d01 * d21) / denom;
-    float w = (d00 * d21 - d01 * d20) / denom;
-    float u = 1.0f - v - w;
+    auto barycentric = toBarycentricCoordinates(point);
 
     auto normalV0 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex]];
     auto normalV1 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex + 1]];
     auto normalV2 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex + 2]];
 
-    const Vector3f normal = normalV0 * u + normalV1 * v + normalV2 * w;
-    return normal.normalize();
+    return interpolateLinear(barycentric, normalV0, normalV1, normalV2).normalize();
 }
 
 Vector3f Triangle::getNormal() {
     const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
     return normal.invert();
 }
+BarycentricCoordinates Triangle::toBarycentricCoordinates(const Vector3f &point) {
+    // based on Fundamentals of Computer Graphics, 2016, p. 49
+    const Vector3f &normal = getNormal();
+    float lengthSquared = normal.lengthSquared();
+    float alpha = normal.scalarProduct((v2() - v1()).crossProduct(point - v1())) / lengthSquared;
+    float beta = normal.scalarProduct((v0() - v2()).crossProduct(point - v2())) / lengthSquared;
+    float gamma = normal.scalarProduct((v1() - v0()).crossProduct(point - v0())) / lengthSquared;
+    return {alpha, beta, gamma};
+}
+
 
