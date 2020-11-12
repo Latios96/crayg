@@ -22,10 +22,12 @@ class Triangle : public Imageable {
     Vector3f v0();
     Vector3f v1();
     Vector3f v2();
+
     TriangleMesh *triangleMesh;
     int faceIndex;
-
+ private:
     Intersection getIntersectionMullerTrumbore(const Ray &ray);
+
 };
 
 #endif //CRAYG_TRIANGLE_H
