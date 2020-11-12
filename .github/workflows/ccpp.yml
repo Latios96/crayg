@@ -37,7 +37,7 @@ jobs:
         shell: cmd
       - name: build
         working-directory: build
-        run: cmake --build . --config Release
+        run: cmake --build . --config Release -- /M:%NUMBER_OF_PROCESSORS%
         shell: cmd
       - name: run tests
         working-directory: build
