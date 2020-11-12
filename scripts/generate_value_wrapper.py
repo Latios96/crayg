@@ -77,25 +77,39 @@ def generate_wrapper(class_name, wrapped_type):
     wrapped_type_camel = wrapped_type[0].upper() + wrapped_type[1:]
 
     with open(header_path, "w") as f:
-        f.write(render_template(HEADER_TEMPLATE,
-                                dict(class_name=class_name, wrapped_type=wrapped_type,
-                                     wrapped_type_camel_case=wrapped_type_camel)))
+        f.write(
+            render_template(
+                HEADER_TEMPLATE,
+                dict(
+                    class_name=class_name,
+                    wrapped_type=wrapped_type,
+                    wrapped_type_camel_case=wrapped_type_camel,
+                ),
+            )
+        )
     with open(cpp_path, "w") as f:
         f.write(
-            render_template(CPP_TEMPLATE, dict(class_name=class_name, wrapped_type=wrapped_type,
-                                               wrapped_type_camel_case=wrapped_type_camel)))
+            render_template(
+                CPP_TEMPLATE,
+                dict(
+                    class_name=class_name,
+                    wrapped_type=wrapped_type,
+                    wrapped_type_camel_case=wrapped_type_camel,
+                ),
+            )
+        )
 
 
 def main(args):
-    parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('class_name', help="Name of the class to generate")
-    parser.add_argument('wrapped_type', help="The type that should be wrapped")
-    parser.add_argument('folder', help="The folder where .h and .cpp should be located")
+    parser = argparse.ArgumentParser(description="Process some integers.")
+    parser.add_argument("class_name", help="Name of the class to generate")
+    parser.add_argument("wrapped_type", help="The type that should be wrapped")
+    parser.add_argument("folder", help="The folder where .h and .cpp should be located")
 
     args = parser.parse_args()
 
     generate_wrapper(args.class_name, args.wrapped_type)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(sys.argv)
