@@ -11,7 +11,6 @@ class TriangleMesh;
 
 class Triangle : public Imageable {
  public:
-    static int intersections;
     Triangle();
     Triangle(TriangleMesh *triangleMesh, int faceIndex);
 
@@ -25,7 +24,6 @@ class Triangle : public Imageable {
     Vector3f v2();
     TriangleMesh *triangleMesh;
     int faceIndex;
-    Intersection getIntersectionMyImpl(const Ray &ray);
 
     Intersection getIntersectionMullerTrumbore(const Ray &ray);
 };
