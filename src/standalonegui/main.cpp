@@ -44,12 +44,8 @@ int main(int argc, char **argv) {
 
         Renderer renderer(scene, imageWidgetOutputDriver);
 
-        std::thread renderThread([&renderer, &myImage, &parseResult]() {
+        std::thread renderThread([&renderer]() {
             renderer.renderScene();
-
-            Logger::info("writing image..");
-            ImageWriters::writeImage(myImage, parseResult.args->imageOutputPath);
-            Logger::info("writing image done.");
         });
         renderThread.detach();
 
