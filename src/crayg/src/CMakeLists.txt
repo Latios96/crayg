@@ -1,4 +1,7 @@
 set(crayg_SRCS
+        basics/LombokTest.h
+        basics/LombokBaryCentricLombokTest.h
+        basics/LombokBaryCentricLombokTest.cpp
         basics/Vector3f.h
         basics/Vector3f.cpp
         basics/Matrix4x4f.h
