@@ -23,6 +23,12 @@ std::vector<KnipserTest> renderTests() {
             renderScene(context.getReferenceFolder() + "/pointCloud.json", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
+        }),
+        KnipserTest("teapot", [](TestContext &context) {
+            context.setImageOutputName("teapot.png");
+            renderScene(context.getReferenceFolder() + "/teapot.json", context.getOutputFilename());
+
+            ASSERT_IMAGES_ARE_EQUAL(context);
         })
     };
 }
