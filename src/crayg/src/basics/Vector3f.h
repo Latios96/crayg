@@ -42,6 +42,8 @@ class Vector3f {
 
     float length() const;
 
+    float lengthSquared() const;
+
     Vector3f normalize() const;
 
     Vector3f invert() const {

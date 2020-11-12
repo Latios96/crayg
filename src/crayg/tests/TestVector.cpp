@@ -52,6 +52,12 @@ TEST_CASE("length", "[Vector]") {
     REQUIRE(compareWithPrecision(myVector.length(), 11.18033f));
 }
 
+TEST_CASE("lengthSquared", "[Vector]") {
+    Vector3f myVector(-5, -6, -8);
+
+    REQUIRE(compareWithPrecision(myVector.lengthSquared(), 125));
+}
+
 TEST_CASE("multiplyScalar", "[Vector]") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector.multiplyScalar(5);

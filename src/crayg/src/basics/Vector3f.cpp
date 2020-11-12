@@ -33,12 +33,17 @@ float Vector3f::length() const {
     return static_cast<float>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
 }
 
+float Vector3f::lengthSquared() const {
+    return static_cast<float>((pow(x, 2) + pow(y, 2) + pow(z, 2)));
+}
+
 Vector3f Vector3f::normalize() const {
     float length = this->length();
     float oneByLength = 1 / length;
 
     return {x * oneByLength, y * oneByLength, z * oneByLength};
 }
+
 
 Vector3f Vector3f::crossProduct(const Vector3f &otherVector) const {
     return {y * otherVector.z - otherVector.y * z,
