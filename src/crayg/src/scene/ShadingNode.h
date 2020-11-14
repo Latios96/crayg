@@ -78,7 +78,7 @@ class ShadingNode : public Serializable {
 
 template<typename T>
 std::string Plug<T>::fullName() {
-    return shadingNode->getName() + name;
+    return shadingNode->getName() + '.' + name;
 }
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNODE_H_
