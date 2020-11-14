@@ -111,6 +111,6 @@ void JsonSerializer::writeMatrix4x4f(std::string name, Matrix4x4f matrix4X4f) {
     writer->EndArray();
 }
 void JsonSerializer::writeString(std::string name, std::string str) {
-    writer->Key("type");
-    writer->String(name.c_str());
+    writer->Key(name.c_str());
+    writer->String(str.c_str());
 }
