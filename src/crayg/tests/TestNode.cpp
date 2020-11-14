@@ -2,7 +2,9 @@
 // Created by Jan on 14.11.2020.
 //
 #include <catch2/catch.hpp>
+#include <sceneIO/write/json/JsonSerializer.h>
 #include "scene/ShadingNode.h"
+#include <sstream>
 
 class MyMat : public ShadingNode {
  public:
@@ -18,6 +20,17 @@ class MyMat : public ShadingNode {
             serializer.writeString("colorPlug", colorPlug.input->fullName());
         }
     }
+    void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override {
+        if (inputPlugName == "color") {
+            colorPlug.input = static_cast<OutputPlug<Color> *>(outputPlug.getPtr());
+        }
+    }
+    PlugPtr getPlugByName(const std::string &inputPlugName) override {
+        if (inputPlugName == "color") {
+            return PlugPtr(&colorPlug);
+        }
+        return {};
+    }
 };
 
 class MyFileTextureNode : public ShadingNode {
@@ -32,6 +45,14 @@ class MyFileTextureNode : public ShadingNode {
     }
     void serialize(Serializer &serializer) override {
         ShadingNode::serialize(serializer);
+    }
+    void connectOutputToInput(const std::string &inputPlugName, PlugPtr plug) override {
+    }
+    PlugPtr getPlugByName(const std::string &inputPlugName) override {
+        if (inputPlugName == "color") {
+            return PlugPtr(&colorPlug);
+        }
+        return {};
     }
 };
 
@@ -69,4 +90,45 @@ TEST_CASE("should use connected node") {
     myFileTextureNode.colorPlug.connect(&myMat.colorPlug);
 
     REQUIRE(myMat.colorPlug.compute() == Color::createGrey(0.5));
+}
+
+TEST_CASE("serialize node") {
+    MyMat myMat;
+    myMat.generateName();
+    MyFileTextureNode myFileTextureNode;
+    myFileTextureNode.generateName();
+    myFileTextureNode.colorPlug.connect(&myMat.colorPlug);
+
+    std::shared_ptr<std::ostringstream> px = std::make_shared<std::ostringstream>();
+    auto stream = std::shared_ptr<std::ostream>(px);
+    JsonSerializer serializer(stream);
+    serializer.start();
+    serializer.startSceneObjects();
+
+    serializer.startObject();
+    myMat.serialize(serializer);
+    serializer.endObject();
+
+    serializer.startObject();
+    myFileTextureNode.serialize(serializer);
+    serializer.endObject();
+
+    serializer.endSceneObjects();
+    serializer.end();
+
+    REQUIRE(px->str() == "test");
+}
+
+TEST_CASE("deserialize node") {
+    MyMat myMat;
+    myMat.generateName();
+    MyFileTextureNode myFileTextureNode;
+    myFileTextureNode.generateName();
+    std::vector<ShadingNode *> nodes({&myMat, &myFileTextureNode});
+
+    auto node = nodes[1]->getPlugByName("color");
+    nodes[0]->connectOutputToInput("color", node);
+
+    REQUIRE(myMat.colorPlug.shadingNode == &myMat);
+    REQUIRE(myMat.colorPlug.input == &myFileTextureNode.colorPlug);
 }

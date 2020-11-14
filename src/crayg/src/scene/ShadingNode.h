@@ -66,12 +66,33 @@ class OutputPlug : public Plug<T> {
     std::function<T()> computor;
 };
 
+class PlugPtr {
+ public:
+    PlugPtr() = default;;
+
+    template<typename T>
+    explicit PlugPtr(InputPlug<T> *plug) {
+        ptr = plug;
+    }
+    template<typename T>
+    explicit PlugPtr(OutputPlug<T> *plug) {
+        ptr = plug;
+    }
+    void *getPtr() const {
+        return ptr;
+    }
+ private:
+    void *ptr = nullptr;
+};
+
 class ShadingNode : public Serializable {
  public:
     const std::string &getName() const;
     void setName(const std::string &name);
     void generateName();
     void serialize(Serializer &serializer) override;
+    virtual void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) = 0;
+    virtual PlugPtr getPlugByName(const std::string &inputPlugName) = 0;
  private:
     std::string name;
 };
