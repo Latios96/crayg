@@ -9,45 +9,62 @@
 #include <basics/Color.h>
 
 #include <utility>
+#include <functional>
 
 const bool INPUT_PLUG = true;
 const bool OUTPUT_PLUG = false;
 
 class ShadingNode;
 
-template<typename T, bool isInput>
+template<typename T>
 class Plug {
  public:
-    Plug(std::string name,
-         ShadingNode *shadingNode,
-         T defaultValue,
-         Plug<T, !isInput> *input)
-        : name(std::move(name)),
-          shadingNode(shadingNode),
-          defaultValue(defaultValue),
-          input(input) {}
-    Plug(std::string name, ShadingNode *shadingNode, T defaultValue)
+    Plug<T>(std::string name, ShadingNode *shadingNode, T defaultValue)
         : name(std::move(name)), shadingNode(shadingNode), defaultValue(defaultValue) {}
-    T compute() {
-        if (!input) {
-            return defaultValue;
-        }
-        return computor();
-    }
-    void connect(Plug<T, !isInput> *plug) {
-        input = plug;
-    }
 
-    void connectTo(Plug<T, !isInput> *plug) {
-        plug->input = this;
-    }
     std::string fullName() {
         return shadingNode->getName() + name;
     }
     std::string name;
     ShadingNode *shadingNode;
     T defaultValue;
-    Plug<T, !isInput> *input = nullptr;
+};
+template<typename T>
+class OutputPlug;
+
+template<typename T>
+class InputPlug : public Plug<T> {
+ public:
+    InputPlug(const std::string &name, ShadingNode *shadingNode, T defaultValue) :
+        Plug<T>(name, shadingNode, defaultValue) {
+    }
+
+    T compute() {
+        if (!input) {
+            return Plug<T>::defaultValue;
+        }
+        return input->compute();
+    }
+    void connect(OutputPlug<T> *plug) {
+        input = plug;
+    }
+    OutputPlug<T> *input = nullptr;
+};
+
+template<typename T>
+class OutputPlug : public Plug<T> {
+ public:
+    OutputPlug(const std::string &name, ShadingNode *shadingNode, T defaultValue, std::function<T()> computor) :
+        Plug<T>(name, shadingNode, defaultValue),
+        computor(computor) {
+    }
+    T compute() {
+        return computor();
+    }
+    void connect(InputPlug<T> *plug) {
+        plug->input = this;
+    }
+    std::function<T()> computor;
 };
 
 class ShadingNode : public Serializable {

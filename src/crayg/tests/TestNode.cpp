@@ -6,8 +6,8 @@
 
 class MyMat : public ShadingNode {
  public:
-    Plug<Color, INPUT_PLUG> colorPlug;
-    MyMat() : colorPlug(Plug<Color, INPUT_PLUG>("color", this, Color::createBlack())) {
+    InputPlug<Color> colorPlug;
+    MyMat() : colorPlug(InputPlug<Color>("color", this, Color::createBlack())) {
     }
     void deserialize(Deserializer &deserializer) override {
 
@@ -22,17 +22,16 @@ class MyMat : public ShadingNode {
 
 class MyFileTextureNode : public ShadingNode {
  public:
-    Plug<Color, OUTPUT_PLUG> colorPlug;
-    MyFileTextureNode() : colorPlug(Plug<Color, OUTPUT_PLUG>("color", this, Color::createBlack())) {
+    OutputPlug<Color> colorPlug;
+    MyFileTextureNode() : colorPlug(OutputPlug<Color>("color", this, Color::createBlack(), []() {
+        return Color::createGrey(0.5);
+    })) {
     }
     void deserialize(Deserializer &deserializer) override {
 
     }
     void serialize(Serializer &serializer) override {
         ShadingNode::serialize(serializer);
-        if (colorPlug.input) {
-            serializer.writeString("colorPlug", colorPlug.input->fullName());
-        }
     }
 };
 
@@ -50,8 +49,24 @@ TEST_CASE("construct network by connecting output to input") {
     MyMat myMat;
     MyFileTextureNode myFileTextureNode;
 
-    myFileTextureNode.colorPlug.connectTo(&myMat.colorPlug);
+    myFileTextureNode.colorPlug.connect(&myMat.colorPlug);
 
     REQUIRE(myMat.colorPlug.shadingNode == &myMat);
     REQUIRE(myMat.colorPlug.input == &myFileTextureNode.colorPlug);
+}
+
+TEST_CASE("should use default value") {
+    MyMat myMat;
+    MyFileTextureNode myFileTextureNode;
+
+    REQUIRE(myMat.colorPlug.compute() == Color::createBlack());
+}
+
+TEST_CASE("should use connected node") {
+    MyMat myMat;
+    MyFileTextureNode myFileTextureNode;
+
+    myFileTextureNode.colorPlug.connect(&myMat.colorPlug);
+
+    REQUIRE(myMat.colorPlug.compute() == Color::createGrey(0.5));
 }
