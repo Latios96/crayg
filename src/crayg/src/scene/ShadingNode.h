@@ -22,13 +22,12 @@ class Plug {
     Plug<T>(std::string name, ShadingNode *shadingNode, T defaultValue)
         : name(std::move(name)), shadingNode(shadingNode), defaultValue(defaultValue) {}
 
-    std::string fullName() {
-        return shadingNode->getName() + name;
-    }
+    std::string fullName();
     std::string name;
     ShadingNode *shadingNode;
     T defaultValue;
 };
+
 template<typename T>
 class OutputPlug;
 
@@ -76,5 +75,10 @@ class ShadingNode : public Serializable {
  private:
     std::string name;
 };
+
+template<typename T>
+std::string Plug<T>::fullName() {
+    return shadingNode->getName() + name;
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNODE_H_
