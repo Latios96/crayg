@@ -15,3 +15,6 @@ void ShadingNode::setName(const std::string &name) {
 void ShadingNode::generateName() {
     name = boost::uuids::to_string(boost::uuids::random_generator()());
 }
+void ShadingNode::serialize(Serializer &serializer) {
+    serializer.writeString("name", name);
+}

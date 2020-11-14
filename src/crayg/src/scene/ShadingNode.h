@@ -12,6 +12,7 @@ class ShadingNode : public Serializable {
     const std::string &getName() const;
     void setName(const std::string &name);
     void generateName();
+    void serialize(Serializer &serializer) override;
  private:
     std::string name;
 };
