@@ -22,6 +22,7 @@ class JsonDeserializer : public Deserializer {
     void readFloatArray(std::string name, std::vector<float> &target) override;
  private:
     rapidjson::Value &jsonObject;
+    void check_member_exists(const std::string &name) const;
 };
 
 #endif //CRAYG_JSONDESERIALIZER_H
