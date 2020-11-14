@@ -25,6 +25,8 @@ set(crayg_SRCS
         scene/Transformable.cpp
         scene/Scene.h
         scene/Scene.cpp
+        scene/ShadingNode.h
+        scene/ShadingNode.cpp
         intersectors/Intersector.h
         image/ImageWriter.h
         scene/SceneCreator.h
