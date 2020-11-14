@@ -6,6 +6,49 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNODE_H_
 
 #include <sceneIO/Serializable.h>
+#include <basics/Color.h>
+
+#include <utility>
+
+const bool INPUT_PLUG = true;
+const bool OUTPUT_PLUG = false;
+
+class ShadingNode;
+
+template<typename T, bool isInput>
+class Plug {
+ public:
+    Plug(std::string name,
+         ShadingNode *shadingNode,
+         T defaultValue,
+         Plug<T, !isInput> *input)
+        : name(std::move(name)),
+          shadingNode(shadingNode),
+          defaultValue(defaultValue),
+          input(input) {}
+    Plug(std::string name, ShadingNode *shadingNode, T defaultValue)
+        : name(std::move(name)), shadingNode(shadingNode), defaultValue(defaultValue) {}
+    T compute() {
+        if (!input) {
+            return defaultValue;
+        }
+        return computor();
+    }
+    void connect(Plug<T, !isInput> *plug) {
+        input = plug;
+    }
+
+    void connectTo(Plug<T, !isInput> *plug) {
+        plug->input = this;
+    }
+    std::string fullName() {
+        return shadingNode->getName() + name;
+    }
+    std::string name;
+    ShadingNode *shadingNode;
+    T defaultValue;
+    Plug<T, !isInput> *input = nullptr;
+};
 
 class ShadingNode : public Serializable {
  public:

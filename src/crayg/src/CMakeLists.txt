@@ -27,6 +27,8 @@ set(crayg_SRCS
         scene/Scene.cpp
         scene/ShadingNode.h
         scene/ShadingNode.cpp
+        scene/Material.h
+        scene/Material.cpp
         intersectors/Intersector.h
         image/ImageWriter.h
         scene/SceneCreator.h
