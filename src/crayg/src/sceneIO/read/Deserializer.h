@@ -15,6 +15,7 @@ class Deserializer {
     virtual bool hasProperty(std::string name) = 0;
     virtual int readInt(std::string name) = 0;
     virtual float readFloat(std::string name) = 0;
+    virtual std::string readString(std::string name) = 0;
     virtual Vector3f readVector3f(std::string name) = 0;
     virtual Matrix4x4f readMatrix4x4f(std::string name) = 0;
     virtual void readVector3fArray(std::string name, std::vector<Vector3f> &target) = 0;

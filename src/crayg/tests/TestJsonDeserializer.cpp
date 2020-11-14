@@ -12,7 +12,8 @@ TEST_CASE("JsonDeserializer") {
 "myIntArray": [1,2,3],
 "myFloatArray": [0.1,0.2,0.3],
 "myMatrix4x4f": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-"myMatrix4x4fInvalid": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+"myMatrix4x4fInvalid": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+"myString": "testString"
 })";
     rapidjson::StringStream s(json);
     rapidjson::Document d;
@@ -105,6 +106,14 @@ TEST_CASE("JsonDeserializer") {
 
     SECTION("readFloatArrayShouldThrowExceptionNotFound") {
         REQUIRE_THROWS_AS(jsonDeserializer.readMatrix4x4f("e"), std::invalid_argument);
+    }
+
+    SECTION("readStringShouldThrowException") {
+        REQUIRE_THROWS_AS(jsonDeserializer.readString("e"), std::invalid_argument);
+    }
+
+    SECTION("readStringShouldReadCorrectly") {
+        REQUIRE(jsonDeserializer.readString("myString") == "testString");
     }
 
 }

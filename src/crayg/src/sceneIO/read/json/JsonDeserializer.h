@@ -14,6 +14,7 @@ class JsonDeserializer : public Deserializer {
     bool hasProperty(std::string name) override;
     int readInt(std::string name) override;
     float readFloat(std::string name) override;
+    std::string readString(std::string name) override;
     Vector3f readVector3f(std::string name) override;
     Matrix4x4f readMatrix4x4f(std::string name) override;
     void readVector3fArray(std::string name, std::vector<Vector3f> &target) override;

@@ -98,3 +98,10 @@ Matrix4x4f JsonDeserializer::readMatrix4x4f(std::string name) {
                       array[15].GetFloat());
 
 }
+std::string JsonDeserializer::readString(std::string name) {
+    // TODO refactor this
+    if (!jsonObject.HasMember(name.c_str())) {
+        throw std::invalid_argument(fmt::format("Could not read string with name '{}'", name));
+    }
+    return jsonObject[name.c_str()].GetString();
+}
