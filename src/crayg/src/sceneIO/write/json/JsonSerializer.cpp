@@ -51,9 +51,9 @@ void JsonSerializer::writeType(std::string name) {
     writer->String(name.c_str());
 }
 
-JsonSerializer::JsonSerializer(const std::string &path) {
-    ofs = std::make_shared<std::ofstream>(path);
-    osw = std::make_shared<rapidjson::OStreamWrapper>(*ofs);
+JsonSerializer::JsonSerializer(std::shared_ptr<std::ostream> os) {
+    os = os;
+    osw = std::make_shared<rapidjson::OStreamWrapper>(*os);
     writer =
         std::make_shared<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>>(
             *osw);
@@ -99,7 +99,6 @@ void JsonSerializer::start() {
 }
 void JsonSerializer::end() {
     writer->EndObject();
-    ofs->close();
 }
 void JsonSerializer::writeMatrix4x4f(std::string name, Matrix4x4f matrix4X4f) {
     writer->Key(name.c_str());
@@ -110,4 +109,8 @@ void JsonSerializer::writeMatrix4x4f(std::string name, Matrix4x4f matrix4X4f) {
         }
     }
     writer->EndArray();
+}
+void JsonSerializer::writeString(std::string name, std::string str) {
+    writer->Key("type");
+    writer->String(name.c_str());
 }

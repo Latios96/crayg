@@ -16,7 +16,7 @@
 class JsonSerializer : public SerializerImplementation {
 
  public:
-    explicit JsonSerializer(const std::string &path);
+    explicit JsonSerializer(std::shared_ptr<std::ostream> os);
     void start() override;
     void end() override;
     void startSceneObjects() override;
@@ -31,12 +31,13 @@ class JsonSerializer : public SerializerImplementation {
     void writeFloat(std::string name, float value) override;
     void writeVector3f(std::string name, Vector3f value) override;
     void writeType(std::string name) override;
+    void writeString(std::string name, std::string str) override;
     void writeVector3fArray(std::string name, std::vector<Vector3f> &value) override;
     void writeIntArray(std::string name, std::vector<int> &value) override;
     void writeFloatArray(std::string name, std::vector<float> &value) override;
     void writeMatrix4x4f(std::string name, Matrix4x4f matrix4X4f) override;
  private:
-    std::shared_ptr<std::ofstream> ofs;
+    std::shared_ptr<std::ostream> os;
     std::shared_ptr<rapidjson::OStreamWrapper> osw;
     std::shared_ptr<rapidjson::PrettyWriter<rapidjson::OStreamWrapper>> writer;
 

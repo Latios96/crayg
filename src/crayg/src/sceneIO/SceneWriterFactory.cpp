@@ -19,7 +19,7 @@ void SceneWriterFacade::write() {
 }
 
 std::shared_ptr<SceneWriterFacade> SceneWriterFactory::createSceneWriter(std::string scenePath, Scene &scene) {
-    SerializerImplementation *impl = new JsonSerializer(scenePath);
+    SerializerImplementation *impl = new JsonSerializer(std::make_shared<std::ofstream>(scenePath));
     SceneWriter *writer = new SceneWriter(scene, *impl);
     return std::shared_ptr<SceneWriterFacade>(new SceneWriterFacade(writer, impl));
 }

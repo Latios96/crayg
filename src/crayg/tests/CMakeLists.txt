@@ -33,6 +33,7 @@ set(UNIT_TEST_LIST
         TestMatrix4x4f.cpp
         TestTransform.cpp
         TestSceneObject.cpp
+        TestJsonSceneSerializer.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)

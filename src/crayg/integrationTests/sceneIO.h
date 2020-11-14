@@ -36,7 +36,7 @@ std::vector<KnipserTest> sceneIoTests() {
             scene.addLight(light);
 
             const std::string scenePath = context.getOutputFolder() + "/writtenScene.json";
-            JsonSerializer jsonSerializer(scenePath);
+            JsonSerializer jsonSerializer(std::make_shared<std::ofstream>(scenePath));
             SceneWriter sceneWriter(scene, jsonSerializer);
             sceneWriter.write();
 

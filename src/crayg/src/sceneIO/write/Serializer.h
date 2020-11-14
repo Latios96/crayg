@@ -16,6 +16,7 @@ class Serializer {
     virtual void writeFloat(std::string name, float value) = 0;
     virtual void writeVector3f(std::string name, Vector3f value) = 0;
     virtual void writeType(std::string name) = 0;
+    virtual void writeString(std::string name, std::string str) = 0;
     virtual void writeVector3fArray(std::string name, std::vector<Vector3f> &value) = 0;
     virtual void writeIntArray(std::string name, std::vector<int> &value) = 0;
     virtual void writeFloatArray(std::string name, std::vector<float> &value) = 0;
