@@ -28,9 +28,9 @@ class Scene {
     std::vector<std::shared_ptr<Material>> materials;
     std::shared_ptr<Camera> camera = nullptr;
     RenderSettings renderSettings;
+    bool materialWithNameExists(const std::shared_ptr<Material> &material);
 
     virtual ~Scene() = default;
- private:
-    bool materialWithNameExists(const std::shared_ptr<Material> &material);
+
 };
 #endif //CRAYG_SCENE_H
