@@ -24,7 +24,6 @@ class Scene {
 
     std::vector<std::shared_ptr<SceneObject>> objects;
     std::vector<std::shared_ptr<Light>> lights;
-    std::vector<ShadingNode *> shadingNodes;
     std::shared_ptr<Camera> camera = nullptr;
     RenderSettings renderSettings;
 
