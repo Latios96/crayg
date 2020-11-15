@@ -17,6 +17,14 @@
 
 JsonSceneReader::JsonSceneReader(const std::string &path, Scene &scene) : SceneReader(path, scene) {}
 
+template<typename T>
+void readSceneObject(Scene &scene, rapidjson::Value &obj) {
+    std::shared_ptr<T> sphere = std::make_shared<T>();
+    JsonDeserializer deserializer(obj);
+    sphere->deserialize(deserializer);
+    scene.addObject(sphere);
+}
+
 void readSceneObjects(Scene &scene, rapidjson::Document &d) {
     rapidjson::Value &sceneObjects = d[SCENE_OBJECTS];
 
@@ -27,30 +35,18 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
             std::string type(obj["type"].GetString());
 
             if (type == "Sphere") {
-                std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>();
-                JsonDeserializer deserializer(obj);
-                sphere->deserialize(deserializer);
-                scene.addObject(sphere);
+                readSceneObject<Sphere>(scene, obj);
             } else if (type == "GroundPlane") {
-                std::shared_ptr<GroundPlane> plane = std::make_shared<GroundPlane>();
-                JsonDeserializer deserializer(obj);
-                plane->deserialize(deserializer);
-                scene.addObject(plane);
+                readSceneObject<GroundPlane>(scene, obj);
             } else if (type == "TriangleMesh") {
-                std::shared_ptr<TriangleMesh> mesh = std::make_shared<TriangleMesh>();
-                JsonDeserializer deserializer(obj);
-                mesh->deserialize(deserializer);
-                scene.addObject(mesh);
+                readSceneObject<TriangleMesh>(scene, obj);
+            } else if (type == "PointCloud") {
+                readSceneObject<PointCloud>(scene, obj);
             } else if (type == "Light") {
                 std::shared_ptr<Light> light = std::make_shared<Light>();
                 JsonDeserializer deserializer(obj);
                 light->deserialize(deserializer);
                 scene.addLight(light);
-            } else if (type == "PointCloud") {
-                std::shared_ptr<PointCloud> pointCloud = std::make_shared<PointCloud>();
-                JsonDeserializer deserializer(obj);
-                pointCloud->deserialize(deserializer);
-                scene.addObject(pointCloud);
             } else if (type == "DiffuseMaterial") {
                 std::shared_ptr<DiffuseMaterial> diffuseMaterial = std::make_shared<DiffuseMaterial>();
                 JsonDeserializer deserializer(obj);
