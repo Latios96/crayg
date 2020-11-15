@@ -35,6 +35,7 @@ set(UNIT_TEST_LIST
         TestSceneObject.cpp
         TestJsonSerializer.cpp
         TestNode.cpp
+        TestScene.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)

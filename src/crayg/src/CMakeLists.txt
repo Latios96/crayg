@@ -28,6 +28,7 @@ set(crayg_SRCS
         scene/ShadingNode.h
         scene/ShadingNode.cpp
         scene/Material.h
+        scene/Material.cpp
         scene/DiffuseMaterial.h
         scene/DiffuseMaterial.cpp
         intersectors/Intersector.h

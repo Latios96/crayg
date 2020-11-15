@@ -11,6 +11,8 @@
 
 class Material : public ShadingNode {
  public:
+    explicit Material();
+    explicit Material(const std::string &name);
     virtual Color getDiffuseColor() = 0;
 };
 

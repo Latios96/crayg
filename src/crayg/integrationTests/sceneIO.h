@@ -9,6 +9,7 @@
 #include <KnipserAssertions.h>
 #include <sceneIO/write/SceneWriter.h>
 #include <scene/GroundPlane.h>
+#include <scene/DiffuseMaterial.h>
 #include "renderUtils.h"
 
 std::vector<KnipserTest> sceneIoTests() {
@@ -24,7 +25,12 @@ std::vector<KnipserTest> sceneIoTests() {
                 camera = std::make_shared<Camera>(Vector3f(0, 0, 10), Vector3f(0, 1, 0), Vector3f(0, 0, -1), 35, 36);
             scene.camera = camera;
 
-            scene.addObject(std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5));
+            const std::shared_ptr<Material>
+                diffuseMaterial = std::make_shared<DiffuseMaterial>(Color::createGrey(0.5f));
+
+            const std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5);
+            sphere->setMaterial(diffuseMaterial);
+            scene.addObject(sphere);
 
             const std::shared_ptr<GroundPlane> groundPlane = std::make_shared<GroundPlane>();
             groundPlane->setPosition(Vector3f(0, -1.5f, 0));

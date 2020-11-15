@@ -9,6 +9,7 @@
 class DiffuseMaterial : public Material {
  public:
     explicit DiffuseMaterial(const Color &diffuseColor);
+    DiffuseMaterial(const std::string &name, const Color &diffuseColor);
     Color getDiffuseColor() override;
     void serialize(Serializer &serializer) override;
     void deserialize(Deserializer &deserializer) override;
