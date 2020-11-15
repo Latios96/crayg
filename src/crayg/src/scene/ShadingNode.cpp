@@ -12,7 +12,7 @@ ShadingNode::ShadingNode() {
 }
 ShadingNode::ShadingNode(std::string name) : name(std::move(name)) {}
 
-const std::string &ShadingNode::getName() const {
+std::string ShadingNode::getName() const {
     return name;
 }
 void ShadingNode::generateName() {
