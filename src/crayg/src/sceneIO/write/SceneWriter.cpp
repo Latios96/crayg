@@ -20,6 +20,11 @@ void SceneWriter::write() {
         light->serialize(serializerImpl);
         serializerImpl.endObject();
     }
+    for (const auto &material : scene.materials) {
+        serializerImpl.startObject();
+        material->serialize(serializerImpl);
+        serializerImpl.endObject();
+    }
     serializerImpl.endSceneObjects();
 
     if (scene.camera) {
