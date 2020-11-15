@@ -15,7 +15,7 @@ TEST_CASE("ShadingMethod") {
     scene.addLight(light);
 
     std::shared_ptr<DiffuseMaterial>
-        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createGrey(0.0));
+        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createWhite());
     std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(), 1);
     sphere->setMaterial(defaultMaterial);
     scene.addObject(sphere);
@@ -63,7 +63,7 @@ TEST_CASE("ShadingMethod/noLightsInSceneReturnsAmbientColor") {
     Scene scene2;
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1);
     std::shared_ptr<DiffuseMaterial>
-        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createGrey(0.0));
+        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createWhite());
     sphere2->setMaterial(defaultMaterial);
     scene2.addObject(sphere2);
     ShadingMethod shadingMethod2(scene2);
