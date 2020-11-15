@@ -20,6 +20,7 @@ class JsonDeserializer : public Deserializer {
     void readVector3fArray(std::string name, std::vector<Vector3f> &target) override;
     void readIntArray(std::string name, std::vector<int> &target) override;
     void readFloatArray(std::string name, std::vector<float> &target) override;
+    Color readColor(std::string name) override;
  private:
     rapidjson::Value &jsonObject;
     void check_member_exists(const std::string &name) const;

@@ -87,3 +87,8 @@ void JsonDeserializer::check_member_exists(const std::string &name) const {
         throw std::invalid_argument(fmt::format("Could not read member with name '{}'", name));
     }
 }
+Color JsonDeserializer::readColor(std::string name) {
+    check_member_exists(name);
+    const auto array = jsonObject[name.c_str()].GetArray();
+    return {array[0].GetFloat(), array[1].GetFloat(), array[2].GetFloat()};
+}
