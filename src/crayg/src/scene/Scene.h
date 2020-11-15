@@ -21,6 +21,7 @@ class Scene {
 
     void addObject(const std::shared_ptr<SceneObject> &sceneObject);
     void addLight(const std::shared_ptr<Light> &sceneObject);
+    void addMaterial(const std::shared_ptr<Material> &material);
 
     std::vector<std::shared_ptr<SceneObject>> objects;
     std::vector<std::shared_ptr<Light>> lights;
@@ -29,5 +30,7 @@ class Scene {
     RenderSettings renderSettings;
 
     virtual ~Scene() = default;
+ private:
+    bool materialWithNameExists(const std::shared_ptr<Material> &material);
 };
 #endif //CRAYG_SCENE_H

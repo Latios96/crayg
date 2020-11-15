@@ -35,4 +35,17 @@ TEST_CASE("addObjectToScene") {
         REQUIRE(scene.objects.size() == 1);
         REQUIRE(scene.materials.size() == 1);
     }
+
+    SECTION("cannot add material without name") {
+        const std::shared_ptr<Material> material = std::make_shared<DiffuseMaterial>("", Color::createGrey(0.5f));
+        REQUIRE_THROWS_AS(scene.addMaterial(material), std::runtime_error);
+    }
+
+    SECTION("material name has to be unique") {
+        const std::shared_ptr<Material> material1 = std::make_shared<DiffuseMaterial>("name", Color::createGrey(0.5f));
+        const std::shared_ptr<Material> material2 = std::make_shared<DiffuseMaterial>("name", Color::createGrey(0.5f));
+        scene.addMaterial(material1);
+
+        REQUIRE_THROWS_AS(scene.addMaterial(material2), std::runtime_error);
+    }
 }
