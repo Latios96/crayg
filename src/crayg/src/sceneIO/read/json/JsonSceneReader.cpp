@@ -40,6 +40,24 @@ void readMaterial(Scene &scene, rapidjson::Value &obj) {
     readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.materials.push_back(p); });
 }
 
+void switchOnTypeAndCreateObject(Scene &scene, rapidjson::Value &obj, const std::string &type) {
+    if (type == "Sphere") {
+        readSceneObject<Sphere>(scene, obj);
+    } else if (type == "GroundPlane") {
+        readSceneObject<GroundPlane>(scene, obj);
+    } else if (type == "TriangleMesh") {
+        readSceneObject<TriangleMesh>(scene, obj);
+    } else if (type == "PointCloud") {
+        readSceneObject<PointCloud>(scene, obj);
+    } else if (type == "Light") {
+        readLight<Light>(scene, obj);
+    } else if (type == "DiffuseMaterial") {
+        readMaterial<DiffuseMaterial>(scene, obj);
+    } else {
+        Logger::warning("Unknown type {}", type);
+    }
+}
+
 void readSceneObjects(Scene &scene, rapidjson::Document &d) {
     rapidjson::Value &sceneObjects = d[SCENE_OBJECTS];
 
@@ -50,22 +68,7 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
 
     for (rapidjson::Value &obj : array) {
         std::string type(obj["type"].GetString());
-
-        if (type == "Sphere") {
-            readSceneObject<Sphere>(scene, obj);
-        } else if (type == "GroundPlane") {
-            readSceneObject<GroundPlane>(scene, obj);
-        } else if (type == "TriangleMesh") {
-            readSceneObject<TriangleMesh>(scene, obj);
-        } else if (type == "PointCloud") {
-            readSceneObject<PointCloud>(scene, obj);
-        } else if (type == "Light") {
-            readLight<Light>(scene, obj);
-        } else if (type == "DiffuseMaterial") {
-            readMaterial<DiffuseMaterial>(scene, obj);
-        } else {
-            Logger::warning("Unknown type {}", type);
-        }
+        switchOnTypeAndCreateObject(scene, obj, type);
     }
 }
 
