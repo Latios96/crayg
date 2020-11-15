@@ -18,11 +18,26 @@
 JsonSceneReader::JsonSceneReader(const std::string &path, Scene &scene) : SceneReader(path, scene) {}
 
 template<typename T>
-void readSceneObject(Scene &scene, rapidjson::Value &obj) {
-    std::shared_ptr<T> sphere = std::make_shared<T>();
+void readObj(Scene &scene, rapidjson::Value &obj, std::function<void(std::shared_ptr<T>)> addTo) {
+    std::shared_ptr<T> o = std::make_shared<T>();
     JsonDeserializer deserializer(obj);
-    sphere->deserialize(deserializer);
-    scene.addObject(sphere);
+    o->deserialize(deserializer);
+    addTo(o);
+}
+
+template<typename T>
+void readSceneObject(Scene &scene, rapidjson::Value &obj) {
+    readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.objects.push_back(p); });
+}
+
+template<typename T>
+void readLight(Scene &scene, rapidjson::Value &obj) {
+    readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.lights.push_back(p); });
+}
+
+template<typename T>
+void readMaterial(Scene &scene, rapidjson::Value &obj) {
+    readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.materials.push_back(p); });
 }
 
 void readSceneObjects(Scene &scene, rapidjson::Document &d) {
@@ -43,15 +58,9 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
             } else if (type == "PointCloud") {
                 readSceneObject<PointCloud>(scene, obj);
             } else if (type == "Light") {
-                std::shared_ptr<Light> light = std::make_shared<Light>();
-                JsonDeserializer deserializer(obj);
-                light->deserialize(deserializer);
-                scene.addLight(light);
+                readLight<Light>(scene, obj);
             } else if (type == "DiffuseMaterial") {
-                std::shared_ptr<DiffuseMaterial> diffuseMaterial = std::make_shared<DiffuseMaterial>();
-                JsonDeserializer deserializer(obj);
-                diffuseMaterial->deserialize(deserializer);
-                scene.addMaterial(diffuseMaterial);
+                readMaterial<DiffuseMaterial>(scene, obj);
             } else {
                 Logger::warning("Unknown type {}", type);
             }
