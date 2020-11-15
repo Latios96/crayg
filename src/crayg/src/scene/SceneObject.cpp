@@ -6,8 +6,8 @@
 
 void SceneObject::serialize(Serializer &serializer) {
     serializer.writeMatrix4x4f("transform", this->getTransform().matrix);
-    if (material) {
-        serializer.writeString("material", material->getName());
+    if (getMaterial()) {
+        serializer.writeString("material", getMaterial()->getName());
     }
 }
 
@@ -21,12 +21,6 @@ void SceneObject::deserialize(Deserializer &deserializer) {
         return;
     }
     transform = Transform(deserializer.readMatrix4x4f("transform"));
-}
-std::shared_ptr<Material> SceneObject::getMaterial() const {
-    return material;
-}
-void SceneObject::setMaterial(const std::shared_ptr<Material> &material) {
-    SceneObject::material = material;
 }
 
 SceneObject::SceneObject() = default;

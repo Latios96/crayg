@@ -26,7 +26,7 @@ std::vector<KnipserTest> sceneIoTests() {
             scene.camera = camera;
 
             const std::shared_ptr<Material>
-                diffuseMaterial = std::make_shared<DiffuseMaterial>("diffuseMaterial", Color::createGrey(0.5f));
+                diffuseMaterial = std::make_shared<DiffuseMaterial>("diffuseMaterial", Color(1, 0, 0));
 
             const std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5);
             sphere->setMaterial(diffuseMaterial);

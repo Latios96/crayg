@@ -49,7 +49,11 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         throw SceneObjectsIsNotArray();
     }
     auto array = sceneObjects.GetArray();
+
     std::vector<std::string> materialConnections;
+    std::shared_ptr<DiffuseMaterial>
+        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createGrey(0.0));
+    scene.addMaterial(defaultMaterial);
 
     for (rapidjson::Value &obj : array) {
         std::string type(obj["type"].GetString());
@@ -71,7 +75,12 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         }
 
         for (int i = 0; i < scene.objects.size(); i++) {
-            scene.objects[i]->setMaterial(scene.materialByName(materialConnections[i]));
+            const std::string materialConnection = materialConnections[i];
+            if (materialConnection.empty()) {
+                scene.objects[i]->setMaterial(defaultMaterial);
+                continue;
+            }
+            scene.objects[i]->setMaterial(scene.materialByName(materialConnection));
         }
     }
 }

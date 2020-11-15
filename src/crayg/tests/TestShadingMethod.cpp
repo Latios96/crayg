@@ -4,6 +4,7 @@
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include <ShadingMethod.h>
+#include <scene/DiffuseMaterial.h>
 
 TEST_CASE("ShadingMethod") {
     Scene scene;
@@ -13,7 +14,10 @@ TEST_CASE("ShadingMethod") {
     light->setIntensity(1);
     scene.addLight(light);
 
+    std::shared_ptr<DiffuseMaterial>
+        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createGrey(0.0));
     std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(), 1);
+    sphere->setMaterial(defaultMaterial);
     scene.addObject(sphere);
 
     ShadingMethod lambertMethod(scene);
@@ -58,6 +62,9 @@ TEST_CASE("ShadingMethod") {
 TEST_CASE("ShadingMethod/noLightsInSceneReturnsAmbientColor") {
     Scene scene2;
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1);
+    std::shared_ptr<DiffuseMaterial>
+        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createGrey(0.0));
+    sphere2->setMaterial(defaultMaterial);
     scene2.addObject(sphere2);
     ShadingMethod shadingMethod2(scene2);
 

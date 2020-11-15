@@ -49,6 +49,15 @@ const char CORRECT_SCENE[] = R"({
                 0.5,
                 0.5
             ]
+        },
+        {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "type": "Sphere",
+            "radius": 1.5
         }
     ],
     "Camera": {
@@ -114,10 +123,12 @@ TEST_CASE("JsonSceneReader") {
         JsonSceneReader jsonSceneReader("CORRECT_SCENE.json", scene);
         jsonSceneReader.read();
 
-        REQUIRE(scene.objects.size() == 2);
+        REQUIRE(scene.objects.size() == 3);
         REQUIRE(scene.objects[1]->getPosition() == Vector3f(0, -1.5f, 0));
-        REQUIRE(scene.materials.size() == 1);
-        REQUIRE(scene.objects[0]->getMaterial() == scene.materials[0]);
+        REQUIRE(scene.materials.size() == 2);
+        REQUIRE(scene.objects[0]->getMaterial() == scene.materials[1]);
+        REQUIRE(scene.objects[1]->getMaterial() == scene.materials[0]);
+        REQUIRE(scene.objects[1]->getMaterial()->getName() == "defaultMaterial");
         REQUIRE(scene.camera->getPosition() == Vector3f(0, 0, 10));
         REQUIRE(scene.renderSettings.resolution == Resolution(800, 600));
         REQUIRE(scene.renderSettings.maxSamples == 4);

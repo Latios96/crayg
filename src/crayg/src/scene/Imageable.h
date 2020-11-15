@@ -8,6 +8,7 @@
 #include <basics/Color.h>
 #include <basics/Ray.h>
 #include <memory>
+#include "Material.h"
 
 class Imageable : public std::enable_shared_from_this<Imageable> {
  public:
@@ -47,6 +48,13 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
     virtual void beforeRender() {
 
     };
+
+    std::shared_ptr<Material> getMaterial() const;
+    void setMaterial(const std::shared_ptr<Material> &material);
+
+ private:
+    std::shared_ptr<Material> material;
+
 };
 
 #endif //CRAYG_IMAGEABLE_H

@@ -6,7 +6,7 @@
 Color ShadingMethod::lambertShading(Vector3f point, Imageable &object) {
     Vector3f normal = object.getNormal(point);
 
-    Color color = Color::createGrey(0.0f);
+    Color color = object.getMaterial()->getDiffuseColor();
 
     for (const auto &light : scene.lights) {
         color = color + colorForLight(point, normal, light);

@@ -10,3 +10,9 @@ Imageable::Intersection::Intersection(float rayParameter, std::shared_ptr<Imagea
     rayParameter),
                                                                                                   imageable(std::move(
                                                                                                       imageable)) {}
+std::shared_ptr<Material> Imageable::getMaterial() const {
+    return material;
+}
+void Imageable::setMaterial(const std::shared_ptr<Material> &material) {
+    Imageable::material = material;
+}

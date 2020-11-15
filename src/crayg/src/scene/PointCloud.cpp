@@ -23,6 +23,7 @@ Imageable::Intersection PointCloud::intersect(Ray ray) {
     for (unsigned long i = 0; i < points.size(); i++) {
         sphere->setPosition(transform.apply(points[i]));
         sphere->setRadius(radii[i]);
+        sphere->setMaterial(getMaterial());
         Intersection intersection = sphere->intersect(ray);
         if (intersection.isValid()) {
             return intersection;

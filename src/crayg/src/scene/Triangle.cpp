@@ -111,7 +111,9 @@ bool Triangle::isIntersecting(Ray ray) {
 Triangle::Triangle(
     TriangleMesh *triangleMesh,
     int faceIndex)
-    : triangleMesh(triangleMesh), faceIndex(faceIndex) {}
+    : triangleMesh(triangleMesh), faceIndex(faceIndex) {
+    setMaterial(triangleMesh->getMaterial());
+}
 
 Triangle::Triangle() {
     triangleMesh = nullptr;
