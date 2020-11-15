@@ -51,6 +51,7 @@ class TestObjectWithAllTypes : public SceneObject {
         serializer.writeMatrix4x4f("matrix4x4", Matrix4x4f());
         std::vector<Vector3f> vector3fVec({{1, 2, 3}, {4, 5, 6}});
         serializer.writeVector3fArray("vec3fArray", vector3fVec);
+        serializer.writeColor("color", Color(1, 2, 3));
     }
 };
 
@@ -117,6 +118,11 @@ TEST_CASE("should write scene with objects and camera as expected") {
                     5.0,
                     6.0
                 ]
+            ],
+            "color": [
+                1.0,
+                2.0,
+                3.0
             ]
         }
     ],

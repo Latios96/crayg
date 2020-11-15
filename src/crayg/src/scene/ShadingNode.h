@@ -84,8 +84,9 @@ class PlugPtr {
 
 class ShadingNode : public Serializable {
  public:
+    ShadingNode();
+    explicit ShadingNode(std::string name);
     const std::string &getName() const;
-    void setName(const std::string &name);
     void generateName();
     void serialize(Serializer &serializer) override;
     virtual void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) = 0;

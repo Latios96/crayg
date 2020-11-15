@@ -11,6 +11,9 @@ class MyMat : public ShadingNode {
     InputPlug<Color> colorPlug;
     MyMat() : colorPlug(InputPlug<Color>("color", this, Color::createBlack())) {
     }
+    explicit MyMat(const std::string &name)
+        : ShadingNode(name), colorPlug(InputPlug<Color>("color", this, Color::createBlack())) {
+    }
     void deserialize(Deserializer &deserializer) override {
 
     }
@@ -38,6 +41,11 @@ class MyFileTextureNode : public ShadingNode {
  public:
     OutputPlug<Color> colorPlug;
     MyFileTextureNode() : colorPlug(OutputPlug<Color>("color", this, Color::createBlack(), []() {
+        return Color::createGrey(0.5);
+    })) {
+    }
+    explicit MyFileTextureNode(const std::string &name)
+        : ShadingNode(name), colorPlug(OutputPlug<Color>("color", this, Color::createBlack(), []() {
         return Color::createGrey(0.5);
     })) {
     }
@@ -95,10 +103,8 @@ TEST_CASE("should use connected node") {
 }
 
 TEST_CASE("serialize node") {
-    MyMat myMat;
-    myMat.setName("MyMat");
-    MyFileTextureNode myFileTextureNode;
-    myFileTextureNode.setName("MyFileTextureNode");
+    MyMat myMat("MyMat");
+    MyFileTextureNode myFileTextureNode("MyFileTextureNode");
     myFileTextureNode.colorPlug.connect(&myMat.colorPlug);
 
     std::shared_ptr<std::ostringstream> px = std::make_shared<std::ostringstream>();
