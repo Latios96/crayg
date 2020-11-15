@@ -52,7 +52,7 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
 
     std::vector<std::string> materialConnections;
     std::shared_ptr<DiffuseMaterial>
-        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createGrey(0.5));
+        defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createWhite());
     scene.addMaterial(defaultMaterial);
 
     for (rapidjson::Value &obj : array) {
