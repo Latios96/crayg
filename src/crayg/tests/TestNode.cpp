@@ -16,6 +16,7 @@ class MyMat : public ShadingNode {
     }
     void serialize(Serializer &serializer) override {
         ShadingNode::serialize(serializer);
+        serializer.writeType("MyMat");
         if (colorPlug.input) {
             serializer.writeString("colorPlug", colorPlug.input->fullName());
         }
@@ -45,6 +46,7 @@ class MyFileTextureNode : public ShadingNode {
     }
     void serialize(Serializer &serializer) override {
         ShadingNode::serialize(serializer);
+        serializer.writeType("MyFileTextureNode");
     }
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr plug) override {
     }
@@ -120,10 +122,12 @@ TEST_CASE("serialize node") {
     "SceneObjects": [
         {
             "name": "MyMat",
+            "type": "MyMat",
             "colorPlug": "MyFileTextureNode.color"
         },
         {
-            "name": "MyFileTextureNode"
+            "name": "MyFileTextureNode",
+            "type": "MyFileTextureNode"
         }
     ]
 })");
