@@ -11,9 +11,6 @@
 #include <utility>
 #include <functional>
 
-const bool INPUT_PLUG = true;
-const bool OUTPUT_PLUG = false;
-
 class ShadingNode;
 
 template<typename T>
