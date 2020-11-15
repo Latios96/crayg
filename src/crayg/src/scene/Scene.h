@@ -12,11 +12,11 @@
 #include "RenderSettings.h"
 #include <memory>
 
-// todo add Rendersettings
+
 class Scene {
  public:
     Scene();
-    Scene(const RenderSettings &renderSettings);
+    explicit Scene(const RenderSettings &renderSettings);
 
     void addObject(const std::shared_ptr<SceneObject> &sceneObject);
     void addLight(const std::shared_ptr<Light> &sceneObject);
