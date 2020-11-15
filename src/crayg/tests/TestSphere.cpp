@@ -47,6 +47,7 @@ TEST_CASE("Sphere") {
         fakeit::When(Method(mockSerializer, writeVector3f)).AlwaysReturn();
         fakeit::When(Method(mockSerializer, writeType)).AlwaysReturn();
         fakeit::When(Method(mockSerializer, writeMatrix4x4f)).AlwaysReturn();
+        fakeit::When(Method(mockSerializer, writeString)).AlwaysReturn();
 
         Serializer &s = mockSerializer.get();
         mySphere->serialize(s);
@@ -54,6 +55,7 @@ TEST_CASE("Sphere") {
         fakeit::Verify(Method(mockSerializer, writeFloat).Using("radius", 3.0f));
         fakeit::Verify(Method(mockSerializer, writeMatrix4x4f).Using("transform", Matrix4x4f()));
         fakeit::Verify(Method(mockSerializer, writeType).Using("Sphere"));
+        fakeit::Verify(Method(mockSerializer, writeString)).Never();
     }
 
     SECTION("deserialize") {
