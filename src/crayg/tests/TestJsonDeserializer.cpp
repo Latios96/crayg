@@ -13,7 +13,8 @@ TEST_CASE("JsonDeserializer") {
 "myFloatArray": [0.1,0.2,0.3],
 "myMatrix4x4f": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
 "myMatrix4x4fInvalid": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-"myString": "testString"
+"myString": "testString",
+"myColor": [1,2,3]
 })";
     rapidjson::StringStream s(json);
     rapidjson::Document d;
@@ -116,5 +117,12 @@ TEST_CASE("JsonDeserializer") {
         REQUIRE(jsonDeserializer.readString("myString") == "testString");
     }
 
+    /*SECTION("readColorShouldThrowException") {
+        REQUIRE_THROWS_AS(jsonDeserializer.readColor("e"), std::invalid_argument);
+    }
+
+    SECTION("readColorShouldReadCorrectly") {
+        REQUIRE(jsonDeserializer.readColor("myColor") == Color(1,2,3));
+    }*/
 }
 

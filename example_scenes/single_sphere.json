@@ -7,7 +7,8 @@
                 0.0
             ],
             "type": "Sphere",
-            "radius": 1.5
+            "radius": 1.5,
+            "material": "redMat"
         },
         {
             "position": [
@@ -25,6 +26,15 @@
                 0.0
             ],
             "type": "GroundPlane"
+        },
+        {
+            "type": "DiffuseMaterial",
+            "name": "redMat",
+            "diffuseColor": [
+                1,
+                0,
+                0
+            ]
         }
     ],
     "Camera": {
