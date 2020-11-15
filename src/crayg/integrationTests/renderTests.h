@@ -29,6 +29,12 @@ std::vector<KnipserTest> renderTests() {
             renderScene(context.getReferenceFolder() + "/teapot.json", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
+        }),
+        KnipserTest("singleSphereWithMats", [](TestContext &context) {
+            context.setImageOutputName("singleSphereWithMats.png");
+            renderScene(context.getReferenceFolder() + "/singleSphereWithMats.json", context.getOutputFilename());
+
+            ASSERT_IMAGES_ARE_EQUAL(context);
         })
     };
 }
