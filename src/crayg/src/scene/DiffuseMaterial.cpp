@@ -20,7 +20,8 @@ void DiffuseMaterial::serialize(Serializer &serializer) {
     serializer.writeColor("diffuseColor", diffuseColor);
 }
 void DiffuseMaterial::deserialize(Deserializer &deserializer) {
-
+    Material::deserialize(deserializer);
+    // TODO read color
 }
 
 void DiffuseMaterial::connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) {

@@ -21,5 +21,8 @@ void ShadingNode::generateName() {
 void ShadingNode::serialize(Serializer &serializer) {
     serializer.writeString("name", name);
 }
+void ShadingNode::deserialize(Deserializer &deserializer) {
+    name = deserializer.readString("name");
+}
 
 

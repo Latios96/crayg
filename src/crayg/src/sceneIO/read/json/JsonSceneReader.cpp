@@ -26,8 +26,10 @@ void readObj(Scene &scene, rapidjson::Value &obj, std::function<void(std::shared
 }
 
 template<typename T>
-void readSceneObject(Scene &scene, rapidjson::Value &obj) {
+void readSceneObject(Scene &scene, rapidjson::Value &obj, std::vector<std::string> &materialConnections) {
     readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.objects.push_back(p); });
+    std::string materialConnection = obj.HasMember("material") ? obj["material"].GetString() : "";
+    materialConnections.push_back(materialConnection);
 }
 
 template<typename T>
@@ -47,24 +49,29 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         throw SceneObjectsIsNotArray();
     }
     auto array = sceneObjects.GetArray();
+    std::vector<std::string> materialConnections;
 
     for (rapidjson::Value &obj : array) {
         std::string type(obj["type"].GetString());
 
         if (type == "Sphere") {
-            readSceneObject<Sphere>(scene, obj);
+            readSceneObject<Sphere>(scene, obj, materialConnections);
         } else if (type == "GroundPlane") {
-            readSceneObject<GroundPlane>(scene, obj);
+            readSceneObject<GroundPlane>(scene, obj, materialConnections);
         } else if (type == "TriangleMesh") {
-            readSceneObject<TriangleMesh>(scene, obj);
+            readSceneObject<TriangleMesh>(scene, obj, materialConnections);
         } else if (type == "PointCloud") {
-            readSceneObject<PointCloud>(scene, obj);
+            readSceneObject<PointCloud>(scene, obj, materialConnections);
         } else if (type == "Light") {
             readLight<Light>(scene, obj);
         } else if (type == "DiffuseMaterial") {
             readMaterial<DiffuseMaterial>(scene, obj);
         } else {
             Logger::warning("Unknown type {}", type);
+        }
+
+        for (int i = 0; i < scene.objects.size(); i++) {
+            scene.objects[i]->setMaterial(scene.materialByName(materialConnections[i]));
         }
     }
 }

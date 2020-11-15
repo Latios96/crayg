@@ -89,6 +89,7 @@ class ShadingNode : public Serializable {
     std::string getName() const;
     void generateName();
     void serialize(Serializer &serializer) override;
+    void deserialize(Deserializer &deserializer) override;
     virtual void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) = 0;
     virtual PlugPtr getPlugByName(const std::string &inputPlugName) = 0;
  private:

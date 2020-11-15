@@ -117,7 +117,7 @@ TEST_CASE("JsonSceneReader") {
         REQUIRE(scene.objects.size() == 2);
         REQUIRE(scene.objects[1]->getPosition() == Vector3f(0, -1.5f, 0));
         REQUIRE(scene.materials.size() == 1);
-        // TODO REQUIRE(scene.objects[0]->getMaterial() == scene.materials[0]);
+        REQUIRE(scene.objects[0]->getMaterial() == scene.materials[0]);
         REQUIRE(scene.camera->getPosition() == Vector3f(0, 0, 10));
         REQUIRE(scene.renderSettings.resolution == Resolution(800, 600));
         REQUIRE(scene.renderSettings.maxSamples == 4);
