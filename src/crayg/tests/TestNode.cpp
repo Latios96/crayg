@@ -94,9 +94,9 @@ TEST_CASE("should use connected node") {
 
 TEST_CASE("serialize node") {
     MyMat myMat;
-    myMat.generateName();
+    myMat.setName("MyMat");
     MyFileTextureNode myFileTextureNode;
-    myFileTextureNode.generateName();
+    myFileTextureNode.setName("MyFileTextureNode");
     myFileTextureNode.colorPlug.connect(&myMat.colorPlug);
 
     std::shared_ptr<std::ostringstream> px = std::make_shared<std::ostringstream>();
@@ -116,7 +116,17 @@ TEST_CASE("serialize node") {
     serializer.endSceneObjects();
     serializer.end();
 
-    REQUIRE(px->str() == "test");
+    REQUIRE(px->str() == R"({
+    "SceneObjects": [
+        {
+            "name": "MyMat",
+            "colorPlug": "MyFileTextureNode.color"
+        },
+        {
+            "name": "MyFileTextureNode"
+        }
+    ]
+})");
 }
 
 TEST_CASE("deserialize node") {
