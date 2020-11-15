@@ -29,4 +29,7 @@ void DiffuseMaterial::connectOutputToInput(const std::string &inputPlugName, Plu
 PlugPtr DiffuseMaterial::getPlugByName(const std::string &inputPlugName) {
     return {};
 }
+DiffuseMaterial::DiffuseMaterial() : Material() {
+
+}
 

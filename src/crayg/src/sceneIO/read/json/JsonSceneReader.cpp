@@ -9,6 +9,7 @@
 #include <scene/PointCloud.h>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem.hpp>
+#include <scene/DiffuseMaterial.h>
 #include "JsonDeserializer.h"
 #include "utils/StopWatch.h"
 #include "scene/Light.h"
@@ -50,12 +51,18 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
                 JsonDeserializer deserializer(obj);
                 pointCloud->deserialize(deserializer);
                 scene.addObject(pointCloud);
+            } else if (type == "DiffuseMaterial") {
+                std::shared_ptr<DiffuseMaterial> diffuseMaterial = std::make_shared<DiffuseMaterial>();
+                JsonDeserializer deserializer(obj);
+                diffuseMaterial->deserialize(deserializer);
+                scene.addMaterial(diffuseMaterial);
             } else {
                 Logger::warning("Unknown type {}", type);
             }
         }
-    } else {
-        throw SceneObjectsIsNotArray();
+    } else { // todo we can do this better
+        throw
+            SceneObjectsIsNotArray();
     }
 }
 
@@ -117,6 +124,7 @@ void JsonSceneReader::read() {
     if (result.hasMandatoryMembers) {
         // now read the data
         readSceneObjects(scene, document);
+        //TODO connectSceneObjectsToMaterials();
         readCamera(scene, document);
         readRenderSettings(scene, document);
     } else {

@@ -8,6 +8,7 @@
 #include "Material.h"
 class DiffuseMaterial : public Material {
  public:
+    DiffuseMaterial();
     explicit DiffuseMaterial(const Color &diffuseColor);
     DiffuseMaterial(const std::string &name, const Color &diffuseColor);
     Color getDiffuseColor() override;
