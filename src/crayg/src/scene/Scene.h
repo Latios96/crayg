@@ -29,6 +29,7 @@ class Scene {
     std::shared_ptr<Camera> camera = nullptr;
     RenderSettings renderSettings;
     bool materialWithNameExists(const std::shared_ptr<Material> &material);
+    std::shared_ptr<Material> materialByName(const std::string &name);
 
     virtual ~Scene() = default;
 

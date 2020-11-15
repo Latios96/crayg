@@ -35,5 +35,16 @@ bool Scene::materialWithNameExists(const std::shared_ptr<Material> &material) {
                            return mat->getName() == material->getName();
                        });
 }
+std::shared_ptr<Material> Scene::materialByName(const std::string &name) {
+    const auto iterator = std::find_if(materials.begin(),
+                                       materials.end(),
+                                       [&name](std::shared_ptr<Material> &material) {
+                                           return name == material->getName();
+                                       });
+    if (iterator == materials.end()) {
+        return nullptr;
+    }
+    return *iterator;
+}
 
 Scene::Scene() = default;

@@ -49,3 +49,19 @@ TEST_CASE("addObjectToScene") {
         REQUIRE_THROWS_AS(scene.addMaterial(material2), std::runtime_error);
     }
 }
+
+TEST_CASE("findMaterialByNameInScene") {
+    Scene scene;
+    const std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5);
+    const std::shared_ptr<Material>
+        diffuseMaterial = std::make_shared<DiffuseMaterial>("myMaterial", Color::createGrey(0.5f));
+    scene.addMaterial(diffuseMaterial);
+
+    SECTION("should find existing material") {
+        REQUIRE(scene.materialByName("myMaterial") == diffuseMaterial);
+    }
+
+    SECTION("should not find exisiting material") {
+        REQUIRE(scene.materialByName("<sdgf>") == nullptr);
+    }
+}
