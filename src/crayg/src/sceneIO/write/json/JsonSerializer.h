@@ -36,6 +36,7 @@ class JsonSerializer : public SerializerImplementation {
     void writeIntArray(std::string name, std::vector<int> &value) override;
     void writeFloatArray(std::string name, std::vector<float> &value) override;
     void writeMatrix4x4f(std::string name, Matrix4x4f matrix4X4f) override;
+    void writeColor(std::string name, Color value) override;
  private:
     std::shared_ptr<std::ostream> os;
     std::shared_ptr<rapidjson::OStreamWrapper> osw;

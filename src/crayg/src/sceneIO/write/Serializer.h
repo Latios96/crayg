@@ -9,12 +9,14 @@
 #include <vector>
 #include <basics/Vector3f.h>
 #include <basics/Matrix4x4f.h>
+#include <basics/Color.h>
 
 class Serializer {
  public:
     virtual void writeInt(std::string name, int value) = 0;
     virtual void writeFloat(std::string name, float value) = 0;
     virtual void writeVector3f(std::string name, Vector3f value) = 0;
+    virtual void writeColor(std::string name, Color value) = 0;
     virtual void writeType(std::string name) = 0;
     virtual void writeString(std::string name, std::string str) = 0;
     virtual void writeVector3fArray(std::string name, std::vector<Vector3f> &value) = 0;

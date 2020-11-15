@@ -114,3 +114,11 @@ void JsonSerializer::writeString(std::string name, std::string str) {
     writer->Key(name.c_str());
     writer->String(str.c_str());
 }
+void JsonSerializer::writeColor(std::string name, Color value) {
+    writer->Key(name.c_str());
+    writer->StartArray();
+    writer->Double(value.r);
+    writer->Double(value.g);
+    writer->Double(value.b);
+    writer->EndArray();
+}
