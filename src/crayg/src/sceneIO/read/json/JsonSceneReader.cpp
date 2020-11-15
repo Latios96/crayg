@@ -43,31 +43,29 @@ void readMaterial(Scene &scene, rapidjson::Value &obj) {
 void readSceneObjects(Scene &scene, rapidjson::Document &d) {
     rapidjson::Value &sceneObjects = d[SCENE_OBJECTS];
 
-    if (sceneObjects.IsArray()) {
-        auto array = sceneObjects.GetArray();
+    if (!sceneObjects.IsArray()) {
+        throw SceneObjectsIsNotArray();
+    }
+    auto array = sceneObjects.GetArray();
 
-        for (rapidjson::Value &obj : array) {
-            std::string type(obj["type"].GetString());
+    for (rapidjson::Value &obj : array) {
+        std::string type(obj["type"].GetString());
 
-            if (type == "Sphere") {
-                readSceneObject<Sphere>(scene, obj);
-            } else if (type == "GroundPlane") {
-                readSceneObject<GroundPlane>(scene, obj);
-            } else if (type == "TriangleMesh") {
-                readSceneObject<TriangleMesh>(scene, obj);
-            } else if (type == "PointCloud") {
-                readSceneObject<PointCloud>(scene, obj);
-            } else if (type == "Light") {
-                readLight<Light>(scene, obj);
-            } else if (type == "DiffuseMaterial") {
-                readMaterial<DiffuseMaterial>(scene, obj);
-            } else {
-                Logger::warning("Unknown type {}", type);
-            }
+        if (type == "Sphere") {
+            readSceneObject<Sphere>(scene, obj);
+        } else if (type == "GroundPlane") {
+            readSceneObject<GroundPlane>(scene, obj);
+        } else if (type == "TriangleMesh") {
+            readSceneObject<TriangleMesh>(scene, obj);
+        } else if (type == "PointCloud") {
+            readSceneObject<PointCloud>(scene, obj);
+        } else if (type == "Light") {
+            readLight<Light>(scene, obj);
+        } else if (type == "DiffuseMaterial") {
+            readMaterial<DiffuseMaterial>(scene, obj);
+        } else {
+            Logger::warning("Unknown type {}", type);
         }
-    } else { // todo we can do this better
-        throw
-            SceneObjectsIsNotArray();
     }
 }
 
