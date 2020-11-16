@@ -11,6 +11,7 @@
 #include <sceneIO/SceneWriterFactory.h>
 
 int main() {
+    // TODO cli
     std::shared_ptr<TriangleMesh> mesh = std::make_shared<TriangleMesh>();
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
@@ -43,7 +44,6 @@ int main() {
         float z = attrib.vertices[i * 3 + 2];
         mesh->points.emplace_back(x, y, z);
     }
-
 
     // copy face and uv indices
     for (auto &shape : shapes) {

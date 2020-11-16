@@ -17,7 +17,7 @@ SceneWriterFacade::~SceneWriterFacade() {
 void SceneWriterFacade::write() {
     writer->write();
 }
-
+// TODO WTF
 std::shared_ptr<SceneWriterFacade> SceneWriterFactory::createSceneWriter(std::string scenePath, Scene &scene) {
     SerializerImplementation *impl = new JsonSerializer(std::make_shared<std::ofstream>(scenePath));
     SceneWriter *writer = new SceneWriter(scene, *impl);
