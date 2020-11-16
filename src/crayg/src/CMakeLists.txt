@@ -92,6 +92,8 @@ set(crayg_SRCS
         sceneIO/SceneReaderFactory.h
         sceneIO/read/json/JsonSceneReader.cpp
         sceneIO/read/json/JsonSceneReader.h
+        sceneIO/SceneWriters.h
+        sceneIO/SceneWriters.cpp
         scene/Imageable.cpp
         scene/Imageable.h
         scene/RenderSettings.h

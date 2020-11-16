@@ -10,6 +10,7 @@
 #include <scene/Scene.h>
 #include <sceneIO/write/json/JsonSerializer.h>
 #include <sceneIO/write/SceneWriter.h>
+#include <sceneIO/SceneWriters.h>
 #include "CLI/CLI.hpp"
 
 int main(int argc, char *argv[]) {
@@ -71,10 +72,6 @@ int main(int argc, char *argv[]) {
     Scene scene;
     scene.addObject(mesh);
 
-    std::shared_ptr<std::ofstream> stream = std::make_shared<std::ofstream>(scenePath);
-    JsonSerializer jsonSerializer(stream);
-    SceneWriter sceneWriter(scene, jsonSerializer);
-    sceneWriter.write();
-    stream->close();
+    SceneWriters::writeSceneAsJson(scene, scenePath);
     return 0;
 }
