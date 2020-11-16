@@ -9,9 +9,24 @@
 #include <scene/TriangleMesh.h>
 #include <scene/Scene.h>
 #include <sceneIO/SceneWriterFactory.h>
+#include "CLI/CLI.hpp"
 
-int main() {
-    // TODO cli
+int main(int argc, char *argv[]) {
+    CLI::App app {"Crayg, an awesome renderer", "Crayg"};
+
+    std::string objPath;
+    app.add_option("-o,--obj", objPath, "obj file to render")->required();
+
+    std::string scenePath;
+    app.add_option("-s,--scene", scenePath, "Path where converted scene is saved")->required();
+
+    try {
+        app.parse(argc, argv);
+    } catch (const CLI::ParseError &e) {
+        std::cout << e.what() << std::endl;
+        return 1;
+    }
+
     std::shared_ptr<TriangleMesh> mesh = std::make_shared<TriangleMesh>();
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
@@ -19,8 +34,7 @@ int main() {
 
     std::string warn;
     std::string err;
-    std::string path = "/Users/jan/workspace/crayg/cube.obj";
-    std::ifstream inputStream(path);
+    std::ifstream inputStream(objPath);
 
     bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &inputStream);
 
@@ -33,8 +47,8 @@ int main() {
     }
 
     if (!ret) {
-        spdlog::error("Error when reading obj file {}, exiting", path);
-        exit(1);
+        spdlog::error("Error when reading obj file {}, exiting", objPath);
+        return 1;
     }
 
     // copy points to mesh
@@ -56,7 +70,10 @@ int main() {
     Scene scene;
     scene.addObject(mesh);
 
-    const std::shared_ptr<SceneWriterFacade> sceneWriter = SceneWriterFactory::createSceneWriter("test.json", scene);
-    sceneWriter->write();
+    std::shared_ptr<std::ofstream> stream = std::make_shared<std::ofstream>(scenePath);
+    JsonSerializer jsonSerializer(stream);
+    SceneWriter sceneWriter(scene, jsonSerializer);
+    sceneWriter.write();
+    stream->close();
     return 0;
 }
