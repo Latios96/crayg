@@ -8,7 +8,8 @@
 #include <fstream>
 #include <scene/TriangleMesh.h>
 #include <scene/Scene.h>
-#include <sceneIO/SceneWriterFactory.h>
+#include <sceneIO/write/json/JsonSerializer.h>
+#include <sceneIO/write/SceneWriter.h>
 #include "CLI/CLI.hpp"
 
 int main(int argc, char *argv[]) {

@@ -86,8 +86,6 @@ set(crayg_SRCS
         scene/Triangle.h
         scene/TriangleMesh.cpp
         scene/TriangleMesh.h
-        sceneIO/SceneWriterFactory.cpp
-        sceneIO/SceneWriterFactory.h
         sceneIO/write/Serializer.h
         sceneIO/read/Deserializer.h
         sceneIO/SceneReaderFactory.cpp
