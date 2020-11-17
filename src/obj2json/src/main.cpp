@@ -5,16 +5,13 @@
 #include <iostream>
 #include <tiny_obj_loader.h>
 #include <spdlog/spdlog.h>
-#include <fstream>
 #include <scene/TriangleMesh.h>
 #include <scene/Scene.h>
-#include <sceneIO/write/json/JsonSerializer.h>
 #include <sceneIO/write/SceneWriter.h>
 #include <sceneIO/SceneWriters.h>
-#include <boost/concept_check.hpp>
 #include "CLI/CLI.hpp"
 
-void convertShape(const tinyobj::attrib_t &attrib, Scene &scene, const const tinyobj::shape_t &shape);
+void convertShape(const tinyobj::attrib_t &attrib, Scene &scene, const tinyobj::shape_t &shape);
 
 int main(int argc, char *argv[]) {
     CLI::App app {"Crayg, an awesome renderer", "Crayg"};
