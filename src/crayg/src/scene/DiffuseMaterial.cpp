@@ -33,4 +33,7 @@ PlugPtr DiffuseMaterial::getPlugByName(const std::string &inputPlugName) {
 DiffuseMaterial::DiffuseMaterial() : Material() {
 
 }
+float DiffuseMaterial::reflectivity() {
+    return 0;
+}
 
