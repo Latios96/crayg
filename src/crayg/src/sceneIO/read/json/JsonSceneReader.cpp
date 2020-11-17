@@ -10,6 +10,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem.hpp>
 #include <scene/DiffuseMaterial.h>
+#include <scene/ReflectiveMaterial.h>
 #include "JsonDeserializer.h"
 #include "utils/StopWatch.h"
 #include "scene/Light.h"
@@ -70,6 +71,8 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
             readLight<Light>(scene, obj);
         } else if (type == "DiffuseMaterial") {
             readMaterial<DiffuseMaterial>(scene, obj);
+        } else if (type == "ReflectiveMaterial") {
+            readMaterial<ReflectiveMaterial>(scene, obj);
         } else {
             Logger::warning("Unknown type {}", type);
         }
