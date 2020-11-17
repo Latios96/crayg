@@ -6,6 +6,7 @@
 #define CRAYG_JSONDESERIALIZER_H
 
 #include <rapidjson/document.h>
+#include <functional>
 #include "sceneIO/Serializable.h"
 
 class JsonDeserializer : public Deserializer {
@@ -24,6 +25,8 @@ class JsonDeserializer : public Deserializer {
  private:
     rapidjson::Value &jsonObject;
     void check_member_exists(const std::string &name) const;
+    template<typename T>
+    T readValue(const std::string &name, std::function<T(rapidjson::Value &)> jsonValueConverter);
 };
 
 #endif //CRAYG_JSONDESERIALIZER_H
