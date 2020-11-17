@@ -8,7 +8,6 @@ PointLightSampler::PointLightSampler(SceneIntersector &sceneIntersector, const L
     sceneIntersector), light(light) {}
 
 float PointLightSampler::calculateShadowFactor(const Vector3f &point) {
-
     const Vector3f shadowVector = light.getPosition() - point;
     Ray shadowRay(point, shadowVector.normalize());
     const Imageable::Intersection intersection = sceneIntersector.intersect(shadowRay);

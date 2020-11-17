@@ -14,7 +14,7 @@ class MockSceneIntersector : public SceneIntersector {
         : SceneIntersector(scene) {
         this->return_value = return_value;
     }
-    Imageable::Intersection intersect(Ray ray) override {
+    Imageable::Intersection intersect(const Ray &ray) const override {
         return return_value;
     };
  private:

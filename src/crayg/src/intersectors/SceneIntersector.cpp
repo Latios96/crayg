@@ -3,7 +3,7 @@
 //
 
 #include "SceneIntersector.h"
-Imageable::Intersection SceneIntersector::intersect(Ray ray) {
+Imageable::Intersection SceneIntersector::intersect(const Ray &ray) const {
     Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
     for (const auto &intersectable : scene.objects) {
@@ -17,7 +17,7 @@ Imageable::Intersection SceneIntersector::intersect(Ray ray) {
     return hitIntersection;
 }
 
-bool SceneIntersector::isIntersecting(Ray ray) {
+bool SceneIntersector::isIntersecting(const Ray &ray) const {
     for (const auto &intersectable : scene.objects) {
         if (intersectable->isIntersecting(ray)) {
             return true;

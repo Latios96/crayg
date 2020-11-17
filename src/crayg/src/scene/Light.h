@@ -11,6 +11,8 @@ enum LightType {
     POINT_LIGHT
 };
 
+class SceneIntersector;
+
 class Light : public Serializable, public Transformable {
  public:
 
@@ -23,8 +25,12 @@ class Light : public Serializable, public Transformable {
 
     const LightType lightType = POINT_LIGHT;
 
+    float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point);
+
  private:
     float intensity;
+    constexpr static const float NO_SHADOW = 1.0f;
+    constexpr static const float FULL_SHADOW = 0.0f;
 };
 
 #endif //CRAYG_LIGHT_H

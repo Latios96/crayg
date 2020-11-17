@@ -131,9 +131,8 @@ Color Renderer::traceRay(const Ray &ray, int depth) {
 
         float shadow = 1.0;
 
-        // NOTE: this is ugly, but only this way we can avoid cyclic includes between Light, Scene and SceneIntersector at the moment
-        for (auto &lightSampler : lightSamplers) {
-            shadow = lightSampler->calculateShadowFactor(location + (normal * 0.001));
+        for (auto &light : scene.lights) {
+            shadow = light->calculateShadowFactor(*sceneIntersector, location + (normal * 0.001));
         }
 
         return shadedColor * shadow;
