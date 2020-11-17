@@ -14,7 +14,8 @@
 #include <boost/concept_check.hpp>
 #include "CLI/CLI.hpp"
 
-void convertShape(const tinyobj::attrib_t &attrib, Scene &scene, const value_type &shape);
+void convertShape(const tinyobj::attrib_t &attrib, Scene &scene, const const tinyobj::shape_t &shape);
+
 int main(int argc, char *argv[]) {
     CLI::App app {"Crayg, an awesome renderer", "Crayg"};
 
