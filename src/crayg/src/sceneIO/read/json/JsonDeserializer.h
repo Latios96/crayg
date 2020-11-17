@@ -26,7 +26,9 @@ class JsonDeserializer : public Deserializer {
     rapidjson::Value &jsonObject;
     void check_member_exists(const std::string &name) const;
     template<typename T>
-    T readValue(const std::string &name, std::function<T(rapidjson::Value &)> jsonValueConverter);
+    T readValue(const std::string &name);
+    template<typename T>
+    T convertJsonValue(const rapidjson::Value &value);
 };
 
 #endif //CRAYG_JSONDESERIALIZER_H
