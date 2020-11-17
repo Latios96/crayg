@@ -5,6 +5,7 @@
 #ifndef CRAYG_RENDERER_H
 #define CRAYG_RENDERER_H
 
+static const int MAX_DEPTH = 2;
 #include <scene/Scene.h>
 #include <scene/Camera.h>
 #include <image/Image.h>
@@ -39,6 +40,7 @@ class Renderer {
     void renderBucket(const ImageBucket &imageBucket);
     Color renderPixel(const PixelPosition &pixel);
     Color renderSample(float x, float y);
+    Color traceRay(const Ray &ray, int depth);
 };
 
 #endif //CRAYG_RENDERER_H

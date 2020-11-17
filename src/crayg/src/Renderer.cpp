@@ -107,19 +107,33 @@ Color Renderer::renderPixel(const PixelPosition &pixel) {
 
 Color Renderer::renderSample(float x, float y) {
     Ray ray = cameraModel->createPrimaryRay(x, y);
+    return traceRay(ray, 0);
+
+}
+Color Renderer::traceRay(const Ray &ray, int depth) {
+    if (depth == MAX_DEPTH) {
+        return Color::createBlack();
+    }
     auto intersection = sceneIntersector->intersect(ray);
 
     const bool hasHit = intersection.imageable != nullptr;
     if (hasHit) {
         Vector3f location = ray.startPoint + (ray.direction * intersection.rayParameter);
         Imageable &object = *intersection.imageable;
-        Color shadedColor = lambertMethod->lambertShading(location, object);
+        Color shadedColor;
+        const Vector3f normal = object.getNormal(location);
+        if (object.getMaterial()->reflectivity()) {
+            Ray reflectedRay = Ray(location, ray.direction - normal * (2 * (ray.direction.scalarProduct(normal))));
+            shadedColor = traceRay(reflectedRay, depth + 1);
+        } else {
+            shadedColor = lambertMethod->lambertShading(location, object);
+        }
 
         float shadow = 1.0;
 
         // NOTE: this is ugly, but only this way we can avoid cyclic includes between Light, Scene and SceneIntersector at the moment
         for (auto &lightSampler : lightSamplers) {
-            shadow = lightSampler->calculateShadowFactor(location + (object.getNormal(location) * 0.001));
+            shadow = lightSampler->calculateShadowFactor(location + (normal * 0.001));
         }
 
         return shadedColor * shadow;
