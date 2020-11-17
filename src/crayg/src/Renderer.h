@@ -30,14 +30,15 @@ class Renderer {
     std::shared_ptr<SceneIntersector> sceneIntersector;
     std::shared_ptr<ShadingMethod> lambertMethod;
     std::vector<std::shared_ptr<LightSampler>> lightSamplers;
-    Color renderPixel(const PixelPosition &pixel);
 
     void init();
-    Color renderSample(float x, float y);
+
     void renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
     void renderParallel(ProgressReporter &reporter,
                         const std::vector<ImageBucket> &bucketSequence);
     void renderBucket(const ImageBucket &imageBucket);
+    Color renderPixel(const PixelPosition &pixel);
+    Color renderSample(float x, float y);
 };
 
 #endif //CRAYG_RENDERER_H
