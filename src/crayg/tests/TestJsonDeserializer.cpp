@@ -117,12 +117,12 @@ TEST_CASE("JsonDeserializer") {
         REQUIRE(jsonDeserializer.readString("myString") == "testString");
     }
 
-    /*SECTION("readColorShouldThrowException") {
+    SECTION("readColorShouldThrowException") {
         REQUIRE_THROWS_AS(jsonDeserializer.readColor("e"), std::invalid_argument);
     }
 
     SECTION("readColorShouldReadCorrectly") {
-        REQUIRE(jsonDeserializer.readColor("myColor") == Color(1,2,3));
-    }*/
+        REQUIRE(jsonDeserializer.readColor("myColor") == Color(1, 2, 3));
+    }
 }
 
