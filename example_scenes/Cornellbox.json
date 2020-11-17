@@ -12386,16 +12386,11 @@
       ]
     },
     {
-      "type": "DiffuseMaterial",
-      "name": "reflectiveSphere",
-      "diffuseColor": [
-        1,
-        0,
-        1
-      ]
+      "type": "ReflectiveMaterial",
+      "name": "reflectiveSphere"
     },
     {
-      "type": "DiffuseMaterial",
+      "type": "ReflectiveMaterial",
       "name": "refractiveSphere",
       "diffuseColor": [
         1,
