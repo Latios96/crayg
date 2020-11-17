@@ -11,8 +11,10 @@
 #include <sceneIO/write/json/JsonSerializer.h>
 #include <sceneIO/write/SceneWriter.h>
 #include <sceneIO/SceneWriters.h>
+#include <boost/concept_check.hpp>
 #include "CLI/CLI.hpp"
 
+void convertShape(const tinyobj::attrib_t &attrib, Scene &scene, const value_type &shape);
 int main(int argc, char *argv[]) {
     CLI::App app {"Crayg, an awesome renderer", "Crayg"};
 
@@ -29,7 +31,6 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    std::shared_ptr<TriangleMesh> mesh = std::make_shared<TriangleMesh>();
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
@@ -53,25 +54,30 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // copy points to mesh
-    for (int i = 0; i < attrib.vertices.size() / 3; i++) {
-        float x = attrib.vertices[i * 3] - 3;
-        float y = attrib.vertices[i * 3 + 1];
-        float z = attrib.vertices[i * 3 + 2];
-        mesh->points.emplace_back(x, y, z);
-    }
-
-    // copy face and uv indices
-    for (auto &shape : shapes) {
-        for (auto &indice : shape.mesh.indices) {
-            mesh->faceIndexes.push_back(indice.vertex_index);
-        }
-    }
-    spdlog::info("Mesh has {} triangles", mesh->faceIndexes.size() / 3);
-
     Scene scene;
-    scene.addObject(mesh);
+
+    for (auto &shape : shapes) {
+        convertShape(attrib, scene, shape);
+    }
 
     SceneWriters::writeSceneAsJson(scene, scenePath);
     return 0;
+}
+
+void convertShape(const tinyobj::attrib_t &attrib, Scene &scene, const tinyobj::shape_t &shape) {
+    std::map<int, int> faceIndexConversion;
+    std::shared_ptr<TriangleMesh> mesh = std::make_shared<TriangleMesh>();
+    for (auto &indice : shape.mesh.indices) {
+        if (faceIndexConversion.find(indice.vertex_index) == faceIndexConversion.end()) {
+            mesh->points.emplace_back(attrib.vertices[indice.vertex_index * 3],
+                                      attrib.vertices[indice.vertex_index * 3 + 1],
+                                      attrib.vertices[indice.vertex_index * 3 + 2]);
+            int newIndex = mesh->points.size() - 1;
+            mesh->faceIndexes.push_back(newIndex);
+            faceIndexConversion[indice.vertex_index] = newIndex;
+        } else {
+            mesh->faceIndexes.push_back(faceIndexConversion[indice.vertex_index]);
+        }
+    }
+    scene.addObject(mesh);
 }
