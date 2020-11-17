@@ -22,11 +22,20 @@ class JsonDeserializer : public Deserializer {
     void readIntArray(std::string name, std::vector<int> &target) override;
     void readFloatArray(std::string name, std::vector<float> &target) override;
     Color readColor(std::string name) override;
+
+    int readIntWithDefault(std::string name, int defaultValue) override;
+    float readFloatWithDefault(std::string name, float defaultValue) override;
+    std::string readStringWithDefault(std::string name, std::string defaultValue) override;
+    Vector3f readVector3fWithDefault(std::string name, Vector3f defaultValue) override;
+    Matrix4x4f readMatrix4x4fWithDefault(std::string name, Matrix4x4f defaultValue) override;
+    Color readColorWithDefault(std::string name, Color defaultValue) override;
  private:
     rapidjson::Value &jsonObject;
     void check_member_exists(const std::string &name) const;
     template<typename T>
     T readValue(const std::string &name);
+    template<typename T>
+    T readValue(const std::string &name, T defaultValue);
     template<typename T>
     T convertJsonValue(const rapidjson::Value &value);
 };

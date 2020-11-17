@@ -124,5 +124,32 @@ TEST_CASE("JsonDeserializer") {
     SECTION("readColorShouldReadCorrectly") {
         REQUIRE(jsonDeserializer.readColor("myColor") == Color(1, 2, 3));
     }
+
+    SECTION("readIntWithDefaultShouldReturnDefault") {
+        REQUIRE(jsonDeserializer.readIntWithDefault("notExistingNameToReadDefault", 2) == 2);
+    }
+
+    SECTION("readFloatWithDefaultShouldReturnDefault") {
+        REQUIRE(jsonDeserializer.readFloatWithDefault("notExistingNameToReadDefault", 3.3f) == 3.3f);
+    }
+
+    SECTION("readColorWithDefaultShouldReturnDefault") {
+        REQUIRE(jsonDeserializer.readColorWithDefault("notExistingNameToReadDefault", Color::createWhite())
+                    == Color::createWhite());
+    }
+
+    SECTION("readVector3fWithDefaultShouldReturnDefault") {
+        REQUIRE(
+            jsonDeserializer.readVector3fWithDefault("notExistingNameToReadDefault", {1, 2, 3}) == Vector3f(1, 2, 3));
+    }
+
+    SECTION("readStringWithDefaultShouldReturnDefault") {
+        REQUIRE(jsonDeserializer.readStringWithDefault("notExistingNameToReadDefault", "testStr") == "testStr");
+    }
+
+    SECTION("readMatrixWithDefaultShouldReturnDefault") {
+        REQUIRE(
+            jsonDeserializer.readMatrix4x4fWithDefault("notExistingNameToReadDefault", Matrix4x4f()) == Matrix4x4f());
+    }
 }
 

@@ -8,6 +8,12 @@
 
 JsonDeserializer::JsonDeserializer(rapidjson::Value &jsonObject) : jsonObject(jsonObject) {}
 
+void JsonDeserializer::check_member_exists(const std::string &name) const {
+    if (!jsonObject.HasMember(name.c_str())) {
+        throw std::invalid_argument(fmt::format("Could not read member with name '{}'", name));
+    }
+}
+
 template<typename T>
 T JsonDeserializer::readValue(const std::string &name) {
     check_member_exists(name);
@@ -65,6 +71,14 @@ Matrix4x4f JsonDeserializer::convertJsonValue(const rapidjson::Value &value) {
                       array[15].GetFloat());
 }
 
+template<typename T>
+T JsonDeserializer::readValue(const std::string &name, T defaultValue) {
+    if (!jsonObject.HasMember(name.c_str())) {
+        return defaultValue;
+    }
+    return convertJsonValue<T>(jsonObject[name.c_str()]);
+}
+
 int JsonDeserializer::readInt(std::string name) {
     return readValue<int>(name);
 }
@@ -110,13 +124,27 @@ std::string JsonDeserializer::readString(std::string name) {
     return readValue<std::string>(name);
 
 }
-void JsonDeserializer::check_member_exists(const std::string &name) const {
-    if (!jsonObject.HasMember(name.c_str())) {
-        throw std::invalid_argument(fmt::format("Could not read member with name '{}'", name));
-    }
-}
+
 Color JsonDeserializer::readColor(std::string name) {
     return readValue<Color>(name);
+}
+int JsonDeserializer::readIntWithDefault(std::string name, int defaultValue) {
+    return readValue<int>(name, defaultValue);
+}
+float JsonDeserializer::readFloatWithDefault(std::string name, float defaultValue) {
+    return readValue<float>(name, defaultValue);
+}
+std::string JsonDeserializer::readStringWithDefault(std::string name, std::string defaultValue) {
+    return readValue<std::string>(name, defaultValue);
+}
+Vector3f JsonDeserializer::readVector3fWithDefault(std::string name, Vector3f defaultValue) {
+    return readValue<Vector3f>(name, defaultValue);
+}
+Matrix4x4f JsonDeserializer::readMatrix4x4fWithDefault(std::string name, Matrix4x4f defaultValue) {
+    return readValue<Matrix4x4f>(name, defaultValue);
+}
+Color JsonDeserializer::readColorWithDefault(std::string name, Color defaultValue) {
+    return readValue<Color>(name, defaultValue);
 }
 
 
