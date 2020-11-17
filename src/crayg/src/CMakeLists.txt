@@ -104,11 +104,6 @@ set(crayg_SRCS
         basics/BoundingBox.cpp
         utils/RemainingTimeCalculator.h
         utils/RemainingTimeCalculator.cpp
-        lightSamplers/LightSampler.h
-        lightSamplers/LightSampler.cpp
-        lightSamplers/PointLightSampler.h
-        lightSamplers/PointLightSampler.cpp
-        lightSamplers/LightSamplerFactory.h
         Logger.h
         Logger.cpp
         samplers/UnitSphereSampler.h

@@ -6,7 +6,6 @@
 
 #include <image/ImageIterators.h>
 #include <image/ImageBucketSequences.h>
-#include <lightSamplers/LightSamplerFactory.h>
 #include <numeric>
 #include "Renderer.h"
 #include "PineHoleCameraModel.h"
@@ -84,11 +83,6 @@ void Renderer::init() {
 
     Logger::info("Creating SceneIntersector...");
     sceneIntersector = std::make_shared<SceneIntersector>(scene);
-
-    Logger::info("Creating LightSamplers...");
-    for (auto &light : scene.lights) {
-        lightSamplers.push_back(LightSamplerFactory::createLightSampler(*light, *sceneIntersector));
-    }
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
