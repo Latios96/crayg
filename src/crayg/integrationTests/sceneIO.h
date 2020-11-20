@@ -10,6 +10,7 @@
 #include <sceneIO/write/SceneWriter.h>
 #include <scene/GroundPlane.h>
 #include <scene/DiffuseMaterial.h>
+#include <scene/PointLight.h>
 #include "renderUtils.h"
 
 std::vector<knipser::KnipserTest> sceneIoTests() {
@@ -36,7 +37,7 @@ std::vector<knipser::KnipserTest> sceneIoTests() {
             groundPlane->setPosition(Vector3f(0, -1.5f, 0));
             scene.addObject(groundPlane);
 
-            auto light = std::make_shared<Light>();
+            auto light = std::make_shared<PointLight>();
             light->setPosition(Vector3f(0, 3, 3));
             light->setIntensity(1.0);
             scene.addLight(light);

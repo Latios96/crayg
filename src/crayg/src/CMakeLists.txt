@@ -33,6 +33,8 @@ set(crayg_SRCS
         scene/DiffuseMaterial.cpp
         scene/ReflectiveMaterial.h
         scene/ReflectiveMaterial.cpp
+        scene/PointLight.h
+        scene/PointLight.cpp
         intersectors/Intersector.h
         image/ImageWriter.h
         scene/SceneCreator.h
