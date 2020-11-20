@@ -16,11 +16,14 @@ void Light::setIntensity(float intensity) {
 void Light::serialize(Serializer &serializer) {
     serializer.writeVector3f("position", this->getPosition());
     serializer.writeFloat("intensity", intensity);
-    serializer.writeType("Light");
 }
 
 void Light::deserialize(Deserializer &deserializer) {
-    setPosition(deserializer.readVector3f("position"));
+    if (deserializer.hasProperty("position")) {
+        setPosition(deserializer.readVector3f("position"));
+        return;
+    }
+    transform = Transform(deserializer.readMatrix4x4f("transform"));
     setIntensity(deserializer.readFloat("intensity"));
 }
 

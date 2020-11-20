@@ -8,6 +8,8 @@
 #include "scene/Light.h"
 #include "intersectors/SceneIntersector.h"
 
+using namespace fakeit;
+
 TEST_CASE("Light") {
     Light myLight;
     myLight.setPosition(Vector3f(1, 2, 3));
@@ -84,5 +86,36 @@ TEST_CASE("Light Sampling") {
 
         const float shadowFactor = light.calculateShadowFactor(mockIntersector, {0, 0, 0});
         REQUIRE(shadowFactor == FULL_SHADOW);
+    }
+}
+
+TEST_CASE("deserialize Light", "[Light]") {
+
+    auto sceneObject = std::make_shared<Light>();
+
+    SECTION("scene containing position should be converted to transform") {
+        fakeit::Mock<Deserializer> mockDeserializer;
+        When(Method(mockDeserializer, hasProperty).Using("position")).Return(true);
+        When(Method(mockDeserializer, readVector3f).Using("position")).Return(Vector3f(1, 2, 3));
+        When(Method(mockDeserializer, readMatrix4x4f).Using("transform")).Return(Matrix4x4f());
+        When(Method(mockDeserializer, readFloat).Using("intensity")).Return(1);
+
+        Deserializer &s = mockDeserializer.get();
+        sceneObject->deserialize(s);
+
+        REQUIRE(sceneObject->getTransform() == Transform::withPosition({1, 2, 3}));
+    }
+
+    SECTION("scene containing transform should be read correctly") {
+        fakeit::Mock<Deserializer> mockDeserializer;
+        When(Method(mockDeserializer, hasProperty).Using("position")).Return(false);
+        When(Method(mockDeserializer, readMatrix4x4f).Using("transform")).Return(Matrix4x4f());
+        When(Method(mockDeserializer, readMatrix4x4f).Using("transform")).Return(Matrix4x4f());
+        When(Method(mockDeserializer, readFloat).Using("intensity")).Return(1);
+
+        Deserializer &s = mockDeserializer.get();
+        sceneObject->deserialize(s);
+
+        REQUIRE(sceneObject->getTransform() == Transform());
     }
 }
