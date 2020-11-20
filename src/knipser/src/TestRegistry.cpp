@@ -5,6 +5,8 @@
 #include <vector>
 #include "TestRegistry.h"
 
+namespace knipser {
+
 const std::vector<KnipserTest> &TestRegistry::getTests() const {
     return tests;
 }
@@ -17,4 +19,6 @@ TestRegistry &TestRegistry::registerTests(const std::vector<KnipserTest> &knipse
         tests.push_back(test);
     }
     return *this;
+}
+
 }

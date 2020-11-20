@@ -7,6 +7,8 @@
 #include <utility>
 #include <regex>
 
+namespace knipser {
+
 TestPattern::TestPattern(std::string pattern) : pattern(std::move(pattern)) {}
 
 bool TestPattern::matches(const std::string &testName) const {
@@ -24,4 +26,6 @@ bool TestPattern::operator!=(const TestPattern &rhs) const {
 std::ostream &operator<<(std::ostream &os, const TestPattern &pattern) {
     os << "pattern: \"" << pattern.pattern << "\"";
     return os;
+}
+
 }

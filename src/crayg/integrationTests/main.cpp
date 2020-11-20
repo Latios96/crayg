@@ -10,7 +10,7 @@
 int main(int argc, char **argv) {
     Logger::initialize();
 
-    TestRegistry testRegistry;
+    knipser::TestRegistry testRegistry;
     testRegistry
         .registerTests(sceneIoTests())
         .registerTests(imageTests())

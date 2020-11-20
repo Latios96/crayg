@@ -7,6 +7,9 @@
 #include <utility>
 #include <OpenImageIO/imagebuf.h>
 #include <OpenImageIO/imagebufalgo.h>
+
+namespace knipser {
+
 ImageComparator::ImageComparator(std::string left, std::string right)
     : left(std::move(left)), right(std::move(right)) {}
 
@@ -26,4 +29,6 @@ ImageComparatorResult OpenImageIoImageComparator::compareImages() {
     } else {
         return {OK, 0.0};
     }
+}
+
 }

@@ -7,6 +7,8 @@
 
 #include <string>
 
+namespace knipser {
+
 enum ImageComparatorResultStatus {
     OK, WARNING, IMAGE_ERROR
 };
@@ -43,5 +45,7 @@ class OpenImageIoImageComparator : public ImageComparator {
     ImageComparatorResult compareImages() override;
 
 };
+
+}
 
 #endif //CRAYG_SRC_KNIPSER_SRC_IMAGECOMPARATOR_H_

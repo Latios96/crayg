@@ -5,6 +5,8 @@
 #include <fmt/format.h>
 #include "KnipserAssertions.h"
 
+namespace knipser {
+
 BasicAssertion::BasicAssertion(const std::string &file, const int lineNumber) : file(file), lineNumber(lineNumber) {}
 
 std::string BasicAssertion::createMessage(const std::string &assertionMessage) const {
@@ -31,6 +33,8 @@ void ImageOutputExistsAssertion::doAssert(TestContext &testContext) {
 
 bool ImageOutputExistsAssertion::exists(const boost::filesystem::path &path) const {
     return boost::filesystem::exists(path);
+}
+
 }
 
 

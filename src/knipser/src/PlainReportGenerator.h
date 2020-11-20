@@ -7,6 +7,8 @@
 
 #include "ReportGenerator.h"
 
+namespace knipser {
+
 class PlainReportGenerator : public ReportGenerator {
  public:
     PlainReportGenerator(const std::vector<TestResult> &testResults);
@@ -17,5 +19,7 @@ class PlainReportGenerator : public ReportGenerator {
     std::string getTestResultString(const TestResult &result, unsigned long maxNameLength) const;
     unsigned long getMaxNameLength() const;
 };
+
+}
 
 #endif //CRAYG_PLAINREPORTGENERATOR_H

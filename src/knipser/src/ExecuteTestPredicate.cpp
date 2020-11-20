@@ -5,6 +5,9 @@
 #include "ExecuteTestPredicate.h"
 
 #include <utility>
+
+namespace knipser {
+
 ExecuteTestPredicate::ExecuteTestPredicate(std::vector<TestPattern> testPatterns)
     : testPatterns(std::move(testPatterns)) {}
 bool ExecuteTestPredicate::shouldExecute(const KnipserTest &test) {
@@ -17,4 +20,6 @@ bool ExecuteTestPredicate::shouldExecute(const KnipserTest &test) {
         }
     }
     return false;
+}
+
 }

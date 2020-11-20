@@ -4,33 +4,33 @@
 #include "KnipserApp.h"
 #include "renderUtils.h"
 
-std::vector<KnipserTest> renderTests() {
+std::vector<knipser::KnipserTest> renderTests() {
     return {
-        KnipserTest("singleSphere", [](TestContext &context) {
+        knipser::KnipserTest("singleSphere", [](knipser::TestContext &context) {
             context.setImageOutputName("singleSphere.png");
             renderScene(context.getReferenceFolder() + "/singleSphere.json", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
-        KnipserTest("threeSpheres", [](TestContext &context) {
+        knipser::KnipserTest("threeSpheres", [](knipser::TestContext &context) {
             context.setImageOutputName("threeSpheres.png");
             renderScene(context.getReferenceFolder() + "/threeSpheres.json", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
-        KnipserTest("pointCloud", [](TestContext &context) {
+        knipser::KnipserTest("pointCloud", [](knipser::TestContext &context) {
             context.setImageOutputName("pointCloud.png");
             renderScene(context.getReferenceFolder() + "/pointCloud.json", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
-        KnipserTest("teapot", [](TestContext &context) {
+        knipser::KnipserTest("teapot", [](knipser::TestContext &context) {
             context.setImageOutputName("teapot.png");
             renderScene(context.getReferenceFolder() + "/teapot.json", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
-        KnipserTest("singleSphereWithMats", [](TestContext &context) {
+        knipser::KnipserTest("singleSphereWithMats", [](knipser::TestContext &context) {
             context.setImageOutputName("singleSphereWithMats.png");
             renderScene(context.getReferenceFolder() + "/singleSphereWithMats.json", context.getOutputFilename());
 

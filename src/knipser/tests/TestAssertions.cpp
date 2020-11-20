@@ -4,6 +4,8 @@
 #include <catch2/catch.hpp>
 #include <KnipserAssertions.h>
 
+namespace knipser {
+
 TEST_CASE("BasicAssertion") {
 
     SECTION("create basic assertion") {
@@ -90,5 +92,7 @@ TEST_CASE("ImagesAreEqualAssertion") {
         ImagesAreEqualAssertion<AlwaysOkImageComparator> assertion("TestBasicAssertion.cpp", 10);
         REQUIRE_NOTHROW(assertion.doAssert(testContext));
     }
+}
+
 }
 

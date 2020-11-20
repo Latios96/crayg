@@ -12,6 +12,8 @@
 #include "ExecuteTestPredicate.h"
 #include <vector>
 
+namespace knipser {
+
 class TestRunner {
  public:
     explicit TestRunner(TestRegistry &testRegistry, RunConfig runConfig);
@@ -25,5 +27,7 @@ class TestRunner {
 
     TestContext createTestContext(const KnipserTest &test);
 };
+
+}
 
 #endif //CRAYG_TESTRUNNER_H

@@ -7,6 +7,8 @@
 #include "TestContext.h"
 #include <boost/filesystem.hpp>
 
+namespace knipser {
+
 std::string TestContext::getOutputFolder() const {
     return outputFolder;
 }
@@ -52,6 +54,8 @@ std::ostream &operator<<(std::ostream &os, const TestContext &context) {
     os << "outputFolder: " << context.outputFolder << " referenceFolder: " << context.referenceFolder
        << " imageOutputName: " << context.imageOutputName << " imageOutputSet: " << context.imageOutputSet;
     return os;
+}
+
 }
 
 

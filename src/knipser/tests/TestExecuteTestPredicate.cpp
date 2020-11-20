@@ -3,6 +3,9 @@
 //
 #include <catch2/catch.hpp>
 #include "ExecuteTestPredicate.h"
+
+namespace knipser {
+
 TEST_CASE("ExecuteTestPredicate should return true", "[ExecuteTestPredicate]") {
     KnipserTest test("myAwesomeTest", nullptr);
 
@@ -18,4 +21,6 @@ TEST_CASE("ExecuteTestPredicate should return false", "[ExecuteTestPredicate]") 
 
     ExecuteTestPredicate predicate((std::vector<TestPattern>({TestPattern("Dieter")})));
     REQUIRE_FALSE(predicate.shouldExecute(test));
+}
+
 }

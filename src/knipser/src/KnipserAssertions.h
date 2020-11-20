@@ -11,6 +11,8 @@
 #include <boost/filesystem.hpp>
 #include <fmt/format.h>
 
+namespace knipser {
+
 class KnipserException : public std::exception {
  public:
     explicit KnipserException(const std::string &message) : message(message) {}
@@ -63,10 +65,12 @@ class ImagesAreEqualAssertion : public BasicAssertion {
     }
 };
 
-#define ASSERT_IMAGES_ARE_EQUAL(context) ImagesAreEqualAssertion<OpenImageIoImageComparator> imagesAreEqualAssertion(__FILE__, __LINE__); \
-BasicAssertion referenceImageExists(__FILE__, __LINE__); \
+}
+
+#define ASSERT_IMAGES_ARE_EQUAL(context) knipser::ImagesAreEqualAssertion<knipser::OpenImageIoImageComparator> imagesAreEqualAssertion(__FILE__, __LINE__); \
+knipser::BasicAssertion referenceImageExists(__FILE__, __LINE__); \
 referenceImageExists.doAssert(boost::filesystem::exists(context.getReferenceFilename()), fmt::format("Reference image {} does not exist!", context.getReferenceFilename())); \
-BasicAssertion outputFileNameExists(__FILE__, __LINE__); \
+knipser::BasicAssertion outputFileNameExists(__FILE__, __LINE__); \
 outputFileNameExists.doAssert(boost::filesystem::exists(context.getOutputFilename()), fmt::format("Output image {} does not exist!", context.getOutputFilename())); \
 imagesAreEqualAssertion.doAssert(context);
 

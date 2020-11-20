@@ -1,6 +1,8 @@
 #include <catch2/catch.hpp>
 #include <TestPattern.h>
 
+namespace knipser {
+
 TEST_CASE("TestTestPattern") {
     std::string testName = "myAwesomeTest";
 
@@ -26,5 +28,7 @@ TEST_CASE("TestTestPattern") {
         REQUIRE_FALSE(TestPattern("myAwesme.*").matches(testName));
 
     }
+}
+
 }
 

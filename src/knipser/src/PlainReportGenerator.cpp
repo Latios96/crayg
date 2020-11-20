@@ -6,6 +6,8 @@
 #include <iostream>
 #include "PlainReportGenerator.h"
 
+namespace knipser {
+
 void PlainReportGenerator::generateReport(std::ostream &ostream) {
     ostream << "Result:\n";
     for (auto &result : testResults) {
@@ -38,5 +40,7 @@ std::string PlainReportGenerator::getTestResultString(const TestResult &result, 
                        result.test.name,
                        std::string(missingSpacesCount, ' '),
                        messageString);
+}
+
 }
 

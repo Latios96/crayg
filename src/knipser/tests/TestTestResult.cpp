@@ -6,6 +6,8 @@
 #include <KnipserTest.h>
 #include <TestResult.h>
 
+namespace knipser {
+
 TEST_CASE("TestResult") {
     const KnipserTest myTest = KnipserTest(std::string("my test"), [](const TestContext &context) {});
 
@@ -28,5 +30,7 @@ TEST_CASE("TestResult") {
         REQUIRE(failedTestResult.message == "my message");
         REQUIRE(failedTestResult.testContext == testContext);
     }
+
+}
 
 }

@@ -10,6 +10,8 @@
 #include <functional>
 #include <utility>
 
+namespace knipser {
+
 TestRunner::TestRunner(TestRegistry &testRegistry, RunConfig runConfig) : testRegistry(testRegistry),
                                                                           runConfig(std::move(runConfig)),
                                                                           predicate(runConfig.testPatterns) {
@@ -59,4 +61,4 @@ TestContext TestRunner::createTestContext(const KnipserTest &test) {
     return TestContext(testOutputFolder.string(), testReferenceFolder.string());
 }
 
-
+}

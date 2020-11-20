@@ -1,6 +1,8 @@
 #include <catch2/catch.hpp>
 #include <TestPatternStringParser.h>
 
+namespace knipser {
+
 TEST_CASE("TestTestPatternStringParser") {
 
     SECTION("parse") {
@@ -21,6 +23,8 @@ TEST_CASE("TestTestPatternStringParser") {
         REQUIRE(TestPatternStringParser("myAwesomeTest,, myAwesomeTest2").parse()
                     == std::vector<TestPattern> {TestPattern("myAwesomeTest"), TestPattern("myAwesomeTest2")});
     }
+
+}
 
 }
 

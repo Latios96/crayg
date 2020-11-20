@@ -9,6 +9,8 @@
 #include <vector>
 #include "TestPattern.h"
 
+namespace knipser {
+
 class RunConfig {
  public:
     RunConfig(std::string outputFolder, std::string referenceFolder);
@@ -18,5 +20,7 @@ class RunConfig {
     const std::string referenceFolder;
     const std::vector<TestPattern> testPatterns;
 };
+
+}
 
 #endif //CRAYG_RUNCONFIG_H

@@ -12,9 +12,9 @@
 #include <scene/DiffuseMaterial.h>
 #include "renderUtils.h"
 
-std::vector<KnipserTest> sceneIoTests() {
+std::vector<knipser::KnipserTest> sceneIoTests() {
     return {
-        KnipserTest("sceneWriteReadRendersCorrectly", [](TestContext &context) {
+        knipser::KnipserTest("sceneWriteReadRendersCorrectly", [](knipser::TestContext &context) {
             context.setImageOutputName("sceneWriteReadRendersCorrectly.png");
 
             Scene scene;

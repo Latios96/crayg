@@ -8,6 +8,8 @@
 #include <sstream>
 #include <boost/algorithm/string.hpp>
 
+namespace knipser {
+
 TestPatternStringParser::TestPatternStringParser(std::string parseString) : parseString(std::move(parseString)) {}
 
 std::vector<TestPattern> TestPatternStringParser::parse() const {
@@ -22,5 +24,7 @@ std::vector<TestPattern> TestPatternStringParser::parse() const {
         }
     }
     return patterns;
+}
+
 }
 

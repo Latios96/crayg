@@ -4,6 +4,8 @@
 #include <catch2/catch.hpp>
 #include "TestRegistry.h"
 
+namespace knipser {
+
 std::vector<KnipserTest> renderTests() {
     return {KnipserTest("test1", [](TestContext &context) {
 
@@ -23,4 +25,6 @@ TEST_CASE("testsShouldBeRegisteredByCallable") {
     REQUIRE(testRegistry.getTests().size() == 2);
     REQUIRE(testRegistry.getTests()[0].name == "test1");
     REQUIRE(testRegistry.getTests()[1].name == "test2");
+}
+
 }

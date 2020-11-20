@@ -9,6 +9,8 @@
 #include <vector>
 #include "TestPattern.h"
 
+namespace knipser {
+
 class TestPatternStringParser {
  public:
     explicit TestPatternStringParser(std::string parseString);
@@ -16,5 +18,7 @@ class TestPatternStringParser {
  private:
     std::string parseString;
 };
+
+}
 
 #endif //CRAYG_SRC_KNIPSER_SRC_TESTPATTERNSTRINGPARSER_H_

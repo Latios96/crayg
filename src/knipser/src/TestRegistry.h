@@ -9,6 +9,8 @@
 #include "TestContext.h"
 #include "KnipserTest.h"
 
+namespace knipser {
+
 class TestRegistry {
  public:
     bool registerTest(const KnipserTest &knipserTest);
@@ -17,5 +19,7 @@ class TestRegistry {
  private:
     std::vector<KnipserTest> tests;
 };
+
+}
 
 #endif //CRAYG_SRC_KNIPSER_SRC_TESTREGISTRY_H_

@@ -6,6 +6,9 @@
 #define CRAYG_TESTRESULT_H
 
 #include "KnipserTest.h"
+
+namespace knipser {
+
 enum TestResultState {
     FAILED, PASSED, SKIPPED
 };
@@ -29,5 +32,7 @@ struct TestResult {
     bool isPassed() const;
     bool isSkipped() const;
 };
+
+}
 
 #endif //CRAYG_TESTRESULT_H

@@ -6,6 +6,8 @@
 
 #include <utility>
 
+namespace knipser {
+
 KnipserTest::KnipserTest(std::string name, std::function<void(TestContext &)> testCallback)
     : name(std::move(name)), testCallback(std::move(testCallback)) {}
 
@@ -15,5 +17,7 @@ bool KnipserTest::operator==(const KnipserTest &rhs) const {
 
 bool KnipserTest::operator!=(const KnipserTest &rhs) const {
     return !(rhs == *this);
+}
+
 }
 

@@ -8,6 +8,8 @@
 #include <vector>
 #include "TestResult.h"
 
+namespace knipser {
+
 class ReportGenerator {
  public:
     explicit ReportGenerator(const std::vector<TestResult> &testResults);
@@ -16,5 +18,7 @@ class ReportGenerator {
  protected:
     const std::vector<TestResult> testResults;
 };
+
+}
 
 #endif //CRAYG_REPORTGENERATOR_H

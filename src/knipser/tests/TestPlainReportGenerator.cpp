@@ -6,6 +6,8 @@
 #include <sstream>
 #include <fmt/format.h>
 
+namespace knipser {
+
 TEST_CASE("PlainReportGenerator") {
     const KnipserTest myTest = KnipserTest(std::string("my test"), [](const TestContext &context) {});
 
@@ -26,5 +28,6 @@ TEST_CASE("PlainReportGenerator") {
     SECTION("should report failed test") {
 
     }
+}
 
 }

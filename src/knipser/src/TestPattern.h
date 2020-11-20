@@ -8,6 +8,8 @@
 #include <string>
 #include <ostream>
 
+namespace knipser {
+
 class TestPattern {
  public:
     explicit TestPattern(std::string pattern);
@@ -20,5 +22,7 @@ class TestPattern {
 
     friend std::ostream &operator<<(std::ostream &os, const TestPattern &pattern);
 };
+
+}
 
 #endif //CRAYG_SRC_KNIPSER_SRC_TESTPATTERN_H_

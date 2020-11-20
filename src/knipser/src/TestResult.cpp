@@ -4,6 +4,8 @@
 
 #include "TestResult.h"
 
+namespace knipser {
+
 TestResult TestResult::createFailed(KnipserTest test, std::string message, TestContext context) {
     return TestResult(test, TestResultState::FAILED, message, context);
 }
@@ -33,3 +35,4 @@ TestResult::TestResult(const KnipserTest &test,
                                                   state(state),
                                                   message(message), testContext(testContext) {}
 
+}

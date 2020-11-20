@@ -11,7 +11,9 @@
 #include <fmt/format.h>
 #include "CLI/CLI.hpp"
 
-#define KNIPSER_MAIN(testRegistry) KnipserApp app(argc, argv, testRegistry);ExitMessage exitMessage = app.execute();std::cout << exitMessage.message << std::endl;return exitMessage.exitCode
+#define KNIPSER_MAIN(testRegistry) knipser::KnipserApp app(argc, argv, testRegistry);knipser::ExitMessage exitMessage = app.execute();std::cout << exitMessage.message << std::endl;return exitMessage.exitCode
+
+namespace knipser {
 
 struct ExitMessage {
  public:
@@ -35,5 +37,7 @@ class KnipserApp {
     ExitMessage exitMessageFromTestResults(const std::vector<TestResult> &testResults) const;
     TestRegistry &testRegistry;
 };
+
+}
 
 #endif //CRAYG_SRC_KNIPSER_SRC_KNIPSERAPP_H_

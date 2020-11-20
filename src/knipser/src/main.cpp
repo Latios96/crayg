@@ -4,7 +4,6 @@
 #include "KnipserApp.h"
 
 int main(int argc, char **argv) {
-    TestRegistry testRegistry;
+    knipser::TestRegistry testRegistry;
     KNIPSER_MAIN(testRegistry);
 }
-

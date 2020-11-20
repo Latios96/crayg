@@ -8,6 +8,8 @@
 static const char *const TEST_IMAGE_WHITE = "test_image_white.png";
 static const char *const TEST_IMAGE_BLACK = "test_image_black.png";
 
+namespace knipser {
+
 TEST_CASE("ImageComparator") {
 
     SECTION("Result should be OK") {
@@ -19,4 +21,6 @@ TEST_CASE("ImageComparator") {
         OpenImageIoImageComparator comparator(TEST_IMAGE_WHITE, TEST_IMAGE_BLACK);
         REQUIRE(comparator.compareImages().isError());
     }
+}
+
 }

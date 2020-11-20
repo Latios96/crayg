@@ -16,7 +16,7 @@ void createGradientImage(Image &image) {
     }
 }
 
-void writeAndCheckTestImage(TestContext &context, std::string imageOutputName) {
+void writeAndCheckTestImage(knipser::TestContext &context, std::string imageOutputName) {
     context.setImageOutputName(imageOutputName);
     Image image(1280, 720);
     createGradientImage(image);
@@ -26,16 +26,16 @@ void writeAndCheckTestImage(TestContext &context, std::string imageOutputName) {
     ASSERT_IMAGES_ARE_EQUAL(context);
 };
 
-std::vector<KnipserTest> imageTests();
-std::vector<KnipserTest> imageTests() {
+std::vector<knipser::KnipserTest> imageTests();
+std::vector<knipser::KnipserTest> imageTests() {
     return {
-        KnipserTest("writeBmpImage", [](TestContext &context) {
+        knipser::KnipserTest("writeBmpImage", [](knipser::TestContext &context) {
             writeAndCheckTestImage(context, "bmpTestImage.bmp");
         }),
-        KnipserTest("writePngImage", [](TestContext &context) {
+        knipser::KnipserTest("writePngImage", [](knipser::TestContext &context) {
             writeAndCheckTestImage(context, "pngTestImage.png");
         }),
-        KnipserTest("writeToImageOutputDriver", [](TestContext &context) {
+        knipser::KnipserTest("writeToImageOutputDriver", [](knipser::TestContext &context) {
             context.setImageOutputName("writeToImageOutputDriver.png");
 
             Image image(1000, 500);

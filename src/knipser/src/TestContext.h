@@ -8,6 +8,8 @@
 #include <string>
 #include <ostream>
 
+namespace knipser {
+
 class TestContext {
  public:
     explicit TestContext(std::string outputFolder, std::string referenceFolder);
@@ -29,7 +31,8 @@ class TestContext {
     const std::string referenceFolder;
     std::string imageOutputName;
     bool imageOutputSet = false;
-
 };
+
+}
 
 #endif //CRAYG_SRC_KNIPSER_SRC_TESTCONTEXT_H_

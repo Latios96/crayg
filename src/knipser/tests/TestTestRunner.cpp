@@ -6,6 +6,8 @@
 #include "TestRegistry.h"
 #include "KnipserTestUtils.h"
 
+namespace knipser {
+
 TEST_CASE("passing test should generate passing result", "[TestRunner]") {
     TestRegistry testRegistry;
     RunConfig runConfig("demo", "demoReference");
@@ -66,6 +68,8 @@ TEST_CASE("TestRunner should not execute test based on predicate", "[TestRunner]
 
     REQUIRE(testResults.size() == 1);
     REQUIRE(testResults[0].isSkipped());
+}
+
 }
 
 

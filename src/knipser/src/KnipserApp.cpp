@@ -5,6 +5,8 @@
 #include "PlainReportGenerator.h"
 #include "TestPatternStringParser.h"
 
+namespace knipser {
+
 ExitMessage KnipserApp::execute() {
     CLI::App app {"Integration testing framework for projects with image output", "Knipser"};
 
@@ -72,4 +74,6 @@ ExitMessage KnipserApp::exitMessageFromTestResults(const std::vector<TestResult>
                               failedCount);
 
     return {exitCode, message};
+}
+
 }

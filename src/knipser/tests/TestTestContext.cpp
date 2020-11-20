@@ -5,6 +5,8 @@
 #include <TestContext.h>
 #include "KnipserTestUtils.h"
 
+namespace knipser {
+
 TEST_CASE("TestTestContext") {
     TestContext testContext("demo", "demoReference");
 
@@ -39,5 +41,7 @@ TEST_CASE("TestTestContext") {
         testContext.setImageOutputName("test.exr");
         REQUIRE(testContext.getReferenceFilename() == withOsSeperators("demoReference/test.exr"));
     }
+}
+
 }
 

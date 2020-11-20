@@ -9,6 +9,8 @@
 #include "TestPattern.h"
 #include "KnipserTest.h"
 
+namespace knipser {
+
 class ExecuteTestPredicate {
  public:
     explicit ExecuteTestPredicate(std::vector<TestPattern> testPatterns);
@@ -17,5 +19,7 @@ class ExecuteTestPredicate {
  private:
     const std::vector<TestPattern> testPatterns;
 };
+
+}
 
 #endif //CRAYG_SRC_KNIPSER_SRC_EXECUTETESTPREDICATE_H_
