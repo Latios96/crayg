@@ -1,4 +1,3 @@
-
 set(UNIT_TEST_LIST
         TestColor.cpp
         TestImage.cpp
@@ -35,6 +34,7 @@ set(UNIT_TEST_LIST
         TestJsonSerializer.cpp
         TestNode.cpp
         TestScene.cpp
+        TestAreaLight.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)

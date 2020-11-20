@@ -5,13 +5,13 @@
 #include <fakeit.hpp>
 #include <sceneIO/Serializable.h>
 #include <scene/Scene.h>
-#include "scene/Light.h"
+#include "scene/AreaLight.h"
 #include "intersectors/SceneIntersector.h"
 
 using namespace fakeit;
 
-TEST_CASE("serialize Light") {
-    Light myLight;
+TEST_CASE("serialize AreaLight", "[AreaLight]") {
+    AreaLight myLight;
     myLight.setPosition(Vector3f(1, 2, 3));
     myLight.setIntensity(3.0f);
 
@@ -26,12 +26,12 @@ TEST_CASE("serialize Light") {
     fakeit::Verify(Method(mockSerializer, writeFloat).Using("intensity", 3.0f));
     fakeit::Verify(Method(mockSerializer, writeMatrix4x4f).Using("transform",
                                                                  Transform::withPosition({1, 2, 3}).matrix));
-    fakeit::Verify(Method(mockSerializer, writeType).Using("Light"));
+    fakeit::Verify(Method(mockSerializer, writeType).Using("AreaLight"));
 }
 
-TEST_CASE("deserialize Light", "[Light]") {
+TEST_CASE("deserialize AreaLight", "[AreaLight]") {
 
-    auto sceneObject = std::make_shared<Light>();
+    auto sceneObject = std::make_shared<AreaLight>();
 
     SECTION("scene containing position should be converted to transform") {
         fakeit::Mock<Deserializer> mockDeserializer;
@@ -39,6 +39,8 @@ TEST_CASE("deserialize Light", "[Light]") {
         When(Method(mockDeserializer, readVector3f).Using("position")).Return(Vector3f(1, 2, 3));
         When(Method(mockDeserializer, readMatrix4x4f).Using("transform")).Return(Matrix4x4f());
         When(Method(mockDeserializer, readFloat).Using("intensity")).Return(1);
+        When(Method(mockDeserializer, readFloat).Using("width")).Return(2);
+        When(Method(mockDeserializer, readFloat).Using("height")).Return(3);
 
         Deserializer &s = mockDeserializer.get();
         sceneObject->deserialize(s);
@@ -50,60 +52,14 @@ TEST_CASE("deserialize Light", "[Light]") {
         fakeit::Mock<Deserializer> mockDeserializer;
         When(Method(mockDeserializer, hasProperty).Using("position")).Return(false);
         When(Method(mockDeserializer, readMatrix4x4f).Using("transform")).Return(Matrix4x4f());
-        When(Method(mockDeserializer, readMatrix4x4f).Using("transform")).Return(Matrix4x4f());
         When(Method(mockDeserializer, readFloat).Using("intensity")).Return(1);
+        When(Method(mockDeserializer, readFloat).Using("width")).Return(2);
+        When(Method(mockDeserializer, readFloat).Using("height")).Return(3);
 
         Deserializer &s = mockDeserializer.get();
         sceneObject->deserialize(s);
 
         REQUIRE(sceneObject->getTransform() == Transform());
-    }
-}
-
-// for some reason fakeit did not work here
-class MockSceneIntersector : public SceneIntersector {
- public:
-    MockSceneIntersector(Scene &scene, const Imageable::Intersection &return_value)
-        : SceneIntersector(scene) {
-        this->return_value = return_value;
-    }
-    Imageable::Intersection intersect(const Ray &ray) const override {
-        return return_value;
-    };
- private:
-    Imageable::Intersection return_value;
-};
-
-TEST_CASE("Light Sampling") {
-    const float NO_SHADOW = 1.0f;
-    const float FULL_SHADOW = 0.0f;
-
-    Light light;
-    light.setPosition({0, 5, 0});
-    light.setIntensity(1.0);
-
-    SECTION("noIntersectionShouldReturnNoShadow") {
-        Scene scene;
-        MockSceneIntersector mockIntersector(scene, Imageable::Intersection::createInvalid());
-
-        const float shadowFactor = light.calculateShadowFactor(mockIntersector, {0, 0, 0});
-        REQUIRE(shadowFactor == NO_SHADOW);
-    }
-
-    SECTION("intersectionIsBehindLight") {
-        Scene scene;
-        MockSceneIntersector mockIntersector(scene, {10, std::make_shared<Sphere>()});
-
-        const float shadowFactor = light.calculateShadowFactor(mockIntersector, {0, 0, 0});
-        REQUIRE(shadowFactor == NO_SHADOW);
-    }
-
-    SECTION("intersectionIsBeforeLight") {
-        Scene scene;
-        MockSceneIntersector mockIntersector(scene, {2, std::make_shared<Sphere>()});
-
-        const float shadowFactor = light.calculateShadowFactor(mockIntersector, {0, 0, 0});
-        REQUIRE(shadowFactor == FULL_SHADOW);
     }
 }
 

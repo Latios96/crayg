@@ -14,16 +14,17 @@ void Light::setIntensity(float intensity) {
 }
 
 void Light::serialize(Serializer &serializer) {
-    serializer.writeVector3f("position", this->getPosition());
+    serializer.writeMatrix4x4f("transform", this->getTransform().matrix);
     serializer.writeFloat("intensity", intensity);
+    serializer.writeType(getType());
 }
 
 void Light::deserialize(Deserializer &deserializer) {
     if (deserializer.hasProperty("position")) {
         setPosition(deserializer.readVector3f("position"));
-        return;
+    } else {
+        transform = Transform(deserializer.readMatrix4x4f("transform"));
     }
-    transform = Transform(deserializer.readMatrix4x4f("transform"));
     setIntensity(deserializer.readFloat("intensity"));
 }
 
@@ -43,6 +44,9 @@ float Light::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vec
     } else {
         return Light::NO_SHADOW;
     }
+}
+std::string Light::getType() {
+    return "Light";
 }
 
 

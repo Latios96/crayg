@@ -32,6 +32,7 @@ class Light : public Serializable, public Transformable {
  protected:
     constexpr static const float NO_SHADOW = 1.0f;
     constexpr static const float FULL_SHADOW = 0.0f;
+    virtual std::string getType();
 };
 
 #endif //CRAYG_L
