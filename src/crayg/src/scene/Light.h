@@ -28,9 +28,9 @@ class Light : public Serializable, public Transformable {
     float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point);
 
  private:
-    float intensity;
+    float intensity = 1;
     constexpr static const float NO_SHADOW = 1.0f;
     constexpr static const float FULL_SHADOW = 0.0f;
 };
 
-#endif //CRAYG_LIGHT_H
+#endif //CRAYG_L
