@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 #include "nonstd/optional.hpp"
+namespace crayg {
 
 struct CliArgs {
     CliArgs(std::string scenePath, std::string imageOutputPath);
@@ -38,5 +39,7 @@ class CliParser {
     int argc;
     char **argv;
 };
+
+}
 
 #endif //CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_

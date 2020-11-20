@@ -10,8 +10,8 @@
 int main(int argc, char *argv[]) {
     Logger::initialize();
     try {
-        CliParser cliParser(argc, argv);
-        CliParseResult parseResult = cliParser.parse();
+        crayg::CliParser cliParser(argc, argv);
+        crayg::CliParseResult parseResult = cliParser.parse();
 
         if (!parseResult.isValid()) {
             spdlog::error(*parseResult.error);

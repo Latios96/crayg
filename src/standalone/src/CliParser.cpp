@@ -7,6 +7,8 @@
 #include <utility>
 #include "CLI/CLI.hpp"
 
+namespace crayg {
+
 CliParser::CliParser(int argc, char **argv) : argc(argc), argv(argv) {}
 
 CliParseResult CliParser::parse() {
@@ -30,3 +32,5 @@ CliParseResult CliParser::parse() {
 
 CliArgs::CliArgs(std::string scenePath, std::string imageOutputPath)
     : scenePath(std::move(scenePath)), imageOutputPath(std::move(imageOutputPath)) {}
+
+}

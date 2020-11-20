@@ -4,6 +4,8 @@
 #include <catch2/catch.hpp>
 #include "CliParser.h"
 
+namespace crayg {
+
 #define ARGC_ARGV_(vector_name) \
 std::vector<char*> argv_vector;\
 for (const auto& arg : vector_name){\
@@ -49,4 +51,6 @@ TEST_CASE("invalidArgsShouldContainError") {
 
     arguments = {"tests", "-o"};
     assertHasError(arguments);
+}
+
 }

@@ -18,8 +18,8 @@ int main(int argc, char **argv) {
     try {
         QApplication a(argc, argv);
 
-        CliParser cliParser(argc, argv);
-        CliParseResult parseResult = cliParser.parse();
+        crayg::CliParser cliParser(argc, argv);
+        crayg::CliParseResult parseResult = cliParser.parse();
 
         if (!parseResult.isValid()) {
             spdlog::error(*parseResult.error);
