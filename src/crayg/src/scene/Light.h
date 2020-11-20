@@ -25,11 +25,10 @@ class Light : public Serializable, public Transformable {
 
     const LightType lightType = POINT_LIGHT;
 
-    virtual float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) = 0;
+    float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point);
 
  private:
     float intensity = 1;
- protected:
     constexpr static const float NO_SHADOW = 1.0f;
     constexpr static const float FULL_SHADOW = 0.0f;
 };

@@ -5,12 +5,11 @@
 #include <scene/Scene.h>
 #include <ShadingMethod.h>
 #include <scene/DiffuseMaterial.h>
-#include <scene/PointLight.h>
 
 TEST_CASE("ShadingMethod") {
     Scene scene;
 
-    std::shared_ptr<PointLight> light = std::make_shared<PointLight>();
+    std::shared_ptr<Light> light = std::make_shared<Light>();
     light->setPosition(Vector3f(5, 0, 0));
     light->setIntensity(1);
     scene.addLight(light);
@@ -46,7 +45,7 @@ TEST_CASE("ShadingMethod") {
     }
 
     SECTION("everyLightIsConsidered") {
-        std::shared_ptr<PointLight> light2 = std::make_shared<PointLight>();
+        std::shared_ptr<Light> light2 = std::make_shared<Light>();
         light2->setPosition(Vector3f(-5, 0, 0));
         light2->setIntensity(1);
         scene.addLight(light2);

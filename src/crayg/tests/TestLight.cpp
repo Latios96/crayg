@@ -5,11 +5,11 @@
 #include <fakeit.hpp>
 #include <sceneIO/Serializable.h>
 #include <scene/Scene.h>
-#include <scene/PointLight.h>
+#include "scene/Light.h"
 #include "intersectors/SceneIntersector.h"
 
 TEST_CASE("Light") {
-    PointLight myLight;
+    Light myLight;
     myLight.setPosition(Vector3f(1, 2, 3));
     myLight.setIntensity(3.0f);
 
@@ -58,7 +58,7 @@ TEST_CASE("Light Sampling") {
     const float NO_SHADOW = 1.0f;
     const float FULL_SHADOW = 0.0f;
 
-    PointLight light;
+    Light light;
     light.setPosition({0, 5, 0});
     light.setIntensity(1.0);
 
