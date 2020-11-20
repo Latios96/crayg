@@ -8,6 +8,8 @@
 #include <image/OutputDriver.h>
 #include "ImageWidget.h"
 
+namespace crayg {
+
 class ImageWidgetOutputDriver : public OutputDriver {
  public:
     explicit ImageWidgetOutputDriver(ImageWidget &imageWidget);
@@ -16,5 +18,7 @@ class ImageWidgetOutputDriver : public OutputDriver {
  private:
     ImageWidget &imageWidget;
 };
+
+}
 
 #endif //CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_

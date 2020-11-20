@@ -6,6 +6,9 @@
 #include <image/ImageIterators.h>
 #include <iostream>
 #include "ImageWidgetOutputDriver.h"
+
+namespace crayg {
+
 ImageWidgetOutputDriver::ImageWidgetOutputDriver(ImageWidget &imageWidget) : imageWidget(imageWidget) {}
 
 void drawHLine(QImage &image, int x_start, int y_start, int length, int width) {
@@ -62,6 +65,7 @@ void ImageWidgetOutputDriver::writeBucketImageBuffer(const BucketImageBuffer &bu
                                                         std::get<2>(rgbValues)));
     }
     imageWidget.update();
+}
 
 }
 

@@ -15,6 +15,8 @@
 #include <iostream>
 #include "ImageWidget.h"
 
+namespace crayg {
+
 class FrameBufferWidget : public QWidget {
  Q_OBJECT
  public:
@@ -27,5 +29,7 @@ class FrameBufferWidget : public QWidget {
     void setupUI();
     ImageWidget &imageWidget;
 };
+
+}
 
 #endif //CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_

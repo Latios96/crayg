@@ -36,10 +36,10 @@ int main(int argc, char **argv) {
 
         Image myImage(scene.renderSettings.resolution);
 
-        auto imageWidget = new ImageWidget(scene.renderSettings.resolution);
-        ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
+        auto imageWidget = new crayg::ImageWidget(scene.renderSettings.resolution);
+        crayg::ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
 
-        FrameBufferWidget frameBufferWidget(*imageWidget);
+        crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
         frameBufferWidget.show();
 
         Renderer renderer(scene, imageWidgetOutputDriver);

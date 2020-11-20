@@ -8,6 +8,9 @@
 #include <QPainter>
 #include <QtWidgets/qwidget.h>
 #include <basics/Resolution.h>
+
+namespace crayg {
+
 class ImageWidget : public QWidget {
  Q_OBJECT
     friend class ImageWidgetOutputDriver;
@@ -18,5 +21,7 @@ class ImageWidget : public QWidget {
  private:
     QImage image;
 };
+
+}
 
 #endif //CRAYG_SRC_STANDALONEGUI_IMAGEWIDGET_H_

@@ -3,6 +3,7 @@
 //
 
 #include "ImageWidget.h"
+namespace crayg {
 
 ImageWidget::ImageWidget(const Resolution &resolution, QWidget *parent) : QWidget(parent) {
     image = QImage(resolution.getWidth(), resolution.getHeight(), QImage::Format_RGB888);
@@ -12,4 +13,6 @@ ImageWidget::ImageWidget(const Resolution &resolution, QWidget *parent) : QWidge
 void ImageWidget::paintEvent(QPaintEvent *event) {
     QPainter qPainter(this);
     qPainter.drawImage(0, 0, image);
+}
+
 }

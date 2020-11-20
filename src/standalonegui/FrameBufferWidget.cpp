@@ -4,6 +4,9 @@
 
 #include "FrameBufferWidget.h"
 #include "ImageWidget.h"
+
+namespace crayg {
+
 void FrameBufferWidget::setupUI() {
     auto scrollArea = new QScrollArea();
     scrollArea->setWidget(&imageWidget);
@@ -20,5 +23,6 @@ void FrameBufferWidget::setupUI() {
     } else {
         resize(QSize(imageWidget.size().width() + 40, imageWidget.size().height() + 40));
     }
+}
 
 }
