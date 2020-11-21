@@ -7,24 +7,37 @@
         0.0
       ],
       "type": "Sphere",
-      "radius": 1.5,
+      "radius": 1,
       "material": "redMat"
     },
     {
-      "position": [
+      "transform": [
+        1,
         0,
-        3,
-        -10
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0.5,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
       ],
-      "type": "AreaLight",
+      "type": "DiskLight",
       "intensity": 1.0,
-      "width": 1,
+      "radius": 0.5,
       "height": 1
     },
     {
       "position": [
         0.0,
-        -1.5,
+        -1,
         0.0
       ],
       "type": "GroundPlane"

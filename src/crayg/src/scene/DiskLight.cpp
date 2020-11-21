@@ -16,17 +16,18 @@ void DiskLight::deserialize(Deserializer &deserializer) {
     radius = deserializer.readFloat("radius");
 }
 float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
-    float r = radius * sqrt((double(rand()) / RAND_MAX));
+    //float r = radius * sqrt((double(rand()) / RAND_MAX));
+    float r = radius * (double(rand()) / RAND_MAX);
     float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;
     Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
     const Vector3f transformedPosition = getTransform().apply(positionOnPlane);
 
-    const Vector3f shadowVector = (transformedPosition - point);
+    const Vector3f shadowVector = (transformedPosition - point).normalize();
     const Vector3f normal = getNormal({0, 0, 0});
     if (normal.scalarProduct(shadowVector.normalize()) > 0) {
         return Light::FULL_SHADOW;
     }
-    Ray shadowRay(point, shadowVector);
+    Ray shadowRay(point, shadowVector.normalize());
     const Imageable::Intersection intersection = sceneIntersector.intersect(shadowRay);
 
     const bool hasIntersection = intersection.imageable != nullptr;
