@@ -18,6 +18,7 @@ class DiffuseMaterial : public Material {
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override;
     PlugPtr getPlugByName(const std::string &inputPlugName) override;
     float reflectivity() override;
+    bool isEmissive() override;
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_DIFFUSEMATERIAL_H_

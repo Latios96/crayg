@@ -15,6 +15,7 @@ class ReflectiveMaterial : public Material {
     PlugPtr getPlugByName(const std::string &inputPlugName) override;
     void serialize(Serializer &serializer) override;
     void deserialize(Deserializer &deserializer) override;
+    bool isEmissive() override;
 };
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_REFLECTIVEMATERIAL_H_

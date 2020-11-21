@@ -36,4 +36,7 @@ DiffuseMaterial::DiffuseMaterial() : Material() {
 float DiffuseMaterial::reflectivity() {
     return 0;
 }
+bool DiffuseMaterial::isEmissive() {
+    return false;
+}
 

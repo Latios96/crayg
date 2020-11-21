@@ -23,3 +23,6 @@ void ReflectiveMaterial::serialize(Serializer &serializer) {
 void ReflectiveMaterial::deserialize(Deserializer &deserializer) {
     ShadingNode::deserialize(deserializer);
 }
+bool ReflectiveMaterial::isEmissive() {
+    return false;
+}
