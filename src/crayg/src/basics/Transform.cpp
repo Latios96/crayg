@@ -70,4 +70,21 @@ Transform Transform::withScale(float x, float y, float z) {
     matrix4X4f.values[2][2] = z;
     return Transform(matrix4X4f);
 }
+Vector3f Transform::applyForNormal(const Vector3f &vector3f) const {
+    const Matrix4x4f inverse = matrix.invert();
+    const Matrix4x4f transpose = inverse.transpose();
+    float x = transpose.values[0][0] * vector3f.x + transpose.values[0][1] * vector3f.y
+        + transpose.values[0][2] * vector3f.z + transpose.values[0][3];
+    float y = transpose.values[1][0] * vector3f.x + transpose.values[1][1] * vector3f.y
+        + transpose.values[1][2] * vector3f.z + transpose.values[1][3];
+    float z = transpose.values[2][0] * vector3f.x + transpose.values[2][1] * vector3f.y
+        + transpose.values[2][2] * vector3f.z + transpose.values[2][3];
+
+    return {
+        x,
+        y,
+        z,
+    };
+
+}
 

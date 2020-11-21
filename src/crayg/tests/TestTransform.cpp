@@ -97,4 +97,28 @@ TEST_CASE("apply transform to Ray", "[Transform]") {
     }
 }
 
+TEST_CASE("apply transform to Normal", "[Transform]") {
+    SECTION("apply identiy matrix should not change") {
+        Vector3f vector3f(1, 2, 3);
+        Transform transform;
+
+        REQUIRE(transform.applyForNormal(vector3f) == vector3f);
+    }
+
+    SECTION("should not transform because translate only") {
+        Vector3f vector3f(1, 2, 3);
+        Transform transform = Transform::withPosition({3, 0, 0});
+
+        const Vector3f &f = transform.applyForNormal(vector3f);
+        REQUIRE(f == vector3f);
+    }
+
+    SECTION("should transform") {
+        Vector3f vector3f(0, 1, 0);
+        Transform transform = Transform::withRotation(90, 0, 0);
+
+        REQUIRE(transform.applyForNormal(vector3f) == Vector3f(0, 0, 1));
+    }
+}
+
 
