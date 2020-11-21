@@ -14,11 +14,24 @@ Imageable::Intersection SceneIntersector::intersect(const Ray &ray) const {
             hitIntersection.imageable = intersection.imageable;
         }
     }
+    for (const auto &intersectable : scene.lights) {
+        Imageable::Intersection intersection = intersectable->intersect(ray);
+
+        if (intersection.rayParameter < hitIntersection.rayParameter && intersection.imageable) {
+            hitIntersection.rayParameter = intersection.rayParameter;
+            hitIntersection.imageable = intersection.imageable;
+        }
+    }
     return hitIntersection;
 }
 
 bool SceneIntersector::isIntersecting(const Ray &ray) const {
     for (const auto &intersectable : scene.objects) {
+        if (intersectable->isIntersecting(ray)) {
+            return true;
+        }
+    }
+    for (const auto &intersectable : scene.lights) {
         if (intersectable->isIntersecting(ray)) {
             return true;
         }

@@ -80,6 +80,9 @@ void Renderer::init() {
     for (auto &imageable : scene.objects) {
         imageable->beforeRender();
     }
+    for (auto &imageable : scene.lights) {
+        imageable->beforeRender();
+    }
 
     Logger::info("Creating SceneIntersector...");
     sceneIntersector = std::make_shared<SceneIntersector>(scene);
@@ -116,6 +119,9 @@ Color Renderer::traceRay(const Ray &ray, int depth) {
         Imageable &object = *intersection.imageable;
         Color shadedColor;
         const Vector3f normal = object.getNormal(location);
+        if (object.getMaterial()->getDiffuseColor() == Color(10, 10, 10)) {
+            return Color::createWhite();
+        }
         if (object.getMaterial()->reflectivity()) {
             Ray reflectedRay = Ray(location, ray.direction - normal * (2 * (ray.direction.scalarProduct(normal))));
             shadedColor = traceRay(reflectedRay, depth + 1);
