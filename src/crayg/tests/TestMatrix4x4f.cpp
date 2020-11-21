@@ -227,3 +227,11 @@ TEST_CASE("Matrix4x4 rotation factory methods", "[Matrix4x4f]") {
         REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001));
     }
 }
+
+TEST_CASE("Matrix4x4 transpose", "[Matrix4x4f]") {
+    Matrix4x4f matrix4X4F(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+
+    Matrix4x4f result = matrix4X4F.transpose();
+
+    REQUIRE(result == Matrix4x4f(1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15, 4, 8, 12, 16));
+}

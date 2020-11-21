@@ -40,6 +40,7 @@ class Matrix4x4f {
     Matrix4x4f &operator=(const Matrix4x4f &rhs);
     Matrix4x4f operator*(const Matrix4x4f &vec) const;
     Matrix4x4f invert();
+    Matrix4x4f transpose();
 
     float values[4][4] = {1, 0, 0, 0,
                           0, 1, 0, 0,
