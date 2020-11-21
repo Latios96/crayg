@@ -93,7 +93,7 @@ Matrix4x4f &Matrix4x4f::operator=(const Matrix4x4f &rhs) {
     memcpy(values, rhs.values, sizeof(float) * 16);
     return *this;
 }
-Matrix4x4f Matrix4x4f::invert() {
+Matrix4x4f Matrix4x4f::invert() const {
     Matrix4x4f result = *this;
 
     for (int columnIndex = 0; columnIndex < 4; columnIndex++) {
@@ -155,7 +155,7 @@ Matrix4x4f Matrix4x4f::rotateZ(float angleInDegrees) {
                       0, 0, 1, 0,
                       0, 0, 0, 1);
 }
-Matrix4x4f Matrix4x4f::transpose() {
+Matrix4x4f Matrix4x4f::transpose() const {
     return Matrix4x4f(values[0][0],
                       values[1][0],
                       values[2][0],
