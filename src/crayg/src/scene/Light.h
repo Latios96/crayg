@@ -9,10 +9,6 @@
 #include "scene/Transformable.h"
 #include "scene/Imageable.h"
 
-enum LightType {
-    POINT_LIGHT
-};
-
 class SceneIntersector;
 
 class Light : public Serializable, public Transformable, public Imageable {
@@ -24,8 +20,6 @@ class Light : public Serializable, public Transformable, public Imageable {
     float getIntensity() const;
 
     void setIntensity(float intensity);
-
-    const LightType lightType = POINT_LIGHT;
 
     virtual float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point);
     Vector3f getNormal(Vector3f point) override;
