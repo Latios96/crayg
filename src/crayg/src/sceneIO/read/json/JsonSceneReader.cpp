@@ -12,6 +12,7 @@
 #include <scene/DiffuseMaterial.h>
 #include <scene/ReflectiveMaterial.h>
 #include <scene/AreaLight.h>
+#include <scene/DiskLight.h>
 #include "JsonDeserializer.h"
 #include "utils/StopWatch.h"
 #include "scene/Light.h"
@@ -72,6 +73,8 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
             readLight<Light>(scene, obj);
         } else if (type == "AreaLight") {
             readLight<AreaLight>(scene, obj);
+        } else if (type == "DiskLight") {
+            readLight<DiskLight>(scene, obj);
         } else if (type == "DiffuseMaterial") {
             readMaterial<DiffuseMaterial>(scene, obj);
         } else if (type == "ReflectiveMaterial") {
