@@ -5,12 +5,9 @@
 #include <catch2/catch.hpp>
 #include <scene/DiskLight.h>
 #include <fakeit.hpp>
+#include "intersectors/SceneIntersector.h"
 
 using namespace fakeit;
-// serialize
-// deserialize
-// shadow factor
-// intersect / isIntersecting
 
 TEST_CASE("construct DiskLight", "[DiskLight]") {
 
@@ -60,4 +57,188 @@ TEST_CASE("deserialize DiskLight", "[DiskLight]") {
     REQUIRE(diskLight.getTransform() == Transform());
     REQUIRE(diskLight.getIntensity() == 2);
     REQUIRE(diskLight.getRadius() == 3);
+}
+
+class MockSceneIntersector : public SceneIntersector {
+ public:
+    MockSceneIntersector(Scene &scene, const Imageable::Intersection &return_value)
+        : SceneIntersector(scene) {
+        this->return_value = return_value;
+    }
+    Imageable::Intersection intersect(const Ray &ray) const override {
+        return return_value;
+    };
+ private:
+    Imageable::Intersection return_value;
+};
+
+TEST_CASE("DiskLight shadowFactor", "[DiskLight]") {
+
+    SECTION("Disklight at origin should have full light") {
+        Scene scene;
+        DiskLight diskLight;
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection::createInvalid());
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {3, 0, 0});
+
+        REQUIRE(shadowFactor == 1);
+    }
+
+    SECTION("Disklight at origin should have no light behind") {
+        Scene scene;
+        DiskLight diskLight;
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection::createInvalid());
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {-3, 0, 0});
+
+        REQUIRE(shadowFactor == 0);
+    }
+
+    SECTION("Disklight at origin should have no light because of intersection") {
+        Scene scene;
+        DiskLight diskLight;
+        std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>();
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection(2, sphere->shared_from_this()));
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {3, 0, 0});
+
+        REQUIRE(shadowFactor == 0);
+    }
+
+    SECTION("Disklight moved behind should have full light") {
+        Scene scene;
+        DiskLight diskLight(Transform::withPosition({-3, 0, 0}), 1, 1);
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection::createInvalid());
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {3, 0, 0});
+
+        REQUIRE(shadowFactor == 1);
+    }
+
+    SECTION("Disklight moved behind should have no light behind") {
+        Scene scene;
+        DiskLight diskLight(Transform::withPosition({-3, 0, 0}), 1, 1);
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection::createInvalid());
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {-4, 0, 0});
+
+        REQUIRE(shadowFactor == 0);
+    }
+
+    SECTION("Disklight moved behind should have no light because of intersection") {
+        Scene scene;
+        DiskLight diskLight(Transform::withPosition({-3, 0, 0}), 1, 1);
+        std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>();
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection(2, sphere->shared_from_this()));
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {3, 0, 0});
+
+        REQUIRE(shadowFactor == 0);
+    }
+
+    SECTION("Disklight moved front should have full light") {
+        Scene scene;
+        DiskLight diskLight(Transform::withPosition({3, 0, 0}), 1, 1);
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection::createInvalid());
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {6, 0, 0});
+
+        REQUIRE(shadowFactor == 1);
+    }
+
+    SECTION("Disklight moved front should have no light behind") {
+        Scene scene;
+        DiskLight diskLight(Transform::withPosition({3, 0, 0}), 1, 1);
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection::createInvalid());
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {-4, 0, 0});
+
+        REQUIRE(shadowFactor == 0);
+    }
+
+    SECTION("Disklight moved front should have no light because of intersection") {
+        Scene scene;
+        DiskLight diskLight(Transform::withPosition({3, 0, 0}), 1, 1);
+        std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>();
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection(2, sphere->shared_from_this()));
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {6, 0, 0});
+
+        REQUIRE(shadowFactor == 0);
+    }
+
+    SECTION("Disklight rotated should have full light") {
+        Scene scene;
+        DiskLight diskLight(Transform::withRotation(0, 0, -90), 1, 1);
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection::createInvalid());
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {0, -6, 0});
+
+        REQUIRE(shadowFactor == 1);
+    }
+
+    SECTION("Disklight rotated up should have no light behind") {
+        Scene scene;
+        DiskLight diskLight(Transform::withRotation(0, 0, -90), 1, 1);
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection::createInvalid());
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {0, 6, 0});
+
+        REQUIRE(shadowFactor == 0);
+    }
+
+    SECTION("Disklight rotated up should have no light because of intersection") {
+        Scene scene;
+        DiskLight diskLight(Transform::withRotation(0, 0, -90), 1, 1);
+        std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>();
+        MockSceneIntersector mockSceneIntersector(scene, Imageable::Intersection(-2, sphere->shared_from_this()));
+
+        const float shadowFactor = diskLight.calculateShadowFactor(mockSceneIntersector, {0, -6, 0});
+
+        REQUIRE(shadowFactor == 0);
+    }
+
+}
+
+TEST_CASE("DiskLight isIntersecting", "[DiskLight]") {
+
+    DiskLight diskLight(Transform::withPosition({-3, 0, 0}), 1, 1);
+
+    SECTION("front should intersect") {
+        const Ray ray = {{0, 0, 0}, {-1, 0, 0}};
+
+        const bool isIntersecting = diskLight.isIntersecting(ray);
+
+        REQUIRE(isIntersecting);
+    }
+
+    SECTION("back should not intersect") {
+        const Ray ray = {{-6, 0, 0}, {1, 0, 0}};
+
+        const bool isIntersecting = diskLight.isIntersecting(ray);
+
+        REQUIRE_FALSE(isIntersecting);
+    }
+
+}
+
+TEST_CASE("DiskLight intersect", "[DiskLight]") {
+
+    std::shared_ptr<DiskLight> diskLight = std::make_shared<DiskLight>(Transform::withPosition({-3, 0, 0}), 1, 1);
+
+    SECTION("front should intersect") {
+        const Ray ray = {{0, 0, 0}, {-1, 0, 0}};
+
+        const Imageable::Intersection intersection = diskLight->intersect(ray);
+
+        REQUIRE(intersection.imageable);
+    }
+
+    SECTION("back should not intersect") {
+        const Ray ray = {{-6, 0, 0}, {1, 0, 0}};
+
+        const Imageable::Intersection intersection = diskLight->intersect(ray);
+
+        REQUIRE(intersection.imageable == nullptr);
+    }
 }

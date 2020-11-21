@@ -21,8 +21,9 @@ float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
     Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
     const Vector3f transformedPosition = getTransform().apply(positionOnPlane);
 
-    const Vector3f shadowVector = (transformedPosition - point).normalize();
-    if (getNormal({0, 0, 0}).scalarProduct(shadowVector) > 0) {
+    const Vector3f shadowVector = (transformedPosition - point);
+    const Vector3f normal = getNormal({0, 0, 0});
+    if (normal.scalarProduct(shadowVector.normalize()) > 0) {
         return Light::FULL_SHADOW;
     }
     Ray shadowRay(point, shadowVector);
@@ -41,11 +42,14 @@ float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
     }
 }
 Vector3f DiskLight::getNormal(Vector3f point) {
-    return transform.apply({1, 0, 0});
+    return transform.applyForNormal({1, 0, 0}).normalize();
 }
 Imageable::Intersection DiskLight::intersect(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0}).normalize();
     const Vector3f center = transform.apply({0, 0, 0});
+    if (normal.scalarProduct(ray.direction) > 0) {
+        return Imageable::Intersection::createInvalid();
+    }
     float D = normal.scalarProduct(center);
     float t = -normal.scalarProduct(ray.startPoint) + D / normal.scalarProduct(ray.direction);
     if (t <= 0) {
@@ -62,6 +66,9 @@ Imageable::Intersection DiskLight::intersect(Ray ray) {
 bool DiskLight::isIntersecting(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0});
     const Vector3f center = transform.apply({0, 0, 0});
+    if (normal.scalarProduct(ray.direction) > 0) {
+        return false;
+    }
     float D = normal.scalarProduct(center);
     float t = -normal.scalarProduct(ray.startPoint) + D / normal.scalarProduct(ray.direction);
     if (t <= 0) {
