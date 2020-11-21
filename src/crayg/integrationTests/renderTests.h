@@ -35,6 +35,12 @@ std::vector<knipser::KnipserTest> renderTests() {
             renderScene(context.getReferenceFolder() + "/singleSphereWithMats.json", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
-        })
+        }),
+        knipser::KnipserTest("singleSphereWithDiskLight", [](knipser::TestContext &context) {
+            context.setImageOutputName("singleSphereWithDiskLight.png");
+            renderScene(context.getReferenceFolder() + "/singleSphereWithDiskLight.json", context.getOutputFilename());
+
+            ASSERT_IMAGES_ARE_EQUAL(context);
+        }),
     };
 }
