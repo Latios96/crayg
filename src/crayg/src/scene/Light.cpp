@@ -48,6 +48,15 @@ float Light::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vec
 std::string Light::getType() {
     return "Light";
 }
+Vector3f Light::getNormal(Vector3f point) {
+    return Vector3f();
+}
+Imageable::Intersection Light::intersect(Ray ray) {
+    return Imageable::Intersection::createInvalid();
+}
+bool Light::isIntersecting(Ray ray) {
+    return false;
+}
 
 
 

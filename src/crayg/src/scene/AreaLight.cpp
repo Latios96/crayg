@@ -1,18 +1,23 @@
 //
 // Created by Jan on 20.11.2020.
 //
-
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include "AreaLight.h"
 #include "intersectors/SceneIntersector.h"
+#include "EmissiveMaterial.h"
 
 float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
-    float randomForWidth = (double(rand()) / RAND_MAX) * 2 - 1;
-    float randomForHeight = (double(rand()) / RAND_MAX) * 2 - 1;
-    Vector3f positionOnPlane = {randomForWidth, randomForHeight, 0};
+    float r = width * sqrt((double(rand()) / RAND_MAX));
+    float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;
+    Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
     const Vector3f transformedPosition = getTransform().apply(positionOnPlane);
 
-    const Vector3f shadowVector = transformedPosition - point;
-    Ray shadowRay(point, shadowVector.normalize());
+    const Vector3f shadowVector = (transformedPosition - point).normalize();
+    if (getNormal({0, 0, 0}).scalarProduct(shadowVector) > 0) {
+        return Light::FULL_SHADOW;
+    }
+    Ray shadowRay(point, shadowVector);
     const Imageable::Intersection intersection = sceneIntersector.intersect(shadowRay);
 
     const bool hasIntersection = intersection.imageable != nullptr;
@@ -40,4 +45,39 @@ void AreaLight::deserialize(Deserializer &deserializer) {
 }
 std::string AreaLight::getType() {
     return "AreaLight";
+}
+Vector3f AreaLight::getNormal(Vector3f point) {
+    return transform.apply({1, 0, 0});
+}
+
+Imageable::Intersection AreaLight::intersect(Ray ray) {
+    const Vector3f normal = getNormal({0, 0, 0}).normalize();
+    const Vector3f center = transform.apply({0, 0, 0});
+    float D = normal.scalarProduct(center);
+    float t = -normal.scalarProduct(ray.startPoint) + D / normal.scalarProduct(ray.direction);
+    if (t <= 0) {
+        return Imageable::Intersection::createInvalid();
+    }
+    const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
+    const float distanceToCenter = (pointOnPlane - center).lengthSquared();
+    const bool isIntersecting = distanceToCenter <= (pow(width, 2));
+    if (isIntersecting) {
+        return Imageable::Intersection(t, shared_from_this());
+    }
+    return Imageable::Intersection::createInvalid();
+}
+bool AreaLight::isIntersecting(Ray ray) {
+    const Vector3f normal = getNormal({0, 0, 0});
+    const Vector3f center = transform.apply({0, 0, 0});
+    float D = normal.scalarProduct(center);
+    float t = -normal.scalarProduct(ray.startPoint) + D / normal.scalarProduct(ray.direction);
+    if (t <= 0) {
+        return false;
+    }
+    const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
+    const float distanceToCenter = (pointOnPlane - center).lengthSquared();
+    return distanceToCenter <= (pow(width, 2));
+}
+void AreaLight::beforeRender() {
+    setMaterial(std::shared_ptr<Material>(new EmissiveMaterial()));
 }

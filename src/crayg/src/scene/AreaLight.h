@@ -12,6 +12,10 @@ class AreaLight : public Light {
     float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) override;
     void serialize(Serializer &serializer) override;
     void deserialize(Deserializer &deserializer) override;
+    Vector3f getNormal(Vector3f point) override;
+    Intersection intersect(Ray ray) override;
+    bool isIntersecting(Ray ray) override;
+    void beforeRender() override;
  private:
     float width = 1;
     float height = 1;

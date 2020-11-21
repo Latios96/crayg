@@ -5,7 +5,9 @@
 #ifndef CRAYG_LIGHT_H
 #define CRAYG_LIGHT_H
 
-#include "Sphere.h"
+#include "sceneIO/Serializable.h"
+#include "scene/Transformable.h"
+#include "scene/Imageable.h"
 
 enum LightType {
     POINT_LIGHT
@@ -13,7 +15,7 @@ enum LightType {
 
 class SceneIntersector;
 
-class Light : public Serializable, public Transformable {
+class Light : public Serializable, public Transformable, public Imageable {
  public:
 
     void serialize(Serializer &serializer) override;
@@ -26,7 +28,9 @@ class Light : public Serializable, public Transformable {
     const LightType lightType = POINT_LIGHT;
 
     virtual float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point);
-
+    Vector3f getNormal(Vector3f point) override;
+    Intersection intersect(Ray ray) override;
+    bool isIntersecting(Ray ray) override;
  private:
     float intensity = 1;
  protected:
