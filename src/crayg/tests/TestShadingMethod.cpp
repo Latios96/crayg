@@ -9,9 +9,7 @@
 TEST_CASE("ShadingMethod") {
     Scene scene;
 
-    std::shared_ptr<Light> light = std::make_shared<Light>();
-    light->setPosition(Vector3f(5, 0, 0));
-    light->setIntensity(1);
+    std::shared_ptr<Light> light = std::make_shared<Light>(Transform::withPosition(Vector3f(5, 0, 0)), 1);
     scene.addLight(light);
 
     std::shared_ptr<DiffuseMaterial>
@@ -45,9 +43,7 @@ TEST_CASE("ShadingMethod") {
     }
 
     SECTION("everyLightIsConsidered") {
-        std::shared_ptr<Light> light2 = std::make_shared<Light>();
-        light2->setPosition(Vector3f(-5, 0, 0));
-        light2->setIntensity(1);
+        std::shared_ptr<Light> light2 = std::make_shared<Light>(Transform::withPosition(Vector3f(-5, 0, 0)), 1);
         scene.addLight(light2);
 
         // we have one light on each side of the sphere on the x axis,

@@ -13,7 +13,8 @@ class SceneIntersector;
 
 class Light : public Serializable, public Transformable, public Imageable {
  public:
-
+    Light();
+    explicit Light(const Transform &transform, float intensity);
     void serialize(Serializer &serializer) override;
 
     void deserialize(Deserializer &deserializer) override;

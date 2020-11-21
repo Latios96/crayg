@@ -19,6 +19,9 @@ void Transformable::setPosition(const Vector3f &position) {
 const Transform Transformable::getTransform() const {
     return transform;
 }
+Transformable::Transformable(const Transform &transform) : transform(transform) {
+
+}
 
 
 

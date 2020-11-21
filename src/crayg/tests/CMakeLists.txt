@@ -35,6 +35,7 @@ set(UNIT_TEST_LIST
         TestNode.cpp
         TestScene.cpp
         TestAreaLight.cpp
+        TestDiskLight.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)

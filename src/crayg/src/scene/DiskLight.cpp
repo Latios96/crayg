@@ -74,3 +74,13 @@ bool DiskLight::isIntersecting(Ray ray) {
 std::string DiskLight::getType() {
     return "DiskLight";
 }
+DiskLight::DiskLight(const Transform &transform, float intensity, float radius) : Light(transform, intensity),
+                                                                                  radius(radius) {
+
+}
+float DiskLight::getRadius() const {
+    return radius;
+}
+DiskLight::DiskLight() = default;
+
+

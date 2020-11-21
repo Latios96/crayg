@@ -11,6 +11,7 @@
 class Transformable {
  public:
     Transformable();
+    explicit Transformable(const Transform &transform);
     explicit Transformable(const Vector3f &position);
 
     Vector3f getPosition() const;
