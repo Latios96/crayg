@@ -37,6 +37,8 @@ set(crayg_SRCS
         scene/AreaLight.cpp
         scene/EmissiveMaterial.h
         scene/EmissiveMaterial.cpp
+        scene/DiskLight.h
+        scene/DiskLight.cpp
         intersectors/Intersector.h
         image/ImageWriter.h
         scene/SceneCreator.h

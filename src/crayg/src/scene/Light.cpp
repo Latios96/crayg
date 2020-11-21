@@ -4,6 +4,7 @@
 
 #include "Light.h"
 #include "intersectors/SceneIntersector.h"
+#include "EmissiveMaterial.h"
 
 float Light::getIntensity() const {
     return intensity;
@@ -56,6 +57,9 @@ Imageable::Intersection Light::intersect(Ray ray) {
 }
 bool Light::isIntersecting(Ray ray) {
     return false;
+}
+void Light::beforeRender() {
+    setMaterial(std::shared_ptr<Material>(new EmissiveMaterial()));
 }
 
 

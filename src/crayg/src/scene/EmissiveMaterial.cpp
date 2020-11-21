@@ -21,6 +21,6 @@ void EmissiveMaterial::connectOutputToInput(const std::string &inputPlugName, Pl
 PlugPtr EmissiveMaterial::getPlugByName(const std::string &inputPlugName) {
     return PlugPtr();
 }
-float EmissiveMaterial::emissiveAmount() {
-    return 1;
+bool EmissiveMaterial::isEmissive() {
+    return true;
 }

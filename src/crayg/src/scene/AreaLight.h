@@ -15,7 +15,6 @@ class AreaLight : public Light {
     Vector3f getNormal(Vector3f point) override;
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
-    void beforeRender() override;
  private:
     float width = 1;
     float height = 1;

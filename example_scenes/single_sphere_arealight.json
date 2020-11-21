@@ -19,7 +19,7 @@
         1,
         0,
         0,
-        3,
+        1,
         0,
         0,
         1,
@@ -75,6 +75,6 @@
   "RenderSettings": {
     "width": 1920,
     "height": 1080,
-    "maxSamples": 32
+    "maxSamples": 1
   }
 }

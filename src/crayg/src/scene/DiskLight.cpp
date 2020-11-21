@@ -1,13 +1,22 @@
 //
-// Created by Jan on 20.11.2020.
+// Created by Jan on 21.11.2020.
 //
+
 #define _USE_MATH_DEFINES
 #include <cmath>
-#include "AreaLight.h"
+#include "DiskLight.h"
 #include "intersectors/SceneIntersector.h"
 
-float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
-    float r = width * sqrt((double(rand()) / RAND_MAX));
+void DiskLight::serialize(Serializer &serializer) {
+    Light::serialize(serializer);
+    serializer.writeFloat("radius", radius);
+}
+void DiskLight::deserialize(Deserializer &deserializer) {
+    Light::deserialize(deserializer);
+    radius = deserializer.readFloat("radius");
+}
+float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
+    float r = radius * sqrt((double(rand()) / RAND_MAX));
     float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;
     Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
     const Vector3f transformedPosition = getTransform().apply(positionOnPlane);
@@ -31,25 +40,10 @@ float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
         return Light::NO_SHADOW;
     }
 }
-void AreaLight::serialize(Serializer &serializer) {
-    Light::serialize(serializer);
-    serializer.writeType("AreaLight");
-    serializer.writeFloat("width", width);
-    serializer.writeFloat("height", height);
-}
-void AreaLight::deserialize(Deserializer &deserializer) {
-    Light::deserialize(deserializer);
-    width = deserializer.readFloat("width");
-    height = deserializer.readFloat("height");
-}
-std::string AreaLight::getType() {
-    return "AreaLight";
-}
-Vector3f AreaLight::getNormal(Vector3f point) {
+Vector3f DiskLight::getNormal(Vector3f point) {
     return transform.apply({1, 0, 0});
 }
-
-Imageable::Intersection AreaLight::intersect(Ray ray) {
+Imageable::Intersection DiskLight::intersect(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0}).normalize();
     const Vector3f center = transform.apply({0, 0, 0});
     float D = normal.scalarProduct(center);
@@ -59,13 +53,13 @@ Imageable::Intersection AreaLight::intersect(Ray ray) {
     }
     const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
     const float distanceToCenter = (pointOnPlane - center).lengthSquared();
-    const bool isIntersecting = distanceToCenter <= (pow(width, 2));
+    const bool isIntersecting = distanceToCenter <= (pow(radius, 2));
     if (isIntersecting) {
         return Imageable::Intersection(t, shared_from_this());
     }
     return Imageable::Intersection::createInvalid();
 }
-bool AreaLight::isIntersecting(Ray ray) {
+bool DiskLight::isIntersecting(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0});
     const Vector3f center = transform.apply({0, 0, 0});
     float D = normal.scalarProduct(center);
@@ -75,5 +69,8 @@ bool AreaLight::isIntersecting(Ray ray) {
     }
     const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
     const float distanceToCenter = (pointOnPlane - center).lengthSquared();
-    return distanceToCenter <= (pow(width, 2));
+    return distanceToCenter <= (pow(radius, 2));
+}
+std::string DiskLight::getType() {
+    return "DiskLight";
 }
