@@ -35,7 +35,7 @@ jobs:
       - name: run CMake
         working-directory: build
         run: |
-          cmake -G
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
           cmake .. -DCMAKE_BUILD_TYPE=Release -G "Ninja"
         shell: cmd
       - name: build
