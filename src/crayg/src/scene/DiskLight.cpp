@@ -42,12 +42,11 @@ float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
     }
 }
 Vector3f DiskLight::getNormal(Vector3f point) {
-    //return transform.applyForNormal({1, 0, 0}).normalize();
-    return {1, 0, 0};
+    return transform.applyForNormal({1, 0, 0}).normalize();
 }
 Imageable::Intersection DiskLight::intersect(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0}).normalize();
-    const Vector3f center = getPosition();//transform.apply({0, 0, 0});
+    const Vector3f center = transform.apply({0, 0, 0});
     if (normal.scalarProduct(ray.direction) > 0) {
         return Imageable::Intersection::createInvalid();
     }
@@ -66,7 +65,7 @@ Imageable::Intersection DiskLight::intersect(Ray ray) {
 }
 bool DiskLight::isIntersecting(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0});
-    const Vector3f center = getPosition();//transform.apply({0, 0, 0});
+    const Vector3f center = transform.apply({0, 0, 0});
     if (normal.scalarProduct(ray.direction) > 0) {
         return false;
     }
