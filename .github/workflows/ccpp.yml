@@ -33,7 +33,9 @@ jobs:
         run: mkdir build
       - name: run CMake
         working-directory: build
-        run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Ninja"
+        run: |
+          cmake -G
+          cmake .. -DCMAKE_BUILD_TYPE=Release -G "Ninja"
         shell: cmd
       - name: build
         working-directory: build
