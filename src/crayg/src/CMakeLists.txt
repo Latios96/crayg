@@ -117,6 +117,7 @@ set(crayg_SRCS
         CraygInfo.h
         CraygInfo.cpp
         Preconditions.h
+        Preconditions.cpp
         )
 
 

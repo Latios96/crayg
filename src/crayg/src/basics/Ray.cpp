@@ -4,15 +4,18 @@
 
 #include <limits>
 #include <utils/ToStringHelper.h>
+#include <Preconditions.h>
 #include "Ray.h"
 
 Ray::Ray(Vector3f startPoint, Vector3f direction) {
+    Preconditions::checkIsUnitVector(direction, FAILURE_INFORMATION);
     this->startPoint = startPoint;
     this->direction = direction;
     this->length = std::numeric_limits<float>::min();
 }
 
 Ray::Ray(Vector3f startPoint, Vector3f direction, float length) {
+    Preconditions::checkIsUnitVector(direction, FAILURE_INFORMATION);
     this->startPoint = startPoint;
     this->direction = direction;
     this->length = length;

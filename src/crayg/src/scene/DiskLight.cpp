@@ -26,7 +26,7 @@ float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
     if (normal.scalarProduct(shadowVector.normalize()) > 0) {
         return Light::FULL_SHADOW;
     }
-    Ray shadowRay(point, shadowVector.normalize());
+    Ray shadowRay(point, shadowVector);
     const Imageable::Intersection intersection = sceneIntersector.intersect(shadowRay);
 
     const bool hasIntersection = intersection.imageable != nullptr;
