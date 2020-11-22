@@ -8,6 +8,7 @@ jobs:
     runs-on:  windows-2016
     steps:
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Set up Python 3.7
         uses: actions/setup-python@v1
         with:
