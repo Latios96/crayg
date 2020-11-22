@@ -12,18 +12,18 @@
     },
     {
       "transform": [
+        0,
+        0,
         1,
         0,
         0,
+        1,
+        0,
+        0.5,
         -1,
         0,
-        1,
         0,
-        0,
-        0,
-        0,
-        1,
-        0,
+        -4,
         0,
         0,
         0,
@@ -31,7 +31,7 @@
       ],
       "type": "DiskLight",
       "intensity": 1.0,
-      "radius": 0.25,
+      "radius": 1,
       "height": 1
     },
     {
@@ -75,6 +75,6 @@
   "RenderSettings": {
     "width": 1920,
     "height": 1080,
-    "maxSamples": 16
+    "maxSamples": 1
   }
 }
