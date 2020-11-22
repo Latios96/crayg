@@ -16,13 +16,12 @@ void DiskLight::deserialize(Deserializer &deserializer) {
     radius = deserializer.readFloat("radius");
 }
 float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
-    //float r = radius * sqrt((double(rand()) / RAND_MAX));
-    float r = radius * (double(rand()) / RAND_MAX);
+    float r = radius * sqrt((double(rand()) / RAND_MAX));
     float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;
     Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
     const Vector3f transformedPosition = getTransform().apply(positionOnPlane);
 
-    const Vector3f shadowVector = (transformedPosition - point).normalize();
+    const Vector3f shadowVector = (transformedPosition - point);
     const Vector3f normal = getNormal({0, 0, 0});
     if (normal.scalarProduct(shadowVector.normalize()) > 0) {
         return Light::FULL_SHADOW;
@@ -43,11 +42,12 @@ float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
     }
 }
 Vector3f DiskLight::getNormal(Vector3f point) {
-    return transform.applyForNormal({1, 0, 0}).normalize();
+    //return transform.applyForNormal({1, 0, 0}).normalize();
+    return {1, 0, 0};
 }
 Imageable::Intersection DiskLight::intersect(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0}).normalize();
-    const Vector3f center = transform.apply({0, 0, 0});
+    const Vector3f center = getPosition();//transform.apply({0, 0, 0});
     if (normal.scalarProduct(ray.direction) > 0) {
         return Imageable::Intersection::createInvalid();
     }
@@ -66,7 +66,7 @@ Imageable::Intersection DiskLight::intersect(Ray ray) {
 }
 bool DiskLight::isIntersecting(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0});
-    const Vector3f center = transform.apply({0, 0, 0});
+    const Vector3f center = getPosition();//transform.apply({0, 0, 0});
     if (normal.scalarProduct(ray.direction) > 0) {
         return false;
     }
