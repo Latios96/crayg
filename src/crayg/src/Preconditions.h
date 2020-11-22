@@ -10,10 +10,10 @@
 #include <basics/Vector3f.h>
 #include "Logger.h"
 
-#ifdef _DEBUG
+#ifdef ENFORCE_CHECKS
 #define SKIP_IF_DISABLED
 #else
-#define SKIP_IF_DISABLED
+#define SKIP_IF_DISABLED return;
 #endif
 
 struct FailureInformation {
