@@ -1,0 +1,80 @@
+{
+  "SceneObjects": [
+    {
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": "Sphere",
+      "radius": 1,
+      "material": "redMat"
+    },
+    {
+      "transform": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0.5,
+        -1,
+        0,
+        0,
+        -4,
+        0,
+        0,
+        0,
+        1
+      ],
+      "type": "DiskLight",
+      "intensity": 1.0,
+      "radius": 1,
+      "height": 1
+    },
+    {
+      "position": [
+        0.0,
+        -1,
+        0.0
+      ],
+      "type": "GroundPlane"
+    },
+    {
+      "type": "DiffuseMaterial",
+      "name": "redMat",
+      "diffuseColor": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "Camera": {
+    "position": [
+      0,
+      0,
+      10
+    ],
+    "centerOfInterest": [
+      0,
+      0,
+      -1
+    ],
+    "userUpVector": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "focalLength": 35.0,
+    "filmbackSize": 36.0,
+    "type": "Camera"
+  },
+  "RenderSettings": {
+    "width": 800,
+    "height": 600,
+    "maxSamples": 8
+  }
+}
