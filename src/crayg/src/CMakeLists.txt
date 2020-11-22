@@ -116,6 +116,7 @@ set(crayg_SRCS
         samplers/UnitSphereSampler.cpp
         CraygInfo.h
         CraygInfo.cpp
+        Preconditions.h
         )
 
 

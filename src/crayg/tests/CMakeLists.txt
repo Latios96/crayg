@@ -36,6 +36,7 @@ set(UNIT_TEST_LIST
         TestScene.cpp
         TestAreaLight.cpp
         TestDiskLight.cpp
+        TestPreconditions.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
