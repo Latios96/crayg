@@ -8,7 +8,6 @@ jobs:
     runs-on:  windows-2016
     steps:
       - uses: actions/checkout@v2
-      - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Set up Python 3.7
         uses: actions/setup-python@v1
         with:
@@ -34,13 +33,11 @@ jobs:
         run: mkdir build
       - name: run CMake
         working-directory: build
-        run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
-          cmake .. -DCMAKE_BUILD_TYPE=Release -G "Ninja"
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 Win64"
         shell: cmd
       - name: build
         working-directory: build
-        run: cmake --build . --config Release
+        run: cmake --build . --config Release -- /M:%NUMBER_OF_PROCESSORS%
         shell: cmd
       - name: run tests
         working-directory: build
