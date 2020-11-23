@@ -12,6 +12,7 @@
 #include "ImageWidgetOutputDriver.h"
 #include "CraygInfo.h"
 #include <thread>
+#include <image/TeeOutputDriver.h>
 
 int main(int argc, char **argv) {
     Logger::initialize();
@@ -38,14 +39,21 @@ int main(int argc, char **argv) {
 
         auto imageWidget = new crayg::ImageWidget(scene.renderSettings.resolution);
         crayg::ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
-
         crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
         frameBufferWidget.show();
 
-        Renderer renderer(scene, imageWidgetOutputDriver);
+        Image image(scene.renderSettings.resolution);
+        ImageOutputDriver imageOutputDriver(image);
+        TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
 
-        std::thread renderThread([&renderer]() {
+        Renderer renderer(scene, teeOutputDriver);
+
+        std::thread renderThread([&parseResult, &image, &renderer]() {
             renderer.renderScene();
+
+            Logger::info("writing image to {}..", parseResult.args->imageOutputPath);
+            ImageWriters::writeImage(image, parseResult.args->imageOutputPath);
+            Logger::info("writing image done.");
         });
         renderThread.detach();
 
