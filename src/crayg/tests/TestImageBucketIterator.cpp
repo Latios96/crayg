@@ -4,6 +4,8 @@
 #include <iostream>
 #include <image/ImageBucketSequences.h>
 
+namespace crayg {
+
 TEST_CASE("ImageBucketSequences", "[ImageBucketSequences]") {
 
     SECTION("testLineByLineSequenceWorksCorrectly") {
@@ -67,5 +69,6 @@ TEST_CASE("ImageBucketSequences", "[ImageBucketSequences]") {
 
         REQUIRE(buckets.empty());
     }
+}
 
 }

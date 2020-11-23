@@ -8,6 +8,8 @@
 using namespace fakeit;
 #include "utils/utils.h"
 
+namespace crayg {
+
 TEST_CASE("PointCloud") {
 
     SECTION("serialize") {
@@ -47,5 +49,7 @@ TEST_CASE("PointCloud") {
 
         REQUIRE(myPointCloud.getPosition() == Vector3f(1, 2, 3));
     }
+}
+
 }
 

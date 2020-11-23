@@ -8,6 +8,8 @@ using namespace fakeit;
 #include <sceneIO/write/Serializer.h>
 #include <scene/GroundPlane.h>
 
+namespace crayg {
+
 TEST_CASE("GroundPlaneSerialization") {
 
     GroundPlane myGroundPlane;
@@ -60,4 +62,6 @@ TEST_CASE("GroundPlaneIntersection") {
         Imageable::Intersection intersection = myGroundPlane->intersect(PARALLEL_RAY);
         REQUIRE_FALSE(intersection.isValid());
     }
+}
+
 }

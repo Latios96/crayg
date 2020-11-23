@@ -6,6 +6,8 @@
 using namespace fakeit;
 #include <scene/TriangleMesh.h>
 
+namespace crayg {
+
 TEST_CASE("TriangleMesh") {
     TriangleMesh cube;
     TriangleMesh::createCube(cube);
@@ -48,5 +50,6 @@ TEST_CASE("TriangleMesh") {
 
         REQUIRE(cube.getPosition() == Vector3f(1, 2, 3));
     }
+}
 
 }

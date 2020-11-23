@@ -9,6 +9,8 @@
 #include <image/ImageWriters.h>
 #include <boost/filesystem.hpp>
 
+namespace crayg {
+
 static const char *const TEST_IMAGE_BMP = "ImageWriters_bmp.bmp";
 static const char *const TEST_IMAGE_PNG = "ImageWriters_png.png";
 static const char *const TEST_IMAGE_UNKNOWN = "ImageWriters_unknown.unknown";
@@ -46,4 +48,6 @@ TEST_CASE("ImageWriters/ImageWriterType") {
         REQUIRE_THROWS_AS(ImageWriters::writeImage(image, TEST_IMAGE_UNKNOWN), std::runtime_error);
         REQUIRE_FALSE(boost::filesystem::exists(TEST_IMAGE_UNKNOWN));
     }
+}
+
 }

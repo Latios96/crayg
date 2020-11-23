@@ -10,6 +10,8 @@
 
 using namespace fakeit;
 
+namespace crayg {
+
 TEST_CASE("serialize AreaLight", "[AreaLight]") {
     AreaLight myLight;
     myLight.setPosition(Vector3f(1, 2, 3));
@@ -61,5 +63,7 @@ TEST_CASE("deserialize AreaLight", "[AreaLight]") {
 
         REQUIRE(sceneObject->getTransform() == Transform());
     }
+}
+
 }
 

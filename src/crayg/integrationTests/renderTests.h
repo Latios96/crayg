@@ -4,6 +4,8 @@
 #include "KnipserApp.h"
 #include "renderUtils.h"
 
+namespace crayg {
+
 std::vector<knipser::KnipserTest> renderTests() {
     return {
         knipser::KnipserTest("singleSphere", [](knipser::TestContext &context) {
@@ -43,4 +45,6 @@ std::vector<knipser::KnipserTest> renderTests() {
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
     };
+}
+
 }

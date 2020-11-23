@@ -2,6 +2,8 @@
 #include <catch2/catch.hpp>
 #include "utils/utils.h"
 
+namespace crayg {
+
 TEST_CASE("addTwoVectors", "[Vector]") {
     Vector3f myVector(1, 1, 1);
     Vector3f otherVector(1, 2, 3);
@@ -142,4 +144,6 @@ TEST_CASE("Vector/shouldCreateInvalid", "[Vector]") {
 TEST_CASE("Vector/shouldBeInvalid", "[Vector]") {
     Vector3f invalid = Vector3f::createInvalid();
     REQUIRE_FALSE(invalid.isValid());
+}
+
 }

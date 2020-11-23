@@ -8,6 +8,8 @@
 
 using namespace fakeit;
 
+namespace crayg {
+
 TEST_CASE("CameraSerialization") {
     Vector3f CAMERA_POSITION(1, 2, 3);
     Vector3f CAMERA_USER_UP_VECTOR(0, 1, 0);
@@ -55,4 +57,6 @@ TEST_CASE("CameraSerialization") {
         REQUIRE((myCamera.getFocalLength() == CAMERA_FOCAL_LENGTH));
         REQUIRE(myCamera.getFilmbackSize() == CAMERA_FILMBACK_SIZE);
     }
+}
+
 }

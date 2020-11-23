@@ -6,6 +6,8 @@
 #include "scene/ShadingNode.h"
 #include <sstream>
 
+namespace crayg {
+
 class MyMat : public ShadingNode {
  public:
     InputPlug<Color> colorPlug;
@@ -151,4 +153,6 @@ TEST_CASE("deserialize node") {
 
     REQUIRE(myMat.colorPlug.shadingNode == &myMat);
     REQUIRE(myMat.colorPlug.input == &myFileTextureNode.colorPlug);
+}
+
 }

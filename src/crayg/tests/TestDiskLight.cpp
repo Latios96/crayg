@@ -9,6 +9,8 @@
 
 using namespace fakeit;
 
+namespace crayg {
+
 TEST_CASE("construct DiskLight", "[DiskLight]") {
 
     SECTION("default construct") {
@@ -241,4 +243,6 @@ TEST_CASE("DiskLight intersect", "[DiskLight]") {
 
         REQUIRE(intersection.imageable == nullptr);
     }
+}
+
 }

@@ -5,6 +5,8 @@
 #include <basics/Matrix4x4f.h>
 #include <sstream>
 
+namespace crayg {
+
 TEST_CASE("construct Matrix4x4f", "[Matrix4x4f]") {
 
     SECTION("default constructor should create identity matrix") {
@@ -234,4 +236,6 @@ TEST_CASE("Matrix4x4 transpose", "[Matrix4x4f]") {
     Matrix4x4f result = matrix4X4F.transpose();
 
     REQUIRE(result == Matrix4x4f(1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15, 4, 8, 12, 16));
+}
+
 }

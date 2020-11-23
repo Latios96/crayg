@@ -8,6 +8,8 @@
 #include <sstream>
 #include <sceneIO/write/SceneWriter.h>
 
+namespace crayg {
+
 TEST_CASE("should write empty scene as expected") {
     Scene scene;
 
@@ -132,4 +134,6 @@ TEST_CASE("should write scene with objects and camera as expected") {
         "maxSamples": 4
     }
 })");
+}
+
 }

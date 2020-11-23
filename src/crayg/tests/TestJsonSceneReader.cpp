@@ -8,6 +8,8 @@
 #include <sceneIO/read/json/JsonSceneReader.h>
 #include <fstream>
 
+namespace crayg {
+
 const char NO_SCENE_OBJECTS[] = R"({})";
 const char NO_CAMERA[] = R"({"SceneObjects": [],"RenderSettings": {}})";
 const char SCENE_OBJECTS_IS_NOT_ARRAY[] = R"({"SceneObjects": 1, "Camera": {},"RenderSettings": {}})";
@@ -148,3 +150,4 @@ TEST_CASE("JsonSceneReader not existing file should throw") {
     REQUIRE_THROWS_AS(jsonSceneReader.read(), std::runtime_error);
 }
 
+}

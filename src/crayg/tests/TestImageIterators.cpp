@@ -4,6 +4,8 @@
 #include <iostream>
 #include <image/ImageBucketSequences.h>
 
+namespace crayg {
+
 TEST_CASE("ImageIterators", "[ImageIterators]") {
 
     std::vector<PixelPosition> positions;
@@ -33,5 +35,6 @@ TEST_CASE("ImageIterators", "[ImageIterators]") {
         REQUIRE(visitedPositions == positions);
 
     }
+}
 
 }

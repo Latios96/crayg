@@ -4,6 +4,8 @@
 using namespace fakeit;
 #include "utils/utils.h"
 
+namespace crayg {
+
 TEST_CASE("Sphere") {
     auto mySphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 3.0f);
 
@@ -84,4 +86,5 @@ TEST_CASE("Sphere/intersectsTransformed") {
     REQUIRE(mySphere->isIntersecting(Ray(Vector3f(1, 2, 6), Vector3f(0, 0, -1))));
 }
 
+}
 

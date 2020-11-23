@@ -4,6 +4,8 @@
 #include <catch2/catch.hpp>
 #include <utils/ToStringHelper.h>
 
+namespace crayg {
+
 TEST_CASE("ToStringHelper", "[ToStringHelper]") {
     ToStringHelper helper("TestClass");
 
@@ -22,5 +24,7 @@ TEST_CASE("ToStringHelper", "[ToStringHelper]") {
             .addMember("myMember2", 2);
         REQUIRE(helper.finish() == "TestClass{myMember=1,myMember2=2}");
     }
+}
+
 }
 

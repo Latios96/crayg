@@ -5,6 +5,8 @@
 #include <catch2/catch.hpp>
 #include <basics/BoundingBox.h>
 
+namespace crayg {
+
 TEST_CASE("BoundingBox") {
     BoundingBox boundingBox({0, 0, 0}, {1, 1, 1});
 
@@ -18,4 +20,6 @@ TEST_CASE("BoundingBox") {
     SECTION("shouldNotIntersect") {
         REQUIRE_FALSE(boundingBox.isIntersecting(RAY_IS_NOT_INTERSECTING));
     }
+}
+
 }

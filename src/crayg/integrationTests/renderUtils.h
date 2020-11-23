@@ -10,5 +10,9 @@
 #include <sceneIO/SceneReaderFactory.h>
 #include <image/ImageWriters.h>
 
+namespace crayg {
+
 void renderScene(const std::string &scenePath, const std::string imageOutputPath);
+
+}
 #endif //CRAYG_SRC_CRAYG_INTEGRATIONTESTS_RENDERUTILS_H_

@@ -1,6 +1,8 @@
 #include <image/Image.h>
 #include <catch2/catch.hpp>
 
+namespace crayg {
+
 TEST_CASE("Image/constructImage", "[Image]") {
     Image myImage(200, 100);
 
@@ -47,4 +49,6 @@ TEST_CASE("Image/getResolution", "[Image]") {
     Image image(10, 20);
 
     REQUIRE(image.getResolution() == Resolution(10, 20));
+}
+
 }

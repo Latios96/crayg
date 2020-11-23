@@ -1,6 +1,8 @@
 #include <basics/Color.h>
 #include <catch2/catch.hpp>
 
+namespace crayg {
+
 TEST_CASE("Color/createColorDefault", "[Color]") {
     Color myColor;
     REQUIRE(myColor.r == 0);
@@ -119,4 +121,6 @@ TEST_CASE("Color/divide", "[Color]") {
     Color color(1, 2, 3);
     const Color dividedColor = color / 2;
     REQUIRE(dividedColor == Color(0.5, 1, 1.5));
+}
+
 }

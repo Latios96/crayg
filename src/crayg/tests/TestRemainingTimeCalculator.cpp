@@ -5,6 +5,8 @@
 #include <catch2/catch.hpp>
 #include <utils/RemainingTimeCalculator.h>
 
+namespace crayg {
+
 TEST_CASE("RemainingTimeCalculator") {
     RemainingTimeCalculator remainingTimeCalculator(std::chrono::steady_clock::now());
 
@@ -18,4 +20,6 @@ TEST_CASE("RemainingTimeCalculator") {
         RemainingTimeCalculator remainingTimeCalculator(std::chrono::steady_clock::now() - std::chrono::seconds(5));
         REQUIRE(remainingTimeCalculator.getRemainingTimeByProgress(2) == 245);
     }
+}
+
 }

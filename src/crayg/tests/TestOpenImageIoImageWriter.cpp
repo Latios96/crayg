@@ -7,6 +7,8 @@
 #include <image/OpenImageIoImageWriter.h>
 #include <image/ImageIterators.h>
 
+namespace crayg {
+
 TEST_CASE("OpenImageIoImageWriter") {
     Image image(20, 10);
     OpenImageIoImageWriter openImageIoImageWriter;
@@ -25,4 +27,6 @@ TEST_CASE("OpenImageIoImageWriter") {
     if (boost::filesystem::exists("testImage.png")) {
         REQUIRE(remove("testImage.png") == 0);
     }
+}
+
 }

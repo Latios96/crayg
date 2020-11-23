@@ -6,6 +6,8 @@
 #include <ShadingMethod.h>
 #include <scene/DiffuseMaterial.h>
 
+namespace crayg {
+
 TEST_CASE("ShadingMethod") {
     Scene scene;
 
@@ -66,4 +68,6 @@ TEST_CASE("ShadingMethod/noLightsInSceneReturnsAmbientColor") {
 
     Color shadedColor = shadingMethod2.lambertShading(Vector3f(-1, 0, 0), *sphere2);
     REQUIRE(shadedColor == Color::createGrey(0.0f));
+}
+
 }

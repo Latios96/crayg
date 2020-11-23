@@ -4,6 +4,8 @@
 #include <image/BucketImageBuffer.h>
 #include "catch2/catch.hpp"
 
+namespace crayg {
+
 struct ImageWrapper {
     Image image;
 };
@@ -20,5 +22,7 @@ TEST_CASE("BucketImageBuffer") {
         REQUIRE(bucketImageBuffer.image.getWidth() == 20);
         REQUIRE(bucketImageBuffer.image.getHeight() == 30);
     }
+}
+
 }
 

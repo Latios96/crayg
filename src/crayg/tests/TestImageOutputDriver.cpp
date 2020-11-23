@@ -7,6 +7,8 @@
 #include <image/ImageOutputDriver.h>
 #include <image/ImageAlgorithms.h>
 
+namespace crayg {
+
 TEST_CASE("ImageOutputDriver") {
     Image image(200, 200);
     ImageOutputDriver imageOutputDriver(image);
@@ -20,5 +22,6 @@ TEST_CASE("ImageOutputDriver") {
 
         REQUIRE(image.getValue(10, 10) == Color::createWhite());
     }
+}
 
 }

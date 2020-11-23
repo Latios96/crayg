@@ -8,6 +8,8 @@
 
 using namespace fakeit;
 
+namespace crayg {
+
 TEST_CASE("TeeOutputDriver should forward methods") {
     fakeit::Mock<OutputDriver> mockLeft;
     fakeit::When(Method(mockLeft, prepareBucket)).AlwaysReturn();
@@ -30,4 +32,6 @@ TEST_CASE("TeeOutputDriver should forward methods") {
         fakeit::Verify(Method(mockLeft, writeBucketImageBuffer)).Once();
         fakeit::Verify(Method(mockRight, writeBucketImageBuffer)).Once();
     }
+}
+
 }

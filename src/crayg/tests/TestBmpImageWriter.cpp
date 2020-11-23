@@ -9,6 +9,8 @@
 #include <fstream>
 #include <iostream>
 
+namespace crayg {
+
 static const char *const TEST_IMAGE_NAME = "testImageWrite.bmp";
 
 // helper to check if file exists
@@ -35,4 +37,6 @@ TEST_CASE("BmpImageWriter") {
     if (fexists(TEST_IMAGE_NAME)) {
         REQUIRE(remove(TEST_IMAGE_NAME) == 0);
     }
+}
+
 }

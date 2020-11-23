@@ -8,6 +8,8 @@
 
 using namespace fakeit;
 
+namespace crayg {
+
 class SceneObjectForTesting : public SceneObject {
  public:
     Vector3f getNormal(Vector3f point) override {
@@ -46,4 +48,6 @@ TEST_CASE("deserialize SceneObject", "[SceneObject]") {
 
         REQUIRE(sceneObject->getTransform() == Transform());
     }
+}
+
 }

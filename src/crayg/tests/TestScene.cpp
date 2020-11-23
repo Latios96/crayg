@@ -6,6 +6,8 @@
 #include <scene/Scene.h>
 #include <scene/DiffuseMaterial.h>
 
+namespace crayg {
+
 TEST_CASE("addObjectToScene") {
     Scene scene;
     const std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5);
@@ -64,4 +66,6 @@ TEST_CASE("findMaterialByNameInScene") {
     SECTION("should not find exisiting material") {
         REQUIRE(scene.materialByName("<sdgf>") == nullptr);
     }
+}
+
 }

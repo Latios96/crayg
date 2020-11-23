@@ -12,6 +12,8 @@
 #include <scene/DiffuseMaterial.h>
 #include "renderUtils.h"
 
+namespace crayg {
+
 std::vector<knipser::KnipserTest> sceneIoTests() {
     return {
         knipser::KnipserTest("sceneWriteReadRendersCorrectly", [](knipser::TestContext &context) {
@@ -53,5 +55,7 @@ std::vector<knipser::KnipserTest> sceneIoTests() {
             ASSERT_IMAGES_ARE_EQUAL(context);
         })
     };
+}
+
 }
 #endif //CRAYG_SRC_CRAYG_INTEGRATIONTESTS_SCENEIO_H_

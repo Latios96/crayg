@@ -6,6 +6,8 @@
 #include "utils/ProgressReporter.h"
 #include <fakeit.hpp>
 
+namespace crayg {
+
 void _report(int progress, float timeRemaining) {
 
 }
@@ -39,5 +41,7 @@ TEST_CASE("ProgressReporter") {
             reporter.iterationDone();
         }
     }
+
+}
 
 }

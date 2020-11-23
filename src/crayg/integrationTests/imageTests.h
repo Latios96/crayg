@@ -9,6 +9,8 @@
 #include <image/ImageOutputDriver.h>
 #include <image/ImageAlgorithms.h>
 
+namespace crayg {
+
 void createGradientImage(Image &image) {
     for (auto pixel : ImageIterators::lineByLine(image)) {
         float grey = static_cast<float>(pixel.x) / static_cast<float>(image.getWidth());
@@ -56,4 +58,6 @@ std::vector<knipser::KnipserTest> imageTests() {
             ASSERT_IMAGES_ARE_EQUAL(context);
         })
     };
+}
+
 }

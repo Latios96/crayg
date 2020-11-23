@@ -3,6 +3,8 @@
 //
 #include "renderUtils.h"
 
+namespace crayg {
+
 void renderScene(const std::string &scenePath, const std::string imageOutputPath) {
     const Resolution resolution = Resolution(800, 600);
     Image myImage(resolution);
@@ -19,4 +21,6 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
     renderer.renderScene();
 
     ImageWriters::writeImage(myImage, imageOutputPath);
+}
+
 }

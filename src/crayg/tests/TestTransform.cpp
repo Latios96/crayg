@@ -5,6 +5,8 @@
 #include <basics/Vector3f.h>
 #include <basics/Transform.h>
 
+namespace crayg {
+
 TEST_CASE("Transform Construction", "[Transform]") {
     SECTION("should construct identy matrix") {
         Transform transform;
@@ -119,6 +121,8 @@ TEST_CASE("apply transform to Normal", "[Transform]") {
 
         REQUIRE(transform.applyForNormal(vector3f) == Vector3f(0, 0, 1));
     }
+}
+
 }
 
 

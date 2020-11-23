@@ -6,6 +6,8 @@
 #include <image/ImageAlgorithms.h>
 #include "catch2/catch.hpp"
 
+namespace crayg {
+
 TEST_CASE("ImageAlgorithmsBucketIsContainedInImage") {
     Image image(100, 100);
 
@@ -49,5 +51,6 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
         REQUIRE(image.getValue(5, 5) == Color::createBlack());
         REQUIRE(image.getValue(9, 9) == Color::createBlack());
     }
+}
 
 }

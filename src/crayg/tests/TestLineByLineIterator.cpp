@@ -7,6 +7,8 @@
 #include <image/ImageIterators.h>
 #include <iostream>
 
+namespace crayg {
+
 TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
     Image image(20, 10);
 
@@ -44,4 +46,6 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
         }
         REQUIRE(counter == 20 * 10);
     }
+}
+
 }

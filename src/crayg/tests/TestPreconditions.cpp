@@ -6,6 +6,8 @@
 
 #ifdef ENFORCE_CHECKS
 
+namespace crayg {
+
 TEST_CASE("check argument with expression", "[Preconditions]") {
     SECTION("pass") {
         Preconditions::checkArgument(1 == 1, FAILURE_INFORMATION);
@@ -42,5 +44,7 @@ TEST_CASE("check unit vector", "[Preconditions]") {
         REQUIRE_THROWS_AS(Preconditions::checkIsUnitVector(Vector3f(1, 2, 3), FAILURE_INFORMATION),
                           std::invalid_argument);
     }
+}
+
 }
 #endif

@@ -4,6 +4,8 @@
 #include <catch2/catch.hpp>
 #include <samplers/UnitSphereSampler.h>
 
+namespace crayg {
+
 TEST_CASE("UnitImageSampler") {
 
     SECTION("pointShouldBeInOnUnitSphere") {
@@ -14,5 +16,5 @@ TEST_CASE("UnitImageSampler") {
     }
 }
 
-
+}
 

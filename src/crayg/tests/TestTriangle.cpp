@@ -8,6 +8,8 @@
 #include <iostream>
 #include "utils/utils.h"
 
+namespace crayg {
+
 TEST_CASE("TriangleIntersects") {
 
     TriangleMesh triangleMesh;
@@ -82,4 +84,6 @@ TEST_CASE("BarycentricCoordinates") {
     REQUIRE(barycentric2.alpha == 0.5);
     REQUIRE(barycentric2.beta == 0.25);
     REQUIRE(barycentric2.gamma == 0.25);
+}
+
 }

@@ -10,6 +10,8 @@
 
 using namespace fakeit;
 
+namespace crayg {
+
 TEST_CASE("serialize Light") {
     Light myLight(Transform::withPosition(Vector3f(1, 2, 3)), 3);
 
@@ -101,5 +103,7 @@ TEST_CASE("Light Sampling") {
         const float shadowFactor = light.calculateShadowFactor(mockIntersector, {0, 0, 0});
         REQUIRE(shadowFactor == FULL_SHADOW);
     }
+}
+
 }
 

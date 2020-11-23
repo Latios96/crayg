@@ -8,13 +8,13 @@
 #include "sceneIO.h"
 
 int main(int argc, char **argv) {
-    Logger::initialize();
+    crayg::Logger::initialize();
 
     knipser::TestRegistry testRegistry;
     testRegistry
-        .registerTests(sceneIoTests())
-        .registerTests(imageTests())
-        .registerTests(renderTests());
+        .registerTests(crayg::sceneIoTests())
+        .registerTests(crayg::imageTests())
+        .registerTests(crayg::renderTests());
 
     KNIPSER_MAIN(testRegistry);
 }

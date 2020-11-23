@@ -4,6 +4,8 @@
 #include <catch2/catch.hpp>
 #include <sceneIO/read/json/JsonDeserializer.h>
 
+namespace crayg {
+
 TEST_CASE("JsonDeserializer") {
     const char json[] = R"({"myFloat": 1.0,
 "myInt": 2,
@@ -151,5 +153,7 @@ TEST_CASE("JsonDeserializer") {
         REQUIRE(
             jsonDeserializer.readMatrix4x4fWithDefault("notExistingNameToReadDefault", Matrix4x4f()) == Matrix4x4f());
     }
+}
+
 }
 

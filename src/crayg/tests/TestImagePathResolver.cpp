@@ -7,6 +7,8 @@
 #include <boost/filesystem.hpp>
 #include <iostream>
 
+namespace crayg {
+
 class FileFixture {
  public:
     explicit FileFixture(const boost::filesystem::path &path) : path(path) {
@@ -73,5 +75,6 @@ TEST_CASE("ImagePathResolver shouldParseImageNumber") {
         int frameNumber = imagePathResolver.parseImageNumber("test.png");
         REQUIRE(frameNumber == -1);
     }
+}
 
 }
