@@ -4,7 +4,7 @@
 #include <catch2/catch.hpp>
 #include <Preconditions.h>
 
-#ifdef _DEBUG
+#ifdef ENFORCE_CHECKS
 
 TEST_CASE("check argument with expression", "[Preconditions]") {
     SECTION("pass") {
