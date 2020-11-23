@@ -3,6 +3,9 @@
 //
 
 #include "BucketImageBuffer.h"
+
+namespace crayg {
+
 BucketImageBuffer::BucketImageBuffer(int x, int y, int width, int height) : image(Image(width, height)),
                                                                             imageBucket(ImageBucket(x,
                                                                                                     y,
@@ -10,5 +13,7 @@ BucketImageBuffer::BucketImageBuffer(int x, int y, int width, int height) : imag
                                                                                                     height)) {}
 BucketImageBuffer::BucketImageBuffer(const ImageBucket &imageBucket)
     : imageBucket(imageBucket), image(Image(imageBucket.getWidth(), imageBucket.getHeight())) {
+
+}
 
 }

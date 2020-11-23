@@ -7,6 +7,8 @@
 
 #include "sceneIO/Serializable.h"
 
+namespace crayg {
+
 class SerializerImplementation : public Serializer {
  public:
     virtual void start() = 0;
@@ -22,5 +24,7 @@ class SerializerImplementation : public Serializer {
 
     virtual ~SerializerImplementation() = default;;
 };
+
+}
 
 #endif //CRAYG_SERIALIZERIMPLEMENTATION_H

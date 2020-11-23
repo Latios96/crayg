@@ -6,6 +6,8 @@
 
 #include "PineHoleCameraModel.h"
 
+namespace crayg {
+
 PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight) : camera(camera),
                                                                                             imageWidth(imageWidth),
                                                                                             imageHeight(imageHeight) {
@@ -50,4 +52,6 @@ Vector3f PineHoleCameraModel::getPixelCenter(float x, float y) {
     float hScale = 2.0f * (y + 0.5f) / static_cast<float>(imageHeight) - 1.0f;
 
     return planeCenter.add(sideVector.multiplyScalar(wScale)).add(upVector.multiplyScalar(hScale));
+}
+
 }

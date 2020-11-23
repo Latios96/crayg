@@ -6,6 +6,8 @@
 #include "JsonDeserializer.h"
 #include "fmt/format.h"
 
+namespace crayg {
+
 JsonDeserializer::JsonDeserializer(rapidjson::Value &jsonObject) : jsonObject(jsonObject) {}
 
 void JsonDeserializer::check_member_exists(const std::string &name) const {
@@ -147,4 +149,5 @@ Color JsonDeserializer::readColorWithDefault(std::string name, Color defaultValu
     return readValue<Color>(name, defaultValue);
 }
 
+}
 

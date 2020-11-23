@@ -4,6 +4,8 @@
 
 #include "Sphere.h"
 
+namespace crayg {
+
 Sphere::Intersection Sphere::intersect(Ray ray) {
     ray.startPoint = ray.startPoint + getPosition().invert();
 
@@ -87,3 +89,4 @@ void Sphere::setRadius(float radius) {
     Sphere::radius = radius;
 }
 
+}

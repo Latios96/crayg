@@ -4,6 +4,8 @@
 
 #include <stdlib.h>
 #include "UnitSphereSampler.h"
+namespace crayg {
+
 Vector3f UnitSphereSampler::randomPointInside() {
     const Vector3f one = Vector3f(1, 1, 1);
     Vector3f point;
@@ -12,4 +14,6 @@ Vector3f UnitSphereSampler::randomPointInside() {
             - one;
     } while (point.length() >= 1.0);
     return point;
+}
+
 }

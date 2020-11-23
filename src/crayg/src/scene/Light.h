@@ -9,6 +9,8 @@
 #include "scene/Transformable.h"
 #include "scene/Imageable.h"
 
+namespace crayg {
+
 class SceneIntersector;
 
 class Light : public Serializable, public Transformable, public Imageable {
@@ -35,4 +37,5 @@ class Light : public Serializable, public Transformable, public Imageable {
     virtual std::string getType();
 };
 
+}
 #endif //CRAYG_L

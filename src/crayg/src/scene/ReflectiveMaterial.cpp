@@ -4,6 +4,8 @@
 
 #include "ReflectiveMaterial.h"
 
+namespace crayg {
+
 Color ReflectiveMaterial::getDiffuseColor() {
     return {};
 }
@@ -25,4 +27,6 @@ void ReflectiveMaterial::deserialize(Deserializer &deserializer) {
 }
 bool ReflectiveMaterial::isEmissive() {
     return false;
+}
+
 }

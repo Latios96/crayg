@@ -4,6 +4,8 @@
 
 #include "GroundPlane.h"
 
+namespace crayg {
+
 void GroundPlane::serialize(Serializer &serializer) {
     SceneObject::serialize(serializer);
     serializer.writeType("GroundPlane");
@@ -35,4 +37,6 @@ Imageable::Intersection GroundPlane::intersect(Ray ray) {
         }
         return Imageable::Intersection::createInvalid();
     }
+}
+
 }

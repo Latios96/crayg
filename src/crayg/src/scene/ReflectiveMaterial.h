@@ -7,6 +7,8 @@
 
 #include "Material.h"
 
+namespace crayg {
+
 class ReflectiveMaterial : public Material {
  public:
     Color getDiffuseColor() override;
@@ -17,5 +19,7 @@ class ReflectiveMaterial : public Material {
     void deserialize(Deserializer &deserializer) override;
     bool isEmissive() override;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_REFLECTIVEMATERIAL_H_

@@ -9,6 +9,8 @@
 #include "Vector3f.h"
 #include "Ray.h"
 
+namespace crayg {
+
 class BoundingBox {
 
  public:
@@ -21,7 +23,9 @@ class BoundingBox {
 
     Vector3f min, max;
 
-    bool isIntersecting(const Ray &ray);
+    bool isIntersecting(const Ray &ray); // todo make const
 };
+
+}
 
 #endif //CRAYG_BOUNDINGBOX_H

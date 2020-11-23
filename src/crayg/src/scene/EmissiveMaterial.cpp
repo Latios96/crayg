@@ -3,6 +3,9 @@
 //
 
 #include "EmissiveMaterial.h"
+
+namespace crayg {
+
 Color EmissiveMaterial::getDiffuseColor() {
     return {10, 10, 10};
 }
@@ -23,4 +26,6 @@ PlugPtr EmissiveMaterial::getPlugByName(const std::string &inputPlugName) {
 }
 bool EmissiveMaterial::isEmissive() {
     return true;
+}
+
 }

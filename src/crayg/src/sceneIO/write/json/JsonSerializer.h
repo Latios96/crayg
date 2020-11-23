@@ -12,6 +12,8 @@
 #include "sceneIO/write/SerializerImplementation.h"
 #include <memory>
 
+namespace crayg {
+
 // todo add tests
 class JsonSerializer : public SerializerImplementation {
 
@@ -45,4 +47,5 @@ class JsonSerializer : public SerializerImplementation {
     void writeVector3fImpl(const Vector3f &value) const;
 };
 
+}
 #endif //CRAYG_JSONSERIALIZER_H

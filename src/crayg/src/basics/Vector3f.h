@@ -9,6 +9,8 @@
 #include <limits>
 #include <ostream>
 
+namespace crayg {
+
 class Vector3f {
  public:
     float x, y, z;
@@ -60,4 +62,5 @@ class Vector3f {
 
 };
 
+}
 #endif //CRAYG_VECTOR3F_H

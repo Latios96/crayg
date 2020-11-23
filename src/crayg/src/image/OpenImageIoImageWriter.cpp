@@ -6,6 +6,8 @@
 #include <OpenImageIO/imageio.h>
 using namespace OIIO;
 
+namespace crayg {
+
 void OpenImageIoImageWriter::writeImage(const Image &image, std::string image_name) {
     std::unique_ptr<ImageOutput> out = ImageOutput::create(image_name);
     if (!out)
@@ -18,3 +20,5 @@ void OpenImageIoImageWriter::writeImage(const Image &image, std::string image_na
 }
 
 OpenImageIoImageWriter::~OpenImageIoImageWriter() = default;
+
+}

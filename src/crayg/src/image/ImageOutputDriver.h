@@ -6,6 +6,9 @@
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEOUTPUTDRIVER_H_
 
 #include "OutputDriver.h"
+
+namespace crayg {
+
 class ImageOutputDriver : public OutputDriver {
  public:
     ImageOutputDriver(Image &image);
@@ -15,5 +18,7 @@ class ImageOutputDriver : public OutputDriver {
  private:
     Image &image;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEOUTPUTDRIVER_H_

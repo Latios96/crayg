@@ -11,6 +11,8 @@
 #include "RemainingTimeCalculator.h"
 #include "Logger.h"
 
+namespace crayg {
+
 class ProgressReporter {
  public:
     ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback);
@@ -30,5 +32,7 @@ class ProgressReporter {
     std::chrono::steady_clock::time_point startTime;
     RemainingTimeCalculator remainingTimeCalculator;
 };
+
+}
 
 #endif //CRAYG_PROGRESSREPORTER_H

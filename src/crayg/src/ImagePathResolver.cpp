@@ -6,8 +6,9 @@
 #include <vector>
 #include <boost/filesystem.hpp>
 #include <boost/regex.hpp>
-#include <iostream>
 #include <fmt/format.h>
+
+namespace crayg {
 
 std::string ImagePathResolver::resolve(const std::string &pathTemplate) const {
     const boost::filesystem::path
@@ -40,5 +41,7 @@ int ImagePathResolver::parseImageNumber(const std::string path) const {
     }
     const auto str = what[1].str();
     return std::stoi(str);
+}
+
 }
 

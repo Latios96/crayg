@@ -8,6 +8,8 @@
 #include "basics/Vector3f.h"
 #include "basics/Ray.h"
 
+namespace crayg {
+
 template<typename T>
 class Intersector {
  public:
@@ -29,5 +31,7 @@ class Intersector {
  private:
     T sphereToIntersect;
 };
+
+}
 
 #endif //CRAYG_INTERSECTOR_H

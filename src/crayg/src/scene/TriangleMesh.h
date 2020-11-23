@@ -10,6 +10,8 @@
 #include "SceneObject.h"
 #include "Triangle.h"
 
+namespace crayg {
+
 class TriangleMesh : public SceneObject {
  public:
     static void createCube(TriangleMesh &mesh);
@@ -34,5 +36,7 @@ class TriangleMesh : public SceneObject {
     void createBounds();
     void createNormals();
 };
+
+}
 
 #endif //CRAYG_TRIANGEMESH_H

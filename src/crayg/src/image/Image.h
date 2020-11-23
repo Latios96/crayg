@@ -9,6 +9,9 @@
 #include <basics/Resolution.h>
 #include "basics/Color.h"
 #include "basics/Vector3f.h"
+
+namespace crayg {
+
 class Image {
 
  private:
@@ -66,4 +69,5 @@ struct PixelPosition {
     friend std::ostream &operator<<(std::ostream &os, const PixelPosition &position);
 };
 
+}
 #endif //CRAYG_IMAGE_H

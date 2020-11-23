@@ -4,6 +4,8 @@
 
 #include "Image.h"
 
+namespace crayg {
+
 Image::Image(int width, int height) {
     init(width, height);
 }
@@ -78,4 +80,6 @@ bool PixelPosition::operator!=(const PixelPosition &rhs) const {
 std::ostream &operator<<(std::ostream &os, const PixelPosition &position) {
     os << "x: " << position.x << " y: " << position.y;
     return os;
+}
+
 }

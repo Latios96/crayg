@@ -6,6 +6,8 @@
 #include "intersectors/SceneIntersector.h"
 #include "EmissiveMaterial.h"
 
+namespace crayg {
+
 float Light::getIntensity() const {
     return intensity;
 }
@@ -66,6 +68,7 @@ Light::Light(const Transform &transform, float intensity) : Transformable(transf
 }
 Light::Light() = default;
 
+}
 
 
 

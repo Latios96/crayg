@@ -8,6 +8,8 @@
 #include "Matrix4x4f.h"
 #include "Ray.h"
 
+namespace crayg {
+
 class Transform {
  public:
     Transform();
@@ -29,5 +31,7 @@ class Transform {
 
     Matrix4x4f matrix;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_

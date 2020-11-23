@@ -8,6 +8,8 @@
 #include "basics/Vector3f.h"
 #include "sceneIO/Serializable.h"
 
+namespace crayg {
+
 class Camera : public Serializable {
  private:
     Vector3f position;
@@ -49,4 +51,5 @@ class Camera : public Serializable {
     void deserialize(Deserializer &deserializer) override;
 };
 
+}
 #endif //CRAYG_CAMERA_H

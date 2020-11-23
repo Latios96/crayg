@@ -6,6 +6,9 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_DIFFUSEMATERIAL_H_
 
 #include "Material.h"
+
+namespace crayg {
+
 class DiffuseMaterial : public Material {
  public:
     DiffuseMaterial();
@@ -20,5 +23,7 @@ class DiffuseMaterial : public Material {
     float reflectivity() override;
     bool isEmissive() override;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_DIFFUSEMATERIAL_H_

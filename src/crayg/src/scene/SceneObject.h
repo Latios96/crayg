@@ -9,6 +9,8 @@
 #include "sceneIO/Serializable.h"
 #include "Imageable.h"
 
+namespace crayg {
+
 class SceneObject : public Imageable,
                     public Transformable,
                     public Serializable {
@@ -20,5 +22,7 @@ class SceneObject : public Imageable,
     void deserialize(Deserializer &deserializer) override;
     virtual ~SceneObject() = default;
 };
+
+}
 
 #endif //CRAYG_SCENEOBJECT_H

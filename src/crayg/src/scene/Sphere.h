@@ -8,6 +8,8 @@
 #include "string"
 #include "SceneObject.h"
 
+namespace crayg {
+
 class Sphere : public SceneObject {
  public:
 
@@ -32,5 +34,7 @@ class Sphere : public SceneObject {
  private:
     float radius;
 };
+
+}
 
 #endif //CRAYG_SPHERE_H

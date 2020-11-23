@@ -4,6 +4,8 @@
 
 #include "SceneWriter.h"
 
+namespace crayg {
+
 void SceneWriter::write() {
     StopWatch stopwatch = StopWatch::createStopWatch("Scene writing");
 
@@ -47,3 +49,5 @@ void SceneWriter::write() {
 
     stopwatch.end();
 };
+
+}

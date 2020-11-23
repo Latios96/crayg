@@ -8,6 +8,8 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
+namespace crayg {
+
 class Logger {
  public:
 
@@ -112,6 +114,8 @@ void Logger::warning(const T &msg) {
 template<typename T>
 void Logger::critical(const T &msg) {
     spdlog::critical(msg);
+}
+
 }
 
 #endif //RASPITOLIGHT_SRC_CORE_LIB_LOGGER_H_

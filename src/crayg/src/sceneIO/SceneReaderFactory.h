@@ -9,10 +9,14 @@
 #include <sceneIO/read/SceneReader.h>
 #include <sceneIO/read/json/JsonSceneReader.h>
 
+namespace crayg {
+
 class SceneReaderFactory {
  public:
  public:
     static std::shared_ptr<SceneReader> createSceneWriter(std::string scenePath, Scene &scene);
 };
+
+}
 
 #endif //CRAYG_SCENEREADERFACTORY_H

@@ -8,6 +8,8 @@
 #include <scene/Scene.h>
 #include <basics/Ray.h>
 
+namespace crayg {
+
 struct Intersection {
  public:
     Intersection(const Ray &ray, Vector3f location, SceneObject *object)
@@ -32,5 +34,7 @@ class SceneIntersector {
  private:
     Scene &scene;
 };
+
+}
 
 #endif //CRAYG_SCENEINTERSECTOR_H

@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <utils/ToStringHelper.h>
 
+namespace crayg {
+
 std::ostream &operator<<(std::ostream &os, const Color &color) {
     os << ToStringHelper("Color")
         .addMember("r", color.r)
@@ -66,3 +68,4 @@ Color Color::operator/(float scalar) const {
     return {r / scalar, g / scalar, b / scalar};
 }
 
+}

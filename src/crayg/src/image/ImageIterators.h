@@ -4,6 +4,8 @@
 
 #include "LineByLineIterator.h"
 
+namespace crayg {
+
 template<typename T, typename I>
 class IteratorAdapter {
  public:
@@ -26,3 +28,5 @@ class ImageIterators {
         return {i};
     }
 };
+
+}

@@ -3,6 +3,9 @@
 //
 
 #include "ProgressReporter.h"
+
+namespace crayg {
+
 ProgressReporter::ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback) :
     maxIterations(maxIterations),
     progressionCallback(std::move(progressionCallback)),
@@ -41,4 +44,6 @@ void ProgressReporter::finish() {
     auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end - startTime).count();
 
     Logger::info("Rendering took {} seconds.", microseconds * 0.0000006);
+}
+
 }

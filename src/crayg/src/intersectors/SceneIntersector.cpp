@@ -4,6 +4,9 @@
 
 #include <algorithm>
 #include "SceneIntersector.h"
+
+namespace crayg {
+
 Imageable::Intersection SceneIntersector::intersect(const Ray &ray) const {
     Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
@@ -32,4 +35,6 @@ SceneIntersector::~SceneIntersector() {
 
 bool Intersection::isValid() {
     return object != nullptr;
+}
+
 }

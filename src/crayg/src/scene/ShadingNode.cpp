@@ -7,6 +7,8 @@
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 
+namespace crayg {
+
 ShadingNode::ShadingNode() {
     generateName();
 }
@@ -25,4 +27,4 @@ void ShadingNode::deserialize(Deserializer &deserializer) {
     name = deserializer.readString("name");
 }
 
-
+}

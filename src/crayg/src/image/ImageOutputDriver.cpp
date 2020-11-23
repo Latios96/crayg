@@ -4,6 +4,9 @@
 
 #include "ImageOutputDriver.h"
 #include "ImageAlgorithms.h"
+
+namespace crayg {
+
 void ImageOutputDriver::prepareBucket(const ImageBucket &imageBucket) {
 
 }
@@ -12,3 +15,5 @@ void ImageOutputDriver::writeBucketImageBuffer(const BucketImageBuffer &bucketIm
 }
 ImageOutputDriver::ImageOutputDriver(Image &image) : image(image) {}
 ImageOutputDriver::~ImageOutputDriver() = default;
+
+}

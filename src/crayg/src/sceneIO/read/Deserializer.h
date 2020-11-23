@@ -11,6 +11,8 @@
 #include <basics/Matrix4x4f.h>
 #include <basics/Color.h>
 
+namespace crayg {
+
 class Deserializer {
  public:
     virtual bool hasProperty(std::string name) = 0;
@@ -31,5 +33,7 @@ class Deserializer {
     virtual Matrix4x4f readMatrix4x4fWithDefault(std::string name, Matrix4x4f defaultValue) = 0;
     virtual Color readColorWithDefault(std::string name, Color defaultValue) = 0;
 };
+
+}
 
 #endif //CRAYG_DESERIALIZER_H

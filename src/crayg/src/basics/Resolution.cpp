@@ -4,6 +4,9 @@
 
 #include <utils/ToStringHelper.h>
 #include "Resolution.h"
+
+namespace crayg {
+
 Resolution::Resolution(int width, int height) : width(width), height(height) {}
 bool Resolution::operator==(const Resolution &rhs) const {
     return width == rhs.width &&
@@ -45,5 +48,7 @@ const int Resolution::getHeight() const {
     return height;
 }
 Resolution::Resolution(const Resolution &resolution) : width(resolution.width), height(resolution.height) {
+
+}
 
 }

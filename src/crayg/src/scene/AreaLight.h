@@ -7,6 +7,8 @@
 
 #include "Light.h"
 
+namespace crayg {
+
 class AreaLight : public Light {
  public:
     float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) override;
@@ -21,5 +23,7 @@ class AreaLight : public Light {
  protected:
     std::string getType() override;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_AREALIGHT_H_

@@ -4,6 +4,8 @@
 
 #include "RemainingTimeCalculator.h"
 
+namespace crayg {
+
 RemainingTimeCalculator::RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime) : startTime {
     startTime} {
 
@@ -25,3 +27,5 @@ float RemainingTimeCalculator::getRemainingTimeByProgress(int progress) {
     }
 }
 RemainingTimeCalculator::RemainingTimeCalculator() = default;
+
+}

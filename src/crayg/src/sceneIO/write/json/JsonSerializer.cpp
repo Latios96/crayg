@@ -6,6 +6,8 @@
 
 #include <memory>
 
+namespace crayg {
+
 void JsonSerializer::startSceneObjects() {
     writer->Key("SceneObjects");
     writer->StartArray();
@@ -121,4 +123,6 @@ void JsonSerializer::writeColor(std::string name, Color value) {
     writer->Double(value.g);
     writer->Double(value.b);
     writer->EndArray();
+}
+
 }

@@ -10,6 +10,8 @@
 #include <memory>
 #include "Material.h"
 
+namespace crayg {
+
 class Imageable : public std::enable_shared_from_this<Imageable> {
  public:
     virtual Vector3f getNormal(Vector3f point) = 0;
@@ -56,5 +58,7 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
     std::shared_ptr<Material> material;
 
 };
+
+}
 
 #endif //CRAYG_IMAGEABLE_H

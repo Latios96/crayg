@@ -9,6 +9,8 @@
 #include "ImageBucket.h"
 #include <vector>
 
+namespace crayg {
+
 class ImageBucketSequences {
  public:
     template<typename I>
@@ -30,4 +32,5 @@ class ImageBucketSequences {
     static int fitImage(int pos, int bucketWidth, int dimension);
 };
 
+}
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKETSEQUENCES_H_

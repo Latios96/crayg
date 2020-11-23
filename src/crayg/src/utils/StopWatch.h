@@ -14,6 +14,8 @@
 #include "fmt/format.h"
 #include "Logger.h"
 
+namespace crayg {
+
 class StopWatch {
  public:
 
@@ -41,4 +43,6 @@ class StopWatch {
     std::string name;
     std::function<void(std::string)> outputCallback;
 };
+
+}
 #endif //CRAYG_STOPWATCH_H

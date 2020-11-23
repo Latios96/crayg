@@ -4,6 +4,8 @@
 
 #include "BoundingBox.h"
 
+namespace crayg {
+
 BoundingBox::BoundingBox(const Vector3f &min, const Vector3f &max) : min(min), max(max) {}
 
 bool BoundingBox::operator==(const BoundingBox &rhs) const {
@@ -58,4 +60,5 @@ bool BoundingBox::isIntersecting(const Ray &ray) {
 
 }
 
+}
 

@@ -9,6 +9,8 @@
 #include "ImageIterators.h"
 #include "BucketImageBuffer.h"
 
+namespace crayg {
+
 class ImageAlgorithms {
  public:
     static void copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image);
@@ -20,5 +22,7 @@ class ImageAlgorithms {
     }
     static bool bucketIsContainedInImage(const ImageBucket &bucket, Image &image);
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEALGORITHMS_H_

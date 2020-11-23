@@ -3,6 +3,8 @@
 //
 #include "ShadingMethod.h"
 
+namespace crayg {
+
 Color ShadingMethod::lambertShading(Vector3f point, Imageable &object) {
     Vector3f normal = object.getNormal(point);
 
@@ -36,3 +38,5 @@ Color ShadingMethod::colorForLight(const Vector3f &point,
 }
 
 ShadingMethod::ShadingMethod(Scene &scene) : scene(scene) {}
+
+}

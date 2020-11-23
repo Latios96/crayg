@@ -9,6 +9,8 @@
 #include <functional>
 #include "sceneIO/Serializable.h"
 
+namespace crayg {
+
 class JsonDeserializer : public Deserializer {
  public:
     explicit JsonDeserializer(rapidjson::Value &jsonObject);
@@ -39,5 +41,7 @@ class JsonDeserializer : public Deserializer {
     template<typename T>
     T convertJsonValue(const rapidjson::Value &value);
 };
+
+}
 
 #endif //CRAYG_JSONDESERIALIZER_H

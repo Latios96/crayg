@@ -9,6 +9,8 @@
 #include "basics/Ray.h"
 #include "CameraModel.h"
 
+namespace crayg {
+
 // todo add tests
 class PineHoleCameraModel : public CameraModel {
  private:
@@ -26,5 +28,7 @@ class PineHoleCameraModel : public CameraModel {
 
     Ray createPrimaryRay(float x, float y) override;
 };
+
+}
 
 #endif //CRAYG_PINEHOLECAMERAMODEL_H

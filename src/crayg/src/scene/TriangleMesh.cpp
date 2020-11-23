@@ -4,6 +4,8 @@
 
 #include "TriangleMesh.h"
 
+namespace crayg {
+
 bool TriangleMesh::isIntersecting(Ray ray) {
     return false;
 }
@@ -146,4 +148,4 @@ void TriangleMesh::createNormals() {
     }
 }
 
-
+}

@@ -11,6 +11,8 @@
 #include <basics/Matrix4x4f.h>
 #include <basics/Color.h>
 
+namespace crayg {
+
 class Serializer {
  public:
     virtual void writeInt(std::string name, int value) = 0;
@@ -24,5 +26,7 @@ class Serializer {
     virtual void writeFloatArray(std::string name, std::vector<float> &value) = 0;
     virtual void writeMatrix4x4f(std::string name, Matrix4x4f matrix4X4f) = 0;
 };
+
+}
 
 #endif //CRAYG_SERIALIZER_H

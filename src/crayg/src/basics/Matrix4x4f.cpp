@@ -7,6 +7,8 @@
 #include <iostream>
 #include "Matrix4x4f.h"
 
+namespace crayg {
+
 std::ostream &operator<<(std::ostream &os, const Matrix4x4f &matrix4X4F) {
     os << fmt::format(
         "Matrix4x4f(values={{\n{:.2f} {:.2f} {:.2f} {:.2f}\n{:.2f} {:.2f} {:.2f} {:.2f}\n{:.2f} {:.2f} {:.2f} {:.2f}\n{:.2f} {:.2f} {:.2f} {:.2f}}})",
@@ -175,3 +177,5 @@ Matrix4x4f Matrix4x4f::transpose() const {
 }
 
 Matrix4x4f::Matrix4x4f() = default;
+
+}

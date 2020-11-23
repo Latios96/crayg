@@ -7,6 +7,8 @@
 
 #include "SceneObject.h"
 
+namespace crayg {
+
 class GroundPlane : public SceneObject {
  public:
     Imageable::Intersection intersect(Ray ray) override;
@@ -22,5 +24,7 @@ class GroundPlane : public SceneObject {
  private:
     Vector3f normal = Vector3f(0, 1, 0);
 };
+
+}
 
 #endif //CRAYG_GROUNDPLANE_H

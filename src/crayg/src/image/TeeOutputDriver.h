@@ -7,6 +7,8 @@
 
 #include "OutputDriver.h"
 
+namespace crayg {
+
 class TeeOutputDriver : public OutputDriver {
  public:
     TeeOutputDriver(OutputDriver &left, OutputDriver &right);
@@ -16,5 +18,7 @@ class TeeOutputDriver : public OutputDriver {
     OutputDriver &left;
     OutputDriver &right;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_TEEOUTPUTDRIVER_H_

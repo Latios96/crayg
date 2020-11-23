@@ -6,6 +6,8 @@
 #include "Triangle.h"
 #include "TriangleMesh.h"
 
+namespace crayg {
+
 Vector3f Triangle::v0() {
     return triangleMesh->points[triangleMesh->faceIndexes[faceIndex]];
 }
@@ -144,4 +146,5 @@ BarycentricCoordinates Triangle::toBarycentricCoordinates(const Vector3f &point)
     return {alpha, beta, gamma};
 }
 
+}
 

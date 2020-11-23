@@ -10,6 +10,8 @@
 #include <fmt/format.h>
 #include <Logger.h>
 
+namespace crayg {
+
 bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) {
     boost::filesystem::path path(imagePath);
     std::string extension = path.extension().string();
@@ -32,4 +34,6 @@ bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) 
 
     imageWriter->writeImage(image, imagePath);
     return true;
+}
+
 }

@@ -11,6 +11,8 @@
 #include <utility>
 #include <functional>
 
+namespace crayg {
+
 class ShadingNode;
 
 template<typename T>
@@ -99,6 +101,8 @@ class ShadingNode : public Serializable {
 template<typename T>
 std::string Plug<T>::fullName() {
     return shadingNode->getName() + '.' + name;
+}
+
 }
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNODE_H_

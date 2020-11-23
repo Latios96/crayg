@@ -16,7 +16,7 @@
 #include <ImagePathResolver.h>
 
 int main(int argc, char **argv) {
-    Logger::initialize();
+    crayg::Logger::initialize();
     try {
         QApplication a(argc, argv);
 
@@ -28,42 +28,44 @@ int main(int argc, char **argv) {
             exit(1);
         }
 
-        Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
+        crayg::Logger::info("Crayg Renderer version {}, commit {}",
+                            crayg::CraygInfo::VERSION,
+                            crayg::CraygInfo::COMMIT_HASH);
 
-        Scene scene;
+        crayg::Scene scene;
 
         std::string scenePath = parseResult.args->scenePath;
-        auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
+        auto sceneReader = crayg::SceneReaderFactory::createSceneWriter(scenePath, scene);
         sceneReader->read();
 
-        Image myImage(scene.renderSettings.resolution);
+        crayg::Image myImage(scene.renderSettings.resolution);
 
         auto imageWidget = new crayg::ImageWidget(scene.renderSettings.resolution);
         crayg::ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
         crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
         frameBufferWidget.show();
 
-        Image image(scene.renderSettings.resolution);
-        ImageOutputDriver imageOutputDriver(image);
-        TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
+        crayg::Image image(scene.renderSettings.resolution);
+        crayg::ImageOutputDriver imageOutputDriver(image);
+        crayg::TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
 
-        Renderer renderer(scene, teeOutputDriver);
+        crayg::Renderer renderer(scene, teeOutputDriver);
 
         std::thread renderThread([&parseResult, &image, &renderer]() {
             renderer.renderScene();
 
-            ImagePathResolver imagePathResolver;
+            crayg::ImagePathResolver imagePathResolver;
             std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
-            Logger::info("writing image to {}..", imageOutputPath);
-            ImageWriters::writeImage(image, imageOutputPath);
-            Logger::info("writing image done.");
+            crayg::Logger::info("writing image to {}..", imageOutputPath);
+            crayg::ImageWriters::writeImage(image, imageOutputPath);
+            crayg::Logger::info("writing image done.");
         });
         renderThread.detach();
 
         return QApplication::exec();
     }
     catch (std::exception &e) {
-        Logger::error("Caught exception: {}", e.what());
+        crayg::Logger::error("Caught exception: {}", e.what());
         return -1;
     }
 }

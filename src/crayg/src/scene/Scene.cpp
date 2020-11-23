@@ -6,6 +6,8 @@
 #include <fmt/format.h>
 #include "Scene.h"
 
+namespace crayg {
+
 void Scene::addLight(const std::shared_ptr<Light> &light) {
     lights.push_back(light);
 }
@@ -48,3 +50,5 @@ std::shared_ptr<Material> Scene::materialByName(const std::string &name) {
 }
 
 Scene::Scene() = default;
+
+}

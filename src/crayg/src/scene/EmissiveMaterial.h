@@ -6,6 +6,9 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_EMISSIVEMATERIAL_H_
 
 #include "Material.h"
+
+namespace crayg {
+
 class EmissiveMaterial : public Material {
  public:
     Color getDiffuseColor() override;
@@ -16,5 +19,7 @@ class EmissiveMaterial : public Material {
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override;
     PlugPtr getPlugByName(const std::string &inputPlugName) override;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_EMISSIVEMATERIAL_H_

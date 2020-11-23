@@ -9,6 +9,8 @@
 #include "scene/Scene.h"
 #include "sceneIO/write/json/JsonSerializer.h"
 
+namespace crayg {
+
 class SceneWriter {
  public:
     void write();
@@ -20,5 +22,7 @@ class SceneWriter {
     Scene &scene;
     SerializerImplementation &serializerImpl;
 };
+
+}
 
 #endif //CRAYG_SCENEWRITER_H

@@ -9,6 +9,8 @@
 #include <sceneIO/Serializable.h>
 #include "ShadingNode.h"
 
+namespace crayg {
+
 class Material : public ShadingNode {
  public:
     explicit Material();
@@ -17,5 +19,7 @@ class Material : public ShadingNode {
     virtual float reflectivity() = 0;
     virtual bool isEmissive() = 0;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_MATERIAL_H_

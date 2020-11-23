@@ -3,6 +3,9 @@
 //
 
 #include "RenderSettings.h"
+
+namespace crayg {
+
 RenderSettings::RenderSettings(const Resolution &resolution, int maxSamples)
     : resolution(resolution), maxSamples(maxSamples) {}
 
@@ -11,6 +14,8 @@ RenderSettings::RenderSettings() : resolution(Resolution(0, 0)) {
 }
 RenderSettings::RenderSettings(const RenderSettings &renderSettings)
     : resolution(renderSettings.resolution), maxSamples(renderSettings.maxSamples) {
+
+}
 
 }
 

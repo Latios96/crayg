@@ -16,6 +16,8 @@
 #define SKIP_IF_DISABLED return;
 #endif
 
+namespace crayg {
+
 struct FailureInformation {
     std::string file;
     int line;
@@ -56,5 +58,7 @@ class Preconditions {
         throw std::invalid_argument(formattedMessage);
     }
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_

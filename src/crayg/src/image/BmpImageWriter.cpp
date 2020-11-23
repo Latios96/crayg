@@ -8,6 +8,8 @@
 #include "BmpImageWriter.h"
 #include "fmt/format.h"
 
+namespace crayg {
+
 void BmpImageWriter::writeImage(const Image &image, const std::string imageName) {
 
     // https://stackoverflow.com/questions/2654480/writing-bmp-image-in-pure-c-c-without-other-libraries
@@ -77,3 +79,5 @@ void BmpImageWriter::writeImage(const Image &image, const std::string imageName)
 }
 
 BmpImageWriter::~BmpImageWriter() = default;
+
+}

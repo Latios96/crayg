@@ -8,6 +8,8 @@
 #include <ostream>
 #include "Vector3f.h"
 
+namespace crayg {
+
 struct Ray {
     Vector3f startPoint, direction;
     float length;
@@ -27,5 +29,7 @@ struct Ray {
     bool operator!=(const Ray &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const Ray &ray);
 };
+
+}
 
 #endif //CRAYG_RAY_H

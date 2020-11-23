@@ -7,6 +7,9 @@
 
 #include <ostream>
 #include "Vector3f.h"
+
+namespace crayg {
+
 class Matrix4x4f {
  public:
     Matrix4x4f();
@@ -48,4 +51,5 @@ class Matrix4x4f {
                           0, 0, 0, 1}; //[ROW][COLUMN]
 };
 
+}
 #endif //CRAYG_SRC_CRAYG_SRC_BASICS_MATRIX4X4F_H_

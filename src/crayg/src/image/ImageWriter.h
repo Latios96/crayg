@@ -8,6 +8,8 @@
 #include <string>
 #include "Image.h"
 
+namespace crayg {
+
 class ImageWriter {
  public:
     virtual void writeImage(const Image &image, std::string image_name) = 0;
@@ -15,5 +17,7 @@ class ImageWriter {
     virtual ~ImageWriter() = default;
 
 };
+
+}
 
 #endif //CRAYG_IMAGEWRITERS_H

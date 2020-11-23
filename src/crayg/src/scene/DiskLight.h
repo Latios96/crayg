@@ -6,6 +6,9 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_DISKLIGHT_H_
 
 #include "Light.h"
+
+namespace crayg {
+
 class DiskLight : public Light {
  public:
     DiskLight();
@@ -22,5 +25,7 @@ class DiskLight : public Light {
  private:
     float radius = 1;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_DISKLIGHT_H_

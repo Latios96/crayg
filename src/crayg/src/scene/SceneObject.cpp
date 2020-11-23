@@ -4,6 +4,8 @@
 
 #include "SceneObject.h"
 
+namespace crayg {
+
 void SceneObject::serialize(Serializer &serializer) {
     serializer.writeMatrix4x4f("transform", this->getTransform().matrix);
     if (getMaterial()) {
@@ -24,3 +26,5 @@ void SceneObject::deserialize(Deserializer &deserializer) {
 }
 
 SceneObject::SceneObject() = default;
+
+}

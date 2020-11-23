@@ -4,6 +4,9 @@
 
 #include "PointCloud.h"
 #include "Sphere.h"
+
+namespace crayg {
+
 bool PointCloud::isIntersecting(Ray ray) {
     auto sphere = std::make_shared<Sphere>();
     for (unsigned long i = 0; i < points.size(); i++) {
@@ -53,4 +56,6 @@ const std::vector<float> &PointCloud::getRadii() const {
 }
 void PointCloud::setRadii(const std::vector<float> &radii) {
     PointCloud::radii = radii;
+}
+
 }

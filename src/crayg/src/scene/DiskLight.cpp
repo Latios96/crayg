@@ -7,6 +7,8 @@
 #include "DiskLight.h"
 #include "intersectors/SceneIntersector.h"
 
+namespace crayg {
+
 void DiskLight::serialize(Serializer &serializer) {
     Light::serialize(serializer);
     serializer.writeFloat("radius", radius);
@@ -90,4 +92,5 @@ float DiskLight::getRadius() const {
 }
 DiskLight::DiskLight() = default;
 
+}
 

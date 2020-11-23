@@ -6,6 +6,8 @@
 #include "AreaLight.h"
 #include "intersectors/SceneIntersector.h"
 
+namespace crayg {
+
 float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
     float r = width * sqrt((double(rand()) / RAND_MAX));
     float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;
@@ -76,4 +78,6 @@ bool AreaLight::isIntersecting(Ray ray) {
     const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
     const float distanceToCenter = (pointOnPlane - center).lengthSquared();
     return distanceToCenter <= (pow(width, 2));
+}
+
 }

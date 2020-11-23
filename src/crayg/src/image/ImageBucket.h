@@ -6,6 +6,9 @@
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_
 
 #include <ostream>
+
+namespace crayg {
+
 class ImageBucket {
  public:
     ImageBucket(int x, int y, int width, int height);
@@ -21,5 +24,7 @@ class ImageBucket {
  private:
     int x, y, width, height;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_

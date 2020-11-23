@@ -7,6 +7,8 @@
 
 #include <scene/Imageable.h>
 
+namespace crayg {
+
 class TriangleMesh;
 
 struct BarycentricCoordinates {
@@ -43,6 +45,8 @@ T Triangle::interpolateLinear(const BarycentricCoordinates &coordinates,
                               const T &value2,
                               const T &value3) {
     return value1 * coordinates.alpha + value2 * coordinates.beta + value3 * coordinates.gamma;
+}
+
 }
 
 #endif //CRAYG_TRIANGLE_H

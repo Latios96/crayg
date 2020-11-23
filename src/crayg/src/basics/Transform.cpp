@@ -4,6 +4,9 @@
 
 
 #include "Transform.h"
+
+namespace crayg {
+
 Transform::Transform() = default;
 Transform::Transform(const Matrix4x4f &matrix) : matrix(matrix) {}
 Transform::Transform(const Transform &transform) = default;
@@ -85,6 +88,7 @@ Vector3f Transform::applyForNormal(const Vector3f &vector3f) const {
         y,
         z,
     };
+}
 
 }
 

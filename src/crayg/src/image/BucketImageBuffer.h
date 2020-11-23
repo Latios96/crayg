@@ -7,6 +7,9 @@
 
 #include "ImageBucket.h"
 #include "Image.h"
+
+namespace crayg {
+
 struct BucketImageBuffer {
  public:
     ImageBucket imageBucket;
@@ -14,5 +17,7 @@ struct BucketImageBuffer {
     BucketImageBuffer(int x, int y, int width, int height);
     BucketImageBuffer(const ImageBucket &imageBucket);
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_

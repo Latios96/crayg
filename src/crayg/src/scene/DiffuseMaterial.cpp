@@ -4,6 +4,8 @@
 
 #include "DiffuseMaterial.h"
 
+namespace crayg {
+
 DiffuseMaterial::DiffuseMaterial(const Color &diffuseColor) : diffuseColor(diffuseColor) {}
 
 DiffuseMaterial::DiffuseMaterial(const std::string &name, const Color &diffuseColor)
@@ -40,3 +42,4 @@ bool DiffuseMaterial::isEmissive() {
     return false;
 }
 
+}

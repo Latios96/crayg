@@ -9,7 +9,7 @@
 #include "Logger.h"
 
 int main(int argc, char *argv[]) {
-    Logger::initialize();
+    crayg::Logger::initialize();
     try {
         crayg::CliParser cliParser(argc, argv);
         crayg::CliParseResult parseResult = cliParser.parse();
@@ -19,31 +19,33 @@ int main(int argc, char *argv[]) {
             exit(1);
         }
 
-        Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
+        crayg::Logger::info("Crayg Renderer version {}, commit {}",
+                            crayg::CraygInfo::VERSION,
+                            crayg::CraygInfo::COMMIT_HASH);
 
-        Scene scene;
+        crayg::Scene scene;
 
         std::string scenePath = parseResult.args->scenePath;
-        auto sceneReader = SceneReaderFactory::createSceneWriter(scenePath, scene);
+        auto sceneReader = crayg::SceneReaderFactory::createSceneWriter(scenePath, scene);
         sceneReader->read();
 
-        Image myImage(scene.renderSettings.resolution);
+        crayg::Image myImage(scene.renderSettings.resolution);
 
-        ImageOutputDriver imageOutputDriver(myImage);
+        crayg::ImageOutputDriver imageOutputDriver(myImage);
 
-        Renderer renderer(scene, imageOutputDriver);
+        crayg::Renderer renderer(scene, imageOutputDriver);
         renderer.renderScene();
 
-        ImagePathResolver imagePathResolver;
+        crayg::ImagePathResolver imagePathResolver;
         std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
-        Logger::info("writing image to {}..", imageOutputPath);
-        ImageWriters::writeImage(myImage, imageOutputPath);
-        Logger::info("writing image done.");
+        crayg::Logger::info("writing image to {}..", imageOutputPath);
+        crayg::ImageWriters::writeImage(myImage, imageOutputPath);
+        crayg::Logger::info("writing image done.");
 
         return 0;
     }
     catch (std::exception &e) {
-        Logger::error("Caught exception: {}", e.what());
+        crayg::Logger::error("Caught exception: {}", e.what());
         return -1;
     }
 }

@@ -7,10 +7,15 @@
 
 #include <string>
 #include <scene/Scene.h>
+
+namespace crayg {
+
 class SceneWriters {
  public:
     static void writeSceneAsJson(Scene &scene, const std::string &path);
     static void writeSceneAsJson(Scene &scene, std::shared_ptr<std::ostream> stream);
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_SCENEWRITERS_H_

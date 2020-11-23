@@ -4,6 +4,8 @@
 
 #include "TeeOutputDriver.h"
 
+namespace crayg {
+
 void TeeOutputDriver::prepareBucket(const ImageBucket &imageBucket) {
     left.prepareBucket(imageBucket);
     right.prepareBucket(imageBucket);
@@ -14,3 +16,4 @@ void TeeOutputDriver::writeBucketImageBuffer(const BucketImageBuffer &bucketImag
 }
 TeeOutputDriver::TeeOutputDriver(OutputDriver &left, OutputDriver &right) : left(left), right(right) {}
 
+}

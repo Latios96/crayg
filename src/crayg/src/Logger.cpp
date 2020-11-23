@@ -2,6 +2,9 @@
 // Created by Jan on 26.05.2019.
 //
 #include <Logger.h>
+
+namespace crayg {
+
 void Logger::setLevel(LevelEnum level) {
     if (level == LevelEnum::trace) {
         spdlog::set_level(spdlog::level::trace);
@@ -18,4 +21,6 @@ void Logger::setLevel(LevelEnum level) {
     } else if (level == LevelEnum::off) {
         spdlog::set_level(spdlog::level::off);
     }
+}
+
 }

@@ -18,6 +18,8 @@
 #include "scene/Light.h"
 #include "scene/GroundPlane.h"
 
+namespace crayg {
+
 JsonSceneReader::JsonSceneReader(const std::string &path, Scene &scene) : SceneReader(path, scene) {}
 
 template<typename T>
@@ -179,5 +181,7 @@ void JsonSceneReader::read() {
     }
 
     stopwatch.end();
+
+}
 
 }

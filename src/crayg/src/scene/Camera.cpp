@@ -4,6 +4,8 @@
 
 #include "Camera.h"
 
+namespace crayg {
+
 Camera::Camera(const Vector3f &position, const Vector3f &userUpVector, const Vector3f &centerOfInterest,
                float focalLength, float filmbackSize) : position(position), userUpVector(userUpVector),
                                                         centerOfInterest(centerOfInterest), focalLength(focalLength),
@@ -51,6 +53,8 @@ float Camera::getFocalLength() const {
 
 float Camera::getFilmbackSize() const {
     return filmbackSize;
+}
+
 }
 
 

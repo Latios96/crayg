@@ -8,6 +8,8 @@
 #include <ostream>
 #include <tuple>
 
+namespace crayg {
+
 class Color {
  public:
     float r, g, b;
@@ -98,4 +100,5 @@ class Color {
 
 };
 
+}
 #endif //CRAYG_COLOR_H

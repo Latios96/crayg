@@ -7,6 +7,8 @@
 
 #include <string>
 
+namespace crayg {
+
 class ToStringHelper {
  public:
     explicit ToStringHelper(const std::string &className) {
@@ -43,4 +45,5 @@ class ToStringHelper {
     bool hasMembers = false;
 };
 
+}
 #endif //CRAYG_TOSTRINGHELPER_H

@@ -18,6 +18,8 @@ static const int MAX_DEPTH = 2;
 #include <scene/RenderSettings.h>
 #include "ShadingMethod.h"
 
+namespace crayg {
+
 class Renderer {
  public:
     Renderer(Scene &scene, OutputDriver &outputDriver);
@@ -40,5 +42,7 @@ class Renderer {
     Color renderSample(float x, float y);
     Color traceRay(const Ray &ray, int depth);
 };
+
+}
 
 #endif //CRAYG_RENDERER_H

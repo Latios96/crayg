@@ -7,6 +7,8 @@
 
 #include <chrono>
 
+namespace crayg {
+
 class RemainingTimeCalculator {
 
  public:
@@ -23,5 +25,7 @@ class RemainingTimeCalculator {
  private:
     std::chrono::steady_clock::time_point startTime;
 };
+
+}
 
 #endif //CRAYG_REMAININGTIMECALCULATOR_H

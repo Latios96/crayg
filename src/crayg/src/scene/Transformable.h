@@ -8,6 +8,8 @@
 #include <basics/Transform.h>
 #include "basics/Vector3f.h"
 
+namespace crayg {
+
 class Transformable {
  public:
     Transformable();
@@ -22,5 +24,7 @@ class Transformable {
  protected:
     Transform transform;
 };
+
+}
 
 #endif //CRAYG_TRANSFORMABLE_H

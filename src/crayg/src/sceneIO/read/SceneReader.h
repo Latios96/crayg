@@ -8,6 +8,8 @@
 #include <scene/Scene.h>
 #include "scene/TriangleMesh.h"
 
+namespace crayg {
+
 class SceneReader {
  public:
     virtual void read() = 0;
@@ -18,5 +20,7 @@ class SceneReader {
     Scene &scene;
     std::string path;
 };
+
+}
 
 #endif //CRAYG_SCENEREADER_H

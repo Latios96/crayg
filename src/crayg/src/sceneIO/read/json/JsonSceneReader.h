@@ -11,6 +11,8 @@ static const char *const RENDER_SETTINGS = "RenderSettings";
 
 #include <sceneIO/read/SceneReader.h>
 
+namespace crayg {
+
 class SceneObjectsMissing : public std::exception {
     const char *what() const noexcept override {
         return "\"SceneObjects\" key is missing!";
@@ -40,5 +42,7 @@ class JsonSceneReader : public SceneReader {
 
     void read() override;
 };
+
+}
 
 #endif //CRAYG_JSONSCENEREADER_H

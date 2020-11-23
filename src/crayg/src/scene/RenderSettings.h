@@ -6,6 +6,9 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
 
 #include <basics/Resolution.h>
+
+namespace crayg {
+
 class RenderSettings {
  public:
     RenderSettings();
@@ -14,5 +17,7 @@ class RenderSettings {
     Resolution resolution;
     int maxSamples;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_

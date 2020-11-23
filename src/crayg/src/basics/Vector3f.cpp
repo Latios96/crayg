@@ -5,6 +5,8 @@
 #include <utils/ToStringHelper.h>
 #include "Vector3f.h"
 
+namespace crayg {
+
 Vector3f::Vector3f() {
     x = 0;
     y = 0;
@@ -43,7 +45,6 @@ Vector3f Vector3f::normalize() const {
 
     return {x * oneByLength, y * oneByLength, z * oneByLength};
 }
-
 
 Vector3f Vector3f::crossProduct(const Vector3f &otherVector) const {
     return {y * otherVector.z - otherVector.y * z,
@@ -96,4 +97,6 @@ std::ostream &operator<<(std::ostream &os, const Vector3f &f) {
         .addMember("z", f.z)
         .finish();
     return os;
+}
+
 }

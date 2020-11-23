@@ -6,6 +6,9 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_POINTCLOUD_H_
 
 #include "SceneObject.h"
+
+namespace crayg {
+
 class PointCloud : public SceneObject {
  public:
     bool isIntersecting(Ray ray) override;
@@ -23,5 +26,7 @@ class PointCloud : public SceneObject {
     std::vector<Vector3f> points;
     std::vector<float> radii;
 };
+
+}
 
 #endif //CRAYG_SRC_CRAYG_SRC_SCENE_POINTCLOUD_H_

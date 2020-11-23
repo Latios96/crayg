@@ -6,6 +6,9 @@
 #define CRAYG_IMAGEITERATOR_H
 
 #include "Image.h"
+
+namespace crayg {
+
 template<typename I>
 class LineByLineIterator {
  public:
@@ -35,5 +38,7 @@ class LineByLineIterator {
     int lastX, lastY;
     const I &i;
 };
+
+}
 
 #endif //CRAYG_IMAGEITERATOR_H

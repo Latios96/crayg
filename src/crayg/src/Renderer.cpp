@@ -14,6 +14,8 @@
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 
+namespace crayg {
+
 Renderer::Renderer(Scene &scene, OutputDriver &outputDriver)
     : scene(scene), outputDriver(outputDriver) {
 
@@ -138,6 +140,8 @@ Color Renderer::traceRay(const Ray &ray, int depth) {
         return shadedColor * shadow;
     }
     return Color::createBlack();
+}
+
 }
 
 

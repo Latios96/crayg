@@ -6,6 +6,8 @@
 
 #include <utility>
 
+namespace crayg {
+
 Imageable::Intersection::Intersection(float rayParameter, std::shared_ptr<Imageable> imageable) : rayParameter(
     rayParameter),
                                                                                                   imageable(std::move(
@@ -15,4 +17,6 @@ std::shared_ptr<Material> Imageable::getMaterial() const {
 }
 void Imageable::setMaterial(const std::shared_ptr<Material> &material) {
     Imageable::material = material;
+}
+
 }

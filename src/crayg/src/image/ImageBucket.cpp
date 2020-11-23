@@ -4,6 +4,9 @@
 
 #include <utils/ToStringHelper.h>
 #include "ImageBucket.h"
+
+namespace crayg {
+
 ImageBucket::ImageBucket(int x, int y, int width, int height) : x(x), y(y), width(width), height(height) {}
 bool ImageBucket::operator==(const ImageBucket &rhs) const {
     return x == rhs.x &&
@@ -38,5 +41,7 @@ ImageBucket::ImageBucket(const ImageBucket &imageBucket)
     : x(imageBucket.x), y(imageBucket.y), width(imageBucket.width), height(imageBucket.height) {
 }
 ImageBucket::ImageBucket() : x(0), y(0), width(0), height(0) {
+
+}
 
 }

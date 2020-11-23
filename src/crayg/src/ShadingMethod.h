@@ -10,6 +10,8 @@
 #include <scene/SceneObject.h>
 #include <scene/Scene.h>
 
+namespace crayg {
+
 class ShadingMethod {
  public:
     ShadingMethod(Scene &scene);
@@ -21,4 +23,5 @@ class ShadingMethod {
 
 };
 
+}
 #endif //CRAYG_SHADINGMETHODS_H

@@ -7,6 +7,8 @@
 #include <Preconditions.h>
 #include "Ray.h"
 
+namespace crayg {
+
 Ray::Ray(Vector3f startPoint, Vector3f direction) {
     Preconditions::checkIsUnitVector(direction, FAILURE_INFORMATION);
     this->startPoint = startPoint;
@@ -49,6 +51,8 @@ bool Ray::operator!=(const Ray &rhs) const {
 std::ostream &operator<<(std::ostream &os, const Ray &ray) {
     os << "startPoint: " << ray.startPoint << " direction: " << ray.direction << " length: " << ray.length;
     return os;
+}
+
 }
 
 

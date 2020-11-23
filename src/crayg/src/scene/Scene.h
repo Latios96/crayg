@@ -13,6 +13,7 @@
 #include "ShadingNode.h"
 #include <memory>
 
+namespace crayg {
 
 class Scene {
  public:
@@ -34,4 +35,6 @@ class Scene {
     virtual ~Scene() = default;
 
 };
+
+}
 #endif //CRAYG_SCENE_H
