@@ -11,7 +11,7 @@
 #include <sceneIO/SceneWriters.h>
 #include "CLI/CLI.hpp"
 
-void convertShape(const tinyobj::attrib_t &attrib, Scene &scene, const tinyobj::shape_t &shape);
+void convertShape(const tinyobj::attrib_t &attrib, crayg::Scene &scene, const tinyobj::shape_t &shape);
 
 int main(int argc, char *argv[]) {
     CLI::App app {"Crayg, an awesome renderer", "Crayg"};
@@ -52,19 +52,19 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    Scene scene;
+    crayg::Scene scene;
 
     for (auto &shape : shapes) {
         convertShape(attrib, scene, shape);
     }
 
-    SceneWriters::writeSceneAsJson(scene, scenePath);
+    crayg::SceneWriters::writeSceneAsJson(scene, scenePath);
     return 0;
 }
 
-void convertShape(const tinyobj::attrib_t &attrib, Scene &scene, const tinyobj::shape_t &shape) {
+void convertShape(const tinyobj::attrib_t &attrib, crayg::Scene &scene, const tinyobj::shape_t &shape) {
     std::map<int, int> faceIndexConversion;
-    std::shared_ptr<TriangleMesh> mesh = std::make_shared<TriangleMesh>();
+    std::shared_ptr<crayg::TriangleMesh> mesh = std::make_shared<crayg::TriangleMesh>();
     for (auto &indice : shape.mesh.indices) {
         if (faceIndexConversion.find(indice.vertex_index) == faceIndexConversion.end()) {
             mesh->points.emplace_back(attrib.vertices[indice.vertex_index * 3],
