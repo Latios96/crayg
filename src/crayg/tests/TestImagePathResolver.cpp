@@ -28,6 +28,14 @@ TEST_CASE("ImagePathResolver should replace #") {
 
     ImagePathResolver imagePathResolver;
 
+    SECTION("no # should not change") {
+        FileFixture fileFixture("test.1000.png");
+
+        std::string result = imagePathResolver.resolve("test.1000.png");
+
+        REQUIRE(result == "test.1000.png");
+    }
+
     SECTION("not existing before") {
         std::string result = imagePathResolver.resolve("test.#.png");
 
