@@ -13,6 +13,7 @@
 #include "CraygInfo.h"
 #include <thread>
 #include <image/TeeOutputDriver.h>
+#include <ImagePathResolver.h>
 
 int main(int argc, char **argv) {
     Logger::initialize();
@@ -51,8 +52,10 @@ int main(int argc, char **argv) {
         std::thread renderThread([&parseResult, &image, &renderer]() {
             renderer.renderScene();
 
-            Logger::info("writing image to {}..", parseResult.args->imageOutputPath);
-            ImageWriters::writeImage(image, parseResult.args->imageOutputPath);
+            ImagePathResolver imagePathResolver;
+            std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
+            Logger::info("writing image to {}..", imageOutputPath);
+            ImageWriters::writeImage(image, imageOutputPath);
             Logger::info("writing image done.");
         });
         renderThread.detach();

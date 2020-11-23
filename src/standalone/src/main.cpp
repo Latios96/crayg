@@ -3,6 +3,7 @@
 #include <Renderer.h>
 #include <image/ImageWriters.h>
 #include <CraygInfo.h>
+#include <ImagePathResolver.h>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
 #include "Logger.h"
@@ -33,10 +34,12 @@ int main(int argc, char *argv[]) {
         Renderer renderer(scene, imageOutputDriver);
         renderer.renderScene();
 
-        Logger::info("writing image..");
-        ImageWriters::writeImage(myImage, parseResult.args->imageOutputPath);
-
+        ImagePathResolver imagePathResolver;
+        std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
+        Logger::info("writing image to {}..", imageOutputPath);
+        ImageWriters::writeImage(myImage, imageOutputPath);
         Logger::info("writing image done.");
+
         return 0;
     }
     catch (std::exception &e) {
