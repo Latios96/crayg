@@ -13,23 +13,25 @@ std::string ImagePathResolver::resolve(const std::string &pathTemplate) const {
     const boost::filesystem::path
         boostPathTemplate = boost::filesystem::absolute(boost::filesystem::path(pathTemplate));
     const boost::filesystem::path target_path(boostPathTemplate.parent_path());
-    const boost::regex my_filter(boostPathTemplate.filename().string());
 
-    int frameNumber = 1;
+    int frameNumber = 0;
 
     for (const auto &entry : boost::filesystem::directory_iterator(target_path)) {
         if (!boost::filesystem::is_regular_file(entry.status())) continue;
         boost::smatch what;
-        if (!boost::regex_match(boost::regex_replace(entry.path().string(), boost::regex("\.#\."), ".+"),
-                                what,
-                                my_filter))
+        const std::string string = boost::regex_replace(pathTemplate,
+                                                        boost::regex("\.#\."),
+                                                        "\\.(\\d+)\\.");
+        if (!boost::regex_search(entry.path().string(), what, boost::regex("\\.(\\d+)\\."))) {
             continue;
+        }
+
         int f = parseImageNumber(entry.path().string());
         if (f > frameNumber) {
             frameNumber = f;
         }
     }
-    return boost::regex_replace(pathTemplate, boost::regex("\.#\."), fmt::format(".{:0>4}.", frameNumber));
+    return boost::regex_replace(pathTemplate, boost::regex("\\.#\\."), fmt::format(".{:0>4}.", frameNumber + 1));
 }
 int ImagePathResolver::parseImageNumber(const std::string path) const {
     boost::smatch what;

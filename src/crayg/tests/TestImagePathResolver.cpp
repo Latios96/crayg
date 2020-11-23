@@ -4,16 +4,43 @@
 #include <catch2/catch.hpp>
 #include <ImagePathResolver.h>
 #include <boost/regex.hpp>
+#include <boost/filesystem.hpp>
 #include <iostream>
 
-// TODO File Fixture
-// TODO File Fixture
+class FileFixture {
+ public:
+    explicit FileFixture(const boost::filesystem::path &path) : path(path) {
+        const boost::filesystem::path folder = path.parent_path();
+        if (!folder.empty()) {
+            boost::filesystem::create_directories(folder);
+        }
+        std::ofstream outfile(path.string());
+        outfile.close();
+    }
+    ~FileFixture() {
+        boost::filesystem::remove(path);
+    }
+ private:
+    boost::filesystem::path path;
+};
 
 TEST_CASE("ImagePathResolver should replace #") {
-    ImagePathResolver imagePathResolver;
-    std::string result = imagePathResolver.resolve("test.#.png");
 
-    REQUIRE(result == "test.0001.png");
+    ImagePathResolver imagePathResolver;
+
+    SECTION("not existing before") {
+        std::string result = imagePathResolver.resolve("test.#.png");
+
+        REQUIRE(result == "test.0001.png");
+    }
+
+    SECTION("existing file") {
+        FileFixture fileFixture("test.0001.png");
+
+        std::string result = imagePathResolver.resolve("test.#.png");
+
+        REQUIRE(result == "test.0002.png");
+    }
 }
 
 TEST_CASE("ImagePathResolver shouldParseImageNumber") {
