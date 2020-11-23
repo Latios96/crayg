@@ -57,7 +57,6 @@ set(crayg_SRCS
         image/ImageAlgorithms.h
         image/ImageAlgorithms.cpp
         image/OutputDriver.h
-        image/OutputDriver.cpp
         image/ImageOutputDriver.h
         image/ImageOutputDriver.cpp
         utils/ToStringHelper.h
