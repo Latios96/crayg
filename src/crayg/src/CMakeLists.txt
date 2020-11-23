@@ -120,6 +120,8 @@ set(crayg_SRCS
         Preconditions.cpp
         ImagePathResolver.h
         ImagePathResolver.cpp
+        image/TeeOutputDriver.h
+        image/TeeOutputDriver.cpp
         )
 
 

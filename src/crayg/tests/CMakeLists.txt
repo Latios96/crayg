@@ -38,6 +38,7 @@ set(UNIT_TEST_LIST
         TestDiskLight.cpp
         TestPreconditions.cpp
         TestImagePathResolver.cpp
+        TestTeeOutputDriver.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
