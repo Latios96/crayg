@@ -118,6 +118,8 @@ set(crayg_SRCS
         CraygInfo.cpp
         Preconditions.h
         Preconditions.cpp
+        ImagePathResolver.h
+        ImagePathResolver.cpp
         )
 
 
