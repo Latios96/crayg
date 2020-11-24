@@ -18,15 +18,14 @@ std::string ImagePathResolver::resolve(const std::string &pathTemplate) const {
     int frameNumber = 0;
 
     for (const auto &entry : boost::filesystem::directory_iterator(target_path)) {
-        if (!boost::filesystem::is_regular_file(entry.status())) continue;
-        boost::smatch what;
-        const std::string string = boost::regex_replace(pathTemplate,
-                                                        boost::regex("\.#\."),
-                                                        "\\.(\\d+)\\.");
-        if (!boost::regex_search(entry.path().string(), what, boost::regex("\\.(\\d+)\\."))) {
+        const bool isRegularFile = boost::filesystem::is_regular_file(entry.status());
+        const bool isMatching =
+            matchesTemplate(boost::filesystem::path(pathTemplate).filename().string(),
+                            entry.path().filename().string());
+
+        if (!isRegularFile | !isMatching) {
             continue;
         }
-
         int f = parseImageNumber(entry.path().string());
         if (f > frameNumber) {
             frameNumber = f;
@@ -41,6 +40,13 @@ int ImagePathResolver::parseImageNumber(const std::string path) const {
     }
     const auto str = what[1].str();
     return std::stoi(str);
+}
+bool ImagePathResolver::matchesTemplate(const std::string &pathTemplate, const std::string path) const {
+    boost::smatch what;
+    const std::string filenameWithFilter = boost::regex_replace(pathTemplate,
+                                                                boost::regex(R"(\.#\.)"),
+                                                                R"(\\.(\\d+)\\.)");
+    return boost::regex_search(path, what, boost::regex(filenameWithFilter));
 }
 
 }

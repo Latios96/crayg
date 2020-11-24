@@ -31,25 +31,25 @@ TEST_CASE("ImagePathResolver should replace #") {
     ImagePathResolver imagePathResolver;
 
     SECTION("no # should not change") {
-        FileFixture fileFixture("test.1000.png");
+        FileFixture fileFixture("1203e5c176ab4e7fbe124ae4258131b4.1000.png");
 
-        std::string result = imagePathResolver.resolve("test.1000.png");
+        std::string result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.1000.png");
 
-        REQUIRE(result == "test.1000.png");
+        REQUIRE(result == "1203e5c176ab4e7fbe124ae4258131b4.1000.png");
     }
 
     SECTION("not existing before") {
-        std::string result = imagePathResolver.resolve("test.#.png");
+        std::string result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.#.png");
 
-        REQUIRE(result == "test.0001.png");
+        REQUIRE(result == "1203e5c176ab4e7fbe124ae4258131b4.0001.png");
     }
 
     SECTION("existing file") {
-        FileFixture fileFixture("test.0001.png");
+        FileFixture fileFixture("1203e5c176ab4e7fbe124ae4258131b4.0001.png");
 
-        std::string result = imagePathResolver.resolve("test.#.png");
+        std::string result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.#.png");
 
-        REQUIRE(result == "test.0002.png");
+        REQUIRE(result == "1203e5c176ab4e7fbe124ae4258131b4.0002.png");
     }
 }
 
@@ -57,24 +57,39 @@ TEST_CASE("ImagePathResolver shouldParseImageNumber") {
     ImagePathResolver imagePathResolver;
 
     SECTION("1001") {
-        int frameNumber = imagePathResolver.parseImageNumber("test.1001.png");
+        int frameNumber = imagePathResolver.parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.1001.png");
         REQUIRE(frameNumber == 1001);
     }
 
     SECTION("0001") {
-        int frameNumber = imagePathResolver.parseImageNumber("test.0001.png");
+        int frameNumber = imagePathResolver.parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.0001.png");
         REQUIRE(frameNumber == 0001);
     }
 
     SECTION("0000") {
-        int frameNumber = imagePathResolver.parseImageNumber("test.0000.png");
+        int frameNumber = imagePathResolver.parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.0000.png");
         REQUIRE(frameNumber == 0000);
     }
 
     SECTION("-1") {
-        int frameNumber = imagePathResolver.parseImageNumber("test.png");
+        int frameNumber = imagePathResolver.parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.png");
         REQUIRE(frameNumber == -1);
     }
+}
+
+TEST_CASE("matchesTemplate") {
+    ImagePathResolver imagePathResolver;
+
+    REQUIRE(imagePathResolver.matchesTemplate("1203e5c176ab4e7fbe124ae4258131b4.#.png",
+                                              "1203e5c176ab4e7fbe124ae4258131b4.1.png"));
+    REQUIRE(imagePathResolver.matchesTemplate("1203e5c176ab4e7fbe124ae4258131b4.#.png",
+                                              "1203e5c176ab4e7fbe124ae4258131b4.1000.png"));
+    REQUIRE(imagePathResolver.matchesTemplate("1203e5c176ab4e7fbe124ae4258131b4.#.png",
+                                              "1203e5c176ab4e7fbe124ae4258131b4.0001.png"));
+    REQUIRE_FALSE(imagePathResolver.matchesTemplate("1203e5c176ab4e7fbe124ae4258131b4.1000.png",
+                                                    "1203e5c176ab4e7fbe124ae4258131b4.0001.png"));
+    REQUIRE_FALSE(imagePathResolver.matchesTemplate("tt.png", "1203e5c176ab4e7fbe124ae4258131b4.0001.png"));
+
 }
 
 }
