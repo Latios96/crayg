@@ -3,8 +3,7 @@
 //
 
 #include <limits>
-#include <utils/ToStringHelper.h>
-#include <Preconditions.h>
+#include <utils/Preconditions.h>
 #include "Ray.h"
 
 namespace crayg {
