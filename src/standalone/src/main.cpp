@@ -3,7 +3,7 @@
 #include <Renderer.h>
 #include <image/ImageWriters.h>
 #include <CraygInfo.h>
-#include <ImagePathResolver.h>
+#include <utils/ImagePathResolver.h>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
 #include "Logger.h"

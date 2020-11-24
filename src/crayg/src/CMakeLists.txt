@@ -115,10 +115,10 @@ set(crayg_SRCS
         samplers/UnitSphereSampler.cpp
         CraygInfo.h
         CraygInfo.cpp
-        Preconditions.h
-        Preconditions.cpp
-        ImagePathResolver.h
-        ImagePathResolver.cpp
+        utils/Preconditions.h
+        utils/Preconditions.cpp
+        utils/ImagePathResolver.h
+        utils/ImagePathResolver.cpp
         image/TeeOutputDriver.h
         image/TeeOutputDriver.cpp
         )

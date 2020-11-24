@@ -13,7 +13,7 @@
 #include "CraygInfo.h"
 #include <thread>
 #include <image/TeeOutputDriver.h>
-#include <ImagePathResolver.h>
+#include <utils/ImagePathResolver.h>
 
 int main(int argc, char **argv) {
     crayg::Logger::initialize();
