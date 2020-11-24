@@ -1,0 +1,33 @@
+{
+  "suites": [
+    {
+      "name": "Example Scenes",
+      "tests": [
+        {
+          "name": "single_sphere",
+          "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "single_sphere_arealight",
+          "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "three_spheres",
+          "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "three_spheres_with_disk_light",
+          "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "teapot",
+          "command": "{@crayg_render_command}"
+        }
+      ],
+      "variables": {
+        "scenes_folder": "${PROJECT_SOURCE_DIR}/example_scenes",
+        "crayg_render_command": "${CMAKE_BINARY_DIR}/bin/crayg-standalone -s {@scenes_folder}/{@test_name}.json -o \"{@image_output_png}\""
+      }
+    }
+  ]
+}
