@@ -39,6 +39,7 @@ set(UNIT_TEST_LIST
         TestPreconditions.cpp
         TestImagePathResolver.cpp
         TestTeeOutputDriver.cpp
+        TestReadableFormatter.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)

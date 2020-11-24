@@ -121,6 +121,8 @@ set(crayg_SRCS
         utils/ImagePathResolver.cpp
         image/TeeOutputDriver.h
         image/TeeOutputDriver.cpp
+        utils/ReadableFormatter.h
+        utils/ReadableFormatter.cpp
         )
 
 
