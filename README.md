@@ -5,7 +5,7 @@
 
 Personal Raytracer project to get familiar with C++ in general and how to do CI and TDD in C++.
 
-![demo image](images/three_spheres.png)
+![demo image](images/three_spheres_with_disk_light.0007.png)
 ## Building
 ### Prerequisites
 This project uses [Conan](https://conan.io/), a C++ Package Manager, to manage its dependencies.
