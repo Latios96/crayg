@@ -23,12 +23,11 @@ Renderer::Renderer(Scene &scene, OutputDriver &outputDriver)
 // todo init should not be in renderScene
 void Renderer::renderScene() {
     init();
-
     Logger::info("Starting rendering..");
 
     std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, 60);
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(bucketSequence.size(),
-                                                                                "Rendering done by {}%, estimated time remaining: {:.2f}s");
+                                                                                "Rendering done by {}%, estimated time remaining: {}");
 
     bool serialRendering = false;
     if (serialRendering) {

@@ -3,6 +3,7 @@
 //
 
 #include "ProgressReporter.h"
+#include "ReadableFormatter.h"
 
 namespace crayg {
 
@@ -22,7 +23,11 @@ ProgressReporter::ProgressReporter(const ProgressReporter &progressReporter) {
 }
 ProgressReporter ProgressReporter::createLoggingProgressReporter(int maxIterations, std::string logMessage) {
     std::function<void(int, float)> logProgress = [logMessage](int progress, float timeRemaining) -> void {
-        Logger::info(logMessage.c_str(), progress, timeRemaining);
+        ReadableFormatter readableFormatter;
+        readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeRemaining)));
+        Logger::info(logMessage.c_str(),
+                     progress,
+                     readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeRemaining))));
     };
     return {maxIterations, logProgress};
 }
