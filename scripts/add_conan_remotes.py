@@ -29,7 +29,7 @@ def main():
     )
     ensure_remote(
         remotes,
-        "framebffr",
+        "frmbffr",
         "http://185.245.96.20:8081/artifactory/api/conan/conantest",
     )
 
