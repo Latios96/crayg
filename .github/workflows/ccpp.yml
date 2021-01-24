@@ -85,17 +85,13 @@ jobs:
         run: mkdir build
       - name: run CMake
         working-directory: build
-        run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 Win64"
-        shell: cmd
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release
       - name: build
         working-directory: build
-        run: cmake --build . --config Release
-        shell: cmd
+        run: make -j 4
       - name: run tests
         working-directory: build
         run: ctest -C Release -V
-        shell: cmd
       - name: create package
         working-directory: build
         run: cmake --build . --config Release --target createDistribution
-        shell: cmd
