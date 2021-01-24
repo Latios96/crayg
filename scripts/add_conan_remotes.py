@@ -29,8 +29,8 @@ def main():
     )
     ensure_remote(
         remotes,
-        "frmbffr",
-        "http://185.245.96.20:8081/artifactory/api/conan/conantest",
+        "framebffr",
+        "https://frmbffr.com/artifactory/api/conan/conantest",
     )
 
     print(pprint.pformat(remotes))
