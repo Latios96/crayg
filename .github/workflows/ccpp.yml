@@ -117,10 +117,6 @@ jobs:
         run: conan user ci_github_actions -p -r=framebffr
         env:
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
-      - name: setup conan profile
-        run: |
-          conan profile new default --detect
-          conan profile update settings.compiler.libcxx=libstdc++11 default
       - name: build dependencies
         run: conan install . --build missing
       - name: upload dependencies
