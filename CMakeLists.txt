@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(crayg)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 option(BUILD_WITH_COVERAGE "Activate --coverage to check for Code Coverage" OFF)
 
