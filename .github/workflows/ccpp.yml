@@ -95,3 +95,47 @@ jobs:
       - name: create package
         working-directory: build
         run: make createDistribution
+  build-macos:
+    name: macos-11.0
+    runs-on: macos-11.0
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: install conan
+        run: |
+          pip install conan
+          conan --version
+      - name: add remotes
+        run: |
+          conan remote list
+          python scripts/add_conan_remotes.py
+          conan remote list
+      - name: conan login
+        run: conan user ci_github_actions -p -r=framebffr
+        env:
+          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+      - name: setup conan profile
+        run: |
+          conan profile new default --detect
+          conan profile update settings.compiler.libcxx=libstdc++11 default
+      - name: build dependencies
+        run: conan install . --build missing
+      - name: upload dependencies
+        run: conan upload "*" --all --confirm -r=framebffr --parallel
+      - name: prepare build
+        run: mkdir build
+      - name: run CMake
+        working-directory: build
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release
+      - name: build
+        working-directory: build
+        run: make -j 4
+      - name: run tests
+        working-directory: build
+        run: ctest -C Release -V
+      - name: create package
+        working-directory: build
+        run: make createDistribution
