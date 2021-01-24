@@ -47,3 +47,50 @@ jobs:
         working-directory: build
         run: cmake --build . --config Release --target createDistribution
         shell: cmd
+  build-linux:
+    name: ubuntu-20.04
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: install apt packages
+        run: |
+          apt install libgl-dev xorg-dev libx11-xcb-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev xkb-data
+      - name: install conan
+        run: |
+          pip install conan
+          conan --version
+      - name: add remotes
+        run: |
+          conan remote list
+          python scripts/add_conan_remotes.py
+          conan remote list
+      - name: conan login
+        run: conan user ci_github_actions -p -r=framebffr
+        env:
+          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+      - name: build dependencies
+        run: conan install . --build missing
+      - name: upload dependencies
+        run: conan upload * --all --confirm -r=framebffr --parallel
+      - name: prepare build
+        run: mkdir build
+      - name: run CMake
+        working-directory: build
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 Win64"
+        shell: cmd
+      - name: build
+        working-directory: build
+        run: cmake --build . --config Release
+        shell: cmd
+      - name: run tests
+        working-directory: build
+        run: ctest -C Release -V
+        shell: cmd
+      - name: create package
+        working-directory: build
+        run: cmake --build . --config Release --target createDistribution
+        shell: cmd
