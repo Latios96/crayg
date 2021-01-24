@@ -76,7 +76,7 @@ jobs:
       - name: build dependencies
         run: conan install . --build missing
       - name: upload dependencies
-        run: conan upload * --all --confirm -r=framebffr --parallel
+        run: conan upload "*" --all --confirm -r=framebffr --parallel
       - name: prepare build
         run: mkdir build
       - name: run CMake
