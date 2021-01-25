@@ -97,7 +97,7 @@ jobs:
         run: make createDistribution
   build-macos:
     name: Mac OS
-    runs-on: macos-latest
+    runs-on: macos-11.0
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
