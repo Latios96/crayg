@@ -95,3 +95,47 @@ jobs:
       - name: create package
         working-directory: build
         run: make createDistribution
+  build-macos:
+    name: Mac OS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.7
+        with:
+          cmake-version: '3.18.x'
+      - name: install conan
+        run: |
+          pip install conan
+          conan --version
+      - name: add remotes
+        run: |
+          conan remote list
+          python scripts/add_conan_remotes.py
+          conan remote list
+      - name: conan login
+        run: conan user ci_github_actions -p -r=framebffr
+        env:
+          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+      - name: build dependencies
+        run: conan install . --build missing
+      - name: upload dependencies
+        run: conan upload "*" --all --confirm -r=framebffr --parallel
+      - name: prepare build
+        run: mkdir build
+      - name: run CMake
+        working-directory: build
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release
+      - name: build
+        working-directory: build
+        run: make -j 4
+      - name: run tests
+        working-directory: build
+        run: ctest -C Release -V
+      - name: create package
+        working-directory: build
+        run: make createDistribution
