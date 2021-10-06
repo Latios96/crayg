@@ -4,8 +4,8 @@ on: [push]
 
 jobs:
   build-windows:
-    name:  windows-2016
-    runs-on:  windows-2016
+    name:  windows-2019
+    runs-on:  windows-2019
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
@@ -33,7 +33,7 @@ jobs:
         run: mkdir build
       - name: run CMake
         working-directory: build
-        run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 Win64"
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 16 2019"
         shell: cmd
       - name: build
         working-directory: build
