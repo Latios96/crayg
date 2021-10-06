@@ -12,11 +12,6 @@ Conan is written in Python, so you can install it easily with pip:
 ```shell
 pip install conan
 ```
-You also need to add some additional remotes. Otherwise conan can not find all dependencies.
-```shell
-conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
-conan remote add ppodsiadly https://api.bintray.com/conan/ppodsiadly/conan
-```
 
 ### Linux & Mac OS
 ```shell
@@ -26,7 +21,7 @@ cmake ..
 make -j 4
 ```
 
-### Windows (experimental)
+### Windows
 ```shell
 mkdir build
 cd build
