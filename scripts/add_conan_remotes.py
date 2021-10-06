@@ -19,9 +19,6 @@ def main():
         remotes = json.load(f)["remotes"]
 
     ensure_remote(
-        remotes, "my_bintray", "https://api.bintray.com/conan/latios96/my_conan"
-    )
-    ensure_remote(
         remotes,
         "framebffr",
         "https://frmbffr.com/artifactory/api/conan/conantest",
