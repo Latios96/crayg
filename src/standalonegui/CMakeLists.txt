@@ -27,5 +27,5 @@ add_custom_command(TARGET standalone-gui PRE_BUILD
 
 if (APPLE)
     add_custom_command(TARGET standalone-gui PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_QT_ROOT}/bin/archdatadir/plugins ${CMAKE_BINARY_DIR}/bin/plugins)
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_QT_ROOT}/bin/archdatadir/plugins ${CMAKE_BINARY_DIR}/bin/archdatadir)
 endif()
