@@ -19,12 +19,6 @@ def main():
         remotes = json.load(f)["remotes"]
 
     ensure_remote(
-        remotes, "bincrafters", "https://api.bintray.com/conan/bincrafters/public-conan"
-    )
-    ensure_remote(
-        remotes, "ppodsiadly", "https://api.bintray.com/conan/ppodsiadly/conan"
-    )
-    ensure_remote(
         remotes, "my_bintray", "https://api.bintray.com/conan/latios96/my_conan"
     )
     ensure_remote(
