@@ -33,6 +33,9 @@ conan_cmake_run(CONANFILE conanfile.txt
         BUILD missing
         KEEP_RPATHS)
 
+# for some reasons we can not link against this under Ubuntu-20.04
+list(REMOVE_ITEM CONAN_LIBS "Qt5XcbQpa")
+
 add_subdirectory(src)
 
 # Create distribution target
