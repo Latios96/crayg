@@ -25,7 +25,7 @@ message("CONAN LIBS: ${CONAN_LIBS}")
 add_custom_command(TARGET standalone-gui PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/qt.conf ${CMAKE_BINARY_DIR}/bin/qt.conf)
 
-if (APPLE)
+if (UNIX)
     add_custom_command(TARGET standalone-gui PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_QT_ROOT}/bin/archdatadir/plugins ${CMAKE_BINARY_DIR}/bin/archdatadir)
 endif()
