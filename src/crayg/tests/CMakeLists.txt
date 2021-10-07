@@ -55,9 +55,6 @@ add_executable(${TARGET_NAME}
 target_link_libraries(${TARGET_NAME}
         PUBLIC crayg)
 
-target_include_directories(${TARGET_NAME}
-        PUBLIC ../../externals/fakeIt)
-
 if (${BUILD_WITH_COVERAGE})
     set_target_properties(${TARGET_NAME}
             PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
