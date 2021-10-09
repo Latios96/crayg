@@ -45,10 +45,11 @@ void ProgressReporter::iterationDone() {
     }
 }
 void ProgressReporter::finish() {
+    ReadableFormatter readableFormatter;
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end - startTime).count();
+    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(end - startTime);
 
-    Logger::info("Rendering took {} seconds.", microseconds * 0.0000006);
+    Logger::info("Rendering took {} seconds.", readableFormatter.formatDuration(seconds));
 }
 
 }
