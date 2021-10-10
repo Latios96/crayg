@@ -23,38 +23,38 @@ BoundingBox::BoundingBox() {
 }
 
 bool BoundingBox::isIntersecting(const Ray &ray) {
-    float tmin = (min.x - ray.startPoint.x) / ray.direction.x;
-    float tmax = (max.x - ray.startPoint.x) / ray.direction.x;
+    float txmin = (min.x - ray.startPoint.x) / ray.direction.x;
+    float txmax = (max.x - ray.startPoint.x) / ray.direction.x;
 
-    if (tmin > tmax) std::swap(tmin, tmax);
+    if (txmin > txmax) std::swap(txmin, txmax);
 
     float tymin = (min.y - ray.startPoint.y) / ray.direction.y;
     float tymax = (max.y - ray.startPoint.y) / ray.direction.y;
 
     if (tymin > tymax) std::swap(tymin, tymax);
 
-    if ((tmin > tymax) || (tymin > tmax))
+    if ((txmin > tymax) || (tymin > txmax))
         return false;
 
-    if (tymin > tmin)
-        tmin = tymin;
+    if (tymin > txmin)
+        txmin = tymin;
 
-    if (tymax < tmax)
-        tmax = tymax;
+    if (tymax < txmax)
+        txmax = tymax;
 
     float tzmin = (min.z - ray.startPoint.z) / ray.direction.z;
     float tzmax = (max.z - ray.startPoint.z) / ray.direction.z;
 
     if (tzmin > tzmax) std::swap(tzmin, tzmax);
 
-    if ((tmin > tzmax) || (tzmin > tmax))
+    if ((txmin > tzmax) || (tzmin > txmax))
         return false;
 
-    if (tzmin > tmin)
-        tmin = tzmin;
+    if (tzmin > txmin)
+        txmin = tzmin;
 
-    if (tzmax < tmax)
-        tmax = tzmax;
+    if (tzmax < txmax)
+        txmax = tzmax;
 
     return true;
 
