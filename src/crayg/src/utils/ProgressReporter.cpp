@@ -49,7 +49,7 @@ void ProgressReporter::finish() {
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(end - startTime);
 
-    Logger::info("Rendering took {} seconds.", readableFormatter.formatDuration(seconds));
+    Logger::info("Rendering took {}.", readableFormatter.formatDuration(seconds));
 }
 
 }
