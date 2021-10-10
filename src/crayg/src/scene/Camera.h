@@ -29,12 +29,8 @@ class Camera : public Serializable {
     const Vector3f &getUserUpVector() const;
 
     const Vector3f &getCenterOfInterest() const;
-    /**
-     * Returns FieldOfView based on focalLength and filmBackSize.
-     * Calculation based on https://www.vision-doctor.com/optik-berechnungen/oeffnungswinkel-berechnen.html
-     * @return FieldOfView in radians
-     */
-    float getFieldOfView() const;
+
+    float getHorizontalFieldOfView() const;
 
     /**
      * Returns the focalLength in mm

@@ -59,4 +59,16 @@ TEST_CASE("CameraSerialization") {
     }
 }
 
+TEST_CASE("field of view") {
+    SECTION("get horizontal field of view") {
+        float focalLength = 36;
+        float filmbackSize = 36.0f;
+        Camera camera({0, 0, 0}, {0, 1, 0}, {0, 0, -1}, focalLength, filmbackSize);
+
+        const float horizontalFieldOfViewInRadians = camera.getHorizontalFieldOfView();
+
+        REQUIRE(horizontalFieldOfViewInRadians == Catch::Detail::Approx(0.92729343));
+    }
+}
+
 }

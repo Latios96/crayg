@@ -23,7 +23,7 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
     upVector = sideVector.crossProduct(viewVector).normalize();
 
     // create width and height, define the size of the view plane
-    imagePlaneHeight = 2.0f * std::tan(camera.getFieldOfView() / 2.0f);
+    imagePlaneHeight = (2.0f * std::tan(camera.getHorizontalFieldOfView() / 2.0f)) / imageRatio;
 
     imagePlaneWidth = imageRatio * imagePlaneHeight;
 

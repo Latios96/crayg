@@ -25,8 +25,8 @@ const Vector3f &Camera::getCenterOfInterest() const {
     return centerOfInterest;
 }
 
-float Camera::getFieldOfView() const {
-    // based on https://www.vision-doctor.com/optik-berechnungen/oeffnungswinkel-berechnen.html
+float Camera::getHorizontalFieldOfView() const {
+    // based on https://github.com/PixarAnimationStudios/USD/blob/090ef0d849ced875b3b99a15e454b69148ccd8e1/pxr/base/gf/camera.cpp#L303
     return 2 * std::atan(filmbackSize / 2.0f * 1.0f / focalLength);
 }
 
