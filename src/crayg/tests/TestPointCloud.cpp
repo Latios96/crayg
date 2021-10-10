@@ -6,7 +6,6 @@
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
 using namespace fakeit;
-#include "utils/utils.h"
 
 namespace crayg {
 

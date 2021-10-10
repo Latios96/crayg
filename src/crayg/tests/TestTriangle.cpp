@@ -6,7 +6,6 @@
 #include <scene/Triangle.h>
 #include <scene/TriangleMesh.h>
 #include <iostream>
-#include "utils/utils.h"
 
 namespace crayg {
 

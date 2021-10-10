@@ -1,6 +1,5 @@
 #include <basics/Vector3f.h>
 #include <catch2/catch.hpp>
-#include "utils/utils.h"
 
 namespace crayg {
 
@@ -51,13 +50,13 @@ TEST_CASE("subtractTwoVectorsOperator", "[Vector]") {
 TEST_CASE("length", "[Vector]") {
     Vector3f myVector(-5, -6, -8);
 
-    REQUIRE(compareWithPrecision(myVector.length(), 11.18033f));
+    REQUIRE(myVector.length() == Catch::Detail::Approx(11.18033f));
 }
 
 TEST_CASE("lengthSquared", "[Vector]") {
     Vector3f myVector(-5, -6, -8);
 
-    REQUIRE(compareWithPrecision(myVector.lengthSquared(), 125));
+    REQUIRE(myVector.lengthSquared() == Catch::Detail::Approx(125));
 }
 
 TEST_CASE("multiplyScalar", "[Vector]") {
@@ -82,9 +81,9 @@ TEST_CASE("normalize", "[Vector]") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector.normalize();
 
-    REQUIRE(compareWithPrecision(result.x, 0.44721f));
-    REQUIRE(compareWithPrecision(result.y, 0.5366f));
-    REQUIRE(compareWithPrecision(result.z, 0.71554f));
+    REQUIRE(result.x == Catch::Detail::Approx(0.44721f));
+    REQUIRE(result.y == Catch::Detail::Approx(0.53666f));
+    REQUIRE(result.z == Catch::Detail::Approx(0.71554f));
 }
 
 TEST_CASE("invert", "[Vector]") {

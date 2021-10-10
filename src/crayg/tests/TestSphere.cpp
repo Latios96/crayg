@@ -2,7 +2,6 @@
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
 using namespace fakeit;
-#include "utils/utils.h"
 
 namespace crayg {
 
@@ -33,9 +32,9 @@ TEST_CASE("Sphere") {
         float t = mySphere->intersect(ray).rayParameter;
         Vector3f hitLocation = ray.constructIntersectionPoint(t);
 
-        REQUIRE(compareWithPrecision(hitLocation.x, 4));
-        REQUIRE(compareWithPrecision(hitLocation.y, 0));
-        REQUIRE(compareWithPrecision(hitLocation.z, 0));
+        REQUIRE(hitLocation.x == Catch::Detail::Approx(4));
+        REQUIRE(hitLocation.y == Catch::Detail::Approx(0));
+        REQUIRE(hitLocation.z == Catch::Detail::Approx(0));
     }
 
     SECTION("intersectNotReturnsMax") {
