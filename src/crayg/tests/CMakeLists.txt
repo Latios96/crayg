@@ -40,6 +40,7 @@ set(UNIT_TEST_LIST
         TestImagePathResolver.cpp
         TestTeeOutputDriver.cpp
         TestReadableFormatter.cpp
+        TestBvhBuilder.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
@@ -50,7 +51,7 @@ set(TARGET_NAME tests)
 
 add_executable(${TARGET_NAME}
         main.cpp
-        ${UNIT_TEST_SOURCE_LIST})
+        ${UNIT_TEST_SOURCE_LIST} TestBvhBuilder.cpp)
 
 target_link_libraries(${TARGET_NAME}
         PUBLIC crayg)

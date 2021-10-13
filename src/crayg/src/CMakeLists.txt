@@ -123,7 +123,8 @@ set(crayg_SRCS
         image/TeeOutputDriver.cpp
         utils/ReadableFormatter.h
         utils/ReadableFormatter.cpp
-        )
+        intersectors/BvhNode.h
+        intersectors/BvhNode.cpp intersectors/BvhBuilder.cpp intersectors/BvhBuilder.h)
 
 
 add_library(crayg STATIC
