@@ -34,10 +34,7 @@ Imageable::Intersection intersectTree(const Ray &ray, const BvhNode *node) {
         for (const auto &intersectable: node->objects) {
             Imageable::Intersection intersection = intersectable->intersect(ray);
 
-            if (intersection.rayParameter < hitIntersection.rayParameter && intersection.imageable) {
-                hitIntersection.rayParameter = intersection.rayParameter;
-                hitIntersection.imageable = intersection.imageable;
-            }
+            hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
         }
         return hitIntersection;
     }

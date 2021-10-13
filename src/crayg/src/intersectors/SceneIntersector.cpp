@@ -13,10 +13,7 @@ Imageable::Intersection SceneIntersector::intersect(const Ray &ray) const {
     for (const auto &intersectable : scene.objects) {
         Imageable::Intersection intersection = intersectable->intersect(ray);
 
-        if (intersection.rayParameter < hitIntersection.rayParameter && intersection.imageable) {
-            hitIntersection.rayParameter = intersection.rayParameter;
-            hitIntersection.imageable = intersection.imageable;
-        }
+        hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
     }
     return hitIntersection;
 }

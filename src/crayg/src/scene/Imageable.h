@@ -42,6 +42,7 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
         bool isValid() const {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
         }
+        static Intersection nearest(const Intersection &first, const Intersection &second);
     };
 
     virtual Intersection intersect(Ray ray) = 0;
