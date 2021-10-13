@@ -26,7 +26,7 @@ void Scene::addMaterial(const std::shared_ptr<Material> &material) {
         throw std::runtime_error("Material has no name!");
     }
     if (materialWithNameExists(material)) {
-        throw std::runtime_error(fmt::format("Material with name {}already exists!", material->getName()));
+        throw std::runtime_error(fmt::format("Material with name {} already exists!", material->getName()));
     }
     materials.push_back(material);
 }
