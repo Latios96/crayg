@@ -29,6 +29,8 @@ class BoundingBox {
     BoundingBox unionWith(const Vector3f &point) const;
     BoundingBox unionWith(const BoundingBox &boundingBox) const;
 
+    Vector3f getCentroid() const;
+
     friend std::ostream &operator<<(std::ostream &os, const BoundingBox &box);
  private:
     void unite(BoundingBox &boundingBox, const Vector3f &point) const;

@@ -72,4 +72,10 @@ TEST_CASE("BoundingBoxFromCenterAndRadius") {
     REQUIRE(boundingBox == BoundingBox({-3, -3, -3}, {3, 3, 3}));
 }
 
+TEST_CASE("BoundingBoxGetCentroid") {
+    BoundingBox boundingBox({0, 0, 0}, {1, 1, 1});
+
+    REQUIRE(boundingBox.getCentroid() == Vector3f({0.5, 0.5, 0.5}));
+}
+
 }

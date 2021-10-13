@@ -100,6 +100,10 @@ BoundingBox BoundingBox::fromCenterAndRadius(const Vector3f &center, const float
     return {{center.x - radius, center.y - radius, center.z - radius},
             {center.x + radius, center.y + radius, center.z + radius}};
 }
+Vector3f BoundingBox::getCentroid() const {
+    const Vector3f middle = max - min;
+    return min + (middle * 0.5f);
+}
 
 }
 
