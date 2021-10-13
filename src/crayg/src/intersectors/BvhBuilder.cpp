@@ -15,8 +15,8 @@ struct SplitInfo {
     SplitInfo(Axis axis, float splitPoint) : axis(axis), splitPoint(splitPoint) {}
 };
 
-SplitInfo getSplitInfo(const crayg::BoundingBox &bounds) {
-    const crayg::Vector3f length = bounds.max - bounds.min;
+SplitInfo getSplitInfo(const BoundingBox &bounds) {
+    const Vector3f length = bounds.max - bounds.min;
     if (length.x >= length.y && length.x >= length.z) {
         return {Axis::X, bounds.min.x + (length.x / 2.0f)};
     } else if (length.y >= length.x && length.y >= length.z) {
@@ -26,7 +26,7 @@ SplitInfo getSplitInfo(const crayg::BoundingBox &bounds) {
     }
 }
 
-crayg::BoundingBox computeBounds(const std::vector<crayg::SceneObject *> &objects) {
+BoundingBox computeBounds(const std::vector<SceneObject *> &objects) {
     if (objects.empty()) {
         return {};
     }
@@ -37,36 +37,18 @@ crayg::BoundingBox computeBounds(const std::vector<crayg::SceneObject *> &object
     return boundingBox;
 }
 
-crayg::BoundingBox computeCentroidBounds(const std::vector<crayg::SceneObject *> &objects) {// todo this is wrong i think
+BoundingBox computeCentroidBounds(const std::vector<SceneObject *> &objects) {
     if (objects.empty()) {
         return {};
     }
-    crayg::BoundingBox boundingBox(objects[0]->getBounds().getCentroid(), objects[0]->getBounds().getCentroid());
+    BoundingBox boundingBox(objects[0]->getBounds().getCentroid(), objects[0]->getBounds().getCentroid());
     for (const auto &obj: objects) {
-        const crayg::BoundingBox objectBounds = obj->getBounds();
-        if (objectBounds.min.x < boundingBox.min.x) {
-            boundingBox.min.x = objectBounds.min.x;
-        }
-        if (objectBounds.min.y < boundingBox.min.y) {
-            boundingBox.min.y = objectBounds.min.y;
-        }
-        if (objectBounds.min.z < boundingBox.min.z) {
-            boundingBox.min.z = objectBounds.min.z;
-        }
-
-        if (objectBounds.max.x > boundingBox.max.x) {
-            boundingBox.max.x = objectBounds.max.x;
-        }
-        if (objectBounds.max.y > boundingBox.max.y) {
-            boundingBox.max.y = objectBounds.max.y;
-        }
-        if (objectBounds.max.z > boundingBox.max.z) {
-            boundingBox.max.z = objectBounds.max.z;
-        }
+        const Vector3f objCentroid = obj->getBounds().getCentroid();
+        boundingBox = boundingBox.unionWith(objCentroid);
     }
     return boundingBox;
 }
-bool isLeft(const crayg::SceneObject *obj, const SplitInfo &splitInfo) {
+bool isLeft(const SceneObject *obj, const SplitInfo &splitInfo) {
     if (splitInfo.axis == Axis::X) {
         return obj->getBounds().getCentroid().x < splitInfo.splitPoint;
     } else if (splitInfo.axis == Axis::Y) {
@@ -76,10 +58,10 @@ bool isLeft(const crayg::SceneObject *obj, const SplitInfo &splitInfo) {
     }
 }
 
-crayg::BvhNode *buildTree(const std::vector<SceneObject *> &objects) {
+BvhNode *buildTree(const std::vector<SceneObject *> &objects) {
     const auto bounds = computeBounds(objects);
-    std::vector<crayg::SceneObject *> left, right;
-    const crayg::BoundingBox centroidBounds = computeCentroidBounds(objects);
+    std::vector<SceneObject *> left, right;
+    const BoundingBox centroidBounds = computeCentroidBounds(objects);
     const SplitInfo splitInfo = getSplitInfo(centroidBounds);
     for (const auto &obj: objects) {
         if (isLeft(obj, splitInfo)) {
@@ -95,11 +77,11 @@ crayg::BvhNode *buildTree(const std::vector<SceneObject *> &objects) {
     return new BvhNode(bounds,
                        !left.empty() ? buildTree(left) : nullptr,
                        !right.empty() ? buildTree(right) : nullptr,
-                       std::vector<crayg::SceneObject *>());
+                       std::vector<SceneObject *>());
 }
 
-crayg::BvhNode *BvhBuilder::build() const {
-    std::vector<crayg::SceneObject *> objects;
+BvhNode *BvhBuilder::build() const {
+    std::vector<SceneObject *> objects;
     for (auto &obj: scene.objects) {
         objects.push_back(obj.get());
     }
