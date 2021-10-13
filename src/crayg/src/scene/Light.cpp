@@ -66,6 +66,9 @@ void Light::beforeRender() {
 Light::Light(const Transform &transform, float intensity) : Transformable(transform), intensity(intensity) {
 
 }
+BoundingBox Light::getBounds() const {
+    return BoundingBox();
+}
 Light::Light() = default;
 
 }

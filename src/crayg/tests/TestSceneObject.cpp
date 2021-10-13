@@ -21,6 +21,9 @@ class SceneObjectForTesting : public SceneObject {
     bool isIntersecting(Ray ray) override {
         return false;
     }
+    BoundingBox getBounds() const override {
+        return BoundingBox();
+    }
 };
 
 TEST_CASE("deserialize SceneObject", "[SceneObject]") {

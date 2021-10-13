@@ -8,13 +8,13 @@
 
 namespace crayg {
 
-Vector3f Triangle::v0() {
+Vector3f Triangle::v0() const {
     return triangleMesh->points[triangleMesh->faceIndexes[faceIndex]];
 }
-Vector3f Triangle::v1() {
+Vector3f Triangle::v1() const {
     return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 1]];
 }
-Vector3f Triangle::v2() {
+Vector3f Triangle::v2() const {
     return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 2]];
 }
 
@@ -144,6 +144,13 @@ BarycentricCoordinates Triangle::toBarycentricCoordinates(const Vector3f &point)
     float beta = normal.scalarProduct((v0() - v2()).crossProduct(point - v2())) / lengthSquared;
     float gamma = normal.scalarProduct((v1() - v0()).crossProduct(point - v0())) / lengthSquared;
     return {alpha, beta, gamma};
+}
+BoundingBox Triangle::getBounds() const {
+    BoundingBox boundingBox;
+    boundingBox = boundingBox.unionWith(v0());
+    boundingBox = boundingBox.unionWith(v1());
+    boundingBox = boundingBox.unionWith(v2());
+    return boundingBox;
 }
 
 }

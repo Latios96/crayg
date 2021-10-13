@@ -17,6 +17,7 @@ class TriangleMesh : public SceneObject {
     static void createCube(TriangleMesh &mesh);
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
+    BoundingBox getBounds() const override;
 
     void serialize(Serializer &serializer) override;
 

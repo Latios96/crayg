@@ -11,8 +11,8 @@ namespace crayg {
 TEST_CASE("SceneIntersector") {
     Scene scene;
 
-    scene.addObject(std::make_shared<Sphere>(Vector3f(1, 0, 0), 1));
-    scene.addObject(std::make_shared<Sphere>(Vector3f(-2, 0, 0), 1));
+    scene.addObject(std::make_shared<Sphere>(Vector3f(1, 0, 0), 1.0f));
+    scene.addObject(std::make_shared<Sphere>(Vector3f(-2, 0, 0), 1.0f));
 
     SceneIntersector intersector(scene);
 

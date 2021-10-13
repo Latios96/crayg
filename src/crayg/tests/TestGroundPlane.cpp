@@ -64,4 +64,13 @@ TEST_CASE("GroundPlaneIntersection") {
     }
 }
 
+TEST_CASE("GroundPlaneIntersectionGetBounds") {
+    std::shared_ptr<GroundPlane> myGroundPlane = std::make_shared<GroundPlane>();
+
+    const BoundingBox bounds = myGroundPlane->getBounds();
+
+    REQUIRE(bounds == BoundingBox({std::numeric_limits<float>::min(), -0.001f, std::numeric_limits<float>::min()},
+                                  {std::numeric_limits<float>::max(), 0, std::numeric_limits<float>::max()}));
+}
+
 }

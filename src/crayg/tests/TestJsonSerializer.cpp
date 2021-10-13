@@ -40,6 +40,9 @@ class TestObjectWithAllTypes : public SceneObject {
     bool isIntersecting(Ray ray) override {
         return false;
     }
+    BoundingBox getBounds() const override {
+        return BoundingBox();
+    }
     void serialize(Serializer &serializer) override {
         serializer.writeInt("int", 0);
         serializer.writeFloat("float", 0.0);

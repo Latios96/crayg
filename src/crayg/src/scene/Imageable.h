@@ -8,6 +8,7 @@
 #include <basics/Color.h>
 #include <basics/Ray.h>
 #include <memory>
+#include <basics/BoundingBox.h>
 #include "Material.h"
 
 namespace crayg {
@@ -50,6 +51,8 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
     virtual void beforeRender() {
 
     };
+
+    virtual BoundingBox getBounds() const = 0;
 
     std::shared_ptr<Material> getMaterial() const;
     void setMaterial(const std::shared_ptr<Material> &material);

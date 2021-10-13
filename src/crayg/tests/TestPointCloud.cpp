@@ -50,5 +50,18 @@ TEST_CASE("PointCloud") {
     }
 }
 
+TEST_CASE("PointCloudGetBounds") {
+    std::vector<Vector3f> points = {{1, 2, 3}, {4, 5, 6}};
+    std::vector<float> radii = {0.1f, 0.2f};
+    PointCloud myPointCloud;
+    myPointCloud.setPoints(points);
+    myPointCloud.setRadii(radii);
+
+    const BoundingBox bounds = myPointCloud.getBounds();
+
+    REQUIRE(bounds == BoundingBox({0.9f, 1.9f, 2.9f},
+                                  {4.2f, 5.2f, 6.2f}));
+}
+
 }
 

@@ -245,4 +245,12 @@ TEST_CASE("DiskLight intersect", "[DiskLight]") {
     }
 }
 
+TEST_CASE("Disklight getBounds", "[DiskLight]") {
+    const std::shared_ptr<DiskLight> diskLight = std::make_shared<DiskLight>(Transform::withPosition({0, 0, 0}), 1, 1);
+
+    const BoundingBox bounds = diskLight->getBounds();
+
+    REQUIRE(bounds == BoundingBox({-1, -1, -1}, {1, 1, 1}));
+}
+
 }

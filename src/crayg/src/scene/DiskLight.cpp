@@ -90,6 +90,9 @@ DiskLight::DiskLight(const Transform &transform, float intensity, float radius) 
 float DiskLight::getRadius() const {
     return radius;
 }
+BoundingBox DiskLight::getBounds() const {
+    return BoundingBox::fromCenterAndRadius(getPosition(), radius);
+}
 DiskLight::DiskLight() = default;
 
 }

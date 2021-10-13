@@ -88,5 +88,8 @@ Vector3f Sphere::getNormal(Vector3f point) {
 void Sphere::setRadius(float radius) {
     Sphere::radius = radius;
 }
+BoundingBox Sphere::getBounds() const {
+    return BoundingBox::fromCenterAndRadius(getPosition(), radius);
+}
 
 }

@@ -38,5 +38,9 @@ Imageable::Intersection GroundPlane::intersect(Ray ray) {
         return Imageable::Intersection::createInvalid();
     }
 }
+BoundingBox GroundPlane::getBounds() const {
+    return {{std::numeric_limits<float>::min(), -0.001f, std::numeric_limits<float>::min()},
+            {std::numeric_limits<float>::max(), 0, std::numeric_limits<float>::max()}};
+}
 
 }

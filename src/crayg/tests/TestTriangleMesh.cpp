@@ -52,4 +52,19 @@ TEST_CASE("TriangleMesh") {
     }
 }
 
+TEST_CASE("TriangleMeshGetBounds") {
+    TriangleMesh triangleMesh;
+    triangleMesh.points.emplace_back(0, 0, 0);
+    triangleMesh.points.emplace_back(0, 1, 0);
+    triangleMesh.points.emplace_back(1, 0, 0);
+    triangleMesh.faceIndexes.push_back(0);
+    triangleMesh.faceIndexes.push_back(1);
+    triangleMesh.faceIndexes.push_back(2);
+    triangleMesh.beforeRender();
+
+    const BoundingBox boundingBox = triangleMesh.getBounds();
+
+    REQUIRE(boundingBox == BoundingBox({0, 0, 0}, {1, 1, 0}));
+}
+
 }

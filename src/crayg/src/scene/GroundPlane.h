@@ -20,6 +20,7 @@ class GroundPlane : public SceneObject {
     void deserialize(Deserializer &deserializer) override;
 
     Vector3f getNormal(Vector3f point) override;
+    BoundingBox getBounds() const override;
 
  private:
     Vector3f normal = Vector3f(0, 1, 0);

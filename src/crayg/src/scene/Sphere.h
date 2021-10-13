@@ -22,6 +22,7 @@ class Sphere : public SceneObject {
 
     Sphere::Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
+    BoundingBox getBounds() const override;
 
     void serialize(Serializer &serializer) override;
 

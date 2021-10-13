@@ -20,6 +20,7 @@ class DiskLight : public Light {
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     float getRadius() const;
+    BoundingBox getBounds() const override;
  protected:
     std::string getType() override;
  private:

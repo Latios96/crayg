@@ -79,5 +79,8 @@ bool AreaLight::isIntersecting(Ray ray) {
     const float distanceToCenter = (pointOnPlane - center).lengthSquared();
     return distanceToCenter <= (pow(width, 2));
 }
+BoundingBox AreaLight::getBounds() const {
+    return BoundingBox::fromCenterAndRadius(getPosition(), width);
+}
 
 }

@@ -22,6 +22,7 @@ class PointCloud : public SceneObject {
     void setPoints(const std::vector<Vector3f> &points);
     const std::vector<float> &getRadii() const;
     void setRadii(const std::vector<float> &radii);
+    BoundingBox getBounds() const override;
  private:
     std::vector<Vector3f> points;
     std::vector<float> radii;

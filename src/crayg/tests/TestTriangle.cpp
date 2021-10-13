@@ -85,4 +85,21 @@ TEST_CASE("BarycentricCoordinates") {
     REQUIRE(barycentric2.gamma == 0.25);
 }
 
+TEST_CASE("TriangleGetBounds") {
+    TriangleMesh triangleMesh;
+    triangleMesh.points.emplace_back(0, 0, 0);
+    triangleMesh.points.emplace_back(0, 1, 0);
+    triangleMesh.points.emplace_back(1, 0, 0);
+    triangleMesh.faceIndexes.push_back(0);
+    triangleMesh.faceIndexes.push_back(1);
+    triangleMesh.faceIndexes.push_back(2);
+    triangleMesh.beforeRender();
+
+    Triangle triangle(&triangleMesh, 0);
+
+    const BoundingBox boundingBox = triangle.getBounds();
+
+    REQUIRE(boundingBox == BoundingBox({0, 0, 0}, {1, 1, 0}));
+}
+
 }

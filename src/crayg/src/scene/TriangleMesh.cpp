@@ -143,9 +143,12 @@ void TriangleMesh::createNormals() {
         normals[faceIndexes[triangle->faceIndex + 1]] = normals[faceIndexes[triangle->faceIndex + 1]].add(normal);
         normals[faceIndexes[triangle->faceIndex + 2]] = normals[faceIndexes[triangle->faceIndex + 2]].add(normal);
     }
-    for (auto &normal : normals) {
+    for (auto &normal: normals) {
         normal = normal.normalize();
     }
+}
+BoundingBox TriangleMesh::getBounds() const {
+    return boundingBox;
 }
 
 }

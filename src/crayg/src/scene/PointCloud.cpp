@@ -57,5 +57,12 @@ const std::vector<float> &PointCloud::getRadii() const {
 void PointCloud::setRadii(const std::vector<float> &radii) {
     PointCloud::radii = radii;
 }
+BoundingBox PointCloud::getBounds() const {
+    BoundingBox boundingBox = BoundingBox::fromCenterAndRadius(points[0], radii[0]);
+    for (unsigned long i = 0; i < points.size(); i++) {
+        boundingBox = boundingBox.unionWith(BoundingBox::fromCenterAndRadius(points[i], radii[i]));
+    }
+    return boundingBox;
+}
 
 }

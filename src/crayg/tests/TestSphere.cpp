@@ -85,5 +85,11 @@ TEST_CASE("Sphere/intersectsTransformed") {
     REQUIRE(mySphere->isIntersecting(Ray(Vector3f(1, 2, 6), Vector3f(0, 0, -1))));
 }
 
+TEST_CASE("Sphere/getBounds") {
+    Sphere sphere({1, 2, 3}, 2);
+
+    REQUIRE(sphere.getBounds() == BoundingBox({-1, 0, 1}, {3, 4, 5}));
+}
+
 }
 

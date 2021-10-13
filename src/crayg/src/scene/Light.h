@@ -21,6 +21,7 @@ class Light : public Serializable, public Transformable, public Imageable {
 
     void deserialize(Deserializer &deserializer) override;
     float getIntensity() const;
+    BoundingBox getBounds() const override;
 
     void setIntensity(float intensity);
 
