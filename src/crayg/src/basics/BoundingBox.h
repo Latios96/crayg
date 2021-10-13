@@ -23,7 +23,7 @@ class BoundingBox {
 
     Vector3f min, max;
 
-    bool isIntersecting(const Ray &ray); // todo make const
+    bool isIntersecting(const Ray &ray) const;
 };
 
 }

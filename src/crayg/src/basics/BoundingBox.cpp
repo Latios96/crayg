@@ -22,7 +22,7 @@ BoundingBox::BoundingBox() {
     max = Vector3f();
 }
 
-bool BoundingBox::isIntersecting(const Ray &ray) {
+bool BoundingBox::isIntersecting(const Ray &ray) const {
     float txmin = (min.x - ray.startPoint.x) / ray.direction.x;
     float txmax = (max.x - ray.startPoint.x) / ray.direction.x;
 
