@@ -70,7 +70,7 @@ void convertShape(const tinyobj::attrib_t &attrib, crayg::Scene &scene, const ti
             mesh->points.emplace_back(attrib.vertices[indice.vertex_index * 3],
                                       attrib.vertices[indice.vertex_index * 3 + 1],
                                       attrib.vertices[indice.vertex_index * 3 + 2]);
-            int newIndex = mesh->points.size() - 1;
+            std::size_t newIndex = mesh->points.size() - 1;
             mesh->faceIndexes.push_back(newIndex);
             faceIndexConversion[indice.vertex_index] = newIndex;
         } else {

@@ -8,15 +8,15 @@ namespace crayg {
 TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
 
     Scene scene;
-    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1);
-    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1.1);
+    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.0f);
+    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<SceneObject *> objects({sphere1.get(), sphere2.get()});
-    auto *bvhNode = new BvhNode(BoundingBox({-1.1, -1.1, -1.1}, {1.1, 1.1, 1.1}), nullptr, nullptr, objects);
+    auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
 
     SECTION("isIntersecting") {
         BvhSceneIntersector intersector(scene, bvhNode);
 
-        bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
+        bool result = intersector.isIntersecting({{0.0f, 0.0f, -5.0f}, {0.0f, 0.0f, 1.0f}});
 
         REQUIRE(result);
     }
@@ -24,7 +24,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
     SECTION("intersect") {
         BvhSceneIntersector intersector(scene, bvhNode);
 
-        Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
+        Imageable::Intersection intersection = intersector.intersect({{0.0f, 0.0f, -5.0f}, {0.0f, 0.0f, 1.0f}});
 
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(3.9f));
     }
@@ -34,10 +34,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
 TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
 
     Scene scene;
-    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1);
+    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<SceneObject *> objects({sphere1.get()});
-    auto *left = new BvhNode(BoundingBox({-1.1, -1.1, -1.1}, {1.1, 1.1, 1.1}), nullptr, nullptr, objects);
-    auto *bvhNode = new BvhNode(BoundingBox({-1.1, -1.1, -1.1}, {1.1, 1.1, 1.1}), left, nullptr, {});
+    auto *left = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), left, nullptr, {});
 
     SECTION("isIntersecting") {
         BvhSceneIntersector intersector(scene, bvhNode);
@@ -59,10 +59,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
 TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
 
     Scene scene;
-    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1);
+    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<SceneObject *> objects({sphere1.get()});
-    auto *right = new BvhNode(BoundingBox({-1.1, -1.1, -1.1}, {1.1, 1.1, 1.1}), nullptr, nullptr, objects);
-    auto *bvhNode = new BvhNode(BoundingBox({-1.1, -1.1, -1.1}, {1.1, 1.1, 1.1}), nullptr, right, {});
+    auto *right = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, right, {});
 
     SECTION("isIntersecting") {
         BvhSceneIntersector intersector(scene, bvhNode);
