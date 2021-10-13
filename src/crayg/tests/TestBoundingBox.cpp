@@ -66,4 +66,10 @@ TEST_CASE("BoundingBoxUnionWithBoundingBox") {
     }
 }
 
+TEST_CASE("BoundingBoxFromCenterAndRadius") {
+    const BoundingBox boundingBox = BoundingBox::fromCenterAndRadius({0, 0, 0}, 3);
+
+    REQUIRE(boundingBox == BoundingBox({-3, -3, -3}, {3, 3, 3}));
+}
+
 }

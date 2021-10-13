@@ -96,6 +96,10 @@ BoundingBox BoundingBox::unionWith(const BoundingBox &boundingBox) const {
     unite(resultBoundingBox, boundingBox.max);
     return resultBoundingBox;
 }
+BoundingBox BoundingBox::fromCenterAndRadius(const Vector3f &center, const float radius) {
+    return {{center.x - radius, center.y - radius, center.z - radius},
+            {center.x + radius, center.y + radius, center.z + radius}};
+}
 
 }
 

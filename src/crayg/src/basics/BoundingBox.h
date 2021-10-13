@@ -16,6 +16,7 @@ class BoundingBox {
  public:
     BoundingBox();
     BoundingBox(const Vector3f &min, const Vector3f &max);
+    static BoundingBox fromCenterAndRadius(const Vector3f &center, const float radius);
 
     bool operator==(const BoundingBox &rhs) const;
 
