@@ -8,6 +8,13 @@ TEST_CASE("ReadableFormatter should format time", "[TestReadableFormatter]") {
 
     ReadableFormatter readableFormatter;
 
+    SECTION("less than one second") {
+        std::string result =
+            readableFormatter.formatDuration(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::milliseconds(
+                1)));
+        REQUIRE(result == "less than one second");
+    }
+
     SECTION("one second") {
         std::string result = readableFormatter.formatDuration(std::chrono::seconds(1));
         REQUIRE(result == "1 second");

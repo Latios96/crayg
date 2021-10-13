@@ -26,5 +26,8 @@ std::string ReadableFormatter::formatDuration(std::chrono::seconds seconds) {
     if (secondsCount != 0) {
         result += (result.empty() ? "" : " ") + fmt::format("{} second{}", secondsCount, secondsCount == 1 ? "" : "s");
     }
+    if (secondsCount < 1 && hoursCount == 0 && minutesCount == 0) {
+        return "less than one second";
+    }
     return result;
 }
