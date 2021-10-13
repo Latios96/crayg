@@ -69,7 +69,8 @@ TEST_CASE("GroundPlaneIntersectionGetBounds") {
 
     const BoundingBox bounds = myGroundPlane->getBounds();
 
-    REQUIRE(bounds == BoundingBox({std::numeric_limits<float>::min(), -0.001f, std::numeric_limits<float>::min()},
+    REQUIRE(bounds == BoundingBox({std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(),
+                                   std::numeric_limits<float>::lowest()},
                                   {std::numeric_limits<float>::max(), 0, std::numeric_limits<float>::max()}));
 }
 
