@@ -124,7 +124,7 @@ set(crayg_SRCS
         utils/ReadableFormatter.h
         utils/ReadableFormatter.cpp
         intersectors/BvhNode.h
-        intersectors/BvhNode.cpp intersectors/BvhBuilder.cpp intersectors/BvhBuilder.h)
+        intersectors/BvhNode.cpp intersectors/BvhBuilder.cpp intersectors/BvhBuilder.h intersectors/BvhSceneIntersector.cpp intersectors/BvhSceneIntersector.h)
 
 
 add_library(crayg STATIC

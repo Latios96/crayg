@@ -13,6 +13,8 @@
 #include "Logger.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
+#include <intersectors/BvhBuilder.h>
+#include <intersectors/BvhSceneIntersector.h>
 
 namespace crayg {
 
@@ -20,7 +22,6 @@ Renderer::Renderer(Scene &scene, OutputDriver &outputDriver)
     : scene(scene), outputDriver(outputDriver) {
 
 }
-// todo init should not be in renderScene
 void Renderer::renderScene() {
     init();
     Logger::info("Starting rendering..");
@@ -78,15 +79,17 @@ void Renderer::init() {
     lambertMethod = std::make_shared<ShadingMethod>(scene);
 
     Logger::info("Execute Imageable::beforeRender...");
-    for (auto &imageable : scene.objects) {
+    for (auto &imageable: scene.objects) {
         imageable->beforeRender();
     }
-    for (auto &imageable : scene.lights) {
+    for (auto &imageable: scene.lights) {
         imageable->beforeRender();
     }
 
     Logger::info("Creating SceneIntersector...");
-    sceneIntersector = std::make_shared<SceneIntersector>(scene);
+    BvhBuilder bvhBuilder(scene);
+    BvhNode *root = bvhBuilder.build();
+    sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {

@@ -29,9 +29,7 @@ bool SceneIntersector::isIntersecting(const Ray &ray) const {
 
 SceneIntersector::SceneIntersector(Scene &scene) : scene(scene) {}
 
-SceneIntersector::~SceneIntersector() {
-
-}
+SceneIntersector::~SceneIntersector() = default;
 
 bool Intersection::isValid() {
     return object != nullptr;
