@@ -24,6 +24,13 @@ class BoundingBox {
     Vector3f min, max;
 
     bool isIntersecting(const Ray &ray) const;
+
+    BoundingBox unionWith(const Vector3f &point) const;
+    BoundingBox unionWith(const BoundingBox &boundingBox) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const BoundingBox &box);
+ private:
+    void unite(BoundingBox &boundingBox, const Vector3f &point) const;
 };
 
 }

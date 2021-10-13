@@ -2,6 +2,7 @@
 // Created by jan on 02.12.18.
 //
 
+#include <utils/ToStringHelper.h>
 #include "BoundingBox.h"
 
 namespace crayg {
@@ -58,6 +59,42 @@ bool BoundingBox::isIntersecting(const Ray &ray) const {
 
     return true;
 
+}
+std::ostream &operator<<(std::ostream &os, const BoundingBox &box) {
+    os << "BoundingBox{min: " << box.min << " max: " << box.max << '}';
+    return os;
+}
+BoundingBox BoundingBox::unionWith(const Vector3f &point) const {
+    BoundingBox boundingBox(min, max);
+    unite(boundingBox, point);
+    return boundingBox;
+}
+void BoundingBox::unite(BoundingBox &boundingBox, const Vector3f &point) const {
+    if (point.x < min.x) {
+        boundingBox.min.x = point.x;
+    }
+    if (point.y < min.y) {
+        boundingBox.min.y = point.y;
+    }
+    if (point.z < min.z) {
+        boundingBox.min.z = point.z;
+    }
+
+    if (point.x > max.x) {
+        boundingBox.max.x = point.x;
+    }
+    if (point.y > max.y) {
+        boundingBox.max.y = point.y;
+    }
+    if (point.z > max.z) {
+        boundingBox.max.z = point.z;
+    }
+}
+BoundingBox BoundingBox::unionWith(const BoundingBox &boundingBox) const {
+    BoundingBox resultBoundingBox(min, max);
+    unite(resultBoundingBox, boundingBox.min);
+    unite(resultBoundingBox, boundingBox.max);
+    return resultBoundingBox;
 }
 
 }
