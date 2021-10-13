@@ -54,9 +54,9 @@ TEST_CASE("BoundingBoxUnionWithBoundingBox") {
     }
 
     SECTION("shouldExtendCorrectlyIntoMinDirection") {
-        const BoundingBox unionBoundingBox = boundingBox.unionWith({{0, 0, 0}, {-2, 0, 0}});
+        const BoundingBox unionBoundingBox = boundingBox.unionWith({{-2, -1, -1}, {-0.5, -0.5, -0.5}});
 
-        REQUIRE(unionBoundingBox == BoundingBox({-2, 0, 0}, {1, 1, 1}));
+        REQUIRE(unionBoundingBox == BoundingBox({-2, -1, -1}, {1, 1, 1}));
     }
 
     SECTION("shouldNotChangeSincePointIsAlreadyIncluded") {

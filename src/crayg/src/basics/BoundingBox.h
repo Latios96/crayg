@@ -32,8 +32,6 @@ class BoundingBox {
     Vector3f getCentroid() const;
 
     friend std::ostream &operator<<(std::ostream &os, const BoundingBox &box);
- private:
-    void unite(BoundingBox &boundingBox, const Vector3f &point) const;
 };
 
 }

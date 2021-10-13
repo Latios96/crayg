@@ -66,10 +66,6 @@ std::ostream &operator<<(std::ostream &os, const BoundingBox &box) {
 }
 BoundingBox BoundingBox::unionWith(const Vector3f &point) const {
     BoundingBox boundingBox(min, max);
-    unite(boundingBox, point);
-    return boundingBox;
-}
-void BoundingBox::unite(BoundingBox &boundingBox, const Vector3f &point) const {
     if (point.x < min.x) {
         boundingBox.min.x = point.x;
     }
@@ -89,11 +85,29 @@ void BoundingBox::unite(BoundingBox &boundingBox, const Vector3f &point) const {
     if (point.z > max.z) {
         boundingBox.max.z = point.z;
     }
+    return boundingBox;
 }
 BoundingBox BoundingBox::unionWith(const BoundingBox &boundingBox) const {
     BoundingBox resultBoundingBox(min, max);
-    unite(resultBoundingBox, boundingBox.min);
-    unite(resultBoundingBox, boundingBox.max);
+    if (boundingBox.min.x < min.x) {
+        resultBoundingBox.min.x = boundingBox.min.x;
+    }
+    if (boundingBox.min.y < min.y) {
+        resultBoundingBox.min.y = boundingBox.min.y;
+    }
+    if (boundingBox.min.z < min.z) {
+        resultBoundingBox.min.z = boundingBox.min.z;
+    }
+
+    if (boundingBox.max.x > max.x) {
+        resultBoundingBox.max.x = boundingBox.max.x;
+    }
+    if (boundingBox.max.y > max.y) {
+        resultBoundingBox.max.y = boundingBox.max.y;
+    }
+    if (boundingBox.max.z > max.z) {
+        resultBoundingBox.max.z = boundingBox.max.z;
+    }
     return resultBoundingBox;
 }
 BoundingBox BoundingBox::fromCenterAndRadius(const Vector3f &center, const float radius) {
