@@ -19,7 +19,7 @@ struct Intersection {
     Vector3f location;
     SceneObject *object;
 
-    bool isValid();
+    bool isValid() const;
 };
 
 class SceneIntersector {

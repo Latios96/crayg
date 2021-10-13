@@ -86,7 +86,7 @@ Vector3f Vector3f::createInvalid() {
     return {max, max, max};
 }
 
-bool Vector3f::isValid() {
+bool Vector3f::isValid() const {
     auto max = std::numeric_limits<float>::max();
     return x != max && y != max && z != max;
 }

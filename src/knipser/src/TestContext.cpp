@@ -32,7 +32,7 @@ void TestContext::setImageOutputName(const std::string &imageOutputName) {
 
 }
 
-bool TestContext::imageOutputIsSet() {
+bool TestContext::imageOutputIsSet() const {
     return imageOutputSet;
 }
 std::string TestContext::getReferenceFolder() const {

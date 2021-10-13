@@ -15,7 +15,7 @@ class TestContext {
     explicit TestContext(std::string outputFolder, std::string referenceFolder);
 
     void setImageOutputName(const std::string &imageOutputName);
-    bool imageOutputIsSet();
+    bool imageOutputIsSet() const;
 
     std::string getOutputFolder() const;
     std::string getOutputFilename() const;

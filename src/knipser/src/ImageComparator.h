@@ -18,15 +18,15 @@ struct ImageComparatorResult {
     ImageComparatorResultStatus status;
     float error;
 
-    bool isOk() {
+    bool isOk() const {
         return status == ImageComparatorResultStatus::OK;
     }
 
-    bool isWarning() {
+    bool isWarning() const {
         return status == ImageComparatorResultStatus::WARNING;
     }
 
-    bool isError() {
+    bool isError() const {
         return status == ImageComparatorResultStatus::IMAGE_ERROR;
     }
 };

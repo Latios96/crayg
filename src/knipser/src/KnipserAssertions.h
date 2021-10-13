@@ -31,7 +31,7 @@ class BasicAssertion {
 
     std::string createMessage(const std::string &assertionMessage) const;
 
-    void doAssert(bool expression, const std::string &message);
+    void doAssert(bool expression, const std::string &message) const;
 
  protected:
     const std::string file;

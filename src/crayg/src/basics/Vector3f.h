@@ -56,7 +56,7 @@ class Vector3f {
 
     static Vector3f createInvalid();
 
-    bool isValid();
+    bool isValid() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Vector3f &f);
 

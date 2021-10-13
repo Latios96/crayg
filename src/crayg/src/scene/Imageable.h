@@ -39,7 +39,7 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
         float rayParameter;
         std::shared_ptr<Imageable> imageable;
 
-        bool isValid() {
+        bool isValid() const {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
         }
     };

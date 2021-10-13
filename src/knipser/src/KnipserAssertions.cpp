@@ -13,7 +13,7 @@ std::string BasicAssertion::createMessage(const std::string &assertionMessage) c
     return fmt::format("{}:{}: Failure:\n{}", file, lineNumber, assertionMessage);
 }
 
-void BasicAssertion::doAssert(bool expression, const std::string &message) {
+void BasicAssertion::doAssert(bool expression, const std::string &message) const {
     if (!expression) {
         throw KnipserException(createMessage(message));
     }

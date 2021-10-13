@@ -31,7 +31,7 @@ SceneIntersector::SceneIntersector(Scene &scene) : scene(scene) {}
 
 SceneIntersector::~SceneIntersector() = default;
 
-bool Intersection::isValid() {
+bool Intersection::isValid() const {
     return object != nullptr;
 }
 

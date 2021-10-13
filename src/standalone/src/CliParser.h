@@ -24,7 +24,7 @@ struct CliParseResult {
     nonstd::optional<CliArgs> args;
     nonstd::optional<std::string> error;
 
-    bool isValid() {
+    bool isValid() const {
         return !error && args;
     }
 };
