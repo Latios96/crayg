@@ -41,6 +41,7 @@ class JsonSceneReader : public SceneReader {
     JsonSceneReader(const std::string &path, Scene &scene);
 
     void read() override;
+    void readFromStream(std::istream &ifs) const;
 };
 
 }

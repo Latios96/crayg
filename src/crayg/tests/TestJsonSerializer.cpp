@@ -7,6 +7,8 @@
 #include <memory>
 #include <sstream>
 #include <sceneIO/write/SceneWriter.h>
+#include <scene/DiffuseMaterial.h>
+#include <sceneIO/read/json/JsonSceneReader.h>
 
 namespace crayg {
 
@@ -140,7 +142,59 @@ TEST_CASE("should write scene with objects and camera as expected") {
 }
 
 TEST_CASE("should write Scene with Triangle Mesh") {
+    std::shared_ptr<TriangleMesh> triangleMesh = std::make_shared<TriangleMesh>();
+    TriangleMesh::createCube(*triangleMesh);
+    triangleMesh->init();
+    std::shared_ptr<DiffuseMaterial>
+        defaultMaterial = std::make_shared<DiffuseMaterial>("myMaterial", Color::createWhite());
+    triangleMesh->setMaterial(defaultMaterial);
+    Scene scene;
+    scene.addObject(triangleMesh);
 
+    std::shared_ptr<std::ostringstream> px = std::make_shared<std::ostringstream>();
+    auto stream = std::shared_ptr<std::ostream>(px);
+    JsonSerializer serializer(stream);
+    SceneWriter sceneWriter(scene, serializer);
+    sceneWriter.write();
+
+    REQUIRE(px->str().find(R"("material": "myMaterial")") != std::string::npos);
+    REQUIRE(px->str().find(R"("name": "myMaterial")") != std::string::npos);
+}
+
+TEST_CASE("should write Scene and read back should work") {
+    std::shared_ptr<Camera> camera = std::make_shared<Camera>();
+    std::shared_ptr<TriangleMesh> triangleMesh = std::make_shared<TriangleMesh>();
+    TriangleMesh::createCube(*triangleMesh);
+    triangleMesh->init();
+    std::shared_ptr<DiffuseMaterial>
+        myMaterial = std::make_shared<DiffuseMaterial>("myMaterial", Color::createWhite());
+    std::shared_ptr<DiffuseMaterial>
+        sphereMaterial = std::make_shared<DiffuseMaterial>("sphereMaterial", Color::createWhite());
+    triangleMesh->setMaterial(myMaterial);
+    std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>();
+    sphere->setMaterial(sphereMaterial);
+    Scene writtenScene;
+    writtenScene.camera = camera;
+    writtenScene.addObject(triangleMesh);
+    writtenScene.addObject(sphere);
+
+    std::shared_ptr<std::ostringstream> px = std::make_shared<std::ostringstream>();
+    auto stream = std::shared_ptr<std::ostream>(px);
+    JsonSerializer serializer(stream);
+    SceneWriter sceneWriter(writtenScene, serializer);
+    sceneWriter.write();
+
+    Scene readScene;
+    JsonSceneReader jsonSceneReader("test.json", readScene);
+    std::istringstream istream;
+    istream.str(px->str());
+    jsonSceneReader.readFromStream(istream);
+
+    REQUIRE(readScene.objects.size() == 13);
+    REQUIRE(readScene.owningObjects.size() == 2);
+    REQUIRE(readScene.materials.size() == 2);
+    REQUIRE(readScene.materialByName("myMaterial") != nullptr);
+    REQUIRE(readScene.materialByName("sphereMaterial") != nullptr);
 }
 
 }

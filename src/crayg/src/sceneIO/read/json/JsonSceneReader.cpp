@@ -44,9 +44,7 @@ void readTriangleMesh(Scene &scene,
                           obj,
                           [&scene](std::shared_ptr<TriangleMesh> triangleMesh) {
                               triangleMesh->init();
-                              scene.owningObjects.push_back(triangleMesh);
-                              triangleMesh->getTriangles(scene.objects);
-                              //scene.addObject(triangleMesh);
+                              scene.addObject(triangleMesh);
                           });
     std::string materialConnection = obj.HasMember("material") ? obj["material"].GetString() : "";
     materialConnections.push_back(materialConnection);
@@ -73,7 +71,6 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
     std::vector<std::string> materialConnections;
     std::shared_ptr<DiffuseMaterial>
         defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createWhite());
-    scene.addMaterial(defaultMaterial);
 
     for (rapidjson::Value &obj: array) {
         std::string type(obj["type"].GetString());
@@ -157,10 +154,13 @@ void JsonSceneReader::read() {
     if (!boost::filesystem::exists(boostPath)) {
         throw std::runtime_error(fmt::format("Could not read scene \"{}\", file does not exist!", path));
     }
-    StopWatch stopwatch = StopWatch::createStopWatch("Scene reading");
-    Logger::info("Reading scene {}", path);
-
     std::ifstream ifs(path);
+    Logger::info("Reading scene {}", path);
+    readFromStream(ifs);
+}
+void JsonSceneReader::readFromStream(std::istream &ifs) const {
+    StopWatch stopwatch = StopWatch::createStopWatch("Scene reading");
+
     rapidjson::IStreamWrapper isw(ifs);
     rapidjson::Document document;
     document.ParseStream(isw);
@@ -170,7 +170,6 @@ void JsonSceneReader::read() {
     if (result.hasMandatoryMembers) {
         // now read the data
         readSceneObjects(scene, document);
-        //TODO connectSceneObjectsToMaterials();
         readCamera(scene, document);
         readRenderSettings(scene, document);
     } else {
@@ -197,7 +196,6 @@ void JsonSceneReader::read() {
     }
 
     stopwatch.end();
-
 }
 
 }
