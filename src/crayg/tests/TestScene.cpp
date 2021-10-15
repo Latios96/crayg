@@ -20,7 +20,7 @@ TEST_CASE("addObjectToScene") {
     }
 
     SECTION("should add object with known material to scene") {
-        scene.materials.push_back(diffuseMaterial);
+        scene.addMaterial(diffuseMaterial);
         sphere->setMaterial(diffuseMaterial);
 
         scene.addObject(sphere);
@@ -47,8 +47,9 @@ TEST_CASE("addObjectToScene") {
         const std::shared_ptr<Material> material1 = std::make_shared<DiffuseMaterial>("name", Color::createGrey(0.5f));
         const std::shared_ptr<Material> material2 = std::make_shared<DiffuseMaterial>("name", Color::createGrey(0.5f));
         scene.addMaterial(material1);
+        scene.addMaterial(material2);
 
-        REQUIRE_THROWS_AS(scene.addMaterial(material2), std::runtime_error);
+        REQUIRE(scene.materials.size() == 1);
     }
 }
 

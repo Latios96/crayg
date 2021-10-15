@@ -139,4 +139,8 @@ TEST_CASE("should write scene with objects and camera as expected") {
 })");
 }
 
+TEST_CASE("should write Scene with Triangle Mesh") {
+
+}
+
 }

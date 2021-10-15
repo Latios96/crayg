@@ -82,7 +82,7 @@ void Renderer::init() {
     for (auto &imageable: scene.objects) {
         imageable->beforeRender();
     }
-    for (auto &imageable: scene.oldObjects) {
+    for (auto &imageable: scene.owningObjects) {
         imageable->beforeRender();
     }
     for (auto &imageable: scene.lights) {
@@ -145,7 +145,6 @@ Color Renderer::traceRay(const Ray &ray, int depth) {
         for (auto &light: scene.lights) {
             shadow = light->calculateShadowFactor(*sceneIntersector, location + (normal * 0.001));
         }
-        //return shadedColor;
         return shadedColor * shadow;
     }
     return Color::createBlack();

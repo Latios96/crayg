@@ -126,11 +126,10 @@ TEST_CASE("JsonSceneReader") {
         jsonSceneReader.read();
 
         REQUIRE(scene.objects.size() == 3);
-        REQUIRE(scene.oldObjects[1]->getPosition() == Vector3f(0, -1.5f, 0));
+        REQUIRE(scene.owningObjects[1]->getPosition() == Vector3f(0, -1.5f, 0));
         REQUIRE(scene.materials.size() == 2);
-        REQUIRE(scene.objects[0]->getMaterial() == scene.materials[1]);
-        REQUIRE(scene.objects[1]->getMaterial() == scene.materials[0]);
-        REQUIRE(scene.objects[1]->getMaterial()->getName() == "defaultMaterial");
+        REQUIRE(scene.objects[0]->getMaterial() == scene.materialByName("diffuseMaterial"));
+        REQUIRE(scene.objects[1]->getMaterial() == scene.materialByName("defaultMaterial"));
         REQUIRE(scene.camera->getPosition() == Vector3f(0, 0, 10));
         REQUIRE(scene.renderSettings.resolution == Resolution(800, 600));
         REQUIRE(scene.renderSettings.maxSamples == 4);

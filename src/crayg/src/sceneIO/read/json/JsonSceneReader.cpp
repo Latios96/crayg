@@ -44,8 +44,9 @@ void readTriangleMesh(Scene &scene,
                           obj,
                           [&scene](std::shared_ptr<TriangleMesh> triangleMesh) {
                               triangleMesh->init();
-                              scene.oldObjects.push_back(triangleMesh);
+                              scene.owningObjects.push_back(triangleMesh);
                               triangleMesh->getTriangles(scene.objects);
+                              //scene.addObject(triangleMesh);
                           });
     std::string materialConnection = obj.HasMember("material") ? obj["material"].GetString() : "";
     materialConnections.push_back(materialConnection);
@@ -58,7 +59,7 @@ void readLight(Scene &scene, rapidjson::Value &obj) {
 
 template<typename T>
 void readMaterial(Scene &scene, rapidjson::Value &obj) {
-    readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.materials.push_back(p); });
+    readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.addMaterial(p); });
 }
 
 void readSceneObjects(Scene &scene, rapidjson::Document &d) {
@@ -99,15 +100,16 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
             Logger::warning("Unknown type {}", type);
         }
     }
-    for (int i = 0; i < scene.oldObjects.size(); i++) {
+    for (int i = 0; i < scene.owningObjects.size(); i++) {
         const std::string materialConnection = materialConnections[i];
         if (materialConnection.empty()) {
-            scene.oldObjects[i]->setMaterial(defaultMaterial);
+            scene.owningObjects[i]->setMaterial(defaultMaterial);
+            scene.addMaterial(defaultMaterial);
             continue;
         }
-        scene.oldObjects[i]->setMaterial(scene.materialByName(materialConnection));
+        scene.owningObjects[i]->setMaterial(scene.materialByName(materialConnection));
+        scene.addMaterial(scene.owningObjects[i]->getMaterial());
     }
-    // todo store materials in scene, read / write roundtrip of materials seems to be broken
 }
 
 void readCamera(Scene &scene, rapidjson::Document &d) {
