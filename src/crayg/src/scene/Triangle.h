@@ -25,6 +25,7 @@ class Triangle : public Imageable {
     Vector3f getNormal(Vector3f point) override;
     Vector3f getNormal();
     BoundingBox getBounds() const override;
+    std::shared_ptr<Material> getMaterial() const override;
 
     Vector3f v0() const;
     Vector3f v1() const;

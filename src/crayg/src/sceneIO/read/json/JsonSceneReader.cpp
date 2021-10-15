@@ -39,13 +39,12 @@ void readSceneObject(Scene &scene, rapidjson::Value &obj, std::vector<std::strin
 
 void readTriangleMesh(Scene &scene,
                       rapidjson::Value &obj,
-                      std::vector<std::string> &materialConnections,
-                      std::vector<std::shared_ptr<TriangleMesh>> &triangleMeshes) {
+                      std::vector<std::string> &materialConnections) {
     readObj<TriangleMesh>(scene,
                           obj,
-                          [&scene, &triangleMeshes](std::shared_ptr<TriangleMesh> p) {
-                              scene.oldObjects.push_back(p);
-                              triangleMeshes.push_back(p);
+                          [&scene](std::shared_ptr<TriangleMesh> triangleMesh) {
+                              scene.oldObjects.push_back(triangleMesh);
+                              triangleMesh->getTriangles(scene.objects);
                           });
     std::string materialConnection = obj.HasMember("material") ? obj["material"].GetString() : "";
     materialConnections.push_back(materialConnection);
@@ -74,8 +73,6 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createWhite());
     scene.addMaterial(defaultMaterial);
 
-    std::vector<std::shared_ptr<TriangleMesh>> triangleMeshes;
-
     for (rapidjson::Value &obj: array) {
         std::string type(obj["type"].GetString());
 
@@ -84,7 +81,7 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         } else if (type == "GroundPlane") {
             readSceneObject<GroundPlane>(scene, obj, materialConnections);
         } else if (type == "TriangleMesh") {
-            readTriangleMesh(scene, obj, materialConnections, triangleMeshes);
+            readTriangleMesh(scene, obj, materialConnections);
         } else if (type == "PointCloud") {
             readSceneObject<PointCloud>(scene, obj, materialConnections);
         } else if (type == "Light") {
@@ -109,9 +106,7 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         }
         scene.oldObjects[i]->setMaterial(scene.materialByName(materialConnection));
     }
-    for (const auto &triangleMesh: triangleMeshes) {
-        triangleMesh->getTriangles(scene.objects);
-    }
+    // todo store materials in scene, read / write roundtrip of materials seems to be broken
 }
 
 void readCamera(Scene &scene, rapidjson::Document &d) {

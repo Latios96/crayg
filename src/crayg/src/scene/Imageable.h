@@ -55,7 +55,7 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
 
     virtual BoundingBox getBounds() const = 0;
 
-    std::shared_ptr<Material> getMaterial() const;
+    virtual std::shared_ptr<Material> getMaterial() const;
     void setMaterial(const std::shared_ptr<Material> &material);
 
  private:
