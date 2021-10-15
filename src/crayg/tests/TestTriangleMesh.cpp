@@ -60,7 +60,7 @@ TEST_CASE("TriangleMeshGetBounds") {
     triangleMesh.faceIndexes.push_back(0);
     triangleMesh.faceIndexes.push_back(1);
     triangleMesh.faceIndexes.push_back(2);
-    triangleMesh.beforeRender();
+    triangleMesh.init();
 
     const BoundingBox boundingBox = triangleMesh.getBounds();
 

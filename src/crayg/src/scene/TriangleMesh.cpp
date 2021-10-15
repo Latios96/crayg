@@ -14,8 +14,9 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     if (boundingBox.isIntersecting(ray)) {
         Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-        for (std::shared_ptr<Triangle> &triangle : triangles) {
-            Imageable::Intersection intersection = triangle->intersect(ray);
+        for (int i = 0; i < faceIndexes.size(); i = i + 3) {
+            Triangle triangle(this, i);
+            Imageable::Intersection intersection = triangle.intersect(ray);
             hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
         }
         return hitIntersection;
@@ -30,11 +31,6 @@ void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Imageable>> &triangl
     }
 }
 
-void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Triangle>> &triangles) {
-    for (int i = 0; i < faceIndexes.size(); i = i + 3) {
-        triangles.push_back(std::make_shared<Triangle>(this, i));
-    }
-}
 
 void TriangleMesh::serialize(Serializer &serializer) {
     SceneObject::serialize(serializer);
@@ -103,15 +99,6 @@ void TriangleMesh::createCube(TriangleMesh &mesh) {
     mesh.faceIndexes.push_back(2);
 }
 
-void TriangleMesh::beforeRender() {
-    Imageable::beforeRender();
-    for (auto &point : points) {
-        point = transform.apply(point);
-    }
-    getTriangles(triangles);
-    createBounds();
-    createNormals();
-}
 
 void TriangleMesh::createBounds() {
     Vector3f min, max;
@@ -140,12 +127,13 @@ void TriangleMesh::createBounds() {
 }
 void TriangleMesh::createNormals() {
     normals.resize(points.size());
-    for (auto &triangle : triangles) {
-        Vector3f normal = triangle->getNormal();
-        const int x = faceIndexes[triangle->faceIndex];
+    for (int i = 0; i < faceIndexes.size(); i = i + 3) {
+        Triangle triangle(this, i);
+        Vector3f normal = triangle.getNormal();
+        const int x = faceIndexes[triangle.faceIndex];
         normals[x] = normals[x].add(normal);
-        normals[faceIndexes[triangle->faceIndex + 1]] = normals[faceIndexes[triangle->faceIndex + 1]].add(normal);
-        normals[faceIndexes[triangle->faceIndex + 2]] = normals[faceIndexes[triangle->faceIndex + 2]].add(normal);
+        normals[faceIndexes[triangle.faceIndex + 1]] = normals[faceIndexes[triangle.faceIndex + 1]].add(normal);
+        normals[faceIndexes[triangle.faceIndex + 2]] = normals[faceIndexes[triangle.faceIndex + 2]].add(normal);
     }
     for (auto &normal: normals) {
         normal = normal.normalize();
@@ -153,6 +141,13 @@ void TriangleMesh::createNormals() {
 }
 BoundingBox TriangleMesh::getBounds() const {
     return boundingBox;
+}
+void TriangleMesh::init() {
+    for (auto &point: points) {
+        point = transform.apply(point);
+    }
+    createBounds();
+    createNormals();
 }
 
 }

@@ -43,6 +43,7 @@ void readTriangleMesh(Scene &scene,
     readObj<TriangleMesh>(scene,
                           obj,
                           [&scene](std::shared_ptr<TriangleMesh> triangleMesh) {
+                              triangleMesh->init();
                               scene.oldObjects.push_back(triangleMesh);
                               triangleMesh->getTriangles(scene.objects);
                           });
