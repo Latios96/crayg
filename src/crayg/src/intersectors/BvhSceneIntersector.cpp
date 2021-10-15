@@ -2,6 +2,7 @@
 // Created by Jan on 13.10.2021.
 //
 
+#include <algorithm>
 #include "BvhSceneIntersector.h"
 
 namespace crayg {
@@ -12,7 +13,9 @@ bool isIntersectingTree(const Ray &ray, const BvhNode *node) {
         return false;
     }
     if (node->isLeaf()) {
-        return true;
+        return std::any_of(node->objects.begin(),
+                           node->objects.end(),
+                           [&ray](Imageable *intersectable) { return intersectable->isIntersecting(ray); });
     }
     if (node->left && isIntersectingTree(ray, node->left)) {
         return true;
@@ -30,7 +33,6 @@ Imageable::Intersection intersectTree(const Ray &ray, const BvhNode *node) {
     }
     if (node->isLeaf()) {
         Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
-
         for (const auto &intersectable: node->objects) {
             Imageable::Intersection intersection = intersectable->intersect(ray);
 

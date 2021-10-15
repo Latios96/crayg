@@ -10,7 +10,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.0f);
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1.1f);
-    std::vector<SceneObject *> objects({sphere1.get(), sphere2.get()});
+    std::vector<Imageable *> objects({sphere1.get(), sphere2.get()});
     auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
 
     SECTION("isIntersecting") {
@@ -35,7 +35,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
 
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1f);
-    std::vector<SceneObject *> objects({sphere1.get()});
+    std::vector<Imageable *> objects({sphere1.get()});
     auto *left = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
     auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), left, nullptr, {});
 
@@ -60,7 +60,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
 
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1f);
-    std::vector<SceneObject *> objects({sphere1.get()});
+    std::vector<Imageable *> objects({sphere1.get()});
     auto *right = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
     auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, right, {});
 
@@ -87,8 +87,8 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1);
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1);
-    std::vector<SceneObject *> objectsLeft({sphere1.get()});
-    std::vector<SceneObject *> objectsRight({sphere2.get()});
+    std::vector<Imageable *> objectsLeft({sphere1.get()});
+    std::vector<Imageable *> objectsRight({sphere2.get()});
     auto *left = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
     auto *right = new BvhNode(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
     auto *bvhNode = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 2}), left, right, {});
@@ -116,8 +116,8 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, right i
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1);
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1);
-    std::vector<SceneObject *> objectsLeft({sphere1.get()});
-    std::vector<SceneObject *> objectsRight({sphere2.get()});
+    std::vector<Imageable *> objectsLeft({sphere1.get()});
+    std::vector<Imageable *> objectsRight({sphere2.get()});
     auto *left = new BvhNode(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
     auto *right = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
     auto *bvhNode = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 2}), left, right, {});

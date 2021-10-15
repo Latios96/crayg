@@ -6,7 +6,7 @@
 crayg::BvhNode::BvhNode(const crayg::BoundingBox &boundingBox,
                         crayg::BvhNode *left,
                         crayg::BvhNode *right,
-                        const std::vector<SceneObject *> &objects)
+                        const std::vector<Imageable *> &objects)
     : boundingBox(boundingBox), left(left), right(right), objects(objects) {}
 crayg::BvhNode::~BvhNode() {
     delete left;

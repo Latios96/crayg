@@ -21,7 +21,7 @@ Imageable::Intersection SceneIntersector::intersect(const Ray &ray) const {
 bool SceneIntersector::isIntersecting(const Ray &ray) const {
     return std::any_of(scene.objects.begin(),
                        scene.objects.end(),
-                       [&ray](std::shared_ptr<SceneObject> &intersectable) { return intersectable->isIntersecting(ray); });
+                       [&ray](std::shared_ptr<Imageable> &intersectable) { return intersectable->isIntersecting(ray); });
 }
 
 SceneIntersector::SceneIntersector(Scene &scene) : scene(scene) {}

@@ -26,6 +26,12 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     }
 }
 
+void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles) {
+    for (int i = 0; i < faceIndexes.size(); i = i + 3) {
+        triangles.push_back(std::make_shared<Triangle>(this, i));
+    }
+}
+
 void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Triangle>> &triangles) {
     for (int i = 0; i < faceIndexes.size(); i = i + 3) {
         triangles.push_back(std::make_shared<Triangle>(this, i));

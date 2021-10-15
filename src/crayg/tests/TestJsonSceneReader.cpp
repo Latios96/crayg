@@ -126,7 +126,7 @@ TEST_CASE("JsonSceneReader") {
         jsonSceneReader.read();
 
         REQUIRE(scene.objects.size() == 3);
-        REQUIRE(scene.objects[1]->getPosition() == Vector3f(0, -1.5f, 0));
+        REQUIRE(scene.oldObjects[1]->getPosition() == Vector3f(0, -1.5f, 0));
         REQUIRE(scene.materials.size() == 2);
         REQUIRE(scene.objects[0]->getMaterial() == scene.materials[1]);
         REQUIRE(scene.objects[1]->getMaterial() == scene.materials[0]);

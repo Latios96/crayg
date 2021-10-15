@@ -82,6 +82,9 @@ void Renderer::init() {
     for (auto &imageable: scene.objects) {
         imageable->beforeRender();
     }
+    for (auto &imageable: scene.oldObjects) {
+        imageable->beforeRender();
+    }
     for (auto &imageable: scene.lights) {
         imageable->beforeRender();
     }
@@ -89,7 +92,8 @@ void Renderer::init() {
     Logger::info("Creating SceneIntersector...");
     BvhBuilder bvhBuilder(scene);
     BvhNode *root = bvhBuilder.build();
-    sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
+    //sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
+    sceneIntersector = std::make_shared<SceneIntersector>(scene);
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
@@ -135,10 +139,14 @@ Color Renderer::traceRay(const Ray &ray, int depth) {
 
         float shadow = 1.0;
 
-        for (auto &light : scene.lights) {
-            shadow = light->calculateShadowFactor(*sceneIntersector, location + (normal * 0.001));
+        if (shadedColor.r > 0) {
+            int i = 0;
         }
 
+        for (auto &light: scene.lights) {
+            shadow = light->calculateShadowFactor(*sceneIntersector, location + (normal * 0.001));
+        }
+        //return shadedColor;
         return shadedColor * shadow;
     }
     return Color::createBlack();

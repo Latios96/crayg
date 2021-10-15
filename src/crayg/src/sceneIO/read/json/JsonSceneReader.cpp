@@ -32,7 +32,21 @@ void readObj(Scene &scene, rapidjson::Value &obj, std::function<void(std::shared
 
 template<typename T>
 void readSceneObject(Scene &scene, rapidjson::Value &obj, std::vector<std::string> &materialConnections) {
-    readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.objects.push_back(p); });
+    readObj<T>(scene, obj, [&scene](std::shared_ptr<T> p) { scene.addObject(p); });
+    std::string materialConnection = obj.HasMember("material") ? obj["material"].GetString() : "";
+    materialConnections.push_back(materialConnection);
+}
+
+void readTriangleMesh(Scene &scene,
+                      rapidjson::Value &obj,
+                      std::vector<std::string> &materialConnections,
+                      std::vector<std::shared_ptr<TriangleMesh>> &triangleMeshes) {
+    readObj<TriangleMesh>(scene,
+                          obj,
+                          [&scene, &triangleMeshes](std::shared_ptr<TriangleMesh> p) {
+                              scene.oldObjects.push_back(p);
+                              triangleMeshes.push_back(p);
+                          });
     std::string materialConnection = obj.HasMember("material") ? obj["material"].GetString() : "";
     materialConnections.push_back(materialConnection);
 }
@@ -60,7 +74,9 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createWhite());
     scene.addMaterial(defaultMaterial);
 
-    for (rapidjson::Value &obj : array) {
+    std::vector<std::shared_ptr<TriangleMesh>> triangleMeshes;
+
+    for (rapidjson::Value &obj: array) {
         std::string type(obj["type"].GetString());
 
         if (type == "Sphere") {
@@ -68,7 +84,7 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         } else if (type == "GroundPlane") {
             readSceneObject<GroundPlane>(scene, obj, materialConnections);
         } else if (type == "TriangleMesh") {
-            readSceneObject<TriangleMesh>(scene, obj, materialConnections);
+            readTriangleMesh(scene, obj, materialConnections, triangleMeshes);
         } else if (type == "PointCloud") {
             readSceneObject<PointCloud>(scene, obj, materialConnections);
         } else if (type == "Light") {
@@ -84,15 +100,17 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
         } else {
             Logger::warning("Unknown type {}", type);
         }
-
-        for (int i = 0; i < scene.objects.size(); i++) {
-            const std::string materialConnection = materialConnections[i];
-            if (materialConnection.empty()) {
-                scene.objects[i]->setMaterial(defaultMaterial);
-                continue;
-            }
-            scene.objects[i]->setMaterial(scene.materialByName(materialConnection));
+    }
+    for (int i = 0; i < scene.oldObjects.size(); i++) {
+        const std::string materialConnection = materialConnections[i];
+        if (materialConnection.empty()) {
+            scene.oldObjects[i]->setMaterial(defaultMaterial);
+            continue;
         }
+        scene.oldObjects[i]->setMaterial(scene.materialByName(materialConnection));
+    }
+    for (const auto &triangleMesh: triangleMeshes) {
+        triangleMesh->getTriangles(scene.objects);
     }
 }
 

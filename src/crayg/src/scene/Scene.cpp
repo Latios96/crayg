@@ -13,6 +13,7 @@ void Scene::addLight(const std::shared_ptr<Light> &light) {
 }
 void Scene::addObject(const std::shared_ptr<SceneObject> &sceneObject) {
     objects.push_back(sceneObject);
+    oldObjects.push_back(sceneObject);
     if (sceneObject->getMaterial()) {
         if (std::find(materials.begin(), materials.end(), sceneObject->getMaterial()) == materials.end()) {
             addMaterial(sceneObject->getMaterial());

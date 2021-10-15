@@ -19,7 +19,6 @@ Vector3f Triangle::v2() const {
 }
 
 Triangle::Intersection Triangle::intersect(Ray ray) {
-
     return getIntersectionMullerTrumbore(ray);
 }
 
@@ -65,6 +64,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     return {v0v2.scalarProduct(qvec) * invDet, shared_from_this()};
 }
 bool Triangle::isIntersecting(Ray ray) {
+    return getIntersectionMullerTrumbore(ray).imageable != nullptr;
     Vector3f normal = (v1() - v0()).crossProduct((v2() - v0()));
 
     const float scalar = normal.scalarProduct(ray.direction);
@@ -146,10 +146,13 @@ BarycentricCoordinates Triangle::toBarycentricCoordinates(const Vector3f &point)
     return {alpha, beta, gamma};
 }
 BoundingBox Triangle::getBounds() const {
-    BoundingBox boundingBox;
-    boundingBox = boundingBox.unionWith(v0());
-    boundingBox = boundingBox.unionWith(v1());
-    boundingBox = boundingBox.unionWith(v2());
+    BoundingBox boundingBox(v0(), v0());
+    const Vector3f v0_ = v0();
+    const Vector3f v1_ = v1();
+    const Vector3f v2_ = v2();
+    //boundingBox = boundingBox.unionWith(v0_);
+    boundingBox = boundingBox.unionWith(v1_);
+    boundingBox = boundingBox.unionWith(v2_);
     return boundingBox;
 }
 

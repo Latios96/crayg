@@ -28,6 +28,7 @@ class TriangleMesh : public SceneObject {
     std::vector<Vector3f> points;
     std::vector<Vector3f> normals;
     std::vector<int> faceIndexes;
+    void getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles);
     void getTriangles(std::vector<std::shared_ptr<Triangle>> &triangles);
     friend class Triangle;
     void beforeRender() override;

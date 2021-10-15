@@ -14,7 +14,7 @@ TEST_CASE("BvhBuilder/build") {
         BvhBuilder bvhBuilder(scene);
         std::unique_ptr<BvhNode> root = std::unique_ptr<BvhNode>(bvhBuilder.build());
 
-        REQUIRE(*root == BvhNode(BoundingBox(), nullptr, nullptr, std::vector<SceneObject *>()));
+        REQUIRE(*root == BvhNode(BoundingBox(), nullptr, nullptr, std::vector<Imageable *>()));
     }
 
     SECTION("single objects should create only root node") {
@@ -26,7 +26,7 @@ TEST_CASE("BvhBuilder/build") {
 
         REQUIRE(root->boundingBox == BoundingBox({-1, -1, -1}, {1, 1, 1}));
         REQUIRE(root->isLeaf());
-        REQUIRE(root->objects == std::vector<SceneObject *>({sphere.get()}));
+        REQUIRE(root->objects == std::vector<Imageable *>({sphere.get()}));
     }
 
     SECTION("two objects should get their own node each") {
@@ -45,11 +45,11 @@ TEST_CASE("BvhBuilder/build") {
 
         REQUIRE(root->left->boundingBox == BoundingBox({-2, -1, -1}, {0, 1, 1}));
         REQUIRE(root->left->isLeaf());
-        REQUIRE(root->left->objects == std::vector<SceneObject *>({sphere1.get()}));
+        REQUIRE(root->left->objects == std::vector<Imageable *>({sphere1.get()}));
 
         REQUIRE(root->right->boundingBox == BoundingBox({0, -1, -1}, {2, 1, 1}));
         REQUIRE(root->right->isLeaf());
-        REQUIRE(root->right->objects == std::vector<SceneObject *>({sphere2.get()}));
+        REQUIRE(root->right->objects == std::vector<Imageable *>({sphere2.get()}));
     }
 
     SECTION("two objects with the same centroid should be placed in the same node") {
@@ -64,7 +64,7 @@ TEST_CASE("BvhBuilder/build") {
 
         REQUIRE(root->boundingBox == BoundingBox({-0.5, -1.5, -1.5}, {2.5, 1.5, 1.5}));
         REQUIRE(root->isLeaf());
-        REQUIRE(root->objects == std::vector<SceneObject *>({sphere1.get(), sphere2.get()}));
+        REQUIRE(root->objects == std::vector<Imageable *>({sphere1.get(), sphere2.get()}));
     }
 
     SECTION("three objects should be placed in a hierarchy") {
@@ -81,12 +81,12 @@ TEST_CASE("BvhBuilder/build") {
 
         REQUIRE(!root->isLeaf());
         REQUIRE(root->left->isLeaf());
-        REQUIRE(root->left->objects == std::vector<SceneObject *>({sphere1.get()}));
+        REQUIRE(root->left->objects == std::vector<Imageable *>({sphere1.get()}));
         REQUIRE(!root->right->isLeaf());
         REQUIRE(root->right->left->isLeaf());
-        REQUIRE(root->right->left->objects == std::vector<SceneObject *>({sphere2.get()}));
+        REQUIRE(root->right->left->objects == std::vector<Imageable *>({sphere2.get()}));
         REQUIRE(root->right->right->isLeaf());
-        REQUIRE(root->right->right->objects == std::vector<SceneObject *>({sphere3.get()}));
+        REQUIRE(root->right->right->objects == std::vector<Imageable *>({sphere3.get()}));
     }
 
 }

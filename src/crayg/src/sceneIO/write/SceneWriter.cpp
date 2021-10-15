@@ -12,12 +12,12 @@ void SceneWriter::write() {
     serializerImpl.start();
 
     serializerImpl.startSceneObjects();
-    for (const auto &obj : scene.objects) {
+    for (const auto &obj: scene.oldObjects) {
         serializerImpl.startObject();
         obj->serialize(serializerImpl);
         serializerImpl.endObject();
     }
-    for (const auto &light : scene.lights) {
+    for (const auto &light: scene.lights) {
         serializerImpl.startObject();
         light->serialize(serializerImpl);
         serializerImpl.endObject();

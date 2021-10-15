@@ -10,11 +10,11 @@ namespace crayg {
 
 class BvhNode {
  public:
-    BvhNode(const BoundingBox &boundingBox, BvhNode *left, BvhNode *right, const std::vector<SceneObject *> &objects);
+    BvhNode(const BoundingBox &boundingBox, BvhNode *left, BvhNode *right, const std::vector<Imageable *> &objects);
     BoundingBox boundingBox;
     BvhNode *left;
     BvhNode *right;
-    std::vector<SceneObject *> objects;
+    std::vector<Imageable *> objects;
 
     bool isLeaf() const;
 

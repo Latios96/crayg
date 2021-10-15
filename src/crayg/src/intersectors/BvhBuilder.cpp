@@ -26,7 +26,7 @@ SplitInfo getSplitInfo(const BoundingBox &bounds) {
     }
 }
 
-BoundingBox computeBounds(const std::vector<SceneObject *> &objects) {
+BoundingBox computeBounds(const std::vector<Imageable *> &objects) {
     if (objects.empty()) {
         return {};
     }
@@ -37,7 +37,7 @@ BoundingBox computeBounds(const std::vector<SceneObject *> &objects) {
     return boundingBox;
 }
 
-BoundingBox computeCentroidBounds(const std::vector<SceneObject *> &objects) {
+BoundingBox computeCentroidBounds(const std::vector<Imageable *> &objects) {
     if (objects.empty()) {
         return {};
     }
@@ -48,7 +48,7 @@ BoundingBox computeCentroidBounds(const std::vector<SceneObject *> &objects) {
     }
     return boundingBox;
 }
-bool isLeft(const SceneObject *obj, const SplitInfo &splitInfo) {
+bool isLeft(const Imageable *obj, const SplitInfo &splitInfo) {
     if (splitInfo.axis == Axis::X) {
         return obj->getBounds().getCentroid().x < splitInfo.splitPoint;
     } else if (splitInfo.axis == Axis::Y) {
@@ -58,11 +58,14 @@ bool isLeft(const SceneObject *obj, const SplitInfo &splitInfo) {
     }
 }
 
-BvhNode *buildTree(const std::vector<SceneObject *> &objects) {
+BvhNode *buildTree(const std::vector<Imageable *> &objects) {
     const auto bounds = computeBounds(objects);
-    std::vector<SceneObject *> left, right;
+    std::vector<Imageable *> left, right;
     const BoundingBox centroidBounds = computeCentroidBounds(objects);
     const SplitInfo splitInfo = getSplitInfo(centroidBounds);
+    /*if(objects.size() < 1000){
+        return new BvhNode(bounds, nullptr, nullptr, objects);
+    }*/
     for (const auto &obj: objects) {
         if (isLeft(obj, splitInfo)) {
             left.push_back(obj);
@@ -77,11 +80,11 @@ BvhNode *buildTree(const std::vector<SceneObject *> &objects) {
     return new BvhNode(bounds,
                        !left.empty() ? buildTree(left) : nullptr,
                        !right.empty() ? buildTree(right) : nullptr,
-                       std::vector<SceneObject *>());
+                       std::vector<Imageable *>());
 }
 
 BvhNode *BvhBuilder::build() const {
-    std::vector<SceneObject *> objects;
+    std::vector<Imageable *> objects;
     for (auto &obj: scene.objects) {
         objects.push_back(obj.get());
     }
