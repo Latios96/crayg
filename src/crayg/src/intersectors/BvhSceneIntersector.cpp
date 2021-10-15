@@ -35,7 +35,6 @@ Imageable::Intersection intersectTree(const Ray &ray, const BvhNode *node) {
         Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
         for (const auto &intersectable: node->objects) {
             Imageable::Intersection intersection = intersectable->intersect(ray);
-
             hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
         }
         return hitIntersection;

@@ -16,9 +16,7 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
 
         for (std::shared_ptr<Triangle> &triangle : triangles) {
             Imageable::Intersection intersection = triangle->intersect(ray);
-            if (intersection.rayParameter < hitIntersection.rayParameter && intersection.rayParameter > 0) {
-                hitIntersection = intersection;
-            }
+            hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
         }
         return hitIntersection;
     } else {

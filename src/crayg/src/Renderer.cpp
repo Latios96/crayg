@@ -92,8 +92,7 @@ void Renderer::init() {
     Logger::info("Creating SceneIntersector...");
     BvhBuilder bvhBuilder(scene);
     BvhNode *root = bvhBuilder.build();
-    //sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
-    sceneIntersector = std::make_shared<SceneIntersector>(scene);
+    sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
