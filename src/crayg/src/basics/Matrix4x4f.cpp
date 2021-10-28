@@ -64,6 +64,7 @@ Matrix4x4f::Matrix4x4f(float v00,
     values[3][2] = v23;
     values[3][3] = v33;
 }
+
 Matrix4x4f Matrix4x4f::operator*(const Matrix4x4f &vec) const {
     Matrix4x4f r;
     for (int i = 0; i < 4; i++) {
@@ -174,6 +175,13 @@ Matrix4x4f Matrix4x4f::transpose() const {
                       values[1][3],
                       values[2][3],
                       values[3][3]);
+}
+Matrix4x4f Matrix4x4f::translation(float x, float y, float z) {
+    Matrix4x4f matrix4X4f;
+    matrix4X4f.values[0][3] = x;
+    matrix4X4f.values[1][3] = y;
+    matrix4X4f.values[2][3] = z;
+    return matrix4X4f;
 }
 
 Matrix4x4f::Matrix4x4f() = default;
