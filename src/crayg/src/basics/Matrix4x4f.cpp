@@ -183,6 +183,13 @@ Matrix4x4f Matrix4x4f::translation(float x, float y, float z) {
     matrix4X4f.values[2][3] = z;
     return matrix4X4f;
 }
+Matrix4x4f Matrix4x4f::scale(float x, float y, float z) {
+    Matrix4x4f matrix4X4f;
+    matrix4X4f.values[0][0] = x;
+    matrix4X4f.values[1][1] = y;
+    matrix4X4f.values[2][2] = z;
+    return matrix4X4f;
+}
 
 Matrix4x4f::Matrix4x4f() = default;
 

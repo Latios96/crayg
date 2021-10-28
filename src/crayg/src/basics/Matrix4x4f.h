@@ -31,6 +31,7 @@ class Matrix4x4f {
                float v23,
                float v33);
     static Matrix4x4f translation(float x, float y, float z);
+    static Matrix4x4f scale(float x, float y, float z);
     static Matrix4x4f rotateX(float angleInDegrees);
     static Matrix4x4f rotateY(float angleInDegrees);
     static Matrix4x4f rotateZ(float angleInDegrees);
