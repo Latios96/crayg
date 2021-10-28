@@ -1,0 +1,20 @@
+//
+// Created by Jan on 28.10.2021.
+//
+
+#ifndef CRAYG_SRC_CRAYGUSD_SRC_CONVERSIONS_H_
+#define CRAYG_SRC_CRAYGUSD_SRC_CONVERSIONS_H_
+
+#include <pxr/base/gf/matrix4d.h>
+#include <basics/Matrix4x4f.h>
+
+namespace crayg {
+
+class Conversions {
+ public:
+    static Matrix4x4f convert(const pxr::GfMatrix4d &matrix);
+};
+
+};
+
+#endif //CRAYG_SRC_CRAYGUSD_SRC_CONVERSIONS_H_
