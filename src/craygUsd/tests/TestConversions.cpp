@@ -39,4 +39,14 @@ TEST_CASE("ConvertMatrix4d") {
     }
 }
 
+TEST_CASE("ConvertVec3f") {
+    SECTION("should convert Vec3f") {
+        const pxr::GfVec3f vectorToConvert(1, 2, 3);
+
+        const Vector3f convertedVector = Conversions::convert(vectorToConvert);
+
+        REQUIRE(convertedVector == Vector3f(1, 2, 3));
+    }
+}
+
 }

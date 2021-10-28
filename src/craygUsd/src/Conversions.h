@@ -13,6 +13,7 @@ namespace crayg {
 class Conversions {
  public:
     static Matrix4x4f convert(const pxr::GfMatrix4d &matrix);
+    static Vector3f convert(const pxr::GfVec3f &vector);
 };
 
 };
