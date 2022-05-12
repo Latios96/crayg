@@ -29,5 +29,8 @@ Matrix4x4f Conversions::convert(const pxr::GfMatrix4d &matrix) {
 Vector3f Conversions::convert(const pxr::GfVec3f &vector) {
     return {vector[0], vector[1], vector[2]};
 }
+Vector3f Conversions::convert(const pxr::GfVec3d &vector) {
+    return {static_cast<float>(vector[0]), static_cast<float>(vector[1]), static_cast<float>(vector[2])};
+}
 
 };

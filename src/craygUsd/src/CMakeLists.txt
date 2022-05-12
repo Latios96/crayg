@@ -1,4 +1,8 @@
-add_library(crayg_usd STATIC Conversions.h Conversions.cpp)
+add_library(crayg_usd STATIC
+        Conversions.h
+        Conversions.cpp
+        CameraTranslator.h
+        CameraTranslator.cpp)
 
 target_include_directories(crayg_usd PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})
