@@ -36,6 +36,7 @@ openimageio:with_openvdb=False
 openimageio:with_ptex=False
 openimageio:with_raw=False
 openimageio:with_libjpeg=libjpeg-turbo
+openimageio:with_openjpeg=False
 fmt:header_only=True
 spdlog:header_only=True
 
