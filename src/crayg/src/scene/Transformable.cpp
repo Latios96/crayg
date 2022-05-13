@@ -24,6 +24,9 @@ const Transform Transformable::getTransform() const {
 Transformable::Transformable(const Transform &transform) : transform(transform) {
 
 }
+void Transformable::setTransform(const Transform &transform) {
+    Transformable::transform = transform;
+}
 
 }
 

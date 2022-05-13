@@ -20,6 +20,7 @@ class Transformable {
     void setPosition(const Vector3f &position);
 
     const Transform getTransform() const;
+    void setTransform(const Transform &transform);
 
  protected:
     Transform transform;
