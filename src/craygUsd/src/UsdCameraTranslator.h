@@ -4,7 +4,8 @@
 
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
-#define NOMINMAX
+
+#include "CraygUsdBase.h"
 #include <pxr/usd/usdGeom/camera.h>
 #include <scene/Camera.h>
 
