@@ -3,6 +3,7 @@
 //
 
 #include "Camera.h"
+#include "utils/ToStringHelper.h"
 
 namespace crayg {
 
@@ -54,7 +55,22 @@ float Camera::getFocalLength() const {
 float Camera::getFilmbackSize() const {
     return filmbackSize;
 }
-
+bool Camera::operator==(const Camera &rhs) const {
+    return position == rhs.position &&
+        userUpVector == rhs.userUpVector &&
+        centerOfInterest == rhs.centerOfInterest &&
+        focalLength == rhs.focalLength &&
+        filmbackSize == rhs.filmbackSize;
+}
+bool Camera::operator!=(const Camera &rhs) const {
+    return !(rhs == *this);
+}
+std::ostream &operator<<(std::ostream &os, const Camera &camera) {// TODO use ToStringHelper
+    os << "Camera position: " << camera.position << " userUpVector: "
+       << camera.userUpVector << " centerOfInterest: " << camera.centerOfInterest << " focalLength: "
+       << camera.focalLength << " filmbackSize: " << camera.filmbackSize;
+    return os;
+}
 }
 
 

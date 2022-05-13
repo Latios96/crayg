@@ -5,6 +5,7 @@
 #ifndef CRAYG_CAMERA_H
 #define CRAYG_CAMERA_H
 
+#include <ostream>
 #include "basics/Vector3f.h"
 #include "sceneIO/Serializable.h"
 
@@ -45,6 +46,10 @@ class Camera : public Serializable {
     void serialize(Serializer &serializer) override;
 
     void deserialize(Deserializer &deserializer) override;
+
+    bool operator==(const Camera &rhs) const;
+    bool operator!=(const Camera &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const Camera &camera);
 };
 
 }
