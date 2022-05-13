@@ -3,6 +3,7 @@
 //
 
 #include "BvhBuilder.h"
+#include "Logger.h"
 namespace crayg {
 
 enum Axis {
@@ -84,11 +85,14 @@ BvhNode *buildTree(const std::vector<Imageable *> &objects) {
 }
 
 BvhNode *BvhBuilder::build() const {
+    Logger::info("Building BVH..");
     std::vector<Imageable *> objects;
     for (auto &obj: scene.objects) {
         objects.push_back(obj.get());
     }
-    return buildTree(objects);
+    auto bvh = buildTree(objects);
+    Logger::info("Building BVH done.");
+    return bvh;
 }
 BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
 }
