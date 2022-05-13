@@ -5,6 +5,7 @@
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_CONVERSIONS_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_CONVERSIONS_H_
 
+#define NOMINMAX
 #include <pxr/base/gf/matrix4d.h>
 #include <basics/Matrix4x4f.h>
 

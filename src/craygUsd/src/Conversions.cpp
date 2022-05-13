@@ -5,26 +5,26 @@
 #include "Conversions.h"
 namespace crayg {
 
-const Matrix4x4f MIRROR_Z = Matrix4x4f::scale(1, 1, -1);
-
+const Matrix4x4f BASE_TRANSFORM = Matrix4x4f::scale(1, 1, -1);
+const Matrix4x4f BASE_TRANSFORM_INVERTED = Matrix4x4f::scale(1, 1, -1).invert();
 
 Matrix4x4f Conversions::convert(const pxr::GfMatrix4d &matrix) {
-    return Matrix4x4f(static_cast<float>(matrix[0][0]),
-                      static_cast<float>(matrix[1][0]),
-                      static_cast<float>(matrix[2][0]),
-                      static_cast<float>(matrix[3][0]),
-                      static_cast<float>(matrix[0][1]),
-                      static_cast<float>(matrix[1][1]),
-                      static_cast<float>(matrix[2][1]),
-                      static_cast<float>(matrix[3][1]),
-                      static_cast<float>(matrix[0][2]),
-                      static_cast<float>(matrix[1][2]),
-                      static_cast<float>(matrix[2][2]),
-                      static_cast<float>(matrix[3][2]),
-                      static_cast<float>(matrix[0][3]),
-                      static_cast<float>(matrix[1][3]),
-                      static_cast<float>(matrix[2][3]),
-                      static_cast<float>(matrix[3][3])) * MIRROR_Z;
+    return BASE_TRANSFORM * Matrix4x4f(static_cast<float>(matrix[0][0]),
+                                       static_cast<float>(matrix[1][0]),
+                                       static_cast<float>(matrix[2][0]),
+                                       static_cast<float>(matrix[3][0]),
+                                       static_cast<float>(matrix[0][1]),
+                                       static_cast<float>(matrix[1][1]),
+                                       static_cast<float>(matrix[2][1]),
+                                       static_cast<float>(matrix[3][1]),
+                                       static_cast<float>(matrix[0][2]),
+                                       static_cast<float>(matrix[1][2]),
+                                       static_cast<float>(matrix[2][2]),
+                                       static_cast<float>(matrix[3][2]),
+                                       static_cast<float>(matrix[0][3]),
+                                       static_cast<float>(matrix[1][3]),
+                                       static_cast<float>(matrix[2][3]),
+                                       static_cast<float>(matrix[3][3])) * BASE_TRANSFORM_INVERTED;
 }
 Vector3f Conversions::convert(const pxr::GfVec3f &vector) {
     return {vector[0], vector[1], vector[2]};

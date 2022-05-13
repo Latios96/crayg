@@ -16,7 +16,7 @@ TEST_CASE("ConvertMatrix4d") {
         matrix.SetIdentity();
         Matrix4x4f expectedMatrix(1, 0, 0, 0,
                                   0, 1, 0, 0,
-                                  0, 0, -1, 0,
+                                  0, 0, 1, 0,
                                   0, 0, 0, 1);
 
         const Matrix4x4f convertedMatrix = Conversions::convert(matrix);
@@ -30,12 +30,12 @@ TEST_CASE("ConvertMatrix4d") {
         matrix.SetTranslate({1, 2, 3});
         Matrix4x4f expectedMatrix(1, 0, 0, 1,
                                   0, 1, 0, 2,
-                                  0, 0, -1, 3,
+                                  0, 0, 1, -3,
                                   0, 0, 0, 1);
 
         const Matrix4x4f convertedMatrix = Conversions::convert(matrix);
 
-        REQUIRE(convertedMatrix.isEqualTo(expectedMatrix, 0.000f));
+        REQUIRE(convertedMatrix == expectedMatrix);
     }
 }
 
