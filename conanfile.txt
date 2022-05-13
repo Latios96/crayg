@@ -9,7 +9,7 @@ cli11/2.1.1
 boost/1.78.0
 openimageio/2.3.7.2
 tinyobjloader/1.0.6
-tbb/2020.3
+onetbb/2020.3
 qt/5.15.2
 
 zlib/1.2.12
