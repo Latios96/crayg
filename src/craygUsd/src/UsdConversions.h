@@ -2,8 +2,8 @@
 // Created by Jan on 28.10.2021.
 //
 
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_CONVERSIONS_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_CONVERSIONS_H_
+#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_
+#define CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_
 
 #define NOMINMAX
 #include <pxr/base/gf/matrix4d.h>
@@ -11,7 +11,7 @@
 
 namespace crayg {
 
-class Conversions {
+class UsdConversions {
  public:
     static Matrix4x4f convert(const pxr::GfMatrix4d &matrix);
     static Vector3f convert(const pxr::GfVec3f &vector);
@@ -20,4 +20,4 @@ class Conversions {
 
 };
 
-#endif //CRAYG_SRC_CRAYGUSD_SRC_CONVERSIONS_H_
+#endif //CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_

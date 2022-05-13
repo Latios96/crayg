@@ -5,7 +5,7 @@
 
 #include <catch2/catch.hpp>
 #include <pxr/base/gf/matrix4d.h>
-#include <Conversions.h>
+#include <UsdConversions.h>
 
 namespace crayg {
 
@@ -19,7 +19,7 @@ TEST_CASE("ConvertMatrix4d") {
                                   0, 0, 1, 0,
                                   0, 0, 0, 1);
 
-        const Matrix4x4f convertedMatrix = Conversions::convert(matrix);
+        const Matrix4x4f convertedMatrix = UsdConversions::convert(matrix);
 
         REQUIRE(convertedMatrix == expectedMatrix);
     }
@@ -33,7 +33,7 @@ TEST_CASE("ConvertMatrix4d") {
                                   0, 0, 1, -3,
                                   0, 0, 0, 1);
 
-        const Matrix4x4f convertedMatrix = Conversions::convert(matrix);
+        const Matrix4x4f convertedMatrix = UsdConversions::convert(matrix);
 
         REQUIRE(convertedMatrix == expectedMatrix);
     }
@@ -43,9 +43,17 @@ TEST_CASE("ConvertVec3f") {
     SECTION("should convert Vec3f") {
         const pxr::GfVec3f vectorToConvert(1, 2, 3);
 
-        const Vector3f convertedVector = Conversions::convert(vectorToConvert);
+        const Vector3f convertedVector = UsdConversions::convert(vectorToConvert);
 
-        REQUIRE(convertedVector == Vector3f(1, 2, 3));
+        REQUIRE(convertedVector == Vector3f(1, 2, -3));
+    }
+
+    SECTION("should convert Vec3d") {
+        const pxr::GfVec3d vectorToConvert(1, 2, 3);
+
+        const Vector3f convertedVector = UsdConversions::convert(vectorToConvert);
+
+        REQUIRE(convertedVector == Vector3f(1, 2, -3));
     }
 }
 

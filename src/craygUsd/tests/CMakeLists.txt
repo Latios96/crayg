@@ -2,7 +2,7 @@
 set(TARGET_NAME crayg_usd_tests)
 
 add_executable(${TARGET_NAME}
-        main.cpp TestConversions.cpp)
+        main.cpp TestUsdConversions.cpp TestUsdCameraTranslator.cpp)
 
 target_link_libraries(${TARGET_NAME}
         PUBLIC crayg_usd)
