@@ -6,6 +6,7 @@ add_executable(${TARGET_NAME}
         TestUsdCameraTranslator.cpp
         TestUsdConversions.cpp
         TestUsdMeshTranslator.cpp
+        TestUsdSphereLightTranslator.cpp
         )
 
 target_link_libraries(${TARGET_NAME}
