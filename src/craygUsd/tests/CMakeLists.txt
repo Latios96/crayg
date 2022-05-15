@@ -5,7 +5,8 @@ add_executable(${TARGET_NAME}
         main.cpp
         TestUsdCameraTranslator.cpp
         TestUsdConversions.cpp
-        TestUsdMeshTranslator.cpp)
+        TestUsdMeshTranslator.cpp
+        )
 
 target_link_libraries(${TARGET_NAME}
         PUBLIC crayg_usd)

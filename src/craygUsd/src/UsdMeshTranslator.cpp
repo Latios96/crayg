@@ -7,6 +7,7 @@
 #include "UsdMeshTranslator.h"
 #include "UsdUtils.h"
 #include "UsdConversions.h"
+#include "UsdTranslatorUtils.h"
 
 namespace crayg {
 
@@ -14,7 +15,7 @@ crayg::UsdMeshTranslator::UsdMeshTranslator(const pxr::UsdGeomMesh &usdGeomMesh)
 
 std::shared_ptr<TriangleMesh> crayg::UsdMeshTranslator::translate() {
     auto triangleMesh = std::make_shared<crayg::TriangleMesh>();
-    translateTransform(triangleMesh);
+    UsdTranslatorUtils::translateTransform(*triangleMesh, usdGeomMesh);
 
     pxr::VtVec3iArray triangleIndices;
     computeTriangleIndices(triangleIndices);
@@ -23,12 +24,6 @@ std::shared_ptr<TriangleMesh> crayg::UsdMeshTranslator::translate() {
     translatePoints(triangleMesh);
 
     return triangleMesh;
-}
-void crayg::UsdMeshTranslator::translateTransform(std::shared_ptr<TriangleMesh> &triangleMesh) const {
-    pxr::GfMatrix4d matrix;
-    bool resetsXformStack = false;
-    usdGeomMesh.GetLocalTransformation(&matrix, &resetsXformStack);
-    triangleMesh->setTransform(Transform(UsdConversions::convert(matrix)));
 }
 void crayg::UsdMeshTranslator::translateFaceIndices(std::shared_ptr<TriangleMesh> &triangleMesh,
                                                     pxr::VtVec3iArray &triangleIndices) const {

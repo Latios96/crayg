@@ -1,10 +1,16 @@
 add_library(crayg_usd STATIC
+        CraygUsdBase.h
         UsdCameraTranslator.cpp
         UsdCameraTranslator.h
         UsdConversions.cpp
         UsdConversions.h
+        UsdMeshTranslator.cpp
+        UsdMeshTranslator.h
+        UsdSphereLightTranslator.cpp
+        UsdSphereLightTranslator.h
+        UsdTranslatorUtils.cpp
+        UsdTranslatorUtils.h
         UsdUtils.h
-        CraygUsdBase.h
         )
 
 target_include_directories(crayg_usd PUBLIC

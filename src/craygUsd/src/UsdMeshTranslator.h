@@ -20,7 +20,6 @@ class UsdMeshTranslator {
     void computeTriangleIndices(pxr::VtVec3iArray &triangleIndices) const;
     void translatePoints(std::shared_ptr<TriangleMesh> &triangleMesh) const;
     void translateFaceIndices(std::shared_ptr<TriangleMesh> &triangleMesh, pxr::VtVec3iArray &triangleIndices) const;
-    void translateTransform(std::shared_ptr<TriangleMesh> &triangleMesh) const;
 };
 
 }
