@@ -1,103 +1,13 @@
 name: Github Actions CI
 
 on: [push]
-
 jobs:
-  build-windows:
-    name:  windows-2019
-    runs-on:  windows-2019
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.7
-      - name: install conan
-        run: |
-          pip install conan
-          conan --version
-      - name: add remotes
-        run: |
-          conan remote list
-          python scripts/add_conan_remotes.py
-          conan remote list
-      - name: conan login
-        run: conan user ci_github_actions -p -r=framebffr
-        env:
-          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
-      - name: build dependencies
-        run: conan install . --build outdated
-      - name: upload dependencies
-        run: conan upload * --all --confirm -r=framebffr --parallel
-      - name: prepare build
-        run: mkdir build
-      - name: run CMake
-        working-directory: build
-        run: cmake .. -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 16 2019"
-        shell: cmd
-      - name: build
-        working-directory: build
-        run: cmake --build . --config Release -- /M:%NUMBER_OF_PROCESSORS%
-        shell: cmd
-      - name: run tests
-        working-directory: build
-        run: ctest -C Release -V
-        shell: cmd
-      - name: create package
-        working-directory: build
-        run: cmake --build . --config Release --target createDistribution
-        shell: cmd
-  build-linux:
-    name: ubuntu-20.04
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.7
-      - name: install apt packages
-        run: |
-          sudo apt-get update
-          sudo apt-get install libgl-dev xorg-dev libx11-xcb-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev xkb-data libx11-dev libx11-xcb-dev libfontenc-dev libice-dev libsm-dev libxau-dev libxaw7-dev libxcomposite-dev libxcursor-dev libxdamage-dev libxdmcp-dev libxext-dev libxfixes-dev libxft-dev libxi-dev libxinerama-dev libxkbfile-dev libxmu-dev libxmuu-dev libxpm-dev libxrandr-dev libxrender-dev libxres-dev libxss-dev libxt-dev libxtst-dev libxv-dev libxvmc-dev libxxf86vm-dev xtrans-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev xkb-data libxcb-dri3-dev uuid-dev libxcb-util-dev
-      - name: install conan
-        run: |
-          pip install conan
-          conan --version
-      - name: add remotes
-        run: |
-          conan remote list
-          python scripts/add_conan_remotes.py
-          conan remote list
-      - name: conan login
-        run: conan user ci_github_actions -p -r=framebffr
-        env:
-          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
-      - name: setup conan profile
-        run: |
-          conan profile new default --detect
-          conan profile update settings.compiler.libcxx=libstdc++11 default
-      - name: build dependencies
-        run: conan install . --build outdated
-      - name: upload dependencies
-        run: conan upload "*" --all --confirm -r=framebffr --parallel
-      - name: prepare build
-        run: mkdir build
-      - name: run CMake
-        working-directory: build
-        run: cmake .. -DCMAKE_BUILD_TYPE=Release
-      - name: build
-        working-directory: build
-        run: make -j 4
-      - name: run tests
-        working-directory: build
-        run: ctest -C Release -V
-      - name: create package
-        working-directory: build
-        run: make createDistribution
-  build-macos:
-    name: Mac OS
-    runs-on: macos-latest
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
+    name: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
@@ -121,21 +31,30 @@ jobs:
         run: conan user ci_github_actions -p -r=framebffr
         env:
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
-      - name: build dependencies
-        run: conan install . --build outdated
-      - name: upload dependencies
-        run: conan upload "*" --all --confirm -r=framebffr --parallel
+      - name: setup conan profile
+        if: runner.os != 'Linux'
+        run: |
+          conan profile new default --detect
+          conan profile update settings.compiler.libcxx=libstdc++11 default
       - name: prepare build
         run: mkdir build
       - name: run CMake
         working-directory: build
         run: cmake .. -DCMAKE_BUILD_TYPE=Release
+      - name: upload dependencies
+        run: conan upload "*" --all --confirm -r=framebffr --parallel
       - name: build
         working-directory: build
+        if: runner.os != 'Windows'
         run: make -j 4
+      - name: build
+        if: runner.os == 'Windows'
+        working-directory: build
+        run: cmake --build . --config Release -- /M:%NUMBER_OF_PROCESSORS%
+        shell: cmd
       - name: run tests
         working-directory: build
         run: ctest -C Release -V
       - name: create package
         working-directory: build
-        run: make createDistribution
+        run: cmake --build . --config Release --target createDistribution
