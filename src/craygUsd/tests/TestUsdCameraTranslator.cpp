@@ -7,6 +7,7 @@
 #include <UsdCameraTranslator.h>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
+#include <pxr/usd/usdGeom/xform.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 #include <iostream>
 
@@ -48,6 +49,17 @@ TEST_CASE("CameraTranslatorTranslate") {
                                                               35,
                                                               36);
         REQUIRE(*camera == *expectedCamera);
+    }
+
+    SECTION("should translate camera with translation on its parents correctly") {
+        auto parent = pxr::UsdGeomXform::Define(stage, pxr::SdfPath("/cam_grp"));
+        pxr::UsdGeomXformCommonAPI(parent).SetScale(pxr::GfVec3f(1, 2, 3));
+        pxr::UsdGeomXformCommonAPI(usdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3));
+
+        UsdCameraTranslator cameraTranslator(usdCamera);
+        auto camera = cameraTranslator.translate();
+
+        REQUIRE(camera->getPosition() == Vector3f(1, 2, -3));
     }
 
 }

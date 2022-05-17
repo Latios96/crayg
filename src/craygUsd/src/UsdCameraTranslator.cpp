@@ -12,9 +12,7 @@ namespace crayg {
 UsdCameraTranslator::UsdCameraTranslator(const pxr::UsdGeomCamera &camera) : usdCamera(camera) {}
 
 std::shared_ptr<Camera> UsdCameraTranslator::translate() {
-    pxr::GfMatrix4d matrix;
-    bool resetsXformStack = false;
-    usdCamera.GetLocalTransformation(&matrix, &resetsXformStack);
+    const pxr::GfMatrix4d matrix = usdCamera.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default());
 
     const Vector3f position = UsdConversions::convert(matrix.ExtractTranslation());
 
