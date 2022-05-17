@@ -38,6 +38,12 @@ class Color {
         return {1, 1, 1};
     }
 
+    static Color createRandom() {
+        return {((float) rand() / (RAND_MAX)),
+                ((float) rand() / (RAND_MAX)),
+                ((float) rand() / (RAND_MAX))};
+    }
+
     /**
      * Adds the two colors component-wise, r+r, g+g, b+b
      * @param otherColor
