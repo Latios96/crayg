@@ -36,7 +36,7 @@ class StopWatch {
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
 
-        outputCallback(fmt::format("{} took {} seconds.", name, microseconds * 0.0000006));
+        outputCallback(fmt::format("{} took {:.2f} seconds.", name, microseconds * 0.0000006));
     };
  private:
     std::chrono::steady_clock::time_point begin;
