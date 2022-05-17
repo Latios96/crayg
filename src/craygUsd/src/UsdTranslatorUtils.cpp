@@ -4,11 +4,12 @@
 
 #include "UsdTranslatorUtils.h"
 #include "UsdConversions.h"
+#include "Logger.h"
+#include "pxr/base/gf/rotation.h"
 
 void crayg::UsdTranslatorUtils::translateTransform(crayg::Transformable &transformable,
                                                    pxr::UsdGeomXformable &usdGeomXformable) {
-    pxr::GfMatrix4d matrix;
-    bool resetsXformStack = false;
-    usdGeomXformable.GetLocalTransformation(&matrix, &resetsXformStack);
-    transformable.setTransform(Transform(UsdConversions::convert(matrix)));
+    const pxr::GfMatrix4d &d = usdGeomXformable.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default());
+    const Transform &transform = Transform(UsdConversions::convert(d));
+    transformable.setTransform(transform);
 }
