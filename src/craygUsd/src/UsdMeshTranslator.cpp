@@ -30,8 +30,8 @@ void crayg::UsdMeshTranslator::translateFaceIndices(std::shared_ptr<TriangleMesh
     triangleMesh->faceIndexes.reserve(triangleIndices.size());
     for (const auto &faceIndex: triangleIndices) {
         triangleMesh->faceIndexes.push_back(faceIndex[0]);
-        triangleMesh->faceIndexes.push_back(faceIndex[1]);
         triangleMesh->faceIndexes.push_back(faceIndex[2]);
+        triangleMesh->faceIndexes.push_back(faceIndex[1]);
     }
 }
 void crayg::UsdMeshTranslator::translatePoints(std::shared_ptr<TriangleMesh> &triangleMesh) const {
@@ -39,7 +39,7 @@ void crayg::UsdMeshTranslator::translatePoints(std::shared_ptr<TriangleMesh> &tr
     usdGeomMesh.GetPointsAttr().Get(&points);
     triangleMesh->points.reserve(points.size());
     for (const auto &point: points) {
-        triangleMesh->points.emplace_back(point[0], point[1], point[2]);
+        triangleMesh->points.emplace_back(point[0], point[1], -point[2]);
     }
 }
 

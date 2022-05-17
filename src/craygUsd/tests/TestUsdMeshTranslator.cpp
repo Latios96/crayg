@@ -31,8 +31,8 @@ TEST_CASE("MeshTranslatorTranslate") {
 
         REQUIRE(triangleMesh->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(triangleMesh->points
-                    == std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}}));
-        REQUIRE(triangleMesh->faceIndexes == std::vector<int>({0, 1, 3, 0, 3, 2}));
+                    == std::vector<Vector3f>({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
+        REQUIRE(triangleMesh->faceIndexes == std::vector<int>({0, 3, 1, 0, 2, 3}));
     }
 
     SECTION("should translate triangle plane") {
@@ -50,8 +50,8 @@ TEST_CASE("MeshTranslatorTranslate") {
 
         REQUIRE(triangleMesh->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(triangleMesh->points
-                    == std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}}));
-        REQUIRE(triangleMesh->faceIndexes == std::vector<int>({0, 1, 2, 2, 1, 3}));
+                    == std::vector<Vector3f>({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
+        REQUIRE(triangleMesh->faceIndexes == std::vector<int>({0, 2, 1, 2, 3, 1}));
     }
 
 }
