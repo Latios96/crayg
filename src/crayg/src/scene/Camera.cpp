@@ -65,12 +65,7 @@ bool Camera::operator==(const Camera &rhs) const {
 bool Camera::operator!=(const Camera &rhs) const {
     return !(rhs == *this);
 }
-std::ostream &operator<<(std::ostream &os, const Camera &camera) {// TODO use ToStringHelper
-    os << "Camera position: " << camera.position << " userUpVector: "
-       << camera.userUpVector << " centerOfInterest: " << camera.centerOfInterest << " focalLength: "
-       << camera.focalLength << " filmbackSize: " << camera.filmbackSize;
-    return os;
-}
+
 }
 
 

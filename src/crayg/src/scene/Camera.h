@@ -8,6 +8,7 @@
 #include <ostream>
 #include "basics/Vector3f.h"
 #include "sceneIO/Serializable.h"
+#include "spdlog/fmt/ostr.h"
 
 namespace crayg {
 
@@ -49,7 +50,14 @@ class Camera : public Serializable {
 
     bool operator==(const Camera &rhs) const;
     bool operator!=(const Camera &rhs) const;
-    friend std::ostream &operator<<(std::ostream &os, const Camera &camera);
+
+    template<typename OStream>
+    friend OStream &operator<<(OStream &os, const Camera &camera) {
+        os << "Camera position: " << camera.position << " userUpVector: "
+           << camera.userUpVector << " centerOfInterest: " << camera.centerOfInterest << " focalLength: "
+           << camera.focalLength << " filmbackSize: " << camera.filmbackSize;
+        return os;
+    }
 };
 
 }
