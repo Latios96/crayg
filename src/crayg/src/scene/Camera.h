@@ -9,6 +9,7 @@
 #include "basics/Vector3f.h"
 #include "sceneIO/Serializable.h"
 #include "spdlog/fmt/ostr.h"
+#include "utils/ToStringHelper.h"
 
 namespace crayg {
 
@@ -53,9 +54,13 @@ class Camera : public Serializable {
 
     template<typename OStream>
     friend OStream &operator<<(OStream &os, const Camera &camera) {
-        os << "Camera position: " << camera.position << " userUpVector: "
-           << camera.userUpVector << " centerOfInterest: " << camera.centerOfInterest << " focalLength: "
-           << camera.focalLength << " filmbackSize: " << camera.filmbackSize;
+        os << ToStringHelper("Camera")
+            .addMember("position", camera.position)
+            .addMember("userUpVector", camera.userUpVector)
+            .addMember("centerOfInterest", camera.centerOfInterest)
+            .addMember("focalLength", camera.focalLength)
+            .addMember("filmbackSize", camera.filmbackSize)
+            .finish();
         return os;
     }
 };

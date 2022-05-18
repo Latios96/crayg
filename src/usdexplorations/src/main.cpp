@@ -42,8 +42,6 @@ int main(int argc, char *argv[]) {
     const int cameraIndexToRender = 0;
     int cameraIndex = 0;
 
-    crayg::Logger::setLevel(crayg::Logger::LevelEnum::debug);
-
     for (pxr::UsdPrim prim: stage->TraverseAll()) {
         if (prim.IsA<pxr::UsdGeomMesh>()) {
             crayg::Logger::debug("Translating mesh {}", prim.GetPath().GetString());
@@ -61,7 +59,7 @@ int main(int argc, char *argv[]) {
             if (cameraIndex == cameraIndexToRender) {
                 crayg::Logger::debug("Using camera {}", prim.GetPath().GetString());
                 auto camera = crayg::UsdCameraTranslator(pxr::UsdGeomCamera(prim)).translate();
-                crayg::Logger::debug("{}", camera->getPosition());
+                crayg::Logger::debug("{}", *camera);
                 scene.camera = camera;
             }
             cameraIndex++;
