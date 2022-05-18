@@ -21,9 +21,9 @@ void UsdStageTranslator::translateStageToScene(Scene &scene) {
 
     bool translatedCamera = false;
     for (pxr::UsdPrim prim: stage.TraverseAll()) {
-        if (prim.IsA<pxr::UsdGeomMesh>()) {
+        if (prim.IsA<pxr::UsdGeomMesh>() && primIsVisible(prim)) {
             translateUsdGeomMesh(scene, defaultMaterial, prim);
-        } else if (prim.IsA<pxr::UsdLuxSphereLight>()) {
+        } else if (prim.IsA<pxr::UsdLuxSphereLight>() && primIsVisible(prim)) {
             translateSphereLight(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomCamera>() && !translatedCamera) {
             translateCamera(scene, prim);
@@ -54,6 +54,10 @@ void UsdStageTranslator::translateCamera(Scene &scene, const pxr::UsdPrim &prim)
     Logger::info("Using camera {}", prim.GetPath().GetString());
     auto camera = UsdCameraTranslator(pxr::UsdGeomCamera(prim)).translate();
     scene.camera = camera;
+}
+
+bool UsdStageTranslator::primIsVisible(pxr::UsdPrim &prim) {
+    return pxr::UsdGeomImageable(prim).ComputeVisibility() != pxr::TfToken("invisible");
 }
 
 }
