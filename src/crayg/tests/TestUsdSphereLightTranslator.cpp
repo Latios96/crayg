@@ -4,7 +4,7 @@
 
 
 #include <catch2/catch.hpp>
-#include <UsdSphereLightTranslator.h>
+#include "sceneIO/read/usd/UsdSphereLightTranslator.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdLux/sphereLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>

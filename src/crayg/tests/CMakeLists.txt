@@ -40,6 +40,12 @@ set(UNIT_TEST_LIST
         TestTriangle.cpp
         TestTriangleMesh.cpp
         TestUnitImageSampler.cpp
+        TestUsdCameraTranslator.cpp
+        TestUsdConversions.cpp
+        TestUsdMeshTranslator.cpp
+        TestUsdSphereLightTranslator.cpp
+        TestUsdStageTranslator.cpp
+        TestUsdTranslatorUtils.cpp
         TestVector.cpp
         )
 

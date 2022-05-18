@@ -10,10 +10,10 @@
 #include "Renderer.h"
 #include "utils/ImagePathResolver.h"
 #include "scene/DiffuseMaterial.h"
-#include "UsdMeshTranslator.h"
-#include "UsdSphereLightTranslator.h"
-#include "UsdCameraTranslator.h"
-#include "UsdStageTranslator.h"
+#include "sceneIO/read/usd/UsdMeshTranslator.h"
+#include "sceneIO/read/usd/UsdSphereLightTranslator.h"
+#include "sceneIO/read/usd/UsdCameraTranslator.h"
+#include "sceneIO/read/usd/UsdStageTranslator.h"
 #include <image/ImageWriters.h>
 
 int main(int argc, char *argv[]) {

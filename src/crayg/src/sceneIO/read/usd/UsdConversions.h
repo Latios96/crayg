@@ -7,7 +7,7 @@
 
 #include "CraygUsdBase.h"
 #include <pxr/base/gf/matrix4d.h>
-#include <basics/Matrix4x4f.h>
+#include "basics/Matrix4x4f.h"
 
 namespace crayg {
 

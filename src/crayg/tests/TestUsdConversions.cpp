@@ -5,7 +5,7 @@
 
 #include <catch2/catch.hpp>
 #include <pxr/base/gf/matrix4d.h>
-#include <UsdConversions.h>
+#include "sceneIO/read/usd/UsdConversions.h"
 
 namespace crayg {
 

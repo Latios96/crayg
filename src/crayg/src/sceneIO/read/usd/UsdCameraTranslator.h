@@ -7,7 +7,7 @@
 
 #include "CraygUsdBase.h"
 #include <pxr/usd/usdGeom/camera.h>
-#include <scene/Camera.h>
+#include "scene/Camera.h"
 
 namespace crayg {
 

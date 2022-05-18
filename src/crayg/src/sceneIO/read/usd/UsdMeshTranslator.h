@@ -7,7 +7,7 @@
 
 #include "CraygUsdBase.h"
 #include <pxr/usd/usdGeom/mesh.h>
-#include <scene/TriangleMesh.h>
+#include "scene/TriangleMesh.h"
 
 namespace crayg {
 

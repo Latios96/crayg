@@ -103,6 +103,20 @@ set(crayg_SRCS
         sceneIO/read/json/JsonSceneReader.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
+        sceneIO/read/usd/CraygUsdBase.h
+        sceneIO/read/usd/UsdCameraTranslator.cpp
+        sceneIO/read/usd/UsdCameraTranslator.h
+        sceneIO/read/usd/UsdConversions.cpp
+        sceneIO/read/usd/UsdConversions.h
+        sceneIO/read/usd/UsdMeshTranslator.cpp
+        sceneIO/read/usd/UsdMeshTranslator.h
+        sceneIO/read/usd/UsdSphereLightTranslator.cpp
+        sceneIO/read/usd/UsdSphereLightTranslator.h
+        sceneIO/read/usd/UsdStageTranslator.cpp
+        sceneIO/read/usd/UsdStageTranslator.h
+        sceneIO/read/usd/UsdTranslatorUtils.cpp
+        sceneIO/read/usd/UsdTranslatorUtils.h
+        sceneIO/read/usd/UsdUtils.h
         sceneIO/SceneReaderFactory.cpp
         sceneIO/SceneReaderFactory.h
         sceneIO/SceneWriters.cpp
@@ -137,6 +151,8 @@ add_library(crayg STATIC
 target_include_directories(crayg PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})
 
+add_custom_command(TARGET crayg PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_LIB_DIRS_USD}/usd ${CMAKE_BINARY_DIR}/bin/usd)
 
 if (${BUILD_WITH_COVERAGE})
     set_target_properties(crayg

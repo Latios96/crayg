@@ -4,7 +4,7 @@
 
 
 #include <catch2/catch.hpp>
-#include <UsdMeshTranslator.h>
+#include "sceneIO/read/usd/UsdMeshTranslator.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>

@@ -4,7 +4,7 @@
 
 
 #include <catch2/catch.hpp>
-#include <UsdTranslatorUtils.h>
+#include "sceneIO/read/usd/UsdTranslatorUtils.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/xform.h>
