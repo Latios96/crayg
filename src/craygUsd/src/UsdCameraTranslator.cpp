@@ -6,12 +6,15 @@
 #include "UsdCameraTranslator.h"
 #include "UsdConversions.h"
 #include "UsdUtils.h"
+#include "Logger.h"
 
 namespace crayg {
 
 UsdCameraTranslator::UsdCameraTranslator(const pxr::UsdGeomCamera &camera) : usdCamera(camera) {}
 
 std::shared_ptr<Camera> UsdCameraTranslator::translate() {
+    Logger::debug("Translating camera {}", usdCamera.GetPath().GetString());
+
     const pxr::GfMatrix4d matrix = usdCamera.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default());
 
     const Vector3f position = UsdConversions::convert(matrix.ExtractTranslation());

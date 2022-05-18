@@ -6,6 +6,7 @@
 #include "UsdConversions.h"
 #include "UsdTranslatorUtils.h"
 #include "UsdUtils.h"
+#include "Logger.h"
 
 namespace crayg {
 
@@ -13,6 +14,8 @@ UsdSphereLightTranslator::UsdSphereLightTranslator(const pxr::UsdLuxSphereLight 
     : sphereLight(sphereLight) {}
 
 std::shared_ptr<Light> UsdSphereLightTranslator::translate() {
+    Logger::debug("Translating sphereLight {}", sphereLight.GetPath().GetString());
+
     auto light = std::make_shared<Light>();
     UsdTranslatorUtils::translateTransform(*light, sphereLight);
 

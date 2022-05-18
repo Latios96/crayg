@@ -8,12 +8,15 @@
 #include "UsdUtils.h"
 #include "UsdConversions.h"
 #include "UsdTranslatorUtils.h"
+#include "Logger.h"
 
 namespace crayg {
 
 crayg::UsdMeshTranslator::UsdMeshTranslator(const pxr::UsdGeomMesh &usdGeomMesh) : usdGeomMesh(usdGeomMesh) {};
 
 std::shared_ptr<TriangleMesh> crayg::UsdMeshTranslator::translate() {
+    Logger::debug("Translating mesh {}", usdGeomMesh.GetPath().GetString());
+
     auto triangleMesh = std::make_shared<crayg::TriangleMesh>();
     UsdTranslatorUtils::translateTransform(*triangleMesh, usdGeomMesh);
 
