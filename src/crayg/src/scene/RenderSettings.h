@@ -6,6 +6,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
 
 #include <basics/Resolution.h>
+#include "spdlog/fmt/ostr.h"
 
 namespace crayg {
 
@@ -18,6 +19,15 @@ class RenderSettings {
     int maxSamples;
     bool operator==(const RenderSettings &rhs) const;
     bool operator!=(const RenderSettings &rhs) const;
+
+    template<typename OStream>
+    friend OStream &operator<<(OStream &os, const RenderSettings &renderSettings) {
+        os << ToStringHelper("RenderSettings")
+            .addMember("resolution", renderSettings.resolution)
+            .addMember("maxSamples", renderSettings.maxSamples)
+            .finish();
+        return os;
+    }
 };
 
 }
