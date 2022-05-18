@@ -1,130 +1,134 @@
 set(crayg_SRCS
-        basics/Vector3f.h
-        basics/Vector3f.cpp
-        basics/Matrix4x4f.h
-        basics/Matrix4x4f.cpp
-        basics/Transform.h
-        basics/Transform.cpp
-        basics/Resolution.h
-        basics/Resolution.cpp
-        image/Image.h
-        image/Image.cpp
-        image/BmpImageWriter.h
-        image/BmpImageWriter.cpp
-        scene/Camera.h
-        scene/Camera.cpp
-        PineHoleCameraModel.h
-        PineHoleCameraModel.cpp
-        basics/Ray.h
-        basics/Ray.cpp
-        scene/Sphere.h
-        scene/Sphere.cpp
-        basics/Color.h
+        basics/BoundingBox.cpp
+        basics/BoundingBox.h
         basics/Color.cpp
-        scene/Transformable.h
-        scene/Transformable.cpp
-        scene/Scene.h
-        scene/Scene.cpp
-        scene/ShadingNode.h
-        scene/ShadingNode.cpp
-        scene/Material.h
-        scene/Material.cpp
-        scene/DiffuseMaterial.h
-        scene/DiffuseMaterial.cpp
-        scene/ReflectiveMaterial.h
-        scene/ReflectiveMaterial.cpp
-        scene/AreaLight.h
-        scene/AreaLight.cpp
-        scene/EmissiveMaterial.h
-        scene/EmissiveMaterial.cpp
-        scene/DiskLight.h
-        scene/DiskLight.cpp
-        intersectors/Intersector.h
-        image/ImageWriter.h
-        scene/SceneCreator.h
-        image/LineByLineIterator.h
-        image/ImageIterators.h
-        image/ImageWriters.h
-        image/ImageWriters.cpp
-        image/OpenImageIoImageWriter.h
-        image/OpenImageIoImageWriter.cpp
-        image/ImageBucket.h
-        image/ImageBucket.cpp
-        image/ImageBucketSequences.h
-        image/ImageBucketSequences.cpp
-        image/BucketImageBuffer.h
+        basics/Color.h
+        basics/Matrix4x4f.cpp
+        basics/Matrix4x4f.h
+        basics/Ray.cpp
+        basics/Ray.h
+        basics/Resolution.cpp
+        basics/Resolution.h
+        basics/Transform.cpp
+        basics/Transform.h
+        basics/Vector3f.cpp
+        basics/Vector3f.h
+        CameraModel.h
+        CraygInfo.cpp
+        CraygInfo.h
+        image/BmpImageWriter.cpp
+        image/BmpImageWriter.h
         image/BucketImageBuffer.cpp
-        image/ImageAlgorithms.h
+        image/BucketImageBuffer.h
+        image/Image.cpp
+        image/Image.h
         image/ImageAlgorithms.cpp
-        image/OutputDriver.h
-        image/ImageOutputDriver.h
+        image/ImageAlgorithms.h
+        image/ImageBucket.cpp
+        image/ImageBucket.h
+        image/ImageBucketSequences.cpp
+        image/ImageBucketSequences.h
+        image/ImageIterators.h
         image/ImageOutputDriver.cpp
-        utils/ToStringHelper.h
-        sceneIO/write/SceneWriter.h
-        sceneIO/Serializable.h
-        sceneIO/write/json/JsonSerializer.cpp
-        sceneIO/write/json/JsonSerializer.h
-        sceneIO/read/json/JsonDeserializer.cpp
-        sceneIO/read/json/JsonDeserializer.h
-        sceneIO/read/SceneReader.cpp
-        sceneIO/read/SceneReader.h
-        utils/StopWatch.h
+        image/ImageOutputDriver.h
+        image/ImageWriter.h
+        image/ImageWriters.cpp
+        image/ImageWriters.h
+        image/LineByLineIterator.h
+        image/OpenImageIoImageWriter.cpp
+        image/OpenImageIoImageWriter.h
+        image/OutputDriver.h
+        image/TeeOutputDriver.cpp
+        image/TeeOutputDriver.h
+        intersectors/BvhBuilder.cpp
+        intersectors/BvhBuilder.h
+        intersectors/BvhNode.cpp
+        intersectors/BvhNode.h
+        intersectors/BvhSceneIntersector.cpp
+        intersectors/BvhSceneIntersector.h
+        intersectors/Intersector.h
         intersectors/SceneIntersector.cpp
         intersectors/SceneIntersector.h
-        sceneIO/write/SceneWriter.cpp
-        sceneIO/write/SerializerImplementation.h
+        Logger.cpp
+        Logger.h
+        PineHoleCameraModel.cpp
+        PineHoleCameraModel.h
         Renderer.cpp
         Renderer.h
-        utils/utils.h
-        scene/Light.h
-        scene/Light.cpp
-        scene/SceneObject.cpp
-        scene/SceneObject.h
+        samplers/UnitSphereSampler.cpp
+        samplers/UnitSphereSampler.h
+        scene/AreaLight.cpp
+        scene/AreaLight.h
+        scene/Camera.cpp
+        scene/Camera.h
+        scene/DiffuseMaterial.cpp
+        scene/DiffuseMaterial.h
+        scene/DiskLight.cpp
+        scene/DiskLight.h
+        scene/EmissiveMaterial.cpp
+        scene/EmissiveMaterial.h
         scene/GroundPlane.cpp
         scene/GroundPlane.h
-        scene/PointCloud.h
+        scene/Imageable.cpp
+        scene/Imageable.h
+        scene/Light.cpp
+        scene/Light.h
+        scene/Material.cpp
+        scene/Material.h
         scene/PointCloud.cpp
-        CameraModel.h
-        utils/ProgressReporter.cpp
-        utils/ProgressReporter.h
-        ShadingMethod.cpp
-        ShadingMethod.h
+        scene/PointCloud.h
+        scene/ReflectiveMaterial.cpp
+        scene/ReflectiveMaterial.h
+        scene/RenderSettings.cpp
+        scene/RenderSettings.h
+        scene/Scene.cpp
+        scene/Scene.h
+        scene/SceneCreator.h
+        scene/SceneObject.cpp
+        scene/SceneObject.h
+        scene/ShadingNode.cpp
+        scene/ShadingNode.h
+        scene/Sphere.cpp
+        scene/Sphere.h
+        scene/Transformable.cpp
+        scene/Transformable.h
         scene/Triangle.cpp
         scene/Triangle.h
         scene/TriangleMesh.cpp
         scene/TriangleMesh.h
-        sceneIO/write/Serializer.h
         sceneIO/read/Deserializer.h
-        sceneIO/SceneReaderFactory.cpp
-        sceneIO/SceneReaderFactory.h
+        sceneIO/read/json/JsonDeserializer.cpp
+        sceneIO/read/json/JsonDeserializer.h
         sceneIO/read/json/JsonSceneReader.cpp
         sceneIO/read/json/JsonSceneReader.h
-        sceneIO/SceneWriters.h
+        sceneIO/read/SceneReader.cpp
+        sceneIO/read/SceneReader.h
+        sceneIO/SceneReaderFactory.cpp
+        sceneIO/SceneReaderFactory.h
         sceneIO/SceneWriters.cpp
-        scene/Imageable.cpp
-        scene/Imageable.h
-        scene/RenderSettings.h
-        scene/RenderSettings.cpp
-        basics/BoundingBox.h
-        basics/BoundingBox.cpp
-        utils/RemainingTimeCalculator.h
-        utils/RemainingTimeCalculator.cpp
-        Logger.h
-        Logger.cpp
-        samplers/UnitSphereSampler.h
-        samplers/UnitSphereSampler.cpp
-        CraygInfo.h
-        CraygInfo.cpp
-        utils/Preconditions.h
-        utils/Preconditions.cpp
-        utils/ImagePathResolver.h
+        sceneIO/SceneWriters.h
+        sceneIO/Serializable.h
+        sceneIO/write/json/JsonSerializer.cpp
+        sceneIO/write/json/JsonSerializer.h
+        sceneIO/write/SceneWriter.cpp
+        sceneIO/write/SceneWriter.h
+        sceneIO/write/Serializer.h
+        sceneIO/write/SerializerImplementation.h
+        ShadingMethod.cpp
+        ShadingMethod.h
         utils/ImagePathResolver.cpp
-        image/TeeOutputDriver.h
-        image/TeeOutputDriver.cpp
-        utils/ReadableFormatter.h
+        utils/ImagePathResolver.h
+        utils/Preconditions.cpp
+        utils/Preconditions.h
+        utils/ProgressReporter.cpp
+        utils/ProgressReporter.h
         utils/ReadableFormatter.cpp
-        intersectors/BvhNode.h
-        intersectors/BvhNode.cpp intersectors/BvhBuilder.cpp intersectors/BvhBuilder.h intersectors/BvhSceneIntersector.cpp intersectors/BvhSceneIntersector.h)
+        utils/ReadableFormatter.h
+        utils/RemainingTimeCalculator.cpp
+        utils/RemainingTimeCalculator.h
+        utils/StopWatch.h
+        utils/ToStringHelper.h
+        utils/utils.h)
 
 
 add_library(crayg STATIC
