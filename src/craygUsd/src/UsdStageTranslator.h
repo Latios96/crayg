@@ -9,14 +9,26 @@
 #include "scene/Scene.h"
 #include "scene/DiffuseMaterial.h"
 #include <pxr/usd/usd/stage.h>
+#include <optional>
 
 namespace crayg {
 
 class UsdStageTranslator {
  public:
+
+    struct TranslationsOptions {
+        std::optional<std::string> cameraPath;
+        std::optional<RenderSettings> renderSettings;
+        static TranslationsOptions empty() {
+            return {};
+        }
+    };
+
     explicit UsdStageTranslator(pxr::UsdStage &stage);
 
-    void translateStageToScene(Scene &scene);
+    void translateStageToScene(Scene &scene,
+                               const TranslationsOptions &TranslationsOptions = TranslationsOptions::empty());
+
  private:
     pxr::UsdStage &stage;
     void translateCamera(Scene &scene, const pxr::UsdPrim &prim) const;
