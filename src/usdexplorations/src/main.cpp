@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
             auto triangleMesh = crayg::UsdMeshTranslator(pxr::UsdGeomMesh(prim)).translate();
             triangleMesh->init();
             auto randomColor = std::make_shared<crayg::DiffuseMaterial>("defaultMaterial",
-                                                                        crayg::Color::createRandom();
+                                                                        crayg::Color::createRandom());
             triangleMesh->setMaterial(defaultMaterial);
             scene.addObject(triangleMesh);
         } else if (prim.IsA<pxr::UsdLuxSphereLight>()) {
