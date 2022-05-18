@@ -1,46 +1,46 @@
 set(UNIT_TEST_LIST
-        TestColor.cpp
-        TestImage.cpp
-        TestSphere.cpp
-        TestVector.cpp
-        TestToStringHelper.cpp
-        TestLineByLineIterator.cpp
+        TestAreaLight.cpp
         TestBmpImageWriter.cpp
-        TestSceneIntersector.cpp
-        TestRay.cpp
-        TestLight.cpp
-        TestProgressReporter.cpp
-        TestShadingMethod.cpp
-        TestTriangle.cpp
-        TestTriangleMesh.cpp
-        TestRemainingTimeCalculator.cpp
-        TestGroundPlane.cpp
-        TestCamera.cpp
-        TestJsonDeserializer.cpp
-        TestJsonSceneReader.cpp
         TestBoundingBox.cpp
-        TestImageWriters.cpp
-        TestOpenImageIoImageWriter.cpp
-        TestUnitImageSampler.cpp
-        TestPointCloud.cpp
+        TestBucketImageBuffer.cpp
+        TestBvhBuilder.cpp
+        TestCamera.cpp
+        TestColor.cpp
+        TestDiskLight.cpp
+        TestGroundPlane.cpp
+        TestImage.cpp
+        TestImageAlgorithms.cpp
         TestImageBucketIterator.cpp
         TestImageIterators.cpp
-        TestBucketImageBuffer.cpp
-        TestImageAlgorithms.cpp
         TestImageOutputDriver.cpp
-        TestMatrix4x4f.cpp
-        TestTransform.cpp
-        TestSceneObject.cpp
-        TestJsonSerializer.cpp
-        TestNode.cpp
-        TestScene.cpp
-        TestAreaLight.cpp
-        TestDiskLight.cpp
-        TestPreconditions.cpp
         TestImagePathResolver.cpp
-        TestTeeOutputDriver.cpp
+        TestImageWriters.cpp
+        TestJsonDeserializer.cpp
+        TestJsonSceneReader.cpp
+        TestJsonSerializer.cpp
+        TestLight.cpp
+        TestLineByLineIterator.cpp
+        TestMatrix4x4f.cpp
+        TestNode.cpp
+        TestOpenImageIoImageWriter.cpp
+        TestPointCloud.cpp
+        TestPreconditions.cpp
+        TestProgressReporter.cpp
+        TestRay.cpp
         TestReadableFormatter.cpp
-        TestBvhBuilder.cpp
+        TestRemainingTimeCalculator.cpp
+        TestScene.cpp
+        TestSceneIntersector.cpp
+        TestSceneObject.cpp
+        TestShadingMethod.cpp
+        TestSphere.cpp
+        TestTeeOutputDriver.cpp
+        TestToStringHelper.cpp
+        TestTransform.cpp
+        TestTriangle.cpp
+        TestTriangleMesh.cpp
+        TestUnitImageSampler.cpp
+        TestVector.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
