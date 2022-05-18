@@ -8,6 +8,8 @@ add_library(crayg_usd STATIC
         UsdMeshTranslator.h
         UsdSphereLightTranslator.cpp
         UsdSphereLightTranslator.h
+        UsdStageTranslator.cpp
+        UsdStageTranslator.h
         UsdTranslatorUtils.cpp
         UsdTranslatorUtils.h
         UsdUtils.h
