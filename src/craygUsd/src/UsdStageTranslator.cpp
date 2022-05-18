@@ -9,6 +9,7 @@
 #include "Logger.h"
 #include <pxr/usd/usd/prim.h>
 #include <pxr/usd/usd/primRange.h>
+#include <fmt/format.h>
 
 namespace crayg {
 
@@ -25,14 +26,20 @@ void UsdStageTranslator::translateStageToScene(Scene &scene, const TranslationsO
             translateUsdGeomMesh(scene, defaultMaterial, prim);
         } else if (prim.IsA<pxr::UsdLuxSphereLight>() && primIsVisible(prim)) {
             translateSphereLight(scene, prim);
-        } else if (prim.IsA<pxr::UsdGeomCamera>() && !translatedCamera) {
+        } else if (prim.IsA<pxr::UsdGeomCamera>() && !translatedCamera
+            && cameraPathMatches(prim.GetPath(), translationsOptions.cameraPath)) {
             translateCamera(scene, prim);
             translatedCamera = true;
         }
     }
 
-    if (scene.camera == nullptr) {
-        throw std::runtime_error("No camera found in USD file!");
+    const bool noCameraFound = scene.camera == nullptr;
+    if (noCameraFound) {
+        if (translationsOptions.cameraPath) {
+            throw std::runtime_error(fmt::format("No camera with path {} found in USD stage!",
+                                                 translationsOptions.cameraPath.value()));
+        }
+        throw std::runtime_error("No camera found in USD stage!");
     }
 }
 
@@ -58,6 +65,10 @@ void UsdStageTranslator::translateCamera(Scene &scene, const pxr::UsdPrim &prim)
 
 bool UsdStageTranslator::primIsVisible(pxr::UsdPrim &prim) {
     return pxr::UsdGeomImageable(prim).ComputeVisibility() != pxr::TfToken("invisible");
+}
+
+bool UsdStageTranslator::cameraPathMatches(pxr::SdfPath path, std::optional<std::string> cameraPath) {
+    return path.GetString() == cameraPath.value_or(path.GetString());
 }
 
 }

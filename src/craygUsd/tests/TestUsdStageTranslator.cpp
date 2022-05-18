@@ -37,7 +37,9 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
     SECTION("translating a stage without camera should throw exception") {
         stage->RemovePrim(pxr::SdfPath("/usdCamera"));
 
-        REQUIRE_THROWS_AS(UsdStageTranslator(*stage).translateStageToScene(scene), std::runtime_error);
+        REQUIRE_THROWS_MATCHES(UsdStageTranslator(*stage).translateStageToScene(scene),
+                               std::runtime_error,
+                               Catch::Message("No camera found in USD stage!"));
     }
 
     SECTION("should translate sphereLight") {
@@ -87,6 +89,27 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
         UsdStageTranslator(*stage).translateStageToScene(scene, translationsOptions);
 
         REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600), 1));
+    }
+
+    SECTION("providing a cameraPath in translationOptions should use this camera") {
+        UsdStageTranslator::TranslationsOptions translationsOptions;
+        translationsOptions.cameraPath = "/usdCamera2";
+        auto secondsUsdCamera = pxr::UsdGeomCamera::Define(stage, pxr::SdfPath("/usdCamera2"));
+        pxr::UsdGeomXformCommonAPI(secondsUsdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3));
+
+        UsdStageTranslator(*stage).translateStageToScene(scene, translationsOptions);
+
+        REQUIRE(scene.camera->getPosition() == Vector3f(1, 2, -3));
+    }
+
+    SECTION("providing a non existent camera path should throw exception") {
+        stage->RemovePrim(pxr::SdfPath("/usdCamera"));
+        UsdStageTranslator::TranslationsOptions translationsOptions;
+        translationsOptions.cameraPath = "/not_existing";
+
+        REQUIRE_THROWS_MATCHES(UsdStageTranslator(*stage).translateStageToScene(scene, translationsOptions),
+                               std::runtime_error,
+                               Catch::Message("No camera with path /not_existing found in USD stage!"));
     }
 
 }
