@@ -6,6 +6,7 @@
 #define CRAYG_TOSTRINGHELPER_H
 
 #include <string>
+#include <fmt/format.h>
 
 namespace crayg {
 
@@ -22,12 +23,12 @@ class ToStringHelper {
             hasMembers = true;
             repr.append(name)
                 .append("=")
-                .append(std::to_string(value));
+                .append(fmt::format("{}", value));
         } else {
             repr.append(",")
                 .append(name)
                 .append("=")
-                .append(std::to_string(value));
+                .append(fmt::format("{}", value));
         }
         return *this;
     };
