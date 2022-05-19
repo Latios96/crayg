@@ -38,7 +38,7 @@ class RenderSettingsAreMissing : public std::exception {
 
 class JsonSceneReader : public SceneReader {
  public:
-    JsonSceneReader(const std::string &path, Scene &scene);
+    JsonSceneReader(const std::string &path, Scene &scene, const ReadOptions &readOptions = ReadOptions::empty());
 
     void read() override;
     void readFromStream(std::istream &ifs) const;

@@ -20,7 +20,8 @@
 
 namespace crayg {
 
-JsonSceneReader::JsonSceneReader(const std::string &path, Scene &scene) : SceneReader(path, scene) {}
+JsonSceneReader::JsonSceneReader(const std::string &path, Scene &scene, const SceneReader::ReadOptions &readOptions)
+    : SceneReader(path, scene, readOptions) {}
 
 template<typename T>
 void readObj(Scene &scene, rapidjson::Value &obj, std::function<void(std::shared_ptr<T>)> addTo) {

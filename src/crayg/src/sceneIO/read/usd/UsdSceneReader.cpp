@@ -8,7 +8,8 @@
 
 namespace crayg {
 
-UsdSceneReader::UsdSceneReader(const std::string &path, Scene &scene) : SceneReader(path, scene) {
+UsdSceneReader::UsdSceneReader(const std::string &path, Scene &scene, const SceneReader::ReadOptions &readOptions)
+    : SceneReader(path, scene, readOptions) {
 
 }
 

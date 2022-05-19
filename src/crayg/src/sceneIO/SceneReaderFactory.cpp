@@ -10,14 +10,16 @@
 
 namespace crayg {
 
-std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(std::string scenePath, Scene &scene) {
+std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(std::string scenePath,
+                                                                   Scene &scene,
+                                                                   const SceneReader::ReadOptions &readOptions) {
     boost::filesystem::path path(scenePath);
     std::string extension = path.extension().string();
 
     if (extension == ".json") {
-        return std::shared_ptr<SceneReader>(new JsonSceneReader(scenePath, scene));
+        return std::shared_ptr<SceneReader>(new JsonSceneReader(scenePath, scene, readOptions));
     } else if (extension == ".usd") {
-        return std::shared_ptr<SceneReader>(new UsdSceneReader(scenePath, scene));
+        return std::shared_ptr<SceneReader>(new UsdSceneReader(scenePath, scene, readOptions));
     } else {
         Logger::error("No SceneReader found for extension {}", extension);
         throw std::runtime_error(fmt::format("No SceneReader found for extension {}", extension));
