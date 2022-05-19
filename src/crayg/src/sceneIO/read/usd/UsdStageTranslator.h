@@ -18,7 +18,6 @@ class UsdStageTranslator {
 
     struct TranslationsOptions {
         std::optional<std::string> cameraPath;
-        std::optional<RenderSettings> renderSettings;
         static TranslationsOptions empty() {
             return {};
         }

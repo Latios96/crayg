@@ -16,7 +16,7 @@ namespace crayg {
 UsdStageTranslator::UsdStageTranslator(pxr::UsdStage &stage) : stage(stage) {}
 
 void UsdStageTranslator::translateStageToScene(Scene &scene, const TranslationsOptions &translationsOptions) {
-    scene.renderSettings = translationsOptions.renderSettings.value_or(RenderSettings(crayg::Resolution(1280, 720), 4));
+    scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4);
 
     auto defaultMaterial = std::make_shared<crayg::DiffuseMaterial>("defaultMaterial", crayg::Color::createWhite());
 

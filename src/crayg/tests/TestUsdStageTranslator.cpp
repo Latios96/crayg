@@ -76,19 +76,10 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
         REQUIRE(scene.owningObjects.size() == 0);
     }
 
-    SECTION("not providing render settings should create defaults") {
+    SECTION("should create default rendersettings if there are no rendersettings in the stage") {
         UsdStageTranslator(*stage).translateStageToScene(scene);
 
         REQUIRE(scene.renderSettings == RenderSettings(Resolution(1280, 720), 4));
-    }
-
-    SECTION("providing renderSettings in translationOptions should use them") {
-        UsdStageTranslator::TranslationsOptions translationsOptions;
-        translationsOptions.renderSettings.emplace(Resolution(800, 600), 1);
-
-        UsdStageTranslator(*stage).translateStageToScene(scene, translationsOptions);
-
-        REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600), 1));
     }
 
     SECTION("providing a cameraPath in translationOptions should use this camera") {
