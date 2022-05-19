@@ -20,17 +20,44 @@ CliParseResult CliParser::parse() {
     std::string imageOutputPath;
     app.add_option("-o,--output", imageOutputPath, "Path where rendered image is saved")->required();
 
+    std::string cameraName;
+    app.add_option("--camera",
+                   cameraName,
+                   "Name of the camera to render. Defaulting to the first camera found in the scene");
+
+    std::string resolution;
+    app.add_option("--resolution", resolution, "Override resolution to render, format: 1280x720");
+
+    int maxSamples = 0;
+    app.add_option("--maxSamples", maxSamples, "Override max samples");
+
     try {
         app.parse(argc, argv);
 
-        return CliParseResult(CliArgs(sceneFileName, imageOutputPath), nonstd::nullopt);
-    } catch (const CLI::ParseError &e) {
+        CliRenderSettingsOverride renderSettingsOverride;
+        if (!resolution.empty()) {
+            renderSettingsOverride.resolution = Resolution::parse(resolution);
+        }
+        if (maxSamples) {
+            renderSettingsOverride.maxSamples = maxSamples;
+        }
+
+        return CliParseResult(CliArgs(sceneFileName,
+                                      imageOutputPath,
+                                      !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,
+                                      renderSettingsOverride), nonstd::nullopt);
+    } catch (const std::runtime_error &e) {
         return CliParseResult(nonstd::nullopt, nonstd::optional<std::string>(e.what()));
     }
 
 }
 
-CliArgs::CliArgs(std::string scenePath, std::string imageOutputPath)
-    : scenePath(std::move(scenePath)), imageOutputPath(std::move(imageOutputPath)) {}
+CliArgs::CliArgs(std::string scenePath,
+                 std::string imageOutputPath,
+                 std::optional<std::string> cameraName,
+                 CliRenderSettingsOverride cliRenderSettingsOverride)
+    : scenePath(scenePath), imageOutputPath(imageOutputPath), cameraName(cameraName),
+      cliRenderSettingsOverride(cliRenderSettingsOverride) {
 
+}
 }

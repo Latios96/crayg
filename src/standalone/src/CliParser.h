@@ -7,13 +7,25 @@
 
 #include <string>
 #include <utility>
+#include <optional>
 #include "nonstd/optional.hpp"
+#include "basics/Resolution.h"
 namespace crayg {
 
+struct CliRenderSettingsOverride {
+    std::optional<Resolution> resolution;
+    std::optional<int> maxSamples;
+};
+
 struct CliArgs {
-    CliArgs(std::string scenePath, std::string imageOutputPath);
+    CliArgs(std::string scenePath,
+            std::string imageOutputPath,
+            std::optional<std::string> cameraName,
+            CliRenderSettingsOverride cliRenderSettingsOverride);
     std::string scenePath;
     std::string imageOutputPath;
+    std::optional<std::string> cameraName;
+    CliRenderSettingsOverride cliRenderSettingsOverride;
 };
 
 struct CliParseResult {
