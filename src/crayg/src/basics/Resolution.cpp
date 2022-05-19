@@ -2,7 +2,7 @@
 // Created by Jan on 30.10.2020.
 //
 
-#include <utils/ToStringHelper.h>
+#include <fmt/format.h>
 #include <vector>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
@@ -35,10 +35,7 @@ bool Resolution::operator>=(const Resolution &rhs) const {
     return !(*this < rhs);
 }
 std::ostream &operator<<(std::ostream &os, const Resolution &resolution) {
-    os << ToStringHelper("Resolution")
-        .addMember("width", resolution.width)
-        .addMember("height", resolution.height)
-        .finish();
+    os << fmt::format("{}x{}", resolution.width, resolution.height);
     return os;
 }
 Resolution::Resolution() : width(0), height(0) {
