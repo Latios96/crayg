@@ -26,8 +26,12 @@ int main(int argc, char *argv[]) {
         crayg::Scene scene;
 
         std::string scenePath = parseResult.args->scenePath;
-        auto sceneReader = crayg::SceneReaderFactory::createSceneReader(scenePath, scene);
+        crayg::SceneReader::ReadOptions readOptions;
+        readOptions.cameraName = parseResult.args->cameraName;
+        auto sceneReader = crayg::SceneReaderFactory::createSceneReader(scenePath, scene, readOptions);
         sceneReader->read();
+
+        scene.renderSettings = parseResult.args->cliRenderSettingsOverride.resolveOverrides(scene.renderSettings);
 
         crayg::Image myImage(scene.renderSettings.resolution);
 

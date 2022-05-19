@@ -2,7 +2,9 @@ set(CRAYG_STANDALONE_TESTS crayg-standalone-tests)
 
 add_executable(${CRAYG_STANDALONE_TESTS}
         main.cpp
-        TestArgsParsing.cpp)
+        TestArgsParsing.cpp
+        TestCliRenderSettingsOverride.cpp
+        )
 
 target_link_libraries(${CRAYG_STANDALONE_TESTS}
         crayg-standalone-lib)

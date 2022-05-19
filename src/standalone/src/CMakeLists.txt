@@ -1,8 +1,11 @@
 set(CRAYG_STANDALONE_LIB crayg-standalone-lib)
 
 set(CRAYG_STANDALONE_LIB_SRCS
+        CliParser.cpp
         CliParser.h
-        CliParser.cpp)
+        CliRenderSettingsOverride.cpp
+        CliRenderSettingsOverride.h
+        )
 
 set(Main_Executable_SRCS
         main.cpp)

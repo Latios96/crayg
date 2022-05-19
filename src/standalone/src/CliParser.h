@@ -10,12 +10,9 @@
 #include <optional>
 #include "nonstd/optional.hpp"
 #include "basics/Resolution.h"
-namespace crayg {
+#include "CliRenderSettingsOverride.h"
 
-struct CliRenderSettingsOverride {
-    std::optional<Resolution> resolution;
-    std::optional<int> maxSamples;
-};
+namespace crayg {
 
 struct CliArgs {
     CliArgs(std::string scenePath,
