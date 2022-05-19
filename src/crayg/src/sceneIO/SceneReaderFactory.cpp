@@ -10,7 +10,7 @@
 
 namespace crayg {
 
-std::shared_ptr<SceneReader> SceneReaderFactory::createSceneWriter(std::string scenePath, Scene &scene) {
+std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(std::string scenePath, Scene &scene) {
     boost::filesystem::path path(scenePath);
     std::string extension = path.extension().string();
 

@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
 
     crayg::Scene scene;
 
-    auto sceneReader = crayg::SceneReaderFactory::createSceneWriter(scenePath, scene);
+    auto sceneReader = crayg::SceneReaderFactory::createSceneReader(scenePath, scene);
     sceneReader->read();
 
     crayg::StopWatch stopWatch = crayg::StopWatch::createStopWatch("building BVH");

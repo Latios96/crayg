@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
         crayg::Scene scene;
 
         std::string scenePath = parseResult.args->scenePath;
-        auto sceneReader = crayg::SceneReaderFactory::createSceneWriter(scenePath, scene);
+        auto sceneReader = crayg::SceneReaderFactory::createSceneReader(scenePath, scene);
         sceneReader->read();
 
         crayg::Image myImage(scene.renderSettings.resolution);
