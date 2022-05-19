@@ -6,6 +6,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
 
 #include <basics/Resolution.h>
+#include <utils/ToStringHelper.h>
 #include "spdlog/fmt/ostr.h"
 
 namespace crayg {
