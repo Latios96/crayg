@@ -29,6 +29,7 @@ set(UNIT_TEST_LIST
         TestRay.cpp
         TestReadableFormatter.cpp
         TestRemainingTimeCalculator.cpp
+        TestResolution.cpp
         TestScene.cpp
         TestSceneIntersector.cpp
         TestSceneObject.cpp

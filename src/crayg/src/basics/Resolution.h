@@ -14,6 +14,7 @@ struct Resolution {
     Resolution();
     Resolution(int width, int height);
     Resolution(const Resolution &resolution);
+    static Resolution parse(const std::string &resolutionString);
     bool operator==(const Resolution &rhs) const;
     bool operator!=(const Resolution &rhs) const;
     bool operator<(const Resolution &rhs) const;

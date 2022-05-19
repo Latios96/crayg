@@ -3,6 +3,9 @@
 //
 
 #include <utils/ToStringHelper.h>
+#include <vector>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/classification.hpp>
 #include "Resolution.h"
 
 namespace crayg {
@@ -49,6 +52,14 @@ const int Resolution::getHeight() const {
 }
 Resolution::Resolution(const Resolution &resolution) : width(resolution.width), height(resolution.height) {
 
+}
+Resolution Resolution::parse(const std::string &resolutionString) {
+    std::vector<std::string> splitResults;
+    boost::algorithm::split(splitResults, resolutionString, boost::algorithm::is_any_of("x"));
+    if (splitResults.size() != 2 || splitResults.size() == 2 && (splitResults[0].empty() || splitResults[1].empty())) {
+        throw std::runtime_error(fmt::format("Resolution string {} has invalid format", resolutionString));
+    }
+    return {std::atoi(splitResults[0].c_str()), std::atoi(splitResults[1].c_str())};
 }
 
 }
