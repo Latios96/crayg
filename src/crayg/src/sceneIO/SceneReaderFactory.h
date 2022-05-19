@@ -14,7 +14,7 @@ namespace crayg {
 class SceneReaderFactory {
  public:
  public:
-    static std::shared_ptr<SceneReader> createSceneWriter(std::string scenePath, Scene &scene);
+    static std::shared_ptr<SceneReader> createSceneWriter(std::string scenePath, Scene &scene);// todo fix wrong name
 };
 
 }

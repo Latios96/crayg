@@ -110,6 +110,8 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdConversions.h
         sceneIO/read/usd/UsdMeshTranslator.cpp
         sceneIO/read/usd/UsdMeshTranslator.h
+        sceneIO/read/usd/UsdSceneReader.cpp
+        sceneIO/read/usd/UsdSceneReader.h
         sceneIO/read/usd/UsdSphereLightTranslator.cpp
         sceneIO/read/usd/UsdSphereLightTranslator.h
         sceneIO/read/usd/UsdStageTranslator.cpp
