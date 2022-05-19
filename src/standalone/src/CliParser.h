@@ -8,7 +8,6 @@
 #include <string>
 #include <utility>
 #include <optional>
-#include "nonstd/optional.hpp"
 #include "basics/Resolution.h"
 #include "CliRenderSettingsOverride.h"
 
@@ -27,11 +26,11 @@ struct CliArgs {
 
 struct CliParseResult {
  public:
-    CliParseResult(nonstd::optional<CliArgs> args, nonstd::optional<std::string> error)
+    CliParseResult(std::optional<CliArgs> args, std::optional<std::string> error)
         : args(std::move(args)), error(std::move(error)) {}
 
-    nonstd::optional<CliArgs> args;
-    nonstd::optional<std::string> error;
+    std::optional<CliArgs> args;
+    std::optional<std::string> error;
 
     bool isValid() const {
         return !error && args;

@@ -4,7 +4,6 @@ spdlog/1.10.0
 rapidjson/1.1.0
 catch2/2.13.7
 fakeit/2.0.9
-optional-lite/3.5.0
 cli11/2.1.1
 boost/1.78.0
 openimageio/2.3.7.2

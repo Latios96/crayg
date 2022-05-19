@@ -4,7 +4,6 @@
 
 #include "CliParser.h"
 
-#include <utility>
 #include "CLI/CLI.hpp"
 
 namespace crayg {
@@ -45,9 +44,9 @@ CliParseResult CliParser::parse() {
         return CliParseResult(CliArgs(sceneFileName,
                                       imageOutputPath,
                                       !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,
-                                      renderSettingsOverride), nonstd::nullopt);
+                                      renderSettingsOverride), std::nullopt);
     } catch (const std::runtime_error &e) {
-        return CliParseResult(nonstd::nullopt, nonstd::optional<std::string>(e.what()));
+        return CliParseResult(std::nullopt, std::optional<std::string>(e.what()));
     }
 
 }
