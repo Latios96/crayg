@@ -15,7 +15,7 @@ UsdSceneReader::UsdSceneReader(const std::string &path, Scene &scene) : SceneRea
 void UsdSceneReader::read() {
     auto stage = pxr::UsdStage::Open(path);
     UsdStageTranslator translator(*stage);
-    translator.translateStageToScene(scene);
+    translator.translateStageToScene(scene, readOptions);
 }
 
 }

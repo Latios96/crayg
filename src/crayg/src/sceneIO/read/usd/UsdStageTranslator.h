@@ -8,6 +8,7 @@
 #include "CraygUsdBase.h"
 #include "scene/Scene.h"
 #include "scene/DiffuseMaterial.h"
+#include "sceneIO/read/SceneReader.h"
 #include <pxr/usd/usd/stage.h>
 #include <optional>
 
@@ -16,17 +17,10 @@ namespace crayg {
 class UsdStageTranslator {
  public:
 
-    struct TranslationsOptions {
-        std::optional<std::string> cameraPath;
-        static TranslationsOptions empty() {
-            return {};
-        }
-    };
-
     explicit UsdStageTranslator(pxr::UsdStage &stage);
 
     void translateStageToScene(Scene &scene,
-                               const TranslationsOptions &TranslationsOptions = TranslationsOptions::empty());
+                               const SceneReader::ReadOptions &readOptions = SceneReader::ReadOptions::empty());
 
  private:
     pxr::UsdStage &stage;

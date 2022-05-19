@@ -15,7 +15,7 @@ namespace crayg {
 
 UsdStageTranslator::UsdStageTranslator(pxr::UsdStage &stage) : stage(stage) {}
 
-void UsdStageTranslator::translateStageToScene(Scene &scene, const TranslationsOptions &translationsOptions) {
+void UsdStageTranslator::translateStageToScene(Scene &scene, const SceneReader::ReadOptions &readOptions) {
     scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4);
 
     auto defaultMaterial = std::make_shared<crayg::DiffuseMaterial>("defaultMaterial", crayg::Color::createWhite());
@@ -27,7 +27,7 @@ void UsdStageTranslator::translateStageToScene(Scene &scene, const TranslationsO
         } else if (prim.IsA<pxr::UsdLuxSphereLight>() && primIsVisible(prim)) {
             translateSphereLight(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomCamera>() && !translatedCamera
-            && cameraPathMatches(prim.GetPath(), translationsOptions.cameraPath)) {
+            && cameraPathMatches(prim.GetPath(), readOptions.cameraName)) {
             translateCamera(scene, prim);
             translatedCamera = true;
         }
@@ -35,9 +35,9 @@ void UsdStageTranslator::translateStageToScene(Scene &scene, const TranslationsO
 
     const bool noCameraFound = scene.camera == nullptr;
     if (noCameraFound) {
-        if (translationsOptions.cameraPath) {
+        if (readOptions.cameraName) {
             throw std::runtime_error(fmt::format("No camera with path {} found in USD stage!",
-                                                 translationsOptions.cameraPath.value()));
+                                                 readOptions.cameraName.value()));
         }
         throw std::runtime_error("No camera found in USD stage!");
     }

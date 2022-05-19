@@ -2,7 +2,6 @@
 // Created by Jan on 28.10.2021.
 //
 
-
 #include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdStageTranslator.h"
 #include <pxr/usd/usd/stage.h>
@@ -82,23 +81,23 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
         REQUIRE(scene.renderSettings == RenderSettings(Resolution(1280, 720), 4));
     }
 
-    SECTION("providing a cameraPath in translationOptions should use this camera") {
-        UsdStageTranslator::TranslationsOptions translationsOptions;
-        translationsOptions.cameraPath = "/usdCamera2";
+    SECTION("providing a cameraName in translationOptions should use this camera") {
+        SceneReader::ReadOptions readOptions;
+        readOptions.cameraName = "/usdCamera2";
         auto secondsUsdCamera = pxr::UsdGeomCamera::Define(stage, pxr::SdfPath("/usdCamera2"));
         pxr::UsdGeomXformCommonAPI(secondsUsdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3));
 
-        UsdStageTranslator(*stage).translateStageToScene(scene, translationsOptions);
+        UsdStageTranslator(*stage).translateStageToScene(scene, readOptions);
 
         REQUIRE(scene.camera->getPosition() == Vector3f(1, 2, -3));
     }
 
     SECTION("providing a non existent camera path should throw exception") {
         stage->RemovePrim(pxr::SdfPath("/usdCamera"));
-        UsdStageTranslator::TranslationsOptions translationsOptions;
-        translationsOptions.cameraPath = "/not_existing";
+        SceneReader::ReadOptions readOptions;
+        readOptions.cameraName = "/not_existing";
 
-        REQUIRE_THROWS_MATCHES(UsdStageTranslator(*stage).translateStageToScene(scene, translationsOptions),
+        REQUIRE_THROWS_MATCHES(UsdStageTranslator(*stage).translateStageToScene(scene, readOptions),
                                std::runtime_error,
                                Catch::Message("No camera with path /not_existing found in USD stage!"));
     }
