@@ -82,5 +82,17 @@ bool AreaLight::isIntersecting(Ray ray) {
 BoundingBox AreaLight::getBounds() const {
     return BoundingBox::fromCenterAndRadius(getPosition(), width);
 }
+float AreaLight::getWidth() const {
+    return width;
+}
+void AreaLight::setWidth(float width) {
+    AreaLight::width = width;
+}
+float AreaLight::getHeight() const {
+    return height;
+}
+void AreaLight::setHeight(float height) {
+    AreaLight::height = height;
+}
 
 }

@@ -18,6 +18,10 @@ class AreaLight : public Light {
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     BoundingBox getBounds() const override;
+    float getWidth() const;
+    void setWidth(float width);
+    float getHeight() const;
+    void setHeight(float height);
  private:
     float width = 1;
     float height = 1;
