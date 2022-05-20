@@ -18,7 +18,7 @@ std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(std::string s
 
     if (extension == ".json") {
         return std::shared_ptr<SceneReader>(new JsonSceneReader(scenePath, scene, readOptions));
-    } else if (extension == ".usd") {
+    } else if (extension == ".usd" || extension == ".usda") {
         return std::shared_ptr<SceneReader>(new UsdSceneReader(scenePath, scene, readOptions));
     } else {
         Logger::error("No SceneReader found for extension {}", extension);
