@@ -41,6 +41,7 @@ openimageio:with_libjpeg=libjpeg-turbo
 openimageio:with_openjpeg=False
 fmt:header_only=True
 spdlog:header_only=True
+fakeit:integration=catch
 
 [imports]
 bin,*.dll->./bin
