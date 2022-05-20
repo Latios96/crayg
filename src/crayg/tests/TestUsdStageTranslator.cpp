@@ -8,6 +8,7 @@
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/usdLux/sphereLight.h>
+#include <pxr/usd/usdLux/rectLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 
 namespace crayg {
@@ -49,6 +50,14 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
         REQUIRE(scene.lights.size() == 1);
     }
 
+    SECTION("should translate rectLight") {
+        auto usdRectLight = pxr::UsdLuxRectLight::Define(stage, pxr::SdfPath("/usdRectLight"));
+
+        UsdStageTranslator(*stage).translateStageToScene(scene);
+
+        REQUIRE(scene.lights.size() == 1);
+    }
+
     SECTION("should translate mesh") {
         auto usdMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
 
@@ -74,6 +83,16 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
 
         REQUIRE(scene.owningObjects.size() == 0);
     }
+
+    SECTION("should translate hidden rectLight") {
+        auto usdRectLight = pxr::UsdLuxRectLight::Define(stage, pxr::SdfPath("/usdRectLight"));
+        usdRectLight.MakeInvisible();
+
+        UsdStageTranslator(*stage).translateStageToScene(scene);
+
+        REQUIRE(scene.lights.size() == 0);
+    }
+
 
     SECTION("should create default rendersettings if there are no rendersettings in the stage") {
         UsdStageTranslator(*stage).translateStageToScene(scene);

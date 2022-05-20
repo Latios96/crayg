@@ -5,8 +5,10 @@
 #include "UsdStageTranslator.h"
 #include "UsdCameraTranslator.h"
 #include "UsdSphereLightTranslator.h"
+#include "UsdRectLightTranslator.h"
 #include "UsdMeshTranslator.h"
 #include "Logger.h"
+#include "scene/GroundPlane.h"
 #include <pxr/usd/usd/prim.h>
 #include <pxr/usd/usd/primRange.h>
 #include <fmt/format.h>
@@ -26,6 +28,8 @@ void UsdStageTranslator::translateStageToScene(Scene &scene, const SceneReader::
             translateUsdGeomMesh(scene, defaultMaterial, prim);
         } else if (prim.IsA<pxr::UsdLuxSphereLight>() && primIsVisible(prim)) {
             translateSphereLight(scene, prim);
+        } else if (prim.IsA<pxr::UsdLuxRectLight>() && primIsVisible(prim)) {
+            translateRectLight(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomCamera>() && !translatedCamera
             && cameraPathMatches(prim.GetPath(), readOptions.cameraName)) {
             translateCamera(scene, prim);
@@ -54,6 +58,11 @@ void UsdStageTranslator::translateUsdGeomMesh(Scene &scene,
 
 void UsdStageTranslator::translateSphereLight(Scene &scene, const pxr::UsdPrim &prim) const {
     auto light = UsdSphereLightTranslator(pxr::UsdLuxSphereLight(prim)).translate();
+    scene.addLight(light);
+}
+
+void UsdStageTranslator::translateRectLight(Scene &scene, const pxr::UsdPrim &prim) const {
+    auto light = UsdRectLightTranslator(pxr::UsdLuxRectLight(prim)).translate();
     scene.addLight(light);
 }
 

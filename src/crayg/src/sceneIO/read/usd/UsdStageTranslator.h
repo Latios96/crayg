@@ -26,6 +26,7 @@ class UsdStageTranslator {
     pxr::UsdStage &stage;
     void translateCamera(Scene &scene, const pxr::UsdPrim &prim) const;
     void translateSphereLight(Scene &scene, const pxr::UsdPrim &prim) const;
+    void translateRectLight(Scene &scene, const pxr::UsdPrim &prim) const;
     void translateUsdGeomMesh(Scene &scene,
                               const std::shared_ptr<DiffuseMaterial> &defaultMaterial,
                               const pxr::UsdPrim &prim) const;

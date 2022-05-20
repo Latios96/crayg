@@ -45,6 +45,7 @@ set(UNIT_TEST_LIST
         TestUsdCameraTranslator.cpp
         TestUsdConversions.cpp
         TestUsdMeshTranslator.cpp
+        TestUsdRectLightTranslator.cpp
         TestUsdSphereLightTranslator.cpp
         TestUsdStageTranslator.cpp
         TestUsdTranslatorUtils.cpp

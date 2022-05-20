@@ -104,6 +104,8 @@ set(crayg_SRCS
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/CraygUsdBase.h
+        sceneIO/read/usd/UsdRectLightTranslator.cpp
+        sceneIO/read/usd/UsdRectLightTranslator.h
         sceneIO/read/usd/UsdCameraTranslator.cpp
         sceneIO/read/usd/UsdCameraTranslator.h
         sceneIO/read/usd/UsdConversions.cpp
@@ -144,7 +146,8 @@ set(crayg_SRCS
         utils/RemainingTimeCalculator.h
         utils/StopWatch.h
         utils/ToStringHelper.h
-        utils/utils.h)
+        utils/utils.h
+        )
 
 
 add_library(crayg STATIC
