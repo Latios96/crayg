@@ -9,16 +9,14 @@
 namespace crayg {
 
 float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
-    float r = width * sqrt((double(rand()) / RAND_MAX));
-    float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;
-    Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
-    const Vector3f transformedPosition = getTransform().apply(positionOnPlane);
+    const Vector3f samplePosition = samplePoint();
 
-    const Vector3f shadowVector = (transformedPosition - point).normalize();
-    if (getNormal({0, 0, 0}).scalarProduct(shadowVector) > 0) {
+    const Vector3f shadowVector = (samplePosition - point);
+    const Vector3f normal = getNormal({0, 0, 0});
+    if (normal.scalarProduct(shadowVector) > 0) {
         return Light::FULL_SHADOW;
     }
-    Ray shadowRay(point, shadowVector);
+    Ray shadowRay(point, shadowVector.normalize());
     const Imageable::Intersection intersection = sceneIntersector.intersect(shadowRay);
 
     const bool hasIntersection = intersection.imageable != nullptr;
@@ -32,6 +30,13 @@ float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
     } else {
         return Light::NO_SHADOW;
     }
+}
+Vector3f AreaLight::samplePoint() const {
+    float positionByWidth = ((float) rand() / (RAND_MAX)) * width - width / 2;
+    float positionByHeight = ((float) rand() / (RAND_MAX)) * height - height / 2;
+    Vector3f positionOnPlane = {positionByWidth, positionByHeight, 0};
+    const Vector3f samplePosition = getTransform().apply(positionOnPlane);
+    return samplePosition;
 }
 void AreaLight::serialize(Serializer &serializer) {
     Light::serialize(serializer);
@@ -48,7 +53,7 @@ std::string AreaLight::getType() {
     return "AreaLight";
 }
 Vector3f AreaLight::getNormal(Vector3f point) {
-    return transform.apply({1, 0, 0});
+    return transform.applyForNormal({0, 0, 1});
 }
 
 Imageable::Intersection AreaLight::intersect(Ray ray) {

@@ -22,11 +22,13 @@ class AreaLight : public Light {
     void setWidth(float width);
     float getHeight() const;
     void setHeight(float height);
+    Vector3f samplePoint() const;
  private:
     float width = 1;
     float height = 1;
  protected:
     std::string getType() override;
+
 };
 
 }
