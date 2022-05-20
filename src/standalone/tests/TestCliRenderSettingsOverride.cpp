@@ -28,7 +28,7 @@ TEST_CASE("CliRenderSettingsOverride/hasAnyOverrides") {
 
     SECTION("has no overrides") {
 
-        REQUIRE(CliRenderSettingsOverride().hasAnyOverrides());
+        REQUIRE_FALSE(CliRenderSettingsOverride().hasAnyOverrides());
     }
 }
 
