@@ -74,6 +74,58 @@ class MockSceneIntersector : public SceneIntersector {
     Imageable::Intersection return_value;
 };
 
+struct AreaLightFixture {
+
+    AreaLightFixture() {
+        areaLight = std::make_shared<RectLight>();
+        position = {0, 2, 2};
+        areaLight->setPosition(position);
+        areaLight->setWidth(1);
+        areaLight->setHeight(1);
+        areaLight->setIntensity(1);
+        scene.addLight(areaLight);
+    }
+
+    std::shared_ptr<RectLight> areaLight;
+    Scene scene;
+    Vector3f position;
+};
+
+TEST_CASE("DiskLight::sampleLightShape") {
+    const Vector3f position = {0, 2, 2};
+    const float radius = 2;
+    DiskLight diskLight(Transform::withPosition(position), 1, radius);
+
+
+    SECTION("sampleLightShape should respect radius") {
+        const float realRadius = 2;
+        for (int i = 0; i < 1000; i++) {
+            const Vector3f samplePoint = diskLight.sampleLightShape();
+            REQUIRE(samplePoint.x < (position.x + realRadius));
+            REQUIRE(samplePoint.x > (position.x - realRadius));
+            REQUIRE(samplePoint.y < (position.y + realRadius));
+            REQUIRE(samplePoint.y > (position.y - realRadius));
+            REQUIRE(samplePoint.z == position.z);
+        }
+    }SECTION("sampleLightShape should respect scale") {
+
+        const Transform transform =
+            Transform(Transform::withPosition(position).matrix
+                          * Transform::withScale(1. / 2, 1. / 2, 1. / 2).matrix);
+        diskLight.setTransform(transform);
+        const float realRadius = 1;
+
+        for (int i = 0; i < 1000; i++) {
+            const Vector3f samplePoint = diskLight.sampleLightShape();
+            REQUIRE(samplePoint.x < (position.x + realRadius));
+            REQUIRE(samplePoint.x > (position.x - realRadius));
+            REQUIRE(samplePoint.y < (position.y + realRadius));
+            REQUIRE(samplePoint.y > (position.y - realRadius));
+            REQUIRE(samplePoint.z == position.z);
+        }
+    }
+}
+/*
 TEST_CASE("DiskLight shadowFactor", "[DiskLight]") {
 
     SECTION("Disklight at origin should have full light") {
@@ -200,7 +252,7 @@ TEST_CASE("DiskLight shadowFactor", "[DiskLight]") {
         REQUIRE(shadowFactor == 0);
     }
 
-}
+}*/
 
 TEST_CASE("DiskLight isIntersecting", "[DiskLight]") {
 

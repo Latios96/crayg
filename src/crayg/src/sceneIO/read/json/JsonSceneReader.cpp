@@ -11,7 +11,7 @@
 #include <boost/filesystem.hpp>
 #include <scene/DiffuseMaterial.h>
 #include <scene/ReflectiveMaterial.h>
-#include <scene/AreaLight.h>
+#include <scene/RectLight.h>
 #include <scene/DiskLight.h>
 #include "JsonDeserializer.h"
 #include "utils/StopWatch.h"
@@ -86,8 +86,8 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
             readSceneObject<PointCloud>(scene, obj, materialConnections);
         } else if (type == "Light") {
             readLight<Light>(scene, obj);
-        } else if (type == "AreaLight") {
-            readLight<AreaLight>(scene, obj);
+        } else if (type == "RectLight") {
+            readLight<RectLight>(scene, obj);
         } else if (type == "DiskLight") {
             readLight<DiskLight>(scene, obj);
         } else if (type == "DiffuseMaterial") {

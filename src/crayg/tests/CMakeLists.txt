@@ -28,6 +28,7 @@ set(UNIT_TEST_LIST
         TestProgressReporter.cpp
         TestRay.cpp
         TestReadableFormatter.cpp
+        TestRectLight.cpp
         TestRemainingTimeCalculator.cpp
         TestResolution.cpp
         TestScene.cpp

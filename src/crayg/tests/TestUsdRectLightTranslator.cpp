@@ -16,7 +16,7 @@ TEST_CASE("RectLightTranslatorTranslate") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
 
-    SECTION("should translate rect light to AreaLight") {
+    SECTION("should translate rect light to RectLight") {
         auto usdRectLight = pxr::UsdLuxRectLight::Define(stage, pxr::SdfPath("/usdRectLight"));
         pxr::UsdGeomXformCommonAPI(usdRectLight).SetTranslate(pxr::GfVec3f(1, 2, 3));
         usdRectLight.GetIntensityAttr().Set(3.0f);

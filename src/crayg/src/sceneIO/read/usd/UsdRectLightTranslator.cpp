@@ -13,9 +13,9 @@ UsdRectLightTranslator::UsdRectLightTranslator(const pxr::UsdLuxRectLight &rectL
 
 }
 
-std::shared_ptr<AreaLight> UsdRectLightTranslator::translate() {
+std::shared_ptr<RectLight> UsdRectLightTranslator::translate() {
     Logger::debug("Translating rectLight {}", rectLight.GetPath().GetString());
-    auto areaLight = std::make_shared<AreaLight>();
+    auto areaLight = std::make_shared<RectLight>();
 
     UsdTranslatorUtils::translateTransform(*areaLight, rectLight);
 

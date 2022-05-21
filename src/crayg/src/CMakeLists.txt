@@ -77,6 +77,8 @@ set(crayg_SRCS
         scene/Material.h
         scene/PointCloud.cpp
         scene/PointCloud.h
+        scene/RectLight.cpp
+        scene/RectLight.h
         scene/ReflectiveMaterial.cpp
         scene/ReflectiveMaterial.h
         scene/RenderSettings.cpp
@@ -104,14 +106,14 @@ set(crayg_SRCS
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/CraygUsdBase.h
-        sceneIO/read/usd/UsdRectLightTranslator.cpp
-        sceneIO/read/usd/UsdRectLightTranslator.h
         sceneIO/read/usd/UsdCameraTranslator.cpp
         sceneIO/read/usd/UsdCameraTranslator.h
         sceneIO/read/usd/UsdConversions.cpp
         sceneIO/read/usd/UsdConversions.h
         sceneIO/read/usd/UsdMeshTranslator.cpp
         sceneIO/read/usd/UsdMeshTranslator.h
+        sceneIO/read/usd/UsdRectLightTranslator.cpp
+        sceneIO/read/usd/UsdRectLightTranslator.h
         sceneIO/read/usd/UsdSceneReader.cpp
         sceneIO/read/usd/UsdSceneReader.h
         sceneIO/read/usd/UsdSphereLightTranslator.cpp

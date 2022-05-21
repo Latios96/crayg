@@ -5,22 +5,22 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_DISKLIGHT_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_DISKLIGHT_H_
 
-#include "Light.h"
+#include "RectLight.h"
 
 namespace crayg {
 
-class DiskLight : public Light {
+class DiskLight : public AreaLight {
  public:
     DiskLight();
     DiskLight(const Transform &transform, float intensity, float radius);
     void serialize(Serializer &serializer) override;
     void deserialize(Deserializer &deserializer) override;
-    float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) override;
     Vector3f getNormal(Vector3f point) override;
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     float getRadius() const;
     BoundingBox getBounds() const override;
+    Vector3f sampleLightShape() const override;
  protected:
     std::string getType() override;
  private:

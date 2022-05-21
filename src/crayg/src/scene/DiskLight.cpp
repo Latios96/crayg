@@ -17,31 +17,11 @@ void DiskLight::deserialize(Deserializer &deserializer) {
     Light::deserialize(deserializer);
     radius = deserializer.readFloat("radius");
 }
-float DiskLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
+Vector3f DiskLight::sampleLightShape() const {
     float r = radius * sqrt((double(rand()) / RAND_MAX));
     float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;
     Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
-    const Vector3f transformedPosition = getTransform().apply(positionOnPlane);
-
-    const Vector3f shadowVector = (transformedPosition - point);
-    const Vector3f normal = getNormal({0, 0, 0});
-    if (normal.scalarProduct(shadowVector.normalize()) > 0) {
-        return Light::FULL_SHADOW;
-    }
-    Ray shadowRay(point, shadowVector.normalize());
-    const Imageable::Intersection intersection = sceneIntersector.intersect(shadowRay);
-
-    const bool hasIntersection = intersection.imageable != nullptr;
-    if (hasIntersection) {
-        const bool intersectionIsBehindLight = shadowVector.length() <= intersection.rayParameter;
-        if (intersectionIsBehindLight) {
-            return Light::NO_SHADOW;
-        } else {
-            return Light::FULL_SHADOW;
-        }
-    } else {
-        return Light::NO_SHADOW;
-    }
+    return getTransform().apply(positionOnPlane);
 }
 Vector3f DiskLight::getNormal(Vector3f point) {
     return transform.applyForNormal({1, 0, 0}).normalize();
@@ -83,7 +63,7 @@ bool DiskLight::isIntersecting(Ray ray) {
 std::string DiskLight::getType() {
     return "DiskLight";
 }
-DiskLight::DiskLight(const Transform &transform, float intensity, float radius) : Light(transform, intensity),
+DiskLight::DiskLight(const Transform &transform, float intensity, float radius) : AreaLight(transform, intensity),
                                                                                   radius(radius) {
 
 }
