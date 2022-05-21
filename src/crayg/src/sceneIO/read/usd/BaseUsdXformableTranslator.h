@@ -21,7 +21,7 @@ class BaseUsdXformableTranslator : public BaseUsdTranslator<UsdType, CraygType> 
     std::shared_ptr<CraygType> translate() override {
         auto craygObject = BaseUsdTranslator<UsdType, CraygType>::translate();
 
-        UsdTranslatorUtils::translateTransform(*craygObject, usdPrim);
+        UsdTranslatorUtils::translateTransform(*craygObject, this->usdPrim);
 
         return craygObject;
     }
