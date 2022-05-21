@@ -82,16 +82,16 @@ struct AreaLightFixture {
     Vector3f position;
 };
 
-TEST_CASE("AreaLight::samplePoint") {
+TEST_CASE("AreaLight::sampleLightShape") {
 
     AreaLightFixture areaLightFixture;
 
-    SECTION("samplePoint should respect width and height") {
+    SECTION("sampleLightShape should respect width and height") {
         const float realWidth = 1;
         const float realHeight = 1;
 
         for (int i = 0; i < 1000; i++) {
-            const Vector3f samplePoint = areaLightFixture.areaLight->samplePoint();
+            const Vector3f samplePoint = areaLightFixture.areaLight->sampleLightShape();
             REQUIRE(samplePoint.x < (areaLightFixture.position.x + realWidth / 2));
             REQUIRE(samplePoint.x > (areaLightFixture.position.x - realWidth / 2));
             REQUIRE(samplePoint.y < (areaLightFixture.position.y + realHeight / 2));
@@ -100,7 +100,7 @@ TEST_CASE("AreaLight::samplePoint") {
         }
     }
         // TODO this also needs to be done for DiskLight
-    SECTION("samplePoint should respect scale") {
+    SECTION("sampleLightShape should respect scale") {
         areaLightFixture.areaLight->setWidth(5);
         areaLightFixture.areaLight->setHeight(5);
         const Transform transform =
@@ -111,7 +111,7 @@ TEST_CASE("AreaLight::samplePoint") {
         const float realHeight = 1;
 
         for (int i = 0; i < 1000; i++) {
-            const Vector3f samplePoint = areaLightFixture.areaLight->samplePoint();
+            const Vector3f samplePoint = areaLightFixture.areaLight->sampleLightShape();
             REQUIRE(samplePoint.x < (areaLightFixture.position.x + realWidth / 2));
             REQUIRE(samplePoint.x > (areaLightFixture.position.x - realWidth / 2));
             REQUIRE(samplePoint.y < (areaLightFixture.position.y + realHeight / 2));

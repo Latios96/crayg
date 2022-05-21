@@ -9,7 +9,7 @@
 namespace crayg {
 
 float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
-    const Vector3f samplePosition = samplePoint();
+    const Vector3f samplePosition = sampleLightShape();
 
     const Vector3f shadowVector = (samplePosition - point);
     const Vector3f normal = getNormal({0, 0, 0});
@@ -31,7 +31,7 @@ float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
         return Light::NO_SHADOW;
     }
 }
-Vector3f AreaLight::samplePoint() const {
+Vector3f AreaLight::sampleLightShape() const {
     float positionByWidth = ((float) rand() / (RAND_MAX)) * width - width / 2;
     float positionByHeight = ((float) rand() / (RAND_MAX)) * height - height / 2;
     Vector3f positionOnPlane = {positionByWidth, positionByHeight, 0};
