@@ -65,6 +65,21 @@ bool Camera::operator==(const Camera &rhs) const {
 bool Camera::operator!=(const Camera &rhs) const {
     return !(rhs == *this);
 }
+void Camera::setPosition(const Vector3f &position) {
+    Camera::position = position;
+}
+void Camera::setUserUpVector(const Vector3f &userUpVector) {
+    Camera::userUpVector = userUpVector;
+}
+void Camera::setCenterOfInterest(const Vector3f &centerOfInterest) {
+    Camera::centerOfInterest = centerOfInterest;
+}
+void Camera::setFocalLength(float focalLength) {
+    Camera::focalLength = focalLength;
+}
+void Camera::setFilmbackSize(float filmbackSize) {
+    Camera::filmbackSize = filmbackSize;
+}
 
 }
 

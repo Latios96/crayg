@@ -63,6 +63,12 @@ class Camera : public Serializable {
             .finish();
         return os;
     }
+
+    void setPosition(const Vector3f &position);
+    void setUserUpVector(const Vector3f &userUpVector);
+    void setCenterOfInterest(const Vector3f &centerOfInterest);
+    void setFocalLength(float focalLength);
+    void setFilmbackSize(float filmbackSize);
 };
 
 }

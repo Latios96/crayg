@@ -10,22 +10,34 @@
 
 namespace crayg {
 
-UsdCameraTranslator::UsdCameraTranslator(const pxr::UsdGeomCamera &camera) : usdCamera(camera) {}
-
 std::shared_ptr<Camera> UsdCameraTranslator::translate() {
-    Logger::debug("Translating camera {}", usdCamera.GetPath().GetString());
+    auto camera = BaseUsdTranslator<pxr::UsdGeomCamera, Camera>::translate();
 
-    const pxr::GfMatrix4d matrix = usdCamera.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default());
+    const pxr::GfMatrix4d matrix = usdPrim.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default());
 
     const Vector3f position = UsdConversions::convert(matrix.ExtractTranslation());
+    camera->setPosition(position);
 
-    const auto focalLength = UsdUtils::getAttributeValueAs<float>(usdCamera.GetFocalLengthAttr());
-    const auto filmbackSize = UsdUtils::getAttributeValueAs<float>(usdCamera.GetHorizontalApertureAttr());
-    const auto focusDistance = UsdUtils::getAttributeValueAs<float>(usdCamera.GetFocusDistanceAttr());
+    const auto focalLength = UsdUtils::getAttributeValueAs<float>(usdPrim.GetFocalLengthAttr());
+    camera->setFocalLength(focalLength);
+
+    const auto filmbackSize = UsdUtils::getAttributeValueAs<float>(usdPrim.GetHorizontalApertureAttr());
+    camera->setFilmbackSize(filmbackSize);
+
+    const auto focusDistance = UsdUtils::getAttributeValueAs<float>(usdPrim.GetFocusDistanceAttr());
     const Vector3f centerOfInterest =
         Transform(UsdConversions::convert(matrix)).apply(Vector3f(0, 0, (focusDistance != 0 ? focusDistance : 1)));
+    camera->setCenterOfInterest(centerOfInterest);
 
-    return std::make_shared<Camera>(position, Vector3f(0, 1, 0), centerOfInterest, focalLength, filmbackSize);
+    camera->setUserUpVector({0, 1, 0});
+
+    return camera;
+}
+UsdCameraTranslator::UsdCameraTranslator(const pxr::UsdGeomCamera &camera) : BaseUsdTranslator(camera) {
+
+}
+std::string UsdCameraTranslator::getTranslatedType() {
+    return "camera";
 };
 
 }
