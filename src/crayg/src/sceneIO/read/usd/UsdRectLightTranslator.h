@@ -6,17 +6,18 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRECTLIGHTTRANSLATOR_H_
 
 #include "CraygUsdBase.h"
+#include "BaseUsdXformableTranslator.h"
 #include "scene/RectLight.h"
 #include <pxr/usd/usdLux/rectLight.h>
 
 namespace crayg {
 
-class UsdRectLightTranslator {
+class UsdRectLightTranslator : public BaseUsdXformableTranslator<pxr::UsdLuxRectLight, RectLight> {
  public:
     UsdRectLightTranslator(const pxr::UsdLuxRectLight &rectLight);
-    std::shared_ptr<RectLight> translate();
- private:
-    pxr::UsdLuxRectLight rectLight;
+    std::shared_ptr<RectLight> translate() override;
+ protected:
+    std::string getTranslatedType() override;
 };
 
 } // crayg
