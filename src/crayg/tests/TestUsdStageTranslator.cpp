@@ -7,6 +7,7 @@
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/mesh.h>
+#include <pxr/usd/usdGeom/sphere.h>
 #include <pxr/usd/usdLux/sphereLight.h>
 #include <pxr/usd/usdLux/rectLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
@@ -66,6 +67,14 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
         REQUIRE(scene.owningObjects.size() == 1);
     }
 
+    SECTION("should translate sphere") {
+        auto usdSphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/usdSphere"));
+
+        UsdStageTranslator(*stage).translateStageToScene(scene);
+
+        REQUIRE(scene.owningObjects.size() == 1);
+    }
+
     SECTION("should not translate hidden sphereLight") {
         auto usdSphereLight = pxr::UsdLuxSphereLight::Define(stage, pxr::SdfPath("/usdSphereLight"));
         usdSphereLight.MakeInvisible();
@@ -93,6 +102,14 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
         REQUIRE(scene.lights.size() == 0);
     }
 
+    SECTION("should not translate hidden sphere") {
+        auto usdSphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/usdSphere"));
+        usdSphere.MakeInvisible();
+
+        UsdStageTranslator(*stage).translateStageToScene(scene);
+
+        REQUIRE(scene.owningObjects.size() == 0);
+    }
 
     SECTION("should create default rendersettings if there are no rendersettings in the stage") {
         UsdStageTranslator(*stage).translateStageToScene(scene);

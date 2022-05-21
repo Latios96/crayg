@@ -105,6 +105,8 @@ set(crayg_SRCS
         sceneIO/read/json/JsonSceneReader.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
+        sceneIO/read/usd/BaseUsdTranslator.h
+        sceneIO/read/usd/BaseUsdXformableTranslator.h
         sceneIO/read/usd/CraygUsdBase.h
         sceneIO/read/usd/UsdCameraTranslator.cpp
         sceneIO/read/usd/UsdCameraTranslator.h
