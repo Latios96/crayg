@@ -11,18 +11,18 @@
 namespace crayg {
 
 UsdSphereLightTranslator::UsdSphereLightTranslator(const pxr::UsdLuxSphereLight &sphereLight)
-    : sphereLight(sphereLight) {}
+    : BaseUsdXformableTranslator(sphereLight) {}
 
 std::shared_ptr<Light> UsdSphereLightTranslator::translate() {
-    Logger::debug("Translating sphereLight {}", sphereLight.GetPath().GetString());
+    auto light = BaseUsdXformableTranslator<pxr::UsdLuxSphereLight, Light>::translate();
 
-    auto light = std::make_shared<Light>();
-    UsdTranslatorUtils::translateTransform(*light, sphereLight);
-
-    const auto intensity = UsdUtils::getAttributeValueAs<float>(sphereLight.GetIntensityAttr());
+    const auto intensity = UsdUtils::getAttributeValueAs<float>(usdPrim.GetIntensityAttr());
     light->setIntensity(intensity);
 
     return light;
+}
+std::string UsdSphereLightTranslator::getTranslatedType() {
+    return "sphereLight";
 }
 
 }
