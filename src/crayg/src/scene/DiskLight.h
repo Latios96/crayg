@@ -19,6 +19,7 @@ class DiskLight : public AreaLight {
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     float getRadius() const;
+    void setRadius(float radius);
     BoundingBox getBounds() const override;
     Vector3f sampleLightShape() const override;
  protected:

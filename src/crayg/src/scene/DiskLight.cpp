@@ -73,6 +73,9 @@ float DiskLight::getRadius() const {
 BoundingBox DiskLight::getBounds() const {
     return BoundingBox::fromCenterAndRadius(getPosition(), radius);
 }
+void DiskLight::setRadius(float radius) {
+    DiskLight::radius = radius;
+}
 DiskLight::DiskLight() = default;
 
 }

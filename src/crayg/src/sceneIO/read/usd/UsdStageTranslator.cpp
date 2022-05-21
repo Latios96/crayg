@@ -8,6 +8,7 @@
 #include "UsdRectLightTranslator.h"
 #include "UsdMeshTranslator.h"
 #include "UsdSphereTranslator.h"
+#include "UsdDiskLightTranslator.h"
 #include "Logger.h"
 #include "scene/GroundPlane.h"
 #include <pxr/usd/usd/prim.h>
@@ -32,6 +33,8 @@ void UsdStageTranslator::translateStageToScene(Scene &scene, const SceneReader::
             translateRectLight(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomSphere>() && primIsVisible(prim)) {
             translateSphere(scene, prim);
+        } else if (prim.IsA<pxr::UsdLuxDiskLight>() && primIsVisible(prim)) {
+            translateDiskLight(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomCamera>() && scene.camera == nullptr
             && cameraPathMatches(prim.GetPath(), readOptions.cameraName)) {
             translateCamera(scene, prim);
@@ -83,6 +86,10 @@ bool UsdStageTranslator::cameraPathMatches(pxr::SdfPath path, std::optional<std:
 void UsdStageTranslator::translateSphere(Scene &scene, const pxr::UsdPrim &prim) const {
     auto sphere = UsdSphereTranslator(pxr::UsdGeomSphere(prim)).translate();
     scene.addObject(sphere);
+}
+void UsdStageTranslator::translateDiskLight(Scene &scene, const pxr::UsdPrim &prim) const {
+    auto diskLight = UsdDiskLightTranslator(pxr::UsdLuxDiskLight(prim)).translate();
+    scene.addLight(diskLight);
 }
 
 }
