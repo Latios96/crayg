@@ -7,6 +7,7 @@
 #include "UsdSphereLightTranslator.h"
 #include "UsdRectLightTranslator.h"
 #include "UsdMeshTranslator.h"
+#include "UsdSphereTranslator.h"
 #include "Logger.h"
 #include "scene/GroundPlane.h"
 #include <pxr/usd/usd/prim.h>
@@ -22,7 +23,7 @@ void UsdStageTranslator::translateStageToScene(Scene &scene, const SceneReader::
 
     auto defaultMaterial = std::make_shared<crayg::DiffuseMaterial>("defaultMaterial", crayg::Color::createWhite());
 
-    bool translatedCamera = false;
+    bool translatedCamera = false;// TODO we can also check if scene.camera == nullptr
     for (pxr::UsdPrim prim: stage.TraverseAll()) {
         if (prim.IsA<pxr::UsdGeomMesh>() && primIsVisible(prim)) {
             translateUsdGeomMesh(scene, defaultMaterial, prim);
@@ -30,13 +31,14 @@ void UsdStageTranslator::translateStageToScene(Scene &scene, const SceneReader::
             translateSphereLight(scene, prim);
         } else if (prim.IsA<pxr::UsdLuxRectLight>() && primIsVisible(prim)) {
             translateRectLight(scene, prim);
+        } else if (prim.IsA<pxr::UsdGeomSphere>() && primIsVisible(prim)) {
+            translateSphere(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomCamera>() && !translatedCamera
             && cameraPathMatches(prim.GetPath(), readOptions.cameraName)) {
             translateCamera(scene, prim);
             translatedCamera = true;
         }
     }
-
     const bool noCameraFound = scene.camera == nullptr;
     if (noCameraFound) {
         if (readOptions.cameraName) {
@@ -80,7 +82,13 @@ bool UsdStageTranslator::cameraPathMatches(pxr::SdfPath path, std::optional<std:
     return path.GetString() == cameraPath.value_or(path.GetString());
 }
 
+void UsdStageTranslator::translateSphere(Scene &scene, const pxr::UsdPrim &prim) const {
+    auto sphere = UsdSphereTranslator(pxr::UsdGeomSphere(prim)).translate();
+    scene.addObject(sphere);
 }
+
+}
+
 
 
 

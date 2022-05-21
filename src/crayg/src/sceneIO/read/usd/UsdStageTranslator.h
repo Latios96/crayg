@@ -30,6 +30,7 @@ class UsdStageTranslator {
     void translateUsdGeomMesh(Scene &scene,
                               const std::shared_ptr<DiffuseMaterial> &defaultMaterial,
                               const pxr::UsdPrim &prim) const;
+    void translateSphere(Scene &scene, const pxr::UsdPrim &prim) const;
     bool primIsVisible(pxr::UsdPrim &prim);
     bool cameraPathMatches(pxr::SdfPath path, std::optional<std::string> cameraPath);
 };
