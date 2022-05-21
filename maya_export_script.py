@@ -96,7 +96,7 @@ class TriangleMeshWriter(TransformableWriter):
         print crayg_points
         print face_indexes
         obj_dict['points'] = crayg_points
-        obj_dict['faceIndexes'] = face_indexes
+        obj_dict['faceIndices'] = face_indexes
 
         return obj_dict
 

@@ -12,8 +12,8 @@ TriangleMeshBuilder::TriangleMeshBuilder() {
 std::vector<Vector3f> &crayg::TriangleMeshBuilder::getPoints() {
     return triangleMesh->points;
 }
-std::vector<int> &crayg::TriangleMeshBuilder::faceIndexes() {
-    return triangleMesh->faceIndexes;
+std::vector<int> &crayg::TriangleMeshBuilder::faceIndices() {
+    return triangleMesh->faceIndices;
 }
 std::shared_ptr<TriangleMesh> TriangleMeshBuilder::build() {
     triangleMesh->init();

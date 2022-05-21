@@ -31,7 +31,7 @@ TEST_CASE("TriangleMesh") {
         cube.serialize(s);
 
         //NOTE: this doesnt work correctly on Mac OS
-        //fakeit::Verify(Method(mockSerializer,writeIntArray).Using("faceIndexes", cube.faceIndexes));
+        //fakeit::Verify(Method(mockSerializer,writeIntArray).Using("faceIndices", cube.faceIndices));
         fakeit::Verify(Method(mockSerializer, writeIntArray)).Once();
         fakeit::Verify(Method(mockSerializer, writeVector3fArray)).Once();
         fakeit::Verify(Method(mockSerializer, writeMatrix4x4f).Using("transform", Matrix4x4f()));
@@ -57,9 +57,9 @@ TEST_CASE("TriangleMeshGetBounds") {
     triangleMesh.points.emplace_back(0, 0, 0);
     triangleMesh.points.emplace_back(0, 1, 0);
     triangleMesh.points.emplace_back(1, 0, 0);
-    triangleMesh.faceIndexes.push_back(0);
-    triangleMesh.faceIndexes.push_back(1);
-    triangleMesh.faceIndexes.push_back(2);
+    triangleMesh.faceIndices.push_back(0);
+    triangleMesh.faceIndices.push_back(1);
+    triangleMesh.faceIndices.push_back(2);
     triangleMesh.init();
 
     const BoundingBox boundingBox = triangleMesh.getBounds();

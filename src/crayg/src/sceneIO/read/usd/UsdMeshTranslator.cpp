@@ -30,11 +30,11 @@ std::shared_ptr<TriangleMesh> crayg::UsdMeshTranslator::translate() {
 }
 void crayg::UsdMeshTranslator::translateFaceIndices(std::shared_ptr<TriangleMesh> &triangleMesh,
                                                     pxr::VtVec3iArray &triangleIndices) const {
-    triangleMesh->faceIndexes.reserve(triangleIndices.size());
+    triangleMesh->faceIndices.reserve(triangleIndices.size());
     for (const auto &faceIndex: triangleIndices) {
-        triangleMesh->faceIndexes.push_back(faceIndex[0]);
-        triangleMesh->faceIndexes.push_back(faceIndex[2]);
-        triangleMesh->faceIndexes.push_back(faceIndex[1]);
+        triangleMesh->faceIndices.push_back(faceIndex[0]);
+        triangleMesh->faceIndices.push_back(faceIndex[2]);
+        triangleMesh->faceIndices.push_back(faceIndex[1]);
     }
 }
 void crayg::UsdMeshTranslator::translatePoints(std::shared_ptr<TriangleMesh> &triangleMesh) const {

@@ -13,7 +13,7 @@ class TriangleMeshBuilder {
     TriangleMeshBuilder();
 
     std::vector<Vector3f> &getPoints();
-    std::vector<int> &faceIndexes();
+    std::vector<int> &faceIndices();
     std::shared_ptr<TriangleMesh> build();
  private:
     std::shared_ptr<TriangleMesh> triangleMesh;

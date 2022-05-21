@@ -9,13 +9,13 @@
 namespace crayg {
 
 Vector3f Triangle::v0() const {
-    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex]];
+    return triangleMesh->points[triangleMesh->faceIndices[faceIndex]];
 }
 Vector3f Triangle::v1() const {
-    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 1]];
+    return triangleMesh->points[triangleMesh->faceIndices[faceIndex + 1]];
 }
 Vector3f Triangle::v2() const {
-    return triangleMesh->points[triangleMesh->faceIndexes[faceIndex + 2]];
+    return triangleMesh->points[triangleMesh->faceIndices[faceIndex + 2]];
 }
 
 Triangle::Intersection Triangle::intersect(Ray ray) {
@@ -124,9 +124,9 @@ Triangle::Triangle() {
 Vector3f Triangle::getNormal(Vector3f point) {
     auto barycentric = toBarycentricCoordinates(point);
 
-    auto normalV0 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex]];
-    auto normalV1 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex + 1]];
-    auto normalV2 = triangleMesh->normals[triangleMesh->faceIndexes[faceIndex + 2]];
+    auto normalV0 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex]];
+    auto normalV1 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex + 1]];
+    auto normalV2 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex + 2]];
 
     return interpolateLinear(barycentric, normalV0, normalV1, normalV2).normalize();
 }
