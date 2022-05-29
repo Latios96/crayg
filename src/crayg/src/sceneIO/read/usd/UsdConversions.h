@@ -8,6 +8,7 @@
 #include "CraygUsdBase.h"
 #include <pxr/base/gf/matrix4d.h>
 #include "basics/Matrix4x4f.h"
+#include "basics/Color.h"
 
 namespace crayg {
 
@@ -16,6 +17,7 @@ class UsdConversions {
     static Matrix4x4f convert(const pxr::GfMatrix4d &matrix);
     static Vector3f convert(const pxr::GfVec3f &vector);
     static Vector3f convert(const pxr::GfVec3d &vector);
+    static Color convertColor(const pxr::GfVec3f &color);
 };
 
 };

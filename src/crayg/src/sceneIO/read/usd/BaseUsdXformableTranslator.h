@@ -6,7 +6,6 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDXFORMABLETRANSLATOR_H_
 
 #include <memory>
-#include "Logger.h"
 #include "BaseUsdTranslator.h"
 #include "UsdTranslatorUtils.h"
 

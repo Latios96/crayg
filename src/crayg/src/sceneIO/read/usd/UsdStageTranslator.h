@@ -9,6 +9,7 @@
 #include "scene/Scene.h"
 #include "scene/DiffuseMaterial.h"
 #include "sceneIO/read/SceneReader.h"
+#include "UsdMaterialTranslationCache.h"
 #include <pxr/usd/usd/stage.h>
 #include <optional>
 
@@ -29,11 +30,13 @@ class UsdStageTranslator {
     void translateRectLight(Scene &scene, const pxr::UsdPrim &prim) const;
     void translateUsdGeomMesh(Scene &scene,
                               const std::shared_ptr<DiffuseMaterial> &defaultMaterial,
-                              const pxr::UsdPrim &prim) const;
-    void translateSphere(Scene &scene, const pxr::UsdPrim &prim) const;
+                              const pxr::UsdPrim &prim);
+    void translateSphere(Scene &scene, const pxr::UsdPrim &prim);
     void translateDiskLight(Scene &scene, const pxr::UsdPrim &prim) const;
     bool primIsVisible(pxr::UsdPrim &prim);
     bool cameraPathMatches(pxr::SdfPath path, std::optional<std::string> cameraPath);
+
+    UsdMaterialTranslationCache usdMaterialTranslationCache;
 };
 
 }

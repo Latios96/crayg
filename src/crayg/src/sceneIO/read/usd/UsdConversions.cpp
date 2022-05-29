@@ -34,5 +34,8 @@ Vector3f UsdConversions::convert(const pxr::GfVec3f &vector) {
 Vector3f UsdConversions::convert(const pxr::GfVec3d &vector) {
     return {static_cast<float>(vector[0]), static_cast<float>(vector[1]), -static_cast<float>(vector[2])};
 }
+Color UsdConversions::convertColor(const pxr::GfVec3f &vector) {
+    return {vector[0], vector[1], vector[2]};
+}
 
 };

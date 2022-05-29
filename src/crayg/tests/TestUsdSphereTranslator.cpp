@@ -11,17 +11,19 @@ namespace crayg {
 TEST_CASE("UsdSphereTranslator::translate") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
+    UsdMaterialTranslationCache usdMaterialTranslationCache;
 
     SECTION("should translate sphere") {
         auto usdSphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/usdSphere"));
         pxr::UsdGeomXformCommonAPI(usdSphere).SetTranslate(pxr::GfVec3f(1, 2, 3));
         usdSphere.GetRadiusAttr().Set(3.0);
 
-        UsdSphereTranslator usdSphereTranslator(usdSphere);
+        UsdSphereTranslator usdSphereTranslator(usdSphere, usdMaterialTranslationCache);
         auto sphere = usdSphereTranslator.translate();
 
         REQUIRE(sphere->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(sphere->getRadius() == 3);
+        REQUIRE(sphere->getMaterial()->getName() == "defaultMaterial");
     }
 }
 

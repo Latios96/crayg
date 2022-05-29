@@ -17,7 +17,7 @@ class BaseUsdTranslator {
     BaseUsdTranslator(const UsdType &usdPrim) : usdPrim(usdPrim) {
     }
     virtual std::shared_ptr<CraygType> translate() {
-        Logger::debug("Translating {} {}", getTranslatedType(), usdPrim.GetPath().GetString());
+        Logger::info("Translating {} {}", getTranslatedType(), usdPrim.GetPath().GetString());
 
         auto craygObject = std::make_shared<CraygType>();
 

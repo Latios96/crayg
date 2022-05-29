@@ -7,8 +7,12 @@
 
 namespace crayg {
 
+UsdSphereTranslator::UsdSphereTranslator(const pxr::UsdGeomSphere &usdPrim,
+                                         UsdMaterialTranslationCache &usdMaterialTranslationCache)
+    : BaseUsdImageableTranslator(usdPrim, usdMaterialTranslationCache) {}
+
 std::shared_ptr<Sphere> UsdSphereTranslator::translate() {
-    auto sphere = BaseUsdXformableTranslator<pxr::UsdGeomSphere, Sphere>::translate();
+    auto sphere = BaseUsdImageableTranslator<pxr::UsdGeomSphere, Sphere>::translate();
 
     const auto radius = UsdUtils::getAttributeValueAs<double>(usdPrim.GetRadiusAttr());
     sphere->setRadius(static_cast<float>(radius));

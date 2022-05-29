@@ -15,6 +15,7 @@ namespace crayg {
 TEST_CASE("MeshTranslatorTranslate") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
+    UsdMaterialTranslationCache usdMaterialTranslationCache;
 
     SECTION("should translate quad plane") {
         auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
@@ -26,13 +27,14 @@ TEST_CASE("MeshTranslatorTranslate") {
         pxr::VtIntArray faceVertexIndices({0, 1, 3, 2});
         usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
 
-        UsdMeshTranslator meshTranslator(usdGeomMesh);
+        UsdMeshTranslator meshTranslator(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = meshTranslator.translate();
 
         REQUIRE(triangleMesh->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(triangleMesh->points
                     == std::vector<Vector3f>({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
         REQUIRE(triangleMesh->faceIndices == std::vector<int>({0, 3, 1, 0, 2, 3}));
+        REQUIRE(triangleMesh->getMaterial()->getName() == "defaultMaterial");
     }
 
     SECTION("should translate triangle plane") {
@@ -45,13 +47,14 @@ TEST_CASE("MeshTranslatorTranslate") {
         pxr::VtIntArray faceVertexIndices({0, 1, 2, 2, 1, 3});
         usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
 
-        UsdMeshTranslator meshTranslator(usdGeomMesh);
+        UsdMeshTranslator meshTranslator(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = meshTranslator.translate();
 
         REQUIRE(triangleMesh->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(triangleMesh->points
                     == std::vector<Vector3f>({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
         REQUIRE(triangleMesh->faceIndices == std::vector<int>({0, 2, 1, 2, 3, 1}));
+        REQUIRE(triangleMesh->getMaterial()->getName() == "defaultMaterial");
     }
 
 }

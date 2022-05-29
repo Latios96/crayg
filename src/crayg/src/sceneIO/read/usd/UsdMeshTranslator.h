@@ -6,15 +6,15 @@
 #define CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_
 
 #include "CraygUsdBase.h"
-#include "BaseUsdXformableTranslator.h"
+#include "BaseUsdImageableTranslator.h"
 #include <pxr/usd/usdGeom/mesh.h>
 #include "scene/TriangleMesh.h"
 
 namespace crayg {
 
-class UsdMeshTranslator : public BaseUsdXformableTranslator<pxr::UsdGeomMesh, TriangleMesh> {
+class UsdMeshTranslator : public BaseUsdImageableTranslator<pxr::UsdGeomMesh, TriangleMesh> {
  public:
-    explicit UsdMeshTranslator(const pxr::UsdGeomMesh &usdGeomMesh);
+    UsdMeshTranslator(const pxr::UsdGeomMesh &usdPrim, UsdMaterialTranslationCache &usdMaterialTranslationCache);
     std::shared_ptr<TriangleMesh> translate() override;
  protected:
     std::string getTranslatedType() override;

@@ -1,5 +1,6 @@
 set(UNIT_TEST_LIST
         TestAreaLight.cpp
+        TestBaseUsdImageableTranslator.cpp
         TestBaseUsdTranslator.cpp
         TestBaseUsdXformableTranslator.cpp
         TestBmpImageWriter.cpp
@@ -48,6 +49,7 @@ set(UNIT_TEST_LIST
         TestUsdCameraTranslator.cpp
         TestUsdConversions.cpp
         TestUsdDiskLightTranslator.cpp
+        TestUsdMaterialTranslationCache.cpp
         TestUsdMeshTranslator.cpp
         TestUsdRectLightTranslator.cpp
         TestUsdSphereLightTranslator.cpp

@@ -57,4 +57,15 @@ TEST_CASE("ConvertVec3f") {
     }
 }
 
+TEST_CASE("convertColor") {
+    SECTION("should convert Vec3f to Color") {
+        const pxr::GfVec3f colorToConvert(1, 2, 3);
+
+        const Color convertedColor = UsdConversions::convertColor(colorToConvert);
+
+        REQUIRE(convertedColor == Color(1, 2, 3));
+    }
+
+}
+
 }

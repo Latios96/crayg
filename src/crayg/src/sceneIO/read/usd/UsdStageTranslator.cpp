@@ -52,10 +52,9 @@ void UsdStageTranslator::translateStageToScene(Scene &scene, const SceneReader::
 
 void UsdStageTranslator::translateUsdGeomMesh(Scene &scene,
                                               const std::shared_ptr<DiffuseMaterial> &defaultMaterial,
-                                              const pxr::UsdPrim &prim) const {
-    auto triangleMesh = UsdMeshTranslator(pxr::UsdGeomMesh(prim)).translate();
+                                              const pxr::UsdPrim &prim) {
+    auto triangleMesh = UsdMeshTranslator(pxr::UsdGeomMesh(prim), usdMaterialTranslationCache).translate();
     triangleMesh->init();
-    triangleMesh->setMaterial(defaultMaterial);
     scene.addObject(triangleMesh);
 }
 
@@ -83,8 +82,8 @@ bool UsdStageTranslator::cameraPathMatches(pxr::SdfPath path, std::optional<std:
     return path.GetString() == cameraPath.value_or(path.GetString());
 }
 
-void UsdStageTranslator::translateSphere(Scene &scene, const pxr::UsdPrim &prim) const {
-    auto sphere = UsdSphereTranslator(pxr::UsdGeomSphere(prim)).translate();
+void UsdStageTranslator::translateSphere(Scene &scene, const pxr::UsdPrim &prim) {
+    auto sphere = UsdSphereTranslator(pxr::UsdGeomSphere(prim), usdMaterialTranslationCache).translate();
     scene.addObject(sphere);
 }
 void UsdStageTranslator::translateDiskLight(Scene &scene, const pxr::UsdPrim &prim) const {

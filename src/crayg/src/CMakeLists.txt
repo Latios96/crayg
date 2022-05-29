@@ -105,6 +105,7 @@ set(crayg_SRCS
         sceneIO/read/json/JsonSceneReader.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
+        sceneIO/read/usd/BaseUsdImageableTranslator.h
         sceneIO/read/usd/BaseUsdTranslator.h
         sceneIO/read/usd/BaseUsdXformableTranslator.h
         sceneIO/read/usd/CraygUsdBase.h
@@ -114,6 +115,8 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdConversions.h
         sceneIO/read/usd/UsdDiskLightTranslator.cpp
         sceneIO/read/usd/UsdDiskLightTranslator.h
+        sceneIO/read/usd/UsdMaterialTranslationCache.cpp
+        sceneIO/read/usd/UsdMaterialTranslationCache.h
         sceneIO/read/usd/UsdMeshTranslator.cpp
         sceneIO/read/usd/UsdMeshTranslator.h
         sceneIO/read/usd/UsdRectLightTranslator.cpp

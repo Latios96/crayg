@@ -7,17 +7,15 @@
 #include "UsdMeshTranslator.h"
 #include "UsdUtils.h"
 #include "UsdConversions.h"
-#include "UsdTranslatorUtils.h"
-#include "Logger.h"
 
 namespace crayg {
 
-UsdMeshTranslator::UsdMeshTranslator(const pxr::UsdGeomMesh &usdGeomMesh) : BaseUsdXformableTranslator(usdGeomMesh) {
-
-}
+UsdMeshTranslator::UsdMeshTranslator(const pxr::UsdGeomMesh &usdPrim,
+                                     UsdMaterialTranslationCache &usdMaterialTranslationCache)
+    : BaseUsdImageableTranslator(usdPrim, usdMaterialTranslationCache) {}
 
 std::shared_ptr<TriangleMesh> crayg::UsdMeshTranslator::translate() {
-    auto triangleMesh = BaseUsdXformableTranslator<pxr::UsdGeomMesh, TriangleMesh>::translate();
+    auto triangleMesh = BaseUsdImageableTranslator<pxr::UsdGeomMesh, TriangleMesh>::translate();
 
     pxr::VtVec3iArray triangleIndices;
     computeTriangleIndices(triangleIndices);
@@ -65,3 +63,4 @@ std::string UsdMeshTranslator::getTranslatedType() {
 }
 
 }
+

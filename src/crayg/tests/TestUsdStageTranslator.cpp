@@ -68,6 +68,23 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
         REQUIRE(scene.owningObjects.size() == 1);
     }
 
+    SECTION("should not override material for mesh") {
+        auto usdMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
+        auto usdShadeMaterial = pxr::UsdShadeMaterial::Define(stage, pxr::SdfPath("/material"));
+        auto usdShadeShader = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/material/shader"));
+        pxr::UsdShadeMaterialBindingAPI bindingApi(usdMesh.GetPrim());
+        bindingApi.Bind(usdShadeMaterial);
+        usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
+        usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"),
+                                   pxr::SdfValueTypeNames->Color3f).Set(pxr::GfVec3f(0.5f));
+        usdShadeMaterial.CreateSurfaceOutput().ConnectToSource(usdShadeShader.ConnectableAPI(),
+                                                               pxr::TfToken("surface"));
+
+        UsdStageTranslator(*stage).translateStageToScene(scene);
+
+        REQUIRE(scene.owningObjects[0]->getMaterial()->getName()=="/material");
+    }
+
     SECTION("should translate sphere") {
         auto usdSphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/usdSphere"));
 
