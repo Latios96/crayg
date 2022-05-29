@@ -121,6 +121,8 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdMeshTranslator.h
         sceneIO/read/usd/UsdRectLightTranslator.cpp
         sceneIO/read/usd/UsdRectLightTranslator.h
+        sceneIO/read/usd/UsdRenderSettingsTranslator.cpp
+        sceneIO/read/usd/UsdRenderSettingsTranslator.h
         sceneIO/read/usd/UsdSceneReader.cpp
         sceneIO/read/usd/UsdSceneReader.h
         sceneIO/read/usd/UsdSphereLightTranslator.cpp

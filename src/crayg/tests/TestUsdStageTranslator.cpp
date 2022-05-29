@@ -12,6 +12,7 @@
 #include <pxr/usd/usdLux/rectLight.h>
 #include <pxr/usd/usdLux/diskLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
+#include <pxr/usd/usdRender/settings.h>
 
 namespace crayg {
 
@@ -150,6 +151,16 @@ TEST_CASE("UsdStageTranslator/translateStageToScene") {
         UsdStageTranslator(*stage).translateStageToScene(scene);
 
         REQUIRE(scene.renderSettings == RenderSettings(Resolution(1280, 720), 4));
+    }
+
+    SECTION("should read rendersettings if defined") {
+        auto usdRenderSettings = pxr::UsdRenderSettings::Define(stage, pxr::SdfPath("/Render/settings"));
+        usdRenderSettings.GetResolutionAttr().Set(pxr::GfVec2i(800, 600));
+        usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("maxSamples"), pxr::SdfValueTypeNames->Int).Set(2);
+
+        UsdStageTranslator(*stage).translateStageToScene(scene);
+
+        REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600), 2));
     }
 
     SECTION("providing a cameraName in translationOptions should use this camera") {

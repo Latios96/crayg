@@ -9,6 +9,7 @@
 #include "UsdMeshTranslator.h"
 #include "UsdSphereTranslator.h"
 #include "UsdDiskLightTranslator.h"
+#include "UsdRenderSettingsTranslator.h"
 #include "Logger.h"
 #include "scene/GroundPlane.h"
 #include <pxr/usd/usd/prim.h>
@@ -20,7 +21,7 @@ namespace crayg {
 UsdStageTranslator::UsdStageTranslator(pxr::UsdStage &stage) : stage(stage) {}
 
 void UsdStageTranslator::translateStageToScene(Scene &scene, const SceneReader::ReadOptions &readOptions) {
-    scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4);
+    translateRenderSettings(scene);
 
     auto defaultMaterial = std::make_shared<crayg::DiffuseMaterial>("defaultMaterial", crayg::Color::createWhite());
 
@@ -86,9 +87,25 @@ void UsdStageTranslator::translateSphere(Scene &scene, const pxr::UsdPrim &prim)
     auto sphere = UsdSphereTranslator(pxr::UsdGeomSphere(prim), usdMaterialTranslationCache).translate();
     scene.addObject(sphere);
 }
+
 void UsdStageTranslator::translateDiskLight(Scene &scene, const pxr::UsdPrim &prim) const {
     auto diskLight = UsdDiskLightTranslator(pxr::UsdLuxDiskLight(prim)).translate();
     scene.addLight(diskLight);
+}
+
+void UsdStageTranslator::translateRenderSettings(Scene &scene) {
+    const pxr::UsdPrim renderPrim = stage.GetPrimAtPath(pxr::SdfPath("/Render"));
+    if (!renderPrim) {
+        scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4);
+        return;
+    }
+    for (pxr::UsdPrim prim: renderPrim.GetDescendants()) {
+        if (prim.IsA<pxr::UsdRenderSettings>()) {
+            scene.renderSettings = *UsdRenderSettingsTranslator(pxr::UsdRenderSettings(prim)).translate();
+            return;
+        }
+    }
+    scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4);
 }
 
 }

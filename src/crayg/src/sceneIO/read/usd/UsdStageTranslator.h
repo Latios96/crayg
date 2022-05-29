@@ -33,6 +33,7 @@ class UsdStageTranslator {
                               const pxr::UsdPrim &prim);
     void translateSphere(Scene &scene, const pxr::UsdPrim &prim);
     void translateDiskLight(Scene &scene, const pxr::UsdPrim &prim) const;
+    void translateRenderSettings(Scene &scene);
     bool primIsVisible(pxr::UsdPrim &prim);
     bool cameraPathMatches(pxr::SdfPath path, std::optional<std::string> cameraPath);
 

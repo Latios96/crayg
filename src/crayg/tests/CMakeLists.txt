@@ -52,6 +52,7 @@ set(UNIT_TEST_LIST
         TestUsdMaterialTranslationCache.cpp
         TestUsdMeshTranslator.cpp
         TestUsdRectLightTranslator.cpp
+        TestUsdRenderSettingsTranslator.cpp
         TestUsdSphereLightTranslator.cpp
         TestUsdSphereTranslator.cpp
         TestUsdStageTranslator.cpp
