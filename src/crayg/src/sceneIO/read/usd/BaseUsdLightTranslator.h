@@ -23,6 +23,8 @@ class BaseUsdLightTranslator : public BaseUsdXformableTranslator<UsdType, CraygT
         const auto intensity = UsdUtils::getAttributeValueAs<float>(usdPrim.GetIntensityAttr());
         craygObject->setIntensity(intensity);
 
+        craygObject->setName(this->usdPrim.GetPrim().GetPath().GetString());
+
         return craygObject;
     }
 };

@@ -25,6 +25,14 @@ void SceneObject::deserialize(Deserializer &deserializer) {
     transform = Transform(deserializer.readMatrix4x4f("transform"));
 }
 
+const std::string &SceneObject::getName() const {
+    return name;
+}
+
+void SceneObject::setName(const std::string &name) {
+    SceneObject::name = name;
+}
+
 SceneObject::SceneObject() = default;
 
 }

@@ -21,6 +21,12 @@ class SceneObject : public Imageable,
     void serialize(Serializer &serializer) override;
     void deserialize(Deserializer &deserializer) override;
     virtual ~SceneObject() = default;
+
+    const std::string &getName() const;
+    void setName(const std::string &name);
+
+ private:
+    std::string name;
 };
 
 }

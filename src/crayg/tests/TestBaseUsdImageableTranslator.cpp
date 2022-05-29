@@ -32,6 +32,7 @@ TEST_CASE("BaseUsdImageableTranslator::translate") {
         auto sphere = dummyBaseTranslator.translate();
 
         REQUIRE(sphere->getMaterial()->getName() == "defaultMaterial");
+        REQUIRE(sphere->getName() == "/usdSphere");
     }
 }
 

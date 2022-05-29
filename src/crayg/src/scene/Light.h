@@ -24,6 +24,8 @@ class Light : public Serializable, public Transformable, public Imageable {
     BoundingBox getBounds() const override;
 
     void setIntensity(float intensity);
+    const std::string &getName() const;
+    void setName(const std::string &name);
 
     virtual float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point);
     Vector3f getNormal(Vector3f point) override;
@@ -32,6 +34,7 @@ class Light : public Serializable, public Transformable, public Imageable {
     void beforeRender() override;
  private:
     float intensity = 1;
+    std::string name;
  protected:
     constexpr static const float NO_SHADOW = 1.0f;
     constexpr static const float FULL_SHADOW = 0.0f;

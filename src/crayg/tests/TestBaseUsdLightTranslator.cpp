@@ -34,6 +34,7 @@ TEST_CASE("BaseUsdLightTranslator::translator") {
 
         REQUIRE(light->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(light->getIntensity() == 3);
+        REQUIRE(light->getName() == "/usdDiskLight");
     }
 
 }

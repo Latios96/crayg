@@ -69,6 +69,12 @@ Light::Light(const Transform &transform, float intensity) : Transformable(transf
 BoundingBox Light::getBounds() const {
     return BoundingBox();
 }
+const std::string &Light::getName() const {
+    return name;
+}
+void Light::setName(const std::string &name) {
+    Light::name = name;
+}
 Light::Light() = default;
 
 }

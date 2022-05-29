@@ -23,7 +23,8 @@ class BaseUsdImageableTranslator : public BaseUsdXformableTranslator<UsdType, Cr
         auto craygObject = BaseUsdXformableTranslator<UsdType, CraygType>::translate();
 
         const pxr::UsdPrim &prim = this->usdPrim.GetPrim();
-        craygObject->setMaterial(usdMaterialTranslationCache.getTranslatedPrimMaterial(prim)); // todo test
+        craygObject->setMaterial(usdMaterialTranslationCache.getTranslatedPrimMaterial(prim));
+        craygObject->setName(this->usdPrim.GetPrim().GetPath().GetString());
 
         return craygObject;
     }
