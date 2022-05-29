@@ -20,7 +20,7 @@ class BaseUsdLightTranslator : public BaseUsdXformableTranslator<UsdType, CraygT
     std::shared_ptr<CraygType> translate() override {
         auto craygObject = BaseUsdXformableTranslator<UsdType, CraygType>::translate();
 
-        const auto intensity = UsdUtils::getAttributeValueAs<float>(usdPrim.GetIntensityAttr());
+        const auto intensity = UsdUtils::getAttributeValueAs<float>(this->usdPrim.GetIntensityAttr());
         craygObject->setIntensity(intensity);
 
         craygObject->setName(this->usdPrim.GetPrim().GetPath().GetString());
