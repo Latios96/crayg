@@ -106,6 +106,7 @@ set(crayg_SRCS
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/BaseUsdImageableTranslator.h
+        sceneIO/read/usd/BaseUsdLightTranslator.h
         sceneIO/read/usd/BaseUsdTranslator.h
         sceneIO/read/usd/BaseUsdXformableTranslator.h
         sceneIO/read/usd/CraygUsdBase.h

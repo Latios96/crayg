@@ -6,13 +6,13 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDDISKLIGHTTRANSLATOR_H_
 
 #include "CraygUsdBase.h"
-#include "BaseUsdXformableTranslator.h"
+#include "BaseUsdLightTranslator.h"
 #include "scene/DiskLight.h"
 #include <pxr/usd/usdLux/diskLight.h>
 
 namespace crayg {
 
-class UsdDiskLightTranslator : public BaseUsdXformableTranslator<pxr::UsdLuxDiskLight, DiskLight> {
+class UsdDiskLightTranslator : public BaseUsdLightTranslator<pxr::UsdLuxDiskLight, DiskLight> {
  public:
     UsdDiskLightTranslator(const pxr::UsdLuxDiskLight &diskLight);
     std::shared_ptr<DiskLight> translate() override;

@@ -9,12 +9,12 @@
 
 namespace crayg {
 
-UsdRectLightTranslator::UsdRectLightTranslator(const pxr::UsdLuxRectLight &rectLight) : BaseUsdXformableTranslator(
+UsdRectLightTranslator::UsdRectLightTranslator(const pxr::UsdLuxRectLight &rectLight) : BaseUsdLightTranslator(
     rectLight) {
 }
 
 std::shared_ptr<RectLight> UsdRectLightTranslator::translate() {
-    auto areaLight = BaseUsdXformableTranslator<pxr::UsdLuxRectLight, RectLight>::translate();
+    auto areaLight = BaseUsdLightTranslator<pxr::UsdLuxRectLight, RectLight>::translate();
 
     const auto intensity = UsdUtils::getAttributeValueAs<float>(usdPrim.GetIntensityAttr());
     areaLight->setIntensity(intensity);

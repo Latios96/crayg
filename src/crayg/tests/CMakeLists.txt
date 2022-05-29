@@ -1,6 +1,7 @@
 set(UNIT_TEST_LIST
         TestAreaLight.cpp
         TestBaseUsdImageableTranslator.cpp
+        TestBaseUsdLightTranslator.cpp
         TestBaseUsdTranslator.cpp
         TestBaseUsdXformableTranslator.cpp
         TestBmpImageWriter.cpp
