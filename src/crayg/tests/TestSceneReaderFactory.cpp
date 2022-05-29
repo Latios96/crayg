@@ -26,6 +26,12 @@ TEST_CASE("TestSceneReaderFactory/createSceneReader") {
         REQUIRE(reader != nullptr);
     }
 
+    SECTION("should return SceneReader for .usdc") {
+        auto reader = SceneReaderFactory::createSceneReader("test.usdc", scene);
+
+        REQUIRE(reader != nullptr);
+    }
+
     SECTION("should throw exception for unsupported extension") {
         REQUIRE_THROWS_AS(SceneReaderFactory::createSceneReader("test.unkown", scene), std::runtime_error);
     }
