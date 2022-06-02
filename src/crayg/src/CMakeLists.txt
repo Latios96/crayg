@@ -112,8 +112,8 @@ set(crayg_SRCS
         sceneIO/usd/CraygUsdBase.h
         sceneIO/read/usd/UsdCameraReader.cpp
         sceneIO/read/usd/UsdCameraReader.h
-        sceneIO/read/usd/UsdConversions.cpp
-        sceneIO/read/usd/UsdConversions.h
+        sceneIO/usd/UsdConversions.cpp
+        sceneIO/usd/UsdConversions.h
         sceneIO/read/usd/UsdDiskLightReader.cpp
         sceneIO/read/usd/UsdDiskLightReader.h
         sceneIO/read/usd/UsdMaterialReadCache.cpp
