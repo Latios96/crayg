@@ -5,7 +5,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRENDERSETTINGSTRANSLATOR_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRENDERSETTINGSTRANSLATOR_H_
 
-#include "CraygUsdBase.h"
+#include "sceneIO/CraygUsdBase.h"
 #include "BaseUsdTranslator.h"
 #include <pxr/usd/usdRender/settings.h>
 #include "scene/RenderSettings.h"

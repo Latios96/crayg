@@ -5,7 +5,7 @@
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDTRANSLATORUTILS_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDTRANSLATORUTILS_H_
 
-#include "CraygUsdBase.h"
+#include "sceneIO/CraygUsdBase.h"
 #include <pxr/usd/usdGeom/xformable.h>
 #include "scene/Transformable.h"
 

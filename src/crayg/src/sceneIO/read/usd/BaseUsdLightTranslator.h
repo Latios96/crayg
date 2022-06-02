@@ -5,7 +5,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDLIGHTTRANSLATOR_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDLIGHTTRANSLATOR_H_
 
-#include "CraygUsdBase.h"
+#include "sceneIO/CraygUsdBase.h"
 #include "BaseUsdXformableTranslator.h"
 #include "UsdUtils.h"
 
