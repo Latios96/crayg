@@ -1,9 +1,9 @@
 set(UNIT_TEST_LIST
         TestAreaLight.cpp
-        TestBaseUsdImageableTranslator.cpp
-        TestBaseUsdLightTranslator.cpp
-        TestBaseUsdTranslator.cpp
-        TestBaseUsdXformableTranslator.cpp
+        TestBaseUsdImageableReader.cpp
+        TestBaseUsdLightReader.cpp
+        TestBaseUsdReader.cpp
+        TestBaseUsdXformableReader.cpp
         TestBmpImageWriter.cpp
         TestBoundingBox.cpp
         TestBucketImageBuffer.cpp
@@ -47,17 +47,17 @@ set(UNIT_TEST_LIST
         TestTriangle.cpp
         TestTriangleMesh.cpp
         TestUnitImageSampler.cpp
-        TestUsdCameraTranslator.cpp
+        TestUsdCameraReader.cpp
         TestUsdConversions.cpp
-        TestUsdDiskLightTranslator.cpp
-        TestUsdMaterialTranslationCache.cpp
-        TestUsdMeshTranslator.cpp
-        TestUsdRectLightTranslator.cpp
-        TestUsdRenderSettingsTranslator.cpp
-        TestUsdSphereLightTranslator.cpp
-        TestUsdSphereTranslator.cpp
-        TestUsdStageTranslator.cpp
-        TestUsdTranslatorUtils.cpp
+        TestUsdDiskLightReader.cpp
+        TestUsdMaterialReadCache.cpp
+        TestUsdMeshReader.cpp
+        TestUsdRectLightReader.cpp
+        TestUsdRenderSettingsReader.cpp
+        TestUsdSphereLightReader.cpp
+        TestUsdSphereReader.cpp
+        TestUsdStageReader.cpp
+        TestUsdReadUtils.cpp
         TestVector.cpp
         )
 

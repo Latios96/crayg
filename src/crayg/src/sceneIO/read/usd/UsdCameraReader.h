@@ -1,0 +1,26 @@
+//
+// Created by Jan on 28.10.2021.
+//
+
+#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
+#define CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
+
+#include "sceneIO/CraygUsdBase.h"
+#include "BaseUsdXformableReader.h"
+#include <pxr/usd/usdGeom/camera.h>
+#include "scene/Camera.h"
+
+
+namespace crayg {
+
+class UsdCameraReader : public BaseUsdXformableReader<pxr::UsdGeomCamera, Camera> {
+ public:
+    explicit UsdCameraReader(const pxr::UsdGeomCamera &camera);
+    std::shared_ptr<Camera> read() override;
+ protected:
+    std::string getTranslatedType() override;
+};
+
+}
+
+#endif //CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_

@@ -105,35 +105,35 @@ set(crayg_SRCS
         sceneIO/read/json/JsonSceneReader.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
-        sceneIO/read/usd/BaseUsdImageableTranslator.h
-        sceneIO/read/usd/BaseUsdLightTranslator.h
-        sceneIO/read/usd/BaseUsdTranslator.h
-        sceneIO/read/usd/BaseUsdXformableTranslator.h
+        sceneIO/read/usd/BaseUsdImageableReader.h
+        sceneIO/read/usd/BaseUsdLightReader.h
+        sceneIO/read/usd/BaseUsdReader.h
+        sceneIO/read/usd/BaseUsdXformableReader.h
         sceneIO/CraygUsdBase.h
-        sceneIO/read/usd/UsdCameraTranslator.cpp
-        sceneIO/read/usd/UsdCameraTranslator.h
+        sceneIO/read/usd/UsdCameraReader.cpp
+        sceneIO/read/usd/UsdCameraReader.h
         sceneIO/read/usd/UsdConversions.cpp
         sceneIO/read/usd/UsdConversions.h
-        sceneIO/read/usd/UsdDiskLightTranslator.cpp
-        sceneIO/read/usd/UsdDiskLightTranslator.h
-        sceneIO/read/usd/UsdMaterialTranslationCache.cpp
-        sceneIO/read/usd/UsdMaterialTranslationCache.h
-        sceneIO/read/usd/UsdMeshTranslator.cpp
-        sceneIO/read/usd/UsdMeshTranslator.h
-        sceneIO/read/usd/UsdRectLightTranslator.cpp
-        sceneIO/read/usd/UsdRectLightTranslator.h
-        sceneIO/read/usd/UsdRenderSettingsTranslator.cpp
-        sceneIO/read/usd/UsdRenderSettingsTranslator.h
+        sceneIO/read/usd/UsdDiskLightReader.cpp
+        sceneIO/read/usd/UsdDiskLightReader.h
+        sceneIO/read/usd/UsdMaterialReadCache.cpp
+        sceneIO/read/usd/UsdMaterialReadCache.h
+        sceneIO/read/usd/UsdMeshReader.cpp
+        sceneIO/read/usd/UsdMeshReader.h
+        sceneIO/read/usd/UsdRectLightReader.cpp
+        sceneIO/read/usd/UsdRectLightReader.h
+        sceneIO/read/usd/UsdRenderSettingsReader.cpp
+        sceneIO/read/usd/UsdRenderSettingsReader.h
         sceneIO/read/usd/UsdSceneReader.cpp
         sceneIO/read/usd/UsdSceneReader.h
-        sceneIO/read/usd/UsdSphereLightTranslator.cpp
-        sceneIO/read/usd/UsdSphereLightTranslator.h
-        sceneIO/read/usd/UsdSphereTranslator.cpp
-        sceneIO/read/usd/UsdSphereTranslator.h
-        sceneIO/read/usd/UsdStageTranslator.cpp
-        sceneIO/read/usd/UsdStageTranslator.h
-        sceneIO/read/usd/UsdTranslatorUtils.cpp
-        sceneIO/read/usd/UsdTranslatorUtils.h
+        sceneIO/read/usd/UsdSphereLightReader.cpp
+        sceneIO/read/usd/UsdSphereLightReader.h
+        sceneIO/read/usd/UsdSphereReader.cpp
+        sceneIO/read/usd/UsdSphereReader.h
+        sceneIO/read/usd/UsdStageReader.cpp
+        sceneIO/read/usd/UsdStageReader.h
+        sceneIO/read/usd/UsdReadUtils.cpp
+        sceneIO/read/usd/UsdReadUtils.h
         sceneIO/read/usd/UsdUtils.h
         sceneIO/SceneReaderFactory.cpp
         sceneIO/SceneReaderFactory.h

@@ -3,7 +3,7 @@
 //
 
 #include "sceneIO/read/usd/UsdSceneReader.h"
-#include "UsdStageTranslator.h"
+#include "UsdStageReader.h"
 #include <pxr/usd/usd/stage.h>
 
 namespace crayg {
@@ -15,8 +15,8 @@ UsdSceneReader::UsdSceneReader(const std::string &path, Scene &scene, const Scen
 
 void UsdSceneReader::read() {
     auto stage = pxr::UsdStage::Open(path);
-    UsdStageTranslator translator(*stage);
-    translator.translateStageToScene(scene, readOptions);
+    UsdStageReader translator(*stage);
+    translator.readStageToScene(scene, readOptions);
 }
 
 }
