@@ -1,0 +1,43 @@
+//
+// Created by Jan on 21.05.2022.
+//
+#include <catch2/catch.hpp>
+#include "scene/Sphere.h"
+#include "sceneIO/write/usd/BaseUsdTransformableWriter.h"
+#include "sceneIO/usd/UsdUtils.h"
+#include <pxr/usd/usd/stage.h>
+#include <pxr/usd/usdGeom/sphere.h>
+#include <pxr/usd/usdGeom/xformCommonAPI.h>
+
+namespace crayg {
+
+TEST_CASE("BaseUsdTransformableWriter::write") {
+
+    class DummyBaseWriter : public BaseUsdTransformableWriter<pxr::UsdGeomSphere, Sphere> {
+     public:
+        DummyBaseWriter(const std::shared_ptr<Sphere> &craygObject) : BaseUsdTransformableWriter<pxr::UsdGeomSphere,
+                                                                                                 Sphere>(craygObject) {}
+     protected:
+        std::string getTranslatedType() override {
+            return std::string("test");
+        }
+    };
+
+    auto stage = pxr::UsdStage::CreateInMemory();
+    UsdPathFactory usdPathFactory;
+
+    SECTION("should write object translation to prim") {
+        auto sphere = std::make_shared<Sphere>(Vector3f(1, 2, -3), 3);
+        sphere->setName("craygSphere");
+
+        DummyBaseWriter dummyBaseWriter(sphere);
+        dummyBaseWriter.write(stage, usdPathFactory);
+        auto usdGeomSphere = pxr::UsdGeomSphere(stage->GetPrimAtPath(pxr::SdfPath("/craygSphere")));
+
+        pxr::GfVec3d
+            translation = usdGeomSphere.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
+        REQUIRE(translation == pxr::GfVec3f(1, 2, 3));
+    }
+}
+
+}

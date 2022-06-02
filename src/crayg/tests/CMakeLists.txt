@@ -3,6 +3,7 @@ set(UNIT_TEST_LIST
         TestBaseUsdImageableReader.cpp
         TestBaseUsdLightReader.cpp
         TestBaseUsdReader.cpp
+        TestBaseUsdTransformableWriter.cpp
         TestBaseUsdXformableReader.cpp
         TestBmpImageWriter.cpp
         TestBoundingBox.cpp
@@ -52,12 +53,12 @@ set(UNIT_TEST_LIST
         TestUsdDiskLightReader.cpp
         TestUsdMaterialReadCache.cpp
         TestUsdMeshReader.cpp
+        TestUsdReadUtils.cpp
         TestUsdRectLightReader.cpp
         TestUsdRenderSettingsReader.cpp
         TestUsdSphereLightReader.cpp
         TestUsdSphereReader.cpp
         TestUsdStageReader.cpp
-        TestUsdReadUtils.cpp
         TestVector.cpp
         )
 

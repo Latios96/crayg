@@ -109,11 +109,8 @@ set(crayg_SRCS
         sceneIO/read/usd/BaseUsdLightReader.h
         sceneIO/read/usd/BaseUsdReader.h
         sceneIO/read/usd/BaseUsdXformableReader.h
-        sceneIO/usd/CraygUsdBase.h
         sceneIO/read/usd/UsdCameraReader.cpp
         sceneIO/read/usd/UsdCameraReader.h
-        sceneIO/usd/UsdConversions.cpp
-        sceneIO/usd/UsdConversions.h
         sceneIO/read/usd/UsdDiskLightReader.cpp
         sceneIO/read/usd/UsdDiskLightReader.h
         sceneIO/read/usd/UsdMaterialReadCache.cpp
@@ -132,29 +129,33 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdSphereReader.h
         sceneIO/read/usd/UsdStageReader.cpp
         sceneIO/read/usd/UsdStageReader.h
-        sceneIO/usd/UsdReadUtils.cpp
-        sceneIO/usd/UsdReadUtils.h
-        sceneIO/usd/UsdUtils.h
         sceneIO/SceneReaderFactory.cpp
         sceneIO/SceneReaderFactory.h
         sceneIO/SceneWriters.cpp
         sceneIO/SceneWriters.h
         sceneIO/Serializable.h
+        sceneIO/usd/CraygUsdBase.h
+        sceneIO/usd/UsdConversions.cpp
+        sceneIO/usd/UsdConversions.h
+        sceneIO/usd/UsdReadUtils.cpp
+        sceneIO/usd/UsdReadUtils.h
+        sceneIO/usd/UsdUtils.h
         sceneIO/write/json/JsonSerializer.cpp
         sceneIO/write/json/JsonSerializer.h
         sceneIO/write/SceneWriter.cpp
         sceneIO/write/SceneWriter.h
         sceneIO/write/Serializer.h
         sceneIO/write/SerializerImplementation.h
-        sceneIO/write/usd/UsdSceneWriter.cpp
-        sceneIO/write/usd/UsdSceneWriter.h
+        sceneIO/write/usd/BaseUsdTransformableWriter.h
+        sceneIO/write/usd/BaseUsdWriter.h
         sceneIO/write/usd/UsdCameraWriter.cpp
         sceneIO/write/usd/UsdCameraWriter.h
-        sceneIO/write/usd/BaseUsdWriter.h
         sceneIO/write/usd/UsdPathFactory.cpp
         sceneIO/write/usd/UsdPathFactory.h
         sceneIO/write/usd/UsdRenderSettingsWriter.cpp
         sceneIO/write/usd/UsdRenderSettingsWriter.h
+        sceneIO/write/usd/UsdSceneWriter.cpp
+        sceneIO/write/usd/UsdSceneWriter.h
         ShadingMethod.cpp
         ShadingMethod.h
         utils/ImagePathResolver.cpp
