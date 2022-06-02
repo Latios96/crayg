@@ -146,6 +146,15 @@ set(crayg_SRCS
         sceneIO/write/SceneWriter.h
         sceneIO/write/Serializer.h
         sceneIO/write/SerializerImplementation.h
+        sceneIO/write/usd/UsdSceneWriter.cpp
+        sceneIO/write/usd/UsdSceneWriter.h
+        sceneIO/write/usd/UsdCameraWriter.cpp
+        sceneIO/write/usd/UsdCameraWriter.h
+        sceneIO/write/usd/BaseUsdWriter.h
+        sceneIO/write/usd/UsdPathFactory.cpp
+        sceneIO/write/usd/UsdPathFactory.h
+        sceneIO/write/usd/UsdRenderSettingsWriter.cpp
+        sceneIO/write/usd/UsdRenderSettingsWriter.h
         ShadingMethod.cpp
         ShadingMethod.h
         utils/ImagePathResolver.cpp

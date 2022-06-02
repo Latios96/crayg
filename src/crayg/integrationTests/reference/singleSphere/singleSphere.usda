@@ -1,0 +1,17 @@
+#usda 1.0
+
+def Camera "camera0"
+{
+    float focalLength = 35
+    float horizontalAperture = 36
+}
+
+def "Render"
+{
+    def RenderSettings "settings"
+    {
+        custom int maxSamples = 4
+        uniform int2 resolution = (800, 600)
+    }
+}
+
