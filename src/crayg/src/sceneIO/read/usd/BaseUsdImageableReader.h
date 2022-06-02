@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "BaseUsdXformableReader.h"
-#include "UsdReadUtils.h"
+#include "sceneIO/usd/UsdReadUtils.h"
 #include "UsdMaterialReadCache.h"
 
 namespace crayg {

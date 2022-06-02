@@ -4,7 +4,7 @@
 
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDSPHERELIGHTTRANSLATOR_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDSPHERELIGHTTRANSLATOR_H_
-#include "sceneIO/CraygUsdBase.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdXformableReader.h"
 #include "scene/Light.h"
 #include <pxr/usd/usdLux/sphereLight.h>

@@ -109,7 +109,7 @@ set(crayg_SRCS
         sceneIO/read/usd/BaseUsdLightReader.h
         sceneIO/read/usd/BaseUsdReader.h
         sceneIO/read/usd/BaseUsdXformableReader.h
-        sceneIO/CraygUsdBase.h
+        sceneIO/usd/CraygUsdBase.h
         sceneIO/read/usd/UsdCameraReader.cpp
         sceneIO/read/usd/UsdCameraReader.h
         sceneIO/read/usd/UsdConversions.cpp
@@ -132,9 +132,9 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdSphereReader.h
         sceneIO/read/usd/UsdStageReader.cpp
         sceneIO/read/usd/UsdStageReader.h
-        sceneIO/read/usd/UsdReadUtils.cpp
-        sceneIO/read/usd/UsdReadUtils.h
-        sceneIO/read/usd/UsdUtils.h
+        sceneIO/usd/UsdReadUtils.cpp
+        sceneIO/usd/UsdReadUtils.h
+        sceneIO/usd/UsdUtils.h
         sceneIO/SceneReaderFactory.cpp
         sceneIO/SceneReaderFactory.h
         sceneIO/SceneWriters.cpp

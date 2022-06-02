@@ -3,7 +3,7 @@
 //
 
 #include "UsdMaterialReadCache.h"
-#include "UsdUtils.h"
+#include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"
 #include "scene/DiffuseMaterial.h"
 #include "UsdConversions.h"

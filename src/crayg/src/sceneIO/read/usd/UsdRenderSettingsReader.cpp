@@ -4,7 +4,7 @@
 
 #include "UsdRenderSettingsReader.h"
 #include <pxr/base/gf/vec2i.h>
-#include "UsdUtils.h"
+#include "sceneIO/usd/UsdUtils.h"
 
 namespace crayg {
 

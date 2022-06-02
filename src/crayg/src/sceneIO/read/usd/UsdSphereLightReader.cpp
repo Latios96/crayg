@@ -4,8 +4,8 @@
 
 #include "UsdSphereLightReader.h"
 #include "UsdConversions.h"
-#include "UsdReadUtils.h"
-#include "UsdUtils.h"
+#include "sceneIO/usd/UsdReadUtils.h"
+#include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"
 
 namespace crayg {

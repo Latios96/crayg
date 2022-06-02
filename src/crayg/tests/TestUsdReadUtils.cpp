@@ -4,7 +4,7 @@
 
 
 #include <catch2/catch.hpp>
-#include "sceneIO/read/usd/UsdReadUtils.h"
+#include "sceneIO/usd/UsdReadUtils.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/xform.h>

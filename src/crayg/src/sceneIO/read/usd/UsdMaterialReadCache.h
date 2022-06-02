@@ -6,7 +6,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDMATERIALREADCACHE_H_
 
 #include "scene/Material.h"
-#include "sceneIO/CraygUsdBase.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdShade/materialBindingAPI.h>
 #include <pxr/usd/usd/schemaBase.h>
 

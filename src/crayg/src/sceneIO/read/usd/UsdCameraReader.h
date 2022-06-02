@@ -5,7 +5,7 @@
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
 
-#include "sceneIO/CraygUsdBase.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdXformableReader.h"
 #include <pxr/usd/usdGeom/camera.h>
 #include "scene/Camera.h"

@@ -3,7 +3,7 @@
 //
 
 #include "UsdSphereReader.h"
-#include "UsdUtils.h"
+#include "sceneIO/usd/UsdUtils.h"
 
 namespace crayg {
 

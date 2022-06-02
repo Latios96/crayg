@@ -5,7 +5,7 @@
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_
 
-#include "sceneIO/CraygUsdBase.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include "scene/Scene.h"
 #include "scene/DiffuseMaterial.h"
 #include "sceneIO/read/SceneReader.h"

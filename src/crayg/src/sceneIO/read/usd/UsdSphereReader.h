@@ -5,10 +5,10 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDSPHEREREADER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDSPHEREREADER_H_
 
-#include "sceneIO/CraygUsdBase.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdImageableReader.h"
 #include "scene/Sphere.h"
-#include "UsdUtils.h"
+#include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usdGeom/sphere.h>
 
 namespace crayg {

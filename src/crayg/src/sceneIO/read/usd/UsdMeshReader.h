@@ -5,7 +5,7 @@
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_
 
-#include "sceneIO/CraygUsdBase.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdImageableReader.h"
 #include <pxr/usd/usdGeom/mesh.h>
 #include "scene/TriangleMesh.h"

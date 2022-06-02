@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "Logger.h"
-#include "UsdReadUtils.h"
+#include "sceneIO/usd/UsdReadUtils.h"
 
 namespace crayg {
 

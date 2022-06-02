@@ -3,7 +3,7 @@
 //
 
 #include "UsdDiskLightReader.h"
-#include "UsdUtils.h"
+#include "sceneIO/usd/UsdUtils.h"
 
 namespace crayg {
 
