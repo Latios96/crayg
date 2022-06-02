@@ -3,7 +3,7 @@
 //
 
 #include "UsdSphereLightReader.h"
-#include "UsdConversions.h"
+#include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdReadUtils.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"

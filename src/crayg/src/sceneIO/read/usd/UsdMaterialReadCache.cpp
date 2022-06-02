@@ -6,7 +6,7 @@
 #include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"
 #include "scene/DiffuseMaterial.h"
-#include "UsdConversions.h"
+#include "sceneIO/usd/UsdConversions.h"
 #include <pxr/base/gf/vec3f.h>
 
 namespace crayg {

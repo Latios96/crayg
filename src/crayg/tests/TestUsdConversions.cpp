@@ -5,11 +5,11 @@
 
 #include <catch2/catch.hpp>
 #include <pxr/base/gf/matrix4d.h>
-#include "sceneIO/read/usd/UsdConversions.h"
+#include "sceneIO/usd/UsdConversions.h"
 
 namespace crayg {
 
-TEST_CASE("ConvertMatrix4d") {
+TEST_CASE("ConvertGfMatrix4d") {
 
     SECTION("should convert identity matrix") {
         pxr::GfMatrix4d matrix {};
@@ -34,6 +34,36 @@ TEST_CASE("ConvertMatrix4d") {
                                   0, 0, 0, 1);
 
         const Matrix4x4f convertedMatrix = UsdConversions::convert(matrix);
+
+        REQUIRE(convertedMatrix == expectedMatrix);
+    }
+}
+
+TEST_CASE("ConvertMatrix4d") {
+
+    SECTION("should convert identity matrix") {
+        Matrix4x4f matrix(1, 0, 0, 0,
+                          0, 1, 0, 0,
+                          0, 0, 1, 0,
+                          0, 0, 0, 1);
+        pxr::GfMatrix4d expectedMatrix {};
+        expectedMatrix.SetIdentity();
+
+        const pxr::GfMatrix4d convertedMatrix = UsdConversions::convert(matrix);
+
+        REQUIRE(convertedMatrix == expectedMatrix);
+    }
+
+    SECTION("should convert translated matrix") {
+        Matrix4x4f matrix(1, 0, 0, 1,
+                          0, 1, 0, 2,
+                          0, 0, 1, -3,
+                          0, 0, 0, 1);
+        pxr::GfMatrix4d expectedMatrix {};
+        expectedMatrix.SetIdentity();
+        expectedMatrix.SetTranslate({1, 2, 3});
+
+        const pxr::GfMatrix4d convertedMatrix = UsdConversions::convert(matrix);
 
         REQUIRE(convertedMatrix == expectedMatrix);
     }

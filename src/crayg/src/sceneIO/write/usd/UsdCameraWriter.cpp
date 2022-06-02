@@ -3,6 +3,7 @@
 //
 
 #include "UsdCameraWriter.h"
+#include "sceneIO/usd/UsdConversions.h"
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 
 namespace crayg {

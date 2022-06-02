@@ -3,7 +3,7 @@
 //
 
 #include "UsdReadUtils.h"
-#include "sceneIO/read/usd/UsdConversions.h"
+#include "UsdConversions.h"
 #include "Logger.h"
 #include "pxr/base/gf/rotation.h"
 

@@ -18,6 +18,7 @@ class UsdConversions {
     static Vector3f convert(const pxr::GfVec3f &vector);
     static Vector3f convert(const pxr::GfVec3d &vector);
     static Color convertColor(const pxr::GfVec3f &color);
+    static pxr::GfMatrix4d convert(const Matrix4x4f &matrix);
 };
 
 };

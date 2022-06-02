@@ -6,7 +6,7 @@
 #include <pxr/imaging/hd/meshTopology.h>
 #include "UsdMeshReader.h"
 #include "sceneIO/usd/UsdUtils.h"
-#include "UsdConversions.h"
+#include "sceneIO/usd/UsdConversions.h"
 
 namespace crayg {
 

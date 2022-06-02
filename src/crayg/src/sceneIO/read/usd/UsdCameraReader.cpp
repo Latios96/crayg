@@ -4,7 +4,7 @@
 
 #include "basics/Transform.h"
 #include "UsdCameraReader.h"
-#include "UsdConversions.h"
+#include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"
 
