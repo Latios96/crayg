@@ -7,23 +7,18 @@
 
 namespace crayg {
 
-Camera::Camera(const Vector3f &position, const Vector3f &userUpVector, const Vector3f &centerOfInterest,
-               float focalLength, float filmbackSize) : position(position), userUpVector(userUpVector),
-                                                        centerOfInterest(centerOfInterest), focalLength(focalLength),
-                                                        filmbackSize(filmbackSize) {}
+Camera::Camera(const Transform &transform, float focalLength, float filmbackSize)
+    : Transformable(transform), focalLength(focalLength),
+      filmbackSize(filmbackSize) {}
 
 Camera::Camera() = default;
 
-const Vector3f &Camera::getPosition() const {
-    return position;
+Vector3f Camera::getUserUpVector() const {
+    return {0, 1, 0};
 }
 
-const Vector3f &Camera::getUserUpVector() const {
-    return userUpVector;
-}
-
-const Vector3f &Camera::getCenterOfInterest() const {
-    return centerOfInterest;
+Vector3f Camera::getCenterOfInterest() const {
+    return transform.apply({0, 0, 1});
 }
 
 float Camera::getHorizontalFieldOfView() const {
@@ -33,17 +28,13 @@ float Camera::getHorizontalFieldOfView() const {
 
 void Camera::serialize(Serializer &serializer) {
     serializer.writeType("Camera");
-    serializer.writeVector3f("position", position);
-    serializer.writeVector3f("centerOfInterest", centerOfInterest);
-    serializer.writeVector3f("userUpVector", userUpVector);
+    serializer.writeMatrix4x4f("transform", transform.matrix);
     serializer.writeFloat("focalLength", focalLength);
     serializer.writeFloat("filmbackSize", filmbackSize);
 }
 
 void Camera::deserialize(Deserializer &deserializer) {
-    position = deserializer.readVector3f("position");
-    centerOfInterest = deserializer.readVector3f("centerOfInterest");
-    userUpVector = deserializer.readVector3f("userUpVector");
+    transform = Transform(deserializer.readMatrix4x4f("transform"));
     focalLength = deserializer.readFloat("focalLength");
     filmbackSize = deserializer.readFloat("filmbackSize");
 }
@@ -56,23 +47,12 @@ float Camera::getFilmbackSize() const {
     return filmbackSize;
 }
 bool Camera::operator==(const Camera &rhs) const {
-    return position == rhs.position &&
-        userUpVector == rhs.userUpVector &&
-        centerOfInterest == rhs.centerOfInterest &&
+    return transform == rhs.transform &&
         focalLength == rhs.focalLength &&
         filmbackSize == rhs.filmbackSize;
 }
 bool Camera::operator!=(const Camera &rhs) const {
     return !(rhs == *this);
-}
-void Camera::setPosition(const Vector3f &position) {
-    Camera::position = position;
-}
-void Camera::setUserUpVector(const Vector3f &userUpVector) {
-    Camera::userUpVector = userUpVector;
-}
-void Camera::setCenterOfInterest(const Vector3f &centerOfInterest) {
-    Camera::centerOfInterest = centerOfInterest;
 }
 void Camera::setFocalLength(float focalLength) {
     Camera::focalLength = focalLength;

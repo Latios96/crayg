@@ -24,7 +24,8 @@ std::vector<knipser::KnipserTest> sceneIoTests() {
             scene.renderSettings.maxSamples = 4;
 
             std::shared_ptr<Camera>
-                camera = std::make_shared<Camera>(Vector3f(0, 0, 10), Vector3f(0, 1, 0), Vector3f(0, 0, -1), 35, 36);
+                camera = std::make_shared<Camera>(Transform(
+                Transform::withPosition({0, 0, 10}).matrix * Transform::withRotation(0, 180, 0).matrix), 35, 36);
             scene.camera = camera;
 
             const std::shared_ptr<Material>

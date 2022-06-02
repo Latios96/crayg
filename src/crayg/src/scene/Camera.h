@@ -8,30 +8,26 @@
 #include <ostream>
 #include "basics/Vector3f.h"
 #include "sceneIO/Serializable.h"
+#include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"
 #include "utils/ToStringHelper.h"
 
 namespace crayg {
 
-class Camera : public Serializable {
+class Camera : public Serializable, public Transformable {
  private:
-    Vector3f position;
-    Vector3f userUpVector;
-    Vector3f centerOfInterest;
     float focalLength;
     float filmbackSize;
 
  public:
     Camera();
 
-    Camera(const Vector3f &position, const Vector3f &userUpVector, const Vector3f &centerOfInterest, float focalLength,
-           float filmbackSize);
+    Camera(const Transform &transform, float focalLength, float filmbackSize);
+    //const Vector3f &getPosition() const;
 
-    const Vector3f &getPosition() const;
+    Vector3f getUserUpVector() const;
 
-    const Vector3f &getUserUpVector() const;
-
-    const Vector3f &getCenterOfInterest() const;
+    Vector3f getCenterOfInterest() const;
 
     float getHorizontalFieldOfView() const;
 
@@ -55,18 +51,13 @@ class Camera : public Serializable {
     template<typename OStream>
     friend OStream &operator<<(OStream &os, const Camera &camera) {
         os << ToStringHelper("Camera")
-            .addMember("position", camera.position)
-            .addMember("userUpVector", camera.userUpVector)
-            .addMember("centerOfInterest", camera.centerOfInterest)
+            .addMember("transform", camera.transform)
             .addMember("focalLength", camera.focalLength)
             .addMember("filmbackSize", camera.filmbackSize)
             .finish();
         return os;
     }
 
-    void setPosition(const Vector3f &position);
-    void setUserUpVector(const Vector3f &userUpVector);
-    void setCenterOfInterest(const Vector3f &centerOfInterest);
     void setFocalLength(float focalLength);
     void setFilmbackSize(float filmbackSize);
 };

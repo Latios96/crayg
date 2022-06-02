@@ -27,9 +27,7 @@ TEST_CASE("CameraTranslatorTranslate") {
         UsdCameraTranslator cameraTranslator(usdCamera);
         auto camera = cameraTranslator.translate();
 
-        auto expectedCamera = std::make_shared<crayg::Camera>(crayg::Vector3f(1, 2, -3),
-                                                              crayg::Vector3f(0, 1, 0),
-                                                              crayg::Vector3f(1, 2, 2),
+        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1, 2, -3}),
                                                               35,
                                                               36);
         REQUIRE(*camera == *expectedCamera);
@@ -43,9 +41,7 @@ TEST_CASE("CameraTranslatorTranslate") {
         UsdCameraTranslator cameraTranslator(usdCamera);
         auto camera = cameraTranslator.translate();
 
-        auto expectedCamera = std::make_shared<crayg::Camera>(crayg::Vector3f(1, 2, -3),
-                                                              crayg::Vector3f(0, 1, 0),
-                                                              crayg::Vector3f(1, 2, -2),
+        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1, 2, -3}),
                                                               35,
                                                               36);
         REQUIRE(*camera == *expectedCamera);

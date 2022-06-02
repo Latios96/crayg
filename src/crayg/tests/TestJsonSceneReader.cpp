@@ -63,19 +63,10 @@ const char CORRECT_SCENE[] = R"({
         }
     ],
     "Camera": {
-        "position": [
-            0,
-            0,
-            10
-        ],
-        "centerOfInterest": [
-            0,0,-1
-        ],
-        "userUpVector": [
-            0.0,
-            1.0,
-            0.0
-        ],
+        "transform":    [1,0,0,0,
+                        0,1,0,0,
+                        0,0,1,10,
+                        0,0,0,0],
         "focalLength": 35.0,
         "filmbackSize": 36.0,
         "type": "Camera"

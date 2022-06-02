@@ -89,6 +89,10 @@ Vector3f Transform::applyForNormal(const Vector3f &vector3f) const {
         z,
     };
 }
+std::ostream &operator<<(std::ostream &os, const Transform &transform) {
+    os << "matrix: " << transform.matrix;
+    return os;
+}
 
 }
 

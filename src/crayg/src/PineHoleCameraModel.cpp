@@ -13,13 +13,15 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
                                                                                             imageHeight(imageHeight) {
     imageRatio = static_cast<float>(imageWidth) / static_cast<float>(imageHeight);
 
-    // create view vector
-    viewVector = camera.getCenterOfInterest().substract(camera.getPosition()).normalize();
+    // create view position
+    const Vector3f &centerOfInterest = camera.getCenterOfInterest();
+    const Vector3f &position = camera.getPosition();
+    viewVector = centerOfInterest.substract(position).normalize();
 
-    // create site vector
+    // create site position
     sideVector = viewVector.crossProduct(camera.getUserUpVector()).normalize();
 
-    // create camera up vector, user up vector might not be orthononal to viewVector
+    // create camera up position, user up position might not be orthononal to viewVector
     upVector = sideVector.crossProduct(viewVector).normalize();
 
     // create width and height, define the size of the view plane

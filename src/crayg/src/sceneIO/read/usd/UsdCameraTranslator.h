@@ -6,14 +6,14 @@
 #define CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
 
 #include "CraygUsdBase.h"
-#include "BaseUsdTranslator.h"
+#include "BaseUsdXformableTranslator.h"
 #include <pxr/usd/usdGeom/camera.h>
 #include "scene/Camera.h"
 
 
 namespace crayg {
 
-class UsdCameraTranslator : public BaseUsdTranslator<pxr::UsdGeomCamera, Camera> {
+class UsdCameraTranslator : public BaseUsdXformableTranslator<pxr::UsdGeomCamera, Camera> {
  public:
     explicit UsdCameraTranslator(const pxr::UsdGeomCamera &camera);
     std::shared_ptr<Camera> translate() override;

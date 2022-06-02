@@ -5,6 +5,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
 #define CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
 
+#include <ostream>
 #include "Matrix4x4f.h"
 #include "Ray.h"
 
@@ -30,6 +31,7 @@ class Transform {
     Transform &operator=(const Transform &rhs);
 
     Matrix4x4f matrix;
+    friend std::ostream &operator<<(std::ostream &os, const Transform &transform);
 };
 
 }
