@@ -60,6 +60,12 @@ void Camera::setFocalLength(float focalLength) {
 void Camera::setFilmbackSize(float filmbackSize) {
     Camera::filmbackSize = filmbackSize;
 }
+const std::string &Camera::getName() const {
+    return name;
+}
+void Camera::setName(const std::string &name) {
+    Camera::name = name;
+}
 
 }
 

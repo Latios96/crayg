@@ -18,6 +18,7 @@ class Camera : public Serializable, public Transformable {
  private:
     float focalLength;
     float filmbackSize;
+    std::string name;
 
  public:
     Camera();
@@ -44,6 +45,9 @@ class Camera : public Serializable, public Transformable {
     void serialize(Serializer &serializer) override;
 
     void deserialize(Deserializer &deserializer) override;
+
+    const std::string &getName() const;
+    void setName(const std::string &name);
 
     bool operator==(const Camera &rhs) const;
     bool operator!=(const Camera &rhs) const;
