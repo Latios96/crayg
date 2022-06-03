@@ -1,10 +1,15 @@
 #include <catch2/catch.hpp>
 #include "scene/Scene.h"
 #include "sceneIO/write/usd/UsdSceneWriter.h"
+#include "scene/RectLight.h"
+#include "scene/DiskLight.h"
 #include <pxr/usd/usd/primRange.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdRender/settings.h>
 #include <pxr/usd/usdGeom/sphere.h>
+#include <pxr/usd/usdLux/sphereLight.h>
+#include <pxr/usd/usdLux/rectLight.h>
+#include <pxr/usd/usdLux/diskLight.h>
 
 namespace crayg {
 
@@ -49,6 +54,30 @@ TEST_CASE("UsdSceneWriter::write") {
         usdSceneWriter.writeScene(stage, scene);
 
         REQUIRE(count<pxr::UsdGeomSphere>(stage) == 1);
+    }
+
+    SECTION("should write point light") {
+        scene.addLight(std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3));
+
+        usdSceneWriter.writeScene(stage, scene);
+
+        REQUIRE(count<pxr::UsdLuxSphereLight>(stage) == 1);
+    }
+
+    SECTION("should write rect light") {
+        scene.addLight(std::make_shared<RectLight>(Transform::withPosition({1, 2, -3}), 3, 4, 5));
+
+        usdSceneWriter.writeScene(stage, scene);
+
+        REQUIRE(count<pxr::UsdLuxRectLight>(stage) == 1);
+    }
+
+    SECTION("should write disk light") {
+        scene.addLight(std::make_shared<DiskLight>(Transform::withPosition({1, 2, -3}), 3, 4));
+
+        usdSceneWriter.writeScene(stage, scene);
+
+        REQUIRE(count<pxr::UsdLuxDiskLight>(stage) == 1);
     }
 }
 
