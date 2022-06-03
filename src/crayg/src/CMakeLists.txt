@@ -150,14 +150,16 @@ set(crayg_SRCS
         sceneIO/write/usd/BaseUsdSceneObjectWriter.h
         sceneIO/write/usd/BaseUsdTransformableWriter.h
         sceneIO/write/usd/BaseUsdWriter.h
-        sceneIO/write/usd/UsdRectLightWriter.cpp
-        sceneIO/write/usd/UsdRectLightWriter.h
         sceneIO/write/usd/UsdCameraWriter.cpp
         sceneIO/write/usd/UsdCameraWriter.h
+        sceneIO/write/usd/UsdDiskLightWriter.cpp
+        sceneIO/write/usd/UsdDiskLightWriter.h
         sceneIO/write/usd/UsdPathFactory.cpp
         sceneIO/write/usd/UsdPathFactory.h
         sceneIO/write/usd/UsdPointLightWriter.cpp
         sceneIO/write/usd/UsdPointLightWriter.h
+        sceneIO/write/usd/UsdRectLightWriter.cpp
+        sceneIO/write/usd/UsdRectLightWriter.h
         sceneIO/write/usd/UsdRenderSettingsWriter.cpp
         sceneIO/write/usd/UsdRenderSettingsWriter.h
         sceneIO/write/usd/UsdSceneWriter.cpp

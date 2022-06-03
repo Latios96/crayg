@@ -53,6 +53,7 @@ set(UNIT_TEST_LIST
         TestUsdCameraWriter.cpp
         TestUsdConversions.cpp
         TestUsdDiskLightReader.cpp
+        TestUsdDiskLightWriter.cpp
         TestUsdMaterialReadCache.cpp
         TestUsdMeshReader.cpp
         TestUsdPathFactory.cpp
