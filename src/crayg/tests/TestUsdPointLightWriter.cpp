@@ -25,7 +25,9 @@ TEST_CASE("UsdPointLightWriter::write") {
         auto usdLuxSphereLight = pxr::UsdLuxSphereLight(stage->GetPrimAtPath(pxr::SdfPath("/light")));
 
         auto intensity = UsdUtils::getAttributeValueAs<float>(usdLuxSphereLight.GetIntensityAttr());
+        auto radius = UsdUtils::getAttributeValueAs<float>(usdLuxSphereLight.GetRadiusAttr());
         REQUIRE(intensity == 3);
+        REQUIRE(radius == 0);
     }
 }
 
