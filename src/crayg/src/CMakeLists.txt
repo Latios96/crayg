@@ -156,6 +156,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdRenderSettingsWriter.h
         sceneIO/write/usd/UsdSceneWriter.cpp
         sceneIO/write/usd/UsdSceneWriter.h
+        sceneIO/write/usd/UsdSphereWriter.cpp
+        sceneIO/write/usd/UsdSphereWriter.h
         ShadingMethod.cpp
         ShadingMethod.h
         utils/ImagePathResolver.cpp
