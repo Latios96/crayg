@@ -56,6 +56,7 @@ set(UNIT_TEST_LIST
         TestUsdMaterialReadCache.cpp
         TestUsdMeshReader.cpp
         TestUsdPathFactory.cpp
+        TestUsdPointLightWriter.cpp
         TestUsdReadUtils.cpp
         TestUsdRectLightReader.cpp
         TestUsdRenderSettingsReader.cpp
