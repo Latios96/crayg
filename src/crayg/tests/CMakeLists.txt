@@ -59,6 +59,7 @@ set(UNIT_TEST_LIST
         TestUsdRectLightReader.cpp
         TestUsdRenderSettingsReader.cpp
         TestUsdRenderSettingsWriter.cpp
+        TestUsdSceneWriter.cpp
         TestUsdSphereLightReader.cpp
         TestUsdSphereReader.cpp
         TestUsdSphereWriter.cpp
