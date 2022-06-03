@@ -30,6 +30,8 @@ class Sphere : public SceneObject {
 
     Vector3f getNormal(Vector3f point) override;
 
+    std::string getType() override;
+
     virtual ~Sphere();
 
  private:

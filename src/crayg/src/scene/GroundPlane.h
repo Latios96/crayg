@@ -21,7 +21,7 @@ class GroundPlane : public SceneObject {
 
     Vector3f getNormal(Vector3f point) override;
     BoundingBox getBounds() const override;
-
+    std::string getType() override;
  private:
     Vector3f normal = Vector3f(0, 1, 0);
 };

@@ -24,6 +24,9 @@ class SceneObjectForTesting : public SceneObject {
     BoundingBox getBounds() const override {
         return BoundingBox();
     }
+    std::string getType() override {
+        return "SceneObjectForTesting";
+    }
 };
 
 TEST_CASE("deserialize SceneObject", "[SceneObject]") {

@@ -43,5 +43,8 @@ BoundingBox GroundPlane::getBounds() const {
              std::numeric_limits<float>::lowest()},
             {std::numeric_limits<float>::max(), 0, std::numeric_limits<float>::max()}};
 }
+std::string GroundPlane::getType() {
+    return "GroundPlane";
+}
 
 }

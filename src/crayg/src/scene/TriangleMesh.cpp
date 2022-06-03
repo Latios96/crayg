@@ -149,5 +149,8 @@ void TriangleMesh::init() {
     createBounds();
     createNormals();
 }
+std::string TriangleMesh::getType() {
+    return "TriangleMesh";
+}
 
 }

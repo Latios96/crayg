@@ -31,6 +31,7 @@ class TriangleMesh : public SceneObject {
     void getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles);
     friend class Triangle;
     void init();
+    std::string getType() override;
  private:
     BoundingBox boundingBox;
     void createBounds();

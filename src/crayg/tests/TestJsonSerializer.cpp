@@ -60,6 +60,10 @@ class TestObjectWithAllTypes : public SceneObject {
         serializer.writeVector3fArray("vec3fArray", vector3fVec);
         serializer.writeColor("color", Color(1, 2, 3));
     }
+
+    std::string getType() override {
+        return "TestObjectWithAllTypes";
+    }
 };
 
 TEST_CASE("should write scene with objects and camera as expected") {

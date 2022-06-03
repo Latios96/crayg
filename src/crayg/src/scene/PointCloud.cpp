@@ -64,5 +64,8 @@ BoundingBox PointCloud::getBounds() const {
     }
     return boundingBox;
 }
+std::string PointCloud::getType() {
+    return "PointCloud";
+}
 
 }

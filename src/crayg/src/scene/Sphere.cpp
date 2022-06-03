@@ -91,5 +91,8 @@ void Sphere::setRadius(float radius) {
 BoundingBox Sphere::getBounds() const {
     return BoundingBox::fromCenterAndRadius(getPosition(), radius);
 }
+std::string Sphere::getType() {
+    return "Sphere";
+}
 
 }

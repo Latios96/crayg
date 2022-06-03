@@ -24,7 +24,7 @@ class SceneObject : public Imageable,
 
     const std::string &getName() const;
     void setName(const std::string &name);
-
+    virtual std::string getType() = 0;
  private:
     std::string name;
 };
