@@ -13,7 +13,7 @@ TEST_CASE("UsdRectLightWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
 
-    SECTION("should write object translation to prim") {
+    SECTION("should write rect light") {
         auto sphere = std::make_shared<RectLight>(Transform::withPosition({1, 2, -3}), 3, 4, 5);
         sphere->setName("light");
 
