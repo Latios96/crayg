@@ -21,7 +21,7 @@ TEST_CASE("UsdSphereWriter::write") {
         UsdSphereWriter usdSphereWriter(sphere);
         usdSphereWriter.write(stage, usdPathFactory);
 
-        auto usdGeomSphere = pxr::UsdGeomSphere(stage->GetPrimAtPath(pxr::SdfPath("/sphere0")));
+        auto usdGeomSphere = pxr::UsdGeomSphere(stage->GetPrimAtPath(pxr::SdfPath("/Sphere0")));
         auto radius = UsdUtils::getAttributeValueAs<double>(usdGeomSphere.GetRadiusAttr());
         REQUIRE(radius == 3);
         const pxr::GfVec3d

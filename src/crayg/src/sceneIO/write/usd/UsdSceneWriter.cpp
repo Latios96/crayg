@@ -15,7 +15,7 @@ void crayg::UsdSceneWriter::writeScene(const std::string &scenePath, crayg::Scen
 }
 void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage, crayg::Scene &scene) {
     UsdCameraWriter(scene.camera).write(stage, usdPathFactory);
-
+    // todo tests
     UsdRenderSettingsWriter(scene.renderSettings).write(stage);
 
     // read lights
