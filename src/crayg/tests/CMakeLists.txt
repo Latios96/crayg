@@ -49,6 +49,7 @@ set(UNIT_TEST_LIST
         TestTriangleMesh.cpp
         TestUnitImageSampler.cpp
         TestUsdCameraReader.cpp
+        TestUsdCameraWriter.cpp
         TestUsdConversions.cpp
         TestUsdDiskLightReader.cpp
         TestUsdMaterialReadCache.cpp

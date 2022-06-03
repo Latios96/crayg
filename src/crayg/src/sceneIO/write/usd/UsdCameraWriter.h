@@ -8,11 +8,11 @@
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdGeom/camera.h>
 #include "scene/Camera.h"
-#include "BaseUsdWriter.h"
+#include "BaseUsdTransformableWriter.h"
 
 namespace crayg {
 
-class UsdCameraWriter : public BaseUsdWriter<pxr::UsdGeomCamera, Camera> {
+class UsdCameraWriter : public BaseUsdTransformableWriter<pxr::UsdGeomCamera, Camera> {
  public:
     UsdCameraWriter(const std::shared_ptr<Camera> &craygObject);
     pxr::UsdGeomCamera write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;

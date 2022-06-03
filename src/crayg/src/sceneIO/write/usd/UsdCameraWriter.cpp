@@ -3,14 +3,12 @@
 //
 
 #include "UsdCameraWriter.h"
-#include "sceneIO/usd/UsdConversions.h"
-#include <pxr/usd/usdGeom/xformCommonAPI.h>
 
 namespace crayg {
 
 pxr::UsdGeomCamera UsdCameraWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
-    auto usdCamera = BaseUsdWriter::write(stage, usdPathFactory);
-    // todo author xform
+    auto usdCamera = BaseUsdTransformableWriter::write(stage, usdPathFactory);
+    // todo tests
     usdCamera.GetFocalLengthAttr().Set(craygObject->getFocalLength());
     usdCamera.GetHorizontalApertureAttr().Set(craygObject->getFilmbackSize());
 
@@ -20,6 +18,7 @@ pxr::UsdGeomCamera UsdCameraWriter::write(pxr::UsdStagePtr stage, UsdPathFactory
 std::string UsdCameraWriter::getTranslatedType() {
     return "camera";
 }
-UsdCameraWriter::UsdCameraWriter(const std::shared_ptr<Camera> &craygObject) : BaseUsdWriter(craygObject) {}
+UsdCameraWriter::UsdCameraWriter(const std::shared_ptr<Camera> &craygObject)
+    : BaseUsdTransformableWriter(craygObject) {}
 
 } // crayg
