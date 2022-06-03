@@ -146,6 +146,7 @@ set(crayg_SRCS
         sceneIO/write/SceneWriter.h
         sceneIO/write/Serializer.h
         sceneIO/write/SerializerImplementation.h
+        sceneIO/write/usd/BaseUsdLightWriter.h
         sceneIO/write/usd/BaseUsdSceneObjectWriter.h
         sceneIO/write/usd/BaseUsdTransformableWriter.h
         sceneIO/write/usd/BaseUsdWriter.h

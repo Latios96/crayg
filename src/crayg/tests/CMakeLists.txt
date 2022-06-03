@@ -2,6 +2,7 @@ set(UNIT_TEST_LIST
         TestAreaLight.cpp
         TestBaseUsdImageableReader.cpp
         TestBaseUsdLightReader.cpp
+        TestBaseUsdLightWriter.cpp
         TestBaseUsdReader.cpp
         TestBaseUsdTransformableWriter.cpp
         TestBaseUsdXformableReader.cpp
