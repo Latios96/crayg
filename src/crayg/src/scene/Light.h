@@ -32,13 +32,14 @@ class Light : public Serializable, public Transformable, public Imageable {
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     void beforeRender() override;
+    virtual std::string getType();
  private:
     float intensity = 1;
     std::string name;
  protected:
     constexpr static const float NO_SHADOW = 1.0f;
     constexpr static const float FULL_SHADOW = 0.0f;
-    virtual std::string getType();
+
 };
 
 }
