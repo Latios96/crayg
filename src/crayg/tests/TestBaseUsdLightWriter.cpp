@@ -26,7 +26,7 @@ TEST_CASE("BaseUsdLightWriter::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write object translation to prim") {
-        auto sphere = std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3);
+        auto sphere = std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3.0f);
         sphere->setName("light");
 
         DummyBaseWriter dummyBaseWriter(sphere);

@@ -25,13 +25,13 @@ std::vector<knipser::KnipserTest> sceneIoTests() {
 
             std::shared_ptr<Camera>
                 camera = std::make_shared<Camera>(Transform(
-                Transform::withPosition({0, 0, 10}).matrix * Transform::withRotation(0, 180, 0).matrix), 35, 36);
+                Transform::withPosition({0, 0, 10}).matrix * Transform::withRotation(0, 180, 0).matrix), 35.0f, 36.0f);
             scene.camera = camera;
 
             const std::shared_ptr<Material>
                 diffuseMaterial = std::make_shared<DiffuseMaterial>("diffuseMaterial", Color(1, 0, 0));
 
-            const std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5);
+            const std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5f);
             sphere->setMaterial(diffuseMaterial);
             scene.addObject(sphere);
 
