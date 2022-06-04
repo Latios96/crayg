@@ -11,6 +11,8 @@ enable_testing()
 
 unset(ENV{CI})
 
+set(CONAN_SYSTEM_INCLUDES ON)
+
 execute_process(
         COMMAND git describe --tags
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
