@@ -20,8 +20,8 @@ TEST_CASE("UsdDiskLightWriter::write") {
         UsdDiskLightWriter usdDiskLightWriter(diskLight);
         usdDiskLightWriter.write(stage, usdPathFactory);
 
-        auto usdLuxDiskLight = pxr::UsdLuxDiskLight(stage->GetPrimAtPath(pxr::SdfPath("/Sphere0")));
-        auto radius = UsdUtils::getAttributeValueAs<double>(usdLuxDiskLight.GetRadiusAttr());
+        auto usdLuxDiskLight = pxr::UsdLuxDiskLight(stage->GetPrimAtPath(pxr::SdfPath("/DiskLight0")));
+        auto radius = UsdUtils::getAttributeValueAs<float>(usdLuxDiskLight.GetRadiusAttr());
         REQUIRE(radius == 4);
     }
 }

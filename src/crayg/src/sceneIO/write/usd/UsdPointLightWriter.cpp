@@ -11,7 +11,7 @@ UsdPointLightWriter::UsdPointLightWriter(const std::shared_ptr<Light> &craygObje
 pxr::UsdLuxSphereLight UsdPointLightWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usdLuxSphereLight = BaseUsdLightWriter::write(stage, usdPathFactory);
 
-    usdLuxSphereLight.GetRadiusAttr().Set(0);
+    usdLuxSphereLight.GetRadiusAttr().Set(0.0f);
 
     return usdLuxSphereLight;
 }
