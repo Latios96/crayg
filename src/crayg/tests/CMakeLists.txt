@@ -68,6 +68,7 @@ set(UNIT_TEST_LIST
         TestUsdSphereReader.cpp
         TestUsdSphereWriter.cpp
         TestUsdStageReader.cpp
+        TestUsdUtils.cpp
         TestVector.cpp
         )
 
