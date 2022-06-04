@@ -8,7 +8,7 @@ namespace crayg {
 
 pxr::UsdGeomCamera UsdCameraWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usdCamera = BaseUsdTransformableWriter::write(stage, usdPathFactory);
-    // todo tests
+
     usdCamera.GetFocalLengthAttr().Set(craygObject->getFocalLength());
     usdCamera.GetHorizontalApertureAttr().Set(craygObject->getFilmbackSize());
 
