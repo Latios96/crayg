@@ -16,7 +16,7 @@ class BaseUsdLightWriter : public BaseUsdTransformableWriter<UsdType, CraygType>
         craygObject) {}
 
     UsdType write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override {
-        auto light = BaseUsdTransformableWriter::write(stage, usdPathFactory);
+        auto light = BaseUsdTransformableWriter<UsdType, CraygType>::write(stage, usdPathFactory);
 
         light.GetIntensityAttr().Set(this->craygObject->getIntensity());
 
