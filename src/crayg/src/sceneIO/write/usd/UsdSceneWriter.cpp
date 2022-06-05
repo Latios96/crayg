@@ -9,6 +9,7 @@
 #include "UsdPointLightWriter.h"
 #include "UsdRectLightWriter.h"
 #include "UsdDiskLightWriter.h"
+#include "UsdTriangleMeshWriter.h"
 
 void crayg::UsdSceneWriter::writeScene(const std::string &scenePath, crayg::Scene &scene) {
     auto stage = pxr::UsdStage::CreateNew(scenePath);
@@ -25,6 +26,8 @@ void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage, crayg::Scene &sce
     for (auto sceneObject: scene.owningObjects) {
         if (sceneObject->getType() == "Sphere") {
             UsdSphereWriter(std::static_pointer_cast<Sphere>(sceneObject)).write(stage, usdPathFactory);
+        } else if (sceneObject->getType() == "TriangleMesh") {
+            UsdTriangleMeshWriter(std::static_pointer_cast<TriangleMesh>(sceneObject)).write(stage, usdPathFactory);
         } else {
             Logger::warning("Skipping unsupported type {}", sceneObject->getType());
         }

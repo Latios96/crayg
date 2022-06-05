@@ -7,6 +7,7 @@
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdRender/settings.h>
 #include <pxr/usd/usdGeom/sphere.h>
+#include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/usdLux/sphereLight.h>
 #include <pxr/usd/usdLux/rectLight.h>
 #include <pxr/usd/usdLux/diskLight.h>
@@ -78,6 +79,14 @@ TEST_CASE("UsdSceneWriter::write") {
         usdSceneWriter.writeScene(stage, scene);
 
         REQUIRE(count<pxr::UsdLuxDiskLight>(stage) == 1);
+    }
+
+    SECTION("should write trianglemesh") {
+        scene.addObject(std::make_shared<TriangleMesh>());
+
+        usdSceneWriter.writeScene(stage, scene);
+
+        REQUIRE(count<pxr::UsdGeomMesh>(stage) == 1);
     }
 }
 

@@ -56,6 +56,7 @@ set(UNIT_TEST_LIST
         TestUsdDiskLightWriter.cpp
         TestUsdMaterialReadCache.cpp
         TestUsdMeshReader.cpp
+        TestUsdTriangleMeshWriter.cpp
         TestUsdPathFactory.cpp
         TestUsdPointLightWriter.cpp
         TestUsdReadUtils.cpp

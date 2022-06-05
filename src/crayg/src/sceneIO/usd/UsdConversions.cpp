@@ -58,5 +58,8 @@ pxr::GfMatrix4d UsdConversions::convert(const Matrix4x4f &matrix) {
                                                 (matrix.values[2][3]),
                                                 (matrix.values[3][3])) * BASE_TRANSFORM_USD_INVERTED;
 }
+pxr::GfVec3f UsdConversions::convert(const Vector3f &vector) {
+    return {vector.x, vector.y, -vector.z};
+}
 
 };
