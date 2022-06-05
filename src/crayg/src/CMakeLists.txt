@@ -154,6 +154,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdCameraWriter.h
         sceneIO/write/usd/UsdDiskLightWriter.cpp
         sceneIO/write/usd/UsdDiskLightWriter.h
+        sceneIO/write/usd/UsdGroundPlaneWriter.cpp
+        sceneIO/write/usd/UsdGroundPlaneWriter.h
         sceneIO/write/usd/UsdPathFactory.cpp
         sceneIO/write/usd/UsdPathFactory.h
         sceneIO/write/usd/UsdPointLightWriter.cpp
