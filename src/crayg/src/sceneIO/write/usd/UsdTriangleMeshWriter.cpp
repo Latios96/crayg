@@ -5,8 +5,11 @@
 #include "UsdTriangleMeshWriter.h"
 
 namespace crayg {
-UsdTriangleMeshWriter::UsdTriangleMeshWriter(const std::shared_ptr<TriangleMesh> &craygObject)
-    : BaseUsdSceneObjectWriter(craygObject) {}
+
+UsdTriangleMeshWriter::UsdTriangleMeshWriter(const std::shared_ptr<TriangleMesh> &craygObject,
+                                             UsdMaterialWriteCache &usdMaterialWriteCache) : BaseUsdSceneObjectWriter(
+    craygObject,
+    usdMaterialWriteCache) {}
 
 pxr::UsdGeomMesh UsdTriangleMeshWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usdGeomMesh = BaseUsdTransformableWriter::write(stage, usdPathFactory);

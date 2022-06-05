@@ -20,17 +20,23 @@ void crayg::UsdSceneWriter::writeScene(const std::string &scenePath, crayg::Scen
     stage->Save();
 }
 void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage, crayg::Scene &scene) {
+    UsdPathFactory usdPathFactory;
     UsdCameraWriter(scene.camera).write(stage, usdPathFactory);
 
     UsdRenderSettingsWriter(scene.renderSettings).write(stage);
+    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
     for (auto sceneObject: scene.owningObjects) {
         if (sceneObject->getType() == "Sphere") {
-            UsdSphereWriter(std::static_pointer_cast<Sphere>(sceneObject)).write(stage, usdPathFactory);
+            UsdSphereWriter(std::static_pointer_cast<Sphere>(sceneObject), usdMaterialWriteCache).write(stage,
+                                                                                                        usdPathFactory);
         } else if (sceneObject->getType() == "TriangleMesh") {
-            UsdTriangleMeshWriter(std::static_pointer_cast<TriangleMesh>(sceneObject)).write(stage, usdPathFactory);
+            UsdTriangleMeshWriter(std::static_pointer_cast<TriangleMesh>(sceneObject), usdMaterialWriteCache).write(
+                stage,
+                usdPathFactory);
         } else if (sceneObject->getType() == "GroundPlane") {
-            UsdGroundPlaneWriter(std::static_pointer_cast<GroundPlane>(sceneObject)).write(stage, usdPathFactory);
+            UsdGroundPlaneWriter(std::static_pointer_cast<GroundPlane>(sceneObject), usdMaterialWriteCache).write(stage,
+                                                                                                                  usdPathFactory);
         } else {
             Logger::warning("Skipping unsupported type {}", sceneObject->getType());
         }

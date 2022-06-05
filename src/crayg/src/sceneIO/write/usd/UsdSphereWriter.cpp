@@ -5,8 +5,10 @@
 #include "UsdSphereWriter.h"
 
 namespace crayg {
-UsdSphereWriter::UsdSphereWriter(const std::shared_ptr<Sphere> &craygObject)
-    : BaseUsdSceneObjectWriter(craygObject) {}
+
+UsdSphereWriter::UsdSphereWriter(const std::shared_ptr<Sphere> &craygObject,
+                                 UsdMaterialWriteCache &usdMaterialWriteCache) : BaseUsdSceneObjectWriter(craygObject,
+                                                                                                          usdMaterialWriteCache) {}
 
 pxr::UsdGeomSphere UsdSphereWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usdGeomSphere = BaseUsdSceneObjectWriter::write(stage, usdPathFactory);

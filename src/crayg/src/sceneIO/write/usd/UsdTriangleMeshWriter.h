@@ -13,7 +13,8 @@ namespace crayg {
 
 class UsdTriangleMeshWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, TriangleMesh> {
  public:
-    UsdTriangleMeshWriter(const std::shared_ptr<TriangleMesh> &craygObject);
+    UsdTriangleMeshWriter(const std::shared_ptr<TriangleMesh> &craygObject,
+                          UsdMaterialWriteCache &usdMaterialWriteCache);
     pxr::UsdGeomMesh write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 
  private:

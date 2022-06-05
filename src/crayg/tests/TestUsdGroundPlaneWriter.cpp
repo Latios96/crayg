@@ -10,11 +10,12 @@ TEST_CASE("UsdGroundPlaneMeshWriter::write") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
+    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
     SECTION("should write groundPlane") {
         auto groundPlane = std::make_shared<GroundPlane>();
 
-        UsdGroundPlaneWriter usdGroundPlaneWriter(groundPlane);
+        UsdGroundPlaneWriter usdGroundPlaneWriter(groundPlane, usdMaterialWriteCache);
         usdGroundPlaneWriter.write(stage, usdPathFactory);
 
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/GroundPlane0")));

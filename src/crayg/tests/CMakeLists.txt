@@ -4,6 +4,7 @@ set(UNIT_TEST_LIST
         TestBaseUsdLightReader.cpp
         TestBaseUsdLightWriter.cpp
         TestBaseUsdReader.cpp
+        TestBaseUsdSceneObjectWriter.cpp
         TestBaseUsdTransformableWriter.cpp
         TestBaseUsdXformableReader.cpp
         TestBmpImageWriter.cpp
@@ -57,6 +58,7 @@ set(UNIT_TEST_LIST
         TestUsdDiskLightWriter.cpp
         TestUsdGroundPlaneWriter.cpp
         TestUsdMaterialReadCache.cpp
+        TestUsdMaterialWriteCache.cpp
         TestUsdMeshReader.cpp
         TestUsdPathFactory.cpp
         TestUsdPointLightWriter.cpp
@@ -73,7 +75,6 @@ set(UNIT_TEST_LIST
         TestUsdTriangleMeshWriter.cpp
         TestUsdUtils.cpp
         TestVector.cpp
-        TestUsdMaterialWriteCache.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)

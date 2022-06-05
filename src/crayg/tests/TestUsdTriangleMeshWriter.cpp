@@ -15,6 +15,7 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
+    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
     SECTION("should write triangle plane") {
         auto triangleMesh = std::make_shared<TriangleMesh>();
@@ -23,7 +24,7 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
         triangleMesh->faceIndices = std::vector<int>({0, 2, 1, 2, 3, 1});
         triangleMesh->init();
 
-        UsdTriangleMeshWriter usdTriangleMeshWriter(triangleMesh);
+        UsdTriangleMeshWriter usdTriangleMeshWriter(triangleMesh, usdMaterialWriteCache);
         usdTriangleMeshWriter.write(stage, usdPathFactory);
 
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));

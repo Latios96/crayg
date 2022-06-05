@@ -9,6 +9,7 @@
 #include "scene/Scene.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "UsdPathFactory.h"
+#include "UsdMaterialWriteCache.h"
 #include <pxr/usd/usd/stage.h>
 
 namespace crayg {
@@ -17,8 +18,6 @@ class UsdSceneWriter {
  public:
     void writeScene(const std::string &scenePath, Scene &scene);
     void writeScene(pxr::UsdStagePtr stage, Scene &scene);
- private:
-    UsdPathFactory usdPathFactory;
 };
 
 }
