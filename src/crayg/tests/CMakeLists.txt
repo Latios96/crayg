@@ -48,15 +48,16 @@ set(UNIT_TEST_LIST
         TestTransform.cpp
         TestTriangle.cpp
         TestTriangleMesh.cpp
+        TestTriangleMeshConversion.cpp
         TestUnitImageSampler.cpp
         TestUsdCameraReader.cpp
         TestUsdCameraWriter.cpp
         TestUsdConversions.cpp
         TestUsdDiskLightReader.cpp
         TestUsdDiskLightWriter.cpp
+        TestUsdGroundPlaneWriter.cpp
         TestUsdMaterialReadCache.cpp
         TestUsdMeshReader.cpp
-        TestUsdTriangleMeshWriter.cpp
         TestUsdPathFactory.cpp
         TestUsdPointLightWriter.cpp
         TestUsdReadUtils.cpp
@@ -69,9 +70,9 @@ set(UNIT_TEST_LIST
         TestUsdSphereReader.cpp
         TestUsdSphereWriter.cpp
         TestUsdStageReader.cpp
+        TestUsdTriangleMeshWriter.cpp
         TestUsdUtils.cpp
         TestVector.cpp
-        TestTriangleMeshConversion.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)

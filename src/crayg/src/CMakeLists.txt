@@ -98,6 +98,8 @@ set(crayg_SRCS
         scene/Triangle.h
         scene/TriangleMesh.cpp
         scene/TriangleMesh.h
+        scene/TriangleMeshConversion.cpp
+        scene/TriangleMeshConversion.h
         sceneIO/read/Deserializer.h
         sceneIO/read/json/JsonDeserializer.cpp
         sceneIO/read/json/JsonDeserializer.h
