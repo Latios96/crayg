@@ -61,5 +61,8 @@ pxr::GfMatrix4d UsdConversions::convert(const Matrix4x4f &matrix) {
 pxr::GfVec3f UsdConversions::convert(const Vector3f &vector) {
     return {vector.x, vector.y, -vector.z};
 }
+pxr::GfVec3f UsdConversions::convert(const Color &color) {
+    return {color.r, color.g, color.b};
+}
 
 };

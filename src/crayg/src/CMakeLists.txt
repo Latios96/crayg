@@ -172,6 +172,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdSphereWriter.h
         sceneIO/write/usd/UsdTriangleMeshWriter.cpp
         sceneIO/write/usd/UsdTriangleMeshWriter.h
+        sceneIO/write/usd/UsdMaterialWriteCache.cpp
+        sceneIO/write/usd/UsdMaterialWriteCache.h
         ShadingMethod.cpp
         ShadingMethod.h
         utils/ImagePathResolver.cpp

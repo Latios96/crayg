@@ -73,6 +73,7 @@ set(UNIT_TEST_LIST
         TestUsdTriangleMeshWriter.cpp
         TestUsdUtils.cpp
         TestVector.cpp
+        TestUsdMaterialWriteCache.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
