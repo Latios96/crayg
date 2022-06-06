@@ -20,12 +20,6 @@ std::vector<knipser::KnipserTest> renderTests() {
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
-        knipser::KnipserTest("pointCloud", [](knipser::TestContext &context) {
-            context.setImageOutputName("pointCloud.png");
-            renderScene(context.getReferenceFolder() + "/pointCloud.json", context.getOutputFilename());
-
-            ASSERT_IMAGES_ARE_EQUAL(context);
-        }),
         knipser::KnipserTest("teapot", [](knipser::TestContext &context) {
             context.setImageOutputName("teapot.png");
             renderScene(context.getReferenceFolder() + "/teapot.json", context.getOutputFilename());
