@@ -4,18 +4,17 @@
 
 #include "OpenImageIoImageWriter.h"
 #include <OpenImageIO/imageio.h>
-using namespace OIIO;
 
 namespace crayg {
 
 void OpenImageIoImageWriter::writeImage(const Image &image, std::string image_name) {
-    std::unique_ptr<ImageOutput> out = ImageOutput::create(image_name);
+    std::unique_ptr<OIIO::ImageOutput> out = OIIO::ImageOutput::create(image_name);
     if (!out)
         return;
 
-    ImageSpec spec(image.getWidth(), image.getHeight(), RGB_CHANNEL_COUNT, TypeDesc::FLOAT);
+    OIIO::ImageSpec spec(image.getWidth(), image.getHeight(), RGB_CHANNEL_COUNT, OIIO::TypeDesc::FLOAT);
     out->open(image_name, spec);
-    out->write_image(TypeDesc::FLOAT, image.getValues());
+    out->write_image(OIIO::TypeDesc::FLOAT, image.getValues());
     out->close();
 }
 
