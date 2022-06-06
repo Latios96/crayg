@@ -7,20 +7,15 @@
 
 #include <utils/StopWatch.h>
 #include "scene/Scene.h"
-#include "sceneIO/write/SerializerImplementation.h"
 
 namespace crayg {
 
 class SceneWriter {
  public:
-    void write();
-
-    explicit SceneWriter(Scene &scene, SerializerImplementation &serializerImpl) : scene(scene),
-                                                                                   serializerImpl(serializerImpl) {}
-
- private:
+    SceneWriter(Scene &scene);
+    virtual void writeScene(const std::string &scenePath) = 0;
+ protected:
     Scene &scene;
-    SerializerImplementation &serializerImpl;
 };
 
 }
