@@ -8,11 +8,6 @@ namespace crayg {
 
 TEST_CASE("TestSceneReaderFactory/createSceneReader") {
     Scene scene;
-    SECTION("should return SceneReader for .json") {
-        auto reader = SceneReaderFactory::createSceneReader("test.json", scene);
-
-        REQUIRE(reader != nullptr);
-    }
 
     SECTION("should return SceneReader for .usd") {
         auto reader = SceneReaderFactory::createSceneReader("test.usd", scene);

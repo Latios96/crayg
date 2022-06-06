@@ -11,6 +11,7 @@
 #include <scene/GroundPlane.h>
 #include <scene/DiffuseMaterial.h>
 #include "renderUtils.h"
+#include "sceneIO/write/usd/UsdSceneWriter.h"
 
 namespace crayg {
 
@@ -35,8 +36,12 @@ std::vector<knipser::KnipserTest> sceneIoTests() {
             sphere->setMaterial(diffuseMaterial);
             scene.addObject(sphere);
 
+            const std::shared_ptr<Material>
+                groundMaterial = std::make_shared<DiffuseMaterial>("groundMaterial", Color(1, 1, 1));
+
             const std::shared_ptr<GroundPlane> groundPlane = std::make_shared<GroundPlane>();
             groundPlane->setPosition(Vector3f(0, -1.5f, 0));
+            groundPlane->setMaterial(groundMaterial);
             scene.addObject(groundPlane);
 
             auto light = std::make_shared<Light>();
@@ -44,12 +49,9 @@ std::vector<knipser::KnipserTest> sceneIoTests() {
             light->setIntensity(1.0);
             scene.addLight(light);
 
-            const std::string scenePath = context.getOutputFolder() + "/writtenScene.json";
-            const std::shared_ptr<std::ofstream> ostream = std::make_shared<std::ofstream>(scenePath);
-            JsonSerializer jsonSerializer(ostream);
-            SceneWriter sceneWriter(scene, jsonSerializer);
-            sceneWriter.write();
-            ostream->close();
+            const std::string scenePath = context.getOutputFolder() + "/writtenScene.usda";
+            UsdSceneWriter usdSceneWriter;
+            usdSceneWriter.writeScene(scenePath, scene);
 
             renderScene(scenePath, context.getOutputFilename());
 

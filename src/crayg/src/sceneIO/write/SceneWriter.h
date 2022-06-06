@@ -7,7 +7,7 @@
 
 #include <utils/StopWatch.h>
 #include "scene/Scene.h"
-#include "sceneIO/write/json/JsonSerializer.h"
+#include "sceneIO/write/SerializerImplementation.h"
 
 namespace crayg {
 

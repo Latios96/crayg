@@ -99,10 +99,6 @@ set(crayg_SRCS
         scene/TriangleMeshConversion.cpp
         scene/TriangleMeshConversion.h
         sceneIO/read/Deserializer.h
-        sceneIO/read/json/JsonDeserializer.cpp
-        sceneIO/read/json/JsonDeserializer.h
-        sceneIO/read/json/JsonSceneReader.cpp
-        sceneIO/read/json/JsonSceneReader.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/BaseUsdImageableReader.h
@@ -131,8 +127,6 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdStageReader.h
         sceneIO/SceneReaderFactory.cpp
         sceneIO/SceneReaderFactory.h
-        sceneIO/SceneWriters.cpp
-        sceneIO/SceneWriters.h
         sceneIO/Serializable.h
         sceneIO/usd/CraygUsdBase.h
         sceneIO/usd/UsdConversions.cpp
@@ -140,8 +134,6 @@ set(crayg_SRCS
         sceneIO/usd/UsdReadUtils.cpp
         sceneIO/usd/UsdReadUtils.h
         sceneIO/usd/UsdUtils.h
-        sceneIO/write/json/JsonSerializer.cpp
-        sceneIO/write/json/JsonSerializer.h
         sceneIO/write/SceneWriter.cpp
         sceneIO/write/SceneWriter.h
         sceneIO/write/Serializer.h

@@ -7,7 +7,6 @@
 
 #include <memory>
 #include <sceneIO/read/SceneReader.h>
-#include <sceneIO/read/json/JsonSceneReader.h>
 
 namespace crayg {
 

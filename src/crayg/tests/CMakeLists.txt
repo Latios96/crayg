@@ -22,9 +22,6 @@ set(UNIT_TEST_LIST
         TestImageOutputDriver.cpp
         TestImagePathResolver.cpp
         TestImageWriters.cpp
-        TestJsonDeserializer.cpp
-        TestJsonSceneReader.cpp
-        TestJsonSerializer.cpp
         TestLight.cpp
         TestLineByLineIterator.cpp
         TestMatrix4x4f.cpp
