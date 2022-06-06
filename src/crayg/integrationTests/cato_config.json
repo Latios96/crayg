@@ -1,22 +1,22 @@
 {
   "suites": [
     {
-      "name": "ExampleScenes",
+      "name": "CornellBox",
       "tests": [
         {
-          "name": "single_sphere",
+          "name": "CornellBox_Glossy",
           "command": "{@crayg_render_command}"
         },
         {
-          "name": "single_sphere_arealight",
+          "name": "CornellBox_Glossy_Floor",
           "command": "{@crayg_render_command}"
         },
         {
-          "name": "three_spheres",
+          "name": "CornellBox_Original",
           "command": "{@crayg_render_command}"
         },
         {
-          "name": "three_spheres_with_disk_light",
+          "name": "CornellBox_Sphere",
           "command": "{@crayg_render_command}"
         },
         {
