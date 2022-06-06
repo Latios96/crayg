@@ -22,19 +22,6 @@ TEST_CASE("construct DiskLight", "[DiskLight]") {
         REQUIRE(diskLight.getRadius() == 3);
     }
 }
-// for some reason fakeit did not work here
-class MockSceneIntersector : public SceneIntersector {
- public:
-    MockSceneIntersector(Scene &scene, const Imageable::Intersection &return_value)
-        : SceneIntersector(scene) {
-        this->return_value = return_value;
-    }
-    Imageable::Intersection intersect(const Ray &ray) const override {
-        return return_value;
-    };
- private:
-    Imageable::Intersection return_value;
-};
 
 struct AreaLightFixture {
 

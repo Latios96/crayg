@@ -1,4 +1,5 @@
 #include <catch2/catch.hpp>
+#include <fakeit.hpp>
 #include <scene/Scene.h>
 #include "scene/Light.h"
 #include "intersectors/SceneIntersector.h"
@@ -6,20 +7,6 @@
 
 namespace crayg {
 
-
-// for some reason fakeit did not work here
-class MockSceneIntersector : public SceneIntersector {
- public:
-    MockSceneIntersector(Scene &scene, const Imageable::Intersection &return_value)
-        : SceneIntersector(scene) {
-        this->return_value = return_value;
-    }
-    Imageable::Intersection intersect(const Ray &ray) const override {
-        return return_value;
-    };
- private:
-    Imageable::Intersection return_value;
-};
 
 TEST_CASE("Light Sampling") {
     const float NO_SHADOW = 1.0f;
@@ -29,25 +16,30 @@ TEST_CASE("Light Sampling") {
 
     SECTION("noIntersectionShouldReturnNoShadow") {
         Scene scene;
-        MockSceneIntersector mockIntersector(scene, Imageable::Intersection::createInvalid());
+        fakeit::Mock<SceneIntersector> mockSceneIntersector;
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection::createInvalid());
 
-        const float shadowFactor = light.calculateShadowFactor(mockIntersector, {0, 0, 0});
+        const float shadowFactor = light.calculateShadowFactor(mockSceneIntersector.get(), {0, 0, 0});
         REQUIRE(shadowFactor == NO_SHADOW);
     }
 
     SECTION("intersectionIsBehindLight") {
         Scene scene;
-        MockSceneIntersector mockIntersector(scene, {10, std::make_shared<Sphere>()});
+        fakeit::Mock<SceneIntersector> mockSceneIntersector;
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(10,
+                                                                                             std::make_shared<Sphere>()));
 
-        const float shadowFactor = light.calculateShadowFactor(mockIntersector, {0, 0, 0});
+        const float shadowFactor = light.calculateShadowFactor(mockSceneIntersector.get(), {0, 0, 0});
         REQUIRE(shadowFactor == NO_SHADOW);
     }
 
     SECTION("intersectionIsBeforeLight") {
         Scene scene;
-        MockSceneIntersector mockIntersector(scene, {2, std::make_shared<Sphere>()});
+        fakeit::Mock<SceneIntersector> mockSceneIntersector;
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(2,
+                                                                                             std::make_shared<Sphere>()));
 
-        const float shadowFactor = light.calculateShadowFactor(mockIntersector, {0, 0, 0});
+        const float shadowFactor = light.calculateShadowFactor(mockSceneIntersector.get(), {0, 0, 0});
         REQUIRE(shadowFactor == FULL_SHADOW);
     }
 }
