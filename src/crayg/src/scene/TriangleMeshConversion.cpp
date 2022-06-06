@@ -20,5 +20,6 @@ void TriangleMeshConversion::toTriangleMesh(const GroundPlane &groundPlane, Tria
 
     triangleMesh.setMaterial(groundPlane.getMaterial());
     triangleMesh.init();
+    triangleMesh.setTransform(groundPlane.getTransform());
 }
 } // crayg
