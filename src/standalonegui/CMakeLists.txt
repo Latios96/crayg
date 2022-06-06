@@ -10,8 +10,7 @@ add_library(crayg-framebuffer
         ImageWidget.h
         ImageWidget.cpp
         ImageWidgetOutputDriver.h
-        ImageWidgetOutputDriver.cpp
-        ../bvhbuilder/src/main.cpp)
+        ImageWidgetOutputDriver.cpp)
 target_include_directories(crayg-framebuffer PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(crayg-framebuffer crayg Qt5::Core Qt5::Widgets ${CONAN_LIBS})
