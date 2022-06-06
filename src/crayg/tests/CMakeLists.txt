@@ -30,7 +30,6 @@ set(UNIT_TEST_LIST
         TestMatrix4x4f.cpp
         TestNode.cpp
         TestOpenImageIoImageWriter.cpp
-        TestPointCloud.cpp
         TestPreconditions.cpp
         TestProgressReporter.cpp
         TestRay.cpp

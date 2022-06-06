@@ -75,8 +75,6 @@ set(crayg_SRCS
         scene/Light.h
         scene/Material.cpp
         scene/Material.h
-        scene/PointCloud.cpp
-        scene/PointCloud.h
         scene/RectLight.cpp
         scene/RectLight.h
         scene/ReflectiveMaterial.cpp

@@ -6,7 +6,6 @@
 #include <rapidjson/istreamwrapper.h>
 #include <rapidjson/document.h>
 #include <fstream>
-#include <scene/PointCloud.h>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem.hpp>
 #include <scene/DiffuseMaterial.h>
@@ -82,8 +81,6 @@ void readSceneObjects(Scene &scene, rapidjson::Document &d) {
             readSceneObject<GroundPlane>(scene, obj, materialConnections);
         } else if (type == "TriangleMesh") {
             readTriangleMesh(scene, obj, materialConnections);
-        } else if (type == "PointCloud") {
-            readSceneObject<PointCloud>(scene, obj, materialConnections);
         } else if (type == "Light") {
             readLight<Light>(scene, obj);
         } else if (type == "RectLight") {
