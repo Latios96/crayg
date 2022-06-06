@@ -127,6 +127,8 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdStageReader.h
         sceneIO/SceneReaderFactory.cpp
         sceneIO/SceneReaderFactory.h
+        sceneIO/SceneWriterFactory.cpp
+        sceneIO/SceneWriterFactory.h
         sceneIO/Serializable.h
         sceneIO/usd/CraygUsdBase.h
         sceneIO/usd/UsdConversions.cpp
@@ -147,6 +149,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdDiskLightWriter.h
         sceneIO/write/usd/UsdGroundPlaneWriter.cpp
         sceneIO/write/usd/UsdGroundPlaneWriter.h
+        sceneIO/write/usd/UsdMaterialWriteCache.cpp
+        sceneIO/write/usd/UsdMaterialWriteCache.h
         sceneIO/write/usd/UsdPathFactory.cpp
         sceneIO/write/usd/UsdPathFactory.h
         sceneIO/write/usd/UsdPointLightWriter.cpp
@@ -161,8 +165,6 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdSphereWriter.h
         sceneIO/write/usd/UsdTriangleMeshWriter.cpp
         sceneIO/write/usd/UsdTriangleMeshWriter.h
-        sceneIO/write/usd/UsdMaterialWriteCache.cpp
-        sceneIO/write/usd/UsdMaterialWriteCache.h
         ShadingMethod.cpp
         ShadingMethod.h
         utils/ImagePathResolver.cpp

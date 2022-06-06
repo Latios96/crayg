@@ -12,6 +12,7 @@
 #include <scene/DiffuseMaterial.h>
 #include "renderUtils.h"
 #include "sceneIO/write/usd/UsdSceneWriter.h"
+#include "sceneIO/SceneWriterFactory.h"
 
 namespace crayg {
 
@@ -50,8 +51,8 @@ std::vector<knipser::KnipserTest> sceneIoTests() {
             scene.addLight(light);
 
             const std::string scenePath = context.getOutputFolder() + "/writtenScene.usda";
-            UsdSceneWriter usdSceneWriter;
-            usdSceneWriter.writeScene(scenePath, scene);
+            auto sceneWriter = SceneWriterFactory::createSceneWriter(scenePath, scene);
+            sceneWriter->writeScene(scenePath);
 
             renderScene(scenePath, context.getOutputFilename());
 

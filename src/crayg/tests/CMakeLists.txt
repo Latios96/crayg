@@ -38,6 +38,7 @@ set(UNIT_TEST_LIST
         TestSceneIntersector.cpp
         TestSceneObject.cpp
         TestSceneReaderFactory.cpp
+        TestSceneWriterFactory.cpp
         TestShadingMethod.cpp
         TestSphere.cpp
         TestTeeOutputDriver.cpp
