@@ -12,14 +12,14 @@
 #include "UsdTriangleMeshWriter.h"
 #include "UsdGroundPlaneWriter.h"
 
-void crayg::UsdSceneWriter::writeScene(const std::string &scenePath, crayg::Scene &scene) {
+void crayg::UsdSceneWriter::writeScene(const std::string &scenePath) {
     auto stage = pxr::UsdStage::CreateNew(scenePath);
 
-    writeScene(stage, scene);
+    writeScene(stage);
 
     stage->Save();
 }
-void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage, crayg::Scene &scene) {
+void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
     UsdPathFactory usdPathFactory;
     UsdCameraWriter(scene.camera).write(stage, usdPathFactory);
 
@@ -55,3 +55,4 @@ void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage, crayg::Scene &sce
     }
 
 }
+crayg::UsdSceneWriter::UsdSceneWriter(crayg::Scene &scene) : scene(scene) {}

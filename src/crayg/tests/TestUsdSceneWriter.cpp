@@ -35,16 +35,16 @@ TEST_CASE("UsdSceneWriter::write") {
                                             35.0f);
 
     auto stage = pxr::UsdStage::CreateInMemory();
-    UsdSceneWriter usdSceneWriter;
+    UsdSceneWriter usdSceneWriter(scene);
 
     SECTION("should write camera") {
-        usdSceneWriter.writeScene(stage, scene);
+        usdSceneWriter.writeScene(stage);
 
         REQUIRE(count<pxr::UsdGeomCamera>(stage) == 1);
     }
 
     SECTION("should write render settings") {
-        usdSceneWriter.writeScene(stage, scene);
+        usdSceneWriter.writeScene(stage);
 
         REQUIRE(count<pxr::UsdRenderSettings>(stage) == 1);
     }
@@ -52,7 +52,7 @@ TEST_CASE("UsdSceneWriter::write") {
     SECTION("should write sphere") {
         scene.addObject(std::make_shared<Sphere>(Vector3f(1, 2, 3), 3));
 
-        usdSceneWriter.writeScene(stage, scene);
+        usdSceneWriter.writeScene(stage);
 
         REQUIRE(count<pxr::UsdGeomSphere>(stage) == 1);
     }
@@ -60,7 +60,7 @@ TEST_CASE("UsdSceneWriter::write") {
     SECTION("should write point light") {
         scene.addLight(std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3));
 
-        usdSceneWriter.writeScene(stage, scene);
+        usdSceneWriter.writeScene(stage);
 
         REQUIRE(count<pxr::UsdLuxSphereLight>(stage) == 1);
     }
@@ -68,7 +68,7 @@ TEST_CASE("UsdSceneWriter::write") {
     SECTION("should write rect light") {
         scene.addLight(std::make_shared<RectLight>(Transform::withPosition({1, 2, -3}), 3, 4, 5));
 
-        usdSceneWriter.writeScene(stage, scene);
+        usdSceneWriter.writeScene(stage);
 
         REQUIRE(count<pxr::UsdLuxRectLight>(stage) == 1);
     }
@@ -76,7 +76,7 @@ TEST_CASE("UsdSceneWriter::write") {
     SECTION("should write disk light") {
         scene.addLight(std::make_shared<DiskLight>(Transform::withPosition({1, 2, -3}), 3, 4));
 
-        usdSceneWriter.writeScene(stage, scene);
+        usdSceneWriter.writeScene(stage);
 
         REQUIRE(count<pxr::UsdLuxDiskLight>(stage) == 1);
     }
@@ -84,7 +84,7 @@ TEST_CASE("UsdSceneWriter::write") {
     SECTION("should write trianglemesh") {
         scene.addObject(std::make_shared<TriangleMesh>());
 
-        usdSceneWriter.writeScene(stage, scene);
+        usdSceneWriter.writeScene(stage);
 
         REQUIRE(count<pxr::UsdGeomMesh>(stage) == 1);
     }

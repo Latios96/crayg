@@ -16,8 +16,11 @@ namespace crayg {
 
 class UsdSceneWriter {
  public:
-    void writeScene(const std::string &scenePath, Scene &scene);
-    void writeScene(pxr::UsdStagePtr stage, Scene &scene);
+    UsdSceneWriter(Scene &scene);
+    void writeScene(const std::string &scenePath);
+    void writeScene(pxr::UsdStagePtr stage);
+ private:
+    Scene &scene;
 };
 
 }
