@@ -4,7 +4,7 @@ def Camera "camera0"
 {
     float focalLength = 35
     float horizontalAperture = 36
-    matrix4d xformOp:transform = ( (-1, 0, 0, 0), (0, 1, -0, 0), (0, 0, -1, 0), (0, 0, -10, 1) )
+    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 0.8500000238418579, -0.5299999713897705, 0), (0, 0.5299999713897705, 0.8500000238418579, 0), (0, 5, 8, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]
 }
 
@@ -20,8 +20,8 @@ def "Render"
 def Sphere "Sphere0"
 {
     rel material:binding = </defaultMaterial>
-    double radius = 1.5
-    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, 0, -0, 1) )
+    double radius = 1
+    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (-3.9306530952453613, 1, 0, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]
 }
 
@@ -37,12 +37,28 @@ def Material "defaultMaterial"
     }
 }
 
+def Sphere "Sphere1"
+{
+    rel material:binding = </defaultMaterial>
+    double radius = 1
+    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (-0.11379870772361755, 1, 4.912843704223633, 1) )
+    uniform token[] xformOpOrder = ["xformOp:transform"]
+}
+
+def Sphere "Sphere2"
+{
+    rel material:binding = </defaultMaterial>
+    double radius = 1
+    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (2.4158709049224854, 1, -0.8301497101783752, 1) )
+    uniform token[] xformOpOrder = ["xformOp:transform"]
+}
+
 def Mesh "GroundPlane0"
 {
     int[] faceVertexCounts = [3, 3]
     int[] faceVertexIndices = [0, 2, 1, 2, 0, 3]
     point3f[] points = [(-1000, 0, 1000), (-1000, 0, -1000), (1000, 0, -1000), (1000, 0, 1000)]
-    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, -1.5, 0, 1) )
+    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, 0, -0, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]
     rel material:binding = </defaultMaterial>
 }
@@ -51,7 +67,7 @@ def SphereLight "Light0"
 {
     float inputs:intensity = 1
     float inputs:radius = 0
-    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, 3, -3, 1) )
+    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, 2.7426412105560303, -0, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]
 }
 

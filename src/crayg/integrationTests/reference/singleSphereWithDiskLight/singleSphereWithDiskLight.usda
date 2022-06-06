@@ -12,17 +12,39 @@ def "Render"
 {
     def RenderSettings "settings"
     {
-        custom int maxSamples = 4
+        custom int maxSamples = 8
         uniform int2 resolution = (800, 600)
     }
 }
 
 def Sphere "Sphere0"
 {
-    rel material:binding = </defaultMaterial>
-    double radius = 1.5
+    rel material:binding = </redMat>
+    double radius = 1
     matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, 0, -0, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]
+}
+
+def Material "redMat"
+{
+    token outputs:surface.connect = </redMat/usdPreviewSurface.outputs:surface>
+
+    def Shader "usdPreviewSurface"
+    {
+        uniform token info:id = "UsdPreviewSurface"
+        color3f inputs:diffuseColor = (1, 0, 0)
+        token outputs:surface
+    }
+}
+
+def Mesh "GroundPlane0"
+{
+    int[] faceVertexCounts = [3, 3]
+    int[] faceVertexIndices = [0, 2, 1, 2, 0, 3]
+    point3f[] points = [(-1000, 0, 1000), (-1000, 0, -1000), (1000, 0, -1000), (1000, 0, 1000)]
+    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, -1, 0, 1) )
+    uniform token[] xformOpOrder = ["xformOp:transform"]
+    rel material:binding = </defaultMaterial>
 }
 
 def Material "defaultMaterial"
@@ -37,21 +59,11 @@ def Material "defaultMaterial"
     }
 }
 
-def Mesh "GroundPlane0"
-{
-    int[] faceVertexCounts = [3, 3]
-    int[] faceVertexIndices = [0, 2, 1, 2, 0, 3]
-    point3f[] points = [(-1000, 0, 1000), (-1000, 0, -1000), (1000, 0, -1000), (1000, 0, 1000)]
-    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, -1.5, 0, 1) )
-    uniform token[] xformOpOrder = ["xformOp:transform"]
-    rel material:binding = </defaultMaterial>
-}
-
-def SphereLight "Light0"
+def DiskLight "DiskLight0"
 {
     float inputs:intensity = 1
-    float inputs:radius = 0
-    matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, 3, -3, 1) )
+    float inputs:radius = 1
+    matrix4d xformOp:transform = ( (0, 0, 1, 0), (0, 1, -0, 0), (-1, 0, 0, 0), (0, 0.5, 4, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]
 }
 

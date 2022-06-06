@@ -19,20 +19,20 @@ def "Render"
 
 def Sphere "Sphere0"
 {
-    rel material:binding = </defaultMaterial>
+    rel material:binding = </redMat>
     double radius = 1.5
     matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, 0, -0, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]
 }
 
-def Material "defaultMaterial"
+def Material "redMat"
 {
-    token outputs:surface.connect = </defaultMaterial/usdPreviewSurface.outputs:surface>
+    token outputs:surface.connect = </redMat/usdPreviewSurface.outputs:surface>
 
     def Shader "usdPreviewSurface"
     {
         uniform token info:id = "UsdPreviewSurface"
-        color3f inputs:diffuseColor = (1, 1, 1)
+        color3f inputs:diffuseColor = (1, 0, 0)
         token outputs:surface
     }
 }
@@ -41,10 +41,22 @@ def Mesh "GroundPlane0"
 {
     int[] faceVertexCounts = [3, 3]
     int[] faceVertexIndices = [0, 2, 1, 2, 0, 3]
+    rel material:binding = </groundMat>
     point3f[] points = [(-1000, 0, 1000), (-1000, 0, -1000), (1000, 0, -1000), (1000, 0, 1000)]
     matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, -1.5, 0, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]
-    rel material:binding = </defaultMaterial>
+}
+
+def Material "groundMat"
+{
+    token outputs:surface.connect = </groundMat/usdPreviewSurface.outputs:surface>
+
+    def Shader "usdPreviewSurface"
+    {
+        uniform token info:id = "UsdPreviewSurface"
+        color3f inputs:diffuseColor = (0.1, 0.1, 0.1)
+        token outputs:surface
+    }
 }
 
 def SphereLight "Light0"

@@ -10,31 +10,31 @@ std::vector<knipser::KnipserTest> renderTests() {
     return {
         knipser::KnipserTest("singleSphere", [](knipser::TestContext &context) {
             context.setImageOutputName("singleSphere.png");
-            renderScene(context.getReferenceFolder() + "/singleSphere.json", context.getOutputFilename());
+            renderScene(context.getReferenceFolder() + "/singleSphere.usda", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
         knipser::KnipserTest("threeSpheres", [](knipser::TestContext &context) {
             context.setImageOutputName("threeSpheres.png");
-            renderScene(context.getReferenceFolder() + "/threeSpheres.json", context.getOutputFilename());
+            renderScene(context.getReferenceFolder() + "/threeSpheres.usda", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
         knipser::KnipserTest("teapot", [](knipser::TestContext &context) {
             context.setImageOutputName("teapot.png");
-            renderScene(context.getReferenceFolder() + "/teapot.json", context.getOutputFilename());
+            renderScene(context.getReferenceFolder() + "/teapot.usda", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
         knipser::KnipserTest("singleSphereWithMats", [](knipser::TestContext &context) {
             context.setImageOutputName("singleSphereWithMats.png");
-            renderScene(context.getReferenceFolder() + "/singleSphereWithMats.json", context.getOutputFilename());
+            renderScene(context.getReferenceFolder() + "/singleSphereWithMats.usda", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
         knipser::KnipserTest("singleSphereWithDiskLight", [](knipser::TestContext &context) {
             context.setImageOutputName("singleSphereWithDiskLight.png");
-            renderScene(context.getReferenceFolder() + "/singleSphereWithDiskLight.json", context.getOutputFilename());
+            renderScene(context.getReferenceFolder() + "/singleSphereWithDiskLight.usda", context.getOutputFilename());
 
             ASSERT_IMAGES_ARE_EQUAL(context);
         }),
