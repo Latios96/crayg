@@ -6,20 +6,16 @@
 #define CRAYG_SCENEOBJECT_H
 
 #include "Transformable.h"
-#include "sceneIO/Serializable.h"
 #include "Imageable.h"
 
 namespace crayg {
 
 class SceneObject : public Imageable,
-                    public Transformable,
-                    public Serializable {
+                    public Transformable {
  public:
     SceneObject();
 
     explicit SceneObject(Vector3f position);
-    void serialize(Serializer &serializer) override;
-    void deserialize(Deserializer &deserializer) override;
     virtual ~SceneObject() = default;
 
     const std::string &getName() const;

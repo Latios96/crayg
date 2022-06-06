@@ -9,14 +9,6 @@
 
 namespace crayg {
 
-void DiskLight::serialize(Serializer &serializer) {
-    Light::serialize(serializer);
-    serializer.writeFloat("radius", radius);
-}
-void DiskLight::deserialize(Deserializer &deserializer) {
-    Light::deserialize(deserializer);
-    radius = deserializer.readFloat("radius");
-}
 Vector3f DiskLight::sampleLightShape() const {
     float r = radius * sqrt((double(rand()) / RAND_MAX));
     float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;

@@ -1,7 +1,5 @@
 #include <scene/Sphere.h>
 #include <catch2/catch.hpp>
-#include <fakeit.hpp>
-using namespace fakeit;
 
 namespace crayg {
 
@@ -40,36 +38,6 @@ TEST_CASE("Sphere") {
     SECTION("intersectNotReturnsMax") {
         auto hitRay = mySphere->intersect(Ray(Vector3f(1, 10, -5), Vector3f(0, 0, 1)));
         REQUIRE(hitRay.rayParameter == std::numeric_limits<float>::max());
-    }
-
-    SECTION("serialize") {
-        fakeit::Mock<Serializer> mockSerializer;
-        fakeit::When(Method(mockSerializer, writeFloat)).AlwaysReturn();
-        fakeit::When(Method(mockSerializer, writeVector3f)).AlwaysReturn();
-        fakeit::When(Method(mockSerializer, writeType)).AlwaysReturn();
-        fakeit::When(Method(mockSerializer, writeMatrix4x4f)).AlwaysReturn();
-        fakeit::When(Method(mockSerializer, writeString)).AlwaysReturn();
-
-        Serializer &s = mockSerializer.get();
-        mySphere->serialize(s);
-
-        fakeit::Verify(Method(mockSerializer, writeFloat).Using("radius", 3.0f));
-        fakeit::Verify(Method(mockSerializer, writeMatrix4x4f).Using("transform", Matrix4x4f()));
-        fakeit::Verify(Method(mockSerializer, writeType).Using("Sphere"));
-        fakeit::Verify(Method(mockSerializer, writeString)).Never();
-    }
-
-    SECTION("deserialize") {
-        fakeit::Mock<Deserializer> mockDeserializer;
-        When(Method(mockDeserializer, hasProperty).Using("position")).Return(true);
-        When(Method(mockDeserializer, readFloat).Using("radius")).Return(3.0f);
-        When(Method(mockDeserializer, readVector3f).Using("position")).Return(Vector3f(1, 2, 3));
-
-        Deserializer &s = mockDeserializer.get();
-        mySphere->deserialize(s);
-
-        REQUIRE(mySphere->getPosition() == Vector3f(1, 2, 3));
-        REQUIRE(mySphere->getRadius() == 3.0f);
     }
 }
 

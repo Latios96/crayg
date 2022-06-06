@@ -6,7 +6,6 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_MATERIAL_H_
 
 #include <basics/Color.h>
-#include <sceneIO/Serializable.h>
 #include "ShadingNode.h"
 
 namespace crayg {

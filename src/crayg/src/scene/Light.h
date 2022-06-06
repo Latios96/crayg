@@ -5,7 +5,6 @@
 #ifndef CRAYG_LIGHT_H
 #define CRAYG_LIGHT_H
 
-#include "sceneIO/Serializable.h"
 #include "scene/Transformable.h"
 #include "scene/Imageable.h"
 
@@ -13,13 +12,10 @@ namespace crayg {
 
 class SceneIntersector;
 
-class Light : public Serializable, public Transformable, public Imageable {
+class Light : public Transformable, public Imageable {
  public:
     Light();
     explicit Light(const Transform &transform, float intensity);
-    void serialize(Serializer &serializer) override;
-
-    void deserialize(Deserializer &deserializer) override;
     float getIntensity() const;
     BoundingBox getBounds() const override;
 

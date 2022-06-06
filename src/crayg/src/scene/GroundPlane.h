@@ -15,10 +15,6 @@ class GroundPlane : public SceneObject {
 
     bool isIntersecting(Ray ray) override;
 
-    void serialize(Serializer &serializer) override;
-
-    void deserialize(Deserializer &deserializer) override;
-
     Vector3f getNormal(Vector3f point) override;
     BoundingBox getBounds() const override;
     std::string getType() override;

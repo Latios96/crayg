@@ -21,17 +21,6 @@ Vector3f RectLight::sampleLightShape() const {
     const Vector3f samplePosition = getTransform().apply(positionOnPlane);
     return samplePosition;
 }
-void RectLight::serialize(Serializer &serializer) {
-    Light::serialize(serializer);
-    serializer.writeType("RectLight");
-    serializer.writeFloat("width", width);
-    serializer.writeFloat("height", height);
-}
-void RectLight::deserialize(Deserializer &deserializer) {
-    Light::deserialize(deserializer);
-    width = deserializer.readFloat("width");
-    height = deserializer.readFloat("height");
-}
 std::string RectLight::getType() {
     return "RectLight";
 }

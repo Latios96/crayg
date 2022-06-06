@@ -16,21 +16,6 @@ void Light::setIntensity(float intensity) {
     Light::intensity = intensity;
 }
 
-void Light::serialize(Serializer &serializer) {
-    serializer.writeMatrix4x4f("transform", this->getTransform().matrix);
-    serializer.writeFloat("intensity", intensity);
-    serializer.writeType(getType());
-}
-
-void Light::deserialize(Deserializer &deserializer) {
-    if (deserializer.hasProperty("position")) {
-        setPosition(deserializer.readVector3f("position"));
-    } else {
-        transform = Transform(deserializer.readMatrix4x4f("transform"));
-    }
-    setIntensity(deserializer.readFloat("intensity"));
-}
-
 float Light::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
     const Vector3f shadowVector = getPosition() - point;
     Ray shadowRay(point, shadowVector.normalize());

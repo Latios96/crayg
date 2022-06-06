@@ -7,14 +7,13 @@
 
 #include <ostream>
 #include "basics/Vector3f.h"
-#include "sceneIO/Serializable.h"
 #include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"
 #include "utils/ToStringHelper.h"
 
 namespace crayg {
 
-class Camera : public Serializable, public Transformable {
+class Camera : public Transformable {
  private:
     float focalLength;
     float filmbackSize;
@@ -41,10 +40,6 @@ class Camera : public Serializable, public Transformable {
      * @return filmbackSize in mm
      */
     float getFilmbackSize() const;
-
-    void serialize(Serializer &serializer) override;
-
-    void deserialize(Deserializer &deserializer) override;
 
     const std::string &getName() const;
     void setName(const std::string &name);

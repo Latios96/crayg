@@ -12,12 +12,6 @@ Color EmissiveMaterial::getDiffuseColor() {
 float EmissiveMaterial::reflectivity() {
     return 0;
 }
-void EmissiveMaterial::serialize(Serializer &serializer) {
-    ShadingNode::serialize(serializer);
-}
-void EmissiveMaterial::deserialize(Deserializer &deserializer) {
-    ShadingNode::deserialize(deserializer);
-}
 void EmissiveMaterial::connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) {
 
 }

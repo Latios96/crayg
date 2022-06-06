@@ -6,15 +6,6 @@
 
 namespace crayg {
 
-void GroundPlane::serialize(Serializer &serializer) {
-    SceneObject::serialize(serializer);
-    serializer.writeType("GroundPlane");
-}
-
-void GroundPlane::deserialize(Deserializer &deserializer) {
-    SceneObject::deserialize(deserializer);
-}
-
 bool GroundPlane::isIntersecting(Ray ray) {
     auto scalar = normal.scalarProduct(ray.direction);
     return scalar != 0;

@@ -67,16 +67,6 @@ float Sphere::getRadius() const {
 
 Sphere::~Sphere() = default;
 
-void Sphere::serialize(Serializer &serializer) {
-    SceneObject::serialize(serializer);
-    serializer.writeType("Sphere");
-    serializer.writeFloat("radius", radius);
-}
-
-void Sphere::deserialize(Deserializer &deserializer) {
-    SceneObject::deserialize(deserializer);
-    radius = deserializer.readFloat("radius");
-}
 
 Sphere::Sphere() {
     radius = 0;

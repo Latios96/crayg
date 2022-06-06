@@ -36,7 +36,6 @@ set(UNIT_TEST_LIST
         TestResolution.cpp
         TestScene.cpp
         TestSceneIntersector.cpp
-        TestSceneObject.cpp
         TestSceneReaderFactory.cpp
         TestSceneWriterFactory.cpp
         TestShadingMethod.cpp

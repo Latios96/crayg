@@ -1,6 +1,3 @@
-//
-// Created by Jan on 14.11.2020.
-//
 #include <catch2/catch.hpp>
 #include "scene/ShadingNode.h"
 #include <sstream>
@@ -14,16 +11,6 @@ class MyMat : public ShadingNode {
     }
     explicit MyMat(const std::string &name)
         : ShadingNode(name), colorPlug(InputPlug<Color>("color", this, Color::createBlack())) {
-    }
-    void deserialize(Deserializer &deserializer) override {
-
-    }
-    void serialize(Serializer &serializer) override {
-        ShadingNode::serialize(serializer);
-        serializer.writeType("MyMat");
-        if (colorPlug.input) {
-            serializer.writeString("colorPlug", colorPlug.input->fullName());
-        }
     }
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override {
         if (inputPlugName == "color") {
@@ -49,13 +36,6 @@ class MyFileTextureNode : public ShadingNode {
         : ShadingNode(name), colorPlug(OutputPlug<Color>("color", this, Color::createBlack(), []() {
         return Color::createGrey(0.5);
     })) {
-    }
-    void deserialize(Deserializer &deserializer) override {
-
-    }
-    void serialize(Serializer &serializer) override {
-        ShadingNode::serialize(serializer);
-        serializer.writeType("MyFileTextureNode");
     }
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr plug) override {
     }

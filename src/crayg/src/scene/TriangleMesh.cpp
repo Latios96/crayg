@@ -31,20 +31,6 @@ void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Imageable>> &triangl
     }
 }
 
-
-void TriangleMesh::serialize(Serializer &serializer) {
-    SceneObject::serialize(serializer);
-    serializer.writeType("TriangleMesh");
-    serializer.writeVector3fArray("points", points);
-    serializer.writeIntArray("faceIndices", faceIndices);
-}
-
-void TriangleMesh::deserialize(Deserializer &deserializer) {
-    SceneObject::deserialize(deserializer);
-    deserializer.readVector3fArray("points", points);
-    deserializer.readIntArray("faceIndices", faceIndices);
-}
-
 Vector3f TriangleMesh::getNormal(Vector3f point) {
     return {0, 1, 0};
 }

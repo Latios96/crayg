@@ -15,8 +15,6 @@ class DiffuseMaterial : public Material {
     explicit DiffuseMaterial(const Color &diffuseColor);
     DiffuseMaterial(const std::string &name, const Color &diffuseColor);
     Color getDiffuseColor() override;
-    void serialize(Serializer &serializer) override;
-    void deserialize(Deserializer &deserializer) override;
     Color diffuseColor;
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override;
     PlugPtr getPlugByName(const std::string &inputPlugName) override;

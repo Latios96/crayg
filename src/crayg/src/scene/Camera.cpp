@@ -26,19 +26,6 @@ float Camera::getHorizontalFieldOfView() const {
     return 2 * std::atan(filmbackSize / 2.0f * 1.0f / focalLength);
 }
 
-void Camera::serialize(Serializer &serializer) {
-    serializer.writeType("Camera");
-    serializer.writeMatrix4x4f("transform", transform.matrix);
-    serializer.writeFloat("focalLength", focalLength);
-    serializer.writeFloat("filmbackSize", filmbackSize);
-}
-
-void Camera::deserialize(Deserializer &deserializer) {
-    transform = Transform(deserializer.readMatrix4x4f("transform"));
-    focalLength = deserializer.readFloat("focalLength");
-    filmbackSize = deserializer.readFloat("filmbackSize");
-}
-
 float Camera::getFocalLength() const {
     return focalLength;
 }

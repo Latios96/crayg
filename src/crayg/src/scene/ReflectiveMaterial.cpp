@@ -18,13 +18,6 @@ void ReflectiveMaterial::connectOutputToInput(const std::string &inputPlugName, 
 PlugPtr ReflectiveMaterial::getPlugByName(const std::string &inputPlugName) {
     return {};
 }
-void ReflectiveMaterial::serialize(Serializer &serializer) {
-    ShadingNode::serialize(serializer);
-    serializer.writeType("ReflectiveMaterial");
-}
-void ReflectiveMaterial::deserialize(Deserializer &deserializer) {
-    ShadingNode::deserialize(deserializer);
-}
 bool ReflectiveMaterial::isEmissive() {
     return false;
 }

@@ -24,10 +24,6 @@ class Sphere : public SceneObject {
     bool isIntersecting(Ray ray) override;
     BoundingBox getBounds() const override;
 
-    void serialize(Serializer &serializer) override;
-
-    void deserialize(Deserializer &deserializer) override;
-
     Vector3f getNormal(Vector3f point) override;
 
     std::string getType() override;

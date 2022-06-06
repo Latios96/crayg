@@ -98,7 +98,6 @@ set(crayg_SRCS
         scene/TriangleMesh.h
         scene/TriangleMeshConversion.cpp
         scene/TriangleMeshConversion.h
-        sceneIO/read/Deserializer.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/BaseUsdImageableReader.h
@@ -129,7 +128,6 @@ set(crayg_SRCS
         sceneIO/SceneReaderFactory.h
         sceneIO/SceneWriterFactory.cpp
         sceneIO/SceneWriterFactory.h
-        sceneIO/Serializable.h
         sceneIO/usd/CraygUsdBase.h
         sceneIO/usd/UsdConversions.cpp
         sceneIO/usd/UsdConversions.h
@@ -138,7 +136,6 @@ set(crayg_SRCS
         sceneIO/usd/UsdUtils.h
         sceneIO/write/SceneWriter.cpp
         sceneIO/write/SceneWriter.h
-        sceneIO/write/Serializer.h
         sceneIO/write/usd/BaseUsdLightWriter.h
         sceneIO/write/usd/BaseUsdSceneObjectWriter.h
         sceneIO/write/usd/BaseUsdTransformableWriter.h

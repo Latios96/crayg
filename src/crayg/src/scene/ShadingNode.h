@@ -5,7 +5,6 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNODE_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNODE_H_
 
-#include <sceneIO/Serializable.h>
 #include <basics/Color.h>
 
 #include <utility>
@@ -84,14 +83,12 @@ class PlugPtr {
     void *ptr = nullptr;
 };
 
-class ShadingNode : public Serializable {
+class ShadingNode {
  public:
     ShadingNode();
     explicit ShadingNode(std::string name);
     std::string getName() const;
     void generateName();
-    void serialize(Serializer &serializer) override;
-    void deserialize(Deserializer &deserializer) override;
     virtual void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) = 0;
     virtual PlugPtr getPlugByName(const std::string &inputPlugName) = 0;
  private:

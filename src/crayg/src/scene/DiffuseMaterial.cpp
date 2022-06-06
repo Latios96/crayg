@@ -16,15 +16,6 @@ DiffuseMaterial::DiffuseMaterial(const std::string &name, const Color &diffuseCo
 Color DiffuseMaterial::getDiffuseColor() {
     return diffuseColor;
 }
-void DiffuseMaterial::serialize(Serializer &serializer) {
-    ShadingNode::serialize(serializer);
-    serializer.writeType("DiffuseMaterial");
-    serializer.writeColor("diffuseColor", diffuseColor);
-}
-void DiffuseMaterial::deserialize(Deserializer &deserializer) {
-    Material::deserialize(deserializer);
-    diffuseColor = deserializer.readColor("diffuseColor");
-}
 
 void DiffuseMaterial::connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) {
 
