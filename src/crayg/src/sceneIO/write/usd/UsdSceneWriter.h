@@ -10,17 +10,16 @@
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "UsdPathFactory.h"
 #include "UsdMaterialWriteCache.h"
+#include "sceneIO/write/SceneWriter.h"
 #include <pxr/usd/usd/stage.h>
 
 namespace crayg {
 
-class UsdSceneWriter {
+class UsdSceneWriter : public SceneWriter {
  public:
     UsdSceneWriter(Scene &scene);
-    void writeScene(const std::string &scenePath);
+    void writeScene(const std::string &scenePath) override;
     void writeScene(pxr::UsdStagePtr stage);
- private:
-    Scene &scene;
 };
 
 }

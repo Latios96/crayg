@@ -55,4 +55,4 @@ void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
     }
 
 }
-crayg::UsdSceneWriter::UsdSceneWriter(crayg::Scene &scene) : scene(scene) {}
+crayg::UsdSceneWriter::UsdSceneWriter(crayg::Scene &scene) : SceneWriter(scene) {}
