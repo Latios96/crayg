@@ -1,7 +1,6 @@
 [requires]
 fmt/8.1.1
 spdlog/1.10.0
-rapidjson/1.1.0
 catch2/2.13.7
 fakeit/2.0.9
 cli11/2.1.1
