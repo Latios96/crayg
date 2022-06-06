@@ -4,6 +4,7 @@
 
 #include "UsdMaterialWriteCache.h"
 #include "sceneIO/usd/UsdConversions.h"
+#include "Logger.h"
 
 namespace crayg {
 
@@ -20,6 +21,8 @@ pxr::UsdShadeMaterial UsdMaterialWriteCache::getCachedUsdMaterial(const std::sha
 
 pxr::UsdShadeMaterial UsdMaterialWriteCache::translateMaterial(const std::shared_ptr<Material> material) {
     const pxr::SdfPath materialPath = usdPathFactory.getPathForName(material->getName(), "Material");
+    Logger::info("Writing material {}", materialPath.GetString());
+
     auto usdShadeMaterial = pxr::UsdShadeMaterial::Define(stage, materialPath);
     auto usdShadeShader =
         pxr::UsdShadeShader::Define(stage, materialPath.AppendChild(pxr::TfToken("usdPreviewSurface")));
