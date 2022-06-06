@@ -12,7 +12,7 @@ UsdTriangleMeshWriter::UsdTriangleMeshWriter(const std::shared_ptr<TriangleMesh>
     usdMaterialWriteCache) {}
 
 pxr::UsdGeomMesh UsdTriangleMeshWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
-    auto usdGeomMesh = BaseUsdTransformableWriter::write(stage, usdPathFactory);
+    auto usdGeomMesh = BaseUsdSceneObjectWriter::write(stage, usdPathFactory);
 
     writePoints(usdGeomMesh);
     writeFaceVertexIndices(usdGeomMesh);
