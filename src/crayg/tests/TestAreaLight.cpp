@@ -4,8 +4,6 @@
 #include "scene/AreaLight.h"
 #include "intersectors/SceneIntersector.h"
 
-using namespace fakeit;
-
 namespace crayg {
 
 TEST_CASE("AreaLight::calculateShadowFactor") {
@@ -27,7 +25,7 @@ TEST_CASE("AreaLight::calculateShadowFactor") {
     SECTION("should illuminate point in front of the areaLight when there are no objects inbetween") {
         Vector3f point(0, 2, 4);
         fakeit::Mock<SceneIntersector> mockSceneIntersector;
-        When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection::createInvalid());
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection::createInvalid());
 
         const float shadowFactor = dummyAreaLight.calculateShadowFactor(mockSceneIntersector.get(), point);
 
@@ -37,7 +35,7 @@ TEST_CASE("AreaLight::calculateShadowFactor") {
     SECTION("should not illuminate point in back of the areaLight when there are no objects inbetween") {
         Vector3f point(0, 2, 1.9f);
         fakeit::Mock<SceneIntersector> mockSceneIntersector;
-        When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection::createInvalid());
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection::createInvalid());
 
         const float shadowFactor = dummyAreaLight.calculateShadowFactor(mockSceneIntersector.get(), point);
 
@@ -47,7 +45,7 @@ TEST_CASE("AreaLight::calculateShadowFactor") {
     SECTION("should not illuminate point in front of the areaLight when there are objects inbetween") {
         Vector3f point(0, 2, 4);
         fakeit::Mock<SceneIntersector> mockSceneIntersector;
-        When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1, std::make_shared<Sphere>()));
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1, std::make_shared<Sphere>()));
 
         const float shadowFactor = dummyAreaLight.calculateShadowFactor(mockSceneIntersector.get(), point);
 
@@ -57,7 +55,7 @@ TEST_CASE("AreaLight::calculateShadowFactor") {
     SECTION("should illuminate point in front of the areaLight when there are objects inbetween") {
         Vector3f point(0, 2, 4);
         fakeit::Mock<SceneIntersector> mockSceneIntersector;
-        When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1, std::make_shared<Sphere>()));
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1, std::make_shared<Sphere>()));
 
         const float shadowFactor = dummyAreaLight.calculateShadowFactor(mockSceneIntersector.get(), point);
 

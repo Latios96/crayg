@@ -6,8 +6,6 @@
 #include <image/OutputDriver.h>
 #include <image/TeeOutputDriver.h>
 
-using namespace fakeit;
-
 namespace crayg {
 
 TEST_CASE("TeeOutputDriver should forward methods") {
