@@ -39,13 +39,14 @@ struct CliParseResult {
 
 class CliParser {
  public:
-    CliParser(int argc, char **argv);
+    CliParser(const std::string &executableName, int argc, char **argv);
 
     CliParseResult parse();
 
  private:
     int argc;
     char **argv;
+    std::string executableName;
 };
 
 }

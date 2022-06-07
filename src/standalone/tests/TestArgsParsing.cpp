@@ -18,7 +18,7 @@ TEST_CASE("shouldParseArgsValid") {
     std::vector<std::string> arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path"};
     ARGC_ARGV_(arguments);
 
-    CliParser cli_parser(argc, argv);
+    CliParser cli_parser("executable_name", argc, argv);
     auto result = cli_parser.parse();
 
     REQUIRE(result.isValid());
@@ -32,7 +32,7 @@ TEST_CASE("shouldParseOptionalArgs") {
          "1280x720", "--maxSamples", "8"};
     ARGC_ARGV_(arguments);
 
-    CliParser cli_parser(argc, argv);
+    CliParser cli_parser("executable_name", argc, argv);
     auto result = cli_parser.parse();
 
     REQUIRE(result.isValid());
@@ -46,7 +46,7 @@ TEST_CASE("shouldParseOptionalArgs") {
 void assertHasError(const std::vector<std::string> &arguments) {
     ARGC_ARGV_(arguments);
 
-    CliParser cli_parser(argc, argv);
+    CliParser cli_parser("executable_name", argc, argv);
     auto result = cli_parser.parse();
 
     REQUIRE_FALSE(result.isValid());

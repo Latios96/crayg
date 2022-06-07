@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
     try {
         QApplication a(argc, argv);
 
-        crayg::CliParser cliParser(argc, argv);
+        crayg::CliParser cliParser("standalone-gui", argc, argv);
         crayg::CliParseResult parseResult = cliParser.parse();
 
         if (!parseResult.isValid()) {

@@ -8,10 +8,11 @@
 
 namespace crayg {
 
-CliParser::CliParser(int argc, char **argv) : argc(argc), argv(argv) {}
+CliParser::CliParser(const std::string &executableName, int argc, char **argv)
+    : argc(argc), argv(argv), executableName(executableName) {}
 
 CliParseResult CliParser::parse() {
-    CLI::App app {"Crayg, an awesome renderer", "Crayg"};
+    CLI::App app {"Crayg, an awesome renderer", executableName};
 
     std::string sceneFileName;
     app.add_option("-s,--scene", sceneFileName, "Scene file to render")->required();

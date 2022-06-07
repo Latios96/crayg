@@ -12,7 +12,7 @@
 int main(int argc, char *argv[]) {
     crayg::Logger::initialize();
     try {
-        crayg::CliParser cliParser(argc, argv);
+        crayg::CliParser cliParser("crayg-standalone", argc, argv);
         crayg::CliParseResult parseResult = cliParser.parse();
 
         if (!parseResult.isValid()) {
