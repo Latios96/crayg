@@ -13,4 +13,4 @@ add_test(
         COMMAND crayg-integration-tests --output knipser-output --reference ${CMAKE_CURRENT_SOURCE_DIR}/reference
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-configure_file(cato_config.json ${CMAKE_BINARY_DIR}/bin/cato.json)
+configure_file(cato.json ${CMAKE_BINARY_DIR}/bin/cato.json)

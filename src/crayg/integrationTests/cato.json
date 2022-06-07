@@ -1,4 +1,5 @@
 {
+  "projectName": "TestSpheres",
   "suites": [
     {
       "name": "CornellBox",
@@ -18,18 +19,11 @@
         {
           "name": "CornellBox_Sphere",
           "command": "{@crayg_render_command}"
-        },
-        {
-          "name": "teapot",
-          "command": "{@crayg_render_command}"
         }
       ],
       "variables": {
-        "scenes_folder": "${PROJECT_SOURCE_DIR}/example_scenes",
-        "crayg_render_command": "${CMAKE_BINARY_DIR}/bin/crayg-standalone -s {@scenes_folder}/{@test_name}.json -o \"{@image_output_png}\"",
-        "reference_image_no_extension": "${PROJECT_SOURCE_DIR}/images/{@test_name}",
-        "reference_image_png": "{@reference_image_no_extension}.png",
-        "reference_image_exr": "{@reference_image_no_extension}.exr"
+        "config_path": "${CMAKE_CURRENT_SOURCE_DIR}",
+        "crayg_render_command": "${CMAKE_BINARY_DIR}/bin/crayg-standalone -s {@test_resources}/{@test_name}.usda -o \"{@image_output_png}\""
       }
     }
   ]
