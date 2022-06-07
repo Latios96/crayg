@@ -5,6 +5,7 @@
 #include "CliParser.h"
 
 #include "CLI/CLI.hpp"
+#include "CraygInfo.h"
 
 namespace crayg {
 
@@ -12,7 +13,9 @@ CliParser::CliParser(const std::string &executableName, int argc, char **argv)
     : argc(argc), argv(argv), executableName(executableName) {}
 
 CliParseResult CliParser::parse() {
-    CLI::App app {"Crayg, an awesome renderer", executableName};
+    CLI::App app {fmt::format("Crayg Renderer version {}, commit {}",
+                              crayg::CraygInfo::VERSION,
+                              crayg::CraygInfo::COMMIT_HASH), executableName};
 
     std::string sceneFileName;
     app.add_option("-s,--scene", sceneFileName, "Scene file to render")->required();
