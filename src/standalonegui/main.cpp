@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
         crayg::CliParseResult parseResult = cliParser.parse();
 
         if (!parseResult.isValid()) {
-            spdlog::error(*parseResult.error);
+            std::cout << (*parseResult.error) << std::endl;
             exit(1);
         }
 

@@ -46,7 +46,7 @@ CliParseResult CliParser::parse() {
                                       !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,
                                       renderSettingsOverride), std::nullopt);
     } catch (const std::runtime_error &e) {
-        return CliParseResult(std::nullopt, std::optional<std::string>(e.what()));
+        return CliParseResult(std::nullopt, std::optional<std::string>(app.help("", CLI::AppFormatMode::All)));
     }
 
 }

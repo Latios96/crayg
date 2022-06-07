@@ -4,6 +4,7 @@
 #include <image/ImageWriters.h>
 #include <CraygInfo.h>
 #include <utils/ImagePathResolver.h>
+#include <iostream>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
 #include "Logger.h"
@@ -15,7 +16,7 @@ int main(int argc, char *argv[]) {
         crayg::CliParseResult parseResult = cliParser.parse();
 
         if (!parseResult.isValid()) {
-            spdlog::error(*parseResult.error);
+            std::cout << (*parseResult.error) << std::endl;
             exit(1);
         }
 
