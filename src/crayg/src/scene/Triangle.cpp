@@ -5,7 +5,6 @@
 #include <iostream>
 #include "Triangle.h"
 #include "TriangleMesh.h"
-#include "basics/BarycentricCoordinates.h"
 
 namespace crayg {
 
@@ -123,13 +122,7 @@ Triangle::Triangle() {
 }
 
 Vector3f Triangle::getNormal(Vector3f point) {
-    BarycentricCoordinates barycentricCoordinates(*this, point);
-
-    auto normalV0 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex]];
-    auto normalV1 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex + 1]];
-    auto normalV2 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex + 2]];
-
-    return barycentricCoordinates.interpolateLinear(normalV0, normalV1, normalV2).normalize();
+    return this->triangleMesh->normalsPrimVar.interpolateAt(this->faceIndex, point).normalize();
 }
 
 Vector3f Triangle::getNormal() const {

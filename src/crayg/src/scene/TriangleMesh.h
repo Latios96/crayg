@@ -9,11 +9,13 @@
 #include <basics/BoundingBox.h>
 #include "SceneObject.h"
 #include "Triangle.h"
+#include "TriangleMeshPerPointPrimVar.h"
 
 namespace crayg {
 
 class TriangleMesh : public SceneObject {
  public:
+    TriangleMesh();
     static void createCube(TriangleMesh &mesh);
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
@@ -22,7 +24,7 @@ class TriangleMesh : public SceneObject {
     Vector3f getNormal(Vector3f point) override;
 
     std::vector<Vector3f> points;
-    std::vector<Vector3f> normals;
+    TriangleMeshPerPointPrimVar<Vector3f> normalsPrimVar;
     std::vector<int> faceIndices;
     void getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles);
     friend class Triangle;

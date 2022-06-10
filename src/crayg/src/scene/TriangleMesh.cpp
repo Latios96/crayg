@@ -85,10 +85,9 @@ void TriangleMesh::createCube(TriangleMesh &mesh) {
     mesh.faceIndices.push_back(2);
 }
 
-
 void TriangleMesh::createBounds() {
     Vector3f min, max;
-    for (const auto &point : points) {
+    for (const auto &point: points) {
         if (point.x < min.x) {
             min.x = point.x;
         }
@@ -112,6 +111,7 @@ void TriangleMesh::createBounds() {
     boundingBox = BoundingBox(min, max);
 }
 void TriangleMesh::createNormals() {
+    std::vector<Vector3f> normals;
     normals.resize(points.size());
     for (int i = 0; i < faceIndices.size(); i = i + 3) {
         Triangle triangle(this, i);
@@ -121,9 +121,14 @@ void TriangleMesh::createNormals() {
         normals[faceIndices[triangle.faceIndex + 1]] = normals[faceIndices[triangle.faceIndex + 1]].add(normal);
         normals[faceIndices[triangle.faceIndex + 2]] = normals[faceIndices[triangle.faceIndex + 2]].add(normal);
     }
-    for (auto &normal: normals) {
-        normal = normal.normalize();
+
+    normalsPrimVar.allocate();
+
+    for (int i = 0; i < points.size(); i++) {
+        normals[i] = normals[i].normalize();
+        normalsPrimVar.write(i, normals[i]);
     }
+
 }
 BoundingBox TriangleMesh::getBounds() const {
     return boundingBox;
@@ -137,6 +142,8 @@ void TriangleMesh::init() {
 }
 std::string TriangleMesh::getType() {
     return "TriangleMesh";
+}
+TriangleMesh::TriangleMesh() : normalsPrimVar(TriangleMeshPerPointPrimVar<Vector3f>(*this)) {
 }
 
 }
