@@ -23,7 +23,7 @@ class Triangle : public Imageable {
     bool isIntersecting(Ray ray) override;
     Imageable::Intersection intersect(Ray ray) override;
     Vector3f getNormal(Vector3f point) override;
-    Vector3f getNormal();
+    Vector3f getNormal() const;
     BoundingBox getBounds() const override;
     std::shared_ptr<Material> getMaterial() const override;
 

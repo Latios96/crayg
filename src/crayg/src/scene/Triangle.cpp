@@ -131,7 +131,7 @@ Vector3f Triangle::getNormal(Vector3f point) {
     return interpolateLinear(barycentric, normalV0, normalV1, normalV2).normalize();
 }
 
-Vector3f Triangle::getNormal() {
+Vector3f Triangle::getNormal() const {
     const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
     return normal.invert();
 }
