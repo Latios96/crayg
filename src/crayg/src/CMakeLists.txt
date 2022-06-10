@@ -1,4 +1,6 @@
 set(crayg_SRCS
+        basics/BarycentricCoordinates.cpp
+        basics/BarycentricCoordinates.h
         basics/BoundingBox.cpp
         basics/BoundingBox.h
         basics/Color.cpp

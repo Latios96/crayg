@@ -1,5 +1,6 @@
 set(UNIT_TEST_LIST
         TestAreaLight.cpp
+        TestBarycentricCoordinates.cpp
         TestBaseUsdImageableReader.cpp
         TestBaseUsdLightReader.cpp
         TestBaseUsdLightWriter.cpp
