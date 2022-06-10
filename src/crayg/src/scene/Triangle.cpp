@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Triangle.h"
 #include "TriangleMesh.h"
+#include "basics/BarycentricCoordinates.h"
 
 namespace crayg {
 
@@ -122,28 +123,20 @@ Triangle::Triangle() {
 }
 
 Vector3f Triangle::getNormal(Vector3f point) {
-    auto barycentric = toBarycentricCoordinates(point);
+    BarycentricCoordinates barycentricCoordinates(*this, point);
 
     auto normalV0 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex]];
     auto normalV1 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex + 1]];
     auto normalV2 = triangleMesh->normals[triangleMesh->faceIndices[faceIndex + 2]];
 
-    return interpolateLinear(barycentric, normalV0, normalV1, normalV2).normalize();
+    return barycentricCoordinates.interpolateLinear(normalV0, normalV1, normalV2).normalize();
 }
 
 Vector3f Triangle::getNormal() const {
     const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
     return normal.invert();
 }
-BarycentricCoordinates Triangle::toBarycentricCoordinates(const Vector3f &point) {
-    // based on Fundamentals of Computer Graphics, 2016, p. 49
-    const Vector3f &normal = getNormal();
-    float lengthSquared = normal.lengthSquared();
-    float alpha = normal.scalarProduct((v2() - v1()).crossProduct(point - v1())) / lengthSquared;
-    float beta = normal.scalarProduct((v0() - v2()).crossProduct(point - v2())) / lengthSquared;
-    float gamma = normal.scalarProduct((v1() - v0()).crossProduct(point - v0())) / lengthSquared;
-    return {alpha, beta, gamma};
-}
+
 BoundingBox Triangle::getBounds() const {
     BoundingBox boundingBox(v0(), v0());
     boundingBox = boundingBox.unionWith(v1());

@@ -17,21 +17,21 @@ TEST_CASE("BarycentricCoordinates::construct") {
     Triangle triangle(&triangleMesh, 0);
 
     SECTION("should construct correctly from triangle") {
-        _BarycentricCoordinates coordinates(triangle, {0.25, 0.25, 0.25});
+        BarycentricCoordinates coordinates(triangle, {0.25, 0.25, 0.25});
 
-        REQUIRE(coordinates == _BarycentricCoordinates(0.5, 0.25, 0.25));
+        REQUIRE(coordinates == BarycentricCoordinates(0.5, 0.25, 0.25));
     }
 
     SECTION("should construct correctly from scalars") {
-        _BarycentricCoordinates coordinates({0, 0, 0}, {0, 1, 0}, {1, 0, 0}, triangle.getNormal(), {0.25, 0.25, 0.25});
+        BarycentricCoordinates coordinates({0, 0, 0}, {0, 1, 0}, {1, 0, 0}, triangle.getNormal(), {0.25, 0.25, 0.25});
 
-        REQUIRE(coordinates == _BarycentricCoordinates(0.5, 0.25, 0.25));
+        REQUIRE(coordinates == BarycentricCoordinates(0.5, 0.25, 0.25));
     }
 }
 
 TEST_CASE("BarycentricCoordinates::interpolate") {
     SECTION("should interpolate constant value correctly") {
-        _BarycentricCoordinates coordinates({0, 0, 0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}, {0.25, 0.25, 0.25});
+        BarycentricCoordinates coordinates({0, 0, 0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}, {0.25, 0.25, 0.25});
 
         Color interpolatedColor =
             coordinates.interpolateLinear(Color::createGrey(0.5f), Color::createGrey(0.5f), Color::createGrey(0.5f));
@@ -40,7 +40,7 @@ TEST_CASE("BarycentricCoordinates::interpolate") {
     }
 
     SECTION("should interpolate values correctly") {
-        _BarycentricCoordinates coordinates({0, 0, 0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}, {0.25, 0.25, 0.25});
+        BarycentricCoordinates coordinates({0, 0, 0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}, {0.25, 0.25, 0.25});
 
         Color interpolatedColor = coordinates.interpolateLinear(Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1));
 

@@ -10,19 +10,19 @@
 
 namespace crayg {
 
-class _BarycentricCoordinates {
+class BarycentricCoordinates {
  public:
-    _BarycentricCoordinates(const Triangle &triangle, const Vector3f &point);
-    _BarycentricCoordinates(const Vector3f &v0,
-                            const Vector3f &v1,
-                            const Vector3f &v2,
-                            const Vector3f &normal,
-                            const Vector3f &point);
-    _BarycentricCoordinates(float alpha, float beta, float gamma);
+    BarycentricCoordinates(const Triangle &triangle, const Vector3f &point);
+    BarycentricCoordinates(const Vector3f &v0,
+                           const Vector3f &v1,
+                           const Vector3f &v2,
+                           const Vector3f &normal,
+                           const Vector3f &point);
+    BarycentricCoordinates(float alpha, float beta, float gamma);
 
-    bool operator==(const _BarycentricCoordinates &rhs) const;
-    bool operator!=(const _BarycentricCoordinates &rhs) const;
-    friend std::ostream &operator<<(std::ostream &os, const _BarycentricCoordinates &coordinates);
+    bool operator==(const BarycentricCoordinates &rhs) const;
+    bool operator!=(const BarycentricCoordinates &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const BarycentricCoordinates &coordinates);
 
     template<typename T>
     T interpolateLinear(const T &value1, const T &value2, const T &value3);
@@ -31,9 +31,9 @@ class _BarycentricCoordinates {
 };
 
 template<typename T>
-T _BarycentricCoordinates::interpolateLinear(const T &value1,
-                                             const T &value2,
-                                             const T &value3) {
+T BarycentricCoordinates::interpolateLinear(const T &value1,
+                                            const T &value2,
+                                            const T &value3) {
     return value1 * alpha + value2 * beta + value3 * gamma;
 }
 
