@@ -17,6 +17,17 @@ TEST_CASE("TriangleMesh::intersect") {
     }
 }
 
+TEST_CASE("TriangleMesh::faceCount") {
+    TriangleMesh cube;
+    TriangleMesh::createCube(cube);
+
+    SECTION("should return correct face count for cube") {
+        int faceCount = cube.faceCount();
+
+        REQUIRE(faceCount == 12);
+    }
+}
+
 TEST_CASE("TriangleMesh::getBounds") {
 
     SECTION("bounds should be calculated corretly") {

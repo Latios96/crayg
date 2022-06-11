@@ -146,5 +146,8 @@ std::string TriangleMesh::getType() {
 }
 TriangleMesh::TriangleMesh() : normalsPrimVar(nullptr) {
 }
+int TriangleMesh::faceCount() {
+    return faceIndices.size() / 3;
+}
 
 }

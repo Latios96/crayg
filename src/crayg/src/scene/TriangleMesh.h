@@ -25,6 +25,7 @@ class TriangleMesh : public SceneObject {
     friend class Triangle;
     void init();
     std::string getType() override;
+    int faceCount();
 
     template<typename T>
     void addNormalsPrimVar() {
