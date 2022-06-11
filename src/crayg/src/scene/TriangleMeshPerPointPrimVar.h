@@ -12,10 +12,13 @@ class TriangleMeshPerPointPrimVar : public TriangleMeshAbstractPrimVar<T> {
     explicit TriangleMeshPerPointPrimVar(TriangleMesh &triangleMesh) : TriangleMeshAbstractPrimVar<T>(
         triangleMesh) {}
     void allocate() override {
-        pointData.reserve(this->triangleMesh.points.size());
+        pointData.resize(this->triangleMesh.points.size());
     }
     void write(int pointIndex, const T &value) {
         pointData[pointIndex] = value;
+    }
+    T read(int pointIndex) {
+        return pointData[pointIndex];
     }
     T interpolateAt(int faceIndex, const Vector3f &point) override {
         int indexV0 = this->triangleMesh.faceIndices[faceIndex];

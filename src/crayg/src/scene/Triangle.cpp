@@ -122,7 +122,7 @@ Triangle::Triangle() {
 }
 
 Vector3f Triangle::getNormal(Vector3f point) {
-    return this->triangleMesh->normalsPrimVar.interpolateAt(this->faceIndex, point).normalize();
+    return this->triangleMesh->normalsPrimVar->interpolateAt(this->faceIndex, point).normalize();
 }
 
 Vector3f Triangle::getNormal() const {

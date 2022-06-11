@@ -24,7 +24,7 @@ class TriangleMesh : public SceneObject {
     Vector3f getNormal(Vector3f point) override;
 
     std::vector<Vector3f> points;
-    TriangleMeshPerPointPrimVar<Vector3f> normalsPrimVar;
+    std::unique_ptr<TriangleMeshPerPointPrimVar<Vector3f>> normalsPrimVar = nullptr;
     std::vector<int> faceIndices;
     void getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles);
     friend class Triangle;

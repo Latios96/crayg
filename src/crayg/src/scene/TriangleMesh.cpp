@@ -111,22 +111,24 @@ void TriangleMesh::createBounds() {
     boundingBox = BoundingBox(min, max);
 }
 void TriangleMesh::createNormals() {
-    std::vector<Vector3f> normals;
-    normals.resize(points.size());
-    for (int i = 0; i < faceIndices.size(); i = i + 3) {
-        Triangle triangle(this, i);
-        Vector3f normal = triangle.getNormal();
-        const int x = faceIndices[triangle.faceIndex];
-        normals[x] = normals[x].add(normal);
-        normals[faceIndices[triangle.faceIndex + 1]] = normals[faceIndices[triangle.faceIndex + 1]].add(normal);
-        normals[faceIndices[triangle.faceIndex + 2]] = normals[faceIndices[triangle.faceIndex + 2]].add(normal);
-    }
+    if (normalsPrimVar == nullptr) {
+        std::vector<Vector3f> normals;
+        normals.resize(points.size());
+        for (int i = 0; i < faceIndices.size(); i = i + 3) {
+            Triangle triangle(this, i);
+            Vector3f normal = triangle.getNormal();
+            const int x = faceIndices[triangle.faceIndex];
+            normals[x] = normals[x].add(normal);
+            normals[faceIndices[triangle.faceIndex + 1]] = normals[faceIndices[triangle.faceIndex + 1]].add(normal);
+            normals[faceIndices[triangle.faceIndex + 2]] = normals[faceIndices[triangle.faceIndex + 2]].add(normal);
+        }
+        normalsPrimVar = std::make_unique<TriangleMeshPerPointPrimVar<Vector3f>>(*this);
+        normalsPrimVar->allocate();
 
-    normalsPrimVar.allocate();
-
-    for (int i = 0; i < points.size(); i++) {
-        normals[i] = normals[i].normalize();
-        normalsPrimVar.write(i, normals[i]);
+        for (int i = 0; i < points.size(); i++) {
+            normals[i] = normals[i].normalize();
+            normalsPrimVar->write(i, normals[i]);
+        }
     }
 
 }
@@ -143,7 +145,7 @@ void TriangleMesh::init() {
 std::string TriangleMesh::getType() {
     return "TriangleMesh";
 }
-TriangleMesh::TriangleMesh() : normalsPrimVar(TriangleMeshPerPointPrimVar<Vector3f>(*this)) {
+TriangleMesh::TriangleMesh() : normalsPrimVar(nullptr) {
 }
 
 }
