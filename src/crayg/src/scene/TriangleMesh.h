@@ -20,16 +20,15 @@ class TriangleMesh : public SceneObject {
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     BoundingBox getBounds() const override;
-
     Vector3f getNormal(Vector3f point) override;
-
-    std::vector<Vector3f> points;
-    std::unique_ptr<TriangleMeshPerPointPrimVar<Vector3f>> normalsPrimVar = nullptr;
-    std::vector<int> faceIndices;
     void getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles);
     friend class Triangle;
     void init();
     std::string getType() override;
+
+    std::vector<Vector3f> points;
+    std::unique_ptr<TriangleMeshPerPointPrimVar<Vector3f>> normalsPrimVar = nullptr;
+    std::vector<int> faceIndices;
  private:
     BoundingBox boundingBox;
     void createBounds();
