@@ -102,6 +102,7 @@ set(crayg_SRCS
         scene/TriangleMeshConversion.cpp
         scene/TriangleMeshConversion.h
         scene/TriangleMeshPerPointPrimVar.h
+        scene/TriangleMeshPerVertexPrimVar.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/BaseUsdImageableReader.h

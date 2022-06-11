@@ -48,6 +48,7 @@ set(UNIT_TEST_LIST
         TestTriangleMesh.cpp
         TestTriangleMeshConversion.cpp
         TestTriangleMeshPerPointPrimVar.cpp
+        TestTriangleMeshPerVertexPrimVar.cpp
         TestUnitImageSampler.cpp
         TestUsdCameraReader.cpp
         TestUsdCameraWriter.cpp
