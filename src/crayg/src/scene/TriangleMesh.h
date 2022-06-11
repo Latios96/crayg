@@ -26,6 +26,12 @@ class TriangleMesh : public SceneObject {
     void init();
     std::string getType() override;
 
+    template<typename T>
+    void addNormalsPrimVar() {
+        normalsPrimVar = std::make_unique<T>(*this);
+        normalsPrimVar->allocate();
+    }
+
     std::vector<Vector3f> points;
     std::unique_ptr<TriangleMeshPerPointPrimVar<Vector3f>> normalsPrimVar = nullptr;
     std::vector<int> faceIndices;

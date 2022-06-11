@@ -52,8 +52,7 @@ TEST_CASE("TriangleMesh::init") {
     }
 
     SECTION("not providing normals primvar should calculate") {
-        triangleMesh.normalsPrimVar = std::make_unique<TriangleMeshPerPointPrimVar<Vector3f>>(triangleMesh);
-        triangleMesh.normalsPrimVar->allocate();
+        triangleMesh.addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
         triangleMesh.normalsPrimVar->write(0, Vector3f(1, 0, 0));
         triangleMesh.init();
 

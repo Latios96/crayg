@@ -122,8 +122,7 @@ void TriangleMesh::createNormals() {
             normals[faceIndices[triangle.faceIndex + 1]] = normals[faceIndices[triangle.faceIndex + 1]].add(normal);
             normals[faceIndices[triangle.faceIndex + 2]] = normals[faceIndices[triangle.faceIndex + 2]].add(normal);
         }
-        normalsPrimVar = std::make_unique<TriangleMeshPerPointPrimVar<Vector3f>>(*this);
-        normalsPrimVar->allocate();
+        addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
 
         for (int i = 0; i < points.size(); i++) {
             normals[i] = normals[i].normalize();
