@@ -2,8 +2,7 @@
 // Created by Jan on 21.11.2020.
 //
 
-#define _USE_MATH_DEFINES
-#include <cmath>
+#include <boost/math/constants/constants.hpp>
 #include "DiskLight.h"
 #include "intersectors/SceneIntersector.h"
 
@@ -11,7 +10,7 @@ namespace crayg {
 
 Vector3f DiskLight::sampleLightShape() const {
     float r = radius * sqrt((double(rand()) / RAND_MAX));
-    float theta = (double(rand()) / RAND_MAX) * 2 * M_PI;
+    float theta = (double(rand()) / RAND_MAX) * 2 * boost::math::constants::pi<double>();
     Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
     return getTransform().apply(positionOnPlane);
 }

@@ -1,8 +1,6 @@
 //
 // Created by Jan on 20.11.2020.
 //
-#define _USE_MATH_DEFINES
-#include <cmath>
 #include "RectLight.h"
 #include "intersectors/SceneIntersector.h"
 
