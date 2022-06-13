@@ -2,6 +2,9 @@
 // Created by Jan Honsbrok on 28.10.18.
 //
 
+#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_LINEBYLINEITERATOR_H_
+#define CRAYG_SRC_CRAYG_SRC_IMAGE_LINEBYLINEITERATOR_H_
+
 #include "LineByLineIterator.h"
 
 namespace crayg {
@@ -30,3 +33,5 @@ class ImageIterators {
 };
 
 }
+
+#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_LINEBYLINEITERATOR_H_
