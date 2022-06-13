@@ -46,7 +46,7 @@ jobs:
         run: mkdir build
       - name: run CMake
         working-directory: build
-        run: cmake .. -DCMAKE_BUILD_TYPE=Release
+        run: cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_UNITY_BUILD=true
       - name: upload dependencies
         run: conan upload "*" --all --confirm -r=framebffr --parallel
       - name: build
