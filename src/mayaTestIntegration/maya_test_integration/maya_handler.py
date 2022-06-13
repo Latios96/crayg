@@ -6,7 +6,7 @@ from .usd_export_script import UsdExporter
 
 class MayaHandler(AbstractHandler):
     def open(self, test):
-        pm.loadScene(test.maya_scene_path)
+        pm.openFile(test.maya_scene_path)
 
     def save(self, test):
         pm.saveAs(test.maya_scene_path, type="mayaAscii")
