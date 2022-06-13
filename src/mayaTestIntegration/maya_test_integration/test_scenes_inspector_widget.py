@@ -29,6 +29,7 @@ class TestScenesInspectorWidget(QtWidgets.QWidget):
         self._btn_save.clicked.connect(self._save_clicked)
         self._btns_layout.addWidget(self._btn_save)
         self._btn_open = QtWidgets.QPushButton("Open")
+        self._btn_open.clicked.connect(self._open_clicked)
         self._btns_layout.addWidget(self._btn_open)
         self._layout.addLayout(self._btns_layout)
         self._populate()
