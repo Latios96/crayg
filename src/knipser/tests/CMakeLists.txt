@@ -1,6 +1,6 @@
 # own executable for test registration, since we access the global TestRegistry here
 
-add_executable(knipser-main-tests TestTestRunner.cpp
+add_executable(knipser-main-tests main.cpp TestTestRunner.cpp
         TestTestResult.cpp
         TestPlainReportGenerator.cpp
         TestTestContext.cpp
@@ -11,8 +11,7 @@ add_executable(knipser-main-tests TestTestRunner.cpp
         TestExecuteTestPredicate.cpp
         KnipserTestUtils.h
         KnipserTestUtils.cpp
-        TestTestRegistration.cpp
-        main.cpp)
+        TestTestRegistration.cpp)
 
 target_link_libraries(knipser-main-tests
         ${CONAN_LIBS} knipser)
