@@ -54,7 +54,7 @@ class TriangleMesh : public SceneObject {
 
         FaceIdIterator(std::size_t id) : id(id) {}
 
-        FaceIdIterator &operator++() {
+        FaceIdIterator operator++() {
             return FaceIdIterator(++id);
         }
         std::size_t operator*() const { return id; }

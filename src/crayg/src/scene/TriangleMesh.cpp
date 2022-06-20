@@ -14,8 +14,8 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     if (boundingBox.isIntersecting(ray)) {
         Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-        for (int i = 0; i < faceVertexIndices.size(); i++) {
-            Triangle triangle(this, i);
+        for (auto id: faceIds()) {
+            Triangle triangle(this, id);
             Imageable::Intersection intersection = triangle.intersect(ray);
             hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
         }
@@ -26,8 +26,8 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
 }
 
 void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles) {
-    for (int i = 0; i < faceVertexIndices.size(); i++) {
-        triangles.push_back(std::make_shared<Triangle>(this, i));
+    for (auto id: faceIds()) {
+        triangles.push_back(std::make_shared<Triangle>(this, id));
     }
 }
 
@@ -88,8 +88,8 @@ void TriangleMesh::createNormals() {
     if (normalsPrimVar == nullptr) {
         std::vector<Vector3f> normals;
         normals.resize(points.size());
-        for (int i = 0; i < faceVertexIndices.size(); i++) {
-            Triangle triangle(this, i);
+        for (auto id: faceIds()) {
+            Triangle triangle(this, id);
             Vector3f normal = triangle.getNormal();
             auto indices = faceVertexIndices[triangle.faceId];
             normals[indices.v0] = normals[indices.v0].add(normal);
