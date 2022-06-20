@@ -35,9 +35,7 @@ TEST_CASE("TriangleMesh::getBounds") {
         triangleMesh.points.emplace_back(0, 0, 0);
         triangleMesh.points.emplace_back(0, 1, 0);
         triangleMesh.points.emplace_back(1, 0, 0);
-        triangleMesh.faceIndices.push_back(0);
-        triangleMesh.faceIndices.push_back(1);
-        triangleMesh.faceIndices.push_back(2);
+        triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
         triangleMesh.init();
 
         const BoundingBox boundingBox = triangleMesh.getBounds();
@@ -51,9 +49,7 @@ TEST_CASE("TriangleMesh::init") {
     triangleMesh.points.emplace_back(0, 0, 0);
     triangleMesh.points.emplace_back(0, 1, 0);
     triangleMesh.points.emplace_back(1, 0, 0);
-    triangleMesh.faceIndices.push_back(0);
-    triangleMesh.faceIndices.push_back(1);
-    triangleMesh.faceIndices.push_back(2);
+    triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
 
     SECTION("providing normals primvar should use this") {
         triangleMesh.init();

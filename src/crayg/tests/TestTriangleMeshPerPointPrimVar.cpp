@@ -8,7 +8,7 @@ TEST_CASE("TriangleMeshPerPointPrimVar::interpolateAt")
 {
     TriangleMesh triangleMesh;
     triangleMesh.points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
-    triangleMesh.faceIndices = std::vector<int>({0, 2, 1, 2, 3, 1});
+    triangleMesh.faceVertexIndices = std::vector<TriangleMesh::FaceVertexIndices>({{0, 2, 1}, {2, 3, 1}});
 
     SECTION("should interpolate constant value correctly") {
         TriangleMeshPerPointPrimVar<Color> primVar(triangleMesh);

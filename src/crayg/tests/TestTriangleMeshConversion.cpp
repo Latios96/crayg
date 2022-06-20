@@ -20,7 +20,7 @@ TEST_CASE("TriangleMeshConversion::toTriangleMesh") {
         REQUIRE(triangleMesh.getTransform().toPosition() == Vector3f(0, 1, 0));
         REQUIRE(triangleMesh.points
                     == std::vector<Vector3f>({{-1000, 1, -1000}, {-1000, 1, 1000}, {1000, 1, 1000}, {1000, 1, -1000}}));
-        REQUIRE(triangleMesh.faceIndices == std::vector<int>({0, 1, 2, 2, 3, 0}));
+        REQUIRE(triangleMesh.faceVertexIndices == std::vector<TriangleMesh::FaceVertexIndices>({{0, 1, 2}, {2, 3, 0}}));
         REQUIRE(triangleMesh.getMaterial()->getName() == "groundPlaneMat");
     }
 }

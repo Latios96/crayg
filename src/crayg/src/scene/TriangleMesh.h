@@ -35,7 +35,14 @@ class TriangleMesh : public SceneObject {
 
     std::vector<Vector3f> points;
     std::unique_ptr<TriangleMeshPerPointPrimVar<Vector3f>> normalsPrimVar = nullptr;
-    std::vector<int> faceIndices;
+
+    struct FaceVertexIndices {
+        int v0, v1, v2;
+        FaceVertexIndices(int v0, int v1, int v2);
+        bool operator==(const FaceVertexIndices &rhs) const;
+        bool operator!=(const FaceVertexIndices &rhs) const;
+    };
+    std::vector<FaceVertexIndices> faceVertexIndices;
  private:
     BoundingBox boundingBox;
     void createBounds();

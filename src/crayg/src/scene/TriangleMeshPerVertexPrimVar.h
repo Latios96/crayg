@@ -21,15 +21,15 @@ class TriangleMeshPerVertexPrimVar : public TriangleMeshAbstractPrimVar<T> {
     void allocate() override {
         vertexData.resize(this->triangleMesh.faceCount());
     }
-    void write(int faceIndex, const VertexData<T> &value) {
-        vertexData[faceIndex] = value;
+    void write(int faceId, const VertexData<T> &value) {
+        vertexData[faceId] = value;
     }
-    void write(int faceIndex, const T &v0, const T &v1, const T &v2) {
-        write(faceIndex, {v0, v1, v2});
+    void write(int faceId, const T &v0, const T &v1, const T &v2) {
+        write(faceId, {v0, v1, v2});
     }
-    T interpolateAt(int faceIndex, const Vector3f &point) override {
-        BarycentricCoordinates coordinates = BarycentricCoordinates(Triangle(&this->triangleMesh, faceIndex), point);
-        VertexData<T> vertexDataForFace = vertexData[faceIndex];
+    T interpolateAt(int faceId, const Vector3f &point) override {
+        BarycentricCoordinates coordinates = BarycentricCoordinates(Triangle(&this->triangleMesh, faceId), point);
+        VertexData<T> vertexDataForFace = vertexData[faceId];
         return coordinates.interpolateLinear(vertexDataForFace.v0, vertexDataForFace.v1, vertexDataForFace.v2);
     }
  private:

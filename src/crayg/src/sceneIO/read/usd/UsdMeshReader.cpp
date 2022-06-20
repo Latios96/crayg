@@ -27,11 +27,9 @@ std::shared_ptr<TriangleMesh> crayg::UsdMeshReader::read() {
 }
 void crayg::UsdMeshReader::translateFaceIndices(std::shared_ptr<TriangleMesh> &triangleMesh,
                                                 pxr::VtVec3iArray &triangleIndices) const {
-    triangleMesh->faceIndices.reserve(triangleIndices.size());
+    triangleMesh->faceVertexIndices.reserve(triangleIndices.size());
     for (const auto &faceIndex: triangleIndices) {
-        triangleMesh->faceIndices.push_back(faceIndex[0]);
-        triangleMesh->faceIndices.push_back(faceIndex[2]);
-        triangleMesh->faceIndices.push_back(faceIndex[1]);
+        triangleMesh->faceVertexIndices.emplace_back(faceIndex[0], faceIndex[2], faceIndex[1]);
     }
 }
 void crayg::UsdMeshReader::translatePoints(std::shared_ptr<TriangleMesh> &triangleMesh) const {

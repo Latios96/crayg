@@ -14,7 +14,7 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     if (boundingBox.isIntersecting(ray)) {
         Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-        for (int i = 0; i < faceIndices.size(); i = i + 3) {
+        for (int i = 0; i < faceVertexIndices.size(); i++) {
             Triangle triangle(this, i);
             Imageable::Intersection intersection = triangle.intersect(ray);
             hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
@@ -26,7 +26,7 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
 }
 
 void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles) {
-    for (int i = 0; i < faceIndices.size(); i = i + 3) {
+    for (int i = 0; i < faceVertexIndices.size(); i++) {
         triangles.push_back(std::make_shared<Triangle>(this, i));
     }
 }
@@ -45,44 +45,18 @@ void TriangleMesh::createCube(TriangleMesh &mesh) {
     mesh.points.emplace_back(-1, -1, -1);
     mesh.points.emplace_back(1, -1, -1);
 
-    mesh.faceIndices.push_back(0);
-    mesh.faceIndices.push_back(1);
-    mesh.faceIndices.push_back(2);
-
-    mesh.faceIndices.push_back(2);
-    mesh.faceIndices.push_back(1);
-    mesh.faceIndices.push_back(3);
-
-    mesh.faceIndices.push_back(2);
-    mesh.faceIndices.push_back(3);
-    mesh.faceIndices.push_back(4);
-    mesh.faceIndices.push_back(4);
-    mesh.faceIndices.push_back(3);
-    mesh.faceIndices.push_back(5);
-    mesh.faceIndices.push_back(4);
-    mesh.faceIndices.push_back(5);
-    mesh.faceIndices.push_back(6);
-    mesh.faceIndices.push_back(6);
-    mesh.faceIndices.push_back(5);
-    mesh.faceIndices.push_back(7);
-    mesh.faceIndices.push_back(6);
-    mesh.faceIndices.push_back(7);
-    mesh.faceIndices.push_back(0);
-    mesh.faceIndices.push_back(0);
-    mesh.faceIndices.push_back(7);
-    mesh.faceIndices.push_back(1);
-    mesh.faceIndices.push_back(1);
-    mesh.faceIndices.push_back(7);
-    mesh.faceIndices.push_back(3);
-    mesh.faceIndices.push_back(3);
-    mesh.faceIndices.push_back(7);
-    mesh.faceIndices.push_back(5);
-    mesh.faceIndices.push_back(6);
-    mesh.faceIndices.push_back(0);
-    mesh.faceIndices.push_back(4);
-    mesh.faceIndices.push_back(4);
-    mesh.faceIndices.push_back(0);
-    mesh.faceIndices.push_back(2);
+    mesh.faceVertexIndices.emplace_back(0, 1, 2);
+    mesh.faceVertexIndices.emplace_back(2, 1, 3);
+    mesh.faceVertexIndices.emplace_back(2, 3, 4);
+    mesh.faceVertexIndices.emplace_back(4, 3, 5);
+    mesh.faceVertexIndices.emplace_back(4, 5, 6);
+    mesh.faceVertexIndices.emplace_back(6, 5, 7);
+    mesh.faceVertexIndices.emplace_back(6, 7, 0);
+    mesh.faceVertexIndices.emplace_back(0, 7, 1);
+    mesh.faceVertexIndices.emplace_back(1, 7, 3);
+    mesh.faceVertexIndices.emplace_back(3, 7, 5);
+    mesh.faceVertexIndices.emplace_back(6, 0, 4);
+    mesh.faceVertexIndices.emplace_back(4, 0, 2);
 }
 
 void TriangleMesh::createBounds() {
@@ -114,13 +88,13 @@ void TriangleMesh::createNormals() {
     if (normalsPrimVar == nullptr) {
         std::vector<Vector3f> normals;
         normals.resize(points.size());
-        for (int i = 0; i < faceIndices.size(); i = i + 3) {
+        for (int i = 0; i < faceVertexIndices.size(); i++) {
             Triangle triangle(this, i);
             Vector3f normal = triangle.getNormal();
-            const int x = faceIndices[triangle.faceIndex];
-            normals[x] = normals[x].add(normal);
-            normals[faceIndices[triangle.faceIndex + 1]] = normals[faceIndices[triangle.faceIndex + 1]].add(normal);
-            normals[faceIndices[triangle.faceIndex + 2]] = normals[faceIndices[triangle.faceIndex + 2]].add(normal);
+            auto indices = faceVertexIndices[triangle.faceId];
+            normals[indices.v0] = normals[indices.v0].add(normal);
+            normals[indices.v1] = normals[indices.v1].add(normal);
+            normals[indices.v2] = normals[indices.v2].add(normal);
         }
         addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
 
@@ -147,7 +121,16 @@ std::string TriangleMesh::getType() {
 TriangleMesh::TriangleMesh() : normalsPrimVar(nullptr) {
 }
 int TriangleMesh::faceCount() {
-    return faceIndices.size() / 3;
+    return faceVertexIndices.size();
 }
 
+TriangleMesh::FaceVertexIndices::FaceVertexIndices(int v0, int v1, int v2) : v0(v0), v1(v1), v2(v2) {}
+bool TriangleMesh::FaceVertexIndices::operator==(const TriangleMesh::FaceVertexIndices &rhs) const {
+    return v0 == rhs.v0 &&
+        v1 == rhs.v1 &&
+        v2 == rhs.v2;
+}
+bool TriangleMesh::FaceVertexIndices::operator!=(const TriangleMesh::FaceVertexIndices &rhs) const {
+    return !(rhs == *this);
+}
 }

@@ -22,19 +22,19 @@ pxr::UsdGeomMesh UsdTriangleMeshWriter::write(pxr::UsdStagePtr stage, UsdPathFac
 }
 void UsdTriangleMeshWriter::writeFaceVertexCounts(const pxr::UsdGeomMesh &usdGeomMesh) const {
     pxr::VtIntArray faceVertexCounts;
-    faceVertexCounts.reserve(craygObject->faceIndices.size() / 3);
-    for (int i = 0; i < craygObject->faceIndices.size(); i += 3) {
+    faceVertexCounts.reserve(craygObject->faceCount());
+    for (auto &indices: craygObject->faceVertexIndices) {
         faceVertexCounts.push_back(3);
     }
     usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
 }
 void UsdTriangleMeshWriter::writeFaceVertexIndices(const pxr::UsdGeomMesh &usdGeomMesh) {
     pxr::VtIntArray triangleIndices;
-    triangleIndices.reserve(craygObject->faceIndices.size());
-    for (int i = 0; i < craygObject->faceIndices.size(); i += 3) {
-        triangleIndices.push_back(craygObject->faceIndices[i]);
-        triangleIndices.push_back(craygObject->faceIndices[i + 2]);
-        triangleIndices.push_back(craygObject->faceIndices[i + 1]);
+    triangleIndices.reserve(craygObject->faceCount() * 3);
+    for (auto &indices: craygObject->faceVertexIndices) {
+        triangleIndices.push_back(indices.v0);
+        triangleIndices.push_back(indices.v2);
+        triangleIndices.push_back(indices.v1);
     }
     usdGeomMesh.GetFaceVertexIndicesAttr().Set(triangleIndices);
 }

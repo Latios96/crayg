@@ -20,11 +20,11 @@ class TriangleMeshPerPointPrimVar : public TriangleMeshAbstractPrimVar<T> {
     T read(int pointIndex) {
         return pointData[pointIndex];
     }
-    T interpolateAt(int faceIndex, const Vector3f &point) override {
-        int indexV0 = this->triangleMesh.faceIndices[faceIndex];
-        int indexV1 = this->triangleMesh.faceIndices[faceIndex + 1];
-        int indexV2 = this->triangleMesh.faceIndices[faceIndex + 2];
-        BarycentricCoordinates coordinates = BarycentricCoordinates(Triangle(&this->triangleMesh, faceIndex), point);
+    T interpolateAt(int faceId, const Vector3f &point) override {
+        int indexV0 = this->triangleMesh.faceVertexIndices[faceId].v0;
+        int indexV1 = this->triangleMesh.faceVertexIndices[faceId].v1;
+        int indexV2 = this->triangleMesh.faceVertexIndices[faceId].v2;
+        BarycentricCoordinates coordinates = BarycentricCoordinates(Triangle(&this->triangleMesh, faceId), point);
         return coordinates.interpolateLinear(pointData[indexV0], pointData[indexV1], pointData[indexV2]);
     }
  private:

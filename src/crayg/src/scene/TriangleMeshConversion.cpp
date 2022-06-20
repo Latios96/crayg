@@ -11,12 +11,8 @@ void TriangleMeshConversion::toTriangleMesh(const GroundPlane &groundPlane, Tria
     triangleMesh.points.emplace_back(1000, 0, 1000);
     triangleMesh.points.emplace_back(1000, 0, -1000);
 
-    triangleMesh.faceIndices.push_back(0);
-    triangleMesh.faceIndices.push_back(1);
-    triangleMesh.faceIndices.push_back(2);
-    triangleMesh.faceIndices.push_back(2);
-    triangleMesh.faceIndices.push_back(3);
-    triangleMesh.faceIndices.push_back(0);
+    triangleMesh.faceVertexIndices.push_back({0, 1, 2});
+    triangleMesh.faceVertexIndices.push_back({2, 3, 0});
 
     triangleMesh.setMaterial(groundPlane.getMaterial());
     triangleMesh.setTransform(groundPlane.getTransform());

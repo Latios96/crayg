@@ -33,7 +33,8 @@ TEST_CASE("UsdMeshReader::read") {
         REQUIRE(triangleMesh->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(triangleMesh->points
                     == std::vector<Vector3f>({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
-        REQUIRE(triangleMesh->faceIndices == std::vector<int>({0, 3, 1, 0, 2, 3}));
+        REQUIRE(
+            triangleMesh->faceVertexIndices == std::vector<TriangleMesh::FaceVertexIndices>({{0, 3, 1}, {0, 2, 3}}));
         REQUIRE(triangleMesh->getMaterial()->getName() == "defaultMaterial");
     }
 
@@ -53,7 +54,8 @@ TEST_CASE("UsdMeshReader::read") {
         REQUIRE(triangleMesh->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(triangleMesh->points
                     == std::vector<Vector3f>({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
-        REQUIRE(triangleMesh->faceIndices == std::vector<int>({0, 2, 1, 2, 3, 1}));
+        REQUIRE(
+            triangleMesh->faceVertexIndices == std::vector<TriangleMesh::FaceVertexIndices>({{0, 2, 1}, {2, 3, 1}}));
         REQUIRE(triangleMesh->getMaterial()->getName() == "defaultMaterial");
     }
 

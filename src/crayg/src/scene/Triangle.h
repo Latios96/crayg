@@ -14,7 +14,7 @@ class TriangleMesh;
 class Triangle : public Imageable {
  public:
     Triangle();
-    Triangle(TriangleMesh *triangleMesh, int faceIndex);
+    Triangle(TriangleMesh *triangleMesh, int faceId);
 
     bool isIntersecting(Ray ray) override;
     Imageable::Intersection intersect(Ray ray) override;
@@ -28,7 +28,7 @@ class Triangle : public Imageable {
     Vector3f v2() const;
 
     TriangleMesh *triangleMesh;
-    int faceIndex;
+    int faceId;
 
  private:
     Intersection getIntersectionMullerTrumbore(const Ray &ray);
