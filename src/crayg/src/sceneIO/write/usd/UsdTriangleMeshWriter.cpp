@@ -22,10 +22,9 @@ pxr::UsdGeomMesh UsdTriangleMeshWriter::write(pxr::UsdStagePtr stage, UsdPathFac
 }
 void UsdTriangleMeshWriter::writeFaceVertexCounts(const pxr::UsdGeomMesh &usdGeomMesh) const {
     pxr::VtIntArray faceVertexCounts;
-    faceVertexCounts.reserve(craygObject->faceCount());
-    for (auto &indices: craygObject->faceVertexIndices) {
-        faceVertexCounts.push_back(3);
-    }
+    faceVertexCounts.resize(craygObject->faceCount());
+    std::fill(faceVertexCounts.begin(), faceVertexCounts.end(), 3);
+
     usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
 }
 void UsdTriangleMeshWriter::writeFaceVertexIndices(const pxr::UsdGeomMesh &usdGeomMesh) {
