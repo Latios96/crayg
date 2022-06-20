@@ -94,15 +94,15 @@ set(crayg_SRCS
         scene/Sphere.h
         scene/Transformable.cpp
         scene/Transformable.h
-        scene/Triangle.cpp
-        scene/Triangle.h
-        scene/TriangleMesh.cpp
-        scene/TriangleMesh.h
-        scene/TriangleMeshAbstractPrimVar.h
-        scene/TriangleMeshConversion.cpp
-        scene/TriangleMeshConversion.h
-        scene/TriangleMeshPerPointPrimVar.h
-        scene/TriangleMeshPerVertexPrimVar.h
+        scene/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h
+        scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h
+        scene/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h
+        scene/trianglemesh/Triangle.cpp
+        scene/trianglemesh/Triangle.h
+        scene/trianglemesh/TriangleMesh.cpp
+        scene/trianglemesh/TriangleMesh.h
+        scene/trianglemesh/TriangleMeshConversion.cpp
+        scene/trianglemesh/TriangleMeshConversion.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/BaseUsdImageableReader.h

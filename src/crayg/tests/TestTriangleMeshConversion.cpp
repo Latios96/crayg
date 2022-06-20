@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include "scene/GroundPlane.h"
-#include "scene/TriangleMesh.h"
-#include "scene/TriangleMeshConversion.h"
+#include "scene/trianglemesh/TriangleMesh.h"
+#include "scene/trianglemesh/TriangleMeshConversion.h"
 #include "scene/DiffuseMaterial.h"
 
 namespace crayg {

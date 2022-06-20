@@ -12,7 +12,7 @@
 #include "Camera.h"
 #include "RenderSettings.h"
 #include "ShadingNode.h"
-#include "TriangleMesh.h"
+#include "scene/trianglemesh/TriangleMesh.h"
 #include <memory>
 
 namespace crayg {

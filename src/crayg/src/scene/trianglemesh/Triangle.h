@@ -5,7 +5,7 @@
 #ifndef CRAYG_TRIANGLE_H
 #define CRAYG_TRIANGLE_H
 
-#include <scene/Imageable.h>
+#include "scene/Imageable.h"
 
 namespace crayg {
 

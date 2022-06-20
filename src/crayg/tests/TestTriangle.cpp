@@ -3,8 +3,8 @@
 //
 
 #include <catch2/catch.hpp>
-#include <scene/Triangle.h>
-#include <scene/TriangleMesh.h>
+#include "scene/trianglemesh/Triangle.h"
+#include "scene/trianglemesh/TriangleMesh.h"
 #include <iostream>
 
 namespace crayg {

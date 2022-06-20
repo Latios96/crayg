@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <scene/TriangleMesh.h>
+#include "scene/trianglemesh/TriangleMesh.h"
 #include <numeric>
 
 namespace crayg {

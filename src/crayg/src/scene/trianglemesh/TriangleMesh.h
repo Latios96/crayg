@@ -6,10 +6,10 @@
 #define CRAYG_TRIANGEMESH_H
 
 #include <vector>
-#include <basics/BoundingBox.h>
-#include "SceneObject.h"
+#include "basics/BoundingBox.h"
+#include "scene/SceneObject.h"
 #include "Triangle.h"
-#include "TriangleMeshPerPointPrimVar.h"
+#include "scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 
 namespace crayg {
 

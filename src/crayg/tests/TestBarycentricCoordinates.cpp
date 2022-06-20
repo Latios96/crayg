@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <basics/BarycentricCoordinates.h>
-#include <scene/TriangleMesh.h>
+#include "scene/trianglemesh/TriangleMesh.h"
 
 namespace crayg {
 

@@ -1,6 +1,6 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHABSTRACTPRIMVAR_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHABSTRACTPRIMVAR_H_
-#include "TriangleMesh.h"
+#include "scene/trianglemesh/TriangleMesh.h"
 
 namespace crayg {
 
