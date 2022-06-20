@@ -9,7 +9,7 @@
 #include "basics/BoundingBox.h"
 #include "scene/SceneObject.h"
 #include "Triangle.h"
-#include "scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "scene/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h"
 
 namespace crayg {
 
@@ -28,13 +28,19 @@ class TriangleMesh : public SceneObject {
     int faceCount();
 
     template<typename T>
-    void addNormalsPrimVar() {
+    T *addNormalsPrimVar() {
         normalsPrimVar = std::make_unique<T>(*this);
         normalsPrimVar->allocate();
+        return getNormalsPrimVarAs<T>();
+    }
+
+    template<typename T>
+    T *getNormalsPrimVarAs() {
+        return dynamic_cast<T *>(normalsPrimVar.get());
     }
 
     std::vector<Vector3f> points;
-    std::unique_ptr<TriangleMeshPerPointPrimVar<Vector3f>> normalsPrimVar = nullptr;
+    std::unique_ptr<TriangleMeshAbstractPrimVar<Vector3f>> normalsPrimVar = nullptr;
 
     struct FaceVertexIndices {
         int v0, v1, v2;

@@ -3,6 +3,7 @@
 //
 
 #include "TriangleMesh.h"
+#include "scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 
 namespace crayg {
 
@@ -96,11 +97,11 @@ void TriangleMesh::createNormals() {
             normals[indices.v1] = normals[indices.v1].add(normal);
             normals[indices.v2] = normals[indices.v2].add(normal);
         }
-        addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
+        auto primVar = addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
 
         for (int i = 0; i < points.size(); i++) {
             normals[i] = normals[i].normalize();
-            normalsPrimVar->write(i, normals[i]);
+            primVar->write(i, normals[i]);
         }
     }
 
