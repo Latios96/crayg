@@ -43,6 +43,46 @@ class TriangleMesh : public SceneObject {
         bool operator!=(const FaceVertexIndices &rhs) const;
     };
     std::vector<FaceVertexIndices> faceVertexIndices;
+
+    class FaceIdIterator {
+     public:
+        using iterator_category = std::forward_iterator_tag;
+        using value_type = std::size_t;
+        using difference_type = std::size_t;
+        using pointer = std::size_t *;
+        using reference = std::size_t &;
+
+        FaceIdIterator(std::size_t id) : id(id) {}
+
+        FaceIdIterator &operator++() {
+            return FaceIdIterator(++id);
+        }
+        std::size_t operator*() const { return id; }
+        bool operator!=(const FaceIdIterator &o) const {
+            return id != o.id;
+        };
+     private:
+        std::size_t id;
+    };
+
+    class FaceIdIteratorAdapter {
+     public:
+        FaceIdIteratorAdapter(TriangleMesh &triangleMesh) : triangleMesh(triangleMesh) {}
+
+        FaceIdIterator begin() {
+            return {0};
+        }
+        FaceIdIterator end() {
+            return {triangleMesh.faceVertexIndices.size()};
+        }
+     private:
+        TriangleMesh &triangleMesh;
+    };
+
+    FaceIdIteratorAdapter faceIds() {
+        return {*this};
+    }
+
  private:
     BoundingBox boundingBox;
     void createBounds();

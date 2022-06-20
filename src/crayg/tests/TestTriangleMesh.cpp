@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include <scene/TriangleMesh.h>
+#include <numeric>
 
 namespace crayg {
 
@@ -65,6 +66,28 @@ TEST_CASE("TriangleMesh::init") {
 
         REQUIRE(triangleMesh.normalsPrimVar != nullptr);
         REQUIRE(triangleMesh.normalsPrimVar->read(0) == Vector3f(1, 0, 0));
+    }
+}
+
+TEST_CASE("TriangleMesh::faceIds") {
+    TriangleMesh triangleMesh;
+    SECTION("should iterate successfully over empty mesh") {
+        std::vector<std::size_t> ids;
+
+        std::copy(triangleMesh.faceIds().begin(), triangleMesh.faceIds().end(), std::back_inserter(ids));
+
+        std::vector<std::size_t> expectedIds;
+        REQUIRE(ids == expectedIds);
+    }SECTION("should iterate successfully over all face ids of a cube") {
+        TriangleMesh::createCube(triangleMesh);
+        std::vector<std::size_t> ids;
+
+        std::copy(triangleMesh.faceIds().begin(), triangleMesh.faceIds().end(), std::back_inserter(ids));
+
+        std::vector<std::size_t> expectedIds;
+        expectedIds.resize(12);
+        std::iota(expectedIds.begin(), expectedIds.end(), 0);
+        REQUIRE(ids == expectedIds);
     }
 }
 
