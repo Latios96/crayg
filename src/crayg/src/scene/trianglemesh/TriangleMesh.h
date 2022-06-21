@@ -28,16 +28,10 @@ class TriangleMesh : public SceneObject {
     int faceCount();
 
     template<typename T>
-    T *addNormalsPrimVar() {
-        normalsPrimVar = std::make_unique<T>(*this);
-        normalsPrimVar->allocate();
-        return getNormalsPrimVarAs<T>();
-    }
+    T *addNormalsPrimVar();
 
     template<typename T>
-    T *getNormalsPrimVarAs() {
-        return dynamic_cast<T *>(normalsPrimVar.get());
-    }
+    T *getNormalsPrimVarAs();
 
     std::vector<Vector3f> points;
     std::unique_ptr<TriangleMeshAbstractPrimVar<Vector3f>> normalsPrimVar = nullptr;
@@ -60,13 +54,9 @@ class TriangleMesh : public SceneObject {
 
         FaceIdIterator(std::size_t id) : id(id) {}
 
-        FaceIdIterator operator++() {
-            return FaceIdIterator(++id);
-        }
-        std::size_t operator*() const { return id; }
-        bool operator!=(const FaceIdIterator &o) const {
-            return id != o.id;
-        };
+        FaceIdIterator operator++();
+        std::size_t operator*() const;
+        bool operator!=(const FaceIdIterator &o) const;;
      private:
         std::size_t id;
     };
@@ -75,25 +65,31 @@ class TriangleMesh : public SceneObject {
      public:
         FaceIdIteratorAdapter(TriangleMesh &triangleMesh) : triangleMesh(triangleMesh) {}
 
-        FaceIdIterator begin() {
-            return {0};
-        }
-        FaceIdIterator end() {
-            return {triangleMesh.faceVertexIndices.size()};
-        }
+        FaceIdIterator begin();
+        FaceIdIterator end();
      private:
         TriangleMesh &triangleMesh;
     };
 
-    FaceIdIteratorAdapter faceIds() {
-        return {*this};
-    }
+    FaceIdIteratorAdapter faceIds();
 
  private:
     BoundingBox boundingBox;
     void createBounds();
     void createNormals();
 };
+
+template<typename T>
+T *TriangleMesh::addNormalsPrimVar() {
+    normalsPrimVar = std::make_unique<T>(*this);
+    normalsPrimVar->allocate();
+    return getNormalsPrimVarAs<T>();
+}
+
+template<typename T>
+T *TriangleMesh::getNormalsPrimVarAs() {
+    return dynamic_cast<T *>(normalsPrimVar.get());
+}
 
 }
 

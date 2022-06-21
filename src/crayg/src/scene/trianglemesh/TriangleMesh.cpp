@@ -134,4 +134,27 @@ bool TriangleMesh::FaceVertexIndices::operator==(const TriangleMesh::FaceVertexI
 bool TriangleMesh::FaceVertexIndices::operator!=(const TriangleMesh::FaceVertexIndices &rhs) const {
     return !(rhs == *this);
 }
+
+TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIterator::operator++() {
+    return FaceIdIterator(++id);
+}
+
+std::size_t TriangleMesh::FaceIdIterator::operator*() const { return id; }
+
+bool TriangleMesh::FaceIdIterator::operator!=(const TriangleMesh::FaceIdIterator &o) const {
+    return id != o.id;
+}
+
+TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIteratorAdapter::begin() {
+    return {0};
+}
+
+TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIteratorAdapter::end() {
+    return {triangleMesh.faceVertexIndices.size()};
+}
+
+TriangleMesh::FaceIdIteratorAdapter TriangleMesh::faceIds() {
+    return {*this};
+}
+
 }
