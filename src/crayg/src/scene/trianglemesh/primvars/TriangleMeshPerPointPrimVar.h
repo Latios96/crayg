@@ -27,6 +27,12 @@ class TriangleMeshPerPointPrimVar : public TriangleMeshAbstractPrimVar<T> {
         BarycentricCoordinates coordinates = BarycentricCoordinates(Triangle(&this->triangleMesh, faceId), point);
         return coordinates.interpolateLinear(pointData[indexV0], pointData[indexV1], pointData[indexV2]);
     }
+    bool operator==(const std::vector<T> &otherPointData) const {
+        return pointData == otherPointData;
+    }
+    bool operator!=(const std::vector<T> &otherPointData) const {
+        return pointData != otherPointData;
+    }
  private:
     std::vector<T> pointData;
 };

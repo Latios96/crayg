@@ -7,6 +7,7 @@ namespace crayg {
 
 TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
 {
+    // TODO use a fixture
     TriangleMesh triangleMesh;
     triangleMesh.points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
     triangleMesh.faceVertexIndices.emplace_back(0, 2, 1);
@@ -39,7 +40,27 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
 
         REQUIRE(interpolatedValueForFace1 == std::get<2>(testData));
     }
+}
 
+TEST_CASE("TriangleMeshPerVertexPrimVar::==") {
+    // TODO use a fixture
+    TriangleMesh triangleMesh;
+    triangleMesh.points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
+    triangleMesh.faceVertexIndices = std::vector<TriangleMesh::FaceVertexIndices>({{0, 2, 1}, {2, 3, 1}});
+
+    TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
+    primVar.allocate();
+    primVar.write(0, VertexData(Color::createGrey(0.5)));
+    primVar.write(1, VertexData(Color::createGrey(0.5)));
+
+    SECTION("primvar should be equal to equivalent buffer") {
+        REQUIRE(primVar == std::vector<VertexData<Color>>({VertexData(Color::createGrey(0.5)),
+                                                           VertexData(Color::createGrey(0.5))}));
+    }
+
+    SECTION("primvar should not be equal to different equivalent buffer") {
+        REQUIRE(primVar != std::vector<VertexData<Color>>({VertexData(Color::createGrey(0.5))}));
+    }
 }
 
 }

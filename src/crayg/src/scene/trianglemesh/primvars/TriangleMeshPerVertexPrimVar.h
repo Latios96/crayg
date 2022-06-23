@@ -12,6 +12,14 @@ struct VertexData {
     VertexData() = default;
     explicit VertexData(const T &value) : v0(value), v1(value), v2(value) {}
     VertexData(const T &v0, const T &v1, const T &v2) : v0(v0), v1(v1), v2(v2) {}
+    bool operator==(const VertexData &rhs) const {
+        return v0 == rhs.v0 &&
+            v1 == rhs.v1 &&
+            v2 == rhs.v2;
+    }
+    bool operator!=(const VertexData &rhs) const {
+        return !(rhs == *this);
+    }
 };
 
 template<typename T>
@@ -32,6 +40,12 @@ class TriangleMeshPerVertexPrimVar : public TriangleMeshAbstractPrimVar<T> {
         BarycentricCoordinates coordinates = BarycentricCoordinates(Triangle(&this->triangleMesh, faceId), point);
         VertexData<T> vertexDataForFace = vertexData[faceId];
         return coordinates.interpolateLinear(vertexDataForFace.v0, vertexDataForFace.v1, vertexDataForFace.v2);
+    }
+    bool operator==(const std::vector<VertexData<T>> &otherVertexData) const {
+        return vertexData == otherVertexData;
+    }
+    bool operator!=(const std::vector<VertexData<T>> &otherVertexData) const {
+        return vertexData != otherVertexData;
     }
  private:
     std::vector<VertexData<T>> vertexData;
