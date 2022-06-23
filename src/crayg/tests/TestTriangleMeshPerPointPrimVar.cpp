@@ -7,10 +7,7 @@ namespace crayg {
 
 TEST_CASE("TriangleMeshPerPointPrimVar::interpolateAt")
 {
-    // TODO use a fixture
-    TriangleMesh triangleMesh;
-    triangleMesh.points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
-    triangleMesh.faceVertexIndices = std::vector<TriangleMesh::FaceVertexIndices>({{0, 2, 1}, {2, 3, 1}});
+    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     SECTION("should interpolate constant value correctly") {
         TriangleMeshPerPointPrimVar<Color> primVar(triangleMesh);
@@ -35,7 +32,7 @@ TEST_CASE("TriangleMeshPerPointPrimVar::interpolateAt")
 
         Color interpolatedValue = primVar.interpolateAt(0, {-0.25, 0, 0.25});
 
-        REQUIRE(interpolatedValue == Color(0.5f, 0.25f, 0.25f));
+        REQUIRE(interpolatedValue == Color(0.75f, 0.25f, 0.0f));
     }
 
     SECTION("should return the correct interpolated value for a point shared by multiple faces") {
@@ -44,7 +41,6 @@ TEST_CASE("TriangleMeshPerPointPrimVar::interpolateAt")
                                                               {0, {0.0f, 0.0f, 0.0f}, Color::createBlack()},
                                                               {3, {0.0f, 0.0f, 2.0f}, Color::createBlack()}}));
 
-        TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
         TriangleMeshPerPointPrimVar<Color> primVar(triangleMesh);
         primVar.allocate();
         primVar.write(1, Color::createWhite());
@@ -57,10 +53,7 @@ TEST_CASE("TriangleMeshPerPointPrimVar::interpolateAt")
 }
 
 TEST_CASE("TriangleMeshPerPointPrimVar::==") {
-    // TODO use a fixture
-    TriangleMesh triangleMesh;
-    triangleMesh.points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
-    triangleMesh.faceVertexIndices = std::vector<TriangleMesh::FaceVertexIndices>({{0, 2, 1}, {2, 3, 1}});
+    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     TriangleMeshPerPointPrimVar<Color> primVar(triangleMesh);
     primVar.allocate();
@@ -68,9 +61,11 @@ TEST_CASE("TriangleMeshPerPointPrimVar::==") {
     primVar.write(1, Color(0, 1, 0));
     primVar.write(2, Color(0, 0, 1));
     primVar.write(3, Color(1, 0, 0));
+    primVar.write(4, Color(0, 1, 0));
+    primVar.write(5, Color(0, 0, 1));
 
     SECTION("primvar should be equal to equivalent buffer") {
-        REQUIRE(primVar == std::vector<Color>({{1, 0, 0}, {0, 1, 0}, {0, 0, 1}, {1, 0, 0}}));
+        REQUIRE(primVar == std::vector<Color>({{1, 0, 0}, {0, 1, 0}, {0, 0, 1}, {1, 0, 0}, {0, 1, 0}, {0, 0, 1}}));
     }
 
     SECTION("primvar should not be equal to different equivalent buffer") {

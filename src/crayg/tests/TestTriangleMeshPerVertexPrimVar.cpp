@@ -7,11 +7,7 @@ namespace crayg {
 
 TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
 {
-    // TODO use a fixture
-    TriangleMesh triangleMesh;
-    triangleMesh.points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
-    triangleMesh.faceVertexIndices.emplace_back(0, 2, 1);
-    triangleMesh.faceVertexIndices.emplace_back(2, 3, 1);
+    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     SECTION("should interpolate constant value correctly") {
         TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
@@ -31,7 +27,6 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
                                                               {0, {0.0f, 0.0f, 0.0f}, Color::createBlack()},
                                                               {3, {0.0f, 0.0f, 2.0f}, Color::createBlack()}}));
 
-        TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
         TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
         primVar.allocate();
         primVar.write(1, {Color::createWhite(), Color::createBlack(), Color::createBlack()});
@@ -43,18 +38,19 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
 }
 
 TEST_CASE("TriangleMeshPerVertexPrimVar::==") {
-    // TODO use a fixture
-    TriangleMesh triangleMesh;
-    triangleMesh.points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
-    triangleMesh.faceVertexIndices = std::vector<TriangleMesh::FaceVertexIndices>({{0, 2, 1}, {2, 3, 1}});
+    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
     primVar.allocate();
     primVar.write(0, VertexData(Color::createGrey(0.5)));
     primVar.write(1, VertexData(Color::createGrey(0.5)));
+    primVar.write(2, VertexData(Color::createGrey(0.5)));
+    primVar.write(3, VertexData(Color::createGrey(0.5)));
 
     SECTION("primvar should be equal to equivalent buffer") {
         REQUIRE(primVar == std::vector<VertexData<Color>>({VertexData(Color::createGrey(0.5)),
+                                                           VertexData(Color::createGrey(0.5)),
+                                                           VertexData(Color::createGrey(0.5)),
                                                            VertexData(Color::createGrey(0.5))}));
     }
 
