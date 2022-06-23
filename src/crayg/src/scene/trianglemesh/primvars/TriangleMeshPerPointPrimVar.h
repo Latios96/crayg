@@ -3,6 +3,7 @@
 
 #include "TriangleMeshAbstractPrimVar.h"
 #include "basics/BarycentricCoordinates.h"
+#include "utils/ToStringHelper.h"
 
 namespace crayg {
 
@@ -32,6 +33,13 @@ class TriangleMeshPerPointPrimVar : public TriangleMeshAbstractPrimVar<T> {
     }
     bool operator!=(const std::vector<T> &otherPointData) const {
         return pointData != otherPointData;
+    }
+    template<typename OStream>
+    friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerPointPrimVar &var) {
+        os << ToStringHelper("TriangleMeshPerPointPrimVar")
+            .addMember("pointData", var.pointData)
+            .finish();
+        return os;
     }
  private:
     std::vector<T> pointData;

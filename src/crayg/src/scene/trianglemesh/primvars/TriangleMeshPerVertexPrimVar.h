@@ -1,8 +1,10 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHPERVERTEXPRIMVAR_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHPERVERTEXPRIMVAR_H_
 
+#include <ostream>
 #include "TriangleMeshAbstractPrimVar.h"
 #include "basics/BarycentricCoordinates.h"
+#include "utils/ToStringHelper.h"
 
 namespace crayg {
 
@@ -19,6 +21,15 @@ struct VertexData {
     }
     bool operator!=(const VertexData &rhs) const {
         return !(rhs == *this);
+    }
+    template<typename OStream>
+    friend std::ostream &operator<<(std::ostream &os, const VertexData &data) {
+        os << ToStringHelper("VertexData")
+            .addMember("v0", data.v0)
+            .addMember("v0", data.v1)
+            .addMember("v0", data.v2)
+            .finish();
+        return os;
     }
 };
 
@@ -46,6 +57,13 @@ class TriangleMeshPerVertexPrimVar : public TriangleMeshAbstractPrimVar<T> {
     }
     bool operator!=(const std::vector<VertexData<T>> &otherVertexData) const {
         return vertexData != otherVertexData;
+    }
+    template<typename OStream>
+    friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerVertexPrimVar &var) {
+        os << ToStringHelper("TriangleMeshPerVertexPrimVar")
+            .addMember("vertexData", var.vertexData)
+            .finish();
+        return os;
     }
  private:
     std::vector<VertexData<T>> vertexData;
