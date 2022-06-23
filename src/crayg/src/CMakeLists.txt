@@ -48,7 +48,6 @@ set(crayg_SRCS
         intersectors/BvhNode.h
         intersectors/BvhSceneIntersector.cpp
         intersectors/BvhSceneIntersector.h
-        intersectors/Intersector.h
         intersectors/SceneIntersector.cpp
         intersectors/SceneIntersector.h
         Logger.cpp
