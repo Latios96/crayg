@@ -26,7 +26,7 @@ std::shared_ptr<Material> crayg::UsdMaterialReadCache::getCachedReadPrimMaterial
 }
 
 std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::UsdShadeMaterial &usdShadeMaterial) {
-    Logger::info("Translating material {}", usdShadeMaterial.GetPath().GetString());
+    Logger::info("Translating material {}", usdShadeMaterial.GetPath());
     auto shader = usdShadeMaterial.ComputeSurfaceSource();
 
     if (!shader) {
@@ -36,8 +36,8 @@ std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::Usd
     shader.GetIdAttr().Get(&shaderId);
     if (!isUsdPreviewSurface(shaderId)) {
         Logger::warning("Shader at {} is of id {}, which is not supported",
-                        shader.GetPath().GetString(),
-                        shaderId.GetString());
+                        shader.GetPath(),
+                        shaderId);
         return getDefaultMaterial();
     }
 

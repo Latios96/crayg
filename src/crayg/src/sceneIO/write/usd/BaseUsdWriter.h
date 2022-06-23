@@ -20,7 +20,7 @@ class BaseUsdWriter {
 
     virtual UsdType write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
         const pxr::SdfPath targetPath = usdPathFactory.getPathForName(craygObject->getName(), getTranslatedType());
-        Logger::info("Writing {} {}", getTranslatedType(), targetPath.GetString());
+        Logger::info("Writing {} {}", getTranslatedType(), targetPath);
 
         auto usdObject = UsdType::Define(stage, targetPath);
 

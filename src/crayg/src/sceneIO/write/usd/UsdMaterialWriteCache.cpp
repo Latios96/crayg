@@ -21,7 +21,7 @@ pxr::UsdShadeMaterial UsdMaterialWriteCache::getCachedUsdMaterial(const std::sha
 
 pxr::UsdShadeMaterial UsdMaterialWriteCache::translateMaterial(const std::shared_ptr<Material> material) {
     const pxr::SdfPath materialPath = usdPathFactory.getPathForName(material->getName(), "Material");
-    Logger::info("Writing material {}", materialPath.GetString());
+    Logger::info("Writing material {}", materialPath);
 
     auto usdShadeMaterial = pxr::UsdShadeMaterial::Define(stage, materialPath);
     auto usdShadeShader =

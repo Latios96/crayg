@@ -70,7 +70,7 @@ void UsdStageReader::readRectLight(Scene &scene, const pxr::UsdPrim &prim) const
 }
 
 void UsdStageReader::readCamera(Scene &scene, const pxr::UsdPrim &prim) const {
-    Logger::info("Using camera {}", prim.GetPath().GetString());
+    Logger::info("Using camera {}", prim.GetPath());
     auto camera = UsdCameraReader(pxr::UsdGeomCamera(prim)).read();
     scene.camera = camera;
 }

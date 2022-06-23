@@ -73,8 +73,8 @@ void UsdMeshReader::translateNormals(std::shared_ptr<TriangleMesh> &triangleMesh
         translateFaceVaryingNormals(triangleMesh, meshUtil);
     } else {
         Logger::warning(R"(Normals interpolation "{}" of mesh {} is not supported)",
-                        normalsInterpolation.GetString(),
-                        usdPrim.GetPath().GetString());
+                        normalsInterpolation,
+                        usdPrim.GetPath());
     }
 }
 void UsdMeshReader::translateFaceVaryingNormals(std::shared_ptr<TriangleMesh> &triangleMesh,
