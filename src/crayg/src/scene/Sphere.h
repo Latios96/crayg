@@ -1,7 +1,3 @@
-//
-// Created by jan on 19.08.18.
-//
-
 #ifndef CRAYG_SPHERE_H
 #define CRAYG_SPHERE_H
 

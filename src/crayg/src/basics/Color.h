@@ -1,7 +1,3 @@
-//
-// Created by jan on 21.08.18.
-//
-
 #ifndef CRAYG_COLOR_H
 #define CRAYG_COLOR_H
 
@@ -103,8 +99,7 @@ class Color {
     std::tuple<int, int, int> getRgbValues() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Color &color);
-
 };
 
-}
-#endif //CRAYG_COLOR_H
+}// namespace crayg
+#endif//CRAYG_COLOR_H

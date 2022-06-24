@@ -1,7 +1,3 @@
-//
-// Created by Jan on 13.05.2022.
-//
-
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_CRAYGUSDBASE_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_CRAYGUSDBASE_H_
 #include <fmt/format.h>

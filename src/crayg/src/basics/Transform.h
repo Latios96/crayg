@@ -1,7 +1,3 @@
-//
-// Created by Jan on 09.11.2020.
-//
-
 #ifndef CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
 #define CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
 

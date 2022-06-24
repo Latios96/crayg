@@ -1,6 +1,3 @@
-//
-// Created by Jan on 24.11.2020.
-//
 #include <catch2/catch.hpp>
 #include <utils/ReadableFormatter.h>
 

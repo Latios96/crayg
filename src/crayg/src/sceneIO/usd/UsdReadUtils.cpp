@@ -1,7 +1,3 @@
-//
-// Created by Jan on 13.05.2022.
-//
-
 #include "UsdReadUtils.h"
 #include "UsdConversions.h"
 #include "Logger.h"

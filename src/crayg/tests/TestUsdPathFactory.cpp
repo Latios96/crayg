@@ -1,6 +1,3 @@
-//
-// Created by Jan on 02.06.2022.
-//
 #include <catch2/catch.hpp>
 #include "sceneIO/write/usd/UsdPathFactory.h"
 

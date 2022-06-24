@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 09.01.20.
-//
-
 #include "TestPatternStringParser.h"
 
 #include <utility>

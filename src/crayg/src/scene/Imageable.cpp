@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 25.11.18.
-//
-
 #include "Imageable.h"
 
 #include <utility>

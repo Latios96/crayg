@@ -1,7 +1,3 @@
-//
-// Created by jan on 27.12.18.
-//
-
 #include "RemainingTimeCalculator.h"
 
 namespace crayg {

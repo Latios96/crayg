@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 28.10.18.
-//
-
 #ifndef CRAYG_IMAGEWRITERS_H
 #define CRAYG_IMAGEWRITERS_H
 

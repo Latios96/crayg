@@ -1,6 +1,3 @@
-//
-// Created by Jan on 23.11.2020.
-//
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
 #include <image/OutputDriver.h>

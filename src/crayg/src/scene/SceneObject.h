@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 07.11.18.
-//
-
 #ifndef CRAYG_SCENEOBJECT_H
 #define CRAYG_SCENEOBJECT_H
 

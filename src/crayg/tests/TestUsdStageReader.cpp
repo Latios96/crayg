@@ -1,7 +1,3 @@
-//
-// Created by Jan on 28.10.2021.
-//
-
 #include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdStageReader.h"
 #include <pxr/usd/usd/stage.h>

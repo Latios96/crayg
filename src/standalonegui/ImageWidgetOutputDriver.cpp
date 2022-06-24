@@ -1,7 +1,3 @@
-//
-// Created by Jan on 04.11.2020.
-//
-
 #include <Logger.h>
 #include <image/ImageIterators.h>
 #include <iostream>

@@ -1,7 +1,3 @@
-//
-// Created by jan on 03/08/2019.
-//
-
 #ifndef CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_
 #define CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_
 

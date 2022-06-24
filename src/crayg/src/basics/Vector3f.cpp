@@ -1,7 +1,3 @@
-//
-// Created by jan on 15.08.18.
-//
-
 #include <utils/ToStringHelper.h>
 #include "Vector3f.h"
 

@@ -1,8 +1,3 @@
-//
-// Created by Jan Honsbrok on 25.11.18.
-//
-
-
 #include <boost/filesystem/path.hpp>
 #include "SceneReaderFactory.h"
 #include "sceneIO/read/usd/UsdSceneReader.h"

@@ -1,7 +1,3 @@
-//
-// Created by jan on 15.08.18.
-//
-
 #include "Image.h"
 
 namespace crayg {

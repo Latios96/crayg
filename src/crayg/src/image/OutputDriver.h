@@ -1,7 +1,3 @@
-//
-// Created by Jan on 29.10.2020.
-//
-
 #ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_OUTPUTDRIVER_H_
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_OUTPUTDRIVER_H_
 

@@ -1,7 +1,3 @@
-//
-// Created by Jan on 25.05.2020.
-//
-
 #include "KnipserTestUtils.h"
 
 namespace knipser {

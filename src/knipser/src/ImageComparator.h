@@ -1,7 +1,3 @@
-//
-// Created by jan on 19/08/2019.
-//
-
 #ifndef CRAYG_SRC_KNIPSER_SRC_IMAGECOMPARATOR_H_
 #define CRAYG_SRC_KNIPSER_SRC_IMAGECOMPARATOR_H_
 

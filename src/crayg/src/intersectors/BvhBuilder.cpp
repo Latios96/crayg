@@ -1,7 +1,3 @@
-//
-// Created by Jan on 13.10.2021.
-//
-
 #include "BvhBuilder.h"
 #include "Logger.h"
 namespace crayg {

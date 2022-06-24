@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 13.11.18.
-//
-
 #include <catch2/catch.hpp>
 #include "scene/trianglemesh/Triangle.h"
 #include "scene/trianglemesh/TriangleMesh.h"

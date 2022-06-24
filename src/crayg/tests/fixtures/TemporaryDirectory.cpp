@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 18.06.22.
-//
-
 #include "TemporaryDirectory.h"
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>

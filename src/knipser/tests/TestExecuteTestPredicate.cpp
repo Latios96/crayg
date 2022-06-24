@@ -1,6 +1,3 @@
-//
-// Created by Jan Honsbrok on 10.01.20.
-//
 #include <catch2/catch.hpp>
 #include "ExecuteTestPredicate.h"
 

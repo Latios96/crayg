@@ -1,8 +1,3 @@
-//
-// Created by jan on 03/10/2019.
-//
-
-
 #include <catch2/catch.hpp>
 #include <fstream>
 #include <image/Image.h>

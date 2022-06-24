@@ -1,15 +1,10 @@
-#include <utility>
-
-//
-// Created by Jan Honsbrok on 11.11.18.
-//
-
 #ifndef CRAYG_PROGRESSREPORTER_H
 #define CRAYG_PROGRESSREPORTER_H
 
 #include <functional>
 #include "RemainingTimeCalculator.h"
 #include "Logger.h"
+#include <utility>
 
 namespace crayg {
 

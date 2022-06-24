@@ -1,7 +1,3 @@
-//
-// Created by Jan on 14.11.2020.
-//
-
 #include "ShadingNode.h"
 #include <utility>
 #include <boost/uuid/uuid_generators.hpp>

@@ -1,7 +1,3 @@
-//
-// Created by Jan on 13.05.2022.
-//
-
 #include <pxr/imaging/hd/meshTopology.h>
 #include <pxr/imaging/hd/vtBufferSource.h>
 #include "UsdMeshReader.h"

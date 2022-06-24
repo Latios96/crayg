@@ -1,7 +1,3 @@
-//
-// Created by jan on 22.08.18.
-//
-
 #include <algorithm>
 #include <fmt/format.h>
 #include "Scene.h"

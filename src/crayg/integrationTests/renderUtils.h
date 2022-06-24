@@ -1,7 +1,3 @@
-//
-// Created by Jan on 31.10.2020.
-//
-
 #ifndef CRAYG_SRC_CRAYG_INTEGRATIONTESTS_RENDERUTILS_H_
 #define CRAYG_SRC_CRAYG_INTEGRATIONTESTS_RENDERUTILS_H_ \
 #include <scene/Scene.h>

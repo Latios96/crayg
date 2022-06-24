@@ -1,7 +1,3 @@
-//
-// Created by Jan on 30.10.2020.
-//
-
 #include "RenderSettings.h"
 
 namespace crayg {

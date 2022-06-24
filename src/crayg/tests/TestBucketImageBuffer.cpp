@@ -1,6 +1,3 @@
-//
-// Created by Jan on 29.10.2020.
-//
 #include <image/BucketImageBuffer.h>
 #include "catch2/catch.hpp"
 

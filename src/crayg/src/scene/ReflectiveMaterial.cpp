@@ -1,7 +1,3 @@
-//
-// Created by Jan on 17.11.2020.
-//
-
 #include "ReflectiveMaterial.h"
 
 namespace crayg {

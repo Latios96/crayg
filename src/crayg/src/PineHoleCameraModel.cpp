@@ -1,9 +1,4 @@
 #include <cmath>
-
-//
-// Created by jan on 16.08.18.
-//
-
 #include "PineHoleCameraModel.h"
 
 namespace crayg {

@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 01.11.18.
-//
-
 #include <algorithm>
 #include "SceneIntersector.h"
 

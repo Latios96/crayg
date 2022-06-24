@@ -1,7 +1,3 @@
-//
-// Created by Jan on 10.06.2022.
-//
-
 #include "BarycentricCoordinates.h"
 #include "utils/ToStringHelper.h"
 

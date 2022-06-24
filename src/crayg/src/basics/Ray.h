@@ -1,7 +1,3 @@
-//
-// Created by jan on 16.08.18.
-//
-
 #ifndef CRAYG_RAY_H
 #define CRAYG_RAY_H
 

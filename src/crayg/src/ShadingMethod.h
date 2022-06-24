@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 11.11.18.
-//
-
 #ifndef CRAYG_SHADINGMETHODS_H
 #define CRAYG_SHADINGMETHODS_H
 

@@ -1,7 +1,3 @@
-//
-// Created by jan on 16.08.18.
-//
-
 #include "Camera.h"
 #include "utils/ToStringHelper.h"
 

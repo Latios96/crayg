@@ -1,7 +1,3 @@
-//
-// Created by Jan on 28.10.2021.
-//
-
 #include "basics/Transform.h"
 #include "UsdCameraReader.h"
 #include "sceneIO/usd/UsdConversions.h"

@@ -1,7 +1,3 @@
-//
-// Created by Jan on 13.05.2022.
-//
-
 #include "UsdSphereLightReader.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdReadUtils.h"

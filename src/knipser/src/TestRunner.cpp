@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 2019-08-10.
-//
-
 #include <iostream>
 #include <fmt/format.h>
 #include "TestRunner.h"

@@ -1,7 +1,3 @@
-//
-// Created by jan on 03/08/2019.
-//
-
 #include "KnipserTest.h"
 
 #include <utility>

@@ -1,7 +1,3 @@
-//
-// Created by Jan on 13.10.2021.
-//
-
 #include "BvhNode.h"
 crayg::BvhNode::BvhNode(const crayg::BoundingBox &boundingBox,
                         crayg::BvhNode *left,

@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 01.11.18.
-//
-
 #ifndef CRAYG_SCENEINTERSECTOR_H
 #define CRAYG_SCENEINTERSECTOR_H
 

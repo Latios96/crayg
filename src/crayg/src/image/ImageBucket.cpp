@@ -1,7 +1,3 @@
-//
-// Created by Jan on 21.10.2020.
-//
-
 #include <utils/ToStringHelper.h>
 #include "ImageBucket.h"
 

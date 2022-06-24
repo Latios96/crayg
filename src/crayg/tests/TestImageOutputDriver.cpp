@@ -1,7 +1,3 @@
-//
-// Created by Jan on 29.10.2020.
-//
-
 #include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <image/ImageOutputDriver.h>

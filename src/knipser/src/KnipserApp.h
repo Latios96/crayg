@@ -1,7 +1,3 @@
-//
-// Created by jan on 23/08/2019.
-//
-
 #ifndef CRAYG_SRC_KNIPSER_SRC_KNIPSERAPP_H_
 #define CRAYG_SRC_KNIPSER_SRC_KNIPSERAPP_H_
 

@@ -1,6 +1,3 @@
-//
-// Created by Jan on 31.10.2020.
-//
 #include "renderUtils.h"
 
 namespace crayg {

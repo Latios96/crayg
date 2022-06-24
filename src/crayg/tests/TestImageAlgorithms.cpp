@@ -1,6 +1,3 @@
-//
-// Created by Jan on 29.10.2020.
-//
 #include <image/Image.h>
 #include <image/ImageBucket.h>
 #include <image/ImageAlgorithms.h>

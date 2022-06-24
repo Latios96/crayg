@@ -1,7 +1,3 @@
-//
-// Created by jan on 27.12.18.
-//
-
 #ifndef CRAYG_REMAININGTIMECALCULATOR_H
 #define CRAYG_REMAININGTIMECALCULATOR_H
 

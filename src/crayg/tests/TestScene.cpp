@@ -1,7 +1,3 @@
-//
-// Created by Jan on 15.11.2020.
-//
-
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include <scene/DiffuseMaterial.h>

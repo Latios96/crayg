@@ -1,7 +1,3 @@
-//
-// Created by jan on 19.08.18.
-//
-
 #include "Sphere.h"
 
 namespace crayg {

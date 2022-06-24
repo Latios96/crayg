@@ -1,9 +1,4 @@
 #include <utility>
-
-//
-// Created by Jan Honsbrok on 31.10.18.
-//
-
 #include "SceneReader.h"
 
 namespace crayg {

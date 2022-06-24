@@ -1,6 +1,3 @@
-//
-// Created by Jan on 19.05.2022.
-//
 #include <catch2/catch.hpp>
 #include "sceneIO/SceneReaderFactory.h"
 

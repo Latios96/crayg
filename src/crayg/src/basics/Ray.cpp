@@ -1,7 +1,3 @@
-//
-// Created by jan on 16.08.18.
-//
-
 #include <limits>
 #include <utils/Preconditions.h>
 #include "Ray.h"

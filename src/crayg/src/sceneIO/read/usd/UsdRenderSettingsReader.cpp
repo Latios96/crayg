@@ -1,7 +1,3 @@
-//
-// Created by Jan on 29.05.2022.
-//
-
 #include "UsdRenderSettingsReader.h"
 #include <pxr/base/gf/vec2i.h>
 #include "sceneIO/usd/UsdUtils.h"

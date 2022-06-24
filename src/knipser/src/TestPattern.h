@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 09.01.20.
-//
-
 #ifndef CRAYG_SRC_KNIPSER_SRC_TESTPATTERN_H_
 #define CRAYG_SRC_KNIPSER_SRC_TESTPATTERN_H_
 

@@ -1,9 +1,4 @@
-//
-// Created by jan on 03/08/2019.
-//
-
 #include "CliParser.h"
-
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
 

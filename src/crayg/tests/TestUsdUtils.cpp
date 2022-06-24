@@ -1,6 +1,3 @@
-//
-// Created by Jan on 04.06.2022.
-//
 #include <catch2/catch.hpp>
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usd/stage.h>

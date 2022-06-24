@@ -1,7 +1,3 @@
-//
-// Created by Jan on 23.11.2020.
-//
-
 #include "ImagePathResolver.h"
 #include <vector>
 #include <boost/filesystem.hpp>

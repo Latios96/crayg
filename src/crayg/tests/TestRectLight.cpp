@@ -1,6 +1,3 @@
-//
-// Created by Jan Honsbrok on 06.11.18.
-//
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include "scene/RectLight.h"

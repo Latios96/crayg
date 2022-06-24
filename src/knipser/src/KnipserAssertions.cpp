@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 2019-08-11.
-//
-
 #include <fmt/format.h>
 #include "KnipserAssertions.h"
 

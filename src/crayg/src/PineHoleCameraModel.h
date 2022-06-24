@@ -1,7 +1,3 @@
-//
-// Created by jan on 16.08.18.
-//
-
 #ifndef CRAYG_PINEHOLECAMERAMODEL_H
 #define CRAYG_PINEHOLECAMERAMODEL_H
 

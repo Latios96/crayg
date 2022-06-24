@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 12.11.18.
-//
-
 #include <iostream>
 #include "Triangle.h"
 #include "TriangleMesh.h"

@@ -1,7 +1,3 @@
-//
-// Created by jan on 15.08.18.
-//
-
 #ifndef CRAYG_IMAGE_H
 #define CRAYG_IMAGE_H
 

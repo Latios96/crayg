@@ -1,6 +1,3 @@
-//
-// Created by Jan on 09.11.2020.
-//
 #include <catch2/catch.hpp>
 #include <basics/Vector3f.h>
 #include <basics/Transform.h>

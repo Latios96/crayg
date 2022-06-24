@@ -1,9 +1,3 @@
-#include <utility>
-
-//
-// Created by Jan Honsbrok on 31.10.18.
-//
-
 #ifndef CRAYG_STOPWATCH_H
 #define CRAYG_STOPWATCH_H
 
@@ -13,6 +7,7 @@
 
 #include "fmt/format.h"
 #include "Logger.h"
+#include <utility>
 
 namespace crayg {
 

@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 11.10.19.
-//
-
 #include <stdlib.h>
 #include "UnitSphereSampler.h"
 namespace crayg {

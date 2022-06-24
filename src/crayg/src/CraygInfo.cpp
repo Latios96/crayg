@@ -1,7 +1,3 @@
-//
-// Created by Jan on 05.11.2020.
-//
-
 #include "CraygInfo.h"
 
 namespace crayg {

@@ -1,7 +1,3 @@
-//
-// Created by Jan on 18.05.2022.
-//
-
 #include "UsdStageReader.h"
 #include "UsdCameraReader.h"
 #include "UsdSphereLightReader.h"

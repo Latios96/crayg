@@ -1,7 +1,3 @@
-//
-// Created by Jan on 21.05.2022.
-//
-
 #include "UsdDiskLightReader.h"
 #include "sceneIO/usd/UsdUtils.h"
 

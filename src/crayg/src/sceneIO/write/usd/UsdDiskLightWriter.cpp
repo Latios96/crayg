@@ -1,7 +1,3 @@
-//
-// Created by Jan on 03.06.2022.
-//
-
 #include "UsdDiskLightWriter.h"
 
 namespace crayg {

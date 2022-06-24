@@ -1,6 +1,3 @@
-//
-// Created by Jan Honsbrok on 2019-08-11.
-//
 #include <catch2/catch.hpp>
 #include <KnipserAssertions.h>
 

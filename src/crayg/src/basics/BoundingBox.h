@@ -1,7 +1,3 @@
-//
-// Created by jan on 02.12.18.
-//
-
 #ifndef CRAYG_BOUNDINGBOX_H
 #define CRAYG_BOUNDINGBOX_H
 

@@ -1,7 +1,3 @@
-//
-// Created by Jan on 21.10.2020.
-//
-
 #include "ImageBucketSequences.h"
 
 namespace crayg {

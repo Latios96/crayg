@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 07.11.18.
-//
-
 #include "SceneObject.h"
 
 namespace crayg {

@@ -1,6 +1,3 @@
-//
-// Created by Jan on 13.10.2021.
-//
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include <intersectors/BvhBuilder.h>

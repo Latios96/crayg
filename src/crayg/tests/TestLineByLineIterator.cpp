@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 28.10.18.
-//
-
 #include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <image/ImageIterators.h>

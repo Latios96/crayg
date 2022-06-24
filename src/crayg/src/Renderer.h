@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 04.11.18.
-//
-
 #ifndef CRAYG_RENDERER_H
 #define CRAYG_RENDERER_H
 

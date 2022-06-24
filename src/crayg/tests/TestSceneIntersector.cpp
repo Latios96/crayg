@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 01.11.18.
-//
-
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include "intersectors/SceneIntersector.h"

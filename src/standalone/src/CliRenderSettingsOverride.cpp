@@ -1,7 +1,3 @@
-//
-// Created by Jan on 19.05.2022.
-//
-
 #include <boost/algorithm/string/join.hpp>
 #include "CliRenderSettingsOverride.h"
 #include "Logger.h"

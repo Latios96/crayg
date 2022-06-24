@@ -1,6 +1,3 @@
-//
-// Created by jan on 03/10/2019.
-//
 #include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <boost/filesystem.hpp>

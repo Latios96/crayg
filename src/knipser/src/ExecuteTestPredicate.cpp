@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 10.01.20.
-//
-
 #include "ExecuteTestPredicate.h"
 
 #include <utility>

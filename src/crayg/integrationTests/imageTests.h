@@ -1,7 +1,3 @@
-//
-// Created by jan on 03/10/2019.
-//
-
 #include <image/Image.h>
 #include <image/ImageWriters.h>
 #include "KnipserApp.h"

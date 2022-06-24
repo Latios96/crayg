@@ -1,7 +1,3 @@
-//
-// Created by Jan on 28.10.2021.
-//
-
 #include "UsdConversions.h"
 #include "basics/Transform.h"
 

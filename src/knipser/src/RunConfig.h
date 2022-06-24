@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 2019-08-11.
-//
-
 #ifndef CRAYG_RUNCONFIG_H
 #define CRAYG_RUNCONFIG_H
 

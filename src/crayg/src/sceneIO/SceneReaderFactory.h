@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 25.11.18.
-//
-
 #ifndef CRAYG_SCENEREADERFACTORY_H
 #define CRAYG_SCENEREADERFACTORY_H
 

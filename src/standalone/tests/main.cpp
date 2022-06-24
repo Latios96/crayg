@@ -1,6 +1,3 @@
-//
-// Created by jan on 03/08/2019.
-//
 #define CATCH_CONFIG_RUNNER
 
 #include <catch2/catch.hpp>

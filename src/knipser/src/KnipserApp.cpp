@@ -1,6 +1,3 @@
-//
-// Created by jan on 23/08/2019.
-//
 #include <KnipserApp.h>
 #include "PlainReportGenerator.h"
 #include "TestPatternStringParser.h"

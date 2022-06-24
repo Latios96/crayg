@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 2019-08-10.
-//
-
 #ifndef CRAYG_PLAINREPORTGENERATOR_H
 #define CRAYG_PLAINREPORTGENERATOR_H
 

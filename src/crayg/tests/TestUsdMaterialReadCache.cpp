@@ -1,6 +1,3 @@
-//
-// Created by Jan on 28.05.2022.
-//
 #include <catch2/catch.hpp>
 #include "scene/Material.h"
 #include "sceneIO/read/usd/UsdMaterialReadCache.h"

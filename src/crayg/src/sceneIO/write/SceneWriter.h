@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 30.10.18.
-//
-
 #ifndef CRAYG_SCENEWRITER_H
 #define CRAYG_SCENEWRITER_H
 

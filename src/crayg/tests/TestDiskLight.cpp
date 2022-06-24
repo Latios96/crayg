@@ -1,7 +1,3 @@
-//
-// Created by Jan on 21.11.2020.
-//
-
 #include <catch2/catch.hpp>
 #include <scene/DiskLight.h>
 #include "intersectors/SceneIntersector.h"

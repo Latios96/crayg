@@ -1,6 +1,3 @@
-//
-// Created by Jan Honsbrok on 01.10.19.
-//
 #include "Logger.h"
 #include "KnipserApp.h"
 #include "imageTests.h"

@@ -1,6 +1,3 @@
-//
-// Created by Jan on 20.11.2020.
-//
 #include "RectLight.h"
 #include "intersectors/SceneIntersector.h"
 

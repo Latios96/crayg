@@ -1,7 +1,3 @@
-//
-// Created by Jan on 19.05.2022.
-//
-
 #include "UsdRectLightReader.h"
 #include "Logger.h"
 #include "sceneIO/usd/UsdReadUtils.h"

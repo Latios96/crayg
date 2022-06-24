@@ -1,7 +1,3 @@
-//
-// Created by Jan on 21.05.2022.
-//
-
 #include "UsdMaterialReadCache.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"

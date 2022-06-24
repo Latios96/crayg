@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 2019-08-10.
-//
-
 #include <fmt/format.h>
 #include <iostream>
 #include "PlainReportGenerator.h"

@@ -1,6 +1,3 @@
-//
-// Created by Jan on 21.05.2022.
-//
 #include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdSphereReader.h"
 #include <pxr/usd/usd/stage.h>

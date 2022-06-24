@@ -1,6 +1,3 @@
-//
-// Created by Jan on 09.11.2020.
-//
 #include <boost/math/constants/constants.hpp>
 #include <fmt/format.h>
 #include <iostream>

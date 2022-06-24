@@ -1,7 +1,3 @@
-//
-// Created by jan on 19/08/2019.
-//
-
 #include "ImageComparator.h"
 
 #include <utility>

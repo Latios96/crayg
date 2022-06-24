@@ -1,6 +1,3 @@
-//
-// Created by Jan Honsbrok on 28.10.18.
-//
 #include <catch2/catch.hpp>
 #include <utils/ToStringHelper.h>
 

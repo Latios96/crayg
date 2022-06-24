@@ -1,7 +1,3 @@
-//
-// Created by Jan on 21.11.2020.
-//
-
 #include <boost/math/constants/constants.hpp>
 #include "DiskLight.h"
 #include "intersectors/SceneIntersector.h"

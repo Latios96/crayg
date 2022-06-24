@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 04.11.18.
-//
-
 #include "Light.h"
 #include "intersectors/SceneIntersector.h"
 #include "EmissiveMaterial.h"

@@ -1,7 +1,3 @@
-//
-// Created by Jan on 13.10.2021.
-//
-
 #include <algorithm>
 #include "BvhSceneIntersector.h"
 

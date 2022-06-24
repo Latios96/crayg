@@ -1,7 +1,3 @@
-//
-// Created by jan on 03/10/2019.
-//
-
 #include "ImageWriters.h"
 #include "ImageWriter.h"
 #include "BmpImageWriter.h"

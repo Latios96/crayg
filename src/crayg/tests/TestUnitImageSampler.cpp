@@ -1,6 +1,3 @@
-//
-// Created by Jan Honsbrok on 11.10.19.
-//
 #include <catch2/catch.hpp>
 #include <samplers/UnitSphereSampler.h>
 

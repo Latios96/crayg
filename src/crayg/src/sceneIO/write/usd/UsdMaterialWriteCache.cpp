@@ -1,7 +1,3 @@
-//
-// Created by Jan on 05.06.2022.
-//
-
 #include "UsdMaterialWriteCache.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "Logger.h"

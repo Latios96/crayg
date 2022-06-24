@@ -1,7 +1,3 @@
-//
-// Created by Jan on 02.06.2022.
-//
-
 #include "UsdRenderSettingsWriter.h"
 
 namespace crayg {

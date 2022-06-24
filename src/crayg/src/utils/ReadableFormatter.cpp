@@ -1,7 +1,3 @@
-//
-// Created by Jan on 24.11.2020.
-//
-
 #include <fmt/format.h>
 #include "ReadableFormatter.h"
 

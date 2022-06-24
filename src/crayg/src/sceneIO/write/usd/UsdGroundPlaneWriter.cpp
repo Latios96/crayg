@@ -1,7 +1,3 @@
-//
-// Created by Jan on 05.06.2022.
-//
-
 #include "UsdGroundPlaneWriter.h"
 #include "scene/trianglemesh/TriangleMeshConversion.h"
 

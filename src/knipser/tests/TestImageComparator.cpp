@@ -1,7 +1,3 @@
-//
-// Created by jan on 20/08/2019.
-//
-
 #include <catch2/catch.hpp>
 #include <ImageComparator.h>
 

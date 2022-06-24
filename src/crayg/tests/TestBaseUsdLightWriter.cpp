@@ -1,6 +1,3 @@
-//
-// Created by Jan on 03.06.2022.
-//
 #include <catch2/catch.hpp>
 #include "scene/Light.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"

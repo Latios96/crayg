@@ -1,7 +1,3 @@
-//
-// Created by jan on 29.12.18.
-//
-
 #include <catch2/catch.hpp>
 #include <scene/GroundPlane.h>
 

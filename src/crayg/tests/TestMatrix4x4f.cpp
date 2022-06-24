@@ -1,6 +1,3 @@
-//
-// Created by Jan on 09.11.2020.
-//
 #include <catch2/catch.hpp>
 #include <basics/Matrix4x4f.h>
 #include <sstream>

@@ -1,6 +1,3 @@
-//
-// Created by Jan on 26.05.2019.
-//
 #include <Logger.h>
 
 namespace crayg {

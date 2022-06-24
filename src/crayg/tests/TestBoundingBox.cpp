@@ -1,7 +1,3 @@
-//
-// Created by jan on 30.12.18.
-//
-
 #include <catch2/catch.hpp>
 #include <basics/BoundingBox.h>
 

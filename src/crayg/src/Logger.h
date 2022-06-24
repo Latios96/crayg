@@ -1,7 +1,3 @@
-//
-// Created by Jan on 21.05.2019.
-//
-
 #ifndef CRAYG_LOGGER_H_
 #define CRAYG_LOGGER_H_
 

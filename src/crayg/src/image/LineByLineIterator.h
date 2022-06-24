@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 28.10.18.
-//
-
 #ifndef CRAYG_IMAGEITERATOR_H
 #define CRAYG_IMAGEITERATOR_H
 

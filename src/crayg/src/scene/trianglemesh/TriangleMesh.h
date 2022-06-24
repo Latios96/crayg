@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 13.11.18.
-//
-
 #ifndef CRAYG_TRIANGEMESH_H
 #define CRAYG_TRIANGEMESH_H
 

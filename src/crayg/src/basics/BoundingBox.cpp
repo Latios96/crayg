@@ -1,7 +1,3 @@
-//
-// Created by jan on 02.12.18.
-//
-
 #include <utils/ToStringHelper.h>
 #include "BoundingBox.h"
 

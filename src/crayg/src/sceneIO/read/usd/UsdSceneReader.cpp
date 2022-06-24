@@ -1,7 +1,3 @@
-//
-// Created by Jan Honsbrok on 25.11.18.
-//
-
 #include "sceneIO/read/usd/UsdSceneReader.h"
 #include "UsdStageReader.h"
 #include <pxr/usd/usd/stage.h>

@@ -1,7 +1,3 @@
-//
-// Created by jan on 15.08.18.
-//
-
 #ifndef CRAYG_VECTOR3F_H
 #define CRAYG_VECTOR3F_H
 

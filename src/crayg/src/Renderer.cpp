@@ -1,9 +1,4 @@
 #include <memory>
-
-//
-// Created by Jan Honsbrok on 04.11.18.
-//
-
 #include <image/ImageIterators.h>
 #include <image/ImageBucketSequences.h>
 #include <numeric>
