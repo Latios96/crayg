@@ -10,7 +10,6 @@ TEST_CASE("BarycentricCoordinates::construct") {
     triangleMesh.points.emplace_back(0.0f, 1.0f, 0.0f);
     triangleMesh.points.emplace_back(1.0f, 0.0f, 0.0f);
     triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
-    triangleMesh.beforeRender();
 
     Triangle triangle(&triangleMesh, 0);
 

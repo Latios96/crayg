@@ -78,17 +78,6 @@ void Renderer::init() {
                                                              scene.renderSettings.resolution.getHeight()));
     lambertMethod = std::make_shared<ShadingMethod>(scene);
 
-    Logger::info("Execute Imageable::beforeRender...");
-    for (auto &imageable: scene.objects) {
-        imageable->beforeRender();
-    }
-    for (auto &imageable: scene.owningObjects) {
-        imageable->beforeRender();
-    }
-    for (auto &imageable: scene.lights) {
-        imageable->beforeRender();
-    }
-
     Logger::info("Creating SceneIntersector...");
     BvhBuilder bvhBuilder(scene);
     BvhNode *root = bvhBuilder.build();

@@ -27,7 +27,6 @@ class Light : public Transformable, public Imageable {
     Vector3f getNormal(Vector3f point) override;
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
-    void beforeRender() override;
     virtual std::string getType();
  private:
     float intensity = 1;

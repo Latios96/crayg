@@ -45,9 +45,7 @@ Imageable::Intersection Light::intersect(Ray ray) {
 bool Light::isIntersecting(Ray ray) {
     return false;
 }
-void Light::beforeRender() {
-    setMaterial(std::shared_ptr<Material>(new EmissiveMaterial()));
-}
+
 Light::Light(const Transform &transform, float intensity) : Transformable(transform), intensity(intensity) {
 
 }

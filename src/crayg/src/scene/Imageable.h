@@ -49,10 +49,6 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
 
     virtual bool isIntersecting(Ray ray) = 0;
 
-    virtual void beforeRender() {
-
-    };
-
     virtual BoundingBox getBounds() const = 0;
 
     virtual std::shared_ptr<Material> getMaterial() const;
