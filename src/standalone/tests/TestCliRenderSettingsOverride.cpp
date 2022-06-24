@@ -33,6 +33,7 @@ TEST_CASE("CliRenderSettingsOverride/reportOverrides") {
     CliRenderSettingsOverride fullOverrides;
     fullOverrides.resolution = Resolution(800, 600);
     fullOverrides.maxSamples = 8;
+    fullOverrides.integratorType = IntegratorType::DEBUG;
 
     CliRenderSettingsOverride onlyResolution;
     onlyResolution.resolution = Resolution(800, 600);
@@ -40,13 +41,18 @@ TEST_CASE("CliRenderSettingsOverride/reportOverrides") {
     CliRenderSettingsOverride onlyMaxSamples;
     onlyMaxSamples.maxSamples = 8;
 
-    SECTION("has overrides") {
+    CliRenderSettingsOverride onlyIntegratorType;
+    onlyIntegratorType.integratorType = IntegratorType::DEBUG;
 
-        REQUIRE(fullOverrides.reportOverrides() == "resolution -> 800x600, maxSamples -> 8");
+    SECTION("has overrides") {
+        REQUIRE(
+            fullOverrides.reportOverrides() == R"(resolution -> 800x600, maxSamples -> 8, integratorType -> "DEBUG")");
 
         REQUIRE(onlyResolution.reportOverrides() == "resolution -> 800x600");
 
         REQUIRE(onlyMaxSamples.reportOverrides() == "maxSamples -> 8");
+
+        REQUIRE(onlyIntegratorType.reportOverrides() == R"(integratorType -> "DEBUG")");
     }
 
     SECTION("has no overrides") {
@@ -59,6 +65,7 @@ TEST_CASE("CliRenderSettingsOverride/resolveOverrides") {
     CliRenderSettingsOverride fullOverrides;
     fullOverrides.resolution = Resolution(800, 600);
     fullOverrides.maxSamples = 8;
+    fullOverrides.integratorType = IntegratorType::RAYTRACING;
 
     CliRenderSettingsOverride onlyResolution;
     onlyResolution.resolution = Resolution(800, 600);
@@ -66,17 +73,25 @@ TEST_CASE("CliRenderSettingsOverride/resolveOverrides") {
     CliRenderSettingsOverride onlyMaxSamples;
     onlyMaxSamples.maxSamples = 8;
 
+    CliRenderSettingsOverride onlyIntegratorType;
+    onlyIntegratorType.integratorType = IntegratorType::DEBUG;
+
     RenderSettings renderSettings;
     renderSettings.resolution = Resolution(1280, 720);
     renderSettings.maxSamples = 4;
+    renderSettings.integratorType = IntegratorType::RAYTRACING;
 
     SECTION("has overrides") {
+        REQUIRE(fullOverrides.resolveOverrides(renderSettings) == RenderSettings({800, 600}, 8, IntegratorType::DEBUG));
 
-        REQUIRE(fullOverrides.resolveOverrides(renderSettings) == RenderSettings({800, 600}, 8));
+        REQUIRE(onlyResolution.resolveOverrides(renderSettings)
+                    == RenderSettings({800, 600}, 4, IntegratorType::RAYTRACING));
 
-        REQUIRE(onlyResolution.resolveOverrides(renderSettings) == RenderSettings({800, 600}, 4));
+        REQUIRE(onlyMaxSamples.resolveOverrides(renderSettings)
+                    == RenderSettings({1280, 720}, 8, IntegratorType::RAYTRACING));
 
-        REQUIRE(onlyMaxSamples.resolveOverrides(renderSettings) == RenderSettings({1280, 720}, 8));
+        REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings)
+                    == RenderSettings({1280, 720}, 4, IntegratorType::DEBUG));
     }
 
     SECTION("has no overrides") {

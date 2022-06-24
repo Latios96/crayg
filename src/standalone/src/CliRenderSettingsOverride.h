@@ -9,6 +9,7 @@ namespace crayg {
 struct CliRenderSettingsOverride {
     std::optional<Resolution> resolution;
     std::optional<int> maxSamples;
+    std::optional<IntegratorType> integratorType;
 
     RenderSettings resolveOverrides(const RenderSettings &renderSettings) const;
 

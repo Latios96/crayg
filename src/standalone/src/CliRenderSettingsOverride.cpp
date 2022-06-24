@@ -14,7 +14,7 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
 
     resolvedRenderSettings.resolution = resolution ? resolution.value() : renderSettings.resolution;
     resolvedRenderSettings.maxSamples = maxSamples ? maxSamples.value() : renderSettings.maxSamples;
-    resolvedRenderSettings.integratorType = renderSettings.integratorType;
+    resolvedRenderSettings.integratorType = integratorType ? integratorType.value() : renderSettings.integratorType;
 
     return resolvedRenderSettings;
 }
@@ -30,6 +30,9 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
     }
     if (maxSamples) {
         report.push_back(fmt::format("maxSamples -> {}", *maxSamples));
+    }
+    if (integratorType) {
+        report.push_back(fmt::format(R"(integratorType -> "{}")", *integratorType));
     }
     return boost::algorithm::join(report, ", ");
 }
