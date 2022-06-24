@@ -1,3 +1,0 @@
-# Coordinate system
-
-Left handed
