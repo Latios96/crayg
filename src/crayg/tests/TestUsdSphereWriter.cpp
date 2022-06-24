@@ -17,7 +17,7 @@ TEST_CASE("UsdSphereWriter::write") {
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
     SECTION("should write sphere") {
-        auto sphere = std::make_shared<Sphere>(Vector3f(1, 2, 3), 3);
+        auto sphere = std::make_shared<Sphere>(Vector3f(1, 2, 3), 3.0f);
 
         UsdSphereWriter usdSphereWriter(sphere, usdMaterialWriteCache);
         usdSphereWriter.write(stage, usdPathFactory);
