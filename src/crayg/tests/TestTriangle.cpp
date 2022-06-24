@@ -5,18 +5,14 @@
 #include <catch2/catch.hpp>
 #include "scene/trianglemesh/Triangle.h"
 #include "scene/trianglemesh/TriangleMesh.h"
+#include "fixtures/TriangleMeshFixtures.h"
 #include <iostream>
 
 namespace crayg {
 
 TEST_CASE("TriangleIntersects") {
 
-    TriangleMesh triangleMesh;
-
-    triangleMesh.points.emplace_back(0.0f, 0.0f, 0.0f);
-    triangleMesh.points.emplace_back(0.0f, 1.0f, 0.0f);
-    triangleMesh.points.emplace_back(1.0f, 0.0f, 0.0f);
-    triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
+    TriangleMesh triangleMesh = TriangleMeshFixtures::createSingleTriangle();
 
     auto TRIANGLE = std::make_shared<Triangle>(&triangleMesh, 0);
     Ray RAY_HITTING_TRIANGLE({0.25f, 0.25f, -1}, {0, 0, 1});
@@ -66,11 +62,7 @@ TEST_CASE("TriangleIntersects") {
 }
 
 TEST_CASE("TriangleGetBounds") {
-    TriangleMesh triangleMesh;
-    triangleMesh.points.emplace_back(0.0f, 0.0f, 0.0f);
-    triangleMesh.points.emplace_back(0.0f, 1.0f, 0.0f);
-    triangleMesh.points.emplace_back(1.0f, 0.0f, 0.0f);
-    triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
+    TriangleMesh triangleMesh = TriangleMeshFixtures::createSingleTriangle();
 
     Triangle triangle(&triangleMesh, 0);
 

@@ -39,6 +39,19 @@ class TriangleMeshFixtures {
         triangleMesh.init();
         return triangleMesh;
     }
+
+    static TriangleMesh createSingleTriangle() {
+        TriangleMesh triangleMesh;
+
+        triangleMesh.points.emplace_back(0.0f, 0.0f, 0.0f);
+        triangleMesh.points.emplace_back(0.0f, 1.0f, 0.0f);
+        triangleMesh.points.emplace_back(1.0f, 0.0f, 0.0f);
+
+        triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
+
+        triangleMesh.init();
+        return triangleMesh;
+    }
 };
 
 }
