@@ -10,6 +10,7 @@ tinyobjloader/1.0.6
 onetbb/2020.3
 qt/5.15.2
 USD/22.05@latios96/stable
+magic_enum/0.8.0
 
 zlib/1.2.12
 

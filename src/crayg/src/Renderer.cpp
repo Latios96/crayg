@@ -7,6 +7,8 @@
 #include "utils/ProgressReporter.h"
 #include "Logger.h"
 #include "integrators/RaytracingIntegrator.h"
+#include "integrators/IntegratorType.h"
+#include "integrators/IntegratorFactory.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 #include <intersectors/BvhBuilder.h>
@@ -50,7 +52,7 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
     BucketImageBuffer bucketImageBuffer(imageBucket);
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
-    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+    for (auto pixel: ImageIterators::lineByLine(imageBucket)) {
         Color pixelColor =
             renderPixel(PixelPosition(imageBucket.getX() + pixel.x,
                                       imageBucket.getY() + pixel.y));
@@ -76,7 +78,9 @@ void Renderer::init() {
     BvhBuilder bvhBuilder(scene);
     BvhNode *root = bvhBuilder.build();
     sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
-    integrator = std::make_unique<RaytracingIntegrator>(scene, sceneIntersector);
+    integrator = std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(IntegratorType::RAYTRACING,
+                                                                                         scene,
+                                                                                         sceneIntersector));
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {

@@ -48,6 +48,8 @@ set(crayg_SRCS
         integrators/RaytracingIntegrator.h
         integrators/DebugIntegrator.cpp
         integrators/DebugIntegrator.h
+        integrators/IntegratorType.h
+        integrators/IntegratorFactory.h
         intersectors/BvhBuilder.cpp
         intersectors/BvhBuilder.h
         intersectors/BvhNode.cpp
