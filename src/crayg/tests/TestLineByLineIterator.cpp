@@ -1,7 +1,6 @@
 #include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <image/ImageIterators.h>
-#include <iostream>
 
 namespace crayg {
 
