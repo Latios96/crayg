@@ -18,6 +18,7 @@ set(UNIT_TEST_LIST
         TestBvhBuilder.cpp
         TestCamera.cpp
         TestColor.cpp
+        TestDebugIntegrator.cpp
         TestDiskLight.cpp
         TestGroundPlane.cpp
         TestImage.cpp
