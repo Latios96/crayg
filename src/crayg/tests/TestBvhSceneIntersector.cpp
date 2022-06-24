@@ -85,8 +85,8 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
 TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is nearer") {
 
     Scene scene;
-    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1);
-    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1);
+    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1.0f);
+    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1.0f);
     std::vector<Imageable *> objectsLeft({sphere1.get()});
     std::vector<Imageable *> objectsRight({sphere2.get()});
     auto *left = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
@@ -114,8 +114,8 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is
 TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, right is nearer") {
 
     Scene scene;
-    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1);
-    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1);
+    std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1.0f);
+    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1.0f);
     std::vector<Imageable *> objectsLeft({sphere1.get()});
     std::vector<Imageable *> objectsRight({sphere2.get()});
     auto *left = new BvhNode(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);

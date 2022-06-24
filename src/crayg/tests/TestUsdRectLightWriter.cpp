@@ -14,7 +14,7 @@ TEST_CASE("UsdRectLightWriter::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write rect light") {
-        auto sphere = std::make_shared<RectLight>(Transform::withPosition({1, 2, -3}), 3, 4, 5);
+        auto sphere = std::make_shared<RectLight>(Transform::withPosition({1, 2, -3}), 3.0f, 4.0f, 5.0f);
         sphere->setName("light");
 
         UsdRectLightWriter usdRectLightWriter(sphere);
