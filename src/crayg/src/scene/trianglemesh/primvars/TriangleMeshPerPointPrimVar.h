@@ -21,7 +21,7 @@ class TriangleMeshPerPointPrimVar : public TriangleMeshAbstractPrimVar<T> {
     T read(int pointIndex) {
         return pointData[pointIndex];
     }
-    T interpolateAt(int faceId, const Vector3f &point) override {
+    T interpolateAt(std::size_t faceId, const Vector3f &point) override {
         int indexV0 = this->triangleMesh.faceVertexIndices[faceId].v0;
         int indexV1 = this->triangleMesh.faceVertexIndices[faceId].v1;
         int indexV2 = this->triangleMesh.faceVertexIndices[faceId].v2;

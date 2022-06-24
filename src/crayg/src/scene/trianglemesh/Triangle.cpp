@@ -111,7 +111,7 @@ bool Triangle::isIntersecting(Ray ray) {
 
 Triangle::Triangle(
     TriangleMesh *triangleMesh,
-    int faceId)
+    std::size_t faceId)
     : triangleMesh(triangleMesh), faceId(faceId) {
     setMaterial(triangleMesh->getMaterial());
 }
