@@ -20,8 +20,7 @@ class RenderSettings {
     bool operator==(const RenderSettings &rhs) const;
     bool operator!=(const RenderSettings &rhs) const;
 
-    template<typename OStream>
-    friend OStream &operator<<(OStream &os, const RenderSettings &renderSettings) {
+    friend std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings) {
         os << ToStringHelper("RenderSettings")
             .addMember("resolution", renderSettings.resolution)
             .addMember("maxSamples", renderSettings.maxSamples)
