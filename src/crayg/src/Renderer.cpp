@@ -6,6 +6,7 @@
 #include "PineHoleCameraModel.h"
 #include "utils/ProgressReporter.h"
 #include "Logger.h"
+#include "integrators/RaytracingIntegrator.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 #include <intersectors/BvhBuilder.h>
@@ -15,7 +16,6 @@ namespace crayg {
 
 Renderer::Renderer(Scene &scene, OutputDriver &outputDriver)
     : scene(scene), outputDriver(outputDriver) {
-
 }
 void Renderer::renderScene() {
     init();
@@ -71,12 +71,12 @@ void Renderer::init() {
         std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera,
                                                              scene.renderSettings.resolution.getWidth(),
                                                              scene.renderSettings.resolution.getHeight()));
-    lambertMethod = std::make_shared<ShadingMethod>(scene);
 
     Logger::info("Creating SceneIntersector...");
     BvhBuilder bvhBuilder(scene);
     BvhNode *root = bvhBuilder.build();
     sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
+    integrator = std::make_unique<RaytracingIntegrator>(scene, sceneIntersector);
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
@@ -95,43 +95,8 @@ Color Renderer::renderPixel(const PixelPosition &pixel) {
 
 Color Renderer::renderSample(float x, float y) {
     Ray ray = cameraModel->createPrimaryRay(x, y);
-    return traceRay(ray, 0);
+    return integrator->integrate(ray);
 
-}
-Color Renderer::traceRay(const Ray &ray, int depth) {
-    if (depth == MAX_DEPTH) {
-        return Color::createBlack();
-    }
-    auto intersection = sceneIntersector->intersect(ray);
-
-    const bool hasHit = intersection.imageable != nullptr;
-    if (hasHit) {
-        Vector3f location = ray.startPoint + (ray.direction * intersection.rayParameter);
-        Imageable &object = *intersection.imageable;
-        Color shadedColor;
-        const Vector3f normal = object.getNormal(location);
-        if (object.getMaterial()->getDiffuseColor() == Color(10, 10, 10)) {
-            return Color::createWhite();
-        }
-        if (object.getMaterial()->reflectivity()) {
-            Ray reflectedRay = Ray(location, ray.direction - normal * (2 * (ray.direction.scalarProduct(normal))));
-            shadedColor = traceRay(reflectedRay, depth + 1);
-        } else {
-            shadedColor = lambertMethod->lambertShading(location, object);
-        }
-
-        float shadow = 1.0;
-
-        if (shadedColor.r > 0) {
-            int i = 0;
-        }
-
-        for (auto &light: scene.lights) {
-            shadow = light->calculateShadowFactor(*sceneIntersector, location + (normal * 0.001));
-        }
-        return shadedColor * shadow;
-    }
-    return Color::createBlack();
 }
 
 }

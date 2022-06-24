@@ -44,6 +44,8 @@ set(crayg_SRCS
         image/TeeOutputDriver.h
         integrators/AbstractIntegrator.cpp
         integrators/AbstractIntegrator.h
+        integrators/RaytracingIntegrator.cpp
+        integrators/RaytracingIntegrator.h
         intersectors/BvhBuilder.cpp
         intersectors/BvhBuilder.h
         intersectors/BvhNode.cpp
