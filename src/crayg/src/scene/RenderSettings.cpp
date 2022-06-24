@@ -9,7 +9,9 @@ RenderSettings::RenderSettings() : resolution(Resolution(0, 0)) {
     maxSamples = 4;
 }
 RenderSettings::RenderSettings(const RenderSettings &renderSettings)
-    : resolution(renderSettings.resolution), maxSamples(renderSettings.maxSamples) {
+    : resolution(renderSettings.resolution),
+      maxSamples(renderSettings.maxSamples),
+      integratorType(renderSettings.integratorType) {
 
 }
 bool RenderSettings::operator==(const RenderSettings &rhs) const {
