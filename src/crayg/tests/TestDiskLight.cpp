@@ -15,7 +15,7 @@ TEST_CASE("construct DiskLight", "[DiskLight]") {
     }
 
     SECTION("construct with params") {
-        DiskLight diskLight(Transform(), 2, 3);
+        DiskLight diskLight(Transform(), 2.0f, 3.0f);
 
         REQUIRE(diskLight.getTransform() == Transform());
         REQUIRE(diskLight.getIntensity() == 2);
@@ -43,7 +43,7 @@ struct AreaLightFixture {
 TEST_CASE("DiskLight::sampleLightShape") {
     const Vector3f position = {0, 2, 2};
     const float radius = 2;
-    DiskLight diskLight(Transform::withPosition(position), 1, radius);
+    DiskLight diskLight(Transform::withPosition(position), 1.0f, radius);
 
 
     SECTION("sampleLightShape should respect radius") {
@@ -77,7 +77,7 @@ TEST_CASE("DiskLight::sampleLightShape") {
 
 TEST_CASE("DiskLight isIntersecting", "[DiskLight]") {
 
-    DiskLight diskLight(Transform::withPosition({-3, 0, 0}), 1, 1);
+    DiskLight diskLight(Transform::withPosition({-3, 0, 0}), 1.0f, 1.0f);
 
     SECTION("front should intersect") {
         const Ray ray = {{0, 0, 0}, {-1, 0, 0}};
@@ -99,7 +99,7 @@ TEST_CASE("DiskLight isIntersecting", "[DiskLight]") {
 
 TEST_CASE("DiskLight intersect", "[DiskLight]") {
 
-    std::shared_ptr<DiskLight> diskLight = std::make_shared<DiskLight>(Transform::withPosition({-3, 0, 0}), 1, 1);
+    std::shared_ptr<DiskLight> diskLight = std::make_shared<DiskLight>(Transform::withPosition({-3, 0, 0}), 1.0f, 1.0f);
 
     SECTION("front should intersect") {
         const Ray ray = {{0, 0, 0}, {-1, 0, 0}};
@@ -119,7 +119,8 @@ TEST_CASE("DiskLight intersect", "[DiskLight]") {
 }
 
 TEST_CASE("Disklight getBounds", "[DiskLight]") {
-    const std::shared_ptr<DiskLight> diskLight = std::make_shared<DiskLight>(Transform::withPosition({0, 0, 0}), 1, 1);
+    const std::shared_ptr<DiskLight>
+        diskLight = std::make_shared<DiskLight>(Transform::withPosition({0, 0, 0}), 1.0f, 1.0f);
 
     const BoundingBox bounds = diskLight->getBounds();
 

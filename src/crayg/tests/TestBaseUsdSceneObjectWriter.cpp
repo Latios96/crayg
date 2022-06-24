@@ -20,7 +20,7 @@ TEST_CASE("BaseUsdSceneObjectWriter::write")
     UsdPathFactory usdPathFactory;
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
-    auto sphere = std::make_shared<Sphere>(Vector3f(1, 2, 3), 3);
+    auto sphere = std::make_shared<Sphere>(Vector3f(1, 2, 3), 3.0f);
 
     class DummyBaseWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomSphere, Sphere> {
      public:

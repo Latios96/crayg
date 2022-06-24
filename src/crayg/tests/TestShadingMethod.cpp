@@ -11,12 +11,12 @@ namespace crayg {
 TEST_CASE("ShadingMethod") {
     Scene scene;
 
-    std::shared_ptr<Light> light = std::make_shared<Light>(Transform::withPosition(Vector3f(5, 0, 0)), 1);
+    std::shared_ptr<Light> light = std::make_shared<Light>(Transform::withPosition(Vector3f(5, 0, 0)), 1.0f);
     scene.addLight(light);
 
     std::shared_ptr<DiffuseMaterial>
         defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createWhite());
-    std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(), 1);
+    std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(), 1.0f);
     sphere->setMaterial(defaultMaterial);
     scene.addObject(sphere);
 
@@ -45,7 +45,7 @@ TEST_CASE("ShadingMethod") {
     }
 
     SECTION("everyLightIsConsidered") {
-        std::shared_ptr<Light> light2 = std::make_shared<Light>(Transform::withPosition(Vector3f(-5, 0, 0)), 1);
+        std::shared_ptr<Light> light2 = std::make_shared<Light>(Transform::withPosition(Vector3f(-5, 0, 0)), 1.0f);
         scene.addLight(light2);
 
         // we have one light on each side of the sphere on the x axis,
@@ -59,7 +59,7 @@ TEST_CASE("ShadingMethod") {
 }
 TEST_CASE("ShadingMethod/noLightsInSceneReturnsAmbientColor") {
     Scene scene2;
-    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1);
+    std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1.0f);
     std::shared_ptr<DiffuseMaterial>
         defaultMaterial = std::make_shared<DiffuseMaterial>("defaultMaterial", Color::createWhite());
     sphere2->setMaterial(defaultMaterial);

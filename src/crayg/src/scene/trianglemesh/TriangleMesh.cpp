@@ -37,14 +37,14 @@ Vector3f TriangleMesh::getNormal(Vector3f point) {
 }
 
 void TriangleMesh::createCube(TriangleMesh &mesh) {
-    mesh.points.emplace_back(-1, -1, 1);
-    mesh.points.emplace_back(-1, -1, 1);
-    mesh.points.emplace_back(-1, 1, 1);
-    mesh.points.emplace_back(1, 1, 1);
-    mesh.points.emplace_back(-1, 1, -1);
-    mesh.points.emplace_back(1, 1, -1);
-    mesh.points.emplace_back(-1, -1, -1);
-    mesh.points.emplace_back(1, -1, -1);
+    mesh.points.emplace_back(-1.0f, -1.0f, 1.0f);
+    mesh.points.emplace_back(-1.0f, -1.0f, 1.0f);
+    mesh.points.emplace_back(-1.0f, 1.0f, 1.0f);
+    mesh.points.emplace_back(1.0f, 1.0f, 1.0f);
+    mesh.points.emplace_back(-1.0f, 1.0f, -1.0f);
+    mesh.points.emplace_back(1.0f, 1.0f, -1.0f);
+    mesh.points.emplace_back(-1.0f, -1.0f, -1.0f);
+    mesh.points.emplace_back(1.0f, -1.0f, -1.0f);
 
     mesh.faceVertexIndices.emplace_back(0, 1, 2);
     mesh.faceVertexIndices.emplace_back(2, 1, 3);
