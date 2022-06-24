@@ -92,7 +92,7 @@ void UsdStageReader::readDiskLight(Scene &scene, const pxr::UsdPrim &prim) const
 void UsdStageReader::readRenderSettings(Scene &scene) {
     const pxr::UsdPrim renderPrim = stage.GetPrimAtPath(pxr::SdfPath("/Render"));
     if (!renderPrim) {
-        scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4);
+        scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4, IntegratorType::RAYTRACING);
         return;
     }
     for (pxr::UsdPrim prim: renderPrim.GetDescendants()) {
@@ -101,7 +101,7 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
             return;
         }
     }
-    scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4);
+    scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720), 4, IntegratorType::RAYTRACING);
 }
 
 }

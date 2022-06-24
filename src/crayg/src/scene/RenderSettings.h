@@ -4,6 +4,7 @@
 #include <basics/Resolution.h>
 #include <utils/ToStringHelper.h>
 #include "spdlog/fmt/ostr.h"
+#include "integrators/IntegratorType.h"
 
 namespace crayg {
 
@@ -11,7 +12,7 @@ class RenderSettings {
  public:
     RenderSettings();
     RenderSettings(const RenderSettings &renderSettings);
-    explicit RenderSettings(const Resolution &resolution, int maxSamples);
+    explicit RenderSettings(const Resolution &resolution, int maxSamples, IntegratorType integratorType);
 
     bool operator==(const RenderSettings &rhs) const;
     bool operator!=(const RenderSettings &rhs) const;
@@ -26,6 +27,7 @@ class RenderSettings {
 
     Resolution resolution;
     int maxSamples;
+    IntegratorType integratorType = IntegratorType::RAYTRACING;
 };
 
 }

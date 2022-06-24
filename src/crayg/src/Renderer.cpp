@@ -78,9 +78,10 @@ void Renderer::init() {
     BvhBuilder bvhBuilder(scene);
     BvhNode *root = bvhBuilder.build();
     sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
-    integrator = std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(IntegratorType::RAYTRACING,
-                                                                                         scene,
-                                                                                         sceneIntersector));
+    integrator =
+        std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(scene.renderSettings.integratorType,
+                                                                                scene,
+                                                                                sceneIntersector));
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
