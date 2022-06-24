@@ -19,7 +19,7 @@ TEST_CASE("BvhBuilder/build") {
 
     SECTION("single objects should create only root node") {
         Scene scene;
-        std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(), 1);
+        std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(), 1.0f);
         scene.addObject(sphere);
         BvhBuilder bvhBuilder(scene);
         std::unique_ptr<BvhNode> root = std::unique_ptr<BvhNode>(bvhBuilder.build());
@@ -31,8 +31,8 @@ TEST_CASE("BvhBuilder/build") {
 
     SECTION("two objects should get their own node each") {
         Scene scene;
-        std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(-1, 0, 0), 1);
-        std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(1, 0, 0), 1);
+        std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(-1, 0, 0), 1.0f);
+        std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(1, 0, 0), 1.0f);
         scene.addObject(sphere1);
         scene.addObject(sphere2);
 
@@ -54,8 +54,8 @@ TEST_CASE("BvhBuilder/build") {
 
     SECTION("two objects with the same centroid should be placed in the same node") {
         Scene scene;
-        std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(1, 0, 0), 1.5);
-        std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(1, 0, 0), 1);
+        std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(1, 0, 0), 1.5f);
+        std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(1, 0, 0), 1.0f);
         scene.addObject(sphere1);
         scene.addObject(sphere2);
 
@@ -69,9 +69,9 @@ TEST_CASE("BvhBuilder/build") {
 
     SECTION("three objects should be placed in a hierarchy") {
         Scene scene;
-        std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(-1, 0, 0), 1.5);
-        std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(1, 0, 0), 1);
-        std::shared_ptr<Sphere> sphere3 = std::make_shared<Sphere>(Vector3f(1, 0, 1), 1);
+        std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(-1, 0, 0), 1.5f);
+        std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(1, 0, 0), 1.0f);
+        std::shared_ptr<Sphere> sphere3 = std::make_shared<Sphere>(Vector3f(1, 0, 1), 1.0f);
         scene.addObject(sphere1);
         scene.addObject(sphere2);
         scene.addObject(sphere3);
