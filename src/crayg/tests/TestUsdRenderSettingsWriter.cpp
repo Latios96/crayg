@@ -10,7 +10,7 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
 
     SECTION("should write rendersettings correctly") {
-        RenderSettings renderSettings(Resolution(1280, 720), 4);
+        RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING);
 
         UsdRenderSettingsWriter usdRenderSettingsWriter(renderSettings);
         usdRenderSettingsWriter.write(stage);
@@ -20,8 +20,12 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
             resolution = UsdUtils::getAttributeValueAs<pxr::GfVec2i>(usdRenderSettings.GetResolutionAttr());
         int maxSamples =
             UsdUtils::getAttributeValueAs<int>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("maxSamples")));
+        pxr::TfToken integratorType =
+            UsdUtils::getAttributeValueAs<pxr::TfToken>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
+                "integratorType")));
         REQUIRE(resolution == pxr::GfVec2i(1280, 720));
         REQUIRE(maxSamples == 4);
+        REQUIRE(integratorType == pxr::TfToken("RAYTRACING"));
     }
 
 }

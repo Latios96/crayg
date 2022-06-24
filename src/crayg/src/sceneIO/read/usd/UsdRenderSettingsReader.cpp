@@ -1,6 +1,8 @@
 #include "UsdRenderSettingsReader.h"
 #include <pxr/base/gf/vec2i.h>
 #include "sceneIO/usd/UsdUtils.h"
+#include <magic_enum.hpp>
+#include <algorithm>
 
 namespace crayg {
 
@@ -22,8 +24,21 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
         maxSamples = UsdUtils::getAttributeValueAs<int>(maxSamplesAttr);
     }
 
+    IntegratorType integratorType = IntegratorType::RAYTRACING;
+    auto integratorTypeAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken("integratorType"));
+    if (integratorTypeAttr) {
+        auto integratorTypeToken = UsdUtils::getAttributeValueAs<pxr::TfToken>(integratorTypeAttr).GetString();
+        for (auto &c: integratorTypeToken) c = toupper(c);
+        auto maybeValue = magic_enum::enum_cast<IntegratorType>(integratorTypeToken);
+        if (!maybeValue.has_value()) {
+            throw std::runtime_error(fmt::format(R"(Unsupported Integrator type: "{}")", integratorTypeToken));
+        }
+        integratorType = maybeValue.value();
+    }
+
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
+    renderSettings->integratorType = integratorType;
 
     return renderSettings;
 }

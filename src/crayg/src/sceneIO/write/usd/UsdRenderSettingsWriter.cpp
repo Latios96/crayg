@@ -1,3 +1,4 @@
+#include <magic_enum.hpp>
 #include "UsdRenderSettingsWriter.h"
 
 namespace crayg {
@@ -14,6 +15,8 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
                                                            renderSettings.resolution.getHeight()));
     usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("maxSamples"), pxr::SdfValueTypeNames->Int).Set(
         renderSettings.maxSamples);
+    usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("integratorType"), pxr::SdfValueTypeNames->Token).Set(
+        pxr::TfToken(std::string(magic_enum::enum_name(renderSettings.integratorType))));
 
     return usdRenderSettings;
 }
