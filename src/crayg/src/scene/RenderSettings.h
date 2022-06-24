@@ -16,8 +16,7 @@ class RenderSettings {
     RenderSettings();
     RenderSettings(const RenderSettings &renderSettings);
     explicit RenderSettings(const Resolution &resolution, int maxSamples);
-    Resolution resolution;
-    int maxSamples;
+
     bool operator==(const RenderSettings &rhs) const;
     bool operator!=(const RenderSettings &rhs) const;
 
@@ -29,6 +28,9 @@ class RenderSettings {
             .finish();
         return os;
     }
+
+    Resolution resolution;
+    int maxSamples;
 };
 
 }
