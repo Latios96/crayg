@@ -50,7 +50,7 @@ TEST_CASE("UsdSceneWriter::write") {
     }
 
     SECTION("should write sphere") {
-        scene.addObject(std::make_shared<Sphere>(Vector3f(1, 2, 3), 3));
+        scene.addObject(std::make_shared<Sphere>(Vector3f(1, 2, 3), 3.0f));
 
         usdSceneWriter.writeScene(stage);
 
@@ -58,7 +58,7 @@ TEST_CASE("UsdSceneWriter::write") {
     }
 
     SECTION("should write point light") {
-        scene.addLight(std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3));
+        scene.addLight(std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3.0f));
 
         usdSceneWriter.writeScene(stage);
 
@@ -66,7 +66,7 @@ TEST_CASE("UsdSceneWriter::write") {
     }
 
     SECTION("should write rect light") {
-        scene.addLight(std::make_shared<RectLight>(Transform::withPosition({1, 2, -3}), 3, 4, 5));
+        scene.addLight(std::make_shared<RectLight>(Transform::withPosition({1, 2, -3}), 3.0f, 4.0f, 5.0f));
 
         usdSceneWriter.writeScene(stage);
 
@@ -74,7 +74,7 @@ TEST_CASE("UsdSceneWriter::write") {
     }
 
     SECTION("should write disk light") {
-        scene.addLight(std::make_shared<DiskLight>(Transform::withPosition({1, 2, -3}), 3, 4));
+        scene.addLight(std::make_shared<DiskLight>(Transform::withPosition({1, 2, -3}), 3.0f, 4.0f));
 
         usdSceneWriter.writeScene(stage);
 
