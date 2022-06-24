@@ -17,7 +17,7 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int depth) {
 
     const bool hasHit = intersection.imageable != nullptr;
     if (hasHit) {
-        Vector3f location = ray.startPoint + (ray.direction * intersection.rayParameter);
+        const Vector3f location = ray.constructIntersectionPoint(intersection.rayParameter);
         Imageable &object = *intersection.imageable;
         Color shadedColor;
         const Vector3f normal = object.getNormal(location);

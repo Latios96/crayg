@@ -13,8 +13,7 @@ Color DebugIntegrator::integrate(const Ray &ray) {
         return Color::createBlack();
     }
 
-    // TODO create method for this on ray
-    const Vector3f location = ray.startPoint + (ray.direction * intersection.rayParameter);
+    const Vector3f location = ray.constructIntersectionPoint(intersection.rayParameter);
     const Vector3f normal = intersection.imageable->getNormal(location);
     const float scalar = normal.scalarProduct(ray.direction.invert());
     return Color::createGrey(std::max(scalar, 0.0f));
