@@ -11,6 +11,7 @@ class TriangleMeshAbstractPrimVar {
     explicit TriangleMeshAbstractPrimVar(TriangleMesh &triangleMesh) : triangleMesh(triangleMesh) {}
     virtual void allocate() = 0;
     virtual T interpolateAt(int faceIndex, const Vector3f &point) = 0;
+    virtual ~TriangleMeshAbstractPrimVar() = default;
  protected:
     TriangleMesh &triangleMesh;
 };

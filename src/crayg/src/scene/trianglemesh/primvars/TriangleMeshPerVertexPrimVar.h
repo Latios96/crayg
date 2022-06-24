@@ -31,6 +31,7 @@ struct VertexData {
             .finish();
         return os;
     }
+    virtual ~VertexData() = default;
 };
 
 template<typename T>
