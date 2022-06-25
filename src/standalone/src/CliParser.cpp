@@ -1,3 +1,4 @@
+#include <boost/algorithm/string/join.hpp>
 #include "CliParser.h"
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
@@ -29,6 +30,15 @@ CliParseResult CliParser::parse() {
     int maxSamples = 0;
     app.add_option("--maxSamples", maxSamples, "Override max samples");
 
+    std::optional<IntegratorType> integratorType;
+    constexpr auto entries = magic_enum::enum_entries<IntegratorType>();
+    std::map<std::string, IntegratorType> map;
+    for (auto &entry: entries) {
+        map[std::string(entry.second)] = entry.first;
+    }
+    app.add_option("--integrator", integratorType, "Override integrator")->transform(CLI::CheckedTransformer(map,
+                                                                                                             CLI::ignore_case));
+
     try {
         app.parse(argc, argv);
 
@@ -38,6 +48,9 @@ CliParseResult CliParser::parse() {
         }
         if (maxSamples) {
             renderSettingsOverride.maxSamples = maxSamples;
+        }
+        if (integratorType) {
+            renderSettingsOverride.integratorType = integratorType.value();
         }
 
         return CliParseResult(CliArgs(sceneFileName,
