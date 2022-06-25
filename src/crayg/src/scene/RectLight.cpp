@@ -1,5 +1,6 @@
 #include "RectLight.h"
 #include "intersectors/SceneIntersector.h"
+#include "Logger.h"
 
 namespace crayg {
 
@@ -65,6 +66,12 @@ float RectLight::getHeight() const {
 }
 void RectLight::setHeight(float height) {
     RectLight::height = height;
+}
+float RectLight::area() const {
+    const Vector3f widthVector = getPosition() - getTransform().apply({width / 2, 0, 0});
+    const Vector3f heightVector = getPosition() - getTransform().apply({0, height / 2, 0});
+    const float area = widthVector.length() * 2 * heightVector.length() * 2;
+    return area;
 }
 
 }

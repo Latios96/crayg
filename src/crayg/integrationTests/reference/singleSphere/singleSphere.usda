@@ -49,7 +49,7 @@ def Mesh "GroundPlane0"
 
 def SphereLight "Light0"
 {
-    float inputs:intensity = 1
+    float inputs:intensity = 3
     float inputs:radius = 0
     matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 1, -0, 0), (0, 0, 1, 0), (0, 3, -3, 1) )
     uniform token[] xformOpOrder = ["xformOp:transform"]

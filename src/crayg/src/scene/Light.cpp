@@ -29,6 +29,13 @@ float Light::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vec
         return Light::NO_SHADOW;
     }
 }
+
+Light::Radiance Light::radiance(const Vector3f &point, const Vector3f &normal) {
+    const Vector3f shadowVector = getPosition() - point;
+    Ray shadowRay(point, shadowVector);
+
+    return {getIntensity() / shadowVector.lengthSquared() * normal.scalarProduct(shadowVector), shadowRay};
+}
 std::string Light::getType() {
     return "Light";
 }
@@ -54,8 +61,24 @@ const std::string &Light::getName() const {
 void Light::setName(const std::string &name) {
     Light::name = name;
 }
+
 Light::Light() = default;
 
+Light::Radiance::Radiance(const float &radiance, const Ray &ray) : radiance(radiance), ray(ray) {}
+bool Light::Radiance::operator==(const Light::Radiance &rhs) const {
+    return radiance == rhs.radiance &&
+        ray == rhs.ray;
+}
+bool Light::Radiance::operator!=(const Light::Radiance &rhs) const {
+    return !(rhs == *this);
+}
+std::ostream &operator<<(std::ostream &os, const Light::Radiance &radiance) {
+    os << ToStringHelper("Radiance")
+        .addMember("radiance", radiance.radiance)
+        .addMember("ray", radiance.ray)
+        .finish();
+    return os;
+}
 }
 
 

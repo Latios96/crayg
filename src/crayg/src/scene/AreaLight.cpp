@@ -29,6 +29,18 @@ float AreaLight::calculateShadowFactor(SceneIntersector &sceneIntersector, const
         return Light::NO_SHADOW;
     }
 }
+Light::Radiance AreaLight::radiance(const Vector3f &point, const Vector3f &normal) {
+    const Vector3f shadowVector = sampleLightShape() - point;
+    Ray shadowRay(point, shadowVector);// todo normalize this and pass length to ray
+
+    if (getNormal({0, 0, 0}).scalarProduct(shadowVector) > 0) {
+        return {0, shadowRay};
+    }
+
+    const float pdf = shadowVector.lengthSquared() / (normal.scalarProduct(shadowVector) * area());
+
+    return {getIntensity() / pdf, shadowRay};
+}
 
 }
 

@@ -74,34 +74,8 @@ def Xform "CornellBox_Mirror" (
             normal3f[] normals = [(0.9999374, 0.010049638, 0.004925796), (0.99993736, 0.010049638, 0.0049257954), (0.9999374, 0.010049637, 0.004925796), (0.9999374, 0.010049637, 0.004925796)] (
                 interpolation = "faceVarying"
             )
-            point3f[] points = [(-1.01, 0, 0.99), (-0.99, 0, -1.04), (-1.02, 1.99, -1.04), (-1.02, 1.99, 0.99), (0.53, 0, 0.75), (0.13, 0, 0), (-0.05, 0, 0.57)]
+            point3f[] points = [(-1.01, 0, 0.99), (-0.99, 0, -1.04), (-1.02, 1.99, -1.04), (-1.02, 1.99, 0.99), (0.53, 0, 0.75)]
             uniform token subdivisionScheme = "none"
-        }
-    }
-
-    def Mesh "light" (
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        uniform bool doubleSided = 1
-        float3[] extent = [(-0.24, 1.98, -0.22), (0.23, 1.98, 0.16)]
-        int[] faceVertexCounts = [4]
-        int[] faceVertexIndices = [0, 1, 2, 3]
-        normal3f[] normals = [(0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0)] (
-            interpolation = "faceVarying"
-        )
-        point3f[] points = [(-0.24, 1.98, 0.16), (-0.24, 1.98, -0.22), (0.23, 1.98, -0.22), (0.23, 1.98, 0.16)]
-        uniform token subdivisionScheme = "none"
-        uniform token subsetFamily:materialBind:familyType = "partition"
-
-        def GeomSubset "light13" (
-            prepend apiSchemas = ["MaterialBindingAPI"]
-        )
-        {
-            uniform token elementType = "face"
-            uniform token familyName = "materialBind"
-            int[] indices = [0]
-            rel material:binding = </CornellBox_Mirror/Looks/light13>
         }
     }
 
@@ -166,23 +140,6 @@ def Xform "CornellBox_Mirror" (
             }
         }
 
-        def Material "light13"
-        {
-            token outputs:surface.connect = </CornellBox_Mirror/Looks/light13/light14.outputs:surface>
-
-            def Shader "light14"
-            {
-                uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (0.624, 0.624, 0.624)
-                normal3f inputs:normal = (1, 1, 1)
-                float inputs:roughness = 0.33700418
-                color3f inputs:specularColor = (0, 0, 0)
-                int inputs:useSpecularWorkflow = 1
-                token outputs:displacement
-                token outputs:surface
-            }
-        }
-
         def Material "leftWall14SG"
         {
             token outputs:surface.connect = </CornellBox_Mirror/Looks/leftWall14SG/leftWall14.outputs:surface>
@@ -236,6 +193,7 @@ def RectLight "areaLight1" (
     kind = "assembly"
 )
 {
+    float inputs:intensity = 30
     bool inputs:normalize = 1
     color3f inputs:shadow:color
     bool inputs:shadow:enable

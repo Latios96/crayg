@@ -76,22 +76,6 @@ def Xform "CornellBox_Original" (
         uniform token subdivisionScheme = "none"
     }
 
-    def Mesh "light" (
-        prepend apiSchemas = ["MaterialBindingAPI"]
-    )
-    {
-        uniform bool doubleSided = 1
-        float3[] extent = [(-0.24, 1.98, -0.22), (0.23, 1.98, 0.16)]
-        int[] faceVertexCounts = [4]
-        int[] faceVertexIndices = [0, 1, 2, 3]
-        rel material:binding = </CornellBox_Original/Looks/floor16SG>
-        normal3f[] normals = [(0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0)] (
-            interpolation = "faceVarying"
-        )
-        point3f[] points = [(-0.24, 1.98, 0.16), (-0.24, 1.98, -0.22), (0.23, 1.98, -0.22), (0.23, 1.98, 0.16)]
-        uniform token subdivisionScheme = "none"
-    }
-
     def Mesh "rightWall" (
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
@@ -214,12 +198,13 @@ def RectLight "areaLight1" (
     kind = "assembly"
 )
 {
+    float inputs:intensity = 30
     bool inputs:normalize = 1
     color3f inputs:shadow:color
     bool inputs:shadow:enable
     float3 xformOp:rotateXYZ = (-90, 0, 0)
     float3 xformOp:scale = (0.2313511, 0.18880378, 0.23932873)
-    double3 xformOp:translate = (-0.005312805952886301, 1.9696238887391315, -0.026564029764432)
+    double3 xformOp:translate = (-0.005312805952886301, 1.9837595363336387, -0.026564029764432)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
 }
 

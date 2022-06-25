@@ -63,6 +63,11 @@ BoundingBox DiskLight::getBounds() const {
 void DiskLight::setRadius(float radius) {
     DiskLight::radius = radius;
 }
+float DiskLight::area() const {
+    const Vector3f radiusVector = getPosition() - getTransform().apply({radius, 0, 0});
+    const float area = boost::math::constants::pi<float>() * radiusVector.lengthSquared();
+    return area;
+}
 DiskLight::DiskLight() = default;
 
 }

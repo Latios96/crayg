@@ -19,23 +19,6 @@ TEST_CASE("construct DiskLight", "[DiskLight]") {
     }
 }
 
-struct AreaLightFixture {
-
-    AreaLightFixture() {
-        areaLight = std::make_shared<RectLight>();
-        position = {0, 2, 2};
-        areaLight->setPosition(position);
-        areaLight->setWidth(1);
-        areaLight->setHeight(1);
-        areaLight->setIntensity(1);
-        scene.addLight(areaLight);
-    }
-
-    std::shared_ptr<RectLight> areaLight;
-    Scene scene;
-    Vector3f position;
-};
-
 TEST_CASE("DiskLight::sampleLightShape") {
     const Vector3f position = {0, 2, 2};
     const float radius = 2;
@@ -121,6 +104,30 @@ TEST_CASE("Disklight getBounds", "[DiskLight]") {
     const BoundingBox bounds = diskLight->getBounds();
 
     REQUIRE(bounds == BoundingBox({-1, -1, -1}, {1, 1, 1}));
+}
+
+TEST_CASE("Disklight::area") {
+    const Vector3f position = {0, 2, 2};
+    const float radius = 2;
+    DiskLight diskLight(Transform::withPosition(position), 1.0f, radius);
+
+    SECTION("area should respect width and height") {
+        const float area = diskLight.area();
+
+        REQUIRE(area == Catch::Detail::Approx(12.56637f));
+    }
+
+    SECTION("area should respect scale") {
+        diskLight.setRadius(1);
+        const Transform transform =
+            Transform(Transform::withPosition(position).matrix
+                          * Transform::withScale(5, 5, 5).matrix);
+        diskLight.setTransform(transform);
+
+        const float area = diskLight.area();
+
+        REQUIRE(area == Catch::Detail::Approx(78.53982f));
+    }
 }
 
 }

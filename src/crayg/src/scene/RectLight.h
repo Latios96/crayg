@@ -19,6 +19,7 @@ class RectLight : public AreaLight {
     void setHeight(float height);
     Vector3f sampleLightShape() const override;
     std::string getType() override;
+    float area() const override;
  private:
     float width = 1;
     float height = 1;

@@ -16,6 +16,9 @@ TEST_CASE("AreaLight::calculateShadowFactor") {
         Vector3f getNormal(Vector3f point) override {
             return transform.applyForNormal({0, 0, 1});
         }
+        float area() const override {
+            return 5;
+        }
     };
 
     DummyAreaLight dummyAreaLight;
@@ -55,11 +58,50 @@ TEST_CASE("AreaLight::calculateShadowFactor") {
     SECTION("should illuminate point in front of the areaLight when there are objects inbetween") {
         Vector3f point(0, 2, 4);
         fakeit::Mock<SceneIntersector> mockSceneIntersector;
-        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1, std::make_shared<Sphere>()));
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1,
+                                                                                             std::make_shared<Sphere>()));
 
         const float shadowFactor = dummyAreaLight.calculateShadowFactor(mockSceneIntersector.get(), point);
 
         REQUIRE(shadowFactor == 0);
+    }
+}
+
+TEST_CASE("AreaLight::radiance") {
+
+    class DummyAreaLight : public AreaLight {
+     public:
+        Vector3f sampleLightShape() const override {
+            return transform.toPosition();
+        }
+        Vector3f getNormal(Vector3f point) override {
+            return transform.applyForNormal({0, 0, 1});
+        }
+        float area() const override {
+            return 4;
+        }
+    };
+
+    DummyAreaLight dummyAreaLight;
+    dummyAreaLight.setPosition({0, 2, 2});
+    dummyAreaLight.setIntensity(10);
+
+    SECTION("should illuminate point in front of the areaLight") {
+        const Vector3f point(0, 2, 4);
+        const Vector3f normal(0, 0, -1);
+
+        auto radiance = dummyAreaLight.radiance(point, normal);
+
+        REQUIRE(radiance == Light::Radiance(20, Ray({0, 2, 4}, {0, 0, -2})));
+    }
+
+    SECTION("should not illuminate point in back of the areaLight") {
+        Vector3f point(0, 2, 1);
+        const Vector3f normal(0, 0, -1);
+
+        auto radiance = dummyAreaLight.radiance(point, normal);
+
+        REQUIRE(radiance == Light::Radiance(0, Ray({0, 2, 1}, {0, 0, 1})));
     }
 }
 

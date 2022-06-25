@@ -17,6 +17,7 @@ class DiskLight : public AreaLight {
     BoundingBox getBounds() const override;
     Vector3f sampleLightShape() const override;
     std::string getType() override;
+    float area() const override;
  private:
     float radius = 1;
 };

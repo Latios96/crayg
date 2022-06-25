@@ -43,7 +43,7 @@ std::vector<knipser::KnipserTest> sceneIoTests() {
 
             auto light = std::make_shared<Light>();
             light->setPosition(Vector3f(0, 3, 3));
-            light->setIntensity(1.0);
+            light->setIntensity(3.0);
             scene.addLight(light);
 
             const std::string scenePath = context.getOutputFolder() + "/writtenScene.usda";

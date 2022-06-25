@@ -2,7 +2,6 @@
 #include <scene/Scene.h>
 #include "scene/RectLight.h"
 
-
 namespace crayg {
 
 struct AreaLightFixture {
@@ -56,6 +55,33 @@ TEST_CASE("RectLight::sampleLightShape") {
             REQUIRE(samplePoint.y > (areaLightFixture.position.y - realHeight / 2));
             REQUIRE(samplePoint.z == areaLightFixture.position.z);
         }
+    }
+}
+
+TEST_CASE("RectLight::area") {
+
+    AreaLightFixture areaLightFixture;
+
+    SECTION("area should respect width and height") {
+        areaLightFixture.areaLight->setWidth(5);
+        areaLightFixture.areaLight->setHeight(5);
+
+        const float area = areaLightFixture.areaLight->area();
+
+        REQUIRE(area == Catch::Detail::Approx(25));
+    }
+
+    SECTION("area should respect scale") {
+        areaLightFixture.areaLight->setWidth(1);
+        areaLightFixture.areaLight->setHeight(1);
+        const Transform transform =
+            Transform(Transform::withPosition(areaLightFixture.position).matrix
+                          * Transform::withScale(5, 5, 5).matrix);
+        areaLightFixture.areaLight->setTransform(transform);
+
+        const float area = areaLightFixture.areaLight->area();
+
+        REQUIRE(area == Catch::Detail::Approx(25));
     }
 }
 

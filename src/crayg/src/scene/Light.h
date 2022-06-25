@@ -1,6 +1,7 @@
 #ifndef CRAYG_LIGHT_H
 #define CRAYG_LIGHT_H
 
+#include <ostream>
 #include "scene/Transformable.h"
 #include "scene/Imageable.h"
 
@@ -20,6 +21,17 @@ class Light : public Transformable, public Imageable {
     void setName(const std::string &name);
 
     virtual float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point);
+
+    struct Radiance {// todo move next to light
+        float radiance;
+        Ray ray;
+        Radiance(const float &radiance, const Ray &ray);
+        bool operator==(const Radiance &rhs) const;
+        bool operator!=(const Radiance &rhs) const;
+        friend std::ostream &operator<<(std::ostream &os, const Radiance &radiance);
+    };
+
+    virtual Radiance radiance(const Vector3f &point, const Vector3f &normal);
     Vector3f getNormal(Vector3f point) override;
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;

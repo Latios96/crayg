@@ -36,6 +36,7 @@ set(UNIT_TEST_LIST
         TestPreconditions.cpp
         TestProgressReporter.cpp
         TestRay.cpp
+        TestRaytracingIntegrator.cpp
         TestReadableFormatter.cpp
         TestRectLight.cpp
         TestRemainingTimeCalculator.cpp

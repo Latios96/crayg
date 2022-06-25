@@ -11,7 +11,7 @@ class RaytracingIntegrator : public AbstractIntegrator {
     RaytracingIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector);
     Color integrate(const Ray &ray) override;
     Color integrate(const Ray &ray, int depth);
-    static const int MAX_DEPTH = 2;
+    float calculateDirectLight(std::shared_ptr<Light> &sharedPtr, const Vector3f &f, const Vector3f &f1);
  private:
     ShadingMethod lambertMethod;
 };
