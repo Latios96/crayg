@@ -11,35 +11,6 @@ for (const auto& arg : vector_name){\
 int argc = argv_vector.size(); \
 char ** argv = argv_vector.data();
 
-TEST_CASE("shouldParseArgsValid") {
-    std::vector<std::string> arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path"};
-    ARGC_ARGV_(arguments);
-
-    CliParser cli_parser("executable_name", argc, argv);
-    auto result = cli_parser.parse();
-
-    REQUIRE(result.isValid());
-    REQUIRE(result.args->scenePath == "/some_scene_path");
-    REQUIRE(result.args->imageOutputPath == "/some_image_path");
-}
-
-TEST_CASE("shouldParseOptionalArgs") {
-    std::vector<std::string> arguments =
-        {"tests", "-s", "/some_scene_path", "-o", "/some_image_path", "--camera", "/usdCamera", "--resolution",
-         "1280x720", "--maxSamples", "8"};
-    ARGC_ARGV_(arguments);
-
-    CliParser cli_parser("executable_name", argc, argv);
-    auto result = cli_parser.parse();
-
-    REQUIRE(result.isValid());
-    REQUIRE(result.args->scenePath == "/some_scene_path");
-    REQUIRE(result.args->imageOutputPath == "/some_image_path");
-    REQUIRE(result.args->cameraName == "/usdCamera");
-    REQUIRE(result.args->cliRenderSettingsOverride.resolution == Resolution(1280, 720));
-    REQUIRE(result.args->cliRenderSettingsOverride.maxSamples == 8);
-}
-
 void assertHasError(const std::vector<std::string> &arguments) {
     ARGC_ARGV_(arguments);
 
@@ -50,24 +21,56 @@ void assertHasError(const std::vector<std::string> &arguments) {
     REQUIRE(result.error != "");
 }
 
-TEST_CASE("invalidArgsShouldContainError") {
-    std::vector<std::string> arguments = {"tests"};
-    assertHasError(arguments);
+TEST_CASE("CliParser::parse")
+{
+    SECTION("should parse args valid") {
+        std::vector<std::string> arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path"};
+        ARGC_ARGV_(arguments);
 
-    arguments = {"tests", "-s", "/some_scene_path"};
-    assertHasError(arguments);
+        CliParser cli_parser("executable_name", argc, argv);
+        auto result = cli_parser.parse();
 
-    arguments = {"tests", "-o", "/some_image_path"};
-    assertHasError(arguments);
+        REQUIRE(result.isValid());
+        REQUIRE(result.args->scenePath == "/some_scene_path");
+        REQUIRE(result.args->imageOutputPath == "/some_image_path");
+    }
 
-    arguments = {"tests", "-s"};
-    assertHasError(arguments);
+    SECTION("should parse optional args") {
+        std::vector<std::string> arguments =
+            {"tests", "-s", "/some_scene_path", "-o", "/some_image_path", "--camera", "/usdCamera", "--resolution",
+             "1280x720", "--maxSamples", "8"};
+        ARGC_ARGV_(arguments);
 
-    arguments = {"tests", "-o"};
-    assertHasError(arguments);
+        CliParser cli_parser("executable_name", argc, argv);
+        auto result = cli_parser.parse();
 
-    arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path", "--resolution", "8"};
-    assertHasError(arguments);
+        REQUIRE(result.isValid());
+        REQUIRE(result.args->scenePath == "/some_scene_path");
+        REQUIRE(result.args->imageOutputPath == "/some_image_path");
+        REQUIRE(result.args->cameraName == "/usdCamera");
+        REQUIRE(result.args->cliRenderSettingsOverride.resolution == Resolution(1280, 720));
+        REQUIRE(result.args->cliRenderSettingsOverride.maxSamples == 8);
+    }
+
+    SECTION("invalid args should contain error") {
+        std::vector<std::string> arguments = {"tests"};
+        assertHasError(arguments);
+
+        arguments = {"tests", "-s", "/some_scene_path"};
+        assertHasError(arguments);
+
+        arguments = {"tests", "-o", "/some_image_path"};
+        assertHasError(arguments);
+
+        arguments = {"tests", "-s"};
+        assertHasError(arguments);
+
+        arguments = {"tests", "-o"};
+        assertHasError(arguments);
+
+        arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path", "--resolution", "8"};
+        assertHasError(arguments);
+    }
 }
 
 }

@@ -3,7 +3,7 @@
 
 namespace crayg {
 
-TEST_CASE("CliRenderSettingsOverride/hasAnyOverrides") {
+TEST_CASE("CliRenderSettingsOverride::hasAnyOverrides") {
     CliRenderSettingsOverride fullOverrides;
     fullOverrides.resolution = Resolution(800, 600);
     fullOverrides.maxSamples = 8;
@@ -29,7 +29,7 @@ TEST_CASE("CliRenderSettingsOverride/hasAnyOverrides") {
     }
 }
 
-TEST_CASE("CliRenderSettingsOverride/reportOverrides") {
+TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
     CliRenderSettingsOverride fullOverrides;
     fullOverrides.resolution = Resolution(800, 600);
     fullOverrides.maxSamples = 8;
@@ -61,7 +61,7 @@ TEST_CASE("CliRenderSettingsOverride/reportOverrides") {
     }
 }
 
-TEST_CASE("CliRenderSettingsOverride/resolveOverrides") {
+TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     CliRenderSettingsOverride fullOverrides;
     fullOverrides.resolution = Resolution(800, 600);
     fullOverrides.maxSamples = 8;
