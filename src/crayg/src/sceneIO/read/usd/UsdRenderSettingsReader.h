@@ -14,6 +14,10 @@ class UsdRenderSettingsReader : public BaseUsdReader<pxr::UsdRenderSettings, Ren
     std::shared_ptr<RenderSettings> read() override;
  protected:
     std::string getTranslatedType() override;
+ private:
+    Resolution readResolution() const;
+    int readMaxSamples() const;
+    IntegratorType readIntegratorType() const;
 };
 
 }
