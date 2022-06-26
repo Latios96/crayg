@@ -2,8 +2,7 @@
 
 namespace crayg {
 
-void renderScene(const std::string &scenePath, const std::string imageOutputPath) {
-    const Resolution resolution = Resolution(800, 600);
+void renderScene(const std::string &scenePath, const std::string imageOutputPath, const Resolution resolution) {
     Image myImage(resolution);
     ImageOutputDriver imageOutputDriver(myImage);
 
