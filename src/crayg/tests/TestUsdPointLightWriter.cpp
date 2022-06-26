@@ -14,10 +14,10 @@ TEST_CASE("UsdPointLightWriter::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write object translation to prim") {
-        auto sphere = std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3);
-        sphere->setName("light");
+        auto light = std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3);
+        light->setName("light");
 
-        UsdPointLightWriter usdPointLightWriter(sphere);
+        UsdPointLightWriter usdPointLightWriter(light);
         usdPointLightWriter.write(stage, usdPathFactory);
         auto usdLuxSphereLight = pxr::UsdLuxSphereLight(stage->GetPrimAtPath(pxr::SdfPath("/light")));
 
