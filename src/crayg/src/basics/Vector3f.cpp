@@ -59,6 +59,9 @@ Vector3f Vector3f::operator-(const Vector3f &otherVector) const {
 Vector3f Vector3f::operator*(float scalar) const {
     return multiplyScalar(scalar);
 }
+Vector3f Vector3f::operator/(float scalar) const {
+    return {x / scalar, y / scalar, z / scalar};
+}
 
 Vector3f Vector3f::operator*(const Vector3f &otherVector) const {
     return crossProduct(otherVector);

@@ -77,6 +77,15 @@ TEST_CASE("multiplyScalarOperator", "[Vector]") {
     REQUIRE(result.z == 40);
 }
 
+TEST_CASE("divideScalar", "[Vector]") {
+    Vector3f myVector(5, 6, 8);
+    Vector3f result = myVector / 5;
+
+    REQUIRE(result.x == 1);
+    REQUIRE(result.y == 6.f / 5.f);
+    REQUIRE(result.z == 8.f / 5.f);
+}
+
 TEST_CASE("normalize", "[Vector]") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector.normalize();
