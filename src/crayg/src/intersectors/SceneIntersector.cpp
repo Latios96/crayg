@@ -6,7 +6,7 @@ namespace crayg {
 Imageable::Intersection SceneIntersector::intersect(const Ray &ray) const {
     Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-    for (const auto &intersectable : scene.objects) {
+    for (const auto &intersectable: scene.objects) {
         Imageable::Intersection intersection = intersectable->intersect(ray);
 
         hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
@@ -23,9 +23,5 @@ bool SceneIntersector::isIntersecting(const Ray &ray) const {
 SceneIntersector::SceneIntersector(Scene &scene) : scene(scene) {}
 
 SceneIntersector::~SceneIntersector() = default;
-
-bool Intersection::isValid() const {
-    return object != nullptr;
-}
 
 }

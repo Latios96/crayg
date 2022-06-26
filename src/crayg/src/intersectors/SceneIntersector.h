@@ -6,17 +6,7 @@
 
 namespace crayg {
 
-struct Intersection {
- public:
-    Intersection(const Ray &ray, Vector3f location, SceneObject *object)
-        : ray(ray), location(location), object(object) {}
 
-    Ray ray;
-    Vector3f location;
-    SceneObject *object;
-
-    bool isValid() const;
-};
 
 class SceneIntersector {
  public:
