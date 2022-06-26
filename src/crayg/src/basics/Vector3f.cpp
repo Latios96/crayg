@@ -53,7 +53,6 @@ Vector3f Vector3f::operator+(const Vector3f &otherVector) const {
 }
 
 Vector3f Vector3f::operator-(const Vector3f &otherVector) const {
-    // return substract(otherVector);
     return {x - otherVector.x, y - otherVector.y, z - otherVector.z};
 }
 
