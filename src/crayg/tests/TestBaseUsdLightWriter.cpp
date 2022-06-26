@@ -25,6 +25,7 @@ TEST_CASE("BaseUsdLightWriter::write") {
     SECTION("should write object translation to prim") {
         auto light = std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3.0f);
         light->setName("light");
+        light->setColor({1, 0, 0});
 
         DummyBaseWriter dummyBaseWriter(light);
         dummyBaseWriter.write(stage, usdPathFactory);
@@ -32,6 +33,8 @@ TEST_CASE("BaseUsdLightWriter::write") {
 
         auto intensity = UsdUtils::getAttributeValueAs<float>(usdLuxSphereLight.GetIntensityAttr());
         REQUIRE(intensity == 3);
+        auto color = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(usdLuxSphereLight.GetColorAttr());
+        REQUIRE(color == pxr::GfVec3f(1, 0, 0));
     }
 }
 

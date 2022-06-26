@@ -15,6 +15,7 @@ class BaseUsdLightWriter : public BaseUsdTransformableWriter<UsdType, CraygType>
         auto light = BaseUsdTransformableWriter<UsdType, CraygType>::write(stage, usdPathFactory);
 
         light.GetIntensityAttr().Set(this->craygObject->getIntensity());
+        light.GetColorAttr().Set(UsdConversions::convert(this->craygObject->getColor()));
 
         return light;
     }

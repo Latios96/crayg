@@ -16,12 +16,17 @@ TEST_CASE("UsdDiskLightWriter::write") {
 
     SECTION("should write disk light") {
         auto diskLight = std::make_shared<DiskLight>(Transform::withPosition({1, 2, -3}), 3, 4);
+        diskLight->setColor({1, 0, 0});
 
         UsdDiskLightWriter usdDiskLightWriter(diskLight);
         usdDiskLightWriter.write(stage, usdPathFactory);
 
         auto usdLuxDiskLight = pxr::UsdLuxDiskLight(stage->GetPrimAtPath(pxr::SdfPath("/DiskLight0")));
         auto radius = UsdUtils::getAttributeValueAs<float>(usdLuxDiskLight.GetRadiusAttr());
+        auto intensity = UsdUtils::getAttributeValueAs<float>(usdLuxDiskLight.GetIntensityAttr());
+        auto color = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(usdLuxDiskLight.GetColorAttr());
+        REQUIRE(intensity == 3);
+        REQUIRE(color == pxr::GfVec3f(1, 0, 0));
         REQUIRE(radius == 4);
     }
 }
