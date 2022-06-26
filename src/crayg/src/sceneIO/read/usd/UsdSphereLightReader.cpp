@@ -7,13 +7,10 @@
 namespace crayg {
 
 UsdSphereLightReader::UsdSphereLightReader(const pxr::UsdLuxSphereLight &sphereLight)
-    : BaseUsdXformableReader(sphereLight) {}
+    : BaseUsdLightReader(sphereLight) {}
 
 std::shared_ptr<Light> UsdSphereLightReader::read() {
-    auto light = BaseUsdXformableReader<pxr::UsdLuxSphereLight, Light>::read();
-
-    const auto intensity = UsdUtils::getAttributeValueAs<float>(usdPrim.GetIntensityAttr());
-    light->setIntensity(intensity);
+    auto light = BaseUsdLightReader<pxr::UsdLuxSphereLight, Light>::read();
 
     return light;
 }
