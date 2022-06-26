@@ -20,8 +20,6 @@ class Light : public Transformable, public Imageable {
     const std::string &getName() const;
     void setName(const std::string &name);
 
-    virtual float calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point);
-
     struct Radiance {// todo move next to light
         float radiance;
         Ray ray;

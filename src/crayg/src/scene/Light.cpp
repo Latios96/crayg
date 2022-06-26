@@ -12,24 +12,6 @@ void Light::setIntensity(float intensity) {
     Light::intensity = intensity;
 }
 
-float Light::calculateShadowFactor(SceneIntersector &sceneIntersector, const Vector3f &point) {
-    const Vector3f shadowVector = getPosition() - point;
-    Ray shadowRay(point, shadowVector.normalize());
-    const Imageable::Intersection intersection = sceneIntersector.intersect(shadowRay);
-
-    const bool hasIntersection = intersection.imageable != nullptr;
-    if (hasIntersection) {
-        const bool intersectionIsBehindLight = shadowVector.length() <= intersection.rayParameter;
-        if (intersectionIsBehindLight) {
-            return Light::NO_SHADOW;
-        } else {
-            return Light::FULL_SHADOW;
-        }
-    } else {
-        return Light::NO_SHADOW;
-    }
-}
-
 Light::Radiance Light::radiance(const Vector3f &point, const Vector3f &normal) {
     const Vector3f shadowVector = getPosition() - point;
     Ray shadowRay(point, shadowVector);
