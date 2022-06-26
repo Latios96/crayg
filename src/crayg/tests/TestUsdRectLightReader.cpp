@@ -15,6 +15,7 @@ TEST_CASE("UsdRectLightReader::read") {
         auto usdRectLight = pxr::UsdLuxRectLight::Define(stage, pxr::SdfPath("/usdRectLight"));
         pxr::UsdGeomXformCommonAPI(usdRectLight).SetTranslate(pxr::GfVec3f(1, 2, 3));
         usdRectLight.GetIntensityAttr().Set(3.0f);
+        usdRectLight.GetColorAttr().Set(pxr::GfVec3f(1, 0, 0));
         usdRectLight.GetWidthAttr().Set(2.0f);
         usdRectLight.GetHeightAttr().Set(3.0f);
 
@@ -23,6 +24,7 @@ TEST_CASE("UsdRectLightReader::read") {
 
         REQUIRE(light->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(light->getIntensity() == 3);
+        REQUIRE(light->getColor() == Color({1, 0, 0}));
         REQUIRE(light->getWidth() == 2);
         REQUIRE(light->getHeight() == 3);
     }

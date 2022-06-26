@@ -15,12 +15,14 @@ TEST_CASE("UsdSphereLightReader::read") {
         auto usdSphereLight = pxr::UsdLuxSphereLight::Define(stage, pxr::SdfPath("/usdSphereLight"));
         pxr::UsdGeomXformCommonAPI(usdSphereLight).SetTranslate(pxr::GfVec3f(1, 2, 3));
         usdSphereLight.GetIntensityAttr().Set(3.0f);
+        usdSphereLight.GetColorAttr().Set(pxr::GfVec3f(1, 0, 0));
 
         UsdSphereLightReader usdSphereLightReader(usdSphereLight);
         auto light = usdSphereLightReader.read();
 
         REQUIRE(light->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(light->getIntensity() == 3);
+        REQUIRE(light->getColor() == Color({1, 0, 0}));
     }
 
 }

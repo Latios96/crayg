@@ -24,6 +24,7 @@ TEST_CASE("BaseUsdLightReader::read") {
         auto usdDiskLight = pxr::UsdLuxDiskLight::Define(stage, pxr::SdfPath("/usdDiskLight"));
         pxr::UsdGeomXformCommonAPI(usdDiskLight).SetTranslate(pxr::GfVec3f(1, 2, 3));
         usdDiskLight.GetIntensityAttr().Set(3.0f);
+        usdDiskLight.GetColorAttr().Set(pxr::GfVec3f(1, 0, 0));
         usdDiskLight.GetRadiusAttr().Set(3.0f);
 
         DummyBaseReader baseUsdLightReader(usdDiskLight);
@@ -31,6 +32,7 @@ TEST_CASE("BaseUsdLightReader::read") {
 
         REQUIRE(light->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(light->getIntensity() == 3);
+        REQUIRE(light->getColor() == Color({1, 0, 0}));
         REQUIRE(light->getName() == "/usdDiskLight");
     }
 
