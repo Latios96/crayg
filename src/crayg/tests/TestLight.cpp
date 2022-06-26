@@ -13,7 +13,7 @@ TEST_CASE("Light::radiance") {
 
         auto radiance = light.radiance(point, normal);
 
-        REQUIRE(radiance.radiance == Catch::Detail::Approx(0.2f));
+        REQUIRE(radiance.radiance == Color::createGrey(0.19999999f));
         REQUIRE(radiance.ray == Ray({0, 0, 0}, {0, 5, 0}));
     }
 }

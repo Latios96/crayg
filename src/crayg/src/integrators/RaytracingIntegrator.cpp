@@ -33,7 +33,7 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
                                                  const Vector3f &location,
                                                  const Vector3f &normal) {
     auto lightRadiance = light->radiance(location + (normal * 0.001), normal);
-    if (lightRadiance.radiance <= 0) {
+    if (lightRadiance.radiance == Color::createBlack()) {
         return Color::createBlack();
     }
     float angle = normal.scalarProduct(lightRadiance.ray.direction.normalize());
@@ -45,7 +45,7 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
     auto intersection = sceneIntersector->intersect(rayToTrace);
 
     if (intersection.imageable == nullptr) {
-        return Color::createGrey(lightRadiance.radiance);
+        return lightRadiance.radiance;
     }
 
     bool lightIsHidden = intersection.rayParameter <= lightRadiance.ray.direction.length();
@@ -53,6 +53,6 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
         return Color::createBlack();
     }
 
-    return Color::createGrey(lightRadiance.radiance);
+    return lightRadiance.radiance;
 }
 }

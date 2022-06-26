@@ -11,12 +11,12 @@ Light::Radiance AreaLight::radiance(const Vector3f &point, const Vector3f &norma
     Ray shadowRay(point, shadowVector);// todo normalize this and pass length to ray
 
     if (getNormal({0, 0, 0}).scalarProduct(shadowVector) > 0) {
-        return {0, shadowRay};
+        return {Color::createBlack(), shadowRay};
     }
 
     const float pdf = shadowVector.lengthSquared() / (normal.scalarProduct(shadowVector) * area());
 
-    return {getIntensity() / pdf, shadowRay};
+    return {getColor() * getIntensity() / pdf, shadowRay};
 }
 
 }

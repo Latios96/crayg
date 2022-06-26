@@ -13,17 +13,20 @@ class Light : public Transformable, public Imageable {
  public:
     Light();
     explicit Light(const Transform &transform, float intensity);
-    float getIntensity() const;
+
     BoundingBox getBounds() const override;
 
     void setIntensity(float intensity);
+    float getIntensity() const;
+    const Color &getColor() const;
+    void setColor(const Color &color);
     const std::string &getName() const;
     void setName(const std::string &name);
 
     struct Radiance {// todo move next to light
-        float radiance;
+        Color radiance;
         Ray ray;
-        Radiance(const float &radiance, const Ray &ray);
+        Radiance(const Color &radiance, const Ray &ray);
         bool operator==(const Radiance &rhs) const;
         bool operator!=(const Radiance &rhs) const;
         friend std::ostream &operator<<(std::ostream &os, const Radiance &radiance);
@@ -36,6 +39,7 @@ class Light : public Transformable, public Imageable {
     virtual std::string getType();
  private:
     float intensity = 1;
+    Color color = Color::createWhite();
     std::string name;
  protected:
     constexpr static const float NO_SHADOW = 1.0f;

@@ -16,7 +16,7 @@ Light::Radiance Light::radiance(const Vector3f &point, const Vector3f &normal) {
     const Vector3f shadowVector = getPosition() - point;
     Ray shadowRay(point, shadowVector);
 
-    return {getIntensity() / shadowVector.lengthSquared() * normal.scalarProduct(shadowVector), shadowRay};
+    return {color * intensity / shadowVector.lengthSquared() * normal.scalarProduct(shadowVector), shadowRay};
 }
 std::string Light::getType() {
     return "Light";
@@ -46,7 +46,7 @@ void Light::setName(const std::string &name) {
 
 Light::Light() = default;
 
-Light::Radiance::Radiance(const float &radiance, const Ray &ray) : radiance(radiance), ray(ray) {}
+Light::Radiance::Radiance(const Color &radiance, const Ray &ray) : radiance(radiance), ray(ray) {}
 bool Light::Radiance::operator==(const Light::Radiance &rhs) const {
     return radiance == rhs.radiance &&
         ray == rhs.ray;
@@ -60,6 +60,12 @@ std::ostream &operator<<(std::ostream &os, const Light::Radiance &radiance) {
         .addMember("ray", radiance.ray)
         .finish();
     return os;
+}
+const Color &Light::getColor() const {
+    return color;
+}
+void Light::setColor(const Color &color) {
+    Light::color = color;
 }
 }
 
