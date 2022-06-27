@@ -41,10 +41,6 @@ class Light : public Transformable, public Imageable {
     float intensity = 1;
     Color color = Color::createWhite();
     std::string name;
- protected:
-    constexpr static const float NO_SHADOW = 1.0f;
-    constexpr static const float FULL_SHADOW = 0.0f;
-
 };
 
 }
