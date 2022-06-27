@@ -1,5 +1,5 @@
 #ifndef CRAYG_SRC_CRAYG_INTEGRATIONTESTS_RENDERUTILS_H_
-#define CRAYG_SRC_CRAYG_INTEGRATIONTESTS_RENDERUTILS_H_ \
+#define CRAYG_SRC_CRAYG_INTEGRATIONTESTS_RENDERUTILS_H_
 #include <scene/Scene.h>
 #include <Renderer.h>
 #include <image/ImageWriter.h>
