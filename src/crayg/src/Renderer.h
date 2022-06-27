@@ -11,7 +11,6 @@
 #include <image/ImageOutputDriver.h>
 #include <basics/Resolution.h>
 #include <scene/RenderSettings.h>
-#include "ShadingMethod.h"
 #include "integrators/AbstractIntegrator.h"
 
 namespace crayg {

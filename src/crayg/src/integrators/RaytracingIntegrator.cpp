@@ -3,7 +3,7 @@
 namespace crayg {
 
 RaytracingIntegrator::RaytracingIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector)
-    : AbstractIntegrator(scene, sceneIntersector), lambertMethod({scene}) {
+    : AbstractIntegrator(scene, sceneIntersector) {
 }
 
 Color RaytracingIntegrator::integrate(const Ray &ray) {
