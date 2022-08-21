@@ -14,4 +14,9 @@ add_test(
         COMMAND crayg-integration-tests --output knipser-output --reference ${CMAKE_CURRENT_SOURCE_DIR}/reference
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+add_test(
+        NAME crayg-cato-integration-tests
+        COMMAND cato run -u https://cato.frmbffr.com
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 configure_file(cato.json ${CMAKE_BINARY_DIR}/bin/cato.json)

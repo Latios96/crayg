@@ -1,5 +1,5 @@
 {
-  "projectName": "TestSpheres",
+  "projectName": "Crayg Integration Tests",
   "suites": [
     {
       "name": "CornellBox",
@@ -23,7 +23,8 @@
       ],
       "variables": {
         "config_path": "${CMAKE_CURRENT_SOURCE_DIR}",
-        "crayg_render_command": "${CMAKE_BINARY_DIR}/bin/crayg-standalone -s {@test_resources}/{@test_name}.usda -o \"{@image_output_png}\""
+        "crayg_render_command": "${CMAKE_BINARY_DIR}/bin/crayg-standalone -s {@test_resources}/{@test_name}.usda -o \"{@image_output_png}\"",
+        "reference_image_png": "{@test_resources}/{@test_name}.png"
       }
     }
   ]
