@@ -21,6 +21,31 @@
           "command": "{@crayg_render_command}"
         }
       ]
+    },
+    {
+      "name": "Lights",
+      "tests": [
+        {
+          "name": "MultipleColoredPointLights",
+          "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "MultiplePointLights",
+          "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "SingleDiskLight",
+          "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "SinglePointLight",
+          "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "SingleRectLight",
+          "command": "{@crayg_render_command}"
+        }
+      ]
     }
   ],
   "variables": {
