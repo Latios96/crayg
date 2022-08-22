@@ -86,12 +86,12 @@ void TriangleMesh::createNormals() {
         std::vector<Vector3f> normals;
         normals.resize(points.size());
         for (auto id: faceIds()) {
-            Triangle triangle(this, id);
-            Vector3f normal = triangle.getNormal();
-            auto indices = faceVertexIndices[triangle.faceId];
-            normals[indices.v0] = normals[indices.v0].add(normal);
-            normals[indices.v1] = normals[indices.v1].add(normal);
-            normals[indices.v2] = normals[indices.v2].add(normal);
+          Triangle triangle(this, id);
+          Vector3f normal = triangle.getNormal();
+          auto indices = faceVertexIndices[triangle.faceId];
+          normals[indices.v0] = normals[indices.v0] + normal;
+          normals[indices.v1] = normals[indices.v1] + normal;
+          normals[indices.v2] = normals[indices.v2] + normal;
         }
         auto primVar = addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
 

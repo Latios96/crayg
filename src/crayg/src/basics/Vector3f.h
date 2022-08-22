@@ -27,12 +27,6 @@ class Vector3f {
 
     bool operator!=(const Vector3f &otherVector) const;
 
-    Vector3f add(const Vector3f &otherVector) const;
-
-    Vector3f substract(const Vector3f &otherVector) const;
-
-    Vector3f multiplyScalar(float scalar) const;
-
     float dot(const Vector3f &otherVector) const;
 
     float length() const;

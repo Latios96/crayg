@@ -7,17 +7,6 @@ TEST_CASE("addTwoVectors", "[Vector]") {
     Vector3f myVector(1, 1, 1);
     Vector3f otherVector(1, 2, 3);
 
-    Vector3f result = myVector.add(otherVector);
-
-    REQUIRE(result.x == 2);
-    REQUIRE(result.y == 3);
-    REQUIRE(result.z == 4);
-}
-
-TEST_CASE("addTwoVectorsOperator", "[Vector]") {
-    Vector3f myVector(1, 1, 1);
-    Vector3f otherVector(1, 2, 3);
-
     Vector3f result = myVector + otherVector;
 
     REQUIRE(result.x == 2);
@@ -26,17 +15,6 @@ TEST_CASE("addTwoVectorsOperator", "[Vector]") {
 }
 
 TEST_CASE("subtractTwoVectors", "[Vector]") {
-    Vector3f myVector(1, 1, 1);
-    Vector3f otherVector(1, 2, 3);
-
-    Vector3f result = myVector.substract(otherVector);
-
-    REQUIRE(result.x == 0);
-    REQUIRE(result.y == -1);
-    REQUIRE(result.z == -2);
-}
-
-TEST_CASE("subtractTwoVectorsOperator", "[Vector]") {
     Vector3f myVector(1, 1, 1);
     Vector3f otherVector(1, 2, 3);
 
@@ -60,15 +38,6 @@ TEST_CASE("lengthSquared", "[Vector]") {
 }
 
 TEST_CASE("multiplyScalar", "[Vector]") {
-    Vector3f myVector(5, 6, 8);
-    Vector3f result = myVector.multiplyScalar(5);
-
-    REQUIRE(result.x == 25);
-    REQUIRE(result.y == 30);
-    REQUIRE(result.z == 40);
-}
-
-TEST_CASE("multiplyScalarOperator", "[Vector]") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector * 5;
 
