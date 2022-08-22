@@ -11,9 +11,6 @@ class Vector3f {
  public:
     float x, y, z;
 
-    /**
-    Creates a new Vector and initialised x,y,z to 0
-    */
     Vector3f();
 
     Vector3f(float _x, float _y, float _z);
