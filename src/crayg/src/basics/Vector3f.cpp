@@ -1,41 +1,41 @@
-#include <utils/ToStringHelper.h>
 #include "Vector3f.h"
+#include <utils/ToStringHelper.h>
 
 namespace crayg {
 
 Vector3f::Vector3f() {
-    x = 0;
-    y = 0;
-    z = 0;
+  x = 0;
+  y = 0;
+  z = 0;
 }
 
 Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) {}
 
 Vector3f Vector3f::add(const Vector3f &otherVector) const {
-    return {x + otherVector.x, y + otherVector.y, z + otherVector.z};
+  return {x + otherVector.x, y + otherVector.y, z + otherVector.z};
 }
 
 Vector3f Vector3f::substract(const Vector3f &otherVector) const {
-    return {x - otherVector.x, y - otherVector.y, z - otherVector.z};
+  return {x - otherVector.x, y - otherVector.y, z - otherVector.z};
 }
 
 Vector3f Vector3f::multiplyScalar(float scalar) const {
-    return {x * scalar, y * scalar, z * scalar};
+  return {x * scalar, y * scalar, z * scalar};
 }
 
 float Vector3f::length() const {
-    return static_cast<float>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
+  return static_cast<float>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
 }
 
 float Vector3f::lengthSquared() const {
-    return static_cast<float>((pow(x, 2) + pow(y, 2) + pow(z, 2)));
+  return static_cast<float>((pow(x, 2) + pow(y, 2) + pow(z, 2)));
 }
 
 Vector3f Vector3f::normalize() const {
-    float length = this->length();
-    float oneByLength = 1 / length;
+  float length = this->length();
+  float oneByLength = 1 / length;
 
-    return {x * oneByLength, y * oneByLength, z * oneByLength};
+  return {x * oneByLength, y * oneByLength, z * oneByLength};
 }
 
 Vector3f Vector3f::cross(const Vector3f &otherVector) const {
@@ -45,18 +45,18 @@ Vector3f Vector3f::cross(const Vector3f &otherVector) const {
 }
 
 Vector3f Vector3f::operator+(const Vector3f &otherVector) const {
-    return add(otherVector);
+  return add(otherVector);
 }
 
 Vector3f Vector3f::operator-(const Vector3f &otherVector) const {
-    return {x - otherVector.x, y - otherVector.y, z - otherVector.z};
+  return {x - otherVector.x, y - otherVector.y, z - otherVector.z};
 }
 
 Vector3f Vector3f::operator*(float scalar) const {
-    return multiplyScalar(scalar);
+  return multiplyScalar(scalar);
 }
 Vector3f Vector3f::operator/(float scalar) const {
-    return {x / scalar, y / scalar, z / scalar};
+  return {x / scalar, y / scalar, z / scalar};
 }
 
 float Vector3f::dot(const Vector3f &otherVector) const {
@@ -64,29 +64,31 @@ float Vector3f::dot(const Vector3f &otherVector) const {
 }
 
 bool Vector3f::operator==(const Vector3f &otherVector) const {
-    return this->x == otherVector.x && this->y == otherVector.y && this->z == otherVector.z;
+  return this->x == otherVector.x && this->y == otherVector.y &&
+         this->z == otherVector.z;
 }
 
 bool Vector3f::operator!=(const Vector3f &otherVector) const {
-    return !(this->x == otherVector.x && this->y == otherVector.y && this->z == otherVector.z);
+  return !(this->x == otherVector.x && this->y == otherVector.y &&
+           this->z == otherVector.z);
 }
 
 Vector3f Vector3f::createInvalid() {
-    auto max = std::numeric_limits<float>::max();
-    return {max, max, max};
+  auto max = std::numeric_limits<float>::max();
+  return {max, max, max};
 }
 
 bool Vector3f::isValid() const {
-    auto max = std::numeric_limits<float>::max();
-    return x != max && y != max && z != max;
+  auto max = std::numeric_limits<float>::max();
+  return x != max && y != max && z != max;
 }
 std::ostream &operator<<(std::ostream &os, const Vector3f &f) {
-    os << ToStringHelper("Vector3f")
-        .addMember("x", f.x)
-        .addMember("y", f.y)
-        .addMember("z", f.z)
-        .finish();
-    return os;
+  os << ToStringHelper("Vector3f")
+            .addMember("x", f.x)
+            .addMember("y", f.y)
+            .addMember("z", f.z)
+            .finish();
+  return os;
 }
 
-}
+} // namespace crayg
