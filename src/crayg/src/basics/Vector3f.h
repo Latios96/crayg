@@ -41,9 +41,7 @@ class Vector3f {
 
     Vector3f normalize() const;
 
-    Vector3f invert() const {
-        return {x * -1, y * -1, z * -1};
-    }
+    Vector3f invert() const;
 
     Vector3f cross(const Vector3f &otherVector) const;
 

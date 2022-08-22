@@ -90,5 +90,6 @@ std::ostream &operator<<(std::ostream &os, const Vector3f &f) {
             .finish();
   return os;
 }
+Vector3f Vector3f::invert() const { return {x * -1, y * -1, z * -1}; }
 
 } // namespace crayg
