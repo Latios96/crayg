@@ -114,16 +114,6 @@ TEST_CASE("crossProduct", "[Vector]") {
     REQUIRE(result.z == 3);
 }
 
-TEST_CASE("crossProductOperator", "[Vector]") {
-    Vector3f myVector(1, 2, 3);
-    Vector3f otherVector(1, 5, 7);
-    Vector3f result = myVector * otherVector;
-
-    REQUIRE(result.x == -1);
-    REQUIRE(result.y == -4);
-    REQUIRE(result.z == 3);
-}
-
 TEST_CASE("operatorEqual", "[Vector]") {
     Vector3f myVector(1, 2, 3);
     Vector3f otherVector(1, 2, 3);
