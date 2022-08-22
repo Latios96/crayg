@@ -42,10 +42,10 @@ Vector3f Vector3f::normalize() const {
     return {x * oneByLength, y * oneByLength, z * oneByLength};
 }
 
-Vector3f Vector3f::crossProduct(const Vector3f &otherVector) const {
-    return {y * otherVector.z - otherVector.y * z,
-            z * otherVector.x - otherVector.z * x,
-            x * otherVector.y - otherVector.x * y};
+Vector3f Vector3f::cross(const Vector3f &otherVector) const {
+  return {y * otherVector.z - otherVector.y * z,
+          z * otherVector.x - otherVector.z * x,
+          x * otherVector.y - otherVector.x * y};
 }
 
 Vector3f Vector3f::operator+(const Vector3f &otherVector) const {

@@ -17,9 +17,9 @@ BarycentricCoordinates::BarycentricCoordinates(const Vector3f &v0,
                                                const Vector3f &point) {
   // based on Fundamentals of Computer Graphics, 2016, p. 49
   float lengthSquared = normal.lengthSquared();
-  alpha = normal.dot((v2 - v1).crossProduct(point - v1)) / lengthSquared;
-  beta = normal.dot((v0 - v2).crossProduct(point - v2)) / lengthSquared;
-  gamma = normal.dot((v1 - v0).crossProduct(point - v0)) / lengthSquared;
+  alpha = normal.dot((v2 - v1).cross(point - v1)) / lengthSquared;
+  beta = normal.dot((v0 - v2).cross(point - v2)) / lengthSquared;
+  gamma = normal.dot((v1 - v0).cross(point - v0)) / lengthSquared;
 }
 bool BarycentricCoordinates::operator==(const BarycentricCoordinates &rhs) const {
     return alpha == rhs.alpha &&

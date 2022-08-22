@@ -104,10 +104,10 @@ TEST_CASE("invert", "[Vector]") {
     REQUIRE(result.z == myVector.z * -1);
 }
 
-TEST_CASE("crossProduct", "[Vector]") {
+TEST_CASE("cross", "[Vector]") {
     Vector3f myVector(1, 2, 3);
     Vector3f otherVector(1, 5, 7);
-    Vector3f result = myVector.crossProduct(otherVector);
+    Vector3f result = myVector.cross(otherVector);
 
     REQUIRE(result.x == -1);
     REQUIRE(result.y == -4);

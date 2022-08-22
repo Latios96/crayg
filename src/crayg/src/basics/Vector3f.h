@@ -48,7 +48,7 @@ class Vector3f {
         return {x * -1, y * -1, z * -1};
     }
 
-    Vector3f crossProduct(const Vector3f &otherVector) const;
+    Vector3f cross(const Vector3f &otherVector) const;
 
     static Vector3f createInvalid();
 

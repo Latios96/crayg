@@ -14,10 +14,10 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
     viewVector = centerOfInterest.substract(position).normalize();
 
     // create site position
-    sideVector = viewVector.crossProduct(camera.getUserUpVector()).normalize();
+    sideVector = viewVector.cross(camera.getUserUpVector()).normalize();
 
     // create camera up position, user up position might not be orthononal to viewVector
-    upVector = sideVector.crossProduct(viewVector).normalize();
+    upVector = sideVector.cross(viewVector).normalize();
 
     // create width and height, define the size of the view plane
     imagePlaneHeight = (2.0f * std::tan(camera.getHorizontalFieldOfView() / 2.0f)) / imageRatio;

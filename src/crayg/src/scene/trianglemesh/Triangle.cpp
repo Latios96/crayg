@@ -26,7 +26,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     Vector3f v0v2 = v2() - v0();
 
     //Vec3 pvec = cross(r->dir, v0v2);
-    Vector3f pvec = ray.direction.crossProduct(v0v2);
+    Vector3f pvec = ray.direction.cross(v0v2);
 
     //float det = dot(v0v1, pvec);
     float det = v0v1.dot(pvec);
@@ -48,7 +48,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     }
 
     //Vec3 qvec = cross(tvec, v0v1);
-    Vector3f qvec = tvec.crossProduct(v0v1);
+    Vector3f qvec = tvec.cross(v0v1);
 
     //float v = dot(r->dir, qvec) * invDet;
     float v = ray.direction.dot(qvec) * invDet;
@@ -60,9 +60,9 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     return {v0v2.dot(qvec) * invDet, shared_from_this()};
 }
 bool Triangle::isIntersecting(Ray ray) {
-    Vector3f normal = (v1() - v0()).crossProduct((v2() - v0()));
+  Vector3f normal = (v1() - v0()).cross((v2() - v0()));
 
-    const float scalar = normal.dot(ray.direction);
+  const float scalar = normal.dot(ray.direction);
 
     const bool raysAreParallel = scalar == 0;
 
@@ -80,21 +80,21 @@ bool Triangle::isIntersecting(Ray ray) {
 
             Vector3f edge0 = v1() - v0();
             Vector3f vp0 = hitLocation - v0();
-            C = edge0.crossProduct(vp0);
+            C = edge0.cross(vp0);
             if (normal.dot(C) < 0) {
               return false;
             }
 
             Vector3f edge1 = v2() - v1();
             Vector3f vp1 = hitLocation - v1();
-            C = edge1.crossProduct(vp1);
+            C = edge1.cross(vp1);
             if (normal.dot(C) < 0) {
               return false;
             }
 
             Vector3f edge2 = v0() - v2();
             Vector3f vp2 = hitLocation - v2();
-            C = edge2.crossProduct(vp2);
+            C = edge2.cross(vp2);
             if (normal.dot(C) < 0) {
               return false;
             }
@@ -122,8 +122,8 @@ Vector3f Triangle::getNormal(Vector3f point) {
 }
 
 Vector3f Triangle::getNormal() const {
-    const Vector3f normal = (v2() - v0()).crossProduct(v1() - v0()).normalize();
-    return normal.invert();
+  const Vector3f normal = (v2() - v0()).cross(v1() - v0()).normalize();
+  return normal.invert();
 }
 
 BoundingBox Triangle::getBounds() const {
