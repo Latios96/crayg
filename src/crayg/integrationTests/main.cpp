@@ -1,14 +1,8 @@
-#include "Logger.h"
-#include "KnipserApp.h"
-#include "imageTests.h"
-#include "sceneIO.h"
+#define CATCH_CONFIG_RUNNER
 
-int main(int argc, char **argv) {
-    crayg::Logger::initialize();
+#include <catch2/catch.hpp>
 
-    knipser::TestRegistry testRegistry;
-    testRegistry.registerTests(crayg::sceneIoTests())
-        .registerTests(crayg::imageTests());
-
-    KNIPSER_MAIN(testRegistry);
+int main(int argc, char *argv[]) {
+  int result = Catch::Session().run(argc, argv);
+  return result;
 }

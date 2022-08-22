@@ -32,6 +32,32 @@
       ]
     },
     {
+      "name": "ImageIO",
+      "tests": [
+        {
+          "name": "writeBmpImage",
+          "command": "{@cray_integration_test_command}"
+        },
+        {
+          "name": "writeExrImage",
+          "command": "{@cray_integration_test_command}"
+        },
+        {
+          "name": "writeToImageOutputDriver",
+          "command": "{@cray_integration_test_command}"
+        }
+      ]
+    },
+    {
+      "name": "SceneIO",
+      "tests": [
+        {
+          "name": "sceneWriteReadRendersCorrectly",
+          "command": "{@cray_integration_test_command}"
+        }
+      ]
+    },
+    {
       "name": "Lights",
       "tests": [
         {
@@ -60,6 +86,7 @@
   "variables": {
     "config_path": "${CMAKE_CURRENT_SOURCE_DIR}",
     "crayg_render_command": "${CMAKE_BINARY_DIR}/bin/crayg-standalone -s {@test_resources}/{@test_name}.usda -o \"{@image_output_png}\"",
+    "cray_integration_test_command": "${CMAKE_BINARY_DIR}/bin/crayg-binary-integration-tests {@suite_name}/{@test_name}",
     "reference_image_png": "{@test_resources}/{@test_name}.png"
   }
 }
