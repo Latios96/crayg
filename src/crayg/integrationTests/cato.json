@@ -23,6 +23,15 @@
       ]
     },
     {
+      "name": "Geometry",
+      "tests": [
+        {
+          "name": "SpherePrimitive",
+          "command": "{@crayg_render_command}"
+        }
+      ]
+    },
+    {
       "name": "Lights",
       "tests": [
         {
