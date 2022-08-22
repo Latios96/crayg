@@ -9,11 +9,7 @@ Vector3f::Vector3f() {
     z = 0;
 }
 
-Vector3f::Vector3f(float _x, float _y, float _z) {
-    x = _x;
-    y = _y;
-    z = _z;
-}
+Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) {}
 
 Vector3f Vector3f::add(const Vector3f &otherVector) const {
     return {x + otherVector.x, y + otherVector.y, z + otherVector.z};
