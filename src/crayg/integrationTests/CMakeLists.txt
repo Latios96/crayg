@@ -1,8 +1,6 @@
 add_executable(crayg-integration-tests
         main.cpp
         imageTests.h
-        renderTests.h
-        renderTestsCato.h
         sceneIO.h
         renderUtils.h
         renderUtils.cpp)
