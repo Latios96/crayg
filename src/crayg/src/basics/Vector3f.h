@@ -38,7 +38,7 @@ class Vector3f {
 
     Vector3f multiplyScalar(float scalar) const;
 
-    float scalarProduct(const Vector3f &otherVector) const;
+    float dot(const Vector3f &otherVector) const;
 
     float length() const;
 

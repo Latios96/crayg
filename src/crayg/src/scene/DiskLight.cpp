@@ -14,38 +14,38 @@ Vector3f DiskLight::getNormal(Vector3f point) {
     return transform.applyForNormal({1, 0, 0}).normalize();
 }
 Imageable::Intersection DiskLight::intersect(Ray ray) {
-    const Vector3f normal = getNormal({0, 0, 0}).normalize();
-    const Vector3f center = transform.apply({0, 0, 0});
-    if (normal.scalarProduct(ray.direction) > 0) {
-        return Imageable::Intersection::createInvalid();
-    }
-    float D = normal.scalarProduct(center);
-    float t = -normal.scalarProduct(ray.startPoint) + D / normal.scalarProduct(ray.direction);
-    if (t <= 0) {
-        return Imageable::Intersection::createInvalid();
-    }
-    const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
-    const float distanceToCenter = (pointOnPlane - center).lengthSquared();
-    const bool isIntersecting = distanceToCenter <= (pow(radius, 2));
-    if (isIntersecting) {
-        return Imageable::Intersection(t, shared_from_this());
-    }
+  const Vector3f normal = getNormal({0, 0, 0}).normalize();
+  const Vector3f center = transform.apply({0, 0, 0});
+  if (normal.dot(ray.direction) > 0) {
     return Imageable::Intersection::createInvalid();
+  }
+  float D = normal.dot(center);
+  float t = -normal.dot(ray.startPoint) + D / normal.dot(ray.direction);
+  if (t <= 0) {
+    return Imageable::Intersection::createInvalid();
+  }
+  const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
+  const float distanceToCenter = (pointOnPlane - center).lengthSquared();
+  const bool isIntersecting = distanceToCenter <= (pow(radius, 2));
+  if (isIntersecting) {
+    return Imageable::Intersection(t, shared_from_this());
+  }
+  return Imageable::Intersection::createInvalid();
 }
 bool DiskLight::isIntersecting(Ray ray) {
-    const Vector3f normal = getNormal({0, 0, 0});
-    const Vector3f center = transform.apply({0, 0, 0});
-    if (normal.scalarProduct(ray.direction) > 0) {
-        return false;
-    }
-    float D = normal.scalarProduct(center);
-    float t = -normal.scalarProduct(ray.startPoint) + D / normal.scalarProduct(ray.direction);
-    if (t <= 0) {
-        return false;
-    }
-    const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
-    const float distanceToCenter = (pointOnPlane - center).lengthSquared();
-    return distanceToCenter <= (pow(radius, 2));
+  const Vector3f normal = getNormal({0, 0, 0});
+  const Vector3f center = transform.apply({0, 0, 0});
+  if (normal.dot(ray.direction) > 0) {
+    return false;
+  }
+  float D = normal.dot(center);
+  float t = -normal.dot(ray.startPoint) + D / normal.dot(ray.direction);
+  if (t <= 0) {
+    return false;
+  }
+  const Vector3f pointOnPlane = ray.constructIntersectionPoint(t);
+  const float distanceToCenter = (pointOnPlane - center).lengthSquared();
+  return distanceToCenter <= (pow(radius, 2));
 }
 std::string DiskLight::getType() {
     return "DiskLight";

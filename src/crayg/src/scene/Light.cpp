@@ -13,10 +13,12 @@ void Light::setIntensity(float intensity) {
 }
 
 Light::Radiance Light::radiance(const Vector3f &point, const Vector3f &normal) {
-    const Vector3f shadowVector = getPosition() - point;
-    Ray shadowRay(point, shadowVector);
+  const Vector3f shadowVector = getPosition() - point;
+  Ray shadowRay(point, shadowVector);
 
-    return {color * intensity / shadowVector.lengthSquared() * normal.scalarProduct(shadowVector), shadowRay};
+  return {color * intensity / shadowVector.lengthSquared() *
+              normal.dot(shadowVector),
+          shadowRay};
 }
 std::string Light::getType() {
     return "Light";

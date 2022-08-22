@@ -36,7 +36,7 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
     if (lightRadiance.radiance == Color::createBlack()) {
         return Color::createBlack();
     }
-    float angle = normal.scalarProduct(lightRadiance.ray.direction.normalize());
+    float angle = normal.dot(lightRadiance.ray.direction.normalize());
     if (angle <= 0) {
         return Color::createBlack();
     }
