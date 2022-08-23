@@ -22,10 +22,6 @@ PlugPtr DiffuseMaterial::getPlugByName(const std::string &inputPlugName) {
 DiffuseMaterial::DiffuseMaterial() : Material() {
 
 }
-float DiffuseMaterial::reflectivity() {
-    return 0;
-}
-bool DiffuseMaterial::isEmissive() { return false; }
 Color DiffuseMaterial::evaluate(const SurfaceInteraction &surfaceInteraction) {
   return diffuseColor;
 }

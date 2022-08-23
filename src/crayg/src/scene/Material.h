@@ -21,8 +21,6 @@ public:
   explicit Material();
   explicit Material(const std::string &name);
   virtual Color getDiffuseColor() = 0;
-  virtual float reflectivity() = 0;
-  virtual bool isEmissive() = 0;
   virtual Color evaluate(const SurfaceInteraction &surfaceInteraction) = 0;
 };
 
