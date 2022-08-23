@@ -74,8 +74,6 @@ set(crayg_SRCS
         scene/DiffuseMaterial.h
         scene/DiskLight.cpp
         scene/DiskLight.h
-        scene/EmissiveMaterial.cpp
-        scene/EmissiveMaterial.h
         scene/GroundPlane.cpp
         scene/GroundPlane.h
         scene/Imageable.cpp
@@ -86,8 +84,6 @@ set(crayg_SRCS
         scene/Material.h
         scene/RectLight.cpp
         scene/RectLight.h
-        scene/ReflectiveMaterial.cpp
-        scene/ReflectiveMaterial.h
         scene/RenderSettings.cpp
         scene/RenderSettings.h
         scene/Scene.cpp
