@@ -12,6 +12,7 @@ class ReflectiveMaterial : public Material {
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override;
     PlugPtr getPlugByName(const std::string &inputPlugName) override;
     bool isEmissive() override;
+    Color evaluate(const SurfaceInteraction &surfaceInteraction) override;
 };
 
 }

@@ -10,23 +10,26 @@ Color RaytracingIntegrator::integrate(const Ray &ray) {
     return integrate(ray, 0);
 }
 Color RaytracingIntegrator::integrate(const Ray &ray, int depth) {
-    auto intersection = sceneIntersector->intersect(ray);
+  auto intersection = sceneIntersector->intersect(ray);
 
-    const bool hasHit = intersection.imageable != nullptr;
-    if (!hasHit) {
-        return Color::createBlack();
-    }
+  const bool hasHit = intersection.imageable != nullptr;
+  if (!hasHit) {
+    return Color::createBlack();
+  }
 
-    const Vector3f location = ray.constructIntersectionPoint(intersection.rayParameter);
-    Imageable &object = *intersection.imageable;
-    Color shadedColor = object.getMaterial()->getDiffuseColor();
-    const Vector3f normal = object.getNormal(location);
+  const Vector3f location =
+      ray.constructIntersectionPoint(intersection.rayParameter);
+  Imageable &object = *intersection.imageable;
+  const Vector3f normal = object.getNormal(location);
+  const SurfaceInteraction surfaceInteraction =
+      SurfaceInteraction(location, normal, ray);
+  Color shadedColor = object.getMaterial()->evaluate(surfaceInteraction);
 
-    Color radiance = Color::createBlack();
-    for (auto &light: scene.lights) {
-        radiance = radiance + calculateDirectLight(light, location, normal);
-    }
-    return shadedColor * radiance;
+  Color radiance = Color::createBlack();
+  for (auto &light : scene.lights) {
+    radiance = radiance + calculateDirectLight(light, location, normal);
+  }
+  return shadedColor * radiance;
 }
 
 Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,

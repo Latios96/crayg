@@ -14,8 +14,10 @@ void ReflectiveMaterial::connectOutputToInput(const std::string &inputPlugName, 
 PlugPtr ReflectiveMaterial::getPlugByName(const std::string &inputPlugName) {
     return {};
 }
-bool ReflectiveMaterial::isEmissive() {
-    return false;
+bool ReflectiveMaterial::isEmissive() { return false; }
+Color ReflectiveMaterial::evaluate(
+    const SurfaceInteraction &surfaceInteraction) {
+  return Color();
 }
 
 }

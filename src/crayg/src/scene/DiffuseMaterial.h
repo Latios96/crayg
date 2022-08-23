@@ -16,6 +16,7 @@ class DiffuseMaterial : public Material {
     PlugPtr getPlugByName(const std::string &inputPlugName) override;
     float reflectivity() override;
     bool isEmissive() override;
+    Color evaluate(const SurfaceInteraction &surfaceInteraction) override;
 };
 
 }
