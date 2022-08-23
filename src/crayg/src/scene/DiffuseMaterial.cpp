@@ -23,7 +23,10 @@ DiffuseMaterial::DiffuseMaterial() : Material() {
 
 }
 Color DiffuseMaterial::evaluate(const SurfaceInteraction &surfaceInteraction) {
-  return diffuseColor;
+    return diffuseColor;
+}
+std::string DiffuseMaterial::getType() {
+    return "DiffuseMaterial";
 }
 
 }

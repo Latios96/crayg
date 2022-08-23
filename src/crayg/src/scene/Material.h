@@ -22,6 +22,7 @@ public:
   explicit Material(const std::string &name);
   virtual Color getDiffuseColor() = 0;
   virtual Color evaluate(const SurfaceInteraction &surfaceInteraction) = 0;
+    virtual std::string getType() = 0;
 };
 
 } // namespace crayg

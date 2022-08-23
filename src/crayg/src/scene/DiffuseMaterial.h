@@ -15,6 +15,7 @@ class DiffuseMaterial : public Material {
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override;
     PlugPtr getPlugByName(const std::string &inputPlugName) override;
     Color evaluate(const SurfaceInteraction &surfaceInteraction) override;
+    std::string getType() override;
 };
 
 }
