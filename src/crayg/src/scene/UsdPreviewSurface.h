@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_USDPREVIEWSURFACE_H_
 #include "Material.h"
 namespace crayg {
+
 class UsdPreviewSurface : public Material {
  public:
     explicit UsdPreviewSurface(const Color &diffuseColor);
@@ -12,5 +13,6 @@ class UsdPreviewSurface : public Material {
  private:
     Color diffuseColor;
 };
+
 } // namespace crayg
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_USDPREVIEWSURFACE_H_

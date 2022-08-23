@@ -13,12 +13,6 @@ Color DiffuseMaterial::getDiffuseColor() {
     return diffuseColor;
 }
 
-void DiffuseMaterial::connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) {
-
-}
-PlugPtr DiffuseMaterial::getPlugByName(const std::string &inputPlugName) {
-    return {};
-}
 DiffuseMaterial::DiffuseMaterial() : Material() {
 
 }
