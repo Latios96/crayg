@@ -106,6 +106,8 @@ set(crayg_SRCS
         scene/trianglemesh/TriangleMesh.h
         scene/trianglemesh/TriangleMeshConversion.cpp
         scene/trianglemesh/TriangleMeshConversion.h
+        scene/UsdPreviewSurface.cpp
+        scene/UsdPreviewSurface.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/BaseUsdImageableReader.h
