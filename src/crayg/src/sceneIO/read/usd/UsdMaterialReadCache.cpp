@@ -39,7 +39,7 @@ std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::Usd
 
     Color color(0.18, 0.18, 0.18);
     auto diffuseColorInput = shader.GetInput(pxr::TfToken("diffuseColor"));
-    if (diffuseColorInput) {
+    if (diffuseColorInput && !diffuseColorInput.HasConnectedSource()) {
         auto usdColor = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(diffuseColorInput);
         color = UsdConversions::convertColor(usdColor);
     }
