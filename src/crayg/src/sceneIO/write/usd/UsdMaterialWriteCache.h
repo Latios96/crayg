@@ -18,6 +18,7 @@ class UsdMaterialWriteCache {
     std::map<std::string, pxr::UsdShadeMaterial> materialCache;
     pxr::UsdStagePtr stage;
     UsdPathFactory &usdPathFactory;
+    pxr::UsdShadeShader createUsdPreviewSurface(const pxr::UsdShadeMaterial &usdShadeMaterial);
 };
 
 } // crayg

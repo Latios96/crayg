@@ -1,7 +1,7 @@
 #include "UsdMaterialReadCache.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"
-#include "scene/DiffuseMaterial.h"
+#include "scene/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include <pxr/base/gf/vec3f.h>
 
@@ -44,7 +44,7 @@ std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::Usd
         color = UsdConversions::convertColor(usdColor);
     }
 
-    auto material = std::make_shared<DiffuseMaterial>(usdShadeMaterial.GetPath().GetString(), color);
+    auto material = std::make_shared<UsdPreviewSurface>(usdShadeMaterial.GetPath().GetString(), color);
     return material;
 }
 
@@ -52,8 +52,8 @@ bool crayg::UsdMaterialReadCache::isUsdPreviewSurface(const pxr::TfToken &shader
     return shaderId == pxr::TfToken("UsdPreviewSurface");
 }
 std::shared_ptr<Material> UsdMaterialReadCache::createDefaultMaterial() {
-    return std::make_shared<DiffuseMaterial>("defaultMaterial",
-                                             Color(1, 0, 0));
+    return std::make_shared<UsdPreviewSurface>("defaultMaterial",
+                                               Color(1, 0, 0));
 }
 UsdMaterialReadCache::UsdMaterialReadCache() {
     materialCache[pxr::SdfPath()] = createDefaultMaterial();

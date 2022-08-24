@@ -20,16 +20,27 @@ pxr::UsdShadeMaterial UsdMaterialWriteCache::translateMaterial(const std::shared
     Logger::info("Writing material {}", materialPath);
 
     auto usdShadeMaterial = pxr::UsdShadeMaterial::Define(stage, materialPath);
-    auto usdShadeShader =
-        pxr::UsdShadeShader::Define(stage, materialPath.AppendChild(pxr::TfToken("usdPreviewSurface")));
 
-    usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
+    if (material->getType() != "UsdPreviewSurface") {
+        Logger::warning("Shader {} of type {} is not supported, writing default UsdPreviewSurface instead",
+                        material->getName(), material->getType());
+    }
+
+    auto usdShadeShader = createUsdPreviewSurface(usdShadeMaterial);
+
     usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"),
                                pxr::SdfValueTypeNames->Color3f).Set(UsdConversions::convert(material->getDiffuseColor()));
-    usdShadeMaterial.CreateSurfaceOutput().ConnectToSource(usdShadeShader.ConnectableAPI(),
-                                                           pxr::TfToken("surface"));
 
     return usdShadeMaterial;
+}
+pxr::UsdShadeShader UsdMaterialWriteCache::createUsdPreviewSurface(const pxr::UsdShadeMaterial &usdShadeMaterial) {
+    auto usdShadeShader =
+        pxr::UsdShadeShader::Define(stage, usdShadeMaterial.GetPath().AppendChild(pxr::TfToken("usdPreviewSurface")));
+
+    usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
+    usdShadeMaterial.CreateSurfaceOutput().ConnectToSource(usdShadeShader.ConnectableAPI(),
+                                                           pxr::TfToken("surface"));
+    return usdShadeShader;
 }
 
 } // crayg

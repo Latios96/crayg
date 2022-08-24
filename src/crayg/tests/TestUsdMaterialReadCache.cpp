@@ -9,7 +9,7 @@
 namespace crayg {
 
 bool isDefaultMaterial(const std::shared_ptr<Material> &material) {
-    return material->getName() == "defaultMaterial";
+    return material->getName() == "defaultMaterial" && material->getType() == "UsdPreviewSurface";
 }
 
 TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
