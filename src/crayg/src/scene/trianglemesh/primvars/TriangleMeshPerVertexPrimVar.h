@@ -66,6 +66,13 @@ class TriangleMeshPerVertexPrimVar : public TriangleMeshAbstractPrimVar<T> {
             .finish();
         return os;
     }
+    void apply(const std::function<T(T)> func) override {
+        for (auto &data: vertexData) {
+            data.v0 = func(data.v0);
+            data.v1 = func(data.v1);
+            data.v2 = func(data.v2);
+        }
+    }
  private:
     std::vector<VertexData<T>> vertexData;
 };

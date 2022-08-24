@@ -73,4 +73,25 @@ TEST_CASE("TriangleMeshPerPointPrimVar::==") {
     }
 }
 
+TEST_CASE("TriangleMeshPerPointPrimVar::apply") {
+    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+
+    TriangleMeshPerPointPrimVar<Color> primVar(triangleMesh);
+    primVar.allocate();
+    primVar.write(0, Color(1, 0, 0));
+    primVar.write(1, Color(0, 1, 0));
+    primVar.write(2, Color(0, 0, 1));
+    primVar.write(3, Color(1, 0, 0));
+    primVar.write(4, Color(0, 1, 0));
+    primVar.write(5, Color(0, 0, 1));
+
+    SECTION("should apply function to all elements") {
+        primVar.apply([](Color color) {
+            return color * 2;
+        });
+
+        REQUIRE(primVar == std::vector<Color>({{2, 0, 0}, {0, 2, 0}, {0, 0, 2}, {2, 0, 0}, {0, 2, 0}, {0, 0, 2}}));
+    }
+}
+
 }

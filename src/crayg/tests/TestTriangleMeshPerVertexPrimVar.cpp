@@ -59,4 +59,26 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::==") {
     }
 }
 
+TEST_CASE("TriangleMeshPerVertexPrimVar::apply") {
+    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+
+    TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
+    primVar.allocate();
+    primVar.write(0, VertexData(Color::createGrey(0.5)));
+    primVar.write(1, VertexData(Color::createGrey(0.5)));
+    primVar.write(2, VertexData(Color::createGrey(0.5)));
+    primVar.write(3, VertexData(Color::createGrey(0.5)));
+
+    SECTION("should apply function to all elements") {
+        primVar.apply([](Color color) {
+            return color * 2;
+        });
+
+        REQUIRE(primVar == std::vector<VertexData<Color>>({VertexData(Color::createWhite()),
+                                                           VertexData(Color::createWhite()),
+                                                           VertexData(Color::createWhite()),
+                                                           VertexData(Color::createWhite())}));
+    }
+}
+
 }
