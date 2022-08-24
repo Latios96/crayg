@@ -90,8 +90,8 @@ void TriangleMesh::createNormals() {
           Vector3f normal = triangle.getNormal();
           auto indices = faceVertexIndices[triangle.faceId];
           normals[indices.v0] = normals[indices.v0] + normal;
-          normals[indices.v1] = normals[indices.v1] + normal;
-          normals[indices.v2] = normals[indices.v2] + normal;
+            normals[indices.v1] = normals[indices.v1] + normal;
+            normals[indices.v2] = normals[indices.v2] + normal;
         }
         auto primVar = addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
 
@@ -99,6 +99,10 @@ void TriangleMesh::createNormals() {
             normals[i] = normals[i].normalize();
             primVar->write(i, normals[i]);
         }
+    } else {
+        normalsPrimVar->apply([this](Vector3f normal) {
+            return transform.applyForNormal(normal);
+        });
     }
 
 }

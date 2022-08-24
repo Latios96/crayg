@@ -28,6 +28,10 @@
         {
           "name": "SpherePrimitive",
           "command": "{@crayg_render_command}"
+        },
+        {
+          "name": "CorrectNormalTransformation",
+          "command": "{@crayg_render_command}"
         }
       ]
     },
