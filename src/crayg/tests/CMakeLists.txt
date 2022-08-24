@@ -85,7 +85,7 @@ foreach (NAME IN LISTS UNIT_TEST_LIST)
     list(APPEND UNIT_TEST_SOURCE_LIST ${NAME})
 endforeach ()
 
-set(TARGET_NAME tests)
+set(TARGET_NAME crayg-unit-tests)
 
 add_executable(${TARGET_NAME}
         main.cpp
