@@ -81,6 +81,15 @@
           "command": "{@crayg_render_command}"
         }
       ]
+    },
+    {
+      "name": "UsdPreviewSurface",
+      "tests": [
+        {
+          "name": "SimpleDiffuseMaterial",
+          "command": "{@crayg_render_command}"
+        }
+      ]
     }
   ],
   "variables": {
