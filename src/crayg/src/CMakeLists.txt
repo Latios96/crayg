@@ -70,8 +70,6 @@ set(crayg_SRCS
         scene/AreaLight.h
         scene/Camera.cpp
         scene/Camera.h
-        scene/DiffuseMaterial.cpp
-        scene/DiffuseMaterial.h
         scene/DiskLight.cpp
         scene/DiskLight.h
         scene/GroundPlane.cpp

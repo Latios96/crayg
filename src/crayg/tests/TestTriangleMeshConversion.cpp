@@ -2,14 +2,14 @@
 #include "scene/GroundPlane.h"
 #include "scene/trianglemesh/TriangleMesh.h"
 #include "scene/trianglemesh/TriangleMeshConversion.h"
-#include "scene/DiffuseMaterial.h"
+#include "scene/UsdPreviewSurface.h"
 
 namespace crayg {
 
 TEST_CASE("TriangleMeshConversion::toTriangleMesh") {
 
     SECTION("should convert GroundPlace correctly") {
-        auto material = std::make_shared<DiffuseMaterial>("groundPlaneMat", Color::createGrey(0.5f));
+        auto material = std::make_shared<UsdPreviewSurface>("groundPlaneMat", Color::createGrey(0.5f));
         GroundPlane groundPlane;
         groundPlane.setTransform(Transform::withPosition({0, 1, 0}));
         groundPlane.setMaterial(material);

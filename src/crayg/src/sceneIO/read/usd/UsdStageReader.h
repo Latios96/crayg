@@ -3,7 +3,7 @@
 
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "scene/Scene.h"
-#include "scene/DiffuseMaterial.h"
+#include "scene/UsdPreviewSurface.h"
 #include "sceneIO/read/SceneReader.h"
 #include "UsdMaterialReadCache.h"
 #include <pxr/usd/usd/stage.h>
@@ -25,7 +25,7 @@ class UsdStageReader {
     void readSphereLight(Scene &scene, const pxr::UsdPrim &prim) const;
     void readRectLight(Scene &scene, const pxr::UsdPrim &prim) const;
     void readUsdGeomMesh(Scene &scene,
-                         const std::shared_ptr<DiffuseMaterial> &defaultMaterial,
+                         const std::shared_ptr<Material> &defaultMaterial,
                          const pxr::UsdPrim &prim);
     void readSphere(Scene &scene, const pxr::UsdPrim &prim);
     void readDiskLight(Scene &scene, const pxr::UsdPrim &prim) const;

@@ -2,7 +2,7 @@
 #include "sceneIO/write/usd/BaseUsdSceneObjectWriter.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "scene/Sphere.h"
-#include "scene/DiffuseMaterial.h"
+#include "scene/UsdPreviewSurface.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>
 namespace crayg {
@@ -32,7 +32,7 @@ TEST_CASE("BaseUsdSceneObjectWriter::write")
     DummyBaseWriter dummyBaseWriter(sphere, usdMaterialWriteCache);
 
     SECTION("should write material") {
-        auto diffuseMaterial = std::make_shared<DiffuseMaterial>("myMat", Color::createGrey(0.5f));
+        auto diffuseMaterial = std::make_shared<UsdPreviewSurface>("myMat", Color::createGrey(0.5f));
         sphere->setMaterial(diffuseMaterial);
 
         dummyBaseWriter.write(stage, usdPathFactory);

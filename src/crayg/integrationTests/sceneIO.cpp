@@ -5,7 +5,7 @@
 #include "sceneIO/write/usd/UsdSceneWriter.h"
 #include "utils.h"
 #include <catch2/catch.hpp>
-#include <scene/DiffuseMaterial.h>
+#include <scene/UsdPreviewSurface.h>
 #include <scene/GroundPlane.h>
 #include <sceneIO/write/SceneWriter.h>
 
@@ -22,16 +22,16 @@ TEST_CASE("SceneIO/sceneWriteReadRendersCorrectly") {
       35.0f, 36.0f);
   scene.camera = camera;
 
-  const std::shared_ptr<Material> diffuseMaterial =
-      std::make_shared<DiffuseMaterial>("diffuseMaterial", Color(1, 0, 0));
+    const std::shared_ptr<Material> diffuseMaterial =
+        std::make_shared<UsdPreviewSurface>("diffuseMaterial", Color(1, 0, 0));
 
   const std::shared_ptr<Sphere> sphere =
       std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5f);
   sphere->setMaterial(diffuseMaterial);
   scene.addObject(sphere);
 
-  const std::shared_ptr<Material> groundMaterial =
-      std::make_shared<DiffuseMaterial>("groundMaterial", Color(1, 1, 1));
+    const std::shared_ptr<Material> groundMaterial =
+        std::make_shared<UsdPreviewSurface>("groundMaterial", Color(1, 1, 1));
 
   const std::shared_ptr<GroundPlane> groundPlane =
       std::make_shared<GroundPlane>();

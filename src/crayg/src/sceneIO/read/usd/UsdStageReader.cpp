@@ -19,7 +19,7 @@ UsdStageReader::UsdStageReader(pxr::UsdStage &stage) : stage(stage) {}
 void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptions &readOptions) {
     readRenderSettings(scene);
 
-    auto defaultMaterial = std::make_shared<crayg::DiffuseMaterial>("defaultMaterial", crayg::Color::createWhite());
+    auto defaultMaterial = std::make_shared<crayg::UsdPreviewSurface>("defaultMaterial", crayg::Color::createWhite());
 
     for (pxr::UsdPrim prim: stage.TraverseAll()) {
         if (prim.IsA<pxr::UsdGeomMesh>() && primIsVisible(prim)) {
@@ -48,7 +48,7 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
 }
 
 void UsdStageReader::readUsdGeomMesh(Scene &scene,
-                                     const std::shared_ptr<DiffuseMaterial> &defaultMaterial,
+                                     const std::shared_ptr<Material> &defaultMaterial,
                                      const pxr::UsdPrim &prim) {
     auto triangleMesh = UsdMeshReader(pxr::UsdGeomMesh(prim), usdMaterialTranslationCache).read();
     triangleMesh->init();

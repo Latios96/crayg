@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include "sceneIO/write/usd/UsdMaterialWriteCache.h"
 #include <pxr/usd/usd/stage.h>
-#include "scene/DiffuseMaterial.h"
+#include "scene/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdUtils.h"
 
 namespace crayg {
@@ -25,7 +25,7 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
-    auto material = std::make_shared<DiffuseMaterial>("myMat", Color(1, 2, 3));
+    auto material = std::make_shared<UsdPreviewSurface>("myMat", Color(1, 2, 3));
 
     SECTION("should translate material") {
         usdMaterialWriteCache.getCachedUsdMaterial(material);
