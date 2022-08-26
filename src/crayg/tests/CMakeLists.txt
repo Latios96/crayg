@@ -78,7 +78,7 @@ set(UNIT_TEST_LIST
         TestUsdStageReader.cpp
         TestUsdTriangleMeshWriter.cpp
         TestUsdUtils.cpp
-        TestVector.cpp
+        TestVector3f.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
