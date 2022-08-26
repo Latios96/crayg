@@ -1,6 +1,7 @@
 #include "UsdMaterialWriteCache.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "Logger.h"
+#include "scene/UsdPreviewSurface.h"
 
 namespace crayg {
 
@@ -27,9 +28,11 @@ pxr::UsdShadeMaterial UsdMaterialWriteCache::translateMaterial(const std::shared
                         material->getName(), material->getType());
         return usdShadeMaterial;
     }
+    const auto usdPreviewSurfaceMaterial = std::static_pointer_cast<UsdPreviewSurface>(material);
 
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("diffuseColor"),
-                                        pxr::SdfValueTypeNames->Color3f).Set(UsdConversions::convert(material->getDiffuseColor()));
+                                        pxr::SdfValueTypeNames->Color3f).Set(UsdConversions::convert(
+        usdPreviewSurfaceMaterial->diffuseColor));
 
     return usdShadeMaterial;
 }

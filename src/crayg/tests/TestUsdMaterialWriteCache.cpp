@@ -9,9 +9,7 @@ namespace crayg {
 class UnsupportedMaterial : public Material {
  public:
     explicit UnsupportedMaterial(const std::string &name) : Material(name) {}
-    Color getDiffuseColor() override {
-        return {};
-    }
+
     Color evaluate(const SurfaceInteraction &surfaceInteraction) override {
         return {};
     }

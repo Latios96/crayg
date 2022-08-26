@@ -1,6 +1,7 @@
 #include <catch2/catch.hpp>
 #include "scene/Material.h"
 #include "sceneIO/read/usd/UsdMaterialReadCache.h"
+#include "scene/UsdPreviewSurface.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/sdf/types.h>
@@ -10,6 +11,13 @@ namespace crayg {
 
 bool isDefaultMaterial(const std::shared_ptr<Material> &material) {
     return material->getName() == "defaultMaterial" && material->getType() == "UsdPreviewSurface";
+}
+
+std::shared_ptr<UsdPreviewSurface> getAsUsdPreviewSurface(const std::shared_ptr<Material> &material) {
+    if (material->getType() != "UsdPreviewSurface") {
+        throw std::runtime_error("This is not a UsdPreviewSurface.");
+    }
+    return std::static_pointer_cast<UsdPreviewSurface>(material);
 }
 
 TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
@@ -100,7 +108,7 @@ TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
         auto material = usdMaterialReadCache.getCachedReadPrimMaterial(geo);
 
         REQUIRE(material->getName() == "/material");
-        REQUIRE(material->getDiffuseColor() == Color::createGrey(0.5f));
+        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color::createGrey(0.5f));
     }
 
     SECTION("UsdPreviewSurface translation should be cached") {
@@ -132,7 +140,7 @@ TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
         auto material = usdMaterialReadCache.getCachedReadPrimMaterial(geo);
 
         REQUIRE(material->getName() == "/material");
-        REQUIRE(material->getDiffuseColor() == Color(0.18, 0.18, 0.18));
+        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color(0.18, 0.18, 0.18));
     }
 
     SECTION("assigned UsdPreviewSurface with a connection in diffuseColor should fallback to default value") {
@@ -150,7 +158,7 @@ TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
         auto material = usdMaterialReadCache.getCachedReadPrimMaterial(geo);
 
         REQUIRE(material->getName() == "/material");
-        REQUIRE(material->getDiffuseColor() == Color(0.18, 0.18, 0.18));
+        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color(0.18, 0.18, 0.18));
     }
 
 }

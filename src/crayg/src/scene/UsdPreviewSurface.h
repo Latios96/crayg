@@ -7,7 +7,6 @@ class UsdPreviewSurface : public Material {
  public:
     explicit UsdPreviewSurface(const Color &diffuseColor);
     UsdPreviewSurface(const std::string &name, const Color &diffuseColor);
-    Color getDiffuseColor() override;
     Color evaluate(const SurfaceInteraction &surfaceInteraction) override;
     std::string getType() override;
 
