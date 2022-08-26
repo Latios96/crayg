@@ -48,9 +48,8 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
             shaderPrim = pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat/usdPreviewSurface")));
         auto id = UsdUtils::getAttributeValueAs<pxr::TfToken>(shaderPrim.GetIdAttr());
         REQUIRE(id == pxr::TfToken("UsdPreviewSurface"));
-        auto diffuseColor =
-            UsdUtils::getAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("diffuseColor")));
-        REQUIRE(diffuseColor == pxr::GfVec3f(0, 0, 0));
+        auto diffuseColorAttr = shaderPrim.GetInput(pxr::TfToken("diffuseColor"));
+        REQUIRE_FALSE(diffuseColorAttr);
     }
 
     SECTION("translating material twice should be cached")

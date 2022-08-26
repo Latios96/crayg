@@ -20,13 +20,13 @@ pxr::UsdShadeMaterial UsdMaterialWriteCache::translateMaterial(const std::shared
     Logger::info("Writing material {}", materialPath);
 
     auto usdShadeMaterial = pxr::UsdShadeMaterial::Define(stage, materialPath);
+    auto usdPreviewSurfaceShader = createUsdPreviewSurface(usdShadeMaterial);
 
     if (material->getType() != "UsdPreviewSurface") {
         Logger::warning("Shader {} of type {} is not supported, writing default UsdPreviewSurface instead",
                         material->getName(), material->getType());
+        return usdShadeMaterial;
     }
-
-    auto usdPreviewSurfaceShader = createUsdPreviewSurface(usdShadeMaterial);
 
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("diffuseColor"),
                                         pxr::SdfValueTypeNames->Color3f).Set(UsdConversions::convert(material->getDiffuseColor()));
