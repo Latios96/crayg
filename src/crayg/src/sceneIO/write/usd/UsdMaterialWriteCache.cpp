@@ -26,10 +26,10 @@ pxr::UsdShadeMaterial UsdMaterialWriteCache::translateMaterial(const std::shared
                         material->getName(), material->getType());
     }
 
-    auto usdShadeShader = createUsdPreviewSurface(usdShadeMaterial);
+    auto usdPreviewSurfaceShader = createUsdPreviewSurface(usdShadeMaterial);
 
-    usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"),
-                               pxr::SdfValueTypeNames->Color3f).Set(UsdConversions::convert(material->getDiffuseColor()));
+    usdPreviewSurfaceShader.CreateInput(pxr::TfToken("diffuseColor"),
+                                        pxr::SdfValueTypeNames->Color3f).Set(UsdConversions::convert(material->getDiffuseColor()));
 
     return usdShadeMaterial;
 }
