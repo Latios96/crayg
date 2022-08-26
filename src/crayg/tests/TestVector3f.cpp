@@ -3,7 +3,7 @@
 
 namespace crayg {
 
-TEST_CASE("addTwoVectors") {
+TEST_CASE("Vector3f::operator+") {
     Vector3f myVector(1, 1, 1);
     Vector3f otherVector(1, 2, 3);
 
@@ -14,7 +14,7 @@ TEST_CASE("addTwoVectors") {
     REQUIRE(result.z == 4);
 }
 
-TEST_CASE("subtractTwoVectors") {
+TEST_CASE("Vector3f::operator-") {
     Vector3f myVector(1, 1, 1);
     Vector3f otherVector(1, 2, 3);
 
@@ -25,19 +25,19 @@ TEST_CASE("subtractTwoVectors") {
     REQUIRE(result.z == -2);
 }
 
-TEST_CASE("length") {
+TEST_CASE("Vector3f::length") {
     Vector3f myVector(-5, -6, -8);
 
     REQUIRE(myVector.length() == Catch::Detail::Approx(11.18033f));
 }
 
-TEST_CASE("lengthSquared") {
+TEST_CASE("Vector3f::lengthSquared") {
     Vector3f myVector(-5, -6, -8);
 
     REQUIRE(myVector.lengthSquared() == Catch::Detail::Approx(125));
 }
 
-TEST_CASE("multiplyScalar") {
+TEST_CASE("Vector3f::operator*") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector * 5;
 
@@ -46,7 +46,7 @@ TEST_CASE("multiplyScalar") {
     REQUIRE(result.z == 40);
 }
 
-TEST_CASE("divideScalar") {
+TEST_CASE("Vector3f::operator/") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector / 5;
 
@@ -55,7 +55,7 @@ TEST_CASE("divideScalar") {
     REQUIRE(result.z == 8.f / 5.f);
 }
 
-TEST_CASE("normalize") {
+TEST_CASE("Vector3f::normalize") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector.normalize();
 
@@ -64,7 +64,7 @@ TEST_CASE("normalize") {
     REQUIRE(result.z == Catch::Detail::Approx(0.71554f));
 }
 
-TEST_CASE("invert") {
+TEST_CASE("Vector3f::invert") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector.invert();
 
@@ -73,7 +73,7 @@ TEST_CASE("invert") {
     REQUIRE(result.z == myVector.z * -1);
 }
 
-TEST_CASE("cross") {
+TEST_CASE("Vector3f::cross") {
     Vector3f myVector(1, 2, 3);
     Vector3f otherVector(1, 5, 7);
     Vector3f result = myVector.cross(otherVector);
@@ -83,7 +83,7 @@ TEST_CASE("cross") {
     REQUIRE(result.z == 3);
 }
 
-TEST_CASE("operatorEqual") {
+TEST_CASE("Vector3f::operatorEqual") {
     Vector3f myVector(1, 2, 3);
     Vector3f otherVector(1, 2, 3);
     Vector3f anotherVector(0, 0, 0);
@@ -92,7 +92,7 @@ TEST_CASE("operatorEqual") {
     REQUIRE_FALSE(myVector == anotherVector);
 }
 
-TEST_CASE("operatorNotEqual") {
+TEST_CASE("Vector3f::operatorNotEqual") {
     Vector3f myVector(1, 2, 3);
     Vector3f otherVector(1, 2, 3);
     Vector3f anotherVector(0, 0, 0);
@@ -101,14 +101,14 @@ TEST_CASE("operatorNotEqual") {
     REQUIRE(myVector != anotherVector);
 }
 
-TEST_CASE("Vector/shouldCreateInvalid") {
+TEST_CASE("Vector3f::shouldCreateInvalid") {
     Vector3f invalid = Vector3f::createInvalid();
     REQUIRE(invalid.x == std::numeric_limits<float>::max());
     REQUIRE(invalid.y == std::numeric_limits<float>::max());
     REQUIRE(invalid.z == std::numeric_limits<float>::max());
 }
 
-TEST_CASE("Vector/shouldBeInvalid") {
+TEST_CASE("Vector3f::shouldBeInvalid") {
     Vector3f invalid = Vector3f::createInvalid();
     REQUIRE_FALSE(invalid.isValid());
 }
