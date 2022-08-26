@@ -11,6 +11,10 @@ class SurfaceInteraction {
     Vector3f point;
     Vector3f normal;
     Ray ray;
+
+    Ray spawnRayFromSurface(const Vector3f &direction) const;
+
+    Ray spawnReflectionRayFromSurface() const;
 };
 
 }

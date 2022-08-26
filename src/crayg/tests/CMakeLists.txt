@@ -46,6 +46,7 @@ set(UNIT_TEST_LIST
         TestSceneReaderFactory.cpp
         TestSceneWriterFactory.cpp
         TestSphere.cpp
+        TestSurfaceInteraction.cpp
         TestTeeOutputDriver.cpp
         TestToStringHelper.cpp
         TestTransform.cpp
