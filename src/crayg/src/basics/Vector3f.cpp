@@ -71,13 +71,17 @@ bool Vector3f::isValid() const {
   return x != max && y != max && z != max;
 }
 std::ostream &operator<<(std::ostream &os, const Vector3f &f) {
-  os << ToStringHelper("Vector3f")
-            .addMember("x", f.x)
-            .addMember("y", f.y)
-            .addMember("z", f.z)
-            .finish();
-  return os;
+    os << ToStringHelper("Vector3f")
+        .addMember("x", f.x)
+        .addMember("y", f.y)
+        .addMember("z", f.z)
+        .finish();
+    return os;
 }
 Vector3f Vector3f::invert() const { return {x * -1, y * -1, z * -1}; }
+
+Vector3f Vector3f::reflect(const Vector3f &normal) const {
+    return (*this) - (normal * 2 * (this->dot(normal)));
+}
 
 } // namespace crayg

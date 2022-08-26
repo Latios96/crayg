@@ -39,6 +39,8 @@ class Vector3f {
 
     Vector3f cross(const Vector3f &otherVector) const;
 
+    Vector3f reflect(const Vector3f &normal) const;
+
     static Vector3f createInvalid();
 
     bool isValid() const;

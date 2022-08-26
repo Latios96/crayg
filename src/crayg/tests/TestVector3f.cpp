@@ -113,4 +113,23 @@ TEST_CASE("Vector3f::shouldBeInvalid") {
     REQUIRE_FALSE(invalid.isValid());
 }
 
+TEST_CASE("Vector3f::reflect") {
+
+    SECTION("should reflect vector correctly") {
+        const Vector3f vectorToReflect = Vector3f(0, -1, 1);
+
+        const Vector3f result = vectorToReflect.reflect({0, 1, 0});
+
+        REQUIRE(result == Vector3f(0, 1, 1));
+    }
+
+    SECTION("should exactly at normal correctly") {
+        const Vector3f vectorToReflect = Vector3f(0, -1, 0);
+
+        const Vector3f result = vectorToReflect.reflect({0, 1, 0});
+
+        REQUIRE(result == Vector3f(0, 1, 0));
+    }
+}
+
 }
