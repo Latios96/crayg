@@ -10,8 +10,18 @@ class UsdPreviewSurface : public Material {
     Color getDiffuseColor() override;
     Color evaluate(const SurfaceInteraction &surfaceInteraction) override;
     std::string getType() override;
- private:
-    Color diffuseColor;
+
+    Color diffuseColor = Color::createGrey(0.18);
+    Color emissiveColor = Color::createBlack();
+    bool useSpecularWorkflow = false;
+    Color specularColor = Color::createBlack();
+    float metallic = 0;
+    float roughness = 0.5f;
+    float clearcoat = 0;
+    float clearcoatRoughness = 0.01f;
+    float opacity = 1;
+    float opacityThreshold = 0;
+    float ior = 1.5;
 };
 
 } // namespace crayg
