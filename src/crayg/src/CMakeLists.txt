@@ -50,6 +50,8 @@ set(crayg_SRCS
         integrators/IntegratorType.h
         integrators/RaytracingIntegrator.cpp
         integrators/RaytracingIntegrator.h
+        integrators/SurfaceInteraction.cpp
+        integrators/SurfaceInteraction.h
         intersectors/BvhBuilder.cpp
         intersectors/BvhBuilder.h
         intersectors/BvhNode.cpp

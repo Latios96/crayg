@@ -2,19 +2,11 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_MATERIAL_H_
 
 #include "ShadingNode.h"
+#include "integrators/SurfaceInteraction.h"
 #include <basics/Color.h>
 #include <basics/Ray.h>
 
 namespace crayg {
-
-class SurfaceInteraction {
-public:
-  SurfaceInteraction(const Vector3f &point, const Vector3f &normal,
-                     const Ray &ray);
-  Vector3f point;
-  Vector3f normal;
-  Ray ray;
-};
 
 class Material : public ShadingNode {
  public:
