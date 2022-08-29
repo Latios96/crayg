@@ -6,6 +6,7 @@ namespace crayg {
 class UsdPreviewSurface : public Material {
  public:
     explicit UsdPreviewSurface(const Color &diffuseColor);
+    explicit UsdPreviewSurface(const std::string &name);
     UsdPreviewSurface(const std::string &name, const Color &diffuseColor);
     Color evaluate(const SurfaceInteraction &surfaceInteraction) override;
     std::string getType() override;
