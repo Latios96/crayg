@@ -1,4 +1,5 @@
 import os.path
+import pymel.core as pm
 
 from .scene_repository import SceneRepository
 from .test_scenes_inspector_widget import TestScenesInspectorWidget
@@ -12,6 +13,8 @@ def _get_tests_root_folder():
 
 
 def show(handler=None, use_maya_parent=True):
+    pm.loadPlugin("mayaUsdPlugin")
+
     scene_repository = SceneRepository(_get_tests_root_folder())
     if not handler:
         from .maya_handler import MayaHandler
