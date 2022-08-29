@@ -22,6 +22,7 @@ class UsdPreviewSurface : public Material {
     float opacity = 1;
     float opacityThreshold = 0;
     float ior = 1.5;
+    Color getReflectivity() const;
 };
 
 } // namespace crayg

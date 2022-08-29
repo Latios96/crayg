@@ -156,6 +156,14 @@
             "method": "SSIM",
             "threshold": 0.95
           }
+        },
+        {
+          "name": "SimpleReflectiveMaterial",
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         }
       ]
     }
