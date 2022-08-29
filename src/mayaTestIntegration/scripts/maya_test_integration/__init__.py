@@ -6,7 +6,7 @@ from .test_scenes_inspector_widget import TestScenesInspectorWidget
 
 def _get_tests_root_folder():
     path = __file__
-    for i in range(3):
+    for i in range(4):
         path = os.path.dirname(path)
     return os.path.join(path, "crayg", "integrationTests")
 
