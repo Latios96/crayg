@@ -10,7 +10,7 @@ class UnsupportedMaterial : public Material {
  public:
     explicit UnsupportedMaterial(const std::string &name) : Material(name) {}
 
-    Color evaluate(const SurfaceInteraction &surfaceInteraction) override {
+    Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) override {
         return {};
     }
     std::string getType() override {

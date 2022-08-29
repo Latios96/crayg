@@ -10,7 +10,7 @@ UsdPreviewSurface::UsdPreviewSurface(const std::string &name)
 UsdPreviewSurface::UsdPreviewSurface(const std::string &name, const Color &diffuseColor)
     : Material(name), diffuseColor(diffuseColor) {}
 
-Color UsdPreviewSurface::evaluate(const SurfaceInteraction &surfaceInteraction) {
+Color UsdPreviewSurface::evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) {
     return diffuseColor;
 }
 std::string UsdPreviewSurface::getType() {

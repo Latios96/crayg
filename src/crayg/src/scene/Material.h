@@ -3,6 +3,7 @@
 
 #include "ShadingNode.h"
 #include "integrators/SurfaceInteraction.h"
+#include "integrators/IntegratorContext.h"
 #include <basics/Color.h>
 #include <basics/Ray.h>
 
@@ -12,7 +13,7 @@ class Material : public ShadingNode {
  public:
     explicit Material();
     explicit Material(const std::string &name);
-    virtual Color evaluate(const SurfaceInteraction &surfaceInteraction) = 0;
+    virtual Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) = 0;
     virtual std::string getType() = 0;
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override;
     PlugPtr getPlugByName(const std::string &inputPlugName) override;
