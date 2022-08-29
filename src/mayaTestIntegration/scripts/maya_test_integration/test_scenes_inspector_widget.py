@@ -49,15 +49,15 @@ class TestScenesInspectorWidget(QtWidgets.QWidget):
     def _populate(self):
         items = []
         for suite in self._scene_repository.list_suites():
-            item = QTreeWidgetItem([suite.name])
-            item.setData(0, 50, suite)
+            suite_item = QTreeWidgetItem([suite.name])
+            suite_item.setData(0, 50, suite)
             for test in suite.tests:
-                child = QTreeWidgetItem([test.name])
-                child.setIcon(0, QtGui.QIcon(test.reference_image_path))
-                child.setData(0, 50, suite)
-                child.setData(0, 60, test)
-                item.addChild(child)
-            items.append(item)
+                test_item = QTreeWidgetItem([test.name])
+                test_item.setIcon(0, QtGui.QIcon(test.reference_image_path))
+                test_item.setData(0, 50, suite)
+                test_item.setData(0, 60, test)
+                suite_item.addChild(test_item)
+            items.append(suite_item)
 
         self._tree_view.clear()
         self._tree_view.insertTopLevelItems(0, items)
