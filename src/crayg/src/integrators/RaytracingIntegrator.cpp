@@ -6,27 +6,31 @@ RaytracingIntegrator::RaytracingIntegrator(Scene &scene, const std::shared_ptr<S
     : AbstractIntegrator(scene, sceneIntersector) {
 }
 
-Color RaytracingIntegrator::integrate(const Ray &ray, int depth) {
-  auto intersection = sceneIntersector->intersect(ray);
+Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
+    if (recursionDepth == RaytracingIntegrator::MAX_RECURSION_DEPTH) {
+        return Color::createBlack();
+    }
 
-  const bool hasHit = intersection.imageable != nullptr;
-  if (!hasHit) {
-    return Color::createBlack();
-  }
+    auto intersection = sceneIntersector->intersect(ray);
 
-  const Vector3f location =
-      ray.constructIntersectionPoint(intersection.rayParameter);
-  Imageable &object = *intersection.imageable;
-  const Vector3f normal = object.getNormal(location);
-  const SurfaceInteraction surfaceInteraction =
-      SurfaceInteraction(location, normal, ray);
-  Color shadedColor = object.getMaterial()->evaluate(surfaceInteraction);
+    const bool hasHit = intersection.imageable != nullptr;
+    if (!hasHit) {
+        return Color::createBlack();
+    }
 
-  Color radiance = Color::createBlack();
-  for (auto &light : scene.lights) {
-    radiance = radiance + calculateDirectLight(light, location, normal);
-  }
-  return shadedColor * radiance;
+    const Vector3f location =
+        ray.constructIntersectionPoint(intersection.rayParameter);
+    Imageable &object = *intersection.imageable;
+    const Vector3f normal = object.getNormal(location);
+    const SurfaceInteraction surfaceInteraction =
+        SurfaceInteraction(location, normal, ray);
+    Color shadedColor = object.getMaterial()->evaluate(surfaceInteraction);
+
+    Color radiance = Color::createBlack();
+    for (auto &light: scene.lights) {
+        radiance = radiance + calculateDirectLight(light, location, normal);
+    }
+    return shadedColor * radiance;
 }
 
 Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,

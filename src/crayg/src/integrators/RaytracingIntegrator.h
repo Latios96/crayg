@@ -11,6 +11,8 @@ class RaytracingIntegrator : public AbstractIntegrator {
     RaytracingIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector);
     Color integrate(const Ray &ray, int recursionDepth) override;
     Color calculateDirectLight(std::shared_ptr<Light> &sharedPtr, const Vector3f &f, const Vector3f &f1);
+ private:
+    static const int MAX_RECURSION_DEPTH = 6;
 };
 
 } // crayg
