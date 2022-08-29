@@ -6,9 +6,6 @@ RaytracingIntegrator::RaytracingIntegrator(Scene &scene, const std::shared_ptr<S
     : AbstractIntegrator(scene, sceneIntersector) {
 }
 
-Color RaytracingIntegrator::integrate(const Ray &ray) {
-    return integrate(ray, 0);
-}
 Color RaytracingIntegrator::integrate(const Ray &ray, int depth) {
   auto intersection = sceneIntersector->intersect(ray);
 

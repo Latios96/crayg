@@ -10,7 +10,7 @@ namespace crayg {
 class AbstractIntegrator {
  public:
     explicit AbstractIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector);
-    virtual Color integrate(const Ray &ray) = 0;
+    virtual Color integrate(const Ray &ray, int recursionDepth) = 0;
     virtual ~AbstractIntegrator();
  protected:
     Scene &scene;

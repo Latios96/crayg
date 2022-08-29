@@ -5,7 +5,7 @@ namespace crayg {
 DebugIntegrator::DebugIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector)
     : AbstractIntegrator(scene, sceneIntersector) {}
 
-Color DebugIntegrator::integrate(const Ray &ray) {
+Color DebugIntegrator::integrate(const Ray &ray, int recursionDepth) {
     auto intersection = sceneIntersector->intersect(ray);
 
     const bool hasHit = intersection.imageable != nullptr;

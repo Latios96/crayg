@@ -100,7 +100,7 @@ Color Renderer::renderPixel(const PixelPosition &pixel) {
 
 Color Renderer::renderSample(float x, float y) {
     Ray ray = cameraModel->createPrimaryRay(x, y);
-    return integrator->integrate(ray);
+    return integrator->integrate(ray, 0);
 
 }
 

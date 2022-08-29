@@ -22,7 +22,7 @@ TEST_CASE("DebugIntegrator::integrate") {
         auto sceneIntersector = std::shared_ptr<SceneIntersector>(&mockSceneIntersector.get());
         DebugIntegrator debugIntegrator(scene, sceneIntersector);
 
-        Color integratedColor = debugIntegrator.integrate(Ray(std::get<0>(testData), {0, 0, 1}));
+        Color integratedColor = debugIntegrator.integrate(Ray(std::get<0>(testData), {0, 0, 1}), 0);
 
         REQUIRE(integratedColor == std::get<1>(testData));
     }
@@ -33,7 +33,7 @@ TEST_CASE("DebugIntegrator::integrate") {
         auto sceneIntersector = std::shared_ptr<SceneIntersector>(&mockSceneIntersector.get());
         DebugIntegrator debugIntegrator(scene, sceneIntersector);
 
-        Color integratedColor = debugIntegrator.integrate(Ray({0, 0, 0}, {0, 0, 1}));
+        Color integratedColor = debugIntegrator.integrate(Ray({0, 0, 0}, {0, 0, 1}), 0);
 
         REQUIRE(integratedColor == Color::createBlack());
     }

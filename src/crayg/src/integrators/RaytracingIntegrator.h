@@ -9,8 +9,7 @@ namespace crayg {
 class RaytracingIntegrator : public AbstractIntegrator {
  public:
     RaytracingIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector);
-    Color integrate(const Ray &ray) override;
-    Color integrate(const Ray &ray, int depth);
+    Color integrate(const Ray &ray, int recursionDepth) override;
     Color calculateDirectLight(std::shared_ptr<Light> &sharedPtr, const Vector3f &f, const Vector3f &f1);
 };
 
