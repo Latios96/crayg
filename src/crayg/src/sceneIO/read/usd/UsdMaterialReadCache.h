@@ -3,6 +3,8 @@
 
 #include "scene/Material.h"
 #include "sceneIO/usd/CraygUsdBase.h"
+#include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/usd/UsdConversions.h"
 #include <pxr/usd/usdShade/materialBindingAPI.h>
 #include <pxr/usd/usd/schemaBase.h>
 
@@ -19,8 +21,33 @@ class UsdMaterialReadCache {
     std::shared_ptr<Material> createDefaultMaterial();
     std::shared_ptr<Material> getDefaultMaterial();
 
+    template<typename T, typename UsdType>
+    void readShaderAttributeValue(const pxr::UsdShadeShader &shader, const std::string &attributeName, T &target);
+
+    template<typename T, typename UsdType>
+    T readValue(const pxr::UsdShadeInput &input);
+
     std::map<pxr::SdfPath, std::shared_ptr<Material>> materialCache;
 };
+
+template<typename T, typename UsdType>
+void UsdMaterialReadCache::readShaderAttributeValue(const pxr::UsdShadeShader &shader,
+                                                    const std::string &attributeName,
+                                                    T &target) {
+    auto input = shader.GetInput(pxr::TfToken(attributeName));
+
+    if (!input || input.HasConnectedSource()) {
+        return;
+    }
+
+    target = readValue<T, UsdType>(input);
+
+}
+template<typename T, typename UsdType>
+T UsdMaterialReadCache::readValue(const pxr::UsdShadeInput &input) {
+    auto value = UsdUtils::getAttributeValueAs<UsdType>(input);
+    return UsdConversions::convert(value);
+}
 
 }
 

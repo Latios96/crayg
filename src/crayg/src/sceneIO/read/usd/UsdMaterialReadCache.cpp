@@ -37,14 +37,20 @@ std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::Usd
         return getDefaultMaterial();
     }
 
-    Color color(0.18, 0.18, 0.18);
-    auto diffuseColorInput = shader.GetInput(pxr::TfToken("diffuseColor"));
-    if (diffuseColorInput && !diffuseColorInput.HasConnectedSource()) {
-        auto usdColor = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(diffuseColorInput);
-        color = UsdConversions::convertColor(usdColor);
-    }
+    auto material = std::make_shared<UsdPreviewSurface>(usdShadeMaterial.GetPath().GetString());
 
-    auto material = std::make_shared<UsdPreviewSurface>(usdShadeMaterial.GetPath().GetString(), color);
+    readShaderAttributeValue<Color, pxr::GfVec3f>(shader, "diffuseColor", material->diffuseColor);
+    readShaderAttributeValue<Color, pxr::GfVec3f>(shader, "emissiveColor", material->emissiveColor);
+    readShaderAttributeValue<bool, int>(shader, "useSpecularWorkflow", material->useSpecularWorkflow);
+    readShaderAttributeValue<Color, pxr::GfVec3f>(shader, "specularColor", material->specularColor);
+    readShaderAttributeValue<float, float>(shader, "metallic", material->metallic);
+    readShaderAttributeValue<float, float>(shader, "roughness", material->roughness);
+    readShaderAttributeValue<float, float>(shader, "clearcoat", material->clearcoat);
+    readShaderAttributeValue<float, float>(shader, "clearcoatRoughness", material->clearcoatRoughness);
+    readShaderAttributeValue<float, float>(shader, "opacity", material->opacity);
+    readShaderAttributeValue<float, float>(shader, "opacityThreshold", material->opacityThreshold);
+    readShaderAttributeValue<float, float>(shader, "ior", material->ior);
+
     return material;
 }
 
@@ -60,6 +66,23 @@ UsdMaterialReadCache::UsdMaterialReadCache() {
 }
 std::shared_ptr<Material> UsdMaterialReadCache::getDefaultMaterial() {
     return materialCache[pxr::SdfPath()];
+}
+
+template<>
+Color UsdMaterialReadCache::readValue<Color, pxr::GfVec3f>(const pxr::UsdShadeInput &input) {
+    auto value = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(input);
+    return UsdConversions::convertColor(value);
+}
+
+template<>
+bool UsdMaterialReadCache::readValue<bool, int>(const pxr::UsdShadeInput &input) {
+    auto value = UsdUtils::getAttributeValueAs<int>(input);
+    return value != 0;
+}
+
+template<>
+float UsdMaterialReadCache::readValue<float, float>(const pxr::UsdShadeInput &input) {
+    return UsdUtils::getAttributeValueAs<float>(input);
 }
 
 }
