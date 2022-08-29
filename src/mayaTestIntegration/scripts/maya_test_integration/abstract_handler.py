@@ -10,3 +10,6 @@ class AbstractHandler:
 
     def save_as_new(self, test):
         raise NotImplementedError()
+
+    def is_current_test(self, test):
+        raise NotImplementedError()

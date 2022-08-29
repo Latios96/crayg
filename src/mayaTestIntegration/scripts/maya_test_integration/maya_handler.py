@@ -1,3 +1,5 @@
+import os
+
 import pymel.core as pm
 
 from .abstract_handler import AbstractHandler
@@ -18,3 +20,6 @@ class MayaHandler(AbstractHandler):
 
     def save_as_new(self, test):
         pm.saveAs(test.maya_scene_path, type="mayaAscii")
+
+    def is_current_test(self, test):
+        return os.path.normpath(test.maya_scene_path) == os.path.normpath(pm.sceneName())

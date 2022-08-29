@@ -48,6 +48,8 @@ class TestScenesInspectorWidget(QtWidgets.QWidget):
 
     def _populate(self):
         items = []
+        selected_suite_item = None
+        selected_test_item = None
         for suite in self._scene_repository.list_suites():
             suite_item = QTreeWidgetItem([suite.name])
             suite_item.setData(0, 50, suite)
@@ -57,10 +59,16 @@ class TestScenesInspectorWidget(QtWidgets.QWidget):
                 test_item.setData(0, 50, suite)
                 test_item.setData(0, 60, test)
                 suite_item.addChild(test_item)
+                if self._maya_handler.is_current_test(test):
+                    selected_suite_item = suite_item
+                    selected_test_item = test_item
             items.append(suite_item)
 
         self._tree_view.clear()
         self._tree_view.insertTopLevelItems(0, items)
+        if selected_suite_item and selected_test_item:
+            selected_suite_item.setExpanded(True)
+            selected_test_item.setSelected(True)
 
     def _selection_changed(self):
         self._enable_or_disable_buttons(bool(self._tree_view.selectedItems()))
