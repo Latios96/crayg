@@ -6,19 +6,35 @@
       "tests": [
         {
           "name": "CornellBox_Glossy",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "CornellBox_Glossy_Floor",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "CornellBox_Original",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "CornellBox_Sphere",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         }
       ]
     },
@@ -27,11 +43,19 @@
       "tests": [
         {
           "name": "SpherePrimitive",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "CorrectNormalTransformation",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         }
       ]
     },
@@ -40,15 +64,27 @@
       "tests": [
         {
           "name": "writeBmpImage",
-          "command": "{@cray_integration_test_command}"
+          "command": "{@cray_integration_test_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "writeExrImage",
-          "command": "{@cray_integration_test_command}"
+          "command": "{@cray_integration_test_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "writeToImageOutputDriver",
-          "command": "{@cray_integration_test_command}"
+          "command": "{@cray_integration_test_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         }
       ]
     },
@@ -57,7 +93,11 @@
       "tests": [
         {
           "name": "sceneWriteReadRendersCorrectly",
-          "command": "{@cray_integration_test_command}"
+          "command": "{@cray_integration_test_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         }
       ]
     },
@@ -66,23 +106,43 @@
       "tests": [
         {
           "name": "MultipleColoredPointLights",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "MultiplePointLights",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "SingleDiskLight",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "SinglePointLight",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         },
         {
           "name": "SingleRectLight",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         }
       ]
     },
@@ -91,7 +151,11 @@
       "tests": [
         {
           "name": "SimpleDiffuseMaterial",
-          "command": "{@crayg_render_command}"
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
         }
       ]
     }
