@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <samplers/UnitSphereSampler.h>
+#include <sampling/UnitSphereSampler.h>
 
 namespace crayg {
 

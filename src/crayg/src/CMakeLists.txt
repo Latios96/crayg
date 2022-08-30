@@ -70,8 +70,8 @@ set(crayg_SRCS
         PineHoleCameraModel.h
         Renderer.cpp
         Renderer.h
-        samplers/UnitSphereSampler.cpp
-        samplers/UnitSphereSampler.h
+        sampling/UnitSphereSampler.cpp
+        sampling/UnitSphereSampler.h
         scene/AreaLight.cpp
         scene/AreaLight.h
         scene/Camera.cpp
