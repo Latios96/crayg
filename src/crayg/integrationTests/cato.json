@@ -2,6 +2,27 @@
   "projectName": "Crayg Integration Tests",
   "suites": [
     {
+      "name": "AmbientOcclusionIntegrator",
+      "tests": [
+        {
+          "name": "SpherePrimitiveAO",
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.90
+          }
+        },
+        {
+          "name": "CorrectNormalTransformationAO",
+          "command": "{@crayg_render_command}",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.95
+          }
+        }
+      ]
+    },
+    {
       "name": "CornellBox",
       "tests": [
         {

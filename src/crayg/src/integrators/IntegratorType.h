@@ -5,7 +5,7 @@
 
 namespace crayg {
 
-enum class IntegratorType { RAYTRACING = 1, DEBUG = 2 };
+enum class IntegratorType { RAYTRACING = 1, DEBUG = 2, AMBIENT_OCCLUSION = 3 };
 
 }
 

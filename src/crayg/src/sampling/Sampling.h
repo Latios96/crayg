@@ -8,6 +8,8 @@ class Sampling {
  public:
     static Vector3f uniformSampleHemisphere();
     static Vector3f uniformSampleHemisphere(float u, float v);
+    static Vector3f uniformSampleSphere();
+    static Vector3f uniformSampleSphere(float u, float v);
 };
 
 } // crayg

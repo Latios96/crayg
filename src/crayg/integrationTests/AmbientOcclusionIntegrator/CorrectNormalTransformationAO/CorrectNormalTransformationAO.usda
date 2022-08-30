@@ -1,0 +1,16 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../../Geometry/CorrectNormalTransformation/CorrectNormalTransformation.usda@
+    ]
+)
+
+
+
+over "Render"
+{
+    over "settings"
+    {
+        custom token integratorType = "AMBIENT_OCCLUSION"
+    }
+}

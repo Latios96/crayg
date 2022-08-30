@@ -46,6 +46,8 @@ set(crayg_SRCS
         image/TeeOutputDriver.h
         integrators/AbstractIntegrator.cpp
         integrators/AbstractIntegrator.h
+        integrators/AmbientOcclusionIntegrator.cpp
+        integrators/AmbientOcclusionIntegrator.h
         integrators/DebugIntegrator.cpp
         integrators/DebugIntegrator.h
         integrators/IntegratorContext.cpp
