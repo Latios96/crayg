@@ -9,7 +9,7 @@
           "command": "{@crayg_render_command}",
           "comparisonSettings": {
             "method": "SSIM",
-            "threshold": 0.90
+            "threshold": 0.85
           }
         },
         {
