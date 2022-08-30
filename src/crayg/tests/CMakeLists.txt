@@ -34,6 +34,7 @@ set(UNIT_TEST_LIST
         TestMatrix4x4f.cpp
         TestNode.cpp
         TestOpenImageIoImageWriter.cpp
+        TestOrthonormalBasis.cpp
         TestPreconditions.cpp
         TestProgressReporter.cpp
         TestRay.cpp

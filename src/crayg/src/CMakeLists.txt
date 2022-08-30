@@ -7,6 +7,8 @@ set(crayg_SRCS
         basics/Color.h
         basics/Matrix4x4f.cpp
         basics/Matrix4x4f.h
+        basics/OrthonormalBasis.cpp
+        basics/OrthonormalBasis.h
         basics/Ray.cpp
         basics/Ray.h
         basics/Resolution.cpp
