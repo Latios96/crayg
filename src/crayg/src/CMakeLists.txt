@@ -53,6 +53,8 @@ set(crayg_SRCS
         integrators/IntegratorContext.cpp
         integrators/IntegratorContext.h
         integrators/IntegratorFactory.h
+        integrators/IntegratorSettings.cpp
+        integrators/IntegratorSettings.h
         integrators/IntegratorType.h
         integrators/RaytracingIntegrator.cpp
         integrators/RaytracingIntegrator.h

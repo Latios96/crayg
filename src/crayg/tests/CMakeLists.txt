@@ -29,6 +29,7 @@ set(UNIT_TEST_LIST
         TestImagePathResolver.cpp
         TestImageWriters.cpp
         TestIntegratorContext.cpp
+        TestIntegratorSettings.cpp
         TestLight.cpp
         TestLineByLineIterator.cpp
         TestMatrix4x4f.cpp
