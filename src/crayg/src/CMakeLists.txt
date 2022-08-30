@@ -72,6 +72,8 @@ set(crayg_SRCS
         Renderer.h
         sampling/Random.cpp
         sampling/Random.h
+        sampling/Sampling.cpp
+        sampling/Sampling.h
         sampling/UnitSphereSampler.cpp
         sampling/UnitSphereSampler.h
         scene/AreaLight.cpp
