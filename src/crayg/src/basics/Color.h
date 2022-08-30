@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include <tuple>
+#include "sampling/Random.h"
 
 namespace crayg {
 
@@ -35,9 +36,9 @@ class Color {
     }
 
     static Color createRandom() {
-        return {((float) rand() / (RAND_MAX)),
-                ((float) rand() / (RAND_MAX)),
-                ((float) rand() / (RAND_MAX))};
+        return {Random::random(),
+                Random::random(),
+                Random::random()};
     }
 
     /**

@@ -11,8 +11,8 @@ RectLight::RectLight(const Transform &transform, float intensity, float width, f
                                                                                                height(height) {}
 
 Vector3f RectLight::sampleLightShape() const {
-    float positionByWidth = ((float) rand() / (RAND_MAX)) * width - width / 2;
-    float positionByHeight = ((float) rand() / (RAND_MAX)) * height - height / 2;
+    float positionByWidth = Random::random() * width - width / 2;
+    float positionByHeight = Random::random() * height - height / 2;
     Vector3f positionOnPlane = {positionByWidth, positionByHeight, 0};
     const Vector3f samplePosition = getTransform().apply(positionOnPlane);
     return samplePosition;
