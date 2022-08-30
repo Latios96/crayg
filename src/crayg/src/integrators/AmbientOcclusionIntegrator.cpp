@@ -23,13 +23,13 @@ Color AmbientOcclusionIntegrator::integrate(const Ray &ray, int recursionDepth) 
 }
 Color AmbientOcclusionIntegrator::calculateAmbientOcclusionAtPoint(Imageable::Intersection &intersection,
                                                                    const Vector3f &location) const {
-    const auto normal = intersection.imageable->getNormal(location);
+    const auto orthonormalBasis = intersection.imageable->getOrthonormalBasis(location);
 
     const int maxSamples = 8;
     int countClear = 0;
     for (int i = 0; i < maxSamples; i++) {
-        Vector3f direction = Sampling::uniformSampleSphere();
-        if (direction.dot(normal) < 0) direction = direction.invert();
+        Vector3f directionOnHemisphere = Sampling::uniformSampleHemisphere();
+        Vector3f direction = orthonormalBasis.toLocalCoordinates(directionOnHemisphere);
         Ray aoRay(location, direction);
         const auto aoIntersection = sceneIntersector->intersect(aoRay);
         if (aoIntersection.imageable == nullptr

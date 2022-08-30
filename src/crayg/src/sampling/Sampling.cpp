@@ -10,9 +10,8 @@ Vector3f Sampling::uniformSampleHemisphere() {
 Vector3f Sampling::uniformSampleHemisphere(float u, float v) {
     float z = u;
     float r = std::sqrt(std::max((float) 0, (float) 1. - z * z));
-    float phi = 2 * boost::math::constants::pi<double>() * v;
-    return {r * std::cos(phi), r * std::sin(phi), z};
-
+    float phi = 2.0f * boost::math::constants::pi<float>() * v;
+    return {r * std::cos(phi), z, r * std::sin(phi)};
 }
 Vector3f Sampling::uniformSampleSphere() {
     return uniformSampleSphere(Random::random(), Random::random());

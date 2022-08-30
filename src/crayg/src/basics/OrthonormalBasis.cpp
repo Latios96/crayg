@@ -8,14 +8,14 @@ Vector3f OrthonormalBasis::toLocalCoordinates(const Vector3f &vec) const {
     return {u * vec.x + v * vec.y + w * vec.z};
 }
 OrthonormalBasis::OrthonormalBasis(const Vector3f &normal) {
-    w = normal;
-    Vector3f a(0, 1, 0);
+    v = normal;
+    Vector3f a(0, 0, 1);
     float d = normal.dot(a);
-    if (std::abs(d) <= 1) {
-        a = Vector3f(1, 0, 0);
+    if (std::abs(d) > 0.50) {
+        a = Vector3f(0, -1, 0);
     }
-    v = normal.cross(a);
-    u = normal.cross(v);
+    u = normal.cross(a);
+    w = u.cross(v);
 }
 bool OrthonormalBasis::operator==(const OrthonormalBasis &rhs) const {
     return u == rhs.u &&
