@@ -6,12 +6,14 @@
 #include <memory>
 #include <basics/BoundingBox.h>
 #include "Material.h"
+#include "basics/OrthonormalBasis.h"
 
 namespace crayg {
 
 class Imageable : public std::enable_shared_from_this<Imageable> {
  public:
     virtual Vector3f getNormal(Vector3f point) = 0;
+    virtual OrthonormalBasis getOrthonormalBasis(const Vector3f &point);
 
     class Intersection {
      public:

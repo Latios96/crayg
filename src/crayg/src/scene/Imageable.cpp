@@ -21,5 +21,8 @@ std::shared_ptr<Material> Imageable::getMaterial() const {
 void Imageable::setMaterial(const std::shared_ptr<Material> &material) {
     Imageable::material = material;
 }
+OrthonormalBasis Imageable::getOrthonormalBasis(const Vector3f &point) {
+    return OrthonormalBasis(getNormal(point));
+}
 
 }
