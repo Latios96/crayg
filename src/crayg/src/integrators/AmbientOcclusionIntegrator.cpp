@@ -1,6 +1,5 @@
 #include "AmbientOcclusionIntegrator.h"
 #include "sampling/Sampling.h"
-#include "Logger.h"
 
 namespace crayg {
 
