@@ -13,6 +13,9 @@ class UsdRenderSettingsWriter {
     pxr::UsdRenderSettings write(pxr::UsdStagePtr stage);
  private:
     RenderSettings renderSettings;
+    void writeResolution(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeMaxSamples(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeIntegratorType(const pxr::UsdRenderSettings &usdRenderSettings) const;
 };
 
 } // crayg

@@ -11,14 +11,23 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
 
     auto usdRenderSettings = pxr::UsdRenderSettings::Define(stage, pxr::SdfPath("/Render/settings"));
 
-    usdRenderSettings.GetResolutionAttr().Set(pxr::GfVec2i(renderSettings.resolution.getWidth(),
-                                                           renderSettings.resolution.getHeight()));
-    usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("maxSamples"), pxr::SdfValueTypeNames->Int).Set(
-        renderSettings.maxSamples);
-    usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("integratorType"), pxr::SdfValueTypeNames->Token).Set(
-        pxr::TfToken(std::string(magic_enum::enum_name(renderSettings.integratorType))));
+    writeResolution(usdRenderSettings);
+    writeMaxSamples(usdRenderSettings);
+    writeIntegratorType(usdRenderSettings);
 
     return usdRenderSettings;
+}
+void UsdRenderSettingsWriter::writeIntegratorType(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("integratorType"), pxr::SdfValueTypeNames->Token).Set(
+        pxr::TfToken(std::string(magic_enum::enum_name(renderSettings.integratorType))));
+}
+void UsdRenderSettingsWriter::writeMaxSamples(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("maxSamples"), pxr::SdfValueTypeNames->Int).Set(
+        renderSettings.maxSamples);
+}
+void UsdRenderSettingsWriter::writeResolution(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    usdRenderSettings.GetResolutionAttr().Set(pxr::GfVec2i(renderSettings.resolution.getWidth(),
+                                                           renderSettings.resolution.getHeight()));
 }
 
 } // crayg
