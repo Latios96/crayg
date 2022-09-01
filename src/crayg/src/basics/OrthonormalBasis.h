@@ -18,7 +18,6 @@ class OrthonormalBasis {
     bool operator==(const OrthonormalBasis &rhs) const;
     bool operator!=(const OrthonormalBasis &rhs) const;
 
-    template<typename OStream>
     friend std::ostream &operator<<(std::ostream &os, const OrthonormalBasis &basis) {
         os << ToStringHelper("OrthonormalBasis")
             .addMember("u", basis.u)

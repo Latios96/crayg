@@ -43,7 +43,6 @@ class Camera : public Transformable {
     bool operator==(const Camera &rhs) const;
     bool operator!=(const Camera &rhs) const;
 
-    //template<typename OStream>
     friend std::ostream &operator<<(std::ostream &os, const Camera &camera) {
         os << ToStringHelper("Camera")
             .addMember("transform", camera.transform)

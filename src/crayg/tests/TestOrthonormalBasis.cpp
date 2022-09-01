@@ -15,9 +15,7 @@ TEST_CASE("OrthonormalBasis::construct") {
 
         const auto orthonormalBasis = OrthonormalBasis((std::get<0>(testData)));
 
-        REQUIRE(orthonormalBasis.u == std::get<1>(testData).u);
-        REQUIRE(orthonormalBasis.v == std::get<1>(testData).v);
-        REQUIRE(orthonormalBasis.w == std::get<1>(testData).w);
+        REQUIRE(orthonormalBasis == std::get<1>(testData));
         REQUIRE(orthonormalBasis.u.dot(orthonormalBasis.v) == 0);
         REQUIRE(orthonormalBasis.v.dot(orthonormalBasis.w) == 0);
         REQUIRE(orthonormalBasis.u.dot(orthonormalBasis.w) == 0);
