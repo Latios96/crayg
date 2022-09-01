@@ -146,7 +146,10 @@ TEST_CASE("UsdStageReader::readStageToScene") {
     SECTION("should create default rendersettings if there are no rendersettings in the stage") {
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.renderSettings == RenderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING));
+        REQUIRE(scene.renderSettings == RenderSettings(Resolution(1280, 720),
+                                                       4,
+                                                       IntegratorType::RAYTRACING,
+                                                       IntegratorSettings()));
     }
 
     SECTION("should read rendersettings if defined") {
@@ -156,7 +159,10 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600), 2, IntegratorType::RAYTRACING));
+        REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600),
+                                                       2,
+                                                       IntegratorType::RAYTRACING,
+                                                       IntegratorSettings()));
     }
 
     SECTION("providing a cameraName in translationOptions should use this camera") {

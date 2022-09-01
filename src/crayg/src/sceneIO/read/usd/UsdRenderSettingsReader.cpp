@@ -2,6 +2,7 @@
 #include <pxr/base/gf/vec2i.h>
 #include "sceneIO/usd/UsdUtils.h"
 #include <magic_enum.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 
 namespace crayg {
 
@@ -14,10 +15,12 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     Resolution resolution = readResolution();
     int maxSamples = readMaxSamples();
     IntegratorType integratorType = readIntegratorType();
+    IntegratorSettings integratorSettings = readIntegratorSettings();
 
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
     renderSettings->integratorType = integratorType;
+    renderSettings->integratorSettings = integratorSettings;
 
     return renderSettings;
 }
@@ -59,6 +62,41 @@ IntegratorType crayg::UsdRenderSettingsReader::readIntegratorType() const {
 
 std::string crayg::UsdRenderSettingsReader::getTranslatedType() {
     return "render settings";
+}
+IntegratorSettings UsdRenderSettingsReader::readIntegratorSettings() const {
+    std::unordered_map<std::string, IntegratorSettingsValue> values;
+    for (auto &attribute: usdPrim.GetPrim().GetAttributes()) {
+        if (isIntegratorSettingsAttribute(attribute)) {
+            values[attribute.GetName().GetString()] = readIntegratorSettingsValue(attribute);
+        }
+    }
+    return IntegratorSettings(values);
+}
+bool UsdRenderSettingsReader::isIntegratorSettingsAttribute(const pxr::UsdAttribute &attribute) const {
+    constexpr auto integratorNames = magic_enum::enum_entries<IntegratorType>();
+    const auto attributeName = attribute.GetName().GetString();
+    return std::any_of(integratorNames.begin(), integratorNames.end(), [&attributeName](auto &integratorName) {
+        return boost::algorithm::istarts_with(attributeName, integratorName.second);
+    });
+}
+
+IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(const pxr::UsdAttribute &attribute) const {
+    const bool isIntAttribute = attribute.GetTypeName() == pxr::SdfValueTypeNames->Int;
+    const bool isFloatAttribute = attribute.GetTypeName() == pxr::SdfValueTypeNames->Float;
+    const bool isTokenAttribute = attribute.GetTypeName() == pxr::SdfValueTypeNames->Token;
+
+    if (isIntAttribute) {
+        return {UsdUtils::getAttributeValueAs<int>(attribute)};
+    } else if (isFloatAttribute) {
+        return {UsdUtils::getAttributeValueAs<float>(attribute)};
+    } else if (isTokenAttribute) {
+        return {UsdUtils::getAttributeValueAs<pxr::TfToken>(attribute).GetString()};
+    }
+
+    throw std::runtime_error(fmt::format(
+        "The attribute {} is of type {}, which is not supported. Only token, int and float are suppored as Integrator settings values",
+        attribute.GetName(),
+        attribute.GetTypeName()));
 }
 
 }

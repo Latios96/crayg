@@ -14,18 +14,27 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("maxSamples"), pxr::SdfValueTypeNames->Int).Set(2);
         usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("integratorType"), pxr::SdfValueTypeNames->Token).Set(
             pxr::TfToken("DEBUG"));
+        usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("DEBUG:someToken"), pxr::SdfValueTypeNames->Token).Set(
+            pxr::TfToken("someTokenValue"));
 
         UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
         auto renderSettings = usdRenderSettingsReader.read();
 
-        REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(800, 600), 2, IntegratorType::DEBUG));
+        REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(800, 600),
+                                                  2,
+                                                  IntegratorType::DEBUG,
+                                                  IntegratorSettings({{"DEBUG:someToken",
+                                                                       {std::string("someTokenValue")}}})));
     }
 
     SECTION("should fallback to default values") {
         UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
         auto renderSettings = usdRenderSettingsReader.read();
 
-        REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720), 4, IntegratorType::RAYTRACING));
+        REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720),
+                                                  4,
+                                                  IntegratorType::RAYTRACING,
+                                                  IntegratorSettings()));
     }
 
     SECTION("should parse rendersettings case insensitive") {
@@ -34,7 +43,10 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
         auto renderSettings = usdRenderSettingsReader.read();
 
-        REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720), 4, IntegratorType::DEBUG));
+        REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720),
+                                                  4,
+                                                  IntegratorType::DEBUG,
+                                                  IntegratorSettings()));
     }
 
 }

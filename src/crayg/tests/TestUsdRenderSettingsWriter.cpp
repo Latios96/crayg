@@ -10,7 +10,7 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
 
     SECTION("should write rendersettings correctly") {
-        RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING);
+        RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING, IntegratorSettings());
 
         UsdRenderSettingsWriter usdRenderSettingsWriter(renderSettings);
         usdRenderSettingsWriter.write(stage);

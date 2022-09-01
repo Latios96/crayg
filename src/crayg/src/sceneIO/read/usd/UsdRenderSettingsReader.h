@@ -18,6 +18,9 @@ class UsdRenderSettingsReader : public BaseUsdReader<pxr::UsdRenderSettings, Ren
     Resolution readResolution() const;
     int readMaxSamples() const;
     IntegratorType readIntegratorType() const;
+    IntegratorSettings readIntegratorSettings() const;
+    bool isIntegratorSettingsAttribute(const pxr::UsdAttribute &attribute) const;
+    IntegratorSettingsValue readIntegratorSettingsValue(const pxr::UsdAttribute &attribute) const;
 };
 
 }
