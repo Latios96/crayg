@@ -81,7 +81,8 @@ void Renderer::init() {
     integrator =
         std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(scene.renderSettings.integratorType,
                                                                                 scene,
-                                                                                sceneIntersector));
+                                                                                sceneIntersector,
+                                                                                scene.renderSettings.integratorSettings));
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {

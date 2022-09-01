@@ -15,6 +15,7 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     resolvedRenderSettings.resolution = resolution ? resolution.value() : renderSettings.resolution;
     resolvedRenderSettings.maxSamples = maxSamples ? maxSamples.value() : renderSettings.maxSamples;
     resolvedRenderSettings.integratorType = integratorType ? integratorType.value() : renderSettings.integratorType;
+    resolvedRenderSettings.integratorSettings = renderSettings.integratorSettings;
 
     return resolvedRenderSettings;
 }

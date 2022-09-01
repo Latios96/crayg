@@ -4,8 +4,12 @@
 namespace crayg {
 
 AmbientOcclusionIntegrator::AmbientOcclusionIntegrator(Scene &scene,
-                                                       const std::shared_ptr<SceneIntersector> &sceneIntersector)
-    : AbstractIntegrator(scene, sceneIntersector) {}
+                                                       const std::shared_ptr<SceneIntersector> &sceneIntersector,
+                                                       const IntegratorSettings &integratorSettings)
+    : AbstractIntegrator(scene, sceneIntersector) {
+    sampleCount = std::get<int>(integratorSettings.getOrDefault("AMBIENT_OCCLUSION:sampleCount", {8}));
+    radius = std::get<float>(integratorSettings.getOrDefault("AMBIENT_OCCLUSION:radius", {3.0f}));
+}
 
 Color AmbientOcclusionIntegrator::integrate(const Ray &ray, int recursionDepth) {
     auto intersection = sceneIntersector->intersect(ray);
@@ -24,19 +28,18 @@ Color AmbientOcclusionIntegrator::calculateAmbientOcclusionAtPoint(Imageable::In
                                                                    const Vector3f &location) const {
     const auto orthonormalBasis = intersection.imageable->getOrthonormalBasis(location);
 
-    const int maxSamples = 8;
     int countClear = 0;
-    for (int i = 0; i < maxSamples; i++) {
+    for (int i = 0; i < sampleCount; i++) {
         Vector3f directionOnHemisphere = Sampling::uniformSampleHemisphere();
         Vector3f direction = orthonormalBasis.toLocalCoordinates(directionOnHemisphere);
         Ray aoRay(location, direction);
         const auto aoIntersection = sceneIntersector->intersect(aoRay);
         if (aoIntersection.imageable == nullptr
-            || (aoIntersection.imageable != nullptr && aoIntersection.rayParameter > 3)) {
+            || (aoIntersection.imageable != nullptr && aoIntersection.rayParameter > radius)) {
             countClear++;
         }
     }
-    return Color::createGrey(static_cast<float>(countClear) / static_cast<float>(maxSamples));
+    return Color::createGrey(static_cast<float>(countClear) / static_cast<float>(sampleCount));
 }
 
 } // crayg
