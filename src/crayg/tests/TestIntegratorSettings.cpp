@@ -54,4 +54,31 @@ TEST_CASE("IntegratorSettings::getOrDefault") {
     }
 }
 
+TEST_CASE("IntegratorSettings::==") {
+
+    std::unordered_map<std::string, IntegratorSettingsValue> values;
+    values["INTEGRATOR_NAME:string_value"] = {"my_value"};
+    IntegratorSettings integratorSettings(values);
+    std::unordered_map<std::string, IntegratorSettingsValue> otherValues;
+    otherValues["INTEGRATOR_NAME:string_value"] = {"my_other_value"};
+
+    SECTION("sames values should be equal") {
+        IntegratorSettings otherIntegratorSettings(values);
+
+        REQUIRE(integratorSettings == otherIntegratorSettings);
+    }
+
+    SECTION("different values should not be equal") {
+        IntegratorSettings otherIntegratorSettings(otherValues);
+
+        REQUIRE(integratorSettings != otherIntegratorSettings);
+    }
+
+    SECTION("different keys should not be equal") {
+        IntegratorSettings otherIntegratorSettings;
+
+        REQUIRE(integratorSettings != otherIntegratorSettings);
+    }
+}
+
 }
