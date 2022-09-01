@@ -16,6 +16,7 @@ class UsdRenderSettingsWriter {
     void writeResolution(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeMaxSamples(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeIntegratorType(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeIntegratorSettings(const pxr::UsdRenderSettings &usdRenderSettings) const;
 };
 
 } // crayg

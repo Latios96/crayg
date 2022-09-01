@@ -14,6 +14,7 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
     writeResolution(usdRenderSettings);
     writeMaxSamples(usdRenderSettings);
     writeIntegratorType(usdRenderSettings);
+    writeIntegratorSettings(usdRenderSettings);
 
     return usdRenderSettings;
 }
@@ -28,6 +29,27 @@ void UsdRenderSettingsWriter::writeMaxSamples(const pxr::UsdRenderSettings &usdR
 void UsdRenderSettingsWriter::writeResolution(const pxr::UsdRenderSettings &usdRenderSettings) const {
     usdRenderSettings.GetResolutionAttr().Set(pxr::GfVec2i(renderSettings.resolution.getWidth(),
                                                            renderSettings.resolution.getHeight()));
+}
+void UsdRenderSettingsWriter::writeIntegratorSettings(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    for (const auto &entry: renderSettings.integratorSettings.settings) {
+        switch (entry.second.index()) {
+            case 0:
+                usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken(entry.first),
+                                                            pxr::SdfValueTypeNames->Token).Set(
+                    pxr::TfToken(std::get<std::string>(entry.second)));
+                break;
+            case 1:
+                usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken(entry.first),
+                                                            pxr::SdfValueTypeNames->Int).Set(
+                    std::get<int>(entry.second));
+                break;
+            case 2:
+                usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken(entry.first),
+                                                            pxr::SdfValueTypeNames->Float).Set(
+                    std::get<float>(entry.second));
+                break;
+        }
+    }
 }
 
 } // crayg

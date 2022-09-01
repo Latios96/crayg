@@ -16,7 +16,7 @@ class IntegratorSettings {
     bool operator==(const IntegratorSettings &rhs) const;
     bool operator!=(const IntegratorSettings &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const IntegratorSettings &settings);
- private:
+
     std::unordered_map<std::string, std::variant<std::string, int, float>> settings;
 };
 

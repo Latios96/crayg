@@ -10,7 +10,9 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
 
     SECTION("should write rendersettings correctly") {
-        RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING, IntegratorSettings());
+        RenderSettings renderSettings
+            (Resolution(1280, 720), 4, IntegratorType::RAYTRACING, IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount",
+                                                                                        {8}}}));
 
         UsdRenderSettingsWriter usdRenderSettingsWriter(renderSettings);
         usdRenderSettingsWriter.write(stage);
@@ -23,9 +25,13 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
         pxr::TfToken integratorType =
             UsdUtils::getAttributeValueAs<pxr::TfToken>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
                 "integratorType")));
+        const int sampleCount =
+            UsdUtils::getAttributeValueAs<int>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
+                "AMBIENT_OCCLUSION:sampleCount")));
         REQUIRE(resolution == pxr::GfVec2i(1280, 720));
         REQUIRE(maxSamples == 4);
         REQUIRE(integratorType == pxr::TfToken("RAYTRACING"));
+        REQUIRE(sampleCount == 8);
     }
 
 }
