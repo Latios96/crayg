@@ -14,22 +14,11 @@ class Image {
     int width, height;
     float *values;
 
-    /**
-     * Computes the index in the 1D-array from x and y.
-     * @param x x coordinate
-     * @param y x coordinate
-     * @return index in the 1d array
-     */
     int index(int x, int y) const {
         return (x + width * y) * 3;
     }
 
  public:
-    /**
-     * Creates a new Image of given dimensions. All Pixel values are initialized to 0.
-     * @param width width of the new image
-     * @param height height of the new image
-     */
     Image(int width, int height);
     Image(const Resolution &resolution);
 
