@@ -56,10 +56,10 @@ TEST_CASE("DiskLight::sampleLightShape") {
 
 TEST_CASE("DiskLight isIntersecting", "[DiskLight]") {
 
-    DiskLight diskLight(Transform::withPosition({-3, 0, 0}), 1.0f, 1.0f);
+    DiskLight diskLight(Transform::withPosition({0, 0, -3}), 1.0f, 1.0f);
 
     SECTION("front should intersect") {
-        const Ray ray = {{0, 0, 0}, {-1, 0, 0}};
+        const Ray ray = {{0, 0, 0}, {0, 0, -1}};
 
         const bool isIntersecting = diskLight.isIntersecting(ray);
 
@@ -78,10 +78,10 @@ TEST_CASE("DiskLight isIntersecting", "[DiskLight]") {
 
 TEST_CASE("DiskLight intersect", "[DiskLight]") {
 
-    std::shared_ptr<DiskLight> diskLight = std::make_shared<DiskLight>(Transform::withPosition({-3, 0, 0}), 1.0f, 1.0f);
+    std::shared_ptr<DiskLight> diskLight = std::make_shared<DiskLight>(Transform::withPosition({0, 0, -3}), 1.0f, 1.0f);
 
     SECTION("front should intersect") {
-        const Ray ray = {{0, 0, 0}, {-1, 0, 0}};
+        const Ray ray = {{0, 0, 0}, {0, 0, -1}};
 
         const Imageable::Intersection intersection = diskLight->intersect(ray);
 

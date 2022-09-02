@@ -11,11 +11,11 @@ Vector3f DiskLight::sampleLightShape() const {
     return getTransform().apply(positionOnPlane);
 }
 Vector3f DiskLight::getNormal(Vector3f point) {
-    return transform.applyForNormal({1, 0, 0}).normalize();
+    return transform.applyForNormal({0, 0, 1}).normalize();
 }
 Imageable::Intersection DiskLight::intersect(Ray ray) {
-  const Vector3f normal = getNormal({0, 0, 0}).normalize();
-  const Vector3f center = transform.apply({0, 0, 0});
+    const Vector3f normal = transform.applyForNormal(getNormal({0, 0, 0}));
+    const Vector3f center = transform.apply({0, 0, 0});
   if (normal.dot(ray.direction) > 0) {
     return Imageable::Intersection::createInvalid();
   }
@@ -33,8 +33,8 @@ Imageable::Intersection DiskLight::intersect(Ray ray) {
   return Imageable::Intersection::createInvalid();
 }
 bool DiskLight::isIntersecting(Ray ray) {
-  const Vector3f normal = getNormal({0, 0, 0});
-  const Vector3f center = transform.apply({0, 0, 0});
+    const Vector3f normal = transform.applyForNormal(getNormal({0, 0, 0}));
+    const Vector3f center = transform.apply({0, 0, 0});
   if (normal.dot(ray.direction) > 0) {
     return false;
   }
