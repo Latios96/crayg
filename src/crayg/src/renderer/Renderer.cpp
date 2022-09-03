@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "integrators/IntegratorFactory.h"
+#include "SampleAccumulator.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 #include <intersectors/BvhBuilder.h>
@@ -85,17 +86,16 @@ void Renderer::init() {
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
-    std::vector<Color> sampleColors;
+    SampleAccumulator sampleAccumulator;
+
     float stepSize = 1.0f / static_cast<float>(scene.renderSettings.maxSamples);
     for (int i = 0; i < scene.renderSettings.maxSamples; i++) {
         for (int a = 0; a < scene.renderSettings.maxSamples; a++) {
-            sampleColors.push_back(renderSample(pixel.x - 0.5f + stepSize * i, pixel.y - 0.5f + stepSize * a));
+            sampleAccumulator.addSample(renderSample(pixel.x - 0.5f + stepSize * i, pixel.y - 0.5f + stepSize * a));
         }
     }
 
-    Color pixelColor =
-        std::accumulate(sampleColors.begin(), sampleColors.end(), Color::createBlack()) / sampleColors.size();
-    return pixelColor;
+    return sampleAccumulator.getValue();
 }
 
 Color Renderer::renderSample(float x, float y) {
