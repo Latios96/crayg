@@ -7,7 +7,6 @@
 #include "utils/ProgressReporter.h"
 #include "Logger.h"
 #include "integrators/RaytracingIntegrator.h"
-#include "integrators/IntegratorType.h"
 #include "integrators/IntegratorFactory.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
