@@ -46,6 +46,7 @@ set(UNIT_TEST_LIST
         TestRectLight.cpp
         TestRemainingTimeCalculator.cpp
         TestResolution.cpp
+        TestSampleAccumulator.cpp
         TestScene.cpp
         TestSceneIntersector.cpp
         TestSceneReaderFactory.cpp

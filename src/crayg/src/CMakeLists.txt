@@ -74,6 +74,8 @@ set(crayg_SRCS
         PineHoleCameraModel.h
         renderer/Renderer.cpp
         renderer/Renderer.h
+        renderer/SampleAccumulator.cpp
+        renderer/SampleAccumulator.h
         sampling/Random.cpp
         sampling/Random.h
         sampling/Sampling.cpp
