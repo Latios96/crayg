@@ -38,5 +38,13 @@ if __name__ == "__main__":
 
     print(pprint.pformat(all_requirements))
     for requirement in all_requirements:
-        cmd = ["conan", "upload", requirement, "--all", "--confirm", "-r=framebffr", "--parallel"]
+        cmd = [
+            "conan",
+            "upload",
+            requirement,
+            "--all",
+            "--confirm",
+            "-r=framebffr",
+            "--parallel",
+        ]
         call_conan(cmd)
