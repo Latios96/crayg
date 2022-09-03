@@ -1,6 +1,6 @@
 #include <scene/Scene.h>
 #include <image/ImageWriter.h>
-#include <Renderer.h>
+#include <renderer/Renderer.h>
 #include <image/ImageWriters.h>
 #include <CraygInfo.h>
 #include <utils/ImagePathResolver.h>

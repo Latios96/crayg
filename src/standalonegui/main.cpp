@@ -4,7 +4,7 @@
 
 #include <scene/Scene.h>
 #include <image/ImageWriter.h>
-#include <Renderer.h>
+#include <renderer/Renderer.h>
 #include <image/ImageWriters.h>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"

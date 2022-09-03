@@ -72,8 +72,8 @@ set(crayg_SRCS
         Logger.h
         PineHoleCameraModel.cpp
         PineHoleCameraModel.h
-        Renderer.cpp
-        Renderer.h
+        renderer/Renderer.cpp
+        renderer/Renderer.h
         sampling/Random.cpp
         sampling/Random.h
         sampling/Sampling.cpp
