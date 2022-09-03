@@ -16,6 +16,8 @@ set(UNIT_TEST_LIST
         TestBoundingBox.cpp
         TestBucketImageBuffer.cpp
         TestBvhBuilder.cpp
+        TestBvhBuilder.cpp
+        TestBvhSceneIntersector.cpp
         TestCamera.cpp
         TestColor.cpp
         TestDebugIntegrator.cpp
@@ -93,7 +95,7 @@ set(TARGET_NAME crayg-unit-tests)
 
 add_executable(${TARGET_NAME}
         main.cpp
-        ${UNIT_TEST_SOURCE_LIST} TestBvhBuilder.cpp TestBvhSceneIntersector.cpp)
+        ${UNIT_TEST_SOURCE_LIST})
 
 target_link_libraries(${TARGET_NAME}
         PUBLIC crayg)
