@@ -5,6 +5,7 @@ set(crayg_SRCS
         basics/BoundingBox.h
         basics/Color.cpp
         basics/Color.h
+        basics/Gradient.h
         basics/Matrix4x4f.cpp
         basics/Matrix4x4f.h
         basics/OrthonormalBasis.cpp
