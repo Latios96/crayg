@@ -26,6 +26,10 @@ class Color {
         return {1, 1, 1};
     }
 
+    static Color fromRGB(int r, int g, int b) {
+        return {static_cast<float>(r) / 255.f, static_cast<float>(g) / 255.f, static_cast<float>(b) / 255.f};
+    }
+
     static Color createRandom() {
         return {Random::random(),
                 Random::random(),
