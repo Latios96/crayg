@@ -52,6 +52,8 @@ class Gradient {
 
 template<typename T>
 T Gradient<T>::interpolate(float position) {
+    position = std::clamp<float>(position, 0, 1);
+
     for (int i = 1; i < stops.size(); i++) {
         GradientStop<T> &firstStop = stops[i - 1];
         GradientStop<T> &secondStop = stops[i];
@@ -66,6 +68,7 @@ T Gradient<T>::interpolate(float position) {
             return lerp(firstStop.value, secondStop.value, relativePositionInInterval);
         }
     }
+
     throw std::runtime_error(fmt::format("Did not find a stop for position {}", position));
 }
 template<typename T>

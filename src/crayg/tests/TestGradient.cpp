@@ -52,6 +52,18 @@ TEST_CASE("Gradient::interpolate") {
 
         REQUIRE(result == expectedValue);
     }
+
+    SECTION("should clamp positions outside [0-1] range") {
+        auto testData = GENERATE(table<float, Color>({{-0.1f, Color::createBlack()},
+                                                      {1.1f, Color::createWhite()}}));
+        const auto position = std::get<0>(testData);
+        const auto expectedValue = std::get<1>(testData);
+        Gradient<Color> gradient({Color::createBlack(), Color::createWhite()});
+
+        const auto result = gradient.interpolate(position);
+
+        REQUIRE(result == expectedValue);
+    }
 }
 
 }
