@@ -39,5 +39,23 @@ class StopWatch {
     std::function<void(std::string)> outputCallback;
 };
 
+class ScopedStopWatch {
+ public:
+    explicit ScopedStopWatch(const std::string &name) : stopWatch(StopWatch::createStopWatch(name)) {
+    }
+    virtual ~ScopedStopWatch() {
+        stopWatch.end();
+    }
+ private:
+    StopWatch stopWatch;
+};
+
+class InformativeScopedStopWatch : public ScopedStopWatch {
+ public:
+    explicit InformativeScopedStopWatch(const std::string &name) : ScopedStopWatch(name) {
+        Logger::info("{}..", name);
+    }
+};
+
 }
 #endif //CRAYG_STOPWATCH_H
