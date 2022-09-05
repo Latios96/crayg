@@ -13,7 +13,7 @@ class BaseUsdReader {
     BaseUsdReader(const UsdType &usdPrim) : usdPrim(usdPrim) {
     }
     virtual std::shared_ptr<CraygType> read() {
-        Logger::info("Read {} {}", getTranslatedType(), usdPrim.GetPath());
+        Logger::debug("Read {} {}", getTranslatedType(), usdPrim.GetPath());
 
         auto craygObject = std::make_shared<CraygType>();
 

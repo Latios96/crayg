@@ -22,7 +22,7 @@ std::shared_ptr<Material> crayg::UsdMaterialReadCache::getCachedReadPrimMaterial
 }
 
 std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::UsdShadeMaterial &usdShadeMaterial) {
-    Logger::info("Translating material {}", usdShadeMaterial.GetPath());
+    Logger::debug("Translating material {}", usdShadeMaterial.GetPath());
     auto shader = usdShadeMaterial.ComputeSurfaceSource();
 
     if (!shader) {
