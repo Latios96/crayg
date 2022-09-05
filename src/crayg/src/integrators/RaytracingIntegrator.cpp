@@ -31,7 +31,11 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
     for (auto &light: scene.lights) {
         radiance = radiance + calculateDirectLight(light, location, normal);
     }
-    return shadedColor * radiance;
+
+    const Color
+        gi = calculateIndirectLight(surfaceInteraction, object.getOrthonormalBasis(location), integratorContext);
+
+    return shadedColor * radiance + gi;
 }
 
 Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
@@ -59,5 +63,13 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
     }
 
     return lightRadiance.radiance;
+}
+Color RaytracingIntegrator::calculateIndirectLight(const SurfaceInteraction &surfaceInteraction,
+                                                   const OrthonormalBasis &orthonormalBasis,
+                                                   IntegratorContext &integratorContext) {
+    const Vector3f randomDirOnHemisphere = Sampling::uniformSampleHemisphere();
+    const Vector3f giDir = orthonormalBasis.toLocalCoordinates(randomDirOnHemisphere);
+    const Ray giRay = surfaceInteraction.spawnRayFromSurface(giDir);
+    return integratorContext.integrateRay(giRay);
 }
 }
