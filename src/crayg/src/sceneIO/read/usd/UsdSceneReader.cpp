@@ -1,6 +1,6 @@
 #include "sceneIO/read/usd/UsdSceneReader.h"
 #include "UsdStageReader.h"
-#include "Logger.h"
+#include "utils/StopWatch.h"
 #include <pxr/usd/usd/stage.h>
 
 namespace crayg {
@@ -11,7 +11,7 @@ UsdSceneReader::UsdSceneReader(const std::string &path, Scene &scene, const Scen
 }
 
 void UsdSceneReader::read() {
-    Logger::info("Opening USD stage {}..", path);
+    InformativeScopedStopWatch informativeScopedStopWatch(fmt::format("Reading USD Stage {}", path));
     auto stage = pxr::UsdStage::Open(path);
     UsdStageReader translator(*stage);
     translator.readStageToScene(scene, readOptions);
