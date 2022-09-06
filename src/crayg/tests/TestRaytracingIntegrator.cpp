@@ -46,7 +46,7 @@ TEST_CASE("RaytracingIntegrator::calculateDirectLight") {
         fakeit::Verify(Method(mockSceneIntersector, intersect)).Never();
     }
 
-    SECTION("should return 0 iif light is occluded") {
+    SECTION("should return 0 if light is occluded") {
         fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1,
                                                                                              std::make_shared<Sphere>(
                                                                                                  Vector3f(),
