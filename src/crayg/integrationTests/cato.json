@@ -42,6 +42,14 @@
           }
         },
         {
+          "name": "CornellBox_Original_GI",
+          "command": "{@crayg_render_command} --maxSamples 8",
+          "comparisonSettings": {
+            "method": "SSIM",
+            "threshold": 0.81
+          }
+        },
+        {
           "name": "CornellBox_Sphere",
           "command": "{@crayg_render_command}",
           "comparisonSettings": {

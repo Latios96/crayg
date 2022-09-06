@@ -198,7 +198,7 @@ def RectLight "areaLight1" (
     kind = "assembly"
 )
 {
-    color3f inputs:color = (15, 15, 5)
+    float inputs:intensity = 30
     bool inputs:normalize = 1
     color3f inputs:shadow:color
     bool inputs:shadow:enable

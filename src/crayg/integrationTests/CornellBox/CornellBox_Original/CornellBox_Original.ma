@@ -1,6 +1,6 @@
 //Maya ASCII 2023 scene
 //Name: CornellBox_Original.ma
-//Last modified: Tue, Sep 06, 2022 03:16:29 PM
+//Last modified: Tue, Sep 06, 2022 03:28:20 PM
 //Codeset: 1252
 requires maya "2023";
 requires -nodeType "VRaySettingsNode" -dataType "VRaySunParams" -dataType "vrayFloatVectorData"
@@ -15,7 +15,7 @@ fileInfo "product" "Maya 2023";
 fileInfo "version" "2023";
 fileInfo "cutIdentifier" "202205052215-234554116d";
 fileInfo "osv" "Windows 10 Pro v2009 (Build: 19044)";
-fileInfo "UUID" "1C3A46D6-4B49-CA75-158C-F88134AFC70C";
+fileInfo "UUID" "811ED233-4DE4-EB4D-3587-2F8AE18275D2";
 createNode transform -s -n "persp";
 	rename -uid "F7D4EBC4-4F06-8925-4296-1C9242DFC02C";
 	setAttr ".v" no;
@@ -309,7 +309,7 @@ createNode areaLight -n "areaLightShape1" -p "areaLight1";
 	addAttr -ci true -sn "vrayMBSamples" -ln "vrayMBSamples" -dv 2 -min 0 -max 128 -smx 
 		16 -at "long";
 	setAttr -k off ".v";
-	setAttr ".cl" -type "float3" 15 15 5 ;
+	setAttr ".in" 30;
 	setAttr ".de" 2;
 	setAttr ".vraySeparator_vray_arealight" -type "string" "";
 createNode lightLinker -s -n "lightLinker1";
