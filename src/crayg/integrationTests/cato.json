@@ -34,22 +34,6 @@
       "name": "CornellBox",
       "tests": [
         {
-          "name": "CornellBox_Glossy",
-          "command": "{@crayg_render_command}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
-        },
-        {
-          "name": "CornellBox_Glossy_Floor",
-          "command": "{@crayg_render_command}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
-        },
-        {
           "name": "CornellBox_Original",
           "command": "{@crayg_render_command}",
           "comparisonSettings": {
