@@ -48,6 +48,9 @@ class TriangleMeshPerVertexPrimVar : public TriangleMeshAbstractPrimVar<T> {
     void write(std::size_t faceId, const T &v0, const T &v1, const T &v2) {
         write(faceId, {v0, v1, v2});
     }
+    VertexData<T> read(int pointIndex) {
+        return vertexData[pointIndex];
+    }
     T interpolateAt(std::size_t faceId, const Vector3f &point) override {
         BarycentricCoordinates coordinates = BarycentricCoordinates(Triangle(&this->triangleMesh, faceId), point);
         VertexData<T> vertexDataForFace = vertexData[faceId];
