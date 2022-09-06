@@ -135,7 +135,7 @@ def Xform "CornellBox_Original" (
             def Shader "leftWall16"
             {
                 uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (0.504, 0.051999997, 0.040000003)
+                color3f inputs:diffuseColor = (0.64000005, 0.040000003, 0.040000003)
                 normal3f inputs:normal = (1, 1, 1)
                 float inputs:roughness = 0.33700418
                 color3f inputs:specularColor = (0, 0, 0)
@@ -152,7 +152,7 @@ def Xform "CornellBox_Original" (
             def Shader "rightWall16"
             {
                 uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (0.112, 0.35999998, 0.0728)
+                color3f inputs:diffuseColor = (0.040000003, 0.64000005, 0.040000003)
                 normal3f inputs:normal = (1, 1, 1)
                 float inputs:roughness = 0.33700418
                 color3f inputs:specularColor = (0, 0, 0)
@@ -169,7 +169,7 @@ def Xform "CornellBox_Original" (
             def Shader "white"
             {
                 uniform token info:id = "UsdPreviewSurface"
-                color3f inputs:diffuseColor = (0.58000004, 0.568, 0.544)
+                color3f inputs:diffuseColor = (0.64000005, 0.64000005, 0.64000005)
                 normal3f inputs:normal = (1, 1, 1)
                 float inputs:roughness = 0.33700418
                 color3f inputs:specularColor = (0, 0, 0)
@@ -198,7 +198,7 @@ def RectLight "areaLight1" (
     kind = "assembly"
 )
 {
-    float inputs:intensity = 30
+    color3f inputs:color = (15, 15, 5)
     bool inputs:normalize = 1
     color3f inputs:shadow:color
     bool inputs:shadow:enable

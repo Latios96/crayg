@@ -1,20 +1,21 @@
 //Maya ASCII 2023 scene
 //Name: CornellBox_Original.ma
-//Last modified: Sun, Jun 26, 2022 01:46:54 PM
+//Last modified: Tue, Sep 06, 2022 03:16:29 PM
 //Codeset: 1252
 requires maya "2023";
 requires -nodeType "VRaySettingsNode" -dataType "VRaySunParams" -dataType "vrayFloatVectorData"
 		 -dataType "vrayFloatVectorData" -dataType "vrayIntData" "vrayformaya" "5";
 requires -nodeType "renderSetup" "renderSetup.py" "1.0";
 requires "stereoCamera" "10.0";
+requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "vrayBuild" "5.20.02 2341490";
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2023";
 fileInfo "version" "2023";
-fileInfo "cutIdentifier" "202202161415-df43006fd3";
+fileInfo "cutIdentifier" "202205052215-234554116d";
 fileInfo "osv" "Windows 10 Pro v2009 (Build: 19044)";
-fileInfo "UUID" "61C9D643-4284-842D-3ED8-4BA4B6D3CB97";
+fileInfo "UUID" "1C3A46D6-4B49-CA75-158C-F88134AFC70C";
 createNode transform -s -n "persp";
 	rename -uid "F7D4EBC4-4F06-8925-4296-1C9242DFC02C";
 	setAttr ".v" no;
@@ -308,43 +309,43 @@ createNode areaLight -n "areaLightShape1" -p "areaLight1";
 	addAttr -ci true -sn "vrayMBSamples" -ln "vrayMBSamples" -dv 2 -min 0 -max 128 -smx 
 		16 -at "long";
 	setAttr -k off ".v";
-	setAttr ".in" 30;
+	setAttr ".cl" -type "float3" 15 15 5 ;
 	setAttr ".de" 2;
 	setAttr ".vraySeparator_vray_arealight" -type "string" "";
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "19D577CB-439F-EB36-69BD-A8AF16C5D5E5";
+	rename -uid "763DF35E-472E-FECB-96CC-8EA9CE5128F7";
 	setAttr -s 5 ".lnk";
 	setAttr -s 5 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "6DB17EF9-4176-1FA9-5874-F1AD9CCB65F2";
+	rename -uid "C795DAA8-481E-1466-4EB1-CDA9181EA62E";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "5B3EDE22-4D01-3D41-A456-57A4BF9494BA";
+	rename -uid "BDF0E853-4F96-040E-E3F1-0B99186DB1A3";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "C5FC014F-4A55-E37E-F480-A88243CE7D70";
+	rename -uid "BF5B3331-4E7E-785B-EC7B-9582E83B16E3";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "831DAF9B-4260-D0BA-6E83-1DAB4A511A7F";
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "4BEFA30D-418A-6FF5-2004-71A425E6567A";
+	rename -uid "C6B131C7-473A-BC16-7291-C692AA773204";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "61915476-40D8-58D1-F79E-9896245347F2";
 	setAttr ".g" yes;
 createNode phong -n "white";
 	rename -uid "955D5F59-4F0E-E6B7-5A91-A4A737D2195D";
-	setAttr ".c" -type "float3" 0.72500002 0.70999998 0.68000001 ;
+	setAttr ".c" -type "float3" 0.80000001 0.80000001 0.80000001 ;
 	setAttr ".ambc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sc" -type "float3" 0 0 0 ;
 	setAttr ".cp" 12;
 createNode phong -n "rightWall16";
 	rename -uid "A1A5F51F-4256-6FDF-9721-A38D9FE580B4";
 	setAttr ".rfi" 1.5;
-	setAttr ".c" -type "float3" 0.14 0.44999999 0.090999998 ;
+	setAttr ".c" -type "float3" 0.050000001 0.80000001 0.050000001 ;
 	setAttr ".ambc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sc" -type "float3" 0 0 0 ;
 	setAttr ".cp" 12;
 createNode phong -n "leftWall16";
 	rename -uid "501838FA-4642-3DD8-5193-A48BB1B16A09";
 	setAttr ".rfi" 1.5;
-	setAttr ".c" -type "float3" 0.63 0.064999998 0.050000001 ;
+	setAttr ".c" -type "float3" 0.80000001 0.050000001 0.050000001 ;
 	setAttr ".ambc" -type "float3" 0.40000001 0.40000001 0.40000001 ;
 	setAttr ".sc" -type "float3" 0 0 0 ;
 	setAttr ".cp" 12;
