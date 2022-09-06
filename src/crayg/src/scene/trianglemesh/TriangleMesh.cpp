@@ -1,5 +1,6 @@
 #include "TriangleMesh.h"
 #include "scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "scene/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 
 namespace crayg {
 
@@ -83,21 +84,11 @@ void TriangleMesh::createBounds() {
 }
 void TriangleMesh::createNormals() {
     if (normalsPrimVar == nullptr) {
-        std::vector<Vector3f> normals;
-        normals.resize(points.size());
+        auto primVar = addNormalsPrimVar<TriangleMeshPerVertexPrimVar<Vector3f>>();
         for (auto id: faceIds()) {
-          Triangle triangle(this, id);
-          Vector3f normal = triangle.getNormal();
-          auto indices = faceVertexIndices[triangle.faceId];
-          normals[indices.v0] = normals[indices.v0] + normal;
-            normals[indices.v1] = normals[indices.v1] + normal;
-            normals[indices.v2] = normals[indices.v2] + normal;
-        }
-        auto primVar = addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
-
-        for (int i = 0; i < points.size(); i++) {
-            normals[i] = normals[i].normalize();
-            primVar->write(i, normals[i]);
+            Triangle triangle(this, id);
+            const Vector3f normal = triangle.getNormal();
+            primVar->write(id, normal, normal, normal);
         }
     } else {
         normalsPrimVar->apply([this](Vector3f normal) {

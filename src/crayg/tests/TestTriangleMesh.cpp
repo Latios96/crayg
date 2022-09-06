@@ -1,6 +1,7 @@
 #include <catch2/catch.hpp>
 #include "scene/trianglemesh/TriangleMesh.h"
 #include "scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "scene/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include <numeric>
 
 namespace crayg {
@@ -58,7 +59,8 @@ TEST_CASE("TriangleMesh::init") {
 
         REQUIRE(triangleMesh.normalsPrimVar != nullptr);
         REQUIRE(
-            triangleMesh.getNormalsPrimVarAs<TriangleMeshPerPointPrimVar<Vector3f>>()->read(0) == Vector3f(0, 0, -1));
+            triangleMesh.getNormalsPrimVarAs<TriangleMeshPerVertexPrimVar<Vector3f>>()->read(0)
+                == VertexData(Vector3f(0, 0, -1)));
     }
 
     SECTION("not providing normals primvar should calculate") {
