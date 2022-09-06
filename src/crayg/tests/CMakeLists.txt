@@ -15,6 +15,7 @@ set(UNIT_TEST_LIST
         TestBmpImageWriter.cpp
         TestBoundingBox.cpp
         TestBucketImageBuffer.cpp
+        TestBucketSizeEstimator.cpp
         TestBvhBuilder.cpp
         TestBvhBuilder.cpp
         TestBvhSceneIntersector.cpp

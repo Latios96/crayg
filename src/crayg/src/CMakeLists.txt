@@ -73,6 +73,8 @@ set(crayg_SRCS
         Logger.h
         PineHoleCameraModel.cpp
         PineHoleCameraModel.h
+        renderer/BucketSizeEstimator.cpp
+        renderer/BucketSizeEstimator.h
         renderer/Renderer.cpp
         renderer/Renderer.h
         renderer/SampleAccumulator.cpp
