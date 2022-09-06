@@ -59,7 +59,7 @@ bool crayg::UsdMaterialReadCache::isUsdPreviewSurface(const pxr::TfToken &shader
 }
 std::shared_ptr<Material> UsdMaterialReadCache::createDefaultMaterial() {
     return std::make_shared<UsdPreviewSurface>("defaultMaterial",
-                                               Color(1, 0, 0));
+                                               Color::createGrey(0.5f));
 }
 UsdMaterialReadCache::UsdMaterialReadCache() {
     materialCache[pxr::SdfPath()] = createDefaultMaterial();
