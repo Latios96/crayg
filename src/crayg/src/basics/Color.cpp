@@ -43,10 +43,10 @@ Color Color::clamp() const {
 }
 
 std::tuple<int, int, int> Color::getRgbValues() const {
-    int int_r = static_cast<int>(r * 255);
-    int int_g = static_cast<int>(g * 255);
-    int int_b = static_cast<int>(b * 255);
-    return std::make_tuple(std::min(255, int_r), std::min(255, int_g), std::min(255, int_b));
+    int int_r = static_cast<int>(std::clamp<float>(r, 0, 1) * 255);
+    int int_g = static_cast<int>(std::clamp<float>(g, 0, 1) * 255);
+    int int_b = static_cast<int>(std::clamp<float>(b, 0, 1) * 255);
+    return std::make_tuple(int_r, int_g, int_b);
 }
 
 bool Color::operator==(const Color &color) const {

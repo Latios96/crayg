@@ -95,13 +95,15 @@ TEST_CASE("Color/getRgbValuesClamped", "[Color]") {
 }
 
 TEST_CASE("Color/getRgbValues", "[Color]") {
-    Color myColor(0.1f, 0.2f, 0.3f);
+    auto testData = GENERATE(table<Color, std::tuple<int, int, int>>({{{0.1f, 0.2f, 0.3f}, {25, 51, 76}},
+                                                                      {{-0.1f, 0.2f, 0.3f}, {0, 51, 76}},
+                                                                      {{1.1f, 0.2f, 0.3f}, {255, 51, 76}}}));
+    auto colorToConvert = std::get<0>(testData);
+    auto expectedTuple = std::get<1>(testData);
 
-    std::tuple<int, int, int> values = myColor.getRgbValues();
+    std::tuple<int, int, int> values = colorToConvert.getRgbValues();
 
-    REQUIRE(std::get<0>(values) == 25);
-    REQUIRE(std::get<1>(values) == 51);
-    REQUIRE(std::get<2>(values) == 76);
+    REQUIRE(values == expectedTuple);
 }
 
 TEST_CASE("Color/equalOperator", "[Color]") {
