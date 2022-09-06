@@ -9,7 +9,7 @@ TEST_CASE("RaytracingIntegrator::calculateDirectLight") {
     fakeit::Fake((mockSceneIntersector.dtor()));
     auto sceneIntersector = std::shared_ptr<SceneIntersector>(&mockSceneIntersector.get());
     Scene scene;
-    RaytracingIntegrator raytracingIntegrator(scene, sceneIntersector);
+    RaytracingIntegrator raytracingIntegrator(scene, sceneIntersector, IntegratorSettings());
 
     auto light = std::make_shared<Light>(Transform::withPosition({0, 2, 0}), 10.0f);
 

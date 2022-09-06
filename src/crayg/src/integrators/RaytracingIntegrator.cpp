@@ -2,8 +2,11 @@
 
 namespace crayg {
 
-RaytracingIntegrator::RaytracingIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector)
+RaytracingIntegrator::RaytracingIntegrator(Scene &scene,
+                                           const std::shared_ptr<SceneIntersector> &sceneIntersector,
+                                           const IntegratorSettings &integratorSettings)
     : AbstractIntegrator(scene, sceneIntersector) {
+    useGi = std::get<int>(integratorSettings.getOrDefault("RAYTRACING:useGi", {0})) == 1 ? true : false;
 }
 
 Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
@@ -32,8 +35,10 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
         radiance = radiance + calculateDirectLight(light, location, normal);
     }
 
-    const Color
+    Color gi = Color::createBlack();
+    if (useGi) {
         gi = calculateIndirectLight(surfaceInteraction, object.getOrthonormalBasis(location), integratorContext);
+    }
 
     return shadedColor * radiance + gi;
 }

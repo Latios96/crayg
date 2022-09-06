@@ -18,7 +18,10 @@ class IntegratorFactory {
                                                 const std::shared_ptr<SceneIntersector> &sceneIntersector,
                                                 const IntegratorSettings &integratorSettings) {
         switch (integratorType) {
-            case IntegratorType::RAYTRACING: return new RaytracingIntegrator(scene, sceneIntersector);
+            case IntegratorType::RAYTRACING:
+                return new RaytracingIntegrator(scene,
+                                                sceneIntersector,
+                                                integratorSettings);
             case IntegratorType::DEBUG: return new DebugIntegrator(scene, sceneIntersector);
             case IntegratorType::AMBIENT_OCCLUSION:
                 return new AmbientOcclusionIntegrator(scene,
