@@ -1,0 +1,22 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../CornellBox_Original/CornellBox_Original.usda@
+    ]
+)
+
+
+
+over "Render"
+{
+    over "settings"
+    {
+        custom int RAYTRACING:useGi = 1
+        uniform int2 resolution = (200, 200)
+    }
+}
+
+over "areaLight1"{
+    color3f inputs:color = (15, 15, 5)
+    float inputs:intensity = 1
+}
