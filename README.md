@@ -68,12 +68,15 @@ The invocation of Conan is handled transparently by CMake
 
 ### Build
 
+For better buid speed, it is recommended to do a CMake unity build by
+specifying `-DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BATCH_SIZE=16`
+
 #### Linux & Mac OS
 
 ```shell
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 ..
 make -j 4
 ```
 
@@ -82,7 +85,7 @@ make -j 4
 ```shell
 mkdir build
 cd build
-cmake -G "Visual Studio 16 2019" .. --build
+cmake -G "Visual Studio 16 2019" -DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 .. --build
 ```
 
 ## Test execution
