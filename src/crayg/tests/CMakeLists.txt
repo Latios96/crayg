@@ -61,6 +61,7 @@ set(UNIT_TEST_LIST
         TestTriangle.cpp
         TestTriangleMesh.cpp
         TestTriangleMeshConversion.cpp
+        TestTriangleMeshPerFacePrimVar.cpp
         TestTriangleMeshPerPointPrimVar.cpp
         TestTriangleMeshPerVertexPrimVar.cpp
         TestUnitImageSampler.cpp

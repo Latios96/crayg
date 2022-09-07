@@ -108,6 +108,7 @@ set(crayg_SRCS
         scene/primitives/trianglemesh/BarycentricCoordinates.cpp
         scene/primitives/trianglemesh/BarycentricCoordinates.h
         scene/primitives/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h
+        scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h
         scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h
         scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h
         scene/primitives/trianglemesh/Triangle.cpp
