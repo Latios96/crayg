@@ -105,7 +105,6 @@ set(crayg_SRCS
         scene/RenderSettings.h
         scene/Scene.cpp
         scene/Scene.h
-        scene/SceneCreator.h
         scene/SceneObject.cpp
         scene/SceneObject.h
         scene/ShadingNode.cpp
