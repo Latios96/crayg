@@ -1,4 +1,5 @@
 #include "RaytracingIntegrator.h"
+#include "sampling/Sampling.h"
 
 namespace crayg {
 

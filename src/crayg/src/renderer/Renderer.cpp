@@ -9,6 +9,7 @@
 #include "integrators/RaytracingIntegrator.h"
 #include "integrators/IntegratorFactory.h"
 #include "SampleAccumulator.h"
+#include "BucketSizeEstimator.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 #include <intersectors/BvhBuilder.h>
