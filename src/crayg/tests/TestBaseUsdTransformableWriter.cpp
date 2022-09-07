@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include "scene/Sphere.h"
+#include "scene/primitives/Sphere.h"
 #include "sceneIO/write/usd/BaseUsdTransformableWriter.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usd/stage.h>

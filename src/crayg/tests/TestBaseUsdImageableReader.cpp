@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include "sceneIO/read/usd/BaseUsdImageableReader.h"
-#include "scene/Sphere.h"
+#include "scene/primitives/Sphere.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>

@@ -2,7 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_BASICS_BARYCENTRICCOORDINATES_H_
 
 #include <ostream>
-#include "scene/trianglemesh/Triangle.h"
+#include "scene/primitives/trianglemesh/Triangle.h"
 
 namespace crayg {
 

@@ -7,7 +7,7 @@
 #include "UsdDiskLightReader.h"
 #include "UsdRenderSettingsReader.h"
 #include "Logger.h"
-#include "scene/GroundPlane.h"
+#include "scene/primitives/GroundPlane.h"
 #include <pxr/usd/usd/prim.h>
 #include <pxr/usd/usd/primRange.h>
 #include <fmt/format.h>

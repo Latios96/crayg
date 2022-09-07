@@ -3,7 +3,7 @@
 
 #include "BaseUsdSceneObjectWriter.h"
 #include <pxr/usd/usdGeom/sphere.h>
-#include "scene/Sphere.h"
+#include "scene/primitives/Sphere.h"
 
 namespace crayg {
 

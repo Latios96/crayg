@@ -3,7 +3,7 @@
 
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdImageableReader.h"
-#include "scene/Sphere.h"
+#include "scene/primitives/Sphere.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usdGeom/sphere.h>
 

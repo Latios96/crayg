@@ -3,7 +3,7 @@
 
 #include <scene/Scene.h>
 #include <optional>
-#include "scene/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
 
 namespace crayg {
 

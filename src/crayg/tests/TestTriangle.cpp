@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
-#include "scene/trianglemesh/Triangle.h"
-#include "scene/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/trianglemesh/Triangle.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "fixtures/TriangleMeshFixtures.h"
 #include <iostream>
 

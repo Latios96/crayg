@@ -5,7 +5,7 @@
 #include "basics/BoundingBox.h"
 #include "scene/SceneObject.h"
 #include "Triangle.h"
-#include "scene/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h"
 
 namespace crayg {
 

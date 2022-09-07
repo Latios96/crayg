@@ -1,4 +1,4 @@
-#include <scene/Sphere.h>
+#include <scene/primitives/Sphere.h>
 #include <catch2/catch.hpp>
 
 namespace crayg {

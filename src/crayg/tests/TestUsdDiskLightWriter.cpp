@@ -2,7 +2,7 @@
 #include "sceneIO/write/usd/UsdSphereWriter.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include <pxr/usd/usd/stage.h>
-#include "scene/Sphere.h"
+#include "scene/primitives/Sphere.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "scene/lights/DiskLight.h"
 #include "sceneIO/write/usd/UsdDiskLightWriter.h"

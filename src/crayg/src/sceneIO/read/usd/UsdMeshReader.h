@@ -4,7 +4,7 @@
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdImageableReader.h"
 #include <pxr/usd/usdGeom/mesh.h>
-#include "scene/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include <pxr/imaging/hd/meshUtil.h>
 
 namespace crayg {

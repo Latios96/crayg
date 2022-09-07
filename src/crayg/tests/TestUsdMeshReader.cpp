@@ -4,7 +4,7 @@
 #include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 #include <iostream>
-#include "scene/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 
 namespace crayg {
 

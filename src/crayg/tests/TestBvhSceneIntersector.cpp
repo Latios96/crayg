@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <intersectors/BvhNode.h>
-#include <scene/Sphere.h>
+#include <scene/primitives/Sphere.h>
 #include <intersectors/BvhSceneIntersector.h>
 
 namespace crayg {

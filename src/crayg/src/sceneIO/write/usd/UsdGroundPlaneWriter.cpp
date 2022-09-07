@@ -1,5 +1,5 @@
 #include "UsdGroundPlaneWriter.h"
-#include "scene/trianglemesh/TriangleMeshConversion.h"
+#include "scene/primitives/trianglemesh/TriangleMeshConversion.h"
 
 namespace crayg {
 UsdGroundPlaneWriter::UsdGroundPlaneWriter(const std::shared_ptr<GroundPlane> &craygObject,

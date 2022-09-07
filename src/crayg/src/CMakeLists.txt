@@ -91,8 +91,8 @@ set(crayg_SRCS
         scene/Camera.h
         scene/lights/DiskLight.cpp
         scene/lights/DiskLight.h
-        scene/GroundPlane.cpp
-        scene/GroundPlane.h
+        scene/primitives/GroundPlane.cpp
+        scene/primitives/GroundPlane.h
         scene/Imageable.cpp
         scene/Imageable.h
         scene/lights/Light.cpp
@@ -109,19 +109,19 @@ set(crayg_SRCS
         scene/SceneObject.h
         scene/materials/ShadingNode.cpp
         scene/materials/ShadingNode.h
-        scene/Sphere.cpp
-        scene/Sphere.h
+        scene/primitives/Sphere.cpp
+        scene/primitives/Sphere.h
         scene/Transformable.cpp
         scene/Transformable.h
-        scene/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h
-        scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h
-        scene/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h
-        scene/trianglemesh/Triangle.cpp
-        scene/trianglemesh/Triangle.h
-        scene/trianglemesh/TriangleMesh.cpp
-        scene/trianglemesh/TriangleMesh.h
-        scene/trianglemesh/TriangleMeshConversion.cpp
-        scene/trianglemesh/TriangleMeshConversion.h
+        scene/primitives/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h
+        scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h
+        scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h
+        scene/primitives/trianglemesh/Triangle.cpp
+        scene/primitives/trianglemesh/Triangle.h
+        scene/primitives/trianglemesh/TriangleMesh.cpp
+        scene/primitives/trianglemesh/TriangleMesh.h
+        scene/primitives/trianglemesh/TriangleMeshConversion.cpp
+        scene/primitives/trianglemesh/TriangleMeshConversion.h
         scene/materials/UsdPreviewSurface.cpp
         scene/materials/UsdPreviewSurface.h
         sceneIO/read/SceneReader.cpp

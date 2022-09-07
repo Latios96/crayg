@@ -6,7 +6,7 @@
 #include "utils.h"
 #include <catch2/catch.hpp>
 #include <scene/materials/UsdPreviewSurface.h>
-#include <scene/GroundPlane.h>
+#include <scene/primitives/GroundPlane.h>
 #include <sceneIO/write/SceneWriter.h>
 
 namespace crayg {

@@ -1,6 +1,6 @@
 #include "TriangleMesh.h"
-#include "scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
-#include "scene/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 
 namespace crayg {
 

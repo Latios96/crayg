@@ -1,7 +1,7 @@
 #ifndef CRAYG_GROUNDPLANE_H
 #define CRAYG_GROUNDPLANE_H
 
-#include "SceneObject.h"
+#include "scene/SceneObject.h"
 
 namespace crayg {
 

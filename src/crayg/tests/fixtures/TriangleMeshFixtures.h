@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_TRIANGLEMESHFIXTURES_H_
 #define CRAYG_SRC_CRAYG_TESTS_FIXTURES_TRIANGLEMESHFIXTURES_H_
 
-#include "scene/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
 
 namespace crayg {
 

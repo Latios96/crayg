@@ -3,7 +3,7 @@
 #include "UsdMeshReader.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "sceneIO/usd/UsdConversions.h"
-#include "scene/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 
 namespace crayg {
 

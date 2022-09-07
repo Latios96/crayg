@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
-#include "scene/trianglemesh/TriangleMesh.h"
-#include "scene/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "fixtures/TriangleMeshFixtures.h"
 
 namespace crayg {

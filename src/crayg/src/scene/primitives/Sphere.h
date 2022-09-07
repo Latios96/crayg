@@ -2,7 +2,7 @@
 #define CRAYG_SPHERE_H
 
 #include "string"
-#include "SceneObject.h"
+#include "scene/SceneObject.h"
 
 namespace crayg {
 

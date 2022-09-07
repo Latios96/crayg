@@ -3,7 +3,7 @@
 
 #include "BaseUsdSceneObjectWriter.h"
 #include <pxr/usd/usdGeom/mesh.h>
-#include "scene/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
 
 namespace crayg {
 
