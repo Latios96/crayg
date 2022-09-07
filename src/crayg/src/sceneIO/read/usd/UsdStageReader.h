@@ -3,7 +3,7 @@
 
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "scene/Scene.h"
-#include "scene/UsdPreviewSurface.h"
+#include "scene/materials/UsdPreviewSurface.h"
 #include "sceneIO/read/SceneReader.h"
 #include "UsdMaterialReadCache.h"
 #include <pxr/usd/usd/stage.h>

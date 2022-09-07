@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
-#include "scene/Material.h"
+#include "scene/materials/Material.h"
 #include "sceneIO/read/usd/UsdMaterialReadCache.h"
-#include "scene/UsdPreviewSurface.h"
+#include "scene/materials/UsdPreviewSurface.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/sdf/types.h>

@@ -2,7 +2,7 @@
 #include "scene/GroundPlane.h"
 #include "scene/trianglemesh/TriangleMesh.h"
 #include "scene/trianglemesh/TriangleMeshConversion.h"
-#include "scene/UsdPreviewSurface.h"
+#include "scene/materials/UsdPreviewSurface.h"
 
 namespace crayg {
 

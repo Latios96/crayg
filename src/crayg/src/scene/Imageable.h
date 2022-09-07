@@ -5,7 +5,7 @@
 #include <basics/Ray.h>
 #include <memory>
 #include <basics/BoundingBox.h>
-#include "Material.h"
+#include "materials/Material.h"
 #include "basics/OrthonormalBasis.h"
 
 namespace crayg {

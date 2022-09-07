@@ -1,7 +1,7 @@
 #include "UsdMaterialReadCache.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"
-#include "scene/UsdPreviewSurface.h"
+#include "scene/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include <pxr/base/gf/vec3f.h>
 

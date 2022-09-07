@@ -1,7 +1,7 @@
 #include "UsdMaterialWriteCache.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "Logger.h"
-#include "scene/UsdPreviewSurface.h"
+#include "scene/materials/UsdPreviewSurface.h"
 
 namespace crayg {
 

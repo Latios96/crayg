@@ -5,7 +5,7 @@
 #include "sceneIO/write/usd/UsdSceneWriter.h"
 #include "utils.h"
 #include <catch2/catch.hpp>
-#include <scene/UsdPreviewSurface.h>
+#include <scene/materials/UsdPreviewSurface.h>
 #include <scene/GroundPlane.h>
 #include <sceneIO/write/SceneWriter.h>
 

@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDMATERIALREADCACHE_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDMATERIALREADCACHE_H_
 
-#include "scene/Material.h"
+#include "scene/materials/Material.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "sceneIO/usd/UsdConversions.h"

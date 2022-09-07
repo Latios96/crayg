@@ -97,8 +97,8 @@ set(crayg_SRCS
         scene/Imageable.h
         scene/lights/Light.cpp
         scene/lights/Light.h
-        scene/Material.cpp
-        scene/Material.h
+        scene/materials/Material.cpp
+        scene/materials/Material.h
         scene/lights/RectLight.cpp
         scene/lights/RectLight.h
         scene/RenderSettings.cpp
@@ -107,8 +107,8 @@ set(crayg_SRCS
         scene/Scene.h
         scene/SceneObject.cpp
         scene/SceneObject.h
-        scene/ShadingNode.cpp
-        scene/ShadingNode.h
+        scene/materials/ShadingNode.cpp
+        scene/materials/ShadingNode.h
         scene/Sphere.cpp
         scene/Sphere.h
         scene/Transformable.cpp
@@ -122,8 +122,8 @@ set(crayg_SRCS
         scene/trianglemesh/TriangleMesh.h
         scene/trianglemesh/TriangleMeshConversion.cpp
         scene/trianglemesh/TriangleMeshConversion.h
-        scene/UsdPreviewSurface.cpp
-        scene/UsdPreviewSurface.h
+        scene/materials/UsdPreviewSurface.cpp
+        scene/materials/UsdPreviewSurface.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/BaseUsdImageableReader.h

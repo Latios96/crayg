@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include "scene/ShadingNode.h"
+#include "scene/materials/ShadingNode.h"
 #include <sstream>
 
 namespace crayg {

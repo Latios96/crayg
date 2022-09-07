@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
-#include <scene/UsdPreviewSurface.h>
+#include <scene/materials/UsdPreviewSurface.h>
 
 namespace crayg {
 

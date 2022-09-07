@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include "sceneIO/write/usd/UsdMaterialWriteCache.h"
 #include <pxr/usd/usd/stage.h>
-#include "scene/UsdPreviewSurface.h"
+#include "scene/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdUtils.h"
 
 namespace crayg {

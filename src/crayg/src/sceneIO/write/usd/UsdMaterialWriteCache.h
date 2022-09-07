@@ -2,7 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDMATERIALWRITECACHE_H_
 
 #include <map>
-#include "scene/Material.h"
+#include "scene/materials/Material.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "UsdPathFactory.h"
 #include <pxr/usd/usdShade/materialBindingAPI.h>

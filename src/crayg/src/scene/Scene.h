@@ -7,7 +7,7 @@
 #include "lights/Light.h"
 #include "Camera.h"
 #include "RenderSettings.h"
-#include "ShadingNode.h"
+#include "materials/ShadingNode.h"
 #include "scene/trianglemesh/TriangleMesh.h"
 #include <memory>
 

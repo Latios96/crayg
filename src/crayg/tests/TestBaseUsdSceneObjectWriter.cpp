@@ -2,7 +2,7 @@
 #include "sceneIO/write/usd/BaseUsdSceneObjectWriter.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "scene/Sphere.h"
-#include "scene/UsdPreviewSurface.h"
+#include "scene/materials/UsdPreviewSurface.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>
 namespace crayg {
