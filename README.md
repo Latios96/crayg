@@ -9,7 +9,6 @@ Personal Raytracer project started to get familiar with C++ in general and how t
 Cornell Box by http://casual-effects.com/data/index.html
 
 <!-- TOC -->
-
 * [crayg](#crayg)
   * [Features](#features)
     * [Rendering related features](#rendering-related-features)
@@ -20,7 +19,13 @@ Cornell Box by http://casual-effects.com/data/index.html
       * [Linux & Mac OS](#linux--mac-os)
       * [Windows](#windows)
   * [Test execution](#test-execution)
-
+  * [Test Integration for Autodesk Maya](#test-integration-for-autodesk-maya)
+    * [Prerequisites](#prerequisites)
+    * [Launching and Usage](#launching-and-usage)
+      * [Functions](#functions)
+        * [Open](#open)
+        * [Save](#save)
+        * [Create a new Suite or Test](#create-a-new-suite-or-test)
 <!-- TOC -->
 
 ## Features
@@ -53,7 +58,7 @@ Cornell Box by http://casual-effects.com/data/index.html
   - Conan Recipes for OpenSubdiv ([available](https://conan.io/center/opensubdiv) in Conan Center) and USD (to be
     contributed to Conan Center)
 - Autodesk Maya GUI integration for easy authoring of integration test
-  scenes [(more details)](docs/maya_test_integration.md)
+  scenes [(more details)](#test-integration-for-autodesk-maya)
 
 ## Build the project
 
@@ -89,8 +94,56 @@ cmake -G "Visual Studio 16 2019" -DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BA
 ```
 
 ## Test execution
+
 ```shell
 cd build
 ctest -V
 ```
+
+## Test Integration for Autodesk Maya
+
+Qt / Python based tool for easy authoring of integration test scenes inside of Autodesk Maya
+
+For each test, a Maya `.ma` file and a `.usda` file is stored
+
+### Prerequisites
+
+Currently, Autodesk Maya 2023 is supported.
+You need to have the [maya-usd](https://github.com/Autodesk/maya-usd) installed
+
+(install dependencies)
+
+### Launching and Usage
+
+Start Maya with the test integration via command line:
+
+```shell
+cd src\mayaTestIntegration
+start_maya.bat
+```
+
+When Maya is open, a new Shelf is added. Use the Inspector Icon to launch the test integration:
+![](docs/shelf.png)
+
+The Test Integration will present you the suites / tests as a tree view
+![](docs/UI_overview.png)
+
+#### Functions
+
+##### Open
+
+Opens the .ma file associated with the test
+
+##### Save
+
+Saves the currently open test as a `.ma` file and exports scene to `.usda`
+
+##### Create a new Suite or Test
+
+Suite: right-click into tree view
+Test: right-click on a suite
+
+![](docs/create_new_test_or_suite.png)
+
+
 
