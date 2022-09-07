@@ -46,7 +46,7 @@
           "command": "{@crayg_render_command} --maxSamples 8",
           "comparisonSettings": {
             "method": "SSIM",
-            "threshold": 0.81
+            "threshold": 0.76
           }
         },
         {
