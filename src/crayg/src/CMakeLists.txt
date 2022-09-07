@@ -1,6 +1,4 @@
 set(crayg_SRCS
-        scene/primitives/trianglemesh/BarycentricCoordinates.cpp
-        scene/primitives/trianglemesh/BarycentricCoordinates.h
         basics/BoundingBox.cpp
         basics/BoundingBox.h
         basics/Color.cpp
@@ -18,7 +16,6 @@ set(crayg_SRCS
         basics/Transform.h
         basics/Vector3f.cpp
         basics/Vector3f.h
-        scene/camera/CameraModel.h
         CraygInfo.cpp
         CraygInfo.h
         image/BmpImageWriter.cpp
@@ -71,8 +68,6 @@ set(crayg_SRCS
         intersectors/SceneIntersector.h
         Logger.cpp
         Logger.h
-        scene/camera/PineHoleCameraModel.cpp
-        scene/camera/PineHoleCameraModel.h
         renderer/BucketSizeEstimator.cpp
         renderer/BucketSizeEstimator.h
         renderer/Renderer.cpp
@@ -85,34 +80,33 @@ set(crayg_SRCS
         sampling/Sampling.h
         sampling/UnitSphereSampler.cpp
         sampling/UnitSphereSampler.h
-        scene/lights/AreaLight.cpp
-        scene/lights/AreaLight.h
         scene/camera/Camera.cpp
         scene/camera/Camera.h
-        scene/lights/DiskLight.cpp
-        scene/lights/DiskLight.h
-        scene/primitives/GroundPlane.cpp
-        scene/primitives/GroundPlane.h
+        scene/camera/CameraModel.h
+        scene/camera/PineHoleCameraModel.cpp
+        scene/camera/PineHoleCameraModel.h
         scene/Imageable.cpp
         scene/Imageable.h
+        scene/lights/AreaLight.cpp
+        scene/lights/AreaLight.h
+        scene/lights/DiskLight.cpp
+        scene/lights/DiskLight.h
         scene/lights/Light.cpp
         scene/lights/Light.h
-        scene/materials/Material.cpp
-        scene/materials/Material.h
         scene/lights/RectLight.cpp
         scene/lights/RectLight.h
-        scene/RenderSettings.cpp
-        scene/RenderSettings.h
-        scene/Scene.cpp
-        scene/Scene.h
-        scene/SceneObject.cpp
-        scene/SceneObject.h
+        scene/materials/Material.cpp
+        scene/materials/Material.h
         scene/materials/ShadingNode.cpp
         scene/materials/ShadingNode.h
+        scene/materials/UsdPreviewSurface.cpp
+        scene/materials/UsdPreviewSurface.h
+        scene/primitives/GroundPlane.cpp
+        scene/primitives/GroundPlane.h
         scene/primitives/Sphere.cpp
         scene/primitives/Sphere.h
-        scene/Transformable.cpp
-        scene/Transformable.h
+        scene/primitives/trianglemesh/BarycentricCoordinates.cpp
+        scene/primitives/trianglemesh/BarycentricCoordinates.h
         scene/primitives/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h
         scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h
         scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h
@@ -122,8 +116,14 @@ set(crayg_SRCS
         scene/primitives/trianglemesh/TriangleMesh.h
         scene/primitives/trianglemesh/TriangleMeshConversion.cpp
         scene/primitives/trianglemesh/TriangleMeshConversion.h
-        scene/materials/UsdPreviewSurface.cpp
-        scene/materials/UsdPreviewSurface.h
+        scene/RenderSettings.cpp
+        scene/RenderSettings.h
+        scene/Scene.cpp
+        scene/Scene.h
+        scene/SceneObject.cpp
+        scene/SceneObject.h
+        scene/Transformable.cpp
+        scene/Transformable.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/BaseUsdImageableReader.h
