@@ -1,6 +1,10 @@
 name: Github Actions CI
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - '**/README.md'
+      - 'docs/**/*'
 jobs:
   build:
     runs-on: ${{ matrix.os }}
