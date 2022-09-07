@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <scene/Camera.h>
+#include <scene/camera/Camera.h>
 
 
 namespace crayg {

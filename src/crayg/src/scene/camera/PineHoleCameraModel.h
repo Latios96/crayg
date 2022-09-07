@@ -1,7 +1,7 @@
 #ifndef CRAYG_PINEHOLECAMERAMODEL_H
 #define CRAYG_PINEHOLECAMERAMODEL_H
 
-#include "scene/Camera.h"
+#include "scene/camera/Camera.h"
 #include "basics/Ray.h"
 #include "CameraModel.h"
 

@@ -5,7 +5,7 @@
 #include <set>
 #include "primitives/Sphere.h"
 #include "lights/Light.h"
-#include "Camera.h"
+#include "camera/Camera.h"
 #include "RenderSettings.h"
 #include "materials/ShadingNode.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"

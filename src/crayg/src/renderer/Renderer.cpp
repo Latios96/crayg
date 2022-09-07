@@ -3,7 +3,7 @@
 #include <image/ImageBucketSequences.h>
 #include <numeric>
 #include "Renderer.h"
-#include "PineHoleCameraModel.h"
+#include "scene/camera/PineHoleCameraModel.h"
 #include "utils/ProgressReporter.h"
 #include "Logger.h"
 #include "integrators/RaytracingIntegrator.h"

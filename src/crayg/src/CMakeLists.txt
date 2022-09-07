@@ -18,7 +18,7 @@ set(crayg_SRCS
         basics/Transform.h
         basics/Vector3f.cpp
         basics/Vector3f.h
-        CameraModel.h
+        scene/camera/CameraModel.h
         CraygInfo.cpp
         CraygInfo.h
         image/BmpImageWriter.cpp
@@ -71,8 +71,8 @@ set(crayg_SRCS
         intersectors/SceneIntersector.h
         Logger.cpp
         Logger.h
-        PineHoleCameraModel.cpp
-        PineHoleCameraModel.h
+        scene/camera/PineHoleCameraModel.cpp
+        scene/camera/PineHoleCameraModel.h
         renderer/BucketSizeEstimator.cpp
         renderer/BucketSizeEstimator.h
         renderer/Renderer.cpp
@@ -87,8 +87,8 @@ set(crayg_SRCS
         sampling/UnitSphereSampler.h
         scene/lights/AreaLight.cpp
         scene/lights/AreaLight.h
-        scene/Camera.cpp
-        scene/Camera.h
+        scene/camera/Camera.cpp
+        scene/camera/Camera.h
         scene/lights/DiskLight.cpp
         scene/lights/DiskLight.h
         scene/primitives/GroundPlane.cpp

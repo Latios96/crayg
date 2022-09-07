@@ -2,10 +2,10 @@
 #define CRAYG_RENDERER_H
 
 #include <scene/Scene.h>
-#include <scene/Camera.h>
+#include <scene/camera/Camera.h>
 #include <image/Image.h>
 #include <basics/Color.h>
-#include "PineHoleCameraModel.h"
+#include "scene/camera/PineHoleCameraModel.h"
 #include <intersectors/SceneIntersector.h>
 #include <utils/ProgressReporter.h>
 #include <image/ImageOutputDriver.h>
