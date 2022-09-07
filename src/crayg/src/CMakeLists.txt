@@ -85,22 +85,22 @@ set(crayg_SRCS
         sampling/Sampling.h
         sampling/UnitSphereSampler.cpp
         sampling/UnitSphereSampler.h
-        scene/AreaLight.cpp
-        scene/AreaLight.h
+        scene/lights/AreaLight.cpp
+        scene/lights/AreaLight.h
         scene/Camera.cpp
         scene/Camera.h
-        scene/DiskLight.cpp
-        scene/DiskLight.h
+        scene/lights/DiskLight.cpp
+        scene/lights/DiskLight.h
         scene/GroundPlane.cpp
         scene/GroundPlane.h
         scene/Imageable.cpp
         scene/Imageable.h
-        scene/Light.cpp
-        scene/Light.h
+        scene/lights/Light.cpp
+        scene/lights/Light.h
         scene/Material.cpp
         scene/Material.h
-        scene/RectLight.cpp
-        scene/RectLight.h
+        scene/lights/RectLight.cpp
+        scene/lights/RectLight.h
         scene/RenderSettings.cpp
         scene/RenderSettings.h
         scene/Scene.cpp

@@ -4,7 +4,7 @@
 #include <vector>
 #include <set>
 #include "Sphere.h"
-#include "Light.h"
+#include "lights/Light.h"
 #include "Camera.h"
 #include "RenderSettings.h"
 #include "ShadingNode.h"

@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include "scene/Light.h"
+#include "scene/lights/Light.h"
 
 namespace crayg {
 

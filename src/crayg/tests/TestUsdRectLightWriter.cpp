@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include "scene/RectLight.h"
+#include "scene/lights/RectLight.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include "sceneIO/write/usd/BaseUsdLightWriter.h"
 #include "sceneIO/usd/UsdUtils.h"

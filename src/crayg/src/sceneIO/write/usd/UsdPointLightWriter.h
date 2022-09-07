@@ -3,7 +3,7 @@
 
 #include "sceneIO/write/usd/BaseUsdLightWriter.h"
 #include <pxr/usd/usdLux/sphereLight.h>
-#include "scene/Light.h"
+#include "scene/lights/Light.h"
 
 namespace crayg {
 

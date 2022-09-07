@@ -4,7 +4,7 @@
 #include <pxr/usd/usd/stage.h>
 #include "scene/Sphere.h"
 #include "sceneIO/usd/UsdUtils.h"
-#include "scene/DiskLight.h"
+#include "scene/lights/DiskLight.h"
 #include "sceneIO/write/usd/UsdDiskLightWriter.h"
 
 namespace crayg {

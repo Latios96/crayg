@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include "sceneIO/read/usd/BaseUsdLightReader.h"
-#include "scene/DiskLight.h"
+#include "scene/lights/DiskLight.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdLux/diskLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>

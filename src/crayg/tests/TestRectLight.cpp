@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
-#include "scene/RectLight.h"
+#include "scene/lights/RectLight.h"
 
 namespace crayg {
 

@@ -3,7 +3,7 @@
 
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdLightReader.h"
-#include "scene/RectLight.h"
+#include "scene/lights/RectLight.h"
 #include <pxr/usd/usdLux/rectLight.h>
 
 namespace crayg {

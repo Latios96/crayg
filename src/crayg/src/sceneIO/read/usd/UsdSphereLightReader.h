@@ -2,7 +2,7 @@
 #define CRAYG_SRC_CRAYGUSD_SRC_USDSPHERELIGHTTRANSLATOR_H_
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdLightReader.h"
-#include "scene/Light.h"
+#include "scene/lights/Light.h"
 #include <pxr/usd/usdLux/sphereLight.h>
 
 namespace crayg {

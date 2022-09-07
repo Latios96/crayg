@@ -1,8 +1,8 @@
 #include <catch2/catch.hpp>
 #include "scene/Scene.h"
 #include "sceneIO/write/usd/UsdSceneWriter.h"
-#include "scene/RectLight.h"
-#include "scene/DiskLight.h"
+#include "scene/lights/RectLight.h"
+#include "scene/lights/DiskLight.h"
 #include <pxr/usd/usd/primRange.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdRender/settings.h>

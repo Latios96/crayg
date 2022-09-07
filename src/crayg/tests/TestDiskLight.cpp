@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <scene/DiskLight.h>
+#include <scene/lights/DiskLight.h>
 #include "intersectors/SceneIntersector.h"
 
 namespace crayg {
