@@ -81,7 +81,7 @@ specifying `-DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BATCH_SIZE=16`
 ```shell
 mkdir build
 cd build
-cmake -DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 ..
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 ..
 make -j 4
 ```
 
@@ -90,7 +90,18 @@ make -j 4
 ```shell
 mkdir build
 cd build
-cmake -G "Visual Studio 16 2019" -DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 .. --build
+cmake -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE=Release -DCMAKE_UNITY_BUILD=true -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 ..
+cmake --build . --config Release -- /M:%NUMBER_OF_PROCESSORS%
+```
+
+Alternatively, you can also use Ninja:
+
+```shell
+mkdir build
+cd build
+call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+cmake -G "Ninja" .. -DCMAKE_BUILD_TYPE=Release
+ninja
 ```
 
 ## Test execution
