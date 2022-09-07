@@ -6,6 +6,23 @@ Personal Raytracer project started to get familiar with C++ in general and how t
 
 ![demo image](images/CornellBox_Original_GI.png)
 
+Cornell Box by http://casual-effects.com/data/index.html
+
+<!-- TOC -->
+
+* [crayg](#crayg)
+  * [Features](#features)
+    * [Rendering related features](#rendering-related-features)
+    * [Project features not related to rendering](#project-features-not-related-to-rendering)
+  * [Build the project](#build-the-project)
+    * [Prerequisites](#prerequisites)
+    * [Build](#build)
+      * [Linux & Mac OS](#linux--mac-os)
+      * [Windows](#windows)
+  * [Test execution](#test-execution)
+
+<!-- TOC -->
+
 ## Features
 
 ### Rendering related features
@@ -15,8 +32,11 @@ Personal Raytracer project started to get familiar with C++ in general and how t
 - perfect reflections
 - diffuse reflections / GI
 - naive BVH implementation
-- multiple integrators (Raytracing, Ambient Occlusion and Debug (Simple "N Dot V shading", inspired
-  by [Renderman's PxrVisualizer](https://rmanwiki.pixar.com/display/REN24/PxrVisualizer)))
+- multiple integrators:
+  - Raytracing
+  - Ambient Occlusion
+  - Debug (Simple "N Dot V shading", inspired
+    by [Renderman's PxrVisualizer](https://rmanwiki.pixar.com/display/REN24/PxrVisualizer)))
 - Scene format uses USD, with basic respect
   for [UsdRender](https://graphics.pixar.com/usd/release/api/usd_render_page_front.html)
 - CLI interface / basic Renderview GUI
@@ -35,7 +55,7 @@ Personal Raytracer project started to get familiar with C++ in general and how t
 - Autodesk Maya GUI integration for easy authoring of integration test
   scenes [(more details)](docs/maya_test_integration.md)
 
-## Building
+## Build the project
 
 ### Prerequisites
 
@@ -46,7 +66,9 @@ Personal Raytracer project started to get familiar with C++ in general and how t
 
 The invocation of Conan is handled transparently by CMake
 
-### Linux & Mac OS
+### Build
+
+#### Linux & Mac OS
 
 ```shell
 mkdir build
@@ -55,7 +77,8 @@ cmake ..
 make -j 4
 ```
 
-### Windows
+#### Windows
+
 ```shell
 mkdir build
 cd build
