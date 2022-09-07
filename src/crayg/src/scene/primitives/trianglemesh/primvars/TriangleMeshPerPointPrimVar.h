@@ -2,7 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHPERPOINTPRIMVAR_H_
 
 #include "TriangleMeshAbstractPrimVar.h"
-#include "basics/BarycentricCoordinates.h"
+#include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
 #include "utils/ToStringHelper.h"
 
 namespace crayg {

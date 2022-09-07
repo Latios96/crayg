@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <basics/BarycentricCoordinates.h>
+#include <scene/primitives/trianglemesh/BarycentricCoordinates.h>
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 
 namespace crayg {

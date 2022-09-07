@@ -3,7 +3,7 @@
 
 #include <ostream>
 #include "TriangleMeshAbstractPrimVar.h"
-#include "basics/BarycentricCoordinates.h"
+#include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
 #include "utils/ToStringHelper.h"
 
 namespace crayg {
