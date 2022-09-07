@@ -1,5 +1,5 @@
 #include "TriangleMesh.h"
-#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 
 namespace crayg {
@@ -84,11 +84,11 @@ void TriangleMesh::createBounds() {
 }
 void TriangleMesh::createNormals() {
     if (normalsPrimVar == nullptr) {
-        auto primVar = addNormalsPrimVar<TriangleMeshPerVertexPrimVar<Vector3f>>();
+        auto primVar = addNormalsPrimVar<TriangleMeshPerFacePrimVar<Vector3f>>();
         for (auto id: faceIds()) {
             Triangle triangle(this, id);
             const Vector3f normal = triangle.getNormal();
-            primVar->write(id, normal, normal, normal);
+            primVar->write(id, normal);
         }
     } else {
         normalsPrimVar->apply([this](Vector3f normal) {

@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
-#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include <numeric>
 
 namespace crayg {
@@ -54,16 +54,16 @@ TEST_CASE("TriangleMesh::init") {
     triangleMesh.points.emplace_back(1, 0, 0);
     triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
 
-    SECTION("providing normals primvar should use this") {
+    SECTION("not providing normals primvar should auto generate normals") {
         triangleMesh.init();
 
         REQUIRE(triangleMesh.normalsPrimVar != nullptr);
         REQUIRE(
-            triangleMesh.getNormalsPrimVarAs<TriangleMeshPerVertexPrimVar<Vector3f>>()->read(0)
-                == VertexData(Vector3f(0, 0, -1)));
+            triangleMesh.getNormalsPrimVarAs<TriangleMeshPerFacePrimVar<Vector3f>>()->read(0)
+                == Vector3f(0, 0, -1));
     }
 
-    SECTION("not providing normals primvar should calculate") {
+    SECTION("providing normals primvar should use them") {
         auto normalsPrimVar = triangleMesh.addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
         normalsPrimVar->write(0, Vector3f(1, 0, 0));
         triangleMesh.init();
