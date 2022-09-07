@@ -11,9 +11,9 @@ class BucketSizeEstimator {
     int estimateBucketSize(int threadCount) const;
  private:
     const RenderSettings &renderSettings;
-    static const int MIN_BUCKET_SIZE = 8;
-    static const int MAX_BUCKET_SIZE = 64;
-    static const int BUCKETS_PER_THREAD = 4;
+    static constexpr int MIN_BUCKET_SIZE = 8;
+    static constexpr int MAX_BUCKET_SIZE = 64;
+    static constexpr int BUCKETS_PER_THREAD = 4;
 };
 
 } // crayg
