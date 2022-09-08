@@ -1,13 +1,13 @@
 #include "FrameBufferWidget.h"
-#include "PanAndZoomArea.h"
 
 namespace crayg {
 
 void FrameBufferWidget::setupUI() {
-    this->setWindowTitle("Crayg Frame Buffer");
+    setZoomFactor(ZoomFactor());
 
     auto scrollArea = new PanAndZoomArea();
     scrollArea->setWidget(&imageWidget);
+    this->connect(scrollArea, &PanAndZoomArea::zoomFactorChanged, this, &FrameBufferWidget::setZoomFactor);
     auto layout = new QVBoxLayout();
     layout->addWidget(scrollArea);
     this->setLayout(layout);
@@ -20,6 +20,13 @@ void FrameBufferWidget::setupUI() {
     } else {
         resize(QSize(imageWidget.size().width() + 40, imageWidget.size().height() + 40));
     }
+}
+void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
+    const std::string title = fmt::format("Crayg Frame Buffer - [{} of {}x{}]",
+                                          zoomFactor,
+                                          imageWidget.size().width(),
+                                          imageWidget.size().height());
+    this->setWindowTitle(QString::fromStdString(title));
 }
 
 }

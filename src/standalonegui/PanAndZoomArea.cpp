@@ -15,10 +15,13 @@ void PanAndZoomArea::wheelEvent(QWheelEvent *event) {
     event->accept();
     const bool isZoomIn = event->angleDelta().y() > 0;
     if (isZoomIn) {
-        this->zoomFactor += 1;
+        this->zoomFactor++;
     } else {
-        this->zoomFactor -= 1;
+        this->zoomFactor--;
     }
+
+    emit zoomFactorChanged(this->zoomFactor);
+
     const auto oldImageSize = this->widget()->size();
     const auto oldScrollbarValueX = this->horizontalScrollBar()->value();
     const auto oldScrollbarValueY = this->verticalScrollBar()->value();
@@ -55,4 +58,29 @@ void PanAndZoomArea::setWidget(QWidget *widget) {
     originalSize = widget->size();
 }
 
+int ZoomFactor::getValue() const {
+    return value;
+}
+bool ZoomFactor::operator==(const ZoomFactor &rhs) const {
+    return value == rhs.value;
+}
+bool ZoomFactor::operator!=(const ZoomFactor &rhs) const {
+    return !(rhs == *this);
+}
+std::ostream &operator<<(std::ostream &os, const ZoomFactor &factor) {
+    os << fmt::format("{:.1f}%", factor.toPercentage());
+    return os;
+}
+float ZoomFactor::toPercentage() const {
+    return 100.0f * std::pow(2, value);
+}
+ZoomFactor &ZoomFactor::operator++(int) {
+    ++value;
+    return *this;
+}
+ZoomFactor &ZoomFactor::operator--(int) {
+    --value;
+    return *this;
+}
+ZoomFactor::ZoomFactor(int value) : value(value) {}
 } // crayg

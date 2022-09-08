@@ -10,6 +10,7 @@
 #include <QScreen>
 #include <iostream>
 #include "ImageWidget.h"
+#include "PanAndZoomArea.h"
 
 namespace crayg {
 
@@ -21,6 +22,8 @@ class FrameBufferWidget : public QWidget {
         setupUI();
     }
     ~FrameBufferWidget() override = default;
+ public slots:
+    void setZoomFactor(ZoomFactor zoomFactor);
  private:
     void setupUI();
     ImageWidget &imageWidget;
