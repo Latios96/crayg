@@ -1,5 +1,4 @@
 #include "FrameBufferWidget.h"
-#include "ImageWidget.h"
 #include "PanAndZoomArea.h"
 
 namespace crayg {
