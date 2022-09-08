@@ -17,8 +17,8 @@ class ZoomFactor {
     float toPercentage() const;
     bool operator==(const ZoomFactor &rhs) const;
     bool operator!=(const ZoomFactor &rhs) const;
-    ZoomFactor &ZoomFactor::operator++(int);
-    ZoomFactor &ZoomFactor::operator--(int);
+    ZoomFactor &operator++(int);
+    ZoomFactor &operator--(int);
     friend std::ostream &operator<<(std::ostream &os, const ZoomFactor &factor);
  private:
     int value = 0;
