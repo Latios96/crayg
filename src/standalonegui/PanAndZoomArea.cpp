@@ -50,5 +50,9 @@ int PanAndZoomArea::newScrollValue(float mousePosition, float oldImageSize, int 
     const auto newScrollbarValue = absolutePositionInNewlyScaledImage - absolutePositionInVisibleFrame;
     return static_cast<int>(newScrollbarValue);
 }
+void PanAndZoomArea::setWidget(QWidget *widget) {
+    QScrollArea::setWidget(widget);
+    originalSize = widget->size();
+}
 
 } // crayg

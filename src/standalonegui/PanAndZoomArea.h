@@ -9,11 +9,13 @@ class PanAndZoomArea : public QScrollArea {
  Q_OBJECT
  public:
     explicit PanAndZoomArea(QWidget *parent = nullptr);
+    void setWidget(QWidget *widget);
  protected:
     void wheelEvent(QWheelEvent *event) override;
  private:
     int zoomFactor = 0;
     int newScrollValue(float mousePosition, float oldImageSize, int oldScrollbarValue, float newImageSize);
+    QSize originalSize;
 };
 
 } // crayg
