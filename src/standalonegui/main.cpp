@@ -1,6 +1,6 @@
 
 #include <QtWidgets/qapplication.h>
-#include "FrameBufferWidget.h"
+#include "widgets/FrameBufferWidget.h"
 
 #include <scene/Scene.h>
 #include <image/ImageWriter.h>
@@ -9,7 +9,7 @@
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
 #include "Logger.h"
-#include "ImageWidgetOutputDriver.h"
+#include "widgets/ImageWidgetOutputDriver.h"
 #include "CraygInfo.h"
 #include <thread>
 #include <image/TeeOutputDriver.h>
