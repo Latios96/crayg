@@ -7,6 +7,7 @@ void FrameBufferWidget::setupUI() {
     auto scrollArea = new QScrollArea();
     scrollArea->setWidget(&imageWidget);
     scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    scrollArea->setFrameShape(QFrame::NoFrame);
     auto layout = new QVBoxLayout();
     layout->addWidget(scrollArea);
     this->setLayout(layout);
