@@ -3,6 +3,7 @@
 #include <QScrollBar>
 
 namespace crayg {
+
 PanAndZoomArea::PanAndZoomArea(QWidget *parent) : QScrollArea(parent) {
     this->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     this->setFrameShape(QFrame::NoFrame);
@@ -57,6 +58,43 @@ void PanAndZoomArea::setWidget(QWidget *widget) {
     QScrollArea::setWidget(widget);
     originalSize = widget->size();
 }
+void PanAndZoomArea::mousePressEvent(QMouseEvent *event) {
+    if (event->button() == Qt::MiddleButton) {
+        event->accept();
+        startMove(event->globalPos());
+    }
+}
+void PanAndZoomArea::mouseMoveEvent(QMouseEvent *event) {
+    if (isMoving) {
+        applyMove(move(event->globalPos()));
+    }
+
+}
+void PanAndZoomArea::mouseReleaseEvent(QMouseEvent *event) {
+    if (event->button() == Qt::MiddleButton) {
+        event->accept();
+        applyMove(endMove(event->globalPos()));
+    }
+}
+void PanAndZoomArea::applyMove(const QPoint point) {
+    Logger::info("old value {}", this->horizontalScrollBar()->value());
+    this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value() + point.x());
+    Logger::info("new value {}", this->horizontalScrollBar()->value());
+    this->verticalScrollBar()->setValue(this->verticalScrollBar()->value() + point.y());
+}
+void PanAndZoomArea::startMove(const QPoint &point) {
+    isMoving = true;
+    panStartPoint = point;
+}
+QPoint PanAndZoomArea::move(const QPoint &point) {
+    const QPoint &offset = panStartPoint - point;
+    panStartPoint = point;
+    return offset;
+}
+QPoint PanAndZoomArea::endMove(const QPoint &point) {
+    isMoving = false;
+    return move(point);
+}
 
 int ZoomFactor::getValue() const {
     return value;
@@ -71,8 +109,11 @@ std::ostream &operator<<(std::ostream &os, const ZoomFactor &factor) {
     os << fmt::format("{:.1f}%", factor.toPercentage());
     return os;
 }
+float ZoomFactor::toFloat() const {
+    return 1.0 * std::pow(2, value);
+}
 float ZoomFactor::toPercentage() const {
-    return 100.0f * std::pow(2, value);
+    return 100.0f * toFloat();
 }
 ZoomFactor &ZoomFactor::operator++(int) {
     ++value;
@@ -83,4 +124,5 @@ ZoomFactor &ZoomFactor::operator--(int) {
     return *this;
 }
 ZoomFactor::ZoomFactor(int value) : value(value) {}
+
 } // crayg
