@@ -11,7 +11,7 @@ add_library(crayg-framebuffer
         widgets/ImageWidgetOutputDriver.cpp
         widgets/PanAndZoomArea.cpp
         widgets/PanAndZoomArea.h
-        Stylesheet.h
+        resources/Stylesheet.h
         )
 
 target_include_directories(crayg-framebuffer PUBLIC

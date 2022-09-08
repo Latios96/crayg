@@ -14,7 +14,7 @@
 #include <thread>
 #include <image/TeeOutputDriver.h>
 #include <utils/ImagePathResolver.h>
-#include "Stylesheet.h"
+#include "resources/Stylesheet.h"
 
 int main(int argc, char **argv) {
     crayg::Logger::initialize();
