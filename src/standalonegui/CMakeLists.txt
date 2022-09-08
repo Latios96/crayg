@@ -12,6 +12,7 @@ add_library(crayg-framebuffer
         widgets/PanAndZoomArea.cpp
         widgets/PanAndZoomArea.h
         resources/Stylesheet.h
+        QtBase.h
         )
 
 target_include_directories(crayg-framebuffer PUBLIC

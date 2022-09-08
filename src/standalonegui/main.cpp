@@ -1,4 +1,4 @@
-
+#include "QtBase.h"
 #include <QtWidgets/qapplication.h>
 #include "widgets/FrameBufferWidget.h"
 
