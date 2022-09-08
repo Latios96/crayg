@@ -8,7 +8,10 @@ add_library(crayg-framebuffer
         ImageWidget.h
         ImageWidget.cpp
         ImageWidgetOutputDriver.h
-        ImageWidgetOutputDriver.cpp)
+        ImageWidgetOutputDriver.cpp
+        PanAndZoomArea.cpp
+        PanAndZoomArea.h
+        )
 
 target_include_directories(crayg-framebuffer PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})

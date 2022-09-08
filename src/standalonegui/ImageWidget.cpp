@@ -8,7 +8,7 @@ ImageWidget::ImageWidget(const Resolution &resolution, QWidget *parent) : QWidge
 }
 void ImageWidget::paintEvent(QPaintEvent *event) {
     QPainter qPainter(this);
-    qPainter.drawImage(0, 0, image);
+    qPainter.drawImage(QRect(0, 0, size().width(), size().height()), image);
 }
 
 }
