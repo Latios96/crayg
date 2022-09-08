@@ -95,6 +95,12 @@ QPoint PanAndZoomArea::endMove(const QPoint &point) {
     isMoving = false;
     return move(point);
 }
+const QSize &PanAndZoomArea::getOriginalSize() const {
+    return originalSize;
+}
+void PanAndZoomArea::setOriginalSize(const QSize &originalSize) {
+    PanAndZoomArea::originalSize = originalSize;
+}
 
 int ZoomFactor::getValue() const {
     return value;

@@ -3,14 +3,14 @@
 namespace crayg {
 
 void FrameBufferWidget::setupUI() {
-    setZoomFactor(ZoomFactor());
-
-    auto scrollArea = new PanAndZoomArea();
-    scrollArea->setWidget(&imageWidget);
-    this->connect(scrollArea, &PanAndZoomArea::zoomFactorChanged, this, &FrameBufferWidget::setZoomFactor);
+    this->panAndZoomArea = new PanAndZoomArea();
+    this->panAndZoomArea->setWidget(&imageWidget);
+    QObject::connect(panAndZoomArea, &PanAndZoomArea::zoomFactorChanged, this, &FrameBufferWidget::setZoomFactor);
     auto layout = new QVBoxLayout();
-    layout->addWidget(scrollArea);
+    layout->addWidget(this->panAndZoomArea);
     this->setLayout(layout);
+
+    setZoomFactor(ZoomFactor());
 
     const QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
 
@@ -24,8 +24,8 @@ void FrameBufferWidget::setupUI() {
 void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
     const std::string title = fmt::format("Crayg Frame Buffer - [{} of {}x{}]",
                                           zoomFactor,
-                                          imageWidget.size().width(),
-                                          imageWidget.size().height());
+                                          this->panAndZoomArea->getOriginalSize().width(),
+                                          this->panAndZoomArea->getOriginalSize().height());
     this->setWindowTitle(QString::fromStdString(title));
 }
 

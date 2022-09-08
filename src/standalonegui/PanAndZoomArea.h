@@ -29,6 +29,8 @@ class PanAndZoomArea : public QScrollArea {
  public:
     explicit PanAndZoomArea(QWidget *parent = nullptr);
     void setWidget(QWidget *widget);
+    const QSize &getOriginalSize() const;
+    void setOriginalSize(const QSize &originalSize);
  protected:
     void wheelEvent(QWheelEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;

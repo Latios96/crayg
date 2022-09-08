@@ -27,6 +27,7 @@ class FrameBufferWidget : public QWidget {
  private:
     void setupUI();
     ImageWidget &imageWidget;
+    PanAndZoomArea *panAndZoomArea;
 };
 
 }
