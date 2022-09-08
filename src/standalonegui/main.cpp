@@ -14,11 +14,13 @@
 #include <thread>
 #include <image/TeeOutputDriver.h>
 #include <utils/ImagePathResolver.h>
+#include "Stylesheet.h"
 
 int main(int argc, char **argv) {
     crayg::Logger::initialize();
     try {
         QApplication a(argc, argv);
+        a.setStyleSheet(STYLESHEET);
 
         crayg::CliParser cliParser("standalone-gui", argc, argv);
         crayg::CliParseResult parseResult = cliParser.parse();
