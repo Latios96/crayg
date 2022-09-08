@@ -1,13 +1,14 @@
 #include "FrameBufferWidget.h"
 #include "ImageWidget.h"
+#include "PanAndZoomArea.h"
 
 namespace crayg {
 
 void FrameBufferWidget::setupUI() {
-    auto scrollArea = new QScrollArea();
+    this->setWindowTitle("Crayg Frame Buffer");
+
+    auto scrollArea = new PanAndZoomArea();
     scrollArea->setWidget(&imageWidget);
-    scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    scrollArea->setFrameShape(QFrame::NoFrame);
     auto layout = new QVBoxLayout();
     layout->addWidget(scrollArea);
     this->setLayout(layout);
