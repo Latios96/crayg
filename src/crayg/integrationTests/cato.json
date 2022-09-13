@@ -1,31 +1,27 @@
 {
   "serverUrl": "https://cato.frmbffr.com",
   "projectName": "Crayg Integration Tests",
+  "command": "{{crayg_render_command}}",
+  "comparisonSettings": {
+    "method": "SSIM",
+    "threshold": 0.95
+  },
   "suites": [
     {
       "name": "AmbientOcclusionIntegrator",
       "tests": [
         {
           "name": "SpherePrimitiveAO",
-          "command": "{{crayg_render_command}}",
           "comparisonSettings": {
-            "method": "SSIM",
             "threshold": 0.85
           }
         },
         {
-          "name": "CorrectNormalTransformationAO",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "CorrectNormalTransformationAO"
         },
         {
           "name": "CorrectNormalTransformationAO_LargerRadius",
-          "command": "{{crayg_render_command}}",
           "comparisonSettings": {
-            "method": "SSIM",
             "threshold": 0.82
           }
         }
@@ -35,28 +31,16 @@
       "name": "CornellBox",
       "tests": [
         {
-          "name": "CornellBox_Original",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "CornellBox_Original"
         },
         {
           "name": "CornellBox_Original_GI",
-          "command": "{{crayg_render_command}} --maxSamples 8",
           "comparisonSettings": {
-            "method": "SSIM",
             "threshold": 0.76
           }
         },
         {
-          "name": "CornellBox_Sphere",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "CornellBox_Sphere"
         }
       ]
     },
@@ -64,62 +48,34 @@
       "name": "Geometry",
       "tests": [
         {
-          "name": "SpherePrimitive",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "SpherePrimitive"
         },
         {
-          "name": "CorrectNormalTransformation",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "CorrectNormalTransformation"
         }
       ]
     },
     {
       "name": "ImageIO",
+      "command": "{{cray_integration_test_command}}",
       "tests": [
         {
-          "name": "writeBmpImage",
-          "command": "{{cray_integration_test_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "writeBmpImage"
         },
         {
-          "name": "writeExrImage",
-          "command": "{{cray_integration_test_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "writeExrImage"
         },
         {
-          "name": "writeToImageOutputDriver",
-          "command": "{{cray_integration_test_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "writeToImageOutputDriver"
         }
       ]
     },
     {
       "name": "SceneIO",
+      "command": "{{cray_integration_test_command}}",
       "tests": [
         {
-          "name": "sceneWriteReadRendersCorrectly",
-          "command": "{{cray_integration_test_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "sceneWriteReadRendersCorrectly"
         }
       ]
     },
@@ -127,44 +83,19 @@
       "name": "Lights",
       "tests": [
         {
-          "name": "MultipleColoredPointLights",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "MultipleColoredPointLights"
         },
         {
-          "name": "MultiplePointLights",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "MultiplePointLights"
         },
         {
-          "name": "SingleDiskLight",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "SingleDiskLight"
         },
         {
-          "name": "SinglePointLight",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "SinglePointLight"
         },
         {
-          "name": "SingleRectLight",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "SingleRectLight"
         }
       ]
     },
@@ -172,20 +103,10 @@
       "name": "UsdPreviewSurface",
       "tests": [
         {
-          "name": "SimpleDiffuseMaterial",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "SimpleDiffuseMaterial"
         },
         {
-          "name": "SimpleReflectiveMaterial",
-          "command": "{{crayg_render_command}}",
-          "comparisonSettings": {
-            "method": "SSIM",
-            "threshold": 0.95
-          }
+          "name": "SimpleReflectiveMaterial"
         }
       ]
     }
