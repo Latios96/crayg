@@ -12,7 +12,7 @@ target_link_libraries(crayg-binary-integration-tests crayg)
 
 add_test(
         NAME crayg-integration-tests
-        COMMAND cato run -u https://cato.frmbffr.com
+        COMMAND cato run
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 configure_file(cato.json ${CMAKE_BINARY_DIR}/bin/cato.json)
