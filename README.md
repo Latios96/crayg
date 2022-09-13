@@ -122,7 +122,11 @@ For each test, a Maya `.ma` file and a `.usda` file is stored
 Currently, Autodesk Maya 2023 is supported.
 You need to have the [maya-usd](https://github.com/Autodesk/maya-usd) installed
 
-(install dependencies)
+Make sure to install the Python dependencies inside Maya:
+
+```shell
+C:\Program Files\Autodesk\Maya2023\bin\mayapy -m requirements.txt
+```
 
 ### Launching and Usage
 
