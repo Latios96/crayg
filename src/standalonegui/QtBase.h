@@ -14,7 +14,7 @@ struct fmt::formatter<QPoint> {
 
     template<typename FormatContext>
     auto format(QPoint const &qPoint, FormatContext &ctx) {
-        return fmt::format_to("({},{}))", qPoint.x(), qPoint.y());
+        return fmt::format_to(ctx.out(),"({},{}))", qPoint.x(), qPoint.y());
     };
 };
 
@@ -27,7 +27,7 @@ struct fmt::formatter<QPointF> {
 
     template<typename FormatContext>
     auto format(QPointF const &qPoint, FormatContext &ctx) {
-        return fmt::format_to("({},{}))", qPoint.x(), qPoint.y());
+        return fmt::format_to(ctx.out(),"({},{}))", qPoint.x(), qPoint.y());
     };
 };
 
@@ -40,7 +40,7 @@ struct fmt::formatter<QSize> {
 
     template<typename FormatContext>
     auto format(QSize const &size, FormatContext &ctx) {
-        return fmt::format_to("({},{}))", size.width(), size.height());
+        return fmt::format_to(ctx.out(),"({},{}))", size.width(), size.height());
     };
 };
 
@@ -53,7 +53,7 @@ struct fmt::formatter<QSizeF> {
 
     template<typename FormatContext>
     auto format(QSizeF const &size, FormatContext &ctx) {
-        return fmt::format_to("({},{}))", size.width(), size.height());
+        return fmt::format_to(ctx.out(),"({},{}))", size.width(), size.height());
     };
 };
 
