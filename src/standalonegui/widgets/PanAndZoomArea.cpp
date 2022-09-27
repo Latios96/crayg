@@ -77,9 +77,7 @@ void PanAndZoomArea::mouseReleaseEvent(QMouseEvent *event) {
     }
 }
 void PanAndZoomArea::applyMove(const QPoint point) {
-    Logger::info("old value {}", this->horizontalScrollBar()->value());
     this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value() + point.x());
-    Logger::info("new value {}", this->horizontalScrollBar()->value());
     this->verticalScrollBar()->setValue(this->verticalScrollBar()->value() + point.y());
 }
 void PanAndZoomArea::startMove(const QPoint &point) {
