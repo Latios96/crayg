@@ -71,6 +71,7 @@ jobs:
         run: ctest -C Release -V
         env:
           CATO_API_TOKEN: ${{ secrets.CATO_API_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: create package
         working-directory: build
         run: cmake --build . --config Release --target createDistribution
