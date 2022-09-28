@@ -13,7 +13,9 @@ void PanAndZoomArea::wheelEvent(QWheelEvent *event) {
     if (!hasZoom) {
         event->ignore();
     }
+
     event->accept();
+
     const bool isZoomIn = event->angleDelta().y() > 0;
     if (isZoomIn) {
         this->zoomFactor++;
