@@ -117,6 +117,18 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
                 name_override="Pixar Kitchen",
             )
         )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\Lego_Models\Hubble.usda"),
+                name_override="Hubble",
+            )
+        )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\Lego_Models\Space_Shuttle.usda"),
+                name_override="Space Shuttle",
+            )
+        )
 
 
 def add_not_existing_run_configurations(run_manager, scenes):
