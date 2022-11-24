@@ -60,9 +60,7 @@ BvhNode *buildTree(const std::vector<Imageable *> &objects) {
     std::vector<Imageable *> left, right;
     const BoundingBox centroidBounds = computeCentroidBounds(objects);
     const SplitInfo splitInfo = getSplitInfo(centroidBounds);
-    /*if(objects.size() < 1000){
-        return new BvhNode(bounds, nullptr, nullptr, objects);
-    }*/
+
     for (const auto &obj: objects) {
         if (isLeft(obj, splitInfo)) {
             left.push_back(obj);
