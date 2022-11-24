@@ -20,4 +20,8 @@ void Logger::setLevel(LevelEnum level) {
     }
 }
 
+void Logger::initialize() {
+    auto console = spdlog::stdout_color_mt("console");
+}
+
 }
