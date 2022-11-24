@@ -82,6 +82,9 @@ BvhNode *buildTree(const std::vector<Imageable *> &objects) {
 
 BvhNode *BvhBuilder::build() const {
     InformativeScopedStopWatch informativeScopedStopWatch("Building BVH");
+
+    Logger::info("Primitives in scene: {:L}", scene.objects.size());
+
     std::vector<Imageable *> objects;
     objects.reserve(scene.objects.size());
     for (auto &obj: scene.objects) {
