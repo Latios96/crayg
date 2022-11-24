@@ -21,6 +21,8 @@ void Logger::setLevel(LevelEnum level) {
 }
 
 void Logger::initialize() {
+    std::locale::global(std::locale("en_US.UTF-8"));
+
     auto console = spdlog::stdout_color_mt("console");
 }
 
