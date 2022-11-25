@@ -129,6 +129,18 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
                 name_override="Space Shuttle",
             )
         )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\Lego_Models\Millennium_Falcon.usda"),
+                name_override="Millennium Falcon",
+            )
+        )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\ALab\entry_flattened.usd"),
+                name_override="ALab",
+            )
+        )
 
 
 def add_not_existing_run_configurations(run_manager, scenes):
