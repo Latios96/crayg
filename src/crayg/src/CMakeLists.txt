@@ -189,6 +189,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdSphereWriter.h
         sceneIO/write/usd/UsdTriangleMeshWriter.cpp
         sceneIO/write/usd/UsdTriangleMeshWriter.h
+        utils/FileSystemUtils.cpp
+        utils/FileSystemUtils.h
         utils/ImagePathResolver.cpp
         utils/ImagePathResolver.h
         utils/Preconditions.cpp
