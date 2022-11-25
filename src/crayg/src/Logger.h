@@ -54,6 +54,7 @@ class Logger {
     static void critical(const T &msg);
 
     static void initialize();
+    static void logToFile(const std::string &fileName);
 };
 
 template<typename... Args>
