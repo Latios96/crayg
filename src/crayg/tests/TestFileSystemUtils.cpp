@@ -16,6 +16,12 @@ TEST_CASE("FileSystemUtils::swapFileExtension") {
 
         REQUIRE(pathWithNewExtension == "myImage.txt");
     }
+
+    SECTION("should not add two dots") {
+        const auto pathWithNewExtension = FileSystemUtils::swapFileExtension("myImage.png", ".txt");
+
+        REQUIRE(pathWithNewExtension == "myImage.txt");
+    }
 }
 
 }
