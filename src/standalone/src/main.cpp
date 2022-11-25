@@ -4,6 +4,7 @@
 #include <image/ImageWriters.h>
 #include <CraygInfo.h>
 #include <utils/ImagePathResolver.h>
+#include "utils/FileSystemUtils.h"
 #include <iostream>
 #include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
@@ -19,6 +20,11 @@ int main(int argc, char *argv[]) {
             std::cout << (*parseResult.error) << std::endl;
             exit(1);
         }
+
+        crayg::ImagePathResolver imagePathResolver;
+        std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
+        std::string logFilePath = crayg::FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
+        crayg::Logger::logToFile(logFilePath);
 
         crayg::Logger::info("Crayg Renderer version {}, commit {}",
                             crayg::CraygInfo::VERSION,
@@ -41,8 +47,6 @@ int main(int argc, char *argv[]) {
         crayg::Renderer renderer(scene, imageOutputDriver);
         renderer.renderScene();
 
-        crayg::ImagePathResolver imagePathResolver;
-        std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
         crayg::Logger::info("writing image to {}..", imageOutputPath);
         crayg::ImageWriters::writeImage(myImage, imageOutputPath);
         crayg::Logger::info("writing image done.");

@@ -14,6 +14,7 @@
 #include <thread>
 #include <image/TeeOutputDriver.h>
 #include <utils/ImagePathResolver.h>
+#include "utils/FileSystemUtils.h"
 #include "resources/Stylesheet.h"
 
 int main(int argc, char **argv) {
@@ -29,6 +30,11 @@ int main(int argc, char **argv) {
             std::cout << (*parseResult.error) << std::endl;
             exit(1);
         }
+
+        crayg::ImagePathResolver imagePathResolver;
+        std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
+        std::string logFilePath = crayg::FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
+        crayg::Logger::logToFile(logFilePath);
 
         crayg::Logger::info("Crayg Renderer version {}, commit {}",
                             crayg::CraygInfo::VERSION,
@@ -57,11 +63,9 @@ int main(int argc, char **argv) {
 
         crayg::Renderer renderer(scene, teeOutputDriver);
 
-        std::thread renderThread([&parseResult, &image, &renderer]() {
+        std::thread renderThread([&image, &renderer, &imageOutputPath]() {
             renderer.renderScene();
 
-            crayg::ImagePathResolver imagePathResolver;
-            std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
             crayg::Logger::info("writing image to {}..", imageOutputPath);
             crayg::ImageWriters::writeImage(image, imageOutputPath);
             crayg::Logger::info("writing image done.");
