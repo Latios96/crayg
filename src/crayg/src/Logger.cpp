@@ -25,7 +25,7 @@ void Logger::initialize() {
     std::locale::global(std::locale("en_US.UTF-8"));
 
     std::vector<spdlog::sink_ptr> sinks;
-    const auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_st>();
+    const auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
     sinks.push_back(stdout_sink);
 
     auto combined_logger = std::make_shared<spdlog::logger>("console", begin(sinks), end(sinks));
@@ -35,7 +35,7 @@ void Logger::initialize() {
     spdlog::flush_on(spdlog::level::info);
 }
 void Logger::logToFile(const std::string &fileName) {
-    const auto file_synk = std::make_shared<spdlog::sinks::basic_file_sink_st>(fileName, true);
+    const auto file_synk = std::make_shared<spdlog::sinks::basic_file_sink_mt>(fileName, true);
     file_synk->set_level(spdlog::level::info);
     spdlog::default_logger()->sinks().push_back(file_synk);
 }
