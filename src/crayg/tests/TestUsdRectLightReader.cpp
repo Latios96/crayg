@@ -29,6 +29,24 @@ TEST_CASE("UsdRectLightReader::read") {
         REQUIRE(light->getHeight() == 3);
     }
 
+    SECTION("should read rect light with time samples correctly") {
+        auto usdRectLight = pxr::UsdLuxRectLight::Define(stage, pxr::SdfPath("/usdRectLight"));
+        pxr::UsdGeomXformCommonAPI(usdRectLight).SetTranslate(pxr::GfVec3f(1, 2, 3), pxr::UsdTimeCode());
+        usdRectLight.GetIntensityAttr().Set(3.0f, pxr::UsdTimeCode());
+        usdRectLight.GetColorAttr().Set(pxr::GfVec3f(1, 0, 0), pxr::UsdTimeCode());
+        usdRectLight.GetWidthAttr().Set(2.0f, pxr::UsdTimeCode());
+        usdRectLight.GetHeightAttr().Set(3.0f, pxr::UsdTimeCode());
+
+        UsdRectLightReader usdRectLightReader(usdRectLight);
+        auto light = usdRectLightReader.read();
+
+        REQUIRE(light->getTransform().toPosition() == Vector3f(1, 2, -3));
+        REQUIRE(light->getIntensity() == 3);
+        REQUIRE(light->getColor() == Color({1, 0, 0}));
+        REQUIRE(light->getWidth() == 2);
+        REQUIRE(light->getHeight() == 3);
+    }
+
 }
 
 }

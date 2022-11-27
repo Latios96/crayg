@@ -39,6 +39,21 @@ TEST_CASE("CameraReader::read") {
         REQUIRE(camera->getPosition() == Vector3f(1, 2, -3));
     }
 
+    SECTION("should read fully populated camera with time samples correctly") {
+        pxr::UsdGeomXformCommonAPI(usdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3), pxr::UsdTimeCode());
+        usdCamera.GetFocusDistanceAttr().Set(5.0f, pxr::UsdTimeCode());
+        usdCamera.GetFocalLengthAttr().Set(35.0f, pxr::UsdTimeCode());
+        usdCamera.GetHorizontalApertureAttr().Set(36.0f, pxr::UsdTimeCode());
+
+        UsdCameraReader usdCameraReader(usdCamera);
+        auto camera = usdCameraReader.read();
+
+        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1, 2, -3}),
+                                                              35,
+                                                              36);
+        REQUIRE(*camera == *expectedCamera);
+    }
+
 }
 
 }

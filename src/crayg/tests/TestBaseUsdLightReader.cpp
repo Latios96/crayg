@@ -36,6 +36,22 @@ TEST_CASE("BaseUsdLightReader::read") {
         REQUIRE(light->getName() == "/usdDiskLight");
     }
 
+    SECTION("should read diskLight with time samples correctly") {
+        auto usdDiskLight = pxr::UsdLuxDiskLight::Define(stage, pxr::SdfPath("/usdDiskLight"));
+        pxr::UsdGeomXformCommonAPI(usdDiskLight).SetTranslate(pxr::GfVec3f(1, 2, 3));
+        usdDiskLight.GetIntensityAttr().Set(3.0f, pxr::UsdTimeCode());
+        usdDiskLight.GetColorAttr().Set(pxr::GfVec3f(1, 0, 0), pxr::UsdTimeCode());
+        usdDiskLight.GetRadiusAttr().Set(3.0f, pxr::UsdTimeCode());
+
+        DummyBaseReader baseUsdLightReader(usdDiskLight);
+        auto light = baseUsdLightReader.read();
+
+        REQUIRE(light->getTransform().toPosition() == Vector3f(1, 2, -3));
+        REQUIRE(light->getIntensity() == 3);
+        REQUIRE(light->getColor() == Color({1, 0, 0}));
+        REQUIRE(light->getName() == "/usdDiskLight");
+    }
+
 }
 
 }

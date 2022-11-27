@@ -22,6 +22,19 @@ TEST_CASE("UsdSphereReader::read") {
         REQUIRE(sphere->getRadius() == 3);
         REQUIRE(sphere->getMaterial()->getName() == "defaultMaterial");
     }
+
+    SECTION("should read sphere with time samples correctly") {
+        auto usdSphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/usdSphere"));
+        pxr::UsdGeomXformCommonAPI(usdSphere).SetTranslate(pxr::GfVec3f(1, 2, 3), pxr::UsdTimeCode());
+        usdSphere.GetRadiusAttr().Set(3.0, pxr::UsdTimeCode());
+
+        UsdSphereReader usdSphereReader(usdSphere, usdMaterialTranslationCache);
+        auto sphere = usdSphereReader.read();
+
+        REQUIRE(sphere->getTransform().toPosition() == Vector3f(1, 2, -3));
+        REQUIRE(sphere->getRadius() == 3);
+        REQUIRE(sphere->getMaterial()->getName() == "defaultMaterial");
+    }
 }
 
 }
