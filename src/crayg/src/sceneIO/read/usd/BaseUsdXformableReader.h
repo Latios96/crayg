@@ -16,7 +16,7 @@ class BaseUsdXformableReader : public BaseUsdReader<UsdType, CraygType> {
     std::shared_ptr<CraygType> read() override {
         auto craygObject = BaseUsdReader<UsdType, CraygType>::read();
 
-        UsdReadUtils::readTransform(*craygObject, this->usdPrim);
+        UsdReadUtils::readTransform(*craygObject, this->usdPrim, this->timeCodeToRead);
 
         return craygObject;
     }

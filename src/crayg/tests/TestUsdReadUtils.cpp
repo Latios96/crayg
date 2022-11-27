@@ -22,7 +22,7 @@ TEST_CASE("UsdReadUtils::readTransform") {
                                   0, 0, 3, -3,
                                   0, 0, 0, 1);
 
-        UsdReadUtils::readTransform(transformable, usdCamera);
+        UsdReadUtils::readTransform(transformable, usdCamera, pxr::UsdTimeCode::EarliestTime());
 
         REQUIRE(transformable.getTransform().matrix == expectedMatrix);
     }
@@ -37,7 +37,7 @@ TEST_CASE("UsdReadUtils::readTransform") {
                                   0, 0, 3, -9,
                                   0, 0, 0, 1);
 
-        UsdReadUtils::readTransform(transformable, usdCamera);
+        UsdReadUtils::readTransform(transformable, usdCamera, pxr::UsdTimeCode::EarliestTime());
 
         REQUIRE(transformable.getTransform().matrix == expectedMatrix);
     }

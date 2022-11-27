@@ -9,7 +9,9 @@ namespace crayg {
 
 class UsdReadUtils {
  public:
-    static void readTransform(Transformable &transformable, pxr::UsdGeomXformable &usdGeomXformable);
+    static void readTransform(Transformable &transformable,
+                              pxr::UsdGeomXformable &usdGeomXformable,
+                              const pxr::UsdTimeCode &timeToRead);
 };
 
 }
