@@ -28,20 +28,6 @@ TEST_CASE("CameraReader::read") {
         REQUIRE(*camera == *expectedCamera);
     }
 
-    SECTION("should read fully populated camera correctly") {
-        pxr::UsdGeomXformCommonAPI(usdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3));
-        usdCamera.GetFocalLengthAttr().Set(35.0f);
-        usdCamera.GetHorizontalApertureAttr().Set(36.0f);
-
-        UsdCameraReader usdCameraReader(usdCamera);
-        auto camera = usdCameraReader.read();
-
-        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1, 2, -3}),
-                                                              35,
-                                                              36);
-        REQUIRE(*camera == *expectedCamera);
-    }
-
     SECTION("should read camera with translation on its parents correctly") {
         auto parent = pxr::UsdGeomXform::Define(stage, pxr::SdfPath("/cam_grp"));
         pxr::UsdGeomXformCommonAPI(parent).SetScale(pxr::GfVec3f(1, 2, 3));
