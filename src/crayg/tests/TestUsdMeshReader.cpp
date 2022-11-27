@@ -114,6 +114,26 @@ TEST_CASE("UsdMeshReader::read") {
         REQUIRE(triangleMesh->normalsPrimVar == nullptr);
     }
 
+    SECTION("should read mesh with animated geometry definitions correctly") {
+        auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
+        pxr::UsdGeomXformCommonAPI(usdGeomMesh).SetTranslate(pxr::GfVec3f(1, 2, 3));
+        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
+        usdGeomMesh.GetPointsAttr().Set(points, pxr::UsdTimeCode());
+        pxr::VtIntArray faceVertexCounts({4});
+        usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts, pxr::UsdTimeCode());
+        pxr::VtIntArray faceVertexIndices({0, 1, 3, 2});
+        usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices, pxr::UsdTimeCode());
+
+        UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto triangleMesh = usdMeshReader.read();
+
+        REQUIRE(triangleMesh->getTransform().toPosition() == Vector3f(1, 2, -3));
+        REQUIRE(triangleMesh->points
+                    == std::vector<Vector3f>({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
+        REQUIRE(
+            triangleMesh->faceVertexIndices == std::vector<TriangleMesh::FaceVertexIndices>({{0, 3, 1}, {0, 2, 3}}));
+    }
+
 }
 
 }

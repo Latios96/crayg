@@ -35,7 +35,7 @@ void crayg::UsdMeshReader::translateFaceIndices(std::shared_ptr<TriangleMesh> &t
 }
 void crayg::UsdMeshReader::translatePoints(std::shared_ptr<TriangleMesh> &triangleMesh) const {
     pxr::VtVec3fArray points;
-    usdPrim.GetPointsAttr().Get(&points);
+    usdPrim.GetPointsAttr().Get(&points, pxr::UsdTimeCode::EarliestTime());
     triangleMesh->points.reserve(points.size());
     for (const auto &point: points) {
         triangleMesh->points.emplace_back(point[0], point[1], -point[2]);
@@ -52,9 +52,9 @@ pxr::HdMeshTopology *crayg::UsdMeshReader::getMeshUtil() const {
     auto orientation = UsdUtils::getAttributeValueAs<pxr::TfToken>(usdPrim.GetOrientationAttr());
 
     pxr::VtIntArray faceVertexCounts, faceVertexIndices, holeIndices;
-    usdPrim.GetFaceVertexCountsAttr().Get(&faceVertexCounts);
-    usdPrim.GetFaceVertexIndicesAttr().Get(&faceVertexIndices);
-    usdPrim.GetHoleIndicesAttr().Get(&holeIndices);
+    usdPrim.GetFaceVertexCountsAttr().Get(&faceVertexCounts, pxr::UsdTimeCode::EarliestTime());
+    usdPrim.GetFaceVertexIndicesAttr().Get(&faceVertexIndices, pxr::UsdTimeCode::EarliestTime());
+    usdPrim.GetHoleIndicesAttr().Get(&holeIndices, pxr::UsdTimeCode::EarliestTime());
 
     return new pxr::HdMeshTopology(scheme, orientation, faceVertexCounts, faceVertexIndices, holeIndices);
 }
@@ -91,7 +91,7 @@ void UsdMeshReader::translateFaceVaryingNormals(std::shared_ptr<TriangleMesh> &t
 pxr::VtValue &UsdMeshReader::computeTriangulatedFaceVaryingNormals(const pxr::HdMeshUtil &meshUtil,
                                                                    pxr::VtValue &triangulated) const {
     pxr::VtVec3fArray normals;
-    usdPrim.GetNormalsAttr().Get(&normals);
+    usdPrim.GetNormalsAttr().Get(&normals, pxr::UsdTimeCode::EarliestTime());
     meshUtil.ComputeTriangulatedFaceVaryingPrimvar(normals.data(),
                                                    normals.size(),
                                                    pxr::HdTypeFloatVec3,
