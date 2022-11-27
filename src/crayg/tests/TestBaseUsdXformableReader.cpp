@@ -23,7 +23,6 @@ TEST_CASE("BaseUsdXformableReader::read") {
     SECTION("should read prim translation") {
         auto usdSphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/usdSphere"));
         pxr::UsdGeomXformCommonAPI(usdSphere).SetTranslate(pxr::GfVec3f(1, 2, 3));
-        usdSphere.GetRadiusAttr().Set(3.0); // TODO do we need radius here?
 
         DummyBaseReader dummyBaseReader(usdSphere);
         auto sphere = dummyBaseReader.read();
@@ -34,7 +33,6 @@ TEST_CASE("BaseUsdXformableReader::read") {
     SECTION("should read time sampled prim translation correctly") {
         auto usdSphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/usdSphere"));
         pxr::UsdGeomXformCommonAPI(usdSphere).SetTranslate(pxr::GfVec3f(1, 2, 3), pxr::UsdTimeCode());
-        usdSphere.GetRadiusAttr().Set(3.0); // TODO do we need radius here?
 
         DummyBaseReader dummyBaseReader(usdSphere);
         auto sphere = dummyBaseReader.read();
