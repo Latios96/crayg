@@ -28,7 +28,7 @@ std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::Usd
     if (!shader) {
         return getDefaultMaterial();
     }
-    auto shaderId = UsdUtils::getAttributeValueAs<pxr::TfToken>(shader.GetIdAttr());
+    auto shaderId = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(shader.GetIdAttr());
     shader.GetIdAttr().Get(&shaderId);
     if (!isUsdPreviewSurface(shaderId)) {
         Logger::warning("Shader at {} is of id {}, which is not supported",
@@ -70,19 +70,19 @@ std::shared_ptr<Material> UsdMaterialReadCache::getDefaultMaterial() {
 
 template<>
 Color UsdMaterialReadCache::readValue<Color, pxr::GfVec3f>(const pxr::UsdShadeInput &input) {
-    auto value = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(input);
+    auto value = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(input, this->timeCodeToRead);
     return UsdConversions::convertColor(value);
 }
 
 template<>
 bool UsdMaterialReadCache::readValue<bool, int>(const pxr::UsdShadeInput &input) {
-    auto value = UsdUtils::getAttributeValueAs<int>(input);
+    auto value = UsdUtils::getAttributeValueAs<int>(input, this->timeCodeToRead);
     return value != 0;
 }
 
 template<>
 float UsdMaterialReadCache::readValue<float, float>(const pxr::UsdShadeInput &input) {
-    return UsdUtils::getAttributeValueAs<float>(input);
+    return UsdUtils::getAttributeValueAs<float>(input, this->timeCodeToRead);
 }
 
 }

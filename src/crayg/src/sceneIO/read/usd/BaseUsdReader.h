@@ -22,6 +22,7 @@ class BaseUsdReader {
  protected:
     virtual std::string getTranslatedType() = 0;
     UsdType usdPrim;
+    pxr::UsdTimeCode timeCodeToRead = pxr::UsdTimeCode::EarliestTime();
 };
 
 } // crayg

@@ -41,40 +41,40 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
 
         auto matPrim = pxr::UsdShadeMaterial(stage->GetPrimAtPath(pxr::SdfPath("/myMat")));
         auto shaderPrim = pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myMat/usdPreviewSurface")));
-        auto id = UsdUtils::getAttributeValueAs<pxr::TfToken>(shaderPrim.GetIdAttr());
+        auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(shaderPrim.GetIdAttr());
         REQUIRE(id == pxr::TfToken("UsdPreviewSurface"));
         auto diffuseColor =
-            UsdUtils::getAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("diffuseColor")));
+            UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("diffuseColor")));
         REQUIRE(diffuseColor == pxr::GfVec3f(1, 2, 3));
         auto emissiveColor =
-            UsdUtils::getAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("emissiveColor")));
+            UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("emissiveColor")));
         REQUIRE(emissiveColor == pxr::GfVec3f(4, 5, 6));
         auto useSpecularWorkflow =
-            UsdUtils::getAttributeValueAs<int>(shaderPrim.GetInput(pxr::TfToken("useSpecularWorkflow")));
+            UsdUtils::getStaticAttributeValueAs<int>(shaderPrim.GetInput(pxr::TfToken("useSpecularWorkflow")));
         REQUIRE(useSpecularWorkflow == 1);
         auto specularColor =
-            UsdUtils::getAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("specularColor")));
+            UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("specularColor")));
         REQUIRE(specularColor == pxr::GfVec3f(7, 8, 9));
         auto metallic =
-            UsdUtils::getAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("metallic")));
+            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("metallic")));
         REQUIRE(metallic == 0.1f);
         auto roughness =
-            UsdUtils::getAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("roughness")));
+            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("roughness")));
         REQUIRE(roughness == 0.2f);
         auto clearcoat =
-            UsdUtils::getAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("clearcoat")));
+            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("clearcoat")));
         REQUIRE(clearcoat == 0.3f);
         auto clearcoatRoughness =
-            UsdUtils::getAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("clearcoatRoughness")));
+            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("clearcoatRoughness")));
         REQUIRE(clearcoatRoughness == 0.4f);
         auto opacity =
-            UsdUtils::getAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("opacity")));
+            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("opacity")));
         REQUIRE(opacity == 0.5f);
         auto opacityThreshold =
-            UsdUtils::getAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("opacityThreshold")));
+            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("opacityThreshold")));
         REQUIRE(opacityThreshold == 0.6f);
         auto ior =
-            UsdUtils::getAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("ior")));
+            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("ior")));
         REQUIRE(ior == 0.7f);
     }
 
@@ -85,7 +85,7 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
         auto matPrim = pxr::UsdShadeMaterial(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat")));
         auto
             shaderPrim = pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat/usdPreviewSurface")));
-        auto id = UsdUtils::getAttributeValueAs<pxr::TfToken>(shaderPrim.GetIdAttr());
+        auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(shaderPrim.GetIdAttr());
         REQUIRE(id == pxr::TfToken("UsdPreviewSurface"));
         auto diffuseColorAttr = shaderPrim.GetInput(pxr::TfToken("diffuseColor"));
         REQUIRE_FALSE(diffuseColorAttr);

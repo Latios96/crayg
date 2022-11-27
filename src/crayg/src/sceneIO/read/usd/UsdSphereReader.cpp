@@ -10,7 +10,7 @@ UsdSphereReader::UsdSphereReader(const pxr::UsdGeomSphere &usdPrim,
 std::shared_ptr<Sphere> UsdSphereReader::read() {
     auto sphere = BaseUsdImageableReader<pxr::UsdGeomSphere, Sphere>::read();
 
-    const auto radius = UsdUtils::getAttributeValueAs<double>(usdPrim.GetRadiusAttr());
+    const auto radius = UsdUtils::getAttributeValueAs<double>(usdPrim.GetRadiusAttr(), this->timeCodeToRead);
     sphere->setRadius(static_cast<float>(radius));
 
     return sphere;

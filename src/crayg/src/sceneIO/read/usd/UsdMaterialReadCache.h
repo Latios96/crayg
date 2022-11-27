@@ -28,6 +28,7 @@ class UsdMaterialReadCache {
     T readValue(const pxr::UsdShadeInput &input);
 
     std::map<pxr::SdfPath, std::shared_ptr<Material>> materialCache;
+    pxr::UsdTimeCode timeCodeToRead = pxr::UsdTimeCode::EarliestTime();
 };
 
 template<typename T, typename UsdType>
@@ -45,7 +46,7 @@ void UsdMaterialReadCache::readShaderAttributeValue(const pxr::UsdShadeShader &s
 }
 template<typename T, typename UsdType>
 T UsdMaterialReadCache::readValue(const pxr::UsdShadeInput &input) {
-    auto value = UsdUtils::getAttributeValueAs<UsdType>(input);
+    auto value = UsdUtils::getAttributeValueAs<UsdType>(input, timeCodeToRead);
     return UsdConversions::convert(value);
 }
 

@@ -22,8 +22,8 @@ TEST_CASE("UsdCameraReader::write") {
         usdCameraWriter.write(stage, usdPathFactory);
 
         auto usdGeomCamera = pxr::UsdGeomCamera(stage->GetPrimAtPath(pxr::SdfPath("/camera0")));
-        auto focalLength = UsdUtils::getAttributeValueAs<float>(usdGeomCamera.GetFocalLengthAttr());
-        auto horizontalAperture = UsdUtils::getAttributeValueAs<float>(usdGeomCamera.GetHorizontalApertureAttr());
+        auto focalLength = UsdUtils::getStaticAttributeValueAs<float>(usdGeomCamera.GetFocalLengthAttr());
+        auto horizontalAperture = UsdUtils::getStaticAttributeValueAs<float>(usdGeomCamera.GetHorizontalApertureAttr());
         REQUIRE(focalLength == 50.0f);
         REQUIRE(horizontalAperture == 35.0f);
         REQUIRE(usdGeomCamera.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation()

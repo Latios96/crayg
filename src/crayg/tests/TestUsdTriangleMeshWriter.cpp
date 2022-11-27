@@ -25,9 +25,11 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));
         pxr::GfVec3d
             translation = usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
-        auto points = UsdUtils::getAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetPointsAttr());
-        auto triangleIndices = UsdUtils::getAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
-        auto faceVertexCounts = UsdUtils::getAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexCountsAttr());
+        auto points = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetPointsAttr());
+        auto triangleIndices =
+            UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
+        auto faceVertexCounts =
+            UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexCountsAttr());
         REQUIRE(translation == pxr::GfVec3f(1, 2, -3));
         REQUIRE(points
                     == pxr::VtVec3fArray({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));

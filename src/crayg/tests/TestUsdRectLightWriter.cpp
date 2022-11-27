@@ -22,10 +22,10 @@ TEST_CASE("UsdRectLightWriter::write") {
         usdRectLightWriter.write(stage, usdPathFactory);
         auto usdLuxRectLight = pxr::UsdLuxRectLight(stage->GetPrimAtPath(pxr::SdfPath("/light")));
 
-        auto intensity = UsdUtils::getAttributeValueAs<float>(usdLuxRectLight.GetIntensityAttr());
-        auto color = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(usdLuxRectLight.GetColorAttr());
-        auto width = UsdUtils::getAttributeValueAs<float>(usdLuxRectLight.GetWidthAttr());
-        auto height = UsdUtils::getAttributeValueAs<float>(usdLuxRectLight.GetHeightAttr());
+        auto intensity = UsdUtils::getStaticAttributeValueAs<float>(usdLuxRectLight.GetIntensityAttr());
+        auto color = UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(usdLuxRectLight.GetColorAttr());
+        auto width = UsdUtils::getStaticAttributeValueAs<float>(usdLuxRectLight.GetWidthAttr());
+        auto height = UsdUtils::getStaticAttributeValueAs<float>(usdLuxRectLight.GetHeightAttr());
         REQUIRE(intensity == 3);
         REQUIRE(color == pxr::GfVec3f(1, 0, 0));
         REQUIRE(width == 4);

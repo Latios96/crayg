@@ -21,9 +21,11 @@ TEST_CASE("UsdGroundPlaneMeshWriter::write") {
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/GroundPlane0")));
         pxr::GfVec3d
             translation = usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
-        auto points = UsdUtils::getAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetPointsAttr());
-        auto triangleIndices = UsdUtils::getAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
-        auto faceVertexCounts = UsdUtils::getAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexCountsAttr());
+        auto points = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetPointsAttr());
+        auto triangleIndices =
+            UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
+        auto faceVertexCounts =
+            UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexCountsAttr());
         REQUIRE(translation == pxr::GfVec3f(0, 0, 0));
         REQUIRE(points
                     == pxr::VtVec3fArray({{-1000, 0, 1000}, {-1000, 0, -1000}, {1000, 0, -1000}, {1000, 0, 1000}}));

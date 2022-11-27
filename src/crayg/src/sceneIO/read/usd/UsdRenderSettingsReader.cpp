@@ -28,7 +28,7 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
 Resolution crayg::UsdRenderSettingsReader::readResolution() const {
     Resolution resolution = Resolution(1280, 720);
     if (usdPrim.GetResolutionAttr() && usdPrim.GetResolutionAttr().IsAuthored()) {
-        auto usdResolution = UsdUtils::getAttributeValueAs<pxr::GfVec2i>(usdPrim.GetResolutionAttr());
+        auto usdResolution = UsdUtils::getStaticAttributeValueAs<pxr::GfVec2i>(usdPrim.GetResolutionAttr());
         resolution = Resolution(usdResolution[0], usdResolution[1]);
     }
     return resolution;
@@ -38,7 +38,7 @@ int crayg::UsdRenderSettingsReader::readMaxSamples() const {
     int maxSamples = 4;
     auto maxSamplesAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken("maxSamples"));
     if (maxSamplesAttr) {
-        maxSamples = UsdUtils::getAttributeValueAs<int>(maxSamplesAttr);
+        maxSamples = UsdUtils::getStaticAttributeValueAs<int>(maxSamplesAttr);
     }
     return maxSamples;
 }
@@ -49,7 +49,7 @@ IntegratorType crayg::UsdRenderSettingsReader::readIntegratorType() const {
     if (!integratorTypeAttr) {
         return integratorType;
     }
-    auto integratorTypeToken = UsdUtils::getAttributeValueAs<pxr::TfToken>(integratorTypeAttr).GetString();
+    auto integratorTypeToken = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(integratorTypeAttr).GetString();
     for (auto &c: integratorTypeToken) c = toupper(c);
     auto maybeValue = magic_enum::enum_cast<IntegratorType>(integratorTypeToken);
     if (!maybeValue.has_value()) {
@@ -86,11 +86,11 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
     const bool isTokenAttribute = attribute.GetTypeName() == pxr::SdfValueTypeNames->Token;
 
     if (isIntAttribute) {
-        return {UsdUtils::getAttributeValueAs<int>(attribute)};
+        return {UsdUtils::getStaticAttributeValueAs<int>(attribute)};
     } else if (isFloatAttribute) {
-        return {UsdUtils::getAttributeValueAs<float>(attribute)};
+        return {UsdUtils::getStaticAttributeValueAs<float>(attribute)};
     } else if (isTokenAttribute) {
-        return {UsdUtils::getAttributeValueAs<pxr::TfToken>(attribute).GetString()};
+        return {UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(attribute).GetString()};
     }
 
     throw std::runtime_error(fmt::format(

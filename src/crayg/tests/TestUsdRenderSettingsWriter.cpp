@@ -19,14 +19,14 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
 
         auto usdRenderSettings = pxr::UsdRenderSettings(stage->GetPrimAtPath(pxr::SdfPath("/Render/settings")));
         const pxr::GfVec2i
-            resolution = UsdUtils::getAttributeValueAs<pxr::GfVec2i>(usdRenderSettings.GetResolutionAttr());
+            resolution = UsdUtils::getStaticAttributeValueAs<pxr::GfVec2i>(usdRenderSettings.GetResolutionAttr());
         int maxSamples =
-            UsdUtils::getAttributeValueAs<int>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("maxSamples")));
+            UsdUtils::getStaticAttributeValueAs<int>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("maxSamples")));
         pxr::TfToken integratorType =
-            UsdUtils::getAttributeValueAs<pxr::TfToken>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
+            UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
                 "integratorType")));
         const int sampleCount =
-            UsdUtils::getAttributeValueAs<int>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
+            UsdUtils::getStaticAttributeValueAs<int>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
                 "AMBIENT_OCCLUSION:sampleCount")));
         REQUIRE(resolution == pxr::GfVec2i(1280, 720));
         REQUIRE(maxSamples == 4);

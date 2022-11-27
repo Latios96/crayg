@@ -12,13 +12,13 @@ TEST_CASE("UsdUtils::getAttributeValueAs") {
     sphere.GetRadiusAttr().Set(3.0);
 
     SECTION("should read attribute value") {
-        auto radius = UsdUtils::getAttributeValueAs<double>(sphere.GetRadiusAttr());
+        auto radius = UsdUtils::getStaticAttributeValueAs<double>(sphere.GetRadiusAttr());
 
         REQUIRE(radius == 3.0);
     }
 
     SECTION("should throw exception when there is an error reading the attribute") {
-        REQUIRE_THROWS_AS(UsdUtils::getAttributeValueAs<float>(sphere.GetRadiusAttr()), std::runtime_error);
+        REQUIRE_THROWS_AS(UsdUtils::getStaticAttributeValueAs<float>(sphere.GetRadiusAttr()), std::runtime_error);
     }
 
 }

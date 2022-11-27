@@ -22,9 +22,9 @@ TEST_CASE("UsdDiskLightWriter::write") {
         usdDiskLightWriter.write(stage, usdPathFactory);
 
         auto usdLuxDiskLight = pxr::UsdLuxDiskLight(stage->GetPrimAtPath(pxr::SdfPath("/DiskLight0")));
-        auto radius = UsdUtils::getAttributeValueAs<float>(usdLuxDiskLight.GetRadiusAttr());
-        auto intensity = UsdUtils::getAttributeValueAs<float>(usdLuxDiskLight.GetIntensityAttr());
-        auto color = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(usdLuxDiskLight.GetColorAttr());
+        auto radius = UsdUtils::getStaticAttributeValueAs<float>(usdLuxDiskLight.GetRadiusAttr());
+        auto intensity = UsdUtils::getStaticAttributeValueAs<float>(usdLuxDiskLight.GetIntensityAttr());
+        auto color = UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(usdLuxDiskLight.GetColorAttr());
         REQUIRE(intensity == 3);
         REQUIRE(color == pxr::GfVec3f(1, 0, 0));
         REQUIRE(radius == 4);

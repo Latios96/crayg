@@ -31,9 +31,9 @@ TEST_CASE("BaseUsdLightWriter::write") {
         dummyBaseWriter.write(stage, usdPathFactory);
         auto usdLuxSphereLight = pxr::UsdLuxSphereLight(stage->GetPrimAtPath(pxr::SdfPath("/light")));
 
-        auto intensity = UsdUtils::getAttributeValueAs<float>(usdLuxSphereLight.GetIntensityAttr());
+        auto intensity = UsdUtils::getStaticAttributeValueAs<float>(usdLuxSphereLight.GetIntensityAttr());
         REQUIRE(intensity == 3);
-        auto color = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(usdLuxSphereLight.GetColorAttr());
+        auto color = UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(usdLuxSphereLight.GetColorAttr());
         REQUIRE(color == pxr::GfVec3f(1, 0, 0));
     }
 }

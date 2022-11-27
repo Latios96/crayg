@@ -20,7 +20,7 @@ TEST_CASE("UsdSphereWriter::write") {
         usdSphereWriter.write(stage, usdPathFactory);
 
         auto usdGeomSphere = pxr::UsdGeomSphere(stage->GetPrimAtPath(pxr::SdfPath("/Sphere0")));
-        auto radius = UsdUtils::getAttributeValueAs<double>(usdGeomSphere.GetRadiusAttr());
+        auto radius = UsdUtils::getStaticAttributeValueAs<double>(usdGeomSphere.GetRadiusAttr());
         REQUIRE(radius == 3);
         const pxr::GfVec3d
             translation = usdGeomSphere.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();

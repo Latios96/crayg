@@ -10,12 +10,17 @@ class UsdUtils {
 
  public:
     template<typename T>
-    static T getAttributeValueAs(const pxr::UsdAttribute attribute) {
+    static T getAttributeValueAs(const pxr::UsdAttribute attribute, const pxr::UsdTimeCode timeCodeToRead) {
         T value;
-        if (attribute.Get(&value, pxr::UsdTimeCode::EarliestTime())) {
+        if (attribute.Get(&value, timeCodeToRead)) {
             return value;
         }
         throw std::runtime_error("There was no attribute value to read or attribute was not of the type requested");
+    };
+
+    template<typename T>
+    static T getStaticAttributeValueAs(const pxr::UsdAttribute attribute) {
+        return getAttributeValueAs<T>(attribute, pxr::UsdTimeCode::Default());
     };
 
 };

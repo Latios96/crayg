@@ -13,7 +13,7 @@ UsdDiskLightReader::UsdDiskLightReader(const pxr::UsdLuxDiskLight &diskLight) : 
 std::shared_ptr<DiskLight> UsdDiskLightReader::read() {
     auto diskLight = BaseUsdLightReader::read();
 
-    const auto radius = UsdUtils::getAttributeValueAs<float>(usdPrim.GetRadiusAttr());
+    const auto radius = UsdUtils::getAttributeValueAs<float>(usdPrim.GetRadiusAttr(), this->timeCodeToRead);
     diskLight->setRadius(radius);
 
     return diskLight;
