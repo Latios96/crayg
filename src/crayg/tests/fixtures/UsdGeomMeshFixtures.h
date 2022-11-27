@@ -22,6 +22,20 @@ class UsdGeomMeshFixtures {
 
         return usdGeomMesh;
     }
+
+    static pxr::UsdGeomMesh createTrianglePlane(const pxr::UsdStagePtr &stage) {
+        auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
+
+        pxr::UsdGeomXformCommonAPI(usdGeomMesh).SetTranslate(pxr::GfVec3f(1, 2, 3));
+        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
+        usdGeomMesh.GetPointsAttr().Set(points);
+        pxr::VtIntArray faceVertexCounts({3, 3});
+        usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
+        pxr::VtIntArray faceVertexIndices({0, 1, 2, 2, 1, 3});
+        usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+
+        return usdGeomMesh;
+    }
 };
 
 } // crayg

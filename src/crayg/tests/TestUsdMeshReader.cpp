@@ -2,7 +2,6 @@
 #include "sceneIO/read/usd/UsdMeshReader.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
-#include <pxr/usd/usdGeom/xformCommonAPI.h>
 #include <iostream>
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include "fixtures/UsdGeomMeshFixtures.h"
@@ -29,14 +28,7 @@ TEST_CASE("UsdMeshReader::read") {
     }
 
     SECTION("should read triangle plane") {
-        auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
-        pxr::UsdGeomXformCommonAPI(usdGeomMesh).SetTranslate(pxr::GfVec3f(1, 2, 3));
-        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
-        usdGeomMesh.GetPointsAttr().Set(points);
-        pxr::VtIntArray faceVertexCounts({3, 3});
-        usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
-        pxr::VtIntArray faceVertexIndices({0, 1, 2, 2, 1, 3});
-        usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+        auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
 
         UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = usdMeshReader.read();
@@ -50,14 +42,7 @@ TEST_CASE("UsdMeshReader::read") {
     }
 
     SECTION("usdGeomMesh with no authored normals should have no normals after translation") {
-        // TODO introduce fixtures for meshes
-        auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
-        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
-        usdGeomMesh.GetPointsAttr().Set(points);
-        pxr::VtIntArray faceVertexCounts({3, 3});
-        usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
-        pxr::VtIntArray faceVertexIndices({0, 1, 2, 2, 1, 3});
-        usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+        auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
 
         UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = usdMeshReader.read();
@@ -66,14 +51,8 @@ TEST_CASE("UsdMeshReader::read") {
     }
 
     SECTION("authored faceVarying normals should be translated") {
-        // TODO introduce fixtures for meshes
-        auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
-        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
-        usdGeomMesh.GetPointsAttr().Set(points);
-        pxr::VtIntArray faceVertexCounts({3, 3});
-        usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
-        pxr::VtIntArray faceVertexIndices({0, 1, 2, 2, 1, 3});
-        usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+        auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
+
         usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->faceVarying);
         pxr::VtVec3fArray normals({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
         usdGeomMesh.GetNormalsAttr().Set(normals);
@@ -90,14 +69,8 @@ TEST_CASE("UsdMeshReader::read") {
     }
 
     SECTION("authored normals with normals other than faceVarying should not be translated") {
-        // TODO introduce fixtures for meshes
-        auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
-        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
-        usdGeomMesh.GetPointsAttr().Set(points);
-        pxr::VtIntArray faceVertexCounts({3, 3});
-        usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
-        pxr::VtIntArray faceVertexIndices({0, 1, 2, 2, 1, 3});
-        usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+        auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
+
         usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->uniform);
         pxr::VtVec3fArray normals({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
         usdGeomMesh.GetNormalsAttr().Set(normals);
