@@ -5,7 +5,8 @@
 
 void crayg::UsdReadUtils::readTransform(crayg::Transformable &transformable,
                                         pxr::UsdGeomXformable &usdGeomXformable) {
-    const pxr::GfMatrix4d &d = usdGeomXformable.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default());
+    const pxr::GfMatrix4d &d =
+        usdGeomXformable.ComputeLocalToWorldTransform(pxr::UsdTimeCode::EarliestTime());// todo pass in time to read
     const Transform &transform = Transform(UsdConversions::convert(d));
     transformable.setTransform(transform);
 }
