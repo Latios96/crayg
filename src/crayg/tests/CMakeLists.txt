@@ -3,6 +3,8 @@ set(UNIT_TEST_LIST
         fixtures/TemporaryDirectory.h
         fixtures/TriangleMeshFixtures.cpp
         fixtures/TriangleMeshFixtures.h
+        fixtures/UsdGeomMeshFixtures.cpp
+        fixtures/UsdGeomMeshFixtures.h
         TestAreaLight.cpp
         TestBarycentricCoordinates.cpp
         TestBaseUsdImageableReader.cpp

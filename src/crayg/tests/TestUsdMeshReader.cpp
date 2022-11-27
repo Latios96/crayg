@@ -5,6 +5,7 @@
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 #include <iostream>
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "fixtures/UsdGeomMeshFixtures.h"
 
 namespace crayg {
 
@@ -14,14 +15,7 @@ TEST_CASE("UsdMeshReader::read") {
     UsdMaterialReadCache usdMaterialTranslationCache;
 
     SECTION("should read quad plane") {
-        auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
-        pxr::UsdGeomXformCommonAPI(usdGeomMesh).SetTranslate(pxr::GfVec3f(1, 2, 3));
-        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
-        usdGeomMesh.GetPointsAttr().Set(points);
-        pxr::VtIntArray faceVertexCounts({4});
-        usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
-        pxr::VtIntArray faceVertexIndices({0, 1, 3, 2});
-        usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage);
 
         UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = usdMeshReader.read();
