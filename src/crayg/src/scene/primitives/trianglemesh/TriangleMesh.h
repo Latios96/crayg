@@ -18,7 +18,7 @@ class TriangleMesh : public SceneObject {
     BoundingBox getBounds() const override;
     Vector3f getNormal(Vector3f point) override;
     void getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles);
-    void getPrimitives(std::vector<Imageable *> &target, bool *isOwning) override;
+    void getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const override;
     friend class Triangle;
     void init();
     std::string getType() override;
