@@ -62,7 +62,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.owningObjects.size() == 1);
+        REQUIRE(scene.objects.size() == 1);
     }
 
     SECTION("should not override material for mesh") {
@@ -79,7 +79,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.owningObjects[0]->getMaterial()->getName() == "/material");
+        REQUIRE(scene.objects[0]->getMaterial()->getName() == "/material");
     }
 
     SECTION("should read sphere") {
@@ -87,7 +87,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.owningObjects.size() == 1);
+        REQUIRE(scene.objects.size() == 1);
     }
 
     SECTION("should read disklight") {
@@ -113,7 +113,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.owningObjects.size() == 0);
+        REQUIRE(scene.objects.size() == 0);
     }
 
     SECTION("should read hidden rectLight") {
@@ -131,7 +131,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.owningObjects.size() == 0);
+        REQUIRE(scene.objects.size() == 0);
     }
 
     SECTION("should not read hidden disklight") {

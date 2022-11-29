@@ -10,7 +10,7 @@
 
 namespace crayg {
 
-class Imageable : public std::enable_shared_from_this<Imageable> {
+class Imageable {
  public:
     virtual Vector3f getNormal(Vector3f point) = 0;
     virtual OrthonormalBasis getOrthonormalBasis(const Vector3f &point);
@@ -27,7 +27,7 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
             imageable = nullptr;
         }
 
-        Intersection(float rayParameter, std::shared_ptr<Imageable> imageable);
+        Intersection(float rayParameter, Imageable *imageable);
 
         Intersection(const Intersection &intersection) {
             this->rayParameter = intersection.rayParameter;
@@ -35,7 +35,7 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
         }
 
         float rayParameter;
-        std::shared_ptr<Imageable> imageable;
+        Imageable *imageable;
 
         bool isValid() const {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
@@ -51,7 +51,7 @@ class Imageable : public std::enable_shared_from_this<Imageable> {
 
     virtual std::shared_ptr<Material> getMaterial() const;
     void setMaterial(const std::shared_ptr<Material> &material);
-
+    virtual ~Imageable() = default;
  private:
     std::shared_ptr<Material> material;
 

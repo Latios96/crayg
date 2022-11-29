@@ -23,12 +23,6 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     }
 }
 
-void TriangleMesh::getTriangles(std::vector<std::shared_ptr<Imageable>> &triangles) {
-    for (auto id: faceIds()) {
-        triangles.push_back(std::make_shared<Triangle>(this, id));
-    }
-}
-
 Vector3f TriangleMesh::getNormal(Vector3f point) {
     return {0, 1, 0};
 }

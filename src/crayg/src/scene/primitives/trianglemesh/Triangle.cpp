@@ -57,7 +57,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
         return {std::numeric_limits<float>::max(), nullptr};
     }
     // dot(v0v2, qvec) * invDet;
-    return {v0v2.dot(qvec) * invDet, shared_from_this()};
+    return {v0v2.dot(qvec) * invDet, this};
 }
 bool Triangle::isIntersecting(Ray ray) {
   Vector3f normal = (v1() - v0()).cross((v2() - v0()));

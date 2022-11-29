@@ -3,11 +3,21 @@
 #include <scene/Scene.h>
 #include "BvhNode.h"
 namespace crayg {
+
+struct Bvh {
+    Bvh() = default;
+    Bvh(BvhNode *root);
+    BvhNode *root;
+    std::vector<Imageable *> objects;
+    std::vector<std::pair<std::size_t, std::size_t>> objectsToFree;
+    virtual ~Bvh();
+};
+
 class BvhBuilder {
  public:
     BvhBuilder(const Scene &scene);
     const Scene &scene;
-    [[nodiscard]] BvhNode *build() const;
+    [[nodiscard]] Bvh *build() const;
 };
 }
 

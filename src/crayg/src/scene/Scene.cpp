@@ -11,19 +11,9 @@ void Scene::addLight(const std::shared_ptr<Light> &light) {
 }
 void Scene::addObject(const std::shared_ptr<SceneObject> &sceneObject) {
     objects.push_back(sceneObject);
-    owningObjects.push_back(sceneObject);
     addMaterialIfObjectHasMaterial(sceneObject);
+}
 
-}
-void Scene::addObject(const std::shared_ptr<TriangleMesh> &triangleMesh) {
-    triangleMesh->getTriangles(objects);
-    owningObjects.push_back(triangleMesh);
-    if (triangleMesh->getMaterial()) {
-        if (std::find(materials.begin(), materials.end(), triangleMesh->getMaterial()) == materials.end()) {
-            addMaterial(triangleMesh->getMaterial());
-        }
-    }
-}
 void Scene::addMaterialIfObjectHasMaterial(const std::shared_ptr<SceneObject> &sceneObject) {
     if (sceneObject->getMaterial()) {
         if (std::find(materials.begin(), materials.end(), sceneObject->getMaterial()) == materials.end()) {

@@ -4,10 +4,9 @@
 
 namespace crayg {
 
-Imageable::Intersection::Intersection(float rayParameter, std::shared_ptr<Imageable> imageable) : rayParameter(
-    rayParameter),
-                                                                                                  imageable(std::move(
-                                                                                                      imageable)) {}
+Imageable::Intersection::Intersection(float rayParameter, Imageable *imageable) : rayParameter(
+    rayParameter), imageable(imageable) {}
+
 Imageable::Intersection Imageable::Intersection::nearest(const Imageable::Intersection &first,
                                                          const Imageable::Intersection &second) {
     if (first.rayParameter < second.rayParameter && first.imageable && first.rayParameter > 0) {

@@ -50,17 +50,17 @@ Imageable::Intersection intersectTree(const Ray &ray, const BvhNode *node) {
 }
 
 Imageable::Intersection BvhSceneIntersector::intersect(const Ray &ray) const {
-    return intersectTree(ray, root);
+    return intersectTree(ray, bvh->root);
 }
 bool BvhSceneIntersector::isIntersecting(const Ray &ray) const {
-    return isIntersectingTree(ray, root);
+    return isIntersectingTree(ray, bvh->root);
 }
 
+BvhSceneIntersector::BvhSceneIntersector(Scene &scene, Bvh *bvh)
+    : SceneIntersector(scene), bvh(bvh) {}
 BvhSceneIntersector::~BvhSceneIntersector() {
-    delete root;
+    delete bvh;
 }
-BvhSceneIntersector::BvhSceneIntersector(Scene &scene, BvhNode *root)
-    : SceneIntersector(scene), root(root) {}
 
 }
 

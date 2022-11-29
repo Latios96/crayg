@@ -81,8 +81,8 @@ void Renderer::init() {
 
     Logger::info("Creating SceneIntersector...");
     BvhBuilder bvhBuilder(scene);
-    BvhNode *root = bvhBuilder.build();
-    sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, root);
+    auto bvh = bvhBuilder.build();
+    sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, bvh);
     integrator =
         std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(scene.renderSettings.integratorType,
                                                                                 scene,

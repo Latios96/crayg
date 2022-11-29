@@ -78,18 +78,35 @@ BvhNode *buildTree(const std::vector<Imageable *> &objects) {
                        std::vector<Imageable *>());
 }
 
-BvhNode *BvhBuilder::build() const {
+Bvh *BvhBuilder::build() const {
     InformativeScopedStopWatch informativeScopedStopWatch("Building BVH");
 
-    Logger::info("Primitives in scene: {:L}", scene.objects.size());
+    auto bvh = new Bvh();
 
-    std::vector<Imageable *> objects;
-    objects.reserve(scene.objects.size());
     for (auto &obj: scene.objects) {
-        objects.push_back(obj.get());
+        bool isOwning;
+        std::size_t startIndex = std::max<int>(bvh->objects.size() - 1, 0);
+        obj->getPrimitives(bvh->objects, &isOwning);
+        if (isOwning) {
+            bvh->objectsToFree.emplace_back(startIndex, bvh->objects.size() - startIndex);
+        }
     }
-    auto bvh = buildTree(objects);
+    Logger::info("Primitives in scene: {:L}", bvh->objects.size());
+
+    bvh->root = buildTree(bvh->objects);
     return bvh;
 }
 BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
+
+Bvh::~Bvh() {
+    delete root;
+    for (auto objectsToFreeInfo: objectsToFree) {
+        for (std::size_t i = objectsToFreeInfo.first; i < objectsToFreeInfo.second; i++) {
+            delete objects[i];
+        }
+    }
+}
+Bvh::Bvh(BvhNode *root) : root(root) {
+
+}
 }

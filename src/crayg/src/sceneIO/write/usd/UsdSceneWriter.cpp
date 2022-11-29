@@ -22,7 +22,7 @@ void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
     UsdRenderSettingsWriter(scene.renderSettings).write(stage);
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
-    for (auto sceneObject: scene.owningObjects) {
+    for (auto sceneObject: scene.objects) {
         if (sceneObject->getType() == "Sphere") {
             UsdSphereWriter(std::static_pointer_cast<Sphere>(sceneObject), usdMaterialWriteCache).write(stage,
                                                                                                         usdPathFactory);

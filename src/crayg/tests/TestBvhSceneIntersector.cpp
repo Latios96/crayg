@@ -12,9 +12,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<Imageable *> objects({sphere1.get(), sphere2.get()});
     auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto bvh = new Bvh(bvhNode);
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         bool result = intersector.isIntersecting({{0.0f, 0.0f, -5.0f}, {0.0f, 0.0f, 1.0f}});
 
@@ -22,7 +23,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         Imageable::Intersection intersection = intersector.intersect({{0.0f, 0.0f, -5.0f}, {0.0f, 0.0f, 1.0f}});
 
@@ -38,9 +39,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
     std::vector<Imageable *> objects({sphere1.get()});
     auto *left = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
     auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), left, nullptr, {});
+    auto bvh = new Bvh(bvhNode);
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
 
@@ -48,7 +50,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
 
@@ -63,9 +65,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
     std::vector<Imageable *> objects({sphere1.get()});
     auto *right = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
     auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, right, {});
+    auto bvh = new Bvh(bvhNode);
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
 
@@ -73,7 +76,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
 
@@ -92,9 +95,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is
     auto *left = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
     auto *right = new BvhNode(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
     auto *bvhNode = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 2}), left, right, {});
+    auto bvh = new Bvh(bvhNode);
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
 
@@ -102,12 +106,12 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
 
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(3.0f));
-        REQUIRE(intersection.imageable == sphere1);
+        REQUIRE(intersection.imageable == sphere1.get());
     }
 }
 
@@ -121,9 +125,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, right i
     auto *left = new BvhNode(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
     auto *right = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
     auto *bvhNode = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 2}), left, right, {});
+    auto bvh = new Bvh(bvhNode);
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
 
@@ -131,12 +136,12 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, right i
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, bvhNode);
+        BvhSceneIntersector intersector(scene, bvh);
 
         Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
 
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(3.0f));
-        REQUIRE(intersection.imageable == sphere2);
+        REQUIRE(intersection.imageable == sphere2.get());
     }
 }
 

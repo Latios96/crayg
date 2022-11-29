@@ -23,7 +23,7 @@ Sphere::Intersection Sphere::intersect(Ray ray) {
     } else if (isTangent) {
         // only one solution, calculate t
         const float t0 = (float) (b * (-1.0) / 2.0);
-        return {t0, shared_from_this()};
+        return {t0, this};
     } else {
         const double sqrtD = sqrt(d);
 
@@ -31,7 +31,7 @@ Sphere::Intersection Sphere::intersect(Ray ray) {
 
         // if t0 > 0 its the point we want to render
         if (t0 > 0) {
-            return {t0, shared_from_this()};
+            return {t0, this};
         } else {
             return {std::numeric_limits<float>::max(), nullptr};
         }

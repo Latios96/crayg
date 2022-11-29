@@ -19,12 +19,10 @@ class Scene {
     explicit Scene(const RenderSettings &renderSettings);
 
     void addObject(const std::shared_ptr<SceneObject> &sceneObject);
-    void addObject(const std::shared_ptr<TriangleMesh> &sceneObject);
     void addLight(const std::shared_ptr<Light> &sceneObject);
     void addMaterial(const std::shared_ptr<Material> &material);
 
-    std::vector<std::shared_ptr<Imageable>> objects;
-    std::vector<std::shared_ptr<SceneObject>> owningObjects;
+    std::vector<std::shared_ptr<SceneObject>> objects;
     std::vector<std::shared_ptr<Light>> lights;
     std::set<std::shared_ptr<Material>> materials;
     std::shared_ptr<Camera> camera = nullptr;

@@ -21,7 +21,7 @@ Imageable::Intersection GroundPlane::intersect(Ray ray) {
           -(normal.dot(ray.startPoint) + getPosition().length()) / scalar;
 
       if (t > 0) {
-            return {t, shared_from_this()};
+            return {t, this};
         }
         return Imageable::Intersection::createInvalid();
     }
