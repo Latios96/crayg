@@ -112,7 +112,7 @@ std::string TriangleMesh::getType() {
 }
 TriangleMesh::TriangleMesh() : normalsPrimVar(nullptr) {
 }
-int TriangleMesh::faceCount() {
+int TriangleMesh::faceCount() const {
     return faceVertexIndices.size();
 }
 
@@ -144,8 +144,8 @@ TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIteratorAdapter::end() {
     return {triangleMesh.faceVertexIndices.size()};
 }
 
-TriangleMesh::FaceIdIteratorAdapter TriangleMesh::faceIds() {
-    return {*this};
+TriangleMesh::FaceIdIteratorAdapter TriangleMesh::faceIds() const {
+    return {*const_cast<TriangleMesh *>(this)};
 }
 void TriangleMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwning) {
     target.reserve(target.size() + faceCount());

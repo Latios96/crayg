@@ -22,7 +22,7 @@ class TriangleMesh : public SceneObject {
     friend class Triangle;
     void init();
     std::string getType() override;
-    int faceCount();
+    int faceCount() const;
 
     template<typename T>
     T *addNormalsPrimVar();
@@ -68,7 +68,7 @@ class TriangleMesh : public SceneObject {
         TriangleMesh &triangleMesh;
     };
 
-    FaceIdIteratorAdapter faceIds();
+    FaceIdIteratorAdapter faceIds() const;
 
  private:
     BoundingBox boundingBox;
