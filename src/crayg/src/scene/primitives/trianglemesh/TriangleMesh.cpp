@@ -147,5 +147,12 @@ TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIteratorAdapter::end() {
 TriangleMesh::FaceIdIteratorAdapter TriangleMesh::faceIds() {
     return {*this};
 }
+void TriangleMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwning) {
+    target.reserve(target.size() + faceCount());
+    for (auto id: faceIds()) {
+        target.push_back(new Triangle(this, id));
+    }
+    *isOwning = true;
+}
 
 }

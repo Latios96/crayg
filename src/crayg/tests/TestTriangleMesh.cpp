@@ -2,6 +2,7 @@
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "fixtures/TriangleMeshFixtures.h"
 #include <numeric>
 
 namespace crayg {
@@ -93,6 +94,18 @@ TEST_CASE("TriangleMesh::faceIds") {
         std::iota(expectedIds.begin(), expectedIds.end(), 0);
         REQUIRE(ids == expectedIds);
     }
+}
+
+TEST_CASE("TriangleMesh::getPrimitives") {
+    auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+
+    std::vector<Imageable *> target;
+    bool isOwning = false;
+
+    triangleMesh.getPrimitives(target, &isOwning);
+
+    REQUIRE(target.size() == 4);
+    REQUIRE(isOwning == true);
 }
 
 }

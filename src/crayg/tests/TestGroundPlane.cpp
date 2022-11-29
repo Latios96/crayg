@@ -38,4 +38,16 @@ TEST_CASE("GroundPlaneIntersectionGetBounds") {
                                   {std::numeric_limits<float>::max(), 0, std::numeric_limits<float>::max()}));
 }
 
+TEST_CASE("GroundPlaneIntersectionGetBounds::getPrimitives") {
+    GroundPlane groundPlane;
+
+    std::vector<Imageable *> target;
+    bool isOwning = true;
+
+    groundPlane.getPrimitives(target, &isOwning);
+
+    REQUIRE(target == std::vector<Imageable *>({&groundPlane}));
+    REQUIRE(isOwning == false);
+}
+
 }

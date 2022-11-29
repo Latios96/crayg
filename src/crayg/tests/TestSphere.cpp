@@ -59,5 +59,16 @@ TEST_CASE("Sphere/getBounds") {
     REQUIRE(sphere.getBounds() == BoundingBox({-1, 0, 1}, {3, 4, 5}));
 }
 
+TEST_CASE("Sphere::getPrimitives") {
+    Sphere sphere({1, 2, 3}, 2);
+    std::vector<Imageable *> target;
+    bool isOwning = true;
+
+    sphere.getPrimitives(target, &isOwning);
+
+    REQUIRE(target == std::vector<Imageable *>({&sphere}));
+    REQUIRE(isOwning == false);
+}
+
 }
 
