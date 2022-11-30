@@ -9,7 +9,7 @@ struct Bvh {
     Bvh(BvhNode *root);
     BvhNode *root;
     std::vector<Imageable *> objects;
-    std::vector<std::pair<std::size_t, std::size_t>> objectsToFree;
+    std::vector<int> objectsToFree;
     virtual ~Bvh();
 };
 

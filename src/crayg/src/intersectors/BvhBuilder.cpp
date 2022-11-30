@@ -107,7 +107,7 @@ void BvhBuilder::collectPrimitives(Bvh &bvh) const {
         size_t startIndex = bvh.objects.size();
         obj->getPrimitives(bvh.objects, &isOwning);
         if (isOwning) {
-            bvh.objectsToFree.emplace_back(startIndex, bvh.objects.size() - startIndex);
+            bvh.objectsToFree.emplace_back(startIndex);
         }
     }
 }
@@ -124,9 +124,7 @@ BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
 Bvh::~Bvh() {
     delete root;
     for (auto objectsToFreeInfo: objectsToFree) {
-        for (std::size_t i = objectsToFreeInfo.first; i < objectsToFreeInfo.second; i++) {
-            delete objects[i];
-        }
+        delete[] objects[objectsToFreeInfo];
     }
 }
 Bvh::Bvh(BvhNode *root) : root(root) {
