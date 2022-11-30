@@ -18,6 +18,9 @@ class BvhBuilder {
     BvhBuilder(const Scene &scene);
     const Scene &scene;
     [[nodiscard]] Bvh *build() const;
+ private:
+    void collectPrimitives(Bvh *bvh);
+    int collectPrimitiveCount();
 };
 }
 

@@ -84,36 +84,40 @@ Bvh *BvhBuilder::build() const {
 
     auto bvh = new Bvh();
 
-    int primitiveCount = 0;
-    InformativeScopedStopWatch collectingPrimitiveCount("Collecting primitive count");
-    for (auto &obj: scene.objects) {
-        primitiveCount += obj->primitiveCount();
-    }
+    collectPrimitives(bvh);
 
-    {
-        Logger::info("Objects in scene: {:L}", scene.objects.size());
-
-        InformativeScopedStopWatch collectingPrimitives("Collecting primitives");
-
-        bvh->objects.reserve(primitiveCount);
-
-        for (int i = 0; i < scene.objects.size(); i++) {
-            auto &obj = scene.objects[i];
-            bool isOwning;
-            std::size_t startIndex = bvh->objects.size();
-            obj->getPrimitives(bvh->objects, &isOwning);
-            if (isOwning) {
-                bvh->objectsToFree.emplace_back(startIndex, bvh->objects.size() - startIndex);
-            }
-        }
-        Logger::info("Primitives in scene: {:L}", bvh->objects.size());
-    }
     {
         InformativeScopedStopWatch buildingBvh("Building BVH");
         bvh->root = buildTree(bvh->objects);
     }
 
     return bvh;
+}
+void BvhBuilder::collectPrimitives(Bvh *bvh) {
+    InformativeScopedStopWatch collectingPrimitives("Collecting primitives");
+
+    int primitiveCount = collectPrimitiveCount();
+    Logger::info("Primitives in scene: {:L}", primitiveCount);
+
+    bvh->objects.reserve(primitiveCount);
+
+    for (int i = 0; i < scene.objects.size(); i++) {
+        auto &obj = scene.objects[i];
+        bool isOwning;
+        size_t startIndex = bvh->objects.size();
+        obj->getPrimitives(bvh->objects, &isOwning);
+        if (isOwning) {
+            bvh->objectsToFree.emplace_back(startIndex, bvh->objects.size() - startIndex);
+        }
+    }
+}
+int BvhBuilder::collectPrimitiveCount() {
+    int primitiveCount = 0;
+    InformativeScopedStopWatch collectingPrimitiveCount("Collecting primitive count");
+    for (auto &obj: scene.objects) {
+        primitiveCount += obj->primitiveCount();
+    }
+    return primitiveCount;
 }
 BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
 
