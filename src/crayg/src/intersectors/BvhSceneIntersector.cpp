@@ -56,11 +56,8 @@ bool BvhSceneIntersector::isIntersecting(const Ray &ray) const {
     return isIntersectingTree(ray, bvh->root);
 }
 
-BvhSceneIntersector::BvhSceneIntersector(Scene &scene, Bvh *bvh)
-    : SceneIntersector(scene), bvh(bvh) {}
-BvhSceneIntersector::~BvhSceneIntersector() {
-    delete bvh;
-}
+BvhSceneIntersector::BvhSceneIntersector(Scene &scene, std::unique_ptr<Bvh> bvh)
+    : SceneIntersector(scene), bvh(std::move(bvh)) {}
 
 }
 

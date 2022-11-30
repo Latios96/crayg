@@ -84,7 +84,7 @@ void Renderer::init() {
         InformativeScopedStopWatch buildBvh("Building SceneIntersector");
         BvhBuilder bvhBuilder(scene);
         auto bvh = bvhBuilder.build();
-        sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, bvh);
+        sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, std::move(bvh));
         integrator =
             std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(scene.renderSettings.integratorType,
                                                                                     scene,

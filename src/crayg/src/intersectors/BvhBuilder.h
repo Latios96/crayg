@@ -17,7 +17,7 @@ class BvhBuilder {
  public:
     BvhBuilder(const Scene &scene);
     const Scene &scene;
-    Bvh *build() const;
+    std::unique_ptr<Bvh> build() const;
  private:
     void collectPrimitives(Bvh &bvh) const;
     int collectPrimitiveCount() const;

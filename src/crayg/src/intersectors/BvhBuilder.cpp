@@ -78,11 +78,11 @@ BvhNode *buildTree(const std::vector<Imageable *> &objects) {
                        std::vector<Imageable *>());
 }
 
-Bvh *BvhBuilder::build() const {
+std::unique_ptr<Bvh> BvhBuilder::build() const {
     InformativeScopedStopWatch informativeScopedStopWatch("Building BVH");
     Logger::info("Objects in scene: {:L}", scene.objects.size());
 
-    auto bvh = new Bvh();
+    auto bvh = std::make_unique<Bvh>();
 
     collectPrimitives(*bvh);
 

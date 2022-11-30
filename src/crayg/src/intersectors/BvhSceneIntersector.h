@@ -8,12 +8,12 @@ namespace crayg {
 
 class BvhSceneIntersector : public SceneIntersector {
  public:
-    BvhSceneIntersector(Scene &scene, Bvh *bvh);
+    BvhSceneIntersector(Scene &scene, std::unique_ptr<Bvh> bvh);
     Imageable::Intersection intersect(const Ray &ray) const override;
     bool isIntersecting(const Ray &ray) const override;
-    ~BvhSceneIntersector() override;
+    ~BvhSceneIntersector() override = default;
  private:
-    Bvh *bvh;
+    std::unique_ptr<Bvh> bvh = nullptr;
 };
 
 }
