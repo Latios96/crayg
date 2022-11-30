@@ -122,8 +122,11 @@ int BvhBuilder::collectPrimitiveCount() const {
 BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
 
 Bvh::~Bvh() {
+    Logger::debug("Free BVH");
     delete root;
+    Logger::debug("freed root, freeing objects");
     for (auto objectsToFreeInfo: objectsToFree) {
+        Logger::debug("Free {}", objectsToFreeInfo);
         delete[] objects[objectsToFreeInfo];
     }
 }
