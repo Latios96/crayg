@@ -80,10 +80,9 @@ BvhNode *buildTree(const std::vector<Imageable *> &objects) {
 
 Bvh *BvhBuilder::build() const {
     InformativeScopedStopWatch informativeScopedStopWatch("Building BVH");
+    Logger::info("Objects in scene: {:L}", scene.objects.size());
 
     auto bvh = new Bvh();
-
-    Logger::info("Objects in scene: {:L}", scene.objects.size());
 
     int primitiveCount = 0;
     InformativeScopedStopWatch collectingPrimitiveCount("Collecting primitive count");
