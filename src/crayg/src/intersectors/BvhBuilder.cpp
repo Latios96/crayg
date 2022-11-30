@@ -102,12 +102,8 @@ Bvh *BvhBuilder::build() const {
 BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
 
 Bvh::~Bvh() {
-    Logger::debug("BVH is getting deconstructed");
-    Logger::debug("Deleting root");
     delete root;
-    Logger::debug("Deleting owning objects");
     for (auto objectsToFreeInfo: objectsToFree) {
-        Logger::debug("index {}, count {}", objectsToFreeInfo.first, objectsToFreeInfo.second);
         for (std::size_t i = objectsToFreeInfo.first; i < objectsToFreeInfo.second; i++) {
             delete objects[i];
         }
