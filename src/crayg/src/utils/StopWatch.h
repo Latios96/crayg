@@ -7,6 +7,7 @@
 
 #include "fmt/format.h"
 #include "Logger.h"
+#include "ReadableFormatter.h"
 #include <utility>
 
 namespace crayg {
@@ -28,10 +29,13 @@ class StopWatch {
     }
 
     void end() {
+        ReadableFormatter readableFormatter;
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
 
-        outputCallback(fmt::format("{} took {:.2f} seconds.", name, microseconds * 0.0000006));
+        outputCallback(fmt::format("{} took {}.",
+                                   name,
+                                   readableFormatter.formatDuration(std::chrono::seconds(seconds))));
     };
  private:
     std::chrono::steady_clock::time_point begin;
