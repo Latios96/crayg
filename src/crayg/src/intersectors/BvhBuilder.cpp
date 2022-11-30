@@ -87,7 +87,7 @@ Bvh *BvhBuilder::build() const {
         InformativeScopedStopWatch collectingPrimitives("Collecting primitives");
         for (auto &obj: scene.objects) {
             bool isOwning;
-            std::size_t startIndex = std::max<int>(bvh->objects.size() - 1, 0);
+            std::size_t startIndex = bvh->objects.size();
             obj->getPrimitives(bvh->objects, &isOwning);
             if (isOwning) {
                 bvh->objectsToFree.emplace_back(startIndex, bvh->objects.size() - startIndex);
