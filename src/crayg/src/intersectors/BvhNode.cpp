@@ -1,13 +1,10 @@
 #include "BvhNode.h"
 crayg::BvhNode::BvhNode(const crayg::BoundingBox &boundingBox,
-                        crayg::BvhNode *left,
-                        crayg::BvhNode *right,
+                        std::unique_ptr<BvhNode> left,
+                        std::unique_ptr<BvhNode> right,
                         const std::vector<Imageable *> &objects)
-    : boundingBox(boundingBox), left(left), right(right), objects(objects) {}
-crayg::BvhNode::~BvhNode() {
-    delete left;
-    delete right;
-}
+    : boundingBox(boundingBox), left(std::move(left)), right(std::move(right)), objects(objects) {}
+
 bool crayg::BvhNode::operator==(const crayg::BvhNode &rhs) const {
     return boundingBox == rhs.boundingBox &&
         left == rhs.left &&

@@ -55,7 +55,7 @@ bool isLeft(const Imageable *obj, const SplitInfo &splitInfo) {
     }
 }
 
-BvhNode *buildTree(const std::vector<Imageable *> &objects) {
+std::unique_ptr<BvhNode> buildTree(const std::vector<Imageable *> &objects) {
     const auto bounds = computeBounds(objects);
     std::vector<Imageable *> left, right;
     const BoundingBox centroidBounds = computeCentroidBounds(objects);
@@ -69,13 +69,13 @@ BvhNode *buildTree(const std::vector<Imageable *> &objects) {
         }
     }
     if (objects.size() == left.size() || objects.size() == right.size()) {
-        return new BvhNode(bounds, nullptr, nullptr, objects);
+        return std::make_unique<BvhNode>(bounds, nullptr, nullptr, objects);
     }
 
-    return new BvhNode(bounds,
-                       !left.empty() ? buildTree(left) : nullptr,
-                       !right.empty() ? buildTree(right) : nullptr,
-                       std::vector<Imageable *>());
+    return std::make_unique<BvhNode>(bounds,
+                                     !left.empty() ? buildTree(left) : nullptr,
+                                     !right.empty() ? buildTree(right) : nullptr,
+                                     std::vector<Imageable *>());
 }
 
 std::unique_ptr<Bvh> BvhBuilder::build() const {
@@ -123,14 +123,13 @@ BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
 
 Bvh::~Bvh() {
     Logger::debug("Free BVH");
-    delete root;
     Logger::debug("freed root, freeing objects");
     for (auto objectsToFreeInfo: objectsToFree) {
         Logger::debug("Free {:p}", (void *) objects[objectsToFreeInfo]);
         delete[] objects[objectsToFreeInfo];
     }
 }
-Bvh::Bvh(BvhNode *root) : root(root) {
+Bvh::Bvh(std::unique_ptr<BvhNode> root) : root(std::move(root)) {
 
 }
 }

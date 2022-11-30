@@ -11,8 +11,8 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.0f);
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<Imageable *> objects({sphere1.get(), sphere2.get()});
-    auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
-    auto bvh = std::make_unique<Bvh>(bvhNode);
+    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
         BvhSceneIntersector intersector(scene, std::move(bvh));
@@ -37,9 +37,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<Imageable *> objects({sphere1.get()});
-    auto *left = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
-    auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), left, nullptr, {});
-    auto bvh = std::make_unique<Bvh>(bvhNode);
+    auto left = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}),
+                                             std::move(left), nullptr, std::vector<Imageable*>());
+    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
         BvhSceneIntersector intersector(scene, std::move(bvh));
@@ -63,9 +64,9 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<Imageable *> objects({sphere1.get()});
-    auto *right = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
-    auto *bvhNode = new BvhNode(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, right, {});
-    auto bvh = std::make_unique<Bvh>(bvhNode);
+    auto right = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, std::move(right), std::vector<Imageable*>());
+    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
         BvhSceneIntersector intersector(scene, std::move(bvh));
@@ -92,10 +93,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1.0f);
     std::vector<Imageable *> objectsLeft({sphere1.get()});
     std::vector<Imageable *> objectsRight({sphere2.get()});
-    auto *left = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
-    auto *right = new BvhNode(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
-    auto *bvhNode = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 2}), left, right, {});
-    auto bvh = std::make_unique<Bvh>(bvhNode);
+    auto left = std::make_unique<BvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
+    auto right = std::make_unique<BvhNode>(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
+    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 2}), std::move(left), std::move(right), std::vector<Imageable*>());
+    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
         BvhSceneIntersector intersector(scene, std::move(bvh));
@@ -122,10 +123,10 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, right i
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1.0f);
     std::vector<Imageable *> objectsLeft({sphere1.get()});
     std::vector<Imageable *> objectsRight({sphere2.get()});
-    auto *left = new BvhNode(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
-    auto *right = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
-    auto *bvhNode = new BvhNode(BoundingBox({-1, -1, -2}, {1, 1, 2}), left, right, {});
-    auto bvh = std::make_unique<Bvh>(bvhNode);
+    auto left = std::make_unique<BvhNode>(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
+    auto right = std::make_unique<BvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
+    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 2}), std::move(left), std::move(right), std::vector<Imageable*>());
+    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
         BvhSceneIntersector intersector(scene, std::move(bvh));

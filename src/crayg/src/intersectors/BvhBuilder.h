@@ -6,8 +6,8 @@ namespace crayg {
 
 struct Bvh {
     Bvh() = default;
-    Bvh(BvhNode *root);
-    BvhNode *root;
+    Bvh(std::unique_ptr<BvhNode> root);
+    std::unique_ptr<BvhNode> root;
     std::vector<Imageable *> objects;
     std::vector<int> objectsToFree;
     virtual ~Bvh();

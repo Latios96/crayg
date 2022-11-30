@@ -9,18 +9,19 @@ namespace crayg {
 
 class BvhNode {
  public:
-    BvhNode(const BoundingBox &boundingBox, BvhNode *left, BvhNode *right, const std::vector<Imageable *> &objects);
+    BvhNode(const BoundingBox &boundingBox,
+            std::unique_ptr<BvhNode> left,
+            std::unique_ptr<BvhNode> right,
+            const std::vector<Imageable *> &objects);
     BoundingBox boundingBox;
-    BvhNode *left;
-    BvhNode *right;
+    std::unique_ptr<BvhNode> left;
+    std::unique_ptr<BvhNode> right;
     std::vector<Imageable *> objects;
 
     bool isLeaf() const;
 
     bool operator==(const BvhNode &rhs) const;
     bool operator!=(const BvhNode &rhs) const;
-
-    virtual ~BvhNode();
 };
 }
 #endif //CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHNODE_H_
