@@ -1,6 +1,7 @@
 #include "TriangleMesh.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "Logger.h"
 
 namespace crayg {
 
@@ -144,6 +145,7 @@ TriangleMesh::FaceIdIteratorAdapter TriangleMesh::faceIds() const {
 void TriangleMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const {
     target.reserve(target.size() + faceCount());
     auto triangles = new Triangle[faceCount()];
+    Logger::debug("{:p}", (void *) triangles);
 
     for (unsigned int i = 0; i < faceCount(); i++) {
         triangles[i] = Triangle(const_cast<TriangleMesh *>(this), i);

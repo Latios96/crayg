@@ -126,7 +126,7 @@ Bvh::~Bvh() {
     delete root;
     Logger::debug("freed root, freeing objects");
     for (auto objectsToFreeInfo: objectsToFree) {
-        Logger::debug("Free {}", objectsToFreeInfo);
+        Logger::debug("Free {:p}", (void *) objects[objectsToFreeInfo]);
         delete[] objects[objectsToFreeInfo];
     }
 }
