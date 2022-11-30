@@ -10,6 +10,7 @@
 #include "integrators/IntegratorFactory.h"
 #include "SampleAccumulator.h"
 #include "BucketSizeEstimator.h"
+#include "utils/StopWatch.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 #include <intersectors/BvhBuilder.h>
@@ -79,15 +80,18 @@ void Renderer::init() {
                                                              scene.renderSettings.resolution.getWidth(),
                                                              scene.renderSettings.resolution.getHeight()));
 
-    Logger::info("Creating SceneIntersector...");
-    BvhBuilder bvhBuilder(scene);
-    auto bvh = bvhBuilder.build();
-    sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, bvh);
-    integrator =
-        std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(scene.renderSettings.integratorType,
-                                                                                scene,
-                                                                                sceneIntersector,
-                                                                                scene.renderSettings.integratorSettings));
+    {
+        InformativeScopedStopWatch buildBvh("Building SceneIntersector");
+        BvhBuilder bvhBuilder(scene);
+        auto bvh = bvhBuilder.build();
+        sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, bvh);
+        integrator =
+            std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(scene.renderSettings.integratorType,
+                                                                                    scene,
+                                                                                    sceneIntersector,
+                                                                                    scene.renderSettings.integratorSettings));
+    }
+
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
