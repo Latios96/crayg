@@ -17,10 +17,10 @@ class BvhBuilder {
  public:
     BvhBuilder(const Scene &scene);
     const Scene &scene;
-    [[nodiscard]] Bvh *build() const;
+    Bvh *build() const;
  private:
-    void collectPrimitives(Bvh *bvh);
-    int collectPrimitiveCount();
+    void collectPrimitives(Bvh &bvh) const;
+    int collectPrimitiveCount() const;
 };
 }
 

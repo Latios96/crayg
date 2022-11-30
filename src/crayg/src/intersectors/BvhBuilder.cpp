@@ -84,7 +84,7 @@ Bvh *BvhBuilder::build() const {
 
     auto bvh = new Bvh();
 
-    collectPrimitives(bvh);
+    collectPrimitives(*bvh);
 
     {
         InformativeScopedStopWatch buildingBvh("Building BVH");
@@ -93,25 +93,25 @@ Bvh *BvhBuilder::build() const {
 
     return bvh;
 }
-void BvhBuilder::collectPrimitives(Bvh *bvh) {
+void BvhBuilder::collectPrimitives(Bvh &bvh) const {
     InformativeScopedStopWatch collectingPrimitives("Collecting primitives");
 
     int primitiveCount = collectPrimitiveCount();
     Logger::info("Primitives in scene: {:L}", primitiveCount);
 
-    bvh->objects.reserve(primitiveCount);
+    bvh.objects.reserve(primitiveCount);
 
     for (int i = 0; i < scene.objects.size(); i++) {
         auto &obj = scene.objects[i];
         bool isOwning;
-        size_t startIndex = bvh->objects.size();
-        obj->getPrimitives(bvh->objects, &isOwning);
+        size_t startIndex = bvh.objects.size();
+        obj->getPrimitives(bvh.objects, &isOwning);
         if (isOwning) {
-            bvh->objectsToFree.emplace_back(startIndex, bvh->objects.size() - startIndex);
+            bvh.objectsToFree.emplace_back(startIndex, bvh.objects.size() - startIndex);
         }
     }
 }
-int BvhBuilder::collectPrimitiveCount() {
+int BvhBuilder::collectPrimitiveCount() const {
     int primitiveCount = 0;
     InformativeScopedStopWatch collectingPrimitiveCount("Collecting primitive count");
     for (auto &obj: scene.objects) {
