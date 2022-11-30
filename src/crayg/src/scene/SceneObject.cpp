@@ -18,6 +18,9 @@ void SceneObject::getPrimitives(std::vector<Imageable *> &target, bool *isOwning
     target.push_back(const_cast<SceneObject *>(this));
     *isOwning = false;
 }
+int SceneObject::primitiveCount() const {
+    return 1;
+}
 
 SceneObject::SceneObject() = default;
 

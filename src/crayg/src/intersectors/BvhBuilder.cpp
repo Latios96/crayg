@@ -83,9 +83,23 @@ Bvh *BvhBuilder::build() const {
 
     auto bvh = new Bvh();
 
+    Logger::info("Objects in scene: {:L}", scene.objects.size());
+
+    int primitiveCount = 0;
+    InformativeScopedStopWatch collectingPrimitiveCount("Collecting primitive count");
+    for (auto &obj: scene.objects) {
+        primitiveCount += obj->primitiveCount();
+    }
+
     {
+        Logger::info("Objects in scene: {:L}", scene.objects.size());
+
         InformativeScopedStopWatch collectingPrimitives("Collecting primitives");
-        for (auto &obj: scene.objects) {
+
+        bvh->objects.reserve(primitiveCount);
+
+        for (int i = 0; i < scene.objects.size(); i++) {
+            auto &obj = scene.objects[i];
             bool isOwning;
             std::size_t startIndex = bvh->objects.size();
             obj->getPrimitives(bvh->objects, &isOwning);
@@ -95,8 +109,11 @@ Bvh *BvhBuilder::build() const {
         }
         Logger::info("Primitives in scene: {:L}", bvh->objects.size());
     }
+    {
+        InformativeScopedStopWatch buildingBvh("Building BVH");
+        bvh->root = buildTree(bvh->objects);
+    }
 
-    bvh->root = buildTree(bvh->objects);
     return bvh;
 }
 BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
