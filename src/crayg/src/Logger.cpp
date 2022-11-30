@@ -33,6 +33,7 @@ void Logger::initialize() {
     spdlog::register_logger(combined_logger);
     spdlog::set_default_logger(combined_logger);
     spdlog::flush_on(spdlog::level::info);
+    spdlog::set_level(spdlog::level::debug);
 }
 void Logger::logToFile(const std::string &fileName) {
     const auto file_synk = std::make_shared<spdlog::sinks::basic_file_sink_mt>(fileName, true);
