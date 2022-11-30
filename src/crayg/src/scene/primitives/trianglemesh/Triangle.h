@@ -25,7 +25,7 @@ class Triangle : public Imageable {
 
     TriangleMesh *triangleMesh;
     std::size_t faceId;
-
+    ~Triangle() override = default;
  private:
     Intersection getIntersectionMullerTrumbore(const Ray &ray);
 };
