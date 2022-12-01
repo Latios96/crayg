@@ -126,7 +126,8 @@ Bvh::~Bvh() {
     Logger::debug("freed root, freeing objects");
     for (auto objectsToFreeInfo: objectsToFree) {
         Logger::debug("Free {:p}", (void *) objects[objectsToFreeInfo]);
-        delete[] objects[objectsToFreeInfo];
+        Triangle *triangle = dynamic_cast<Triangle *>(objects[objectsToFreeInfo]);
+        delete[] triangle;
     }
 }
 Bvh::Bvh(std::unique_ptr<BvhNode> root) : root(std::move(root)) {
