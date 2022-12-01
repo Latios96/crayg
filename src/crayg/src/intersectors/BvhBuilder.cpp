@@ -122,10 +122,7 @@ int BvhBuilder::collectPrimitiveCount() const {
 BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
 
 Bvh::~Bvh() {
-    Logger::debug("Free BVH");
-    Logger::debug("freed root, freeing objects");
     for (auto objectsToFreeInfo: objectsToFree) {
-        Logger::debug("Free {:p}", (void *) objects[objectsToFreeInfo]);
         Triangle *triangle = dynamic_cast<Triangle *>(objects[objectsToFreeInfo]);
         delete[] triangle;
     }
