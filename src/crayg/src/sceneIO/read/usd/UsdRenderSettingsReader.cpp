@@ -6,6 +6,21 @@
 
 namespace crayg {
 
+template<typename T>
+T readEnumValue(pxr::UsdRenderSettings usdPrim, const std::string &attributeName, T defaultValue) {
+    auto usdAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken(attributeName));
+    if (!usdAttr) {
+        return defaultValue;
+    }
+    auto tokenValue = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdAttr).GetString();
+    for (auto &c: tokenValue) c = toupper(c);
+    auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
+    if (!maybeValue.has_value()) {
+        throw std::runtime_error(fmt::format(R"(Unsupported value for '{}': "{}")", attributeName, tokenValue));
+    }
+    return maybeValue.value();
+}
+
 UsdRenderSettingsReader::UsdRenderSettingsReader(const pxr::UsdRenderSettings &usdPrim) : BaseUsdReader(
     usdPrim) {}
 
@@ -46,20 +61,7 @@ int crayg::UsdRenderSettingsReader::readMaxSamples() const {
 }
 
 IntegratorType crayg::UsdRenderSettingsReader::readIntegratorType() const {
-    IntegratorType integratorType = IntegratorType::RAYTRACING;
-    auto integratorTypeAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken("integratorType"));
-    if (!integratorTypeAttr) {
-        return integratorType;
-    }
-    auto integratorTypeToken = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(integratorTypeAttr).GetString();
-    for (auto &c: integratorTypeToken) c = toupper(c);
-    auto maybeValue = magic_enum::enum_cast<IntegratorType>(integratorTypeToken);
-    if (!maybeValue.has_value()) {
-        throw std::runtime_error(fmt::format(R"(Unsupported Integrator type: "{}")", integratorTypeToken));
-    }
-    integratorType = maybeValue.value();
-
-    return integratorType;
+    return readEnumValue<IntegratorType>(usdPrim, "integratorType", IntegratorType::RAYTRACING);
 }
 
 std::string crayg::UsdRenderSettingsReader::getTranslatedType() {
@@ -100,22 +102,9 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
         attribute.GetName(),
         attribute.GetTypeName()));
 }
-// todo refactor to something like "read enum"
-IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
-    IntersectorType intersectorType = IntersectorType::NAIVE_BVH;
-    auto intersectorTypeAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken("intersectorType"));
-    if (!intersectorTypeAttr) {
-        return intersectorType;
-    }
-    auto intersectorTypeToken = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(intersectorTypeAttr).GetString();
-    for (auto &c: intersectorTypeToken) c = toupper(c);
-    auto maybeValue = magic_enum::enum_cast<IntersectorType>(intersectorTypeToken);
-    if (!maybeValue.has_value()) {
-        throw std::runtime_error(fmt::format(R"(Unsupported Intersector type: "{}")", intersectorTypeToken));
-    }
-    intersectorType = maybeValue.value();
 
-    return intersectorType;
+IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
+    return readEnumValue<IntersectorType>(usdPrim, "intersectorType", IntersectorType::NAIVE_BVH);
 }
 
 }
