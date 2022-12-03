@@ -11,6 +11,7 @@
 #include "SampleAccumulator.h"
 #include "BucketSizeEstimator.h"
 #include "utils/StopWatch.h"
+#include "intersectors/IntersectorFactory.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 #include <intersectors/BvhBuilder.h>
@@ -82,9 +83,7 @@ void Renderer::init() {
 
     {
         InformativeScopedStopWatch buildBvh("Building SceneIntersector");
-        BvhBuilder bvhBuilder(scene);
-        auto bvh = bvhBuilder.build();
-        sceneIntersector = std::make_shared<BvhSceneIntersector>(scene, std::move(bvh));
+        sceneIntersector = IntersectorFactory::createSceneIntersector(scene.renderSettings.intersectorType, scene);
         integrator =
             std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(scene.renderSettings.integratorType,
                                                                                     scene,

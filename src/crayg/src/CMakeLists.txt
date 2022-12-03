@@ -67,6 +67,7 @@ set(crayg_SRCS
         intersectors/IntersectorType.h
         intersectors/SceneIntersector.cpp
         intersectors/SceneIntersector.h
+        intersectors/IntersectorFactory.h
         Logger.cpp
         Logger.h
         renderer/BucketSizeEstimator.cpp
