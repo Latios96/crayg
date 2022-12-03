@@ -121,13 +121,5 @@ int BvhBuilder::collectPrimitiveCount() const {
 }
 BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
 
-Bvh::~Bvh() {
-    for (auto objectsToFreeInfo: objectsToFree) {
-        Triangle *triangle = dynamic_cast<Triangle *>(objects[objectsToFreeInfo]);
-        delete[] triangle;
-    }
-}
-Bvh::Bvh(std::unique_ptr<BvhNode> root) : root(std::move(root)) {
 
-}
 }

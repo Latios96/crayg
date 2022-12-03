@@ -23,5 +23,15 @@ class BvhNode {
     bool operator==(const BvhNode &rhs) const;
     bool operator!=(const BvhNode &rhs) const;
 };
+
+struct Bvh {
+    Bvh() = default;
+    Bvh(std::unique_ptr<BvhNode> root);
+    std::unique_ptr<BvhNode> root;
+    std::vector<Imageable *> objects;
+    std::vector<int> objectsToFree;
+    virtual ~Bvh();
+};
+
 }
 #endif //CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHNODE_H_

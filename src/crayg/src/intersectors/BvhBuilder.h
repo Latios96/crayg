@@ -4,15 +4,6 @@
 #include "BvhNode.h"
 namespace crayg {
 
-struct Bvh {
-    Bvh() = default;
-    Bvh(std::unique_ptr<BvhNode> root);
-    std::unique_ptr<BvhNode> root;
-    std::vector<Imageable *> objects;
-    std::vector<int> objectsToFree;
-    virtual ~Bvh();
-};
-
 class BvhBuilder {
  public:
     BvhBuilder(const Scene &scene);
