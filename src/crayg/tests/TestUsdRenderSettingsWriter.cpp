@@ -11,8 +11,12 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
 
     SECTION("should write rendersettings correctly") {
         RenderSettings renderSettings
-            (Resolution(1280, 720), 4, IntegratorType::RAYTRACING, IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount",
-                                                                                        {8}}}));
+            (Resolution(1280, 720),
+             4,
+             IntegratorType::RAYTRACING,
+             IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount",
+                                  {8}}}),
+             IntersectorType::NAIVE_BVH);
 
         UsdRenderSettingsWriter usdRenderSettingsWriter(renderSettings);
         usdRenderSettingsWriter.write(stage);
@@ -28,10 +32,14 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
         const int sampleCount =
             UsdUtils::getStaticAttributeValueAs<int>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
                 "AMBIENT_OCCLUSION:sampleCount")));
+        pxr::TfToken intersectorType =
+            UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken(
+                "intersectorType")));
         REQUIRE(resolution == pxr::GfVec2i(1280, 720));
         REQUIRE(maxSamples == 4);
         REQUIRE(integratorType == pxr::TfToken("RAYTRACING"));
         REQUIRE(sampleCount == 8);
+        REQUIRE(intersectorType == pxr::TfToken("NAIVE_BVH"));
     }
 
 }

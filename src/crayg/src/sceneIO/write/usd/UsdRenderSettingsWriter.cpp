@@ -15,6 +15,7 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
     writeMaxSamples(usdRenderSettings);
     writeIntegratorType(usdRenderSettings);
     writeIntegratorSettings(usdRenderSettings);
+    writeIntersectorType(usdRenderSettings);
 
     return usdRenderSettings;
 }
@@ -50,6 +51,10 @@ void UsdRenderSettingsWriter::writeIntegratorSettings(const pxr::UsdRenderSettin
                 break;
         }
     }
+}
+void UsdRenderSettingsWriter::writeIntersectorType(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("intersectorType"), pxr::SdfValueTypeNames->Token).Set(
+        pxr::TfToken(std::string(magic_enum::enum_name(renderSettings.intersectorType))));
 }
 
 } // crayg

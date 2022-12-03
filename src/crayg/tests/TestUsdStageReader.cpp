@@ -149,7 +149,8 @@ TEST_CASE("UsdStageReader::readStageToScene") {
         REQUIRE(scene.renderSettings == RenderSettings(Resolution(1280, 720),
                                                        4,
                                                        IntegratorType::RAYTRACING,
-                                                       IntegratorSettings()));
+                                                       IntegratorSettings(),
+                                                       IntersectorType::NAIVE_BVH));
     }
 
     SECTION("should read rendersettings if defined") {
@@ -162,7 +163,8 @@ TEST_CASE("UsdStageReader::readStageToScene") {
         REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600),
                                                        2,
                                                        IntegratorType::RAYTRACING,
-                                                       IntegratorSettings()));
+                                                       IntegratorSettings(),
+                                                       IntersectorType::NAIVE_BVH));
     }
 
     SECTION("providing a cameraName in translationOptions should use this camera") {

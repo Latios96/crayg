@@ -85,16 +85,29 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
         REQUIRE(fullOverrides.resolveOverrides(renderSettings) == RenderSettings({800, 600},
                                                                                  8,
                                                                                  IntegratorType::DEBUG,
-                                                                                 IntegratorSettings()));
+                                                                                 IntegratorSettings(),
+                                                                                 IntersectorType::NAIVE_BVH));
 
         REQUIRE(onlyResolution.resolveOverrides(renderSettings)
-                    == RenderSettings({800, 600}, 4, IntegratorType::RAYTRACING, IntegratorSettings()));
+                    == RenderSettings({800, 600},
+                                      4,
+                                      IntegratorType::RAYTRACING,
+                                      IntegratorSettings(),
+                                      IntersectorType::NAIVE_BVH));
 
         REQUIRE(onlyMaxSamples.resolveOverrides(renderSettings)
-                    == RenderSettings({1280, 720}, 8, IntegratorType::RAYTRACING, IntegratorSettings()));
+                    == RenderSettings({1280, 720},
+                                      8,
+                                      IntegratorType::RAYTRACING,
+                                      IntegratorSettings(),
+                                      IntersectorType::NAIVE_BVH));
 
         REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings)
-                    == RenderSettings({1280, 720}, 4, IntegratorType::DEBUG, IntegratorSettings()));
+                    == RenderSettings({1280, 720},
+                                      4,
+                                      IntegratorType::DEBUG,
+                                      IntegratorSettings(),
+                                      IntersectorType::NAIVE_BVH));
     }
 
     SECTION("has no overrides") {

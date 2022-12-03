@@ -6,6 +6,7 @@
 #include "spdlog/fmt/ostr.h"
 #include "integrators/IntegratorType.h"
 #include "integrators/IntegratorSettings.h"
+#include "intersectors/IntersectorType.h"
 
 namespace crayg {
 
@@ -16,7 +17,7 @@ class RenderSettings {
     explicit RenderSettings(const Resolution &resolution,
                             int maxSamples,
                             IntegratorType integratorType,
-                            IntegratorSettings integratorSettings);
+                            IntegratorSettings integratorSettings, IntersectorType intersectorType);
 
     bool operator==(const RenderSettings &rhs) const;
     bool operator!=(const RenderSettings &rhs) const;
@@ -27,6 +28,7 @@ class RenderSettings {
             .addMember("maxSamples", renderSettings.maxSamples)
             .addMember("integratorType", renderSettings.integratorType)
             .addMember("integratorSettings", renderSettings.integratorSettings)
+            .addMember("intersectorType", renderSettings.intersectorType)
             .finish();
         return os;
     }
@@ -35,6 +37,7 @@ class RenderSettings {
     int maxSamples;
     IntegratorType integratorType = IntegratorType::RAYTRACING;
     IntegratorSettings integratorSettings;
+    IntersectorType intersectorType = IntersectorType::NAIVE_BVH;
 };
 
 }

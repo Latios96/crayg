@@ -16,6 +16,8 @@ TEST_CASE("UsdRenderSettingsReader::read") {
             pxr::TfToken("DEBUG"));
         usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("DEBUG:someToken"), pxr::SdfValueTypeNames->Token).Set(
             pxr::TfToken("someTokenValue"));
+        usdRenderSettings.GetPrim().CreateAttribute(pxr::TfToken("intersectorType"), pxr::SdfValueTypeNames->Token).Set(
+            pxr::TfToken("EMBREE"));
 
         UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
         auto renderSettings = usdRenderSettingsReader.read();
@@ -24,7 +26,8 @@ TEST_CASE("UsdRenderSettingsReader::read") {
                                                   2,
                                                   IntegratorType::DEBUG,
                                                   IntegratorSettings({{"DEBUG:someToken",
-                                                                       {std::string("someTokenValue")}}})));
+                                                                       {std::string("someTokenValue")}}}),
+                                                  IntersectorType::EMBREE));
     }
 
     SECTION("should fallback to default values") {
@@ -34,7 +37,7 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720),
                                                   4,
                                                   IntegratorType::RAYTRACING,
-                                                  IntegratorSettings()));
+                                                  IntegratorSettings(), IntersectorType::NAIVE_BVH));
     }
 
     SECTION("should parse rendersettings case insensitive") {
@@ -46,7 +49,7 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720),
                                                   4,
                                                   IntegratorType::DEBUG,
-                                                  IntegratorSettings()));
+                                                  IntegratorSettings(), IntersectorType::NAIVE_BVH));
     }
 
 }

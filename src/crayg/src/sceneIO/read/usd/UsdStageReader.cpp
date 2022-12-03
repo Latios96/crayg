@@ -95,7 +95,8 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
         scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720),
                                               4,
                                               IntegratorType::RAYTRACING,
-                                              IntegratorSettings());
+                                              IntegratorSettings(),
+                                              IntersectorType::NAIVE_BVH);
         return;
     }
     for (pxr::UsdPrim prim: renderPrim.GetDescendants()) {
@@ -107,7 +108,8 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
     scene.renderSettings = RenderSettings(crayg::Resolution(1280, 720),
                                           4,
                                           IntegratorType::RAYTRACING,
-                                          IntegratorSettings());
+                                          IntegratorSettings(),
+                                          IntersectorType::NAIVE_BVH);
 }
 
 }

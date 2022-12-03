@@ -16,11 +16,13 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     int maxSamples = readMaxSamples();
     IntegratorType integratorType = readIntegratorType();
     IntegratorSettings integratorSettings = readIntegratorSettings();
+    IntersectorType intersectorType = readIntersectorType();
 
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
     renderSettings->integratorType = integratorType;
     renderSettings->integratorSettings = integratorSettings;
+    renderSettings->intersectorType = intersectorType;
 
     return renderSettings;
 }
@@ -97,6 +99,23 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
         "The attribute {} is of type {}, which is not supported. Only token, int and float are suppored as Integrator settings values",
         attribute.GetName(),
         attribute.GetTypeName()));
+}
+// todo refactor to something like "read enum"
+IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
+    IntersectorType intersectorType = IntersectorType::NAIVE_BVH;
+    auto intersectorTypeAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken("intersectorType"));
+    if (!intersectorTypeAttr) {
+        return intersectorType;
+    }
+    auto intersectorTypeToken = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(intersectorTypeAttr).GetString();
+    for (auto &c: intersectorTypeToken) c = toupper(c);
+    auto maybeValue = magic_enum::enum_cast<IntersectorType>(intersectorTypeToken);
+    if (!maybeValue.has_value()) {
+        throw std::runtime_error(fmt::format(R"(Unsupported Intersector type: "{}")", intersectorTypeToken));
+    }
+    intersectorType = maybeValue.value();
+
+    return intersectorType;
 }
 
 }

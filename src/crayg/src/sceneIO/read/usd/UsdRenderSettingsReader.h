@@ -21,6 +21,7 @@ class UsdRenderSettingsReader : public BaseUsdReader<pxr::UsdRenderSettings, Ren
     IntegratorSettings readIntegratorSettings() const;
     bool isIntegratorSettingsAttribute(const pxr::UsdAttribute &attribute) const;
     IntegratorSettingsValue readIntegratorSettingsValue(const pxr::UsdAttribute &attribute) const;
+    IntersectorType readIntersectorType() const;
 };
 
 }
