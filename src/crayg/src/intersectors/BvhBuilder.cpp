@@ -98,8 +98,7 @@ void BvhBuilder::collectPrimitives(Bvh &bvh) const {
 
     bvh.objects.reserve(primitiveCount);
 
-    for (int i = 0; i < scene.objects.size(); i++) {
-        auto &obj = scene.objects[i];
+    for (const auto &obj: scene.objects) {
         bool isOwning;
         size_t startIndex = bvh.objects.size();
         obj->getPrimitives(bvh.objects, &isOwning);
