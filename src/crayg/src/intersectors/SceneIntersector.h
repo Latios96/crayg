@@ -17,7 +17,7 @@ class SceneIntersector {
 
     virtual ~SceneIntersector();
 
- private:
+ protected:
     Scene &scene;
 };
 
