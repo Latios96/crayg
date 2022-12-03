@@ -5,6 +5,16 @@
 
 namespace crayg {
 
+template<typename T>
+CLI::CheckedTransformer createTransformer() {
+    constexpr auto entries = magic_enum::enum_entries<T>();
+    std::map<std::string, T> map;
+    for (auto &entry: entries) {
+        map[std::string(entry.second)] = entry.first;
+    }
+    return CLI::CheckedTransformer(map, CLI::ignore_case);
+}
+
 CliParser::CliParser(const std::string &executableName, int argc, char **argv)
     : argc(argc), argv(argv), executableName(executableName) {}
 
@@ -31,13 +41,9 @@ CliParseResult CliParser::parse() {
     app.add_option("--maxSamples", maxSamples, "Override max samples");
 
     std::optional<IntegratorType> integratorType;
-    constexpr auto entries = magic_enum::enum_entries<IntegratorType>();
-    std::map<std::string, IntegratorType> map;
-    for (auto &entry: entries) {
-        map[std::string(entry.second)] = entry.first;
-    }
-    app.add_option("--integrator", integratorType, "Override integrator")->transform(CLI::CheckedTransformer(map,
-                                                                                                             CLI::ignore_case));
+    app.add_option("--integrator",
+                   integratorType,
+                   "Override integrator")->transform(createTransformer<IntegratorType>());
 
     try {
         app.parse(argc, argv);
