@@ -86,10 +86,7 @@ std::unique_ptr<Bvh> BvhBuilder::build() const {
 
     collectPrimitives(*bvh);
 
-    {
-        InformativeScopedStopWatch buildingBvh("Building BVH");
-        bvh->root = buildTree(bvh->objects);
-    }
+    bvh->root = buildTree(bvh->objects);
 
     return bvh;
 }
