@@ -1,4 +1,4 @@
-#include "BvhBuilder.h"
+#include "NaiveBvhBuilder.h"
 #include "utils/StopWatch.h"
 namespace crayg {
 
@@ -55,7 +55,7 @@ bool isLeft(const Imageable *obj, const SplitInfo &splitInfo) {
     }
 }
 
-std::unique_ptr<BvhNode> buildTree(const std::vector<Imageable *> &objects) {
+std::unique_ptr<NaiveBvhNode> buildTree(const std::vector<Imageable *> &objects) {
     const auto bounds = computeBounds(objects);
     std::vector<Imageable *> left, right;
     const BoundingBox centroidBounds = computeCentroidBounds(objects);
@@ -69,20 +69,20 @@ std::unique_ptr<BvhNode> buildTree(const std::vector<Imageable *> &objects) {
         }
     }
     if (objects.size() == left.size() || objects.size() == right.size()) {
-        return std::make_unique<BvhNode>(bounds, nullptr, nullptr, objects);
+        return std::make_unique<NaiveBvhNode>(bounds, nullptr, nullptr, objects);
     }
 
-    return std::make_unique<BvhNode>(bounds,
-                                     !left.empty() ? buildTree(left) : nullptr,
-                                     !right.empty() ? buildTree(right) : nullptr,
-                                     std::vector<Imageable *>());
+    return std::make_unique<NaiveBvhNode>(bounds,
+                                          !left.empty() ? buildTree(left) : nullptr,
+                                          !right.empty() ? buildTree(right) : nullptr,
+                                          std::vector<Imageable *>());
 }
 
-std::unique_ptr<Bvh> BvhBuilder::build() const {
+std::unique_ptr<NaiveBvh> NaiveBvhBuilder::build() const {
     InformativeScopedStopWatch informativeScopedStopWatch("Building BVH");
     Logger::info("Objects in scene: {:L}", scene.objects.size());
 
-    auto bvh = std::make_unique<Bvh>();
+    auto bvh = std::make_unique<NaiveBvh>();
 
     collectPrimitives(*bvh);
 
@@ -90,7 +90,7 @@ std::unique_ptr<Bvh> BvhBuilder::build() const {
 
     return bvh;
 }
-void BvhBuilder::collectPrimitives(Bvh &bvh) const {
+void NaiveBvhBuilder::collectPrimitives(NaiveBvh &bvh) const {
     InformativeScopedStopWatch collectingPrimitives("Collecting primitives");
 
     int primitiveCount = collectPrimitiveCount();
@@ -107,7 +107,7 @@ void BvhBuilder::collectPrimitives(Bvh &bvh) const {
         }
     }
 }
-int BvhBuilder::collectPrimitiveCount() const {
+int NaiveBvhBuilder::collectPrimitiveCount() const {
     int primitiveCount = 0;
     InformativeScopedStopWatch collectingPrimitiveCount("Collecting primitive count");
     for (auto &obj: scene.objects) {
@@ -115,7 +115,7 @@ int BvhBuilder::collectPrimitiveCount() const {
     }
     return primitiveCount;
 }
-BvhBuilder::BvhBuilder(const Scene &scene) : scene(scene) {}
+NaiveBvhBuilder::NaiveBvhBuilder(const Scene &scene) : scene(scene) {}
 
 
 }

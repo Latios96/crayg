@@ -14,8 +14,6 @@
 #include "intersectors/IntersectorFactory.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
-#include <intersectors/BvhBuilder.h>
-#include <intersectors/BvhSceneIntersector.h>
 
 namespace crayg {
 

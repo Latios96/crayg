@@ -1,9 +1,9 @@
 #include <algorithm>
-#include "BvhSceneIntersector.h"
+#include "NaiveBvhSceneIntersector.h"
 
 namespace crayg {
 
-bool isIntersectingTree(const Ray &ray, const BvhNode &node) {
+bool isIntersectingTree(const Ray &ray, const NaiveBvhNode &node) {
     const bool intersects = node.boundingBox.isIntersecting(ray);
     if (!intersects) {
         return false;
@@ -22,7 +22,7 @@ bool isIntersectingTree(const Ray &ray, const BvhNode &node) {
     return false;
 }
 
-Imageable::Intersection intersectTree(const Ray &ray, const BvhNode &node) {
+Imageable::Intersection intersectTree(const Ray &ray, const NaiveBvhNode &node) {
     const bool intersects = node.boundingBox.isIntersecting(ray);
     if (!intersects) {
         return Imageable::Intersection::createInvalid();
@@ -49,14 +49,14 @@ Imageable::Intersection intersectTree(const Ray &ray, const BvhNode &node) {
     return rightIntersection;
 }
 
-Imageable::Intersection BvhSceneIntersector::intersect(const Ray &ray) const {
+Imageable::Intersection NaiveBvhSceneIntersector::intersect(const Ray &ray) const {
     return intersectTree(ray, *bvh->root);
 }
-bool BvhSceneIntersector::isIntersecting(const Ray &ray) const {
+bool NaiveBvhSceneIntersector::isIntersecting(const Ray &ray) const {
     return isIntersectingTree(ray, *bvh->root);
 }
 
-BvhSceneIntersector::BvhSceneIntersector(Scene &scene, std::unique_ptr<Bvh> bvh)
+NaiveBvhSceneIntersector::NaiveBvhSceneIntersector(Scene &scene, std::unique_ptr<NaiveBvh> bvh)
     : SceneIntersector(scene), bvh(std::move(bvh)) {}
 
 }

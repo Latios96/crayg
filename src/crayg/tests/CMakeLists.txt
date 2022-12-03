@@ -18,8 +18,8 @@ set(UNIT_TEST_LIST
         TestBoundingBox.cpp
         TestBucketImageBuffer.cpp
         TestBucketSizeEstimator.cpp
-        TestBvhBuilder.cpp
-        TestBvhBuilder.cpp
+        TestNaiveBvhBuilder.cpp
+        TestNaiveBvhBuilder.cpp
         TestBvhSceneIntersector.cpp
         TestCamera.cpp
         TestColor.cpp

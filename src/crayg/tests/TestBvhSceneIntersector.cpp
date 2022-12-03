@@ -1,21 +1,21 @@
 #include <catch2/catch.hpp>
-#include <intersectors/BvhNode.h>
+#include <intersectors/naive/NaiveBvhNode.h>
 #include <scene/primitives/Sphere.h>
-#include <intersectors/BvhSceneIntersector.h>
+#include <intersectors/naive/NaiveBvhSceneIntersector.h>
 
 namespace crayg {
 
-TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
+TEST_CASE("NaiveBvhSceneIntersector/intersect with objects in node") {
 
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.0f);
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<Imageable *> objects({sphere1.get(), sphere2.get()});
-    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
-    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
+    auto bvhNode = std::make_unique<NaiveBvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto bvh = std::make_unique<NaiveBvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(bvh));
 
         bool result = intersector.isIntersecting({{0.0f, 0.0f, -5.0f}, {0.0f, 0.0f, 1.0f}});
 
@@ -23,7 +23,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(bvh));
 
         Imageable::Intersection intersection = intersector.intersect({{0.0f, 0.0f, -5.0f}, {0.0f, 0.0f, 1.0f}});
 
@@ -32,18 +32,18 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in node") {
 
 }
 
-TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
+TEST_CASE("NaiveBvhSceneIntersector/intersect with objects in left") {
 
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<Imageable *> objects({sphere1.get()});
-    auto left = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
-    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}),
+    auto left = std::make_unique<NaiveBvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto bvhNode = std::make_unique<NaiveBvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}),
                                              std::move(left), nullptr, std::vector<Imageable*>());
-    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
+    auto bvh = std::make_unique<NaiveBvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(bvh));
 
         bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
 
@@ -51,7 +51,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(bvh));
 
         Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
 
@@ -59,17 +59,17 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left") {
     }
 }
 
-TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
+TEST_CASE("NaiveBvhSceneIntersector/intersect with objects in right") {
 
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(), 1.1f);
     std::vector<Imageable *> objects({sphere1.get()});
-    auto right = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
-    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, std::move(right), std::vector<Imageable*>());
-    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
+    auto right = std::make_unique<NaiveBvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, nullptr, objects);
+    auto bvhNode = std::make_unique<NaiveBvhNode>(BoundingBox({-1.1f, -1.1f, -1.1f}, {1.1f, 1.1f, 1.1f}), nullptr, std::move(right), std::vector<Imageable*>());
+    auto bvh = std::make_unique<NaiveBvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(bvh));
 
         bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
 
@@ -77,7 +77,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(bvh));
 
         Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
 
@@ -86,20 +86,20 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in right") {
 
 }
 
-TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is nearer") {
+TEST_CASE("NaiveBvhSceneIntersector/intersect with objects in left and right, left is nearer") {
 
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1.0f);
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1.0f);
     std::vector<Imageable *> objectsLeft({sphere1.get()});
     std::vector<Imageable *> objectsRight({sphere2.get()});
-    auto left = std::make_unique<BvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
-    auto right = std::make_unique<BvhNode>(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
-    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 2}), std::move(left), std::move(right), std::vector<Imageable*>());
-    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
+    auto left = std::make_unique<NaiveBvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
+    auto right = std::make_unique<NaiveBvhNode>(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
+    auto naiveBvhNode = std::make_unique<NaiveBvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 2}), std::move(left), std::move(right), std::vector<Imageable*>());
+    auto naiveBvh = std::make_unique<NaiveBvh>(std::move(naiveBvhNode));
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(naiveBvh));
 
         bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
 
@@ -107,7 +107,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(naiveBvh));
 
         Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
 
@@ -116,20 +116,20 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, left is
     }
 }
 
-TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, right is nearer") {
+TEST_CASE("NaiveBvhSceneIntersector/intersect with objects in left and right, right is nearer") {
 
     Scene scene;
     std::shared_ptr<Sphere> sphere1 = std::make_shared<Sphere>(Vector3f(0, 0, 1), 1.0f);
     std::shared_ptr<Sphere> sphere2 = std::make_shared<Sphere>(Vector3f(0, 0, -1), 1.0f);
     std::vector<Imageable *> objectsLeft({sphere1.get()});
     std::vector<Imageable *> objectsRight({sphere2.get()});
-    auto left = std::make_unique<BvhNode>(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
-    auto right = std::make_unique<BvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
-    auto bvhNode = std::make_unique<BvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 2}), std::move(left), std::move(right), std::vector<Imageable*>());
-    auto bvh = std::make_unique<Bvh>(std::move(bvhNode));
+    auto left = std::make_unique<NaiveBvhNode>(BoundingBox({-1, -1, 0}, {1, 1, 2}), nullptr, nullptr, objectsRight);
+    auto right = std::make_unique<NaiveBvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 0}), nullptr, nullptr, objectsLeft);
+    auto bvhNode = std::make_unique<NaiveBvhNode>(BoundingBox({-1, -1, -2}, {1, 1, 2}), std::move(left), std::move(right), std::vector<Imageable*>());
+    auto bvh = std::make_unique<NaiveBvh>(std::move(bvhNode));
 
     SECTION("isIntersecting") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(bvh));
 
         bool result = intersector.isIntersecting({{0, 0, -5}, {0, 0, 1}});
 
@@ -137,7 +137,7 @@ TEST_CASE("BvhSceneIntersector/intersect with objects in left and right, right i
     }
 
     SECTION("intersect") {
-        BvhSceneIntersector intersector(scene, std::move(bvh));
+        NaiveBvhSceneIntersector intersector(scene, std::move(bvh));
 
         Imageable::Intersection intersection = intersector.intersect({{0, 0, -5}, {0, 0, 1}});
 

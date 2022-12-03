@@ -2,8 +2,8 @@
 #define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_INTERSECTORFACTORY_H_
 
 #include "SceneIntersector.h"
-#include "BvhBuilder.h"
-#include "BvhSceneIntersector.h"
+#include "naive/NaiveBvhBuilder.h"
+#include "naive/NaiveBvhSceneIntersector.h"
 namespace crayg {
 
 class IntersectorFactory {
@@ -18,9 +18,9 @@ class IntersectorFactory {
         }
     }
     static std::shared_ptr<SceneIntersector> createNaiveBvh(Scene &scene) {
-        BvhBuilder bvhBuilder(scene);
+        NaiveBvhBuilder bvhBuilder(scene);
         auto bvh = bvhBuilder.build();
-        return std::make_shared<BvhSceneIntersector>(scene, std::move(bvh));
+        return std::make_shared<NaiveBvhSceneIntersector>(scene, std::move(bvh));
     }
 };
 

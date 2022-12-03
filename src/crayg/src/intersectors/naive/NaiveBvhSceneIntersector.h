@@ -1,19 +1,19 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHSCENEINTERSECTOR_H_
 #define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHSCENEINTERSECTOR_H_
-#include "SceneIntersector.h"
-#include "BvhNode.h"
-#include "BvhBuilder.h"
+#include "intersectors/SceneIntersector.h"
+#include "NaiveBvhNode.h"
+#include "NaiveBvhBuilder.h"
 
 namespace crayg {
 
-class BvhSceneIntersector : public SceneIntersector {
+class NaiveBvhSceneIntersector : public SceneIntersector {
  public:
-    BvhSceneIntersector(Scene &scene, std::unique_ptr<Bvh> bvh);
+    NaiveBvhSceneIntersector(Scene &scene, std::unique_ptr<NaiveBvh> bvh);
     Imageable::Intersection intersect(const Ray &ray) const override;
     bool isIntersecting(const Ray &ray) const override;
-    ~BvhSceneIntersector() override = default;
+    ~NaiveBvhSceneIntersector() override = default;
  private:
-    std::unique_ptr<Bvh> bvh = nullptr;
+    std::unique_ptr<NaiveBvh> bvh = nullptr;
 };
 
 }
