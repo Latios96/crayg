@@ -76,17 +76,21 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     CliRenderSettingsOverride onlyIntegratorType;
     onlyIntegratorType.integratorType = IntegratorType::DEBUG;
 
+    CliRenderSettingsOverride onlyIntersectorType;
+    onlyIntersectorType.intersectorType = IntersectorType::EMBREE;
+
     RenderSettings renderSettings;
     renderSettings.resolution = Resolution(1280, 720);
     renderSettings.maxSamples = 4;
     renderSettings.integratorType = IntegratorType::RAYTRACING;
 
     SECTION("has overrides") {
-        REQUIRE(fullOverrides.resolveOverrides(renderSettings) == RenderSettings({800, 600},
-                                                                                 8,
-                                                                                 IntegratorType::DEBUG,
-                                                                                 IntegratorSettings(),
-                                                                                 IntersectorType::NAIVE_BVH));
+        REQUIRE(fullOverrides.resolveOverrides(renderSettings)
+                    == RenderSettings({800, 600},
+                                      8,
+                                      IntegratorType::DEBUG,
+                                      IntegratorSettings(),
+                                      IntersectorType::NAIVE_BVH));
 
         REQUIRE(onlyResolution.resolveOverrides(renderSettings)
                     == RenderSettings({800, 600},
@@ -108,6 +112,13 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
                                       IntegratorType::DEBUG,
                                       IntegratorSettings(),
                                       IntersectorType::NAIVE_BVH));
+
+        REQUIRE(onlyIntersectorType.resolveOverrides(renderSettings)
+                    == RenderSettings({1280, 720},
+                                      4,
+                                      IntegratorType::RAYTRACING,
+                                      IntegratorSettings(),
+                                      IntersectorType::EMBREE));
     }
 
     SECTION("has no overrides") {

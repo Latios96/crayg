@@ -16,6 +16,7 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     resolvedRenderSettings.maxSamples = maxSamples ? maxSamples.value() : renderSettings.maxSamples;
     resolvedRenderSettings.integratorType = integratorType ? integratorType.value() : renderSettings.integratorType;
     resolvedRenderSettings.integratorSettings = renderSettings.integratorSettings;
+    resolvedRenderSettings.intersectorType = intersectorType ? intersectorType.value() : renderSettings.intersectorType;
 
     return resolvedRenderSettings;
 }
@@ -34,6 +35,9 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
     }
     if (integratorType) {
         report.push_back(fmt::format(R"(integratorType -> "{}")", *integratorType));
+    }
+    if (intersectorType) {
+        report.push_back(fmt::format(R"(intersectorType -> "{}")", *integratorType));
     }
     return boost::algorithm::join(report, ", ");
 }

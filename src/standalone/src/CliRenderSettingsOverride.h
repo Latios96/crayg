@@ -10,6 +10,7 @@ struct CliRenderSettingsOverride {
     std::optional<Resolution> resolution;
     std::optional<int> maxSamples;
     std::optional<IntegratorType> integratorType;
+    std::optional<IntersectorType> intersectorType;
 
     RenderSettings resolveOverrides(const RenderSettings &renderSettings) const;
 

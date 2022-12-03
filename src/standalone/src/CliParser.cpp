@@ -45,6 +45,11 @@ CliParseResult CliParser::parse() {
                    integratorType,
                    "Override integrator")->transform(createTransformer<IntegratorType>());
 
+    std::optional<IntersectorType> intersectorType;
+    app.add_option("--intersector",
+                   intersectorType,
+                   "Override intersector")->transform(createTransformer<IntersectorType>());
+
     try {
         app.parse(argc, argv);
 
@@ -57,6 +62,9 @@ CliParseResult CliParser::parse() {
         }
         if (integratorType) {
             renderSettingsOverride.integratorType = integratorType.value();
+        }
+        if (intersectorType) {
+            renderSettingsOverride.intersectorType = intersectorType.value();
         }
 
         return CliParseResult(CliArgs(sceneFileName,
