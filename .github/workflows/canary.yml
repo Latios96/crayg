@@ -1,0 +1,22 @@
+name: Canary CI
+
+#on:
+#  schedule:
+#    - cron: '0 6 * * 1,6'
+
+on:
+  push:
+    paths-ignore:
+      - '**/README.md'
+      - 'docs/**/*'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ "windows-latest", "ubuntu-latest", "macos-latest" ]
+    name: "${{ matrix.os }}"
+    uses: Latios96/crayg/.github/workflows/build.yml@main
+    secrets: inherit
