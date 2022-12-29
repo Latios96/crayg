@@ -1,18 +1,10 @@
-name: Github Actions CI
+name: CI
 
 on:
-  push:
-    paths-ignore:
-      - '**/README.md'
-      - 'docs/**/*'
+  workflow_call:
+
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
-    name: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.10
