@@ -1,9 +1,15 @@
 on:
   workflow_call:
     inputs:
-      os_matrix:
+      windows_version:
         required: true
-        type: list
+        type: string
+      ubuntu_version:
+        required: true
+        type: string
+      macos_version:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -11,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: "${{ inputs.os_matrix }}"
+        os: ["${{ inputs.windows_version }}","${{ inputs.ubuntu_version }}","${{ inputs.macos_version }}"]
     name: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
