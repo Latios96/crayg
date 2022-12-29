@@ -14,3 +14,5 @@ jobs:
   build:
     uses: Latios96/crayg/.github/workflows/build.yml@master
     secrets: inherit
+    with:
+      os_matrix: [ "windows-latest", "ubuntu-latest", "macos-latest" ]
