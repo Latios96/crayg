@@ -1,23 +1,17 @@
-on:
-  workflow_call:
-    inputs:
-      windows_version:
-        required: true
-        type: string
-      ubuntu_version:
-        required: true
-        type: string
-      macos_version:
-        required: true
-        type: string
+name: Github Actions CI
 
+on:
+  push:
+    paths-ignore:
+      - '**/README.md'
+      - 'docs/**/*'
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: ["${{ inputs.windows_version }}","${{ inputs.ubuntu_version }}","${{ inputs.macos_version }}"]
+        os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
     name: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
