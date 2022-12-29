@@ -12,11 +12,5 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
-    name: "${{ matrix.os }}"
     uses: Latios96/crayg/.github/workflows/build.yml@master
     secrets: inherit

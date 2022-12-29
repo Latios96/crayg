@@ -1,8 +1,18 @@
 on:
   workflow_call:
+    inputs:
+      os_matrix:
+        required: true
+        type: list
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: "${{ inputs.os_matrix }}"
+    name: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.10
