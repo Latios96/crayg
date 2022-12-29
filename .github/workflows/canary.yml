@@ -18,5 +18,5 @@ jobs:
       matrix:
         os: [ "windows-latest", "ubuntu-latest", "macos-latest" ]
     name: "${{ matrix.os }}"
-    uses: Latios96/crayg/.github/workflows/build.yml@main
+    uses: Latios96/crayg/.github/workflows/build.yml@master
     secrets: inherit
