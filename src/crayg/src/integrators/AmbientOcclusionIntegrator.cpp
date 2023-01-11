@@ -32,7 +32,7 @@ Color AmbientOcclusionIntegrator::calculateAmbientOcclusionAtPoint(Imageable::In
     for (int i = 0; i < sampleCount; i++) {
         Vector3f directionOnHemisphere = Sampling::uniformSampleHemisphere();
         Vector3f direction = orthonormalBasis.toLocalCoordinates(directionOnHemisphere);
-        Ray aoRay(location, direction);
+        Ray aoRay(location + intersection.imageable->getNormal(location) * 0.001, direction);
         const auto aoIntersection = sceneIntersector->intersect(aoRay);
         if (aoIntersection.imageable == nullptr
             || (aoIntersection.imageable != nullptr && aoIntersection.rayParameter > radius)) {
