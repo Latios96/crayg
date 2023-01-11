@@ -142,6 +142,37 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
             )
         )
 
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Blenderman\Blenderman.usd"),
+                name_override="ALab",
+            )
+        )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Junk_Shop\Junk_Shop.usd"),
+                name_override="ALab",
+            )
+        )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Racing_Car\Racing_Car.usd"),
+                name_override="ALab",
+            )
+        )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Sprite_Fright\Sprite_Fright.usd"),
+                name_override="ALab",
+            )
+        )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\White_Lands\White_Lands.usd"),
+                name_override="ALab",
+            )
+        )
+
 
 def add_not_existing_run_configurations(run_manager, scenes):
     existing_configs = set()
