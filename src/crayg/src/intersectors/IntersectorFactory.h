@@ -4,6 +4,8 @@
 #include "SceneIntersector.h"
 #include "naive/NaiveBvhBuilder.h"
 #include "naive/NaiveBvhSceneIntersector.h"
+#include "intersectors/embree/EmbreeBvhBuilder.h"
+#include "intersectors/embree/EmbreeSceneIntersector.h"
 namespace crayg {
 
 class IntersectorFactory {
@@ -12,6 +14,7 @@ class IntersectorFactory {
                                                                     Scene &scene) {
         switch (integratorType) {
             case IntersectorType::NAIVE_BVH:return createNaiveBvh(scene);
+            case IntersectorType::EMBREE:return createEmbreeBvh(scene);
             default:
                 throw std::runtime_error(fmt::format(R"(Unsupported Intersector type: "{}")",
                                                      magic_enum::enum_name(integratorType)));
@@ -21,6 +24,11 @@ class IntersectorFactory {
         NaiveBvhBuilder bvhBuilder(scene);
         auto bvh = bvhBuilder.build();
         return std::make_shared<NaiveBvhSceneIntersector>(scene, std::move(bvh));
+    }
+    static std::shared_ptr<SceneIntersector> createEmbreeBvh(Scene &scene) {
+        EmbreeBvhBuilder embreeBvhBuilder(scene);
+        auto bvh = embreeBvhBuilder.build();
+        return std::make_shared<EmbreeSceneIntersector>(scene, std::move(bvh));
     }
 };
 
