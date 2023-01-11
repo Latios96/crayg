@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
+        os: [ "windows-2019", "ubuntu-20.04", "macos-11" ]
     name: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
