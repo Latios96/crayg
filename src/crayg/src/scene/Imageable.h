@@ -28,6 +28,7 @@ class Imageable {
         }
 
         Intersection(float rayParameter, Imageable *imageable);
+        Intersection(float rayParameter, Imageable *imageable, bool isOwning);
 
         Intersection(const Intersection &intersection) {
             this->rayParameter = intersection.rayParameter;
@@ -41,6 +42,9 @@ class Imageable {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
         }
         static Intersection nearest(const Intersection &first, const Intersection &second);
+        virtual ~Intersection();
+     private:
+        bool isOwning = false;
     };
 
     virtual Intersection intersect(Ray ray) = 0;

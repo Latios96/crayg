@@ -14,6 +14,15 @@ Imageable::Intersection Imageable::Intersection::nearest(const Imageable::Inters
     }
     return second;
 }
+Imageable::Intersection::Intersection(float rayParameter, Imageable *imageable, bool isOwning) : rayParameter(
+    rayParameter), imageable(imageable), isOwning(isOwning) {
+
+}
+Imageable::Intersection::~Intersection() {
+    if (isOwning) {
+        delete imageable;
+    }
+}
 std::shared_ptr<Material> Imageable::getMaterial() const {
     return material;
 }
