@@ -9,6 +9,7 @@
 #include <pxr/usd/usdLux/diskLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 #include <pxr/usd/usdRender/settings.h>
+#include <pxr/usd/sdf/types.h>
 
 namespace crayg {
 
@@ -63,6 +64,22 @@ TEST_CASE("UsdStageReader::readStageToScene") {
         UsdStageReader(*stage).readStageToScene(scene);
 
         REQUIRE(scene.objects.size() == 1);
+    }
+
+    SECTION("should read instance") {
+        auto instanceSourcePrim = stage->OverridePrim(pxr::SdfPath("/InstanceSources"));
+        auto instancedContent = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/InstanceSources/source"));
+        instanceSourcePrim.SetSpecifier(pxr::SdfSpecifierOver);
+
+        for (int i = 0; i < 2; i++) {
+            auto instance = stage->DefinePrim(pxr::SdfPath(fmt::format("/instance{}", i)));
+            instance.GetReferences().AddReference(pxr::SdfReference("", pxr::SdfPath("/InstanceSources/source")));
+            instance.SetInstanceable(true);
+        }
+
+        UsdStageReader(*stage).readStageToScene(scene);
+
+        REQUIRE(scene.objects.size() == 2);
     }
 
     SECTION("should not override material for mesh") {

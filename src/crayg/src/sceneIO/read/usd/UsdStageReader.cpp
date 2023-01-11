@@ -10,6 +10,7 @@
 #include "scene/primitives/GroundPlane.h"
 #include <pxr/usd/usd/prim.h>
 #include <pxr/usd/usd/primRange.h>
+#include <pxr/usd/usd/primFlags.h>
 #include <fmt/format.h>
 
 namespace crayg {
@@ -21,7 +22,7 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
 
     auto defaultMaterial = std::make_shared<crayg::UsdPreviewSurface>("defaultMaterial", crayg::Color::createWhite());
 
-    for (pxr::UsdPrim prim: stage.TraverseAll()) {
+    for (pxr::UsdPrim prim: stage.Traverse(pxr::UsdTraverseInstanceProxies())) {
         if (prim.IsA<pxr::UsdGeomMesh>() && primIsVisible(prim)) {
             readUsdGeomMesh(scene, defaultMaterial, prim);
         } else if (prim.IsA<pxr::UsdLuxSphereLight>() && primIsVisible(prim)) {
