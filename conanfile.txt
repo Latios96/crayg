@@ -3,14 +3,14 @@ fmt/8.1.1
 spdlog/1.10.0
 catch2/2.13.7
 fakeit/2.0.9
-cli11/2.1.1
+cli11/2.3.2
 boost/1.78.0
 openimageio/2.3.7.2
-tinyobjloader/1.0.6
+tinyobjloader/1.0.7
 onetbb/2020.3
 qt/5.15.2
 USD/22.05@latios96/stable
-magic_enum/0.8.0
+magic_enum/0.8.2
 
 zlib/1.2.12
 
