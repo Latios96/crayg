@@ -145,31 +145,31 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
         scenes.append(
             RunConfigParameter(
                 Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Blenderman\Blenderman.usd"),
-                name_override="ALab",
+                name_override="Blenderman",
             )
         )
         scenes.append(
             RunConfigParameter(
                 Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Junk_Shop\Junk_Shop.usd"),
-                name_override="ALab",
+                name_override="Junk_Shop",
             )
         )
         scenes.append(
             RunConfigParameter(
                 Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Racing_Car\Racing_Car.usd"),
-                name_override="ALab",
+                name_override="Racing_Car",
             )
         )
         scenes.append(
             RunConfigParameter(
                 Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Sprite_Fright\Sprite_Fright.usd"),
-                name_override="ALab",
+                name_override="Sprite_Fright",
             )
         )
         scenes.append(
             RunConfigParameter(
                 Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\White_Lands\White_Lands.usd"),
-                name_override="ALab",
+                name_override="White_Lands",
             )
         )
 
