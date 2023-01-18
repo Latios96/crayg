@@ -25,7 +25,7 @@ def generate_run_config(run_manager, config: RunConfigParameter):
     configuration_element.set("type", "CMakeRunConfiguration")
     configuration_element.set("factoryName", "Application")
     configuration_element.set(
-        "PROGRAM_PARAMS", f"-s {config.scene_path} -o usdPreviewSurfaceTest.#.png"
+        "PROGRAM_PARAMS", f"-s {config.scene_path} -o {config.name}.#.png"
     )
     configuration_element.set("REDIRECT_INPUT", "false")
     configuration_element.set("ELEVATE", "false")
