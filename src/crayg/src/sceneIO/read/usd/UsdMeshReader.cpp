@@ -4,6 +4,7 @@
 #include "sceneIO/usd/UsdUtils.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 
 namespace crayg {
 
@@ -64,9 +65,14 @@ std::string UsdMeshReader::getTranslatedType() {
 }
 
 void UsdMeshReader::translateNormals(std::shared_ptr<TriangleMesh> &triangleMesh, pxr::HdMeshUtil &meshUtil) {
+    if(!normalsAreAuthored()){
+        return;
+    }
     const pxr::TfToken normalsInterpolation = usdPrim.GetNormalsInterpolation();
     if (normalsInterpolation == pxr::UsdGeomTokens->faceVarying) {
         translateFaceVaryingNormals(triangleMesh, meshUtil);
+    } else if (normalsInterpolation == pxr::UsdGeomTokens->vertex) {
+        translateVertexNormals(triangleMesh, meshUtil);
     } else {
         Logger::warning(R"(Normals interpolation "{}" of mesh {} is not supported)",
                         normalsInterpolation,
@@ -97,6 +103,23 @@ pxr::VtValue &UsdMeshReader::computeTriangulatedFaceVaryingNormals(const pxr::Hd
                                                    pxr::HdTypeFloatVec3,
                                                    &triangulated);
     return triangulated;
+}
+
+void UsdMeshReader::translateVertexNormals(std::shared_ptr<TriangleMesh> &triangleMesh,
+                                           const pxr::HdMeshUtil &meshUtil) const {
+    pxr::VtVec3fArray normals;
+    usdPrim.GetNormalsAttr().Get(&normals, timeCodeToRead);
+
+    auto *primVar = triangleMesh->addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
+
+    for (int i = 0; i < triangleMesh->points.size(); i++) {
+        primVar->write(i, UsdConversions::convert(normals[i]));
+    }
+}
+bool UsdMeshReader::normalsAreAuthored() const {
+    pxr::VtVec3fArray normals;
+    usdPrim.GetNormalsAttr().Get(&normals, timeCodeToRead);
+    return normals.size() > 0;
 }
 
 }

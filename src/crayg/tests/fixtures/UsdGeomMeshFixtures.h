@@ -20,6 +20,8 @@ class UsdGeomMeshFixtures {
         pxr::VtIntArray faceVertexIndices({0, 1, 3, 2});
         usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
 
+        usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->constant);
+
         return usdGeomMesh;
     }
 
@@ -33,6 +35,8 @@ class UsdGeomMeshFixtures {
         usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
         pxr::VtIntArray faceVertexIndices({0, 1, 2, 2, 1, 3});
         usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+
+        usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->constant);
 
         return usdGeomMesh;
     }

@@ -4,6 +4,7 @@
 #include <pxr/usd/usdGeom/mesh.h>
 #include <iostream>
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "fixtures/UsdGeomMeshFixtures.h"
 
 namespace crayg {
@@ -68,7 +69,24 @@ TEST_CASE("UsdMeshReader::read") {
                                                          }));
     }
 
-    SECTION("authored normals with normals other than faceVarying should not be translated") {
+    SECTION("authored vertex normals should be translated") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
+
+        usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->vertex);
+        pxr::VtVec3fArray normals({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
+        usdGeomMesh.GetNormalsAttr().Set(normals);
+
+        UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto triangleMesh = usdMeshReader.read();
+
+        REQUIRE(triangleMesh->normalsPrimVar != nullptr);
+        REQUIRE(*triangleMesh->getNormalsPrimVarAs<TriangleMeshPerPointPrimVar<Vector3f>>()
+                    == std::vector<Vector3f>({
+                                                 {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}
+                                             }));
+    }
+
+    SECTION("authored normals with unsupported interpolation should not be translated") {
         auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
 
         usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->uniform);
@@ -90,6 +108,7 @@ TEST_CASE("UsdMeshReader::read") {
         usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts, pxr::UsdTimeCode());
         pxr::VtIntArray faceVertexIndices({0, 1, 3, 2});
         usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices, pxr::UsdTimeCode());
+        usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->constant);
 
         UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = usdMeshReader.read();

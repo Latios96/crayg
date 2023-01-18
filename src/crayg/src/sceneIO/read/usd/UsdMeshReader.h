@@ -23,8 +23,11 @@ class UsdMeshReader : public BaseUsdImageableReader<pxr::UsdGeomMesh, TriangleMe
     void translateNormals(std::shared_ptr<TriangleMesh> &sharedPtr, pxr::HdMeshUtil &util);
     void translateFaceVaryingNormals(std::shared_ptr<TriangleMesh> &triangleMesh,
                                      const pxr::HdMeshUtil &meshUtil) const;
+    void translateVertexNormals(std::shared_ptr<TriangleMesh> &triangleMesh,
+                                     const pxr::HdMeshUtil &meshUtil) const;
     pxr::VtValue &computeTriangulatedFaceVaryingNormals(const pxr::HdMeshUtil &meshUtil,
                                                         pxr::VtValue &triangulated) const;
+    bool normalsAreAuthored() const;
 };
 
 }
