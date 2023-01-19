@@ -12,6 +12,19 @@ namespace crayg {
 
 typedef std::variant<std::string, int, float, std::chrono::seconds> ImageMetadataValue;
 
+class ImageMetadataTokens{
+ public:
+    static const std::string RENDER_TIME;
+    static const std::string RENDER_TIME_SECONDS;
+    static const std::string CRAYG_VERSION;
+    static const std::string COMPUTER_NAME;
+    static const std::string CPU;
+    static const std::string RENDER_SETTINGS_INTEGRATOR;
+    static const std::string RENDER_SETTINGS_INTERSECTOR;
+    static const std::string RENDER_SETTINGS_MAX_SAMPLES;
+};
+
+
 class ImageMetadata {
  public:
     template<typename T>
