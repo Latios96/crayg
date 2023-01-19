@@ -33,6 +33,7 @@ set(UNIT_TEST_LIST
         TestImageBucketIterator.cpp
         TestImageIterators.cpp
         TestImageMetadata.cpp
+        TestImageMetadataCollector.cpp
         TestImageOutputDriver.cpp
         TestImagePathResolver.cpp
         TestImageWriters.cpp
