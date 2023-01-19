@@ -85,6 +85,10 @@ void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
             } else {
                 auto item = new QTreeWidgetItem();
                 item->setText(0, QString::fromStdString(pathPart));
+                if(pathPart.data() == strings[strings.size()-1].data()){
+                    item->setText(1,QString::fromStdString(fmt::format("{}",metadataEntry.second)));
+                }
+                item->setTextAlignment(1, Qt::AlignRight);
                 currentItem->addChild(item);
                 currentItem = item;
             }
@@ -92,6 +96,9 @@ void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
     }
 
     expand(rootItem);
+
+    imageMetadataWidget->resizeColumnToContents(0);
+    imageMetadataWidget->resizeColumnToContents(1);
 }
 
 }
