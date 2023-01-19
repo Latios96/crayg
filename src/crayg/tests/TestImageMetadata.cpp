@@ -38,6 +38,22 @@ TEST_CASE("ImageMetadata::read/write") {
         REQUIRE(imageMetadata.read<int>("int") == 2);
     }
 }
+TEST_CASE("ImageMetadata::has") {
+
+    SECTION("existing key should return true") {
+        ImageMetadata imageMetadata;
+        imageMetadata.write("int", 1);
+
+        REQUIRE(imageMetadata.has("int"));
+    }
+
+    SECTION("not existing key should return false") {
+        ImageMetadata imageMetadata;
+        imageMetadata.write("int", 1);
+
+        REQUIRE_FALSE(imageMetadata.has("not existing"));
+    }
+}
 
 TEST_CASE("ImageMetadata::iterate") {
 

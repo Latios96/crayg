@@ -27,6 +27,10 @@ class ImageMetadata {
         return std::get<T>(values[name]);
     }
 
+    bool has(const std::string &name){
+        return values.find(name) != values.end();
+    }
+
     auto begin()const {
         return values.begin();
     }
