@@ -12,7 +12,7 @@ namespace crayg {
 
 typedef std::variant<std::string, int, float, std::chrono::seconds> ImageMetadataValue;
 
-class ImageMetadataTokens{
+class ImageMetadataTokens {
  public:
     static const std::string RENDER_TIME;
     static const std::string RENDER_TIME_SECONDS;
@@ -23,7 +23,6 @@ class ImageMetadataTokens{
     static const std::string RENDER_SETTINGS_INTERSECTOR;
     static const std::string RENDER_SETTINGS_MAX_SAMPLES;
 };
-
 
 class ImageMetadata {
  public:
@@ -40,14 +39,14 @@ class ImageMetadata {
         return std::get<T>(values[name]);
     }
 
-    bool has(const std::string &name){
+    bool has(const std::string &name) {
         return values.find(name) != values.end();
     }
 
-    auto begin()const {
+    auto begin() const {
         return values.begin();
     }
-    auto end() const{
+    auto end() const {
         return values.end();
     }
 
@@ -60,7 +59,7 @@ class ImageMetadata {
 
     friend std::ostream &operator<<(std::ostream &os, const ImageMetadata &metadata) {
         os << "values: ";
-        for(auto &v: metadata){
+        for (auto &v: metadata) {
             os << fmt::format("{}={}", v.first, v.second);
         }
         return os;
@@ -81,12 +80,14 @@ struct fmt::formatter<crayg::ImageMetadataValue> {
 
     template<typename FormatContext>
     auto format(crayg::ImageMetadataValue const &imageMetadataValue, FormatContext &ctx) {
-        if (std::holds_alternative<int>(imageMetadataValue)) {
-            return fmt::format_to(ctx.out(),"{}", std::get<int>(imageMetadataValue));
+        if (std::holds_alternative<std::string>(imageMetadataValue)) {
+            return fmt::format_to(ctx.out(), "{}", std::get<std::string>(imageMetadataValue));
+        } else if (std::holds_alternative<int>(imageMetadataValue)) {
+            return fmt::format_to(ctx.out(), "{}", std::get<int>(imageMetadataValue));
         } else if (std::holds_alternative<float>(imageMetadataValue)) {
-            return fmt::format_to(ctx.out(),"{}", std::get<float>(imageMetadataValue));
+            return fmt::format_to(ctx.out(), "{}", std::get<float>(imageMetadataValue));
         } else if (std::holds_alternative<std::chrono::seconds>(imageMetadataValue)) {
-            return fmt::format_to(ctx.out(),"{}s", std::get<std::chrono::seconds>(imageMetadataValue).count());
+            return fmt::format_to(ctx.out(), "{}s", std::get<std::chrono::seconds>(imageMetadataValue).count());
         }
     };
 };
