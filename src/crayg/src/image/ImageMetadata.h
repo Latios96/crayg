@@ -60,7 +60,7 @@ class ImageMetadata {
     friend std::ostream &operator<<(std::ostream &os, const ImageMetadata &metadata) {
         os << "values: ";
         for (auto &v: metadata) {
-            os << fmt::format("{}={}", v.first, v.second);
+            os << fmt::format("{}={} ", v.first, v.second);
         }
         return os;
     }
