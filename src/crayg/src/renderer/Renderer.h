@@ -36,6 +36,7 @@ class Renderer {
     Color renderSample(float x, float y);
 
     std::unique_ptr<AbstractIntegrator> integrator;
+    void writeImageMetadata(std::chrono::seconds renderTime);
 };
 
 }

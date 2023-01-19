@@ -12,6 +12,7 @@
 #include "BucketSizeEstimator.h"
 #include "utils/StopWatch.h"
 #include "intersectors/IntersectorFactory.h"
+#include "utils/ImageMetadataCollector.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
 
@@ -40,7 +41,8 @@ void Renderer::renderScene() {
     }
 
     Logger::info("Rendering done.");
-    reporter.finish();
+    const auto renderTime = reporter.finish();
+    writeImageMetadata(renderTime);
 }
 
 void Renderer::renderParallel(ProgressReporter &reporter,
@@ -108,6 +110,15 @@ Color Renderer::renderSample(float x, float y) {
     Ray ray = cameraModel->createPrimaryRay(x, y);
     return integrator->integrate(ray, 0);
 
+}
+void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
+    ImageMetadataCollector imageMetadataCollector;
+    imageMetadataCollector.renderTime = renderTime;
+    imageMetadataCollector.renderSettings = scene.renderSettings;
+
+    ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
+
+    outputDriver.writeImageMetadata(imageMetadata);
 }
 
 }
