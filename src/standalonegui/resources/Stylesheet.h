@@ -8,7 +8,7 @@ THIS FILE IS GENERATED, DO NOT EDIT DIRECTLY!
 
 const char * STYLESHEET = R"(
 QWidget {
-  font: 10pt Arial;
+  font: 9pt Arial;
   color: #e3e3e3;
   background: #383838;
   selection-background-color: #547ebd; }
@@ -70,13 +70,13 @@ QPushButton {
   border-top-right-radius: 4px;
   padding: 3px; }
 
-QPushButton::pressed, QToolButton::pressed {
+QPushButton:pressed, QToolButton:pressed {
   background-color: #547ebd; }
 
-QPushButton::hover, QToolButton::hover {
+QPushButton:hover, QToolButton:hover {
   background-color: #547ebd; }
 
-QPushButton::disabled, QToolButton::disabled {
+QPushButton:disabled, QToolButton:disabled {
   background-color: #7a7a7a; }
 
 )";
