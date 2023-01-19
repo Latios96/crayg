@@ -11,6 +11,7 @@ class ImageWidgetOutputDriver : public OutputDriver {
     explicit ImageWidgetOutputDriver(ImageWidget &imageWidget);
     void prepareBucket(const ImageBucket &imageBucket) override;
     void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) override;
+    void writeImageMetadata(const ImageMetadata &imageMetadata) override;
  private:
     ImageWidget &imageWidget;
 };

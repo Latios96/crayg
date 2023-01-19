@@ -62,6 +62,9 @@ void ImageWidgetOutputDriver::writeBucketImageBuffer(const BucketImageBuffer &bu
     }
     imageWidget.update();
 }
+void ImageWidgetOutputDriver::writeImageMetadata(const ImageMetadata &imageMetadata) {
+
+}
 
 }
 

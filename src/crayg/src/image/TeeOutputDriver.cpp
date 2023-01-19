@@ -11,5 +11,9 @@ void TeeOutputDriver::writeBucketImageBuffer(const BucketImageBuffer &bucketImag
     right.writeBucketImageBuffer(bucketImageBuffer);
 }
 TeeOutputDriver::TeeOutputDriver(OutputDriver &left, OutputDriver &right) : left(left), right(right) {}
+void TeeOutputDriver::writeImageMetadata(const ImageMetadata &imageMetadata) {
+    left.writeImageMetadata(imageMetadata);
+    right.writeImageMetadata(imageMetadata);
+}
 
 }

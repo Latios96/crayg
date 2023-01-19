@@ -10,6 +10,7 @@ class TeeOutputDriver : public OutputDriver {
     TeeOutputDriver(OutputDriver &left, OutputDriver &right);
     void prepareBucket(const ImageBucket &imageBucket) override;
     void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) override;
+    void writeImageMetadata(const ImageMetadata &imageMetadata) override;
  private:
     OutputDriver &left;
     OutputDriver &right;

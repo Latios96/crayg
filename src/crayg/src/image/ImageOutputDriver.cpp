@@ -1,5 +1,6 @@
 #include "ImageOutputDriver.h"
 #include "ImageAlgorithms.h"
+#include "ImageMetadata.h"
 
 namespace crayg {
 
@@ -10,6 +11,10 @@ void ImageOutputDriver::writeBucketImageBuffer(const BucketImageBuffer &bucketIm
     ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
 }
 ImageOutputDriver::ImageOutputDriver(Image &image) : image(image) {}
+
+void ImageOutputDriver::writeImageMetadata(const ImageMetadata &imageMetadata) {
+    image.metadata = imageMetadata;
+}
 ImageOutputDriver::~ImageOutputDriver() = default;
 
 }

@@ -5,6 +5,7 @@
 #include <basics/Resolution.h>
 #include "basics/Color.h"
 #include "basics/Vector3f.h"
+#include "ImageMetadata.h"
 
 namespace crayg {
 
@@ -42,6 +43,8 @@ class Image {
 
     Resolution getResolution() const;
     void init(int width, int height);
+
+    ImageMetadata metadata;
 };
 
 struct PixelPosition {

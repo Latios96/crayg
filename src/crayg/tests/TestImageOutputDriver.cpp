@@ -18,6 +18,15 @@ TEST_CASE("ImageOutputDriver") {
 
         REQUIRE(image.getValue(10, 10) == Color::createWhite());
     }
+
+    SECTION("should write metadata") {
+        ImageMetadata imageMetadata;
+        imageMetadata.write("testValue",42);
+
+        imageOutputDriver.writeImageMetadata(imageMetadata);
+
+        REQUIRE(image.metadata == imageMetadata);
+    }
 }
 
 }

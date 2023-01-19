@@ -10,6 +10,7 @@ class ImageOutputDriver : public OutputDriver {
     ImageOutputDriver(Image &image);
     void prepareBucket(const ImageBucket &imageBucket) override;
     void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) override;
+    void writeImageMetadata(const ImageMetadata &imageMetadata) override;
     ~ImageOutputDriver() override;
  private:
     Image &image;

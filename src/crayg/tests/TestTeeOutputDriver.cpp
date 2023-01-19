@@ -9,9 +9,11 @@ TEST_CASE("TeeOutputDriver should forward methods") {
     fakeit::Mock<OutputDriver> mockLeft;
     fakeit::When(Method(mockLeft, prepareBucket)).AlwaysReturn();
     fakeit::When(Method(mockLeft, writeBucketImageBuffer)).AlwaysReturn();
+    fakeit::When(Method(mockLeft, writeImageMetadata)).AlwaysReturn();
     fakeit::Mock<OutputDriver> mockRight;
     fakeit::When(Method(mockRight, prepareBucket)).AlwaysReturn();
     fakeit::When(Method(mockRight, writeBucketImageBuffer)).AlwaysReturn();
+    fakeit::When(Method(mockRight, writeImageMetadata)).AlwaysReturn();
     TeeOutputDriver teeOutputDriver(mockLeft.get(), mockRight.get());
 
     SECTION("should forward prepareBucket") {
@@ -26,6 +28,13 @@ TEST_CASE("TeeOutputDriver should forward methods") {
 
         fakeit::Verify(Method(mockLeft, writeBucketImageBuffer)).Once();
         fakeit::Verify(Method(mockRight, writeBucketImageBuffer)).Once();
+    }
+
+    SECTION("should forward writeImageMetadata") {
+        teeOutputDriver.writeImageMetadata(ImageMetadata());
+
+        fakeit::Verify(Method(mockLeft, writeImageMetadata)).Once();
+        fakeit::Verify(Method(mockRight, writeImageMetadata)).Once();
     }
 }
 
