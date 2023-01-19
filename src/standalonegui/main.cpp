@@ -1,6 +1,7 @@
 #include "QtBase.h"
 #include <QtWidgets/qapplication.h>
 #include "widgets/FrameBufferWidget.h"
+#include "widgets/QtMetaTypes.h"
 
 #include <scene/Scene.h>
 #include <image/ImageWriter.h>
@@ -22,6 +23,8 @@ int main(int argc, char **argv) {
     try {
         QApplication a(argc, argv);
         a.setStyleSheet(STYLESHEET);
+
+        registerQMetaTypes();
 
         crayg::CliParser cliParser("standalone-gui", argc, argv);
         crayg::CliParseResult parseResult = cliParser.parse();
@@ -56,6 +59,8 @@ int main(int argc, char **argv) {
         crayg::ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
         crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
         frameBufferWidget.show();
+
+        QObject::connect(&imageWidgetOutputDriver.imageMetadataChanger, &crayg::ImageMetadataChanger::changed, &frameBufferWidget, &crayg::FrameBufferWidget::setImageMetadata);
 
         crayg::Image image(scene.renderSettings.resolution);
         crayg::ImageOutputDriver imageOutputDriver(image);

@@ -1,4 +1,6 @@
 #include "FrameBufferWidget.h"
+#include <QStyle>
+#include <QTreeView>
 
 namespace crayg {
 
@@ -6,9 +8,23 @@ void FrameBufferWidget::setupUI() {
     this->panAndZoomArea = new PanAndZoomArea();
     this->panAndZoomArea->setWidget(&imageWidget);
     QObject::connect(panAndZoomArea, &PanAndZoomArea::zoomFactorChanged, this, &FrameBufferWidget::setZoomFactor);
-    auto layout = new QVBoxLayout();
-    layout->addWidget(this->panAndZoomArea);
-    this->setLayout(layout);
+
+    auto overallLayout = new QHBoxLayout();
+
+    auto middleLayout = new QVBoxLayout();
+    overallLayout->addLayout(middleLayout);
+    middleLayout->addWidget(this->panAndZoomArea);
+
+    auto metadataButtonLayout = new QHBoxLayout();
+    metadataButtonLayout->addStretch();
+    metadataButton = new QPushButton();
+    const QIcon icon = this->style()->standardIcon(QStyle::SP_FileDialogDetailedView);
+    metadataButton->setIcon(icon);
+    metadataButton->setFixedSize(QSize(20,20));
+    metadataButtonLayout->addWidget(metadataButton, Qt::AlignRight);
+    middleLayout->addLayout(metadataButtonLayout);
+
+    this->setLayout(overallLayout);
 
     setZoomFactor(ZoomFactor());
 
@@ -27,6 +43,9 @@ void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
                                           this->panAndZoomArea->getOriginalSize().width(),
                                           this->panAndZoomArea->getOriginalSize().height());
     this->setWindowTitle(QString::fromStdString(title));
+}
+void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
+    Logger::info("{}", imageMetadata);
 }
 
 }

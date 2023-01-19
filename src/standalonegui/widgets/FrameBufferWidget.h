@@ -11,23 +11,26 @@
 #include <iostream>
 #include "ImageWidget.h"
 #include "PanAndZoomArea.h"
+#include "image/ImageMetadata.h"
 
 namespace crayg {
 
 class FrameBufferWidget : public QWidget {
  Q_OBJECT
  public:
-    explicit FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr)
+    FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr)
         : QWidget(parent), imageWidget(imageWidget) {
         setupUI();
     }
     ~FrameBufferWidget() override = default;
  public slots:
     void setZoomFactor(ZoomFactor zoomFactor);
+    void setImageMetadata(ImageMetadata imageMetadata);
  private:
     void setupUI();
     ImageWidget &imageWidget;
     PanAndZoomArea *panAndZoomArea;
+    QPushButton *metadataButton;
 };
 
 }
