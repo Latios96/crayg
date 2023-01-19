@@ -1,6 +1,6 @@
 import os
 
-from scss import Scss
+import sass
 
 HEADER_TEMPLATE = """
 #ifndef CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
@@ -25,8 +25,7 @@ def main():
     with open(source_path) as f:
         source = f.read()
 
-    css = Scss()
-    compiled = css.compile(source)
+    compiled = sass.compile(string=source)
 
     header = HEADER_TEMPLATE.format(compiled)
     with open(target_path, "w") as f:
