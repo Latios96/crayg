@@ -26,6 +26,9 @@ class ImageMetadataTokens {
 
 class ImageMetadata {
  public:
+    ImageMetadata() = default;
+    ImageMetadata(const ImageMetadata &imageMetadata): values(imageMetadata.values){}
+    ~ImageMetadata() = default;
     template<typename T>
     void write(const std::string &name, const T &value) {
         values[name] = value;
