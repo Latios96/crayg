@@ -32,6 +32,7 @@ set(UNIT_TEST_LIST
         TestImageAlgorithms.cpp
         TestImageBucketIterator.cpp
         TestImageIterators.cpp
+        TestImageMetadata.cpp
         TestImageOutputDriver.cpp
         TestImagePathResolver.cpp
         TestImageWriters.cpp

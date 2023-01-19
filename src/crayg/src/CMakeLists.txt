@@ -31,6 +31,8 @@ set(crayg_SRCS
         image/ImageBucketSequences.cpp
         image/ImageBucketSequences.h
         image/ImageIterators.h
+        image/ImageMetadata.cpp
+        image/ImageMetadata.h
         image/ImageOutputDriver.cpp
         image/ImageOutputDriver.h
         image/ImageWriter.h
