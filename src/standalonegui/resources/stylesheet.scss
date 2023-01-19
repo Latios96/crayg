@@ -78,3 +78,23 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal,
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   @include transparentBackground;
 }
+
+QPushButton{
+  background-color: $backgroundColor;
+
+  @include rounded;
+
+  padding: 3px;
+}
+
+QPushButton:pressed, QToolButton:pressed  {
+  background-color: $backgroundColorSelected;
+}
+
+QPushButton:hover, QToolButton:hover  {
+  background-color: $backgroundColorSelected;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+  background-color: $disabled
+}

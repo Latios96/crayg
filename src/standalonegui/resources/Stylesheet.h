@@ -62,6 +62,23 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal,
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   background: transparent; }
 
+QPushButton {
+  background-color: #383838;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 3px; }
+
+QPushButton::pressed, QToolButton::pressed {
+  background-color: #547ebd; }
+
+QPushButton::hover, QToolButton::hover {
+  background-color: #547ebd; }
+
+QPushButton::disabled, QToolButton::disabled {
+  background-color: #7a7a7a; }
+
 )";
 
 #endif //CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
