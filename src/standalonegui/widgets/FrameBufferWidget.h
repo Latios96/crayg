@@ -9,6 +9,7 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <iostream>
+#include <QTreeWidget>
 #include "ImageWidget.h"
 #include "PanAndZoomArea.h"
 #include "image/ImageMetadata.h"
@@ -31,6 +32,7 @@ class FrameBufferWidget : public QWidget {
     ImageWidget &imageWidget;
     PanAndZoomArea *panAndZoomArea;
     QPushButton *metadataButton;
+    QTreeWidget *imageMetadataWidget;
 };
 
 }
