@@ -25,8 +25,13 @@ void FrameBufferWidget::setupUI() {
     middleLayout->addLayout(metadataButtonLayout);
 
     imageMetadataWidget = new QTreeWidget(this);
+    imageMetadataWidget->hide();
     imageMetadataWidget->setHeaderHidden(true);
+    imageMetadataWidget->setColumnCount(2);
     overallLayout->addWidget(imageMetadataWidget);
+    QObject::connect(metadataButton, &QPushButton::clicked, [=](bool checked){
+        imageMetadataWidget->setHidden(!imageMetadataWidget->isHidden());
+    });
 
     this->setLayout(overallLayout);
 
