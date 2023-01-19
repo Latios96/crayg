@@ -17,7 +17,7 @@ class ProgressReporter {
 
     void iterationDone();
 
-    void finish();
+    std::chrono::seconds finish();
 
     std::atomic<int> iterationsDone = {0};
  private:

@@ -40,12 +40,13 @@ void ProgressReporter::iterationDone() {
         }
     }
 }
-void ProgressReporter::finish() {
+std::chrono::seconds ProgressReporter::finish() {
     ReadableFormatter readableFormatter;
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(end - startTime);
 
     Logger::info("Rendering took {}.", readableFormatter.formatDuration(seconds));
+    return seconds;
 }
 
 }
