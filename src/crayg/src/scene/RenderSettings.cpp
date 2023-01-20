@@ -25,7 +25,7 @@ RenderSettings::RenderSettings(const RenderSettings &renderSettings)
 bool RenderSettings::operator==(const RenderSettings &rhs) const {
     return resolution == rhs.resolution &&
         maxSamples == rhs.maxSamples && integratorType == rhs.integratorType
-        && integratorSettings == rhs.integratorSettings;
+        && integratorSettings == rhs.integratorSettings && intersectorType == rhs.intersectorType;
 }
 bool RenderSettings::operator!=(const RenderSettings &rhs) const {
     return !(rhs == *this);
