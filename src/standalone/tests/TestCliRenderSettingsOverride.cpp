@@ -14,13 +14,22 @@ TEST_CASE("CliRenderSettingsOverride::hasAnyOverrides") {
     CliRenderSettingsOverride onlyMaxSamples;
     onlyMaxSamples.maxSamples = 8;
 
-    SECTION("has overrides") {
+    CliRenderSettingsOverride onlyIntegrator;
+    onlyIntegrator.integratorType = IntegratorType::DEBUG;
 
+    CliRenderSettingsOverride onlyIntersector;
+    onlyIntersector.intersectorType = IntersectorType::EMBREE;
+
+    SECTION("has overrides") {
         REQUIRE(fullOverrides.hasAnyOverrides());
 
         REQUIRE(onlyResolution.hasAnyOverrides());
 
         REQUIRE(onlyMaxSamples.hasAnyOverrides());
+
+        REQUIRE(onlyIntegrator.hasAnyOverrides());
+
+        REQUIRE(onlyIntersector.hasAnyOverrides());
     }
 
     SECTION("has no overrides") {

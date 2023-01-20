@@ -22,7 +22,7 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
 }
 
 bool CliRenderSettingsOverride::hasAnyOverrides() const {
-    return resolution || maxSamples || integratorType;
+    return resolution || maxSamples || integratorType || intersectorType;
 }
 
 std::string CliRenderSettingsOverride::reportOverrides() const {
