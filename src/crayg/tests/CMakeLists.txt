@@ -25,6 +25,8 @@ set(UNIT_TEST_LIST
         TestGradient.cpp
         TestDebugIntegrator.cpp
         TestDiskLight.cpp
+        TestEmbreeBvhBuilder.cpp
+        TestEmbreeSceneIntersector.cpp
         TestEmbreeUtils.cpp
         TestFileSystemUtils.cpp
         TestGroundPlane.cpp
