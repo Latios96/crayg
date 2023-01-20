@@ -167,7 +167,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
                                                        4,
                                                        IntegratorType::RAYTRACING,
                                                        IntegratorSettings(),
-                                                       IntersectorType::NAIVE_BVH));
+                                                       IntersectorType::EMBREE));
     }
 
     SECTION("should read rendersettings if defined") {
@@ -181,7 +181,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
                                                        2,
                                                        IntegratorType::RAYTRACING,
                                                        IntegratorSettings(),
-                                                       IntersectorType::NAIVE_BVH));
+                                                       IntersectorType::EMBREE));
     }
 
     SECTION("providing a cameraName in translationOptions should use this camera") {

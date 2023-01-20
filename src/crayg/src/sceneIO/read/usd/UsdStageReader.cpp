@@ -97,7 +97,7 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
                                               4,
                                               IntegratorType::RAYTRACING,
                                               IntegratorSettings(),
-                                              IntersectorType::NAIVE_BVH);
+                                              IntersectorType::EMBREE);
         return;
     }
     for (pxr::UsdPrim prim: renderPrim.GetDescendants()) {
@@ -110,7 +110,7 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
                                           4,
                                           IntegratorType::RAYTRACING,
                                           IntegratorSettings(),
-                                          IntersectorType::NAIVE_BVH);
+                                          IntersectorType::EMBREE);
 }
 
 }

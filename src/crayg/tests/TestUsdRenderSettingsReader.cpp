@@ -37,7 +37,7 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720),
                                                   4,
                                                   IntegratorType::RAYTRACING,
-                                                  IntegratorSettings(), IntersectorType::NAIVE_BVH));
+                                                  IntegratorSettings(), IntersectorType::EMBREE));
     }
 
     SECTION("should parse rendersettings case insensitive") {
@@ -49,7 +49,7 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720),
                                                   4,
                                                   IntegratorType::DEBUG,
-                                                  IntegratorSettings(), IntersectorType::NAIVE_BVH));
+                                                  IntegratorSettings(), IntersectorType::EMBREE));
     }
 
 }

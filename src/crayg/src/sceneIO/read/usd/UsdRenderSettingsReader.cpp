@@ -104,7 +104,7 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
 }
 
 IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
-    return readEnumValue<IntersectorType>(usdPrim, "intersectorType", IntersectorType::NAIVE_BVH);
+    return readEnumValue<IntersectorType>(usdPrim, "intersectorType", IntersectorType::EMBREE);
 }
 
 }

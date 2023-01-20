@@ -37,7 +37,7 @@ class RenderSettings {
     int maxSamples;
     IntegratorType integratorType = IntegratorType::RAYTRACING;
     IntegratorSettings integratorSettings;
-    IntersectorType intersectorType = IntersectorType::NAIVE_BVH;
+    IntersectorType intersectorType = IntersectorType::EMBREE;
 };
 
 }
