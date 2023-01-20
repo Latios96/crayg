@@ -20,12 +20,12 @@ TEST_CASE("Transform Construction", "[Transform]") {
     SECTION("should create with rotation") {
         Transform transform = Transform::withRotation(10, 20, 30);
 
-        Transform expectedTransform = Transform(Matrix4x4f(0.81, -0.46, 0.34, 0,
-                                                           0.54, 0.83, -0.16, 0,
-                                                           -0.20, 0.31, 0.925, 0,
-                                                           0, 0, 0, 1));
+        Transform expectedTransform = Transform(Matrix4x4f(0.81f, -0.46f, 0.34f, 0.f,
+                                                           0.54f, 0.83f, -0.16f, 0.f,
+                                                           -0.20f, 0.31f, 0.925f, 0.f,
+                                                           0.f, 0.f, 0.f, 1.f));
 
-        REQUIRE(transform.matrix.isEqualTo(expectedTransform.matrix, 0.01));
+        REQUIRE(transform.matrix.isEqualTo(expectedTransform.matrix, 0.01f));
     }
 
     SECTION("should create with scale") {

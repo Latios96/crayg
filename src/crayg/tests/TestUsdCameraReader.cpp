@@ -22,9 +22,9 @@ TEST_CASE("CameraReader::read") {
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
 
-        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1, 2, -3}),
-                                                              35,
-                                                              36);
+        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}),
+                                                              35.f,
+                                                              36.f);
         REQUIRE(*camera == *expectedCamera);
     }
 
@@ -48,9 +48,9 @@ TEST_CASE("CameraReader::read") {
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
 
-        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1, 2, -3}),
-                                                              35,
-                                                              36);
+        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}),
+                                                              35.f,
+                                                              36.f);
         REQUIRE(*camera == *expectedCamera);
     }
 

@@ -128,9 +128,9 @@ TEST_CASE("Matrix4x4f equality", "[Matrix4x4f]") {
 
     SECTION("should not be equal to") {
         Matrix4x4f m1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-        Matrix4x4f m2(1.1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+        Matrix4x4f m2(1.1f, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
-        REQUIRE_FALSE(m1.isEqualTo(m2, 0.05));
+        REQUIRE_FALSE(m1.isEqualTo(m2, 0.05f));
     }
 }
 
@@ -170,8 +170,8 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
                           0, 0, 0, 0,
                           0, 0, 0, 1);
 
-        Matrix4x4f expectedInverse = Matrix4x4f(0.4f, 0.2, 0, 0,
-                                                -0.2, 0.4, 0, 0,
+        Matrix4x4f expectedInverse = Matrix4x4f(0.4f, 0.2f, 0, 0,
+                                                -0.2f, 0.4f, 0, 0,
                                                 0, 0, 0, 0,
                                                 0, 0, 0, 1);
 
@@ -184,9 +184,9 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
                           0, 0, 4, 7,
                           0, 0, 0, 1);
 
-        Matrix4x4f expectedInverse = Matrix4x4f(0.4f, 0.2, 0, -3.2,
-                                                -0.2, 0.4, 0, -1.4,
-                                                0, 0, 0.25f, -1.75,
+        Matrix4x4f expectedInverse = Matrix4x4f(0.4f, 0.2f, 0, -3.2f,
+                                                -0.2f, 0.4f, 0, -1.4f,
+                                                0, 0, 0.25f, -1.75f,
                                                 0, 0, 0, 1);
 
         REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
@@ -203,7 +203,7 @@ TEST_CASE("Matrix4x4 factory methods", "[Matrix4x4f]") {
                                   0, 1, 0, 0,
                                   0, 0, 0, 1);
 
-        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001));
+        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001f));
     }
 
     SECTION("rotate y") {
@@ -213,7 +213,7 @@ TEST_CASE("Matrix4x4 factory methods", "[Matrix4x4f]") {
                                   -1, 0, 0, 0,
                                   0, 0, 0, 1);
 
-        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001));
+        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001f));
     }
 
     SECTION("rotate z") {
@@ -223,7 +223,7 @@ TEST_CASE("Matrix4x4 factory methods", "[Matrix4x4f]") {
                                   0, 0, 1, 0,
                                   0, 0, 0, 1);
 
-        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001));
+        REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001f));
     }
 
     SECTION("construct from translation") {

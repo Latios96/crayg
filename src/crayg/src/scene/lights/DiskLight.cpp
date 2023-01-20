@@ -6,7 +6,7 @@ namespace crayg {
 
 Vector3f DiskLight::sampleLightShape() const {
     float r = radius * sqrt(Random::random());
-    float theta = Random::random() * 2 * boost::math::constants::pi<double>();
+    float theta = Random::random() * 2 * boost::math::constants::pi<float>();
     Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
     return getTransform().apply(positionOnPlane);
 }

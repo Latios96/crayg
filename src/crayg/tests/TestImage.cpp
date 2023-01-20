@@ -26,7 +26,7 @@ TEST_CASE("Image/copyImage", "[Image]") {
 
     for (int x = 0; x < myImage.getWidth(); x++) {
         for (int y = 0; y < myImage.getHeight(); y++) {
-            myImage.setValue(x, y, x * y, x * y, x * y);
+            myImage.setValue(x, y, Color::createGrey(static_cast<float>(x) * static_cast<float>(y)));
         }
     }
 

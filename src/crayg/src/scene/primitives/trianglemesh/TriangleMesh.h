@@ -18,11 +18,11 @@ class TriangleMesh : public SceneObject {
     BoundingBox getBounds() const override;
     Vector3f getNormal(Vector3f point) override;
     void getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const override;
-    int primitiveCount() const override;
+    std::size_t primitiveCount() const override;
     friend class Triangle;
     void init();
     std::string getType() override;
-    int faceCount() const;
+    std::size_t faceCount() const;
 
     template<typename T>
     T *addNormalsPrimVar();

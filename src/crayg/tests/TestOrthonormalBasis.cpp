@@ -9,9 +9,9 @@ TEST_CASE("OrthonormalBasis::construct") {
     SECTION("should construct an OrthonormalBasis correctly from single vector") {
         auto testData = GENERATE(table<Vector3f, OrthonormalBasis>({{{0, 1, 0}, {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}},
                                                                     {Vector3f({1, 1, 0}).normalize(),
-                                                                     {{0.70710677, -0.70710677, 0},
-                                                                      {0.70710677, 0.70710677, 0},
-                                                                      {0, 0, 0.99999994}}}}));
+                                                                     {{0.70710677f, -0.70710677f, 0},
+                                                                      {0.70710677f, 0.70710677f, 0},
+                                                                      {0, 0, 0.99999994f}}}}));
 
         const auto orthonormalBasis = OrthonormalBasis((std::get<0>(testData)));
 

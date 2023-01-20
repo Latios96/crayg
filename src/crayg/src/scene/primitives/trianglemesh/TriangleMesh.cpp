@@ -107,7 +107,7 @@ std::string TriangleMesh::getType() {
 }
 TriangleMesh::TriangleMesh() : normalsPrimVar(nullptr) {
 }
-int TriangleMesh::faceCount() const {
+std::size_t TriangleMesh::faceCount() const {
     return faceVertexIndices.size();
 }
 
@@ -154,7 +154,7 @@ void TriangleMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwnin
 
     *isOwning = true;
 }
-int TriangleMesh::primitiveCount() const {
+std::size_t TriangleMesh::primitiveCount() const {
     return faceCount();
 }
 

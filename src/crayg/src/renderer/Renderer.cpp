@@ -30,7 +30,7 @@ void Renderer::renderScene() {
 
     std::vector<ImageBucket>
         bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, bucketSize);
-    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(bucketSequence.size(),
+    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()),
                                                                                 "Rendering done by {}%, estimated time remaining: {}");
 
     bool serialRendering = false;

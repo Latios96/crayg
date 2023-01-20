@@ -223,7 +223,7 @@ TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
         auto material = usdMaterialReadCache.getCachedReadPrimMaterial(geo);
 
         REQUIRE(material->getName() == "/material");
-        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color(0.18, 0.18, 0.18));
+        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color(0.18f, 0.18f, 0.18f));
     }
 
 }

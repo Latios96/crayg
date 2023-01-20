@@ -8,7 +8,7 @@ std::vector<char*> argv_vector;\
 for (const auto& arg : vector_name){\
     argv_vector.push_back((char*)arg.data());\
 }\
-int argc = argv_vector.size(); \
+int argc = static_cast<int>(argv_vector.size()); \
 char ** argv = argv_vector.data();
 
 void assertHasError(const std::vector<std::string> &arguments) {

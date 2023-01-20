@@ -31,7 +31,7 @@ void ProgressReporter::iterationDone() {
 
     iterationsDone++;
 
-    int newProgress = (int) ((float) iterationsDone) / ((float) maxIterations) * 100;
+    int newProgress = static_cast<int>(static_cast<float>(iterationsDone) / (static_cast<float>(maxIterations)) * 100);
     if (newProgress > progress) {
         progress = newProgress;
         if (progress % 10 == 0) {

@@ -29,7 +29,7 @@ struct NaiveBvh {
     NaiveBvh(std::unique_ptr<NaiveBvhNode> root);
     std::unique_ptr<NaiveBvhNode> root;
     std::vector<Imageable *> objects;
-    std::vector<int> objectsToFree;
+    std::vector<size_t> objectsToFree;
     virtual ~NaiveBvh();
 };
 

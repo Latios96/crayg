@@ -9,7 +9,7 @@ std::string ReadableFormatter::formatDuration(std::chrono::seconds seconds) {
 
     int hoursCount = hours.count();
     int minutesCount = minutes.count();
-    int secondsCount = seconds.count();
+    std::size_t secondsCount = seconds.count();
 
     std::string result;
 

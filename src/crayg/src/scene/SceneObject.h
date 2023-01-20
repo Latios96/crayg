@@ -18,7 +18,7 @@ class SceneObject : public Imageable,
     void setName(const std::string &name);
     virtual std::string getType() = 0;
     virtual void getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const;
-    virtual int primitiveCount() const;
+    virtual std::size_t primitiveCount() const;
  private:
     std::string name;
 };

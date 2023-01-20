@@ -93,7 +93,7 @@ std::unique_ptr<NaiveBvh> NaiveBvhBuilder::build() const {
 void NaiveBvhBuilder::collectPrimitives(NaiveBvh &bvh) const {
     InformativeScopedStopWatch collectingPrimitives("Collecting primitives");
 
-    int primitiveCount = collectPrimitiveCount();
+    std::size_t primitiveCount = collectPrimitiveCount();
     Logger::info("Primitives in scene: {:L}", primitiveCount);
 
     bvh.objects.reserve(primitiveCount);
@@ -107,8 +107,8 @@ void NaiveBvhBuilder::collectPrimitives(NaiveBvh &bvh) const {
         }
     }
 }
-int NaiveBvhBuilder::collectPrimitiveCount() const {
-    int primitiveCount = 0;
+std::size_t NaiveBvhBuilder::collectPrimitiveCount() const {
+    std::size_t primitiveCount = 0;
     InformativeScopedStopWatch collectingPrimitiveCount("Collecting primitive count");
     for (auto &obj: scene.objects) {
         primitiveCount += obj->primitiveCount();

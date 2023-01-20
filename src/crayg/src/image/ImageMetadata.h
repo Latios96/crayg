@@ -92,6 +92,7 @@ struct fmt::formatter<crayg::ImageMetadataValue> {
         } else if (std::holds_alternative<std::chrono::seconds>(imageMetadataValue)) {
             return fmt::format_to(ctx.out(), "{}s", std::get<std::chrono::seconds>(imageMetadataValue).count());
         }
+        throw std::runtime_error(fmt::format("Unsupported type with index {} in ImageMetadataValue", imageMetadataValue.index()));
     };
 };
 

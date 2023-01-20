@@ -47,7 +47,7 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
 Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
                                                  const Vector3f &location,
                                                  const Vector3f &normal) {
-    auto lightRadiance = light->radiance(location + (normal * 0.001), normal);
+    auto lightRadiance = light->radiance(location + (normal * 0.001f), normal);
     if (lightRadiance.radiance == Color::createBlack()) {
         return Color::createBlack();
     }

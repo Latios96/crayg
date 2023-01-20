@@ -42,7 +42,7 @@ TEST_CASE("RectLight::sampleLightShape") {
         areaLightFixture.areaLight->setHeight(5);
         const Transform transform =
             Transform(Transform::withPosition(areaLightFixture.position).matrix
-                          * Transform::withScale(1. / 5, 1. / 5, 1. / 5).matrix);
+                          * Transform::withScale(1.f / 5, 1.f / 5, 1.f / 5).matrix);
         areaLightFixture.areaLight->setTransform(transform);
         const float realWidth = 1;
         const float realHeight = 1;

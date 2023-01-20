@@ -26,7 +26,7 @@ TEST_CASE("TriangleMesh::faceCount") {
     TriangleMesh::createCube(cube);
 
     SECTION("should return correct face count for cube") {
-        int faceCount = cube.faceCount();
+        std::size_t faceCount = cube.faceCount();
 
         REQUIRE(faceCount == 12);
     }
@@ -36,23 +36,23 @@ TEST_CASE("TriangleMesh::getBounds") {
 
     SECTION("bounds should be calculated corretly") {
         TriangleMesh triangleMesh;
-        triangleMesh.points.emplace_back(0, 0, 0);
-        triangleMesh.points.emplace_back(0, 1, 0);
-        triangleMesh.points.emplace_back(1, 0, 0);
+        triangleMesh.points.emplace_back(0.f, 0.f, 0.f);
+        triangleMesh.points.emplace_back(0.f, 1.f, 0.f);
+        triangleMesh.points.emplace_back(1.f, 0.f, 0.f);
         triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
         triangleMesh.init();
 
         const BoundingBox boundingBox = triangleMesh.getBounds();
 
-        REQUIRE(boundingBox == BoundingBox({0, 0, 0}, {1, 1, 0}));
+        REQUIRE(boundingBox == BoundingBox({0.f, 0.f, 0.f}, {1.f, 1.f, 0.f}));
     }
 }
 
 TEST_CASE("TriangleMesh::init") {
     TriangleMesh triangleMesh;
-    triangleMesh.points.emplace_back(0, 0, 0);
-    triangleMesh.points.emplace_back(0, 1, 0);
-    triangleMesh.points.emplace_back(1, 0, 0);
+    triangleMesh.points.emplace_back(0.f, 0.f, 0.f);
+    triangleMesh.points.emplace_back(0.f, 1.f, 0.f);
+    triangleMesh.points.emplace_back(1.f, 0.f, 0.f);
     triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
 
     SECTION("not providing normals primvar should auto generate normals") {
@@ -66,11 +66,11 @@ TEST_CASE("TriangleMesh::init") {
 
     SECTION("providing normals primvar should use them") {
         auto normalsPrimVar = triangleMesh.addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
-        normalsPrimVar->write(0, Vector3f(1, 0, 0));
+        normalsPrimVar->write(0, Vector3f(1.f, 0.f, 0.f));
         triangleMesh.init();
 
         REQUIRE(triangleMesh.normalsPrimVar != nullptr);
-        REQUIRE(normalsPrimVar->read(0) == Vector3f(1, 0, 0));
+        REQUIRE(normalsPrimVar->read(0) == Vector3f(1.f, 0.f, 0.f));
     }
 }
 

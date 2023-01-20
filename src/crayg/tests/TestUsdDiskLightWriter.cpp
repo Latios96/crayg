@@ -15,7 +15,7 @@ TEST_CASE("UsdDiskLightWriter::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write disk light") {
-        auto diskLight = std::make_shared<DiskLight>(Transform::withPosition({1, 2, -3}), 3, 4);
+        auto diskLight = std::make_shared<DiskLight>(Transform::withPosition({1, 2, -3}), 3.f, 4.f);
         diskLight->setColor({1, 0, 0});
 
         UsdDiskLightWriter usdDiskLightWriter(diskLight);

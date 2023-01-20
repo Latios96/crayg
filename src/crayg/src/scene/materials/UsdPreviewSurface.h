@@ -11,7 +11,7 @@ class UsdPreviewSurface : public Material {
     Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) override;
     std::string getType() override;
 
-    Color diffuseColor = Color::createGrey(0.18);
+    Color diffuseColor = Color::createGrey(0.18f);
     Color emissiveColor = Color::createBlack();
     bool useSpecularWorkflow = false;
     Color specularColor = Color::createBlack();
