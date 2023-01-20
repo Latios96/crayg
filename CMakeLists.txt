@@ -30,10 +30,17 @@ endif ()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
+set(CMAKE_BUILD_TYPE_FOR_CONAN Release)
+if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
+    set(CMAKE_BUILD_TYPE_FOR_CONAN Debug)
+endif()
+message(STATUS "Using BUILD_TYPE=${CMAKE_BUILD_TYPE_FOR_CONAN} for Conan dependencies")
+
 conan_cmake_run(CONANFILE conanfile.txt
         BASIC_SETUP
         BUILD missing
-        KEEP_RPATHS)
+        KEEP_RPATHS
+        BUILD_TYPE ${CMAKE_BUILD_TYPE_FOR_CONAN})
 
 # for some reasons we can not link against this under Ubuntu-20.04
 list(REMOVE_ITEM CONAN_LIBS "Qt5XcbQpa")
