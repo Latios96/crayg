@@ -35,7 +35,7 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
 
             rtcCommitGeometry(mesh);
             unsigned int geomId = rtcAttachGeometry(rtcScene, mesh);
-            embreeBvh->geomIdToSceneObject[geomId] = std::make_pair(i, EmbreePrimitiveType::TRIANGLE);
+            embreeBvh->geomIdToSceneObject[geomId] = std::make_pair(i, EmbreePrimitiveType::TRIANGLE_MESH);
             rtcReleaseGeometry(mesh);
         }
         else if(sceneObject->getType() == "Sphere"){

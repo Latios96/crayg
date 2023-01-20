@@ -7,7 +7,7 @@
 namespace crayg {
 
 enum EmbreePrimitiveType{
-    TRIANGLE,
+    TRIANGLE_MESH,
     SPHERE
 };
 

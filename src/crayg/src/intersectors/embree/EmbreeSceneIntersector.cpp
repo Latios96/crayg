@@ -18,7 +18,7 @@ Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray) const 
     }
 
     const auto sceneObjectMapping = embreeBvh->geomIdToSceneObject[rtcRayHit.hit.geomID];
-    if (sceneObjectMapping.second == EmbreePrimitiveType::TRIANGLE) {
+    if (sceneObjectMapping.second == EmbreePrimitiveType::TRIANGLE_MESH) {
         return mapToTriangle(rtcRayHit, sceneObjectMapping);
     } else if (sceneObjectMapping.second == EmbreePrimitiveType::SPHERE) {
         return mapToSphere(rtcRayHit, sceneObjectMapping);
