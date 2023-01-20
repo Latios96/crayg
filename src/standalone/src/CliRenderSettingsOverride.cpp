@@ -37,7 +37,7 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
         report.push_back(fmt::format(R"(integratorType -> "{}")", *integratorType));
     }
     if (intersectorType) {
-        report.push_back(fmt::format(R"(intersectorType -> "{}")", *integratorType));
+        report.push_back(fmt::format(R"(intersectorType -> "{}")", *intersectorType));
     }
     return boost::algorithm::join(report, ", ");
 }
