@@ -43,7 +43,7 @@ void FrameBufferWidget::setupUI() {
         imageWidget.size().height() > availableSize.height() - 100) {
         resize(availableSize * 3.0f / 5.0f);
     } else {
-        resize(QSize(imageWidget.size().width() + 40, imageWidget.size().height() + 40));
+        resize(QSize(imageWidget.size().width() + 40, imageWidget.size().height() + 40 + metadataButton->size().height()));
     }
 }
 void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
