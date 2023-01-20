@@ -18,8 +18,6 @@ set(crayg_SRCS
         basics/Vector3f.h
         CraygInfo.cpp
         CraygInfo.h
-        image/BmpImageWriter.cpp
-        image/BmpImageWriter.h
         image/BucketImageBuffer.cpp
         image/BucketImageBuffer.h
         image/Image.cpp

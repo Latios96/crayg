@@ -14,7 +14,6 @@ set(UNIT_TEST_LIST
         TestBaseUsdSceneObjectWriter.cpp
         TestBaseUsdTransformableWriter.cpp
         TestBaseUsdXformableReader.cpp
-        TestBmpImageWriter.cpp
         TestBoundingBox.cpp
         TestBucketImageBuffer.cpp
         TestBucketSizeEstimator.cpp

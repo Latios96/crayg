@@ -1,6 +1,5 @@
 #include "ImageWriters.h"
 #include "ImageWriter.h"
-#include "BmpImageWriter.h"
 #include "OpenImageIoImageWriter.h"
 #include <boost/filesystem.hpp>
 #include <fmt/format.h>
@@ -13,9 +12,7 @@ bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) 
     std::string extension = path.extension().string();
     std::unique_ptr<ImageWriter> imageWriter;
 
-    if (extension == ".bmp") {
-        imageWriter = std::unique_ptr<ImageWriter>(new BmpImageWriter());
-    } else if (extension == ".png") {
+    if (extension == ".png") {
         imageWriter = std::unique_ptr<ImageWriter>(new OpenImageIoImageWriter());
     } else if (extension == ".exr") {
         imageWriter = std::unique_ptr<ImageWriter>(new OpenImageIoImageWriter());
