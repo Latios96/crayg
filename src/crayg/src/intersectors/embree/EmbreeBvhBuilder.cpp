@@ -35,8 +35,24 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
 
             rtcCommitGeometry(mesh);
             unsigned int geomId = rtcAttachGeometry(rtcScene, mesh);
-            embreeBvh->geomIdToSceneObject[geomId] = i;
+            embreeBvh->geomIdToSceneObject[geomId] = std::make_pair(i, EmbreePrimitiveType::TRIANGLE);
             rtcReleaseGeometry(mesh);
+        }
+        else if(sceneObject->getType() == "Sphere"){
+            auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
+            RTCGeometry embreeSphere = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_SPHERE_POINT);
+
+            auto embreeSphereBuffer = (float*) rtcSetNewGeometryBuffer(embreeSphere, RTC_BUFFER_TYPE_VERTEX, 0, RTC_FORMAT_FLOAT4,4*sizeof(float), 1);
+            const Vector3f &position = sphere->getPosition();
+            embreeSphereBuffer[0] = position.x;
+            embreeSphereBuffer[1] = position.y;
+            embreeSphereBuffer[2] = position.z;
+            embreeSphereBuffer[3] = sphere->getRadius();
+
+            rtcCommitGeometry(embreeSphere);
+            unsigned int geomId = rtcAttachGeometry(rtcScene, embreeSphere);
+            embreeBvh->geomIdToSceneObject[geomId] = std::make_pair(i, EmbreePrimitiveType::SPHERE);
+            rtcReleaseGeometry(embreeSphere);
         }
     }
 

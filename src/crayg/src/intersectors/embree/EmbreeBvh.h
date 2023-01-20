@@ -6,10 +6,15 @@
 
 namespace crayg {
 
+enum EmbreePrimitiveType{
+    TRIANGLE,
+    SPHERE
+};
+
 struct EmbreeBvh {
     RTCDevice rtcDevice;
     RTCScene rtcScene;
-    std::unordered_map<unsigned int, unsigned int> geomIdToSceneObject;
+    std::unordered_map<unsigned int, std::pair<unsigned int, EmbreePrimitiveType>> geomIdToSceneObject;
     virtual ~EmbreeBvh();
 };
 
