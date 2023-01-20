@@ -8,9 +8,9 @@ namespace crayg {
 
 TEST_CASE("TriangleIntersects") {
 
-    TriangleMesh triangleMesh = TriangleMeshFixtures::createSingleTriangle();
+    auto triangleMesh = TriangleMeshFixtures::createSingleTriangle();
 
-    auto TRIANGLE = std::make_shared<Triangle>(&triangleMesh, 0);
+    auto TRIANGLE = std::make_shared<Triangle>(triangleMesh.get(), 0);
     Ray RAY_HITTING_TRIANGLE({0.25f, 0.25f, -1}, {0, 0, 1});
     Ray RAY_MISSING_TRIANGLE_LEFT({-1, 0.25f, -1}, {0, 0, 1});
     Ray RAY_MISSING_TRIANGLE_TOP({0.25f, 1, -1}, {0, 0, 1});
@@ -58,9 +58,9 @@ TEST_CASE("TriangleIntersects") {
 }
 
 TEST_CASE("TriangleGetBounds") {
-    TriangleMesh triangleMesh = TriangleMeshFixtures::createSingleTriangle();
+    auto triangleMesh = TriangleMeshFixtures::createSingleTriangle();
 
-    Triangle triangle(&triangleMesh, 0);
+    Triangle triangle(triangleMesh.get(), 0);
 
     const BoundingBox boundingBox = triangle.getBounds();
 

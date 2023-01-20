@@ -83,7 +83,9 @@ TEST_CASE("TriangleMesh::faceIds") {
 
         std::vector<std::size_t> expectedIds;
         REQUIRE(ids == expectedIds);
-    }SECTION("should iterate successfully over all face ids of a cube") {
+    }
+
+    SECTION("should iterate successfully over all face ids of a cube") {
         TriangleMesh::createCube(triangleMesh);
         std::vector<std::size_t> ids;
 
@@ -102,7 +104,7 @@ TEST_CASE("TriangleMesh::getPrimitives") {
     std::vector<Imageable *> target;
     bool isOwning = false;
 
-    triangleMesh.getPrimitives(target, &isOwning);
+    triangleMesh->getPrimitives(target, &isOwning);
 
     REQUIRE(target.size() == 4);
     REQUIRE(isOwning == true);

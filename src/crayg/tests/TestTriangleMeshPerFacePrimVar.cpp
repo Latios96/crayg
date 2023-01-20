@@ -7,10 +7,10 @@ namespace crayg {
 
 TEST_CASE("TriangleMeshPerFacePrimVar::interpolateAt")
 {
-    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+    auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     SECTION("should interpolate constant value correctly") {
-        TriangleMeshPerFacePrimVar<Color> primVar(triangleMesh);
+        TriangleMeshPerFacePrimVar<Color> primVar(*triangleMesh);
         primVar.allocate();
         primVar.write(0, Color::createGrey(0.5));
         primVar.write(1, Color::createGrey(0.5));
@@ -25,9 +25,9 @@ TEST_CASE("TriangleMeshPerFacePrimVar::interpolateAt")
 }
 
 TEST_CASE("TriangleMeshPerFacePrimVar::==") {
-    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+    auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
-    TriangleMeshPerFacePrimVar<Color> primVar(triangleMesh);
+    TriangleMeshPerFacePrimVar<Color> primVar(*triangleMesh);
     primVar.allocate();
     primVar.write(0, Color(1, 0, 0));
     primVar.write(1, Color(0, 1, 0));
@@ -44,9 +44,9 @@ TEST_CASE("TriangleMeshPerFacePrimVar::==") {
 }
 
 TEST_CASE("TriangleMeshPerFacePrimVar::apply") {
-    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+    auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
-    TriangleMeshPerFacePrimVar<Color> primVar(triangleMesh);
+    TriangleMeshPerFacePrimVar<Color> primVar(*triangleMesh);
     primVar.allocate();
     primVar.write(0, Color(1, 0, 0));
     primVar.write(1, Color(0, 1, 0));

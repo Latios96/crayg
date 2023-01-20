@@ -7,10 +7,10 @@ namespace crayg {
 
 TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
 {
-    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+    auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     SECTION("should interpolate constant value correctly") {
-        TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
+        TriangleMeshPerVertexPrimVar<Color> primVar(*triangleMesh);
         primVar.allocate();
         primVar.write(0, VertexData(Color::createGrey(0.5)));
         primVar.write(1, VertexData(Color::createGrey(0.5)));
@@ -27,7 +27,7 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
                                                               {0, {0.0f, 0.0f, 0.0f}, Color::createBlack()},
                                                               {3, {0.0f, 0.0f, 2.0f}, Color::createBlack()}}));
 
-        TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
+        TriangleMeshPerVertexPrimVar<Color> primVar(*triangleMesh);
         primVar.allocate();
         primVar.write(1, {Color::createWhite(), Color::createBlack(), Color::createBlack()});
 
@@ -38,9 +38,9 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
 }
 
 TEST_CASE("TriangleMeshPerVertexPrimVar::==") {
-    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+    auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
-    TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
+    TriangleMeshPerVertexPrimVar<Color> primVar(*triangleMesh);
     primVar.allocate();
     primVar.write(0, VertexData(Color::createGrey(0.5)));
     primVar.write(1, VertexData(Color::createGrey(0.5)));
@@ -60,9 +60,9 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::==") {
 }
 
 TEST_CASE("TriangleMeshPerVertexPrimVar::apply") {
-    TriangleMesh triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+    auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
-    TriangleMeshPerVertexPrimVar<Color> primVar(triangleMesh);
+    TriangleMeshPerVertexPrimVar<Color> primVar(*triangleMesh);
     primVar.allocate();
     primVar.write(0, VertexData(Color::createGrey(0.5)));
     primVar.write(1, VertexData(Color::createGrey(0.5)));

@@ -21,35 +21,35 @@ class TriangleMeshFixtures {
  2: v1,v4,v2
  3: v2,v4,v5
  */
-    static TriangleMesh createPrimVarFixtureMesh() {
-        TriangleMesh triangleMesh;
+    static std::shared_ptr<TriangleMesh> createPrimVarFixtureMesh() {
+        auto triangleMesh = std::make_shared<crayg::TriangleMesh>();
 
-        triangleMesh.points.emplace_back(0.0f, 0.0f, 0.0f);
-        triangleMesh.points.emplace_back(0.0f, 0.0f, 1.0f);
-        triangleMesh.points.emplace_back(0.0f, 0.0f, 2.0f);
-        triangleMesh.points.emplace_back(1.0f, 0.0f, 0.0f);
-        triangleMesh.points.emplace_back(1.0f, 0.0f, 1.0f);
-        triangleMesh.points.emplace_back(1.0f, 0.0f, 2.0f);
+        triangleMesh->points.emplace_back(0.0f, 0.0f, 0.0f);
+        triangleMesh->points.emplace_back(0.0f, 0.0f, 1.0f);
+        triangleMesh->points.emplace_back(0.0f, 0.0f, 2.0f);
+        triangleMesh->points.emplace_back(1.0f, 0.0f, 0.0f);
+        triangleMesh->points.emplace_back(1.0f, 0.0f, 1.0f);
+        triangleMesh->points.emplace_back(1.0f, 0.0f, 2.0f);
 
-        triangleMesh.faceVertexIndices.emplace_back(0, 3, 1);
-        triangleMesh.faceVertexIndices.emplace_back(1, 3, 4);
-        triangleMesh.faceVertexIndices.emplace_back(1, 4, 2);
-        triangleMesh.faceVertexIndices.emplace_back(2, 4, 5);
+        triangleMesh->faceVertexIndices.emplace_back(0, 3, 1);
+        triangleMesh->faceVertexIndices.emplace_back(1, 3, 4);
+        triangleMesh->faceVertexIndices.emplace_back(1, 4, 2);
+        triangleMesh->faceVertexIndices.emplace_back(2, 4, 5);
 
-        triangleMesh.init();
+        triangleMesh->init();
         return triangleMesh;
     }
 
-    static TriangleMesh createSingleTriangle() {
-        TriangleMesh triangleMesh;
+    static std::shared_ptr<TriangleMesh> createSingleTriangle() {
+        auto triangleMesh = std::make_shared<crayg::TriangleMesh>();
 
-        triangleMesh.points.emplace_back(0.0f, 0.0f, 0.0f);
-        triangleMesh.points.emplace_back(0.0f, 1.0f, 0.0f);
-        triangleMesh.points.emplace_back(1.0f, 0.0f, 0.0f);
+        triangleMesh->points.emplace_back(0.0f, 0.0f, 0.0f);
+        triangleMesh->points.emplace_back(0.0f, 1.0f, 0.0f);
+        triangleMesh->points.emplace_back(1.0f, 0.0f, 0.0f);
 
-        triangleMesh.faceVertexIndices.emplace_back(0, 1, 2);
+        triangleMesh->faceVertexIndices.emplace_back(0, 1, 2);
 
-        triangleMesh.init();
+        triangleMesh->init();
         return triangleMesh;
     }
 };
