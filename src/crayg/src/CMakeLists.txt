@@ -70,6 +70,8 @@ set(crayg_SRCS
         intersectors/embree/EmbreeBvh.h
         intersectors/embree/EmbreeSceneIntersector.cpp
         intersectors/embree/EmbreeSceneIntersector.h
+        intersectors/embree/EmbreeUtils.cpp
+        intersectors/embree/EmbreeUtils.h
         intersectors/IntersectorType.h
         intersectors/SceneIntersector.cpp
         intersectors/SceneIntersector.h
