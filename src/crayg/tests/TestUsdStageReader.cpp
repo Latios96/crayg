@@ -163,11 +163,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
     SECTION("should create default rendersettings if there are no rendersettings in the stage") {
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.renderSettings == RenderSettings(Resolution(1280, 720),
-                                                       4,
-                                                       IntegratorType::RAYTRACING,
-                                                       IntegratorSettings(),
-                                                       IntersectorType::EMBREE));
+        REQUIRE(scene.renderSettings == RenderSettings::createDefault());
     }
 
     SECTION("should read rendersettings if defined") {

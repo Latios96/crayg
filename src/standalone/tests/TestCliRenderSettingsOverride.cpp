@@ -86,7 +86,7 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     onlyIntegratorType.integratorType = IntegratorType::DEBUG;
 
     CliRenderSettingsOverride onlyIntersectorType;
-    onlyIntersectorType.intersectorType = IntersectorType::EMBREE;
+    onlyIntersectorType.intersectorType = IntersectorType::NAIVE_BVH;
 
     RenderSettings renderSettings;
     renderSettings.resolution = Resolution(1280, 720);
@@ -99,35 +99,35 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
                                       8,
                                       IntegratorType::DEBUG,
                                       IntegratorSettings(),
-                                      IntersectorType::NAIVE_BVH));
+                                      IntersectorType::EMBREE));
 
         REQUIRE(onlyResolution.resolveOverrides(renderSettings)
                     == RenderSettings({800, 600},
                                       4,
                                       IntegratorType::RAYTRACING,
                                       IntegratorSettings(),
-                                      IntersectorType::NAIVE_BVH));
+                                      IntersectorType::EMBREE));
 
         REQUIRE(onlyMaxSamples.resolveOverrides(renderSettings)
                     == RenderSettings({1280, 720},
                                       8,
                                       IntegratorType::RAYTRACING,
                                       IntegratorSettings(),
-                                      IntersectorType::NAIVE_BVH));
+                                      IntersectorType::EMBREE));
 
         REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings)
                     == RenderSettings({1280, 720},
                                       4,
                                       IntegratorType::DEBUG,
                                       IntegratorSettings(),
-                                      IntersectorType::NAIVE_BVH));
+                                      IntersectorType::EMBREE));
 
         REQUIRE(onlyIntersectorType.resolveOverrides(renderSettings)
                     == RenderSettings({1280, 720},
                                       4,
                                       IntegratorType::RAYTRACING,
                                       IntegratorSettings(),
-                                      IntersectorType::EMBREE));
+                                      IntersectorType::NAIVE_BVH));
     }
 
     SECTION("has no overrides") {

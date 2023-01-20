@@ -34,10 +34,7 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
         auto renderSettings = usdRenderSettingsReader.read();
 
-        REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720),
-                                                  4,
-                                                  IntegratorType::RAYTRACING,
-                                                  IntegratorSettings(), IntersectorType::EMBREE));
+        REQUIRE(*renderSettings == RenderSettings::createDefault());
     }
 
     SECTION("should parse rendersettings case insensitive") {

@@ -30,6 +30,13 @@ bool RenderSettings::operator==(const RenderSettings &rhs) const {
 bool RenderSettings::operator!=(const RenderSettings &rhs) const {
     return !(rhs == *this);
 }
+RenderSettings RenderSettings::createDefault() {
+    return RenderSettings(crayg::Resolution(1280, 720),
+                          4,
+                          IntegratorType::RAYTRACING,
+                          IntegratorSettings(),
+                          IntersectorType::EMBREE);
+}
 
 }
 

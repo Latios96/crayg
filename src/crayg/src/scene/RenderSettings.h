@@ -19,6 +19,8 @@ class RenderSettings {
                             IntegratorType integratorType,
                             IntegratorSettings integratorSettings, IntersectorType intersectorType);
 
+    static RenderSettings createDefault();
+
     bool operator==(const RenderSettings &rhs) const;
     bool operator!=(const RenderSettings &rhs) const;
 
