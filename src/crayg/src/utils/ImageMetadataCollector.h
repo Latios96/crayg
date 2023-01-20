@@ -2,6 +2,9 @@
 #define CRAYG_SRC_CRAYG_SRC_UTILS_IMAGEMETADATACOLLECTOR_H_
 
 #include "image/ImageMetadata.h"
+#include "scene/RenderSettings.h"
+#include <optional>
+
 namespace crayg {
 
 class ImageMetadataCollector {
