@@ -11,8 +11,14 @@ UsdPreviewSurface::UsdPreviewSurface(const std::string &name, const Color &diffu
     : Material(name), diffuseColor(diffuseColor) {}
 
 Color UsdPreviewSurface::evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) {
+    const Color reflectivity = getReflectivity();
+
+    if (reflectivity.isBlack()) {
+        return diffuseColor;
+    }
+
     const Ray reflectionRay = surfaceInteraction.spawnReflectionRayFromSurface();
-    return diffuseColor + getReflectivity() * integratorContext.integrateRay(reflectionRay);
+    return diffuseColor + reflectivity * integratorContext.integrateRay(reflectionRay);
 }
 std::string UsdPreviewSurface::getType() {
     return "UsdPreviewSurface";
