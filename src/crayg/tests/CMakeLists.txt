@@ -83,6 +83,7 @@ set(UNIT_TEST_LIST
         TestUsdMeshReader.cpp
         TestUsdPathFactory.cpp
         TestUsdPointLightWriter.cpp
+        TestUsdPreviewSurface.cpp
         TestUsdReadUtils.cpp
         TestUsdRectLightReader.cpp
         TestUsdRectLightWriter.cpp
