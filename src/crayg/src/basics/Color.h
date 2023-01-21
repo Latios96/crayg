@@ -54,6 +54,8 @@ class Color {
 
     Color clamp() const;
 
+    bool isBlack()const;
+
     std::tuple<int, int, int> getRgbValues() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Color &color);

@@ -130,4 +130,18 @@ TEST_CASE("Color/divide", "[Color]") {
     REQUIRE(dividedColor == Color(0.5, 1, 1.5));
 }
 
+TEST_CASE("Color/isBlack", "[Color]") {
+    SECTION("isBlack should return true"){
+      Color color = Color::createBlack();
+
+      REQUIRE(color.isBlack());
+    }
+
+    SECTION("isBlack should return false"){
+      Color color = Color::createWhite();
+
+      REQUIRE_FALSE(color.isBlack());
+    }
+}
+
 }
