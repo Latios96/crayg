@@ -25,8 +25,8 @@ TEST_CASE("EmbreeBvhBuilder::build") {
         auto embreeBvh = embreeBvhBuilder.build();
 
         REQUIRE(embreeBvh->geomIdToSceneObject.size() == 2);
-        REQUIRE(embreeBvh->geomIdToSceneObject[0] == std::make_pair(0u, EmbreePrimitiveType::TRIANGLE_MESH));
-        REQUIRE(embreeBvh->geomIdToSceneObject[1] == std::make_pair(1u, EmbreePrimitiveType::SPHERE));
+        REQUIRE(embreeBvh->geomIdToSceneObject[0] == EmbreeMappingEntry(0u, EmbreePrimitiveType::TRIANGLE_MESH));
+        REQUIRE(embreeBvh->geomIdToSceneObject[1] == EmbreeMappingEntry(1u, EmbreePrimitiveType::SPHERE));
     }
 }
 

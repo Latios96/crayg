@@ -14,9 +14,9 @@ class EmbreeSceneIntersector : public SceneIntersector {
  private:
     std::unique_ptr<EmbreeBvh> embreeBvh;
     Imageable::Intersection mapToTriangle(const RTCRayHit &rtcRayHit,
-                                          const std::pair<unsigned int, EmbreePrimitiveType> &sceneObjectMapping) const;
+                                          const EmbreeMappingEntry &embreeMappingEntry) const;
     Imageable::Intersection mapToSphere(const RTCRayHit &rtcRayHit,
-                                        const std::pair<unsigned int, EmbreePrimitiveType> &sceneObjectMapping) const;
+                                        const EmbreeMappingEntry &embreeMappingEntry) const;
 };
 
 } // crayg

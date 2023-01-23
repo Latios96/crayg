@@ -3,18 +3,21 @@
 
 #include <embree3/rtcore.h>
 #include <unordered_map>
+#include "utils/PairDto.h"
 
 namespace crayg {
 
-enum EmbreePrimitiveType{
+enum EmbreePrimitiveType {
     TRIANGLE_MESH,
     SPHERE
 };
 
+CRAYG_PAIR_DTO(EmbreeMappingEntry,unsigned int,sceneObjectIndex,EmbreePrimitiveType,primitiveType)
+
 struct EmbreeBvh {
     RTCDevice rtcDevice;
     RTCScene rtcScene;
-    std::unordered_map<unsigned int, std::pair<unsigned int, EmbreePrimitiveType>> geomIdToSceneObject;
+    std::unordered_map<unsigned int, EmbreeMappingEntry> geomIdToSceneObject;
     virtual ~EmbreeBvh();
 };
 

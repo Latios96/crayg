@@ -18,9 +18,9 @@ Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray) const 
     }
 
     const auto sceneObjectMapping = embreeBvh->geomIdToSceneObject[rtcRayHit.hit.geomID];
-    if (sceneObjectMapping.second == EmbreePrimitiveType::TRIANGLE_MESH) {
+    if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::TRIANGLE_MESH) {
         return mapToTriangle(rtcRayHit, sceneObjectMapping);
-    } else if (sceneObjectMapping.second == EmbreePrimitiveType::SPHERE) {
+    } else if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::SPHERE) {
         return mapToSphere(rtcRayHit, sceneObjectMapping);
     }
     return Imageable::Intersection::createInvalid();
@@ -38,16 +38,14 @@ bool EmbreeSceneIntersector::isIntersecting(const Ray &ray) const {
 }
 
 Imageable::Intersection EmbreeSceneIntersector::mapToSphere(const RTCRayHit &rtcRayHit,
-                                                            const std::pair<unsigned int,
-                                                                            EmbreePrimitiveType> &sceneObjectMapping) const {
-    auto sceneObject = scene.objects[sceneObjectMapping.first];
+                                                            const EmbreeMappingEntry &embreeMappingEntry) const {
+    auto sceneObject = scene.objects[embreeMappingEntry.sceneObjectIndex];
     return Imageable::Intersection(rtcRayHit.ray.tfar, sceneObject.get(), false);
 }
 
 Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &rtcRayHit,
-                                                              const std::pair<unsigned int,
-                                                                              EmbreePrimitiveType> &sceneObjectMapping) const {
-    auto sceneObject = scene.objects[sceneObjectMapping.first];
+                                                              const EmbreeMappingEntry &embreeMappingEntry) const {
+    auto sceneObject = scene.objects[embreeMappingEntry.sceneObjectIndex];
     auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
     auto triangle =
         new Triangle(triangleMesh.get(), rtcRayHit.hit.primID);
