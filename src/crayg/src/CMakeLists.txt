@@ -206,6 +206,7 @@ set(crayg_SRCS
         utils/ImagePathResolver.cpp
         utils/ImagePathResolver.h
         utils/Preconditions.cpp
+        utils/PairDto.h
         utils/Preconditions.h
         utils/ProgressReporter.cpp
         utils/ProgressReporter.h
