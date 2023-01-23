@@ -21,5 +21,13 @@ TEST_CASE("Ray/constructIntersectionPoint", "[Ray]") {
     REQUIRE(intersectionPoint == Vector3f(29, 37, 45));
 }
 
+TEST_CASE("Ray/offsetStartPointBy", "[Ray]") {
+    Ray ray({0, 0, 0}, {1, 0, 0}, 7);
+
+    const Ray offsetRay = ray.offsetStartPointBy(0.001f);
+
+    REQUIRE(offsetRay == Ray({0.001f, 0, 0}, {1, 0, 0}, 7));
+}
+
 }
 

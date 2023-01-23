@@ -21,6 +21,9 @@ struct Ray {
     Vector3f constructIntersectionPoint() const;
 
     Vector3f constructIntersectionPoint(float t) const;
+
+    Ray offsetStartPointBy(float offset) const;
+
     bool operator==(const Ray &rhs) const;
     bool operator!=(const Ray &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const Ray &ray);
