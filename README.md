@@ -36,7 +36,9 @@ Cornell Box by http://casual-effects.com/data/index.html
 - Area lights (Rect and Disk)
 - perfect reflections
 - diffuse reflections / GI
-- naive BVH implementation
+- multiple BVH implementations:
+  - Embree 
+  - custom Naive BVH
 - multiple integrators:
   - Raytracing
   - Ambient Occlusion
