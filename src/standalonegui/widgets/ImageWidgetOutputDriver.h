@@ -6,16 +6,25 @@
 
 namespace crayg {
 
-class ImageMetadataChanger: public QObject{
+class QtSignalAdapter: public QObject{
     Q_OBJECT
  public:
-    explicit ImageMetadataChanger(QObject *parent= nullptr) : QObject(parent) {}
+    explicit QtSignalAdapter(QObject *parent= nullptr) : QObject(parent) {}
  public:
-    void change(const ImageMetadata &imageMetadata){
-        emit changed(imageMetadata);
+    void writeImageMetadata(const ImageMetadata &imageMetadata){
+        emit metadataWritten(imageMetadata);
+    }
+    void prepareBucket(const ImageBucket &imageBucket){
+        emit bucketPrepared(imageBucket);
+    }
+    void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer){
+        auto buf = std::make_shared<BucketImageBuffer>(bucketImageBuffer);
+        emit bucketImageBufferWritten(buf);
     }
  signals:
-    void changed(ImageMetadata imageMetadata);
+    void metadataWritten(ImageMetadata imageMetadata);
+    void bucketPrepared(const ImageBucket imageBucket);
+    void bucketImageBufferWritten(std::shared_ptr<BucketImageBuffer> bucketImageBuffer);
 };
 
 class ImageWidgetOutputDriver : public OutputDriver {
@@ -24,7 +33,7 @@ class ImageWidgetOutputDriver : public OutputDriver {
     void prepareBucket(const ImageBucket &imageBucket) override;
     void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) override;
     void writeImageMetadata(const ImageMetadata &imageMetadata) override;
-    ImageMetadataChanger imageMetadataChanger;
+    QtSignalAdapter qtSignalAdapter;
  private:
     ImageWidget &imageWidget;
 };

@@ -10,6 +10,7 @@ struct BucketImageBuffer {
  public:
     ImageBucket imageBucket;
     Image image;
+    BucketImageBuffer();
     BucketImageBuffer(int x, int y, int width, int height);
     BucketImageBuffer(const ImageBucket &imageBucket);
 };

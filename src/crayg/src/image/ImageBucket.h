@@ -10,6 +10,7 @@ class ImageBucket {
     ImageBucket(int x, int y, int width, int height);
     ImageBucket(const ImageBucket &imageBucket);
     ImageBucket();
+    ~ImageBucket() = default;
     bool operator==(const ImageBucket &rhs) const;
     bool operator!=(const ImageBucket &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const ImageBucket &bucket);

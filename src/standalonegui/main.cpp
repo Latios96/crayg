@@ -60,7 +60,8 @@ int main(int argc, char **argv) {
         crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
         frameBufferWidget.show();
 
-        QObject::connect(&imageWidgetOutputDriver.imageMetadataChanger, &crayg::ImageMetadataChanger::changed, &frameBufferWidget, &crayg::FrameBufferWidget::setImageMetadata);
+        QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter,
+                         &crayg::QtSignalAdapter::metadataWritten, &frameBufferWidget, &crayg::FrameBufferWidget::setImageMetadata);
 
         crayg::Image image(scene.renderSettings.resolution);
         crayg::ImageOutputDriver imageOutputDriver(image);
