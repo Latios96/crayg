@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 option(BUILD_WITH_COVERAGE "Activate --coverage to check for Code Coverage" OFF)
 
+if(NOT DEFINED CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE RelWithDebInfo)
+endif()
+
 enable_testing()
 
 unset(ENV{CI})
