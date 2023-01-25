@@ -226,6 +226,10 @@ add_library(crayg STATIC
 target_include_directories(crayg PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})
 
+if (WIN32)
+    target_compile_definitions(crayg PUBLIC NOMINMAX)
+endif()
+
 add_custom_command(TARGET crayg PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_LIB_DIRS_USD}/usd ${CMAKE_BINARY_DIR}/bin/usd)
 

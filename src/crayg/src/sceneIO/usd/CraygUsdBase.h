@@ -4,8 +4,6 @@
 #include <pxr/base/tf/token.h>
 #include <pxr/usd/sdf/path.h>
 
-#define NOMINMAX
-
 template<>
 struct fmt::formatter<pxr::TfToken> {
     template<typename ParseContext>
