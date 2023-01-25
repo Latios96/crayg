@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
 
         registerQMetaTypes();
 
-        crayg::CliParser cliParser("standalone-gui", argc, argv);
+        crayg::CliParser cliParser("crayg-standalone-gui", argc, argv);
         crayg::CliParseResult parseResult = cliParser.parse();
 
         if (!parseResult.isValid()) {
