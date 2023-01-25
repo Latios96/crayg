@@ -34,9 +34,3 @@ endif ()
 
 
 install(TARGETS crayg-standalone DESTINATION bin)
-
-add_executable(osd-experiments
-        osd-experiments.cpp)
-target_link_libraries(osd-experiments
-        ${CRAYG_STANDALONE_LIB})
-install(TARGETS osd-experiments DESTINATION bin)
