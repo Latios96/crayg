@@ -46,7 +46,8 @@ Cornell Box by http://casual-effects.com/data/index.html
     by [Renderman's PxrVisualizer](https://rmanwiki.pixar.com/display/REN24/PxrVisualizer)))
 - Scene format uses USD, with basic respect
   for [UsdRender](https://graphics.pixar.com/usd/release/api/usd_render_page_front.html)
-- CLI interface / basic Renderview GUI
+- CLI interface
+- Qt based Renderview GUI
 
 ### Project features not related to rendering
 
