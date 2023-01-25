@@ -30,7 +30,12 @@ void ImageWidget::writeBucketImageBuffer(std::shared_ptr<BucketImageBuffer> buck
 void drawHLine(QImage &image, int x_start, int y_start, int length, int width) {
     for (int x = 0; x < length; x++) {
         for (int y = 0; y < width; y++) {
-            image.setPixelColor(x_start + x, y_start + y, QColor::fromRgb(255, 255, 255));
+            int xPos = x_start + x;
+            int yPos = y_start + y;
+            if(xPos >= image.width() || yPos >= image.width()){
+                continue;
+            }
+            image.setPixelColor(xPos, yPos, QColor::fromRgb(255, 255, 255));
         }
     }
 }
@@ -38,6 +43,11 @@ void drawHLine(QImage &image, int x_start, int y_start, int length, int width) {
 void drawVLine(QImage &image, int x_start, int y_start, int length, int width) {
     for (int y = 0; y < length; y++) {
         for (int x = 0; x < width; x++) {
+            int xPos = x_start + x;
+            int yPos = y_start + y;
+            if(xPos >= image.width() || yPos >= image.width()){
+                continue;
+            }
             image.setPixelColor(x_start + x, y_start + y, QColor::fromRgb(255, 255, 255));
         }
     }
