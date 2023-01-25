@@ -12,11 +12,14 @@ class RunConfigParameter:
 
     @property
     def name(self):
-        prefix = "standalone-gui"
+        prefix = "crayg-standalone-gui"
         if self.name_override:
             return f"{prefix} {self.name_override}"
         return f"{prefix} {os.path.splitext(self.scene_path.name)[0]}"
 
+    @property
+    def output_file_name(self):
+        return f"{Path(self.scene_path.name).stem}.#.png"
 
 def generate_run_config(run_manager, config: RunConfigParameter):
     print(f"Creating {config.name}")
@@ -25,17 +28,17 @@ def generate_run_config(run_manager, config: RunConfigParameter):
     configuration_element.set("type", "CMakeRunConfiguration")
     configuration_element.set("factoryName", "Application")
     configuration_element.set(
-        "PROGRAM_PARAMS", f"-s {config.scene_path} -o {config.name}.#.png"
+        "PROGRAM_PARAMS", f"-s {config.scene_path} -o {config.output_file_name}"
     )
     configuration_element.set("REDIRECT_INPUT", "false")
     configuration_element.set("ELEVATE", "false")
     configuration_element.set("USE_EXTERNAL_CONSOLE", "false")
     configuration_element.set("PASS_PARENT_ENVS_2", "true")
     configuration_element.set("PROJECT_NAME", "crayg")
-    configuration_element.set("TARGET_NAME", "standalone-gui")
+    configuration_element.set("TARGET_NAME", "crayg-standalone-gui")
     configuration_element.set("CONFIG_NAME", "Release-Visual Studio")
     configuration_element.set("RUN_TARGET_PROJECT_NAME", "crayg")
-    configuration_element.set("RUN_TARGET_NAME", "standalone-gui")
+    configuration_element.set("RUN_TARGET_NAME", "crayg-standalone-gui")
     configuration_element.set("generated_by_script", "true")
     method_element = ET.Element("method")
     method_element.set("v", "2")
