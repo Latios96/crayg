@@ -40,7 +40,7 @@ struct fmt::formatter<QSize> {
 
     template<typename FormatContext>
     auto format(QSize const &size, FormatContext &ctx) {
-        return fmt::format_to(ctx.out(),"({},{}))", size.width(), size.height());
+        return fmt::format_to(ctx.out(),"{}x{}", size.width(), size.height());
     };
 };
 
