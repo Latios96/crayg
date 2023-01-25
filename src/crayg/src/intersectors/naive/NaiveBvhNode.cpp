@@ -1,4 +1,5 @@
 #include "NaiveBvhNode.h"
+#include "scene/primitives/trianglemesh/Triangle.h"
 
 crayg::NaiveBvh::~NaiveBvh() {
     for (auto objectsToFreeInfo: objectsToFree) {

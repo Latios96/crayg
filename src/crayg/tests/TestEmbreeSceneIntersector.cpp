@@ -1,5 +1,7 @@
 #include <catch2/catch.hpp>
 #include "intersectors/embree/EmbreeSceneIntersector.h"
+#include "intersectors/embree/EmbreeBvhBuilder.h"
+#include "fixtures/TriangleMeshFixtures.h"
 
 namespace crayg {
 

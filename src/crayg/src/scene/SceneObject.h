@@ -3,6 +3,7 @@
 
 #include "Transformable.h"
 #include "Imageable.h"
+#include <vector>
 
 namespace crayg {
 

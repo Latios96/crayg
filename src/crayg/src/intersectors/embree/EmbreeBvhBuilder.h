@@ -2,6 +2,8 @@
 #define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREEBVHBUILDER_H_
 
 #include "EmbreeBvh.h"
+#include "scene/Scene.h"
+
 namespace crayg {
 
 class EmbreeBvhBuilder {

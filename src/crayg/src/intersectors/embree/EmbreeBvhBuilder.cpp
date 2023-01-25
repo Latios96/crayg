@@ -1,4 +1,7 @@
 #include "EmbreeBvhBuilder.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/Sphere.h"
+#include "utils/StopWatch.h"
 
 namespace crayg {
 EmbreeBvhBuilder::EmbreeBvhBuilder(const Scene &scene) : scene(scene) {

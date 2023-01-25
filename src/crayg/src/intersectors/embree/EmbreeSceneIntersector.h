@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREESCENEINTERSECTOR_H_
 
 #include "intersectors/SceneIntersector.h"
+#include "EmbreeBvh.h"
 
 namespace crayg {
 
