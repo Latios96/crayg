@@ -37,7 +37,7 @@ Cornell Box by http://casual-effects.com/data/index.html
 - perfect reflections
 - diffuse reflections / GI
 - multiple BVH implementations:
-  - Embree 
+  - [Intel Embree](https://github.com/embree/embree) 
   - custom Naive BVH
 - multiple integrators:
   - Raytracing
