@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <tuple>
 #include <utils/ToStringHelper.h>
+#include "sampling/Random.h"
 
 namespace crayg {
 
@@ -64,5 +65,22 @@ Color Color::operator/(float scalar) const {
   return {r / scalar, g / scalar, b / scalar};
 }
 bool Color::isBlack() const { return r == 0 && g == 0 && b == 0; }
+Color Color::createGrey(float grey) {
+    return {grey, grey, grey};
+}
+Color Color::createBlack() {
+    return {};
+}
+Color Color::createWhite() {
+    return {1, 1, 1};
+}
+Color Color::fromRGB(int r, int g, int b) {
+    return {static_cast<float>(r) / 255.f, static_cast<float>(g) / 255.f, static_cast<float>(b) / 255.f};
+}
+Color Color::createRandom() {
+    return {Random::random(),
+            Random::random(),
+            Random::random()};
+}
 
 } // namespace crayg

@@ -3,7 +3,6 @@
 
 #include <ostream>
 #include <tuple>
-#include "sampling/Random.h"
 
 namespace crayg {
 
@@ -15,26 +14,13 @@ class Color {
 
     Color(float r, float g, float b);
 
-    static Color createGrey(float grey) {
-        return {grey, grey, grey};
-    }
+    static Color createGrey(float grey);
+    static Color createBlack();
+    static Color createWhite();
 
-    static Color createBlack() {
-        return {};
-    }
-    static Color createWhite() {
-        return {1, 1, 1};
-    }
+    static Color fromRGB(int r, int g, int b);
 
-    static Color fromRGB(int r, int g, int b) {
-        return {static_cast<float>(r) / 255.f, static_cast<float>(g) / 255.f, static_cast<float>(b) / 255.f};
-    }
-
-    static Color createRandom() {
-        return {Random::random(),
-                Random::random(),
-                Random::random()};
-    }
+    static Color createRandom();
 
     Color operator+(const Color &otherColor) const;
 
