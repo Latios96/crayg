@@ -18,8 +18,8 @@ struct Resolution {
     bool operator<=(const Resolution &rhs) const;
     bool operator>=(const Resolution &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const Resolution &resolution);
-    const int getWidth() const;
-    const int getHeight() const;
+    int getWidth() const;
+    int getHeight() const;
  private:
     int width, height;
 };
