@@ -32,6 +32,7 @@ jobs:
           conan remote list
           python scripts/add_conan_remotes.py
           conan remote list
+          conan config set general.parallel_download=8
       - name: conan login
         run: conan user ci_github_actions -p -r=framebffr
         env:
