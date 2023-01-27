@@ -27,10 +27,14 @@ class UsdStageReader {
     void readUsdGeomMesh(Scene &scene,
                          const std::shared_ptr<Material> &defaultMaterial,
                          const pxr::UsdPrim &prim);
+    void readSubdivisionSurfaceMesh(Scene &scene,
+                         const std::shared_ptr<Material> &defaultMaterial,
+                         const pxr::UsdPrim &prim);
     void readSphere(Scene &scene, const pxr::UsdPrim &prim);
     void readDiskLight(Scene &scene, const pxr::UsdPrim &prim) const;
     void readRenderSettings(Scene &scene);
     bool primIsVisible(pxr::UsdPrim &prim);
+    bool isSubdivisionSurfaceMesh(pxr::UsdPrim &prim);
     bool cameraPathMatches(pxr::SdfPath path, std::optional<std::string> cameraPath);
 
     UsdMaterialReadCache usdMaterialTranslationCache;

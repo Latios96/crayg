@@ -66,6 +66,15 @@ TEST_CASE("UsdStageReader::readStageToScene") {
         REQUIRE(scene.objects.size() == 1);
     }
 
+    SECTION("should read subdivision surface") {
+        auto usdMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
+        usdMesh.GetSubdivisionSchemeAttr().Set(pxr::UsdGeomTokens->catmullClark);
+
+        UsdStageReader(*stage).readStageToScene(scene);
+
+        REQUIRE(scene.objects.size() == 1);
+    }
+
     SECTION("should read instance") {
         auto instanceSourcePrim = stage->OverridePrim(pxr::SdfPath("/InstanceSources"));
         auto instancedContent = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/InstanceSources/source"));

@@ -8,6 +8,7 @@
 #include "UsdRenderSettingsReader.h"
 #include "Logger.h"
 #include "scene/primitives/GroundPlane.h"
+#include "UsdSubdivisionSurfaceMeshReader.h"
 #include <pxr/usd/usd/prim.h>
 #include <pxr/usd/usd/primRange.h>
 #include <pxr/usd/usd/primFlags.h>
@@ -23,7 +24,9 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
     auto defaultMaterial = std::make_shared<crayg::UsdPreviewSurface>("defaultMaterial", crayg::Color::createWhite());
 
     for (pxr::UsdPrim prim: stage.Traverse(pxr::UsdTraverseInstanceProxies())) {
-        if (prim.IsA<pxr::UsdGeomMesh>() && primIsVisible(prim)) {
+        if (isSubdivisionSurfaceMesh(prim) && primIsVisible(prim)) {
+            readSubdivisionSurfaceMesh(scene, defaultMaterial, prim);
+        } else if (prim.IsA<pxr::UsdGeomMesh>() && primIsVisible(prim)) {
             readUsdGeomMesh(scene, defaultMaterial, prim);
         } else if (prim.IsA<pxr::UsdLuxSphereLight>() && primIsVisible(prim)) {
             readSphereLight(scene, prim);
@@ -54,6 +57,14 @@ void UsdStageReader::readUsdGeomMesh(Scene &scene,
     auto triangleMesh = UsdMeshReader(pxr::UsdGeomMesh(prim), usdMaterialTranslationCache).read();
     triangleMesh->init();
     scene.addObject(triangleMesh);
+}
+
+void UsdStageReader::readSubdivisionSurfaceMesh(Scene &scene,
+                                                const std::shared_ptr<Material> &defaultMaterial,
+                                                const pxr::UsdPrim &prim) {
+    auto subdivisionSurfaceMesh =
+        UsdSubdivisionSurfaceMeshReader(pxr::UsdGeomMesh(prim), usdMaterialTranslationCache).read();
+    scene.addObject(subdivisionSurfaceMesh);
 }
 
 void UsdStageReader::readSphereLight(Scene &scene, const pxr::UsdPrim &prim) const {
@@ -103,6 +114,15 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
         }
     }
     scene.renderSettings = RenderSettings::createDefault();
+}
+bool UsdStageReader::isSubdivisionSurfaceMesh(pxr::UsdPrim &prim) {
+    if (!prim.IsA<pxr::UsdGeomMesh>()) {
+        return false;
+    }
+    pxr::UsdGeomMesh usdGeomMesh(prim);
+    auto subdivisionScheme = UsdUtils::getAttributeValueAs<pxr::TfToken>(usdGeomMesh.GetSubdivisionSchemeAttr(),
+                                                                         pxr::UsdTimeCode::EarliestTime());
+    return subdivisionScheme == pxr::UsdGeomTokens->catmullClark;
 }
 
 }
