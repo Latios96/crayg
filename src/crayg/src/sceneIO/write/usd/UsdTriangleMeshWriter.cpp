@@ -13,6 +13,7 @@ pxr::UsdGeomMesh UsdTriangleMeshWriter::write(pxr::UsdStagePtr stage, UsdPathFac
     writePoints(usdGeomMesh);
     writeFaceVertexIndices(usdGeomMesh);
     writeFaceVertexCounts(usdGeomMesh);
+    writeSubdivisionScheme(usdGeomMesh);
 
     return usdGeomMesh;
 }
@@ -43,4 +44,5 @@ void UsdTriangleMeshWriter::writePoints(const pxr::UsdGeomMesh &usdGeomMesh) {
     }
     usdGeomMesh.GetPointsAttr().Set(points);
 }
+void UsdTriangleMeshWriter::writeSubdivisionScheme(const pxr::UsdGeomMesh &usdGeomMesh) const { usdGeomMesh.GetSubdivisionSchemeAttr().Set(pxr::UsdGeomTokens->none); }
 } // crayg

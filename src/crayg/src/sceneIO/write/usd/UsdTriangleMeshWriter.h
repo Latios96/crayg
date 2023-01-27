@@ -17,6 +17,7 @@ class UsdTriangleMeshWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, 
     void writePoints(const pxr::UsdGeomMesh &usdGeomMesh);
     void writeFaceVertexIndices(const pxr::UsdGeomMesh &usdGeomMesh);
     void writeFaceVertexCounts(const pxr::UsdGeomMesh &usdGeomMesh) const;
+    void writeSubdivisionScheme(const pxr::UsdGeomMesh &usdGeomMesh) const;
 };
 
 } // crayg
