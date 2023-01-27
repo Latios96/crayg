@@ -127,6 +127,8 @@ set(crayg_SRCS
         scene/primitives/trianglemesh/TriangleMesh.h
         scene/primitives/trianglemesh/TriangleMeshConversion.cpp
         scene/primitives/trianglemesh/TriangleMeshConversion.h
+        scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.cpp
+        scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h
         scene/RenderSettings.cpp
         scene/RenderSettings.h
         scene/Scene.cpp

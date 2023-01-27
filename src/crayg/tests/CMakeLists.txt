@@ -1,4 +1,6 @@
 set(UNIT_TEST_LIST
+        fixtures/SubdivisionSurfaceMeshFixtures.cpp
+        fixtures/SubdivisionSurfaceMeshFixtures.h
         fixtures/TemporaryDirectory.cpp
         fixtures/TemporaryDirectory.h
         fixtures/TriangleMeshFixtures.cpp
@@ -61,6 +63,7 @@ set(UNIT_TEST_LIST
         TestSceneReaderFactory.cpp
         TestSceneWriterFactory.cpp
         TestSphere.cpp
+        TestSubdivisionSurfaceMesh.cpp
         TestSurfaceInteraction.cpp
         TestTeeOutputDriver.cpp
         TestToStringHelper.cpp
