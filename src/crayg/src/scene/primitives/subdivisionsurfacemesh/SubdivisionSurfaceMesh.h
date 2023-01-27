@@ -21,7 +21,7 @@ class SubdivisionSurfaceMesh: public SceneObject {
 
     std::vector<Vector3f> points;
     std::vector<int> faceVertexIndices;
-    std::vector<int> verticesPerFace;
+    std::vector<int> faceVertexCounts;
 
     TriangleMesh triangleMesh;
  private:

@@ -34,9 +34,10 @@ size_t SubdivisionSurfaceMesh::primitiveCount() const {
     return triangleMesh.primitiveCount();
 }
 void SubdivisionSurfaceMesh::tessellate() {
+    // TODO check if transform and material is set correctly for triangle mesh
     isTessellated = true;
 }
 std::size_t SubdivisionSurfaceMesh::faceCount() const {
-    return verticesPerFace.size();
+    return faceVertexCounts.size();
 }
 } // crayg

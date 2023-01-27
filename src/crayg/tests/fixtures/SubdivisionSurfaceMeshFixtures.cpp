@@ -13,7 +13,7 @@ void SubdivisionSurfaceMeshFixtures::createUnitPlane(SubdivisionSurfaceMesh &sub
     subdivisionSurfaceMesh.faceVertexIndices.push_back(2);
     subdivisionSurfaceMesh.faceVertexIndices.push_back(3);
 
-    subdivisionSurfaceMesh.verticesPerFace.push_back(4);
+    subdivisionSurfaceMesh.faceVertexCounts.push_back(4);
 }
 
 void SubdivisionSurfaceMeshFixtures::createUnitCube(SubdivisionSurfaceMesh &subdivisionSurfaceMesh) {
@@ -33,7 +33,7 @@ void SubdivisionSurfaceMeshFixtures::createUnitCube(SubdivisionSurfaceMesh &subd
                                                                                                      1, 7, 5, 3,
                                                                                                      6, 0, 2, 4});
 
-    subdivisionSurfaceMesh.verticesPerFace.resize(6,4);
+    subdivisionSurfaceMesh.faceVertexCounts.resize(6, 4);
 }
 
 } // crayg
