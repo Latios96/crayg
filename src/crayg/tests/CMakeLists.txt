@@ -97,6 +97,7 @@ set(UNIT_TEST_LIST
         TestUsdSphereReader.cpp
         TestUsdSphereWriter.cpp
         TestUsdStageReader.cpp
+        TestUsdSubdivisionSurfaceMeshReader.cpp
         TestUsdTriangleMeshWriter.cpp
         TestUsdUtils.cpp
         TestVector3f.cpp

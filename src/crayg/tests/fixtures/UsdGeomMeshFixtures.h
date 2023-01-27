@@ -9,8 +9,9 @@ namespace crayg {
 
 class UsdGeomMeshFixtures {
  public:
-    static pxr::UsdGeomMesh createQuadPlane(const pxr::UsdStagePtr &stage) {
+    static pxr::UsdGeomMesh createQuadPlane(const pxr::UsdStagePtr &stage, const pxr::TfToken &subdivisionScheme=pxr::UsdGeomTokens->none) {
         auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
+        usdGeomMesh.GetSubdivisionSchemeAttr().Set(subdivisionScheme);
 
         pxr::UsdGeomXformCommonAPI(usdGeomMesh).SetTranslate(pxr::GfVec3f(1, 2, 3));
         pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
@@ -27,6 +28,7 @@ class UsdGeomMeshFixtures {
 
     static pxr::UsdGeomMesh createTrianglePlane(const pxr::UsdStagePtr &stage) {
         auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
+        usdGeomMesh.GetSubdivisionSchemeAttr().Set(pxr::UsdGeomTokens->none);
 
         pxr::UsdGeomXformCommonAPI(usdGeomMesh).SetTranslate(pxr::GfVec3f(1, 2, 3));
         pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};

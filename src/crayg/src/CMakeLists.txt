@@ -163,6 +163,8 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdSphereReader.h
         sceneIO/read/usd/UsdStageReader.cpp
         sceneIO/read/usd/UsdStageReader.h
+        sceneIO/read/usd/UsdSubdivisionSurfaceMeshReader.cpp
+        sceneIO/read/usd/UsdSubdivisionSurfaceMeshReader.h
         sceneIO/SceneReaderFactory.cpp
         sceneIO/SceneReaderFactory.h
         sceneIO/SceneWriterFactory.cpp
