@@ -48,6 +48,7 @@ set(UNIT_TEST_LIST
         TestMatrix4x4f.cpp
         TestNode.cpp
         TestOpenImageIoImageWriter.cpp
+        TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp
         TestPreconditions.cpp
         TestProgressReporter.cpp
