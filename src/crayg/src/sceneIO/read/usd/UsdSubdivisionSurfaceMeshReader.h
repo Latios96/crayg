@@ -17,7 +17,6 @@ class UsdSubdivisionSurfaceMeshReader : public BaseUsdImageableReader<pxr::UsdGe
     std::string getTranslatedType() override;
     void translatePoints(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const;
     void translateIndices(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const;
-    void translateFaceVertexCounts(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const;
     void ensureCatmullClarkScheme() const;
 };
 

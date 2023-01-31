@@ -52,6 +52,9 @@
         },
         {
           "name": "CorrectNormalTransformation"
+        },
+        {
+          "name": "SubdivisionSurfaceCube"
         }
       ]
     },

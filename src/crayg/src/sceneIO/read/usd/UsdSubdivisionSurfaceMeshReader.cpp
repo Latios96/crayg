@@ -18,7 +18,6 @@ std::shared_ptr<SubdivisionSurfaceMesh> UsdSubdivisionSurfaceMeshReader::read() 
 
     translatePoints(subdivisionSurfaceMesh);
     translateIndices(subdivisionSurfaceMesh);
-    translateFaceVertexCounts(subdivisionSurfaceMesh);
 
     return subdivisionSurfaceMesh;
 }
@@ -41,20 +40,21 @@ void UsdSubdivisionSurfaceMeshReader::translatePoints(std::shared_ptr<Subdivisio
 }
 
 void UsdSubdivisionSurfaceMeshReader::translateIndices(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const {
-    pxr::VtIntArray faceVertexIndices;
-    usdPrim.GetFaceVertexIndicesAttr().Get(&faceVertexIndices, timeCodeToRead);
-    subdivisionSurfaceMesh->faceVertexIndices.reserve(faceVertexIndices.size());
-    for (auto i: faceVertexIndices) {
-        subdivisionSurfaceMesh->faceVertexIndices.push_back(i);
-    }
-}
-
-void UsdSubdivisionSurfaceMeshReader::translateFaceVertexCounts(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const {
     pxr::VtIntArray faceVertexCounts;
     usdPrim.GetFaceVertexCountsAttr().Get(&faceVertexCounts, timeCodeToRead);
     subdivisionSurfaceMesh->faceVertexCounts.reserve(faceVertexCounts.size());
-    for (auto i: faceVertexCounts) {
-        subdivisionSurfaceMesh->faceVertexCounts.push_back(i);
+
+    pxr::VtIntArray faceVertexIndices;
+    usdPrim.GetFaceVertexIndicesAttr().Get(&faceVertexIndices, timeCodeToRead);
+    subdivisionSurfaceMesh->faceVertexIndices.reserve(faceVertexIndices.size());
+
+    int offset = 0;
+    for (auto faceVertexCount: faceVertexCounts) {
+        subdivisionSurfaceMesh->faceVertexCounts.push_back(faceVertexCount);
+        for (int i = faceVertexCount - 1; i >= 0; i--) {
+            subdivisionSurfaceMesh->faceVertexIndices.push_back(faceVertexIndices[offset + i]);
+        }
+        offset += faceVertexCount;
     }
 }
 } // crayg
