@@ -81,6 +81,9 @@ void Renderer::init() {
                                                              scene.renderSettings.resolution.getWidth(),
                                                              scene.renderSettings.resolution.getHeight()));
 
+    GeometryCompiler geometryCompiler(scene);
+    geometryCompiler.compile();
+
     {
         InformativeScopedStopWatch buildBvh("Building SceneIntersector");
         sceneIntersector = IntersectorFactory::createSceneIntersector(scene.renderSettings.intersectorType, scene);

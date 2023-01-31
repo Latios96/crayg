@@ -80,6 +80,8 @@ set(crayg_SRCS
         Logger.h
         renderer/BucketSizeEstimator.cpp
         renderer/BucketSizeEstimator.h
+        renderer/GeometryCompiler.cpp
+        renderer/GeometryCompiler.h
         renderer/Renderer.cpp
         renderer/Renderer.h
         renderer/SampleAccumulator.cpp
