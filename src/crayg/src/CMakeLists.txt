@@ -129,6 +129,8 @@ set(crayg_SRCS
         scene/primitives/trianglemesh/TriangleMesh.h
         scene/primitives/trianglemesh/TriangleMeshConversion.cpp
         scene/primitives/trianglemesh/TriangleMeshConversion.h
+        scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.cpp
+        scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.h
         scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.cpp
         scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h
         scene/RenderSettings.cpp
@@ -233,7 +235,7 @@ target_include_directories(crayg PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})
 
 if (WIN32)
-    target_compile_definitions(crayg PUBLIC NOMINMAX)
+    target_compile_definitions(crayg PUBLIC NOMINMAX _USE_MATH_DEFINES)
 endif()
 
 add_custom_command(TARGET crayg PRE_BUILD
