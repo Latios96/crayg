@@ -26,13 +26,6 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
     auto sphere = std::make_shared<Sphere>(Vector3f(0.f, 2.f, 0.f), 1.f);
     scene.addObject(sphere);
 
-    // find intersection for triangle
-    // find intersection for sphere
-
-    //triangle: isOwning==true
-    //sphere: isOwning==false
-
-    //respect offset, aka. ray starting at triangle ignores triangle
     SECTION("should find no intersection for empty scene") {
         Scene emptyScene;
         IntersectorFixture fixture(emptyScene);
