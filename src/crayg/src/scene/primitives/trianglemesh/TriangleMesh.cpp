@@ -2,6 +2,7 @@
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include "Logger.h"
+#include "utils/ToStringHelper.h"
 
 namespace crayg {
 
@@ -119,6 +120,14 @@ bool TriangleMesh::FaceVertexIndices::operator==(const TriangleMesh::FaceVertexI
 }
 bool TriangleMesh::FaceVertexIndices::operator!=(const TriangleMesh::FaceVertexIndices &rhs) const {
     return !(rhs == *this);
+}
+std::ostream &operator<<(std::ostream &os, const TriangleMesh::FaceVertexIndices &indices) {
+    os << ToStringHelper("FaceVertexIndices")
+        .addMember("v0", indices.v0)
+        .addMember("v1", indices.v1)
+        .addMember("v2", indices.v2)
+        .finish();
+    return os;
 }
 
 TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIterator::operator++() {

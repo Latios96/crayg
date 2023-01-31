@@ -2,6 +2,7 @@
 #define CRAYG_TRIANGEMESH_H
 
 #include <vector>
+#include <ostream>
 #include "basics/BoundingBox.h"
 #include "scene/SceneObject.h"
 #include "Triangle.h"
@@ -38,6 +39,7 @@ class TriangleMesh : public SceneObject {
         FaceVertexIndices(int v0, int v1, int v2);
         bool operator==(const FaceVertexIndices &rhs) const;
         bool operator!=(const FaceVertexIndices &rhs) const;
+        friend std::ostream &operator<<(std::ostream &os, const FaceVertexIndices &indices);
     };
     std::vector<FaceVertexIndices> faceVertexIndices;
 
