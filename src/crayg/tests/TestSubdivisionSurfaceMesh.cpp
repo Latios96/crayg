@@ -115,4 +115,26 @@ TEST_CASE("SubdivisionSurfaceMesh::faceCount") {
     }
 }
 
+TEST_CASE("SubdivisionSurfaceMesh::tessellate") {
+
+    SECTION("should tessellate correctly"){
+        SubdivisionSurfaceMesh subdivisionSurfaceMesh;
+        auto usdPreviewSurface = std::make_shared<UsdPreviewSurface>(Color::createWhite());
+        subdivisionSurfaceMesh.setMaterial(usdPreviewSurface);
+        const Transform transform = Transform::withPosition({0, 1, 0});
+        subdivisionSurfaceMesh.setTransform(transform);
+        SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
+
+        subdivisionSurfaceMesh.tessellate();
+
+        REQUIRE(subdivisionSurfaceMesh.points.empty());
+        REQUIRE(subdivisionSurfaceMesh.faceVertexIndices.empty());
+        REQUIRE(subdivisionSurfaceMesh.faceVertexCounts.empty());
+        REQUIRE(subdivisionSurfaceMesh.triangleMesh.points.size() == 81);
+        REQUIRE(subdivisionSurfaceMesh.triangleMesh.faceVertexIndices.size() == 128);
+        REQUIRE(subdivisionSurfaceMesh.triangleMesh.getMaterial() == usdPreviewSurface);
+        REQUIRE(subdivisionSurfaceMesh.triangleMesh.getTransform() == transform);
+    }
+}
+
 }
