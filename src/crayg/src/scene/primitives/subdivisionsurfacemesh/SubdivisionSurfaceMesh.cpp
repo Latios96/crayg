@@ -1,4 +1,5 @@
 #include "SubdivisionSurfaceMesh.h"
+#include "OpenSubdivRefiner.h"
 
 namespace crayg {
 Vector3f SubdivisionSurfaceMesh::getNormal(Vector3f point) {
@@ -34,6 +35,8 @@ size_t SubdivisionSurfaceMesh::primitiveCount() const {
     return triangleMesh.primitiveCount();
 }
 void SubdivisionSurfaceMesh::tessellate() {
+    OpenSubdivRefiner openSubdivRefiner(*this);
+    openSubdivRefiner.refine();
     // TODO check if transform and material is set correctly for triangle mesh
     isTessellated = true;
 }
