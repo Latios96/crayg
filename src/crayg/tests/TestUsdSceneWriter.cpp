@@ -43,6 +43,13 @@ TEST_CASE("UsdSceneWriter::write") {
         REQUIRE(count<pxr::UsdGeomCamera>(stage) == 1);
     }
 
+    SECTION("should not crash when there is no camera") {
+        scene.camera = nullptr;
+        usdSceneWriter.writeScene(stage);
+
+        REQUIRE(count<pxr::UsdGeomCamera>(stage) == 0);
+    }
+
     SECTION("should write render settings") {
         usdSceneWriter.writeScene(stage);
 

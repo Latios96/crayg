@@ -17,7 +17,9 @@ void crayg::UsdSceneWriter::writeScene(const std::string &scenePath) {
 }
 void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
     UsdPathFactory usdPathFactory;
-    UsdCameraWriter(scene.camera).write(stage, usdPathFactory);
+    if(scene.camera){
+        UsdCameraWriter(scene.camera).write(stage, usdPathFactory);
+    }
 
     UsdRenderSettingsWriter(scene.renderSettings).write(stage);
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
