@@ -133,6 +133,8 @@ set(crayg_SRCS
         scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.h
         scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.cpp
         scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h
+        scene/primitives/subdivisionsurfacemesh/FanTriangulator.cpp
+        scene/primitives/subdivisionsurfacemesh/FanTriangulator.h
         scene/RenderSettings.cpp
         scene/RenderSettings.h
         scene/Scene.cpp

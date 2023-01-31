@@ -1,0 +1,25 @@
+[2023-01-20 18:25:53.170] [console] [info] Crayg Renderer version 1.5.1, commit v1.5.1-765-g5887c4a
+[2023-01-20 18:25:53.171] [console] [info] Reading USD Stage M:\Test_Scene_Collection\Intel_Sponza\WithCurtains.usda..
+[2023-01-20 18:26:02.276] [console] [info] Using camera /PhysCamera001
+[2023-01-20 18:26:02.740] [console] [info] Reading USD Stage M:\Test_Scene_Collection\Intel_Sponza\WithCurtains.usda took 9 seconds.
+[2023-01-20 18:26:02.741] [console] [info] Applying rendersetting overrides: maxSamples -> 32
+[2023-01-20 18:26:03.032] [console] [info] Building SceneIntersector..
+[2023-01-20 18:26:03.033] [console] [info] Building Embree BVH..
+[2023-01-20 18:26:03.478] [console] [info] Building Embree BVH took less than one second.
+[2023-01-20 18:26:03.479] [console] [info] Building SceneIntersector took less than one second.
+[2023-01-20 18:26:03.479] [console] [info] Starting rendering..
+[2023-01-20 18:26:03.479] [console] [info] Choosing a bucket size of 42x42 pixels
+[2023-01-20 18:43:34.401] [console] [info] Rendering done by 10%, estimated time remaining: 2 hours 37 minutes 30 seconds
+[2023-01-20 18:57:09.856] [console] [info] Rendering done by 20%, estimated time remaining: 2 hours 4 minutes 24 seconds
+[2023-01-20 19:10:56.675] [console] [info] Rendering done by 30%, estimated time remaining: 1 hour 44 minutes 43 seconds
+[2023-01-20 19:23:44.149] [console] [info] Rendering done by 40%, estimated time remaining: 1 hour 26 minutes 30 seconds
+[2023-01-20 19:37:10.049] [console] [info] Rendering done by 50%, estimated time remaining: 1 hour 11 minutes 6 seconds
+[2023-01-20 19:49:57.581] [console] [info] Rendering done by 60%, estimated time remaining: 55 minutes 56 seconds
+[2023-01-20 20:06:04.052] [console] [info] Rendering done by 70%, estimated time remaining: 42 minutes 51 seconds
+[2023-01-20 20:21:38.306] [console] [info] Rendering done by 80%, estimated time remaining: 28 minutes 53 seconds
+[2023-01-20 20:37:10.496] [console] [info] Rendering done by 90%, estimated time remaining: 14 minutes 34 seconds
+[2023-01-20 20:49:20.548] [console] [info] Rendering done by 100%, estimated time remaining: less than one second
+[2023-01-20 20:49:20.549] [console] [info] Rendering done.
+[2023-01-20 20:49:20.549] [console] [info] Rendering took 2 hours 23 minutes 17 seconds.
+[2023-01-20 20:49:20.550] [console] [info] writing image to usdPreviewSurfaceTest.0002.png..
+[2023-01-20 20:49:20.882] [console] [info] writing image done.
