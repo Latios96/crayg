@@ -1,7 +1,9 @@
 #include "SubdivisionSurfaceMesh.h"
 #include "OpenSubdivRefiner.h"
+#include "FanTriangulator.h"
 
 namespace crayg {
+
 Vector3f SubdivisionSurfaceMesh::getNormal(Vector3f point) {
     verifyIsTessellated();
     return triangleMesh.getNormal(point);
@@ -37,7 +39,19 @@ size_t SubdivisionSurfaceMesh::primitiveCount() const {
 void SubdivisionSurfaceMesh::tessellate() {
     OpenSubdivRefiner openSubdivRefiner(*this);
     openSubdivRefiner.refine();
-    // TODO check if transform and material is set correctly for triangle mesh
+
+    FanTriangulator fanTriangulator(*this);
+    fanTriangulator.fanTriangulate(triangleMesh.faceVertexIndices);
+
+    triangleMesh.points = points;
+    triangleMesh.setMaterial(getMaterial());
+    triangleMesh.setTransform(getTransform());
+    triangleMesh.init();
+
+    points.clear();
+    faceVertexIndices.clear();
+    faceVertexCounts.clear();
+
     isTessellated = true;
 }
 std::size_t SubdivisionSurfaceMesh::faceCount() const {
