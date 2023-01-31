@@ -16,6 +16,23 @@ void SubdivisionSurfaceMeshFixtures::createUnitPlane(SubdivisionSurfaceMesh &sub
     subdivisionSurfaceMesh.faceVertexCounts.push_back(4);
 }
 
+void SubdivisionSurfaceMeshFixtures::createTriangleUnitPlane(SubdivisionSurfaceMesh &subdivisionSurfaceMesh) {
+    subdivisionSurfaceMesh.points.emplace_back(-0.5f,0.f,-0.5f);
+    subdivisionSurfaceMesh.points.emplace_back(0.5f,0.f,-0.5f);
+    subdivisionSurfaceMesh.points.emplace_back(0.5f,0.f,0.5f);
+    subdivisionSurfaceMesh.points.emplace_back(-0.5f,0.f,0.5f);
+
+    subdivisionSurfaceMesh.faceVertexIndices.push_back(0);
+    subdivisionSurfaceMesh.faceVertexIndices.push_back(1);
+    subdivisionSurfaceMesh.faceVertexIndices.push_back(2);
+    subdivisionSurfaceMesh.faceVertexIndices.push_back(0);
+    subdivisionSurfaceMesh.faceVertexIndices.push_back(2);
+    subdivisionSurfaceMesh.faceVertexIndices.push_back(3);
+
+    subdivisionSurfaceMesh.faceVertexCounts.push_back(3);
+    subdivisionSurfaceMesh.faceVertexCounts.push_back(3);
+}
+
 void SubdivisionSurfaceMeshFixtures::createUnitCube(SubdivisionSurfaceMesh &subdivisionSurfaceMesh) {
     subdivisionSurfaceMesh.points.emplace_back(-0.5f, -0.5f, 0.5f);
     subdivisionSurfaceMesh.points.emplace_back(0.5f, -0.5f, 0.5f);
