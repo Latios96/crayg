@@ -7,6 +7,7 @@ namespace crayg {
 
 const Ray RAY_WITH_NO_INTERSECTION = Ray({0,5,0},{1,0,0});
 const Ray RAY_WITH_TRIANGLE_INTERSECTION = Ray({0.75f,1,1.5f},{0,-1,0});
+const Ray RAY_WITH_SUBD_MESH_INTERSECTION = Ray({0.1f,1,0},{0,-1,0});
 const Ray RAY_WITH_SPHERE_INTERSECTION = Ray({-2,2,0},{1,0,0});
 const Ray RAY_ON_TRIANGLE = Ray({0.75f,0,1.5f},{0,1,0});
 
@@ -52,6 +53,23 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
         auto triangle = dynamic_cast<Triangle*>(intersection.imageable);
         REQUIRE(triangle->faceId == 3);
+        REQUIRE(intersection.isOwning == true);
+    }
+
+    SECTION("should find intersection for SubdivisionSurfaceMesh") {
+        Scene scene;
+        auto subdivisionSurfaceMesh = std::make_shared<SubdivisionSurfaceMesh>();
+        SubdivisionSurfaceMeshFixtures::createUnitPlane(*subdivisionSurfaceMesh);
+        subdivisionSurfaceMesh->tessellate();
+        scene.addObject(subdivisionSurfaceMesh);
+        IntersectorFixture fixture(scene);
+
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SUBD_MESH_INTERSECTION);
+
+        REQUIRE(intersection.isValid());
+        REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
+        auto triangle = dynamic_cast<Triangle*>(intersection.imageable);
+        REQUIRE(triangle->faceId == 64);
         REQUIRE(intersection.isOwning == true);
     }
 

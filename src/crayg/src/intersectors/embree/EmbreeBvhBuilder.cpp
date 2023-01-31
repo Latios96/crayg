@@ -2,6 +2,7 @@
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/Sphere.h"
 #include "utils/StopWatch.h"
+#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 
 namespace crayg {
 EmbreeBvhBuilder::EmbreeBvhBuilder(const Scene &scene) : scene(scene) {
@@ -20,26 +21,13 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
         auto &sceneObject = scene.objects[i];
         if (sceneObject->getType() == "TriangleMesh") {
             auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
-            RTCGeometry mesh = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
-
-            rtcSetSharedGeometryBuffer(mesh,
-                                       RTC_BUFFER_TYPE_VERTEX,
-                                       0, RTC_FORMAT_FLOAT3,
-                                       triangleMesh->points.data(),
-                                       0, sizeof(Vector3f),
-                                       triangleMesh->points.size());
-            rtcSetSharedGeometryBuffer(mesh,
-                                       RTC_BUFFER_TYPE_INDEX,
-                                       0, RTC_FORMAT_UINT3,
-                                       triangleMesh->faceVertexIndices.data(),
-                                       0,
-                                       sizeof(TriangleMesh::FaceVertexIndices),
-                                       triangleMesh->faceVertexIndices.size());
-
-            rtcCommitGeometry(mesh);
-            unsigned int geomId = rtcAttachGeometry(rtcScene, mesh);
-            embreeBvh->geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::TRIANGLE_MESH);
-            rtcReleaseGeometry(mesh);
+            unsigned int geomId = addTriangleMesh(device, rtcScene,  *triangleMesh);
+            embreeBvh->geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, TRIANGLE_MESH);
+        }
+        else if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
+            auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
+            unsigned int geomId = addTriangleMesh(device, rtcScene, subdivisionSurfaceMesh->triangleMesh);
+            embreeBvh->geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, SUBDIVISION_SURFACE_MESH);
         }
         else if(sceneObject->getType() == "Sphere"){
             auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
@@ -62,5 +50,29 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
     rtcCommitScene(rtcScene);
 
     return embreeBvh;
+}
+unsigned int EmbreeBvhBuilder::addTriangleMesh(RTCDevice device,
+                                       RTCScene rtcScene,
+                                       const TriangleMesh &triangleMesh) const {
+    RTCGeometry mesh = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
+
+    rtcSetSharedGeometryBuffer(mesh,
+                               RTC_BUFFER_TYPE_VERTEX,
+                               0, RTC_FORMAT_FLOAT3,
+                               triangleMesh.points.data(),
+                               0, sizeof(Vector3f),
+                               triangleMesh.points.size());
+    rtcSetSharedGeometryBuffer(mesh,
+                               RTC_BUFFER_TYPE_INDEX,
+                               0, RTC_FORMAT_UINT3,
+                               triangleMesh.faceVertexIndices.data(),
+                               0,
+                               sizeof(TriangleMesh::FaceVertexIndices),
+                               triangleMesh.faceVertexIndices.size());
+
+    rtcCommitGeometry(mesh);
+    unsigned int geomId = rtcAttachGeometry(rtcScene, mesh);
+    rtcReleaseGeometry(mesh);
+    return geomId;
 }
 } // crayg

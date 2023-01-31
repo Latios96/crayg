@@ -16,6 +16,8 @@ class EmbreeSceneIntersector : public SceneIntersector {
     std::unique_ptr<EmbreeBvh> embreeBvh;
     Imageable::Intersection mapToTriangle(const RTCRayHit &rtcRayHit,
                                           const EmbreeMappingEntry &embreeMappingEntry) const;
+    Imageable::Intersection mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
+                                          const EmbreeMappingEntry &embreeMappingEntry) const;
     Imageable::Intersection mapToSphere(const RTCRayHit &rtcRayHit,
                                         const EmbreeMappingEntry &embreeMappingEntry) const;
 };

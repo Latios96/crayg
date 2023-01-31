@@ -20,6 +20,8 @@ Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray) const 
     const auto sceneObjectMapping = embreeBvh->geomIdToSceneObject[rtcRayHit.hit.geomID];
     if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::TRIANGLE_MESH) {
         return mapToTriangle(rtcRayHit, sceneObjectMapping);
+    } else if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::SUBDIVISION_SURFACE_MESH) {
+        return mapToSubdivisionSurfaceMesh(rtcRayHit, sceneObjectMapping);
     } else if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::SPHERE) {
         return mapToSphere(rtcRayHit, sceneObjectMapping);
     }
@@ -49,6 +51,15 @@ Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &r
     auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
     auto triangle =
         new Triangle(triangleMesh.get(), rtcRayHit.hit.primID);
+    return Imageable::Intersection(rtcRayHit.ray.tfar, triangle, true);
+}
+
+Imageable::Intersection EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
+                                                                            const EmbreeMappingEntry &embreeMappingEntry) const {
+    auto sceneObject = scene.objects[embreeMappingEntry.sceneObjectIndex];
+    auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
+    auto triangle =
+        new Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID);
     return Imageable::Intersection(rtcRayHit.ray.tfar, triangle, true);
 }
 

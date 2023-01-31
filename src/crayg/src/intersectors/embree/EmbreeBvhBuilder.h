@@ -3,6 +3,7 @@
 
 #include "EmbreeBvh.h"
 #include "scene/Scene.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
 
 namespace crayg {
 
@@ -12,6 +13,9 @@ class EmbreeBvhBuilder {
     std::unique_ptr<EmbreeBvh> build() const;
  private:
     const Scene &scene;
+    unsigned int addTriangleMesh(RTCDevice device,
+                         RTCScene rtcScene,
+                         const TriangleMesh &sceneObject) const;
 };
 
 } // crayg
