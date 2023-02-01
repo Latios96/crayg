@@ -18,6 +18,7 @@ std::shared_ptr<SubdivisionSurfaceMesh> UsdSubdivisionSurfaceMeshReader::read() 
 
     translatePoints(subdivisionSurfaceMesh);
     translateIndices(subdivisionSurfaceMesh);
+    translateNormals(subdivisionSurfaceMesh);
 
     return subdivisionSurfaceMesh;
 }
@@ -57,4 +58,36 @@ void UsdSubdivisionSurfaceMeshReader::translateIndices(std::shared_ptr<Subdivisi
         offset += faceVertexCount;
     }
 }
+
+void UsdSubdivisionSurfaceMeshReader::translateNormals(std::shared_ptr<SubdivisionSurfaceMesh> subdivisionSurfaceMesh) {
+    if(!normalsAreAuthored()){
+        return;
+    }
+
+    pxr::VtVec3fArray normals;
+    usdPrim.GetNormalsAttr().Get(&normals, timeCodeToRead);
+
+    const pxr::TfToken normalsInterpolation = usdPrim.GetNormalsInterpolation();
+    if (normalsInterpolation == pxr::UsdGeomTokens->faceVarying) {
+        subdivisionSurfaceMesh->normalsInterpolation = PrimVarType::PER_VERTEX;
+    } else if (normalsInterpolation == pxr::UsdGeomTokens->vertex) {
+        subdivisionSurfaceMesh->normalsInterpolation = PrimVarType::PER_POINT;
+    } else {
+        Logger::warning(R"(Normals interpolation "{}" of mesh {} is not supported)",
+                        normalsInterpolation,
+                        usdPrim.GetPath());
+        return;
+    }
+    subdivisionSurfaceMesh->normals.reserve(normals.size());
+    for(auto &normal: normals){
+        subdivisionSurfaceMesh->normals.push_back(UsdConversions::convert(normal));
+    }
+}
+
+bool UsdSubdivisionSurfaceMeshReader::normalsAreAuthored() const {
+    pxr::VtVec3fArray normals;
+    usdPrim.GetNormalsAttr().Get(&normals, timeCodeToRead);
+    return !normals.empty();
+}
+
 } // crayg

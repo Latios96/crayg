@@ -1,8 +1,10 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_
 
+#include <optional>
 #include "scene/SceneObject.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/trianglemesh/primvars/PrimVarType.h"
 
 namespace crayg {
 
@@ -22,6 +24,9 @@ class SubdivisionSurfaceMesh: public SceneObject {
     std::vector<Vector3f> points;
     std::vector<int> faceVertexIndices;
     std::vector<int> faceVertexCounts;
+
+    std::vector<Vector3f> normals;
+    std::optional<PrimVarType> normalsInterpolation;
 
     TriangleMesh triangleMesh;
  private:

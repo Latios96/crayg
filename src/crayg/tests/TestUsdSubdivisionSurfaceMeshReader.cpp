@@ -31,6 +31,42 @@ TEST_CASE("UsdSubdivisionSurfaceMeshReader::read") {
             subdivisionSurfaceMesh->faceVertexCounts == std::vector<int>({4}));
         REQUIRE(subdivisionSurfaceMesh->getMaterial()->getName() == "defaultMaterial");
     }
+
+    SECTION("should not read unsupported normals interpolation"){
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage,pxr::UsdGeomTokens->catmullClark);
+
+        UsdSubdivisionSurfaceMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto subdivisionSurfaceMesh = usdMeshReader.read();
+
+        REQUIRE(subdivisionSurfaceMesh->normals.empty());
+        REQUIRE(!subdivisionSurfaceMesh->normalsInterpolation);
+    }
+
+    SECTION("should read per point normals"){
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage,pxr::UsdGeomTokens->catmullClark);
+        usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->vertex);
+        pxr::VtVec3fArray normals({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
+        usdGeomMesh.GetNormalsAttr().Set(normals);
+
+        UsdSubdivisionSurfaceMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto subdivisionSurfaceMesh = usdMeshReader.read();
+
+        REQUIRE(subdivisionSurfaceMesh->normals == std::vector<Vector3f>({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}}));
+        REQUIRE(subdivisionSurfaceMesh->normalsInterpolation == PrimVarType::PER_POINT);
+    }
+
+    SECTION("should read per vertex normals"){
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage,pxr::UsdGeomTokens->catmullClark);
+        usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->faceVarying);
+        pxr::VtVec3fArray normals({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
+        usdGeomMesh.GetNormalsAttr().Set(normals);
+
+        UsdSubdivisionSurfaceMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto subdivisionSurfaceMesh = usdMeshReader.read();
+
+        REQUIRE(subdivisionSurfaceMesh->normals == std::vector<Vector3f>({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}}));
+        REQUIRE(subdivisionSurfaceMesh->normalsInterpolation == PrimVarType::PER_VERTEX);
+    }
 }
 
 }
