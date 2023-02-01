@@ -33,6 +33,7 @@ void OpenSubdivRefiner::refine(int maxLevel) {
 
     refinePoints(refiner, maxLevel, refLastLevel);
     refineIndices(refLastLevel);
+    refineNormals(refiner,maxLevel,refLastLevel);
 }
 
 void OpenSubdivRefiner::refinePoints(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
@@ -75,6 +76,33 @@ void OpenSubdivRefiner::refineIndices(const OpenSubdiv::Far::TopologyLevel &refL
     subdivisionSurfaceMesh.faceVertexIndices = newFaceVertexIndices;// TODO is this needed? Or can we just push back directly in the original vector
     subdivisionSurfaceMesh.faceVertexCounts = newFaceVertexCounts;
 }
+
+void OpenSubdivRefiner::refineNormals(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,int maxlevel,const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
+    if(!subdivisionSurfaceMesh.normalsInterpolation){
+        return;
+    }
+
+    std::vector<Vector3f> subdividedNormals(refiner->GetNumVerticesTotal());
+    for(int i=0; i< subdivisionSurfaceMesh.normals.size(); i++){
+        subdividedNormals[i] = subdivisionSurfaceMesh.normals[i];
+    }
+
+    OpenSubdiv::Far::PrimvarRefiner primvarRefiner(*refiner);
+
+    auto *src = static_cast<OsdVector3fAdapter *>(subdividedNormals.data());
+    for (int level = 1; level <= maxlevel; ++level) {
+        OsdVector3fAdapter * dst = src + refiner->GetLevel(level-1).GetNumVertices();
+        primvarRefiner.Interpolate(level, src, dst);
+        src = dst;
+    }
+
+    subdivisionSurfaceMesh.normals.resize(refLastLevel.GetNumVertices());
+    int firstOfLastVerts = refiner->GetNumVerticesTotal() - refLastLevel.GetNumVertices();
+    for(int i=0;i<refLastLevel.GetNumVertices();i++){
+        subdivisionSurfaceMesh.normals[i] = subdividedNormals[firstOfLastVerts+i];
+    }
+}
+
 std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> OpenSubdivRefiner::createRefiner() {
     auto descriptor = createDescriptor();
 
@@ -90,6 +118,7 @@ std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> OpenSubdivRefiner::createRefin
                                                                                                                     options));
     return std::unique_ptr<OpenSubdiv::Far::TopologyRefiner>(refiner);
 }
+
 OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     OpenSubdiv::Far::TopologyDescriptor descriptor;
     descriptor.numVertices = subdivisionSurfaceMesh.points.size();
@@ -98,4 +127,5 @@ OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     descriptor.vertIndicesPerFace = subdivisionSurfaceMesh.faceVertexIndices.data(); // TODO check for clockwise/counter-clockwise
     return descriptor;
 }
+
 } // crayg
