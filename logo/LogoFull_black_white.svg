@@ -1,1 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?><svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.97 22.22"><defs><style>.cls-1{font-size:23.35px;}.cls-1,.cls-2,.cls-3{fill:#1d1d1b;}.cls-2,.cls-4,.cls-5{font-family:RalewayRoman-Medium, Raleway;font-variation-settings:'wght' 500;font-weight:500;}.cls-2,.cls-5{font-size:23.49px;}.cls-6,.cls-5{fill:#fff;}.cls-7,.cls-8,.cls-9,.cls-10{font-family:Raleway-Bold, Raleway;font-weight:700;}.cls-8{letter-spacing:-.01em;}.cls-9{letter-spacing:-.02em;}.cls-10{letter-spacing:0em;}</style></defs><rect class="cls-6" x="-.5" y="-.53" width="66.17" height="24.08"/><text class="cls-2" transform="translate(8.9 -4.66)"><tspan x="0" y="0">c</tspan></text><g><rect class="cls-3" x="6.59" y="9.3" width=".65" height="2.43" transform="translate(-5.41 7.97) rotate(-45)"/><rect class="cls-3" x="8.58" y="7.54" width=".65" height="4.49" transform="translate(8.29 23.01) rotate(-135)"/><polygon class="cls-3" points="11.4 7.31 8.61 8.06 10.66 10.1 11.4 7.31"/></g><text class="cls-1" transform="translate(1.4 14.88)"><tspan class="cls-4" x="0" y="0">c</tspan><tspan class="cls-10" x="12.93" y="0">r</tspan><tspan class="cls-8" x="21.81" y="0">a</tspan><tspan class="cls-9" x="34.9" y="0">y</tspan><tspan class="cls-7" x="47.32" y="0">g</tspan></text><text class="cls-5" transform="translate(29.37 -4.55)"><tspan x="0" y="0">c</tspan></text></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.97 22.22">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        font-family: Raleway-Bold, Raleway;
+      }
+
+      .cls-5, .cls-6 {
+        font-size: 23.49px;
+      }
+
+      .cls-5, .cls-6, .cls-7 {
+        font-family: RalewayRoman-Medium, Raleway;
+        font-variation-settings: 'wght' 500;
+      }
+
+      .cls-5, .cls-8, .cls-9 {
+        fill: #010200;
+      }
+
+      .cls-6, .cls-10 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        letter-spacing: 0em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-9 {
+        font-size: 23.35px;
+      }
+    </style>
+  </defs>
+  <rect class="cls-10" x="-.5" y="-.53" width="66.17" height="24.08"/>
+  <text class="cls-5" transform="translate(8.9 -4.66)"><tspan x="0" y="0">c</tspan></text>
+  <g>
+    <rect class="cls-8" x="6.59" y="9.3" width=".65" height="2.43" transform="translate(-5.41 7.97) rotate(-45)"/>
+    <rect class="cls-8" x="8.58" y="7.54" width=".65" height="4.49" transform="translate(8.29 23.01) rotate(-135)"/>
+    <polygon class="cls-8" points="11.4 7.31 8.61 8.06 10.66 10.1 11.4 7.31"/>
+  </g>
+  <text class="cls-9" transform="translate(1.4 14.88)"><tspan class="cls-7" x="0" y="0">c</tspan><tspan class="cls-2" x="12.93" y="0">r</tspan><tspan class="cls-1" x="21.81" y="0">a</tspan><tspan class="cls-4" x="34.9" y="0">y</tspan><tspan class="cls-3" x="47.32" y="0">g</tspan></text>
+  <text class="cls-6" transform="translate(29.37 -4.55)"><tspan x="0" y="0">c</tspan></text>
+</svg>
