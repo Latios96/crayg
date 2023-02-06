@@ -20,8 +20,18 @@ target_include_directories(crayg-framebuffer PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(crayg-framebuffer crayg Qt5::Core Qt5::Widgets ${CONAN_LIBS})
 
-add_executable(crayg-standalone-gui
-        main.cpp)
+if(APPLE)
+    set(MAC_OS_ICON_PATH ${CMAKE_SOURCE_DIR}/logo/generated/Logo_black_white.icns)
+    set(MACOSX_BUNDLE_ICON_FILE ${MAC_OS_ICON_PATH})
+
+    set(craygStandalone_ICON ${MAC_OS_ICON_PATH})
+    set_source_files_properties(${craygStandalone_ICON} PROPERTIES
+            MACOSX_PACKAGE_LOCATION "Resources")
+
+    add_executable(crayg-standalone-gui MACOSX_BUNDLE ${craygStandalone_ICON} main.cpp)
+else()
+    add_executable(crayg-standalone-gui main.cpp)
+endif()
 target_link_libraries(crayg-standalone-gui crayg crayg-framebuffer crayg-standalone-lib Qt5::Widgets Qt5::Core ${CONAN_LIBS})
 
 add_custom_command(TARGET crayg-standalone-gui PRE_BUILD
