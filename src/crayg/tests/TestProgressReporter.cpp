@@ -14,8 +14,14 @@ void _storeCallCount(int progress, float timeRemaining) {
     callCount++;
 }
 
+bool finishedCalled = false;
+
+void _storeFinishCalled(std::chrono::seconds seconds) {
+    finishedCalled = true;
+}
+
 TEST_CASE("ProgressReporter") {
-    ProgressReporter reporter(100, &_report);
+    ProgressReporter reporter(100, &_report,&_storeFinishCalled);
 
     SECTION("iterationsDoneShouldBeZero") {
         REQUIRE(reporter.iterationsDone == 0);
@@ -27,7 +33,7 @@ TEST_CASE("ProgressReporter") {
     }
 
     SECTION("progressCallbackShouldBeCalledEvery10") {
-        ProgressReporter reporter(100, &_storeCallCount);
+        ProgressReporter reporter(100, &_storeCallCount,&_storeFinishCalled);
 
         REQUIRE(callCount == 0);
         reporter.iterationDone();
@@ -36,6 +42,14 @@ TEST_CASE("ProgressReporter") {
         for (int i = 0; i < 10; i++) {
             reporter.iterationDone();
         }
+    }
+
+    SECTION("finished callback should be called"){
+        ProgressReporter reporter(100, &_storeCallCount,&_storeFinishCalled);
+
+        reporter.finish();
+
+        REQUIRE(finishedCalled);
     }
 
 }

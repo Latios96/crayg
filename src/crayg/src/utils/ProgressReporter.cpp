@@ -3,9 +3,10 @@
 
 namespace crayg {
 
-ProgressReporter::ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback) :
+ProgressReporter::ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback,std::function<void(std::chrono::seconds)> finishCallback) :
     maxIterations(maxIterations),
     progressionCallback(std::move(progressionCallback)),
+    finishCallback(std::move(finishCallback)),
     iterationsDone(0),
     remainingTimeCalculator(std::chrono::steady_clock::now()) {
     startTime = std::chrono::steady_clock::now();
@@ -17,15 +18,21 @@ ProgressReporter::ProgressReporter(const ProgressReporter &progressReporter) {
     remainingTimeCalculator = progressReporter.remainingTimeCalculator;
     startTime = progressReporter.startTime;
 }
-ProgressReporter ProgressReporter::createLoggingProgressReporter(int maxIterations, std::string logMessage) {
-    std::function<void(int, float)> logProgress = [logMessage](int progress, float timeRemaining) -> void {
+ProgressReporter ProgressReporter::createLoggingProgressReporter(int maxIterations, const std::string &taskName) {
+    std::function<void(int, float)> logProgress = [taskName](int progress, float timeRemaining) -> void {
         ReadableFormatter readableFormatter;
         readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeRemaining)));
-        Logger::info(logMessage.c_str(),
+        Logger::info("{} done by {}%, estimated time remaining: {}",
+                     taskName,
                      progress,
                      readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeRemaining))));
     };
-    return {maxIterations, logProgress};
+    std::function<void(std::chrono::seconds)> finishCallback = [taskName](std::chrono::seconds seconds)->void {
+        ReadableFormatter readableFormatter;
+        Logger::info("{} took {}.", taskName, readableFormatter.formatDuration(seconds));
+    };
+    Logger::info("{}..", taskName);
+    return {maxIterations, logProgress,finishCallback};
 }
 void ProgressReporter::iterationDone() {
 
@@ -41,11 +48,10 @@ void ProgressReporter::iterationDone() {
     }
 }
 std::chrono::seconds ProgressReporter::finish() {
-    ReadableFormatter readableFormatter;
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(end - startTime);
 
-    Logger::info("Rendering took {}.", readableFormatter.formatDuration(seconds));
+    finishCallback(seconds);
     return seconds;
 }
 
