@@ -51,6 +51,7 @@ set(UNIT_TEST_LIST
         TestOpenImageIoImageWriter.cpp
         TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp
+        TestPairDto.cpp
         TestPreconditions.cpp
         TestProgressReporter.cpp
         TestRay.cpp

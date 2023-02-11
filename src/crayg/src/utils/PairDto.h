@@ -7,8 +7,8 @@
 
 #define CRAYG_PAIR_DTO(Name, FirstType, FirstName, SecondType, SecondName) \
 struct Name {\
-    FirstType FirstName;                                                   \
-    SecondType SecondName;                                                 \
+    FirstType FirstName = FirstType();                                                   \
+    SecondType SecondName = SecondType();                                                 \
                                                                            \
     Name() = default;                                                      \
                                                                            \
@@ -24,9 +24,9 @@ struct Name {\
         return !(rhs == *this); \
     } \
     friend std::ostream &operator<<(std::ostream &os, const Name &dto) { \
-        os << ToStringHelper("Name") \
-            .addMember("FirstName", dto.FirstName) \
-            .addMember("SecondName", dto.SecondName) \
+        os << ToStringHelper(#Name) \
+            .addMember(#FirstName, dto.FirstName) \
+            .addMember(#SecondName, dto.SecondName) \
             .finish(); \
         return os; \
     }\
