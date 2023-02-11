@@ -65,7 +65,7 @@ Imageable::Intersection EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(cons
     return {rtcRayHit.ray.tfar, triangle, true};
 }
 
-EmbreeSceneIntersector::~EmbreeSceneIntersector() {
+EmbreeSceneIntersector::~EmbreeSceneIntersector() = default;
 
 EmbreeSceneIntersector::EmbreeSceneIntersector(Scene &scene, std::unique_ptr<EmbreeBvh> embreeBvh)
     : SceneIntersector(scene), embreeBvh(std::move(embreeBvh)) {}
