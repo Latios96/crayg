@@ -52,6 +52,7 @@ set(UNIT_TEST_LIST
         TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp
         TestPairDto.cpp
+        TestPixelBuffer.cpp
         TestPreconditions.cpp
         TestProgressReporter.cpp
         TestRay.cpp
