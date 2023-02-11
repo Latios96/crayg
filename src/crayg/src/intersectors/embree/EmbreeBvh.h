@@ -13,7 +13,7 @@ enum EmbreePrimitiveType {
     SPHERE
 };
 
-CRAYG_PAIR_DTO(EmbreeMappingEntry,unsigned int,sceneObjectIndex,EmbreePrimitiveType,primitiveType)
+CRAYG_PAIR_DTO(EmbreeMappingEntry,std::uint32_t,sceneObjectIndex,EmbreePrimitiveType,primitiveType)
 
 struct EmbreeBvh {
     RTCDevice rtcDevice;
