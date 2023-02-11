@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "scene/materials/UsdPreviewSurface.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
 
 namespace crayg {
