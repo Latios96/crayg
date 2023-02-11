@@ -29,7 +29,7 @@ if(APPLE)
             MACOSX_PACKAGE_LOCATION "Resources")
 
     add_executable(crayg-standalone-gui MACOSX_BUNDLE ${craygStandalone_ICON} main.cpp)
-elseif(WIN32)
+elseif (0)
     set(WINDOWS_APP_ICON_PATH ${CMAKE_SOURCE_DIR}/logo/generated/Logo_white_black.ico)
     CONFIGURE_FILE(appicon.rc.in ${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc)
     set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")

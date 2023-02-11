@@ -44,7 +44,7 @@ bool EmbreeSceneIntersector::isIntersecting(const Ray &ray) const {
 Imageable::Intersection EmbreeSceneIntersector::mapToSphere(const RTCRayHit &rtcRayHit,
                                                             const EmbreeMappingEntry &embreeMappingEntry) const {
     auto sceneObject = scene.objects[embreeMappingEntry.sceneObjectIndex];
-    return Imageable::Intersection(rtcRayHit.ray.tfar, sceneObject.get(), false);
+    return {rtcRayHit.ray.tfar, sceneObject.get(), false};
 }
 
 Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &rtcRayHit,
@@ -53,7 +53,7 @@ Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &r
     auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
     auto triangle =
         new Triangle(triangleMesh.get(), rtcRayHit.hit.primID);
-    return Imageable::Intersection(rtcRayHit.ray.tfar, triangle, true);
+    return {rtcRayHit.ray.tfar, triangle, true};
 }
 
 Imageable::Intersection EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
@@ -62,12 +62,11 @@ Imageable::Intersection EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(cons
     auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
     auto triangle =
         new Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID);
-    return Imageable::Intersection(rtcRayHit.ray.tfar, triangle, true);
+    return {rtcRayHit.ray.tfar, triangle, true};
 }
 
 EmbreeSceneIntersector::~EmbreeSceneIntersector() {
 
-}
 EmbreeSceneIntersector::EmbreeSceneIntersector(Scene &scene, std::unique_ptr<EmbreeBvh> embreeBvh)
     : SceneIntersector(scene), embreeBvh(std::move(embreeBvh)) {}
 } // crayg
