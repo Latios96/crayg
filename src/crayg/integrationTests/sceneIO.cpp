@@ -7,6 +7,7 @@
 #include <catch2/catch.hpp>
 #include <scene/materials/UsdPreviewSurface.h>
 #include <scene/primitives/GroundPlane.h>
+#include <scene/primitives/Sphere.h>
 #include <sceneIO/write/SceneWriter.h>
 
 namespace crayg {

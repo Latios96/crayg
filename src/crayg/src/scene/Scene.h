@@ -3,12 +3,11 @@
 
 #include <vector>
 #include <set>
-#include "primitives/Sphere.h"
+#include "scene/SceneObject.h"
 #include "lights/Light.h"
 #include "camera/Camera.h"
 #include "RenderSettings.h"
 #include "materials/ShadingNode.h"
-#include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include <memory>
 
 namespace crayg {

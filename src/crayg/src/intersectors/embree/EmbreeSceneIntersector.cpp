@@ -1,5 +1,7 @@
 #include "EmbreeSceneIntersector.h"
 #include "EmbreeUtils.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 
 namespace crayg {
 
