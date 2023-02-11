@@ -6,6 +6,7 @@
 #include "basics/Color.h"
 #include "basics/Vector3f.h"
 #include "ImageMetadata.h"
+#include "PixelPosition.h"
 
 namespace crayg {
 
@@ -45,16 +46,6 @@ class Image {
     void init(int width, int height);
 
     ImageMetadata metadata;
-};
-
-struct PixelPosition {
-    int x;
-    int y;
-
-    PixelPosition(int x, int y);
-    bool operator==(const PixelPosition &rhs) const;
-    bool operator!=(const PixelPosition &rhs) const;
-    friend std::ostream &operator<<(std::ostream &os, const PixelPosition &position);
 };
 
 }
