@@ -6,36 +6,36 @@ namespace crayg {
 struct PixelBufferSetValue {
     void operator()(float *data) const {
         if (colorChannelCount == 1) {
-            for (int index = startIndex; index < endIndex; index++) {
-                data[index] = color.r;
+            for (int pixelNumber = startPixelNumber; pixelNumber < endPixelNumber; pixelNumber++) {
+                data[pixelNumber] = color.r;
             }
             return;
         }
 
-        for (int index = startIndex; index < endIndex; index++) {
-            data[index] = color.r;
-            data[index + 1] = color.g;
-            data[index + 2] = color.b;
+        for (int pixelNumber = startPixelNumber; pixelNumber < endPixelNumber; pixelNumber++) {
+            data[pixelNumber * colorChannelCount] = color.r;
+            data[pixelNumber * colorChannelCount + 1] = color.g;
+            data[pixelNumber * colorChannelCount + 2] = color.b;
         }
     }
 
     void operator()(uint8_t *data) const {
         const auto values = color.getRgbValues();
         if (colorChannelCount == 1) {
-            for (int index = startIndex; index < endIndex; index++) {
-                data[index] = std::get<0>(values);
+            for (int pixelNumber = startPixelNumber; pixelNumber < endPixelNumber; pixelNumber++) {
+                data[pixelNumber] = std::get<0>(values);
             }
             return;
         }
-        for (int index = startIndex; index < endIndex; index++) {
-            data[index] = std::get<0>(values);
-            data[index + 1] = std::get<1>(values);
-            data[index + 2] = std::get<2>(values);
+        for (int pixelNumber = startPixelNumber; pixelNumber < endPixelNumber; pixelNumber++) {
+            data[pixelNumber * colorChannelCount] = std::get<0>(values);
+            data[pixelNumber * colorChannelCount + 1] = std::get<1>(values);
+            data[pixelNumber * colorChannelCount + 2] = std::get<2>(values);
         }
     }
 
-    int startIndex;
-    int endIndex;
+    int startPixelNumber;
+    int endPixelNumber;
     int colorChannelCount;
     const Color &color;
 };
@@ -43,20 +43,21 @@ struct PixelBufferSetValue {
 struct PixelBufferGetValue {
     Color operator()(float *data) const {
         if (colorChannelCount == 1) {
-            return Color::createGrey(data[index]);
+            return Color::createGrey(data[pixelNumber]);
         }
-        return {data[index], data[index + 1], data[index + 2]};
+        return {data[pixelNumber * colorChannelCount], data[pixelNumber * colorChannelCount + 1],
+                data[pixelNumber * colorChannelCount + 2]};
     }
     Color operator()(uint8_t *data) const {
         if (colorChannelCount == 1) {
-            return Color::createGrey(static_cast<float>(data[index]) / 255.f);
+            return Color::createGrey(static_cast<float>(data[pixelNumber]) / 255.f);
         }
-        return Color::fromRGB(data[index],
-                              data[index + 1],
-                              data[index + 2]);
+        return Color::fromRGB(data[pixelNumber * colorChannelCount],
+                              data[pixelNumber * colorChannelCount + 1],
+                              data[pixelNumber * colorChannelCount + 2]);
     }
 
-    int index;
+    int pixelNumber;
     int colorChannelCount;
 };
 
@@ -100,11 +101,13 @@ void PixelBuffer::fill(const Color &color) {
 }
 
 void PixelBuffer::setValue(const PixelPosition &pixelPosition, const Color &color) {
-    std::visit(PixelBufferSetValue {index(pixelPosition), index(pixelPosition) + 1, colorChannelCount, color}, data);
+    std::visit(PixelBufferSetValue {pixelNumber(pixelPosition), pixelNumber(pixelPosition) + 1, colorChannelCount,
+                                    color},
+               data);
 }
 
 Color PixelBuffer::getValue(const PixelPosition &pixelPosition) const {
-    return std::visit(PixelBufferGetValue {index(pixelPosition), colorChannelCount}, data);
+    return std::visit(PixelBufferGetValue {pixelNumber(pixelPosition), colorChannelCount}, data);
 }
 
 int PixelBuffer::pixelCount() const {
@@ -115,8 +118,8 @@ PixelBuffer::~PixelBuffer() {
     std::visit(PixelBufferFree {}, data);
 }
 
-int PixelBuffer::index(const PixelPosition &pixelPosition) const {
-    return (pixelPosition.x + width * pixelPosition.y) * colorChannelCount;
+int PixelBuffer::pixelNumber(const PixelPosition &pixelPosition) const {
+    return (pixelPosition.x + width * pixelPosition.y);
 }
 
 void PixelBuffer::init(PixelFormat pixelFormat) {

@@ -40,7 +40,7 @@ class PixelBuffer {
     friend std::ostream &operator<<(std::ostream &os, const PixelBuffer &buffer);
     ~PixelBuffer();
  private:
-    int index(const PixelPosition &pixelPosition) const;
+    int pixelNumber(const PixelPosition &pixelPosition) const;
     void init(PixelFormat pixelFormat);
 
     std::variant<float *, uint8_t *> data;
