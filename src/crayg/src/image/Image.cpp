@@ -129,6 +129,6 @@ bool Image::operator!=(const Image &rhs) const {
     return !(rhs == *this);
 }
 
-Image::ChannelView::ChannelView(const std::string_view channelName, PixelBuffer &channelBuffer) : channelName(
+Image::ChannelView::ChannelView(const std::string &channelName, PixelBuffer &channelBuffer) : channelName(
     channelName), channelBuffer(channelBuffer) {}
 }

@@ -41,8 +41,8 @@ class Image {
     void replaceChannel(const std::string &name, std::unique_ptr<PixelBuffer> pixelBuffer);
 
     struct ChannelView {
-        ChannelView(const std::string_view channelName, PixelBuffer &channelBuffer);
-        std::string_view channelName;
+        ChannelView(const std::string &channelName, PixelBuffer &channelBuffer);
+        std::string channelName;
         PixelBuffer &channelBuffer;
     };
 
