@@ -72,9 +72,9 @@ int main(int argc, char **argv) {
         std::thread renderThread([&image, &renderer, &imageOutputPath]() {
             renderer.renderScene();
 
-            crayg::Logger::info("writing image to {}..", imageOutputPath);
+            crayg::Logger::info("Writing image to {}..", imageOutputPath);
             crayg::ImageWriters::writeImage(image, imageOutputPath);
-            crayg::Logger::info("writing image done.");
+            crayg::Logger::info("Writing image done.");
         });
         renderThread.detach();
 

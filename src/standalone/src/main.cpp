@@ -47,9 +47,9 @@ int main(int argc, char *argv[]) {
         crayg::Renderer renderer(scene, imageOutputDriver);
         renderer.renderScene();
 
-        crayg::Logger::info("writing image to {}..", imageOutputPath);
+        crayg::Logger::info("Writing image to {}..", imageOutputPath);
         crayg::ImageWriters::writeImage(myImage, imageOutputPath);
-        crayg::Logger::info("writing image done.");
+        crayg::Logger::info("Writing image done.");
 
         return 0;
     }
