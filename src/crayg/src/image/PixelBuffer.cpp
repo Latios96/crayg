@@ -167,6 +167,10 @@ int PixelBuffer::getHeight() const {
     return height;
 }
 
+Resolution PixelBuffer::getResolution() const {
+    return {width, height};
+}
+
 int PixelBuffer::getColorChannelCount() const {
     return colorChannelCount;
 }

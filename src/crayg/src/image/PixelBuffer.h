@@ -34,6 +34,7 @@ class PixelBuffer {
     int pixelCount() const;
     int getWidth() const;
     int getHeight() const;
+    Resolution getResolution() const;
     int getColorChannelCount() const;
     const std::variant<float *, uint8_t *> &getData() const;
     bool operator==(const PixelBuffer &rhs) const;
