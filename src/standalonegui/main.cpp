@@ -53,8 +53,6 @@ int main(int argc, char **argv) {
 
         scene.renderSettings = parseResult.args->cliRenderSettingsOverride.resolveOverrides(scene.renderSettings);
 
-        crayg::Image myImage(scene.renderSettings.resolution);
-
         auto imageWidget = new crayg::ImageWidget(scene.renderSettings.resolution);
         crayg::ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
         crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
