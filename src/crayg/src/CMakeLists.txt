@@ -42,11 +42,11 @@ set(crayg_SRCS
         image/OpenImageIoImageWriter.cpp
         image/OpenImageIoImageWriter.h
         image/OutputDriver.h
+        image/PixelBuffer.cpp
+        image/PixelBuffer.h
         image/PixelPosition.h
         image/PngWriter.cpp
         image/PngWriter.h
-        image/PixelBuffer.cpp
-        image/PixelBuffer.h
         image/TeeOutputDriver.cpp
         image/TeeOutputDriver.h
         integrators/AbstractIntegrator.cpp
@@ -65,24 +65,24 @@ set(crayg_SRCS
         integrators/RaytracingIntegrator.h
         integrators/SurfaceInteraction.cpp
         integrators/SurfaceInteraction.h
+        intersectors/embree/EmbreeBvh.cpp
+        intersectors/embree/EmbreeBvh.h
+        intersectors/embree/EmbreeBvhBuilder.cpp
+        intersectors/embree/EmbreeBvhBuilder.h
+        intersectors/embree/EmbreeSceneIntersector.cpp
+        intersectors/embree/EmbreeSceneIntersector.h
+        intersectors/embree/EmbreeUtils.cpp
+        intersectors/embree/EmbreeUtils.h
+        intersectors/IntersectorFactory.h
+        intersectors/IntersectorType.h
         intersectors/naive/NaiveBvhBuilder.cpp
         intersectors/naive/NaiveBvhBuilder.h
         intersectors/naive/NaiveBvhNode.cpp
         intersectors/naive/NaiveBvhNode.h
         intersectors/naive/NaiveBvhSceneIntersector.cpp
         intersectors/naive/NaiveBvhSceneIntersector.h
-        intersectors/embree/EmbreeBvhBuilder.cpp
-        intersectors/embree/EmbreeBvhBuilder.h
-        intersectors/embree/EmbreeBvh.cpp
-        intersectors/embree/EmbreeBvh.h
-        intersectors/embree/EmbreeSceneIntersector.cpp
-        intersectors/embree/EmbreeSceneIntersector.h
-        intersectors/embree/EmbreeUtils.cpp
-        intersectors/embree/EmbreeUtils.h
-        intersectors/IntersectorType.h
         intersectors/SceneIntersector.cpp
         intersectors/SceneIntersector.h
-        intersectors/IntersectorFactory.h
         Logger.cpp
         Logger.h
         renderer/BucketSizeEstimator.cpp
@@ -124,6 +124,12 @@ set(crayg_SRCS
         scene/primitives/GroundPlane.h
         scene/primitives/Sphere.cpp
         scene/primitives/Sphere.h
+        scene/primitives/subdivisionsurfacemesh/FanTriangulator.cpp
+        scene/primitives/subdivisionsurfacemesh/FanTriangulator.h
+        scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.cpp
+        scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.h
+        scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.cpp
+        scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h
         scene/primitives/trianglemesh/BarycentricCoordinates.cpp
         scene/primitives/trianglemesh/BarycentricCoordinates.h
         scene/primitives/trianglemesh/primvars/PrimVarType.h
@@ -137,12 +143,6 @@ set(crayg_SRCS
         scene/primitives/trianglemesh/TriangleMesh.h
         scene/primitives/trianglemesh/TriangleMeshConversion.cpp
         scene/primitives/trianglemesh/TriangleMeshConversion.h
-        scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.cpp
-        scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.h
-        scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.cpp
-        scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h
-        scene/primitives/subdivisionsurfacemesh/FanTriangulator.cpp
-        scene/primitives/subdivisionsurfacemesh/FanTriangulator.h
         scene/RenderSettings.cpp
         scene/RenderSettings.h
         scene/Scene.cpp
@@ -223,8 +223,8 @@ set(crayg_SRCS
         utils/ImageMetadataCollector.h
         utils/ImagePathResolver.cpp
         utils/ImagePathResolver.h
-        utils/Preconditions.cpp
         utils/PairDto.h
+        utils/Preconditions.cpp
         utils/Preconditions.h
         utils/ProgressReporter.cpp
         utils/ProgressReporter.h

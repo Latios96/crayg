@@ -19,12 +19,9 @@ set(UNIT_TEST_LIST
         TestBoundingBox.cpp
         TestBucketImageBuffer.cpp
         TestBucketSizeEstimator.cpp
-        TestNaiveBvhBuilder.cpp
-        TestNaiveBvhBuilder.cpp
         TestBvhSceneIntersector.cpp
         TestCamera.cpp
         TestColor.cpp
-        TestGradient.cpp
         TestDebugIntegrator.cpp
         TestDiskLight.cpp
         TestEmbreeBvhBuilder.cpp
@@ -32,6 +29,7 @@ set(UNIT_TEST_LIST
         TestEmbreeUtils.cpp
         TestFanTriangulator.cpp
         TestFileSystemUtils.cpp
+        TestGradient.cpp
         TestGroundPlane.cpp
         TestImage.cpp
         TestImageAlgorithms.cpp
@@ -47,13 +45,15 @@ set(UNIT_TEST_LIST
         TestLight.cpp
         TestLineByLineIterator.cpp
         TestMatrix4x4f.cpp
+        TestNaiveBvhBuilder.cpp
+        TestNaiveBvhBuilder.cpp
         TestNode.cpp
         TestOpenExrWriter.cpp
-        TestPngWriter.cpp
         TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp
         TestPairDto.cpp
         TestPixelBuffer.cpp
+        TestPngWriter.cpp
         TestPreconditions.cpp
         TestProgressReporter.cpp
         TestRay.cpp

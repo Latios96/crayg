@@ -3,17 +3,17 @@ find_package(Qt5 COMPONENTS Core Widgets REQUIRED CONFIG)
 set(CMAKE_AUTOMOC ON)
 
 add_library(crayg-framebuffer
-        widgets/FrameBufferWidget.h
+        QtBase.h
+        resources/Stylesheet.h
         widgets/FrameBufferWidget.cpp
-        widgets/ImageWidget.h
+        widgets/FrameBufferWidget.h
         widgets/ImageWidget.cpp
-        widgets/ImageWidgetOutputDriver.h
+        widgets/ImageWidget.h
         widgets/ImageWidgetOutputDriver.cpp
+        widgets/ImageWidgetOutputDriver.h
         widgets/PanAndZoomArea.cpp
         widgets/PanAndZoomArea.h
         widgets/QtMetaTypes.h
-        resources/Stylesheet.h
-        QtBase.h
         )
 
 target_include_directories(crayg-framebuffer PUBLIC
