@@ -3,6 +3,7 @@
 #include <boost/filesystem.hpp>
 #include <image/PngWriter.h>
 #include <image/ImageIterators.h>
+#include "fixtures/TemporaryDirectory.h"
 
 namespace crayg {
 
@@ -14,16 +15,30 @@ TEST_CASE("PngWriter") {
         image.setValue(p.x, p.y, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
     }
 
-    if (boost::filesystem::exists("PngWriter.png")) {
-        REQUIRE(remove("PngWriter.png") == 0);
+    SECTION("should write PNG with rgb only") {
+        TemporaryDirectory temporaryDirectory;
+        auto targetPathRgb = (temporaryDirectory.getPath() / "PngWriter.png").string();
+
+        pngWriter.writeImage(image, targetPathRgb);
+
+        REQUIRE(boost::filesystem::exists(targetPathRgb));
     }
 
-    pngWriter.writeImage(image, "PngWriter.png");
-    REQUIRE(boost::filesystem::exists("PngWriter.png"));
+    SECTION("should write PNG with rgb, alpha and depth") {
+        image.addAlphaChannel();
+        image.addDepthChannel();
+        TemporaryDirectory temporaryDirectory;
+        auto targetPathRgb = (temporaryDirectory.getPath() / "PngWriter.png").string();
+        auto targetPathAlpha = (temporaryDirectory.getPath() / "PngWriter.alpha.png").string();
+        auto targetPathDepth = (temporaryDirectory.getPath() / "PngWriter.depth.png").string();
 
-    if (boost::filesystem::exists("testImage.png")) {
-        REQUIRE(remove("testImage.png") == 0);
+        pngWriter.writeImage(image, targetPathRgb);
+
+        REQUIRE(boost::filesystem::exists(targetPathRgb));
+        REQUIRE(boost::filesystem::exists(targetPathAlpha));
+        REQUIRE(boost::filesystem::exists(targetPathDepth));
     }
+
 }
 
 }
