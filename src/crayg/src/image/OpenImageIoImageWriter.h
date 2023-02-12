@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_OPENIMAGEIOIMAGEWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_OPENIMAGEIOIMAGEWRITER_H_
 
+#include "ImageWriter.h"
 #include <OpenImageIO/imageio.h>
 
 namespace crayg {
