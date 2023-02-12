@@ -34,6 +34,7 @@ set(UNIT_TEST_LIST
         TestImage.cpp
         TestImageAlgorithms.cpp
         TestImageBucketIterator.cpp
+        TestImageChannelPathResolver.cpp
         TestImageIterators.cpp
         TestImageMetadata.cpp
         TestImageMetadataCollector.cpp

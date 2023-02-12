@@ -219,6 +219,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdTriangleMeshWriter.h
         utils/FileSystemUtils.cpp
         utils/FileSystemUtils.h
+        utils/ImageChannelPathResolver.cpp
+        utils/ImageChannelPathResolver.h
         utils/ImageMetadataCollector.cpp
         utils/ImageMetadataCollector.h
         utils/ImagePathResolver.cpp
