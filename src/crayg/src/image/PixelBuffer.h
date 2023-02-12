@@ -19,6 +19,7 @@ class PixelBuffer {
  public:
     PixelBuffer(int width, int height, PixelFormat pixelFormat, int channelCount);
     PixelBuffer(const Resolution &resolution, PixelFormat pixelFormat, int channelCount);
+    PixelBuffer(const PixelBuffer &pixelBuffer);
     static std::unique_ptr<PixelBuffer> createRgbFloat(const Resolution &resolution);
     static std::unique_ptr<PixelBuffer> createGreyFloat(const Resolution &resolution);
     static std::unique_ptr<PixelBuffer> createRgbUInt8(const Resolution &resolution);
@@ -44,6 +45,7 @@ class PixelBuffer {
     void init(PixelFormat pixelFormat);
 
     std::variant<float *, uint8_t *> data;
+    PixelFormat pixelFormat;
     int colorChannelCount;
     int width, height;
 };

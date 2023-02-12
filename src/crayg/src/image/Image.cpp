@@ -2,67 +2,34 @@
 
 namespace crayg {
 
-Image::Image(int width, int height) {
-    init(width, height);
+Image::Image(int width, int height) : rgb(PixelBuffer({width, height}, PixelFormat::FLOAT, 3)) {
+
 }
-void Image::init(int width, int height) {
-    Image::width = width;
-    Image::height = height;
 
-    int size = width * height * 3;
-    values = new float[size];
+Image::Image(const Resolution &resolution) : rgb(PixelBuffer(resolution, PixelFormat::FLOAT, 3)) {
+}
 
-    for (int i = 0; i < size; i++) {
-        values[i] = 0;
-    }
+Image::Image(const Image &image) : rgb(image.rgb), metadata(image.metadata) {
 }
 
 int Image::getWidth() const {
-    return width;
+    return rgb.getWidth();
 }
 
 int Image::getHeight() const {
-    return height;
+    return rgb.getHeight();
 }
 
 void Image::setValue(int x, int y, const Color &color) {
-    int index = this->index(x, y);
-    values[index] = color.r;
-    values[index + 1] = color.g;
-    values[index + 2] = color.b;
-}
-
-void Image::setValue(int x, int y, float r, float g, float b) {
-    int index = this->index(x, y);
-    values[index] = r;
-    values[index + 1] = g;
-    values[index + 2] = b;
+    rgb.setValue({x, y}, color);
 }
 
 Color Image::getValue(int x, int y) const {
-    int index = this->index(x, y);
-    return {values[index], values[index + 1], values[index + 2]};
+    return rgb.getValue({x, y});
 }
 
-Image::Image(const Image &image) {
-    this->width = image.width;
-    this->height = image.height;
-
-    int size = width * height * 3;
-    values = new float[size];
-
-    for (int i = 0; i < size; i++) {
-        values[i] = image.values[i];
-    }
-}
-float *Image::getValues() const {
-    return values;
-}
 Resolution Image::getResolution() const {
-    return Resolution(width, height);
-}
-Image::Image(const Resolution &resolution) {
-    init(resolution.getWidth(), resolution.getHeight());
+    return {rgb.getWidth(), rgb.getHeight()};
 }
 
 }

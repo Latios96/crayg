@@ -67,13 +67,38 @@ struct PixelBufferFree {
 };
 
 PixelBuffer::PixelBuffer(int width, int height, PixelFormat pixelFormat, int channelCount)
-    : width(width), height(height), colorChannelCount(channelCount) {
+    : width(width), height(height), pixelFormat(pixelFormat), colorChannelCount(channelCount) {
     init(pixelFormat);
 }
 
 PixelBuffer::PixelBuffer(const Resolution &resolution, PixelFormat pixelFormat, int channelCount)
-    : width(resolution.getWidth()), height(resolution.getHeight()), colorChannelCount(channelCount) {
+    : width(resolution.getWidth()),
+      height(resolution.getHeight()),
+      pixelFormat(pixelFormat),
+      colorChannelCount(channelCount) {
     init(pixelFormat);
+}
+
+PixelBuffer::PixelBuffer(const PixelBuffer &pixelBuffer)
+    : width(pixelBuffer.width),
+      height(pixelBuffer.height),
+      pixelFormat(pixelBuffer.pixelFormat),
+      colorChannelCount(pixelBuffer.colorChannelCount) {
+    int count = pixelBuffer.pixelCount() * colorChannelCount;
+
+    if (pixelBuffer.pixelFormat == PixelFormat::FLOAT) {
+        data = new float[count];
+        std::memcpy(std::get<float *>(data),
+                    std::get<float *>(pixelBuffer.data),
+                    pixelCount() * colorChannelCount * sizeof(float));
+    } else if (pixelBuffer.pixelFormat == PixelFormat::UINT8) {
+        data = new uint8_t[count];
+        std::memcpy(std::get<uint8_t *>(data),
+                    std::get<uint8_t *>(pixelBuffer.data),
+                    pixelCount() * colorChannelCount * sizeof(uint8_t));
+    } else {
+        throw std::runtime_error("Unsupported pixel format");
+    }
 }
 
 std::unique_ptr<PixelBuffer> PixelBuffer::createRgbFloat(const Resolution &resolution) {

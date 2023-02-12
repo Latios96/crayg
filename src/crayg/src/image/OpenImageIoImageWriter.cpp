@@ -27,7 +27,7 @@ void OpenImageIoImageWriter::writeImage(const Image &image, std::string image_na
     writeImageMetadata(image, spec);
 
     out->open(image_name, spec);
-    out->write_image(OIIO::TypeDesc::FLOAT, image.getValues());
+    out->write_image(OIIO::TypeDesc::FLOAT, std::get<float *>(image.rgb.getData()));
     out->close();
 }
 

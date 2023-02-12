@@ -27,6 +27,29 @@ TEST_CASE("PixelBuffer::construct") {
     }
 }
 
+TEST_CASE("PixelBuffer::copy construct") {
+
+    SECTION("should construct a UNIT8 PixelBuffer with given dimensions") {
+        auto channelCount = GENERATE(1, 3);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::UINT8, channelCount);
+        pixelBuffer.setValue({2, 3}, Color::createWhite());
+
+        PixelBuffer copy = pixelBuffer;
+
+        REQUIRE(copy == pixelBuffer);
+    }
+
+    SECTION("should construct a FLOAT PixelBuffer with given resolution") {
+        auto channelCount = GENERATE(1, 3);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, channelCount);
+        pixelBuffer.setValue({2, 3}, Color::createWhite());
+
+        PixelBuffer copy = pixelBuffer;
+
+        REQUIRE(copy == pixelBuffer);
+    }
+}
+
 TEST_CASE("PixelBuffer::factory methods") {
     SECTION("createRgbFloat") {
         auto pixelBuffer = PixelBuffer::createRgbFloat(Resolution(5, 10));
