@@ -38,6 +38,8 @@ class Image {
     bool hasChannel(const std::string &name) const;
     std::optional<PixelBuffer *> getChannel(const std::string &name) const;
 
+    void replaceChannel(const std::string &name, std::unique_ptr<PixelBuffer> pixelBuffer);
+
     struct ChannelView {
         ChannelView(const std::string_view channelName, PixelBuffer &channelBuffer);
         std::string_view channelName;

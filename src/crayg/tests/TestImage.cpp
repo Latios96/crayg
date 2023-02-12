@@ -131,6 +131,27 @@ TEST_CASE("Image/getChannels", "[Image]") {
     }
 }
 
+TEST_CASE("Image/replaceChannel", "[Image]") {
+    SECTION("should replace rgb channel") {
+        Image myImage(16, 9);
+        myImage.setValue(2, 3, Color::createWhite());
+
+        myImage.replaceChannel("rgb", PixelBuffer::createRgbUInt8(myImage.getResolution()));
+        REQUIRE(myImage.getValue(2, 3) == Color::createBlack());
+    }
+
+    SECTION("should replace additional channel") {
+        Image myImage(16, 9);
+        myImage.addAlphaChannel();
+        (*myImage.getAlphaChannel())->setValue({2, 3}, Color::createWhite());
+
+        myImage.replaceChannel("alpha", PixelBuffer::createGreyFloat(myImage.getResolution()));
+
+        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
+        REQUIRE((*myImage.getAlphaChannel())->getValue({2, 3}) == Color::createBlack());
+    }
+}
+
 TEST_CASE("Image/getResolution", "[Image]") {
     Image image(10, 20);
 

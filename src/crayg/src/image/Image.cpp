@@ -93,6 +93,15 @@ std::vector<Image::ChannelView> Image::getChannels() const {
     }
     return channels;
 }
+
+void Image::replaceChannel(const std::string &name, std::unique_ptr<PixelBuffer> pixelBuffer) {
+    if (name == "rgb") {
+        rgb = *pixelBuffer.release();
+    } else {
+        additionalChannels[name] = std::move(pixelBuffer);
+    }
+}
+
 bool Image::operator==(const Image &rhs) const {
     const bool metadataMatches = metadata == rhs.metadata;
     const bool rgbMatches = rgb == rhs.rgb;
