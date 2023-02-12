@@ -2,13 +2,14 @@
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_OPENEXRWRITER_H_
 
 #include "ImageWriter.h"
+#include "OpenImageIoImageWriter.h"
 
 namespace crayg {
 
-class OpenExrWriter : public ImageWriter {
+class OpenExrWriter : public OpenImageIoImageWriter {
  public:
     void writeImage(const Image &image, std::string image_name) override;
-    virtual ~OpenExrWriter() = default;
+    ~OpenExrWriter() override = default;
 };
 
 } // crayg

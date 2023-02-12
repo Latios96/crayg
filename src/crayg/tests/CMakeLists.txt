@@ -49,7 +49,7 @@ set(UNIT_TEST_LIST
         TestMatrix4x4f.cpp
         TestNode.cpp
         TestOpenExrWriter.cpp
-        TestOpenImageIoImageWriter.cpp
+        TestPngWriter.cpp
         TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp
         TestPairDto.cpp

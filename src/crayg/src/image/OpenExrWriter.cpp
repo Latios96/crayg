@@ -1,5 +1,4 @@
 #include "OpenExrWriter.h"
-#include <OpenImageIO/imageio.h>
 
 namespace crayg {
 
@@ -78,6 +77,9 @@ void OpenExrWriter::writeImage(const Image &image, std::string image_name) {
         return;
 
     OIIO::ImageSpec spec(image.getWidth(), image.getHeight(), colorChannelCount, OIIO::TypeDesc::FLOAT);
+
+    writeImageMetadata(image, spec);
+
     int channelIndex = 0;
     spec.channelnames.clear();
     for (auto &channel: channels) {

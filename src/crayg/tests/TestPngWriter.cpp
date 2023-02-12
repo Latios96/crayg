@@ -1,25 +1,25 @@
 #include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <boost/filesystem.hpp>
-#include <image/OpenImageIoImageWriter.h>
+#include <image/PngWriter.h>
 #include <image/ImageIterators.h>
 
 namespace crayg {
 
-TEST_CASE("OpenImageIoImageWriter") {
+TEST_CASE("PngWriter") {
     Image image(20, 10);
-    OpenImageIoImageWriter openImageIoImageWriter;
+    PngWriter pngWriter;
 
     for (auto p: ImageIterators::lineByLine(image)) {
         image.setValue(p.x, p.y, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
     }
 
-    if (boost::filesystem::exists("OpenImageIoImageWriter.png")) {
-        REQUIRE(remove("OpenImageIoImageWriter.png") == 0);
+    if (boost::filesystem::exists("PngWriter.png")) {
+        REQUIRE(remove("PngWriter.png") == 0);
     }
 
-    openImageIoImageWriter.writeImage(image, "OpenImageIoImageWriter.png");
-    REQUIRE(boost::filesystem::exists("OpenImageIoImageWriter.png"));
+    pngWriter.writeImage(image, "PngWriter.png");
+    REQUIRE(boost::filesystem::exists("PngWriter.png"));
 
     if (boost::filesystem::exists("testImage.png")) {
         REQUIRE(remove("testImage.png") == 0);

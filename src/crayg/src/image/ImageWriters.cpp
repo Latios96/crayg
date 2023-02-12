@@ -1,6 +1,6 @@
 #include "ImageWriters.h"
 #include "ImageWriter.h"
-#include "OpenImageIoImageWriter.h"
+#include "PngWriter.h"
 #include "OpenExrWriter.h"
 #include <boost/filesystem.hpp>
 #include <fmt/format.h>
@@ -14,7 +14,7 @@ bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) 
     std::unique_ptr<ImageWriter> imageWriter;
 
     if (extension == ".png") {
-        imageWriter = std::unique_ptr<ImageWriter>(new OpenImageIoImageWriter());
+        imageWriter = std::unique_ptr<ImageWriter>(new PngWriter());
     } else if (extension == ".exr") {
         imageWriter = std::unique_ptr<ImageWriter>(new OpenExrWriter());
     } else {

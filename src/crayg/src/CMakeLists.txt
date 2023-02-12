@@ -43,6 +43,8 @@ set(crayg_SRCS
         image/OpenImageIoImageWriter.h
         image/OutputDriver.h
         image/PixelPosition.h
+        image/PngWriter.cpp
+        image/PngWriter.h
         image/PixelBuffer.cpp
         image/PixelBuffer.h
         image/TeeOutputDriver.cpp
