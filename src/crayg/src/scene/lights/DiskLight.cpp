@@ -1,6 +1,7 @@
 #include <boost/math/constants/constants.hpp>
 #include "DiskLight.h"
 #include "intersectors/SceneIntersector.h"
+#include "sampling/Random.h"
 
 namespace crayg {
 
