@@ -69,10 +69,28 @@
           "name": "writeBmpImage"
         },
         {
-          "name": "writeExrImage"
+          "name": "writeRgbExrImage"
         },
         {
-          "name": "writeToImageOutputDriver"
+          "name": "writeRgbazExrImage"
+        },
+        {
+          "name": "writeRgbazCustomChannelExrImage"
+        },
+        {
+          "name": "createRgbFloat"
+        },
+        {
+          "name": "createGreyFloat"
+        },
+        {
+          "name": "createRgbUInt8"
+        },
+        {
+          "name": "createGreyUInt8"
+        },
+        {
+          "name": "createVector3f"
         }
       ]
     },
