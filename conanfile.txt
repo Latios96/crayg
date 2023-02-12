@@ -13,6 +13,7 @@ USD/22.05@latios96/stable
 magic_enum/0.8.2
 cpuinfo/cci.20220228
 embree3/3.13.5
+tsl-ordered-map/1.1.0
 
 zlib/1.2.12
 

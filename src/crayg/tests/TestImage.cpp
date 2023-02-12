@@ -6,42 +6,128 @@ namespace crayg {
 TEST_CASE("Image/constructImage", "[Image]") {
     Image myImage(200, 100);
 
-    // make sure size is correct
     REQUIRE(myImage.getWidth() == 200);
     REQUIRE(myImage.getHeight() == 100);
 
-    // check image is 0 initialized
+    REQUIRE(myImage.rgb.isBlack());
+    REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb"}));
+}
 
-    for (int x = 0; x < myImage.getWidth(); x++) {
-        for (int y = 0; y < myImage.getHeight(); y++) {
-            Color color = myImage.getValue(x, y);
-            REQUIRE(color.r == 0);
-            REQUIRE(color.g == 0);
-            REQUIRE(color.b == 0);
+TEST_CASE("Image/copyImage", "[Image]") {
+    SECTION("copy image with rgb") {
+        Image myImage(200, 100);
+
+        for (int x = 0; x < myImage.getWidth(); x++) {
+            for (int y = 0; y < myImage.getHeight(); y++) {
+                myImage.setValue(x, y, Color::createGrey(static_cast<float>(x) * static_cast<float>(y)));
+            }
         }
+
+        Image otherImage(myImage);
+
+        REQUIRE(myImage == otherImage);
+    }
+
+    SECTION("copy images with channels") {
+        Image myImage(200, 100);
+        myImage.addAlphaChannel();
+
+        Image otherImage(myImage);
+
+        REQUIRE(myImage == otherImage);
+        REQUIRE(otherImage.hasAlphaChannel());
     }
 }
-TEST_CASE("Image/copyImage", "[Image]") {
-    Image myImage(200, 100);
 
-    for (int x = 0; x < myImage.getWidth(); x++) {
-        for (int y = 0; y < myImage.getHeight(); y++) {
-            myImage.setValue(x, y, Color::createGrey(static_cast<float>(x) * static_cast<float>(y)));
-        }
+TEST_CASE("Image/addAlphaChannel", "[Image]") {
+    SECTION("should add alpha channel") {
+        Image myImage(16, 9);
+
+        myImage.addAlphaChannel();
+
+        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
+        REQUIRE(myImage.hasAlphaChannel());
+        REQUIRE(myImage.getAlphaChannel() != nullptr);
+        REQUIRE((*myImage.getAlphaChannel())->getResolution() == myImage.getResolution());
     }
 
-    Image otherImage(myImage);
+    SECTION("should not overwrite alpha channel") {
+        Image myImage(16, 9);
 
-    REQUIRE(myImage.getHeight() == otherImage.getHeight());
-    REQUIRE(myImage.getWidth() == otherImage.getWidth());
+        myImage.addAlphaChannel();
+        (*myImage.getAlphaChannel())->setValue({2, 3}, Color::createWhite());
+        myImage.addAlphaChannel();
 
-    for (int x = 0; x < otherImage.getWidth(); x++) {
-        for (int y = 0; y < otherImage.getHeight(); y++) {
-            Color color = otherImage.getValue(x, y);
-            REQUIRE(color.r == x * y);
-            REQUIRE(color.g == x * y);
-            REQUIRE(color.b == x * y);
-        }
+        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
+        REQUIRE((*myImage.getAlphaChannel())->getValue({2, 3}) == Color::createWhite());
+    }
+}
+
+TEST_CASE("Image/addDepthChannel", "[Image]") {
+    SECTION("should add depth channel") {
+        Image myImage(16, 9);
+
+        myImage.addDepthChannel();
+
+        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "depth"}));
+        REQUIRE(myImage.hasDepthChannel());
+        REQUIRE(myImage.getDepthChannel() != nullptr);
+        REQUIRE((*myImage.getDepthChannel())->getResolution() == myImage.getResolution());
+    }
+
+    SECTION("should not overwrite depth channel") {
+        Image myImage(16, 9);
+
+        myImage.addDepthChannel();
+        (*myImage.getDepthChannel())->setValue({2, 3}, Color::createWhite());
+        myImage.addDepthChannel();
+
+        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "depth"}));
+        REQUIRE((*myImage.getDepthChannel())->getValue({2, 3}) == Color::createWhite());
+    }
+}
+
+TEST_CASE("Image/addChannel", "[Image]") {
+    SECTION("order should be maintained") {
+        Image myImage(16, 9);
+
+        myImage.addAlphaChannel();
+        myImage.addDepthChannel();
+        myImage.addChannel("custom", PixelBuffer::createRgbFloat({16, 9}));
+
+        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha", "depth", "custom"}));
+    }
+
+    SECTION("should add a custom channel") {
+        Image myImage(16, 9);
+
+        myImage.addChannel("custom", PixelBuffer::createRgbFloat({16, 9}));
+
+        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "custom"}));
+        REQUIRE(myImage.getChannel("custom") != nullptr);
+    }
+}
+
+TEST_CASE("Image/getChannels", "[Image]") {
+    SECTION("should return only rgb") {
+        Image myImage(16, 9);
+
+        auto channels = myImage.getChannels();
+
+        REQUIRE(channels.size() == 1);
+        REQUIRE(channels[0].channelName == "rgb");
+        REQUIRE(channels[0].channelBuffer == myImage.rgb);
+    }
+
+    SECTION("should return channels") {
+        Image myImage(16, 9);
+        myImage.addAlphaChannel();
+
+        auto channels = myImage.getChannels();
+
+        REQUIRE(channels.size() == 2);
+        REQUIRE(channels[0].channelName == "rgb");
+        REQUIRE(channels[1].channelName == "alpha");
     }
 }
 
