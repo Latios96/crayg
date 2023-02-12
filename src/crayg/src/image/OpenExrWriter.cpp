@@ -2,39 +2,6 @@
 
 namespace crayg {
 
-void example(const std::string &filename) {
-    struct Pixel { half r, g, b, a; float z; };
-    Pixel pixels[160 * 90];
-    for (auto &pixel: pixels) {
-        pixel.r = 0.5;
-        pixel.g = 0.5;
-        pixel.b = 0.5;
-        pixel.a = 0.5;
-        pixel.z = 0.5;
-    }
-
-    auto out = OIIO::ImageOutput::create("foo.exr");
-
-// Double check that this format accepts per-channel formats
-    if (!out->supports("channelformats")) {
-        return;
-    }
-
-// Prepare an ImageSpec with per-channel formats
-    OIIO::ImageSpec spec(160, 90, 5, OIIO::TypeDesc::FLOAT);
-    spec.channelformats.assign(
-        {OIIO::TypeHalf, OIIO::TypeHalf, OIIO::TypeHalf, OIIO::TypeHalf, OIIO::TypeFloat});
-    spec.channelnames.assign({"R", "G", "B", "A", "Z"});
-    spec.alpha_channel = 3;
-    spec.z_channel = 4;
-
-    out->open(filename, spec);
-    out->write_image(OIIO::TypeDesc::UNKNOWN, /* use channel formats */
-                     pixels,            /* data buffer */
-                     sizeof(Pixel));    /* pixel stride */
-    out->close();
-}
-
 void OpenExrWriter::writeImage(const Image &image, std::string image_name) {
     unsigned int pixelCount = image.getWidth() * image.getHeight();
     unsigned int pixelSize = 0;
