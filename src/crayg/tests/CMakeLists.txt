@@ -48,6 +48,7 @@ set(UNIT_TEST_LIST
         TestLineByLineIterator.cpp
         TestMatrix4x4f.cpp
         TestNode.cpp
+        TestOpenExrWriter.cpp
         TestOpenImageIoImageWriter.cpp
         TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp

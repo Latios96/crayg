@@ -37,6 +37,8 @@ set(crayg_SRCS
         image/ImageWriters.cpp
         image/ImageWriters.h
         image/LineByLineIterator.h
+        image/OpenExrWriter.cpp
+        image/OpenExrWriter.h
         image/OpenImageIoImageWriter.cpp
         image/OpenImageIoImageWriter.h
         image/OutputDriver.h

@@ -6,7 +6,7 @@
 
 namespace crayg {
 
-static const char *const TEST_IMAGE_BMP = "ImageWriters_bmp.bmp";
+static const char *const TEST_IMAGE_EXR = "ImageWriters_exr.exr";
 static const char *const TEST_IMAGE_PNG = "ImageWriters_png.png";
 static const char *const TEST_IMAGE_UNKNOWN = "ImageWriters_unknown.unknown";
 
@@ -23,6 +23,19 @@ TEST_CASE("ImageWriters/ImageWriterType") {
 
         if (boost::filesystem::exists(TEST_IMAGE_PNG)) {
             REQUIRE(remove(TEST_IMAGE_PNG) == 0);
+        }
+    }
+
+    SECTION("EXR") {
+        if (boost::filesystem::exists(TEST_IMAGE_EXR)) {
+            REQUIRE(remove(TEST_IMAGE_EXR) == 0);
+        }
+
+        REQUIRE(ImageWriters::writeImage(image, TEST_IMAGE_EXR));
+        REQUIRE(boost::filesystem::exists(TEST_IMAGE_EXR));
+
+        if (boost::filesystem::exists(TEST_IMAGE_EXR)) {
+            REQUIRE(remove(TEST_IMAGE_EXR) == 0);
         }
     }
 
