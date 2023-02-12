@@ -229,5 +229,8 @@ std::ostream &operator<<(std::ostream &os, const PixelBuffer &buffer) {
         .finish();
     return os;
 }
+PixelFormat PixelBuffer::getPixelFormat() const {
+    return pixelFormat;
+}
 
 } // crayg

@@ -34,6 +34,7 @@ class PixelBuffer {
     int pixelCount() const;
     int getWidth() const;
     int getHeight() const;
+    PixelFormat getPixelFormat() const;
     Resolution getResolution() const;
     int getColorChannelCount() const;
     const std::variant<float *, uint8_t *> &getData() const;
