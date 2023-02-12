@@ -97,7 +97,7 @@ TEST_CASE("PixelBuffer::comparison") {
         PixelBuffer right(5, 10, PixelFormat::FLOAT, channelCount);
         right.setValue({2, 3}, Color::createWhite());
 
-        REQUIRE(left == right);
+        REQUIRE(left != right);
     }
 
     SECTION("black and white buffer should not be equal") {
