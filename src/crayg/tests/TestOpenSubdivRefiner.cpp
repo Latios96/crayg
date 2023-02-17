@@ -91,21 +91,29 @@ TEST_CASE("OpenSubdivRefiner::refine") {
     SECTION("should refine per vertex normals") {
         SubdivisionSurfaceMesh subdivisionSurfaceMesh;
         SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
-        subdivisionSurfaceMesh.normals = std::vector<Vector3f>({ {-0.5f,0.f,-0.5f}, {0.5f,0.f,-0.5f}, {0.5f,0.f,0.5f},{-0.5f,0.f,0.5f}});
+        subdivisionSurfaceMesh.normals =
+            std::vector<Vector3f>({{-0.5f, 0.f, -0.5f}, {0.5f, 0.f, -0.5f}, {0.5f, 0.f, 0.5f}, {-0.5f, 0.f, 0.5f}});
         subdivisionSurfaceMesh.normalsInterpolation = PrimVarType::PER_VERTEX;
         OpenSubdivRefiner openSubdivRefiner(subdivisionSurfaceMesh);
 
         openSubdivRefiner.refine(1);
 
-        REQUIRE(subdivisionSurfaceMesh.normals == std::vector<Vector3f>({{-0.375f, 0, -0.375f},
-                                                                         {0.375f, 0, -0.375f},
-                                                                         {0.375f, 0, 0.375f},
-                                                                         {-0.375f, 0, 0.375f},
+        REQUIRE(subdivisionSurfaceMesh.normals == std::vector<Vector3f>({{-0.5f, 0, -0.5f},
+                                                                         {0, 0, -0.5f},
                                                                          {0, 0, 0},
-                                                                         {0, 0, -0.5},
-                                                                         {0.5, 0, 0},
+                                                                         {-0.5f, 0, 0},
+                                                                         {0, 0, -0.5f},
+                                                                         {0.5f, 0, -0.5f},
+                                                                         {0.5f, 0, 0},
+                                                                         {0, 0, 0},
+                                                                         {0, 0, 0},
+                                                                         {0.5f, 0, 0},
+                                                                         {0.5f, 0, 0.5f},
                                                                          {0, 0, 0.5f},
-                                                                         {-0.5f, 0, 0}}));
+                                                                         {-0.5f, 0, 0},
+                                                                         {0, 0, 0},
+                                                                         {0, 0, 0.5f},
+                                                                         {-0.5f, 0, 0.5f},}));
     }
 }
 

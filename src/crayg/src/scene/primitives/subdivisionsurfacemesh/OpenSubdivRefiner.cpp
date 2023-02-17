@@ -21,6 +21,28 @@ class OsdVector3fAdapter : public Vector3f {
     }
 };
 
+void interpolatePerPoint(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
+                         int maxlevel,
+                         const OpenSubdiv::Far::PrimvarRefiner &primvarRefiner,
+                         OsdVector3fAdapter *src) {
+    for (int level = 1; level <= maxlevel; ++level) {
+        OsdVector3fAdapter *dst = src + refiner->GetLevel(level - 1).GetNumVertices();
+        primvarRefiner.Interpolate(level, src, dst);
+        src = dst;
+    }
+}
+
+void interpolatePerVertex(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
+                          int maxlevel,
+                          const OpenSubdiv::Far::PrimvarRefiner &primvarRefiner,
+                          OsdVector3fAdapter *src) {
+    for (int level = 1; level <= maxlevel; ++level) {
+        OsdVector3fAdapter *dst = src + refiner->GetLevel(level - 1).GetNumVertices();
+        primvarRefiner.InterpolateFaceVarying(level, src, dst);
+        src = dst;
+    }
+}
+
 OpenSubdivRefiner::OpenSubdivRefiner(SubdivisionSurfaceMesh &subdivisionSurfaceMesh) : subdivisionSurfaceMesh(
     subdivisionSurfaceMesh) {}
 
@@ -47,11 +69,7 @@ void OpenSubdivRefiner::refinePoints(const std::unique_ptr<OpenSubdiv::Far::Topo
     OpenSubdiv::Far::PrimvarRefiner primvarRefiner(*refiner);
 
     auto *src = static_cast<OsdVector3fAdapter *>(subdividedPoints.data());
-    for (int level = 1; level <= maxlevel; ++level) {
-        OsdVector3fAdapter *dst = src + refiner->GetLevel(level - 1).GetNumVertices();
-        primvarRefiner.Interpolate(level, src, dst);
-        src = dst;
-    }
+    interpolatePerPoint(refiner, maxlevel, primvarRefiner, src);
 
     subdivisionSurfaceMesh.points.resize(refLastLevel.GetNumVertices());
     int firstOfLastVerts = refiner->GetNumVerticesTotal() - refLastLevel.GetNumVertices();
@@ -85,7 +103,11 @@ void OpenSubdivRefiner::refineNormals(const std::unique_ptr<OpenSubdiv::Far::Top
         return;
     }
 
-    std::vector<Vector3f> subdividedNormals(refiner->GetNumVerticesTotal());
+    int normalsSize = refiner->GetNumVerticesTotal();
+    if (subdivisionSurfaceMesh.normalsInterpolation == PrimVarType::PER_VERTEX) {
+        normalsSize = refiner->GetNumFVarValuesTotal(0);// refiner->GetLevel(maxlevel).GetNumFVarValues(0);
+    }
+    std::vector<Vector3f> subdividedNormals(normalsSize);
     for (int i = 0; i < subdivisionSurfaceMesh.normals.size(); i++) {
         subdividedNormals[i] = subdivisionSurfaceMesh.normals[i];
     }
@@ -93,16 +115,30 @@ void OpenSubdivRefiner::refineNormals(const std::unique_ptr<OpenSubdiv::Far::Top
     OpenSubdiv::Far::PrimvarRefiner primvarRefiner(*refiner);
 
     auto *src = static_cast<OsdVector3fAdapter *>(subdividedNormals.data());
-    for (int level = 1; level <= maxlevel; ++level) {
-        OsdVector3fAdapter *dst = src + refiner->GetLevel(level - 1).GetNumVertices();
-        primvarRefiner.Interpolate(level, src, dst);
-        src = dst;
+    if (subdivisionSurfaceMesh.normalsInterpolation == PrimVarType::PER_POINT) {
+        interpolatePerPoint(refiner, maxlevel, primvarRefiner, src);
+    } else {
+        interpolatePerVertex(refiner, maxlevel, primvarRefiner, src);
     }
 
-    subdivisionSurfaceMesh.normals.resize(refLastLevel.GetNumVertices());
-    int firstOfLastVerts = refiner->GetNumVerticesTotal() - refLastLevel.GetNumVertices();
-    for (int i = 0; i < refLastLevel.GetNumVertices(); i++) {
-        subdivisionSurfaceMesh.normals[i] = subdividedNormals[firstOfLastVerts + i];
+    int normalCountForLastLevel =
+        subdivisionSurfaceMesh.normalsInterpolation == PrimVarType::PER_POINT ? refLastLevel.GetNumVertices()
+                                                                              : refLastLevel.GetNumFVarValues(0);
+    int firstOfLastVerts = normalsSize - normalCountForLastLevel;
+    if (subdivisionSurfaceMesh.normalsInterpolation == PrimVarType::PER_POINT) {
+        subdivisionSurfaceMesh.normals.resize(normalCountForLastLevel);
+        for (int i = 0; i < normalCountForLastLevel; i++) {
+            subdivisionSurfaceMesh.normals[i] = subdividedNormals[firstOfLastVerts + i];
+        }
+    } else {
+        const int numberOfFaces = refLastLevel.GetNumFaces();
+        subdivisionSurfaceMesh.normals.clear();
+        for (int face = 0; face < numberOfFaces; face++) {
+            OpenSubdiv::Far::ConstIndexArray fverts = refLastLevel.GetFaceVertices(face);
+            for (int fvert: fverts) {
+                subdivisionSurfaceMesh.normals.push_back(subdividedNormals[firstOfLastVerts + fvert]);
+            }
+        }
     }
 }
 
@@ -130,6 +166,19 @@ OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     descriptor.numVertsPerFace = subdivisionSurfaceMesh.faceVertexCounts.data();
     descriptor.vertIndicesPerFace =
         subdivisionSurfaceMesh.faceVertexIndices.data(); // TODO check for clockwise/counter-clockwise
+
+    if (!subdivisionSurfaceMesh.normals.empty()) {
+        channels[0].numValues = subdivisionSurfaceMesh.normals.size();
+        normalsIndices.reserve(subdivisionSurfaceMesh.normals.size());
+        for (int i = 0; i < subdivisionSurfaceMesh.normals.size(); i++) {
+            normalsIndices.push_back(i);
+        }
+        channels[0].valueIndices = normalsIndices.data();
+
+        descriptor.numFVarChannels = 1;
+        descriptor.fvarChannels = channels;
+    }
+
     return descriptor;
 }
 
