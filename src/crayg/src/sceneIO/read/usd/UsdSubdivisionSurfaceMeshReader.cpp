@@ -19,6 +19,7 @@ std::shared_ptr<SubdivisionSurfaceMesh> UsdSubdivisionSurfaceMeshReader::read() 
     translatePoints(subdivisionSurfaceMesh);
     translateIndices(subdivisionSurfaceMesh);
     translateNormals(subdivisionSurfaceMesh);
+    translateBoundaryInterpolation(subdivisionSurfaceMesh);
 
     return subdivisionSurfaceMesh;
 }
@@ -79,7 +80,7 @@ void UsdSubdivisionSurfaceMeshReader::translateNormals(std::shared_ptr<Subdivisi
         return;
     }
     subdivisionSurfaceMesh->normals.reserve(normals.size());
-    for(auto &normal: normals){
+    for (auto &normal: normals) {
         subdivisionSurfaceMesh->normals.push_back(UsdConversions::convert(normal));
     }
 }
@@ -88,6 +89,16 @@ bool UsdSubdivisionSurfaceMeshReader::normalsAreAuthored() const {
     pxr::VtVec3fArray normals;
     usdPrim.GetNormalsAttr().Get(&normals, timeCodeToRead);
     return !normals.empty();
+}
+
+void UsdSubdivisionSurfaceMeshReader::translateBoundaryInterpolation(std::shared_ptr<SubdivisionSurfaceMesh> subdivisionSurfaceMesh) {
+    auto interpolateBoundary =
+        UsdUtils::getAttributeValueAs<pxr::TfToken>(usdPrim.GetInterpolateBoundaryAttr(), timeCodeToRead);
+    if (interpolateBoundary == pxr::UsdGeomTokens->edgeAndCorner) {
+        subdivisionSurfaceMesh->boundaryInterpolation = SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_AND_CORNER;
+        return;
+    }
+    subdivisionSurfaceMesh->boundaryInterpolation = SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_ONLY;
 }
 
 } // crayg

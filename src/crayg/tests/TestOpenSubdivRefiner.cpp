@@ -29,10 +29,49 @@ TEST_CASE("OpenSubdivRefiner::refine") {
         REQUIRE(subdivisionSurfaceMesh.normals.empty());
     }
 
+    SECTION("should refine mesh with boundary interpolation edge only") {
+        SubdivisionSurfaceMesh subdivisionSurfaceMesh;
+        SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
+        subdivisionSurfaceMesh.boundaryInterpolation = SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_ONLY;
+        OpenSubdivRefiner openSubdivRefiner(subdivisionSurfaceMesh);
+
+        openSubdivRefiner.refine(1);
+
+        REQUIRE(subdivisionSurfaceMesh.points == std::vector<Vector3f>({{-0.375f, 0, -0.375f},
+                                                                        {0.375f, 0, -0.375f},
+                                                                        {0.375f, 0, 0.375f},
+                                                                        {-0.375f, 0, 0.375f},
+                                                                        {0, 0, 0},
+                                                                        {0, 0, -0.5},
+                                                                        {0.5, 0, 0},
+                                                                        {0, 0, 0.5f},
+                                                                        {-0.5f, 0, 0}}));
+    }
+
+    SECTION("should refine mesh with boundary interpolation edge and corner") {
+        SubdivisionSurfaceMesh subdivisionSurfaceMesh;
+        SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
+        subdivisionSurfaceMesh.boundaryInterpolation = SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_AND_CORNER;
+        OpenSubdivRefiner openSubdivRefiner(subdivisionSurfaceMesh);
+
+        openSubdivRefiner.refine(1);
+
+        REQUIRE(subdivisionSurfaceMesh.points == std::vector<Vector3f>({{-0.5f, 0, -0.5f},
+                                                                        {0.5f, 0, -0.5f},
+                                                                        {0.5f, 0, 0.5f},
+                                                                        {-0.5f, 0, 0.5f},
+                                                                        {0, 0, 0},
+                                                                        {0, 0, -0.5},
+                                                                        {0.5, 0, 0},
+                                                                        {0, 0, 0.5f},
+                                                                        {-0.5f, 0, 0}}));
+    }
+
     SECTION("should refine per point normals") {
         SubdivisionSurfaceMesh subdivisionSurfaceMesh;
         SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
-        subdivisionSurfaceMesh.normals = std::vector<Vector3f>({ {-0.5f,0.f,-0.5f}, {0.5f,0.f,-0.5f}, {0.5f,0.f,0.5f},{-0.5f,0.f,0.5f}});
+        subdivisionSurfaceMesh.normals =
+            std::vector<Vector3f>({{-0.5f, 0.f, -0.5f}, {0.5f, 0.f, -0.5f}, {0.5f, 0.f, 0.5f}, {-0.5f, 0.f, 0.5f}});
         subdivisionSurfaceMesh.normalsInterpolation = PrimVarType::PER_POINT;
         OpenSubdivRefiner openSubdivRefiner(subdivisionSurfaceMesh);
 

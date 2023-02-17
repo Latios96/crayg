@@ -4,20 +4,20 @@
 
 namespace crayg {
 
-class OsdVector3fAdapter: public Vector3f{
+class OsdVector3fAdapter : public Vector3f {
  public:
-    OsdVector3fAdapter():Vector3f(){}
-    OsdVector3fAdapter(const Vector3f &src): Vector3f(src){}
-    void Clear( void * =0 ) {
-        x=0;
-        y=0;
-        z=0;
+    OsdVector3fAdapter() : Vector3f() {}
+    OsdVector3fAdapter(const Vector3f &src) : Vector3f(src) {}
+    void Clear(void * = 0) {
+        x = 0;
+        y = 0;
+        z = 0;
     }
 
-    void AddWithWeight(OsdVector3fAdapter const & src, float weight) {
-        x+=weight*src.x;
-        y+=weight*src.y;
-        z+=weight*src.z;
+    void AddWithWeight(OsdVector3fAdapter const &src, float weight) {
+        x += weight * src.x;
+        y += weight * src.y;
+        z += weight * src.z;
     }
 };
 
@@ -29,18 +29,18 @@ void OpenSubdivRefiner::refine(int maxLevel) {
 
     refiner->RefineUniform(OpenSubdiv::Far::TopologyRefiner::UniformOptions(maxLevel));
 
-    OpenSubdiv::Far::TopologyLevel const & refLastLevel = refiner->GetLevel(maxLevel);
+    OpenSubdiv::Far::TopologyLevel const &refLastLevel = refiner->GetLevel(maxLevel);
 
     refinePoints(refiner, maxLevel, refLastLevel);
     refineIndices(refLastLevel);
-    refineNormals(refiner,maxLevel,refLastLevel);
+    refineNormals(refiner, maxLevel, refLastLevel);
 }
 
 void OpenSubdivRefiner::refinePoints(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
                                      int maxlevel,
                                      const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
     std::vector<Vector3f> subdividedPoints(refiner->GetNumVerticesTotal()); // todo use original points
-    for(int i=0; i< subdivisionSurfaceMesh.points.size(); i++){
+    for (int i = 0; i < subdivisionSurfaceMesh.points.size(); i++) {
         subdividedPoints[i] = subdivisionSurfaceMesh.points[i];
     }
 
@@ -48,15 +48,15 @@ void OpenSubdivRefiner::refinePoints(const std::unique_ptr<OpenSubdiv::Far::Topo
 
     auto *src = static_cast<OsdVector3fAdapter *>(subdividedPoints.data());
     for (int level = 1; level <= maxlevel; ++level) {
-        OsdVector3fAdapter * dst = src + refiner->GetLevel(level-1).GetNumVertices();
+        OsdVector3fAdapter *dst = src + refiner->GetLevel(level - 1).GetNumVertices();
         primvarRefiner.Interpolate(level, src, dst);
         src = dst;
     }
 
     subdivisionSurfaceMesh.points.resize(refLastLevel.GetNumVertices());
     int firstOfLastVerts = refiner->GetNumVerticesTotal() - refLastLevel.GetNumVertices();
-    for(int i=0;i<refLastLevel.GetNumVertices();i++){
-        subdivisionSurfaceMesh.points[i] = subdividedPoints[firstOfLastVerts+i];
+    for (int i = 0; i < refLastLevel.GetNumVertices(); i++) {
+        subdivisionSurfaceMesh.points[i] = subdividedPoints[firstOfLastVerts + i];
     }
 }
 
@@ -68,22 +68,25 @@ void OpenSubdivRefiner::refineIndices(const OpenSubdiv::Far::TopologyLevel &refL
     for (int face = 0; face < numberOfFaces; face++) {
         OpenSubdiv::Far::ConstIndexArray fverts = refLastLevel.GetFaceVertices(face);
         newFaceVertexCounts.push_back(fverts.size());
-        for (int fvert : fverts) {
+        for (int fvert: fverts) {
             newFaceVertexIndices.push_back(fvert);
         }
     }
 
-    subdivisionSurfaceMesh.faceVertexIndices = newFaceVertexIndices;// TODO is this needed? Or can we just push back directly in the original vector
+    subdivisionSurfaceMesh.faceVertexIndices =
+        newFaceVertexIndices;// TODO is this needed? Or can we just push back directly in the original vector
     subdivisionSurfaceMesh.faceVertexCounts = newFaceVertexCounts;
 }
 
-void OpenSubdivRefiner::refineNormals(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,int maxlevel,const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
-    if(!subdivisionSurfaceMesh.normalsInterpolation){
+void OpenSubdivRefiner::refineNormals(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
+                                      int maxlevel,
+                                      const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
+    if (!subdivisionSurfaceMesh.normalsInterpolation) {
         return;
     }
 
     std::vector<Vector3f> subdividedNormals(refiner->GetNumVerticesTotal());
-    for(int i=0; i< subdivisionSurfaceMesh.normals.size(); i++){
+    for (int i = 0; i < subdivisionSurfaceMesh.normals.size(); i++) {
         subdividedNormals[i] = subdivisionSurfaceMesh.normals[i];
     }
 
@@ -91,15 +94,15 @@ void OpenSubdivRefiner::refineNormals(const std::unique_ptr<OpenSubdiv::Far::Top
 
     auto *src = static_cast<OsdVector3fAdapter *>(subdividedNormals.data());
     for (int level = 1; level <= maxlevel; ++level) {
-        OsdVector3fAdapter * dst = src + refiner->GetLevel(level-1).GetNumVertices();
+        OsdVector3fAdapter *dst = src + refiner->GetLevel(level - 1).GetNumVertices();
         primvarRefiner.Interpolate(level, src, dst);
         src = dst;
     }
 
     subdivisionSurfaceMesh.normals.resize(refLastLevel.GetNumVertices());
     int firstOfLastVerts = refiner->GetNumVerticesTotal() - refLastLevel.GetNumVertices();
-    for(int i=0;i<refLastLevel.GetNumVertices();i++){
-        subdivisionSurfaceMesh.normals[i] = subdividedNormals[firstOfLastVerts+i];
+    for (int i = 0; i < refLastLevel.GetNumVertices(); i++) {
+        subdivisionSurfaceMesh.normals[i] = subdividedNormals[firstOfLastVerts + i];
     }
 }
 
@@ -109,13 +112,14 @@ std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> OpenSubdivRefiner::createRefin
     OpenSubdiv::Sdc::SchemeType type = OpenSubdiv::Sdc::SCHEME_CATMARK;
 
     OpenSubdiv::Sdc::Options options;
-    options.SetVtxBoundaryInterpolation(OpenSubdiv::Sdc::Options::VTX_BOUNDARY_EDGE_ONLY);
+    options.SetVtxBoundaryInterpolation(getBoundaryInterpolation());
 
-    auto refiner = OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Create(descriptor,
-                                                                                                                OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<
-                                                                                                                    OpenSubdiv::Far::TopologyDescriptor>::Options(
-                                                                                                                    type,
-                                                                                                                    options));
+    auto refiner =
+        OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Create(descriptor,
+                                                                                                     OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<
+                                                                                                         OpenSubdiv::Far::TopologyDescriptor>::Options(
+                                                                                                         type,
+                                                                                                         options));
     return std::unique_ptr<OpenSubdiv::Far::TopologyRefiner>(refiner);
 }
 
@@ -124,8 +128,16 @@ OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     descriptor.numVertices = subdivisionSurfaceMesh.points.size();
     descriptor.numFaces = subdivisionSurfaceMesh.faceCount();
     descriptor.numVertsPerFace = subdivisionSurfaceMesh.faceVertexCounts.data();
-    descriptor.vertIndicesPerFace = subdivisionSurfaceMesh.faceVertexIndices.data(); // TODO check for clockwise/counter-clockwise
+    descriptor.vertIndicesPerFace =
+        subdivisionSurfaceMesh.faceVertexIndices.data(); // TODO check for clockwise/counter-clockwise
     return descriptor;
+}
+
+OpenSubdiv::Sdc::Options::VtxBoundaryInterpolation OpenSubdivRefiner::getBoundaryInterpolation() const {
+    if (subdivisionSurfaceMesh.boundaryInterpolation == SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_ONLY) {
+        return OpenSubdiv::Sdc::Options::VTX_BOUNDARY_EDGE_ONLY;
+    }
+    return OpenSubdiv::Sdc::Options::VTX_BOUNDARY_EDGE_AND_CORNER;
 }
 
 } // crayg

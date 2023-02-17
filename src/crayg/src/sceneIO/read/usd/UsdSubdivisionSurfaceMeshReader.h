@@ -21,6 +21,7 @@ class UsdSubdivisionSurfaceMeshReader : public BaseUsdImageableReader<pxr::UsdGe
  private:
     bool normalsAreAuthored() const;
     void translateNormals(std::shared_ptr<SubdivisionSurfaceMesh> subdivisionSurfaceMesh);
+    void translateBoundaryInterpolation(std::shared_ptr<SubdivisionSurfaceMesh> sharedPtr);
 };
 
 } // crayg

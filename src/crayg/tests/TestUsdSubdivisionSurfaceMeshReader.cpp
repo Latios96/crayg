@@ -67,6 +67,28 @@ TEST_CASE("UsdSubdivisionSurfaceMeshReader::read") {
         REQUIRE(subdivisionSurfaceMesh->normals == std::vector<Vector3f>({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}}));
         REQUIRE(subdivisionSurfaceMesh->normalsInterpolation == PrimVarType::PER_VERTEX);
     }
+
+    SECTION("should read boundary interpolation attr") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage, pxr::UsdGeomTokens->catmullClark);
+        usdGeomMesh.GetInterpolateBoundaryAttr().Set(pxr::UsdGeomTokens->edgeAndCorner);
+
+        UsdSubdivisionSurfaceMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto subdivisionSurfaceMesh = usdMeshReader.read();
+
+        REQUIRE(subdivisionSurfaceMesh->boundaryInterpolation
+                    == SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_AND_CORNER);
+    }
+
+    SECTION("should read boundary interpolation attr none as edge only") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage, pxr::UsdGeomTokens->catmullClark);
+        usdGeomMesh.GetInterpolateBoundaryAttr().Set(pxr::UsdGeomTokens->none);
+
+        UsdSubdivisionSurfaceMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto subdivisionSurfaceMesh = usdMeshReader.read();
+
+        REQUIRE(
+            subdivisionSurfaceMesh->boundaryInterpolation == SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_ONLY);
+    }
 }
 
 }

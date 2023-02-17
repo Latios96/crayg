@@ -28,6 +28,13 @@ class SubdivisionSurfaceMesh: public SceneObject {
     std::vector<Vector3f> normals;
     std::optional<PrimVarType> normalsInterpolation;
 
+    enum BoundaryInterpolation {
+        EDGE_ONLY,
+        EDGE_AND_CORNER
+    };
+
+    BoundaryInterpolation boundaryInterpolation = EDGE_ONLY;
+
     TriangleMesh triangleMesh;
  private:
     bool isTessellated = false;
