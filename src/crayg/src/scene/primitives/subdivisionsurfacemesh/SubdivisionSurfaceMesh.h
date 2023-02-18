@@ -19,6 +19,7 @@ class SubdivisionSurfaceMesh: public SceneObject {
     size_t primitiveCount() const override;
 
     void tessellate();
+    bool isTesselated() const;
     std::size_t faceCount() const;
 
     std::vector<Vector3f> points;

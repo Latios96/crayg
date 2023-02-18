@@ -71,4 +71,7 @@ void SubdivisionSurfaceMesh::copyNormalsToTriangleMesh() {
         primvar->write(i, normals[i]);
     }
 }
+bool SubdivisionSurfaceMesh::isTesselated() const {
+    return isTessellated;
+}
 } // crayg
