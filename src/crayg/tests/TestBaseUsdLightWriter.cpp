@@ -11,8 +11,8 @@ TEST_CASE("BaseUsdLightWriter::write") {
 
     class DummyBaseWriter : public BaseUsdLightWriter<pxr::UsdLuxSphereLight, Light> {
      public:
-        DummyBaseWriter(const std::shared_ptr<Light> &craygObject) : BaseUsdLightWriter<pxr::UsdLuxSphereLight,
-                                                                                        Light>(craygObject) {}
+        DummyBaseWriter(Light &craygObject) : BaseUsdLightWriter<pxr::UsdLuxSphereLight,
+                                                                 Light>(craygObject) {}
      protected:
         std::string getTranslatedType() override {
             return "test";
@@ -23,9 +23,9 @@ TEST_CASE("BaseUsdLightWriter::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write object translation to prim") {
-        auto light = std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3.0f);
-        light->setName("light");
-        light->setColor({1, 0, 0});
+        Light light(Transform::withPosition({1, 2, -3}), 3.0f);
+        light.setName("light");
+        light.setColor({1, 0, 0});
 
         DummyBaseWriter dummyBaseWriter(light);
         dummyBaseWriter.write(stage, usdPathFactory);

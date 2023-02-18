@@ -14,13 +14,13 @@ namespace crayg {
 template<class UsdType, class CraygType>
 class BaseUsdTransformableWriter : public BaseUsdWriter<UsdType, CraygType> {
  public:
-    BaseUsdTransformableWriter(const std::shared_ptr<CraygType> &craygObject) : BaseUsdWriter<UsdType, CraygType>(
+    BaseUsdTransformableWriter(CraygType &craygObject) : BaseUsdWriter<UsdType, CraygType>(
         craygObject) {}
 
     virtual UsdType write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
         auto usdObject = BaseUsdWriter<UsdType, CraygType>::write(stage, usdPathFactory);
 
-        usdObject.MakeMatrixXform().Set(UsdConversions::convert(this->craygObject->getTransform().matrix));
+        usdObject.MakeMatrixXform().Set(UsdConversions::convert(this->craygObject.getTransform().matrix));
 
         return usdObject;
     }

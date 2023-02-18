@@ -13,7 +13,7 @@ TEST_CASE("UsdGroundPlaneMeshWriter::write") {
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
     SECTION("should write groundPlane") {
-        auto groundPlane = std::make_shared<GroundPlane>();
+        GroundPlane groundPlane;
 
         UsdGroundPlaneWriter usdGroundPlaneWriter(groundPlane, usdMaterialWriteCache);
         usdGroundPlaneWriter.write(stage, usdPathFactory);

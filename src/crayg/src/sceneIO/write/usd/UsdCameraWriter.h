@@ -10,7 +10,7 @@ namespace crayg {
 
 class UsdCameraWriter : public BaseUsdTransformableWriter<pxr::UsdGeomCamera, Camera> {
  public:
-    UsdCameraWriter(const std::shared_ptr<Camera> &craygObject);
+    UsdCameraWriter(Camera &craygObject);
     pxr::UsdGeomCamera write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
  protected:
     std::string getTranslatedType() override;

@@ -13,11 +13,11 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
     SECTION("should write triangle plane") {
-        auto triangleMesh = std::make_shared<TriangleMesh>();
-        triangleMesh->setTransform(Transform::withPosition(Vector3f(1, 2, 3)));
-        triangleMesh->points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
-        triangleMesh->faceVertexIndices = std::vector<TriangleMesh::FaceVertexIndices>({{0, 2, 1}, {2, 3, 1}});
-        triangleMesh->init();
+        TriangleMesh triangleMesh;
+        triangleMesh.setTransform(Transform::withPosition(Vector3f(1, 2, 3)));
+        triangleMesh.points = std::vector<Vector3f>({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}});
+        triangleMesh.faceVertexIndices = std::vector<TriangleMesh::FaceVertexIndices>({{0, 2, 1}, {2, 3, 1}});
+        triangleMesh.init();
 
         UsdTriangleMeshWriter usdTriangleMeshWriter(triangleMesh, usdMaterialWriteCache);
         usdTriangleMeshWriter.write(stage, usdPathFactory);

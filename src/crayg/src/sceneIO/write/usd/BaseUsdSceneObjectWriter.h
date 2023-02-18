@@ -16,7 +16,7 @@ namespace crayg {
 template<class UsdType, class CraygType>
 class BaseUsdSceneObjectWriter : public BaseUsdTransformableWriter<UsdType, CraygType> {
  public:
-    BaseUsdSceneObjectWriter(const std::shared_ptr<CraygType> &craygObject,
+    BaseUsdSceneObjectWriter(CraygType &craygObject,
                              UsdMaterialWriteCache &usdMaterialWriteCache) : BaseUsdTransformableWriter<UsdType,
                                                                                                         CraygType>(
         craygObject), usdMaterialWriteCache(usdMaterialWriteCache) {}
@@ -24,8 +24,8 @@ class BaseUsdSceneObjectWriter : public BaseUsdTransformableWriter<UsdType, Cray
     UsdType write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override {
         auto usdObject = BaseUsdTransformableWriter<UsdType, CraygType>::write(stage, usdPathFactory);
 
-        if (this->craygObject->getMaterial()) {
-            auto material = usdMaterialWriteCache.getCachedUsdMaterial(this->craygObject->getMaterial());
+        if (this->craygObject.getMaterial()) {
+            auto material = usdMaterialWriteCache.getCachedUsdMaterial(this->craygObject.getMaterial());
             pxr::UsdShadeMaterialBindingAPI bindingApi(usdObject.GetPrim());
             bindingApi.Bind(material);
         }
@@ -35,7 +35,7 @@ class BaseUsdSceneObjectWriter : public BaseUsdTransformableWriter<UsdType, Cray
 
  protected:
     std::string getTranslatedType() override {
-        return this->craygObject->getType();
+        return this->craygObject.getType();
     }
     UsdMaterialWriteCache &usdMaterialWriteCache;
 

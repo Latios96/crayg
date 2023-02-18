@@ -9,7 +9,7 @@ namespace crayg {
 
 class UsdDiskLightWriter : public BaseUsdLightWriter<pxr::UsdLuxDiskLight, DiskLight> {
  public:
-    UsdDiskLightWriter(const std::shared_ptr<DiskLight> &craygObject);
+    UsdDiskLightWriter(DiskLight &craygObject);
     pxr::UsdLuxDiskLight write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 };
 

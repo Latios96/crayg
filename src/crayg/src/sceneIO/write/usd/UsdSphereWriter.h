@@ -9,7 +9,7 @@ namespace crayg {
 
 class UsdSphereWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomSphere, Sphere> {
  public:
-    UsdSphereWriter(const std::shared_ptr<Sphere> &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache);
+    UsdSphereWriter(Sphere &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache);
 
     pxr::UsdGeomSphere write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 

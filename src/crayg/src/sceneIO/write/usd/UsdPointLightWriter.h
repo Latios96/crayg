@@ -9,7 +9,7 @@ namespace crayg {
 
 class UsdPointLightWriter : public BaseUsdLightWriter<pxr::UsdLuxSphereLight, Light> {
  public:
-    UsdPointLightWriter(const std::shared_ptr<Light> &craygObject);
+    UsdPointLightWriter(Light &craygObject);
 
     pxr::UsdLuxSphereLight write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 };

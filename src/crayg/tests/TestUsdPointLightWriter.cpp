@@ -14,8 +14,8 @@ TEST_CASE("UsdPointLightWriter::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write object translation to prim") {
-        auto light = std::make_shared<Light>(Transform::withPosition({1, 2, -3}), 3.f);
-        light->setName("light");
+        Light light(Transform::withPosition({1, 2, -3}), 3.f);
+        light.setName("light");
 
         UsdPointLightWriter usdPointLightWriter(light);
         usdPointLightWriter.write(stage, usdPathFactory);

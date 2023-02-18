@@ -12,8 +12,8 @@ TEST_CASE("BaseUsdTransformableWriter::write") {
 
     class DummyBaseWriter : public BaseUsdTransformableWriter<pxr::UsdGeomSphere, Sphere> {
      public:
-        DummyBaseWriter(const std::shared_ptr<Sphere> &craygObject) : BaseUsdTransformableWriter<pxr::UsdGeomSphere,
-                                                                                                 Sphere>(craygObject) {}
+        DummyBaseWriter(Sphere &craygObject) : BaseUsdTransformableWriter<pxr::UsdGeomSphere,
+                                                                          Sphere>(craygObject) {}
      protected:
         std::string getTranslatedType() override {
             return std::string("test");
@@ -24,8 +24,8 @@ TEST_CASE("BaseUsdTransformableWriter::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write object translation to prim") {
-        auto sphere = std::make_shared<Sphere>(Vector3f(1, 2, -3), 3.0f);
-        sphere->setName("craygSphere");
+        Sphere sphere(Vector3f(1, 2, -3), 3.0f);
+        sphere.setName("craygSphere");
 
         DummyBaseWriter dummyBaseWriter(sphere);
         dummyBaseWriter.write(stage, usdPathFactory);

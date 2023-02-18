@@ -9,7 +9,7 @@ namespace crayg {
 
 class UsdRectLightWriter : public BaseUsdLightWriter<pxr::UsdLuxRectLight, RectLight> {
  public:
-    UsdRectLightWriter(const std::shared_ptr<RectLight> &craygObject);
+    UsdRectLightWriter(RectLight &craygObject);
 
     pxr::UsdLuxRectLight write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 };

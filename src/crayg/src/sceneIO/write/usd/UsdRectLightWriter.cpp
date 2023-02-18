@@ -2,14 +2,14 @@
 
 namespace crayg {
 
-UsdRectLightWriter::UsdRectLightWriter(const std::shared_ptr<RectLight> &craygObject)
+UsdRectLightWriter::UsdRectLightWriter(RectLight &craygObject)
     : BaseUsdLightWriter(craygObject) {}
 
 pxr::UsdLuxRectLight UsdRectLightWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usdLuxRectLight = BaseUsdLightWriter::write(stage, usdPathFactory);
 
-    usdLuxRectLight.GetHeightAttr().Set(this->craygObject->getHeight());
-    usdLuxRectLight.GetWidthAttr().Set(this->craygObject->getWidth());
+    usdLuxRectLight.GetHeightAttr().Set(this->craygObject.getHeight());
+    usdLuxRectLight.GetWidthAttr().Set(this->craygObject.getWidth());
 
     return usdLuxRectLight;
 }

@@ -20,11 +20,11 @@ TEST_CASE("BaseUsdSceneObjectWriter::write")
     UsdPathFactory usdPathFactory;
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
-    auto sphere = std::make_shared<Sphere>(Vector3f(1, 2, 3), 3.0f);
+    Sphere sphere(Vector3f(1, 2, 3), 3.0f);
 
     class DummyBaseWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomSphere, Sphere> {
      public:
-        DummyBaseWriter(const std::shared_ptr<Sphere> &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache)
+        DummyBaseWriter(Sphere &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache)
             : BaseUsdSceneObjectWriter(craygObject, usdMaterialWriteCache) {}
 
     };
@@ -33,7 +33,7 @@ TEST_CASE("BaseUsdSceneObjectWriter::write")
 
     SECTION("should write material") {
         auto diffuseMaterial = std::make_shared<UsdPreviewSurface>("myMat", Color::createGrey(0.5f));
-        sphere->setMaterial(diffuseMaterial);
+        sphere.setMaterial(diffuseMaterial);
 
         dummyBaseWriter.write(stage, usdPathFactory);
 

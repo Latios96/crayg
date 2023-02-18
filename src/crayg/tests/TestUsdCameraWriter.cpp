@@ -14,9 +14,9 @@ TEST_CASE("UsdCameraReader::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write camera correctly") {
-        auto myCamera = std::make_shared<Camera>(Transform::withPosition({1, 2, 3}),
-                                                 50.0f,
-                                                 35.0f);
+        Camera myCamera(Transform::withPosition({1, 2, 3}),
+                        50.0f,
+                        35.0f);
 
         UsdCameraWriter usdCameraWriter(myCamera);
         usdCameraWriter.write(stage, usdPathFactory);

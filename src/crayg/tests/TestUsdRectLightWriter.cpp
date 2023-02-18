@@ -14,9 +14,9 @@ TEST_CASE("UsdRectLightWriter::write") {
     UsdPathFactory usdPathFactory;
 
     SECTION("should write rect light") {
-        auto light = std::make_shared<RectLight>(Transform::withPosition({1, 2, -3}), 3.0f, 4.0f, 5.0f);
-        light->setName("light");
-        light->setColor({1, 0, 0});
+        RectLight light(Transform::withPosition({1, 2, -3}), 3.0f, 4.0f, 5.0f);
+        light.setName("light");
+        light.setColor({1, 0, 0});
 
         UsdRectLightWriter usdRectLightWriter(light);
         usdRectLightWriter.write(stage, usdPathFactory);
