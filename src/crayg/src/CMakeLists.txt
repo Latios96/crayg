@@ -215,6 +215,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdSceneWriter.h
         sceneIO/write/usd/UsdSphereWriter.cpp
         sceneIO/write/usd/UsdSphereWriter.h
+        sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.cpp
+        sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.h
         sceneIO/write/usd/UsdTriangleMeshWriter.cpp
         sceneIO/write/usd/UsdTriangleMeshWriter.h
         utils/FileSystemUtils.cpp

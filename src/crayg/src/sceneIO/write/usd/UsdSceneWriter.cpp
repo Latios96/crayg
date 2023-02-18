@@ -7,6 +7,7 @@
 #include "UsdDiskLightWriter.h"
 #include "UsdTriangleMeshWriter.h"
 #include "UsdGroundPlaneWriter.h"
+#include "UsdSubdivisionSurfaceMeshWriter.h"
 
 void crayg::UsdSceneWriter::writeScene(const std::string &scenePath) {
     auto stage = pxr::UsdStage::CreateNew(scenePath);
@@ -17,7 +18,7 @@ void crayg::UsdSceneWriter::writeScene(const std::string &scenePath) {
 }
 void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
     UsdPathFactory usdPathFactory;
-    if(scene.camera){
+    if (scene.camera) {
         UsdCameraWriter(*scene.camera).write(stage, usdPathFactory);
     }
 
@@ -36,6 +37,10 @@ void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
             UsdGroundPlaneWriter(*std::static_pointer_cast<GroundPlane>(sceneObject),
                                  usdMaterialWriteCache).write(stage,
                                                               usdPathFactory);
+        } else if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
+            UsdSubdivisionSurfaceMeshWriter(*std::static_pointer_cast<SubdivisionSurfaceMesh>(sceneObject),
+                                            usdMaterialWriteCache).write(stage,
+                                                                         usdPathFactory);
         } else {
             Logger::warning("Skipping unsupported type {}", sceneObject->getType());
         }

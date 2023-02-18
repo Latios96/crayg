@@ -4,6 +4,7 @@
 #include "scene/lights/RectLight.h"
 #include "scene/lights/DiskLight.h"
 #include "scene/primitives/Sphere.h"
+#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include <pxr/usd/usd/primRange.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdRender/settings.h>
@@ -91,6 +92,14 @@ TEST_CASE("UsdSceneWriter::write") {
 
     SECTION("should write trianglemesh") {
         scene.addObject(std::make_shared<TriangleMesh>());
+
+        usdSceneWriter.writeScene(stage);
+
+        REQUIRE(count<pxr::UsdGeomMesh>(stage) == 1);
+    }
+
+    SECTION("should write subd surface mesh") {
+        scene.addObject(std::make_shared<SubdivisionSurfaceMesh>());
 
         usdSceneWriter.writeScene(stage);
 
