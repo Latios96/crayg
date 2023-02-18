@@ -8,14 +8,6 @@
 
 namespace crayg {
 
-class _SpecialUsdTriangleMeshWriter : public UsdTriangleMeshWriter {
- public:
-    _SpecialUsdTriangleMeshWriter(TriangleMesh &craygObject,
-                                  UsdMaterialWriteCache &usdMaterialWriteCache);
- protected:
-    std::string getTranslatedType() override;
-};
-
 class UsdGroundPlaneWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, GroundPlane> {
  public:
     UsdGroundPlaneWriter(GroundPlane &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache);
