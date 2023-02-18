@@ -75,29 +75,39 @@ TEST_CASE("Color/operatorMultiplyScalar", "[Color]") {
 }
 
 TEST_CASE("Color/clamp", "[Color]") {
-    Color myColor(2, 3, 4);
 
-    Color result = myColor.clamp();
+    SECTION("clamp to white"){
+        Color myColor(2, 3, 4);
 
-    REQUIRE(result.r == 1);
-    REQUIRE(result.g == 1);
-    REQUIRE(result.b == 1);
+        Color result = myColor.clamp();
+
+        REQUIRE(result == Color::createWhite());
+    }
+
+    SECTION("clamp to black"){
+        Color myColor(-2, -3, -4);
+
+        Color result = myColor.clamp();
+
+        REQUIRE(result == Color::createBlack());
+    }
+
+    SECTION("clamp NaN to white"){
+        Color myColor(NAN, NAN, NAN);
+
+        Color result = myColor.clamp();
+
+        REQUIRE(result == Color::createBlack());
+    }
+
 }
 
-TEST_CASE("Color/getRgbValuesClamped", "[Color]") {
-    Color myColor(2, 3, 4);
-
-    std::tuple<int, int, int> values = myColor.getRgbValues();
-
-    REQUIRE(std::get<0>(values) == 255);
-    REQUIRE(std::get<1>(values) == 255);
-    REQUIRE(std::get<2>(values) == 255);
-}
 
 TEST_CASE("Color/getRgbValues", "[Color]") {
     auto testData = GENERATE(table<Color, std::tuple<int, int, int>>({{{0.1f, 0.2f, 0.3f}, {25, 51, 76}},
                                                                       {{-0.1f, 0.2f, 0.3f}, {0, 51, 76}},
-                                                                      {{1.1f, 0.2f, 0.3f}, {255, 51, 76}}}));
+                                                                      {{1.1f, 0.2f, 0.3f}, {255, 51, 76}},
+                                                                      {{NAN, NAN, NAN}, {0, 0, 0}}}));
     auto colorToConvert = std::get<0>(testData);
     auto expectedTuple = std::get<1>(testData);
 
