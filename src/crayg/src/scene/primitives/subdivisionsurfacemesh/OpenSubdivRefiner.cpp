@@ -34,16 +34,16 @@ void OpenSubdivRefiner::refine(int maxLevel) {
 
     OpenSubdiv::Far::TopologyLevel const &refLastLevel = refiner->GetLevel(maxLevel);
 
-    std::vector<Vector3f> subdividedPoints(refiner->GetNumVerticesTotal());
-    refinePoints(subdividedPoints, refiner, maxLevel, refLastLevel);
+    refinePoints(refiner, maxLevel, refLastLevel);
     refineIndices(refLastLevel);
-    refineNormals(subdividedPoints, refiner, refLastLevel);
+    refineNormals(refiner, refLastLevel);
 }
 
-void OpenSubdivRefiner::refinePoints(std::vector<Vector3f> &subdividedPoints,
-                                     const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
-                                     int maxlevel,
-                                     const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
+void OpenSubdivRefiner::refinePoints(
+    const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
+    int maxlevel,
+    const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
+    std::vector<Vector3f> subdividedPoints(refiner->GetNumVerticesTotal());
     for (int i = 0; i < subdivisionSurfaceMesh.points.size(); i++) {
         subdividedPoints[i] = subdivisionSurfaceMesh.points[i];
     }
@@ -83,9 +83,9 @@ void OpenSubdivRefiner::refineIndices(const OpenSubdiv::Far::TopologyLevel &refL
     subdivisionSurfaceMesh.faceVertexCounts = newFaceVertexCounts;
 }
 
-void OpenSubdivRefiner::refineNormals(std::vector<Vector3f> &subdividedPoints,
-                                      const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
-                                      const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
+void OpenSubdivRefiner::refineNormals(
+    const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
+    const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
     int numberOfVertices = refLastLevel.GetNumVertices();
     int firstOfLastVerts = refiner->GetNumVerticesTotal() - numberOfVertices;
     std::vector<Vector3f> fineLimitPos(numberOfVertices);
@@ -95,7 +95,7 @@ void OpenSubdivRefiner::refineNormals(std::vector<Vector3f> &subdividedPoints,
 
     OpenSubdiv::Far::PrimvarRefiner primvarRefiner(*refiner);
 
-    auto *src = static_cast<OsdVector3fAdapter *>(&subdividedPoints[firstOfLastVerts]);
+    auto *src = static_cast<OsdVector3fAdapter *>(subdivisionSurfaceMesh.points.data());
     auto *fineLimitPosAdapter = static_cast<OsdVector3fAdapter *>(fineLimitPos.data());
     auto *fineDuAdapter = static_cast<OsdVector3fAdapter *>(fineDu.data());
     auto *fineDvAdapter = static_cast<OsdVector3fAdapter *>(fineDv.data());
