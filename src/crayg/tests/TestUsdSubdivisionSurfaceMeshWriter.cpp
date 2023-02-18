@@ -33,6 +33,7 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
                     == pxr::VtVec3fArray({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {0.5, 0, -0.5}, {-0.5, 0, -0.5}}));
         REQUIRE(triangleIndices == pxr::VtIntArray({0, 1, 2, 3}));
         REQUIRE(faceVertexCounts == pxr::VtIntArray({4}));
+        REQUIRE_FALSE(usdGeomMesh.GetNormalsAttr().HasAuthoredValue());
     }
 
     SECTION("should write tesselated subd surface") {
@@ -45,6 +46,7 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
         pxr::GfVec3d
             translation = usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
         auto points = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetPointsAttr());
+        auto normals = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetNormalsAttr());
         auto triangleIndices =
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
         auto faceVertexCounts =
@@ -53,6 +55,7 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
         REQUIRE(points.size() == 81);
         REQUIRE(triangleIndices.size() == 384);
         REQUIRE(faceVertexCounts.size() == 128);
+        REQUIRE_FALSE(normals.empty());
     }
 }
 

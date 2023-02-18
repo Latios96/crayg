@@ -31,6 +31,7 @@ TEST_CASE("UsdGroundPlaneMeshWriter::write") {
                     == pxr::VtVec3fArray({{-1000, 0, 1000}, {-1000, 0, -1000}, {1000, 0, -1000}, {1000, 0, 1000}}));
         REQUIRE(triangleIndices == pxr::VtIntArray({0, 2, 1, 2, 0, 3}));
         REQUIRE(faceVertexCounts == pxr::VtIntArray({3, 3}));
+        REQUIRE_FALSE(usdGeomMesh.GetNormalsAttr().HasAuthoredValue());
     }
 
 }

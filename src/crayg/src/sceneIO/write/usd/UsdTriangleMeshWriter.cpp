@@ -50,6 +50,9 @@ void UsdTriangleMeshWriter::writePoints(const pxr::UsdGeomMesh &usdGeomMesh) {
 }
 
 void UsdTriangleMeshWriter::writeNormals(pxr::UsdGeomMesh &usdGeomMesh) const {
+    if (!this->craygObject.normalsPrimVar) {
+        return;
+    }
     if (this->craygObject.normalsPrimVar->getType() == PER_POINT) {
         writePerPointNormals(usdGeomMesh);
     } else if (this->craygObject.normalsPrimVar->getType() == PER_VERTEX) {
