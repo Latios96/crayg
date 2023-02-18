@@ -79,7 +79,7 @@ void OpenSubdivRefiner::refineIndices(const OpenSubdiv::Far::TopologyLevel &refL
     }
 
     subdivisionSurfaceMesh.faceVertexIndices =
-        newFaceVertexIndices;// TODO is this needed? Or can we just push back directly in the original vector
+        newFaceVertexIndices;
     subdivisionSurfaceMesh.faceVertexCounts = newFaceVertexCounts;
 }
 
@@ -132,7 +132,7 @@ OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     descriptor.numFaces = subdivisionSurfaceMesh.faceCount();
     descriptor.numVertsPerFace = subdivisionSurfaceMesh.faceVertexCounts.data();
     descriptor.vertIndicesPerFace =
-        subdivisionSurfaceMesh.faceVertexIndices.data(); // TODO check for clockwise/counter-clockwise
+        subdivisionSurfaceMesh.faceVertexIndices.data();
 
     if (!subdivisionSurfaceMesh.normals.empty()) {
         channels[0].numValues = subdivisionSurfaceMesh.normals.size();
