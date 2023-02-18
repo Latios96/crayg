@@ -3,6 +3,9 @@
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
+#include "fixtures/TriangleMeshFixtures.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 
 namespace crayg {
 
@@ -35,6 +38,45 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
                     == pxr::VtVec3fArray({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
         REQUIRE(triangleIndices == pxr::VtIntArray({0, 1, 2, 2, 1, 3}));
         REQUIRE(faceVertexCounts == pxr::VtIntArray({3, 3}));
+    }
+
+    SECTION("should write per point normals") {
+        auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+        auto primVar = triangleMesh->addNormalsPrimVar<TriangleMeshPerPointPrimVar<Vector3f>>();
+        primVar->write(0, Vector3f(1, 0, 0));
+        primVar->write(1, Vector3f(0, 1, 0));
+        primVar->write(2, Vector3f(0, 0, 1));
+        primVar->write(3, Vector3f(1, 0, 0));
+        primVar->write(4, Vector3f(0, 1, 0));
+        primVar->write(5, Vector3f(0, 0, 1));
+
+        UsdTriangleMeshWriter usdTriangleMeshWriter(*triangleMesh, usdMaterialWriteCache);
+        usdTriangleMeshWriter.write(stage, usdPathFactory);
+
+        auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));
+        REQUIRE(usdGeomMesh.GetNormalsInterpolation() == pxr::UsdGeomTokens->vertex);
+        auto normals = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetNormalsAttr());
+        REQUIRE(normals
+                    == pxr::VtVec3fArray({{1, 0, -0}, {0, 1, -0}, {0, 0, -1}, {1, 0, -0}, {0, 1, -0}, {0, 0, -1}}));
+    }
+
+    SECTION("should write per vertex normals") {
+        auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+        auto primVar = triangleMesh->addNormalsPrimVar<TriangleMeshPerVertexPrimVar<Vector3f>>();
+        primVar->write(0, VertexData(Vector3f(1, 0, 0)));
+        primVar->write(1, VertexData(Vector3f(0, 1, 0)));
+        primVar->write(2, VertexData(Vector3f(0, 0, 1)));
+        primVar->write(3, VertexData(Vector3f(1, 0, 0)));
+
+        UsdTriangleMeshWriter usdTriangleMeshWriter(*triangleMesh, usdMaterialWriteCache);
+        usdTriangleMeshWriter.write(stage, usdPathFactory);
+
+        auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));
+        REQUIRE(usdGeomMesh.GetNormalsInterpolation() == pxr::UsdGeomTokens->faceVarying);
+        auto normals = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetNormalsAttr());
+        REQUIRE(normals
+                    == pxr::VtVec3fArray({{1, 0, -0}, {1, 0, -0}, {1, 0, -0}, {0, 1, -0}, {0, 1, -0}, {0, 1, -0},
+                                          {0, 0, -1}, {0, 0, -1}, {0, 0, -1}, {1, 0, -0}, {1, 0, -0}, {1, 0, -0}}));
     }
 
 }
