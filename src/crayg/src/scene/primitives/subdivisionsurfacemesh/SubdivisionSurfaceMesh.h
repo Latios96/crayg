@@ -26,7 +26,6 @@ class SubdivisionSurfaceMesh: public SceneObject {
     std::vector<int> faceVertexCounts;
 
     std::vector<Vector3f> normals;
-    std::optional<PrimVarType> normalsInterpolation;
 
     enum BoundaryInterpolation {
         EDGE_ONLY,
@@ -39,6 +38,7 @@ class SubdivisionSurfaceMesh: public SceneObject {
  private:
     bool isTessellated = false;
     void verifyIsTessellated() const;
+    void copyNormalsToTriangleMesh();
 };
 
 } // crayg

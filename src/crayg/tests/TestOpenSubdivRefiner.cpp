@@ -26,7 +26,7 @@ TEST_CASE("OpenSubdivRefiner::refine") {
         REQUIRE(subdivisionSurfaceMesh.faceVertexIndices
                     == std::vector<int>({0, 5, 4, 8, 5, 1, 6, 4, 4, 6, 2, 7, 8, 4, 7, 3}));
         REQUIRE(subdivisionSurfaceMesh.faceVertexCounts == std::vector<int>({4, 4, 4, 4}));
-        REQUIRE(subdivisionSurfaceMesh.normals.empty());
+        REQUIRE_FALSE(subdivisionSurfaceMesh.normals.empty());
     }
 
     SECTION("should refine mesh with boundary interpolation edge only") {
@@ -67,53 +67,22 @@ TEST_CASE("OpenSubdivRefiner::refine") {
                                                                         {-0.5f, 0, 0}}));
     }
 
-    SECTION("should refine per point normals") {
+    SECTION("should produce limit normals") {
         SubdivisionSurfaceMesh subdivisionSurfaceMesh;
         SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
-        subdivisionSurfaceMesh.normals =
-            std::vector<Vector3f>({{-0.5f, 0.f, -0.5f}, {0.5f, 0.f, -0.5f}, {0.5f, 0.f, 0.5f}, {-0.5f, 0.f, 0.5f}});
-        subdivisionSurfaceMesh.normalsInterpolation = PrimVarType::PER_POINT;
         OpenSubdivRefiner openSubdivRefiner(subdivisionSurfaceMesh);
 
         openSubdivRefiner.refine(1);
 
-        REQUIRE(subdivisionSurfaceMesh.normals == std::vector<Vector3f>({{-0.375f, 0, -0.375f},
-                                                                         {0.375f, 0, -0.375f},
-                                                                         {0.375f, 0, 0.375f},
-                                                                         {-0.375f, 0, 0.375f},
-                                                                         {0, 0, 0},
-                                                                         {0, 0, -0.5},
-                                                                         {0.5, 0, 0},
-                                                                         {0, 0, 0.5f},
-                                                                         {-0.5f, 0, 0}}));
-    }
-
-    SECTION("should refine per vertex normals") {
-        SubdivisionSurfaceMesh subdivisionSurfaceMesh;
-        SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
-        subdivisionSurfaceMesh.normals =
-            std::vector<Vector3f>({{-0.5f, 0.f, -0.5f}, {0.5f, 0.f, -0.5f}, {0.5f, 0.f, 0.5f}, {-0.5f, 0.f, 0.5f}});
-        subdivisionSurfaceMesh.normalsInterpolation = PrimVarType::PER_VERTEX;
-        OpenSubdivRefiner openSubdivRefiner(subdivisionSurfaceMesh);
-
-        openSubdivRefiner.refine(1);
-
-        REQUIRE(subdivisionSurfaceMesh.normals == std::vector<Vector3f>({{-0.5f, 0, -0.5f},
-                                                                         {0, 0, -0.5f},
-                                                                         {0, 0, 0},
-                                                                         {-0.5f, 0, 0},
-                                                                         {0, 0, -0.5f},
-                                                                         {0.5f, 0, -0.5f},
-                                                                         {0.5f, 0, 0},
-                                                                         {0, 0, 0},
-                                                                         {0, 0, 0},
-                                                                         {0.5f, 0, 0},
-                                                                         {0.5f, 0, 0.5f},
-                                                                         {0, 0, 0.5f},
-                                                                         {-0.5f, 0, 0},
-                                                                         {0, 0, 0},
-                                                                         {0, 0, 0.5f},
-                                                                         {-0.5f, 0, 0.5f},}));
+        REQUIRE(subdivisionSurfaceMesh.normals == std::vector<Vector3f>({{0, -0.375, 0},
+                                                                         {0, -0.375, 0},
+                                                                         {-0, -0.375, 0},
+                                                                         {0, -0.375, -0},
+                                                                         {-0, -30.25, -0},
+                                                                         {0, -0.171875, 0},
+                                                                         {0, -0.171875, 0},
+                                                                         {-0, -0.171875, -0},
+                                                                         {0, -0.171875, 0},}));
     }
 }
 
