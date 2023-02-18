@@ -76,6 +76,9 @@ class TriangleMeshPerVertexPrimVar : public TriangleMeshAbstractPrimVar<T> {
             data.v2 = func(data.v2);
         }
     }
+    PrimVarType getType() override {
+        return PER_VERTEX;
+    }
  private:
     std::vector<VertexData<T>> vertexData;
 };

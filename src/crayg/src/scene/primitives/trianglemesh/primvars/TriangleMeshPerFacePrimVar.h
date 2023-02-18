@@ -43,6 +43,9 @@ class TriangleMeshPerFacePrimVar : public TriangleMeshAbstractPrimVar<T> {
             data = func(data);
         }
     }
+    PrimVarType getType() override {
+        return PER_FACE;
+    }
  private:
     std::vector<T> faceData;
 };

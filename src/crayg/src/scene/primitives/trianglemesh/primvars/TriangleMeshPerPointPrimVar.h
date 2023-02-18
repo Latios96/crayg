@@ -46,6 +46,9 @@ class TriangleMeshPerPointPrimVar : public TriangleMeshAbstractPrimVar<T> {
             data = func(data);
         }
     }
+    PrimVarType getType() override {
+        return PER_POINT;
+    }
     virtual ~TriangleMeshPerPointPrimVar() = default;
  private:
     std::vector<T> pointData;
