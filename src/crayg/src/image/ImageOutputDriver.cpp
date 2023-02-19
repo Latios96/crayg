@@ -5,11 +5,7 @@
 namespace crayg {
 
 void ImageOutputDriver::initialize(const ImageSpec &imageSpec) {
-    const ImageSpec specOfProvidedImage = image.getImageSpec();
-    if (specOfProvidedImage != imageSpec) {
-        throw std::runtime_error(fmt::format("Image spec does not match! Required was {}, provided was {}", imageSpec,
-                                             specOfProvidedImage));
-    }
+    image.addChannelsFromSpec(imageSpec);
 }
 
 void ImageOutputDriver::prepareBucket(const ImageBucket &imageBucket) {
