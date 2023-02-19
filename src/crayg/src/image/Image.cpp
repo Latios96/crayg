@@ -140,6 +140,20 @@ ImageSpec Image::getImageSpec() const {
 
     return {getResolution(), channelSpecs};
 }
+void Image::addChannelsFromSpec(const ImageSpec &imageSpec) {
+    if (getResolution() != imageSpec.resolution) {
+        throw std::runtime_error(fmt::format("Image resolution does not match, was {}, required was {}",
+                                             getResolution(),
+                                             imageSpec.resolution));
+    }
+    for (auto &channel: imageSpec.channels) {
+        if (channel.name == "rgb") {
+            continue;
+        }
+        addChannel(channel.name,
+                   std::make_unique<PixelBuffer>(getResolution(), channel.pixelFormat, channel.colorChannelCount));
+    }
+}
 
 Image::ChannelView::ChannelView(const std::string &channelName, PixelBuffer &channelBuffer) : channelName(
     channelName), channelBuffer(channelBuffer) {}

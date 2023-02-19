@@ -179,4 +179,30 @@ TEST_CASE("Image/getImageSpec", "[Image]") {
 
 }
 
+TEST_CASE("Image/addChannelsFromSpec", "[Image]") {
+
+    SECTION("should throw if resolutions do not match") {
+        Image image(10, 20);
+        ImageSpec imageSpec({1, 1}, {{"rgb", PixelFormat::FLOAT, 3}});
+
+        REQUIRE_THROWS_AS(image.addChannelsFromSpec(imageSpec), std::runtime_error);
+    }
+
+    SECTION("should add channels from spec") {
+        Image image(10, 20);
+        ImageSpec imageSpec({10, 20},
+                            {{"rgb", PixelFormat::FLOAT, 3},
+                             {"alpha", PixelFormat::FLOAT, 1},
+                             {"depth", PixelFormat::FLOAT, 1}});
+
+        image.addChannelsFromSpec(imageSpec);
+
+        REQUIRE(image.getImageSpec() == ImageSpec({10, 20},
+                                                  {{"rgb", PixelFormat::FLOAT, 3},
+                                                   {"alpha", PixelFormat::FLOAT, 1},
+                                                   {"depth", PixelFormat::FLOAT, 1}}));
+    }
+
+}
+
 }
