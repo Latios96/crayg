@@ -22,7 +22,7 @@ class ImageWidget : public QWidget {
     void prepareBucket(const ImageBucket imageBucket);
     void writeBucketImageBuffer(std::shared_ptr<BucketImageBuffer> bucketImageBuffer);
  private:
-    QImage image;
+    QImage bufferToShow;
 };
 
 }
