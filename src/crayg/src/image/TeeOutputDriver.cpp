@@ -2,6 +2,11 @@
 
 namespace crayg {
 
+void TeeOutputDriver::initialize(const ImageSpec &imageSpec) {
+    left.initialize(imageSpec);
+    right.initialize(imageSpec);
+}
+
 void TeeOutputDriver::prepareBucket(const ImageBucket &imageBucket) {
     left.prepareBucket(imageBucket);
     right.prepareBucket(imageBucket);

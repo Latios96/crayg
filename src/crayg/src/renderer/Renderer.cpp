@@ -25,6 +25,8 @@ void Renderer::renderScene() {
     init();
     Logger::info("Starting rendering..");
 
+    outputDriver.initialize(requiredImageSpec());
+
     const BucketSizeEstimator bucketSizeEstimator(scene.renderSettings);
     const int bucketSize = bucketSizeEstimator.estimateBucketSize();
 
@@ -120,6 +122,9 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
     ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
 
     outputDriver.writeImageMetadata(imageMetadata);
+}
+ImageSpec Renderer::requiredImageSpec() const {
+    return ImageSpec(scene.renderSettings.resolution, {{"rgb", PixelFormat::FLOAT, 3}});
 }
 
 }

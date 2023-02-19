@@ -7,14 +7,23 @@ namespace crayg {
 
 TEST_CASE("TeeOutputDriver should forward methods") {
     fakeit::Mock<OutputDriver> mockLeft;
+    fakeit::When(Method(mockLeft, initialize)).AlwaysReturn();
     fakeit::When(Method(mockLeft, prepareBucket)).AlwaysReturn();
     fakeit::When(Method(mockLeft, writeBucketImageBuffer)).AlwaysReturn();
     fakeit::When(Method(mockLeft, writeImageMetadata)).AlwaysReturn();
     fakeit::Mock<OutputDriver> mockRight;
+    fakeit::When(Method(mockRight, initialize)).AlwaysReturn();
     fakeit::When(Method(mockRight, prepareBucket)).AlwaysReturn();
     fakeit::When(Method(mockRight, writeBucketImageBuffer)).AlwaysReturn();
     fakeit::When(Method(mockRight, writeImageMetadata)).AlwaysReturn();
     TeeOutputDriver teeOutputDriver(mockLeft.get(), mockRight.get());
+
+    SECTION("should forward initialize") {
+        teeOutputDriver.initialize(ImageSpec());
+
+        fakeit::Verify(Method(mockLeft, initialize)).Once();
+        fakeit::Verify(Method(mockRight, initialize)).Once();
+    }
 
     SECTION("should forward prepareBucket") {
         teeOutputDriver.prepareBucket(ImageBucket());
