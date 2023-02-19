@@ -3,6 +3,7 @@
 
 #include <fmt/format.h>
 #include <QtWidgets/qpushbutton.h>
+#include <QtWidgets/qcombobox.h>
 #include <QtWidgets/qlabel.h>
 #include <QtWidgets/qscrollarea.h>
 #include <QVBoxLayout>
@@ -27,12 +28,14 @@ class FrameBufferWidget : public QWidget {
  public slots:
     void setZoomFactor(ZoomFactor zoomFactor);
     void setImageMetadata(ImageMetadata imageMetadata);
+    void setImageSpec(ImageSpec imageSpec);
  private:
     void setupUI();
     ImageWidget &imageWidget;
     PanAndZoomArea *panAndZoomArea;
     QPushButton *metadataButton;
     QTreeWidget *imageMetadataWidget;
+    QComboBox *channelComboBox;
 };
 
 }

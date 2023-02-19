@@ -13,6 +13,15 @@ void FrameBufferWidget::setupUI() {
 
     auto middleLayout = new QVBoxLayout();
     overallLayout->addLayout(middleLayout);
+
+    auto topRowLayout = new QHBoxLayout();
+
+    channelComboBox = new QComboBox();
+    channelComboBox->setMaximumWidth(150);
+    topRowLayout->addWidget(channelComboBox, Qt::AlignLeft);
+    topRowLayout->addStretch();
+    middleLayout->addLayout(topRowLayout);
+
     middleLayout->addWidget(this->panAndZoomArea);
 
     auto metadataButtonLayout = new QHBoxLayout();
@@ -29,7 +38,7 @@ void FrameBufferWidget::setupUI() {
     imageMetadataWidget->setHeaderHidden(true);
     imageMetadataWidget->setColumnCount(2);
     overallLayout->addWidget(imageMetadataWidget);
-    QObject::connect(metadataButton, &QPushButton::clicked, [=](bool checked){
+    QObject::connect(metadataButton, &QPushButton::clicked, [=](bool checked) {
         imageMetadataWidget->setHidden(!imageMetadataWidget->isHidden());
     });
 
@@ -43,7 +52,9 @@ void FrameBufferWidget::setupUI() {
         imageWidget.size().height() > availableSize.height() - 100) {
         resize(availableSize * 3.0f / 5.0f);
     } else {
-        resize(QSize(imageWidget.size().width() + 40, imageWidget.size().height() + 40 + metadataButton->size().height()));
+        resize(QSize(imageWidget.size().width() + 40,
+                     imageWidget.size().height() + 40 + metadataButton->size().height()
+                         + topRowLayout->sizeHint().height()));
     }
 }
 void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
@@ -85,8 +96,8 @@ void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
             } else {
                 auto item = new QTreeWidgetItem();
                 item->setText(0, QString::fromStdString(pathPart));
-                if(pathPart.data() == strings[strings.size()-1].data()){
-                    item->setText(1,QString::fromStdString(fmt::format("{}",metadataEntry.second)));
+                if (pathPart.data() == strings[strings.size() - 1].data()) {
+                    item->setText(1, QString::fromStdString(fmt::format("{}", metadataEntry.second)));
                 }
                 item->setTextAlignment(1, Qt::AlignRight);
                 currentItem->addChild(item);
@@ -99,6 +110,15 @@ void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
 
     imageMetadataWidget->resizeColumnToContents(0);
     imageMetadataWidget->resizeColumnToContents(1);
+}
+void FrameBufferWidget::setImageSpec(ImageSpec imageSpec) {
+    channelComboBox->clear();
+    for (auto &channelSpec: imageSpec.channels) {
+        channelComboBox->addItem(QString::fromStdString(channelSpec.name));
+        channelComboBox->setItemData(channelComboBox->count() - 1,
+                                     QString::fromStdString(channelSpec.name),
+                                     Qt::ToolTipRole);
+    }
 }
 
 }
