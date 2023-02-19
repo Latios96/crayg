@@ -7,13 +7,9 @@
 #include "basics/Resolution.h"
 #include "basics/Color.h"
 #include "PixelPosition.h"
+#include "PixelFormat.h"
 
 namespace crayg {
-
-enum PixelFormat {
-    FLOAT,
-    UINT8
-};
 
 class PixelBuffer {
  public:

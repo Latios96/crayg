@@ -35,7 +35,7 @@ void OpenExrWriter::countChannelsAndPixels(const std::vector<Image::ChannelView>
     for (auto &channel: channels) {
         PixelBuffer &channelBuffer = channel.channelBuffer;
         unsigned int bytesForChannel =
-            channelBuffer.getPixelFormat() == FLOAT ? sizeof(float) : sizeof(uint8_t);
+            channelBuffer.getPixelFormat() == PixelFormat::FLOAT ? sizeof(float) : sizeof(uint8_t);
         totalValuesCount += channelBuffer.getColorChannelCount() * bytesForChannel;
         colorChannelCount += channelBuffer.getColorChannelCount();
     }
@@ -49,8 +49,8 @@ void OpenExrWriter::collectPixelDataIntoSingleBuffer(unsigned int pixelCount,
         for (auto &channel: channels) {
             int colorChannelCount = channel.channelBuffer.getColorChannelCount();
 
-            const bool isFloat = channel.channelBuffer.getPixelFormat() == FLOAT;
-            const bool isUInt8 = channel.channelBuffer.getPixelFormat() == UINT8;
+            const bool isFloat = channel.channelBuffer.getPixelFormat() == PixelFormat::FLOAT;
+            const bool isUInt8 = channel.channelBuffer.getPixelFormat() == PixelFormat::UINT8;
 
             if (isFloat) {
                 float *channelData = std::get<float *>(channel.channelBuffer.getData());
@@ -111,9 +111,9 @@ void OpenExrWriter::writeChannelNames(OIIO::ImageSpec &spec,
 
 void OpenExrWriter::writeChannelFormats(OIIO::ImageSpec &spec, const PixelBuffer &channelBuffer) const {
     for (int i = 0; i < channelBuffer.getColorChannelCount(); i++) {
-        if (channelBuffer.getPixelFormat() == FLOAT) {
+        if (channelBuffer.getPixelFormat() == PixelFormat::FLOAT) {
             spec.channelformats.push_back(OIIO::TypeFloat);
-        } else if (channelBuffer.getPixelFormat() == UINT8) {
+        } else if (channelBuffer.getPixelFormat() == PixelFormat::UINT8) {
             spec.channelformats.push_back(OIIO::TypeUInt8);
         } else {
             throw std::runtime_error("Unsupported pixel format");
