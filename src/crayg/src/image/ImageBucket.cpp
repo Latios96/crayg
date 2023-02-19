@@ -1,5 +1,6 @@
 #include <utils/ToStringHelper.h>
 #include "ImageBucket.h"
+#include <boost/functional/hash.hpp>
 
 namespace crayg {
 
@@ -41,3 +42,14 @@ ImageBucket::ImageBucket() : x(0), y(0), width(0), height(0) {
 }
 
 }
+
+namespace std {
+size_t std::hash<crayg::ImageBucket>::operator()(const crayg::ImageBucket &imageBucket) const {
+    std::size_t seed = 0;
+    boost::hash_combine(seed, imageBucket.getX());
+    boost::hash_combine(seed, imageBucket.getY());
+    boost::hash_combine(seed, imageBucket.getWidth());
+    boost::hash_combine(seed, imageBucket.getHeight());
+    return seed;
+}
+};

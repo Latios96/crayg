@@ -24,4 +24,11 @@ class ImageBucket {
 
 }
 
+namespace std {
+template<>
+struct hash<crayg::ImageBucket> {
+    size_t operator()(const crayg::ImageBucket &imageBucket) const;
+};
+}
+
 #endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_
