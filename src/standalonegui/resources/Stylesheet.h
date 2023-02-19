@@ -78,6 +78,32 @@ QPushButton:hover, QToolButton:hover {
 QPushButton:disabled, QToolButton:disabled {
   background-color: #7a7a7a; }
 
+QComboBox {
+  background: #5b5b5b;
+  border: 1px solid black;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 1px 5px; }
+
+QComboBox:hover {
+  border: 1px solid #547ebd; }
+
+QComboBox::drop-down {
+  background-color: #5b5b5b;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px; }
+
+QComboBox::down-arrow {
+  width: 6px;
+  height: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: #e3e3e3; }
+
 )";
 
 #endif //CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
