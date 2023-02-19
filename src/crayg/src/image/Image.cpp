@@ -66,12 +66,18 @@ void Image::addChannel(const std::string &name, std::unique_ptr<PixelBuffer> pix
 }
 
 bool Image::hasChannel(const std::string &name) const {
+    if (name == "rgb") {
+        return true;
+    }
     return additionalChannels.find(name) != additionalChannels.end();
 }
 
 std::optional<PixelBuffer *> Image::getChannel(const std::string &name) const {
     if (!hasChannel(name)) {
         return std::nullopt;
+    }
+    if (name == "rgb") {
+        return const_cast<PixelBuffer *>(&rgb);
     }
     return additionalChannels.at(name).get();
 }

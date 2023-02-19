@@ -108,6 +108,48 @@ TEST_CASE("Image/addChannel", "[Image]") {
     }
 }
 
+TEST_CASE("Image/getChannel", "[Image]") {
+    SECTION("should return rgb channel") {
+        Image myImage(16, 9);
+
+        REQUIRE(myImage.getChannel("rgb"));
+    }
+
+    SECTION("should return empty optional for not existing channel") {
+        Image myImage(16, 9);
+
+        REQUIRE_FALSE(myImage.getChannel("alpha"));
+    }
+
+    SECTION("should return custom channel") {
+        Image myImage(16, 9);
+        myImage.addAlphaChannel();
+
+        REQUIRE(myImage.getChannel("alpha"));
+    }
+}
+
+TEST_CASE("Image/hasChannel", "[Image]") {
+    SECTION("should return true for rgb channel") {
+        Image myImage(16, 9);
+
+        REQUIRE(myImage.hasChannel("rgb"));
+    }
+
+    SECTION("should return false for not existing channel") {
+        Image myImage(16, 9);
+
+        REQUIRE_FALSE(myImage.hasChannel("alpha"));
+    }
+
+    SECTION("should return true for custom channel") {
+        Image myImage(16, 9);
+        myImage.addAlphaChannel();
+
+        REQUIRE(myImage.hasChannel("alpha"));
+    }
+}
+
 TEST_CASE("Image/getChannels", "[Image]") {
     SECTION("should return only rgb") {
         Image myImage(16, 9);
