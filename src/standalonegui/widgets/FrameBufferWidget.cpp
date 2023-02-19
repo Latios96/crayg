@@ -18,6 +18,11 @@ void FrameBufferWidget::setupUI() {
 
     channelComboBox = new QComboBox();
     channelComboBox->setMaximumWidth(150);
+    QObject::connect(channelComboBox,
+                     &QComboBox::currentTextChanged,
+                     [this](QString text) {
+                         emit channelChanged(text.toStdString());
+                     });
     topRowLayout->addWidget(channelComboBox, Qt::AlignLeft);
     topRowLayout->addStretch();
     middleLayout->addLayout(topRowLayout);

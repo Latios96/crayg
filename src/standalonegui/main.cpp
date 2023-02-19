@@ -53,7 +53,8 @@ int main(int argc, char **argv) {
 
         scene.renderSettings = parseResult.args->cliRenderSettingsOverride.resolveOverrides(scene.renderSettings);
 
-        auto imageWidget = new crayg::ImageWidget(scene.renderSettings.resolution);
+        crayg::Image image(scene.renderSettings.resolution);
+        auto imageWidget = new crayg::ImageWidget(image);
         crayg::ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
         crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
         frameBufferWidget.show();
@@ -68,7 +69,11 @@ int main(int argc, char **argv) {
                          &frameBufferWidget,
                          &crayg::FrameBufferWidget::setImageSpec);
 
-        crayg::Image image(scene.renderSettings.resolution);
+        QObject::connect(&frameBufferWidget,
+                         &crayg::FrameBufferWidget::channelChanged,
+                         imageWidget,
+                         &crayg::ImageWidget::changeChannel);
+
         crayg::ImageOutputDriver imageOutputDriver(image);
         crayg::TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
 

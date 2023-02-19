@@ -29,6 +29,8 @@ class FrameBufferWidget : public QWidget {
     void setZoomFactor(ZoomFactor zoomFactor);
     void setImageMetadata(ImageMetadata imageMetadata);
     void setImageSpec(ImageSpec imageSpec);
+ signals:
+    void channelChanged(std::string newChannel);
  private:
     void setupUI();
     ImageWidget &imageWidget;
