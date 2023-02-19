@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "basics/Resolution.h"
-#include "PixelBuffer.h"
+#include "PixelFormat.h"
 #include "utils/DtoUtils.h"
 
 namespace crayg {

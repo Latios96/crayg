@@ -10,6 +10,7 @@
 #include "ImageMetadata.h"
 #include "PixelPosition.h"
 #include "PixelBuffer.h"
+#include "ImageSpec.h"
 
 namespace crayg {
 
@@ -53,6 +54,7 @@ class Image {
     bool operator!=(const Image &rhs) const;
 
     Resolution getResolution() const;
+    ImageSpec getImageSpec() const;
     ImageMetadata metadata;
     PixelBuffer rgb;
  private:

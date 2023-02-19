@@ -158,4 +158,25 @@ TEST_CASE("Image/getResolution", "[Image]") {
     REQUIRE(image.getResolution() == Resolution(10, 20));
 }
 
+TEST_CASE("Image/getImageSpec", "[Image]") {
+
+    SECTION("should return correct spec for rgb-only image") {
+        Image image(10, 20);
+
+        REQUIRE(image.getImageSpec() == ImageSpec({10, 20}, {{"rgb", PixelFormat::FLOAT, 3}}));
+    }
+
+    SECTION("should return correct spec for rgb-only image") {
+        Image image(10, 20);
+        image.addAlphaChannel();
+        image.addDepthChannel();
+
+        REQUIRE(image.getImageSpec() == ImageSpec({10, 20},
+                                                  {{"rgb", PixelFormat::FLOAT, 3},
+                                                   {"alpha", PixelFormat::FLOAT, 1},
+                                                   {"depth", PixelFormat::FLOAT, 1}}));
+    }
+
+}
+
 }

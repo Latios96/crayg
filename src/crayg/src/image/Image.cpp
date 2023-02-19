@@ -129,6 +129,18 @@ bool Image::operator!=(const Image &rhs) const {
     return !(rhs == *this);
 }
 
+ImageSpec Image::getImageSpec() const {
+    std::vector<ChannelSpec> channelSpecs({{"rgb", PixelFormat::FLOAT, 3}});
+
+    for (auto &channel: additionalChannels) {
+        channelSpecs.emplace_back(channel.first,
+                                  channel.second->getPixelFormat(),
+                                  channel.second->getColorChannelCount());
+    }
+
+    return {getResolution(), channelSpecs};
+}
+
 Image::ChannelView::ChannelView(const std::string &channelName, PixelBuffer &channelBuffer) : channelName(
     channelName), channelBuffer(channelBuffer) {}
 }
