@@ -124,7 +124,8 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
     outputDriver.writeImageMetadata(imageMetadata);
 }
 ImageSpec Renderer::requiredImageSpec() const {
-    return ImageSpec(scene.renderSettings.resolution, {{"rgb", PixelFormat::FLOAT, 3}});
+    return ImageSpecBuilder(scene.renderSettings.resolution)
+        .finish();
 }
 
 }
