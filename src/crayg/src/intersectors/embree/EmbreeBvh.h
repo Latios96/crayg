@@ -3,7 +3,7 @@
 
 #include <embree3/rtcore.h>
 #include <unordered_map>
-#include "utils/PairDto.h"
+#include "utils/DtoUtils.h"
 
 namespace crayg {
 
@@ -13,7 +13,7 @@ enum EmbreePrimitiveType {
     SPHERE
 };
 
-CRAYG_PAIR_DTO(EmbreeMappingEntry,std::uint32_t,sceneObjectIndex,EmbreePrimitiveType,primitiveType)
+CRAYG_DTO_2(EmbreeMappingEntry, std::uint32_t, sceneObjectIndex, EmbreePrimitiveType, primitiveType)
 
 struct EmbreeBvh {
     RTCDevice rtcDevice;

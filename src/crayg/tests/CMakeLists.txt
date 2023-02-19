@@ -52,7 +52,7 @@ set(UNIT_TEST_LIST
         TestOpenExrWriter.cpp
         TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp
-        TestPairDto.cpp
+        TestDtoUtils.cpp
         TestPixelBuffer.cpp
         TestPngWriter.cpp
         TestPreconditions.cpp

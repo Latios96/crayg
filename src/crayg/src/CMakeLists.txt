@@ -227,7 +227,7 @@ set(crayg_SRCS
         utils/ImageMetadataCollector.h
         utils/ImagePathResolver.cpp
         utils/ImagePathResolver.h
-        utils/PairDto.h
+        utils/DtoUtils.h
         utils/Preconditions.cpp
         utils/Preconditions.h
         utils/ProgressReporter.cpp
