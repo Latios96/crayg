@@ -33,6 +33,8 @@ set(crayg_SRCS
         image/ImageMetadata.h
         image/ImageOutputDriver.cpp
         image/ImageOutputDriver.h
+        image/ImageSpec.cpp
+        image/ImageSpec.h
         image/ImageWriter.h
         image/ImageWriters.cpp
         image/ImageWriters.h
