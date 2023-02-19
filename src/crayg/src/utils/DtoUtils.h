@@ -6,6 +6,20 @@
 #include <fmt/ostream.h>
 #include "ToStringHelper.h"
 
+#define CRAYG_DTO_UTILS_VECTOR_FORMATTER(Name) \
+template<>\
+struct fmt::formatter<std::vector<crayg::Name>> {\
+    template<typename ParseContext>\
+    constexpr auto parse(ParseContext &ctx) {\
+        return ctx.begin();\
+    }\
+\
+    template<typename FormatContext>\
+    auto format(std::vector<crayg::Name> const &dtos, FormatContext &ctx) {\
+        return fmt::format_to(ctx.out(), "[{}]",fmt::join(dtos, ", "));\
+    };\
+};
+
 #define CRAYG_DTO_2(Name, FirstType, FirstName, SecondType, SecondName) \
 struct Name {\
     FirstType FirstName = FirstType();                                                   \
@@ -42,18 +56,7 @@ struct fmt::formatter<crayg::Name> {\
         return fmt::format_to(ctx.out(), "{}{{{}={},{}={}}}",#Name,#FirstName, dto.FirstName,#SecondName, dto.SecondName);\
     };\
 };                                                                      \
-template<>\
-struct fmt::formatter<std::vector<crayg::Name>> {\
-    template<typename ParseContext>\
-    constexpr auto parse(ParseContext &ctx) {\
-        return ctx.begin();\
-    }\
-\
-    template<typename FormatContext>\
-    auto format(std::vector<crayg::Name> const &dtos, FormatContext &ctx) {\
-        return fmt::format_to(ctx.out(), "[{}]",fmt::join(dtos, ", "));\
-    };\
-};                                                                                             \
+CRAYG_DTO_UTILS_VECTOR_FORMATTER(Name)                                                                                           \
 namespace crayg {                                                       \
 
 #define CRAYG_DTO_3(Name, FirstType, FirstName, SecondType, SecondName, ThirdType, ThirdName) \
@@ -92,18 +95,7 @@ struct fmt::formatter<crayg::Name> {\
         return fmt::format_to(ctx.out(), "{}{{{}={},{}={},{}={}}}",#Name,#FirstName, dto.FirstName,#SecondName, dto.SecondName,#ThirdName, dto.ThirdName);\
     };\
 };                                                                                           \
-template<>\
-struct fmt::formatter<std::vector<crayg::Name>> {\
-    template<typename ParseContext>\
-    constexpr auto parse(ParseContext &ctx) {\
-        return ctx.begin();\
-    }\
-\
-    template<typename FormatContext>\
-    auto format(std::vector<crayg::Name> const &dtos, FormatContext &ctx) {\
-        return fmt::format_to(ctx.out(), "[{}]",fmt::join(dtos, ", "));\
-    };\
-};                                                                                             \
+CRAYG_DTO_UTILS_VECTOR_FORMATTER(Name)                                                        \
 namespace crayg {                                                                            \
 
 #endif //CRAYG_SRC_CRAYG_SRC_UTILS_DTOUTILS_H_
