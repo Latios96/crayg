@@ -1,6 +1,10 @@
 import os
+import sys
+import time
 
 import sass
+from watchdog.observers.polling import PollingObserver as Observer
+from watchdog.events import FileSystemEventHandler
 
 HEADER_TEMPLATE = """#ifndef CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
 #define CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
@@ -17,19 +21,45 @@ const char * STYLESHEET = R"(
 
 """
 
+SOURCE_PATH = os.path.join(os.path.dirname(__file__), "stylesheet.scss")
+TARGET_PATH = os.path.join(os.path.dirname(__file__), "Stylesheet.h")
 
-def main():
-    source_path = os.path.join(os.path.dirname(__file__), "stylesheet.scss")
-    target_path = os.path.join(os.path.dirname(__file__), "Stylesheet.h")
-    with open(source_path) as f:
+
+def compile():
+    with open(SOURCE_PATH) as f:
         source = f.read()
 
     compiled = sass.compile(string=source)
 
     header = HEADER_TEMPLATE.format(compiled)
-    with open(target_path, "w") as f:
+    with open(TARGET_PATH, "w") as f:
         f.write(header)
 
+    print("Compilation finished")
 
-if __name__ == '__main__':
+
+def watch_changes():
+    class EventHandler(FileSystemEventHandler):
+        def on_any_event(self, event):
+            compile()
+
+    observer = Observer()
+    event_handler = EventHandler()
+    observer.schedule(event_handler, SOURCE_PATH)
+    observer.start()
+    try:
+        while True:
+            time.sleep(0.2)
+    finally:
+        observer.stop()
+        observer.join()
+
+
+def main():
+    compile()
+    if "--watch" in sys.argv:
+        watch_changes()
+
+
+if __name__ == "__main__":
     main()
