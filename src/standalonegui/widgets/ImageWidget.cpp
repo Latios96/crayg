@@ -1,7 +1,7 @@
 #include "ImageWidget.h"
 #include "image/ImageIterators.h"
 #include "image/ImageAlgorithms.h"
-#include "utils/StopWatch.h"
+
 namespace crayg {
 
 ImageWidget::ImageWidget(Image &image, QWidget *parent) : QWidget(parent), image(image) {
@@ -21,6 +21,7 @@ void ImageWidget::initialize(ImageSpec imageSpec) {
 }
 
 void ImageWidget::writeBucketImageBuffer(std::shared_ptr<BucketImageBuffer> bucketImageBuffer) {
+    activeBuckets.erase(bucketImageBuffer->imageBucket);
     updateBufferToShow(bucketImageBuffer->imageBucket);
 }
 
@@ -50,8 +51,8 @@ void drawVLine(QImage &image, int x_start, int y_start, int length, int width) {
     }
 }
 
-void ImageWidget::prepareBucket(const ImageBucket imageBucket) {
-    /*int x = imageBucket.getX();
+void drawBucket(QImage &bufferToShow, const ImageBucket &imageBucket) {
+    int x = imageBucket.getX();
     int y = imageBucket.getY();
     int CROSS_LENGTH = 5;
     int CROSS_WIDTH = 1;
@@ -73,8 +74,10 @@ void ImageWidget::prepareBucket(const ImageBucket imageBucket) {
               y + imageBucket.getHeight() - CROSS_LENGTH,
               CROSS_LENGTH,
               CROSS_WIDTH);
+}
 
-    update();*/
+void ImageWidget::prepareBucket(const ImageBucket imageBucket) {
+    activeBuckets.insert(imageBucket);
 }
 void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
     auto pixelBuffer = *image.getChannel(currentChannel);
@@ -92,7 +95,10 @@ void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
                                                    std::get<2>(rgbValues)));
     }
     update();
-    //  draw active buckets
+
+    for (auto &bucket: activeBuckets) {
+        drawBucket(bufferToShow, bucket);
+    }
 
 }
 void ImageWidget::changeChannel(std::string newChannel) {

@@ -8,6 +8,7 @@
 #include "image/ImageMetadata.h"
 #include "image/BucketImageBuffer.h"
 #include "image/ImageOutputDriver.h"
+#include <unordered_set>
 
 namespace crayg {
 
@@ -29,6 +30,7 @@ class ImageWidget : public QWidget {
     std::string currentChannel = "rgb";
     QImage bufferToShow;
     Image &image;
+    std::unordered_set<ImageBucket> activeBuckets;
 };
 
 }
