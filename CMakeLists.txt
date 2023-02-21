@@ -9,8 +9,6 @@ endif()
 project(crayg)
 set(CMAKE_CXX_STANDARD 17)
 
-option(BUILD_WITH_COVERAGE "Activate --coverage to check for Code Coverage" OFF)
-
 enable_testing()
 
 unset(ENV{CI})

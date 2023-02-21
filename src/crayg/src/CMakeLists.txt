@@ -258,10 +258,4 @@ endif()
 add_custom_command(TARGET crayg PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_LIB_DIRS_USD}/usd ${CMAKE_BINARY_DIR}/bin/usd)
 
-if (${BUILD_WITH_COVERAGE})
-    set_target_properties(crayg
-            PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} --coverage"
-            LINK_FLAGS "--coverage")
-endif ()
-
 target_link_libraries(crayg ${CONAN_LIBS} ${CMAKE_DL_LIBS})
