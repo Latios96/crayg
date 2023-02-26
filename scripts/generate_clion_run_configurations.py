@@ -116,7 +116,7 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Pixar_Kitchen_set\Kitchen_set.usd"),
+                Path(r"M:\Test_Scene_Collection\Pixar_Kitchen_set\Kitchen_set_Crayg.usda"),
                 name_override="Pixar Kitchen",
             )
         )
@@ -147,31 +147,31 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
 
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Blenderman\Blenderman.usd"),
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Blenderman\Blenderman_Crayg.usda"),
                 name_override="Blenderman",
             )
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Junk_Shop\Junk_Shop.usd"),
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Junk_Shop\Junk_Shop_Crayg.usda"),
                 name_override="Junk_Shop",
             )
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Racing_Car\Racing_Car.usd"),
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Racing_Car\Racing_Car_Crayg.usda"),
                 name_override="Racing_Car",
             )
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Sprite_Fright\Sprite_Fright.usd"),
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Sprite_Fright\Sprite_Fright_Crayg.usda"),
                 name_override="Sprite_Fright",
             )
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\White_Lands\White_Lands.usd"),
+                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\White_Lands\White_Lands_Crayg.usda"),
                 name_override="White_Lands",
             )
         )
