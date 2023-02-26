@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include "image/PixelBuffer.h"
+#include <sstream>
 
 namespace crayg {
 

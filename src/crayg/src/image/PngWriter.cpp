@@ -1,6 +1,7 @@
 #include "PngWriter.h"
 #include "utils/ImageChannelPathResolver.h"
 #include <OpenImageIO/imageio.h>
+#include "Logger.h"
 
 namespace crayg {
 

@@ -5,6 +5,7 @@
 #include <ostream>
 #include <fmt/ostream.h>
 #include "ToStringHelper.h"
+#include <vector>
 
 #define CRAYG_DTO_UTILS_VECTOR_FORMATTER(Name) \
 template<>\

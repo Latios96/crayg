@@ -2,16 +2,19 @@
 #include "intersectors/embree/EmbreeSceneIntersector.h"
 #include "intersectors/embree/EmbreeBvhBuilder.h"
 #include "fixtures/TriangleMeshFixtures.h"
+#include "fixtures/SubdivisionSurfaceMeshFixtures.h"
+#include "scene/primitives/Sphere.h"
+#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 
 namespace crayg {
 
-const Ray RAY_WITH_NO_INTERSECTION = Ray({0,5,0},{1,0,0});
-const Ray RAY_WITH_TRIANGLE_INTERSECTION = Ray({0.75f,1,1.5f},{0,-1,0});
-const Ray RAY_WITH_SUBD_MESH_INTERSECTION = Ray({0.1f,1,0},{0,-1,0});
-const Ray RAY_WITH_SPHERE_INTERSECTION = Ray({-2,2,0},{1,0,0});
-const Ray RAY_ON_TRIANGLE = Ray({0.75f,0,1.5f},{0,1,0});
+const Ray RAY_WITH_NO_INTERSECTION = Ray({0, 5, 0}, {1, 0, 0});
+const Ray RAY_WITH_TRIANGLE_INTERSECTION = Ray({0.75f, 1, 1.5f}, {0, -1, 0});
+const Ray RAY_WITH_SUBD_MESH_INTERSECTION = Ray({0.1f, 1, 0}, {0, -1, 0});
+const Ray RAY_WITH_SPHERE_INTERSECTION = Ray({-2, 2, 0}, {1, 0, 0});
+const Ray RAY_ON_TRIANGLE = Ray({0.75f, 0, 1.5f}, {0, 1, 0});
 
-struct IntersectorFixture{
+struct IntersectorFixture {
     explicit IntersectorFixture(Scene &scene): scene(scene) {
         EmbreeBvhBuilder embreeBvhBuilder(scene);
         auto embreeBvh = embreeBvhBuilder.build();

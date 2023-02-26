@@ -2,6 +2,7 @@
 #include "fixtures/TriangleMeshFixtures.h"
 #include "intersectors/embree/EmbreeBvhBuilder.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "scene/primitives/Sphere.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
 
 namespace crayg {

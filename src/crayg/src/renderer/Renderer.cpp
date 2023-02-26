@@ -15,6 +15,7 @@
 #include "utils/ImageMetadataCollector.h"
 #include <tbb/parallel_for.h>
 #include <image/BucketImageBuffer.h>
+#include "GeometryCompiler.h"
 
 namespace crayg {
 

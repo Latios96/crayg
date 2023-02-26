@@ -3,6 +3,7 @@
 #include "scene/Scene.h"
 #include "intersectors/SceneIntersector.h"
 #include "integrators/DebugIntegrator.h"
+#include "scene/primitives/Sphere.h"
 
 namespace crayg {
 

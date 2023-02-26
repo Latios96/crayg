@@ -2,6 +2,7 @@
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
 #include "sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.h"
+#include "sceneIO/usd/UsdUtils.h"
 
 namespace crayg {
 

@@ -1,6 +1,7 @@
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include <scene/materials/UsdPreviewSurface.h>
+#include "scene/primitives/Sphere.h"
 
 namespace crayg {
 

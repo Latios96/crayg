@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
+#include "scene/primitives/Sphere.h"
 #include "intersectors/SceneIntersector.h"
 
 namespace crayg {
