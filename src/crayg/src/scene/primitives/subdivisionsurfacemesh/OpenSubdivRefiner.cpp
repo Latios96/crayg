@@ -26,6 +26,9 @@ OpenSubdivRefiner::OpenSubdivRefiner(SubdivisionSurfaceMesh &subdivisionSurfaceM
     subdivisionSurfaceMesh) {}
 
 void OpenSubdivRefiner::refine(int maxLevel) {
+    if (subdivisionSurfaceMesh.points.empty()) {
+        return;
+    }
     auto refiner = createRefiner();
 
     auto uniformOptions = OpenSubdiv::Far::TopologyRefiner::UniformOptions(maxLevel);
@@ -99,7 +102,6 @@ void OpenSubdivRefiner::refineNormals(
     auto *fineLimitPosAdapter = static_cast<OsdVector3fAdapter *>(fineLimitPos.data());
     auto *fineDuAdapter = static_cast<OsdVector3fAdapter *>(fineDu.data());
     auto *fineDvAdapter = static_cast<OsdVector3fAdapter *>(fineDv.data());
-
     primvarRefiner.Limit(src, fineLimitPosAdapter, fineDuAdapter, fineDvAdapter);
 
     for (int vert = 0; vert < numberOfVertices; ++vert) {

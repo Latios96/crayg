@@ -84,6 +84,15 @@ TEST_CASE("OpenSubdivRefiner::refine") {
                                                                          {-0, -0.171875, -0},
                                                                          {0, -0.171875, 0},}));
     }
+
+    SECTION("should crash when refining mesh with zero ppoints") {
+        SubdivisionSurfaceMesh subdivisionSurfaceMesh;
+        OpenSubdivRefiner openSubdivRefiner(subdivisionSurfaceMesh);
+
+        openSubdivRefiner.refine(1);
+
+        REQUIRE(subdivisionSurfaceMesh.points.size() == 0);
+    }
 }
 
 }
