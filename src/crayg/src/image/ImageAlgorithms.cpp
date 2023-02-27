@@ -10,8 +10,8 @@ void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bu
     }
 
     for (auto pixel : ImageIterators::lineByLine(bucketImageBuffer.image)) {
-        image.setValue(pixel.x + bucketImageBuffer.imageBucket.getX(), pixel.y + bucketImageBuffer.imageBucket.getY(),
-                       bucketImageBuffer.image.getValue(pixel.x, pixel.y));
+        image.setValue({pixel.x + bucketImageBuffer.imageBucket.getX(), pixel.y + bucketImageBuffer.imageBucket.getY()},
+                       bucketImageBuffer.image.getValue(pixel));
     }
 }
 

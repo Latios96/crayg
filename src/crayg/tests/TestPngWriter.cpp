@@ -12,7 +12,7 @@ TEST_CASE("PngWriter") {
     PngWriter pngWriter;
 
     for (auto p : ImageIterators::lineByLine(image)) {
-        image.setValue(p.x, p.y, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
+        image.setValue(p, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
     }
 
     SECTION("should write PNG with rgb only") {

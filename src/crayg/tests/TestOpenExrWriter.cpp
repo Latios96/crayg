@@ -11,7 +11,7 @@ TEST_CASE("OpenExrWriter") {
     OpenExrWriter openExrWriter;
 
     for (auto p : ImageIterators::lineByLine(image)) {
-        image.setValue(p.x, p.y, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
+        image.setValue(p, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
     }
 
     if (boost::filesystem::exists("OpenExrWriter.png")) {

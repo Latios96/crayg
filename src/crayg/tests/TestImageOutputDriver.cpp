@@ -16,7 +16,7 @@ TEST_CASE("ImageOutputDriver") {
         imageOutputDriver.prepareBucket(bucketImageBuffer.imageBucket);
         imageOutputDriver.writeBucketImageBuffer(bucketImageBuffer);
 
-        REQUIRE(image.getValue(10, 10) == Color::createWhite());
+        REQUIRE(image.getValue({10, 10}) == Color::createWhite());
     }
 
     SECTION("should write metadata") {

@@ -19,7 +19,7 @@ TEST_CASE("Image/copyImage", "[Image]") {
 
         for (int x = 0; x < myImage.getWidth(); x++) {
             for (int y = 0; y < myImage.getHeight(); y++) {
-                myImage.setValue(x, y, Color::createGrey(static_cast<float>(x) * static_cast<float>(y)));
+                myImage.setValue({x, y}, Color::createGrey(static_cast<float>(x) * static_cast<float>(y)));
             }
         }
 
@@ -176,10 +176,10 @@ TEST_CASE("Image/getChannels", "[Image]") {
 TEST_CASE("Image/replaceChannel", "[Image]") {
     SECTION("should replace rgb channel") {
         Image myImage(16, 9);
-        myImage.setValue(2, 3, Color::createWhite());
+        myImage.setValue({2, 3}, Color::createWhite());
 
         myImage.replaceChannel("rgb", PixelBuffer::createRgbUInt8(myImage.getResolution()));
-        REQUIRE(myImage.getValue(2, 3) == Color::createBlack());
+        REQUIRE(myImage.getValue({2, 3}) == Color::createBlack());
     }
 
     SECTION("should replace additional channel") {

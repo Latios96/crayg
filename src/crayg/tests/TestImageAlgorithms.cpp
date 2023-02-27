@@ -31,10 +31,10 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
 
         ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
 
-        REQUIRE(image.getValue(0, 0) == Color::createBlack());
-        REQUIRE(image.getValue(4, 4) == Color::createBlack());
-        REQUIRE(image.getValue(5, 5) == Color::createBlack());
-        REQUIRE(image.getValue(9, 9) == Color::createBlack());
+        REQUIRE(image.getValue({0, 0}) == Color::createBlack());
+        REQUIRE(image.getValue({4, 4}) == Color::createBlack());
+        REQUIRE(image.getValue({5, 5}) == Color::createBlack());
+        REQUIRE(image.getValue({9, 9}) == Color::createBlack());
     }
 
     SECTION("shouldCopyCorrectly") {
@@ -43,10 +43,10 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
 
         ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
 
-        REQUIRE(image.getValue(0, 0) == Color::createWhite());
-        REQUIRE(image.getValue(4, 4) == Color::createWhite());
-        REQUIRE(image.getValue(5, 5) == Color::createBlack());
-        REQUIRE(image.getValue(9, 9) == Color::createBlack());
+        REQUIRE(image.getValue({0, 0}) == Color::createWhite());
+        REQUIRE(image.getValue({4, 4}) == Color::createWhite());
+        REQUIRE(image.getValue({5, 5}) == Color::createBlack());
+        REQUIRE(image.getValue({9, 9}) == Color::createBlack());
     }
 }
 

@@ -24,8 +24,8 @@ class Image {
     int getWidth() const;
     int getHeight() const;
 
-    void setValue(int x, int y, const Color &color);
-    Color getValue(int x, int y) const;
+    void setValue(const PixelPosition &pixelPosition, const Color &color);
+    Color getValue(const PixelPosition &pixelPosition) const;
 
     void addAlphaChannel();
     bool hasAlphaChannel() const;

@@ -13,7 +13,7 @@ class ImageAlgorithms {
 
     static void fill(Image &image, const Color &color) {
         for (auto pixel : ImageIterators::lineByLine(image)) {
-            image.setValue(pixel.x, pixel.y, color);
+            image.setValue({pixel.x, pixel.y}, color);
         }
     }
 
