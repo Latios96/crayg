@@ -29,10 +29,10 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
     }
 
     SECTION("testIterate") {
-        std::vector<PixelPosition> positions;
+        std::vector<Vector2i> positions;
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
-                positions.push_back(PixelPosition(x, y));
+                positions.emplace_back(x, y);
             }
         }
         int counter = 0;

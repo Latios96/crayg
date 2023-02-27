@@ -4,8 +4,8 @@
 #include "ImageMetadata.h"
 #include "ImageSpec.h"
 #include "PixelBuffer.h"
-#include "PixelPosition.h"
 #include "basics/Color.h"
+#include "basics/Vector2.h"
 #include "basics/Vector3f.h"
 #include <basics/Resolution.h>
 #include <optional>
@@ -24,8 +24,8 @@ class Image {
     int getWidth() const;
     int getHeight() const;
 
-    void setValue(const PixelPosition &pixelPosition, const Color &color);
-    Color getValue(const PixelPosition &pixelPosition) const;
+    void setValue(const Vector2i &pixelPosition, const Color &color);
+    Color getValue(const Vector2i &pixelPosition) const;
 
     void addAlphaChannel();
     bool hasAlphaChannel() const;

@@ -22,11 +22,11 @@ int Image::getHeight() const {
     return rgb.getHeight();
 }
 
-void Image::setValue(const PixelPosition &pixelPosition, const Color &color) {
+void Image::setValue(const Vector2i &pixelPosition, const Color &color) {
     rgb.setValue(pixelPosition, color);
 }
 
-Color Image::getValue(const PixelPosition &pixelPosition) const {
+Color Image::getValue(const Vector2i &pixelPosition) const {
     return rgb.getValue(pixelPosition);
 }
 

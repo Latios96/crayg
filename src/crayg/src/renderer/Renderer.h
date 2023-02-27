@@ -32,7 +32,7 @@ class Renderer {
     void renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
     void renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
     void renderBucket(const ImageBucket &imageBucket);
-    Color renderPixel(const PixelPosition &pixel);
+    Color renderPixel(const Vector2i &pixel);
     Color renderSample(float x, float y);
 
     std::unique_ptr<AbstractIntegrator> integrator;

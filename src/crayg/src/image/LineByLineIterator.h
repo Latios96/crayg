@@ -23,7 +23,7 @@ template <typename I> class LineByLineIterator {
         return *this;
     }
 
-    PixelPosition operator*() const {
+    Vector2i operator*() const {
         return {lastX, lastY};
     }
 

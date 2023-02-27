@@ -2,9 +2,9 @@
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_
 
 #include "PixelFormat.h"
-#include "PixelPosition.h"
 #include "basics/Color.h"
 #include "basics/Resolution.h"
+#include "basics/Vector2.h"
 #include <memory>
 #include <ostream>
 #include <variant>
@@ -22,8 +22,8 @@ class PixelBuffer {
     static std::unique_ptr<PixelBuffer> createGreyUInt8(const Resolution &resolution);
     static std::unique_ptr<PixelBuffer> createVector3f(const Resolution &resolution);
     void fill(const Color &color);
-    void setValue(const PixelPosition &pixelPosition, const Color &color);
-    Color getValue(const PixelPosition &pixelPosition) const;
+    void setValue(const Vector2i &pixelPosition, const Color &color);
+    Color getValue(const Vector2i &pixelPosition) const;
     bool isBlack() const;
     bool isWhite() const;
     bool isColor(const Color &color) const;
@@ -40,7 +40,7 @@ class PixelBuffer {
     ~PixelBuffer();
 
   private:
-    int pixelNumber(const PixelPosition &pixelPosition) const;
+    int pixelNumber(const Vector2i &pixelPosition) const;
     void init(PixelFormat pixelFormat);
 
     std::variant<float *, uint8_t *> data;

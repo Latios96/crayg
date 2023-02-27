@@ -124,13 +124,13 @@ void PixelBuffer::fill(const Color &color) {
     std::visit(PixelBufferSetValue{0, pixelCount(), colorChannelCount, color}, data);
 }
 
-void PixelBuffer::setValue(const PixelPosition &pixelPosition, const Color &color) {
+void PixelBuffer::setValue(const Vector2i &pixelPosition, const Color &color) {
     std::visit(
         PixelBufferSetValue{pixelNumber(pixelPosition), pixelNumber(pixelPosition) + 1, colorChannelCount, color},
         data);
 }
 
-Color PixelBuffer::getValue(const PixelPosition &pixelPosition) const {
+Color PixelBuffer::getValue(const Vector2i &pixelPosition) const {
     return std::visit(PixelBufferGetValue{pixelNumber(pixelPosition), colorChannelCount}, data);
 }
 
@@ -142,7 +142,7 @@ PixelBuffer::~PixelBuffer() {
     std::visit(PixelBufferFree{}, data);
 }
 
-int PixelBuffer::pixelNumber(const PixelPosition &pixelPosition) const {
+int PixelBuffer::pixelNumber(const Vector2i &pixelPosition) const {
     return (pixelPosition.x + width * pixelPosition.y);
 }
 

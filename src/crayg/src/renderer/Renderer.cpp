@@ -61,7 +61,7 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
-        Color pixelColor = renderPixel(PixelPosition(imageBucket.getX() + pixel.x, imageBucket.getY() + pixel.y));
+        Color pixelColor = renderPixel(Vector2i(imageBucket.getX() + pixel.x, imageBucket.getY() + pixel.y));
         bucketImageBuffer.image.setValue(pixel, pixelColor);
     }
     outputDriver.writeBucketImageBuffer(bucketImageBuffer);
@@ -89,7 +89,7 @@ void Renderer::init() {
     }
 }
 
-Color Renderer::renderPixel(const PixelPosition &pixel) {
+Color Renderer::renderPixel(const Vector2i &pixel) {
     SampleAccumulator sampleAccumulator;
 
     float stepSize = 1.0f / static_cast<float>(scene.renderSettings.maxSamples);

@@ -50,7 +50,6 @@ set(crayg_SRCS
         image/PixelBuffer.cpp
         image/PixelBuffer.h
         image/PixelFormat.h
-        image/PixelPosition.h
         image/PngWriter.cpp
         image/PngWriter.h
         image/TeeOutputDriver.cpp
