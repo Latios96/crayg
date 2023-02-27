@@ -19,6 +19,7 @@ Cornell Box by http://casual-effects.com/data/index.html
       * [Linux & Mac OS](#linux--mac-os)
       * [Windows](#windows)
   * [Test execution](#test-execution)
+  * [Development Setup](#development-setup)
   * [Test Integration for Autodesk Maya](#test-integration-for-autodesk-maya)
     * [Prerequisites](#prerequisites)
     * [Launching and Usage](#launching-and-usage)
@@ -112,6 +113,14 @@ ninja
 ```shell
 cd build
 ctest -V
+```
+
+## Development Setup
+```shell
+# you may want to use a virtualenv
+pip install -r requirements-dev.txt
+pre-commit install
+git config blame.ignoreRevsFile .git-blame-ignore-revs
 ```
 
 ## Test Integration for Autodesk Maya
