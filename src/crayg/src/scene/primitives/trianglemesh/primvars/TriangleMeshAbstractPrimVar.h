@@ -2,6 +2,8 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHABSTRACTPRIMVAR_H_
 
 #include "PrimVarType.h"
+#include "basics/Vector3f.h"
+
 class TriangleMesh;
 
 namespace crayg {
