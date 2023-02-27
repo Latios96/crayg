@@ -6,6 +6,7 @@ fakeit/2.0.9
 cli11/2.3.2
 boost/1.78.0
 openimageio/2.3.7.2
+opencolorio/2.1.0
 tinyobjloader/1.0.7
 onetbb/2020.3
 qt/5.15.2
