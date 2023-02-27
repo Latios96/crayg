@@ -1,0 +1,8 @@
+﻿---
+ColumnLimit: '120'
+IndentWidth: '4'
+SeparateDefinitionBlocks: Always
+FixNamespaceComments: false
+InsertBraces: true
+AllowShortFunctionsOnASingleLine: false
+...
