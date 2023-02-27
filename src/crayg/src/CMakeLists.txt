@@ -20,6 +20,8 @@ set(crayg_SRCS
         CraygInfo.h
         image/BucketImageBuffer.cpp
         image/BucketImageBuffer.h
+        image/ColorConversion.cpp
+        image/ColorConversion.h
         image/Image.cpp
         image/Image.h
         image/ImageAlgorithms.cpp

@@ -22,6 +22,7 @@ set(UNIT_TEST_LIST
         TestBvhSceneIntersector.cpp
         TestCamera.cpp
         TestColor.cpp
+        TestColorConversion.cpp
         TestDebugIntegrator.cpp
         TestDiskLight.cpp
         TestEmbreeBvhBuilder.cpp
