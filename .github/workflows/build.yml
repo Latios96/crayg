@@ -6,6 +6,21 @@ on:
       - '**/README.md'
       - 'docs/**/*'
 jobs:
+  check-format:
+    runs-on: "ubuntu-20.04"
+    name: "Check formatting"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          pip install pre-commit
+      - name: Check formatting
+        run: |
+          pre-commit run --all-files
   build:
     runs-on: ${{ matrix.os }}
     strategy:
