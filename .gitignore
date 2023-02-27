@@ -51,8 +51,7 @@ CTestTestfile.cmake
 build/
 build/
 .idea/*
-cmake-build-debug/*
-cmake-build-release/*
+cmake-build-*/*
 
 cl
 code_coverage.info
