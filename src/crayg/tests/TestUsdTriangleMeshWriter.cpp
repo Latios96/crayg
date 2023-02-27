@@ -1,11 +1,11 @@
-#include <catch2/catch.hpp>
-#include "sceneIO/write/usd/UsdTriangleMeshWriter.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include <pxr/usd/usd/stage.h>
-#include <pxr/usd/usdGeom/mesh.h>
 #include "fixtures/TriangleMeshFixtures.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/UsdTriangleMeshWriter.h"
+#include <catch2/catch.hpp>
+#include <pxr/usd/usd/stage.h>
+#include <pxr/usd/usdGeom/mesh.h>
 
 namespace crayg {
 
@@ -26,16 +26,15 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
         usdTriangleMeshWriter.write(stage, usdPathFactory);
 
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));
-        pxr::GfVec3d
-            translation = usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
+        pxr::GfVec3d translation =
+            usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
         auto points = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetPointsAttr());
         auto triangleIndices =
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
         auto faceVertexCounts =
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexCountsAttr());
         REQUIRE(translation == pxr::GfVec3f(1, 2, -3));
-        REQUIRE(points
-                    == pxr::VtVec3fArray({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
+        REQUIRE(points == pxr::VtVec3fArray({{-0.5, 0, -0.5}, {0.5, 0, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5}}));
         REQUIRE(triangleIndices == pxr::VtIntArray({0, 1, 2, 2, 1, 3}));
         REQUIRE(faceVertexCounts == pxr::VtIntArray({3, 3}));
     }
@@ -56,8 +55,7 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));
         REQUIRE(usdGeomMesh.GetNormalsInterpolation() == pxr::UsdGeomTokens->vertex);
         auto normals = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetNormalsAttr());
-        REQUIRE(normals
-                    == pxr::VtVec3fArray({{1, 0, -0}, {0, 1, -0}, {0, 0, -1}, {1, 0, -0}, {0, 1, -0}, {0, 0, -1}}));
+        REQUIRE(normals == pxr::VtVec3fArray({{1, 0, -0}, {0, 1, -0}, {0, 0, -1}, {1, 0, -0}, {0, 1, -0}, {0, 0, -1}}));
     }
 
     SECTION("should write per vertex normals") {
@@ -74,11 +72,19 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));
         REQUIRE(usdGeomMesh.GetNormalsInterpolation() == pxr::UsdGeomTokens->faceVarying);
         auto normals = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetNormalsAttr());
-        REQUIRE(normals
-                    == pxr::VtVec3fArray({{1, 0, -0}, {1, 0, -0}, {1, 0, -0}, {0, 1, -0}, {0, 1, -0}, {0, 1, -0},
-                                          {0, 0, -1}, {0, 0, -1}, {0, 0, -1}, {1, 0, -0}, {1, 0, -0}, {1, 0, -0}}));
+        REQUIRE(normals == pxr::VtVec3fArray({{1, 0, -0},
+                                              {1, 0, -0},
+                                              {1, 0, -0},
+                                              {0, 1, -0},
+                                              {0, 1, -0},
+                                              {0, 1, -0},
+                                              {0, 0, -1},
+                                              {0, 0, -1},
+                                              {0, 0, -1},
+                                              {1, 0, -0},
+                                              {1, 0, -0},
+                                              {1, 0, -0}}));
     }
-
 }
 
 }

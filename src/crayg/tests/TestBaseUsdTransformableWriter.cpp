@@ -1,7 +1,7 @@
-#include <catch2/catch.hpp>
 #include "scene/primitives/Sphere.h"
-#include "sceneIO/write/usd/BaseUsdTransformableWriter.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/BaseUsdTransformableWriter.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
@@ -11,10 +11,11 @@ namespace crayg {
 TEST_CASE("BaseUsdTransformableWriter::write") {
 
     class DummyBaseWriter : public BaseUsdTransformableWriter<pxr::UsdGeomSphere, Sphere> {
-     public:
-        DummyBaseWriter(Sphere &craygObject) : BaseUsdTransformableWriter<pxr::UsdGeomSphere,
-                                                                          Sphere>(craygObject) {}
-     protected:
+      public:
+        DummyBaseWriter(Sphere &craygObject) : BaseUsdTransformableWriter<pxr::UsdGeomSphere, Sphere>(craygObject) {
+        }
+
+      protected:
         std::string getTranslatedType() override {
             return std::string("test");
         }
@@ -31,8 +32,8 @@ TEST_CASE("BaseUsdTransformableWriter::write") {
         dummyBaseWriter.write(stage, usdPathFactory);
         auto usdGeomSphere = pxr::UsdGeomSphere(stage->GetPrimAtPath(pxr::SdfPath("/craygSphere")));
 
-        pxr::GfVec3d
-            translation = usdGeomSphere.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
+        pxr::GfVec3d translation =
+            usdGeomSphere.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
         REQUIRE(translation == pxr::GfVec3f(1, 2, 3));
     }
 }

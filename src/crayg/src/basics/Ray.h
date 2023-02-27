@@ -1,15 +1,16 @@
 #ifndef CRAYG_RAY_H
 #define CRAYG_RAY_H
 
-#include <ostream>
 #include "Vector3f.h"
+#include <ostream>
 
 namespace crayg {
 
 struct Ray {
     Vector3f startPoint, direction;
     float length;
- public:
+
+  public:
     Ray(Vector3f startPoint, Vector3f direction);
 
     Ray(Vector3f startPoint, Vector3f direction, float length);
@@ -31,4 +32,4 @@ struct Ray {
 
 }
 
-#endif //CRAYG_RAY_H
+#endif // CRAYG_RAY_H

@@ -1,17 +1,16 @@
-#include <catch2/catch.hpp>
-#include "basics/Vector3f.h"
 #include "basics/OrthonormalBasis.h"
+#include "basics/Vector3f.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
 TEST_CASE("OrthonormalBasis::construct") {
 
     SECTION("should construct an OrthonormalBasis correctly from single vector") {
-        auto testData = GENERATE(table<Vector3f, OrthonormalBasis>({{{0, 1, 0}, {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}},
-                                                                    {Vector3f({1, 1, 0}).normalize(),
-                                                                     {{0.70710677f, -0.70710677f, 0},
-                                                                      {0.70710677f, 0.70710677f, 0},
-                                                                      {0, 0, 0.99999994f}}}}));
+        auto testData = GENERATE(table<Vector3f, OrthonormalBasis>(
+            {{{0, 1, 0}, {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}},
+             {Vector3f({1, 1, 0}).normalize(),
+              {{0.70710677f, -0.70710677f, 0}, {0.70710677f, 0.70710677f, 0}, {0, 0, 0.99999994f}}}}));
 
         const auto orthonormalBasis = OrthonormalBasis((std::get<0>(testData)));
 

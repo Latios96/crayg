@@ -1,14 +1,16 @@
+#include "Scene.h"
 #include <algorithm>
 #include <fmt/format.h>
-#include "Scene.h"
 
 namespace crayg {
 
-Scene::Scene(const RenderSettings &renderSettings) : renderSettings(renderSettings) {}
+Scene::Scene(const RenderSettings &renderSettings) : renderSettings(renderSettings) {
+}
 
 void Scene::addLight(const std::shared_ptr<Light> &light) {
     lights.push_back(light);
 }
+
 void Scene::addObject(const std::shared_ptr<SceneObject> &sceneObject) {
     objects.push_back(sceneObject);
     addMaterialIfObjectHasMaterial(sceneObject);
@@ -30,19 +32,17 @@ void Scene::addMaterial(const std::shared_ptr<Material> &material) {
         materials.insert(material);
     }
 }
+
 bool Scene::materialWithNameExists(const std::shared_ptr<Material> &material) {
-    return std::any_of(materials.begin(),
-                       materials.end(),
-                       [&material](const std::shared_ptr<Material> &mat) {
-                           return mat->getName() == material->getName();
-                       });
+    return std::any_of(materials.begin(), materials.end(), [&material](const std::shared_ptr<Material> &mat) {
+        return mat->getName() == material->getName();
+    });
 }
+
 std::shared_ptr<Material> Scene::materialByName(const std::string &name) {
-    const auto iterator = std::find_if(materials.begin(),
-                                       materials.end(),
-                                       [&name](std::shared_ptr<Material> material) {
-                                           return name == material->getName();
-                                       });
+    const auto iterator = std::find_if(materials.begin(), materials.end(), [&name](std::shared_ptr<Material> material) {
+        return name == material->getName();
+    });
     if (iterator == materials.end()) {
         return nullptr;
     }

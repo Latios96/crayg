@@ -2,5 +2,6 @@
 
 namespace crayg {
 
-SceneWriter::SceneWriter(Scene &scene) : scene(scene) {}
+SceneWriter::SceneWriter(Scene &scene) : scene(scene) {
+}
 }

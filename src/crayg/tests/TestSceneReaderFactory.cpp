@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/SceneReaderFactory.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 

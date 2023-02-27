@@ -1,14 +1,14 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
 #define CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
 
-#include <ostream>
 #include "Matrix4x4f.h"
 #include "Ray.h"
+#include <ostream>
 
 namespace crayg {
 
 class Transform {
- public:
+  public:
     Transform();
     explicit Transform(const Matrix4x4f &matrix);
     Transform(const Transform &transform);
@@ -32,4 +32,4 @@ class Transform {
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_
+#endif // CRAYG_SRC_CRAYG_SRC_BASICS_TRANSFORM_H_

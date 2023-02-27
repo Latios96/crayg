@@ -1,9 +1,9 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdSphereLightReader.h"
-#include <pxr/usd/usd/stage.h>
-#include <pxr/usd/usdLux/sphereLight.h>
-#include <pxr/usd/usdGeom/xformCommonAPI.h>
+#include <catch2/catch.hpp>
 #include <iostream>
+#include <pxr/usd/usd/stage.h>
+#include <pxr/usd/usdGeom/xformCommonAPI.h>
+#include <pxr/usd/usdLux/sphereLight.h>
 
 namespace crayg {
 
@@ -38,7 +38,6 @@ TEST_CASE("UsdSphereLightReader::read") {
         REQUIRE(light->getIntensity() == 3);
         REQUIRE(light->getColor() == Color({1, 0, 0}));
     }
-
 }
 
 }

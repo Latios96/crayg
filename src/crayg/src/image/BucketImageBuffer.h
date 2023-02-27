@@ -1,13 +1,13 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_
 
-#include "ImageBucket.h"
 #include "Image.h"
+#include "ImageBucket.h"
 
 namespace crayg {
 
 struct BucketImageBuffer {
- public:
+  public:
     ImageBucket imageBucket;
     Image image;
     BucketImageBuffer();
@@ -17,4 +17,4 @@ struct BucketImageBuffer {
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_

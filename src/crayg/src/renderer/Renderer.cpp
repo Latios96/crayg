@@ -1,27 +1,27 @@
-#include <memory>
-#include <image/ImageIterators.h>
-#include <image/ImageBucketSequences.h>
-#include <numeric>
 #include "Renderer.h"
-#include "scene/camera/PineHoleCameraModel.h"
-#include "utils/ProgressReporter.h"
-#include "Logger.h"
-#include "integrators/RaytracingIntegrator.h"
-#include "integrators/IntegratorFactory.h"
-#include "SampleAccumulator.h"
 #include "BucketSizeEstimator.h"
-#include "utils/StopWatch.h"
-#include "intersectors/IntersectorFactory.h"
-#include "utils/ImageMetadataCollector.h"
-#include <tbb/parallel_for.h>
-#include <image/BucketImageBuffer.h>
 #include "GeometryCompiler.h"
+#include "Logger.h"
+#include "SampleAccumulator.h"
+#include "integrators/IntegratorFactory.h"
+#include "integrators/RaytracingIntegrator.h"
+#include "intersectors/IntersectorFactory.h"
+#include "scene/camera/PineHoleCameraModel.h"
+#include "utils/ImageMetadataCollector.h"
+#include "utils/ProgressReporter.h"
+#include "utils/StopWatch.h"
+#include <image/BucketImageBuffer.h>
+#include <image/ImageBucketSequences.h>
+#include <image/ImageIterators.h>
+#include <memory>
+#include <numeric>
+#include <tbb/parallel_for.h>
 
 namespace crayg {
 
-Renderer::Renderer(Scene &scene, OutputDriver &outputDriver)
-    : scene(scene), outputDriver(outputDriver) {
+Renderer::Renderer(Scene &scene, OutputDriver &outputDriver) : scene(scene), outputDriver(outputDriver) {
 }
+
 void Renderer::renderScene() {
     init();
     Logger::info("Starting rendering..");
@@ -31,10 +31,10 @@ void Renderer::renderScene() {
     const BucketSizeEstimator bucketSizeEstimator(scene.renderSettings);
     const int bucketSize = bucketSizeEstimator.estimateBucketSize();
 
-    std::vector<ImageBucket>
-        bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, bucketSize);
-    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()),
-                                                                                "Rendering");
+    std::vector<ImageBucket> bucketSequence =
+        ImageBucketSequences::lineByLine(scene.renderSettings.resolution, bucketSize);
+    ProgressReporter reporter =
+        ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()), "Rendering");
 
     bool serialRendering = false;
     if (serialRendering) {
@@ -48,41 +48,35 @@ void Renderer::renderScene() {
     writeImageMetadata(renderTime);
 }
 
-void Renderer::renderParallel(ProgressReporter &reporter,
-                              const std::vector<ImageBucket> &bucketSequence) {
-    tbb::parallel_for(static_cast<std::size_t>(0),
-                      bucketSequence.size(),
-                      [this, &reporter, &bucketSequence](int i) {
-                          ImageBucket imageBucket = bucketSequence[i];
-                          renderBucket(imageBucket);
-                          reporter.iterationDone();
-                      });
+void Renderer::renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence) {
+    tbb::parallel_for(static_cast<std::size_t>(0), bucketSequence.size(), [this, &reporter, &bucketSequence](int i) {
+        ImageBucket imageBucket = bucketSequence[i];
+        renderBucket(imageBucket);
+        reporter.iterationDone();
+    });
 }
+
 void Renderer::renderBucket(const ImageBucket &imageBucket) {
     BucketImageBuffer bucketImageBuffer(imageBucket);
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
-    for (auto pixel: ImageIterators::lineByLine(imageBucket)) {
-        Color pixelColor =
-            renderPixel(PixelPosition(imageBucket.getX() + pixel.x,
-                                      imageBucket.getY() + pixel.y));
+    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+        Color pixelColor = renderPixel(PixelPosition(imageBucket.getX() + pixel.x, imageBucket.getY() + pixel.y));
         bucketImageBuffer.image.setValue(pixel.x, pixel.y, pixelColor);
     }
     outputDriver.writeBucketImageBuffer(bucketImageBuffer);
 }
 
 void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence) {
-    for (auto &imageBucket: bucketSequence) {
+    for (auto &imageBucket : bucketSequence) {
         renderBucket(imageBucket);
         reporter.iterationDone();
     }
 }
 
 void Renderer::init() {
-    cameraModel =
-        std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera,
-                                                             scene.renderSettings.resolution.getWidth(),
-                                                             scene.renderSettings.resolution.getHeight()));
+    cameraModel = std::shared_ptr<CameraModel>(new PineHoleCameraModel(
+        *scene.camera, scene.renderSettings.resolution.getWidth(), scene.renderSettings.resolution.getHeight()));
 
     GeometryCompiler geometryCompiler(scene);
     geometryCompiler.compile();
@@ -90,13 +84,9 @@ void Renderer::init() {
     {
         InformativeScopedStopWatch buildBvh("Building SceneIntersector");
         sceneIntersector = IntersectorFactory::createSceneIntersector(scene.renderSettings.intersectorType, scene);
-        integrator =
-            std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(scene.renderSettings.integratorType,
-                                                                                    scene,
-                                                                                    sceneIntersector,
-                                                                                    scene.renderSettings.integratorSettings));
+        integrator = std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(
+            scene.renderSettings.integratorType, scene, sceneIntersector, scene.renderSettings.integratorSettings));
     }
-
 }
 
 Color Renderer::renderPixel(const PixelPosition &pixel) {
@@ -115,8 +105,8 @@ Color Renderer::renderPixel(const PixelPosition &pixel) {
 Color Renderer::renderSample(float x, float y) {
     Ray ray = cameraModel->createPrimaryRay(x, y);
     return integrator->integrate(ray, 0);
-
 }
+
 void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
     ImageMetadataCollector imageMetadataCollector(renderTime, scene.renderSettings);
 
@@ -124,11 +114,9 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
 
     outputDriver.writeImageMetadata(imageMetadata);
 }
+
 ImageSpec Renderer::requiredImageSpec() const {
-    return ImageSpecBuilder(scene.renderSettings.resolution)
-        .finish();
+    return ImageSpecBuilder(scene.renderSettings.resolution).finish();
 }
 
 }
-
-

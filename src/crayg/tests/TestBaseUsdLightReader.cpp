@@ -1,18 +1,20 @@
-#include <catch2/catch.hpp>
-#include "sceneIO/read/usd/BaseUsdLightReader.h"
 #include "scene/lights/DiskLight.h"
+#include "sceneIO/read/usd/BaseUsdLightReader.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
-#include <pxr/usd/usdLux/diskLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
+#include <pxr/usd/usdLux/diskLight.h>
 
 namespace crayg {
 
 TEST_CASE("BaseUsdLightReader::read") {
 
     class DummyBaseReader : public BaseUsdLightReader<pxr::UsdLuxDiskLight, DiskLight> {
-     public:
-        DummyBaseReader(const pxr::UsdLuxDiskLight &usdPrim) : BaseUsdLightReader(usdPrim) {}
-     protected:
+      public:
+        DummyBaseReader(const pxr::UsdLuxDiskLight &usdPrim) : BaseUsdLightReader(usdPrim) {
+        }
+
+      protected:
         std::string getTranslatedType() override {
             return std::string("test");
         }
@@ -51,7 +53,6 @@ TEST_CASE("BaseUsdLightReader::read") {
         REQUIRE(light->getColor() == Color({1, 0, 0}));
         REQUIRE(light->getName() == "/usdDiskLight");
     }
-
 }
 
 }

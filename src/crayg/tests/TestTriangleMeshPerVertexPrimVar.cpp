@@ -1,12 +1,11 @@
-#include <catch2/catch.hpp>
+#include "fixtures/TriangleMeshFixtures.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
-#include "fixtures/TriangleMeshFixtures.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
-TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt")
-{
+TEST_CASE("TriangleMeshPerVertexPrimVar::interpolateAt") {
     auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     SECTION("should interpolate constant value correctly") {
@@ -48,10 +47,9 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::==") {
     primVar.write(3, VertexData(Color::createGrey(0.5)));
 
     SECTION("primvar should be equal to equivalent buffer") {
-        REQUIRE(primVar == std::vector<VertexData<Color>>({VertexData(Color::createGrey(0.5)),
-                                                           VertexData(Color::createGrey(0.5)),
-                                                           VertexData(Color::createGrey(0.5)),
-                                                           VertexData(Color::createGrey(0.5))}));
+        REQUIRE(primVar == std::vector<VertexData<Color>>(
+                               {VertexData(Color::createGrey(0.5)), VertexData(Color::createGrey(0.5)),
+                                VertexData(Color::createGrey(0.5)), VertexData(Color::createGrey(0.5))}));
     }
 
     SECTION("primvar should not be equal to different equivalent buffer") {
@@ -70,14 +68,11 @@ TEST_CASE("TriangleMeshPerVertexPrimVar::apply") {
     primVar.write(3, VertexData(Color::createGrey(0.5)));
 
     SECTION("should apply function to all elements") {
-        primVar.apply([](Color color) {
-            return color * 2;
-        });
+        primVar.apply([](Color color) { return color * 2; });
 
-        REQUIRE(primVar == std::vector<VertexData<Color>>({VertexData(Color::createWhite()),
-                                                           VertexData(Color::createWhite()),
-                                                           VertexData(Color::createWhite()),
-                                                           VertexData(Color::createWhite())}));
+        REQUIRE(primVar ==
+                std::vector<VertexData<Color>>({VertexData(Color::createWhite()), VertexData(Color::createWhite()),
+                                                VertexData(Color::createWhite()), VertexData(Color::createWhite())}));
     }
 }
 

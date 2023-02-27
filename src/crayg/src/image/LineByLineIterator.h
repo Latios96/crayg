@@ -5,10 +5,8 @@
 
 namespace crayg {
 
-template<typename I>
-class LineByLineIterator {
- public:
-
+template <typename I> class LineByLineIterator {
+  public:
     explicit LineByLineIterator(int lX, int lY, const I &i) : i(i) {
         lastX = lX;
         lastY = lY;
@@ -25,16 +23,19 @@ class LineByLineIterator {
         return *this;
     }
 
-    PixelPosition operator*() const { return {lastX, lastY}; }
+    PixelPosition operator*() const {
+        return {lastX, lastY};
+    }
 
     bool operator!=(const LineByLineIterator &o) const {
         return lastX < i.getWidth() && lastY < i.getHeight();
     };
- private:
+
+  private:
     int lastX, lastY;
     const I &i;
 };
 
 }
 
-#endif //CRAYG_IMAGEITERATOR_H
+#endif // CRAYG_IMAGEITERATOR_H

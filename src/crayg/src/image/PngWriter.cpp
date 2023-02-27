@@ -1,7 +1,7 @@
 #include "PngWriter.h"
+#include "Logger.h"
 #include "utils/ImageChannelPathResolver.h"
 #include <OpenImageIO/imageio.h>
-#include "Logger.h"
 
 namespace crayg {
 
@@ -28,17 +28,16 @@ void write(std::unique_ptr<OIIO::ImageOutput> &out, PixelBuffer &pixelBuffer) {
 
 void PngWriter::writeImage(const Image &image, std::string image_name) {
     ImageChannelPathResolver imageChannelPathResolver;
-    for (auto &channel: image.getChannels()) {
+    for (auto &channel : image.getChannels()) {
         auto channelBuffer = channel.channelBuffer;
         auto channelPath = imageChannelPathResolver.resolve(image_name, channel.channelName);
         Logger::info("Writing channel {} to {}..", channel.channelName, channelPath);
         std::unique_ptr<OIIO::ImageOutput> out = OIIO::ImageOutput::create(channelPath);
-        if (!out)
+        if (!out) {
             return;
+        }
 
-        OIIO::ImageSpec spec(image.getWidth(),
-                             image.getHeight(),
-                             channelBuffer.getColorChannelCount(),
+        OIIO::ImageSpec spec(image.getWidth(), image.getHeight(), channelBuffer.getColorChannelCount(),
                              mapPixelFormat(channelBuffer.getPixelFormat()));
 
         writeImageMetadata(image, spec);

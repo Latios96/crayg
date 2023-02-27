@@ -1,10 +1,10 @@
-#include <catch2/catch.hpp>
-#include "intersectors/embree/EmbreeSceneIntersector.h"
-#include "intersectors/embree/EmbreeBvhBuilder.h"
-#include "fixtures/TriangleMeshFixtures.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
+#include "fixtures/TriangleMeshFixtures.h"
+#include "intersectors/embree/EmbreeBvhBuilder.h"
+#include "intersectors/embree/EmbreeSceneIntersector.h"
 #include "scene/primitives/Sphere.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -15,11 +15,12 @@ const Ray RAY_WITH_SPHERE_INTERSECTION = Ray({-2, 2, 0}, {1, 0, 0});
 const Ray RAY_ON_TRIANGLE = Ray({0.75f, 0, 1.5f}, {0, 1, 0});
 
 struct IntersectorFixture {
-    explicit IntersectorFixture(Scene &scene): scene(scene) {
+    explicit IntersectorFixture(Scene &scene) : scene(scene) {
         EmbreeBvhBuilder embreeBvhBuilder(scene);
         auto embreeBvh = embreeBvhBuilder.build();
         embreeSceneIntersector = std::make_unique<EmbreeSceneIntersector>(scene, std::move(embreeBvh));
     }
+
     Scene &scene;
     std::unique_ptr<EmbreeSceneIntersector> embreeSceneIntersector;
 };
@@ -54,7 +55,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
-        auto triangle = dynamic_cast<Triangle*>(intersection.imageable);
+        auto triangle = dynamic_cast<Triangle *>(intersection.imageable);
         REQUIRE(triangle->faceId == 3);
         REQUIRE(intersection.isOwning == true);
     }
@@ -71,7 +72,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
-        auto triangle = dynamic_cast<Triangle*>(intersection.imageable);
+        auto triangle = dynamic_cast<Triangle *>(intersection.imageable);
         REQUIRE(triangle->faceId == 64);
         REQUIRE(intersection.isOwning == true);
     }
@@ -83,19 +84,18 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
-        auto sphere = dynamic_cast<Sphere*>(intersection.imageable);
+        auto sphere = dynamic_cast<Sphere *>(intersection.imageable);
         REQUIRE(sphere->getRadius() == 1.f);
         REQUIRE(intersection.isOwning == false);
     }
 
-    SECTION("should ignore triangle if ray starts at triangle"){
+    SECTION("should ignore triangle if ray starts at triangle") {
         IntersectorFixture fixture(scene);
 
         auto intersection = fixture.embreeSceneIntersector->intersect(RAY_ON_TRIANGLE);
 
         REQUIRE_FALSE(intersection.isValid());
     }
-
 }
 
 }

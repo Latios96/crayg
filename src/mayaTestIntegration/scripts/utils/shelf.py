@@ -18,13 +18,13 @@ class Shelf:
         raise NotImplementedError()
 
     def add_button(
-            self,
-            label,
-            icon="commandButton.png",
-            command=lambda: None,
-            doubleCommand=lambda: None,
-            annotation="",
-            sourceType="python",
+        self,
+        label,
+        icon="commandButton.png",
+        command=lambda: None,
+        doubleCommand=lambda: None,
+        annotation="",
+        sourceType="python",
     ):
         cmds.setParent(self._parent)
         if icon:

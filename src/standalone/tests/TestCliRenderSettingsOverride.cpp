@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "CliRenderSettingsOverride.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -33,7 +33,6 @@ TEST_CASE("CliRenderSettingsOverride::hasAnyOverrides") {
     }
 
     SECTION("has no overrides") {
-
         REQUIRE_FALSE(CliRenderSettingsOverride().hasAnyOverrides());
     }
 }
@@ -54,8 +53,8 @@ TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
     onlyIntegratorType.integratorType = IntegratorType::DEBUG;
 
     SECTION("has overrides") {
-        REQUIRE(
-            fullOverrides.reportOverrides() == R"(resolution -> 800x600, maxSamples -> 8, integratorType -> "DEBUG")");
+        REQUIRE(fullOverrides.reportOverrides() ==
+                R"(resolution -> 800x600, maxSamples -> 8, integratorType -> "DEBUG")");
 
         REQUIRE(onlyResolution.reportOverrides() == "resolution -> 800x600");
 
@@ -65,7 +64,6 @@ TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
     }
 
     SECTION("has no overrides") {
-
         REQUIRE(CliRenderSettingsOverride().reportOverrides().empty());
     }
 }
@@ -94,40 +92,23 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     renderSettings.integratorType = IntegratorType::RAYTRACING;
 
     SECTION("has overrides") {
-        REQUIRE(fullOverrides.resolveOverrides(renderSettings)
-                    == RenderSettings({800, 600},
-                                      8,
-                                      IntegratorType::DEBUG,
-                                      IntegratorSettings(),
-                                      IntersectorType::EMBREE));
+        REQUIRE(fullOverrides.resolveOverrides(renderSettings) ==
+                RenderSettings({800, 600}, 8, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE));
 
-        REQUIRE(onlyResolution.resolveOverrides(renderSettings)
-                    == RenderSettings({800, 600},
-                                      4,
-                                      IntegratorType::RAYTRACING,
-                                      IntegratorSettings(),
-                                      IntersectorType::EMBREE));
+        REQUIRE(
+            onlyResolution.resolveOverrides(renderSettings) ==
+            RenderSettings({800, 600}, 4, IntegratorType::RAYTRACING, IntegratorSettings(), IntersectorType::EMBREE));
 
-        REQUIRE(onlyMaxSamples.resolveOverrides(renderSettings)
-                    == RenderSettings({1280, 720},
-                                      8,
-                                      IntegratorType::RAYTRACING,
-                                      IntegratorSettings(),
-                                      IntersectorType::EMBREE));
+        REQUIRE(
+            onlyMaxSamples.resolveOverrides(renderSettings) ==
+            RenderSettings({1280, 720}, 8, IntegratorType::RAYTRACING, IntegratorSettings(), IntersectorType::EMBREE));
 
-        REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings)
-                    == RenderSettings({1280, 720},
-                                      4,
-                                      IntegratorType::DEBUG,
-                                      IntegratorSettings(),
-                                      IntersectorType::EMBREE));
+        REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings) ==
+                RenderSettings({1280, 720}, 4, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE));
 
-        REQUIRE(onlyIntersectorType.resolveOverrides(renderSettings)
-                    == RenderSettings({1280, 720},
-                                      4,
-                                      IntegratorType::RAYTRACING,
-                                      IntegratorSettings(),
-                                      IntersectorType::NAIVE_BVH));
+        REQUIRE(onlyIntersectorType.resolveOverrides(renderSettings) ==
+                RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
+                               IntersectorType::NAIVE_BVH));
     }
 
     SECTION("has no overrides") {

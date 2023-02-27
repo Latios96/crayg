@@ -6,7 +6,7 @@
 namespace crayg {
 
 class SubdivisionSurfaceMeshFixtures {
- public:
+  public:
     static void createUnitPlane(SubdivisionSurfaceMesh &subdivisionSurfaceMesh);
     static void createTriangleUnitPlane(SubdivisionSurfaceMesh &subdivisionSurfaceMesh);
     static void createUnitCube(SubdivisionSurfaceMesh &subdivisionSurfaceMesh);
@@ -14,4 +14,4 @@ class SubdivisionSurfaceMeshFixtures {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_TESTS_FIXTURES_SUBDIVISIONSURFACEMESHFIXTURES_H_
+#endif // CRAYG_SRC_CRAYG_TESTS_FIXTURES_SUBDIVISIONSURFACEMESHFIXTURES_H_

@@ -1,6 +1,6 @@
-#include <catch2/catch.hpp>
-#include "sceneIO/read/usd/BaseUsdImageableReader.h"
 #include "scene/primitives/Sphere.h"
+#include "sceneIO/read/usd/BaseUsdImageableReader.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
@@ -10,10 +10,12 @@ namespace crayg {
 TEST_CASE("BaseUsdImageableReader::read") {
 
     class DummyBaseReader : public BaseUsdImageableReader<pxr::UsdGeomSphere, Sphere> {
-     public:
+      public:
         DummyBaseReader(const pxr::UsdGeomSphere &usdPrim, UsdMaterialReadCache &usdMaterialReadCache)
-            : BaseUsdImageableReader(usdPrim, usdMaterialReadCache) {}
-     protected:
+            : BaseUsdImageableReader(usdPrim, usdMaterialReadCache) {
+        }
+
+      protected:
         std::string getTranslatedType() override {
             return std::string("test");
         }

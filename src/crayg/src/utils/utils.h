@@ -10,4 +10,4 @@ inline bool compareWithPrecision(float A, float B, float epsilon = 0.001f) {
 }
 
 }
-#endif //CRAYG_UTILS_H
+#endif // CRAYG_UTILS_H

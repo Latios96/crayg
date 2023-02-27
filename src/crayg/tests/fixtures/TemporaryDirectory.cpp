@@ -8,6 +8,7 @@ TemporaryDirectory::TemporaryDirectory() {
     path = boost::filesystem::temp_directory_path() / boost::uuids::to_string(boost::uuids::random_generator()());
     boost::filesystem::create_directories(path);
 }
+
 TemporaryDirectory::~TemporaryDirectory() {
     boost::filesystem::remove_all(path);
 }

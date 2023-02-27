@@ -2,8 +2,8 @@
 
 namespace crayg {
 
-UsdRectLightWriter::UsdRectLightWriter(RectLight &craygObject)
-    : BaseUsdLightWriter(craygObject) {}
+UsdRectLightWriter::UsdRectLightWriter(RectLight &craygObject) : BaseUsdLightWriter(craygObject) {
+}
 
 pxr::UsdLuxRectLight UsdRectLightWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usdLuxRectLight = BaseUsdLightWriter::write(stage, usdPathFactory);

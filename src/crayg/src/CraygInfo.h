@@ -9,11 +9,11 @@
 namespace crayg {
 
 class CraygInfo {
- public:
+  public:
     static std::string const VERSION;
     static std::string const COMMIT_HASH;
 };
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_CRAYGINFO_H_
+#endif // CRAYG_SRC_CRAYG_SRC_CRAYGINFO_H_

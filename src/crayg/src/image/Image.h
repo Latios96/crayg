@@ -1,22 +1,22 @@
 #ifndef CRAYG_IMAGE_H
 #define CRAYG_IMAGE_H
 
-#include <ostream>
-#include <tsl/ordered_map.h>
-#include <optional>
-#include <basics/Resolution.h>
+#include "ImageMetadata.h"
+#include "ImageSpec.h"
+#include "PixelBuffer.h"
+#include "PixelPosition.h"
 #include "basics/Color.h"
 #include "basics/Vector3f.h"
-#include "ImageMetadata.h"
-#include "PixelPosition.h"
-#include "PixelBuffer.h"
-#include "ImageSpec.h"
+#include <basics/Resolution.h>
+#include <optional>
+#include <ostream>
+#include <tsl/ordered_map.h>
 
 namespace crayg {
 
 class Image {
 
- public:
+  public:
     Image(int width, int height);
     Image(const Resolution &resolution);
     Image(const Image &image);
@@ -59,9 +59,10 @@ class Image {
     ImageSpec getImageSpec() const;
     ImageMetadata metadata;
     PixelBuffer rgb;
- private:
+
+  private:
     tsl::ordered_map<std::string, std::unique_ptr<PixelBuffer>> additionalChannels;
 };
 
 }
-#endif //CRAYG_IMAGE_H
+#endif // CRAYG_IMAGE_H

@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "scene/lights/Light.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -19,4 +19,3 @@ TEST_CASE("Light::radiance") {
 }
 
 }
-

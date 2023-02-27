@@ -6,10 +6,10 @@
 namespace crayg {
 
 class FileSystemUtils {
- public:
+  public:
     static std::string swapFileExtension(const std::string &path, const std::string &newExtension);
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_UTILS_FILESYSTEMUTILS_H_
+#endif // CRAYG_SRC_CRAYG_SRC_UTILS_FILESYSTEMUTILS_H_

@@ -1,11 +1,10 @@
-#include <catch2/catch.hpp>
 #include "utils/ProgressReporter.h"
+#include <catch2/catch.hpp>
 #include <fakeit.hpp>
 
 namespace crayg {
 
 void _report(int progress, float timeRemaining) {
-
 }
 
 int callCount = 0;
@@ -21,7 +20,7 @@ void _storeFinishCalled(std::chrono::seconds seconds) {
 }
 
 TEST_CASE("ProgressReporter") {
-    ProgressReporter reporter(100, &_report,&_storeFinishCalled);
+    ProgressReporter reporter(100, &_report, &_storeFinishCalled);
 
     SECTION("iterationsDoneShouldBeZero") {
         REQUIRE(reporter.iterationsDone == 0);
@@ -33,7 +32,7 @@ TEST_CASE("ProgressReporter") {
     }
 
     SECTION("progressCallbackShouldBeCalledEvery10") {
-        ProgressReporter reporter(100, &_storeCallCount,&_storeFinishCalled);
+        ProgressReporter reporter(100, &_storeCallCount, &_storeFinishCalled);
 
         REQUIRE(callCount == 0);
         reporter.iterationDone();
@@ -44,14 +43,13 @@ TEST_CASE("ProgressReporter") {
         }
     }
 
-    SECTION("finished callback should be called"){
-        ProgressReporter reporter(100, &_storeCallCount,&_storeFinishCalled);
+    SECTION("finished callback should be called") {
+        ProgressReporter reporter(100, &_storeCallCount, &_storeFinishCalled);
 
         reporter.finish();
 
         REQUIRE(finishedCalled);
     }
-
 }
 
 }

@@ -8,8 +8,8 @@ namespace crayg {
 
 class UsdUtils {
 
- public:
-    template<typename T>
+  public:
+    template <typename T>
     static T getAttributeValueAs(const pxr::UsdAttribute attribute, const pxr::UsdTimeCode timeCodeToRead) {
         T value;
         if (attribute.Get(&value, timeCodeToRead)) {
@@ -18,13 +18,11 @@ class UsdUtils {
         throw std::runtime_error("There was no attribute value to read or attribute was not of the type requested");
     };
 
-    template<typename T>
-    static T getStaticAttributeValueAs(const pxr::UsdAttribute attribute) {
+    template <typename T> static T getStaticAttributeValueAs(const pxr::UsdAttribute attribute) {
         return getAttributeValueAs<T>(attribute, pxr::UsdTimeCode::Default());
     };
-
 };
 
 }
 
-#endif //CRAYG_SRC_CRAYGUSD_SRC_USDUTILS_H_
+#endif // CRAYG_SRC_CRAYGUSD_SRC_USDUTILS_H_

@@ -5,11 +5,13 @@
 
 namespace crayg {
 
-ImageMetadataCollector::ImageMetadataCollector(){}
+ImageMetadataCollector::ImageMetadataCollector() {
+}
 
 ImageMetadataCollector::ImageMetadataCollector(const std::optional<std::chrono::seconds> &renderTime,
-                                               const std::optional<RenderSettings> &renderSettings) : renderTime(
-    renderTime), renderSettings(renderSettings) {}
+                                               const std::optional<RenderSettings> &renderSettings)
+    : renderTime(renderTime), renderSettings(renderSettings) {
+}
 
 ImageMetadata ImageMetadataCollector::collectMetadata() {
     ImageMetadata imageMetadata;
@@ -51,20 +53,19 @@ void ImageMetadataCollector::collectRenderSettingsIfPresent(ImageMetadata &image
 }
 
 void ImageMetadataCollector::collectIntegratorSettings(ImageMetadata &imageMetadata) {
-    for (const auto &entry: renderSettings.value().integratorSettings.settings) {
+    for (const auto &entry : renderSettings.value().integratorSettings.settings) {
         switch (entry.second.index()) {
-            case 0:
-                imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first,
-                                    std::get<std::string>(entry.second));
-                break;
-            case 1:
-                imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first,
-                                    std::get<int>(entry.second));
-                break;
-            case 2:
-                imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first,
-                                    std::get<float>(entry.second));
-                break;
+        case 0:
+            imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first,
+                                std::get<std::string>(entry.second));
+            break;
+        case 1:
+            imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first, std::get<int>(entry.second));
+            break;
+        case 2:
+            imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first,
+                                std::get<float>(entry.second));
+            break;
         }
     }
 }

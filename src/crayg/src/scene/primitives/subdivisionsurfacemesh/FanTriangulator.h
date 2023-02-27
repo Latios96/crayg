@@ -6,15 +6,16 @@
 namespace crayg {
 
 class FanTriangulator {
- public:
+  public:
     explicit FanTriangulator(SubdivisionSurfaceMesh &subdivisionSurfaceMesh);
     FanTriangulator(std::vector<int> &faceVertexIndices, std::vector<int> &faceVertexCounts);
     void fanTriangulate(std::vector<TriangleMesh::FaceVertexIndices> &target);
- private:
+
+  private:
     std::vector<int> &faceVertexIndices;
     std::vector<int> &faceVertexCounts;
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_FANTRIANGULATOR_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_FANTRIANGULATOR_H_

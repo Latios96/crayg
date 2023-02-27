@@ -1,7 +1,7 @@
-#include <catch2/catch.hpp>
+#include "fixtures/TriangleMeshFixtures.h"
 #include "scene/primitives/trianglemesh/Triangle.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
-#include "fixtures/TriangleMeshFixtures.h"
+#include <catch2/catch.hpp>
 #include <iostream>
 
 namespace crayg {

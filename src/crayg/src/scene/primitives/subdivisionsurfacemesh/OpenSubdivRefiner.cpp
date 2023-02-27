@@ -1,13 +1,17 @@
 #include "OpenSubdivRefiner.h"
-#include <opensubdiv/far/topologyRefinerFactory.h>
 #include <opensubdiv/far/primvarRefiner.h>
+#include <opensubdiv/far/topologyRefinerFactory.h>
 
 namespace crayg {
 
 class OsdVector3fAdapter : public Vector3f {
- public:
-    OsdVector3fAdapter() : Vector3f() {}
-    OsdVector3fAdapter(const Vector3f &src) : Vector3f(src) {}
+  public:
+    OsdVector3fAdapter() : Vector3f() {
+    }
+
+    OsdVector3fAdapter(const Vector3f &src) : Vector3f(src) {
+    }
+
     void Clear(void * = 0) {
         x = 0;
         y = 0;
@@ -21,9 +25,9 @@ class OsdVector3fAdapter : public Vector3f {
     }
 };
 
-
-OpenSubdivRefiner::OpenSubdivRefiner(SubdivisionSurfaceMesh &subdivisionSurfaceMesh) : subdivisionSurfaceMesh(
-    subdivisionSurfaceMesh) {}
+OpenSubdivRefiner::OpenSubdivRefiner(SubdivisionSurfaceMesh &subdivisionSurfaceMesh)
+    : subdivisionSurfaceMesh(subdivisionSurfaceMesh) {
+}
 
 void OpenSubdivRefiner::refine(int maxLevel) {
     if (subdivisionSurfaceMesh.points.empty()) {
@@ -42,10 +46,8 @@ void OpenSubdivRefiner::refine(int maxLevel) {
     refineNormals(refiner, refLastLevel);
 }
 
-void OpenSubdivRefiner::refinePoints(
-    const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
-    int maxlevel,
-    const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
+void OpenSubdivRefiner::refinePoints(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner, int maxlevel,
+                                     const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
     std::vector<Vector3f> subdividedPoints(refiner->GetNumVerticesTotal());
     for (int i = 0; i < subdivisionSurfaceMesh.points.size(); i++) {
         subdividedPoints[i] = subdivisionSurfaceMesh.points[i];
@@ -76,19 +78,17 @@ void OpenSubdivRefiner::refineIndices(const OpenSubdiv::Far::TopologyLevel &refL
     for (int face = 0; face < numberOfFaces; face++) {
         OpenSubdiv::Far::ConstIndexArray fverts = refLastLevel.GetFaceVertices(face);
         newFaceVertexCounts.push_back(fverts.size());
-        for (int fvert: fverts) {
+        for (int fvert : fverts) {
             newFaceVertexIndices.push_back(fvert);
         }
     }
 
-    subdivisionSurfaceMesh.faceVertexIndices =
-        newFaceVertexIndices;
+    subdivisionSurfaceMesh.faceVertexIndices = newFaceVertexIndices;
     subdivisionSurfaceMesh.faceVertexCounts = newFaceVertexCounts;
 }
 
-void OpenSubdivRefiner::refineNormals(
-    const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
-    const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
+void OpenSubdivRefiner::refineNormals(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
+                                      const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
     int numberOfVertices = refLastLevel.GetNumVertices();
     int firstOfLastVerts = refiner->GetNumVerticesTotal() - numberOfVertices;
     std::vector<Vector3f> fineLimitPos(numberOfVertices);
@@ -119,12 +119,9 @@ std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> OpenSubdivRefiner::createRefin
     OpenSubdiv::Sdc::Options options;
     options.SetVtxBoundaryInterpolation(getBoundaryInterpolation());
 
-    auto refiner =
-        OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Create(descriptor,
-                                                                                                     OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<
-                                                                                                         OpenSubdiv::Far::TopologyDescriptor>::Options(
-                                                                                                         type,
-                                                                                                         options));
+    auto refiner = OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Create(
+        descriptor,
+        OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Options(type, options));
     return std::unique_ptr<OpenSubdiv::Far::TopologyRefiner>(refiner);
 }
 
@@ -133,8 +130,7 @@ OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     descriptor.numVertices = subdivisionSurfaceMesh.points.size();
     descriptor.numFaces = subdivisionSurfaceMesh.faceCount();
     descriptor.numVertsPerFace = subdivisionSurfaceMesh.faceVertexCounts.data();
-    descriptor.vertIndicesPerFace =
-        subdivisionSurfaceMesh.faceVertexIndices.data();
+    descriptor.vertIndicesPerFace = subdivisionSurfaceMesh.faceVertexIndices.data();
 
     if (!subdivisionSurfaceMesh.normals.empty()) {
         channels[0].numValues = subdivisionSurfaceMesh.normals.size();

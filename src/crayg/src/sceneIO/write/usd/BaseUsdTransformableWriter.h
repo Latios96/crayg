@@ -1,21 +1,20 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDTRANSFORMABLEWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDTRANSFORMABLEWRITER_H_
 
-#include <memory>
-#include "Logger.h"
-#include "sceneIO/usd/CraygUsdBase.h"
-#include "UsdPathFactory.h"
 #include "BaseUsdWriter.h"
-#include <pxr/usd/usd/stage.h>
+#include "Logger.h"
+#include "UsdPathFactory.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/usd/UsdConversions.h"
+#include <memory>
+#include <pxr/usd/usd/stage.h>
 
 namespace crayg {
 
-template<class UsdType, class CraygType>
-class BaseUsdTransformableWriter : public BaseUsdWriter<UsdType, CraygType> {
- public:
-    BaseUsdTransformableWriter(CraygType &craygObject) : BaseUsdWriter<UsdType, CraygType>(
-        craygObject) {}
+template <class UsdType, class CraygType> class BaseUsdTransformableWriter : public BaseUsdWriter<UsdType, CraygType> {
+  public:
+    BaseUsdTransformableWriter(CraygType &craygObject) : BaseUsdWriter<UsdType, CraygType>(craygObject) {
+    }
 
     virtual UsdType write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
         auto usdObject = BaseUsdWriter<UsdType, CraygType>::write(stage, usdPathFactory);
@@ -24,9 +23,8 @@ class BaseUsdTransformableWriter : public BaseUsdWriter<UsdType, CraygType> {
 
         return usdObject;
     }
-
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDTRANSFORMABLEWRITER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDTRANSFORMABLEWRITER_H_

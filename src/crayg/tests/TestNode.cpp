@@ -1,22 +1,26 @@
-#include <catch2/catch.hpp>
 #include "scene/materials/ShadingNode.h"
+#include <catch2/catch.hpp>
 #include <sstream>
 
 namespace crayg {
 
 class MyMat : public ShadingNode {
- public:
+  public:
     InputPlug<Color> colorPlug;
+
     MyMat() : colorPlug(InputPlug<Color>("color", this, Color::createBlack())) {
     }
+
     explicit MyMat(const std::string &name)
         : ShadingNode(name), colorPlug(InputPlug<Color>("color", this, Color::createBlack())) {
     }
+
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override {
         if (inputPlugName == "color") {
             colorPlug.input = static_cast<OutputPlug<Color> *>(outputPlug.getPtr());
         }
     }
+
     PlugPtr getPlugByName(const std::string &inputPlugName) override {
         if (inputPlugName == "color") {
             return PlugPtr(&colorPlug);
@@ -26,19 +30,21 @@ class MyMat : public ShadingNode {
 };
 
 class MyFileTextureNode : public ShadingNode {
- public:
+  public:
     OutputPlug<Color> colorPlug;
-    MyFileTextureNode() : colorPlug(OutputPlug<Color>("color", this, Color::createBlack(), []() {
-        return Color::createGrey(0.5);
-    })) {
+
+    MyFileTextureNode()
+        : colorPlug(OutputPlug<Color>("color", this, Color::createBlack(), []() { return Color::createGrey(0.5); })) {
     }
+
     explicit MyFileTextureNode(const std::string &name)
-        : ShadingNode(name), colorPlug(OutputPlug<Color>("color", this, Color::createBlack(), []() {
-        return Color::createGrey(0.5);
-    })) {
+        : ShadingNode(name),
+          colorPlug(OutputPlug<Color>("color", this, Color::createBlack(), []() { return Color::createGrey(0.5); })) {
     }
+
     void connectOutputToInput(const std::string &inputPlugName, PlugPtr plug) override {
     }
+
     PlugPtr getPlugByName(const std::string &inputPlugName) override {
         if (inputPlugName == "color") {
             return PlugPtr(&colorPlug);

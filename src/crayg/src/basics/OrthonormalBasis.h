@@ -1,14 +1,14 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_BASICS_ORTHONORMALBASIS_H_
 #define CRAYG_SRC_CRAYG_SRC_BASICS_ORTHONORMALBASIS_H_
 
-#include <ostream>
 #include "Vector3f.h"
 #include "utils/ToStringHelper.h"
+#include <ostream>
 
 namespace crayg {
 
 class OrthonormalBasis {
- public:
+  public:
     OrthonormalBasis(const Vector3f &normal);
     OrthonormalBasis(const Vector3f &u, const Vector3f &v, const Vector3f &w);
     Vector3f u, v, w;
@@ -20,15 +20,14 @@ class OrthonormalBasis {
 
     friend std::ostream &operator<<(std::ostream &os, const OrthonormalBasis &basis) {
         os << ToStringHelper("OrthonormalBasis")
-            .addMember("u", basis.u)
-            .addMember("v", basis.v)
-            .addMember("w", basis.w).finish();
+                  .addMember("u", basis.u)
+                  .addMember("v", basis.v)
+                  .addMember("w", basis.w)
+                  .finish();
         return os;
     }
 };
 
 } // crayg
 
-
-
-#endif //CRAYG_SRC_CRAYG_SRC_BASICS_ORTHONORMALBASIS_H_
+#endif // CRAYG_SRC_CRAYG_SRC_BASICS_ORTHONORMALBASIS_H_

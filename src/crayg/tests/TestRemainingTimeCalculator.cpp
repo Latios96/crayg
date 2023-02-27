@@ -12,7 +12,8 @@ TEST_CASE("RemainingTimeCalculator") {
 
     SECTION("progressOf100ShouldReturn0") {
         REQUIRE(remainingTimeCalculator.getRemainingTimeByProgress(100) == 0);
-    }SECTION("progressOf1ShouldReturnElapsedTime*100") {
+    }
+    SECTION("progressOf1ShouldReturnElapsedTime*100") {
         RemainingTimeCalculator remainingTimeCalculator(std::chrono::steady_clock::now() - std::chrono::seconds(5));
         REQUIRE(remainingTimeCalculator.getRemainingTimeByProgress(2) == 245);
     }

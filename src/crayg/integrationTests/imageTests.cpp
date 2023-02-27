@@ -11,15 +11,14 @@
 namespace crayg {
 
 void createGradientImage(PixelBuffer &pixelBuffer) {
-    for (auto pixel: ImageIterators::lineByLine(pixelBuffer)) {
-        float grey =
-            static_cast<float>(pixel.x) / static_cast<float>(pixelBuffer.getWidth());
+    for (auto pixel : ImageIterators::lineByLine(pixelBuffer)) {
+        float grey = static_cast<float>(pixel.x) / static_cast<float>(pixelBuffer.getWidth());
         pixelBuffer.setValue(pixel, Color::createGrey(grey));
     }
 }
 
 void createSplittedImage(PixelBuffer &pixelBuffer) {
-    for (auto pixel: ImageIterators::lineByLine(pixelBuffer)) {
+    for (auto pixel : ImageIterators::lineByLine(pixelBuffer)) {
         if (pixel.y > pixelBuffer.getHeight() / 2) {
             pixelBuffer.setValue(pixel, Color::createBlack());
         } else {
@@ -32,16 +31,14 @@ TEST_CASE("ImageIO/writeBmpImage") {
     Image image(1280, 720);
     createGradientImage(image.rgb);
 
-    ImageWriters::writeImage(image,
-                             getOutputFilename("ImageIO", "writeBmpImage"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeBmpImage"));
 }
 
 TEST_CASE("ImageIO/writeRgbExrImage") {
     Image image(1280, 720);
     createGradientImage(image.rgb);
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "writeRgbExrImage", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeRgbExrImage", ".exr"));
 }
 
 TEST_CASE("ImageIO/writeRgbazExrImage") {
@@ -53,8 +50,7 @@ TEST_CASE("ImageIO/writeRgbazExrImage") {
     createSplittedImage(**image.getAlphaChannel());
     createGradientImage(**image.getDepthChannel());
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "writeRgbazExrImage", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeRgbazExrImage", ".exr"));
 }
 
 TEST_CASE("ImageIO/writeRgbazCustomChannelExrImage") {
@@ -68,8 +64,7 @@ TEST_CASE("ImageIO/writeRgbazCustomChannelExrImage") {
     createGradientImage(**image.getDepthChannel());
     createSplittedImage(**image.getChannel("position"));
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "writeRgbazCustomChannelExrImage", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeRgbazCustomChannelExrImage", ".exr"));
 }
 
 TEST_CASE("ImageIO/createRgbFloat") {
@@ -77,8 +72,7 @@ TEST_CASE("ImageIO/createRgbFloat") {
     image.replaceChannel("rgb", PixelBuffer::createRgbFloat(image.getResolution()));
     createGradientImage(image.rgb);
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "createRgbFloat", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "createRgbFloat", ".exr"));
 }
 
 TEST_CASE("ImageIO/createGreyFloat") {
@@ -86,8 +80,7 @@ TEST_CASE("ImageIO/createGreyFloat") {
     image.replaceChannel("rgb", PixelBuffer::createGreyFloat(image.getResolution()));
     createGradientImage(image.rgb);
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "createGreyFloat", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "createGreyFloat", ".exr"));
 }
 
 TEST_CASE("ImageIO/createRgbUInt8") {
@@ -95,8 +88,7 @@ TEST_CASE("ImageIO/createRgbUInt8") {
     image.replaceChannel("rgb", PixelBuffer::createRgbUInt8(image.getResolution()));
     createGradientImage(image.rgb);
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "createRgbUInt8", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "createRgbUInt8", ".exr"));
 }
 
 TEST_CASE("ImageIO/createGreyUInt8") {
@@ -104,8 +96,7 @@ TEST_CASE("ImageIO/createGreyUInt8") {
     image.replaceChannel("rgb", PixelBuffer::createGreyUInt8(image.getResolution()));
     createGradientImage(image.rgb);
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "createGreyUInt8", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "createGreyUInt8", ".exr"));
 }
 
 TEST_CASE("ImageIO/createVector3f") {
@@ -113,8 +104,7 @@ TEST_CASE("ImageIO/createVector3f") {
     image.replaceChannel("rgb", PixelBuffer::createVector3f(image.getResolution()));
     createGradientImage(image.rgb);
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "createVector3f", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "createVector3f", ".exr"));
 }
 
 TEST_CASE("ImageIO/writeToImageOutputDriver") {
@@ -131,8 +121,7 @@ TEST_CASE("ImageIO/writeToImageOutputDriver") {
         }
     }
 
-    ImageWriters::writeImage(
-        image, getOutputFilename("ImageIO", "writeToImageOutputDriver", ".exr"));
+    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeToImageOutputDriver", ".exr"));
 }
 
 }

@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "renderer/BucketSizeEstimator.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 

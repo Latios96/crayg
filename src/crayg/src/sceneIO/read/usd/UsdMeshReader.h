@@ -1,21 +1,23 @@
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_
 
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "BaseUsdImageableReader.h"
-#include <pxr/usd/usdGeom/mesh.h>
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/imaging/hd/meshUtil.h>
+#include <pxr/usd/usdGeom/mesh.h>
 
 namespace crayg {
 
 class UsdMeshReader : public BaseUsdImageableReader<pxr::UsdGeomMesh, TriangleMesh> {
- public:
+  public:
     UsdMeshReader(const pxr::UsdGeomMesh &usdPrim, UsdMaterialReadCache &usdMaterialTranslationCache);
     std::shared_ptr<TriangleMesh> read() override;
- protected:
+
+  protected:
     std::string getTranslatedType() override;
- private:
+
+  private:
     void computeTriangleIndices(pxr::VtVec3iArray &triangleIndices, pxr::HdMeshUtil &meshUtil) const;
     void translatePoints(std::shared_ptr<TriangleMesh> &triangleMesh) const;
     void translateFaceIndices(std::shared_ptr<TriangleMesh> &triangleMesh, pxr::VtVec3iArray &triangleIndices) const;
@@ -23,8 +25,7 @@ class UsdMeshReader : public BaseUsdImageableReader<pxr::UsdGeomMesh, TriangleMe
     void translateNormals(std::shared_ptr<TriangleMesh> &sharedPtr, pxr::HdMeshUtil &util);
     void translateFaceVaryingNormals(std::shared_ptr<TriangleMesh> &triangleMesh,
                                      const pxr::HdMeshUtil &meshUtil) const;
-    void translateVertexNormals(std::shared_ptr<TriangleMesh> &triangleMesh,
-                                     const pxr::HdMeshUtil &meshUtil) const;
+    void translateVertexNormals(std::shared_ptr<TriangleMesh> &triangleMesh, const pxr::HdMeshUtil &meshUtil) const;
     pxr::VtValue &computeTriangulatedFaceVaryingNormals(const pxr::HdMeshUtil &meshUtil,
                                                         pxr::VtValue &triangulated) const;
     bool normalsAreAuthored() const;
@@ -32,4 +33,4 @@ class UsdMeshReader : public BaseUsdImageableReader<pxr::UsdGeomMesh, TriangleMe
 
 }
 
-#endif //CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_
+#endif // CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_

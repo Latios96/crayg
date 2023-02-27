@@ -1,8 +1,8 @@
+#include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
 #include <image/Image.h>
-#include <boost/filesystem.hpp>
-#include <image/OpenExrWriter.h>
 #include <image/ImageIterators.h>
+#include <image/OpenExrWriter.h>
 
 namespace crayg {
 
@@ -10,7 +10,7 @@ TEST_CASE("OpenExrWriter") {
     Image image(20, 10);
     OpenExrWriter openExrWriter;
 
-    for (auto p: ImageIterators::lineByLine(image)) {
+    for (auto p : ImageIterators::lineByLine(image)) {
         image.setValue(p.x, p.y, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
     }
 

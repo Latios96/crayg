@@ -1,16 +1,17 @@
 #ifndef CRAYG_PROGRESSREPORTER_H
 #define CRAYG_PROGRESSREPORTER_H
 
-#include <functional>
-#include "RemainingTimeCalculator.h"
 #include "Logger.h"
+#include "RemainingTimeCalculator.h"
+#include <functional>
 #include <utility>
 
 namespace crayg {
 
 class ProgressReporter {
- public:
-    ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback,std::function<void(std::chrono::seconds)> finishCallback);
+  public:
+    ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback,
+                     std::function<void(std::chrono::seconds)> finishCallback);
     ProgressReporter(const ProgressReporter &progressReporter);
 
     static ProgressReporter createLoggingProgressReporter(int maxIterations, const std::string &taskName);
@@ -20,7 +21,8 @@ class ProgressReporter {
     std::chrono::seconds finish();
 
     std::atomic<int> iterationsDone = {0};
- private:
+
+  private:
     int maxIterations;
     int progress = 0;
     std::function<void(int, float)> progressionCallback;
@@ -31,4 +33,4 @@ class ProgressReporter {
 
 }
 
-#endif //CRAYG_PROGRESSREPORTER_H
+#endif // CRAYG_PROGRESSREPORTER_H

@@ -22,7 +22,9 @@ TEST_CASE("GroundPlaneIntersection") {
         Imageable::Intersection intersection = myGroundPlane.intersect(NOT_PARALLEL_RAY);
         REQUIRE(intersection.imageable == &myGroundPlane);
         REQUIRE(intersection.rayParameter == 1.0f);
-    }SECTION("ParallelRayReturnsInvalidIntersection") {
+    }
+
+    SECTION("ParallelRayReturnsInvalidIntersection") {
         Imageable::Intersection intersection = myGroundPlane.intersect(PARALLEL_RAY);
         REQUIRE_FALSE(intersection.isValid());
     }

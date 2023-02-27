@@ -4,7 +4,7 @@ import maya.OpenMaya
 def maya_gui_only(name_of_action):
     def decorator(func):
         is_gui_mode = (
-                maya.OpenMaya.MGlobal.mayaState() == maya.OpenMaya.MGlobal.kInteractive
+            maya.OpenMaya.MGlobal.mayaState() == maya.OpenMaya.MGlobal.kInteractive
         )
 
         if not is_gui_mode:

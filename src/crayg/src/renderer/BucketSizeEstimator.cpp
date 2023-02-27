@@ -1,6 +1,6 @@
-#include <thread>
 #include "BucketSizeEstimator.h"
 #include "Logger.h"
+#include <thread>
 
 namespace crayg {
 int BucketSizeEstimator::estimateBucketSize() const {
@@ -17,5 +17,6 @@ int BucketSizeEstimator::estimateBucketSize(int threadCount) const {
     return bucketSize;
 }
 
-BucketSizeEstimator::BucketSizeEstimator(const RenderSettings &renderSettings) : renderSettings(renderSettings) {}
+BucketSizeEstimator::BucketSizeEstimator(const RenderSettings &renderSettings) : renderSettings(renderSettings) {
+}
 } // crayg

@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "basics/Resolution.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -16,7 +16,6 @@ TEST_CASE("Resolution/parse") {
         REQUIRE_THROWS_AS(Resolution::parse("800"), std::runtime_error);
         REQUIRE_THROWS_AS(Resolution::parse("800x"), std::runtime_error);
         REQUIRE_THROWS_AS(Resolution::parse("x600"), std::runtime_error);
-
     }
 }
 

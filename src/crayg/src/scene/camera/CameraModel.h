@@ -6,11 +6,11 @@
 namespace crayg {
 
 class CameraModel {
- public:
+  public:
     virtual Ray createPrimaryRay(float x, float y) = 0;
 
     virtual ~CameraModel() = default;
 };
 
 }
-#endif //CRAYG_CAMERAMODEL_H
+#endif // CRAYG_CAMERAMODEL_H

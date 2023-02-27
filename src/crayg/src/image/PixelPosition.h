@@ -5,7 +5,7 @@
 
 namespace crayg {
 
-CRAYG_DTO_2(PixelPosition, int, x, int, y) ;
+CRAYG_DTO_2(PixelPosition, int, x, int, y);
 
 }
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELPOSITION_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELPOSITION_H_

@@ -7,10 +7,10 @@ from .scene_repository import SceneRepository
 
 class TestScenesInspectorWidget(QtWidgets.QWidget):
     def __init__(
-            self,
-            scene_repository: SceneRepository,
-            maya_handler: AbstractHandler,
-            parent=None,
+        self,
+        scene_repository: SceneRepository,
+        maya_handler: AbstractHandler,
+        parent=None,
     ):
         super(TestScenesInspectorWidget, self).__init__(parent)
         self._scene_repository = scene_repository

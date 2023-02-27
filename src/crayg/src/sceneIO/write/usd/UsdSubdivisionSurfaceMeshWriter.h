@@ -2,18 +2,18 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSUBDIVISIONSURFACEMESHWRITER_H_
 
 #include "BaseUsdSceneObjectWriter.h"
-#include <pxr/usd/usdGeom/mesh.h>
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include <pxr/usd/usdGeom/mesh.h>
 
 namespace crayg {
 
 class UsdSubdivisionSurfaceMeshWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, SubdivisionSurfaceMesh> {
- public:
-    UsdSubdivisionSurfaceMeshWriter(SubdivisionSurfaceMesh &craygObject,
-                                    UsdMaterialWriteCache &usdMaterialWriteCache);
+  public:
+    UsdSubdivisionSurfaceMeshWriter(SubdivisionSurfaceMesh &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache);
 
     pxr::UsdGeomMesh write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
- protected:
+
+  protected:
     void writePoints(pxr::UsdGeomMesh usdGeomMesh) const;
     void writeFaceVertexIndices(pxr::UsdGeomMesh usdGeomMesh) const;
     void writeFaceVertexCounts(pxr::UsdGeomMesh usdGeomMesh) const;
@@ -22,4 +22,4 @@ class UsdSubdivisionSurfaceMeshWriter : public BaseUsdSceneObjectWriter<pxr::Usd
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSUBDIVISIONSURFACEMESHWRITER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSUBDIVISIONSURFACEMESHWRITER_H_

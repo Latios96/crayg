@@ -5,11 +5,11 @@
 
 namespace crayg {
 
-template<class UsdType, class CraygType>
+template <class UsdType, class CraygType>
 class BaseUsdLightWriter : public BaseUsdTransformableWriter<UsdType, CraygType> {
- public:
-    BaseUsdLightWriter(CraygType &craygObject) : BaseUsdTransformableWriter<UsdType, CraygType>(
-        craygObject) {}
+  public:
+    BaseUsdLightWriter(CraygType &craygObject) : BaseUsdTransformableWriter<UsdType, CraygType>(craygObject) {
+    }
 
     UsdType write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override {
         auto light = BaseUsdTransformableWriter<UsdType, CraygType>::write(stage, usdPathFactory);
@@ -19,7 +19,8 @@ class BaseUsdLightWriter : public BaseUsdTransformableWriter<UsdType, CraygType>
 
         return light;
     }
- protected:
+
+  protected:
     std::string getTranslatedType() override {
         return this->craygObject.getType();
     }
@@ -27,4 +28,4 @@ class BaseUsdLightWriter : public BaseUsdTransformableWriter<UsdType, CraygType>
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_BASEUSDLIGHTWRITER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_BASEUSDLIGHTWRITER_H_

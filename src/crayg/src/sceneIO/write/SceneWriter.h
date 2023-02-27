@@ -1,19 +1,20 @@
 #ifndef CRAYG_SCENEWRITER_H
 #define CRAYG_SCENEWRITER_H
 
-#include <utils/StopWatch.h>
 #include "scene/Scene.h"
+#include <utils/StopWatch.h>
 
 namespace crayg {
 
 class SceneWriter {
- public:
+  public:
     SceneWriter(Scene &scene);
     virtual void writeScene(const std::string &scenePath) = 0;
- protected:
+
+  protected:
     Scene &scene;
 };
 
 }
 
-#endif //CRAYG_SCENEWRITER_H
+#endif // CRAYG_SCENEWRITER_H

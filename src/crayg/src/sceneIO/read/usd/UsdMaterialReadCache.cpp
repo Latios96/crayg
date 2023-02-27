@@ -1,8 +1,8 @@
 #include "UsdMaterialReadCache.h"
-#include "sceneIO/usd/UsdUtils.h"
 #include "Logger.h"
 #include "scene/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdConversions.h"
+#include "sceneIO/usd/UsdUtils.h"
 #include <pxr/base/gf/vec3f.h>
 
 namespace crayg {
@@ -31,9 +31,7 @@ std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::Usd
     auto shaderId = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(shader.GetIdAttr());
     shader.GetIdAttr().Get(&shaderId);
     if (!isUsdPreviewSurface(shaderId)) {
-        Logger::warning("Shader at {} is of id {}, which is not supported",
-                        shader.GetPath(),
-                        shaderId);
+        Logger::warning("Shader at {} is of id {}, which is not supported", shader.GetPath(), shaderId);
         return getDefaultMaterial();
     }
 
@@ -57,31 +55,30 @@ std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::Usd
 bool crayg::UsdMaterialReadCache::isUsdPreviewSurface(const pxr::TfToken &shaderId) const {
     return shaderId == pxr::TfToken("UsdPreviewSurface");
 }
+
 std::shared_ptr<Material> UsdMaterialReadCache::createDefaultMaterial() {
-    return std::make_shared<UsdPreviewSurface>("defaultMaterial",
-                                               Color::createGrey(0.5f));
+    return std::make_shared<UsdPreviewSurface>("defaultMaterial", Color::createGrey(0.5f));
 }
+
 UsdMaterialReadCache::UsdMaterialReadCache() {
     materialCache[pxr::SdfPath()] = createDefaultMaterial();
 }
+
 std::shared_ptr<Material> UsdMaterialReadCache::getDefaultMaterial() {
     return materialCache[pxr::SdfPath()];
 }
 
-template<>
-Color UsdMaterialReadCache::readValue<Color, pxr::GfVec3f>(const pxr::UsdShadeInput &input) {
+template <> Color UsdMaterialReadCache::readValue<Color, pxr::GfVec3f>(const pxr::UsdShadeInput &input) {
     auto value = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(input, this->timeCodeToRead);
     return UsdConversions::convertColor(value);
 }
 
-template<>
-bool UsdMaterialReadCache::readValue<bool, int>(const pxr::UsdShadeInput &input) {
+template <> bool UsdMaterialReadCache::readValue<bool, int>(const pxr::UsdShadeInput &input) {
     auto value = UsdUtils::getAttributeValueAs<int>(input, this->timeCodeToRead);
     return value != 0;
 }
 
-template<>
-float UsdMaterialReadCache::readValue<float, float>(const pxr::UsdShadeInput &input) {
+template <> float UsdMaterialReadCache::readValue<float, float>(const pxr::UsdShadeInput &input) {
     return UsdUtils::getAttributeValueAs<float>(input, this->timeCodeToRead);
 }
 

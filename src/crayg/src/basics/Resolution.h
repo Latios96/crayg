@@ -6,7 +6,7 @@
 namespace crayg {
 
 struct Resolution {
- public:
+  public:
     Resolution();
     Resolution(int width, int height);
     Resolution(const Resolution &resolution);
@@ -20,10 +20,11 @@ struct Resolution {
     friend std::ostream &operator<<(std::ostream &os, const Resolution &resolution);
     int getWidth() const;
     int getHeight() const;
- private:
+
+  private:
     int width, height;
 };
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_BASICS_RESOLUTION_H_
+#endif // CRAYG_SRC_CRAYG_SRC_BASICS_RESOLUTION_H_

@@ -1,6 +1,6 @@
+#include "scene/lights/RectLight.h"
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
-#include "scene/lights/RectLight.h"
 
 namespace crayg {
 
@@ -40,9 +40,8 @@ TEST_CASE("RectLight::sampleLightShape") {
     SECTION("sampleLightShape should respect scale") {
         areaLightFixture.areaLight->setWidth(5);
         areaLightFixture.areaLight->setHeight(5);
-        const Transform transform =
-            Transform(Transform::withPosition(areaLightFixture.position).matrix
-                          * Transform::withScale(1.f / 5, 1.f / 5, 1.f / 5).matrix);
+        const Transform transform = Transform(Transform::withPosition(areaLightFixture.position).matrix *
+                                              Transform::withScale(1.f / 5, 1.f / 5, 1.f / 5).matrix);
         areaLightFixture.areaLight->setTransform(transform);
         const float realWidth = 1;
         const float realHeight = 1;
@@ -75,8 +74,7 @@ TEST_CASE("RectLight::area") {
         areaLightFixture.areaLight->setWidth(1);
         areaLightFixture.areaLight->setHeight(1);
         const Transform transform =
-            Transform(Transform::withPosition(areaLightFixture.position).matrix
-                          * Transform::withScale(5, 5, 5).matrix);
+            Transform(Transform::withPosition(areaLightFixture.position).matrix * Transform::withScale(5, 5, 5).matrix);
         areaLightFixture.areaLight->setTransform(transform);
 
         const float area = areaLightFixture.areaLight->area();
@@ -86,4 +84,3 @@ TEST_CASE("RectLight::area") {
 }
 
 }
-

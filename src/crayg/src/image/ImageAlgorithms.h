@@ -1,14 +1,14 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEALGORITHMS_H_
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEALGORITHMS_H_
 
+#include "BucketImageBuffer.h"
 #include "Image.h"
 #include "ImageIterators.h"
-#include "BucketImageBuffer.h"
 
 namespace crayg {
 
 class ImageAlgorithms {
- public:
+  public:
     static void copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image);
 
     static void fill(Image &image, const Color &color) {
@@ -16,9 +16,10 @@ class ImageAlgorithms {
             image.setValue(pixel.x, pixel.y, color);
         }
     }
+
     static bool bucketIsContainedInImage(const ImageBucket &bucket, Image &image);
 };
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEALGORITHMS_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEALGORITHMS_H_

@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <image/Image.h>
-#include <image/ImageOutputDriver.h>
 #include <image/ImageAlgorithms.h>
+#include <image/ImageOutputDriver.h>
 
 namespace crayg {
 
@@ -21,7 +21,7 @@ TEST_CASE("ImageOutputDriver") {
 
     SECTION("should write metadata") {
         ImageMetadata imageMetadata;
-        imageMetadata.write("testValue",42);
+        imageMetadata.write("testValue", 42);
 
         imageOutputDriver.writeImageMetadata(imageMetadata);
 

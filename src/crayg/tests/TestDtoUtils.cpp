@@ -1,8 +1,8 @@
-#include <catch2/catch.hpp>
-#include <string>
-#include <sstream>
-#include "utils/DtoUtils.h"
 #include "Logger.h"
+#include "utils/DtoUtils.h"
+#include <catch2/catch.hpp>
+#include <sstream>
+#include <string>
 
 namespace crayg {
 
@@ -137,22 +137,22 @@ TEST_CASE("CraygDto3::formatting") {
 
         os << left;
 
-        REQUIRE(
-            os.str() == "ExampleDto3{myFirstNumber=42,myName=hey,nestedDto=ExampleDto2{myFirstNumber=42,myName=hey}}");
+        REQUIRE(os.str() ==
+                "ExampleDto3{myFirstNumber=42,myName=hey,nestedDto=ExampleDto2{myFirstNumber=42,myName=hey}}");
     }
 
     SECTION("should format using fmt") {
         ExampleDto3 left(42, "hey", ExampleDto2(42, "hey"));
 
-        REQUIRE(fmt::format("{}", left)
-                    == "ExampleDto3{myFirstNumber=42,myName=hey,nestedDto=ExampleDto2{myFirstNumber=42,myName=hey}}");
+        REQUIRE(fmt::format("{}", left) ==
+                "ExampleDto3{myFirstNumber=42,myName=hey,nestedDto=ExampleDto2{myFirstNumber=42,myName=hey}}");
     }
 
     SECTION("should format vector of dto using fmt") {
         std::vector<ExampleDto3> dtos({{42, "hey", ExampleDto2(42, "hey")}});
 
-        REQUIRE(fmt::format("{}", dtos)
-                    == "[ExampleDto3{myFirstNumber=42,myName=hey,nestedDto=ExampleDto2{myFirstNumber=42,myName=hey}}]");
+        REQUIRE(fmt::format("{}", dtos) ==
+                "[ExampleDto3{myFirstNumber=42,myName=hey,nestedDto=ExampleDto2{myFirstNumber=42,myName=hey}}]");
     }
 }
 

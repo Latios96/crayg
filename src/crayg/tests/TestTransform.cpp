@@ -1,6 +1,6 @@
-#include <catch2/catch.hpp>
-#include <basics/Vector3f.h>
 #include <basics/Transform.h>
+#include <basics/Vector3f.h>
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -19,11 +19,12 @@ TEST_CASE("Transform Construction", "[Transform]") {
 
     SECTION("should create with rotation") {
         Transform transform = Transform::withRotation(10, 20, 30);
-
+        // clang-format off
         Transform expectedTransform = Transform(Matrix4x4f(0.81f, -0.46f, 0.34f, 0.f,
                                                            0.54f, 0.83f, -0.16f, 0.f,
                                                            -0.20f, 0.31f, 0.925f, 0.f,
                                                            0.f, 0.f, 0.f, 1.f));
+        // clang-format on
 
         REQUIRE(transform.matrix.isEqualTo(expectedTransform.matrix, 0.01f));
     }
@@ -41,7 +42,6 @@ TEST_CASE("Transform Construction", "[Transform]") {
 
         REQUIRE(copy == transform);
     }
-
 }
 
 TEST_CASE("apply transform to vector", "[Transform]") {
@@ -121,5 +121,3 @@ TEST_CASE("apply transform to Normal", "[Transform]") {
 }
 
 }
-
-

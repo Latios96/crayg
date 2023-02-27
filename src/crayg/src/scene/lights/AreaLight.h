@@ -7,7 +7,7 @@
 namespace crayg {
 
 class AreaLight : public Light {
- public:
+  public:
     AreaLight();
     AreaLight(const Transform &transform, float intensity);
     virtual Vector3f sampleLightShape() const = 0;
@@ -17,4 +17,4 @@ class AreaLight : public Light {
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENE_AREALIGHT_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENE_AREALIGHT_H_

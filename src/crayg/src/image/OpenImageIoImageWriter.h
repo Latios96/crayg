@@ -7,11 +7,11 @@
 namespace crayg {
 
 class OpenImageIoImageWriter : public ImageWriter {
- public:
+  public:
     void writeImageMetadata(const Image &image, OIIO::ImageSpec &spec);
     ~OpenImageIoImageWriter() override = default;
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_OPENIMAGEIOIMAGEWRITER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_OPENIMAGEIOIMAGEWRITER_H_

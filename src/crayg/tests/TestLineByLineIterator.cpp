@@ -36,7 +36,7 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
             }
         }
         int counter = 0;
-        for (auto pixel: ImageIterators::lineByLine(image)) {
+        for (auto pixel : ImageIterators::lineByLine(image)) {
             REQUIRE(pixel.x == positions[counter].x);
             REQUIRE(pixel.y == positions[counter].y);
             counter++;

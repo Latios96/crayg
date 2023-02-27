@@ -1,11 +1,11 @@
-#include <catch2/catch.hpp>
 #include "scene/materials/Material.h"
-#include "sceneIO/read/usd/UsdMaterialReadCache.h"
 #include "scene/materials/UsdPreviewSurface.h"
+#include "sceneIO/read/usd/UsdMaterialReadCache.h"
+#include <catch2/catch.hpp>
+#include <pxr/base/gf/vec3f.h>
+#include <pxr/usd/sdf/types.h>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
-#include <pxr/usd/sdf/types.h>
-#include <pxr/base/gf/vec3f.h>
 
 namespace crayg {
 
@@ -100,50 +100,20 @@ TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
         pxr::UsdShadeMaterialBindingAPI bindingApi(geo.GetPrim());
         bindingApi.Bind(usdShadeMaterial);
         usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
-        usdShadeShader
-            .CreateInput(pxr::TfToken("diffuseColor"),
-                         pxr::SdfValueTypeNames->Color3f)
+        usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"), pxr::SdfValueTypeNames->Color3f)
             .Set(pxr::GfVec3f(1, 2, 3));
-        usdShadeShader
-            .CreateInput(pxr::TfToken("emissiveColor"),
-                         pxr::SdfValueTypeNames->Color3f)
+        usdShadeShader.CreateInput(pxr::TfToken("emissiveColor"), pxr::SdfValueTypeNames->Color3f)
             .Set(pxr::GfVec3f(4, 5, 6));
-        usdShadeShader
-            .CreateInput(pxr::TfToken("useSpecularWorkflow"),
-                         pxr::SdfValueTypeNames->Int)
-            .Set(1);
-        usdShadeShader
-            .CreateInput(pxr::TfToken("specularColor"),
-                         pxr::SdfValueTypeNames->Color3f)
+        usdShadeShader.CreateInput(pxr::TfToken("useSpecularWorkflow"), pxr::SdfValueTypeNames->Int).Set(1);
+        usdShadeShader.CreateInput(pxr::TfToken("specularColor"), pxr::SdfValueTypeNames->Color3f)
             .Set(pxr::GfVec3f(7, 8, 9));
-        usdShadeShader
-            .CreateInput(pxr::TfToken("metallic"),
-                         pxr::SdfValueTypeNames->Float)
-            .Set(0.1f);
-        usdShadeShader
-            .CreateInput(pxr::TfToken("roughness"),
-                         pxr::SdfValueTypeNames->Float)
-            .Set(0.2f);
-        usdShadeShader
-            .CreateInput(pxr::TfToken("clearcoat"),
-                         pxr::SdfValueTypeNames->Float)
-            .Set(0.3f);
-        usdShadeShader
-            .CreateInput(pxr::TfToken("clearcoatRoughness"),
-                         pxr::SdfValueTypeNames->Float)
-            .Set(0.4f);
-        usdShadeShader
-            .CreateInput(pxr::TfToken("opacity"),
-                         pxr::SdfValueTypeNames->Float)
-            .Set(0.5f);
-        usdShadeShader
-            .CreateInput(pxr::TfToken("opacityThreshold"),
-                         pxr::SdfValueTypeNames->Float)
-            .Set(0.6f);
-        usdShadeShader
-            .CreateInput(pxr::TfToken("ior"),
-                         pxr::SdfValueTypeNames->Float)
-            .Set(0.7f);
+        usdShadeShader.CreateInput(pxr::TfToken("metallic"), pxr::SdfValueTypeNames->Float).Set(0.1f);
+        usdShadeShader.CreateInput(pxr::TfToken("roughness"), pxr::SdfValueTypeNames->Float).Set(0.2f);
+        usdShadeShader.CreateInput(pxr::TfToken("clearcoat"), pxr::SdfValueTypeNames->Float).Set(0.3f);
+        usdShadeShader.CreateInput(pxr::TfToken("clearcoatRoughness"), pxr::SdfValueTypeNames->Float).Set(0.4f);
+        usdShadeShader.CreateInput(pxr::TfToken("opacity"), pxr::SdfValueTypeNames->Float).Set(0.5f);
+        usdShadeShader.CreateInput(pxr::TfToken("opacityThreshold"), pxr::SdfValueTypeNames->Float).Set(0.6f);
+        usdShadeShader.CreateInput(pxr::TfToken("ior"), pxr::SdfValueTypeNames->Float).Set(0.7f);
         usdShadeMaterial.CreateSurfaceOutput().ConnectToSource(usdShadeShader.ConnectableAPI(),
                                                                pxr::TfToken("surface"));
 
@@ -169,8 +139,8 @@ TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
         pxr::UsdShadeMaterialBindingAPI bindingApi(geo.GetPrim());
         bindingApi.Bind(usdShadeMaterial);
         usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
-        usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"),
-                                   pxr::SdfValueTypeNames->Color3f).Set(pxr::GfVec3f(0.5f));
+        usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"), pxr::SdfValueTypeNames->Color3f)
+            .Set(pxr::GfVec3f(0.5f));
         usdShadeMaterial.CreateSurfaceOutput().ConnectToSource(usdShadeShader.ConnectableAPI(),
                                                                pxr::TfToken("surface"));
 
@@ -217,15 +187,14 @@ TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
         usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
         usdShadeMaterial.CreateSurfaceOutput().ConnectToSource(usdShadeShader.ConnectableAPI(),
                                                                pxr::TfToken("surface"));
-        usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"),
-                                   pxr::SdfValueTypeNames->Color3f).ConnectToSource(rgbOutput);
+        usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"), pxr::SdfValueTypeNames->Color3f)
+            .ConnectToSource(rgbOutput);
 
         auto material = usdMaterialReadCache.getCachedReadPrimMaterial(geo);
 
         REQUIRE(material->getName() == "/material");
         REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color(0.18f, 0.18f, 0.18f));
     }
-
 }
 
 }

@@ -1,37 +1,38 @@
 #ifndef CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_
 #define CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_
 
-#include <fmt/format.h>
-#include <QtWidgets/qpushbutton.h>
-#include <QtWidgets/qcombobox.h>
-#include <QtWidgets/qlabel.h>
-#include <QtWidgets/qscrollarea.h>
-#include <QVBoxLayout>
-#include <QGuiApplication>
-#include <QScreen>
-#include <iostream>
-#include <QTreeWidget>
 #include "ImageWidget.h"
 #include "PanAndZoomArea.h"
 #include "image/ImageMetadata.h"
+#include <QGuiApplication>
+#include <QScreen>
+#include <QTreeWidget>
+#include <QVBoxLayout>
+#include <QtWidgets/qcombobox.h>
+#include <QtWidgets/qlabel.h>
+#include <QtWidgets/qpushbutton.h>
+#include <QtWidgets/qscrollarea.h>
+#include <fmt/format.h>
+#include <iostream>
 
 namespace crayg {
 
 class FrameBufferWidget : public QWidget {
- Q_OBJECT
- public:
-    FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr)
-        : QWidget(parent), imageWidget(imageWidget) {
+    Q_OBJECT
+  public:
+    FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr) : QWidget(parent), imageWidget(imageWidget) {
         setupUI();
     }
+
     ~FrameBufferWidget() override = default;
- public slots:
+  public slots:
     void setZoomFactor(ZoomFactor zoomFactor);
     void setImageMetadata(ImageMetadata imageMetadata);
     void setImageSpec(ImageSpec imageSpec);
- signals:
+  signals:
     void channelChanged(std::string newChannel);
- private:
+
+  private:
     void setupUI();
     ImageWidget &imageWidget;
     PanAndZoomArea *panAndZoomArea;
@@ -42,4 +43,4 @@ class FrameBufferWidget : public QWidget {
 
 }
 
-#endif //CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_
+#endif // CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_

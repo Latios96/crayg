@@ -6,10 +6,10 @@
 namespace crayg {
 
 class ImageChannelPathResolver {
- public:
+  public:
     std::string resolve(const std::string &path, const std::string &channelName);
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_UTILS_IMAGECHANNELPATHRESOLVER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_UTILS_IMAGECHANNELPATHRESOLVER_H_

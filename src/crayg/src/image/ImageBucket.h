@@ -6,7 +6,7 @@
 namespace crayg {
 
 class ImageBucket {
- public:
+  public:
     ImageBucket(int x, int y, int width, int height);
     ImageBucket(const ImageBucket &imageBucket);
     ImageBucket();
@@ -18,17 +18,17 @@ class ImageBucket {
     const int getY() const;
     const int getWidth() const;
     const int getHeight() const;
- private:
+
+  private:
     int x, y, width, height;
 };
 
 }
 
 namespace std {
-template<>
-struct hash<crayg::ImageBucket> {
+template <> struct hash<crayg::ImageBucket> {
     size_t operator()(const crayg::ImageBucket &imageBucket) const;
 };
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_

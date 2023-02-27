@@ -1,15 +1,15 @@
 #ifndef CRAYG_BOUNDINGBOX_H
 #define CRAYG_BOUNDINGBOX_H
 
-#include <ostream>
-#include "Vector3f.h"
 #include "Ray.h"
+#include "Vector3f.h"
+#include <ostream>
 
 namespace crayg {
 
 class BoundingBox {
 
- public:
+  public:
     BoundingBox();
     BoundingBox(const Vector3f &min, const Vector3f &max);
     static BoundingBox fromCenterAndRadius(const Vector3f &center, const float radius);
@@ -32,4 +32,4 @@ class BoundingBox {
 
 }
 
-#endif //CRAYG_BOUNDINGBOX_H
+#endif // CRAYG_BOUNDINGBOX_H

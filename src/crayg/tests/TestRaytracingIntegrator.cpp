@@ -1,7 +1,7 @@
-#include <catch2/catch.hpp>
-#include <integrators/RaytracingIntegrator.h>
-#include <fakeit.hpp>
 #include "scene/primitives/Sphere.h"
+#include <catch2/catch.hpp>
+#include <fakeit.hpp>
+#include <integrators/RaytracingIntegrator.h>
 
 namespace crayg {
 

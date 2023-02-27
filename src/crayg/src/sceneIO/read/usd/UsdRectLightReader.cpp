@@ -5,8 +5,7 @@
 
 namespace crayg {
 
-UsdRectLightReader::UsdRectLightReader(const pxr::UsdLuxRectLight &rectLight) : BaseUsdLightReader(
-    rectLight) {
+UsdRectLightReader::UsdRectLightReader(const pxr::UsdLuxRectLight &rectLight) : BaseUsdLightReader(rectLight) {
 }
 
 std::shared_ptr<RectLight> UsdRectLightReader::read() {
@@ -23,6 +22,7 @@ std::shared_ptr<RectLight> UsdRectLightReader::read() {
 
     return areaLight;
 }
+
 std::string UsdRectLightReader::getTranslatedType() {
     return "rectLight";
 }

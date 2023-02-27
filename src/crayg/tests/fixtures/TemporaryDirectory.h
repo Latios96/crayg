@@ -6,14 +6,15 @@
 namespace crayg {
 
 class TemporaryDirectory {
- public:
+  public:
     TemporaryDirectory();
     const boost::filesystem::path &getPath() const;
     virtual ~TemporaryDirectory();
- private:
+
+  private:
     boost::filesystem::path path;
 };
 
 } // crayg
 
-#endif //CRAYG_TEMPORARYDIRECTORY_H
+#endif // CRAYG_TEMPORARYDIRECTORY_H

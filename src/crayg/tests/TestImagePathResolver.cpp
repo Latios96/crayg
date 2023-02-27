@@ -1,13 +1,13 @@
-#include <catch2/catch.hpp>
-#include <utils/ImagePathResolver.h>
-#include <boost/regex.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/regex.hpp>
+#include <catch2/catch.hpp>
 #include <iostream>
+#include <utils/ImagePathResolver.h>
 
 namespace crayg {
 
 class FileFixture {
- public:
+  public:
     explicit FileFixture(const boost::filesystem::path &path) : path(path) {
         const boost::filesystem::path folder = path.parent_path();
         if (!folder.empty()) {
@@ -16,10 +16,12 @@ class FileFixture {
         std::ofstream outfile(path.string());
         outfile.close();
     }
+
     ~FileFixture() {
         boost::filesystem::remove(path);
     }
- private:
+
+  private:
     boost::filesystem::path path;
 };
 
@@ -86,7 +88,6 @@ TEST_CASE("matchesTemplate") {
     REQUIRE_FALSE(imagePathResolver.matchesTemplate("1203e5c176ab4e7fbe124ae4258131b4.1000.png",
                                                     "1203e5c176ab4e7fbe124ae4258131b4.0001.png"));
     REQUIRE_FALSE(imagePathResolver.matchesTemplate("tt.png", "1203e5c176ab4e7fbe124ae4258131b4.0001.png"));
-
 }
 
 }

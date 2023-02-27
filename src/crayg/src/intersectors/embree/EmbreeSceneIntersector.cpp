@@ -1,7 +1,7 @@
 #include "EmbreeSceneIntersector.h"
 #include "EmbreeUtils.h"
-#include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "scene/primitives/trianglemesh/TriangleMesh.h"
 
 namespace crayg {
 
@@ -29,6 +29,7 @@ Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray) const 
     }
     return Imageable::Intersection::createInvalid();
 }
+
 bool EmbreeSceneIntersector::isIntersecting(const Ray &ray) const {
     RTCIntersectContext context;
     rtcInitIntersectContext(&context);
@@ -51,22 +52,22 @@ Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &r
                                                               const EmbreeMappingEntry &embreeMappingEntry) const {
     auto sceneObject = scene.objects[embreeMappingEntry.sceneObjectIndex];
     auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
-    auto triangle =
-        new Triangle(triangleMesh.get(), rtcRayHit.hit.primID);
+    auto triangle = new Triangle(triangleMesh.get(), rtcRayHit.hit.primID);
     return {rtcRayHit.ray.tfar, triangle, true};
 }
 
-Imageable::Intersection EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
-                                                                            const EmbreeMappingEntry &embreeMappingEntry) const {
+Imageable::Intersection
+EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
+                                                    const EmbreeMappingEntry &embreeMappingEntry) const {
     auto sceneObject = scene.objects[embreeMappingEntry.sceneObjectIndex];
     auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
-    auto triangle =
-        new Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID);
+    auto triangle = new Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID);
     return {rtcRayHit.ray.tfar, triangle, true};
 }
 
 EmbreeSceneIntersector::~EmbreeSceneIntersector() = default;
 
 EmbreeSceneIntersector::EmbreeSceneIntersector(Scene &scene, std::unique_ptr<EmbreeBvh> embreeBvh)
-    : SceneIntersector(scene), embreeBvh(std::move(embreeBvh)) {}
+    : SceneIntersector(scene), embreeBvh(std::move(embreeBvh)) {
+}
 } // crayg

@@ -1,11 +1,11 @@
-#include <catch2/catch.hpp>
-#include "sceneIO/write/usd/UsdSphereWriter.h"
-#include "sceneIO/write/usd/UsdPathFactory.h"
-#include <pxr/usd/usd/stage.h>
+#include "scene/lights/DiskLight.h"
 #include "scene/primitives/Sphere.h"
 #include "sceneIO/usd/UsdUtils.h"
-#include "scene/lights/DiskLight.h"
 #include "sceneIO/write/usd/UsdDiskLightWriter.h"
+#include "sceneIO/write/usd/UsdPathFactory.h"
+#include "sceneIO/write/usd/UsdSphereWriter.h"
+#include <catch2/catch.hpp>
+#include <pxr/usd/usd/stage.h>
 
 namespace crayg {
 

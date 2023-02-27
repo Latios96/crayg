@@ -1,9 +1,10 @@
 #ifndef CRAYG_SRC_STANDALONE_SRC_CLIRENDERSETTINGSOVERRIDE_H_
 #define CRAYG_SRC_STANDALONE_SRC_CLIRENDERSETTINGSOVERRIDE_H_
 
-#include <optional>
 #include "basics/Resolution.h"
 #include "scene/RenderSettings.h"
+#include <optional>
+
 namespace crayg {
 
 struct CliRenderSettingsOverride {
@@ -21,4 +22,4 @@ struct CliRenderSettingsOverride {
 
 }
 
-#endif //CRAYG_SRC_STANDALONE_SRC_CLIRENDERSETTINGSOVERRIDE_H_
+#endif // CRAYG_SRC_STANDALONE_SRC_CLIRENDERSETTINGSOVERRIDE_H_

@@ -1,7 +1,7 @@
-#include <catch2/catch.hpp>
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
-#include "scene/materials/UsdPreviewSurface.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
+#include "scene/materials/UsdPreviewSurface.h"
+#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -118,7 +118,7 @@ TEST_CASE("SubdivisionSurfaceMesh::faceCount") {
 
 TEST_CASE("SubdivisionSurfaceMesh::tessellate") {
 
-    SECTION("should tessellate correctly"){
+    SECTION("should tessellate correctly") {
         SubdivisionSurfaceMesh subdivisionSurfaceMesh;
         auto usdPreviewSurface = std::make_shared<UsdPreviewSurface>(Color::createWhite());
         subdivisionSurfaceMesh.setMaterial(usdPreviewSurface);

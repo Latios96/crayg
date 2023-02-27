@@ -1,10 +1,10 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdCameraReader.h"
+#include <catch2/catch.hpp>
+#include <iostream>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/xform.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
-#include <iostream>
 
 namespace crayg {
 
@@ -22,9 +22,7 @@ TEST_CASE("CameraReader::read") {
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
 
-        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}),
-                                                              35.f,
-                                                              36.f);
+        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}), 35.f, 36.f);
         REQUIRE(*camera == *expectedCamera);
     }
 
@@ -48,12 +46,9 @@ TEST_CASE("CameraReader::read") {
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
 
-        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}),
-                                                              35.f,
-                                                              36.f);
+        auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}), 35.f, 36.f);
         REQUIRE(*camera == *expectedCamera);
     }
-
 }
 
 }

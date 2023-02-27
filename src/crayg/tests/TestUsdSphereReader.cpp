@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdSphereReader.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 

@@ -1,31 +1,25 @@
 #ifndef CRAYG_TOSTRINGHELPER_H
 #define CRAYG_TOSTRINGHELPER_H
 
-#include <string>
 #include <fmt/format.h>
 #include <fmt/ostream.h>
+#include <string>
 
 namespace crayg {
 
 class ToStringHelper {
- public:
+  public:
     explicit ToStringHelper(const std::string &className) {
         repr.append(className);
     }
 
-    template<typename T>
-    ToStringHelper &addMember(const std::string &name, T value) {
+    template <typename T> ToStringHelper &addMember(const std::string &name, T value) {
         if (!hasMembers) {
             repr.append("{");
             hasMembers = true;
-            repr.append(name)
-                .append("=")
-                .append(fmt::format("{}", value));
+            repr.append(name).append("=").append(fmt::format("{}", value));
         } else {
-            repr.append(",")
-                .append(name)
-                .append("=")
-                .append(fmt::format("{}", value));
+            repr.append(",").append(name).append("=").append(fmt::format("{}", value));
         }
         return *this;
     };
@@ -38,10 +32,10 @@ class ToStringHelper {
         return repr;
     }
 
- private:
+  private:
     std::string repr;
     bool hasMembers = false;
 };
 
 }
-#endif //CRAYG_TOSTRINGHELPER_H
+#endif // CRAYG_TOSTRINGHELPER_H

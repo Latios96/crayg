@@ -1,8 +1,8 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdDiskLightReader.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
-#include <pxr/usd/usdLux/diskLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
+#include <pxr/usd/usdLux/diskLight.h>
 
 namespace crayg {
 
@@ -41,7 +41,6 @@ TEST_CASE("UsdDiskLightReader::read") {
         REQUIRE(light->getColor() == Color({1, 0, 0}));
         REQUIRE(light->getRadius() == 3);
     }
-
 }
 
 }

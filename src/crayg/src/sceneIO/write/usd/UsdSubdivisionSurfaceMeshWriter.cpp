@@ -4,12 +4,12 @@
 namespace crayg {
 
 class _SubdivisionSurfaceTriangleMeshWriter : public UsdTriangleMeshWriter {
- public:
-    _SubdivisionSurfaceTriangleMeshWriter(TriangleMesh &craygObject,
-                                          UsdMaterialWriteCache &usdMaterialWriteCache) : UsdTriangleMeshWriter(
-        craygObject,
-        usdMaterialWriteCache) {}
- protected:
+  public:
+    _SubdivisionSurfaceTriangleMeshWriter(TriangleMesh &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache)
+        : UsdTriangleMeshWriter(craygObject, usdMaterialWriteCache) {
+    }
+
+  protected:
     std::string getTranslatedType() override {
         return "SubdivisionSurfaceMesh";
     }
@@ -17,11 +17,13 @@ class _SubdivisionSurfaceTriangleMeshWriter : public UsdTriangleMeshWriter {
 
 UsdSubdivisionSurfaceMeshWriter::UsdSubdivisionSurfaceMeshWriter(SubdivisionSurfaceMesh &craygObject,
                                                                  UsdMaterialWriteCache &usdMaterialWriteCache)
-    : BaseUsdSceneObjectWriter(craygObject, usdMaterialWriteCache) {}
+    : BaseUsdSceneObjectWriter(craygObject, usdMaterialWriteCache) {
+}
+
 pxr::UsdGeomMesh UsdSubdivisionSurfaceMeshWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     if (this->craygObject.isTesselated()) {
-        _SubdivisionSurfaceTriangleMeshWriter
-            subdivisionSurfaceTriangleMeshWriter(this->craygObject.triangleMesh, usdMaterialWriteCache);
+        _SubdivisionSurfaceTriangleMeshWriter subdivisionSurfaceTriangleMeshWriter(this->craygObject.triangleMesh,
+                                                                                   usdMaterialWriteCache);
         return subdivisionSurfaceTriangleMeshWriter.write(stage, usdPathFactory);
     }
     auto usdGeomMesh = BaseUsdSceneObjectWriter::write(stage, usdPathFactory);
@@ -37,7 +39,7 @@ pxr::UsdGeomMesh UsdSubdivisionSurfaceMeshWriter::write(pxr::UsdStagePtr stage, 
 void UsdSubdivisionSurfaceMeshWriter::writePoints(pxr::UsdGeomMesh usdGeomMesh) const {
     pxr::VtVec3fArray points;
     points.reserve(craygObject.points.size());
-    for (auto &i: craygObject.points) {
+    for (auto &i : craygObject.points) {
         points.push_back(UsdConversions::convert(i));
     }
     usdGeomMesh.GetPointsAttr().Set(points);
@@ -46,7 +48,7 @@ void UsdSubdivisionSurfaceMeshWriter::writePoints(pxr::UsdGeomMesh usdGeomMesh) 
 void UsdSubdivisionSurfaceMeshWriter::writeFaceVertexIndices(pxr::UsdGeomMesh usdGeomMesh) const {
     pxr::VtIntArray triangleIndices;
     triangleIndices.reserve(craygObject.faceVertexIndices.size());
-    for (auto &indices: craygObject.faceVertexIndices) {
+    for (auto &indices : craygObject.faceVertexIndices) {
         triangleIndices.push_back(indices);
     }
     usdGeomMesh.GetFaceVertexIndicesAttr().Set(triangleIndices);
@@ -55,7 +57,7 @@ void UsdSubdivisionSurfaceMeshWriter::writeFaceVertexIndices(pxr::UsdGeomMesh us
 void UsdSubdivisionSurfaceMeshWriter::writeFaceVertexCounts(pxr::UsdGeomMesh usdGeomMesh) const {
     pxr::VtIntArray faceVertexCounts;
     faceVertexCounts.reserve(craygObject.faceVertexCounts.size());
-    for (auto &count: craygObject.faceVertexCounts) {
+    for (auto &count : craygObject.faceVertexCounts) {
         faceVertexCounts.push_back(count);
     }
     usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);

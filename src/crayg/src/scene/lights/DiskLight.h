@@ -6,7 +6,7 @@
 namespace crayg {
 
 class DiskLight : public AreaLight {
- public:
+  public:
     DiskLight();
     DiskLight(const Transform &transform, float intensity, float radius);
     Vector3f getNormal(Vector3f point) override;
@@ -18,10 +18,11 @@ class DiskLight : public AreaLight {
     Vector3f sampleLightShape() const override;
     std::string getType() override;
     float area() const override;
- private:
+
+  private:
     float radius = 1;
 };
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENE_DISKLIGHT_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENE_DISKLIGHT_H_

@@ -1,11 +1,10 @@
-#include <cmath>
 #include "PineHoleCameraModel.h"
+#include <cmath>
 
 namespace crayg {
 
-PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight) : camera(camera),
-                                                                                            imageWidth(imageWidth),
-                                                                                            imageHeight(imageHeight) {
+PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight)
+    : camera(camera), imageWidth(imageWidth), imageHeight(imageHeight) {
     imageRatio = static_cast<float>(imageWidth) / static_cast<float>(imageHeight);
 
     // create view position
@@ -33,9 +32,9 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int ima
 }
 
 Ray PineHoleCameraModel::createPrimaryRay(float x, float y) {
-  Vector3f pixelCenter = getPixelCenter(x, y);
-  Vector3f rayDirection = (pixelCenter - camera.getPosition()).normalize();
-  return {camera.getPosition(), rayDirection};
+    Vector3f pixelCenter = getPixelCenter(x, y);
+    Vector3f rayDirection = (pixelCenter - camera.getPosition()).normalize();
+    return {camera.getPosition(), rayDirection};
 }
 
 Vector3f PineHoleCameraModel::getPixelCenter(float x, float y) {

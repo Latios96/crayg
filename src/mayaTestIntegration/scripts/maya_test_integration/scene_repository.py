@@ -38,7 +38,7 @@ class SceneRepository:
     def list_suites(self) -> List[Suite]:
         suites = []
         for suite_name in filter(
-                lambda x: os.path.isdir(os.path.join(self._root, x)), os.listdir(self._root)
+            lambda x: os.path.isdir(os.path.join(self._root, x)), os.listdir(self._root)
         ):
             suites.append(
                 Suite(
@@ -53,7 +53,7 @@ class SceneRepository:
         tests = []
         suite_path = os.path.join(self._root, suite_name)
         for test_name in filter(
-                lambda x: os.path.isdir(os.path.join(suite_path, x)), os.listdir(suite_path)
+            lambda x: os.path.isdir(os.path.join(suite_path, x)), os.listdir(suite_path)
         ):
             tests.append(
                 TestScene(

@@ -1,15 +1,15 @@
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_
 
+#include "basics/Color.h"
+#include "basics/Matrix4x4f.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/base/gf/matrix4d.h>
-#include "basics/Matrix4x4f.h"
-#include "basics/Color.h"
 
 namespace crayg {
 
 class UsdConversions {
- public:
+  public:
     static Matrix4x4f convert(const pxr::GfMatrix4d &matrix);
     static Vector3f convert(const pxr::GfVec3f &vector);
     static pxr::GfVec3f convert(const Vector3f &vector);
@@ -21,4 +21,4 @@ class UsdConversions {
 
 };
 
-#endif //CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_
+#endif // CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_

@@ -1,18 +1,16 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHNODE_H_
 #define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHNODE_H_
 
-#include <vector>
 #include <basics/BoundingBox.h>
 #include <scene/SceneObject.h>
+#include <vector>
 
 namespace crayg {
 
 class NaiveBvhNode {
- public:
-    NaiveBvhNode(const BoundingBox &boundingBox,
-                 std::unique_ptr<NaiveBvhNode> left,
-                 std::unique_ptr<NaiveBvhNode> right,
-                 const std::vector<Imageable *> &objects);
+  public:
+    NaiveBvhNode(const BoundingBox &boundingBox, std::unique_ptr<NaiveBvhNode> left,
+                 std::unique_ptr<NaiveBvhNode> right, const std::vector<Imageable *> &objects);
     BoundingBox boundingBox;
     std::unique_ptr<NaiveBvhNode> left;
     std::unique_ptr<NaiveBvhNode> right;
@@ -34,4 +32,4 @@ struct NaiveBvh {
 };
 
 }
-#endif //CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHNODE_H_
+#endif // CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHNODE_H_

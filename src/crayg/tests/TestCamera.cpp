@@ -1,7 +1,6 @@
 #include <catch2/catch.hpp>
 #include <scene/camera/Camera.h>
 
-
 namespace crayg {
 
 TEST_CASE("field of view") {

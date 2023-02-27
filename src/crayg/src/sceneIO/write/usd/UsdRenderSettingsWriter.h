@@ -2,16 +2,17 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDRENDERSETTINGSWRITER_H_
 
 #include "BaseUsdWriter.h"
-#include <pxr/usd/usdRender/settings.h>
 #include "scene/RenderSettings.h"
+#include <pxr/usd/usdRender/settings.h>
 
 namespace crayg {
 
 class UsdRenderSettingsWriter {
- public:
+  public:
     UsdRenderSettingsWriter(const RenderSettings &renderSettings);
     pxr::UsdRenderSettings write(pxr::UsdStagePtr stage);
- private:
+
+  private:
     RenderSettings renderSettings;
     void writeResolution(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeMaxSamples(const pxr::UsdRenderSettings &usdRenderSettings) const;
@@ -22,4 +23,4 @@ class UsdRenderSettingsWriter {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDRENDERSETTINGSWRITER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDRENDERSETTINGSWRITER_H_

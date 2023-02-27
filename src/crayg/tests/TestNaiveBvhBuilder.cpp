@@ -1,7 +1,7 @@
-#include <catch2/catch.hpp>
-#include <scene/Scene.h>
 #include "scene/primitives/Sphere.h"
+#include <catch2/catch.hpp>
 #include <intersectors/naive/NaiveBvhBuilder.h>
+#include <scene/Scene.h>
 
 namespace crayg {
 
@@ -86,6 +86,5 @@ TEST_CASE("NaiveBvhBuilder/build") {
         REQUIRE(naiveBvh->root->right->right->isLeaf());
         REQUIRE(naiveBvh->root->right->right->objects == std::vector<Imageable *>({sphere3.get()}));
     }
-
 }
 }

@@ -4,10 +4,10 @@
 namespace crayg {
 
 class Random {
- public:
+  public:
     static float random();
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SAMPLING_RANDOM_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SAMPLING_RANDOM_H_

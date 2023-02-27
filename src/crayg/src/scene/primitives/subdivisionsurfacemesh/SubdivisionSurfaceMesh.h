@@ -1,15 +1,15 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_
 
-#include <optional>
 #include "scene/SceneObject.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/trianglemesh/primvars/PrimVarType.h"
+#include <optional>
 
 namespace crayg {
 
-class SubdivisionSurfaceMesh: public SceneObject {
- public:
+class SubdivisionSurfaceMesh : public SceneObject {
+  public:
     Vector3f getNormal(Vector3f point) override;
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
@@ -28,15 +28,13 @@ class SubdivisionSurfaceMesh: public SceneObject {
 
     std::vector<Vector3f> normals;
 
-    enum BoundaryInterpolation {
-        EDGE_ONLY,
-        EDGE_AND_CORNER
-    };
+    enum BoundaryInterpolation { EDGE_ONLY, EDGE_AND_CORNER };
 
     BoundaryInterpolation boundaryInterpolation = EDGE_ONLY;
 
     TriangleMesh triangleMesh;
- private:
+
+  private:
     bool isTessellated = false;
     void verifyIsTessellated() const;
     void copyNormalsToTriangleMesh();
@@ -44,4 +42,4 @@ class SubdivisionSurfaceMesh: public SceneObject {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_

@@ -1,8 +1,8 @@
-#include <catch2/catch.hpp>
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
-#include "sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.h"
+#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -22,16 +22,15 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
         usdSubdivisionSurfaceMeshWriter.write(stage, usdPathFactory);
 
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/SubdivisionSurfaceMesh0")));
-        pxr::GfVec3d
-            translation = usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
+        pxr::GfVec3d translation =
+            usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
         auto points = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetPointsAttr());
         auto triangleIndices =
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
         auto faceVertexCounts =
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexCountsAttr());
         REQUIRE(translation == pxr::GfVec3f(1, 2, -3));
-        REQUIRE(points
-                    == pxr::VtVec3fArray({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {0.5, 0, -0.5}, {-0.5, 0, -0.5}}));
+        REQUIRE(points == pxr::VtVec3fArray({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {0.5, 0, -0.5}, {-0.5, 0, -0.5}}));
         REQUIRE(triangleIndices == pxr::VtIntArray({0, 1, 2, 3}));
         REQUIRE(faceVertexCounts == pxr::VtIntArray({4}));
         REQUIRE_FALSE(usdGeomMesh.GetNormalsAttr().HasAuthoredValue());
@@ -44,8 +43,8 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
         usdSubdivisionSurfaceMeshWriter.write(stage, usdPathFactory);
 
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/SubdivisionSurfaceMesh0")));
-        pxr::GfVec3d
-            translation = usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
+        pxr::GfVec3d translation =
+            usdGeomMesh.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
         auto points = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetPointsAttr());
         auto normals = UsdUtils::getStaticAttributeValueAs<pxr::VtVec3fArray>(usdGeomMesh.GetNormalsAttr());
         auto triangleIndices =

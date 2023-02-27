@@ -8,7 +8,6 @@ std::string UsdSubdivisionSurfaceMeshReader::getTranslatedType() {
 UsdSubdivisionSurfaceMeshReader::UsdSubdivisionSurfaceMeshReader(const pxr::UsdGeomMesh &usdPrim,
                                                                  UsdMaterialReadCache &usdMaterialTranslationCache)
     : BaseUsdImageableReader(usdPrim, usdMaterialTranslationCache) {
-
 }
 
 std::shared_ptr<SubdivisionSurfaceMesh> UsdSubdivisionSurfaceMeshReader::read() {
@@ -31,16 +30,18 @@ void UsdSubdivisionSurfaceMeshReader::ensureCatmullClarkScheme() const {
     }
 }
 
-void UsdSubdivisionSurfaceMeshReader::translatePoints(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const {
+void UsdSubdivisionSurfaceMeshReader::translatePoints(
+    std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const {
     pxr::VtVec3fArray points;
     usdPrim.GetPointsAttr().Get(&points, timeCodeToRead);
     subdivisionSurfaceMesh->points.reserve(points.size());
-    for (const auto &point: points) {
+    for (const auto &point : points) {
         subdivisionSurfaceMesh->points.emplace_back(point[0], point[1], -point[2]);
     }
 }
 
-void UsdSubdivisionSurfaceMeshReader::translateIndices(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const {
+void UsdSubdivisionSurfaceMeshReader::translateIndices(
+    std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const {
     pxr::VtIntArray faceVertexCounts;
     usdPrim.GetFaceVertexCountsAttr().Get(&faceVertexCounts, timeCodeToRead);
     subdivisionSurfaceMesh->faceVertexCounts.reserve(faceVertexCounts.size());
@@ -50,7 +51,7 @@ void UsdSubdivisionSurfaceMeshReader::translateIndices(std::shared_ptr<Subdivisi
     subdivisionSurfaceMesh->faceVertexIndices.reserve(faceVertexIndices.size());
 
     int offset = 0;
-    for (auto faceVertexCount: faceVertexCounts) {
+    for (auto faceVertexCount : faceVertexCounts) {
         subdivisionSurfaceMesh->faceVertexCounts.push_back(faceVertexCount);
         for (int i = faceVertexCount - 1; i >= 0; i--) {
             subdivisionSurfaceMesh->faceVertexIndices.push_back(faceVertexIndices[offset + i]);
@@ -59,7 +60,8 @@ void UsdSubdivisionSurfaceMeshReader::translateIndices(std::shared_ptr<Subdivisi
     }
 }
 
-void UsdSubdivisionSurfaceMeshReader::translateBoundaryInterpolation(std::shared_ptr<SubdivisionSurfaceMesh> subdivisionSurfaceMesh) {
+void UsdSubdivisionSurfaceMeshReader::translateBoundaryInterpolation(
+    std::shared_ptr<SubdivisionSurfaceMesh> subdivisionSurfaceMesh) {
     auto interpolateBoundary =
         UsdUtils::getAttributeValueAs<pxr::TfToken>(usdPrim.GetInterpolateBoundaryAttr(), timeCodeToRead);
     if (interpolateBoundary == pxr::UsdGeomTokens->edgeAndCorner) {

@@ -2,15 +2,15 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_MATERIAL_H_
 
 #include "ShadingNode.h"
-#include "integrators/SurfaceInteraction.h"
 #include "integrators/IntegratorContext.h"
+#include "integrators/SurfaceInteraction.h"
 #include <basics/Color.h>
 #include <basics/Ray.h>
 
 namespace crayg {
 
 class Material : public ShadingNode {
- public:
+  public:
     explicit Material();
     explicit Material(const std::string &name);
     virtual Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) = 0;

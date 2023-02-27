@@ -6,21 +6,21 @@
 namespace crayg {
 
 class TriangleMeshFixtures {
- public:
-/*
- (0,0,0)       (0,0,1)        (0,0,2)
- v0------------v1-------------v2
- |             |              |
- |             |              |
- v3------------v4-------------v5
- (1,0,0)       (1,0,1)        (1,0,2)
+  public:
+    /*
+     (0,0,0)       (0,0,1)        (0,0,2)
+     v0------------v1-------------v2
+     |             |              |
+     |             |              |
+     v3------------v4-------------v5
+     (1,0,0)       (1,0,1)        (1,0,2)
 
- Triangles:
- 0: v0,v3,v1
- 1: v1,v3,v4
- 2: v1,v4,v2
- 3: v2,v4,v5
- */
+     Triangles:
+     0: v0,v3,v1
+     1: v1,v3,v4
+     2: v1,v4,v2
+     3: v2,v4,v5
+     */
     static std::shared_ptr<TriangleMesh> createPrimVarFixtureMesh() {
         auto triangleMesh = std::make_shared<crayg::TriangleMesh>();
 
@@ -56,4 +56,4 @@ class TriangleMeshFixtures {
 
 }
 
-#endif //CRAYG_SRC_CRAYG_TESTS_FIXTURES_TRIANGLEMESHFIXTURES_H_
+#endif // CRAYG_SRC_CRAYG_TESTS_FIXTURES_TRIANGLEMESHFIXTURES_H_

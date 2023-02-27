@@ -6,9 +6,9 @@
 namespace crayg {
 
 class UnitSphereSampler {
- public:
+  public:
     static Vector3f randomPointInside();
 };
 
 }
-#endif //CRAYG_SRC_CRAYG_SRC_SAMPLERS_UNITSPHERESAMPLER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SAMPLERS_UNITSPHERESAMPLER_H_

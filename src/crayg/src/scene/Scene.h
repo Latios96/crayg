@@ -1,19 +1,19 @@
 #ifndef CRAYG_SCENE_H
 #define CRAYG_SCENE_H
 
-#include <vector>
-#include <set>
-#include "scene/SceneObject.h"
-#include "lights/Light.h"
-#include "camera/Camera.h"
 #include "RenderSettings.h"
+#include "camera/Camera.h"
+#include "lights/Light.h"
 #include "materials/ShadingNode.h"
+#include "scene/SceneObject.h"
 #include <memory>
+#include <set>
+#include <vector>
 
 namespace crayg {
 
 class Scene {
- public:
+  public:
     Scene();
     explicit Scene(const RenderSettings &renderSettings);
 
@@ -35,4 +35,4 @@ class Scene {
 };
 
 }
-#endif //CRAYG_SCENE_H
+#endif // CRAYG_SCENE_H

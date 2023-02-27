@@ -3,7 +3,8 @@
 namespace crayg {
 
 DebugIntegrator::DebugIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector)
-    : AbstractIntegrator(scene, sceneIntersector) {}
+    : AbstractIntegrator(scene, sceneIntersector) {
+}
 
 Color DebugIntegrator::integrate(const Ray &ray, int recursionDepth) {
     auto intersection = sceneIntersector->intersect(ray);
@@ -18,6 +19,7 @@ Color DebugIntegrator::integrate(const Ray &ray, int recursionDepth) {
     const float scalar = normal.dot(ray.direction.invert());
     return Color::createGrey(std::max(scalar, 0.0f));
 }
+
 DebugIntegrator::~DebugIntegrator() = default;
 
 }

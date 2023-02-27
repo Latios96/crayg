@@ -8,7 +8,7 @@
 namespace crayg {
 
 class ImageMetadataCollector {
- public:
+  public:
     ImageMetadataCollector();
     ImageMetadataCollector(const std::optional<std::chrono::seconds> &renderTime,
                            const std::optional<RenderSettings> &renderSettings);
@@ -18,7 +18,7 @@ class ImageMetadataCollector {
 
     ImageMetadata collectMetadata();
 
- private:
+  private:
     void collectCraygVersion(ImageMetadata &imageMetadata) const;
     void collectCpuName(ImageMetadata &imageMetadata) const;
     void collectRenderTimeIfPresent(ImageMetadata &imageMetadata);
@@ -28,4 +28,4 @@ class ImageMetadataCollector {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_UTILS_IMAGEMETADATACOLLECTOR_H_
+#endif // CRAYG_SRC_CRAYG_SRC_UTILS_IMAGEMETADATACOLLECTOR_H_

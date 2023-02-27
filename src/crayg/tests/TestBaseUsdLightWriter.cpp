@@ -1,8 +1,8 @@
-#include <catch2/catch.hpp>
 #include "scene/lights/Light.h"
-#include "sceneIO/write/usd/UsdPathFactory.h"
-#include "sceneIO/write/usd/BaseUsdLightWriter.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/BaseUsdLightWriter.h"
+#include "sceneIO/write/usd/UsdPathFactory.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usdLux/sphereLight.h>
 
 namespace crayg {
@@ -10,10 +10,11 @@ namespace crayg {
 TEST_CASE("BaseUsdLightWriter::write") {
 
     class DummyBaseWriter : public BaseUsdLightWriter<pxr::UsdLuxSphereLight, Light> {
-     public:
-        DummyBaseWriter(Light &craygObject) : BaseUsdLightWriter<pxr::UsdLuxSphereLight,
-                                                                 Light>(craygObject) {}
-     protected:
+      public:
+        DummyBaseWriter(Light &craygObject) : BaseUsdLightWriter<pxr::UsdLuxSphereLight, Light>(craygObject) {
+        }
+
+      protected:
         std::string getTranslatedType() override {
             return "test";
         }

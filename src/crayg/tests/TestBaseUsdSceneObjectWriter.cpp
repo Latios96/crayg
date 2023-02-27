@@ -1,10 +1,11 @@
-#include <catch2/catch.hpp>
-#include "sceneIO/write/usd/BaseUsdSceneObjectWriter.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include "scene/primitives/Sphere.h"
 #include "scene/materials/UsdPreviewSurface.h"
+#include "scene/primitives/Sphere.h"
+#include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/BaseUsdSceneObjectWriter.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>
+
 namespace crayg {
 
 static std::string getMaterialPath(const pxr::UsdPrim &spherePrim) {
@@ -13,8 +14,7 @@ static std::string getMaterialPath(const pxr::UsdPrim &spherePrim) {
     return material.GetPath().GetString();
 }
 
-TEST_CASE("BaseUsdSceneObjectWriter::write")
-{
+TEST_CASE("BaseUsdSceneObjectWriter::write") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
@@ -23,10 +23,10 @@ TEST_CASE("BaseUsdSceneObjectWriter::write")
     Sphere sphere(Vector3f(1, 2, 3), 3.0f);
 
     class DummyBaseWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomSphere, Sphere> {
-     public:
+      public:
         DummyBaseWriter(Sphere &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache)
-            : BaseUsdSceneObjectWriter(craygObject, usdMaterialWriteCache) {}
-
+            : BaseUsdSceneObjectWriter(craygObject, usdMaterialWriteCache) {
+        }
     };
 
     DummyBaseWriter dummyBaseWriter(sphere, usdMaterialWriteCache);

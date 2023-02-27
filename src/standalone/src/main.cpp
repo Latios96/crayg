@@ -1,14 +1,14 @@
-#include <scene/Scene.h>
-#include <image/ImageWriter.h>
-#include <renderer/Renderer.h>
-#include <image/ImageWriters.h>
-#include <CraygInfo.h>
-#include <utils/ImagePathResolver.h>
-#include "utils/FileSystemUtils.h"
-#include <iostream>
-#include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
 #include "Logger.h"
+#include "sceneIO/SceneReaderFactory.h"
+#include "utils/FileSystemUtils.h"
+#include <CraygInfo.h>
+#include <image/ImageWriter.h>
+#include <image/ImageWriters.h>
+#include <iostream>
+#include <renderer/Renderer.h>
+#include <scene/Scene.h>
+#include <utils/ImagePathResolver.h>
 
 int main(int argc, char *argv[]) {
     crayg::Logger::initialize();
@@ -26,8 +26,7 @@ int main(int argc, char *argv[]) {
         std::string logFilePath = crayg::FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
         crayg::Logger::logToFile(logFilePath);
 
-        crayg::Logger::info("Crayg Renderer version {}, commit {}",
-                            crayg::CraygInfo::VERSION,
+        crayg::Logger::info("Crayg Renderer version {}, commit {}", crayg::CraygInfo::VERSION,
                             crayg::CraygInfo::COMMIT_HASH);
 
         crayg::Scene scene;
@@ -52,8 +51,7 @@ int main(int argc, char *argv[]) {
         crayg::Logger::info("Writing image done.");
 
         return 0;
-    }
-    catch (std::exception &e) {
+    } catch (std::exception &e) {
         crayg::Logger::error("Caught exception: {}", e.what());
         return -1;
     }

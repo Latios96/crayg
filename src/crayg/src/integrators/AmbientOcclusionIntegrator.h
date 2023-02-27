@@ -7,17 +7,17 @@
 namespace crayg {
 
 class AmbientOcclusionIntegrator : public AbstractIntegrator {
- public:
-    AmbientOcclusionIntegrator(Scene &scene,
-                               const std::shared_ptr<SceneIntersector> &sceneIntersector,
+  public:
+    AmbientOcclusionIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector,
                                const IntegratorSettings &integratorSettings);
     Color integrate(const Ray &ray, int recursionDepth) override;
     Color calculateAmbientOcclusionAtPoint(Imageable::Intersection &intersection, const Vector3f &location) const;
- private:
+
+  private:
     int sampleCount;
     float radius;
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_INTEGRATORS_AMBIENTOCCLUSIONINTEGRATOR_H_
+#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_AMBIENTOCCLUSIONINTEGRATOR_H_

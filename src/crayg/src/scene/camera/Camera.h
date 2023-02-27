@@ -1,25 +1,25 @@
 #ifndef CRAYG_CAMERA_H
 #define CRAYG_CAMERA_H
 
-#include <ostream>
 #include "basics/Vector3f.h"
 #include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"
 #include "utils/ToStringHelper.h"
+#include <ostream>
 
 namespace crayg {
 
 class Camera : public Transformable {
- private:
+  private:
     float focalLength;
     float filmbackSize;
     std::string name;
 
- public:
+  public:
     Camera();
 
     Camera(const Transform &transform, float focalLength, float filmbackSize);
-    //const Vector3f &getPosition() const;
+    // const Vector3f &getPosition() const;
 
     Vector3f getUserUpVector() const;
 
@@ -45,10 +45,10 @@ class Camera : public Transformable {
 
     friend std::ostream &operator<<(std::ostream &os, const Camera &camera) {
         os << ToStringHelper("Camera")
-            .addMember("transform", camera.transform)
-            .addMember("focalLength", camera.focalLength)
-            .addMember("filmbackSize", camera.filmbackSize)
-            .finish();
+                  .addMember("transform", camera.transform)
+                  .addMember("focalLength", camera.focalLength)
+                  .addMember("filmbackSize", camera.filmbackSize)
+                  .finish();
         return os;
     }
 
@@ -57,4 +57,4 @@ class Camera : public Transformable {
 };
 
 }
-#endif //CRAYG_CAMERA_H
+#endif // CRAYG_CAMERA_H

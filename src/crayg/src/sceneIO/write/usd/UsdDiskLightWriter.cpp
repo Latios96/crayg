@@ -2,8 +2,8 @@
 
 namespace crayg {
 
-UsdDiskLightWriter::UsdDiskLightWriter(DiskLight &craygObject)
-    : BaseUsdLightWriter(craygObject) {}
+UsdDiskLightWriter::UsdDiskLightWriter(DiskLight &craygObject) : BaseUsdLightWriter(craygObject) {
+}
 
 pxr::UsdLuxDiskLight UsdDiskLightWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usdLuxDiskLight = BaseUsdLightWriter::write(stage, usdPathFactory);

@@ -1,7 +1,7 @@
+#include "scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
 #include <scene/materials/UsdPreviewSurface.h>
-#include "scene/primitives/Sphere.h"
 
 namespace crayg {
 
@@ -41,10 +41,10 @@ TEST_CASE("addObjectToScene") {
     }
 
     SECTION("material name has to be unique") {
-        const std::shared_ptr<Material>
-            material1 = std::make_shared<UsdPreviewSurface>("name", Color::createGrey(0.5f));
-        const std::shared_ptr<Material>
-            material2 = std::make_shared<UsdPreviewSurface>("name", Color::createGrey(0.5f));
+        const std::shared_ptr<Material> material1 =
+            std::make_shared<UsdPreviewSurface>("name", Color::createGrey(0.5f));
+        const std::shared_ptr<Material> material2 =
+            std::make_shared<UsdPreviewSurface>("name", Color::createGrey(0.5f));
         scene.addMaterial(material1);
         scene.addMaterial(material2);
 
@@ -55,8 +55,8 @@ TEST_CASE("addObjectToScene") {
 TEST_CASE("findMaterialByNameInScene") {
     Scene scene;
     const std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(Vector3f(0, 0, 0), 1.5f);
-    const std::shared_ptr<Material>
-        diffuseMaterial = std::make_shared<UsdPreviewSurface>("myMaterial", Color::createGrey(0.5f));
+    const std::shared_ptr<Material> diffuseMaterial =
+        std::make_shared<UsdPreviewSurface>("myMaterial", Color::createGrey(0.5f));
     scene.addMaterial(diffuseMaterial);
 
     SECTION("should find existing material") {

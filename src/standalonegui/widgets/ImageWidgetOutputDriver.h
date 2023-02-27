@@ -1,30 +1,36 @@
 #ifndef CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_
 #define CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_
 
-#include <image/OutputDriver.h>
 #include "ImageWidget.h"
+#include <image/OutputDriver.h>
 
 namespace crayg {
 
 class QtSignalAdapter : public QObject {
- Q_OBJECT
- public:
-    explicit QtSignalAdapter(QObject *parent = nullptr) : QObject(parent) {}
- public:
+    Q_OBJECT
+  public:
+    explicit QtSignalAdapter(QObject *parent = nullptr) : QObject(parent) {
+    }
+
+  public:
     void initialize(const ImageSpec &imageSpec) {
         emit initialized(imageSpec);
     }
+
     void writeImageMetadata(const ImageMetadata &imageMetadata) {
         emit metadataWritten(imageMetadata);
     }
+
     void prepareBucket(const ImageBucket &imageBucket) {
         emit bucketPrepared(imageBucket);
     }
+
     void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) {
         auto buf = std::make_shared<BucketImageBuffer>(bucketImageBuffer);
         emit bucketImageBufferWritten(buf);
     }
- signals:
+
+  signals:
     void initialized(ImageSpec imageSpec);
     void metadataWritten(ImageMetadata imageMetadata);
     void bucketPrepared(const ImageBucket imageBucket);
@@ -32,17 +38,18 @@ class QtSignalAdapter : public QObject {
 };
 
 class ImageWidgetOutputDriver : public OutputDriver {
- public:
+  public:
     explicit ImageWidgetOutputDriver(ImageWidget &imageWidget);
     void initialize(const ImageSpec &imageSpec) override;
     void prepareBucket(const ImageBucket &imageBucket) override;
     void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) override;
     void writeImageMetadata(const ImageMetadata &imageMetadata) override;
     QtSignalAdapter qtSignalAdapter;
- private:
+
+  private:
     ImageWidget &imageWidget;
 };
 
 }
 
-#endif //CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_
+#endif // CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_

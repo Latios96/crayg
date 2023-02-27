@@ -1,18 +1,18 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_
 
-#include <variant>
+#include "PixelFormat.h"
+#include "PixelPosition.h"
+#include "basics/Color.h"
+#include "basics/Resolution.h"
 #include <memory>
 #include <ostream>
-#include "basics/Resolution.h"
-#include "basics/Color.h"
-#include "PixelPosition.h"
-#include "PixelFormat.h"
+#include <variant>
 
 namespace crayg {
 
 class PixelBuffer {
- public:
+  public:
     PixelBuffer(int width, int height, PixelFormat pixelFormat, int channelCount);
     PixelBuffer(const Resolution &resolution, PixelFormat pixelFormat, int channelCount);
     PixelBuffer(const PixelBuffer &pixelBuffer);
@@ -38,7 +38,8 @@ class PixelBuffer {
     bool operator!=(const PixelBuffer &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const PixelBuffer &buffer);
     ~PixelBuffer();
- private:
+
+  private:
     int pixelNumber(const PixelPosition &pixelPosition) const;
     void init(PixelFormat pixelFormat);
 
@@ -50,4 +51,4 @@ class PixelBuffer {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_

@@ -1,10 +1,10 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_
 #define CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_
 
-#include <stdexcept>
-#include <fmt/format.h>
-#include <basics/Vector3f.h>
 #include "Logger.h"
+#include <basics/Vector3f.h>
+#include <fmt/format.h>
+#include <stdexcept>
 
 #ifdef ENFORCE_CHECKS
 #define SKIP_IF_DISABLED
@@ -24,32 +24,30 @@ struct FailureInformation {
 
 class Preconditions {
 
- public:
+  public:
     static void checkArgument(bool expression, const FailureInformation &failureInformation) {
         SKIP_IF_DISABLED;
         checkArgument(expression, "Expression failed!", failureInformation);
     }
-    static void checkArgument(bool expression,
-                              const std::string &exrStr,
+
+    static void checkArgument(bool expression, const std::string &exrStr,
                               const FailureInformation &failureInformation) {
         SKIP_IF_DISABLED;
         if (!expression) {
             fail(exrStr, failureInformation);
         }
     }
+
     static void checkIsUnitVector(const Vector3f &vector3f, const FailureInformation &failureInformation) {
         SKIP_IF_DISABLED;
-        checkArgument(vector3f.length() == 1, fmt::format("Vector is not unit vector!: {} {} {}",
-                                                          vector3f.x,
-                                                          vector3f.y,
-                                                          vector3f.z), failureInformation);
+        checkArgument(vector3f.length() == 1,
+                      fmt::format("Vector is not unit vector!: {} {} {}", vector3f.x, vector3f.y, vector3f.z),
+                      failureInformation);
     }
- private:
+
+  private:
     static void fail(const std::string &message, const FailureInformation &failureInformation) {
-        auto formattedMessage = fmt::format("{}, at {} {}",
-                                            message,
-                                            failureInformation.file,
-                                            failureInformation.line);
+        auto formattedMessage = fmt::format("{}, at {} {}", message, failureInformation.file, failureInformation.line);
         Logger::error(formattedMessage.c_str());
         throw std::invalid_argument(formattedMessage);
     }
@@ -57,4 +55,4 @@ class Preconditions {
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_
+#endif // CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_

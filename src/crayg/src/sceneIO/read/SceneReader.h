@@ -1,17 +1,17 @@
 #ifndef CRAYG_SCENEREADER_H
 #define CRAYG_SCENEREADER_H
 
-#include <scene/Scene.h>
-#include <optional>
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include <optional>
+#include <scene/Scene.h>
 
 namespace crayg {
 
 class SceneReader {
- public:
-
+  public:
     struct ReadOptions {
         std::optional<std::string> cameraName;
+
         static ReadOptions empty() {
             return {};
         }
@@ -21,7 +21,7 @@ class SceneReader {
 
     explicit SceneReader(std::string path, Scene &scene, const ReadOptions &readOptions = ReadOptions::empty());
 
- protected:
+  protected:
     Scene &scene;
     std::string path;
     const ReadOptions &readOptions;
@@ -29,4 +29,4 @@ class SceneReader {
 
 }
 
-#endif //CRAYG_SCENEREADER_H
+#endif // CRAYG_SCENEREADER_H

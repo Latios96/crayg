@@ -1,8 +1,8 @@
-#include <catch2/catch.hpp>
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
 #include "scene/primitives/subdivisionsurfacemesh/FanTriangulator.h"
+#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "sceneIO/write/usd/UsdSceneWriter.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -48,7 +48,8 @@ TEST_CASE("FanTriangulator::fanTriangulate") {
 
         fanTriangulator.fanTriangulate(target);
 
-        REQUIRE(target == std::vector<TriangleMesh::FaceVertexIndices>({{0, 1, 3}, {0, 3, 2},
+        REQUIRE(target == std::vector<TriangleMesh::FaceVertexIndices>({{0, 1, 3},
+                                                                        {0, 3, 2},
                                                                         {2, 3, 5},
                                                                         {2, 5, 4},
                                                                         {4, 5, 7},

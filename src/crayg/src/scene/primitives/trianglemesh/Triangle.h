@@ -8,7 +8,7 @@ namespace crayg {
 class TriangleMesh;
 
 class Triangle : public Imageable {
- public:
+  public:
     Triangle();
     Triangle(TriangleMesh *triangleMesh, std::size_t faceId);
 
@@ -26,10 +26,11 @@ class Triangle : public Imageable {
     TriangleMesh *triangleMesh;
     std::size_t faceId;
     ~Triangle() override = default;
- private:
+
+  private:
     Intersection getIntersectionMullerTrumbore(const Ray &ray);
 };
 
 }
 
-#endif //CRAYG_TRIANGLE_H
+#endif // CRAYG_TRIANGLE_H

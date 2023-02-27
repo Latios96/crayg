@@ -2,9 +2,8 @@
 
 namespace crayg {
 
-RemainingTimeCalculator::RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime) : startTime {
-    startTime} {
-
+RemainingTimeCalculator::RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime)
+    : startTime{startTime} {
 }
 
 float RemainingTimeCalculator::getRemainingTimeByProgress(int progress) {
@@ -22,6 +21,7 @@ float RemainingTimeCalculator::getRemainingTimeByProgress(int progress) {
         return secondsPerPercent * (100.0f - progress);
     }
 }
+
 RemainingTimeCalculator::RemainingTimeCalculator() = default;
 
 }

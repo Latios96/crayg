@@ -1,19 +1,20 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_ABSTRACTINTEGRATOR_H_
 #define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_ABSTRACTINTEGRATOR_H_
 
+#include "IntegratorContext.h"
 #include "basics/Color.h"
 #include "basics/Ray.h"
 #include "intersectors/SceneIntersector.h"
-#include "IntegratorContext.h"
 
 namespace crayg {
 
 class AbstractIntegrator {
- public:
+  public:
     explicit AbstractIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector);
     virtual Color integrate(const Ray &ray, int recursionDepth) = 0;
     virtual ~AbstractIntegrator();
- protected:
+
+  protected:
     IntegratorContext createIntegratorContext(int recursionDepth);
     Scene &scene;
     std::shared_ptr<SceneIntersector> sceneIntersector;
@@ -21,4 +22,4 @@ class AbstractIntegrator {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_INTEGRATORS_ABSTRACTINTEGRATOR_H_
+#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_ABSTRACTINTEGRATOR_H_

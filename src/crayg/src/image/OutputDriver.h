@@ -7,7 +7,7 @@
 namespace crayg {
 
 class OutputDriver {
- public:
+  public:
     virtual void initialize(const ImageSpec &imageSpec) = 0;
     virtual void prepareBucket(const ImageBucket &imageBucket) = 0;
     virtual void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) = 0;
@@ -17,4 +17,4 @@ class OutputDriver {
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_OUTPUTDRIVER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_OUTPUTDRIVER_H_

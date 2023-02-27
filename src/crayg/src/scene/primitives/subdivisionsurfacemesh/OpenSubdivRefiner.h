@@ -1,23 +1,23 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_OPENSUBDIVREFINER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_OPENSUBDIVREFINER_H_
 
-#include <opensubdiv/far/topologyRefiner.h>
-#include <opensubdiv/far/topologyDescriptor.h>
 #include "SubdivisionSurfaceMesh.h"
+#include <opensubdiv/far/topologyDescriptor.h>
+#include <opensubdiv/far/topologyRefiner.h>
 
 namespace crayg {
 
 class OpenSubdivRefiner {
- public:
+  public:
     explicit OpenSubdivRefiner(SubdivisionSurfaceMesh &subdivisionSurfaceMesh);
     void refine(int maxLevel = 3);
- private:
+
+  private:
     SubdivisionSurfaceMesh &subdivisionSurfaceMesh;
 
     std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> createRefiner();
     OpenSubdiv::Far::TopologyDescriptor createDescriptor();
-    void refinePoints(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
-                      int maxlevel,
+    void refinePoints(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner, int maxlevel,
                       const OpenSubdiv::Far::TopologyLevel &refLastLevel);
     void refineIndices(const OpenSubdiv::Far::TopologyLevel &refLastLevel);
     void refineNormals(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
@@ -30,4 +30,4 @@ class OpenSubdivRefiner {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_OPENSUBDIVREFINER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_OPENSUBDIVREFINER_H_

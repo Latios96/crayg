@@ -1,9 +1,9 @@
+#include "fixtures/TemporaryDirectory.h"
+#include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
 #include <image/Image.h>
-#include <boost/filesystem.hpp>
-#include <image/PngWriter.h>
 #include <image/ImageIterators.h>
-#include "fixtures/TemporaryDirectory.h"
+#include <image/PngWriter.h>
 
 namespace crayg {
 
@@ -11,7 +11,7 @@ TEST_CASE("PngWriter") {
     Image image(20, 10);
     PngWriter pngWriter;
 
-    for (auto p: ImageIterators::lineByLine(image)) {
+    for (auto p : ImageIterators::lineByLine(image)) {
         image.setValue(p.x, p.y, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
     }
 
@@ -38,7 +38,6 @@ TEST_CASE("PngWriter") {
         REQUIRE(boost::filesystem::exists(targetPathAlpha));
         REQUIRE(boost::filesystem::exists(targetPathDepth));
     }
-
 }
 
 }

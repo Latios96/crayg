@@ -1,19 +1,19 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEMETADATA_H_
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEMETADATA_H_
 
-#include <variant>
+#include <chrono>
+#include <fmt/format.h>
+#include <ostream>
 #include <string>
 #include <unordered_map>
-#include <chrono>
-#include <ostream>
-#include <fmt/format.h>
+#include <variant>
 
 namespace crayg {
 
 typedef std::variant<std::string, int, float, std::chrono::seconds> ImageMetadataValue;
 
 class ImageMetadataTokens {
- public:
+  public:
     static const std::string RENDER_TIME;
     static const std::string RENDER_TIME_SECONDS;
     static const std::string CRAYG_VERSION;
@@ -25,20 +25,23 @@ class ImageMetadataTokens {
 };
 
 class ImageMetadata {
- public:
+  public:
     ImageMetadata() = default;
-    ImageMetadata(const ImageMetadata &imageMetadata): values(imageMetadata.values){}
+
+    ImageMetadata(const ImageMetadata &imageMetadata) : values(imageMetadata.values) {
+    }
+
     ~ImageMetadata() = default;
-    template<typename T>
-    void write(const std::string &name, const T &value) {
+
+    template <typename T> void write(const std::string &name, const T &value) {
         values[name] = value;
     }
 
     ImageMetadataValue readValue(const std::string &name) {
         return values[name];
     }
-    template<typename T>
-    T read(const std::string &name) {
+
+    template <typename T> T read(const std::string &name) {
         return std::get<T>(values[name]);
     }
 
@@ -49,6 +52,7 @@ class ImageMetadata {
     auto begin() const {
         return values.begin();
     }
+
     auto end() const {
         return values.end();
     }
@@ -56,32 +60,31 @@ class ImageMetadata {
     bool operator==(const ImageMetadata &rhs) const {
         return values == rhs.values;
     }
+
     bool operator!=(const ImageMetadata &rhs) const {
         return !(rhs == *this);
     }
 
     friend std::ostream &operator<<(std::ostream &os, const ImageMetadata &metadata) {
         os << "values: ";
-        for (auto &v: metadata) {
+        for (auto &v : metadata) {
             os << fmt::format("{}={} ", v.first, v.second);
         }
         return os;
     }
 
- private:
+  private:
     std::unordered_map<std::string, ImageMetadataValue> values;
 };
 
 } // crayg
 
-template<>
-struct fmt::formatter<crayg::ImageMetadataValue> {
-    template<typename ParseContext>
-    constexpr auto parse(ParseContext &ctx) {
+template <> struct fmt::formatter<crayg::ImageMetadataValue> {
+    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
         return ctx.begin();
     }
 
-    template<typename FormatContext>
+    template <typename FormatContext>
     auto format(crayg::ImageMetadataValue const &imageMetadataValue, FormatContext &ctx) {
         if (std::holds_alternative<std::string>(imageMetadataValue)) {
             return fmt::format_to(ctx.out(), "{}", std::get<std::string>(imageMetadataValue));
@@ -92,8 +95,9 @@ struct fmt::formatter<crayg::ImageMetadataValue> {
         } else if (std::holds_alternative<std::chrono::seconds>(imageMetadataValue)) {
             return fmt::format_to(ctx.out(), "{}s", std::get<std::chrono::seconds>(imageMetadataValue).count());
         }
-        throw std::runtime_error(fmt::format("Unsupported type with index {} in ImageMetadataValue", imageMetadataValue.index()));
+        throw std::runtime_error(
+            fmt::format("Unsupported type with index {} in ImageMetadataValue", imageMetadataValue.index()));
     };
 };
 
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEMETADATA_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEMETADATA_H_

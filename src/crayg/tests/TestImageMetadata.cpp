@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "image/ImageMetadata.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -38,6 +38,7 @@ TEST_CASE("ImageMetadata::read/write") {
         REQUIRE(imageMetadata.read<int>("int") == 2);
     }
 }
+
 TEST_CASE("ImageMetadata::has") {
 
     SECTION("existing key should return true") {
@@ -61,7 +62,7 @@ TEST_CASE("ImageMetadata::iterate") {
         ImageMetadata imageMetadata;
 
         bool visited = false;
-        for (auto &m: imageMetadata) {
+        for (auto &m : imageMetadata) {
             visited = true;
         }
 
@@ -75,7 +76,7 @@ TEST_CASE("ImageMetadata::iterate") {
         imageMetadata.write("seconds", std::chrono::seconds(1));
 
         int count = 0;
-        for (auto &m: imageMetadata) {
+        for (auto &m : imageMetadata) {
             count += 1;
         }
 

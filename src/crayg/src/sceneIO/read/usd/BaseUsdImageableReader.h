@@ -1,19 +1,20 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDIMAGEABLEREADER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDIMAGEABLEREADER_H_
 
-#include <memory>
 #include "BaseUsdXformableReader.h"
-#include "sceneIO/usd/UsdReadUtils.h"
 #include "UsdMaterialReadCache.h"
+#include "sceneIO/usd/UsdReadUtils.h"
+#include <memory>
 
 namespace crayg {
 
-template<class UsdType, class CraygType>
+template <class UsdType, class CraygType>
 class BaseUsdImageableReader : public BaseUsdXformableReader<UsdType, CraygType> {
- public:
+  public:
     BaseUsdImageableReader(const UsdType &usdPrim, UsdMaterialReadCache &usdMaterialTranslationCache)
         : BaseUsdXformableReader<UsdType, CraygType>(usdPrim),
-          usdMaterialTranslationCache(usdMaterialTranslationCache) {}
+          usdMaterialTranslationCache(usdMaterialTranslationCache) {
+    }
 
     std::shared_ptr<CraygType> read() override {
         auto craygObject = BaseUsdXformableReader<UsdType, CraygType>::read();
@@ -24,10 +25,11 @@ class BaseUsdImageableReader : public BaseUsdXformableReader<UsdType, CraygType>
 
         return craygObject;
     }
- protected:
+
+  protected:
     UsdMaterialReadCache &usdMaterialTranslationCache;
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDIMAGEABLEREADER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDIMAGEABLEREADER_H_

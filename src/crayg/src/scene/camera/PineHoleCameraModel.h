@@ -1,15 +1,15 @@
 #ifndef CRAYG_PINEHOLECAMERAMODEL_H
 #define CRAYG_PINEHOLECAMERAMODEL_H
 
-#include "scene/camera/Camera.h"
-#include "basics/Ray.h"
 #include "CameraModel.h"
+#include "basics/Ray.h"
+#include "scene/camera/Camera.h"
 
 namespace crayg {
 
 // todo add tests
 class PineHoleCameraModel : public CameraModel {
- private:
+  private:
     Camera &camera;
     float imageRatio;
     float imagePlaneWidth, imagePlaneHeight;
@@ -19,7 +19,7 @@ class PineHoleCameraModel : public CameraModel {
 
     Vector3f getPixelCenter(float x, float y);
 
- public:
+  public:
     PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight);
 
     Ray createPrimaryRay(float x, float y) override;
@@ -27,4 +27,4 @@ class PineHoleCameraModel : public CameraModel {
 
 }
 
-#endif //CRAYG_PINEHOLECAMERAMODEL_H
+#endif // CRAYG_PINEHOLECAMERAMODEL_H

@@ -1,9 +1,9 @@
-#include <catch2/catch.hpp>
-#include "sceneIO/write/usd/UsdSphereWriter.h"
-#include "sceneIO/write/usd/UsdPathFactory.h"
-#include <pxr/usd/usd/stage.h>
 #include "scene/primitives/Sphere.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/UsdPathFactory.h"
+#include "sceneIO/write/usd/UsdSphereWriter.h"
+#include <catch2/catch.hpp>
+#include <pxr/usd/usd/stage.h>
 
 namespace crayg {
 
@@ -22,8 +22,8 @@ TEST_CASE("UsdSphereWriter::write") {
         auto usdGeomSphere = pxr::UsdGeomSphere(stage->GetPrimAtPath(pxr::SdfPath("/Sphere0")));
         auto radius = UsdUtils::getStaticAttributeValueAs<double>(usdGeomSphere.GetRadiusAttr());
         REQUIRE(radius == 3);
-        const pxr::GfVec3d
-            translation = usdGeomSphere.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
+        const pxr::GfVec3d translation =
+            usdGeomSphere.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation();
         REQUIRE(translation == pxr::GfVec3f(1, 2, -3));
     }
 }

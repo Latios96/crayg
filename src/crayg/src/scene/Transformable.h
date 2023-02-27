@@ -1,13 +1,13 @@
 #ifndef CRAYG_TRANSFORMABLE_H
 #define CRAYG_TRANSFORMABLE_H
 
-#include <basics/Transform.h>
 #include "basics/Vector3f.h"
+#include <basics/Transform.h>
 
 namespace crayg {
 
 class Transformable {
- public:
+  public:
     Transformable();
     explicit Transformable(const Transform &transform);
     explicit Transformable(const Vector3f &position);
@@ -18,10 +18,10 @@ class Transformable {
     const Transform getTransform() const;
     void setTransform(const Transform &transform);
 
- protected:
+  protected:
     Transform transform;
 };
 
 }
 
-#endif //CRAYG_TRANSFORMABLE_H
+#endif // CRAYG_TRANSFORMABLE_H

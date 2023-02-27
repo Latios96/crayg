@@ -1,13 +1,13 @@
-#include <utils/ToStringHelper.h>
 #include "BoundingBox.h"
+#include <utils/ToStringHelper.h>
 
 namespace crayg {
 
-BoundingBox::BoundingBox(const Vector3f &min, const Vector3f &max) : min(min), max(max) {}
+BoundingBox::BoundingBox(const Vector3f &min, const Vector3f &max) : min(min), max(max) {
+}
 
 bool BoundingBox::operator==(const BoundingBox &rhs) const {
-    return min == rhs.min &&
-        max == rhs.max;
+    return min == rhs.min && max == rhs.max;
 }
 
 bool BoundingBox::operator!=(const BoundingBox &rhs) const {
@@ -23,43 +23,56 @@ bool BoundingBox::isIntersecting(const Ray &ray) const {
     float txmin = (min.x - ray.startPoint.x) / ray.direction.x;
     float txmax = (max.x - ray.startPoint.x) / ray.direction.x;
 
-    if (txmin > txmax) std::swap(txmin, txmax);
+    if (txmin > txmax) {
+        std::swap(txmin, txmax);
+    }
 
     float tymin = (min.y - ray.startPoint.y) / ray.direction.y;
     float tymax = (max.y - ray.startPoint.y) / ray.direction.y;
 
-    if (tymin > tymax) std::swap(tymin, tymax);
+    if (tymin > tymax) {
+        std::swap(tymin, tymax);
+    }
 
-    if ((txmin > tymax) || (tymin > txmax))
+    if ((txmin > tymax) || (tymin > txmax)) {
         return false;
+    }
 
-    if (tymin > txmin)
+    if (tymin > txmin) {
         txmin = tymin;
+    }
 
-    if (tymax < txmax)
+    if (tymax < txmax) {
         txmax = tymax;
+    }
 
     float tzmin = (min.z - ray.startPoint.z) / ray.direction.z;
     float tzmax = (max.z - ray.startPoint.z) / ray.direction.z;
 
-    if (tzmin > tzmax) std::swap(tzmin, tzmax);
+    if (tzmin > tzmax) {
+        std::swap(tzmin, tzmax);
+    }
 
-    if ((txmin > tzmax) || (tzmin > txmax))
+    if ((txmin > tzmax) || (tzmin > txmax)) {
         return false;
+    }
 
-    if (tzmin > txmin)
+    if (tzmin > txmin) {
         txmin = tzmin;
+    }
 
-    if (tzmax < txmax)
+    if (tzmax < txmax) {
         txmax = tzmax;
+    }
 
     return true;
-
 }
+
 std::ostream &operator<<(std::ostream &os, const BoundingBox &box) {
     os << "BoundingBox{min: " << box.min << " max: " << box.max << '}';
     return os;
 }
+
 BoundingBox BoundingBox::unionWith(const Vector3f &point) const {
     BoundingBox boundingBox(min, max);
     if (point.x < min.x) {
@@ -83,6 +96,7 @@ BoundingBox BoundingBox::unionWith(const Vector3f &point) const {
     }
     return boundingBox;
 }
+
 BoundingBox BoundingBox::unionWith(const BoundingBox &boundingBox) const {
     BoundingBox resultBoundingBox(min, max);
     if (boundingBox.min.x < min.x) {
@@ -106,14 +120,15 @@ BoundingBox BoundingBox::unionWith(const BoundingBox &boundingBox) const {
     }
     return resultBoundingBox;
 }
+
 BoundingBox BoundingBox::fromCenterAndRadius(const Vector3f &center, const float radius) {
     return {{center.x - radius, center.y - radius, center.z - radius},
             {center.x + radius, center.y + radius, center.z + radius}};
 }
+
 Vector3f BoundingBox::getCentroid() const {
     const Vector3f middle = max - min;
     return min + (middle * 0.5f);
 }
 
 }
-

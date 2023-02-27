@@ -1,8 +1,8 @@
 #include <catch2/catch.hpp>
 #include <image/Image.h>
+#include <image/ImageBucketSequences.h>
 #include <image/ImageIterators.h>
 #include <iostream>
-#include <image/ImageBucketSequences.h>
 
 namespace crayg {
 
@@ -33,7 +33,6 @@ TEST_CASE("ImageIterators", "[ImageIterators]") {
             visitedPositions.push_back(pixel);
         }
         REQUIRE(visitedPositions == positions);
-
     }
 }
 

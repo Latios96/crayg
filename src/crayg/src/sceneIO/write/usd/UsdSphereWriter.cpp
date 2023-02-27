@@ -2,9 +2,9 @@
 
 namespace crayg {
 
-UsdSphereWriter::UsdSphereWriter(Sphere &craygObject,
-                                 UsdMaterialWriteCache &usdMaterialWriteCache) : BaseUsdSceneObjectWriter(craygObject,
-                                                                                                          usdMaterialWriteCache) {}
+UsdSphereWriter::UsdSphereWriter(Sphere &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache)
+    : BaseUsdSceneObjectWriter(craygObject, usdMaterialWriteCache) {
+}
 
 pxr::UsdGeomSphere UsdSphereWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usdGeomSphere = BaseUsdSceneObjectWriter::write(stage, usdPathFactory);

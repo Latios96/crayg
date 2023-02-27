@@ -1,5 +1,5 @@
-#include <image/BucketImageBuffer.h>
 #include "catch2/catch.hpp"
+#include <image/BucketImageBuffer.h>
 
 namespace crayg {
 
@@ -22,4 +22,3 @@ TEST_CASE("BucketImageBuffer") {
 }
 
 }
-

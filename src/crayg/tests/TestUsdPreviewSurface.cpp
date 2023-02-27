@@ -1,12 +1,12 @@
+#include "integrators/AbstractIntegrator.h"
+#include "scene/materials/UsdPreviewSurface.h"
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
-#include "scene/materials/UsdPreviewSurface.h"
-#include "integrators/AbstractIntegrator.h"
 
 namespace crayg {
 
 TEST_CASE("UsdPreviewSurface::evaluate") {
-    SurfaceInteraction surfaceInteraction({0,0,0},{0,1,0},{{1,1,0},{-1,-1,0}});
+    SurfaceInteraction surfaceInteraction({0, 0, 0}, {0, 1, 0}, {{1, 1, 0}, {-1, -1, 0}});
     fakeit::Mock<AbstractIntegrator> mockAbstractIntegrator;
     IntegratorContext integratorContext(mockAbstractIntegrator.get(), 0);
 

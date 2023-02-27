@@ -1,22 +1,22 @@
 #include "QtBase.h"
-#include <QtWidgets/qapplication.h>
 #include "widgets/FrameBufferWidget.h"
 #include "widgets/QtMetaTypes.h"
+#include <QtWidgets/qapplication.h>
 
-#include <scene/Scene.h>
-#include <image/ImageWriter.h>
-#include <renderer/Renderer.h>
-#include <image/ImageWriters.h>
-#include "sceneIO/SceneReaderFactory.h"
 #include "CliParser.h"
-#include "Logger.h"
-#include "widgets/ImageWidgetOutputDriver.h"
 #include "CraygInfo.h"
-#include <thread>
-#include <image/TeeOutputDriver.h>
-#include <utils/ImagePathResolver.h>
-#include "utils/FileSystemUtils.h"
+#include "Logger.h"
 #include "resources/Stylesheet.h"
+#include "sceneIO/SceneReaderFactory.h"
+#include "utils/FileSystemUtils.h"
+#include "widgets/ImageWidgetOutputDriver.h"
+#include <image/ImageWriter.h>
+#include <image/ImageWriters.h>
+#include <image/TeeOutputDriver.h>
+#include <renderer/Renderer.h>
+#include <scene/Scene.h>
+#include <thread>
+#include <utils/ImagePathResolver.h>
 
 int main(int argc, char **argv) {
     crayg::Logger::initialize();
@@ -39,8 +39,7 @@ int main(int argc, char **argv) {
         std::string logFilePath = crayg::FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
         crayg::Logger::logToFile(logFilePath);
 
-        crayg::Logger::info("Crayg Renderer version {}, commit {}",
-                            crayg::CraygInfo::VERSION,
+        crayg::Logger::info("Crayg Renderer version {}, commit {}", crayg::CraygInfo::VERSION,
                             crayg::CraygInfo::COMMIT_HASH);
 
         crayg::Scene scene;
@@ -59,19 +58,13 @@ int main(int argc, char **argv) {
         crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
         frameBufferWidget.show();
 
-        QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter,
-                         &crayg::QtSignalAdapter::metadataWritten,
-                         &frameBufferWidget,
-                         &crayg::FrameBufferWidget::setImageMetadata);
+        QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter, &crayg::QtSignalAdapter::metadataWritten,
+                         &frameBufferWidget, &crayg::FrameBufferWidget::setImageMetadata);
 
-        QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter,
-                         &crayg::QtSignalAdapter::initialized,
-                         &frameBufferWidget,
-                         &crayg::FrameBufferWidget::setImageSpec);
+        QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter, &crayg::QtSignalAdapter::initialized,
+                         &frameBufferWidget, &crayg::FrameBufferWidget::setImageSpec);
 
-        QObject::connect(&frameBufferWidget,
-                         &crayg::FrameBufferWidget::channelChanged,
-                         imageWidget,
+        QObject::connect(&frameBufferWidget, &crayg::FrameBufferWidget::channelChanged, imageWidget,
                          &crayg::ImageWidget::changeChannel);
 
         crayg::ImageOutputDriver imageOutputDriver(image);
@@ -89,8 +82,7 @@ int main(int argc, char **argv) {
         renderThread.detach();
 
         return QApplication::exec();
-    }
-    catch (std::exception &e) {
+    } catch (std::exception &e) {
         crayg::Logger::error("Caught exception: {}", e.what());
         return -1;
     }

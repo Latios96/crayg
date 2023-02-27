@@ -1,7 +1,7 @@
+#include "integrators/AbstractIntegrator.h"
+#include "integrators/IntegratorContext.h"
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
-#include "integrators/IntegratorContext.h"
-#include "integrators/AbstractIntegrator.h"
 
 namespace crayg {
 

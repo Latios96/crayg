@@ -2,18 +2,17 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDTRIANGLEMESHWRITER_H_
 
 #include "BaseUsdSceneObjectWriter.h"
-#include <pxr/usd/usdGeom/mesh.h>
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include <pxr/usd/usdGeom/mesh.h>
 
 namespace crayg {
 
 class UsdTriangleMeshWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, TriangleMesh> {
- public:
-    UsdTriangleMeshWriter(TriangleMesh &craygObject,
-                          UsdMaterialWriteCache &usdMaterialWriteCache);
+  public:
+    UsdTriangleMeshWriter(TriangleMesh &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache);
     pxr::UsdGeomMesh write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 
- private:
+  private:
     void writePoints(const pxr::UsdGeomMesh &usdGeomMesh);
     void writeFaceVertexIndices(const pxr::UsdGeomMesh &usdGeomMesh);
     void writeFaceVertexCounts(const pxr::UsdGeomMesh &usdGeomMesh) const;
@@ -25,4 +24,4 @@ class UsdTriangleMeshWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, 
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDTRIANGLEMESHWRITER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDTRIANGLEMESHWRITER_H_

@@ -1,25 +1,24 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDSCENEOBJECTWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDSCENEOBJECTWRITER_H_
 
-#include <memory>
-#include "Logger.h"
-#include "sceneIO/usd/CraygUsdBase.h"
-#include "UsdPathFactory.h"
 #include "BaseUsdTransformableWriter.h"
-#include <pxr/usd/usd/stage.h>
-#include <pxr/usd/usdShade/materialBindingAPI.h>
+#include "Logger.h"
+#include "UsdPathFactory.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/write/usd/UsdMaterialWriteCache.h"
+#include <memory>
+#include <pxr/usd/usd/stage.h>
+#include <pxr/usd/usdShade/materialBindingAPI.h>
 
 namespace crayg {
 
-template<class UsdType, class CraygType>
+template <class UsdType, class CraygType>
 class BaseUsdSceneObjectWriter : public BaseUsdTransformableWriter<UsdType, CraygType> {
- public:
-    BaseUsdSceneObjectWriter(CraygType &craygObject,
-                             UsdMaterialWriteCache &usdMaterialWriteCache) : BaseUsdTransformableWriter<UsdType,
-                                                                                                        CraygType>(
-        craygObject), usdMaterialWriteCache(usdMaterialWriteCache) {}
+  public:
+    BaseUsdSceneObjectWriter(CraygType &craygObject, UsdMaterialWriteCache &usdMaterialWriteCache)
+        : BaseUsdTransformableWriter<UsdType, CraygType>(craygObject), usdMaterialWriteCache(usdMaterialWriteCache) {
+    }
 
     UsdType write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override {
         auto usdObject = BaseUsdTransformableWriter<UsdType, CraygType>::write(stage, usdPathFactory);
@@ -33,14 +32,14 @@ class BaseUsdSceneObjectWriter : public BaseUsdTransformableWriter<UsdType, Cray
         return usdObject;
     }
 
- protected:
+  protected:
     std::string getTranslatedType() override {
         return this->craygObject.getType();
     }
-    UsdMaterialWriteCache &usdMaterialWriteCache;
 
+    UsdMaterialWriteCache &usdMaterialWriteCache;
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDSCENEOBJECTWRITER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDSCENEOBJECTWRITER_H_

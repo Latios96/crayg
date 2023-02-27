@@ -14,7 +14,8 @@ pxr::UsdGeomCamera UsdCameraWriter::write(pxr::UsdStagePtr stage, UsdPathFactory
 std::string UsdCameraWriter::getTranslatedType() {
     return "camera";
 }
-UsdCameraWriter::UsdCameraWriter(Camera &craygObject)
-    : BaseUsdTransformableWriter(craygObject) {}
+
+UsdCameraWriter::UsdCameraWriter(Camera &craygObject) : BaseUsdTransformableWriter(craygObject) {
+}
 
 } // crayg

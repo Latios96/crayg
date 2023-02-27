@@ -2,11 +2,13 @@
 
 namespace crayg {
 
-OrthonormalBasis::OrthonormalBasis(const Vector3f &u, const Vector3f &v, const Vector3f &w) : u(u), v(v), w(w) {}
+OrthonormalBasis::OrthonormalBasis(const Vector3f &u, const Vector3f &v, const Vector3f &w) : u(u), v(v), w(w) {
+}
 
 Vector3f OrthonormalBasis::toLocalCoordinates(const Vector3f &vec) const {
     return {u * vec.x + v * vec.y + w * vec.z};
 }
+
 OrthonormalBasis::OrthonormalBasis(const Vector3f &normal) {
     v = normal;
     Vector3f a(0, 0, 1);
@@ -17,11 +19,11 @@ OrthonormalBasis::OrthonormalBasis(const Vector3f &normal) {
     u = normal.cross(a);
     w = u.cross(v);
 }
+
 bool OrthonormalBasis::operator==(const OrthonormalBasis &rhs) const {
-    return u == rhs.u &&
-        v == rhs.v &&
-        w == rhs.w;
+    return u == rhs.u && v == rhs.v && w == rhs.w;
 }
+
 bool OrthonormalBasis::operator!=(const OrthonormalBasis &rhs) const {
     return !(rhs == *this);
 }

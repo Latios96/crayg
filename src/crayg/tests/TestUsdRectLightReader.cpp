@@ -1,9 +1,9 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdRectLightReader.h"
-#include <pxr/usd/usd/stage.h>
-#include <pxr/usd/usdLux/rectLight.h>
-#include <pxr/usd/usdGeom/xformCommonAPI.h>
+#include <catch2/catch.hpp>
 #include <iostream>
+#include <pxr/usd/usd/stage.h>
+#include <pxr/usd/usdGeom/xformCommonAPI.h>
+#include <pxr/usd/usdLux/rectLight.h>
 
 namespace crayg {
 
@@ -46,7 +46,6 @@ TEST_CASE("UsdRectLightReader::read") {
         REQUIRE(light->getWidth() == 2);
         REQUIRE(light->getHeight() == 3);
     }
-
 }
 
 }

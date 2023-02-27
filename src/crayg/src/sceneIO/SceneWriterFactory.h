@@ -6,10 +6,10 @@
 namespace crayg {
 
 class SceneWriterFactory {
- public:
+  public:
     static std::shared_ptr<SceneWriter> createSceneWriter(std::string scenePath, Scene &scene);
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENEIO_SCENEWRITERFACTORY_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_SCENEWRITERFACTORY_H_

@@ -19,11 +19,11 @@ Color AmbientOcclusionIntegrator::integrate(const Ray &ray, int recursionDepth) 
         return Color::createBlack();
     }
 
-    const Vector3f location =
-        ray.constructIntersectionPoint(intersection.rayParameter);
+    const Vector3f location = ray.constructIntersectionPoint(intersection.rayParameter);
 
     return calculateAmbientOcclusionAtPoint(intersection, location);
 }
+
 Color AmbientOcclusionIntegrator::calculateAmbientOcclusionAtPoint(Imageable::Intersection &intersection,
                                                                    const Vector3f &location) const {
     const auto orthonormalBasis = intersection.imageable->getOrthonormalBasis(location);
@@ -34,8 +34,8 @@ Color AmbientOcclusionIntegrator::calculateAmbientOcclusionAtPoint(Imageable::In
         Vector3f direction = orthonormalBasis.toLocalCoordinates(directionOnHemisphere);
         Ray aoRay(location, direction);
         const auto aoIntersection = sceneIntersector->intersect(aoRay);
-        if (aoIntersection.imageable == nullptr
-            || (aoIntersection.imageable != nullptr && aoIntersection.rayParameter > radius)) {
+        if (aoIntersection.imageable == nullptr ||
+            (aoIntersection.imageable != nullptr && aoIntersection.rayParameter > radius)) {
             countClear++;
         }
     }

@@ -1,18 +1,20 @@
-#include <catch2/catch.hpp>
-#include "sceneIO/write/usd/UsdMaterialWriteCache.h"
-#include <pxr/usd/usd/stage.h>
 #include "scene/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/UsdMaterialWriteCache.h"
+#include <catch2/catch.hpp>
+#include <pxr/usd/usd/stage.h>
 
 namespace crayg {
 
 class UnsupportedMaterial : public Material {
- public:
-    explicit UnsupportedMaterial(const std::string &name) : Material(name) {}
+  public:
+    explicit UnsupportedMaterial(const std::string &name) : Material(name) {
+    }
 
     Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) override {
         return {};
     }
+
     std::string getType() override {
         return "UnsupportedMaterial";
     }
@@ -55,26 +57,21 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
         auto specularColor =
             UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("specularColor")));
         REQUIRE(specularColor == pxr::GfVec3f(7, 8, 9));
-        auto metallic =
-            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("metallic")));
+        auto metallic = UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("metallic")));
         REQUIRE(metallic == 0.1f);
-        auto roughness =
-            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("roughness")));
+        auto roughness = UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("roughness")));
         REQUIRE(roughness == 0.2f);
-        auto clearcoat =
-            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("clearcoat")));
+        auto clearcoat = UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("clearcoat")));
         REQUIRE(clearcoat == 0.3f);
         auto clearcoatRoughness =
             UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("clearcoatRoughness")));
         REQUIRE(clearcoatRoughness == 0.4f);
-        auto opacity =
-            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("opacity")));
+        auto opacity = UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("opacity")));
         REQUIRE(opacity == 0.5f);
         auto opacityThreshold =
             UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("opacityThreshold")));
         REQUIRE(opacityThreshold == 0.6f);
-        auto ior =
-            UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("ior")));
+        auto ior = UsdUtils::getStaticAttributeValueAs<float>(shaderPrim.GetInput(pxr::TfToken("ior")));
         REQUIRE(ior == 0.7f);
     }
 
@@ -83,16 +80,15 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
         usdMaterialWriteCache.getCachedUsdMaterial(unsupportedMaterial);
 
         auto matPrim = pxr::UsdShadeMaterial(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat")));
-        auto
-            shaderPrim = pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat/usdPreviewSurface")));
+        auto shaderPrim =
+            pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat/usdPreviewSurface")));
         auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(shaderPrim.GetIdAttr());
         REQUIRE(id == pxr::TfToken("UsdPreviewSurface"));
         auto diffuseColorAttr = shaderPrim.GetInput(pxr::TfToken("diffuseColor"));
         REQUIRE_FALSE(diffuseColorAttr);
     }
 
-    SECTION("translating material twice should be cached")
-    {
+    SECTION("translating material twice should be cached") {
         auto material1 = usdMaterialWriteCache.getCachedUsdMaterial(material);
         auto material2 = usdMaterialWriteCache.getCachedUsdMaterial(material);
 

@@ -1,12 +1,11 @@
-#include <catch2/catch.hpp>
+#include "fixtures/TriangleMeshFixtures.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
-#include "fixtures/TriangleMeshFixtures.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
-TEST_CASE("TriangleMeshPerPointPrimVar::interpolateAt")
-{
+TEST_CASE("TriangleMeshPerPointPrimVar::interpolateAt") {
     auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     SECTION("should interpolate constant value correctly") {
@@ -49,7 +48,6 @@ TEST_CASE("TriangleMeshPerPointPrimVar::interpolateAt")
 
         REQUIRE(interpolatedValueForFace1 == std::get<2>(testData));
     }
-
 }
 
 TEST_CASE("TriangleMeshPerPointPrimVar::==") {
@@ -86,9 +84,7 @@ TEST_CASE("TriangleMeshPerPointPrimVar::apply") {
     primVar.write(5, Color(0, 0, 1));
 
     SECTION("should apply function to all elements") {
-        primVar.apply([](Color color) {
-            return color * 2;
-        });
+        primVar.apply([](Color color) { return color * 2; });
 
         REQUIRE(primVar == std::vector<Color>({{2, 0, 0}, {0, 2, 0}, {0, 0, 2}, {2, 0, 0}, {0, 2, 0}, {0, 0, 2}}));
     }

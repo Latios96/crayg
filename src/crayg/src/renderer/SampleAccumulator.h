@@ -6,15 +6,16 @@
 namespace crayg {
 
 class SampleAccumulator {
- public:
+  public:
     SampleAccumulator();
     void addSample(const Color &color);
     Color getValue();
- private:
+
+  private:
     int sampleCount;
     Color sum;
 };
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_RENDERER_SAMPLEACCUMULATOR_H_
+#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_SAMPLEACCUMULATOR_H_

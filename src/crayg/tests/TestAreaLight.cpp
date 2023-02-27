@@ -1,19 +1,21 @@
+#include "scene/lights/AreaLight.h"
 #include <catch2/catch.hpp>
 #include <scene/Scene.h>
-#include "scene/lights/AreaLight.h"
 
 namespace crayg {
 
 TEST_CASE("AreaLight::radiance") {
 
     class DummyAreaLight : public AreaLight {
-     public:
+      public:
         Vector3f sampleLightShape() const override {
             return transform.toPosition();
         }
+
         Vector3f getNormal(Vector3f point) override {
             return transform.applyForNormal({0, 0, 1});
         }
+
         float area() const override {
             return 4;
         }
@@ -43,4 +45,3 @@ TEST_CASE("AreaLight::radiance") {
 }
 
 }
-

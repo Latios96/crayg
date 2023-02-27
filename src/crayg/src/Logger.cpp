@@ -34,6 +34,7 @@ void Logger::initialize() {
     spdlog::set_default_logger(combined_logger);
     spdlog::flush_on(spdlog::level::info);
 }
+
 void Logger::logToFile(const std::string &fileName) {
     const auto file_synk = std::make_shared<spdlog::sinks::basic_file_sink_mt>(fileName, true);
     file_synk->set_level(spdlog::level::info);

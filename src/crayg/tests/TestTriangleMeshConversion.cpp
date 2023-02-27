@@ -1,8 +1,8 @@
-#include <catch2/catch.hpp>
+#include "scene/materials/UsdPreviewSurface.h"
 #include "scene/primitives/GroundPlane.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/trianglemesh/TriangleMeshConversion.h"
-#include "scene/materials/UsdPreviewSurface.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
@@ -18,8 +18,8 @@ TEST_CASE("TriangleMeshConversion::toTriangleMesh") {
         TriangleMeshConversion::toTriangleMesh(groundPlane, triangleMesh);
 
         REQUIRE(triangleMesh.getTransform().toPosition() == Vector3f(0, 1, 0));
-        REQUIRE(triangleMesh.points
-                    == std::vector<Vector3f>({{-1000, 1, -1000}, {-1000, 1, 1000}, {1000, 1, 1000}, {1000, 1, -1000}}));
+        REQUIRE(triangleMesh.points ==
+                std::vector<Vector3f>({{-1000, 1, -1000}, {-1000, 1, 1000}, {1000, 1, 1000}, {1000, 1, -1000}}));
         REQUIRE(triangleMesh.faceVertexIndices == std::vector<TriangleMesh::FaceVertexIndices>({{0, 1, 2}, {2, 3, 0}}));
         REQUIRE(triangleMesh.getMaterial()->getName() == "groundPlaneMat");
     }

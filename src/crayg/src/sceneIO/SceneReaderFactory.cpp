@@ -1,12 +1,11 @@
-#include <boost/filesystem/path.hpp>
 #include "SceneReaderFactory.h"
-#include "sceneIO/read/usd/UsdSceneReader.h"
 #include "Logger.h"
+#include "sceneIO/read/usd/UsdSceneReader.h"
+#include <boost/filesystem/path.hpp>
 
 namespace crayg {
 
-std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(std::string scenePath,
-                                                                   Scene &scene,
+std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(std::string scenePath, Scene &scene,
                                                                    const SceneReader::ReadOptions &readOptions) {
     boost::filesystem::path path(scenePath);
     std::string extension = path.extension().string();

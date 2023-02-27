@@ -1,9 +1,9 @@
-#include <catch2/catch.hpp>
 #include "scene/lights/RectLight.h"
-#include "sceneIO/write/usd/UsdPathFactory.h"
-#include "sceneIO/write/usd/BaseUsdLightWriter.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/BaseUsdLightWriter.h"
+#include "sceneIO/write/usd/UsdPathFactory.h"
 #include "sceneIO/write/usd/UsdRectLightWriter.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usdLux/rectLight.h>
 
 namespace crayg {

@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/write/usd/UsdPathFactory.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 

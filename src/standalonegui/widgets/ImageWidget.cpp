@@ -1,6 +1,6 @@
 #include "ImageWidget.h"
-#include "image/ImageIterators.h"
 #include "image/ImageAlgorithms.h"
+#include "image/ImageIterators.h"
 
 namespace crayg {
 
@@ -9,12 +9,13 @@ ImageWidget::ImageWidget(Image &image, QWidget *parent) : QWidget(parent), image
     bufferToShow.fill(0);
     resize(bufferToShow.size());
 }
+
 void ImageWidget::paintEvent(QPaintEvent *event) {
     QPainter qPainter(this);
     qPainter.drawImage(QRect(0, 0, size().width(), size().height()), bufferToShow);
 }
-void ImageWidget::writeMetadata(ImageMetadata imageMetadata) {
 
+void ImageWidget::writeMetadata(ImageMetadata imageMetadata) {
 }
 
 void ImageWidget::initialize(ImageSpec imageSpec) {
@@ -60,47 +61,39 @@ void drawBucket(QImage &bufferToShow, const ImageBucket &imageBucket) {
     drawHLine(bufferToShow, x, y, CROSS_LENGTH, CROSS_WIDTH);
     drawHLine(bufferToShow, x + imageBucket.getWidth() - CROSS_LENGTH, y, CROSS_LENGTH, CROSS_WIDTH);
     drawHLine(bufferToShow, x, y + imageBucket.getHeight() - CROSS_WIDTH, CROSS_LENGTH, CROSS_WIDTH);
-    drawHLine(bufferToShow,
-              x + imageBucket.getWidth() - CROSS_LENGTH,
-              y + imageBucket.getHeight() - CROSS_WIDTH,
-              CROSS_LENGTH,
-              CROSS_WIDTH);
+    drawHLine(bufferToShow, x + imageBucket.getWidth() - CROSS_LENGTH, y + imageBucket.getHeight() - CROSS_WIDTH,
+              CROSS_LENGTH, CROSS_WIDTH);
 
     drawVLine(bufferToShow, x, y, CROSS_LENGTH, CROSS_WIDTH);
     drawVLine(bufferToShow, x + imageBucket.getWidth() - CROSS_WIDTH, y, CROSS_LENGTH, CROSS_WIDTH);
     drawVLine(bufferToShow, x, y + imageBucket.getHeight() - CROSS_LENGTH, CROSS_LENGTH, CROSS_WIDTH);
-    drawVLine(bufferToShow,
-              x + imageBucket.getWidth() - CROSS_WIDTH,
-              y + imageBucket.getHeight() - CROSS_LENGTH,
-              CROSS_LENGTH,
-              CROSS_WIDTH);
+    drawVLine(bufferToShow, x + imageBucket.getWidth() - CROSS_WIDTH, y + imageBucket.getHeight() - CROSS_LENGTH,
+              CROSS_LENGTH, CROSS_WIDTH);
 }
 
 void ImageWidget::prepareBucket(const ImageBucket imageBucket) {
     activeBuckets.insert(imageBucket);
 }
+
 void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
     auto pixelBuffer = *image.getChannel(currentChannel);
     if (!pixelBuffer) {
         return;
     }
-    for (auto pixel: ImageIterators::lineByLine(imageBucket)) {
+    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
         int x = pixel.x + imageBucket.getX();
         int y = pixel.y + imageBucket.getY();
         auto rgbValues = pixelBuffer->getValue({x, y}).getRgbValues();
-        bufferToShow.setPixelColor(x,
-                                   y,
-                                   QColor::fromRgb(std::get<0>(rgbValues),
-                                                   std::get<1>(rgbValues),
-                                                   std::get<2>(rgbValues)));
+        bufferToShow.setPixelColor(
+            x, y, QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
     }
     update();
 
-    for (auto &bucket: activeBuckets) {
+    for (auto &bucket : activeBuckets) {
         drawBucket(bufferToShow, bucket);
     }
-
 }
+
 void ImageWidget::changeChannel(std::string newChannel) {
     currentChannel = newChannel;
     updateBufferToShow({0, 0, image.getWidth(), image.getHeight()});

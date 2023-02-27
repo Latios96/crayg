@@ -1,15 +1,15 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/read/usd/UsdStageReader.h"
+#include <catch2/catch.hpp>
+#include <pxr/usd/sdf/types.h>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/usdGeom/sphere.h>
-#include <pxr/usd/usdLux/sphereLight.h>
-#include <pxr/usd/usdLux/rectLight.h>
-#include <pxr/usd/usdLux/diskLight.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
+#include <pxr/usd/usdLux/diskLight.h>
+#include <pxr/usd/usdLux/rectLight.h>
+#include <pxr/usd/usdLux/sphereLight.h>
 #include <pxr/usd/usdRender/settings.h>
-#include <pxr/usd/sdf/types.h>
 
 namespace crayg {
 
@@ -37,8 +37,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
     SECTION("translating a stage without camera should throw exception") {
         stage->RemovePrim(pxr::SdfPath("/usdCamera"));
 
-        REQUIRE_THROWS_MATCHES(UsdStageReader(*stage).readStageToScene(scene),
-                               std::runtime_error,
+        REQUIRE_THROWS_MATCHES(UsdStageReader(*stage).readStageToScene(scene), std::runtime_error,
                                Catch::Message("No camera found in USD stage!"));
     }
 
@@ -98,8 +97,8 @@ TEST_CASE("UsdStageReader::readStageToScene") {
         pxr::UsdShadeMaterialBindingAPI bindingApi(usdMesh.GetPrim());
         bindingApi.Bind(usdShadeMaterial);
         usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
-        usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"),
-                                   pxr::SdfValueTypeNames->Color3f).Set(pxr::GfVec3f(0.5f));
+        usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"), pxr::SdfValueTypeNames->Color3f)
+            .Set(pxr::GfVec3f(0.5f));
         usdShadeMaterial.CreateSurfaceOutput().ConnectToSource(usdShadeShader.ConnectableAPI(),
                                                                pxr::TfToken("surface"));
 
@@ -182,11 +181,8 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600),
-                                                       2,
-                                                       IntegratorType::RAYTRACING,
-                                                       IntegratorSettings(),
-                                                       IntersectorType::EMBREE));
+        REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600), 2, IntegratorType::RAYTRACING,
+                                                       IntegratorSettings(), IntersectorType::EMBREE));
     }
 
     SECTION("providing a cameraName in translationOptions should use this camera") {
@@ -205,11 +201,9 @@ TEST_CASE("UsdStageReader::readStageToScene") {
         SceneReader::ReadOptions readOptions;
         readOptions.cameraName = "/not_existing";
 
-        REQUIRE_THROWS_MATCHES(UsdStageReader(*stage).readStageToScene(scene, readOptions),
-                               std::runtime_error,
+        REQUIRE_THROWS_MATCHES(UsdStageReader(*stage).readStageToScene(scene, readOptions), std::runtime_error,
                                Catch::Message("No camera with path /not_existing found in USD stage!"));
     }
-
 }
 
 }

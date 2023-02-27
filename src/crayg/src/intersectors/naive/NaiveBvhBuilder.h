@@ -1,18 +1,20 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHBUILDER_H_
 #define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHBUILDER_H_
-#include <scene/Scene.h>
 #include "NaiveBvhNode.h"
+#include <scene/Scene.h>
+
 namespace crayg {
 
 class NaiveBvhBuilder {
- public:
+  public:
     NaiveBvhBuilder(const Scene &scene);
     const Scene &scene;
     std::unique_ptr<NaiveBvh> build() const;
- private:
+
+  private:
     void collectPrimitives(NaiveBvh &bvh) const;
     std::size_t collectPrimitiveCount() const;
 };
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHBUILDER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_INTERSECTORS_BVHBUILDER_H_

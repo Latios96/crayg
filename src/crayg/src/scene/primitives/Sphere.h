@@ -1,14 +1,13 @@
 #ifndef CRAYG_SPHERE_H
 #define CRAYG_SPHERE_H
 
-#include "string"
 #include "scene/SceneObject.h"
+#include "string"
 
 namespace crayg {
 
 class Sphere : public SceneObject {
- public:
-
+  public:
     Sphere();
 
     Sphere(Vector3f position, float radius);
@@ -26,10 +25,10 @@ class Sphere : public SceneObject {
 
     virtual ~Sphere();
 
- private:
+  private:
     float radius;
 };
 
 }
 
-#endif //CRAYG_SPHERE_H
+#endif // CRAYG_SPHERE_H

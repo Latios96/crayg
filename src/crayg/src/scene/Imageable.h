@@ -1,23 +1,22 @@
 #ifndef CRAYG_IMAGEABLE_H
 #define CRAYG_IMAGEABLE_H
 
+#include "basics/OrthonormalBasis.h"
+#include "materials/Material.h"
+#include <basics/BoundingBox.h>
 #include <basics/Color.h>
 #include <basics/Ray.h>
 #include <memory>
-#include <basics/BoundingBox.h>
-#include "materials/Material.h"
-#include "basics/OrthonormalBasis.h"
 
 namespace crayg {
 
 class Imageable {
- public:
+  public:
     virtual Vector3f getNormal(Vector3f point) = 0;
     virtual OrthonormalBasis getOrthonormalBasis(const Vector3f &point);
 
     class Intersection {
-     public:
-
+      public:
         static Intersection createInvalid() {
             return {std::numeric_limits<float>::max(), nullptr};
         }
@@ -42,6 +41,7 @@ class Imageable {
         bool isValid() const {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
         }
+
         static Intersection nearest(const Intersection &first, const Intersection &second);
         virtual ~Intersection();
     };
@@ -55,11 +55,11 @@ class Imageable {
     virtual std::shared_ptr<Material> getMaterial() const;
     void setMaterial(const std::shared_ptr<Material> &material);
     virtual ~Imageable() = default;
- private:
-    std::shared_ptr<Material> material;
 
+  private:
+    std::shared_ptr<Material> material;
 };
 
 }
 
-#endif //CRAYG_IMAGEABLE_H
+#endif // CRAYG_IMAGEABLE_H

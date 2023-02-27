@@ -1,7 +1,7 @@
-#include <image/Image.h>
-#include <image/ImageBucket.h>
-#include <image/ImageAlgorithms.h>
 #include "catch2/catch.hpp"
+#include <image/Image.h>
+#include <image/ImageAlgorithms.h>
+#include <image/ImageBucket.h>
 
 namespace crayg {
 

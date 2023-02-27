@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/usd/UsdReadUtils.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/xform.h>
@@ -16,11 +16,12 @@ TEST_CASE("UsdReadUtils::readTransform") {
     SECTION("should correctly convert transform prim which has only local transformations") {
         pxr::UsdGeomXformCommonAPI(usdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3));
         pxr::UsdGeomXformCommonAPI(usdCamera).SetScale(pxr::GfVec3f(1, 2, 3));
-
+        // clang-format off
         Matrix4x4f expectedMatrix(1, 0, 0, 1,
                                   0, 2, 0, 2,
                                   0, 0, 3, -3,
                                   0, 0, 0, 1);
+        // clang-format on
 
         UsdReadUtils::readTransform(transformable, usdCamera, pxr::UsdTimeCode::EarliestTime());
 
@@ -32,16 +33,12 @@ TEST_CASE("UsdReadUtils::readTransform") {
         pxr::UsdGeomXformCommonAPI(parent).SetScale(pxr::GfVec3f(1, 2, 3));
         pxr::UsdGeomXformCommonAPI(usdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3));
 
-        Matrix4x4f expectedMatrix(1, 0, 0, 1,
-                                  0, 2, 0, 4,
-                                  0, 0, 3, -9,
-                                  0, 0, 0, 1);
+        Matrix4x4f expectedMatrix(1, 0, 0, 1, 0, 2, 0, 4, 0, 0, 3, -9, 0, 0, 0, 1);
 
         UsdReadUtils::readTransform(transformable, usdCamera, pxr::UsdTimeCode::EarliestTime());
 
         REQUIRE(transformable.getTransform().matrix == expectedMatrix);
     }
-
 }
 
 }

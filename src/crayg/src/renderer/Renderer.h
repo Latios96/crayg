@@ -1,26 +1,27 @@
 #ifndef CRAYG_RENDERER_H
 #define CRAYG_RENDERER_H
 
+#include "integrators/AbstractIntegrator.h"
+#include "scene/camera/PineHoleCameraModel.h"
+#include <basics/Color.h>
+#include <basics/Resolution.h>
+#include <image/Image.h>
+#include <image/ImageOutputDriver.h>
+#include <intersectors/SceneIntersector.h>
+#include <scene/RenderSettings.h>
 #include <scene/Scene.h>
 #include <scene/camera/Camera.h>
-#include <image/Image.h>
-#include <basics/Color.h>
-#include "scene/camera/PineHoleCameraModel.h"
-#include <intersectors/SceneIntersector.h>
 #include <utils/ProgressReporter.h>
-#include <image/ImageOutputDriver.h>
-#include <basics/Resolution.h>
-#include <scene/RenderSettings.h>
-#include "integrators/AbstractIntegrator.h"
 
 namespace crayg {
 
 class Renderer {
- public:
+  public:
     Renderer(Scene &scene, OutputDriver &outputDriver);
 
     void renderScene();
- private:
+
+  private:
     Scene &scene;
     OutputDriver &outputDriver;
     std::shared_ptr<CameraModel> cameraModel;
@@ -29,8 +30,7 @@ class Renderer {
     void init();
 
     void renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
-    void renderParallel(ProgressReporter &reporter,
-                        const std::vector<ImageBucket> &bucketSequence);
+    void renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
     void renderBucket(const ImageBucket &imageBucket);
     Color renderPixel(const PixelPosition &pixel);
     Color renderSample(float x, float y);
@@ -42,4 +42,4 @@ class Renderer {
 
 }
 
-#endif //CRAYG_RENDERER_H
+#endif // CRAYG_RENDERER_H

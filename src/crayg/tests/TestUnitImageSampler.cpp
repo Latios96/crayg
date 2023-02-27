@@ -14,4 +14,3 @@ TEST_CASE("UnitImageSampler") {
 }
 
 }
-

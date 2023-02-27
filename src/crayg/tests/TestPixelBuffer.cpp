@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "image/PixelBuffer.h"
+#include <catch2/catch.hpp>
 #include <sstream>
 
 namespace crayg {
@@ -218,8 +218,8 @@ TEST_CASE("PixelBuffer::formatting") {
     SECTION("should format using fmt") {
         PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, 3);
 
-        REQUIRE(
-            fmt::format("{}", pixelBuffer) == "PixelBuffer{width=5,height=10,colorChannelCount=3,pixelFormat=FLOAT}");
+        REQUIRE(fmt::format("{}", pixelBuffer) ==
+                "PixelBuffer{width=5,height=10,colorChannelCount=3,pixelFormat=FLOAT}");
     }
 }
 

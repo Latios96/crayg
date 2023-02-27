@@ -1,8 +1,8 @@
+#include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
 #include <fstream>
 #include <image/Image.h>
 #include <image/ImageWriters.h>
-#include <boost/filesystem.hpp>
 
 namespace crayg {
 

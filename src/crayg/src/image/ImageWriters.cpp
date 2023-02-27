@@ -1,10 +1,10 @@
 #include "ImageWriters.h"
 #include "ImageWriter.h"
-#include "PngWriter.h"
 #include "OpenExrWriter.h"
+#include "PngWriter.h"
+#include <Logger.h>
 #include <boost/filesystem.hpp>
 #include <fmt/format.h>
-#include <Logger.h>
 
 namespace crayg {
 

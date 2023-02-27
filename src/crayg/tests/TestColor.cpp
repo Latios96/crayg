@@ -32,6 +32,7 @@ TEST_CASE("Color/operatorAddColor", "[Color]") {
     REQUIRE(result.g == 7);
     REQUIRE(result.b == 9);
 }
+
 TEST_CASE("Color/operatorAddFloat", "[Color]") {
     Color myColor(1, 2, 3);
 
@@ -76,7 +77,7 @@ TEST_CASE("Color/operatorMultiplyScalar", "[Color]") {
 
 TEST_CASE("Color/clamp", "[Color]") {
 
-    SECTION("clamp to white"){
+    SECTION("clamp to white") {
         Color myColor(2, 3, 4);
 
         Color result = myColor.clamp();
@@ -84,7 +85,7 @@ TEST_CASE("Color/clamp", "[Color]") {
         REQUIRE(result == Color::createWhite());
     }
 
-    SECTION("clamp to black"){
+    SECTION("clamp to black") {
         Color myColor(-2, -3, -4);
 
         Color result = myColor.clamp();
@@ -92,16 +93,14 @@ TEST_CASE("Color/clamp", "[Color]") {
         REQUIRE(result == Color::createBlack());
     }
 
-    SECTION("clamp NaN to white"){
+    SECTION("clamp NaN to white") {
         Color myColor(NAN, NAN, NAN);
 
         Color result = myColor.clamp();
 
         REQUIRE(result == Color::createBlack());
     }
-
 }
-
 
 TEST_CASE("Color/getRgbValues", "[Color]") {
     auto testData = GENERATE(table<Color, std::tuple<int, int, int>>({{{0.1f, 0.2f, 0.3f}, {25, 51, 76}},
@@ -141,16 +140,16 @@ TEST_CASE("Color/divide", "[Color]") {
 }
 
 TEST_CASE("Color/isBlack", "[Color]") {
-    SECTION("isBlack should return true"){
-      Color color = Color::createBlack();
+    SECTION("isBlack should return true") {
+        Color color = Color::createBlack();
 
-      REQUIRE(color.isBlack());
+        REQUIRE(color.isBlack());
     }
 
-    SECTION("isBlack should return false"){
-      Color color = Color::createWhite();
+    SECTION("isBlack should return false") {
+        Color color = Color::createWhite();
 
-      REQUIRE_FALSE(color.isBlack());
+        REQUIRE_FALSE(color.isBlack());
     }
 }
 

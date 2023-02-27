@@ -6,7 +6,7 @@
 namespace crayg {
 
 class UsdSceneReader : public SceneReader {
- public:
+  public:
     UsdSceneReader(const std::string &path, Scene &scene, const ReadOptions &readOptions = ReadOptions::empty());
 
     void read() override;
@@ -14,4 +14,4 @@ class UsdSceneReader : public SceneReader {
 
 }
 
-#endif //CRAYG_USDSCENEREADER_H
+#endif // CRAYG_USDSCENEREADER_H

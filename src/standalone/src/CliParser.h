@@ -1,18 +1,16 @@
 #ifndef CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_
 #define CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_
 
+#include "CliRenderSettingsOverride.h"
+#include "basics/Resolution.h"
+#include <optional>
 #include <string>
 #include <utility>
-#include <optional>
-#include "basics/Resolution.h"
-#include "CliRenderSettingsOverride.h"
 
 namespace crayg {
 
 struct CliArgs {
-    CliArgs(std::string scenePath,
-            std::string imageOutputPath,
-            std::optional<std::string> cameraName,
+    CliArgs(std::string scenePath, std::string imageOutputPath, std::optional<std::string> cameraName,
             CliRenderSettingsOverride cliRenderSettingsOverride);
     std::string scenePath;
     std::string imageOutputPath;
@@ -21,9 +19,10 @@ struct CliArgs {
 };
 
 struct CliParseResult {
- public:
+  public:
     CliParseResult(std::optional<CliArgs> args, std::optional<std::string> error)
-        : args(std::move(args)), error(std::move(error)) {}
+        : args(std::move(args)), error(std::move(error)) {
+    }
 
     std::optional<CliArgs> args;
     std::optional<std::string> error;
@@ -34,12 +33,12 @@ struct CliParseResult {
 };
 
 class CliParser {
- public:
+  public:
     CliParser(const std::string &executableName, int argc, char **argv);
 
     CliParseResult parse();
 
- private:
+  private:
     int argc;
     char **argv;
     std::string executableName;
@@ -47,4 +46,4 @@ class CliParser {
 
 }
 
-#endif //CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_
+#endif // CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_

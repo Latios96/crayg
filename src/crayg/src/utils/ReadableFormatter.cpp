@@ -1,5 +1,5 @@
-#include <fmt/format.h>
 #include "ReadableFormatter.h"
+#include <fmt/format.h>
 
 std::string ReadableFormatter::formatDuration(std::chrono::seconds seconds) {
     std::chrono::hours hours = std::chrono::duration_cast<std::chrono::hours>(seconds);

@@ -7,10 +7,11 @@
 namespace crayg {
 
 class GeometryCompiler {
- public:
+  public:
     explicit GeometryCompiler(Scene &scene);
     void compile();
- private:
+
+  private:
     Scene &scene;
     void tessellateSubdivisionSurfaces();
     void findAllSubdivisionSurfaceMeshes(std::vector<std::shared_ptr<SubdivisionSurfaceMesh>> &subdivisionSurfaces);
@@ -18,4 +19,4 @@ class GeometryCompiler {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_SRC_RENDERER_GEOMETRYCOMPILER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_GEOMETRYCOMPILER_H_

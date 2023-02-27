@@ -19,4 +19,4 @@ void registerQMetaTypes() {
     qRegisterMetaType<crayg::ImageSpec>("ImageSpec");
 }
 
-#endif //CRAYG_SRC_STANDALONEGUI_WIDGETS_QTMETATYPES_H_
+#endif // CRAYG_SRC_STANDALONEGUI_WIDGETS_QTMETATYPES_H_

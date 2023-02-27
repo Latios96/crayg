@@ -7,7 +7,7 @@ namespace crayg {
 
 class RemainingTimeCalculator {
 
- public:
+  public:
     RemainingTimeCalculator();
     explicit RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime);
 
@@ -18,10 +18,10 @@ class RemainingTimeCalculator {
      */
     float getRemainingTimeByProgress(int progress);
 
- private:
+  private:
     std::chrono::steady_clock::time_point startTime;
 };
 
 }
 
-#endif //CRAYG_REMAININGTIMECALCULATOR_H
+#endif // CRAYG_REMAININGTIMECALCULATOR_H

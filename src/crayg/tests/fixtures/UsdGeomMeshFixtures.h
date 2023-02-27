@@ -8,13 +8,14 @@
 namespace crayg {
 
 class UsdGeomMeshFixtures {
- public:
-    static pxr::UsdGeomMesh createQuadPlane(const pxr::UsdStagePtr &stage, const pxr::TfToken &subdivisionScheme=pxr::UsdGeomTokens->none) {
+  public:
+    static pxr::UsdGeomMesh createQuadPlane(const pxr::UsdStagePtr &stage,
+                                            const pxr::TfToken &subdivisionScheme = pxr::UsdGeomTokens->none) {
         auto usdGeomMesh = pxr::UsdGeomMesh::Define(stage, pxr::SdfPath("/usdMesh"));
         usdGeomMesh.GetSubdivisionSchemeAttr().Set(subdivisionScheme);
 
         pxr::UsdGeomXformCommonAPI(usdGeomMesh).SetTranslate(pxr::GfVec3f(1, 2, 3));
-        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
+        pxr::VtVec3fArray points{{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
         usdGeomMesh.GetPointsAttr().Set(points);
         pxr::VtIntArray faceVertexCounts({4});
         usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
@@ -31,7 +32,7 @@ class UsdGeomMeshFixtures {
         usdGeomMesh.GetSubdivisionSchemeAttr().Set(pxr::UsdGeomTokens->none);
 
         pxr::UsdGeomXformCommonAPI(usdGeomMesh).SetTranslate(pxr::GfVec3f(1, 2, 3));
-        pxr::VtVec3fArray points {{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
+        pxr::VtVec3fArray points{{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {-0.5, 0, -0.5}, {0.5, 0, -0.5}};
         usdGeomMesh.GetPointsAttr().Set(points);
         pxr::VtIntArray faceVertexCounts({3, 3});
         usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
@@ -46,4 +47,4 @@ class UsdGeomMeshFixtures {
 
 } // crayg
 
-#endif //CRAYG_SRC_CRAYG_TESTS_FIXTURES_USDGEOMMESHFIXTURES_H_
+#endif // CRAYG_SRC_CRAYG_TESTS_FIXTURES_USDGEOMMESHFIXTURES_H_

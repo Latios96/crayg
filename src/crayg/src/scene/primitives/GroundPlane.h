@@ -6,7 +6,7 @@
 namespace crayg {
 
 class GroundPlane : public SceneObject {
- public:
+  public:
     Imageable::Intersection intersect(Ray ray) override;
 
     bool isIntersecting(Ray ray) override;
@@ -14,10 +14,11 @@ class GroundPlane : public SceneObject {
     Vector3f getNormal(Vector3f point) override;
     BoundingBox getBounds() const override;
     std::string getType() override;
- private:
+
+  private:
     Vector3f normal = Vector3f(0, 1, 0);
 };
 
 }
 
-#endif //CRAYG_GROUNDPLANE_H
+#endif // CRAYG_GROUNDPLANE_H

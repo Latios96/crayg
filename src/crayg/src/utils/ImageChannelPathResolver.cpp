@@ -16,10 +16,7 @@ std::string ImageChannelPathResolver::resolve(const std::string &path, const std
         pathWithoutExtension = pathWithoutExtension.parent_path() / pathWithoutExtension.stem();
     }
 
-    return fmt::format("{}.{}{}{}",
-                       pathWithoutExtension.string(),
-                       channelName,
-                       hashOrDigits.string(),
+    return fmt::format("{}.{}{}{}", pathWithoutExtension.string(), channelName, hashOrDigits.string(),
                        boostPath.extension().string());
 }
 } // crayg

@@ -1,27 +1,27 @@
-#include <boost/algorithm/string/join.hpp>
 #include "CliParser.h"
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
+#include <boost/algorithm/string/join.hpp>
 
 namespace crayg {
 
-template<typename T>
-CLI::CheckedTransformer createTransformer() {
+template <typename T> CLI::CheckedTransformer createTransformer() {
     constexpr auto entries = magic_enum::enum_entries<T>();
     std::map<std::string, T> map;
-    for (auto &entry: entries) {
+    for (auto &entry : entries) {
         map[std::string(entry.second)] = entry.first;
     }
     return CLI::CheckedTransformer(map, CLI::ignore_case);
 }
 
 CliParser::CliParser(const std::string &executableName, int argc, char **argv)
-    : argc(argc), argv(argv), executableName(executableName) {}
+    : argc(argc), argv(argv), executableName(executableName) {
+}
 
 CliParseResult CliParser::parse() {
-    CLI::App app {fmt::format("Crayg Renderer version {}, commit {}",
-                              crayg::CraygInfo::VERSION,
-                              crayg::CraygInfo::COMMIT_HASH), executableName};
+    CLI::App app{
+        fmt::format("Crayg Renderer version {}, commit {}", crayg::CraygInfo::VERSION, crayg::CraygInfo::COMMIT_HASH),
+        executableName};
 
     std::string sceneFileName;
     app.add_option("-s,--scene", sceneFileName, "Scene file to render")->required();
@@ -30,8 +30,7 @@ CliParseResult CliParser::parse() {
     app.add_option("-o,--output", imageOutputPath, "Path where rendered image is saved")->required();
 
     std::string cameraName;
-    app.add_option("--camera",
-                   cameraName,
+    app.add_option("--camera", cameraName,
                    "Name of the camera to render. Defaulting to the first camera found in the scene");
 
     std::string resolution;
@@ -41,14 +40,12 @@ CliParseResult CliParser::parse() {
     app.add_option("--maxSamples", maxSamples, "Override max samples");
 
     std::optional<IntegratorType> integratorType;
-    app.add_option("--integrator",
-                   integratorType,
-                   "Override integrator")->transform(createTransformer<IntegratorType>());
+    app.add_option("--integrator", integratorType, "Override integrator")
+        ->transform(createTransformer<IntegratorType>());
 
     std::optional<IntersectorType> intersectorType;
-    app.add_option("--intersector",
-                   intersectorType,
-                   "Override intersector")->transform(createTransformer<IntersectorType>());
+    app.add_option("--intersector", intersectorType, "Override intersector")
+        ->transform(createTransformer<IntersectorType>());
 
     try {
         app.parse(argc, argv);
@@ -67,22 +64,18 @@ CliParseResult CliParser::parse() {
             renderSettingsOverride.intersectorType = intersectorType.value();
         }
 
-        return CliParseResult(CliArgs(sceneFileName,
-                                      imageOutputPath,
+        return CliParseResult(CliArgs(sceneFileName, imageOutputPath,
                                       !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,
-                                      renderSettingsOverride), std::nullopt);
+                                      renderSettingsOverride),
+                              std::nullopt);
     } catch (const std::runtime_error &e) {
         return CliParseResult(std::nullopt, std::optional<std::string>(app.help("", CLI::AppFormatMode::All)));
     }
-
 }
 
-CliArgs::CliArgs(std::string scenePath,
-                 std::string imageOutputPath,
-                 std::optional<std::string> cameraName,
+CliArgs::CliArgs(std::string scenePath, std::string imageOutputPath, std::optional<std::string> cameraName,
                  CliRenderSettingsOverride cliRenderSettingsOverride)
     : scenePath(scenePath), imageOutputPath(imageOutputPath), cameraName(cameraName),
       cliRenderSettingsOverride(cliRenderSettingsOverride) {
-
 }
 }

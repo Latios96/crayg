@@ -6,7 +6,7 @@
 namespace crayg {
 
 class RectLight : public AreaLight {
- public:
+  public:
     RectLight();
     RectLight(const Transform &transform, float intensity, float width, float height);
     Vector3f getNormal(Vector3f point) override;
@@ -20,13 +20,14 @@ class RectLight : public AreaLight {
     Vector3f sampleLightShape() const override;
     std::string getType() override;
     float area() const override;
- private:
+
+  private:
     float width = 1;
     float height = 1;
- protected:
 
+  protected:
 };
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_SCENE_RECTLIGHT_H_
+#endif // CRAYG_SRC_CRAYG_SRC_SCENE_RECTLIGHT_H_

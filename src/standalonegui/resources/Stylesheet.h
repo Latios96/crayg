@@ -5,7 +5,7 @@
 THIS FILE IS GENERATED, DO NOT EDIT DIRECTLY!
 */
 
-const char * STYLESHEET = R"(
+const char *STYLESHEET = R"(
 QWidget {
   font: 9pt Arial;
   color: #e3e3e3;
@@ -106,5 +106,4 @@ QComboBox::down-arrow {
 
 )";
 
-#endif //CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
-
+#endif // CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_

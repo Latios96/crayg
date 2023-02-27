@@ -1,13 +1,13 @@
 #include "UsdSceneWriter.h"
 #include "UsdCameraWriter.h"
-#include "UsdRenderSettingsWriter.h"
-#include "UsdSphereWriter.h"
+#include "UsdDiskLightWriter.h"
+#include "UsdGroundPlaneWriter.h"
 #include "UsdPointLightWriter.h"
 #include "UsdRectLightWriter.h"
-#include "UsdDiskLightWriter.h"
-#include "UsdTriangleMeshWriter.h"
-#include "UsdGroundPlaneWriter.h"
+#include "UsdRenderSettingsWriter.h"
+#include "UsdSphereWriter.h"
 #include "UsdSubdivisionSurfaceMeshWriter.h"
+#include "UsdTriangleMeshWriter.h"
 
 void crayg::UsdSceneWriter::writeScene(const std::string &scenePath) {
     auto stage = pxr::UsdStage::CreateNew(scenePath);
@@ -16,6 +16,7 @@ void crayg::UsdSceneWriter::writeScene(const std::string &scenePath) {
 
     stage->Save();
 }
+
 void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
     UsdPathFactory usdPathFactory;
     if (scene.camera) {
@@ -25,28 +26,26 @@ void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
     UsdRenderSettingsWriter(scene.renderSettings).write(stage);
     UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
 
-    for (auto sceneObject: scene.objects) {
+    for (auto sceneObject : scene.objects) {
         if (sceneObject->getType() == "Sphere") {
-            UsdSphereWriter(*std::static_pointer_cast<Sphere>(sceneObject), usdMaterialWriteCache).write(stage,
-                                                                                                         usdPathFactory);
+            UsdSphereWriter(*std::static_pointer_cast<Sphere>(sceneObject), usdMaterialWriteCache)
+                .write(stage, usdPathFactory);
         } else if (sceneObject->getType() == "TriangleMesh") {
-            UsdTriangleMeshWriter(*std::static_pointer_cast<TriangleMesh>(sceneObject), usdMaterialWriteCache).write(
-                stage,
-                usdPathFactory);
+            UsdTriangleMeshWriter(*std::static_pointer_cast<TriangleMesh>(sceneObject), usdMaterialWriteCache)
+                .write(stage, usdPathFactory);
         } else if (sceneObject->getType() == "GroundPlane") {
-            UsdGroundPlaneWriter(*std::static_pointer_cast<GroundPlane>(sceneObject),
-                                 usdMaterialWriteCache).write(stage,
-                                                              usdPathFactory);
+            UsdGroundPlaneWriter(*std::static_pointer_cast<GroundPlane>(sceneObject), usdMaterialWriteCache)
+                .write(stage, usdPathFactory);
         } else if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
             UsdSubdivisionSurfaceMeshWriter(*std::static_pointer_cast<SubdivisionSurfaceMesh>(sceneObject),
-                                            usdMaterialWriteCache).write(stage,
-                                                                         usdPathFactory);
+                                            usdMaterialWriteCache)
+                .write(stage, usdPathFactory);
         } else {
             Logger::warning("Skipping unsupported type {}", sceneObject->getType());
         }
     }
 
-    for (auto light: scene.lights) {
+    for (auto light : scene.lights) {
         if (light->getType() == "Light") {
             UsdPointLightWriter(*std::static_pointer_cast<Light>(light)).write(stage, usdPathFactory);
         } else if (light->getType() == "RectLight") {
@@ -57,6 +56,7 @@ void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
             Logger::warning("Skipping unsupported type {}", light->getType());
         }
     }
-
 }
-crayg::UsdSceneWriter::UsdSceneWriter(crayg::Scene &scene) : SceneWriter(scene) {}
+
+crayg::UsdSceneWriter::UsdSceneWriter(crayg::Scene &scene) : SceneWriter(scene) {
+}

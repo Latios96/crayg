@@ -1,6 +1,6 @@
-#include <catch2/catch.hpp>
-#include <boost/filesystem/path.hpp>
 #include "utils/ImageChannelPathResolver.h"
+#include <boost/filesystem/path.hpp>
+#include <catch2/catch.hpp>
 
 namespace crayg {
 

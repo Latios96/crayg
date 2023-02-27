@@ -7,7 +7,7 @@
 namespace crayg {
 
 class Color {
- public:
+  public:
     float r, g, b;
 
     Color();
@@ -40,12 +40,12 @@ class Color {
 
     Color clamp() const;
 
-    bool isBlack()const;
+    bool isBlack() const;
 
     std::tuple<int, int, int> getRgbValues() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Color &color);
 };
 
-}// namespace crayg
-#endif//CRAYG_COLOR_H
+} // namespace crayg
+#endif // CRAYG_COLOR_H

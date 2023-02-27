@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include <basics/Matrix4x4f.h>
+#include <catch2/catch.hpp>
 #include <sstream>
 
 namespace crayg {
@@ -137,6 +137,7 @@ TEST_CASE("Matrix4x4f equality", "[Matrix4x4f]") {
 TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
 
     SECTION("transformation only") {
+        // clang-format off
         Matrix4x4f matrix(1, 0, 0, 1,
                           0, 1, 0, 2,
                           0, 0, 1, 3,
@@ -146,11 +147,13 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
                                                 0, 1, 0, -2,
                                                 0, 0, 1, -3,
                                                 0, 0, 0, 1);
+        // clang-format on
 
         REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.001f));
     }
 
     SECTION("scale only") {
+        // clang-format off
         Matrix4x4f matrix(2, 0, 0, 0,
                           0, 3, 0, 0,
                           0, 0, 4, 0,
@@ -160,11 +163,13 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
                                                 0, 0.33f, 0, 0,
                                                 0, 0, 0.25f, 0,
                                                 0, 0, 0, 1);
+        // clang-format on
 
         REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
     }
 
     SECTION("rotate only") {
+        // clang-format off
         Matrix4x4f matrix(2, -1, 0, 0,
                           1, 2, 0, 0,
                           0, 0, 0, 0,
@@ -174,11 +179,13 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
                                                 -0.2f, 0.4f, 0, 0,
                                                 0, 0, 0, 0,
                                                 0, 0, 0, 1);
+        // clang-format on
 
         REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
     }
 
     SECTION("all combined") {
+        // clang-format off
         Matrix4x4f matrix(2, -1, 0, 5,
                           1, 2, 0, 6,
                           0, 0, 4, 7,
@@ -188,16 +195,17 @@ TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
                                                 -0.2f, 0.4f, 0, -1.4f,
                                                 0, 0, 0.25f, -1.75f,
                                                 0, 0, 0, 1);
+        // clang-format on
 
         REQUIRE(matrix.invert().isEqualTo(expectedInverse, 0.01f));
     }
-
 }
 
 TEST_CASE("Matrix4x4 factory methods", "[Matrix4x4f]") {
 
     SECTION("rotate x") {
         Matrix4x4f matrix4X4f = Matrix4x4f::rotateX(90);
+        // clang-format off
         Matrix4x4f expectedMatrix(1, 0, 0, 0,
                                   0, 0, -1, 0,
                                   0, 1, 0, 0,
@@ -208,40 +216,48 @@ TEST_CASE("Matrix4x4 factory methods", "[Matrix4x4f]") {
 
     SECTION("rotate y") {
         Matrix4x4f matrix4X4f = Matrix4x4f::rotateY(90);
+        // clang-format off
         Matrix4x4f expectedMatrix(0, 0, 1, 0,
                                   0, 1, 0, 0,
                                   -1, 0, 0, 0,
                                   0, 0, 0, 1);
+        // clang-format on
 
         REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001f));
     }
 
     SECTION("rotate z") {
         Matrix4x4f matrix4X4f = Matrix4x4f::rotateZ(90);
+        // clang-format off
         Matrix4x4f expectedMatrix(0, -1, 0, 0,
                                   1, 0, 0, 0,
                                   0, 0, 1, 0,
                                   0, 0, 0, 1);
+        // clang-format on
 
         REQUIRE(matrix4X4f.isEqualTo(expectedMatrix, 0.001f));
     }
 
     SECTION("construct from translation") {
         Matrix4x4f matrix4X4F = Matrix4x4f::translation(1, 2, 3);
+        // clang-format off
         Matrix4x4f expectedMatrix(1, 0, 0, 1,
                                   0, 1, 0, 2,
                                   0, 0, 1, 3,
                                   0, 0, 0, 1);
+        // clang-format on
 
         REQUIRE(matrix4X4F == expectedMatrix);
     }
 
     SECTION("construct from scale") {
         Matrix4x4f matrix4X4F = Matrix4x4f::scale(1, 2, 3);
+        // clang-format off
         Matrix4x4f expectedMatrix(1, 0, 0, 0,
                                   0, 2, 0, 0,
                                   0, 0, 3, 0,
                                   0, 0, 0, 1);
+        // clang-format on
 
         REQUIRE(matrix4X4F == expectedMatrix);
     }

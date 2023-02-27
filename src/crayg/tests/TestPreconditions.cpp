@@ -25,8 +25,7 @@ TEST_CASE("check argument with expression and message", "[Preconditions]") {
                           std::invalid_argument);
         try {
             Preconditions::checkArgument(1 == 2, "This is my message", FAILURE_INFORMATION);
-        }
-        catch (std::invalid_argument &e) {
+        } catch (std::invalid_argument &e) {
             REQUIRE(std::string(e.what()).rfind("This is my message", 0) == 0);
         }
     }

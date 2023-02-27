@@ -1,29 +1,30 @@
 #include "UsdStageReader.h"
-#include "UsdCameraReader.h"
-#include "UsdSphereLightReader.h"
-#include "UsdRectLightReader.h"
-#include "UsdMeshReader.h"
-#include "UsdSphereReader.h"
-#include "UsdDiskLightReader.h"
-#include "UsdRenderSettingsReader.h"
 #include "Logger.h"
-#include "scene/primitives/GroundPlane.h"
+#include "UsdCameraReader.h"
+#include "UsdDiskLightReader.h"
+#include "UsdMeshReader.h"
+#include "UsdRectLightReader.h"
+#include "UsdRenderSettingsReader.h"
+#include "UsdSphereLightReader.h"
+#include "UsdSphereReader.h"
 #include "UsdSubdivisionSurfaceMeshReader.h"
-#include <pxr/usd/usd/prim.h>
-#include <pxr/usd/usd/primRange.h>
-#include <pxr/usd/usd/primFlags.h>
+#include "scene/primitives/GroundPlane.h"
 #include <fmt/format.h>
+#include <pxr/usd/usd/prim.h>
+#include <pxr/usd/usd/primFlags.h>
+#include <pxr/usd/usd/primRange.h>
 
 namespace crayg {
 
-UsdStageReader::UsdStageReader(pxr::UsdStage &stage) : stage(stage) {}
+UsdStageReader::UsdStageReader(pxr::UsdStage &stage) : stage(stage) {
+}
 
 void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptions &readOptions) {
     readRenderSettings(scene);
 
     auto defaultMaterial = std::make_shared<crayg::UsdPreviewSurface>("defaultMaterial", crayg::Color::createWhite());
 
-    for (pxr::UsdPrim prim: stage.Traverse(pxr::UsdTraverseInstanceProxies())) {
+    for (pxr::UsdPrim prim : stage.Traverse(pxr::UsdTraverseInstanceProxies())) {
         if (isSubdivisionSurfaceMesh(prim) && primIsVisible(prim)) {
             readSubdivisionSurfaceMesh(scene, defaultMaterial, prim);
         } else if (prim.IsA<pxr::UsdGeomMesh>() && primIsVisible(prim)) {
@@ -36,31 +37,29 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
             readSphere(scene, prim);
         } else if (prim.IsA<pxr::UsdLuxDiskLight>() && primIsVisible(prim)) {
             readDiskLight(scene, prim);
-        } else if (prim.IsA<pxr::UsdGeomCamera>() && scene.camera == nullptr
-            && cameraPathMatches(prim.GetPath(), readOptions.cameraName)) {
+        } else if (prim.IsA<pxr::UsdGeomCamera>() && scene.camera == nullptr &&
+                   cameraPathMatches(prim.GetPath(), readOptions.cameraName)) {
             readCamera(scene, prim);
         }
     }
     const bool noCameraFound = scene.camera == nullptr;
     if (noCameraFound) {
         if (readOptions.cameraName) {
-            throw std::runtime_error(fmt::format("No camera with path {} found in USD stage!",
-                                                 readOptions.cameraName.value()));
+            throw std::runtime_error(
+                fmt::format("No camera with path {} found in USD stage!", readOptions.cameraName.value()));
         }
         throw std::runtime_error("No camera found in USD stage!");
     }
 }
 
-void UsdStageReader::readUsdGeomMesh(Scene &scene,
-                                     const std::shared_ptr<Material> &defaultMaterial,
+void UsdStageReader::readUsdGeomMesh(Scene &scene, const std::shared_ptr<Material> &defaultMaterial,
                                      const pxr::UsdPrim &prim) {
     auto triangleMesh = UsdMeshReader(pxr::UsdGeomMesh(prim), usdMaterialTranslationCache).read();
     triangleMesh->init();
     scene.addObject(triangleMesh);
 }
 
-void UsdStageReader::readSubdivisionSurfaceMesh(Scene &scene,
-                                                const std::shared_ptr<Material> &defaultMaterial,
+void UsdStageReader::readSubdivisionSurfaceMesh(Scene &scene, const std::shared_ptr<Material> &defaultMaterial,
                                                 const pxr::UsdPrim &prim) {
     auto subdivisionSurfaceMesh =
         UsdSubdivisionSurfaceMeshReader(pxr::UsdGeomMesh(prim), usdMaterialTranslationCache).read();
@@ -107,7 +106,7 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
         scene.renderSettings = RenderSettings::createDefault();
         return;
     }
-    for (pxr::UsdPrim prim: renderPrim.GetDescendants()) {
+    for (pxr::UsdPrim prim : renderPrim.GetDescendants()) {
         if (prim.IsA<pxr::UsdRenderSettings>()) {
             scene.renderSettings = *UsdRenderSettingsReader(pxr::UsdRenderSettings(prim)).read();
             return;
@@ -115,6 +114,7 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
     }
     scene.renderSettings = RenderSettings::createDefault();
 }
+
 bool UsdStageReader::isSubdivisionSurfaceMesh(pxr::UsdPrim &prim) {
     if (!prim.IsA<pxr::UsdGeomMesh>()) {
         return false;
@@ -126,7 +126,3 @@ bool UsdStageReader::isSubdivisionSurfaceMesh(pxr::UsdPrim &prim) {
 }
 
 }
-
-
-
-

@@ -3,8 +3,7 @@
 
 namespace crayg {
 
-RaytracingIntegrator::RaytracingIntegrator(Scene &scene,
-                                           const std::shared_ptr<SceneIntersector> &sceneIntersector,
+RaytracingIntegrator::RaytracingIntegrator(Scene &scene, const std::shared_ptr<SceneIntersector> &sceneIntersector,
                                            const IntegratorSettings &integratorSettings)
     : AbstractIntegrator(scene, sceneIntersector) {
     useGi = std::get<int>(integratorSettings.getOrDefault("RAYTRACING:useGi", {0})) == 1 ? true : false;
@@ -22,17 +21,15 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
         return Color::createBlack();
     }
 
-    const Vector3f location =
-        ray.constructIntersectionPoint(intersection.rayParameter);
+    const Vector3f location = ray.constructIntersectionPoint(intersection.rayParameter);
     Imageable &object = *intersection.imageable;
     const Vector3f normal = object.getNormal(location);
-    const SurfaceInteraction surfaceInteraction =
-        SurfaceInteraction(location, normal, ray);
+    const SurfaceInteraction surfaceInteraction = SurfaceInteraction(location, normal, ray);
     IntegratorContext integratorContext = createIntegratorContext(recursionDepth);
     Color shadedColor = object.getMaterial()->evaluate(surfaceInteraction, integratorContext);
 
     Color radiance = Color::createBlack();
-    for (auto &light: scene.lights) {
+    for (auto &light : scene.lights) {
         radiance = radiance + calculateDirectLight(light, location, normal);
     }
 
@@ -44,8 +41,7 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
     return shadedColor * radiance + gi;
 }
 
-Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
-                                                 const Vector3f &location,
+Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light, const Vector3f &location,
                                                  const Vector3f &normal) {
     auto lightRadiance = light->radiance(location + (normal * 0.001f), normal);
     if (lightRadiance.radiance == Color::createBlack()) {
@@ -70,6 +66,7 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light,
 
     return lightRadiance.radiance;
 }
+
 Color RaytracingIntegrator::calculateIndirectLight(const SurfaceInteraction &surfaceInteraction,
                                                    const OrthonormalBasis &orthonormalBasis,
                                                    IntegratorContext &integratorContext) {

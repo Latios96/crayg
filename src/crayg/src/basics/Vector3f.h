@@ -8,7 +8,7 @@
 namespace crayg {
 
 class Vector3f {
- public:
+  public:
     float x, y, z;
 
     Vector3f();
@@ -46,8 +46,7 @@ class Vector3f {
     bool isValid() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Vector3f &f);
-
 };
 
 }
-#endif //CRAYG_VECTOR3F_H
+#endif // CRAYG_VECTOR3F_H

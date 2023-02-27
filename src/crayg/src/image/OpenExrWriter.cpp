@@ -14,8 +14,9 @@ void OpenExrWriter::writeImage(const Image &image, std::string image_name) {
     collectPixelDataIntoSingleBuffer(pixelCountPerChannel, channels, pixels);
 
     std::unique_ptr<OIIO::ImageOutput> out = OIIO::ImageOutput::create(image_name);
-    if (!out)
+    if (!out) {
         return;
+    }
 
     OIIO::ImageSpec spec(image.getWidth(), image.getHeight(), colorChannelCount, OIIO::TypeDesc::FLOAT);
 
@@ -23,16 +24,13 @@ void OpenExrWriter::writeImage(const Image &image, std::string image_name) {
     writeChannelsToSpec(channels, spec);
 
     out->open(image_name, spec);
-    out->write_image(OIIO::TypeDesc::UNKNOWN,
-                     pixels.data(),
-                     totalValuesCount);
+    out->write_image(OIIO::TypeDesc::UNKNOWN, pixels.data(), totalValuesCount);
     out->close();
 }
 
 void OpenExrWriter::countChannelsAndPixels(const std::vector<Image::ChannelView> &channels,
-                                           unsigned int &totalValuesCount,
-                                           int &colorChannelCount) const {
-    for (auto &channel: channels) {
+                                           unsigned int &totalValuesCount, int &colorChannelCount) const {
+    for (auto &channel : channels) {
         PixelBuffer &channelBuffer = channel.channelBuffer;
         unsigned int bytesForChannel =
             channelBuffer.getPixelFormat() == PixelFormat::FLOAT ? sizeof(float) : sizeof(uint8_t);
@@ -46,7 +44,7 @@ void OpenExrWriter::collectPixelDataIntoSingleBuffer(unsigned int pixelCount,
                                                      std::vector<std::byte> &pixels) const {
     std::byte *data = pixels.data();
     for (unsigned int pixel = 0; pixel < pixelCount; pixel++) {
-        for (auto &channel: channels) {
+        for (auto &channel : channels) {
             int colorChannelCount = channel.channelBuffer.getColorChannelCount();
 
             const bool isFloat = channel.channelBuffer.getPixelFormat() == PixelFormat::FLOAT;
@@ -69,18 +67,16 @@ void OpenExrWriter::collectPixelDataIntoSingleBuffer(unsigned int pixelCount,
     }
 }
 
-void OpenExrWriter::writeChannelsToSpec(const std::vector<Image::ChannelView> &channels,
-                                        OIIO::ImageSpec &spec) {
+void OpenExrWriter::writeChannelsToSpec(const std::vector<Image::ChannelView> &channels, OIIO::ImageSpec &spec) {
     spec.channelnames.clear();
-    for (auto &channel: channels) {
+    for (auto &channel : channels) {
         PixelBuffer &channelBuffer = channel.channelBuffer;
         writeChannelFormats(spec, channelBuffer);
         writeChannelNames(spec, channel, channelBuffer);
     }
 }
 
-void OpenExrWriter::writeChannelNames(OIIO::ImageSpec &spec,
-                                      const Image::ChannelView &channel,
+void OpenExrWriter::writeChannelNames(OIIO::ImageSpec &spec, const Image::ChannelView &channel,
                                       const PixelBuffer &channelBuffer) const {
     int channelIndex = 0;
     if (channel.channelName == "rgb") {

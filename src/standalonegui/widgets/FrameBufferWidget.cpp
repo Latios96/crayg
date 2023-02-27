@@ -2,6 +2,7 @@
 #include <QStyle>
 #include <QTreeWidget>
 #include <boost/algorithm/string.hpp>
+
 namespace crayg {
 
 void FrameBufferWidget::setupUI() {
@@ -18,11 +19,8 @@ void FrameBufferWidget::setupUI() {
 
     channelComboBox = new QComboBox();
     channelComboBox->setMaximumWidth(150);
-    QObject::connect(channelComboBox,
-                     &QComboBox::currentTextChanged,
-                     [this](QString text) {
-                         emit channelChanged(text.toStdString());
-                     });
+    QObject::connect(channelComboBox, &QComboBox::currentTextChanged,
+                     [this](QString text) { emit channelChanged(text.toStdString()); });
     topRowLayout->addWidget(channelComboBox, Qt::AlignLeft);
     topRowLayout->addStretch();
     middleLayout->addLayout(topRowLayout);
@@ -43,9 +41,8 @@ void FrameBufferWidget::setupUI() {
     imageMetadataWidget->setHeaderHidden(true);
     imageMetadataWidget->setColumnCount(2);
     overallLayout->addWidget(imageMetadataWidget);
-    QObject::connect(metadataButton, &QPushButton::clicked, [=](bool checked) {
-        imageMetadataWidget->setHidden(!imageMetadataWidget->isHidden());
-    });
+    QObject::connect(metadataButton, &QPushButton::clicked,
+                     [=](bool checked) { imageMetadataWidget->setHidden(!imageMetadataWidget->isHidden()); });
 
     this->setLayout(overallLayout);
 
@@ -57,16 +54,16 @@ void FrameBufferWidget::setupUI() {
         imageWidget.size().height() > availableSize.height() - 100) {
         resize(availableSize * 3.0f / 5.0f);
     } else {
-        resize(QSize(imageWidget.size().width() + 40,
-                     imageWidget.size().height() + 40 + metadataButton->size().height()
-                         + topRowLayout->sizeHint().height()));
+        resize(QSize(imageWidget.size().width() + 40, imageWidget.size().height() + 40 +
+                                                          metadataButton->size().height() +
+                                                          topRowLayout->sizeHint().height()));
     }
 }
+
 void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
-    const std::string title = fmt::format("Crayg Frame Buffer - [{} of {}x{}]",
-                                          zoomFactor,
-                                          this->panAndZoomArea->getOriginalSize().width(),
-                                          this->panAndZoomArea->getOriginalSize().height());
+    const std::string title =
+        fmt::format("Crayg Frame Buffer - [{} of {}x{}]", zoomFactor, this->panAndZoomArea->getOriginalSize().width(),
+                    this->panAndZoomArea->getOriginalSize().height());
     this->setWindowTitle(QString::fromStdString(title));
 }
 
@@ -90,11 +87,11 @@ void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
     auto rootItem = new QTreeWidgetItem(imageMetadataWidget, QStringList("Image Metadata"));
     imageMetadataWidget->insertTopLevelItem(0, rootItem);
 
-    for (auto &metadataEntry: imageMetadata) {
+    for (auto &metadataEntry : imageMetadata) {
         std::vector<std::string> strings;
         boost::split(strings, metadataEntry.first, boost::is_any_of("/"));
         auto currentItem = rootItem;
-        for (auto &pathPart: strings) {
+        for (auto &pathPart : strings) {
             auto possibleMatchingChild = findChildByName(currentItem, QString::fromStdString(pathPart));
             if (possibleMatchingChild != nullptr) {
                 currentItem = possibleMatchingChild;
@@ -116,12 +113,12 @@ void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
     imageMetadataWidget->resizeColumnToContents(0);
     imageMetadataWidget->resizeColumnToContents(1);
 }
+
 void FrameBufferWidget::setImageSpec(ImageSpec imageSpec) {
     channelComboBox->clear();
-    for (auto &channelSpec: imageSpec.channels) {
+    for (auto &channelSpec : imageSpec.channels) {
         channelComboBox->addItem(QString::fromStdString(channelSpec.name));
-        channelComboBox->setItemData(channelComboBox->count() - 1,
-                                     QString::fromStdString(channelSpec.name),
+        channelComboBox->setItemData(channelComboBox->count() - 1, QString::fromStdString(channelSpec.name),
                                      Qt::ToolTipRole);
     }
 }

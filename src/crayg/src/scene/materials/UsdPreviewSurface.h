@@ -1,10 +1,11 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_USDPREVIEWSURFACE_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_USDPREVIEWSURFACE_H_
 #include "Material.h"
+
 namespace crayg {
 
 class UsdPreviewSurface : public Material {
- public:
+  public:
     explicit UsdPreviewSurface(const Color &diffuseColor);
     explicit UsdPreviewSurface(const std::string &name);
     UsdPreviewSurface(const std::string &name, const Color &diffuseColor);

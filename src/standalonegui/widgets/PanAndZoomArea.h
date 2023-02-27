@@ -1,15 +1,15 @@
 #ifndef CRAYG_SRC_STANDALONEGUI_PANANDZOOMAREA_H_
 #define CRAYG_SRC_STANDALONEGUI_PANANDZOOMAREA_H_
 
-#include <QtWidgets/qscrollarea.h>
-#include <ostream>
-#include <fmt/ostream.h>
 #include "Logger.h"
+#include <QtWidgets/qscrollarea.h>
+#include <fmt/ostream.h>
+#include <ostream>
 
 namespace crayg {
 
 class ZoomFactor {
- public:
+  public:
     ZoomFactor() = default;
     explicit ZoomFactor(int value);
     int getValue() const;
@@ -20,25 +20,28 @@ class ZoomFactor {
     ZoomFactor &operator++(int);
     ZoomFactor &operator--(int);
     friend std::ostream &operator<<(std::ostream &os, const ZoomFactor &factor);
- private:
+
+  private:
     int value = 0;
 };
 
 class PanAndZoomArea : public QScrollArea {
- Q_OBJECT
- public:
+    Q_OBJECT
+  public:
     explicit PanAndZoomArea(QWidget *parent = nullptr);
     void setWidget(QWidget *widget);
     const QSize &getOriginalSize() const;
     void setOriginalSize(const QSize &originalSize);
- protected:
+
+  protected:
     void wheelEvent(QWheelEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
- signals:
+  signals:
     void zoomFactorChanged(ZoomFactor zoomFactor);
- private:
+
+  private:
     ZoomFactor zoomFactor;
     int newScrollValue(float mousePosition, float oldImageSize, int oldScrollbarValue, float newImageSize);
     QSize originalSize;
@@ -52,4 +55,4 @@ class PanAndZoomArea : public QScrollArea {
 
 } // crayg
 
-#endif //CRAYG_SRC_STANDALONEGUI_PANANDZOOMAREA_H_
+#endif // CRAYG_SRC_STANDALONEGUI_PANANDZOOMAREA_H_

@@ -3,9 +3,9 @@
 
 namespace crayg {
 
-UsdSphereReader::UsdSphereReader(const pxr::UsdGeomSphere &usdPrim,
-                                 UsdMaterialReadCache &usdMaterialTranslationCache)
-    : BaseUsdImageableReader(usdPrim, usdMaterialTranslationCache) {}
+UsdSphereReader::UsdSphereReader(const pxr::UsdGeomSphere &usdPrim, UsdMaterialReadCache &usdMaterialTranslationCache)
+    : BaseUsdImageableReader(usdPrim, usdMaterialTranslationCache) {
+}
 
 std::shared_ptr<Sphere> UsdSphereReader::read() {
     auto sphere = BaseUsdImageableReader<pxr::UsdGeomSphere, Sphere>::read();
@@ -15,6 +15,7 @@ std::shared_ptr<Sphere> UsdSphereReader::read() {
 
     return sphere;
 }
+
 std::string UsdSphereReader::getTranslatedType() {
     return "sphere";
 }

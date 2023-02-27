@@ -1,7 +1,7 @@
 #include "TriangleMesh.h"
+#include "Logger.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
-#include "Logger.h"
 #include "utils/ToStringHelper.h"
 
 namespace crayg {
@@ -14,7 +14,7 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     if (boundingBox.isIntersecting(ray)) {
         Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
 
-        for (auto id: faceIds()) {
+        for (auto id : faceIds()) {
             Triangle triangle(this, id);
             Imageable::Intersection intersection = triangle.intersect(ray);
             hitIntersection = Imageable::Intersection::nearest(intersection, hitIntersection);
@@ -55,7 +55,7 @@ void TriangleMesh::createCube(TriangleMesh &mesh) {
 
 void TriangleMesh::createBounds() {
     Vector3f min, max;
-    for (const auto &point: points) {
+    for (const auto &point : points) {
         if (point.x < min.x) {
             min.x = point.x;
         }
@@ -78,55 +78,60 @@ void TriangleMesh::createBounds() {
     }
     boundingBox = BoundingBox(min, max);
 }
+
 void TriangleMesh::createNormals() {
     if (normalsPrimVar == nullptr) {
         auto primVar = addNormalsPrimVar<TriangleMeshPerFacePrimVar<Vector3f>>();
-        for (auto id: faceIds()) {
+        for (auto id : faceIds()) {
             Triangle triangle(this, id);
             const Vector3f normal = triangle.getNormal();
             primVar->write(id, normal);
         }
     } else {
-        normalsPrimVar->apply([this](Vector3f normal) {
-            return transform.applyForNormal(normal);
-        });
+        normalsPrimVar->apply([this](Vector3f normal) { return transform.applyForNormal(normal); });
     }
-
 }
+
 BoundingBox TriangleMesh::getBounds() const {
     return boundingBox;
 }
+
 void TriangleMesh::init() {
-    for (auto &point: points) {
+    for (auto &point : points) {
         point = transform.apply(point);
     } // todo check if this is necessary
     createBounds();
     createNormals();
 }
+
 std::string TriangleMesh::getType() {
     return "TriangleMesh";
 }
+
 TriangleMesh::TriangleMesh() : normalsPrimVar(nullptr) {
 }
+
 std::size_t TriangleMesh::faceCount() const {
     return faceVertexIndices.size();
 }
 
-TriangleMesh::FaceVertexIndices::FaceVertexIndices(int v0, int v1, int v2) : v0(v0), v1(v1), v2(v2) {}
-bool TriangleMesh::FaceVertexIndices::operator==(const TriangleMesh::FaceVertexIndices &rhs) const {
-    return v0 == rhs.v0 &&
-        v1 == rhs.v1 &&
-        v2 == rhs.v2;
+TriangleMesh::FaceVertexIndices::FaceVertexIndices(int v0, int v1, int v2) : v0(v0), v1(v1), v2(v2) {
 }
+
+bool TriangleMesh::FaceVertexIndices::operator==(const TriangleMesh::FaceVertexIndices &rhs) const {
+    return v0 == rhs.v0 && v1 == rhs.v1 && v2 == rhs.v2;
+}
+
 bool TriangleMesh::FaceVertexIndices::operator!=(const TriangleMesh::FaceVertexIndices &rhs) const {
     return !(rhs == *this);
 }
+
 std::ostream &operator<<(std::ostream &os, const TriangleMesh::FaceVertexIndices &indices) {
     os << ToStringHelper("FaceVertexIndices")
-        .addMember("v0", indices.v0)
-        .addMember("v1", indices.v1)
-        .addMember("v2", indices.v2)
-        .finish();
+              .addMember("v0", indices.v0)
+              .addMember("v1", indices.v1)
+              .addMember("v2", indices.v2)
+              .finish();
     return os;
 }
 
@@ -134,7 +139,9 @@ TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIterator::operator++() {
     return FaceIdIterator(++id);
 }
 
-std::size_t TriangleMesh::FaceIdIterator::operator*() const { return id; }
+std::size_t TriangleMesh::FaceIdIterator::operator*() const {
+    return id;
+}
 
 bool TriangleMesh::FaceIdIterator::operator!=(const TriangleMesh::FaceIdIterator &o) const {
     return id != o.id;
@@ -151,10 +158,11 @@ TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIteratorAdapter::end() {
 TriangleMesh::FaceIdIteratorAdapter TriangleMesh::faceIds() const {
     return {*const_cast<TriangleMesh *>(this)};
 }
+
 void TriangleMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const {
     target.reserve(target.size() + faceCount());
     auto triangles = new Triangle[faceCount()];
-    Logger::debug("{:p}", (void *) triangles);
+    Logger::debug("{:p}", (void *)triangles);
 
     for (unsigned int i = 0; i < faceCount(); i++) {
         triangles[i] = Triangle(const_cast<TriangleMesh *>(this), i);
@@ -163,6 +171,7 @@ void TriangleMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwnin
 
     *isOwning = true;
 }
+
 std::size_t TriangleMesh::primitiveCount() const {
     return faceCount();
 }

@@ -1,15 +1,15 @@
-#include <catch2/catch.hpp>
 #include "CliParser.h"
+#include <catch2/catch.hpp>
 
 namespace crayg {
 
-#define ARGC_ARGV_(vector_name) \
-std::vector<char*> argv_vector;\
-for (const auto& arg : vector_name){\
-    argv_vector.push_back((char*)arg.data());\
-}\
-int argc = static_cast<int>(argv_vector.size()); \
-char ** argv = argv_vector.data();
+#define ARGC_ARGV_(vector_name)                                                                                        \
+    std::vector<char *> argv_vector;                                                                                   \
+    for (const auto &arg : vector_name) {                                                                              \
+        argv_vector.push_back((char *)arg.data());                                                                     \
+    }                                                                                                                  \
+    int argc = static_cast<int>(argv_vector.size());                                                                   \
+    char **argv = argv_vector.data();
 
 void assertHasError(const std::vector<std::string> &arguments) {
     ARGC_ARGV_(arguments);
@@ -21,8 +21,7 @@ void assertHasError(const std::vector<std::string> &arguments) {
     REQUIRE(result.error != "");
 }
 
-TEST_CASE("CliParser::parse")
-{
+TEST_CASE("CliParser::parse") {
     SECTION("should parse args valid") {
         std::vector<std::string> arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path"};
         ARGC_ARGV_(arguments);
@@ -36,9 +35,9 @@ TEST_CASE("CliParser::parse")
     }
 
     SECTION("should parse optional args") {
-        std::vector<std::string> arguments =
-            {"tests", "-s", "/some_scene_path", "-o", "/some_image_path", "--camera", "/usdCamera", "--resolution",
-             "1280x720", "--maxSamples", "8", "--intersector", "EMBREE"};
+        std::vector<std::string> arguments = {
+            "tests",        "-s",       "/some_scene_path", "-o", "/some_image_path", "--camera", "/usdCamera",
+            "--resolution", "1280x720", "--maxSamples",     "8",  "--intersector",    "EMBREE"};
         ARGC_ARGV_(arguments);
 
         CliParser cli_parser("executable_name", argc, argv);

@@ -48,12 +48,12 @@ struct PixelBufferGetValue {
         return {data[pixelNumber * colorChannelCount], data[pixelNumber * colorChannelCount + 1],
                 data[pixelNumber * colorChannelCount + 2]};
     }
+
     Color operator()(uint8_t *data) const {
         if (colorChannelCount == 1) {
             return Color::createGrey(static_cast<float>(data[pixelNumber]) / 255.f);
         }
-        return Color::fromRGB(data[pixelNumber * colorChannelCount],
-                              data[pixelNumber * colorChannelCount + 1],
+        return Color::fromRGB(data[pixelNumber * colorChannelCount], data[pixelNumber * colorChannelCount + 1],
                               data[pixelNumber * colorChannelCount + 2]);
     }
 
@@ -62,8 +62,13 @@ struct PixelBufferGetValue {
 };
 
 struct PixelBufferFree {
-    void operator()(float *data) const { delete[] data; }
-    void operator()(uint8_t *data) const { delete[] data; }
+    void operator()(float *data) const {
+        delete[] data;
+    }
+
+    void operator()(uint8_t *data) const {
+        delete[] data;
+    }
 };
 
 PixelBuffer::PixelBuffer(int width, int height, PixelFormat pixelFormat, int channelCount)
@@ -72,29 +77,23 @@ PixelBuffer::PixelBuffer(int width, int height, PixelFormat pixelFormat, int cha
 }
 
 PixelBuffer::PixelBuffer(const Resolution &resolution, PixelFormat pixelFormat, int channelCount)
-    : width(resolution.getWidth()),
-      height(resolution.getHeight()),
-      pixelFormat(pixelFormat),
+    : width(resolution.getWidth()), height(resolution.getHeight()), pixelFormat(pixelFormat),
       colorChannelCount(channelCount) {
     init(pixelFormat);
 }
 
 PixelBuffer::PixelBuffer(const PixelBuffer &pixelBuffer)
-    : width(pixelBuffer.width),
-      height(pixelBuffer.height),
-      pixelFormat(pixelBuffer.pixelFormat),
+    : width(pixelBuffer.width), height(pixelBuffer.height), pixelFormat(pixelBuffer.pixelFormat),
       colorChannelCount(pixelBuffer.colorChannelCount) {
     int count = pixelBuffer.pixelCount() * colorChannelCount;
 
     if (pixelBuffer.pixelFormat == PixelFormat::FLOAT) {
         data = new float[count];
-        std::memcpy(std::get<float *>(data),
-                    std::get<float *>(pixelBuffer.data),
+        std::memcpy(std::get<float *>(data), std::get<float *>(pixelBuffer.data),
                     pixelCount() * colorChannelCount * sizeof(float));
     } else if (pixelBuffer.pixelFormat == PixelFormat::UINT8) {
         data = new uint8_t[count];
-        std::memcpy(std::get<uint8_t *>(data),
-                    std::get<uint8_t *>(pixelBuffer.data),
+        std::memcpy(std::get<uint8_t *>(data), std::get<uint8_t *>(pixelBuffer.data),
                     pixelCount() * colorChannelCount * sizeof(uint8_t));
     } else {
         throw std::runtime_error("Unsupported pixel format");
@@ -122,17 +121,17 @@ std::unique_ptr<PixelBuffer> PixelBuffer::createVector3f(const Resolution &resol
 }
 
 void PixelBuffer::fill(const Color &color) {
-    std::visit(PixelBufferSetValue {0, pixelCount(), colorChannelCount, color}, data);
+    std::visit(PixelBufferSetValue{0, pixelCount(), colorChannelCount, color}, data);
 }
 
 void PixelBuffer::setValue(const PixelPosition &pixelPosition, const Color &color) {
-    std::visit(PixelBufferSetValue {pixelNumber(pixelPosition), pixelNumber(pixelPosition) + 1, colorChannelCount,
-                                    color},
-               data);
+    std::visit(
+        PixelBufferSetValue{pixelNumber(pixelPosition), pixelNumber(pixelPosition) + 1, colorChannelCount, color},
+        data);
 }
 
 Color PixelBuffer::getValue(const PixelPosition &pixelPosition) const {
-    return std::visit(PixelBufferGetValue {pixelNumber(pixelPosition), colorChannelCount}, data);
+    return std::visit(PixelBufferGetValue{pixelNumber(pixelPosition), colorChannelCount}, data);
 }
 
 int PixelBuffer::pixelCount() const {
@@ -140,7 +139,7 @@ int PixelBuffer::pixelCount() const {
 }
 
 PixelBuffer::~PixelBuffer() {
-    std::visit(PixelBufferFree {}, data);
+    std::visit(PixelBufferFree{}, data);
 }
 
 int PixelBuffer::pixelNumber(const PixelPosition &pixelPosition) const {
@@ -156,7 +155,7 @@ void PixelBuffer::init(PixelFormat pixelFormat) {
     } else {
         throw std::runtime_error("Unsupported pixel format");
     }
-    std::visit(PixelBufferSetValue {0, pixelCount(), colorChannelCount, Color::createBlack()}, data);
+    std::visit(PixelBufferSetValue{0, pixelCount(), colorChannelCount, Color::createBlack()}, data);
 }
 
 int PixelBuffer::getWidth() const {
@@ -180,13 +179,12 @@ bool PixelBuffer::operator==(const PixelBuffer &rhs) const {
         return true;
     }
     const bool hasSameSpec = data.index() == rhs.data.index() && colorChannelCount == rhs.colorChannelCount &&
-        width == rhs.width &&
-        height == rhs.height;
+                             width == rhs.width && height == rhs.height;
     if (!hasSameSpec) {
         return false;
     }
 
-    for (auto pixel: ImageIterators::lineByLine(*this)) {
+    for (auto pixel : ImageIterators::lineByLine(*this)) {
         if (getValue(pixel) != rhs.getValue(pixel)) {
             return false;
         }
@@ -212,7 +210,7 @@ bool PixelBuffer::isWhite() const {
 }
 
 bool PixelBuffer::isColor(const Color &color) const {
-    for (auto pixel: ImageIterators::lineByLine(*this)) {
+    for (auto pixel : ImageIterators::lineByLine(*this)) {
         if (getValue(pixel) != color) {
             return false;
         }
@@ -222,13 +220,14 @@ bool PixelBuffer::isColor(const Color &color) const {
 
 std::ostream &operator<<(std::ostream &os, const PixelBuffer &buffer) {
     os << ToStringHelper("PixelBuffer")
-        .addMember("width", buffer.width)
-        .addMember("height", buffer.height)
-        .addMember("colorChannelCount", buffer.colorChannelCount)
-        .addMember("pixelFormat", buffer.data.index() == 0 ? "FLOAT" : "UINT8")
-        .finish();
+              .addMember("width", buffer.width)
+              .addMember("height", buffer.height)
+              .addMember("colorChannelCount", buffer.colorChannelCount)
+              .addMember("pixelFormat", buffer.data.index() == 0 ? "FLOAT" : "UINT8")
+              .finish();
     return os;
 }
+
 PixelFormat PixelBuffer::getPixelFormat() const {
     return pixelFormat;
 }

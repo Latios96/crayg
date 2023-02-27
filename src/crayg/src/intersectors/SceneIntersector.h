@@ -1,15 +1,13 @@
 #ifndef CRAYG_SCENEINTERSECTOR_H
 #define CRAYG_SCENEINTERSECTOR_H
 
-#include <scene/Scene.h>
 #include <basics/Ray.h>
+#include <scene/Scene.h>
 
 namespace crayg {
 
-
-
 class SceneIntersector {
- public:
+  public:
     explicit SceneIntersector(Scene &scene);
 
     virtual Imageable::Intersection intersect(const Ray &ray) const;
@@ -17,10 +15,10 @@ class SceneIntersector {
 
     virtual ~SceneIntersector();
 
- protected:
+  protected:
     Scene &scene;
 };
 
 }
 
-#endif //CRAYG_SCENEINTERSECTOR_H
+#endif // CRAYG_SCENEINTERSECTOR_H

@@ -1,8 +1,8 @@
-#include <catch2/catch.hpp>
+#include "fixtures/TriangleMeshFixtures.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
-#include "fixtures/TriangleMeshFixtures.h"
+#include <catch2/catch.hpp>
 #include <numeric>
 
 namespace crayg {
@@ -59,9 +59,8 @@ TEST_CASE("TriangleMesh::init") {
         triangleMesh.init();
 
         REQUIRE(triangleMesh.normalsPrimVar != nullptr);
-        REQUIRE(
-            triangleMesh.getNormalsPrimVarAs<TriangleMeshPerFacePrimVar<Vector3f>>()->read(0)
-                == Vector3f(0, 0, -1));
+        REQUIRE(triangleMesh.getNormalsPrimVarAs<TriangleMeshPerFacePrimVar<Vector3f>>()->read(0) ==
+                Vector3f(0, 0, -1));
     }
 
     SECTION("providing normals primvar should use them") {

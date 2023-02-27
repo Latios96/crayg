@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
 #include "sceneIO/usd/UsdUtils.h"
+#include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>
 
@@ -20,7 +20,6 @@ TEST_CASE("UsdUtils::getAttributeValueAs") {
     SECTION("should throw exception when there is an error reading the attribute") {
         REQUIRE_THROWS_AS(UsdUtils::getStaticAttributeValueAs<float>(sphere.GetRadiusAttr()), std::runtime_error);
     }
-
 }
 
 }

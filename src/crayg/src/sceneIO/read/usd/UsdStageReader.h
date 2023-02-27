@@ -1,35 +1,31 @@
 #ifndef CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_
 #define CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_
 
-#include "sceneIO/usd/CraygUsdBase.h"
+#include "UsdMaterialReadCache.h"
 #include "scene/Scene.h"
 #include "scene/materials/UsdPreviewSurface.h"
 #include "sceneIO/read/SceneReader.h"
-#include "UsdMaterialReadCache.h"
-#include <pxr/usd/usd/stage.h>
+#include "sceneIO/usd/CraygUsdBase.h"
 #include <optional>
+#include <pxr/usd/usd/stage.h>
 
 namespace crayg {
 
 class UsdStageReader {
- public:
-
+  public:
     explicit UsdStageReader(pxr::UsdStage &stage);
 
     void readStageToScene(Scene &scene,
                           const SceneReader::ReadOptions &readOptions = SceneReader::ReadOptions::empty());
 
- private:
+  private:
     pxr::UsdStage &stage;
     void readCamera(Scene &scene, const pxr::UsdPrim &prim) const;
     void readSphereLight(Scene &scene, const pxr::UsdPrim &prim) const;
     void readRectLight(Scene &scene, const pxr::UsdPrim &prim) const;
-    void readUsdGeomMesh(Scene &scene,
-                         const std::shared_ptr<Material> &defaultMaterial,
-                         const pxr::UsdPrim &prim);
-    void readSubdivisionSurfaceMesh(Scene &scene,
-                         const std::shared_ptr<Material> &defaultMaterial,
-                         const pxr::UsdPrim &prim);
+    void readUsdGeomMesh(Scene &scene, const std::shared_ptr<Material> &defaultMaterial, const pxr::UsdPrim &prim);
+    void readSubdivisionSurfaceMesh(Scene &scene, const std::shared_ptr<Material> &defaultMaterial,
+                                    const pxr::UsdPrim &prim);
     void readSphere(Scene &scene, const pxr::UsdPrim &prim);
     void readDiskLight(Scene &scene, const pxr::UsdPrim &prim) const;
     void readRenderSettings(Scene &scene);
@@ -42,4 +38,4 @@ class UsdStageReader {
 
 }
 
-#endif //CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_
+#endif // CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_

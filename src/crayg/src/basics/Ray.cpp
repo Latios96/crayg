@@ -1,6 +1,6 @@
+#include "Ray.h"
 #include <limits>
 #include <utils/Preconditions.h>
-#include "Ray.h"
 
 namespace crayg {
 
@@ -35,22 +35,20 @@ Vector3f Ray::constructIntersectionPoint(float t) const {
 }
 
 bool Ray::operator==(const Ray &rhs) const {
-    return startPoint == rhs.startPoint &&
-        direction == rhs.direction &&
-        length == rhs.length;
+    return startPoint == rhs.startPoint && direction == rhs.direction && length == rhs.length;
 }
 
 bool Ray::operator!=(const Ray &rhs) const {
     return !(rhs == *this);
 }
+
 std::ostream &operator<<(std::ostream &os, const Ray &ray) {
     os << "startPoint: " << ray.startPoint << " direction: " << ray.direction << " length: " << ray.length;
     return os;
 }
+
 Ray Ray::offsetStartPointBy(float offset) const {
     return Ray(startPoint + direction * offset, direction, length);
 }
 
 }
-
-

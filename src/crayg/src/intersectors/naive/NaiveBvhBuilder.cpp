@@ -1,15 +1,16 @@
 #include "NaiveBvhBuilder.h"
 #include "utils/StopWatch.h"
+
 namespace crayg {
 
-enum Axis {
-    X, Y, Z
-};
+enum Axis { X, Y, Z };
 
 struct SplitInfo {
     Axis axis;
     float splitPoint;
-    SplitInfo(Axis axis, float splitPoint) : axis(axis), splitPoint(splitPoint) {}
+
+    SplitInfo(Axis axis, float splitPoint) : axis(axis), splitPoint(splitPoint) {
+    }
 };
 
 SplitInfo getSplitInfo(const BoundingBox &bounds) {
@@ -28,7 +29,7 @@ BoundingBox computeBounds(const std::vector<Imageable *> &objects) {
         return {};
     }
     auto boundingBox = objects[0]->getBounds();
-    for (const auto &obj: objects) {
+    for (const auto &obj : objects) {
         boundingBox = boundingBox.unionWith(obj->getBounds());
     }
     return boundingBox;
@@ -39,12 +40,13 @@ BoundingBox computeCentroidBounds(const std::vector<Imageable *> &objects) {
         return {};
     }
     BoundingBox boundingBox(objects[0]->getBounds().getCentroid(), objects[0]->getBounds().getCentroid());
-    for (const auto &obj: objects) {
+    for (const auto &obj : objects) {
         const Vector3f objCentroid = obj->getBounds().getCentroid();
         boundingBox = boundingBox.unionWith(objCentroid);
     }
     return boundingBox;
 }
+
 bool isLeft(const Imageable *obj, const SplitInfo &splitInfo) {
     if (splitInfo.axis == Axis::X) {
         return obj->getBounds().getCentroid().x < splitInfo.splitPoint;
@@ -61,7 +63,7 @@ std::unique_ptr<NaiveBvhNode> buildTree(const std::vector<Imageable *> &objects)
     const BoundingBox centroidBounds = computeCentroidBounds(objects);
     const SplitInfo splitInfo = getSplitInfo(centroidBounds);
 
-    for (const auto &obj: objects) {
+    for (const auto &obj : objects) {
         if (isLeft(obj, splitInfo)) {
             left.push_back(obj);
         } else {
@@ -72,10 +74,8 @@ std::unique_ptr<NaiveBvhNode> buildTree(const std::vector<Imageable *> &objects)
         return std::make_unique<NaiveBvhNode>(bounds, nullptr, nullptr, objects);
     }
 
-    return std::make_unique<NaiveBvhNode>(bounds,
-                                          !left.empty() ? buildTree(left) : nullptr,
-                                          !right.empty() ? buildTree(right) : nullptr,
-                                          std::vector<Imageable *>());
+    return std::make_unique<NaiveBvhNode>(bounds, !left.empty() ? buildTree(left) : nullptr,
+                                          !right.empty() ? buildTree(right) : nullptr, std::vector<Imageable *>());
 }
 
 std::unique_ptr<NaiveBvh> NaiveBvhBuilder::build() const {
@@ -90,6 +90,7 @@ std::unique_ptr<NaiveBvh> NaiveBvhBuilder::build() const {
 
     return bvh;
 }
+
 void NaiveBvhBuilder::collectPrimitives(NaiveBvh &bvh) const {
     InformativeScopedStopWatch collectingPrimitives("Collecting primitives");
 
@@ -98,7 +99,7 @@ void NaiveBvhBuilder::collectPrimitives(NaiveBvh &bvh) const {
 
     bvh.objects.reserve(primitiveCount);
 
-    for (const auto &obj: scene.objects) {
+    for (const auto &obj : scene.objects) {
         bool isOwning;
         size_t startIndex = bvh.objects.size();
         obj->getPrimitives(bvh.objects, &isOwning);
@@ -107,15 +108,17 @@ void NaiveBvhBuilder::collectPrimitives(NaiveBvh &bvh) const {
         }
     }
 }
+
 std::size_t NaiveBvhBuilder::collectPrimitiveCount() const {
     std::size_t primitiveCount = 0;
     InformativeScopedStopWatch collectingPrimitiveCount("Collecting primitive count");
-    for (auto &obj: scene.objects) {
+    for (auto &obj : scene.objects) {
         primitiveCount += obj->primitiveCount();
     }
     return primitiveCount;
 }
-NaiveBvhBuilder::NaiveBvhBuilder(const Scene &scene) : scene(scene) {}
 
+NaiveBvhBuilder::NaiveBvhBuilder(const Scene &scene) : scene(scene) {
+}
 
 }

@@ -6,7 +6,7 @@
 namespace crayg {
 
 class ImagePathResolver {
- public:
+  public:
     std::string resolve(const std::string &pathTemplate) const;
     int parseImageNumber(const std::string path) const;
     bool matchesTemplate(const std::string &pathTemplate, const std::string path) const;
@@ -14,4 +14,4 @@ class ImagePathResolver {
 
 }
 
-#endif //CRAYG_SRC_CRAYG_SRC_IMAGEPATHRESOLVER_H_
+#endif // CRAYG_SRC_CRAYG_SRC_IMAGEPATHRESOLVER_H_

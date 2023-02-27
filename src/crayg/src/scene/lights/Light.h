@@ -1,16 +1,16 @@
 #ifndef CRAYG_LIGHT_H
 #define CRAYG_LIGHT_H
 
-#include <ostream>
-#include "scene/Transformable.h"
 #include "scene/Imageable.h"
+#include "scene/Transformable.h"
+#include <ostream>
 
 namespace crayg {
 
 class SceneIntersector;
 
 class Light : public Transformable, public Imageable {
- public:
+  public:
     Light();
     explicit Light(const Transform &transform, float intensity);
 
@@ -23,7 +23,7 @@ class Light : public Transformable, public Imageable {
     const std::string &getName() const;
     void setName(const std::string &name);
 
-    struct Radiance {// todo move next to light
+    struct Radiance { // todo move next to light
         Color radiance;
         Ray ray;
         Radiance(const Color &radiance, const Ray &ray);
@@ -37,11 +37,12 @@ class Light : public Transformable, public Imageable {
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     virtual std::string getType();
- private:
+
+  private:
     float intensity = 1;
     Color color = Color::createWhite();
     std::string name;
 };
 
 }
-#endif //CRAYG_L
+#endif // CRAYG_L

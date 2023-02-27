@@ -1,6 +1,6 @@
+#include "intersectors/SceneIntersector.h"
 #include <catch2/catch.hpp>
 #include <scene/lights/DiskLight.h>
-#include "intersectors/SceneIntersector.h"
 
 namespace crayg {
 
@@ -24,7 +24,6 @@ TEST_CASE("DiskLight::sampleLightShape") {
     const float radius = 2;
     DiskLight diskLight(Transform::withPosition(position), 1.0f, radius);
 
-
     SECTION("sampleLightShape should respect radius") {
         const float realRadius = 2;
         for (int i = 0; i < 1000; i++) {
@@ -35,11 +34,11 @@ TEST_CASE("DiskLight::sampleLightShape") {
             REQUIRE(samplePoint.y > (position.y - realRadius));
             REQUIRE(samplePoint.z == position.z);
         }
-    }SECTION("sampleLightShape should respect scale") {
+    }
+    SECTION("sampleLightShape should respect scale") {
 
         const Transform transform =
-            Transform(Transform::withPosition(position).matrix
-                          * Transform::withScale(1. / 2, 1. / 2, 1. / 2).matrix);
+            Transform(Transform::withPosition(position).matrix * Transform::withScale(1. / 2, 1. / 2, 1. / 2).matrix);
         diskLight.setTransform(transform);
         const float realRadius = 1;
 
@@ -73,7 +72,6 @@ TEST_CASE("DiskLight isIntersecting", "[DiskLight]") {
 
         REQUIRE_FALSE(isIntersecting);
     }
-
 }
 
 TEST_CASE("DiskLight intersect", "[DiskLight]") {
@@ -98,8 +96,8 @@ TEST_CASE("DiskLight intersect", "[DiskLight]") {
 }
 
 TEST_CASE("Disklight getBounds", "[DiskLight]") {
-    const std::shared_ptr<DiskLight>
-        diskLight = std::make_shared<DiskLight>(Transform::withPosition({0, 0, 0}), 1.0f, 1.0f);
+    const std::shared_ptr<DiskLight> diskLight =
+        std::make_shared<DiskLight>(Transform::withPosition({0, 0, 0}), 1.0f, 1.0f);
 
     const BoundingBox bounds = diskLight->getBounds();
 
@@ -120,8 +118,7 @@ TEST_CASE("Disklight::area") {
     SECTION("area should respect scale") {
         diskLight.setRadius(1);
         const Transform transform =
-            Transform(Transform::withPosition(position).matrix
-                          * Transform::withScale(5, 5, 5).matrix);
+            Transform(Transform::withPosition(position).matrix * Transform::withScale(5, 5, 5).matrix);
         diskLight.setTransform(transform);
 
         const float area = diskLight.area();
