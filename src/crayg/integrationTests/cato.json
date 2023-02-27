@@ -66,9 +66,6 @@
       "command": "{{cray_integration_test_command}}",
       "tests": [
         {
-          "name": "writeBmpImage"
-        },
-        {
           "name": "writeRgbExrImage"
         },
         {

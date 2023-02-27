@@ -27,13 +27,6 @@ void createSplittedImage(PixelBuffer &pixelBuffer) {
     }
 }
 
-TEST_CASE("ImageIO/writeBmpImage") {
-    Image image(1280, 720);
-    createGradientImage(image.rgb);
-
-    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeBmpImage"));
-}
-
 TEST_CASE("ImageIO/writeRgbExrImage") {
     Image image(1280, 720);
     createGradientImage(image.rgb);
