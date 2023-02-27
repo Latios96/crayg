@@ -26,7 +26,7 @@ TEST_CASE("ImageIterators", "[ImageIterators]") {
     }
 
     SECTION("testLineByLineWithBucket") {
-        ImageBucket bucket(0, 0, 5, 5);
+        ImageBucket bucket({0, 0}, 5, 5);
         std::vector<Vector2i> visitedPositions;
 
         for (auto pixel : ImageIterators::lineByLine(bucket)) {

@@ -14,7 +14,7 @@ class ImageBucketSequences {
 
         for (int y = 0; y < i.getHeight(); y += bucketWidth) {
             for (int x = 0; x < i.getWidth(); x += bucketWidth) {
-                buckets.emplace_back(x, y, fitImage(x, bucketWidth, i.getWidth()),
+                buckets.emplace_back(Vector2i(x, y), fitImage(x, bucketWidth, i.getWidth()),
                                      fitImage(y, bucketWidth, i.getHeight()));
             }
         }

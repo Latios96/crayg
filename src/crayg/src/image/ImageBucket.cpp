@@ -4,11 +4,12 @@
 
 namespace crayg {
 
-ImageBucket::ImageBucket(int x, int y, int width, int height) : x(x), y(y), width(width), height(height) {
+ImageBucket::ImageBucket(const Vector2i &position, int width, int height)
+    : position(position), width(width), height(height) {
 }
 
 bool ImageBucket::operator==(const ImageBucket &rhs) const {
-    return x == rhs.x && y == rhs.y && width == rhs.width && height == rhs.height;
+    return position == rhs.position && width == rhs.width && height == rhs.height;
 }
 
 bool ImageBucket::operator!=(const ImageBucket &rhs) const {
@@ -17,20 +18,15 @@ bool ImageBucket::operator!=(const ImageBucket &rhs) const {
 
 std::ostream &operator<<(std::ostream &os, const ImageBucket &bucket) {
     os << ToStringHelper("ImageBucket")
-              .addMember("x", bucket.x)
-              .addMember("y", bucket.y)
+              .addMember("position", bucket.position)
               .addMember("width", bucket.width)
               .addMember("height", bucket.height)
               .finish();
     return os;
 }
 
-const int ImageBucket::getX() const {
-    return x;
-}
-
-const int ImageBucket::getY() const {
-    return y;
+Vector2i ImageBucket::getPosition() const {
+    return position;
 }
 
 const int ImageBucket::getWidth() const {
@@ -42,10 +38,10 @@ const int ImageBucket::getHeight() const {
 }
 
 ImageBucket::ImageBucket(const ImageBucket &imageBucket)
-    : x(imageBucket.x), y(imageBucket.y), width(imageBucket.width), height(imageBucket.height) {
+    : position(imageBucket.position), width(imageBucket.width), height(imageBucket.height) {
 }
 
-ImageBucket::ImageBucket() : x(0), y(0), width(0), height(0) {
+ImageBucket::ImageBucket() : position(Vector2i(0, 0)), width(0), height(0) {
 }
 
 }
@@ -53,8 +49,8 @@ ImageBucket::ImageBucket() : x(0), y(0), width(0), height(0) {
 namespace std {
 size_t std::hash<crayg::ImageBucket>::operator()(const crayg::ImageBucket &imageBucket) const {
     std::size_t seed = 0;
-    boost::hash_combine(seed, imageBucket.getX());
-    boost::hash_combine(seed, imageBucket.getY());
+    boost::hash_combine(seed, imageBucket.getPosition().x);
+    boost::hash_combine(seed, imageBucket.getPosition().y);
     boost::hash_combine(seed, imageBucket.getWidth());
     boost::hash_combine(seed, imageBucket.getHeight());
     return seed;

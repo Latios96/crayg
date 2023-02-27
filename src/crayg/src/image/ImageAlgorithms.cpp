@@ -10,14 +10,14 @@ void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bu
     }
 
     for (auto pixel : ImageIterators::lineByLine(bucketImageBuffer.image)) {
-        image.setValue({pixel.x + bucketImageBuffer.imageBucket.getX(), pixel.y + bucketImageBuffer.imageBucket.getY()},
-                       bucketImageBuffer.image.getValue(pixel));
+        image.setValue(pixel + bucketImageBuffer.imageBucket.getPosition(), bucketImageBuffer.image.getValue(pixel));
     }
 }
 
 bool ImageAlgorithms::bucketIsContainedInImage(const ImageBucket &bucket, Image &image) {
-    return bucket.getX() >= 0 && bucket.getY() >= 0 && bucket.getX() + bucket.getWidth() <= image.getWidth() &&
-           bucket.getY() + bucket.getHeight() <= image.getHeight();
+    return bucket.getPosition().x >= 0 && bucket.getPosition().y >= 0 &&
+           bucket.getPosition().x + bucket.getWidth() <= image.getWidth() &&
+           bucket.getPosition().y + bucket.getHeight() <= image.getHeight();
 }
 
 }

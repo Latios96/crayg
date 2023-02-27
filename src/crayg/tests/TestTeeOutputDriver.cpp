@@ -33,7 +33,7 @@ TEST_CASE("TeeOutputDriver should forward methods") {
     }
 
     SECTION("should forward writeBucketImageBuffer") {
-        teeOutputDriver.writeBucketImageBuffer(BucketImageBuffer(0, 0, 10, 10));
+        teeOutputDriver.writeBucketImageBuffer(BucketImageBuffer({0, 0}, 10, 10));
 
         fakeit::Verify(Method(mockLeft, writeBucketImageBuffer)).Once();
         fakeit::Verify(Method(mockRight, writeBucketImageBuffer)).Once();

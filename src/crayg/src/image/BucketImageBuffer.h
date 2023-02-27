@@ -11,7 +11,7 @@ struct BucketImageBuffer {
     ImageBucket imageBucket;
     Image image;
     BucketImageBuffer();
-    BucketImageBuffer(int x, int y, int width, int height);
+    BucketImageBuffer(const Vector2i &position, int width, int height);
     BucketImageBuffer(const ImageBucket &imageBucket);
 };
 

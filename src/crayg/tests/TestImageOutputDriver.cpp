@@ -10,7 +10,7 @@ TEST_CASE("ImageOutputDriver") {
     ImageOutputDriver imageOutputDriver(image);
 
     SECTION("shouldWriteBucket") {
-        BucketImageBuffer bucketImageBuffer(0, 0, 30, 30);
+        BucketImageBuffer bucketImageBuffer({0, 0}, 30, 30);
         ImageAlgorithms::fill(bucketImageBuffer.image, Color::createWhite());
 
         imageOutputDriver.prepareBucket(bucketImageBuffer.imageBucket);

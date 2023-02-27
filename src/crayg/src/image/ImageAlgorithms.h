@@ -13,7 +13,7 @@ class ImageAlgorithms {
 
     template <typename I> static void fill(I &image, const Color &color) {
         for (auto pixel : ImageIterators::lineByLine(image)) {
-            image.setValue(pixel color);
+            image.setValue(pixel, color);
         }
     }
 

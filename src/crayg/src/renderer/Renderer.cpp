@@ -61,7 +61,7 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
-        Color pixelColor = renderPixel(Vector2i(imageBucket.getX() + pixel.x, imageBucket.getY() + pixel.y));
+        Color pixelColor = renderPixel(pixel + imageBucket.getPosition());
         bucketImageBuffer.image.setValue(pixel, pixelColor);
     }
     outputDriver.writeBucketImageBuffer(bucketImageBuffer);
