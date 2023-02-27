@@ -153,4 +153,12 @@ TEST_CASE("Color/isBlack", "[Color]") {
     }
 }
 
+TEST_CASE("Color/pow", "[Color]") {
+    const Color color(1, 2, 3);
+
+    const Color result = color.pow(2);
+
+    REQUIRE(result == Color(1, 4, 9));
+}
+
 }

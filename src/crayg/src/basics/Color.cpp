@@ -95,4 +95,8 @@ Color Color::createRandom() {
     return {Random::random(), Random::random(), Random::random()};
 }
 
+Color Color::pow(float exponent) const {
+    return {std::pow(r, exponent), std::pow(g, exponent), std::pow(b, exponent)};
+}
+
 } // namespace crayg

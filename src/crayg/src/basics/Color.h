@@ -44,6 +44,8 @@ class Color {
 
     std::tuple<int, int, int> getRgbValues() const;
 
+    Color pow(float exponent) const;
+
     friend std::ostream &operator<<(std::ostream &os, const Color &color);
 };
 
