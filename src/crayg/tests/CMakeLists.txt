@@ -108,6 +108,7 @@ set(UNIT_TEST_LIST
         TestUsdSubdivisionSurfaceMeshWriter.cpp
         TestUsdTriangleMeshWriter.cpp
         TestUsdUtils.cpp
+        TestVector2.cpp
         TestVector3f.cpp
         )
 

@@ -14,6 +14,7 @@ set(crayg_SRCS
         basics/Resolution.h
         basics/Transform.cpp
         basics/Transform.h
+        basics/Vector2.h
         basics/Vector3f.cpp
         basics/Vector3f.h
         CraygInfo.cpp

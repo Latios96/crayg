@@ -1,0 +1,56 @@
+#ifndef CRAYG_SRC_CRAYG_SRC_BASICS_VECTOR2_H_
+#define CRAYG_SRC_CRAYG_SRC_BASICS_VECTOR2_H_
+
+#include "utils/ToStringHelper.h"
+#include <ostream>
+
+namespace crayg {
+template <typename T> class Vector2 {
+  public:
+    T x, y;
+
+    Vector2() : x(0), y(0) {
+    }
+
+    Vector2(T x, T y) : x(x), y(y) {
+    }
+
+    Vector2(const Vector2<T> &vec) : x(vec.x), y(vec.y) {
+    }
+
+    Vector2<T> operator+(const Vector2<T> &otherVector) const {
+        return {x + otherVector.x, y + otherVector.y};
+    }
+
+    Vector2<T> operator-(const Vector2<T> &otherVector) const {
+        return {x - otherVector.x, y - otherVector.y};
+    }
+
+    Vector2<T> operator*(T scalar) const {
+        return {x * scalar, y * scalar};
+    }
+
+    Vector2<T> operator/(T scalar) const {
+        return {x / scalar, y / scalar};
+    }
+
+    bool operator==(const Vector2<T> &rhs) const {
+        return x == rhs.x && y == rhs.y;
+    }
+
+    bool operator!=(const Vector2<T> &rhs) const {
+        return !(rhs == *this);
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Vector2<T> &f) {
+        os << ToStringHelper("Vector2").addMember("x", f.x).addMember("y", f.y).finish();
+        return os;
+    }
+};
+
+typedef Vector2<float> Vector2f;
+typedef Vector2<int> Vector2i;
+
+}
+
+#endif // CRAYG_SRC_CRAYG_SRC_BASICS_VECTOR2_H_
