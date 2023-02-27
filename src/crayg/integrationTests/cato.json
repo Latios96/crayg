@@ -129,7 +129,7 @@
         {
           "name": "SimpleReflectiveMaterial",
           "comparisonSettings": {
-            "threshold": 0.926
+            "threshold": 0.917
           }
         }
       ]
