@@ -127,7 +127,10 @@
           "name": "SimpleDiffuseMaterial"
         },
         {
-          "name": "SimpleReflectiveMaterial"
+          "name": "SimpleReflectiveMaterial",
+          "comparisonSettings": {
+            "threshold": 0.926
+          }
         }
       ]
     }

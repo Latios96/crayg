@@ -1,4 +1,5 @@
 #include "ImageWidget.h"
+#include "image/ColorConversion.h"
 #include "image/ImageAlgorithms.h"
 #include "image/ImageIterators.h"
 
@@ -83,7 +84,11 @@ void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
         int x = pixel.x + imageBucket.getX();
         int y = pixel.y + imageBucket.getY();
-        auto rgbValues = pixelBuffer->getValue({x, y}).getRgbValues();
+        Color color = pixelBuffer->getValue({x, y});
+        if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {
+            color = ColorConversion::linearToSRGB(color);
+        }
+        auto rgbValues = color.getRgbValues();
         bufferToShow.setPixelColor(
             x, y, QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
     }

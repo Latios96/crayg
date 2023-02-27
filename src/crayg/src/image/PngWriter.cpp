@@ -1,4 +1,5 @@
 #include "PngWriter.h"
+#include "ColorConversion.h"
 #include "Logger.h"
 #include "utils/ImageChannelPathResolver.h"
 #include <OpenImageIO/imageio.h>
@@ -42,8 +43,16 @@ void PngWriter::writeImage(const Image &image, std::string image_name) {
 
         writeImageMetadata(image, spec);
 
+        PixelBuffer *bufferToWrite = &channelBuffer;
+        std::unique_ptr<PixelBuffer> convertedPixelBuffer;
+        if (ColorConversion::channelNeedsLinearToSRgbConversion(channel.channelName)) {
+            convertedPixelBuffer = std::make_unique<PixelBuffer>(channelBuffer);
+            ColorConversion::linearToSRGB(channelBuffer, *convertedPixelBuffer);
+            bufferToWrite = convertedPixelBuffer.get();
+        }
+
         out->open(channelPath, spec);
-        write(out, channelBuffer);
+        write(out, *bufferToWrite);
         out->close();
     }
 }
