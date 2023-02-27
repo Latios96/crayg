@@ -21,6 +21,7 @@ class RunConfigParameter:
     def output_file_name(self):
         return f"{Path(self.scene_path.name).stem}.#.png"
 
+
 def generate_run_config(run_manager, config: RunConfigParameter):
     print(f"Creating {config.name}")
     configuration_element = ET.Element("configuration")
@@ -62,10 +63,10 @@ def generate_run_config(run_manager, config: RunConfigParameter):
 
 def collect_integration_test_scenes():
     directory = (
-            Path(os.path.abspath(__file__)).parent.parent
-            / "src"
-            / "crayg"
-            / "integrationTests"
+        Path(os.path.abspath(__file__)).parent.parent
+        / "src"
+        / "crayg"
+        / "integrationTests"
     )
     return [RunConfigParameter(x) for x in directory.glob("**/*.usda")]
 
@@ -116,7 +117,9 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Pixar_Kitchen_set\Kitchen_set_Crayg.usda"),
+                Path(
+                    r"M:\Test_Scene_Collection\Pixar_Kitchen_set\Kitchen_set_Crayg.usda"
+                ),
                 name_override="Pixar Kitchen",
             )
         )
@@ -147,31 +150,41 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
 
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Blenderman\Blenderman_Crayg.usda"),
+                Path(
+                    r"M:\Test_Scene_Collection\Blender_Splash_Screens\Blenderman\Blenderman_Crayg.usda"
+                ),
                 name_override="Blenderman",
             )
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Junk_Shop\Junk_Shop_Crayg.usda"),
+                Path(
+                    r"M:\Test_Scene_Collection\Blender_Splash_Screens\Junk_Shop\Junk_Shop_Crayg.usda"
+                ),
                 name_override="Junk_Shop",
             )
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Racing_Car\Racing_Car_Crayg.usda"),
+                Path(
+                    r"M:\Test_Scene_Collection\Blender_Splash_Screens\Racing_Car\Racing_Car_Crayg.usda"
+                ),
                 name_override="Racing_Car",
             )
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\Sprite_Fright\Sprite_Fright_Crayg.usda"),
+                Path(
+                    r"M:\Test_Scene_Collection\Blender_Splash_Screens\Sprite_Fright\Sprite_Fright_Crayg.usda"
+                ),
                 name_override="Sprite_Fright",
             )
         )
         scenes.append(
             RunConfigParameter(
-                Path(r"M:\Test_Scene_Collection\Blender_Splash_Screens\White_Lands\White_Lands_Crayg.usda"),
+                Path(
+                    r"M:\Test_Scene_Collection\Blender_Splash_Screens\White_Lands\White_Lands_Crayg.usda"
+                ),
                 name_override="White_Lands",
             )
         )
@@ -196,7 +209,7 @@ def main():
     scenes = collect_integration_test_scenes()
     collect_test_scenes(scenes)
     workspace_xml_path = (
-            Path(os.path.abspath(__file__)).parent.parent / ".idea" / "workspace.xml"
+        Path(os.path.abspath(__file__)).parent.parent / ".idea" / "workspace.xml"
     )
     tree = ET.parse(workspace_xml_path)
     run_manager = get_run_manager_element(tree)

@@ -33,7 +33,10 @@ def load_icon_sets():
     icon_set_sizes = {}
 
     for f in files:
-        match = re.search('(?P<name>\w+)_(?P<color>\w+)_(?P<background_color>\w+)_(?P<size>\d+)x\d+', str(f.name))
+        match = re.search(
+            "(?P<name>\w+)_(?P<color>\w+)_(?P<background_color>\w+)_(?P<size>\d+)x\d+",
+            str(f.name),
+        )
         if not match:
             continue
         name = match.group("name")
@@ -42,8 +45,12 @@ def load_icon_sets():
         identifier = (name, color, background_color)
         icon_set = icon_set_sizes.get(identifier)
         if not icon_set:
-            icon_set = IconSet(name=name, color=color,
-                               background_color=background_color, resolutions=[])
+            icon_set = IconSet(
+                name=name,
+                color=color,
+                background_color=background_color,
+                resolutions=[],
+            )
             icon_set_sizes[identifier] = icon_set
         icon_set.resolutions.append(int(match.group("size")))
     return list(icon_set_sizes.values())
@@ -51,7 +58,12 @@ def load_icon_sets():
 
 def generate_ico_file(icon_sets: List[IconSet]):
     for icon_set in icon_sets:
-        command = ["magick", "convert", *icon_set.get_names(), f"generated/{icon_set.identifier()}.ico"]
+        command = [
+            "magick",
+            "convert",
+            *icon_set.get_names(),
+            f"generated/{icon_set.identifier()}.ico",
+        ]
         print(f"Converting {icon_set.identifier()} to .ico..")
         subprocess.call(command)
 
@@ -63,9 +75,15 @@ def generate_icns_file(icon_sets: List[IconSet]):
                 continue
             print(f"Converting {icon_set.identifier()} to .icns..")
             for resolution in icon_set.resolutions:
-                icon_set_folder_path = Path(tmpdir).parent / "iconTest" / f"{icon_set.identifier().replace('_', '')}.iconset"
+                icon_set_folder_path = (
+                    Path(tmpdir).parent
+                    / "iconTest"
+                    / f"{icon_set.identifier().replace('_', '')}.iconset"
+                )
                 target = icon_set_folder_path / f"icon_{resolution}x{resolution}.png"
-                target_scaled = icon_set_folder_path / f"icon_{resolution}x{resolution}@2x.png"
+                target_scaled = (
+                    icon_set_folder_path / f"icon_{resolution}x{resolution}@2x.png"
+                )
                 if not target.parent.exists():
                     os.makedirs(target.parent)
                 shutil.copy(icon_set.get_name(resolution), target)
@@ -73,8 +91,10 @@ def generate_icns_file(icon_sets: List[IconSet]):
                     shutil.copy(icon_set.get_name(int(resolution * 2)), target_scaled)
             command = ["iconutil", "-c", "icns", str(icon_set_folder_path)]
             subprocess.call(command)
-            shutil.copy(str(icon_set_folder_path).replace(".iconset", ".icns"),
-                        Path(__file__).parent / "generated"/(icon_set.identifier() + ".icns"))
+            shutil.copy(
+                str(icon_set_folder_path).replace(".iconset", ".icns"),
+                Path(__file__).parent / "generated" / (icon_set.identifier() + ".icns"),
+            )
 
 
 def ensure_generated_folder():
@@ -91,5 +111,5 @@ def main():
         generate_icns_file(icon_sets)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
