@@ -7,7 +7,6 @@
 class ReadableFormatter {
   public:
     std::string formatDuration(std::chrono::seconds seconds);
-    //:.2f
 };
 
 #endif // CRAYG_SRC_CRAYG_SRC_UTILS_READABLEFORMATTER_H_

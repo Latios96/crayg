@@ -27,14 +27,8 @@ class Camera : public Transformable {
 
     float getHorizontalFieldOfView() const;
 
-    /**
-     * Returns the focalLength in mm
-     * @return focalLength in mm
-     */
     float getFocalLength() const;
-    /**
-     * @return filmbackSize in mm
-     */
+
     float getFilmbackSize() const;
 
     const std::string &getName() const;

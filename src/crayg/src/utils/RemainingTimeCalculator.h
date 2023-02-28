@@ -11,11 +11,6 @@ class RemainingTimeCalculator {
     RemainingTimeCalculator();
     explicit RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime);
 
-    /**
-     * Returns the remaining time for the given progress
-     * @param progress progress in percent, for example 5
-     * @return the remaining time in seconds
-     */
     float getRemainingTimeByProgress(int progress);
 
   private:
