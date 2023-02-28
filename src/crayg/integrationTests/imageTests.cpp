@@ -106,7 +106,7 @@ TEST_CASE("ImageIO/writeToImageOutputDriver") {
 
     for (int x = 0; x < 1000; x += 50) {
         for (int y = 0; y < 500; y += 50) {
-            BucketImageBuffer bucketImageBuffer(x, y, 25, 25);
+            BucketImageBuffer bucketImageBuffer({x, y}, 25, 25);
             ImageAlgorithms::fill(bucketImageBuffer.image, Color::createGrey(static_cast<float>(x)));
 
             imageOutputDriver.prepareBucket(bucketImageBuffer.imageBucket);

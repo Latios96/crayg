@@ -54,8 +54,8 @@ void drawVLine(QImage &image, int x_start, int y_start, int length, int width) {
 }
 
 void drawBucket(QImage &bufferToShow, const ImageBucket &imageBucket) {
-    int x = imageBucket.getX();
-    int y = imageBucket.getY();
+    int x = imageBucket.getPosition().x;
+    int y = imageBucket.getPosition().y;
     int CROSS_LENGTH = 5;
     int CROSS_WIDTH = 1;
 
@@ -82,15 +82,15 @@ void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
         return;
     }
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
-        int x = pixel.x + imageBucket.getX();
-        int y = pixel.y + imageBucket.getY();
-        Color color = pixelBuffer->getValue({x, y});
+        Vector2i globalPosition = pixel + imageBucket.getPosition();
+        Color color = pixelBuffer->getValue(globalPosition);
         if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {
             color = ColorConversion::linearToSRGB(color);
         }
         auto rgbValues = color.getRgbValues();
         bufferToShow.setPixelColor(
-            x, y, QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
+            globalPosition.y, globalPosition.y,
+            QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
     }
     update();
 
@@ -101,7 +101,7 @@ void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
 
 void ImageWidget::changeChannel(std::string newChannel) {
     currentChannel = newChannel;
-    updateBufferToShow({0, 0, image.getWidth(), image.getHeight()});
+    updateBufferToShow({{0, 0}, image.getWidth(), image.getHeight()});
 }
 
 }
