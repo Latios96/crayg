@@ -126,7 +126,7 @@ std::ostream &operator<<(std::ostream &os, const ZoomFactor &factor) {
 }
 
 float ZoomFactor::toFloat() const {
-    return 1.0 * std::pow(2, value);
+    return 1.0f * std::pow(2.f, value);
 }
 
 float ZoomFactor::toPercentage() const {
