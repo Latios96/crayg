@@ -89,7 +89,7 @@ void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
         }
         auto rgbValues = color.getRgbValues();
         bufferToShow.setPixelColor(
-            globalPosition.y, globalPosition.y,
+            globalPosition.x, globalPosition.y,
             QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
     }
     update();
