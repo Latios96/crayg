@@ -42,6 +42,16 @@ TEST_CASE("AreaLight::radiance") {
 
         REQUIRE(radiance == Light::Radiance(Color::createBlack(), Ray({0, 2, 1}, {0, 0, 1})));
     }
+
+    SECTION(
+        "should not illuminate point in back of the areaLight, also if surface normal is in same direction as light") {
+        Vector3f point(0, 2, -1);
+        const Vector3f normal(0, 0, 11);
+
+        auto radiance = dummyAreaLight.radiance(point, normal);
+
+        REQUIRE(radiance.radiance < Color::createBlack());
+    }
 }
 
 }
