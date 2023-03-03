@@ -25,7 +25,7 @@ Light::Radiance AreaLight::radiance(const Vector3f &point, const Vector3f &norma
 
     float weight = angleBetweenSurfaceNormalAndLight * angleBetweenLightAndLightVector * area() /
                    (boost::math::constants::pi<float>() * shadowRay.direction.lengthSquared());
-    return {getColor() * getIntensity() * weight, shadowRay};
+    return {getColor() * getIntensity() * std::max(weight, 0.f), shadowRay};
 }
 
 }

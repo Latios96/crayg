@@ -50,7 +50,7 @@ TEST_CASE("AreaLight::radiance") {
 
         auto radiance = dummyAreaLight.radiance(point, normal);
 
-        REQUIRE(radiance.radiance < Color::createBlack());
+        REQUIRE(radiance.radiance == Color::createBlack());
     }
 }
 
