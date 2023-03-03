@@ -25,8 +25,8 @@ TEST_CASE("UsdRectLightReader::read") {
         REQUIRE(light->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(light->getIntensity() == 3);
         REQUIRE(light->getColor() == Color({1, 0, 0}));
-        REQUIRE(light->getWidth() == 2);
-        REQUIRE(light->getHeight() == 3);
+        REQUIRE(light->getWidth() == 4);
+        REQUIRE(light->getHeight() == 6);
     }
 
     SECTION("should read rect light with time samples correctly") {
@@ -43,8 +43,8 @@ TEST_CASE("UsdRectLightReader::read") {
         REQUIRE(light->getTransform().toPosition() == Vector3f(1, 2, -3));
         REQUIRE(light->getIntensity() == 3);
         REQUIRE(light->getColor() == Color({1, 0, 0}));
-        REQUIRE(light->getWidth() == 2);
-        REQUIRE(light->getHeight() == 3);
+        REQUIRE(light->getWidth() == 4);
+        REQUIRE(light->getHeight() == 6);
     }
 }
 

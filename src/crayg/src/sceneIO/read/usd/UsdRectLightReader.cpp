@@ -15,10 +15,10 @@ std::shared_ptr<RectLight> UsdRectLightReader::read() {
     areaLight->setIntensity(intensity);
 
     const auto width = UsdUtils::getAttributeValueAs<float>(usdPrim.GetWidthAttr(), this->timeCodeToRead);
-    areaLight->setWidth(width);
+    areaLight->setWidth(width * 2);
 
     const auto height = UsdUtils::getAttributeValueAs<float>(usdPrim.GetHeightAttr(), this->timeCodeToRead);
-    areaLight->setHeight(height);
+    areaLight->setHeight(height * 2);
 
     return areaLight;
 }
