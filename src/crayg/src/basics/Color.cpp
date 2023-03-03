@@ -99,4 +99,32 @@ Color Color::pow(float exponent) const {
     return {std::pow(r, exponent), std::pow(g, exponent), std::pow(b, exponent)};
 }
 
+bool Color::operator<(const Color &rhs) const {
+    if (r < rhs.r) {
+        return true;
+    }
+    if (rhs.r < r) {
+        return false;
+    }
+    if (g < rhs.g) {
+        return true;
+    }
+    if (rhs.g < g) {
+        return false;
+    }
+    return b < rhs.b;
+}
+
+bool Color::operator>(const Color &rhs) const {
+    return rhs < *this;
+}
+
+bool Color::operator<=(const Color &rhs) const {
+    return !(rhs < *this);
+}
+
+bool Color::operator>=(const Color &rhs) const {
+    return !(*this < rhs);
+}
+
 } // namespace crayg

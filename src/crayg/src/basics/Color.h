@@ -38,6 +38,11 @@ class Color {
 
     bool operator!=(const Color &color) const;
 
+    bool operator<(const Color &rhs) const;
+    bool operator>(const Color &rhs) const;
+    bool operator<=(const Color &rhs) const;
+    bool operator>=(const Color &rhs) const;
+
     Color clamp() const;
 
     bool isBlack() const;
