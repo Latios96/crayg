@@ -8,7 +8,7 @@ class CraygTestIntegrationShelf(Shelf):
     def build(self):
         root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-        self.addButton(
+        self.add_button(
             label="Tests Inspector",
             icon=os.path.join(root, "xbmlangpath", "CraygTestExplorer.png"),
             annotation="Open Crayg Tests Inspector",
