@@ -23,10 +23,6 @@ std::string RectLight::getType() {
     return "RectLight";
 }
 
-Vector3f RectLight::getNormal(Vector3f point) {
-    return transform.applyForNormal({0, 0, 1});
-}
-
 Imageable::Intersection RectLight::intersect(Ray ray) {
     const Vector3f normal = getNormal({0, 0, 0}).normalize();
     const Vector3f center = transform.apply({0, 0, 0});

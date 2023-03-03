@@ -12,10 +12,6 @@ Vector3f DiskLight::sampleLightShape() const {
     return getTransform().apply(positionOnPlane);
 }
 
-Vector3f DiskLight::getNormal(Vector3f point) {
-    return transform.applyForNormal({0, 0, 1}).normalize();
-}
-
 Imageable::Intersection DiskLight::intersect(Ray ray) {
     const Vector3f normal = transform.applyForNormal(getNormal({0, 0, 0}));
     const Vector3f center = transform.apply({0, 0, 0});

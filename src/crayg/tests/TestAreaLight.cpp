@@ -31,7 +31,7 @@ TEST_CASE("AreaLight::radiance") {
 
         auto radiance = dummyAreaLight.radiance(point, normal);
 
-        REQUIRE(radiance == Light::Radiance(Color::createGrey(20), Ray({0, 2, 4}, {0, 0, -2})));
+        REQUIRE(radiance == Light::Radiance(Color::createGrey(3.1830988f), Ray({0, 2, 4}, {0, 0, -2})));
     }
 
     SECTION("should not illuminate point in back of the areaLight") {

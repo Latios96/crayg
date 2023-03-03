@@ -9,7 +9,6 @@ class DiskLight : public AreaLight {
   public:
     DiskLight();
     DiskLight(const Transform &transform, float intensity, float radius);
-    Vector3f getNormal(Vector3f point) override;
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     float getRadius() const;

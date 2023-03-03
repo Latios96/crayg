@@ -9,7 +9,6 @@ class RectLight : public AreaLight {
   public:
     RectLight();
     RectLight(const Transform &transform, float intensity, float width, float height);
-    Vector3f getNormal(Vector3f point) override;
     Intersection intersect(Ray ray) override;
     bool isIntersecting(Ray ray) override;
     BoundingBox getBounds() const override;

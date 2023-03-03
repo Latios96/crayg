@@ -7,6 +7,10 @@ AreaLight::AreaLight() = default;
 AreaLight::AreaLight(const Transform &transform, float intensity) : Light(transform, intensity) {
 }
 
+Vector3f AreaLight::getNormal(Vector3f point) {
+    return transform.applyForNormal({0, 0, 1}).normalize();
+}
+
 Light::Radiance AreaLight::radiance(const Vector3f &point, const Vector3f &normal) {
     const Vector3f shadowVector = sampleLightShape() - point;
     Ray shadowRay(point, shadowVector); // todo normalize this and pass length to ray
@@ -18,6 +22,10 @@ Light::Radiance AreaLight::radiance(const Vector3f &point, const Vector3f &norma
     const float pdf = shadowVector.lengthSquared() / (normal.dot(shadowVector) * area());
 
     return {getColor() * getIntensity() / pdf, shadowRay};
+}
+
+Vector3f AreaLight::getNormal(Vector3f point) {
+    return transform.applyForNormal({0, 0, 1}).normalize();
 }
 
 }
