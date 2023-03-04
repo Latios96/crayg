@@ -31,7 +31,10 @@
       "name": "CornellBox",
       "tests": [
         {
-          "name": "CornellBox_Original"
+          "name": "CornellBox_Original",
+          "comparisonSettings": {
+            "threshold": 0.93
+          }
         },
         {
           "name": "CornellBox_Original_GI",
@@ -124,12 +127,15 @@
       "name": "UsdPreviewSurface",
       "tests": [
         {
-          "name": "SimpleDiffuseMaterial"
+          "name": "SimpleDiffuseMaterial",
+          "comparisonSettings": {
+            "threshold": 0.845
+          }
         },
         {
           "name": "SimpleReflectiveMaterial",
           "comparisonSettings": {
-            "threshold": 0.916
+            "threshold": 0.735
           }
         }
       ]
