@@ -1,0 +1,11 @@
+#usda 1.0
+(
+    subLayers = [
+        @./_base_scene.usdc@
+    ]
+)
+
+over "areaLight1"
+{
+    float inputs:intensity = 30
+}
