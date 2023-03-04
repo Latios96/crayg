@@ -38,7 +38,7 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
         gi = calculateIndirectLight(surfaceInteraction, object.getOrthonormalBasis(location), integratorContext);
     }
 
-    return shadedColor * radiance + gi;
+    return shadedColor * (radiance + gi); // FIXME: this is only correct for completly diffuse surfaces..
 }
 
 Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light, const Vector3f &location,
