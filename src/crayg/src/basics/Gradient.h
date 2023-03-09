@@ -4,6 +4,7 @@
 #include "Color.h"
 #include "utils/ToStringHelper.h"
 #include <fmt/format.h>
+#include <fmt/ostream.h>
 #include <ostream>
 #include <vector>
 
@@ -84,5 +85,9 @@ template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondVa
 }
 
 } // crayg
+
+template <typename T> struct fmt::formatter<crayg::Gradient<T>> : ostream_formatter {};
+
+template <typename T> struct fmt::formatter<crayg::GradientStop<T>> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_BASICS_GRADIENT_H_

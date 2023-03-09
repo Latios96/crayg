@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_BASICS_VECTOR2_H_
 
 #include "utils/ToStringHelper.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -52,5 +53,7 @@ typedef Vector2<float> Vector2f;
 typedef Vector2<int> Vector2i;
 
 }
+
+template <typename T> struct fmt::formatter<crayg::Vector2<T>> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_BASICS_VECTOR2_H_

@@ -5,6 +5,7 @@
 #include "basics/Color.h"
 #include "basics/Resolution.h"
 #include "basics/Vector2.h"
+#include <fmt/ostream.h>
 #include <memory>
 #include <ostream>
 #include <variant>
@@ -50,5 +51,7 @@ class PixelBuffer {
 };
 
 } // crayg
+
+template <> struct fmt::formatter<crayg::PixelBuffer> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_

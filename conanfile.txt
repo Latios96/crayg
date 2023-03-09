@@ -1,6 +1,6 @@
 [requires]
-fmt/8.1.1
-spdlog/1.10.0
+fmt/9.1.0
+spdlog/1.11.0
 catch2/2.13.7
 fakeit/2.0.9
 cli11/2.3.2

@@ -5,6 +5,7 @@
 #include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"
 #include "utils/ToStringHelper.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -51,4 +52,7 @@ class Camera : public Transformable {
 };
 
 }
+
+template <> struct fmt::formatter<crayg::Camera> : ostream_formatter {};
+
 #endif // CRAYG_CAMERA_H

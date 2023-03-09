@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_
 
 #include "basics/Vector2.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -31,5 +32,7 @@ template <> struct hash<crayg::ImageBucket> {
     size_t operator()(const crayg::ImageBucket &imageBucket) const;
 };
 }
+
+template <> struct fmt::formatter<crayg::ImageBucket> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_

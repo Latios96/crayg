@@ -3,6 +3,7 @@
 
 #include "Ray.h"
 #include "Vector3f.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -31,5 +32,7 @@ class BoundingBox {
 };
 
 }
+
+template <> struct fmt::formatter<crayg::BoundingBox> : ostream_formatter {};
 
 #endif // CRAYG_BOUNDINGBOX_H

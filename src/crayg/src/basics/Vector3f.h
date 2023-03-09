@@ -2,6 +2,7 @@
 #define CRAYG_VECTOR3F_H
 
 #include <cmath>
+#include <fmt/ostream.h>
 #include <limits>
 #include <ostream>
 
@@ -49,4 +50,7 @@ class Vector3f {
 };
 
 }
+
+template <> struct fmt::formatter<crayg::Vector3f> : ostream_formatter {};
+
 #endif // CRAYG_VECTOR3F_H

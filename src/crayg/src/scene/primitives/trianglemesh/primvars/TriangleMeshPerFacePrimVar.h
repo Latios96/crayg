@@ -4,6 +4,7 @@
 #include "TriangleMeshAbstractPrimVar.h"
 #include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
 #include "utils/ToStringHelper.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -57,5 +58,7 @@ template <typename T> class TriangleMeshPerFacePrimVar : public TriangleMeshAbst
     std::vector<T> faceData;
 };
 }
+
+template <typename T> struct fmt::formatter<crayg::TriangleMeshPerFacePrimVar<T>> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHPERFACEPRIMVAR_H_

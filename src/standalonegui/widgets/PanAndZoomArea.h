@@ -55,4 +55,6 @@ class PanAndZoomArea : public QScrollArea {
 
 } // crayg
 
+template <> struct fmt::formatter<crayg::ZoomFactor> : ostream_formatter {};
+
 #endif // CRAYG_SRC_STANDALONEGUI_PANANDZOOMAREA_H_

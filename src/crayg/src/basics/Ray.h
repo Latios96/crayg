@@ -2,6 +2,7 @@
 #define CRAYG_RAY_H
 
 #include "Vector3f.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -31,5 +32,7 @@ struct Ray {
 };
 
 }
+
+template <> struct fmt::formatter<crayg::Ray> : ostream_formatter {};
 
 #endif // CRAYG_RAY_H

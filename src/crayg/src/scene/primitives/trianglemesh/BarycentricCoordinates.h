@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_BASICS_BARYCENTRICCOORDINATES_H_
 
 #include "scene/primitives/trianglemesh/Triangle.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -27,5 +28,7 @@ template <typename T> T BarycentricCoordinates::interpolateLinear(const T &value
 }
 
 } // crayg
+
+template <> struct fmt::formatter<crayg::BarycentricCoordinates> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_BASICS_BARYCENTRICCOORDINATES_H_

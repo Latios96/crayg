@@ -11,7 +11,8 @@
     template <> struct fmt::formatter<std::vector<crayg::Name>> {                                                      \
         template <typename ParseContext> constexpr auto parse(ParseContext &ctx) { return ctx.begin(); }               \
                                                                                                                        \
-        template <typename FormatContext> auto format(std::vector<crayg::Name> const &dtos, FormatContext &ctx) {      \
+        template <typename FormatContext>                                                                              \
+        auto format(std::vector<crayg::Name> const &dtos, FormatContext &ctx) const {                                  \
             return fmt::format_to(ctx.out(), "[{}]", fmt::join(dtos, ", "));                                           \
         };                                                                                                             \
     };
@@ -38,7 +39,7 @@
     template <> struct fmt::formatter<crayg::Name> {                                                                   \
         template <typename ParseContext> constexpr auto parse(ParseContext &ctx) { return ctx.begin(); }               \
                                                                                                                        \
-        template <typename FormatContext> auto format(crayg::Name const &dto, FormatContext &ctx) {                    \
+        template <typename FormatContext> auto format(crayg::Name const &dto, FormatContext &ctx) const {              \
             return fmt::format_to(ctx.out(), "{}{{{}={},{}={}}}", #Name, #FirstName, dto.FirstName, #SecondName,       \
                                   dto.SecondName);                                                                     \
         };                                                                                                             \
@@ -72,7 +73,7 @@
     template <> struct fmt::formatter<crayg::Name> {                                                                   \
         template <typename ParseContext> constexpr auto parse(ParseContext &ctx) { return ctx.begin(); }               \
                                                                                                                        \
-        template <typename FormatContext> auto format(crayg::Name const &dto, FormatContext &ctx) {                    \
+        template <typename FormatContext> auto format(crayg::Name const &dto, FormatContext &ctx) const {              \
             return fmt::format_to(ctx.out(), "{}{{{}={},{}={},{}={}}}", #Name, #FirstName, dto.FirstName, #SecondName, \
                                   dto.SecondName, #ThirdName, dto.ThirdName);                                          \
         };                                                                                                             \

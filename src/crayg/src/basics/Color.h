@@ -1,6 +1,7 @@
 #ifndef CRAYG_COLOR_H
 #define CRAYG_COLOR_H
 
+#include <fmt/ostream.h>
 #include <ostream>
 #include <tuple>
 
@@ -55,4 +56,7 @@ class Color {
 };
 
 } // namespace crayg
+
+template <> struct fmt::formatter<crayg::Color> : ostream_formatter {};
+
 #endif // CRAYG_COLOR_H

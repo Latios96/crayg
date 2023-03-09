@@ -3,6 +3,7 @@
 
 #include "Vector3f.h"
 #include "utils/ToStringHelper.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -29,5 +30,7 @@ class OrthonormalBasis {
 };
 
 } // crayg
+
+template <> struct fmt::formatter<crayg::OrthonormalBasis> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_BASICS_ORTHONORMALBASIS_H_

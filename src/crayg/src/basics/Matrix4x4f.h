@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_BASICS_MATRIX4X4F_H_
 
 #include "Vector3f.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -32,4 +33,7 @@ class Matrix4x4f {
 };
 
 }
+
+template <> struct fmt::formatter<crayg::Matrix4x4f> : ostream_formatter {};
+
 #endif // CRAYG_SRC_CRAYG_SRC_BASICS_MATRIX4X4F_H_

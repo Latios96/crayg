@@ -1,5 +1,6 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORSETTINGS_H_
 #define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORSETTINGS_H_
+#include <fmt/ostream.h>
 #include <ostream>
 #include <unordered_map>
 #include <variant>
@@ -21,5 +22,7 @@ class IntegratorSettings {
 };
 
 } // crayg
+
+template <> struct fmt::formatter<crayg::IntegratorSettings> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORSETTINGS_H_

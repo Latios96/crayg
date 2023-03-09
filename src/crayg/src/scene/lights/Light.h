@@ -45,4 +45,7 @@ class Light : public Transformable, public Imageable {
 };
 
 }
+
+template <> struct fmt::formatter<crayg::Light::Radiance> : ostream_formatter {};
+
 #endif // CRAYG_L

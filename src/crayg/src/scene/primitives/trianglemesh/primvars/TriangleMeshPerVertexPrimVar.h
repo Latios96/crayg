@@ -4,6 +4,7 @@
 #include "TriangleMeshAbstractPrimVar.h"
 #include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
 #include "utils/ToStringHelper.h"
+#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -74,7 +75,7 @@ template <typename T> class TriangleMeshPerVertexPrimVar : public TriangleMeshAb
     }
 
     template <typename OStream>
-    friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerVertexPrimVar &var) {
+    friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerVertexPrimVar<T> &var) {
         os << ToStringHelper("TriangleMeshPerVertexPrimVar").addMember("vertexData", var.vertexData).finish();
         return os;
     }
@@ -95,5 +96,9 @@ template <typename T> class TriangleMeshPerVertexPrimVar : public TriangleMeshAb
     std::vector<VertexData<T>> vertexData;
 };
 }
+
+template <typename T> struct fmt::formatter<crayg::VertexData<T>> : ostream_formatter {};
+
+template <typename T> struct fmt::formatter<crayg::TriangleMeshPerVertexPrimVar<T>> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHPERVERTEXPRIMVAR_H_
