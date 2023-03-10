@@ -18,6 +18,7 @@ tsl-ordered-map/1.1.0
 zlib/1.2.13
 libpng/1.6.39
 zstd/1.5.4
+expat/2.5.0
 
 [options]
 libtiff:jpeg=libjpeg
