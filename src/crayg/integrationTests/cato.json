@@ -3,27 +3,21 @@
   "projectName": "Crayg Integration Tests",
   "command": "{{crayg_render_command}}",
   "comparisonSettings": {
-    "method": "SSIM",
-    "threshold": 0.95
+    "method": "FLIP",
+    "threshold": 0.25
   },
   "suites": [
     {
       "name": "AmbientOcclusionIntegrator",
       "tests": [
         {
-          "name": "SpherePrimitiveAO",
-          "comparisonSettings": {
-            "threshold": 0.85
-          }
+          "name": "SpherePrimitiveAO"
         },
         {
           "name": "CorrectNormalTransformationAO"
         },
         {
-          "name": "CorrectNormalTransformationAO_LargerRadius",
-          "comparisonSettings": {
-            "threshold": 0.82
-          }
+          "name": "CorrectNormalTransformationAO_LargerRadius"
         }
       ]
     },
@@ -39,7 +33,7 @@
         {
           "name": "CornellBox_Original_GI",
           "comparisonSettings": {
-            "threshold": 0.76
+            "threshold": 0.4
           }
         },
         {
@@ -129,13 +123,13 @@
         {
           "name": "SimpleDiffuseMaterial",
           "comparisonSettings": {
-            "threshold": 0.845
+            "threshold": 0.55
           }
         },
         {
           "name": "SimpleReflectiveMaterial",
           "comparisonSettings": {
-            "threshold": 0.735
+            "threshold": 0.55
           }
         }
       ]
