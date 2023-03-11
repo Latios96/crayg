@@ -78,8 +78,7 @@ def render_demo_images_with_deadline(demo_images: List[DemoImage]) -> None:
     requests.post("http://127.0.0.1:8081/api/jobs", json=json_data)
 
 
-def get_demo_images():
-    max_samples = 32
+def get_demo_images(max_samples=32):
     demo_images = [
         DemoImage(
             name="CornellBox_Original_GI",
@@ -108,15 +107,15 @@ app = typer.Typer()
 
 
 @app.command(help="Render demo images locally")
-def render_local():
+def render_local(max_samples: Optional[int] = 32):
     print("hi")
-    demo_images = get_demo_images()
+    demo_images = get_demo_images(max_samples)
     render_demo_images_locally(demo_images)
 
 
 @app.command(help="Render demo images using AWS Deadline")
-def submit():
-    demo_images = get_demo_images()
+def submit(max_samples: Optional[int] = 32):
+    demo_images = get_demo_images(max_samples)
     render_demo_images_with_deadline(demo_images)
 
 
