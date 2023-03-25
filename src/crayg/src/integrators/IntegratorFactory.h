@@ -24,8 +24,7 @@ class IntegratorFactory {
         case IntegratorType::AMBIENT_OCCLUSION:
             return new AmbientOcclusionIntegrator(scene, sceneIntersector, integratorSettings);
         default:
-            throw std::runtime_error(
-                fmt::format(R"(Unsupported Integrator type: "{}")", magic_enum::enum_name(integratorType)));
+            throw std::runtime_error(fmt::format(R"(Unsupported Integrator type: "{}")", integratorType));
         }
     }
 };

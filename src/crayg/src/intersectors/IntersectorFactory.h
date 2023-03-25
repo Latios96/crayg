@@ -19,8 +19,7 @@ class IntersectorFactory {
         case IntersectorType::EMBREE:
             return createEmbreeBvh(scene);
         default:
-            throw std::runtime_error(
-                fmt::format(R"(Unsupported Intersector type: "{}")", magic_enum::enum_name(intersectorType)));
+            throw std::runtime_error(fmt::format(R"(Unsupported Intersector type: "{}")", intersectorType));
         }
     }
 
