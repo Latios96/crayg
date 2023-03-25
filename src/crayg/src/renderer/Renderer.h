@@ -24,7 +24,7 @@ class Renderer {
   private:
     Scene &scene;
     OutputDriver &outputDriver;
-    std::shared_ptr<CameraModel> cameraModel;
+    std::unique_ptr<CameraModel> cameraModel;
     std::shared_ptr<SceneIntersector> sceneIntersector;
 
     void init();

@@ -6,6 +6,7 @@
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
+#include "scene/camera/CameraModelFactory.h"
 #include "scene/camera/PineHoleCameraModel.h"
 #include "utils/ImageMetadataCollector.h"
 #include "utils/ProgressReporter.h"
@@ -75,7 +76,7 @@ void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageB
 }
 
 void Renderer::init() {
-    cameraModel = std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, scene.renderSettings.resolution));
+    cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
 
     GeometryCompiler geometryCompiler(scene);
     geometryCompiler.compile();
