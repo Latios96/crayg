@@ -11,10 +11,8 @@ namespace crayg {
 // todo add tests
 class PineHoleCameraModel : public CameraModel {
   private:
-    Camera &camera;
     float imageRatio;
     float imagePlaneWidth, imagePlaneHeight;
-    Resolution resolution;
 
     Vector3f sideVector, upVector, viewVector, planeCenter;
 

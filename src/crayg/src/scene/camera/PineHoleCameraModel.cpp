@@ -4,7 +4,7 @@
 namespace crayg {
 
 PineHoleCameraModel::PineHoleCameraModel(Camera &camera, const Resolution &resolution)
-    : camera(camera), resolution(resolution) {
+    : CameraModel(camera, resolution) {
     imageRatio = static_cast<float>(resolution.getWidth()) / static_cast<float>(resolution.getHeight());
 
     // create view position
