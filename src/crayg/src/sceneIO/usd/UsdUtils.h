@@ -26,6 +26,21 @@ class UsdUtils {
     };
 
     template <typename T>
+    static T getAttributeValueAs(pxr::UsdPrim usdPrim, const std::string &attributeName, T defaultValue,
+                                 const pxr::UsdTimeCode timeCodeToRead) {
+        auto usdAttr = usdPrim.GetAttribute(pxr::TfToken(attributeName));
+        if (!usdAttr) {
+            return defaultValue;
+        }
+        return getAttributeValueAs<T>(usdAttr, timeCodeToRead);
+    };
+
+    template <typename T>
+    static T getStaticAttributeValueAs(pxr::UsdPrim usdPrim, const std::string &attributeName, T defaultValue) {
+        return getAttributeValueAs<T>(usdPrim, attributeName, defaultValue, pxr::UsdTimeCode::Default());
+    };
+
+    template <typename T>
     static T getAttributeValueAsEnum(pxr::UsdPrim usdPrim, const std::string &attributeName, T defaultValue) {
         auto usdAttr = usdPrim.GetAttribute(pxr::TfToken(attributeName));
         if (!usdAttr) {

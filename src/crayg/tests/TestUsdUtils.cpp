@@ -30,6 +30,12 @@ TEST_CASE("UsdUtils::getAttributeValueAs") {
     SECTION("should throw exception when there is an error reading the attribute") {
         REQUIRE_THROWS_AS(UsdUtils::getStaticAttributeValueAs<float>(sphere.GetRadiusAttr()), std::runtime_error);
     }
+
+    SECTION("should read attribute value with default") {
+        auto myInt = UsdUtils::getStaticAttributeValueAs<int>(sphere.GetPrim(), "myInt", 5);
+
+        REQUIRE(myInt == 5);
+    }
 }
 
 TEST_CASE("UsdUtils::getAttributeValueAsEnum") {
