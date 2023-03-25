@@ -2,8 +2,10 @@
 #define CRAYG_SRC_CRAYGUSD_SRC_USDUTILS_H_
 
 #include "CraygUsdBase.h"
+#include "UsdTypeUtil.h"
 #include <magic_enum.hpp>
 #include <pxr/usd/usd/attribute.h>
+#include <type_traits>
 
 namespace crayg {
 
@@ -38,6 +40,12 @@ class UsdUtils {
             throw std::runtime_error(fmt::format(R"(Unsupported value for '{}': "{}")", attributeName, tokenValue));
         }
         return maybeValue.value();
+    }
+
+    template <typename T>
+    static void createAndSetAttribute(pxr::UsdPrim usdPrim, const std::string &attributeName, T defaultValue) {
+        usdPrim.CreateAttribute(pxr::TfToken(attributeName), UsdTypeUtil<T>::sdfValueTypeName)
+            .Set(UsdTypeUtil<T>::convert(defaultValue));
     }
 };
 

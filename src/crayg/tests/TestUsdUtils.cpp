@@ -7,6 +7,14 @@ namespace crayg {
 
 enum class UsdUtilsTestEnum { MY_FIRST_VALUE = 1, MY_SECOND_VALUE = 2 };
 
+template <> struct UsdTypeUtil<UsdUtilsTestEnum> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(UsdUtilsTestEnum testEnum) {
+        return pxr::TfToken(fmt::format("{}", magic_enum::enum_name(testEnum)));
+    }
+};
+
 TEST_CASE("UsdUtils::getAttributeValueAs") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
@@ -67,6 +75,48 @@ TEST_CASE("UsdUtils::readEnumValue") {
         REQUIRE_THROWS_AS(
             UsdUtils::readEnumValue(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE),
             std::runtime_error);
+    }
+}
+
+TEST_CASE("UsdUtils::createAndSetAttribute") {
+
+    auto stage = pxr::UsdStage::CreateInMemory();
+    auto sphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/sphere"));
+    sphere.GetRadiusAttr().Set(3.0);
+
+    SECTION("should create and set int attribute") {
+        UsdUtils::createAndSetAttribute(sphere.GetPrim(), "myIntAttribute", 5);
+
+        auto value =
+            UsdUtils::getStaticAttributeValueAs<int>(sphere.GetPrim().GetAttribute(pxr::TfToken("myIntAttribute")));
+
+        REQUIRE(value == 5);
+    }
+
+    SECTION("should create and set float attribute") {
+        UsdUtils::createAndSetAttribute(sphere.GetPrim(), "myFloatAttribute", 5.f);
+
+        auto value =
+            UsdUtils::getStaticAttributeValueAs<float>(sphere.GetPrim().GetAttribute(pxr::TfToken("myFloatAttribute")));
+
+        REQUIRE(value == 5.f);
+    }
+
+    SECTION("should create and set string attribute") {
+        UsdUtils::createAndSetAttribute(sphere.GetPrim(), "myStringAttribute", std::string("my string"));
+
+        auto value = UsdUtils::getStaticAttributeValueAs<std::string>(
+            sphere.GetPrim().GetAttribute(pxr::TfToken("myStringAttribute")));
+
+        REQUIRE(value == "my string");
+    }
+
+    SECTION("should create and set enum attribute") {
+        UsdUtils::createAndSetAttribute(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_FIRST_VALUE);
+
+        auto value = UsdUtils::readEnumValue(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_FIRST_VALUE);
+
+        REQUIRE(value == UsdUtilsTestEnum::MY_FIRST_VALUE);
     }
 }
 

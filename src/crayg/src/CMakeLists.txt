@@ -194,6 +194,7 @@ set(crayg_SRCS
         sceneIO/usd/UsdConversions.h
         sceneIO/usd/UsdReadUtils.cpp
         sceneIO/usd/UsdReadUtils.h
+        sceneIO/usd/UsdTypeUtil.h
         sceneIO/usd/UsdUtils.h
         sceneIO/write/SceneWriter.cpp
         sceneIO/write/SceneWriter.h
