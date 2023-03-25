@@ -37,12 +37,7 @@ Resolution crayg::UsdRenderSettingsReader::readResolution() const {
 }
 
 int crayg::UsdRenderSettingsReader::readMaxSamples() const {
-    int maxSamples = 4;
-    auto maxSamplesAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken("maxSamples"));
-    if (maxSamplesAttr) {
-        maxSamples = UsdUtils::getStaticAttributeValueAs<int>(maxSamplesAttr);
-    }
-    return maxSamples;
+    return UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "maxSamples", 4);
 }
 
 IntegratorType crayg::UsdRenderSettingsReader::readIntegratorType() const {
