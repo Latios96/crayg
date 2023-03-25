@@ -79,7 +79,8 @@ def render_demo_images_with_deadline(demo_images: List[DemoImage]) -> None:
 
 
 def get_demo_images(max_samples=32):
-    demo_images = [
+    demo_images = []
+    demo_images.append(
         DemoImage(
             name="CornellBox_Original_GI",
             scene_path=resolve_path(
@@ -88,7 +89,7 @@ def get_demo_images(max_samples=32):
             max_samples=max_samples,
             resolution=(800, 800),
         )
-    ]
+    )
     for i in range(1, 7):
         camera_number = f"{i}".zfill(3)
         demo_images.append(
@@ -100,6 +101,18 @@ def get_demo_images(max_samples=32):
                 camera=f"/PhysCamera{camera_number}",
             )
         )
+    for camera_number in range(1, 8):
+        demo_images.append(
+            DemoImage(
+                name=f"OpenChessSet_render_cam_{camera_number}",
+                scene_path=Path(
+                    "M:\Test_Scene_Collection\OpenChessSet\OpenChessSetCrayg.usda"
+                ),
+                max_samples=32,
+                resolution=(1920, 1080),
+                camera=f"/cams/render_cam_{camera_number}/render_cam_{camera_number}Shape",
+            )
+        )
     return demo_images
 
 
@@ -108,7 +121,6 @@ app = typer.Typer()
 
 @app.command(help="Render demo images locally")
 def render_local(max_samples: Optional[int] = 32):
-    print("hi")
     demo_images = get_demo_images(max_samples)
     render_demo_images_locally(demo_images)
 
