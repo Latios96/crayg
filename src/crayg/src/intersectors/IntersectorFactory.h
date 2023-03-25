@@ -11,16 +11,16 @@ namespace crayg {
 
 class IntersectorFactory {
   public:
-    static std::shared_ptr<SceneIntersector> createSceneIntersector(const IntersectorType &integratorType,
+    static std::shared_ptr<SceneIntersector> createSceneIntersector(const IntersectorType &intersectorType,
                                                                     Scene &scene) {
-        switch (integratorType) {
+        switch (intersectorType) {
         case IntersectorType::NAIVE_BVH:
             return createNaiveBvh(scene);
         case IntersectorType::EMBREE:
             return createEmbreeBvh(scene);
         default:
             throw std::runtime_error(
-                fmt::format(R"(Unsupported Intersector type: "{}")", magic_enum::enum_name(integratorType)));
+                fmt::format(R"(Unsupported Intersector type: "{}")", magic_enum::enum_name(intersectorType)));
         }
     }
 
