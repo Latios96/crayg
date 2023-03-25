@@ -107,6 +107,7 @@ set(crayg_SRCS
         scene/camera/Camera.cpp
         scene/camera/Camera.h
         scene/camera/CameraModel.h
+        scene/camera/CameraType.h
         scene/camera/PineHoleCameraModel.cpp
         scene/camera/PineHoleCameraModel.h
         scene/Imageable.cpp
