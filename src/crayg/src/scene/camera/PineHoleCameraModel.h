@@ -3,6 +3,7 @@
 
 #include "CameraModel.h"
 #include "basics/Ray.h"
+#include "basics/Resolution.h"
 #include "scene/camera/Camera.h"
 
 namespace crayg {
@@ -13,14 +14,14 @@ class PineHoleCameraModel : public CameraModel {
     Camera &camera;
     float imageRatio;
     float imagePlaneWidth, imagePlaneHeight;
-    int imageWidth, imageHeight;
+    Resolution resolution;
 
     Vector3f sideVector, upVector, viewVector, planeCenter;
 
     Vector3f getPixelCenter(float x, float y);
 
   public:
-    PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight);
+    PineHoleCameraModel(Camera &camera, const Resolution &resolution);
 
     Ray createPrimaryRay(float x, float y) override;
 };

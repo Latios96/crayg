@@ -75,8 +75,7 @@ void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageB
 }
 
 void Renderer::init() {
-    cameraModel = std::shared_ptr<CameraModel>(new PineHoleCameraModel(
-        *scene.camera, scene.renderSettings.resolution.getWidth(), scene.renderSettings.resolution.getHeight()));
+    cameraModel = std::shared_ptr<CameraModel>(new PineHoleCameraModel(*scene.camera, scene.renderSettings.resolution));
 
     GeometryCompiler geometryCompiler(scene);
     geometryCompiler.compile();

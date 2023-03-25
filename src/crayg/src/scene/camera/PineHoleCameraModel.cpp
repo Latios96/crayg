@@ -3,9 +3,9 @@
 
 namespace crayg {
 
-PineHoleCameraModel::PineHoleCameraModel(Camera &camera, int imageWidth, int imageHeight)
-    : camera(camera), imageWidth(imageWidth), imageHeight(imageHeight) {
-    imageRatio = static_cast<float>(imageWidth) / static_cast<float>(imageHeight);
+PineHoleCameraModel::PineHoleCameraModel(Camera &camera, const Resolution &resolution)
+    : camera(camera), resolution(resolution) {
+    imageRatio = static_cast<float>(resolution.getWidth()) / static_cast<float>(resolution.getHeight());
 
     // create view position
     const Vector3f &centerOfInterest = camera.getCenterOfInterest();
@@ -38,8 +38,8 @@ Ray PineHoleCameraModel::createPrimaryRay(float x, float y) {
 }
 
 Vector3f PineHoleCameraModel::getPixelCenter(float x, float y) {
-    float wScale = 2.0f * (x + 0.5f) / static_cast<float>(imageWidth) - 1.0f;
-    float hScale = 2.0f * (y + 0.5f) / static_cast<float>(imageHeight) - 1.0f;
+    float wScale = 2.0f * (x + 0.5f) / static_cast<float>(resolution.getWidth()) - 1.0f;
+    float hScale = 2.0f * (y + 0.5f) / static_cast<float>(resolution.getHeight()) - 1.0f;
 
     return planeCenter + sideVector * wScale * -1 + upVector * hScale * -1;
 }
