@@ -1,0 +1,14 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/_base_scene.usda@
+    ]
+)
+
+over "render_cam"
+{
+    over "render_camShape"{
+        custom int craygCameraType = 2
+            float fStop = 0.3
+    }
+}

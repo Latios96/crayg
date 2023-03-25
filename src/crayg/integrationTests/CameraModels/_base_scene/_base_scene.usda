@@ -1,0 +1,262 @@
+#usda 1.0
+(
+    defaultPrim = "render_cam"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Xform "render_cam" (
+    kind = "assembly"
+)
+{
+    float3 xformOp:rotateXYZ = (0.6, -171.2, 0)
+    double3 xformOp:translate = (-10.032680050913118, 3.0694367767591233, -93.7934805009732)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+
+    def Camera "render_camShape"
+    {
+        float2 clippingRange = (0.1, 10000)
+        custom int craygCameraType = 2
+        float focalLength = 100
+        float focusDistance = 50.147247
+        float fStop = 0.3
+        float horizontalAperture = 35.999928
+        float verticalAperture = 23.999952
+    }
+
+    def Xform "locator2"
+    {
+        double3 xformOp:translate = (0, 0, -50.14724725997602)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+}
+
+def Mesh "ground" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "component"
+)
+{
+    uniform bool doubleSided = 1
+    float3[] extent = [(-0.5, 0, -0.5), (0.5, 0, 0.5)]
+    int[] faceVertexCounts = [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+    int[] faceVertexIndices = [0, 1, 12, 11, 1, 2, 13, 12, 2, 3, 14, 13, 3, 4, 15, 14, 4, 5, 16, 15, 5, 6, 17, 16, 6, 7, 18, 17, 7, 8, 19, 18, 8, 9, 20, 19, 9, 10, 21, 20, 11, 12, 23, 22, 12, 13, 24, 23, 13, 14, 25, 24, 14, 15, 26, 25, 15, 16, 27, 26, 16, 17, 28, 27, 17, 18, 29, 28, 18, 19, 30, 29, 19, 20, 31, 30, 20, 21, 32, 31, 22, 23, 34, 33, 23, 24, 35, 34, 24, 25, 36, 35, 25, 26, 37, 36, 26, 27, 38, 37, 27, 28, 39, 38, 28, 29, 40, 39, 29, 30, 41, 40, 30, 31, 42, 41, 31, 32, 43, 42, 33, 34, 45, 44, 34, 35, 46, 45, 35, 36, 47, 46, 36, 37, 48, 47, 37, 38, 49, 48, 38, 39, 50, 49, 39, 40, 51, 50, 40, 41, 52, 51, 41, 42, 53, 52, 42, 43, 54, 53, 44, 45, 56, 55, 45, 46, 57, 56, 46, 47, 58, 57, 47, 48, 59, 58, 48, 49, 60, 59, 49, 50, 61, 60, 50, 51, 62, 61, 51, 52, 63, 62, 52, 53, 64, 63, 53, 54, 65, 64, 55, 56, 67, 66, 56, 57, 68, 67, 57, 58, 69, 68, 58, 59, 70, 69, 59, 60, 71, 70, 60, 61, 72, 71, 61, 62, 73, 72, 62, 63, 74, 73, 63, 64, 75, 74, 64, 65, 76, 75, 66, 67, 78, 77, 67, 68, 79, 78, 68, 69, 80, 79, 69, 70, 81, 80, 70, 71, 82, 81, 71, 72, 83, 82, 72, 73, 84, 83, 73, 74, 85, 84, 74, 75, 86, 85, 75, 76, 87, 86, 77, 78, 89, 88, 78, 79, 90, 89, 79, 80, 91, 90, 80, 81, 92, 91, 81, 82, 93, 92, 82, 83, 94, 93, 83, 84, 95, 94, 84, 85, 96, 95, 85, 86, 97, 96, 86, 87, 98, 97, 88, 89, 100, 99, 89, 90, 101, 100, 90, 91, 102, 101, 91, 92, 103, 102, 92, 93, 104, 103, 93, 94, 105, 104, 94, 95, 106, 105, 95, 96, 107, 106, 96, 97, 108, 107, 97, 98, 109, 108, 99, 100, 111, 110, 100, 101, 112, 111, 101, 102, 113, 112, 102, 103, 114, 113, 103, 104, 115, 114, 104, 105, 116, 115, 105, 106, 117, 116, 106, 107, 118, 117, 107, 108, 119, 118, 108, 109, 120, 119]
+    rel material:binding = </ground/Looks/initialShadingGroup>
+    point3f[] points = [(-0.5, 0, 0.5), (-0.4, 0, 0.5), (-0.3, 0, 0.5), (-0.19999999, 0, 0.5), (-0.099999994, 0, 0.5), (0, 0, 0.5), (0.100000024, 0, 0.5), (0.19999999, 0, 0.5), (0.3, 0, 0.5), (0.40000004, 0, 0.5), (0.5, 0, 0.5), (-0.5, 0, 0.4), (-0.4, 0, 0.4), (-0.3, 0, 0.4), (-0.19999999, 0, 0.4), (-0.099999994, 0, 0.4), (0, 0, 0.4), (0.100000024, 0, 0.4), (0.19999999, 0, 0.4), (0.3, 0, 0.4), (0.40000004, 0, 0.4), (0.5, 0, 0.4), (-0.5, 0, 0.3), (-0.4, 0, 0.3), (-0.3, 0, 0.3), (-0.19999999, 0, 0.3), (-0.099999994, 0, 0.3), (0, 0, 0.3), (0.100000024, 0, 0.3), (0.19999999, 0, 0.3), (0.3, 0, 0.3), (0.40000004, 0, 0.3), (0.5, 0, 0.3), (-0.5, 0, 0.19999999), (-0.4, 0, 0.19999999), (-0.3, 0, 0.19999999), (-0.19999999, 0, 0.19999999), (-0.099999994, 0, 0.19999999), (0, 0, 0.19999999), (0.100000024, 0, 0.19999999), (0.19999999, 0, 0.19999999), (0.3, 0, 0.19999999), (0.40000004, 0, 0.19999999), (0.5, 0, 0.19999999), (-0.5, 0, 0.099999994), (-0.4, 0, 0.099999994), (-0.3, 0, 0.099999994), (-0.19999999, 0, 0.099999994), (-0.099999994, 0, 0.099999994), (0, 0, 0.099999994), (0.100000024, 0, 0.099999994), (0.19999999, 0, 0.099999994), (0.3, 0, 0.099999994), (0.40000004, 0, 0.099999994), (0.5, 0, 0.099999994), (-0.5, 0, 0), (-0.4, 0, 0), (-0.3, 0, 0), (-0.19999999, 0, 0), (-0.099999994, 0, 0), (0, 0, 0), (0.100000024, 0, 0), (0.19999999, 0, 0), (0.3, 0, 0), (0.40000004, 0, 0), (0.5, 0, 0), (-0.5, 0, -0.100000024), (-0.4, 0, -0.100000024), (-0.3, 0, -0.100000024), (-0.19999999, 0, -0.100000024), (-0.099999994, 0, -0.100000024), (0, 0, -0.100000024), (0.100000024, 0, -0.100000024), (0.19999999, 0, -0.100000024), (0.3, 0, -0.100000024), (0.40000004, 0, -0.100000024), (0.5, 0, -0.100000024), (-0.5, 0, -0.19999999), (-0.4, 0, -0.19999999), (-0.3, 0, -0.19999999), (-0.19999999, 0, -0.19999999), (-0.099999994, 0, -0.19999999), (0, 0, -0.19999999), (0.100000024, 0, -0.19999999), (0.19999999, 0, -0.19999999), (0.3, 0, -0.19999999), (0.40000004, 0, -0.19999999), (0.5, 0, -0.19999999), (-0.5, 0, -0.3), (-0.4, 0, -0.3), (-0.3, 0, -0.3), (-0.19999999, 0, -0.3), (-0.099999994, 0, -0.3), (0, 0, -0.3), (0.100000024, 0, -0.3), (0.19999999, 0, -0.3), (0.3, 0, -0.3), (0.40000004, 0, -0.3), (0.5, 0, -0.3), (-0.5, 0, -0.40000004), (-0.4, 0, -0.40000004), (-0.3, 0, -0.40000004), (-0.19999999, 0, -0.40000004), (-0.099999994, 0, -0.40000004), (0, 0, -0.40000004), (0.100000024, 0, -0.40000004), (0.19999999, 0, -0.40000004), (0.3, 0, -0.40000004), (0.40000004, 0, -0.40000004), (0.5, 0, -0.40000004), (-0.5, 0, -0.5), (-0.4, 0, -0.5), (-0.3, 0, -0.5), (-0.19999999, 0, -0.5), (-0.099999994, 0, -0.5), (0, 0, -0.5), (0.100000024, 0, -0.5), (0.19999999, 0, -0.5), (0.3, 0, -0.5), (0.40000004, 0, -0.5), (0.5, 0, -0.5)]
+    texCoord2f[] primvars:st = [(0, 0), (0.1, 0), (0.2, 0), (0.3, 0), (0.4, 0), (0.5, 0), (0.6, 0), (0.7, 0), (0.8, 0), (0.90000004, 0), (1, 0), (0, 0.1), (0.1, 0.1), (0.2, 0.1), (0.3, 0.1), (0.4, 0.1), (0.5, 0.1), (0.6, 0.1), (0.7, 0.1), (0.8, 0.1), (0.90000004, 0.1), (1, 0.1), (0, 0.2), (0.1, 0.2), (0.2, 0.2), (0.3, 0.2), (0.4, 0.2), (0.5, 0.2), (0.6, 0.2), (0.7, 0.2), (0.8, 0.2), (0.90000004, 0.2), (1, 0.2), (0, 0.3), (0.1, 0.3), (0.2, 0.3), (0.3, 0.3), (0.4, 0.3), (0.5, 0.3), (0.6, 0.3), (0.7, 0.3), (0.8, 0.3), (0.90000004, 0.3), (1, 0.3), (0, 0.4), (0.1, 0.4), (0.2, 0.4), (0.3, 0.4), (0.4, 0.4), (0.5, 0.4), (0.6, 0.4), (0.7, 0.4), (0.8, 0.4), (0.90000004, 0.4), (1, 0.4), (0, 0.5), (0.1, 0.5), (0.2, 0.5), (0.3, 0.5), (0.4, 0.5), (0.5, 0.5), (0.6, 0.5), (0.7, 0.5), (0.8, 0.5), (0.90000004, 0.5), (1, 0.5), (0, 0.6), (0.1, 0.6), (0.2, 0.6), (0.3, 0.6), (0.4, 0.6), (0.5, 0.6), (0.6, 0.6), (0.7, 0.6), (0.8, 0.6), (0.90000004, 0.6), (1, 0.6), (0, 0.7), (0.1, 0.7), (0.2, 0.7), (0.3, 0.7), (0.4, 0.7), (0.5, 0.7), (0.6, 0.7), (0.7, 0.7), (0.8, 0.7), (0.90000004, 0.7), (1, 0.7), (0, 0.8), (0.1, 0.8), (0.2, 0.8), (0.3, 0.8), (0.4, 0.8), (0.5, 0.8), (0.6, 0.8), (0.7, 0.8), (0.8, 0.8), (0.90000004, 0.8), (1, 0.8), (0, 0.90000004), (0.1, 0.90000004), (0.2, 0.90000004), (0.3, 0.90000004), (0.4, 0.90000004), (0.5, 0.90000004), (0.6, 0.90000004), (0.7, 0.90000004), (0.8, 0.90000004), (0.90000004, 0.90000004), (1, 0.90000004), (0, 1), (0.1, 1), (0.2, 1), (0.3, 1), (0.4, 1), (0.5, 1), (0.6, 1), (0.7, 1), (0.8, 1), (0.90000004, 1), (1, 1)] (
+        customData = {
+            dictionary Maya = {
+                token name = "map1"
+            }
+        }
+        interpolation = "faceVarying"
+    )
+    int[] primvars:st:indices = [0, 1, 12, 11, 1, 2, 13, 12, 2, 3, 14, 13, 3, 4, 15, 14, 4, 5, 16, 15, 5, 6, 17, 16, 6, 7, 18, 17, 7, 8, 19, 18, 8, 9, 20, 19, 9, 10, 21, 20, 11, 12, 23, 22, 12, 13, 24, 23, 13, 14, 25, 24, 14, 15, 26, 25, 15, 16, 27, 26, 16, 17, 28, 27, 17, 18, 29, 28, 18, 19, 30, 29, 19, 20, 31, 30, 20, 21, 32, 31, 22, 23, 34, 33, 23, 24, 35, 34, 24, 25, 36, 35, 25, 26, 37, 36, 26, 27, 38, 37, 27, 28, 39, 38, 28, 29, 40, 39, 29, 30, 41, 40, 30, 31, 42, 41, 31, 32, 43, 42, 33, 34, 45, 44, 34, 35, 46, 45, 35, 36, 47, 46, 36, 37, 48, 47, 37, 38, 49, 48, 38, 39, 50, 49, 39, 40, 51, 50, 40, 41, 52, 51, 41, 42, 53, 52, 42, 43, 54, 53, 44, 45, 56, 55, 45, 46, 57, 56, 46, 47, 58, 57, 47, 48, 59, 58, 48, 49, 60, 59, 49, 50, 61, 60, 50, 51, 62, 61, 51, 52, 63, 62, 52, 53, 64, 63, 53, 54, 65, 64, 55, 56, 67, 66, 56, 57, 68, 67, 57, 58, 69, 68, 58, 59, 70, 69, 59, 60, 71, 70, 60, 61, 72, 71, 61, 62, 73, 72, 62, 63, 74, 73, 63, 64, 75, 74, 64, 65, 76, 75, 66, 67, 78, 77, 67, 68, 79, 78, 68, 69, 80, 79, 69, 70, 81, 80, 70, 71, 82, 81, 71, 72, 83, 82, 72, 73, 84, 83, 73, 74, 85, 84, 74, 75, 86, 85, 75, 76, 87, 86, 77, 78, 89, 88, 78, 79, 90, 89, 79, 80, 91, 90, 80, 81, 92, 91, 81, 82, 93, 92, 82, 83, 94, 93, 83, 84, 95, 94, 84, 85, 96, 95, 85, 86, 97, 96, 86, 87, 98, 97, 88, 89, 100, 99, 89, 90, 101, 100, 90, 91, 102, 101, 91, 92, 103, 102, 92, 93, 104, 103, 93, 94, 105, 104, 94, 95, 106, 105, 95, 96, 107, 106, 96, 97, 108, 107, 97, 98, 109, 108, 99, 100, 111, 110, 100, 101, 112, 111, 101, 102, 113, 112, 102, 103, 114, 113, 103, 104, 115, 114, 104, 105, 116, 115, 105, 106, 117, 116, 106, 107, 118, 117, 107, 108, 119, 118, 108, 109, 120, 119]
+    uniform token subdivisionScheme = "none"
+    float3 xformOp:scale = (169.03806, 169.03806, 169.03806)
+    uniform token[] xformOpOrder = ["xformOp:scale"]
+
+    def Scope "Looks"
+    {
+        def Material "initialShadingGroup"
+        {
+        }
+    }
+}
+
+def Xform "spheres" (
+    kind = "component"
+)
+{
+    def Sphere "pSphere1" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </spheres/Looks/color_1_1_1SG>
+        double radius = 3
+        double3 xformOp:translate = (0, 3, 32.283612842443205)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Sphere "pSphere3" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </spheres/Looks/color_0_2_0_0_3SG>
+        double radius = 3
+        double3 xformOp:translate = (0, 2.9999999999999996, 16.94294221068091)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Sphere "pSphere5" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </spheres/Looks/color_0_0_0_4SG>
+        double radius = 3
+        double3 xformOp:translate = (0, 2.9999999999999987, 1.602271578918618)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Sphere "pSphere7" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </spheres/Looks/color_0_6_0_4_0_2SG>
+        double radius = 3
+        double3 xformOp:translate = (0, 2.999999999999998, -13.738399052843675)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Sphere "pSphere9" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </spheres/Looks/color_0_0_1SG>
+        double radius = 3
+        double3 xformOp:translate = (0, 2.999999999999997, -29.07906968460597)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Sphere "pSphere11" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        double radius = 3
+        rel material:binding = </spheres/Looks/color_0_8_0_0_2SG>
+        double3 xformOp:translate = (0, 2.999999999999996, -44.41974031636826)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Scope "Looks"
+    {
+        def Material "color_0_8_0_0_2SG"
+        {
+            token outputs:surface.connect = </spheres/Looks/color_0_8_0_0_2SG/color_0_8_0_0_2.outputs:surface>
+
+            def Shader "color_0_8_0_0_2"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.64000005, 0, 0.16000001)
+                normal3f inputs:normal = (1, 1, 1)
+                float inputs:roughness = 0.3
+                color3f inputs:specularColor = (0, 0, 0)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:displacement
+                token outputs:surface
+            }
+        }
+
+        def Material "color_0_0_1SG"
+        {
+            token outputs:surface.connect = </spheres/Looks/color_0_0_1SG/color_0_0_1.outputs:surface>
+
+            def Shader "color_0_0_1"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0, 0, 0.8)
+                normal3f inputs:normal = (1, 1, 1)
+                float inputs:roughness = 0
+                color3f inputs:specularColor = (0, 0, 0)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:displacement
+                token outputs:surface
+            }
+        }
+
+        def Material "color_0_6_0_4_0_2SG"
+        {
+            token outputs:surface.connect = </spheres/Looks/color_0_6_0_4_0_2SG/color_0_6_0_4_0_2.outputs:surface>
+
+            def Shader "color_0_6_0_4_0_2"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.48000002, 0.32000002, 0.16000001)
+                normal3f inputs:normal = (1, 1, 1)
+                float inputs:roughness = 0
+                color3f inputs:specularColor = (0, 0, 0)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:displacement
+                token outputs:surface
+            }
+        }
+
+        def Material "color_0_0_0_4SG"
+        {
+            token outputs:surface.connect = </spheres/Looks/color_0_0_0_4SG/color_0_0_0_4.outputs:surface>
+
+            def Shader "color_0_0_0_4"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0, 0, 0.32000002)
+                normal3f inputs:normal = (1, 1, 1)
+                float inputs:roughness = 0
+                color3f inputs:specularColor = (0, 0, 0)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:displacement
+                token outputs:surface
+            }
+        }
+
+        def Material "color_0_2_0_0_3SG"
+        {
+            token outputs:surface.connect = </spheres/Looks/color_0_2_0_0_3SG/color_0_2_0_0_3.outputs:surface>
+
+            def Shader "color_0_2_0_0_3"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.16000001, 0, 0.24000001)
+                normal3f inputs:normal = (1, 1, 1)
+                float inputs:roughness = 0
+                color3f inputs:specularColor = (0, 0, 0)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:displacement
+                token outputs:surface
+            }
+        }
+
+        def Material "color_1_1_1SG"
+        {
+            token outputs:surface.connect = </spheres/Looks/color_1_1_1SG/color_1_1_1.outputs:surface>
+
+            def Shader "color_1_1_1"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.8, 0.8)
+                normal3f inputs:normal = (1, 1, 1)
+                float inputs:roughness = 0
+                color3f inputs:specularColor = (0, 0, 0)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:displacement
+                token outputs:surface
+            }
+        }
+    }
+}
+
+def Xform "lights" (
+    kind = "assembly"
+)
+{
+    def RectLight "areaLight" (
+        prepend apiSchemas = ["ShadowAPI"]
+    )
+    {
+        float inputs:intensity = 150
+        bool inputs:normalize = 1
+        color3f inputs:shadow:color
+        bool inputs:shadow:enable
+        float3 xformOp:rotateXYZ = (-143.41505, 62.346992, 5.803139)
+        float3 xformOp:scale = (11.29193, 11.29193, 10.844571)
+        double3 xformOp:translate = (-65.15107360774635, 99.88394698286527, -62.45104292970273)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+}
+
+def "Render"
+{
+    def RenderSettings "settings"
+    {
+        uniform int2 resolution = (960, 540)
+    }
+}
+

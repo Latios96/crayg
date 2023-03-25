@@ -22,6 +22,17 @@
       ]
     },
     {
+      "name": "CameraModels",
+      "tests": [
+        {
+          "name": "PineHole"
+        },
+        {
+          "name": "ThinLens"
+        }
+      ]
+    },
+    {
       "name": "CornellBox",
       "tests": [
         {
