@@ -46,7 +46,7 @@ int crayg::UsdRenderSettingsReader::readMaxSamples() const {
 }
 
 IntegratorType crayg::UsdRenderSettingsReader::readIntegratorType() const {
-    return UsdUtils::readEnumValue(usdPrim.GetPrim(), "integratorType", IntegratorType::RAYTRACING);
+    return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "integratorType", IntegratorType::RAYTRACING);
 }
 
 std::string crayg::UsdRenderSettingsReader::getTranslatedType() {
@@ -90,8 +90,8 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
 }
 
 IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
-    return UsdUtils::readEnumValue(usdPrim.GetPrim(), "intersectorType",
-                                   RenderSettings::createDefault().intersectorType);
+    return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "intersectorType",
+                                             RenderSettings::createDefault().intersectorType);
 }
 
 }

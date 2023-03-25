@@ -26,7 +26,7 @@ class UsdUtils {
     };
 
     template <typename T>
-    static T readEnumValue(pxr::UsdPrim usdPrim, const std::string &attributeName, T defaultValue) {
+    static T getAttributeValueAsEnum(pxr::UsdPrim usdPrim, const std::string &attributeName, T defaultValue) {
         auto usdAttr = usdPrim.GetAttribute(pxr::TfToken(attributeName));
         if (!usdAttr) {
             return defaultValue;

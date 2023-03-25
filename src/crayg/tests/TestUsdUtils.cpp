@@ -32,7 +32,7 @@ TEST_CASE("UsdUtils::getAttributeValueAs") {
     }
 }
 
-TEST_CASE("UsdUtils::readEnumValue") {
+TEST_CASE("UsdUtils::getAttributeValueAsEnum") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
     auto sphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/sphere"));
@@ -44,7 +44,7 @@ TEST_CASE("UsdUtils::readEnumValue") {
             .Set(pxr::TfToken("MY_FIRST_VALUE"));
 
         auto myEnumValue =
-            UsdUtils::readEnumValue(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE);
+            UsdUtils::getAttributeValueAsEnum(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE);
 
         REQUIRE(myEnumValue == UsdUtilsTestEnum::MY_FIRST_VALUE);
     }
@@ -55,14 +55,14 @@ TEST_CASE("UsdUtils::readEnumValue") {
             .Set(pxr::TfToken("My_FiRST_Value"));
 
         auto myEnumValue =
-            UsdUtils::readEnumValue(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE);
+            UsdUtils::getAttributeValueAsEnum(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE);
 
         REQUIRE(myEnumValue == UsdUtilsTestEnum::MY_FIRST_VALUE);
     }
 
     SECTION("reading not authored enum value should fallback to default") {
         auto myEnumValue =
-            UsdUtils::readEnumValue(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE);
+            UsdUtils::getAttributeValueAsEnum(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE);
 
         REQUIRE(myEnumValue == UsdUtilsTestEnum::MY_SECOND_VALUE);
     }
@@ -73,7 +73,7 @@ TEST_CASE("UsdUtils::readEnumValue") {
             .Set(pxr::TfToken("invalid"));
 
         REQUIRE_THROWS_AS(
-            UsdUtils::readEnumValue(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE),
+            UsdUtils::getAttributeValueAsEnum(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE),
             std::runtime_error);
     }
 }
@@ -114,7 +114,8 @@ TEST_CASE("UsdUtils::createAndSetAttribute") {
     SECTION("should create and set enum attribute") {
         UsdUtils::createAndSetAttribute(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_FIRST_VALUE);
 
-        auto value = UsdUtils::readEnumValue(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_FIRST_VALUE);
+        auto value =
+            UsdUtils::getAttributeValueAsEnum(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_FIRST_VALUE);
 
         REQUIRE(value == UsdUtilsTestEnum::MY_FIRST_VALUE);
     }
