@@ -1,7 +1,5 @@
 #include "UsdCameraReader.h"
-#include "Logger.h"
 #include "basics/Transform.h"
-#include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdUtils.h"
 
 namespace crayg {
@@ -15,6 +13,17 @@ std::shared_ptr<Camera> UsdCameraReader::read() {
     const auto filmbackSize =
         UsdUtils::getAttributeValueAs<float>(usdPrim.GetHorizontalApertureAttr(), this->timeCodeToRead);
     camera->setFilmbackSize(filmbackSize);
+
+    const auto cameraType =
+        UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "craygCameraType", CameraType::PINE_HOLE);
+    camera->setCameraType(cameraType);
+
+    const auto focusDistance =
+        UsdUtils::getAttributeValueAs<float>(usdPrim.GetFocusDistanceAttr(), this->timeCodeToRead);
+    camera->setFocusDistance(focusDistance);
+
+    const auto fStop = UsdUtils::getAttributeValueAs<float>(usdPrim.GetFStopAttr(), this->timeCodeToRead);
+    camera->setFStop(fStop);
 
     return camera;
 }

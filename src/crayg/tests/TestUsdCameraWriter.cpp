@@ -15,6 +15,9 @@ TEST_CASE("UsdCameraReader::write") {
 
     SECTION("should write camera correctly") {
         Camera myCamera(Transform::withPosition({1, 2, 3}), 50.0f, 35.0f);
+        myCamera.setFocusDistance(50.f);
+        myCamera.setFStop(2.8f);
+        myCamera.setCameraType(CameraType::THIN_LENS);
 
         UsdCameraWriter usdCameraWriter(myCamera);
         usdCameraWriter.write(stage, usdPathFactory);
@@ -22,8 +25,15 @@ TEST_CASE("UsdCameraReader::write") {
         auto usdGeomCamera = pxr::UsdGeomCamera(stage->GetPrimAtPath(pxr::SdfPath("/camera0")));
         auto focalLength = UsdUtils::getStaticAttributeValueAs<float>(usdGeomCamera.GetFocalLengthAttr());
         auto horizontalAperture = UsdUtils::getStaticAttributeValueAs<float>(usdGeomCamera.GetHorizontalApertureAttr());
+        auto focusDistance = UsdUtils::getStaticAttributeValueAs<float>(usdGeomCamera.GetFocusDistanceAttr());
+        auto fStop = UsdUtils::getStaticAttributeValueAs<float>(usdGeomCamera.GetFStopAttr());
+        auto cameraType = UsdUtils::getAttributeValueAsEnum<CameraType>(usdGeomCamera.GetPrim(), "craygCameraType",
+                                                                        CameraType::REALISTIC);
         REQUIRE(focalLength == 50.0f);
         REQUIRE(horizontalAperture == 35.0f);
+        REQUIRE(focusDistance == 50.f);
+        REQUIRE(fStop == 2.8f);
+        REQUIRE(cameraType == CameraType::THIN_LENS);
         REQUIRE(usdGeomCamera.ComputeLocalToWorldTransform(pxr::UsdTimeCode::Default()).ExtractTranslation() ==
                 pxr::GfVec3f(1, 2, -3));
     }

@@ -1,4 +1,5 @@
 #include "sceneIO/read/usd/UsdCameraReader.h"
+#include "sceneIO/usd/UsdUtils.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <pxr/usd/usd/stage.h>
@@ -18,11 +19,17 @@ TEST_CASE("CameraReader::read") {
         usdCamera.GetFocusDistanceAttr().Set(5.0f);
         usdCamera.GetFocalLengthAttr().Set(35.0f);
         usdCamera.GetHorizontalApertureAttr().Set(36.0f);
+        usdCamera.GetFocusDistanceAttr().Set(50.0f);
+        usdCamera.GetFStopAttr().Set(2.8f);
+        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygCameraType", CameraType::THIN_LENS);
 
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
 
         auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}), 35.f, 36.f);
+        expectedCamera->setFocusDistance(50.f);
+        expectedCamera->setFStop(2.8f);
+        expectedCamera->setCameraType(CameraType::THIN_LENS);
         REQUIRE(*camera == *expectedCamera);
     }
 
@@ -39,7 +46,6 @@ TEST_CASE("CameraReader::read") {
 
     SECTION("should read fully populated camera with time samples correctly") {
         pxr::UsdGeomXformCommonAPI(usdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3), pxr::UsdTimeCode());
-        usdCamera.GetFocusDistanceAttr().Set(5.0f, pxr::UsdTimeCode());
         usdCamera.GetFocalLengthAttr().Set(35.0f, pxr::UsdTimeCode());
         usdCamera.GetHorizontalApertureAttr().Set(36.0f, pxr::UsdTimeCode());
 
@@ -48,6 +54,12 @@ TEST_CASE("CameraReader::read") {
 
         auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}), 35.f, 36.f);
         REQUIRE(*camera == *expectedCamera);
+    }
+    SECTION("cameraType should default to PineHoleCamera") {
+        UsdCameraReader usdCameraReader(usdCamera);
+        auto camera = usdCameraReader.read();
+
+        REQUIRE(camera->getCameraType() == CameraType::PINE_HOLE);
     }
 }
 

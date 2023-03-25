@@ -1,6 +1,7 @@
 #ifndef CRAYG_CAMERA_H
 #define CRAYG_CAMERA_H
 
+#include "CameraType.h"
 #include "basics/Vector3f.h"
 #include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"
@@ -15,6 +16,9 @@ class Camera : public Transformable {
     float focalLength;
     float filmbackSize;
     std::string name;
+    CameraType cameraType = CameraType::PINE_HOLE;
+    float focusDistance = 0;
+    float fStop = 0;
 
   public:
     Camera();
@@ -34,6 +38,15 @@ class Camera : public Transformable {
     const std::string &getName() const;
     void setName(const std::string &name);
 
+    CameraType getCameraType() const;
+    void setCameraType(CameraType cameraType);
+
+    float getFocusDistance() const;
+    void setFocusDistance(float focusDistance);
+
+    float getFStop() const;
+    void setFStop(float fStop);
+
     bool operator==(const Camera &rhs) const;
     bool operator!=(const Camera &rhs) const;
 
@@ -42,6 +55,9 @@ class Camera : public Transformable {
                   .addMember("transform", camera.transform)
                   .addMember("focalLength", camera.focalLength)
                   .addMember("filmbackSize", camera.filmbackSize)
+                  .addMember("cameraType", camera.cameraType)
+                  .addMember("focusDistance", camera.focusDistance)
+                  .addMember("fStop", camera.fStop)
                   .finish();
         return os;
     }
