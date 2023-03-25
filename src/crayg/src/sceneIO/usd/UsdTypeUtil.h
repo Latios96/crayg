@@ -1,6 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDTYPEUTIL_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDTYPEUTIL_H_
 
+#include "integrators/IntegratorType.h"
+#include "intersectors/IntersectorType.h"
 #include "scene/camera/CameraType.h"
 #include <fmt/format.h>
 #include <pxr/usd/sdf/types.h>
@@ -42,5 +44,22 @@ template <> struct UsdTypeUtil<CameraType> {
         return pxr::TfToken(fmt::format("{}", cameraType));
     }
 };
+
+template <> struct UsdTypeUtil<IntegratorType> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(IntegratorType integratorType) {
+        return pxr::TfToken(fmt::format("{}", integratorType));
+    }
+};
+
+template <> struct UsdTypeUtil<IntersectorType> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(IntersectorType intersectorType) {
+        return pxr::TfToken(fmt::format("{}", intersectorType));
+    }
+};
+
 }
 #endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDTYPEUTIL_H_

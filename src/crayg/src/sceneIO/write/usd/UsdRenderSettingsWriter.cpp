@@ -1,4 +1,5 @@
 #include "UsdRenderSettingsWriter.h"
+#include "sceneIO/usd/UsdUtils.h"
 #include <magic_enum.hpp>
 
 namespace crayg {
@@ -22,15 +23,11 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
 }
 
 void UsdRenderSettingsWriter::writeIntegratorType(const pxr::UsdRenderSettings &usdRenderSettings) const {
-    usdRenderSettings.GetPrim()
-        .CreateAttribute(pxr::TfToken("integratorType"), pxr::SdfValueTypeNames->Token)
-        .Set(pxr::TfToken(std::string(magic_enum::enum_name(renderSettings.integratorType))));
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "integratorType", renderSettings.integratorType);
 }
 
 void UsdRenderSettingsWriter::writeMaxSamples(const pxr::UsdRenderSettings &usdRenderSettings) const {
-    usdRenderSettings.GetPrim()
-        .CreateAttribute(pxr::TfToken("maxSamples"), pxr::SdfValueTypeNames->Int)
-        .Set(renderSettings.maxSamples);
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "maxSamples", renderSettings.maxSamples);
 }
 
 void UsdRenderSettingsWriter::writeResolution(const pxr::UsdRenderSettings &usdRenderSettings) const {
@@ -42,28 +39,21 @@ void UsdRenderSettingsWriter::writeIntegratorSettings(const pxr::UsdRenderSettin
     for (const auto &entry : renderSettings.integratorSettings.settings) {
         switch (entry.second.index()) {
         case 0:
-            usdRenderSettings.GetPrim()
-                .CreateAttribute(pxr::TfToken(entry.first), pxr::SdfValueTypeNames->Token)
-                .Set(pxr::TfToken(std::get<std::string>(entry.second)));
+            UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), entry.first,
+                                            std::get<std::string>(entry.second));
             break;
         case 1:
-            usdRenderSettings.GetPrim()
-                .CreateAttribute(pxr::TfToken(entry.first), pxr::SdfValueTypeNames->Int)
-                .Set(std::get<int>(entry.second));
+            UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), entry.first, std::get<int>(entry.second));
             break;
         case 2:
-            usdRenderSettings.GetPrim()
-                .CreateAttribute(pxr::TfToken(entry.first), pxr::SdfValueTypeNames->Float)
-                .Set(std::get<float>(entry.second));
+            UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), entry.first, std::get<float>(entry.second));
             break;
         }
     }
 }
 
 void UsdRenderSettingsWriter::writeIntersectorType(const pxr::UsdRenderSettings &usdRenderSettings) const {
-    usdRenderSettings.GetPrim()
-        .CreateAttribute(pxr::TfToken("intersectorType"), pxr::SdfValueTypeNames->Token)
-        .Set(pxr::TfToken(std::string(magic_enum::enum_name(renderSettings.intersectorType))));
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "intersectorType", renderSettings.intersectorType);
 }
 
 } // crayg
