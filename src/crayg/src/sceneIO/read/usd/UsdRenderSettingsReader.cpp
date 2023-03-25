@@ -6,23 +6,6 @@
 
 namespace crayg {
 
-template <typename T>
-T readEnumValue(pxr::UsdRenderSettings usdPrim, const std::string &attributeName, T defaultValue) {
-    auto usdAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken(attributeName));
-    if (!usdAttr) {
-        return defaultValue;
-    }
-    auto tokenValue = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdAttr).GetString();
-    for (auto &c : tokenValue) {
-        c = toupper(c);
-    }
-    auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
-    if (!maybeValue.has_value()) {
-        throw std::runtime_error(fmt::format(R"(Unsupported value for '{}': "{}")", attributeName, tokenValue));
-    }
-    return maybeValue.value();
-}
-
 UsdRenderSettingsReader::UsdRenderSettingsReader(const pxr::UsdRenderSettings &usdPrim) : BaseUsdReader(usdPrim) {
 }
 
@@ -63,7 +46,7 @@ int crayg::UsdRenderSettingsReader::readMaxSamples() const {
 }
 
 IntegratorType crayg::UsdRenderSettingsReader::readIntegratorType() const {
-    return readEnumValue<IntegratorType>(usdPrim, "integratorType", IntegratorType::RAYTRACING);
+    return UsdUtils::readEnumValue(usdPrim.GetPrim(), "integratorType", IntegratorType::RAYTRACING);
 }
 
 std::string crayg::UsdRenderSettingsReader::getTranslatedType() {
@@ -107,7 +90,8 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
 }
 
 IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
-    return readEnumValue<IntersectorType>(usdPrim, "intersectorType", RenderSettings::createDefault().intersectorType);
+    return UsdUtils::readEnumValue(usdPrim.GetPrim(), "intersectorType",
+                                   RenderSettings::createDefault().intersectorType);
 }
 
 }

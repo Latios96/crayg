@@ -37,17 +37,6 @@ TEST_CASE("UsdRenderSettingsReader::read") {
 
         REQUIRE(*renderSettings == RenderSettings::createDefault());
     }
-
-    SECTION("should parse rendersettings case insensitive") {
-        usdRenderSettings.GetPrim()
-            .CreateAttribute(pxr::TfToken("integratorType"), pxr::SdfValueTypeNames->Token)
-            .Set(pxr::TfToken("DeBuG"));
-        UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
-        auto renderSettings = usdRenderSettingsReader.read();
-
-        REQUIRE(*renderSettings == RenderSettings(crayg::Resolution(1280, 720), 4, IntegratorType::DEBUG,
-                                                  IntegratorSettings(), IntersectorType::EMBREE));
-    }
 }
 
 }
