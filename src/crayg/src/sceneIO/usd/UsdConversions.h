@@ -3,8 +3,10 @@
 
 #include "basics/Color.h"
 #include "basics/Matrix4x4f.h"
+#include "basics/Resolution.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/base/gf/matrix4d.h>
+#include <pxr/base/gf/vec2i.h>
 
 namespace crayg {
 
@@ -17,6 +19,7 @@ class UsdConversions {
     static pxr::GfVec3f convert(const Color &color);
     static Color convertColor(const pxr::GfVec3f &color);
     static pxr::GfMatrix4d convert(const Matrix4x4f &matrix);
+    static pxr::GfVec2i convert(const Resolution &resolution);
 };
 
 };

@@ -50,4 +50,8 @@ pxr::GfVec3f UsdConversions::convert(const Color &color) {
     return {color.r, color.g, color.b};
 }
 
+pxr::GfVec2i UsdConversions::convert(const Resolution &resolution) {
+    return {resolution.getWidth(), resolution.getHeight()};
+}
+
 };

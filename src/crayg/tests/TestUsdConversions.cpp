@@ -100,4 +100,22 @@ TEST_CASE("convertColor") {
     }
 }
 
+TEST_CASE("ConvertResolution") {
+    SECTION("should convert Resolution to Vec2i") {
+        const Resolution resolution(1280, 720);
+
+        const pxr::GfVec2i converted = UsdConversions::convert(resolution);
+
+        REQUIRE(converted == pxr::GfVec2i(1280, 720));
+    }
+
+    SECTION("should convert Resolution to Vec2i") {
+        const Resolution resolution(1280, 720);
+
+        const pxr::GfVec2i converted = UsdConversions::convert(resolution);
+
+        REQUIRE(converted == pxr::GfVec2i(1280, 720));
+    }
+}
+
 }

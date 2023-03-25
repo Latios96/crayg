@@ -1,4 +1,5 @@
 #include "UsdRenderSettingsWriter.h"
+#include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <magic_enum.hpp>
 
@@ -31,8 +32,7 @@ void UsdRenderSettingsWriter::writeMaxSamples(const pxr::UsdRenderSettings &usdR
 }
 
 void UsdRenderSettingsWriter::writeResolution(const pxr::UsdRenderSettings &usdRenderSettings) const {
-    usdRenderSettings.GetResolutionAttr().Set(
-        pxr::GfVec2i(renderSettings.resolution.getWidth(), renderSettings.resolution.getHeight()));
+    usdRenderSettings.GetResolutionAttr().Set(UsdConversions::convert(renderSettings.resolution));
 }
 
 void UsdRenderSettingsWriter::writeIntegratorSettings(const pxr::UsdRenderSettings &usdRenderSettings) const {
