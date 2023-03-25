@@ -15,6 +15,13 @@ class CraygTestIntegrationShelf(Shelf):
             command="import maya_test_integration;maya_test_integration.show()",
         )
 
+        self.add_button(
+            label="Add Crayg Extra Attributes",
+            icon=os.path.join(root, "xbmlangpath", "craygCameraAttributes.png"),
+            annotation="Add Crayg Extra Attributes to selected cameras",
+            command="from utils import crayg_camera_utils;crayg_camera_utils.add_crayg_extra_attributes_to_selected_cameras()",
+        )
+
 
 @maya_gui_only("loading of Crayg Test Integration shelf")
 def load_shelf():
