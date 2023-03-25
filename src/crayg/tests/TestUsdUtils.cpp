@@ -22,6 +22,13 @@ TEST_CASE("UsdUtils::getAttributeValueAs") {
     SECTION("should throw exception when there is an error reading the attribute") {
         REQUIRE_THROWS_AS(UsdUtils::getStaticAttributeValueAs<float>(sphere.GetRadiusAttr()), std::runtime_error);
     }
+}
+
+TEST_CASE("UsdUtils::readEnumValue") {
+
+    auto stage = pxr::UsdStage::CreateInMemory();
+    auto sphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/sphere"));
+    sphere.GetRadiusAttr().Set(3.0);
 
     SECTION("should read authored enum value") {
         sphere.GetPrim()
