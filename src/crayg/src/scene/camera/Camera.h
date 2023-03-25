@@ -20,7 +20,6 @@ class Camera : public Transformable {
     Camera();
 
     Camera(const Transform &transform, float focalLength, float filmbackSize);
-    // const Vector3f &getPosition() const;
 
     Vector3f getUserUpVector() const;
 
