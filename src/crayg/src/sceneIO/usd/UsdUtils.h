@@ -46,6 +46,31 @@ class UsdUtils {
         if (!usdAttr) {
             return defaultValue;
         }
+
+        const bool enumValueAuthoredAsToken = usdAttr.GetTypeName() == pxr::SdfValueTypeNames->Token;
+        const bool enumValueAuthoredAsInt = usdAttr.GetTypeName() == pxr::SdfValueTypeNames->Int;
+
+        if (!enumValueAuthoredAsToken && !enumValueAuthoredAsInt) {
+            throw std::runtime_error(fmt::format("USD attribute {} has type {}, which is not supported for enum",
+                                                 attributeName, usdAttr.GetTypeName()));
+        }
+
+        if (enumValueAuthoredAsToken) {
+            return getEnumValueFromTokenAttr(usdAttr, attributeName, defaultValue);
+        }
+        return getEnumValueFromIntAttr(usdAttr, attributeName, defaultValue);
+    }
+
+    template <typename T>
+    static void createAndSetAttribute(pxr::UsdPrim usdPrim, const std::string &attributeName, T defaultValue) {
+        usdPrim.CreateAttribute(pxr::TfToken(attributeName), UsdTypeUtil<T>::sdfValueTypeName)
+            .Set(UsdTypeUtil<T>::convert(defaultValue));
+    }
+
+  private:
+    template <typename T>
+    static T getEnumValueFromTokenAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
+                                       T defaultValue) {
         auto tokenValue = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdAttr).GetString();
         for (auto &c : tokenValue) {
             c = toupper(c);
@@ -58,9 +83,14 @@ class UsdUtils {
     }
 
     template <typename T>
-    static void createAndSetAttribute(pxr::UsdPrim usdPrim, const std::string &attributeName, T defaultValue) {
-        usdPrim.CreateAttribute(pxr::TfToken(attributeName), UsdTypeUtil<T>::sdfValueTypeName)
-            .Set(UsdTypeUtil<T>::convert(defaultValue));
+    static T getEnumValueFromIntAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
+                                     T defaultValue) {
+        auto tokenValue = UsdUtils::getStaticAttributeValueAs<int>(usdAttr);
+        auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
+        if (!maybeValue.has_value()) {
+            throw std::runtime_error(fmt::format(R"(Unsupported value for '{}': "{}")", attributeName, tokenValue));
+        }
+        return maybeValue.value();
     }
 };
 
