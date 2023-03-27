@@ -188,6 +188,18 @@ def collect_test_scenes(scenes: List[RunConfigParameter]):
                 name_override="White_Lands",
             )
         )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\OpenChessSet\OpenChessSetCrayg.usda"),
+                name_override="OpenChessSet",
+            )
+        )
+        scenes.append(
+            RunConfigParameter(
+                Path(r"M:\Test_Scene_Collection\OpenChessSet\StormTrooper.usda"),
+                name_override="StormTrooper",
+            )
+        )
 
 
 def add_not_existing_run_configurations(run_manager, scenes):
