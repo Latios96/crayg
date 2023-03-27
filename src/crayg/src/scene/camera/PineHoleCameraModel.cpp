@@ -18,11 +18,8 @@ Ray PineHoleCameraModel::createPrimaryRay(float x, float y) {
 }
 
 Vector3f PineHoleCameraModel::createPineHoleRayDirection(float x, float y) {
-    // TODO Note that always adding 0.5 is wrong, since this should be handled by the x,y generator.
-    // TODO x and y should be passed with the correct position
-    // TODO don't forget to check renderer code and PineHoleCamera
-    float wScale = 2.0f * (x + 0.5f) / static_cast<float>(resolution.getWidth()) - 1.0f;
-    float hScale = 2.0f * (y + 0.5f) / static_cast<float>(resolution.getHeight()) - 1.0f;
+    float wScale = 2.0f * x / static_cast<float>(resolution.getWidth()) - 1.0f;
+    float hScale = 2.0f * y / static_cast<float>(resolution.getHeight()) - 1.0f;
 
     return (viewVector + sideVector * wScale + upVector * hScale * -1).normalize();
 }

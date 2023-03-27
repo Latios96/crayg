@@ -95,7 +95,7 @@ Color Renderer::renderPixel(const Vector2i &pixel) {
     float stepSize = 1.0f / static_cast<float>(scene.renderSettings.maxSamples);
     for (int i = 0; i < scene.renderSettings.maxSamples; i++) {
         for (int a = 0; a < scene.renderSettings.maxSamples; a++) {
-            sampleAccumulator.addSample(renderSample(pixel.x - 0.5f + stepSize * i, pixel.y - 0.5f + stepSize * a));
+            sampleAccumulator.addSample(renderSample(pixel.x + stepSize * i, pixel.y + stepSize * a));
         }
     }
 
