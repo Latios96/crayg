@@ -14,7 +14,7 @@ TEST_CASE("Transform Construction", "[Transform]") {
     SECTION("should create with position") {
         Transform transform = Transform::withPosition({1, 2, 3});
 
-        REQUIRE(transform.apply({1, 2, 3}) == Vector3f(2, 4, 6));
+        REQUIRE(transform.applyForPoint({1, 2, 3}) == Vector3f(2, 4, 6));
     }
 
     SECTION("should create with rotation") {
@@ -44,12 +44,12 @@ TEST_CASE("Transform Construction", "[Transform]") {
     }
 }
 
-TEST_CASE("apply transform to vector", "[Transform]") {
-    SECTION("apply identiy matrix should not change") {
+TEST_CASE("apply transform to point", "[Transform]") {
+    SECTION("apply identy matrix should not change") {
         Vector3f vector3f(1, 2, 3);
         Transform transform;
 
-        REQUIRE(transform.apply(vector3f) == vector3f);
+        REQUIRE(transform.applyForPoint(vector3f) == vector3f);
     }
 
     SECTION("should transform vector on x axis") {
@@ -57,7 +57,7 @@ TEST_CASE("apply transform to vector", "[Transform]") {
         Matrix4x4f matrix4X4f(1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
         Transform transform(matrix4X4f);
 
-        const Vector3f &f = transform.apply(vector3f);
+        const Vector3f &f = transform.applyForPoint(vector3f);
         REQUIRE(f == Vector3f(2, 2, 3));
     }
 
@@ -66,7 +66,7 @@ TEST_CASE("apply transform to vector", "[Transform]") {
         Matrix4x4f matrix4X4f(1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1);
         Transform transform(matrix4X4f);
 
-        const Vector3f &f = transform.apply(vector3f);
+        const Vector3f &f = transform.applyForPoint(vector3f);
         REQUIRE(f == Vector3f(1, 3, 3));
     }
 
@@ -75,7 +75,7 @@ TEST_CASE("apply transform to vector", "[Transform]") {
         Matrix4x4f matrix4X4f(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1);
         Transform transform(matrix4X4f);
 
-        const Vector3f &f = transform.apply(vector3f);
+        const Vector3f &f = transform.applyForPoint(vector3f);
         REQUIRE(f == Vector3f(1, 2, 4));
     }
 }
@@ -92,7 +92,7 @@ TEST_CASE("apply transform to Ray", "[Transform]") {
         Ray ray({1, 2, 3}, {4, 5, 6});
         Transform transform = Transform::withPosition({1, 2, 3});
 
-        REQUIRE(transform.apply(ray) == Ray({2, 4, 6}, {5, 7, 9}));
+        REQUIRE(transform.apply(ray) == Ray({2, 4, 6}, {4, 5, 6}));
     }
 }
 

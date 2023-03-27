@@ -9,12 +9,12 @@ Vector3f DiskLight::sampleLightShape() const {
     float r = radius * sqrt(Random::random());
     float theta = Random::random() * 2 * boost::math::constants::pi<float>();
     Vector3f positionOnPlane = {r * cos(theta), r * sin(theta), 0};
-    return getTransform().apply(positionOnPlane);
+    return getTransform().applyForPoint(positionOnPlane);
 }
 
 Imageable::Intersection DiskLight::intersect(Ray ray) {
     const Vector3f normal = transform.applyForNormal(getNormal({0, 0, 0}));
-    const Vector3f center = transform.apply({0, 0, 0});
+    const Vector3f center = transform.applyForPoint({0, 0, 0});
     if (normal.dot(ray.direction) > 0) {
         return Imageable::Intersection::createInvalid();
     }
@@ -34,7 +34,7 @@ Imageable::Intersection DiskLight::intersect(Ray ray) {
 
 bool DiskLight::isIntersecting(Ray ray) {
     const Vector3f normal = transform.applyForNormal(getNormal({0, 0, 0}));
-    const Vector3f center = transform.apply({0, 0, 0});
+    const Vector3f center = transform.applyForPoint({0, 0, 0});
     if (normal.dot(ray.direction) > 0) {
         return false;
     }
@@ -69,7 +69,7 @@ void DiskLight::setRadius(float radius) {
 }
 
 float DiskLight::area() const {
-    const Vector3f radiusVector = getPosition() - getTransform().apply({radius, 0, 0});
+    const Vector3f radiusVector = getPosition() - getTransform().applyForPoint({radius, 0, 0});
     const float area = boost::math::constants::pi<float>() * radiusVector.lengthSquared();
     return area;
 }

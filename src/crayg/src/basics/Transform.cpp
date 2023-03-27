@@ -17,7 +17,7 @@ Transform Transform::withPosition(const Vector3f &vector3f) {
     return Transform(matrix4X4f);
 }
 
-Vector3f Transform::apply(const Vector3f &vector3f) const {
+Vector3f Transform::applyForPoint(const Vector3f &vector3f) const {
     float x = matrix.values[0][0] * vector3f.x + matrix.values[0][1] * vector3f.y + matrix.values[0][2] * vector3f.z +
               matrix.values[0][3];
     float y = matrix.values[1][0] * vector3f.x + matrix.values[1][1] * vector3f.y + matrix.values[1][2] * vector3f.z +
@@ -43,6 +43,21 @@ Vector3f Transform::apply(const Vector3f &vector3f) const {
     };
 }
 
+Vector3f Transform::apply(const Vector3f &vector3f) const {
+    const float x =
+        matrix.values[0][0] * vector3f.x + matrix.values[0][1] * vector3f.y + matrix.values[0][2] * vector3f.z;
+    const float y =
+        matrix.values[1][0] * vector3f.x + matrix.values[1][1] * vector3f.y + matrix.values[1][2] * vector3f.z;
+    const float z =
+        matrix.values[2][0] * vector3f.x + matrix.values[2][1] * vector3f.y + matrix.values[2][2] * vector3f.z;
+
+    return {
+        x,
+        y,
+        z,
+    };
+}
+
 Vector3f Transform::toPosition() const {
     return {matrix.values[0][3], matrix.values[1][3], matrix.values[2][3]};
 }
@@ -61,7 +76,7 @@ Transform &Transform::operator=(const Transform &rhs) {
 }
 
 Ray Transform::apply(const Ray &ray) const {
-    return {apply(ray.startPoint), apply(ray.direction), ray.length};
+    return {applyForPoint(ray.startPoint), apply(ray.direction), ray.length};
 }
 
 Transform Transform::withRotation(float x, float y, float z) {

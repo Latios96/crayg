@@ -98,7 +98,7 @@ BoundingBox TriangleMesh::getBounds() const {
 
 void TriangleMesh::init() {
     for (auto &point : points) {
-        point = transform.apply(point);
+        point = transform.applyForPoint(point);
     } // todo check if this is necessary
     createBounds();
     createNormals();

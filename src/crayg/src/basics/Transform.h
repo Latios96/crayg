@@ -18,6 +18,7 @@ class Transform {
     static Transform withScale(float x, float y, float z);
 
     Vector3f apply(const Vector3f &vector3f) const;
+    Vector3f applyForPoint(const Vector3f &vector3f) const;
     Vector3f applyForNormal(const Vector3f &vector3f) const;
     Ray apply(const Ray &ray) const;
 

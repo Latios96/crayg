@@ -45,7 +45,7 @@ void UsdTriangleMeshWriter::writePoints(const pxr::UsdGeomMesh &usdGeomMesh) {
     points.reserve(craygObject.points.size());
     Transform inverse = Transform(craygObject.getTransform().matrix.invert());
     for (auto &i : craygObject.points) {
-        Vector3f point = inverse.apply(i);
+        Vector3f point = inverse.applyForPoint(i);
         points.push_back(UsdConversions::convert(point));
     }
     usdGeomMesh.GetPointsAttr().Set(points);

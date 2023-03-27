@@ -14,7 +14,7 @@ Vector3f Camera::getUserUpVector() const {
 }
 
 Vector3f Camera::getCenterOfInterest() const {
-    return transform.apply({0, 0, 1});
+    return transform.applyForPoint({0, 0, 1});
 }
 
 float Camera::getHorizontalFieldOfView() const {
