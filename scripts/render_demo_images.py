@@ -96,7 +96,7 @@ def get_demo_images(max_samples=32):
             DemoImage(
                 name=f"Intel_Sponza_PhysCamera{camera_number}",
                 scene_path=Path("M:\Test_Scene_Collection\Intel_Sponza\Default.usda"),
-                max_samples=32,
+                max_samples=max_samples,
                 resolution=(1280, 720),
                 camera=f"/PhysCamera{camera_number}",
             )
@@ -108,7 +108,7 @@ def get_demo_images(max_samples=32):
                 scene_path=Path(
                     "M:\Test_Scene_Collection\OpenChessSet\OpenChessSetCrayg.usda"
                 ),
-                max_samples=32,
+                max_samples=max_samples,
                 resolution=(1920, 1080),
                 camera=f"/cams/render_cam_{camera_number}/render_cam_{camera_number}Shape",
             )
