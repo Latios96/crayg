@@ -9,6 +9,6 @@ over "render_cam"
 {
     over "render_camShape"{
         custom int craygCameraType = 2
-            float fStop = 0.3
+        float fStop = 17
     }
 }

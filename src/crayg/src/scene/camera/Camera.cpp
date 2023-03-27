@@ -80,4 +80,9 @@ void Camera::setFStop(float fStop) {
     Camera::fStop = fStop;
 }
 
+float Camera::computeApertureSizeHeuristically() const {
+    // inspired by Cycles
+    return (focalLength * 1e-1f) / (2.0f * fStop);
+}
+
 }

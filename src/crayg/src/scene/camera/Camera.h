@@ -47,6 +47,8 @@ class Camera : public Transformable {
     float getFStop() const;
     void setFStop(float fStop);
 
+    float computeApertureSizeHeuristically() const;
+
     bool operator==(const Camera &rhs) const;
     bool operator!=(const Camera &rhs) const;
 
