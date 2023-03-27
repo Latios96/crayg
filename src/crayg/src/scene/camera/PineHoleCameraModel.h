@@ -8,15 +8,17 @@
 
 namespace crayg {
 
-// todo add tests
 class PineHoleCameraModel : public CameraModel {
   private:
     float imageRatio;
     float imagePlaneWidth, imagePlaneHeight;
 
-    Vector3f sideVector, upVector, viewVector, planeCenter;
+    Vector3f sideVector = {1, 0, 0};
+    Vector3f upVector = {0, 1, 0};
+    Vector3f viewVector = {0, 0, 1};
 
-    Vector3f getPixelCenter(float x, float y);
+  protected:
+    Vector3f createPineHoleRayDirection(float x, float y);
 
   public:
     PineHoleCameraModel(Camera &camera, const Resolution &resolution);
