@@ -1,4 +1,6 @@
 set(UNIT_TEST_LIST
+        fixtures/CameraLensFixtures.cpp
+        fixtures/CameraLensFixtures.h
         fixtures/SubdivisionSurfaceMeshFixtures.cpp
         fixtures/SubdivisionSurfaceMeshFixtures.h
         fixtures/TemporaryDirectory.cpp
@@ -21,6 +23,7 @@ set(UNIT_TEST_LIST
         TestBucketSizeEstimator.cpp
         TestBvhSceneIntersector.cpp
         TestCamera.cpp
+        TestCameraLens.cpp
         TestColor.cpp
         TestColorConversion.cpp
         TestDebugIntegrator.cpp

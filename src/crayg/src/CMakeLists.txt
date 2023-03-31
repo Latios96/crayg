@@ -110,6 +110,8 @@ set(crayg_SRCS
         scene/camera/CameraModelFactory.cpp
         scene/camera/CameraModelFactory.h
         scene/camera/CameraType.h
+        scene/camera/CameraLens.cpp
+        scene/camera/CameraLens.h
         scene/camera/PineHoleCameraModel.cpp
         scene/camera/PineHoleCameraModel.h
         scene/camera/ThinLensCameraModel.cpp
