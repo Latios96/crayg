@@ -37,6 +37,15 @@ TEST_CASE("Vector3f::lengthSquared") {
     REQUIRE(myVector.lengthSquared() == Catch::Detail::Approx(125));
 }
 
+TEST_CASE("Vector3f::operator+ scalar") {
+    Vector3f myVector(5, 6, 8);
+    Vector3f result = myVector + 5;
+
+    REQUIRE(result.x == 10);
+    REQUIRE(result.y == 11);
+    REQUIRE(result.z == 13);
+}
+
 TEST_CASE("Vector3f::operator*") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector * 5;
