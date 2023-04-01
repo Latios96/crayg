@@ -13,7 +13,7 @@ template <typename T> class Vector2 {
     Vector2() : x(0), y(0) {
     }
 
-    Vector2(T val) : x(val), y(val) {
+    explicit Vector2(T val) : x(val), y(val) {
     }
 
     Vector2(T x, T y) : x(x), y(y) {
