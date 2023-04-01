@@ -141,4 +141,21 @@ TEST_CASE("Vector3f::reflect") {
     }
 }
 
+TEST_CASE("Vector3f::to Vector2f conversion") {
+
+    const Vector3f myVector(1, 2, 3);
+
+    SECTION("should convert xy components to Vector2f") {
+        REQUIRE(myVector.xy() == Vector2f(1, 2));
+    }
+
+    SECTION("should convert xz components to Vector2f") {
+        REQUIRE(myVector.xz() == Vector2f(1, 3));
+    }
+
+    SECTION("should convert yz components to Vector2f") {
+        REQUIRE(myVector.yz() == Vector2f(2, 3));
+    }
+}
+
 }

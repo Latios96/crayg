@@ -87,4 +87,16 @@ Vector3f Vector3f::reflect(const Vector3f &normal) const {
     return (*this) - (normal * 2 * (this->dot(normal)));
 }
 
+Vector2f Vector3f::xy() const {
+    return {x, y};
+}
+
+Vector2f Vector3f::xz() const {
+    return {x, z};
+}
+
+Vector2f Vector3f::yz() const {
+    return {y, z};
+}
+
 } // namespace crayg

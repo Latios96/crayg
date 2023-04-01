@@ -1,6 +1,7 @@
 #ifndef CRAYG_VECTOR3F_H
 #define CRAYG_VECTOR3F_H
 
+#include "Vector2.h"
 #include <cmath>
 #include <fmt/ostream.h>
 #include <limits>
@@ -47,6 +48,12 @@ class Vector3f {
     static Vector3f createInvalid();
 
     bool isValid() const;
+
+    Vector2f xy() const;
+
+    Vector2f xz() const;
+
+    Vector2f yz() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Vector3f &f);
 };
