@@ -12,6 +12,8 @@ class CameraModel {
     CameraModel(Camera &camera, const Resolution &resolution) : camera(camera), resolution(resolution) {
     }
 
+    virtual void init(){};
+
     virtual Ray createPrimaryRay(float x, float y) = 0;
 
     virtual ~CameraModel() = default;

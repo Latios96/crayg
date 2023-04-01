@@ -76,7 +76,11 @@ void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageB
 }
 
 void Renderer::init() {
-    cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
+    {
+        InformativeScopedStopWatch buildBvh("Initialize camera");
+        cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
+        cameraModel->init();
+    }
 
     GeometryCompiler geometryCompiler(scene);
     geometryCompiler.compile();
