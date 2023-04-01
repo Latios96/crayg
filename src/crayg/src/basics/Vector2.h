@@ -38,6 +38,14 @@ template <typename T> class Vector2 {
         return {x / scalar, y / scalar};
     }
 
+    float length() const {
+        return sqrt(pow<float>(static_cast<float>(x), 2) + pow<float>(static_cast<float>(y), 2));
+    }
+
+    float lengthSquared() const {
+        return pow<float>(static_cast<float>(x), 2) + pow<float>(static_cast<float>(y), 2);
+    }
+
     bool operator==(const Vector2<T> &rhs) const {
         return x == rhs.x && y == rhs.y;
     }

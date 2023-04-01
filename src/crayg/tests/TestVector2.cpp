@@ -58,6 +58,18 @@ TEST_CASE("Vector2::operator/") {
     REQUIRE(vec / 2 == Vector2i(0, 1));
 }
 
+TEST_CASE("Vector2::length") {
+    Vector2i vec(1, 2);
+
+    REQUIRE(vec.length() == Catch::Detail::Approx(2.23606f));
+}
+
+TEST_CASE("Vector2::lengthSquared") {
+    Vector2i vec(1, 2);
+
+    REQUIRE(vec.lengthSquared() == 5);
+}
+
 TEST_CASE("Vector2::operator==") {
     SECTION("should be equal") {
         Vector2i left(1, 2);
