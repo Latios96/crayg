@@ -21,15 +21,15 @@ const LensElement &CameraLens::getLastElement() const {
 
 CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &elements)
     : name(name), elements(elements) {
-    float center = 0;
+
     for (int i = elements.size() - 1; i >= 0; i--) {
         auto &lens = this->elements[i];
         lens.curvatureRadius *= 0.1;
         lens.thickness *= 0.1;
         lens.apertureRadius *= 0.1;
-        center += lens.thickness;
-        lens.center = center;
     }
+
+    moveLensElements(0);
 }
 
 Ray CameraLens::traceFromFilmToWorld(const Ray &ray) const {
@@ -83,6 +83,15 @@ float CameraLens::getNextIor(int currentIndex, int indexOffset) const {
         return 1;
     }
     return nextLens.ior;
+}
+
+void CameraLens::moveLensElements(float offset) {
+    float center = offset;
+    for (int i = elements.size() - 1; i >= 0; i--) {
+        auto &lens = this->elements[i];
+        center += lens.thickness;
+        lens.center = center;
+    }
 }
 
 std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {

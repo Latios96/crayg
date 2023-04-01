@@ -62,4 +62,19 @@ TEST_CASE("CameraLens::traceFromWorldToFilm") {
     }
 }
 
+TEST_CASE("CameraLens::moveLensElements") {
+
+    CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
+
+    SECTION("should move lenses in positive z direction") {
+        REQUIRE(canon70_200.getFirstElement().center == Catch::Detail::Approx(23.751997f));
+        REQUIRE(canon70_200.getLastElement().center == 5.45f);
+
+        canon70_200.moveLensElements(2);
+
+        REQUIRE(canon70_200.getFirstElement().center == Catch::Detail::Approx(25.751997f));
+        REQUIRE(canon70_200.getLastElement().center == 7.45f);
+    }
+}
+
 }
