@@ -114,8 +114,6 @@ set(crayg_SRCS
         scene/camera/CameraLens.h
         scene/camera/PineHoleCameraModel.cpp
         scene/camera/PineHoleCameraModel.h
-        scene/camera/RealisticCameraModel.cpp
-        scene/camera/RealisticCameraModel.h
         scene/camera/ThickLensApproximation.cpp
         scene/camera/ThickLensApproximation.h
         scene/camera/ThinLensCameraModel.cpp
