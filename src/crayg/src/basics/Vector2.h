@@ -39,11 +39,11 @@ template <typename T> class Vector2 {
     }
 
     float length() const {
-        return sqrt(pow<float>(static_cast<float>(x), 2) + pow<float>(static_cast<float>(y), 2));
+        return sqrt(std::pow<float>(static_cast<float>(x), 2) + std::pow<float>(static_cast<float>(y), 2));
     }
 
     float lengthSquared() const {
-        return pow<float>(static_cast<float>(x), 2) + pow<float>(static_cast<float>(y), 2);
+        return std::pow<float>(static_cast<float>(x), 2) + std::pow<float>(static_cast<float>(y), 2);
     }
 
     bool operator==(const Vector2<T> &rhs) const {
