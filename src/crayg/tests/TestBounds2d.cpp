@@ -95,6 +95,32 @@ TEST_CASE("Bounds2d::expand") {
     }
 }
 
+TEST_CASE("Bounds2d::lerp") {
+    SECTION("should return min") {
+        Bounds2df bounds2Df({0, 0}, {1, 1});
+
+        auto lerped = bounds2Df.lerp(0, 0);
+
+        REQUIRE(lerped == bounds2Df.min);
+    }
+
+    SECTION("should return max") {
+        Bounds2df bounds2Df({0, 0}, {1, 1});
+
+        auto lerped = bounds2Df.lerp(1, 1);
+
+        REQUIRE(lerped == bounds2Df.max);
+    }
+
+    SECTION("should return value inbetween") {
+        Bounds2df bounds2Df({0, 0}, {1, 1});
+
+        auto lerped = bounds2Df.lerp(0.5f, 0.5f);
+
+        REQUIRE(lerped == Vector2f(.5f, .5f));
+    }
+}
+
 TEST_CASE("Bounds2d::equality") {
     SECTION("should be equal") {
         Bounds2df left;

@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_BASICS_BOUND2D_H_
 #define CRAYG_SRC_CRAYG_SRC_BASICS_BOUND2D_H_
 
+#include "MathUtils.h"
 #include "Vector2.h"
 #include "utils/ToStringHelper.h"
 #include <fmt/ostream.h>
@@ -33,6 +34,10 @@ template <typename T> class Bounds2d {
 
     template <typename OT> Bounds2d<T> expand(const Vector2<OT> &other) {
         return {min - other, max + other};
+    }
+
+    Vector2<T> lerp(float u, float v) const {
+        return {MathUtils::lerp(u, min.x, max.x), MathUtils::lerp(v, min.y, max.y)};
     }
 
     bool operator==(const Bounds2d &rhs) const {
