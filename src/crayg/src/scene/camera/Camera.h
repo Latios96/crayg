@@ -1,6 +1,7 @@
 #ifndef CRAYG_CAMERA_H
 #define CRAYG_CAMERA_H
 
+#include "CameraLens.h"
 #include "CameraType.h"
 #include "basics/Vector3f.h"
 #include "scene/Transformable.h"
@@ -19,6 +20,7 @@ class Camera : public Transformable {
     CameraType cameraType = CameraType::PINE_HOLE;
     float focusDistance = 0;
     float fStop = 0;
+    std::unique_ptr<CameraLens> lens;
 
   public:
     Camera();
@@ -48,6 +50,10 @@ class Camera : public Transformable {
     void setFStop(float fStop);
 
     float computeApertureSizeHeuristically() const;
+
+    CameraLens &getLens() const {
+        return *lens;
+    }
 
     bool operator==(const Camera &rhs) const;
     bool operator!=(const Camera &rhs) const;
