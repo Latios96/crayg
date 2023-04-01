@@ -14,7 +14,7 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
 
         auto thickLensApproximation = calculator.calculate();
 
-        REQUIRE(thickLensApproximation == ThickLensApproximation({8.794485, -8.882062}, {-43.471054, -48.73264}));
+        REQUIRE(thickLensApproximation == ThickLensApproximation({8.794485f, -8.882062f}, {-43.471054f, -48.73264f}));
     }
 
     SECTION("should throw if aperture is too small") {
