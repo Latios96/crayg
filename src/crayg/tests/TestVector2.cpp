@@ -12,6 +12,12 @@ TEST_CASE("Vector2::construction") {
         REQUIRE(vec == Vector2i(0, 0));
     }
 
+    SECTION("should construct from single arg correctly") {
+        Vector2i vec(1);
+
+        REQUIRE(vec == Vector2i(1));
+    }
+
     SECTION("should construct from args correctly") {
         Vector2i vec(1, 2);
 
