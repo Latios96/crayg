@@ -122,18 +122,12 @@ std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
 bool LensElement::exceedsAperture(const Ray &ray) const {
     const float t = (center - ray.startPoint.z) / ray.direction.z;
     Vector3f intersectionPosition = ray.constructIntersectionPoint(t); // todo respect aperture opening here
-    const float radiusOfIntersectionSquared =
-        std::pow(intersectionPosition.x, 2.f) + std::pow(intersectionPosition.y, 2.f);
-    const float apertureRadiusSquared = std::pow(apertureRadius, 2);
-    const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;
-    return rayExceedsAperture;
+    return exceedsAperture(intersectionPosition);
 }
 
 bool LensElement::exceedsAperture(const Vector3f &intersectionPosition) const {
-    const float radiusOfIntersectionSquared =
-        std::pow(intersectionPosition.x, 2.f) + std::pow(intersectionPosition.y, 2.f);
-    const float apertureRadiusSquared =
-        std::pow(apertureRadius, 2.f); // todo this can be cleaner with Vector3f to Vector3f conversiosn
+    const float radiusOfIntersectionSquared = intersectionPosition.xy().lengthSquared();
+    const float apertureRadiusSquared = std::pow(apertureRadius, 2.f);
     const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;
     return rayExceedsAperture;
 }
