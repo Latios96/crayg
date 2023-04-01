@@ -121,6 +121,56 @@ TEST_CASE("Bounds2d::lerp") {
     }
 }
 
+TEST_CASE("Bounds2d::contains") {
+    SECTION("Bounds2df should contain Vector2f") {
+        Bounds2df bounds2Df({-1, -2}, {2, 1});
+
+        REQUIRE(bounds2Df.contains(Vector2f(0, 0)));
+    }
+
+    SECTION("Bounds2df should not contain Vector2f") {
+        Bounds2df bounds2Df({-1, -2}, {2, 1});
+
+        REQUIRE_FALSE(bounds2Df.contains(Vector2f(2, 2)));
+    }
+
+    SECTION("Bounds2df should contain Vector2i") {
+        Bounds2df bounds2Df({-1, -2}, {2, 1});
+
+        REQUIRE(bounds2Df.contains(Vector2i(0, 0)));
+    }
+
+    SECTION("Bounds2df should not contain Vector2i") {
+        Bounds2df bounds2Df({-1, -2}, {2, 1});
+
+        REQUIRE_FALSE(bounds2Df.contains(Vector2i(2, 2)));
+    }
+
+    SECTION("Bounds2di should contain Vector2f") {
+        Bounds2di bounds2Df({-1, -2}, {2, 1});
+
+        REQUIRE(bounds2Df.contains(Vector2f(0, 0)));
+    }
+
+    SECTION("Bounds2di should not contain Vector2f") {
+        Bounds2di bounds2Df({-1, -2}, {2, 1});
+
+        REQUIRE_FALSE(bounds2Df.contains(Vector2f(2, 2)));
+    }
+
+    SECTION("Bounds2di should contain Vector2i") {
+        Bounds2di bounds2Df({-1, -2}, {2, 1});
+
+        REQUIRE(bounds2Df.contains(Vector2i(0, 0)));
+    }
+
+    SECTION("Bounds2di should not contain Vector2i") {
+        Bounds2di bounds2Df({-1, -2}, {2, 1});
+
+        REQUIRE_FALSE(bounds2Df.contains(Vector2i(2, 2)));
+    }
+}
+
 TEST_CASE("Bounds2d::equality") {
     SECTION("should be equal") {
         Bounds2df left;
