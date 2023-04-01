@@ -50,6 +50,7 @@ set(UNIT_TEST_LIST
         TestIntegratorSettings.cpp
         TestLight.cpp
         TestLineByLineIterator.cpp
+        TestMathUtils.cpp
         TestMatrix4x4f.cpp
         TestNaiveBvhBuilder.cpp
         TestNaiveBvhBuilder.cpp
