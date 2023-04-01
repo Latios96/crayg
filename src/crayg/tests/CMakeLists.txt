@@ -76,6 +76,7 @@ set(UNIT_TEST_LIST
         TestSubdivisionSurfaceMesh.cpp
         TestSurfaceInteraction.cpp
         TestTeeOutputDriver.cpp
+        TestThickLensApproximation.cpp
         TestToStringHelper.cpp
         TestTransform.cpp
         TestTriangle.cpp
