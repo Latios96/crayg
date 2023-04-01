@@ -19,6 +19,7 @@ set(UNIT_TEST_LIST
         TestBaseUsdTransformableWriter.cpp
         TestBaseUsdXformableReader.cpp
         TestBoundingBox.cpp
+        TestBounds2d.cpp
         TestBucketImageBuffer.cpp
         TestBucketSizeEstimator.cpp
         TestBvhSceneIntersector.cpp

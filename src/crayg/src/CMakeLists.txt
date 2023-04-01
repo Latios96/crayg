@@ -1,4 +1,5 @@
 set(crayg_SRCS
+        basics/Bound2d.h
         basics/BoundingBox.cpp
         basics/BoundingBox.h
         basics/Color.cpp
