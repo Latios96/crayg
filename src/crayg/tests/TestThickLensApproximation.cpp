@@ -16,6 +16,13 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
 
         REQUIRE(thickLensApproximation == ThickLensApproximation({8.794485, -8.882062}, {-43.471054, -48.73264}));
     }
+
+    SECTION("should throw if aperture is too small") {
+        canon70_200.elements[24].apertureRadius = 1e-5f;
+        ThickLensApproximationCalculator calculator(canon70_200);
+
+        REQUIRE_THROWS_AS(calculator.calculate(), std::runtime_error);
+    }
 }
 
 }

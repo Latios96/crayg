@@ -33,7 +33,7 @@ TEST_CASE("CameraLens::traceFromFilmToWorld") {
     SECTION("should trace correctly along optical axis") {
         Ray rayIn({0, 0, 0}, {0, 0, 1});
 
-        auto rayOut = canon70_200.traceFromFilmToWorld(rayIn);
+        auto rayOut = *canon70_200.traceFromFilmToWorld(rayIn);
 
         REQUIRE(rayOut.startPoint.x == 0);
         REQUIRE(rayOut.startPoint.y == 0);
@@ -41,6 +41,14 @@ TEST_CASE("CameraLens::traceFromFilmToWorld") {
         REQUIRE(rayOut.direction.x == 0);
         REQUIRE(rayOut.direction.y == 0);
         REQUIRE(rayOut.direction.z == Catch::Detail::Approx(1));
+    }
+
+    SECTION("should return empty optional for ray exceeding aperture") {
+        Ray rayIn({2.2f, 0, 0}, {0, 0, -1});
+
+        auto rayOut = canon70_200.traceFromFilmToWorld(rayIn);
+
+        REQUIRE_FALSE(rayOut);
     }
 }
 
@@ -51,7 +59,7 @@ TEST_CASE("CameraLens::traceFromWorldToFilm") {
     SECTION("should trace correctly along optical axis") {
         Ray rayIn({0, 0, 0}, {0, 0, -1});
 
-        auto rayOut = canon70_200.traceFromWorldToFilm(rayIn);
+        auto rayOut = *canon70_200.traceFromWorldToFilm(rayIn);
 
         REQUIRE(rayOut.startPoint.x == 0);
         REQUIRE(rayOut.startPoint.y == 0);
@@ -59,6 +67,14 @@ TEST_CASE("CameraLens::traceFromWorldToFilm") {
         REQUIRE(rayOut.direction.x == 0);
         REQUIRE(rayOut.direction.y == 0);
         REQUIRE(rayOut.direction.z == -1);
+    }
+
+    SECTION("should return empty optional for ray exceeding aperture") {
+        Ray rayIn({2.2f, 0, 0}, {0, 0, -1});
+
+        auto rayOut = canon70_200.traceFromWorldToFilm(rayIn);
+
+        REQUIRE_FALSE(rayOut);
     }
 }
 

@@ -1,5 +1,6 @@
 #include "CameraLens.h"
 #include "Logger.h"
+#include "basics/Vector2.h"
 
 namespace crayg {
 
@@ -32,27 +33,40 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
     moveLensElements(0);
 }
 
-Ray CameraLens::traceFromFilmToWorld(const Ray &ray) const {
+std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
     Ray tracedRay = ray;
     for (int i = elements.size() - 1; i >= 0; i--) {
         auto lens = elements[i];
         if (lens.isAperture()) {
+            if (lens.exceedsAperture(ray)) {
+                return std::nullopt;
+            }
             continue;
         }
         auto intersection = lens.intersect(tracedRay);
+        if (!intersection) {
+            return std::nullopt;
+        }
         tracedRay = refract(*intersection, tracedRay, lens.ior, getNextIor(i, -1));
     }
     return tracedRay;
 }
 
-Ray CameraLens::traceFromWorldToFilm(const Ray &ray) const {
+// todo merge logic of these two
+std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
     Ray tracedRay = ray;
     for (int i = 0; i < elements.size(); i++) {
         auto lens = elements[i];
         if (lens.isAperture()) {
+            if (lens.exceedsAperture(ray)) {
+                return std::nullopt;
+            }
             continue;
         }
         auto intersection = lens.intersect(tracedRay);
+        if (!intersection) {
+            return std::nullopt;
+        }
         tracedRay = refract(*intersection, tracedRay, getNextIor(i, -1), lens.ior);
     }
     return tracedRay;
@@ -95,6 +109,7 @@ void CameraLens::moveLensElements(float offset) {
 }
 
 std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
+    // todo precondition check that this is not aperture
     Vector3f D = ray.startPoint - Vector3f(0, 0, center - curvatureRadius);
     float B = D.dot(ray.direction);
     float C = D.dot(D) - curvatureRadius * curvatureRadius;
@@ -107,6 +122,26 @@ std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
     Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
     Vector3f normal = intersectionPosition - Vector3f(0, 0, center - curvatureRadius).normalize();
     return LensElementIntersection(intersectionPosition, normal);
+}
+
+bool LensElement::exceedsAperture(const Ray &ray) const {
+    // todo precondition check that this is aperture
+    const float t = (center - ray.startPoint.z) / ray.direction.z;
+    Vector3f intersectionPosition = ray.constructIntersectionPoint(t); // todo respect aperture opening here
+    const float radiusOfIntersectionSquared =
+        std::pow(intersectionPosition.x, 2.f) + std::pow(intersectionPosition.y, 2.f);
+    const float apertureRadiusSquared = std::pow(apertureRadius, 2);
+    const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;
+    return rayExceedsAperture;
+}
+
+bool LensElement::exceedsAperture(const Vector3f &intersectionPosition) const {
+    const float radiusOfIntersectionSquared =
+        std::pow(intersectionPosition.x, 2.f) + std::pow(intersectionPosition.y, 2.f);
+    const float apertureRadiusSquared =
+        std::pow(apertureRadius, 2.f); // todo this can be cleaner with Vector3f to Vector3f conversiosn
+    const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;
+    return rayExceedsAperture;
 }
 
 } // crayg

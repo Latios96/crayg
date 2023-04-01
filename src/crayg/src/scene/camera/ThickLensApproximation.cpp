@@ -10,11 +10,19 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate() {
 
     Ray fromWorldToFilmIn{{offsetX, 0, lens.getFirstElement().center + 1}, {0, 0, -1}};
     auto fromWorldToFilmOut = lens.traceFromWorldToFilm(fromWorldToFilmIn);
-    const auto firstCardinalPoints = computeCardinalPoints(fromWorldToFilmIn, fromWorldToFilmOut);
+    if (!fromWorldToFilmOut) { // todo tests
+        throw std::runtime_error(
+            "Could not trace ray from world to film to compute thick lens approximation. Is aperture stop very small?");
+    }
+    const auto firstCardinalPoints = computeCardinalPoints(fromWorldToFilmIn, *fromWorldToFilmOut);
 
     Ray fromFilmToWorldIn{{offsetX, 0, lens.getLastElement().center - 1}, {0, 0, 1}};
     auto fromFilmToWorldOut = lens.traceFromFilmToWorld(fromWorldToFilmIn);
-    const auto secondCardinalPoints = computeCardinalPoints(fromFilmToWorldIn, fromFilmToWorldOut);
+    if (!fromFilmToWorldOut) {
+        throw std::runtime_error(
+            "Could not trace ray from film to world to compute thick lens approximation. Is aperture stop very small?");
+    }
+    const auto secondCardinalPoints = computeCardinalPoints(fromFilmToWorldIn, *fromFilmToWorldOut);
 
     return {firstCardinalPoints, secondCardinalPoints};
 }

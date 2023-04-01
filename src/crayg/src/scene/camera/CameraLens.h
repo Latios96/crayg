@@ -22,6 +22,8 @@ struct LensElement {
 
     std::optional<LensElementIntersection> intersect(const Ray &ray);
     bool isAperture() const;
+    bool exceedsAperture(const Ray &ray) const;
+    bool exceedsAperture(const Vector3f &intersectionPosition) const;
 };
 
 struct CameraLens {
@@ -32,8 +34,8 @@ struct CameraLens {
     const LensElement &getFirstElement() const;
     const LensElement &getLastElement() const;
 
-    Ray traceFromFilmToWorld(const Ray &ray) const;
-    Ray traceFromWorldToFilm(const Ray &ray) const;
+    std::optional<Ray> traceFromFilmToWorld(const Ray &ray) const;
+    std::optional<Ray> traceFromWorldToFilm(const Ray &ray) const;
 
     void moveLensElements(float offset);
 
