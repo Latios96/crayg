@@ -33,43 +33,39 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
     moveLensElements(0);
 }
 
-std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
+std::optional<Ray> CameraLens::traceRay(const Ray &ray, int startIndex, std::function<int(int)> nextLensIndex,
+                                        std::function<float(int)> inIor, std::function<float(int)> outIor) const {
     Ray tracedRay = ray;
-    for (int i = elements.size() - 1; i >= 0; i--) {
-        auto lens = elements[i];
+    int i = startIndex;
+    while (i != -1) {
+        auto lens = this->elements[i];
         if (lens.isAperture()) {
             if (lens.exceedsAperture(ray)) {
                 return std::nullopt;
             }
+            i = nextLensIndex(i);
             continue;
         }
         auto intersection = lens.intersect(tracedRay);
         if (!intersection) {
             return std::nullopt;
         }
-        tracedRay = refract(*intersection, tracedRay, lens.ior, getNextIor(i, -1));
+        tracedRay = refract(*intersection, tracedRay, inIor(i), outIor(i));
+        i = nextLensIndex(i);
     }
     return tracedRay;
 }
 
-// todo merge logic of these two
+std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
+    return traceRay(
+        ray, elements.size() - 1, [](int i) { return i - 1; }, [this](int i) { return elements[i].ior; },
+        [this](int i) { return getNextIor(i, -1); });
+}
+
 std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
-    Ray tracedRay = ray;
-    for (int i = 0; i < elements.size(); i++) {
-        auto lens = elements[i];
-        if (lens.isAperture()) {
-            if (lens.exceedsAperture(ray)) {
-                return std::nullopt;
-            }
-            continue;
-        }
-        auto intersection = lens.intersect(tracedRay);
-        if (!intersection) {
-            return std::nullopt;
-        }
-        tracedRay = refract(*intersection, tracedRay, getNextIor(i, -1), lens.ior);
-    }
-    return tracedRay;
+    return traceRay(
+        ray, 0, [this](int i) { return i < elements.size() - 1 ? i + 1 : -1; },
+        [this](int i) { return getNextIor(i, -1); }, [this](int i) { return elements[i].ior; });
 }
 
 Ray CameraLens::refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const {
@@ -109,7 +105,6 @@ void CameraLens::moveLensElements(float offset) {
 }
 
 std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
-    // todo precondition check that this is not aperture
     Vector3f D = ray.startPoint - Vector3f(0, 0, center - curvatureRadius);
     float B = D.dot(ray.direction);
     float C = D.dot(D) - curvatureRadius * curvatureRadius;
@@ -125,7 +120,6 @@ std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
 }
 
 bool LensElement::exceedsAperture(const Ray &ray) const {
-    // todo precondition check that this is aperture
     const float t = (center - ray.startPoint.z) / ray.direction.z;
     Vector3f intersectionPosition = ray.constructIntersectionPoint(t); // todo respect aperture opening here
     const float radiusOfIntersectionSquared =

@@ -3,6 +3,7 @@
 
 #include "basics/Ray.h"
 #include "utils/DtoUtils.h"
+#include <functional>
 #include <optional>
 #include <string>
 #include <vector>
@@ -42,6 +43,8 @@ struct CameraLens {
   private:
     Ray refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
     float getNextIor(int currentIndex, int indexOffset) const;
+    std::optional<Ray> traceRay(const Ray &ray, int startIndex, std::function<int(int)> nextLensIndex,
+                                std::function<float(int)> inIor, std::function<float(int)> outIor) const;
 };
 
 } // crayg
