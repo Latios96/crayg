@@ -61,7 +61,8 @@ template <typename T> class Bounds2d {
 typedef Bounds2d<float> Bounds2df;
 typedef Bounds2d<int> Bounds2di;
 
+}
+
 template <typename T> struct fmt::formatter<crayg::Bounds2d<T>> : ostream_formatter {};
 
-}
 #endif // CRAYG_SRC_CRAYG_SRC_BASICS_BOUND2D_H_
