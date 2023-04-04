@@ -114,11 +114,15 @@ set(crayg_SRCS
         scene/camera/CameraModelFactory.h
         scene/camera/CameraType.h
         scene/camera/CameraLens.cpp
+        scene/camera/ExitPupilCalculator.cpp
+        scene/camera/ExitPupilCalculator.h
         scene/camera/LensRaytracerTracer.cpp
         scene/camera/LensRaytracerTracer.h
         scene/camera/CameraLens.h
         scene/camera/PineHoleCameraModel.cpp
         scene/camera/PineHoleCameraModel.h
+        scene/camera/RealisticCameraModel.cpp
+        scene/camera/RealisticCameraModel.h
         scene/camera/ThickLensApproximation.cpp
         scene/camera/ThickLensApproximation.h
         scene/camera/ThinLensCameraModel.cpp
@@ -270,7 +274,7 @@ target_include_directories(crayg PUBLIC
 
 if (WIN32)
     target_compile_definitions(crayg PUBLIC NOMINMAX _USE_MATH_DEFINES)
-endif()
+endif ()
 
 add_custom_command(TARGET crayg PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_LIB_DIRS_USD}/usd ${CMAKE_BINARY_DIR}/bin/usd)

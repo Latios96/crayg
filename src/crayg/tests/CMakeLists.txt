@@ -32,6 +32,7 @@ set(UNIT_TEST_LIST
         TestEmbreeBvhBuilder.cpp
         TestEmbreeSceneIntersector.cpp
         TestEmbreeUtils.cpp
+        TestExitPupilCalculator.cpp
         TestFanTriangulator.cpp
         TestFileSystemUtils.cpp
         TestGradient.cpp
