@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "basics/Resolution.h"
 #include <basics/Ray.h>
+#include <optional>
 
 namespace crayg {
 
@@ -14,7 +15,7 @@ class CameraModel {
 
     virtual void init(){};
 
-    virtual Ray createPrimaryRay(float x, float y) = 0;
+    virtual std::optional<Ray> createPrimaryRay(float x, float y) = 0;
 
     virtual ~CameraModel() = default;
 

@@ -20,6 +20,8 @@ class Camera : public Transformable {
     CameraType cameraType = CameraType::PINE_HOLE;
     float focusDistance = 0;
     float fStop = 0;
+
+  public:
     std::unique_ptr<CameraLens> lens;
 
   public:

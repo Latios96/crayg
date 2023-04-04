@@ -13,7 +13,7 @@ class RealisticCameraModel : public CameraModel {
   public:
     RealisticCameraModel(Camera &camera, const Resolution &resolution);
     void init() override;
-    Ray createPrimaryRay(float x, float y) override;
+    std::optional<Ray> createPrimaryRay(float x, float y) override;
 
   private:
     ThickLensApproximation thickLens;

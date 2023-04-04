@@ -23,7 +23,7 @@ class PineHoleCameraModel : public CameraModel {
   public:
     PineHoleCameraModel(Camera &camera, const Resolution &resolution);
 
-    Ray createPrimaryRay(float x, float y) override;
+    std::optional<Ray> createPrimaryRay(float x, float y) override;
 };
 
 }

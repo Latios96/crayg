@@ -107,8 +107,11 @@ Color Renderer::renderPixel(const Vector2i &pixel) {
 }
 
 Color Renderer::renderSample(float x, float y) {
-    Ray ray = cameraModel->createPrimaryRay(x, y);
-    return integrator->integrate(ray, 0);
+    auto ray = cameraModel->createPrimaryRay(x, y);
+    if (!ray) {
+        return Color::createBlack();
+    }
+    return integrator->integrate(*ray, 0);
 }
 
 void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
