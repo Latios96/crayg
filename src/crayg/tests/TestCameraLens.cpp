@@ -42,14 +42,14 @@ TEST_CASE("CameraLens::traceFromFilmToWorld") {
         REQUIRE(rayOut.direction.y == 0);
         REQUIRE(rayOut.direction.z == Catch::Detail::Approx(1));
     }
-    // todo check why
-    /*SECTION("should return empty optional for ray exceeding aperture") {
+
+    SECTION("should return empty optional for ray exceeding aperture") {
         Ray rayIn({2.2f, 0, 0}, {0, 0, 1});
 
         auto rayOut = canon70_200.traceFromFilmToWorld(rayIn);
 
         REQUIRE_FALSE(rayOut);
-    }*/
+    }
 }
 
 TEST_CASE("CameraLens::traceFromWorldToFilm") {
@@ -68,14 +68,14 @@ TEST_CASE("CameraLens::traceFromWorldToFilm") {
         REQUIRE(rayOut.direction.y == 0);
         REQUIRE(rayOut.direction.z == -1);
     }
-    // todo check why
-    /*SECTION("should return empty optional for ray exceeding aperture") {
+
+    SECTION("should return empty optional for ray exceeding aperture") {
         Ray rayIn({2.2f, 0, 0}, {0, 0, -1});
 
         auto rayOut = canon70_200.traceFromWorldToFilm(rayIn);
 
         REQUIRE_FALSE(rayOut);
-    }*/
+    }
 }
 
 TEST_CASE("CameraLens::moveLensElements") {

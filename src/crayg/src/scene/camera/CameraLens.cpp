@@ -43,13 +43,15 @@ std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
         auto element = elements[i];
         if (element.isAperture()) {
             if (element.exceedsAperture(ray)) {
-                Logger::error("EXCEEDS");
+                return std::nullopt;
             }
             continue;
         }
 
         auto resultIntersection = element.intersect(tracedRay);
-
+        if (!resultIntersection) {
+            return std::nullopt;
+        }
         float eta_i = element.ior;
         float eta_t = (i > 0 && elements[i - 1].ior != 0) ? elements[i - 1].ior : 1;
 
@@ -69,12 +71,15 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
         auto element = elements[i];
         if (element.isAperture()) {
             if (element.exceedsAperture(ray)) {
-                Logger::error("EXCEEDS");
+                return std::nullopt;
             }
             continue;
         }
 
         auto resultIntersection = element.intersect(tracedRay);
+        if (!resultIntersection) {
+            return std::nullopt;
+        }
 
         float eta_i = element.ior;
         float eta_t = (i > 0 && elements[i - 1].ior != 0) ? elements[i - 1].ior : 1;
@@ -206,7 +211,13 @@ std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
     if (!intersects) {
         return std::nullopt;
     }
-    return LensElementIntersection(ray.startPoint + ray.direction * t, normal);
+
+    const Vector3f &intersectionPoint = ray.startPoint + ray.direction * t;
+    if (exceedsAperture(intersectionPoint)) {
+        return std::nullopt;
+    }
+
+    return LensElementIntersection(intersectionPoint, normal);
 }
 
 bool LensElement::exceedsAperture(const Ray &ray) const {

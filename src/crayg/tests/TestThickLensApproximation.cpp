@@ -22,13 +22,13 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
         REQUIRE(thickLensApproximation.secondCardinalPoints.pZ == Catch::Detail::Approx(-11.7357));
         REQUIRE(thickLensApproximation.secondCardinalPoints.fZ == Catch::Detail::Approx(-18.94753f));
     }
-    // todo check why
-    /*SECTION("should throw if aperture is too small") {
-        canon70_200.elements[24].apertureRadius = 1e-25f;
+
+    SECTION("should throw if aperture is too small") {
+        canon70_200.elements[24].apertureRadius = 1e-35f;
         ThickLensApproximationCalculator calculator(canon70_200);
 
         REQUIRE_THROWS_AS(calculator.calculate(), std::runtime_error);
-    }*/
+    }
 }
 
 }
