@@ -2,6 +2,10 @@
 
 namespace crayg {
 
+float calculateFocalLength(const ThickLensApproximation &thickLensApproximation) {
+    return thickLensApproximation.firstCardinalPoints.fZ - thickLensApproximation.firstCardinalPoints.pZ;
+}
+
 ThickLensApproximationCalculator::ThickLensApproximationCalculator(CameraLens &lens) : lens(lens) {
 }
 

@@ -9,6 +9,8 @@ namespace crayg {
 CRAYG_DTO_2(CardinalPoints, float, pZ, float, fZ);
 CRAYG_DTO_2(ThickLensApproximation, CardinalPoints, firstCardinalPoints, CardinalPoints, secondCardinalPoints);
 
+float calculateFocalLength(const ThickLensApproximation &thickLensApproximation);
+
 class ThickLensApproximationCalculator {
   public:
     explicit ThickLensApproximationCalculator(CameraLens &lens);

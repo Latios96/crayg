@@ -13,9 +13,9 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
         ThickLensApproximationCalculator calculator(canon70_200);
 
         auto thickLensApproximation = calculator.calculate();
-        const float focalLength =
-            thickLensApproximation.firstCardinalPoints.fZ - thickLensApproximation.firstCardinalPoints.pZ;
-        REQUIRE(focalLength == Catch::Detail::Approx(7.21183792f)); // todo extract method for this
+
+        const float focalLength = calculateFocalLength(thickLensApproximation);
+        REQUIRE(focalLength == Catch::Detail::Approx(7.21183792f));
 
         REQUIRE(thickLensApproximation.firstCardinalPoints.pZ == Catch::Detail::Approx(-7.4172355f));
         REQUIRE(thickLensApproximation.firstCardinalPoints.fZ == Catch::Detail::Approx(-0.20541f));
