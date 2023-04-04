@@ -1,6 +1,4 @@
 #include "CameraLens.h"
-#include "Logger.h"
-#include "basics/Vector2.h"
 #include <iostream>
 
 namespace crayg {
