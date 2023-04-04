@@ -90,6 +90,15 @@ def get_demo_images(max_samples=32):
             resolution=(800, 800),
         )
     )
+    demo_images.append(
+        DemoImage(
+            name=f"StormTrooper",
+            scene_path=Path("M:\Test_Scene_Collection\StormTrooper\StormTrooper.usda"),
+            max_samples=max_samples,
+            resolution=(1920, 1080),
+            camera=f"/helmet_root/helmet_Camera/helmet_Camera/helmet_CameraShape",
+        )
+    )
     for i in range(1, 7):
         camera_number = f"{i}".zfill(3)
         demo_images.append(
