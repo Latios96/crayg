@@ -15,7 +15,7 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate() {
 
     const Ray fromWorldToFilmIn{{offsetX, 0, lens.getFirstElement().center + 1 * factor}, {0, 0, -1}};
     auto fromWorldToFilmOut = lens.traceFromWorldToFilm(fromWorldToFilmIn);
-    if (!fromWorldToFilmOut) { // todo tests
+    if (!fromWorldToFilmOut) {
         throw std::runtime_error(
             "Could not trace ray from world to film to compute thick lens approximation. Is aperture stop very small?");
     }
