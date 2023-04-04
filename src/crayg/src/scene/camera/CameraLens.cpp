@@ -1,4 +1,6 @@
 #include "CameraLens.h"
+#include "Logger.h"
+#include "ThickLensApproximation.h"
 #include <iostream>
 
 namespace crayg {
@@ -131,6 +133,21 @@ void CameraLens::moveLensElements(float offset) {
         center += lens.thickness;
         lens.center = center;
     }
+}
+
+void CameraLens::focusLens(float focalDistance) {
+    ThickLensApproximationCalculator thickLensCalculator(*this);
+    auto thickLens = thickLensCalculator.calculate();
+
+    const float focalLength = calculateFocalLength(thickLens);
+    Logger::info("Effective focal length: {:.2f}mm", focalLength * 10);
+
+    const float z = -focalDistance;
+    const float c = (thickLens.secondCardinalPoints.pZ - z - thickLens.firstCardinalPoints.pZ) *
+                    (thickLens.secondCardinalPoints.pZ - z - 4 * focalLength - thickLens.firstCardinalPoints.pZ);
+    const float delta = 0.5f * (thickLens.secondCardinalPoints.pZ - z + thickLens.firstCardinalPoints.pZ - sqrt(c));
+
+    moveLensElements(delta);
 }
 
 float FMA(float a, float b, float c) {

@@ -38,7 +38,9 @@ struct CameraLens {
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray) const;
     std::optional<Ray> traceFromWorldToFilm(const Ray &ray) const;
 
+    void focusLens(float focalDistance);
     void moveLensElements(float offset);
+
     Ray refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
 
   private:
