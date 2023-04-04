@@ -48,6 +48,7 @@ set(UNIT_TEST_LIST
         TestImageWriters.cpp
         TestIntegratorContext.cpp
         TestIntegratorSettings.cpp
+        TestLensRaytracerTracer.cpp
         TestLight.cpp
         TestLineByLineIterator.cpp
         TestMathUtils.cpp

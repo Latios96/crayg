@@ -114,6 +114,8 @@ set(crayg_SRCS
         scene/camera/CameraModelFactory.h
         scene/camera/CameraType.h
         scene/camera/CameraLens.cpp
+        scene/camera/LensRaytracerTracer.cpp
+        scene/camera/LensRaytracerTracer.h
         scene/camera/CameraLens.h
         scene/camera/PineHoleCameraModel.cpp
         scene/camera/PineHoleCameraModel.h
