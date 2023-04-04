@@ -53,7 +53,7 @@ std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
         float eta_i = element.ior;
         float eta_t = (i > 0 && elements[i - 1].ior != 0) ? elements[i - 1].ior : 1;
 
-        auto result = refract(*resultIntersection, tracedRay, eta_i, eta_t);
+        auto result = refract(*resultIntersection, tracedRay, eta_t, eta_i);
 
         tracedRay = {result.startPoint, result.direction.invert()};
     }
