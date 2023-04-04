@@ -39,9 +39,9 @@ struct CameraLens {
     std::optional<Ray> traceFromWorldToFilm(const Ray &ray) const;
 
     void moveLensElements(float offset);
+    Ray refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
 
   private:
-    Ray refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
     float getNextIor(int currentIndex, int indexOffset) const;
     std::optional<Ray> traceRay(const Ray &ray, int startIndex, std::function<int(int)> nextLensIndex,
                                 std::function<float(int)> inIor, std::function<float(int)> outIor) const;
