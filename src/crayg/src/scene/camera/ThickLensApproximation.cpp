@@ -30,9 +30,9 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate() {
 
 CardinalPoints ThickLensApproximationCalculator::computeCardinalPoints(const Ray &in, const Ray &out) {
     const float ft = -out.startPoint.x / out.direction.x;
-    const float fz = -out.startPoint.z + out.direction.z * ft;
+    const float fz = -(out.startPoint.z + out.direction.z * ft);
     float pt = (in.startPoint.x - out.startPoint.x) / out.direction.x;
-    const float pz = -out.startPoint.z + out.direction.z * pt;
+    const float pz = -(out.startPoint.z + out.direction.z * pt);
     return {pz, fz};
 }
 
