@@ -1,6 +1,7 @@
 #include "CameraLens.h"
 #include "Logger.h"
 #include "basics/Vector2.h"
+#include <iostream>
 
 namespace crayg {
 
@@ -23,64 +24,89 @@ const LensElement &CameraLens::getLastElement() const {
 CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &elements)
     : name(name), elements(elements) {
 
+    float factor = 0.1f;
+
     for (int i = elements.size() - 1; i >= 0; i--) {
         auto &lens = this->elements[i];
-        lens.curvatureRadius *= 0.1;
-        lens.thickness *= 0.1;
-        lens.apertureRadius *= 0.1;
+        lens.curvatureRadius *= factor;
+        lens.thickness *= factor;
+        lens.apertureRadius *= factor;
     }
 
     moveLensElements(0);
 }
 
-std::optional<Ray> CameraLens::traceRay(const Ray &ray, int startIndex, std::function<int(int)> nextLensIndex,
-                                        std::function<float(int)> inIor, std::function<float(int)> outIor) const {
-    Ray tracedRay = ray;
-    int i = startIndex;
-    while (i != -1) {
-        auto lens = this->elements[i];
-        if (lens.isAperture()) {
-            if (lens.exceedsAperture(ray)) {
-                return std::nullopt;
+std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
+    Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
+                     {ray.direction.x, ray.direction.y, -ray.direction.z}};
+    for (int i = elements.size() - 1; i >= 0; i--) {
+        auto element = elements[i];
+        if (element.isAperture()) {
+            if (element.exceedsAperture(ray)) {
+                Logger::error("EXCEEDS");
             }
-            i = nextLensIndex(i);
             continue;
         }
-        auto intersection = lens.intersect(tracedRay);
-        if (!intersection) {
-            return std::nullopt;
-        }
-        tracedRay = refract(*intersection, tracedRay, inIor(i), outIor(i));
-        i = nextLensIndex(i);
-    }
-    return tracedRay;
-}
 
-std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
-    return traceRay(
-        ray, elements.size() - 1, [](int i) { return i - 1; }, [this](int i) { return elements[i].ior; },
-        [this](int i) { return getNextIor(i, -1); });
+        auto resultIntersection = element.intersect(tracedRay);
+
+        float eta_i = element.ior;
+        float eta_t = (i > 0 && elements[i - 1].ior != 0) ? elements[i - 1].ior : 1;
+
+        auto result = refract(*resultIntersection, tracedRay, eta_i, eta_t);
+
+        tracedRay = {result.startPoint, result.direction.invert()};
+    }
+    return Ray({tracedRay.startPoint.x, tracedRay.startPoint.y, -tracedRay.startPoint.z},
+               {tracedRay.direction.x, tracedRay.direction.y, -tracedRay.direction.z});
 }
 
 std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
-    return traceRay(
-        ray, 0, [this](int i) { return i < elements.size() - 1 ? i + 1 : -1; },
-        [this](int i) { return getNextIor(i, -1); }, [this](int i) { return elements[i].ior; });
+    // todo regeneralize this
+    Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
+                     {ray.direction.x, ray.direction.y, -ray.direction.z}};
+    for (int i = 0; i < elements.size(); i++) {
+        auto element = elements[i];
+        if (element.isAperture()) {
+            if (element.exceedsAperture(ray)) {
+                Logger::error("EXCEEDS");
+            }
+            continue;
+        }
+
+        auto resultIntersection = element.intersect(tracedRay);
+
+        float eta_i = element.ior;
+        float eta_t = (i > 0 && elements[i - 1].ior != 0) ? elements[i - 1].ior : 1;
+
+        auto result = refract(*resultIntersection, tracedRay, /*getNextIor(i,-1),element.ior*/ eta_i, eta_t);
+
+        tracedRay = {result.startPoint, result.direction.invert()};
+    }
+    return Ray({tracedRay.startPoint.x, tracedRay.startPoint.y, -tracedRay.startPoint.z},
+               {tracedRay.direction.x, tracedRay.direction.y, -tracedRay.direction.z});
 }
 
 Ray CameraLens::refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const {
-    float cosi = std::clamp(ray.direction.dot(intersection.normal), -1.0f, 1.0f);
-    Vector3f n = intersection.normal;
-    if (cosi < 0) {
-        cosi = -cosi;
-    } else {
-        std::swap(iorIn, iorOut);
-        n = intersection.normal.invert();
-    }
+    Vector3f n = intersection.normal.invert();
+    float cosTheta_i = n.dot(ray.direction.normalize());
     float eta = iorIn / iorOut;
-    float k = 1 - eta * eta * (1 - cosi * cosi);
-    Vector3f rayDirection = k < 0 ? ray.direction : (ray.direction * eta) + n * (eta * cosi - sqrtf(k));
-    rayDirection = rayDirection.dot(ray.direction.invert()) < 0.f ? rayDirection : rayDirection.invert();
+    // Potentially flip interface orientation for Snell's law
+    if (cosTheta_i < 0) {
+        eta = 1 / eta;
+        cosTheta_i = -cosTheta_i;
+        n = n.invert();
+    }
+
+    // Compute $\cos\,\theta_\roman{t}$ using Snell's law
+    float sin2Theta_i = std::max<float>(0, 1 - cosTheta_i * cosTheta_i);
+    float sin2Theta_t = sin2Theta_i / eta * eta;
+
+    float cosTheta_t = std::sqrt(1 - sin2Theta_t);
+    const Vector3f &f = ray.direction.invert() / eta;
+    float d = cosTheta_i / eta - cosTheta_t;
+    const Vector3f &f1 = n * d;
+    Vector3f rayDirection = f + f1;
     return {intersection.point, rayDirection.normalize()};
 }
 
@@ -104,19 +130,83 @@ void CameraLens::moveLensElements(float offset) {
     }
 }
 
+float FMA(float a, float b, float c) {
+    return a * b + c;
+}
+
+template <typename Ta, typename Tb, typename Tc, typename Td> inline auto DifferenceOfProducts(Ta a, Tb b, Tc c, Td d) {
+    auto cd = c * d;
+    auto differenceOfProducts = FMA(a, b, -cd);
+    auto error = FMA(-c, d, cd);
+    return differenceOfProducts + error;
+}
+
+bool Quadratic(float a, float b, float c, float *t0, float *t1) {
+    // Handle case of $a=0$ for quadratic solution
+    if (a == 0) {
+        if (b == 0) {
+            return false;
+        }
+        *t0 = *t1 = -c / b;
+        return true;
+    }
+
+    // Find quadratic discriminant
+    float discrim = DifferenceOfProducts(b, b, 4 * a, c);
+    if (discrim < 0) {
+        return false;
+    }
+    float rootDiscrim = std::sqrt(discrim);
+
+    // Compute quadratic _t_ values
+    float q = -0.5f * (b + std::copysign(rootDiscrim, b));
+    *t0 = q / a;
+    *t1 = c / q;
+    if (*t0 > *t1) {
+        std::swap(*t0, *t1);
+    }
+
+    return true;
+}
+
+inline Vector3f FaceForward(const Vector3f &n, const Vector3f &v) {
+    return (n.dot(v) < 0.f) ? n.invert() : n;
+}
+
+bool IntersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
+    // Compute _t0_ and _t1_ for ray--element intersection
+    Vector3f o = ray.startPoint - Vector3f(0, 0, zCenter);
+    float A = ray.direction.x * ray.direction.x + ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z;
+    float B = 2 * (ray.direction.x * o.x + ray.direction.y * o.y + ray.direction.z * o.z);
+    float C = o.x * o.x + o.y * o.y + o.z * o.z - radius * radius;
+    float t0, t1;
+    if (!Quadratic(A, B, C, &t0, &t1)) {
+        return false;
+    }
+
+    // Select intersection $t$ based on ray direction and element curvature
+    bool useCloserT = (ray.direction.z > 0) ^ (radius < 0);
+    *t = useCloserT ? std::min(t0, t1) : std::max(t0, t1);
+    if (*t < 0) {
+        return false;
+    }
+
+    // Compute surface normal of element at ray intersection point
+    *n = Vector3f(o + ray.direction * *t);
+    *n = FaceForward(n->normalize(), ray.direction.invert());
+
+    return true;
+}
+
 std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
-    Vector3f D = ray.startPoint - Vector3f(0, 0, center - curvatureRadius);
-    float B = D.dot(ray.direction);
-    float C = D.dot(D) - curvatureRadius * curvatureRadius;
-    float B2_C = B * B - C;
-    if (B2_C < 0) {
+    // todo understand and unit test this
+    float t = 0;
+    Vector3f normal;
+    const bool intersects = IntersectSphericalElement(curvatureRadius, -center + curvatureRadius, ray, &t, &normal);
+    if (!intersects) {
         return std::nullopt;
     }
-    float sgn = (curvatureRadius * ray.direction.z) > 0 ? 1 : -1;
-    float t = sqrt(B2_C) * sgn - B;
-    Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
-    Vector3f normal = intersectionPosition - Vector3f(0, 0, center - curvatureRadius).normalize();
-    return LensElementIntersection(intersectionPosition, normal);
+    return LensElementIntersection(ray.startPoint + ray.direction * t, normal);
 }
 
 bool LensElement::exceedsAperture(const Ray &ray) const {

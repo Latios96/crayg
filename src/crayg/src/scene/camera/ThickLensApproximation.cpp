@@ -6,9 +6,10 @@ ThickLensApproximationCalculator::ThickLensApproximationCalculator(CameraLens &l
 }
 
 ThickLensApproximation ThickLensApproximationCalculator::calculate() {
-    const float offsetX = 0.01 * 0.24f;
+    const int factor = 100;
+    const float offsetX = 3.5e-05f * factor;
 
-    Ray fromWorldToFilmIn{{offsetX, 0, lens.getFirstElement().center + 1}, {0, 0, -1}};
+    const Ray fromWorldToFilmIn{{offsetX, 0, lens.getFirstElement().center + 1 * factor}, {0, 0, -1}};
     auto fromWorldToFilmOut = lens.traceFromWorldToFilm(fromWorldToFilmIn);
     if (!fromWorldToFilmOut) { // todo tests
         throw std::runtime_error(
@@ -16,8 +17,8 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate() {
     }
     const auto firstCardinalPoints = computeCardinalPoints(fromWorldToFilmIn, *fromWorldToFilmOut);
 
-    Ray fromFilmToWorldIn{{offsetX, 0, lens.getLastElement().center - 1}, {0, 0, 1}};
-    auto fromFilmToWorldOut = lens.traceFromFilmToWorld(fromWorldToFilmIn);
+    Ray fromFilmToWorldIn{{offsetX, 0, lens.getLastElement().center - 1 * factor}, {0, 0, 1}};
+    auto fromFilmToWorldOut = lens.traceFromFilmToWorld(fromFilmToWorldIn);
     if (!fromFilmToWorldOut) {
         throw std::runtime_error(
             "Could not trace ray from film to world to compute thick lens approximation. Is aperture stop very small?");
