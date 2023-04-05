@@ -74,6 +74,7 @@ void drawBucket(QImage &bufferToShow, const ImageBucket &imageBucket) {
 
 void ImageWidget::prepareBucket(const ImageBucket imageBucket) {
     activeBuckets.insert(imageBucket);
+    drawBucket(bufferToShow, imageBucket);
 }
 
 void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
