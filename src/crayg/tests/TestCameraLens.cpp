@@ -93,4 +93,16 @@ TEST_CASE("CameraLens::moveLensElements") {
     }
 }
 
+TEST_CASE("CameraLens::getAperture") {
+
+    CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
+
+    SECTION("should return the aperture element") {
+        const auto aperture = canon70_200.getAperture();
+
+        REQUIRE(aperture.ior == 0);
+        REQUIRE(aperture.center == Catch::Detail::Approx(11.839f));
+    }
+}
+
 }

@@ -31,6 +31,9 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
         lens.curvatureRadius *= factor;
         lens.thickness *= factor;
         lens.apertureRadius *= factor;
+        if (lens.isAperture()) {
+            apertureIndex = i;
+        }
     }
 
     moveLensElements(0);
@@ -148,6 +151,10 @@ void CameraLens::focusLens(float focalDistance) {
     const float delta = 0.5f * (thickLens.secondCardinalPoints.pZ - z + thickLens.firstCardinalPoints.pZ - sqrt(c));
 
     moveLensElements(delta);
+}
+
+LensElement &CameraLens::getAperture() {
+    return elements[apertureIndex];
 }
 
 float FMA(float a, float b, float c) {

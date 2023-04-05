@@ -34,6 +34,7 @@ struct CameraLens {
 
     const LensElement &getFirstElement() const;
     const LensElement &getLastElement() const;
+    LensElement &getAperture();
 
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray) const;
     std::optional<Ray> traceFromWorldToFilm(const Ray &ray) const;
@@ -47,6 +48,7 @@ struct CameraLens {
     float getNextIor(int currentIndex, int indexOffset) const;
     std::optional<Ray> traceRay(const Ray &ray, int startIndex, std::function<int(int)> nextLensIndex,
                                 std::function<float(int)> inIor, std::function<float(int)> outIor) const;
+    int apertureIndex = -1;
 };
 
 } // crayg
