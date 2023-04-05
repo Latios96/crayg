@@ -255,4 +255,13 @@ bool LensElement::exceedsAperture(const Vector3f &intersectionPosition) const {
     return rayExceedsAperture;
 }
 
+bool LensElement::operator==(const LensElement &rhs) const {
+    return curvatureRadius == rhs.curvatureRadius && thickness == rhs.thickness && ior == rhs.ior &&
+           apertureRadius == rhs.apertureRadius && center == rhs.center;
+}
+
+bool LensElement::operator!=(const LensElement &rhs) const {
+    return !(rhs == *this);
+}
+
 } // crayg

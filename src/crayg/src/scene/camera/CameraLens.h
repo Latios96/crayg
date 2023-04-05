@@ -25,6 +25,8 @@ struct LensElement {
     bool isAperture() const;
     bool exceedsAperture(const Ray &ray) const;
     bool exceedsAperture(const Vector3f &intersectionPosition) const;
+    bool operator==(const LensElement &rhs) const;
+    bool operator!=(const LensElement &rhs) const;
 };
 
 struct CameraLens {
