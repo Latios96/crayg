@@ -107,6 +107,12 @@ set(crayg_SRCS
         sampling/Sampling.h
         sampling/UnitSphereSampler.cpp
         sampling/UnitSphereSampler.h
+        scene/camera/lensio/LensFileReader.cpp
+        scene/camera/lensio/LensFileReader.h
+        scene/camera/lensio/LensFileReaderFactory.cpp
+        scene/camera/lensio/LensFileReaderFactory.h
+        scene/camera/lensio/LensFileTextFileReader.cpp
+        scene/camera/lensio/LensFileTextFileReader.h
         scene/camera/Camera.cpp
         scene/camera/Camera.h
         scene/camera/CameraModel.h
