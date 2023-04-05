@@ -16,7 +16,6 @@ class RealisticCameraModel : public CameraModel {
     std::optional<Ray> createPrimaryRay(float x, float y) override;
 
   private:
-    ThickLensApproximation thickLens;
     ExitPupil exitPupil;
     Bounds2df filmPhysicalExtend;
 };

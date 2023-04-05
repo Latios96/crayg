@@ -1,6 +1,5 @@
 #include "RealisticCameraModel.h"
 #include "ExitPupilCalculator.h"
-#include "Logger.h"
 #include "sampling/Random.h"
 
 namespace crayg {
