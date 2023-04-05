@@ -15,14 +15,6 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
 
 void RealisticCameraModel::init() {
     camera.getLens().focusLens(camera.getFocusDistance());
-    computeExitPupil();
-}
-
-void RealisticCameraModel::computeExitPupil() {
-    ExitPupilCalculator::CalculationSettings calculationSettings;
-    ExitPupilCalculator exitPupilCalculator(camera.getLens(), camera.getFilmbackSize(),
-                                            calculationSettings); // todo proper film size
-    exitPupil = exitPupilCalculator.calculate();
 }
 
 std::optional<Ray> RealisticCameraModel::createPrimaryRay(float x, float y) {
@@ -31,7 +23,10 @@ std::optional<Ray> RealisticCameraModel::createPrimaryRay(float x, float y) {
     const auto filmPos = filmPhysicalExtend.lerp(relatixeX, relatixeY);
     const Vector3f positionOnFilm = {filmPos.x, filmPos.y, 0};
 
-    const auto pupilSample = exitPupil.samplePupil({x, y}, camera.getFilmbackSize());
+    const float rearApertureRadius = camera.getLens().getLastElement().apertureRadius;
+    const Bounds2df rearElementExtend =
+        Bounds2df(Vector2f(-1.5f * rearApertureRadius), Vector2f(1.5f * rearApertureRadius));
+    const auto pupilSample = rearElementExtend.lerp(Random::random(), Random::random());
     const auto pointOnPupil = Vector3f(pupilSample.x, pupilSample.y, camera.getLens().getLastElement().center);
     const Ray ray = {positionOnFilm, (pointOnPupil - positionOnFilm).normalize()};
     const auto tracedRay = camera.getLens().traceFromFilmToWorld(ray);

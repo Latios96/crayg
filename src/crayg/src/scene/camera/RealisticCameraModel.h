@@ -18,7 +18,6 @@ class RealisticCameraModel : public CameraModel {
   private:
     ThickLensApproximation thickLens;
     ExitPupil exitPupil;
-    void computeExitPupil();
     Bounds2df filmPhysicalExtend;
 };
 
