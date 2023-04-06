@@ -19,12 +19,6 @@ std::string stripCommentFromLine(std::string line) {
 }
 
 bool lineIsSingleInteger(const std::string &line) {
-    /*try {
-        std::stoi(line);
-        return true;
-    } catch (std::invalid_argument const &ex) {
-        return false;
-    }*/
     static const std::regex txt_regex("\\d+");
     return std::regex_match(line, txt_regex);
 }
