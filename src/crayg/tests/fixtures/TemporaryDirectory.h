@@ -9,6 +9,7 @@ class TemporaryDirectory {
   public:
     TemporaryDirectory();
     const boost::filesystem::path &getPath() const;
+    std::string writeToFile(const std::string &fileName, const std::string &content);
     virtual ~TemporaryDirectory();
 
   private:

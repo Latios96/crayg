@@ -17,4 +17,12 @@ const boost::filesystem::path &TemporaryDirectory::getPath() const {
     return path;
 }
 
+std::string TemporaryDirectory::writeToFile(const std::string &fileName, const std::string &content) {
+    const std::string &filePath = (path / fileName).string();
+    std::ofstream o(filePath);
+    o << content;
+    o.close();
+    return filePath;
+}
+
 } // crayg
