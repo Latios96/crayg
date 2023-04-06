@@ -23,7 +23,7 @@ bool lineIsSingleInteger(const std::string &line) {
     return std::regex_match(line, txt_regex);
 }
 
-std::vector<LensElement> LensFileTextFileReader::readFileContent(const std::string &content) {
+CameraLens LensFileTextFileReader::readFileContent(const std::string &content) {
     std::vector<LensElement> elements;
     std::vector<std::string> lines;
     boost::split(lines, content, boost::is_any_of("\n"));
@@ -41,7 +41,7 @@ std::vector<LensElement> LensFileTextFileReader::readFileContent(const std::stri
         elements.push_back(readLensElement(line));
     }
 
-    return elements;
+    return {"", elements};
 }
 
 LensElement LensFileTextFileReader::readLensElement(const std::string &line) const {

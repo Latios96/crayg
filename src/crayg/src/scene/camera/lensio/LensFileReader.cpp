@@ -6,7 +6,7 @@ namespace crayg {
 LensFileReader::LensFileReader(const std::string &filePath) : filePath(filePath) {
 }
 
-std::vector<LensElement> LensFileReader::readFile() {
+CameraLens LensFileReader::readFile() {
     if (!boost::filesystem::exists(filePath)) {
         throw std::runtime_error(fmt::format("Lens file {} does not exist.", filePath));
     }

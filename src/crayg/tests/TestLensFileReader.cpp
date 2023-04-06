@@ -9,8 +9,8 @@ class DummyLensFileReader : public LensFileReader {
     explicit DummyLensFileReader(const std::string &filePath) : LensFileReader(filePath) {
     }
 
-    std::vector<LensElement> readFileContent(const std::string &content) override {
-        return std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}});
+    CameraLens readFileContent(const std::string &content) override {
+        return {"", std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})};
     }
 };
 
@@ -35,7 +35,7 @@ TEST_CASE("TestLensFileReader::readFile") {
 
         auto lensElements = dummyLensFileReader.readFile();
 
-        REQUIRE(lensElements == std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}}));
+        REQUIRE(lensElements == CameraLens("", std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})));
     }
 }
 

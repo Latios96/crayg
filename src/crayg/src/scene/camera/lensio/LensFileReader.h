@@ -12,9 +12,9 @@ class LensFileReader {
   public:
     explicit LensFileReader(const std::string &filePath);
 
-    virtual std::vector<LensElement> readFile();
+    virtual CameraLens readFile();
 
-    virtual std::vector<LensElement> readFileContent(const std::string &content) = 0;
+    virtual CameraLens readFileContent(const std::string &content) = 0;
 
     virtual ~LensFileReader() = default;
 

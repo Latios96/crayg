@@ -8,7 +8,9 @@ namespace crayg {
 class LensFileTextFileReader : public LensFileReader {
   public:
     explicit LensFileTextFileReader(const std::string &filePath);
-    std::vector<LensElement> readFileContent(const std::string &content) override;
+    CameraLens readFileContent(const std::string &content) override;
+
+  private:
     LensElement readLensElement(const std::string &line) const;
 };
 
