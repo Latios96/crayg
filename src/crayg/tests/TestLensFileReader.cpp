@@ -24,18 +24,15 @@ TEST_CASE("TestLensFileReader::readFile") {
 
     SECTION("should read file correctly") {
         TemporaryDirectory temporaryDirectory;
-        const std::string &filePath = (temporaryDirectory.getPath() / "testfile.txt").string();
-        std::ofstream o(filePath);
-        o << R"(# a header comment
+        auto filePath = temporaryDirectory.writeToFile("testfile.txt", R"(# a header comment
 3
 1 2 3 4
-5 6 7 8)" << std::endl;
-        o.close();
+5 6 7 8)");
         DummyLensFileReader dummyLensFileReader(filePath);
 
-        auto lensElements = dummyLensFileReader.readFile();
+        auto cameraLens = dummyLensFileReader.readFile();
 
-        REQUIRE(lensElements == CameraLens("", std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})));
+        REQUIRE(cameraLens == CameraLens("", std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})));
     }
 }
 
