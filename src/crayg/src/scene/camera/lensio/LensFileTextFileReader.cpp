@@ -2,6 +2,7 @@
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim_all.hpp>
 #include <boost/filesystem.hpp>
+#include <regex>
 
 namespace crayg {
 
@@ -17,6 +18,17 @@ std::string stripCommentFromLine(std::string line) {
     return line;
 }
 
+bool lineIsSingleInteger(const std::string &line) {
+    /*try {
+        std::stoi(line);
+        return true;
+    } catch (std::invalid_argument const &ex) {
+        return false;
+    }*/
+    static const std::regex txt_regex("\\d+");
+    return std::regex_match(line, txt_regex);
+}
+
 std::vector<LensElement> LensFileTextFileReader::readFileContent(const std::string &content) {
     std::vector<LensElement> elements;
     std::vector<std::string> lines;
@@ -28,7 +40,7 @@ std::vector<LensElement> LensFileTextFileReader::readFileContent(const std::stri
         if (line.empty()) {
             continue;
         }
-        if (!hasSeenLensCount) {
+        if (!hasSeenLensCount && lineIsSingleInteger(line)) {
             hasSeenLensCount = true;
             continue;
         }
