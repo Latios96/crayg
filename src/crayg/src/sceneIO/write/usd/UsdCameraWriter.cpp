@@ -1,4 +1,5 @@
 #include "UsdCameraWriter.h"
+#include "sceneIO/usd/UsdLensFileUtils.h"
 #include "sceneIO/usd/UsdUtils.h"
 
 namespace crayg {
@@ -12,6 +13,10 @@ pxr::UsdGeomCamera UsdCameraWriter::write(pxr::UsdStagePtr stage, UsdPathFactory
     usdCamera.GetFStopAttr().Set(craygObject.getFStop());
     UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygCameraType", craygObject.getCameraType());
 
+    if (craygObject.getCameraType() == CameraType::REALISTIC) {
+        writeLens(usdCamera);
+    }
+
     return usdCamera;
 }
 
@@ -20,6 +25,10 @@ std::string UsdCameraWriter::getTranslatedType() {
 }
 
 UsdCameraWriter::UsdCameraWriter(Camera &craygObject) : BaseUsdTransformableWriter(craygObject) {
+}
+
+void UsdCameraWriter::writeLens(pxr::UsdGeomCamera usdCamera) {
+    UsdLensFileUtils::writeEmbeddedLensFile(craygObject.getLens(), usdCamera.GetPrim());
 }
 
 } // crayg

@@ -15,6 +15,7 @@ class UsdCameraWriter : public BaseUsdTransformableWriter<pxr::UsdGeomCamera, Ca
 
   protected:
     std::string getTranslatedType() override;
+    void writeLens(pxr::UsdGeomCamera camera);
 };
 
 } // crayg
