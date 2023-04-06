@@ -3,8 +3,10 @@
 
 #include "basics/Ray.h"
 #include "utils/DtoUtils.h"
+#include <fmt/ostream.h>
 #include <functional>
 #include <optional>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -27,6 +29,7 @@ struct LensElement {
     bool exceedsAperture(const Vector3f &intersectionPosition) const;
     bool operator==(const LensElement &rhs) const;
     bool operator!=(const LensElement &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const LensElement &element);
 };
 
 struct CameraLens {
@@ -54,5 +57,7 @@ struct CameraLens {
 };
 
 } // crayg
+
+template <> struct fmt::formatter<crayg::LensElement> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_

@@ -264,4 +264,15 @@ bool LensElement::operator!=(const LensElement &rhs) const {
     return !(rhs == *this);
 }
 
+std::ostream &operator<<(std::ostream &os, const LensElement &element) {
+    os << ToStringHelper("LensElement")
+              .addMember("curvatureRadius", element.curvatureRadius)
+              .addMember("thickness", element.thickness)
+              .addMember("ior", element.ior)
+              .addMember("apertureRadius", element.apertureRadius)
+              .addMember("center", element.center)
+              .finish();
+    return os;
+}
+
 } // crayg
