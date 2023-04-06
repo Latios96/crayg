@@ -160,6 +160,19 @@ LensElement &CameraLens::getAperture() {
     return elements[apertureIndex];
 }
 
+bool CameraLens::operator==(const CameraLens &rhs) const {
+    return name == rhs.name && elements == rhs.elements && apertureIndex == rhs.apertureIndex;
+}
+
+bool CameraLens::operator!=(const CameraLens &rhs) const {
+    return !(rhs == *this);
+}
+
+std::ostream &operator<<(std::ostream &os, const CameraLens &lens) {
+    os << ToStringHelper("CameraLens").addMember("name", lens.name).addMember("elements", lens.elements).finish();
+    return os;
+}
+
 float FMA(float a, float b, float c) {
     return a * b + c;
 }

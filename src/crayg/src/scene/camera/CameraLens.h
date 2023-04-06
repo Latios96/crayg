@@ -49,6 +49,9 @@ struct CameraLens {
     void moveLensElements(float offset);
 
     Ray refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
+    bool operator==(const CameraLens &rhs) const;
+    bool operator!=(const CameraLens &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const CameraLens &lens);
 
   private:
     float getNextIor(int currentIndex, int indexOffset) const;
@@ -60,5 +63,7 @@ struct CameraLens {
 } // crayg
 
 template <> struct fmt::formatter<crayg::LensElement> : ostream_formatter {};
+
+CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensElement);
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_
