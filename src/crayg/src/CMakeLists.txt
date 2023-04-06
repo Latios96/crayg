@@ -215,6 +215,8 @@ set(crayg_SRCS
         sceneIO/usd/CraygUsdBase.h
         sceneIO/usd/UsdConversions.cpp
         sceneIO/usd/UsdConversions.h
+        sceneIO/usd/UsdLensFileUtils.cpp
+        sceneIO/usd/UsdLensFileUtils.h
         sceneIO/usd/UsdReadUtils.cpp
         sceneIO/usd/UsdReadUtils.h
         sceneIO/usd/UsdTypeUtil.h
