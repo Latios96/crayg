@@ -39,6 +39,9 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
     moveLensElements(0);
 }
 
+CameraLens::CameraLens(const CameraLens &cameraLens) : name(cameraLens.name), elements(cameraLens.elements) {
+}
+
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
     Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
                      {ray.direction.x, ray.direction.y, -ray.direction.z}};

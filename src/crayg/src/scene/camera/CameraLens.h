@@ -34,6 +34,7 @@ struct LensElement {
 
 struct CameraLens {
     CameraLens(const std::string &name, const std::vector<LensElement> &elements);
+    CameraLens(const CameraLens &cameraLens);
     std::string name;
     std::vector<LensElement> elements;
 
