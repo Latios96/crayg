@@ -15,6 +15,7 @@ class UsdCameraReader : public BaseUsdXformableReader<pxr::UsdGeomCamera, Camera
 
   protected:
     std::string getTranslatedType() override;
+    void readCameraLens(std::shared_ptr<Camera> &camera) const;
 };
 
 }

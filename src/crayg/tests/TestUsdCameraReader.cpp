@@ -1,3 +1,4 @@
+#include "fixtures/TemporaryDirectory.h"
 #include "sceneIO/read/usd/UsdCameraReader.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <catch2/catch.hpp>
@@ -60,6 +61,29 @@ TEST_CASE("CameraReader::read") {
         auto camera = usdCameraReader.read();
 
         REQUIRE(camera->getCameraType() == CameraType::PINE_HOLE);
+    }
+
+    SECTION("should require lens file when reading realistic lens") {
+        UsdCameraReader usdCameraReader(usdCamera);
+        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygCameraType", CameraType::REALISTIC);
+
+        REQUIRE_THROWS_WITH(usdCameraReader.read(), "craygLensFile attribute was not authored for camera /usdCamera");
+    }
+
+    SECTION("should read camera with lens file successfully") {
+        TemporaryDirectory temporaryDirectory;
+        auto lensFilePath = temporaryDirectory.writeToFile("lensfile.txt", R"(# a header comment
+3
+1 2 3 4
+5 6 7 8)");
+        UsdCameraReader usdCameraReader(usdCamera);
+        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygCameraType", CameraType::REALISTIC);
+        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygLensFile", lensFilePath);
+
+        auto camera = usdCameraReader.read();
+
+        REQUIRE(camera->getCameraType() == CameraType::REALISTIC);
+        REQUIRE(camera->getLens() == CameraLens("", std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})));
     }
 }
 

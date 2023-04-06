@@ -1,6 +1,10 @@
 #include "UsdCameraReader.h"
+#include "Logger.h"
 #include "basics/Transform.h"
+#include "scene/camera/lensio/LensFileReaderFactory.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include <pxr/usd/ar/resolver.h>
+#include <pxr/usd/ar/resolverContextBinder.h>
 
 namespace crayg {
 
@@ -18,6 +22,10 @@ std::shared_ptr<Camera> UsdCameraReader::read() {
         UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "craygCameraType", CameraType::PINE_HOLE);
     camera->setCameraType(cameraType);
 
+    if (cameraType == CameraType::REALISTIC) {
+        readCameraLens(camera);
+    }
+
     const auto focusDistance =
         UsdUtils::getAttributeValueAs<float>(usdPrim.GetFocusDistanceAttr(), this->timeCodeToRead);
     camera->setFocusDistance(focusDistance);
@@ -34,5 +42,22 @@ UsdCameraReader::UsdCameraReader(const pxr::UsdGeomCamera &camera) : BaseUsdXfor
 std::string UsdCameraReader::getTranslatedType() {
     return "camera";
 };
+
+void UsdCameraReader::readCameraLens(std::shared_ptr<Camera> &camera) const {
+    auto lensFileAttribute = usdPrim.GetPrim().GetAttribute(pxr::TfToken("craygLensFile"));
+    if (!lensFileAttribute) {
+        throw std::runtime_error(
+            fmt::format("craygLensFile attribute was not authored for camera {}", usdPrim.GetPath()));
+    }
+
+    auto lensFilePath = UsdUtils::getStaticAttributeValueAs<std::string>(lensFileAttribute);
+    if (!lensFilePath.empty()) {
+        auto lensFileReader = LensFileReaderFactory::createLensFileReader(lensFilePath);
+        auto cameraLens = lensFileReader->readFile();
+        camera->lens = std::make_unique<CameraLens>(cameraLens);
+        return;
+    }
+    // try to read embedded lens
+}
 
 }
