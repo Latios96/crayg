@@ -9,8 +9,8 @@ CameraLens LensFileJsonReader::readFileContent(const std::string &content) {
 
     const std::string name = parsedJson["name"].get<std::string>();
     for (auto &element : parsedJson["elements"]) {
-        elements.emplace_back(element["curvatureRadius"].get<float>(), element["thickness"].get<float>(),
-                              element["ior"].get<float>(), element["apertureRadius"].get<float>());
+        elements.emplace_back(element["curvatureRadius"].get<float>() * 0.1f, element["thickness"].get<float>() * 0.1f,
+                              element["ior"].get<float>(), element["apertureRadius"].get<float>() * 0.1f);
     }
 
     return {name, elements};

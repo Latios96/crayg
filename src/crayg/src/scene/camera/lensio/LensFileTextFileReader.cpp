@@ -3,6 +3,7 @@
 #include <boost/algorithm/string/trim_all.hpp>
 #include <boost/filesystem.hpp>
 #include <regex>
+#include <sstream>
 
 namespace crayg {
 
@@ -50,7 +51,7 @@ LensElement LensFileTextFileReader::readLensElement(const std::string &line) con
     iss >> ior;
     iss >> diameter;
 
-    return {radius, thickness, ior, diameter};
+    return {radius * 0.1f, thickness * 0.1f, ior, diameter * 0.1f};
 }
 
 } // crayg

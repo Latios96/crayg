@@ -9,10 +9,10 @@ std::string LensFileJsonWriter::writeFileContent(const CameraLens &cameraLens) {
     auto jsonLensElements = nlohmann::json::array();
     for (auto &element : cameraLens.elements) {
         jsonLensElements.push_back({
-            {"curvatureRadius", element.curvatureRadius},
-            {"thickness", element.thickness},
+            {"curvatureRadius", element.curvatureRadius * 10},
+            {"thickness", element.thickness * 10},
             {"ior", element.ior},
-            {"apertureRadius", element.apertureRadius},
+            {"apertureRadius", element.apertureRadius * 10},
         });
     }
     lensJson["name"] = cameraLens.name;

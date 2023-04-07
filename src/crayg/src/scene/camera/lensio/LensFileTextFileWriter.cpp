@@ -12,8 +12,8 @@ std::string LensFileTextFileWriter::writeFileContent(const CameraLens &cameraLen
     content += fmt::format("{}\n", cameraLens.elements.size());
 
     for (auto &lens : cameraLens.elements) {
-        content += fmt::format("{:.5f} {:.5f} {:.5f} {:.5f}\n", lens.curvatureRadius, lens.thickness, lens.ior,
-                               lens.apertureRadius, lens.center);
+        content += fmt::format("{:.5f} {:.5f} {:.5f} {:.5f}\n", lens.curvatureRadius * 10, lens.thickness * 10,
+                               lens.ior, lens.apertureRadius * 10);
     }
 
     return content;

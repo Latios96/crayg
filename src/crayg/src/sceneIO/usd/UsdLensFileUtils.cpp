@@ -12,7 +12,8 @@ void UsdLensFileUtils::writeEmbeddedLensFile(const CameraLens &cameraLens, pxr::
 
     pxr::VtArray<pxr::GfVec4f> elements;
     for (auto &element : cameraLens.elements) {
-        elements.push_back({element.curvatureRadius, element.thickness, element.ior, element.apertureRadius});
+        elements.push_back(
+            {element.curvatureRadius * 10, element.thickness * 10, element.ior, element.apertureRadius * 10});
     }
     lensDict["elements"] = elements;
 

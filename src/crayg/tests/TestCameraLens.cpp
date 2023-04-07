@@ -11,7 +11,7 @@ TEST_CASE("CameraLens::getFirstElementZ") {
     SECTION("should calculate z depth for first element correctly") {
         auto firstElement = canon70_200.getFirstElement();
 
-        REQUIRE(firstElement.center == Catch::Detail::Approx(23.751997f));
+        REQUIRE(firstElement.center == Catch::Detail::Approx(23.752f));
     }
 }
 
@@ -63,7 +63,7 @@ TEST_CASE("CameraLens::traceFromWorldToFilm") {
 
         REQUIRE(rayOut.startPoint.x == 0);
         REQUIRE(rayOut.startPoint.y == 0);
-        REQUIRE(rayOut.startPoint.z == Catch::Detail::Approx(5.4500012f));
+        REQUIRE(rayOut.startPoint.z == Catch::Detail::Approx(5.45f));
         REQUIRE(rayOut.direction.x == 0);
         REQUIRE(rayOut.direction.y == 0);
         REQUIRE(rayOut.direction.z == -1);
@@ -83,12 +83,12 @@ TEST_CASE("CameraLens::moveLensElements") {
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
 
     SECTION("should move lenses in positive z direction") {
-        REQUIRE(canon70_200.getFirstElement().center == Catch::Detail::Approx(23.751997f));
+        REQUIRE(canon70_200.getFirstElement().center == Catch::Detail::Approx(23.752f));
         REQUIRE(canon70_200.getLastElement().center == Catch::Detail::Approx(5.45f));
 
         canon70_200.moveLensElements(2);
 
-        REQUIRE(canon70_200.getFirstElement().center == Catch::Detail::Approx(25.751997f));
+        REQUIRE(canon70_200.getFirstElement().center == Catch::Detail::Approx(25.752f));
         REQUIRE(canon70_200.getLastElement().center == Catch::Detail::Approx(7.45f));
     }
 }

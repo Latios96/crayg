@@ -84,7 +84,8 @@ TEST_CASE("CameraReader::read") {
         auto camera = usdCameraReader.read();
 
         REQUIRE(camera->getCameraType() == CameraType::REALISTIC);
-        REQUIRE(camera->getLens() == CameraLens("", std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})));
+        REQUIRE(camera->getLens() ==
+                CameraLens("", std::vector<LensElement>({{0.1, 0.2, 3, 0.4}, {0.5, 0.6, 7, 0.8}})));
     }
 
     SECTION("should read embedded lens file successfully") {
@@ -96,9 +97,7 @@ TEST_CASE("CameraReader::read") {
         auto camera = usdCameraReader.read();
 
         REQUIRE(camera->getCameraType() == CameraType::REALISTIC);
-        /*REQUIRE(camera->getLens() ==
-                CameraLens("Canon 70-200",
-                           {{0.1, 0.2, 0.3, 0.4}, {0.4, 0.5, 0.6, 0.7}})); */// todo handle conversion in IO
+        REQUIRE(camera->getLens() == CameraLens("Canon 70-200", {{1, 2, 3, 4}, {4, 5, 6, 7}}));
     }
 }
 

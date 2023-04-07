@@ -17,10 +17,10 @@ TEST_CASE("TestLensFileJsonWriter::writeFileContent") {
         REQUIRE(parsedJson["name"] == "Canon 70-200");
         REQUIRE(parsedJson["elements"].size() == 2);
         REQUIRE(parsedJson["elements"][0].size() == 4);
-        REQUIRE(parsedJson["elements"][0]["curvatureRadius"] == Catch::Detail::Approx(0.1f));
-        REQUIRE(parsedJson["elements"][0]["thickness"] == Catch::Detail::Approx(0.2f));
+        REQUIRE(parsedJson["elements"][0]["curvatureRadius"] == Catch::Detail::Approx(10));
+        REQUIRE(parsedJson["elements"][0]["thickness"] == Catch::Detail::Approx(20));
         REQUIRE(parsedJson["elements"][0]["ior"] == 3);
-        REQUIRE(parsedJson["elements"][0]["apertureRadius"] == Catch::Detail::Approx(0.4f));
+        REQUIRE(parsedJson["elements"][0]["apertureRadius"] == Catch::Detail::Approx(40));
     }
 }
 

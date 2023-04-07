@@ -24,13 +24,8 @@ const LensElement &CameraLens::getLastElement() const {
 CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &elements)
     : name(name), elements(elements) {
 
-    float factor = 0.1f;
-
     for (int i = elements.size() - 1; i >= 0; i--) {
         auto &lens = this->elements[i];
-        lens.curvatureRadius *= factor;
-        lens.thickness *= factor;
-        lens.apertureRadius *= factor;
         if (lens.isAperture()) {
             apertureIndex = i;
         }
