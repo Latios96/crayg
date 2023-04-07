@@ -77,7 +77,7 @@ class UsdUtils {
         }
         auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
         if (!maybeValue.has_value()) {
-            throw std::runtime_error(fmt::format(R"(Unsupported value for '{}': "{}")", attributeName, tokenValue));
+            return defaultValue;
         }
         return maybeValue.value();
     }
@@ -88,7 +88,7 @@ class UsdUtils {
         auto tokenValue = UsdUtils::getStaticAttributeValueAs<int>(usdAttr);
         auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
         if (!maybeValue.has_value()) {
-            throw std::runtime_error(fmt::format(R"(Unsupported value for '{}': "{}")", attributeName, tokenValue));
+            return defaultValue;
         }
         return maybeValue.value();
     }
