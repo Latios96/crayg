@@ -51,6 +51,8 @@ set(UNIT_TEST_LIST
         TestIntegratorSettings.cpp
         TestLensFileReader.cpp
         TestLensFileTextFileReader.cpp
+        TestLensFileTextFileWriter.cpp
+        TestLensFileWriter.cpp
         TestLensRaytracerTracer.cpp
         TestLight.cpp
         TestLineByLineIterator.cpp

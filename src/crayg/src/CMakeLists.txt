@@ -114,6 +114,12 @@ set(crayg_SRCS
         scene/camera/lensio/LensFileReaderFactory.h
         scene/camera/lensio/LensFileTextFileReader.cpp
         scene/camera/lensio/LensFileTextFileReader.h
+        scene/camera/lensio/LensFileTextFileWriter.cpp
+        scene/camera/lensio/LensFileTextFileWriter.h
+        scene/camera/lensio/LensFileWriter.cpp
+        scene/camera/lensio/LensFileWriter.h
+        scene/camera/lensio/LensFileWriterFactory.cpp
+        scene/camera/lensio/LensFileWriterFactory.h
         scene/camera/Camera.cpp
         scene/camera/Camera.h
         scene/camera/CameraModel.h
