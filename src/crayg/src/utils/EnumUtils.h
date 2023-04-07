@@ -17,6 +17,14 @@ class EnumUtils {
         }
         return maybeValue.value();
     }
+
+    template <typename T> static T parseOrThrow(int value) {
+        auto maybeValue = magic_enum::enum_cast<T>(value);
+        if (!maybeValue.has_value()) {
+            throw std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", value));
+        }
+        return maybeValue.value();
+    }
 };
 
 }
