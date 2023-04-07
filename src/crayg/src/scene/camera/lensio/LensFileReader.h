@@ -2,7 +2,6 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILE_H_
 
 #include "scene/camera/CameraLens.h"
-#include <sstream>
 #include <string>
 #include <vector>
 

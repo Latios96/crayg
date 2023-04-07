@@ -1,5 +1,6 @@
 #include "LensFileReader.h"
 #include <boost/filesystem.hpp>
+#include <sstream>
 
 namespace crayg {
 
