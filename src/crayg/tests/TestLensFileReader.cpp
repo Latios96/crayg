@@ -6,8 +6,7 @@ namespace crayg {
 
 class DummyLensFileReader : public LensFileReader {
   public:
-    explicit DummyLensFileReader(const std::string &filePath) : LensFileReader(filePath) {
-    }
+    explicit DummyLensFileReader() = default;
 
     CameraLens readFileContent(const std::string &content) override {
         return {"", std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})};
@@ -17,9 +16,9 @@ class DummyLensFileReader : public LensFileReader {
 TEST_CASE("TestLensFileReader::readFile") {
 
     SECTION("should throw if file does not exist") {
-        DummyLensFileReader dummyLensFileReader("not-existing-file.txt");
+        DummyLensFileReader dummyLensFileReader;
 
-        REQUIRE_THROWS_AS(dummyLensFileReader.readFile(), std::runtime_error);
+        REQUIRE_THROWS_AS(dummyLensFileReader.readFile("not-existing-file.txt"), std::runtime_error);
     }
 
     SECTION("should read file correctly") {
@@ -28,9 +27,9 @@ TEST_CASE("TestLensFileReader::readFile") {
 3
 1 2 3 4
 5 6 7 8)");
-        DummyLensFileReader dummyLensFileReader(filePath);
+        DummyLensFileReader dummyLensFileReader;
 
-        auto cameraLens = dummyLensFileReader.readFile();
+        auto cameraLens = dummyLensFileReader.readFile(filePath);
 
         REQUIRE(cameraLens == CameraLens("", std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})));
     }

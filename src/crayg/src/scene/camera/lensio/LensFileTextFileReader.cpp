@@ -6,9 +6,6 @@
 
 namespace crayg {
 
-LensFileTextFileReader::LensFileTextFileReader(const std::string &filePath) : LensFileReader(filePath) {
-}
-
 std::string stripCommentFromLine(std::string line) {
     auto commentPosition = line.find('#');
     if (commentPosition != std::string::npos) {

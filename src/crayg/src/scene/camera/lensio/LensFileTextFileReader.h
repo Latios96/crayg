@@ -7,7 +7,7 @@ namespace crayg {
 
 class LensFileTextFileReader : public LensFileReader {
   public:
-    explicit LensFileTextFileReader(const std::string &filePath);
+    explicit LensFileTextFileReader() = default;
     CameraLens readFileContent(const std::string &content) override;
 
   private:

@@ -4,7 +4,7 @@
 namespace crayg {
 
 TEST_CASE("LensFileTextFileReader::readFileContent") {
-    LensFileTextFileReader lensFileTextFileReader("");
+    LensFileTextFileReader lensFileTextFileReader;
 
     SECTION("should read file with lens count correctly") {
         auto fileContent = GENERATE(R"(# a header comment

@@ -9,16 +9,13 @@ namespace crayg {
 
 class LensFileReader {
   public:
-    explicit LensFileReader(const std::string &filePath);
+    explicit LensFileReader() = default;
 
-    virtual CameraLens readFile();
+    virtual CameraLens readFile(const std::string &filePath);
 
     virtual CameraLens readFileContent(const std::string &content) = 0;
 
     virtual ~LensFileReader() = default;
-
-  protected:
-    std::string filePath;
 };
 
 }

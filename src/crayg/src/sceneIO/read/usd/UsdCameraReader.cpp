@@ -45,7 +45,7 @@ std::string UsdCameraReader::getTranslatedType() {
 
 std::unique_ptr<CameraLens> readLensFile(const std::string &lensFilePath) {
     auto lensFileReader = LensFileReaderFactory::createLensFileReader(lensFilePath);
-    auto cameraLens = lensFileReader->readFile();
+    auto cameraLens = lensFileReader->readFile(lensFilePath);
     return std::make_unique<CameraLens>(cameraLens);
 }
 
