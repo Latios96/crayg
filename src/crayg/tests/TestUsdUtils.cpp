@@ -82,14 +82,14 @@ TEST_CASE("UsdUtils::getAttributeValueAsEnum") {
         REQUIRE(myEnumValue == UsdUtilsTestEnum::MY_SECOND_VALUE);
     }
 
-    SECTION("should throw when reading invalud enum value") {
+    SECTION("should return default when reading invalid enum value") {
         sphere.GetPrim()
             .CreateAttribute(pxr::TfToken("myEnumAttribute"), pxr::SdfValueTypeNames->Token)
             .Set(pxr::TfToken("invalid"));
 
-        REQUIRE_THROWS_AS(
-            UsdUtils::getAttributeValueAsEnum(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE),
-            std::runtime_error);
+        REQUIRE(
+            UsdUtils::getAttributeValueAsEnum(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE) ==
+            UsdUtilsTestEnum::MY_SECOND_VALUE);
     }
 }
 
