@@ -8,9 +8,7 @@ namespace crayg {
 
 class LensFileReaderFactory {
   public:
-    static std::unique_ptr<LensFileReader> createLensFileReader(const std::string &filePath) {
-        return std::make_unique<LensFileTextFileReader>(filePath);
-    }
+    static std::unique_ptr<LensFileReader> createLensFileReader(const std::string &filePath);
 };
 } // crayg
 
