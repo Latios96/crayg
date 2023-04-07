@@ -1,12 +1,32 @@
 #include "LensFileWriterFactory.h"
+#include "LensFileJsonWriter.h"
 #include "LensFileTextFileWriter.h"
+#include "Logger.h"
 
 namespace crayg {
+
 std::unique_ptr<LensFileWriter> LensFileWriterFactory::createLensFileWriter(const std::string &filePath) {
-    return std::unique_ptr<LensFileTextFileWriter>();
+    boost::filesystem::path path(filePath);
+    std::string extension = path.extension().string();
+
+    if (extension == ".txt") {
+        return std::unique_ptr<LensFileTextFileWriter>();
+    } else if (extension == ".json") {
+        return std::unique_ptr<LensFileJsonWriter>();
+    } else {
+        Logger::error("No LensFileWriter found for extension {}", extension);
+        throw std::runtime_error(fmt::format("No LensFileWriter found for extension {}", extension));
+    }
 }
 
 std::unique_ptr<LensFileWriter> LensFileWriterFactory::createLensFileWriter(LensFileFormat lensFileFormat) {
-    return std::unique_ptr<LensFileTextFileWriter>();
+    if (lensFileFormat == LensFileFormat::TXT) {
+        return std::unique_ptr<LensFileTextFileWriter>();
+    } else if (lensFileFormat == LensFileFormat::JSON) {
+        return std::unique_ptr<LensFileJsonWriter>();
+    } else {
+        Logger::error("No LensFileWriter found for LensFileFormat {}", lensFileFormat);
+        throw std::runtime_error(fmt::format("No LensFileWriter found for LensFileFormat {}", lensFileFormat));
+    }
 }
 } // crayg
