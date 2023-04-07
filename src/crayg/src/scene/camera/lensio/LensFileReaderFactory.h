@@ -3,6 +3,7 @@
 
 #include "LensFileFormat.h"
 #include "LensFileReader.h"
+#include <memory>
 
 namespace crayg {
 

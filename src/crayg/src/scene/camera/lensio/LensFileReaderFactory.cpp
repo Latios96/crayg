@@ -2,6 +2,7 @@
 #include "LensFileJsonReader.h"
 #include "LensFileTextFileReader.h"
 #include "Logger.h"
+#include <boost/filesystem/path.hpp>
 
 namespace crayg {
 
@@ -21,9 +22,9 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(cons
 
 std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(LensFileFormat lensFileFormat) {
     if (lensFileFormat == LensFileFormat::TXT) {
-        return std::unique_ptr<LensFileTextFileReader>();
+        return std::make_unique<LensFileTextFileReader>();
     } else if (lensFileFormat == LensFileFormat::JSON) {
-        return std::unique_ptr<LensFileJsonReader>();
+        return std::make_unique<LensFileJsonReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", lensFileFormat);
         throw std::runtime_error(fmt::format("No LensFileReader found for extension {}", lensFileFormat));
