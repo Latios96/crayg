@@ -1,4 +1,5 @@
 #include "LensFileReaderFactory.h"
+#include "LensFileTextFileReader.h"
 
 namespace crayg {
 
