@@ -3,7 +3,6 @@
 
 #include "CraygUsdBase.h"
 #include "UsdTypeUtil.h"
-#include "utils/EnumUtils.h"
 #include <magic_enum.hpp>
 #include <pxr/usd/usd/attribute.h>
 #include <type_traits>
@@ -76,14 +75,22 @@ class UsdUtils {
         for (auto &c : tokenValue) {
             c = toupper(c);
         }
-        return EnumUtils::parseOrThrow<T>(tokenValue);
+        auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
+        if (!maybeValue.has_value()) {
+            throw std::runtime_error(fmt::format(R"(Unsupported value for '{}': "{}")", attributeName, tokenValue));
+        }
+        return maybeValue.value();
     }
 
     template <typename T>
     static T getEnumValueFromIntAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
                                      T defaultValue) {
         auto tokenValue = UsdUtils::getStaticAttributeValueAs<int>(usdAttr);
-        return EnumUtils::parseOrThrow<T>(tokenValue);
+        auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
+        if (!maybeValue.has_value()) {
+            throw std::runtime_error(fmt::format(R"(Unsupported value for '{}': "{}")", attributeName, tokenValue));
+        }
+        return maybeValue.value();
     }
 };
 
