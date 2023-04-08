@@ -28,12 +28,12 @@ TEST_CASE("TestImageMetadataCollector::collect") {
     }
 
     SECTION("should collect render settings") {
-
-        RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
-                                      IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}),
-                                      IntersectorType::NAIVE_BVH);
+        Scene scene;
+        scene.renderSettings =
+            RenderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
+                           IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}), IntersectorType::NAIVE_BVH);
         ImageMetadataCollector imageMetadataCollector;
-        imageMetadataCollector.renderSettings = renderSettings;
+        imageMetadataCollector.scene = &scene;
         ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
 
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::RENDER_SETTINGS_INTEGRATOR) == "RAYTRACING");

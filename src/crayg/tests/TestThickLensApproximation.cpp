@@ -14,7 +14,7 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
 
         auto thickLensApproximation = calculator.calculate();
 
-        const float focalLength = calculateFocalLength(thickLensApproximation);
+        const float focalLength = calculateEffectiveFocalLength(thickLensApproximation);
         REQUIRE(focalLength == Catch::Detail::Approx(7.21183792f));
 
         REQUIRE(thickLensApproximation.firstCardinalPoints.pZ == Catch::Detail::Approx(-7.4172355f));

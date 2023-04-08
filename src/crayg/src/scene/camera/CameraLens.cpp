@@ -140,7 +140,7 @@ void CameraLens::focusLens(float focalDistance) {
     ThickLensApproximationCalculator thickLensCalculator(*this);
     auto thickLens = thickLensCalculator.calculate();
 
-    const float focalLength = calculateFocalLength(thickLens);
+    const float focalLength = calculateEffectiveFocalLength(thickLens);
     Logger::info("Effective focal length: {:.2f}mm", focalLength * 10);
 
     const float z = -focalDistance;

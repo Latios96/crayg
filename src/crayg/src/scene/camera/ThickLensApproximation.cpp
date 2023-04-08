@@ -2,7 +2,7 @@
 
 namespace crayg {
 
-float calculateFocalLength(const ThickLensApproximation &thickLensApproximation) {
+float calculateEffectiveFocalLength(const ThickLensApproximation &thickLensApproximation) {
     return thickLensApproximation.firstCardinalPoints.fZ - thickLensApproximation.firstCardinalPoints.pZ;
 }
 
