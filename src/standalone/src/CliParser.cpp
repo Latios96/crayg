@@ -2,6 +2,7 @@
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
 #include <boost/algorithm/string/join.hpp>
+#include <sstream>
 
 namespace crayg {
 
@@ -68,6 +69,10 @@ CliParseResult CliParser::parse() {
                                       !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,
                                       renderSettingsOverride),
                               std::nullopt);
+    } catch (const CLI::Error &e) {
+        std::stringstream cout;
+        app.exit(e);
+        return CliParseResult(std::nullopt, std::optional<std::string>(cout.str()));
     } catch (const std::runtime_error &e) {
         return CliParseResult(std::nullopt, std::optional<std::string>(app.help("", CLI::AppFormatMode::All)));
     }
