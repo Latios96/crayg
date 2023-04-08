@@ -7,7 +7,6 @@
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
 #include "scene/camera/CameraModelFactory.h"
-#include "scene/camera/PineHoleCameraModel.h"
 #include "utils/ImageMetadataCollector.h"
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
