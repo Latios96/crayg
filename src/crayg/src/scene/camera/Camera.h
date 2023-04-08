@@ -51,7 +51,7 @@ class Camera : public Transformable {
     float getFStop() const;
     void setFStop(float fStop);
 
-    float computeApertureSizeHeuristically() const;
+    float computeApertureRadius() const;
 
     CameraLens &getLens() const {
         return *lens;
