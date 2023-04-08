@@ -10,15 +10,16 @@ CRAYG_DTO_2(CardinalPoints, float, pZ, float, fZ);
 CRAYG_DTO_2(ThickLensApproximation, CardinalPoints, firstCardinalPoints, CardinalPoints, secondCardinalPoints);
 
 float calculateEffectiveFocalLength(const ThickLensApproximation &thickLensApproximation);
+float calculateEffectiveFocalLength(const CameraLens &cameraLens);
 
 class ThickLensApproximationCalculator {
   public:
-    explicit ThickLensApproximationCalculator(CameraLens &lens);
+    explicit ThickLensApproximationCalculator(const CameraLens &lens);
     ThickLensApproximation calculate();
 
   private:
     CardinalPoints computeCardinalPoints(const Ray &in, const Ray &out);
-    CameraLens &lens;
+    const CameraLens &lens;
 };
 
 } // crayg

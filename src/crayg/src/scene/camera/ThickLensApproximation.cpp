@@ -6,7 +6,13 @@ float calculateEffectiveFocalLength(const ThickLensApproximation &thickLensAppro
     return thickLensApproximation.firstCardinalPoints.fZ - thickLensApproximation.firstCardinalPoints.pZ;
 }
 
-ThickLensApproximationCalculator::ThickLensApproximationCalculator(CameraLens &lens) : lens(lens) {
+float calculateEffectiveFocalLength(const CameraLens &cameraLens) {
+    ThickLensApproximationCalculator thickLensApproximationCalculator(cameraLens);
+    auto thickLens = thickLensApproximationCalculator.calculate();
+    return calculateEffectiveFocalLength(thickLens);
+}
+
+ThickLensApproximationCalculator::ThickLensApproximationCalculator(const CameraLens &lens) : lens(lens) {
 }
 
 ThickLensApproximation ThickLensApproximationCalculator::calculate() {
