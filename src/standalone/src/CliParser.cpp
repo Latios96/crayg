@@ -70,9 +70,9 @@ CliParseResult CliParser::parse() {
                                       renderSettingsOverride),
                               std::nullopt);
     } catch (const CLI::Error &e) {
-        std::stringstream cout;
-        app.exit(e);
-        return CliParseResult(std::nullopt, std::optional<std::string>(cout.str()));
+        std::stringstream cout, cerr;
+        app.exit(e, cout, cerr);
+        return CliParseResult(std::nullopt, std::optional<std::string>(cerr.str()));
     } catch (const std::runtime_error &e) {
         return CliParseResult(std::nullopt, std::optional<std::string>(app.help("", CLI::AppFormatMode::All)));
     }
