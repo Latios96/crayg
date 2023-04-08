@@ -76,7 +76,7 @@ Transform &Transform::operator=(const Transform &rhs) {
 }
 
 Ray Transform::apply(const Ray &ray) const {
-    return {applyForPoint(ray.startPoint), apply(ray.direction), ray.length};
+    return {applyForPoint(ray.startPoint), apply(ray.direction).normalize(), ray.length};
 }
 
 Transform Transform::withRotation(float x, float y, float z) {

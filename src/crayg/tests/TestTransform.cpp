@@ -81,18 +81,24 @@ TEST_CASE("apply transform to point", "[Transform]") {
 }
 
 TEST_CASE("apply transform to Ray", "[Transform]") {
-    SECTION("apply identiy matrix should not change") {
-        Ray ray({1, 2, 3}, {4, 5, 6});
+    SECTION("apply identity matrix should not change") {
+        Ray ray({1, 2, 3}, {1, 0, 0});
         Transform transform;
 
         REQUIRE(transform.apply(ray) == ray);
     }
 
     SECTION("should transform") {
-        Ray ray({1, 2, 3}, {4, 5, 6});
+        Ray ray({1, 2, 3}, {4, 5, 6}, 5);
         Transform transform = Transform::withPosition({1, 2, 3});
 
-        REQUIRE(transform.apply(ray) == Ray({2, 4, 6}, {4, 5, 6}));
+        auto result = transform.apply(ray);
+
+        REQUIRE(result.startPoint == Vector3f{2, 4, 6});
+        REQUIRE(result.direction.x == Catch::Detail::Approx(0.45584f));
+        REQUIRE(result.direction.x == Catch::Detail::Approx(0.45584f));
+        REQUIRE(result.direction.x == Catch::Detail::Approx(0.45584f));
+        REQUIRE(ray.length == 5);
     }
 }
 
