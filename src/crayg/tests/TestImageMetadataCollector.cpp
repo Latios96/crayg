@@ -1,3 +1,4 @@
+#include "fixtures/CameraLensFixtures.h"
 #include "utils/ImageMetadataCollector.h"
 #include <catch2/catch.hpp>
 
@@ -40,6 +41,49 @@ TEST_CASE("TestImageMetadataCollector::collect") {
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR) == "NAIVE_BVH");
         REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES) == 4);
         REQUIRE(imageMetadata.read<int>("crayg/renderSettings/integratorSettings/AMBIENT_OCCLUSION:sampleCount") == 8);
+    }
+
+    SECTION("should collect normal camera parameters") {
+        Scene scene;
+        scene.camera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}), 35.f, 36.f);
+        scene.camera->setName("/usdCamera");
+        scene.camera->setFocusDistance(50.f);
+        scene.camera->setFStop(2.8f);
+        scene.camera->setCameraType(CameraType::THIN_LENS);
+
+        ImageMetadataCollector imageMetadataCollector;
+        imageMetadataCollector.scene = &scene;
+        ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
+
+        REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_NAME) == scene.camera->getName());
+        REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_FOCAL_LENGTH) == scene.camera->getFocalLength());
+        REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_FILM_BACK_SIZE) ==
+                scene.camera->getFilmbackSize());
+        REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_FOCUS_DISTANCE) ==
+                scene.camera->getFocusDistance());
+        REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_F_STOP) == scene.camera->getFStop());
+        REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_CAMERA_TYPE) ==
+                fmt::format("{}", scene.camera->getCameraType()));
+    }
+
+    SECTION("should collect realistic camera parameters") {
+        Scene scene;
+        scene.camera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}), 35.f, 36.f);
+        scene.camera->setName("/usdCamera");
+        scene.camera->setFocusDistance(50.f);
+        scene.camera->setFStop(2.8f);
+        scene.camera->setCameraType(CameraType::REALISTIC);
+        scene.camera->lens = std::make_unique<CameraLens>(CameraLensFixtures::createCanon70_200mm());
+
+        ImageMetadataCollector imageMetadataCollector;
+        imageMetadataCollector.scene = &scene;
+        ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
+
+        REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_LENS_NAME) == scene.camera->getLens().name);
+        REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT) ==
+                scene.camera->getLens().elements.size());
+        REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH) ==
+                Catch::Detail::Approx(72.1183792f));
     }
 }
 

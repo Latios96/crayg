@@ -115,7 +115,7 @@ Color Renderer::renderSample(float x, float y) {
 }
 
 void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
-    ImageMetadataCollector imageMetadataCollector(renderTime, scene.renderSettings);
+    ImageMetadataCollector imageMetadataCollector(renderTime, &scene);
 
     ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
 

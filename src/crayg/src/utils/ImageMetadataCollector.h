@@ -3,6 +3,7 @@
 
 #include "image/ImageMetadata.h"
 #include "scene/RenderSettings.h"
+#include "scene/Scene.h"
 #include <optional>
 
 namespace crayg {
@@ -10,11 +11,10 @@ namespace crayg {
 class ImageMetadataCollector {
   public:
     ImageMetadataCollector();
-    ImageMetadataCollector(const std::optional<std::chrono::seconds> &renderTime,
-                           const std::optional<RenderSettings> &renderSettings);
+    ImageMetadataCollector(const std::optional<std::chrono::seconds> &renderTime, Scene *scene);
 
     std::optional<std::chrono::seconds> renderTime;
-    std::optional<RenderSettings> renderSettings;
+    Scene *scene = nullptr;
 
     ImageMetadata collectMetadata();
 
@@ -24,6 +24,7 @@ class ImageMetadataCollector {
     void collectRenderTimeIfPresent(ImageMetadata &imageMetadata);
     void collectRenderSettingsIfPresent(ImageMetadata &imageMetadata);
     void collectIntegratorSettings(ImageMetadata &imageMetadata);
+    void collectCamera(ImageMetadata &imageMetadata);
 };
 
 } // crayg

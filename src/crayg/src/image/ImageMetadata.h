@@ -22,6 +22,15 @@ class ImageMetadataTokens {
     static const std::string RENDER_SETTINGS_INTEGRATOR;
     static const std::string RENDER_SETTINGS_INTERSECTOR;
     static const std::string RENDER_SETTINGS_MAX_SAMPLES;
+    static const std::string CAMERA_NAME;
+    static const std::string CAMERA_FOCAL_LENGTH;
+    static const std::string CAMERA_FILM_BACK_SIZE;
+    static const std::string CAMERA_FOCUS_DISTANCE;
+    static const std::string CAMERA_F_STOP;
+    static const std::string CAMERA_CAMERA_TYPE;
+    static const std::string CAMERA_LENS_NAME;
+    static const std::string CAMERA_LENS_ELEMENT_COUNT;
+    static const std::string CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH;
 };
 
 class ImageMetadata {

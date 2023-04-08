@@ -1,5 +1,6 @@
 #include "ImageMetadataCollector.h"
 #include "CraygInfo.h"
+#include "scene/camera/ThickLensApproximation.h"
 #include <cpuinfo.h>
 #include <fmt/chrono.h>
 
@@ -8,9 +9,8 @@ namespace crayg {
 ImageMetadataCollector::ImageMetadataCollector() {
 }
 
-ImageMetadataCollector::ImageMetadataCollector(const std::optional<std::chrono::seconds> &renderTime,
-                                               const std::optional<RenderSettings> &renderSettings)
-    : renderTime(renderTime), renderSettings(renderSettings) {
+ImageMetadataCollector::ImageMetadataCollector(const std::optional<std::chrono::seconds> &renderTime, Scene *scene)
+    : renderTime(renderTime), scene(scene) {
 }
 
 ImageMetadata ImageMetadataCollector::collectMetadata() {
@@ -20,6 +20,7 @@ ImageMetadata ImageMetadataCollector::collectMetadata() {
     collectCpuName(imageMetadata);
     collectRenderTimeIfPresent(imageMetadata);
     collectRenderSettingsIfPresent(imageMetadata);
+    collectCamera(imageMetadata);
 
     return imageMetadata;
 }
@@ -42,18 +43,23 @@ void ImageMetadataCollector::collectRenderTimeIfPresent(ImageMetadata &imageMeta
 }
 
 void ImageMetadataCollector::collectRenderSettingsIfPresent(ImageMetadata &imageMetadata) {
-    if (renderSettings) {
-        imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_INTEGRATOR,
-                            std::string(magic_enum::enum_name(renderSettings.value().integratorType)));
-        imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR,
-                            std::string(magic_enum::enum_name(renderSettings.value().intersectorType)));
-        imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES, renderSettings.value().maxSamples);
-        collectIntegratorSettings(imageMetadata);
+    if (scene == nullptr) {
+        return;
     }
+
+    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_INTEGRATOR,
+                        std::string(magic_enum::enum_name(scene->renderSettings.integratorType)));
+    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR,
+                        std::string(magic_enum::enum_name(scene->renderSettings.intersectorType)));
+    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES, scene->renderSettings.maxSamples);
+    collectIntegratorSettings(imageMetadata);
 }
 
 void ImageMetadataCollector::collectIntegratorSettings(ImageMetadata &imageMetadata) {
-    for (const auto &entry : renderSettings.value().integratorSettings.settings) {
+    if (scene == nullptr) {
+        return;
+    }
+    for (const auto &entry : scene->renderSettings.integratorSettings.settings) {
         switch (entry.second.index()) {
         case 0:
             imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first,
@@ -67,6 +73,31 @@ void ImageMetadataCollector::collectIntegratorSettings(ImageMetadata &imageMetad
                                 std::get<float>(entry.second));
             break;
         }
+    }
+}
+
+void ImageMetadataCollector::collectCamera(ImageMetadata &imageMetadata) {
+    if (scene == nullptr) {
+        return;
+    }
+    if (scene->camera == nullptr) {
+        return;
+    }
+
+    const bool isRealisticCamera = scene->camera->getCameraType() == CameraType::REALISTIC;
+
+    imageMetadata.write(ImageMetadataTokens::CAMERA_NAME, scene->camera->getName());
+    imageMetadata.write(ImageMetadataTokens::CAMERA_FOCAL_LENGTH, scene->camera->getFocalLength());
+    imageMetadata.write(ImageMetadataTokens::CAMERA_FILM_BACK_SIZE, scene->camera->getFilmbackSize());
+    imageMetadata.write(ImageMetadataTokens::CAMERA_FOCUS_DISTANCE, scene->camera->getFocusDistance());
+    imageMetadata.write(ImageMetadataTokens::CAMERA_F_STOP, scene->camera->getFStop());
+    imageMetadata.write(ImageMetadataTokens::CAMERA_CAMERA_TYPE, fmt::format("{}", scene->camera->getCameraType()));
+    if (isRealisticCamera) {
+        auto &lens = scene->camera->getLens();
+        imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_NAME, fmt::format("{}", lens.name));
+        imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT, static_cast<int>(lens.elements.size()));
+        imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH,
+                            calculateEffectiveFocalLength(lens) * 10);
     }
 }
 
