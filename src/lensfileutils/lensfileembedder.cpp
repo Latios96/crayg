@@ -39,11 +39,10 @@ void embeddLensFiles(const std::string &stagePath) {
 
 int main(int argc, char **argv) {
     crayg::Logger::initialize();
+    CLI::App app{fmt::format("Crayg lensfileembedder utils {}, commit {}", crayg::CraygInfo::VERSION,
+                             crayg::CraygInfo::COMMIT_HASH),
+                 "lensfileutils"};
     try {
-        CLI::App app{fmt::format("Crayg lensfileembedder utils {}, commit {}", crayg::CraygInfo::VERSION,
-                                 crayg::CraygInfo::COMMIT_HASH),
-                     "lensfileutils"};
-
         std::string usdStagePath;
         app.add_option("-s,--stage", usdStagePath, "USD stage to embedd lens files for")->required();
 
@@ -51,6 +50,8 @@ int main(int argc, char **argv) {
 
         crayg::embeddLensFiles(usdStagePath);
 
+    } catch (const CLI::Error &e) {
+        exit(app.exit(e));
     } catch (std::exception &e) {
         crayg::Logger::error("Caught exception: {}", e.what());
         return -1;
