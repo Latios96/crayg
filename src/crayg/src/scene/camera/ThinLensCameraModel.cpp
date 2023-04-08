@@ -1,5 +1,4 @@
 #include "ThinLensCameraModel.h"
-#include "basics/Vector2.h"
 #include "sampling/Sampling.h"
 
 namespace crayg {
@@ -14,9 +13,6 @@ std::optional<Ray> ThinLensCameraModel::createPrimaryRay(float x, float y) { // 
     auto apertureSample = Sampling::concentricSampleDisk() * camera.computeApertureSizeHeuristically();
     auto rayOrigin = Vector3f(apertureSample.x, apertureSample.y, 0);
     auto mutatedDirection = (pointOnFocalPlane - rayOrigin).normalize();
-    return Ray(camera.getPosition() + rayOrigin, // camera.getTransform().applyForPoint(rayOrigin),
-               camera.getTransform()
-                   .applyForNormal(mutatedDirection)
-                   .normalize()); // todo add transformation for Ray, also check if we can improve this
+    return camera.getTransform().apply(Ray(rayDirection, mutatedDirection));
 }
 } // crayg

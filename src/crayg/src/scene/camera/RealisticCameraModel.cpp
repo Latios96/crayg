@@ -32,8 +32,7 @@ std::optional<Ray> RealisticCameraModel::createPrimaryRay(float x, float y) {
     if (!tracedRay) {
         return std::nullopt;
     }
-    return Ray(camera.getPosition() + tracedRay->startPoint,
-               camera.getTransform().applyForNormal(tracedRay->direction).normalize());
+    return camera.getTransform().apply(*tracedRay);
 }
 
 } // crayg
