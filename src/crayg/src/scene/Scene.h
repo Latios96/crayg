@@ -29,6 +29,8 @@ class Scene {
     bool materialWithNameExists(const std::shared_ptr<Material> &material);
     std::shared_ptr<Material> materialByName(const std::string &name);
 
+    std::size_t primitiveCount() const;
+
     virtual ~Scene() = default;
 
     void addMaterialIfObjectHasMaterial(const std::shared_ptr<SceneObject> &sceneObject);

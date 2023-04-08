@@ -84,6 +84,8 @@ void Renderer::init() {
 
     GeometryCompiler geometryCompiler(scene);
     geometryCompiler.compile();
+    Logger::info("Objects in scene: {:L}", scene.objects.size());
+    Logger::info("Primitives in scene: {:L}", scene.primitiveCount());
 
     {
         InformativeScopedStopWatch buildBvh("Building SceneIntersector");

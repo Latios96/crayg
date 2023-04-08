@@ -49,6 +49,14 @@ std::shared_ptr<Material> Scene::materialByName(const std::string &name) {
     return *iterator;
 }
 
+std::size_t Scene::primitiveCount() const {
+    std::size_t primitiveCount = 0;
+    for (auto &sceneObject : objects) {
+        primitiveCount += sceneObject->primitiveCount();
+    }
+    return primitiveCount;
+}
+
 Scene::Scene() = default;
 
 }
