@@ -13,6 +13,6 @@ std::optional<Ray> ThinLensCameraModel::createPrimaryRay(float x, float y) { // 
     auto apertureSample = Sampling::concentricSampleDisk() * camera.computeApertureRadius();
     auto rayOrigin = Vector3f(apertureSample.x, apertureSample.y, 0);
     auto mutatedDirection = (pointOnFocalPlane - rayOrigin).normalize();
-    return camera.getTransform().apply(Ray(rayDirection, mutatedDirection));
+    return camera.getTransform().apply(Ray(rayOrigin, mutatedDirection));
 }
 } // crayg
