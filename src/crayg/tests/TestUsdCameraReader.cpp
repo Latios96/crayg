@@ -29,6 +29,7 @@ TEST_CASE("CameraReader::read") {
         auto camera = usdCameraReader.read();
 
         auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}), 35.f, 36.f);
+        expectedCamera->setName("/usdCamera");
         expectedCamera->setFocusDistance(50.f);
         expectedCamera->setFStop(2.8f);
         expectedCamera->setCameraType(CameraType::THIN_LENS);
@@ -55,6 +56,7 @@ TEST_CASE("CameraReader::read") {
         auto camera = usdCameraReader.read();
 
         auto expectedCamera = std::make_shared<crayg::Camera>(Transform::withPosition({1.f, 2.f, -3.f}), 35.f, 36.f);
+        expectedCamera->setName("/usdCamera");
         REQUIRE(*camera == *expectedCamera);
     }
     SECTION("cameraType should default to PineHoleCamera") {

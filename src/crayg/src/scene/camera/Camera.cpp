@@ -32,8 +32,9 @@ float Camera::getFilmbackSize() const {
 }
 
 bool Camera::operator==(const Camera &rhs) const {
-    return transform == rhs.transform && focalLength == rhs.focalLength && filmbackSize == rhs.filmbackSize &&
-           cameraType == rhs.cameraType && focusDistance == rhs.focusDistance && fStop == rhs.fStop;
+    return name == rhs.name && transform == rhs.transform && focalLength == rhs.focalLength &&
+           filmbackSize == rhs.filmbackSize && cameraType == rhs.cameraType && focusDistance == rhs.focusDistance &&
+           fStop == rhs.fStop && lens == rhs.lens;
 }
 
 bool Camera::operator!=(const Camera &rhs) const {

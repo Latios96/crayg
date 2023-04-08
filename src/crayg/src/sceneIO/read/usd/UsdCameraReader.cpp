@@ -11,6 +11,8 @@ namespace crayg {
 std::shared_ptr<Camera> UsdCameraReader::read() {
     auto camera = BaseUsdXformableReader<pxr::UsdGeomCamera, Camera>::read();
 
+    camera->setName(this->usdPrim.GetPrim().GetPath().GetString());
+
     const auto focalLength = UsdUtils::getAttributeValueAs<float>(usdPrim.GetFocalLengthAttr(), this->timeCodeToRead);
     camera->setFocalLength(focalLength);
 
