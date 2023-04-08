@@ -52,6 +52,10 @@ std::unique_ptr<CameraLens> readLensFile(const std::string &lensFilePath) {
 std::unique_ptr<CameraLens> readEmbeddedLensFile(const pxr::UsdAttribute &lensFileAttribute) {
     auto cameraLensData = lensFileAttribute.GetCustomDataByKey(pxr::TfToken("lens"));
 
+    if (cameraLensData.IsEmpty()) {
+        throw std::runtime_error("Could not read embedded lens data, 'lens' value was not authored");
+    }
+
     if (!cameraLensData.CanCast<pxr::VtDictionary>()) {
         throw std::runtime_error("Could not read embedded lens data, 'lens' value was no VtDictionary");
     }
