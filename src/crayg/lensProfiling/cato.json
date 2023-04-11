@@ -1,0 +1,33 @@
+{
+  "serverUrl": "https://cato.frmbffr.com",
+  "projectName": "Crayg Lens Profiling",
+  "command": "{{crayg_render_command}}",
+  "comparisonSettings": {
+    "method": "FLIP",
+    "threshold": 0.25
+  },
+  "suites": [
+    {
+      "name": "LensGrid",
+      "tests": [
+        {
+          "name": "PineHole"
+        },
+        {
+          "name": "ThinLens"
+        },
+        {
+          "name": "Realistic_Biconvex"
+        },
+        {
+          "name": "Realistic_Canon"
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "crayg_bin_folder": "<to-be-supplied-via-commandline>",
+    "crayg_render_command": "{{crayg_bin_folder}}/crayg-standalone -s {{test_resources}}/{{test_name}}.usda -o \"{{image_output_png}}\"",
+    "reference_image_no_extension": "{{test_resources}}/{{test_name}}"
+  }
+}
