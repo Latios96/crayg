@@ -25,6 +25,7 @@ class ImageMetadataCollector {
     void collectRenderSettingsIfPresent(ImageMetadata &imageMetadata);
     void collectIntegratorSettings(ImageMetadata &imageMetadata);
     void collectCamera(ImageMetadata &imageMetadata);
+    void collectSceneStats(ImageMetadata &imageMetadata);
 };
 
 } // crayg

@@ -19,5 +19,7 @@ const std::string ImageMetadataTokens::CAMERA_CAMERA_TYPE = "crayg/camera/camera
 const std::string ImageMetadataTokens::CAMERA_LENS_NAME = "crayg/camera/lens/name";
 const std::string ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT = "crayg/camera/lens/elementCount";
 const std::string ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH = "crayg/camera/lens/effectiveFocalLength";
+const std::string ImageMetadataTokens::SCENE_STATS_OBJECT_COUNT = "crayg/scene/stats/objectCount";
+const std::string ImageMetadataTokens::SCENE_STATS_PRIMITIVE_COUNT = "crayg/scene/stats/primitiveCount";
 
 } // crayg

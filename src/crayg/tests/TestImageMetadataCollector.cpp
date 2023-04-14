@@ -1,4 +1,5 @@
 #include "fixtures/CameraLensFixtures.h"
+#include "scene/primitives/Sphere.h"
 #include "utils/ImageMetadataCollector.h"
 #include <catch2/catch.hpp>
 
@@ -84,6 +85,18 @@ TEST_CASE("TestImageMetadataCollector::collect") {
                 scene.camera->getLens().elements.size());
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH) ==
                 Catch::Detail::Approx(72.1183792f));
+    }
+
+    SECTION("should collect scene stats") {
+        Scene scene;
+        scene.addObject(std::make_shared<Sphere>());
+
+        ImageMetadataCollector imageMetadataCollector;
+        imageMetadataCollector.scene = &scene;
+        ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
+
+        REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::SCENE_STATS_OBJECT_COUNT) == 1);
+        REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::SCENE_STATS_PRIMITIVE_COUNT) == 1);
     }
 }
 

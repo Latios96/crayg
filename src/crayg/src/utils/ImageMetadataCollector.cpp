@@ -21,6 +21,7 @@ ImageMetadata ImageMetadataCollector::collectMetadata() {
     collectRenderTimeIfPresent(imageMetadata);
     collectRenderSettingsIfPresent(imageMetadata);
     collectCamera(imageMetadata);
+    collectSceneStats(imageMetadata);
 
     return imageMetadata;
 }
@@ -99,6 +100,15 @@ void ImageMetadataCollector::collectCamera(ImageMetadata &imageMetadata) {
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH,
                             calculateEffectiveFocalLength(lens) * 10);
     }
+}
+
+void ImageMetadataCollector::collectSceneStats(crayg::ImageMetadata &imageMetadata) {
+    if (scene == nullptr) {
+        return;
+    }
+
+    imageMetadata.write(ImageMetadataTokens::SCENE_STATS_OBJECT_COUNT, static_cast<int>(scene->objects.size()));
+    imageMetadata.write(ImageMetadataTokens::SCENE_STATS_PRIMITIVE_COUNT, static_cast<int>(scene->primitiveCount()));
 }
 
 } // crayg
