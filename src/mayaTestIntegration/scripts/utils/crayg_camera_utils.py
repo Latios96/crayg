@@ -5,6 +5,7 @@ from .usd_exported_user_attributes_utils import (
 )
 
 CRAYG_CAMERA_TYPE_ATTRIBUTE_NAME = "craygCameraType"
+CRAYG_LENS_FILE_ATTRIBUTE_NAME = "craygLensFile"
 
 
 def _find_cameras(objects):
@@ -23,7 +24,7 @@ def _add_usd_user_exported_attribute(node, attribute_name):
     write_usd_user_exported_attribute(node, exported_attributes)
 
 
-def _add_attributes_to_camera(camera):
+def _add_camera_type_attribute(camera):
     if camera.hasAttr(CRAYG_CAMERA_TYPE_ATTRIBUTE_NAME):
         return
     camera.addAttr(
@@ -33,6 +34,18 @@ def _add_attributes_to_camera(camera):
     )
     camera.craygCameraType.set("Pine Hole")
     _add_usd_user_exported_attribute(camera, CRAYG_CAMERA_TYPE_ATTRIBUTE_NAME)
+
+
+def _add_lens_file_attribute(camera):
+    if camera.hasAttr(CRAYG_LENS_FILE_ATTRIBUTE_NAME):
+        return
+    camera.addAttr(CRAYG_LENS_FILE_ATTRIBUTE_NAME, dt="string", keyable=False)
+    _add_usd_user_exported_attribute(camera, CRAYG_LENS_FILE_ATTRIBUTE_NAME)
+
+
+def _add_attributes_to_camera(camera):
+    _add_camera_type_attribute(camera)
+    _add_lens_file_attribute(camera)
 
 
 def add_crayg_extra_attributes_to_selected_cameras():
