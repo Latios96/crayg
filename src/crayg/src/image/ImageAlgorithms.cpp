@@ -8,9 +8,15 @@ void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bu
     if (!isContained) {
         return;
     }
-
-    for (auto pixel : ImageIterators::lineByLine(bucketImageBuffer.image)) {
-        image.setValue(pixel + bucketImageBuffer.imageBucket.getPosition(), bucketImageBuffer.image.getValue(pixel));
+    for (auto &channelView : bucketImageBuffer.image.getChannels()) {
+        if (!image.hasChannel(channelView.channelName)) {
+            continue;
+        }
+        auto imageChannel = *image.getChannel(channelView.channelName);
+        for (auto pixel : ImageIterators::lineByLine(channelView.channelBuffer)) {
+            imageChannel->setValue(pixel + bucketImageBuffer.imageBucket.getPosition(),
+                                   channelView.channelBuffer.getValue(pixel));
+        }
     }
 }
 

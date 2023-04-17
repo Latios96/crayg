@@ -48,6 +48,32 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
         REQUIRE(image.getValue({5, 5}) == Color::createBlack());
         REQUIRE(image.getValue({9, 9}) == Color::createBlack());
     }
+
+    SECTION("should copy image channels if they exist in target image") {
+        BucketImageBuffer bucketImageBuffer({0, 0}, 5, 5);
+        auto specImageBucket = ImageSpecBuilder({5, 5})
+                                   .createGreyFloatChannel("channelExistingInTargetImage")
+                                   .createGreyUInt8Channel("channelExistingButInOtherFormat")
+                                   .createGreyFloatChannel("channelNotExisting")
+                                   .finish();
+        bucketImageBuffer.image.addChannelsFromSpec(specImageBucket);
+        ImageAlgorithms::fill(bucketImageBuffer.image, Color::createWhite());
+        ImageAlgorithms::fill(**bucketImageBuffer.image.getChannel("channelExistingInTargetImage"),
+                              Color::createWhite());
+
+        ImageAlgorithms::fill(**bucketImageBuffer.image.getChannel("channelNotExisting"), Color::createWhite());
+        auto specImage = ImageSpecBuilder({10, 10})
+                             .createGreyFloatChannel("channelExistingInTargetImage")
+                             .createGreyFloatChannel("untouchedChannel")
+                             .finish();
+        image.addChannelsFromSpec(specImage);
+
+        ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
+
+        REQUIRE(image.getValue({0, 0}) == Color::createWhite());
+        REQUIRE(image.getChannel("channelExistingInTargetImage").value()->getValue({0, 0}) == Color::createWhite());
+        REQUIRE(image.getChannel("untouchedChannel").value()->getValue({0, 0}) == Color::createBlack());
+    }
 }
 
 }
