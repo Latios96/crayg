@@ -3,7 +3,7 @@
 
 namespace crayg {
 
-ProgressReporter::ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback,
+ProgressReporter::ProgressReporter(int maxIterations, std::function<void(int, float, float)> progressionCallback,
                                    std::function<void(std::chrono::seconds)> finishCallback)
     : maxIterations(maxIterations), progressionCallback(std::move(progressionCallback)),
       finishCallback(std::move(finishCallback)), iterationsDone(0),
@@ -20,11 +20,15 @@ ProgressReporter::ProgressReporter(const ProgressReporter &progressReporter) {
 }
 
 ProgressReporter ProgressReporter::createLoggingProgressReporter(int maxIterations, const std::string &taskName) {
-    std::function<void(int, float)> logProgress = [taskName](int progress, float timeRemaining) -> void {
+    std::function<void(int, float, float)> logProgress = [taskName](int progress, float timeElapsed,
+                                                                    float timeRemaining) -> void {
         ReadableFormatter readableFormatter;
-        readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeRemaining)));
-        Logger::info("{} done by {}%, estimated time remaining: {}", taskName, progress,
-                     readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeRemaining))));
+        const auto formattedTimeElapsed =
+            readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeElapsed)));
+        const auto formattedTimeRemaining =
+            readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeRemaining)));
+        Logger::info("{} done by {}%, elapsed time: {}, remaining time: {}", taskName, progress, formattedTimeElapsed,
+                     formattedTimeRemaining);
     };
     std::function<void(std::chrono::seconds)> finishCallback = [taskName](std::chrono::seconds seconds) -> void {
         ReadableFormatter readableFormatter;
@@ -42,8 +46,10 @@ void ProgressReporter::iterationDone() {
     if (newProgress > progress) {
         progress = newProgress;
         if (progress % 1 == 0) {
+            auto timeElapsed = std::chrono::steady_clock::now() - startTime;
+            const float elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(timeElapsed).count();
             const float remainingTime = remainingTimeCalculator.getRemainingTimeByProgress(progress);
-            progressionCallback(progress, remainingTime);
+            progressionCallback(progress, elapsedTime, remainingTime);
         }
     }
 }

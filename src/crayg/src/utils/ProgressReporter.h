@@ -10,11 +10,11 @@ namespace crayg {
 
 class ProgressReporter {
   public:
-    ProgressReporter(int maxIterations, std::function<void(int, float)> progressionCallback,
+    ProgressReporter(int maxIterations, std::function<void(int, float, float)> progressionCallback,
                      std::function<void(std::chrono::seconds)> finishCallback);
     ProgressReporter(const ProgressReporter &progressReporter);
 
-    static ProgressReporter createLoggingProgressReporter(int maxIterations, const std::string &taskName);
+    static ProgressReporter createLoggingProgressReporter(int maxIterations, const std::string &timeElapsed);
 
     void iterationDone();
 
@@ -25,7 +25,7 @@ class ProgressReporter {
   private:
     int maxIterations;
     int progress = 0;
-    std::function<void(int, float)> progressionCallback;
+    std::function<void(int, float, float)> progressionCallback;
     std::function<void(std::chrono::seconds)> finishCallback;
     std::chrono::steady_clock::time_point startTime;
     RemainingTimeCalculator remainingTimeCalculator;

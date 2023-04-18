@@ -4,12 +4,12 @@
 
 namespace crayg {
 
-void _report(int progress, float timeRemaining) {
+void _report(int progress, float elapsed, float timeRemaining) {
 }
 
 int callCount = 0;
 
-void _storeCallCount(int progress, float timeRemaining) {
+void _storeCallCount(int progress, float elapsed, float timeRemaining) {
     callCount++;
 }
 
