@@ -31,16 +31,16 @@ TEST_CASE("ProgressReporter") {
         REQUIRE(reporter.iterationsDone == 1);
     }
 
-    SECTION("progressCallbackShouldBeCalledEvery10") {
-        ProgressReporter reporter(100, &_storeCallCount, &_storeFinishCalled);
+    SECTION("progressCallbackShouldBeCalledEvery1") {
+        ProgressReporter reporter(200, &_storeCallCount, &_storeFinishCalled);
 
         REQUIRE(callCount == 0);
+
         reporter.iterationDone();
         REQUIRE(callCount == 0);
 
-        for (int i = 0; i < 10; i++) {
-            reporter.iterationDone();
-        }
+        reporter.iterationDone();
+        REQUIRE(callCount == 1);
     }
 
     SECTION("finished callback should be called") {

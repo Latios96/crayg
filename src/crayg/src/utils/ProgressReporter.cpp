@@ -41,7 +41,7 @@ void ProgressReporter::iterationDone() {
     int newProgress = static_cast<int>(static_cast<float>(iterationsDone) / (static_cast<float>(maxIterations)) * 100);
     if (newProgress > progress) {
         progress = newProgress;
-        if (progress % 10 == 0) {
+        if (progress % 1 == 0) {
             const float remainingTime = remainingTimeCalculator.getRemainingTimeByProgress(progress);
             progressionCallback(progress, remainingTime);
         }
