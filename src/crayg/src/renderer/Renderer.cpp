@@ -2,9 +2,12 @@
 #include "GeometryCompiler.h"
 #include "Logger.h"
 #include "SampleAccumulator.h"
+#include "basics/MathUtils.h"
+#include "image/ImageAlgorithms.h"
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
+#include "sampling/Random.h"
 #include "scene/camera/CameraModelFactory.h"
 #include "utils/ImageMetadataCollector.h"
 #include "utils/ProgressReporter.h"
@@ -61,16 +64,96 @@ void Renderer::renderParallel(ProgressReporter &reporter, const std::vector<Imag
     task_group.wait();
 }
 
+bool shouldTerminate(int samplesTaken, int maxSamples, float error, float maxError) {
+    if (samplesTaken > maxSamples) {
+        return true;
+    }
+    if (error < maxError) {
+        return true;
+    }
+    return false;
+}
+
+float perPixelError(const Color &fullySampled, const Color &halfSampled) {
+    if (fullySampled ==
+        Color::createBlack()) { // todo inf, nan oder sonst was sollte 0 ergeben, aber mal checken ob das so gut geht..
+        return 0;
+    }
+    return (std::abs(fullySampled.r - halfSampled.r) + std::abs(fullySampled.g - halfSampled.g) +
+            std::abs(fullySampled.b - halfSampled.b)) /
+           std::sqrt(fullySampled.r + fullySampled.g + fullySampled.b); // todo tests
+}
+
 void Renderer::renderBucket(const ImageBucket &imageBucket) {
     BucketImageBuffer bucketImageBuffer(imageBucket);
-    bucketImageBuffer.image.addChannelsFromSpec(requiredImageSpec({imageBucket.getWidth(), imageBucket.getHeight()}));
+    bucketImageBuffer.image.addChannelsFromSpec(
+        requiredImageSpec({imageBucket.getWidth(), imageBucket.getHeight()})); // todo store resolution in ImageBucket
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
+    // todo add switch to switch between adaptive / not adaptive
+
+    renderAdaptive(imageBucket, bucketImageBuffer);
+    // renderUniform(imageBucket,bucketImageBuffer);
+
+    outputDriver.writeBucketImageBuffer(bucketImageBuffer);
+}
+
+void Renderer::renderUniform(const crayg::ImageBucket &imageBucket, crayg::BucketImageBuffer &bucketImageBuffer) {
+    const int sampleCount = std::pow(scene.renderSettings.maxSamples, 2);
+    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+        const auto samplePos = imageBucket.getPosition() + pixel;
+        SampleAccumulator sampleAccumulator;
+        for (int i = 0; i < sampleCount; i++) {
+            const Color &sampleColor = renderSample(samplePos.x + Random::random(), samplePos.y + Random::random());
+            sampleAccumulator.addSample(sampleColor);
+        }
+        bucketImageBuffer.image.setValue(pixel, sampleAccumulator.getValue());
+    }
+}
+
+void Renderer::renderAdaptive(const ImageBucket &imageBucket, BucketImageBuffer &bucketImageBuffer) {
+    auto halfSampledBuffer = PixelBuffer::createRgbFloat({imageBucket.getWidth(), imageBucket.getHeight()});
+
+    const int samplesPerPass = 8; // todo make these configurable
+    const int maxSamples = std::pow(scene.renderSettings.maxSamples, 2);
+    const float maxError = 0.007;
+
+    int samplesTaken = 0;
+    float error = 150;
+    while (!shouldTerminate(samplesTaken, maxSamples, error, maxError)) {
+        error = 0;
+        for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+            Color fullySampled = Color::createBlack();
+            Color halfSampled = Color::createBlack();
+            const auto samplePos = imageBucket.getPosition() + pixel;
+            for (int i = 0; i < samplesPerPass; i++) {
+                const Color &sampleColor =
+                    renderSample(samplePos.x + Random::random(),
+                                 samplePos.y + Random::random()); // todo: should be possible to add float + int Vec2
+                fullySampled = fullySampled + sampleColor;
+                if (i % 2 == 0) {
+                    halfSampled = halfSampled + sampleColor;
+                }
+            }
+            fullySampled = bucketImageBuffer.image.getValue(pixel) + fullySampled;
+            bucketImageBuffer.image.setValue(pixel, fullySampled);
+            halfSampled = halfSampledBuffer->getValue(pixel) + halfSampled;
+            halfSampledBuffer->setValue(pixel, halfSampled);
+            error += perPixelError(fullySampled / samplesTaken, halfSampled / (samplesTaken / 2));
+        }
+        error = error / (imageBucket.getWidth() * imageBucket.getHeight());
+        samplesTaken += samplesPerPass;
+    }
 
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
-        Color pixelColor = renderPixel(pixel + imageBucket.getPosition());
-        bucketImageBuffer.image.setValue(pixel, pixelColor);
+        auto pixelColor = bucketImageBuffer.image.getValue(pixel);
+        bucketImageBuffer.image.setValue(pixel, pixelColor / samplesTaken);
     }
-    outputDriver.writeBucketImageBuffer(bucketImageBuffer);
+    const Color start = Color::fromRGB(0, 12, 253);
+    const Color end = Color::fromRGB(0, 252, 129); // todo extract to ColorMap
+    const float relativeSampleCount = static_cast<float>(samplesTaken) / static_cast<float>(maxSamples);
+    ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel(
+                              "sampleCount"), // todo create buffer which stores the number of samples taken
+                          MathUtils::lerp(relativeSampleCount, start, end));
 }
 
 void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence) {
@@ -130,7 +213,7 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
 }
 
 ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {
-    return ImageSpecBuilder(resolution).finish();
+    return ImageSpecBuilder(resolution).createRgbFloatChannel("sampleCount").finish();
 }
 
 }
