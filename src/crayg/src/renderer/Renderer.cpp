@@ -28,11 +28,7 @@ void Renderer::renderScene() {
 
     outputDriver.initialize(requiredImageSpec());
 
-    const BucketSizeEstimator bucketSizeEstimator(scene.renderSettings);
-    const int bucketSize = bucketSizeEstimator.estimateBucketSize();
-
-    std::vector<ImageBucket> bucketSequence =
-        ImageBucketSequences::lineByLine(scene.renderSettings.resolution, bucketSize);
+    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, 8);
     ProgressReporter reporter =
         ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()), "Rendering");
 
