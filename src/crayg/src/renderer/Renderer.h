@@ -37,7 +37,7 @@ class Renderer {
 
     std::unique_ptr<AbstractIntegrator> integrator;
     void writeImageMetadata(std::chrono::seconds renderTime);
-    ImageSpec requiredImageSpec() const;
+    ImageSpec requiredImageSpec(const Resolution &resolution) const;
 };
 
 }

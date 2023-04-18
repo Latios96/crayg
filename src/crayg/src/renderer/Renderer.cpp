@@ -26,7 +26,7 @@ void Renderer::renderScene() {
     init();
     Logger::info("Starting rendering..");
 
-    outputDriver.initialize(requiredImageSpec());
+    outputDriver.initialize(requiredImageSpec(scene.renderSettings.resolution));
 
     std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, 8);
     ProgressReporter reporter =
@@ -54,6 +54,7 @@ void Renderer::renderParallel(ProgressReporter &reporter, const std::vector<Imag
 
 void Renderer::renderBucket(const ImageBucket &imageBucket) {
     BucketImageBuffer bucketImageBuffer(imageBucket);
+    bucketImageBuffer.image.addChannelsFromSpec(requiredImageSpec({imageBucket.getWidth(), imageBucket.getHeight()}));
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
@@ -119,8 +120,8 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
     outputDriver.writeImageMetadata(imageMetadata);
 }
 
-ImageSpec Renderer::requiredImageSpec() const {
-    return ImageSpecBuilder(scene.renderSettings.resolution).finish();
+ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {
+    return ImageSpecBuilder(resolution).createRgbFloatChannel("sampleCount").finish();
 }
 
 }
