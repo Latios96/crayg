@@ -5,8 +5,8 @@ namespace crayg {
 
 class MathUtils {
   public:
-    template <typename T> static T lerp(T t, T val1, T val2) {
-        return (1 - t) * val1 + t * val2;
+    template <typename T, typename V> static V lerp(T t, V val1, V val2) {
+        return val1 * (1 - t) + val2 * t;
     }
 };
 
