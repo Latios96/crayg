@@ -75,6 +75,10 @@ bool shouldTerminate(int samplesTaken, int maxSamples, float error, float maxErr
 }
 
 float perPixelError(const Color &fullySampled, const Color &halfSampled) {
+    if (fullySampled ==
+        Color::createBlack()) { // todo inf, nan oder sonst was sollte 0 ergeben, aber mal checken ob das so gut geht..
+        return 0;
+    }
     return (std::abs(fullySampled.r - halfSampled.r) + std::abs(fullySampled.g - halfSampled.g) +
             std::abs(fullySampled.b - halfSampled.b)) /
            std::sqrt(fullySampled.r + fullySampled.g + fullySampled.b); // todo tests
