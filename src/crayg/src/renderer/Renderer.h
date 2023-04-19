@@ -38,6 +38,8 @@ class Renderer {
     std::unique_ptr<AbstractIntegrator> integrator;
     void writeImageMetadata(std::chrono::seconds renderTime);
     ImageSpec requiredImageSpec(const Resolution &resolution) const;
+    void renderAdaptive(const ImageBucket &imageBucket, BucketImageBuffer &bucketImageBuffer);
+    void renderUniform(const ImageBucket &imageBucket, BucketImageBuffer &bucketImageBuffer);
 };
 
 }
