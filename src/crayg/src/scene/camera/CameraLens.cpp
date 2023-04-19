@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "ThickLensApproximation.h"
 #include <iostream>
+#include <utils/Preconditions.h>
 
 namespace crayg {
 
@@ -153,6 +154,7 @@ void CameraLens::focusLens(float focalDistance) {
 }
 
 LensElement &CameraLens::getAperture() {
+    CRAYG_CHECK_IS_VALID_INDEX(apertureIndex, elements.size());
     return elements[apertureIndex];
 }
 
