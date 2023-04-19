@@ -6,53 +6,35 @@
 #include <fmt/format.h>
 #include <stdexcept>
 
-#ifdef ENFORCE_CHECKS
-#define SKIP_IF_DISABLED
+#define CRAYG_CHECK_IS_NORMALIZED_VECTOR(vector) CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector)
+#define CRAYG_CHECK_IS_VALID_INDEX(index, size) CRAYG_CHECK_IS_VALID_INDEX_IMPL(index, size)
+
+#ifdef CRAYG_DEBUG_CHECKS
+#define CRAYG_CHECKD_IS_NORMALIZED_VECTOR(vector) CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector)
+#define CRAYG_CHECKD_IS_VALID_INDEX(index, size) CRAYG_CHECK_IS_VALID_INDEX_IMPL(index, size)
 #else
-#define SKIP_IF_DISABLED return;
+#define CRAYG_CHECKD_IS_NORMALIZED_VECTOR(vector) EMPTY_CHECK
+#define CRAYG_CHECKD_IS_VALID_INDEX(index, size) EMPTY_CHECK
 #endif
 
-namespace crayg {
+#define CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector)                                                                  \
+    CRAYG_CHECK_OR_THROW(fabs((vector).length() - 1) < 0.001, fmt::format("Vector is not unit vector!: {}", vector))
 
-struct FailureInformation {
-    std::string file;
-    int line;
-    FailureInformation(const std::string &file, int line);
-};
+#define CRAYG_CHECK_IS_VALID_INDEX_IMPL(index, size)                                                                   \
+    CRAYG_CHECK_OR_THROW((index >= 0 && index < size),                                                                 \
+                         fmt::format("Index is out of range: {}, size is {}", index, size))
 
-#define FAILURE_INFORMATION FailureInformation(__FILE__, __LINE__)
-
-class Preconditions {
-
-  public:
-    static void checkArgument(bool expression, const FailureInformation &failureInformation) {
-        SKIP_IF_DISABLED;
-        checkArgument(expression, "Expression failed!", failureInformation);
+#define CRAYG_CHECK_OR_THROW(condition, message)                                                                       \
+    if (!(condition)) {                                                                                                \
+        CRAYG_LOG_AND_THROW(message)                                                                                   \
     }
 
-    static void checkArgument(bool expression, const std::string &exrStr,
-                              const FailureInformation &failureInformation) {
-        SKIP_IF_DISABLED;
-        if (!expression) {
-            fail(exrStr, failureInformation);
-        }
-    }
+#define CRAYG_LOG_AND_THROW(message)                                                                                   \
+    Logger::error("Error at {}:{}: {}", __FILE__, __LINE__, message);                                                  \
+    throw std::runtime_error(fmt::format("Error at {}:{}: {}", __FILE__, __LINE__, message));
 
-    static void checkIsUnitVector(const Vector3f &vector3f, const FailureInformation &failureInformation) {
-        SKIP_IF_DISABLED;
-        checkArgument(vector3f.length() == 1,
-                      fmt::format("Vector is not unit vector!: {} {} {}", vector3f.x, vector3f.y, vector3f.z),
-                      failureInformation);
-    }
-
-  private:
-    static void fail(const std::string &message, const FailureInformation &failureInformation) {
-        auto formattedMessage = fmt::format("{}, at {} {}", message, failureInformation.file, failureInformation.line);
-        Logger::error(formattedMessage.c_str());
-        throw std::invalid_argument(formattedMessage);
-    }
-};
-
-}
+#define EMPTY_CHECK                                                                                                    \
+    do {                                                                                                               \
+    } while (false)
 
 #endif // CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_

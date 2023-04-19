@@ -5,14 +5,14 @@
 namespace crayg {
 
 Ray::Ray(Vector3f startPoint, Vector3f direction) {
-    Preconditions::checkIsUnitVector(direction, FAILURE_INFORMATION);
+    CRAYG_CHECKD_IS_NORMALIZED_VECTOR(direction);
     this->startPoint = startPoint;
     this->direction = direction;
     this->length = std::numeric_limits<float>::min();
 }
 
 Ray::Ray(Vector3f startPoint, Vector3f direction, float length) {
-    Preconditions::checkIsUnitVector(direction, FAILURE_INFORMATION);
+    CRAYG_CHECKD_IS_NORMALIZED_VECTOR(direction);
     this->startPoint = startPoint;
     this->direction = direction;
     this->length = length;
