@@ -1,6 +1,5 @@
 #include "RealisticCameraModel.h"
 #include "ExitPupilCalculator.h"
-#include "sampling/Random.h"
 
 namespace crayg {
 
@@ -10,10 +9,19 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
     filmPhysicalExtend =
         Bounds2df({camera.getFilmbackSize() * 0.1f / 2.f, -camera.getFilmbackSize() * 0.1f / aspectRatio / 2},
                   {-camera.getFilmbackSize() * 0.1f / 2.f, camera.getFilmbackSize() * 0.1f / aspectRatio / 2});
+    filmDiagonal = std::sqrt(std::pow(camera.getFilmbackSize() * 0.1f, 2) +
+                             std::pow(camera.getFilmbackSize() * 0.1f / aspectRatio, 2));
 }
 
 void RealisticCameraModel::init() {
     camera.getLens().focusLens(camera.getFocusDistance());
+
+    const float focalLength = calculateEffectiveFocalLength(camera.getLens());
+    const float apertureRadius = (focalLength / camera.getFStop()) / 2.0f;
+    camera.getLens().getAperture().apertureRadius = apertureRadius;
+
+    ExitPupilCalculator exitPupilCalculator(camera.getLens(), filmDiagonal, ExitPupilCalculator::CalculationSettings());
+    exitPupil = exitPupilCalculator.calculate();
 }
 
 std::optional<Ray> RealisticCameraModel::createPrimaryRay(float x, float y) {
@@ -22,10 +30,7 @@ std::optional<Ray> RealisticCameraModel::createPrimaryRay(float x, float y) {
     const auto filmPos = filmPhysicalExtend.lerp(relatixeX, relatixeY);
     const Vector3f positionOnFilm = {filmPos.x, filmPos.y, 0};
 
-    const float rearApertureRadius = camera.getLens().getLastElement().apertureRadius;
-    const Bounds2df rearElementExtend =
-        Bounds2df(Vector2f(-1.5f * rearApertureRadius), Vector2f(1.5f * rearApertureRadius));
-    const auto pupilSample = rearElementExtend.lerp(Random::random(), Random::random());
+    const auto pupilSample = exitPupil.samplePupil(filmPos, filmDiagonal);
     const auto pointOnPupil = Vector3f(pupilSample.x, pupilSample.y, camera.getLens().getLastElement().center);
     const Ray ray = {positionOnFilm, (pointOnPupil - positionOnFilm).normalize()};
     const auto tracedRay = camera.getLens().traceFromFilmToWorld(ray);

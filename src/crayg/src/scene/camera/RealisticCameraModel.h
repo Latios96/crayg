@@ -18,6 +18,7 @@ class RealisticCameraModel : public CameraModel {
   private:
     ExitPupil exitPupil;
     Bounds2df filmPhysicalExtend;
+    float filmDiagonal;
 };
 
 } // crayg
