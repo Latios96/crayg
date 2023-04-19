@@ -1,0 +1,20 @@
+#usda 1.0
+(
+    subLayers = [
+        @M:/Test_Scene_Collection/OpenChessSet/OpenChessSetCrayg.usda@
+    ]
+)
+
+over "cams" {
+    over "render_cam_3"{
+        over "render_cam_3Shape"{
+            // maybe we need to set fStop here
+        }
+    }
+    over "render_cam_7"{
+        over "render_cam_7Shape"{
+            // maybe we need to set fStop here
+        }
+    }
+}
+

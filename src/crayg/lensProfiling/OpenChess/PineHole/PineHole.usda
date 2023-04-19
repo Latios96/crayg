@@ -1,0 +1,19 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/OpenChess_base.usda@
+    ]
+)
+
+over "cams" {
+    over "render_cam_3"{
+        over "render_cam_3Shape"{
+            custom int craygCameraType = 1
+        }
+    }
+    over "render_cam_7"{
+        over "render_cam_7Shape"{
+            custom int craygCameraType = 1
+        }
+    }
+}

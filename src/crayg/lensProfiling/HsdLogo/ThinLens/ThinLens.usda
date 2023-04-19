@@ -1,0 +1,20 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/HsdLogo_base.usda@
+    ]
+)
+
+over "render_cam_3"
+{
+    over "render_cam_3Shape"{
+        custom int craygCameraType = 2
+    }
+}
+
+over "render_cam_5"
+{
+    over "render_cam_5Shape"{
+        custom int craygCameraType = 2
+    }
+}

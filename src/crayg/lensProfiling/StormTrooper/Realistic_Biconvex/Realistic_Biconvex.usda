@@ -1,0 +1,16 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/StormTrooper_base.usda@
+    ]
+)
+
+over "root"
+{
+    over "Camera"{
+        over "render_cam"{
+            custom int craygCameraType = 3
+            custom string craygLensFile = "C:\\workspace\\appleseed\\sandbox\\lenses\\biconvex-50.txt"
+        }
+    }
+}
