@@ -64,6 +64,17 @@ TEST_CASE("UsdUtils::getAttributeValueAsEnum") {
         REQUIRE(myEnumValue == UsdUtilsTestEnum::MY_FIRST_VALUE);
     }
 
+    SECTION("should read authored string enum value") {
+        sphere.GetPrim()
+            .CreateAttribute(pxr::TfToken("myEnumAttribute"), pxr::SdfValueTypeNames->String)
+            .Set("MY_FIRST_VALUE");
+
+        auto myEnumValue =
+            UsdUtils::getAttributeValueAsEnum(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_SECOND_VALUE);
+
+        REQUIRE(myEnumValue == UsdUtilsTestEnum::MY_FIRST_VALUE);
+    }
+
     SECTION("should read authored enum value case insensitive") {
         sphere.GetPrim()
             .CreateAttribute(pxr::TfToken("myEnumAttribute"), pxr::SdfValueTypeNames->Token)

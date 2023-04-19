@@ -3,6 +3,7 @@
 
 #include "CraygUsdBase.h"
 #include "UsdTypeUtil.h"
+#include "utils/EnumUtils.h"
 #include <magic_enum.hpp>
 #include <pxr/usd/usd/attribute.h>
 #include <type_traits>
@@ -48,15 +49,18 @@ class UsdUtils {
         }
 
         const bool enumValueAuthoredAsToken = usdAttr.GetTypeName() == pxr::SdfValueTypeNames->Token;
+        const bool enumValueAuthoredAsString = usdAttr.GetTypeName() == pxr::SdfValueTypeNames->String;
         const bool enumValueAuthoredAsInt = usdAttr.GetTypeName() == pxr::SdfValueTypeNames->Int;
 
-        if (!enumValueAuthoredAsToken && !enumValueAuthoredAsInt) {
+        if (!enumValueAuthoredAsToken && !enumValueAuthoredAsInt && !enumValueAuthoredAsString) {
             throw std::runtime_error(fmt::format("USD attribute {} has type {}, which is not supported for enum",
                                                  attributeName, usdAttr.GetTypeName()));
         }
 
         if (enumValueAuthoredAsToken) {
             return getEnumValueFromTokenAttr(usdAttr, attributeName, defaultValue);
+        } else if (enumValueAuthoredAsString) {
+            return getEnumValueFromStringAttr(usdAttr, attributeName, defaultValue);
         }
         return getEnumValueFromIntAttr(usdAttr, attributeName, defaultValue);
     }
@@ -72,25 +76,21 @@ class UsdUtils {
     static T getEnumValueFromTokenAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
                                        T defaultValue) {
         auto tokenValue = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdAttr).GetString();
-        for (auto &c : tokenValue) {
-            c = toupper(c);
-        }
-        auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
-        if (!maybeValue.has_value()) {
-            return defaultValue;
-        }
-        return maybeValue.value();
+        return EnumUtils::parseOrDefault(tokenValue, defaultValue);
     }
 
     template <typename T>
     static T getEnumValueFromIntAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
                                      T defaultValue) {
         auto tokenValue = UsdUtils::getStaticAttributeValueAs<int>(usdAttr);
-        auto maybeValue = magic_enum::enum_cast<T>(tokenValue);
-        if (!maybeValue.has_value()) {
-            return defaultValue;
-        }
-        return maybeValue.value();
+        return EnumUtils::parseOrDefault(tokenValue, defaultValue);
+    }
+
+    template <typename T>
+    static T getEnumValueFromStringAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
+                                        T defaultValue) {
+        auto tokenValue = UsdUtils::getStaticAttributeValueAs<std::string>(usdAttr);
+        return EnumUtils::parseOrDefault(tokenValue, defaultValue);
     }
 };
 
