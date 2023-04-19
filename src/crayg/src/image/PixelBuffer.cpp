@@ -1,5 +1,6 @@
 #include "PixelBuffer.h"
 #include "ImageIterators.h"
+#include <utils/Preconditions.h>
 
 namespace crayg {
 
@@ -125,6 +126,7 @@ void PixelBuffer::fill(const Color &color) {
 }
 
 void PixelBuffer::setValue(const Vector2i &pixelPosition, const Color &color) {
+    CRAYG_CHECKD_IS_VALID_INDEX(pixelNumber(pixelPosition), width * height * colorChannelCount);
     std::visit(
         PixelBufferSetValue{pixelNumber(pixelPosition), pixelNumber(pixelPosition) + 1, colorChannelCount, color},
         data);
