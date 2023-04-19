@@ -15,7 +15,8 @@
 #include <image/ImageIterators.h>
 #include <memory>
 #include <numeric>
-#include <tbb/parallel_for.h>
+#include <tbb/concurrent_queue.h>
+#include <tbb/task_group.h>
 
 namespace crayg {
 
@@ -45,11 +46,19 @@ void Renderer::renderScene() {
 }
 
 void Renderer::renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence) {
-    tbb::parallel_for(static_cast<std::size_t>(0), bucketSequence.size(), [this, &reporter, &bucketSequence](int i) {
-        ImageBucket imageBucket = bucketSequence[i];
-        renderBucket(imageBucket);
-        reporter.iterationDone();
-    });
+    tbb::concurrent_queue<ImageBucket> bucketQueue(bucketSequence.begin(), bucketSequence.end());
+    tbb::task_group task_group;
+
+    for (int i = 0; i < std::thread::hardware_concurrency(); i++) {
+        task_group.run([&bucketQueue, &reporter, this]() {
+            ImageBucket imageBucket;
+            while (bucketQueue.try_pop(imageBucket)) {
+                renderBucket(imageBucket);
+                reporter.iterationDone();
+            }
+        });
+    }
+    task_group.wait();
 }
 
 void Renderer::renderBucket(const ImageBucket &imageBucket) {
