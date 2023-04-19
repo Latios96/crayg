@@ -25,6 +25,22 @@ class EnumUtils {
         }
         return maybeValue.value();
     }
+
+    template <typename T> static T parseOrDefault(const std::string &string, T defaultValue) {
+        auto maybeValue = magic_enum::enum_cast<T>(boost::algorithm::to_upper_copy(string));
+        if (!maybeValue.has_value()) {
+            return defaultValue;
+        }
+        return maybeValue.value();
+    }
+
+    template <typename T> static T parseOrDefault(int value, T defaultValue) {
+        auto maybeValue = magic_enum::enum_cast<T>(value);
+        if (!maybeValue.has_value()) {
+            return defaultValue;
+        }
+        return maybeValue.value();
+    }
 };
 
 }

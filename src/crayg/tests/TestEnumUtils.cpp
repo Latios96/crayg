@@ -37,4 +37,40 @@ TEST_CASE("EnumUtils::parseOrThrow(int)") {
     }
 }
 
+TEST_CASE("EnumUtils::parseOrDefault(string)") {
+
+    SECTION("should parse value successfully") {
+        auto value = EnumUtils::parseOrDefault<MyTestEnum>("VALUE_1", MyTestEnum::VALUE_2);
+
+        REQUIRE(value == MyTestEnum::VALUE_1);
+    }
+
+    SECTION("should parse value case insensitive") {
+        auto value = EnumUtils::parseOrDefault<MyTestEnum>("value_1", MyTestEnum::VALUE_2);
+
+        REQUIRE(value == MyTestEnum::VALUE_1);
+    }
+
+    SECTION("should throw if value does not exist") {
+        auto value = EnumUtils::parseOrDefault<MyTestEnum>("VALUE_!", MyTestEnum::VALUE_2);
+
+        REQUIRE(value == MyTestEnum::VALUE_2);
+    }
+}
+
+TEST_CASE("EnumUtils::parseOrDefault(int)") {
+
+    SECTION("should parse value successfully") {
+        auto value = EnumUtils::parseOrDefault<MyTestEnum>(0, MyTestEnum::VALUE_2);
+
+        REQUIRE(value == MyTestEnum::VALUE_1);
+    }
+
+    SECTION("should throw if value does not exist") {
+        auto value = EnumUtils::parseOrDefault<MyTestEnum>(4, MyTestEnum::VALUE_2);
+
+        REQUIRE(value == MyTestEnum::VALUE_2);
+    }
+}
+
 }
