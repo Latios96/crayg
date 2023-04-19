@@ -13,8 +13,8 @@ TEST_CASE("TestLensFileTextFileWriter::writeFileContent") {
 
         REQUIRE(fileContent == R"(# Canon 70-200
 2
-10.00000 20.00000 3.00000 40.00000
-50.00000 60.00000 7.00000 80.00000
+10.00000 20.00000 3.00000 80.00000
+50.00000 60.00000 7.00000 160.00000
 )");
     }
 
@@ -25,8 +25,8 @@ TEST_CASE("TestLensFileTextFileWriter::writeFileContent") {
         auto fileContent = lensFileTextFileWriter.writeFileContent(cameraLens);
 
         std::string expected = R"(2
-10.00000 20.00000 3.00000 40.00000
-50.00000 60.00000 7.00000 80.00000
+10.00000 20.00000 3.00000 80.00000
+50.00000 60.00000 7.00000 160.00000
 )";
         REQUIRE(fileContent == expected);
     }

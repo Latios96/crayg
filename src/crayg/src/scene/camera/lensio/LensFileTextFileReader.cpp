@@ -51,7 +51,7 @@ LensElement LensFileTextFileReader::readLensElement(const std::string &line) con
     iss >> ior;
     iss >> diameter;
 
-    return {radius * 0.1f, thickness * 0.1f, ior, diameter * 0.1f};
+    return {radius * 0.1f, thickness * 0.1f, ior, diameter / 2.f * 0.1f};
 }
 
 } // crayg

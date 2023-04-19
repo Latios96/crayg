@@ -34,7 +34,7 @@ TEST_CASE("LensFileTextFileReader::readFileContent") {
 
         auto cameraLens = lensFileTextFileReader.readFileContent(fileContent);
 
-        REQUIRE(cameraLens == CameraLens("", std::vector<LensElement>({{0.1, 0.2, 3, 0.4}, {0.5, 0.6, 7, 0.8}})));
+        REQUIRE(cameraLens == CameraLens("", std::vector<LensElement>({{0.1, 0.2, 3, 0.2}, {0.5, 0.6, 7, 0.4}})));
     }
 }
 
