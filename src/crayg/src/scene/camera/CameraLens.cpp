@@ -148,6 +148,10 @@ void CameraLens::focusLens(float focalDistance) {
     const float z = -focalDistance;
     const float c = (thickLens.secondCardinalPoints.pZ - z - thickLens.firstCardinalPoints.pZ) *
                     (thickLens.secondCardinalPoints.pZ - z - 4 * focalLength - thickLens.firstCardinalPoints.pZ);
+    if (c < 0) {
+        CRAYG_LOG_AND_THROW(fmt::format("Focal distance {} is too short for this lens", focalDistance));
+    }
+
     const float delta = 0.5f * (thickLens.secondCardinalPoints.pZ - z + thickLens.firstCardinalPoints.pZ - sqrt(c));
 
     moveLensElements(delta);
