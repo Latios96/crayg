@@ -18,7 +18,8 @@ void RealisticCameraModel::init() {
 
     const float focalLength = calculateEffectiveFocalLength(camera.getLens());
     const float apertureRadius = (focalLength / camera.getFStop()) / 2.0f;
-    camera.getLens().getAperture().apertureRadius = apertureRadius;
+    camera.getLens().getAperture().apertureRadius =
+        std::max(apertureRadius, camera.getLens().getAperture().apertureRadius);
 
     ExitPupilCalculator exitPupilCalculator(camera.getLens(), filmDiagonal, ExitPupilCalculator::CalculationSettings());
     exitPupil = exitPupilCalculator.calculate();
