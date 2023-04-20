@@ -11,17 +11,18 @@ class DummyLensFileWriter : public LensFileWriter {
     }
 };
 
-TEST_CASE("TestLensFileWriter::readFile") {
+TEST_CASE("TestLensFileWriter::writeFile") {
 
     CameraLens cameraLens("Canon 70-200", {{1, 2, 3, 4}, {5, 6, 7, 8}});
 
-    SECTION("should throw if file does not exist") {
+    SECTION("should throw if folder does not exist") {
         DummyLensFileWriter dummyLensFileWriter;
 
-        REQUIRE_THROWS_AS(dummyLensFileWriter.writeFile("not-existing-file.txt", cameraLens), std::runtime_error);
+        REQUIRE_THROWS_AS(dummyLensFileWriter.writeFile("not-existing-folder/lens.txt", cameraLens),
+                          std::runtime_error);
     }
 
-    SECTION("should read file correctly") {
+    SECTION("should write file correctly") {
         TemporaryDirectory temporaryDirectory;
         DummyLensFileWriter dummyLensFileWriter;
 
