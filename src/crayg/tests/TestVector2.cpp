@@ -39,11 +39,25 @@ TEST_CASE("Vector2::operator+") {
     REQUIRE(left + right == Vector2i(4, 6));
 }
 
+TEST_CASE("Vector2::operator+ mixed") {
+    Vector2f left(1, 2);
+    Vector2i right(3, 4);
+
+    REQUIRE(left + right == Vector2f(4, 6));
+}
+
 TEST_CASE("Vector2::operator-") {
     Vector2i left(1, 2);
     Vector2i right(2, 1);
 
     REQUIRE(left - right == Vector2i(-1, 1));
+}
+
+TEST_CASE("Vector2::operator- mixed") {
+    Vector2f left(1, 2);
+    Vector2i right(2, 1);
+
+    REQUIRE(left - right == Vector2f(-1, 1));
 }
 
 TEST_CASE("Vector2::operator*") {

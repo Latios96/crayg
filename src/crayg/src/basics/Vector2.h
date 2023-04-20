@@ -22,19 +22,19 @@ template <typename T> class Vector2 {
     Vector2(const Vector2<T> &vec) : x(vec.x), y(vec.y) {
     }
 
-    Vector2<T> operator+(const Vector2<T> &otherVector) const {
+    template <typename OT> Vector2<T> operator+(const Vector2<OT> &otherVector) const {
         return {x + otherVector.x, y + otherVector.y};
     }
 
-    Vector2<T> operator-(const Vector2<T> &otherVector) const {
+    template <typename OT> Vector2<T> operator-(const Vector2<OT> &otherVector) const {
         return {x - otherVector.x, y - otherVector.y};
     }
 
-    Vector2<T> operator*(T scalar) const {
+    template <typename OT> Vector2<T> operator*(OT scalar) const {
         return {x * scalar, y * scalar};
     }
 
-    Vector2<T> operator/(T scalar) const {
+    template <typename OT> Vector2<T> operator/(OT scalar) const {
         return {x / scalar, y / scalar};
     }
 
