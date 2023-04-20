@@ -142,6 +142,22 @@ set(crayg_SRCS
         scene/camera/lensio/LensFileWriterFactory.h
         scene/camera/LensRaytracerTracer.cpp
         scene/camera/LensRaytracerTracer.h
+        scene/camera/lookup/LensRayLookupTable.cpp
+        scene/camera/lookup/LensRayLookupTable.h
+        scene/camera/Camera.cpp
+        scene/camera/Camera.h
+        scene/camera/CameraModel.h
+        scene/camera/CameraModelFactory.cpp
+        scene/camera/CameraModelFactory.h
+        scene/camera/CameraType.h
+        scene/camera/CameraLens.cpp
+        scene/camera/ExitPupilCalculator.cpp
+        scene/camera/ExitPupilCalculator.h
+        scene/camera/LensRaytracerTracer.cpp
+        scene/camera/LensRaytracerTracer.h
+        scene/camera/LookupCameraModel.cpp
+        scene/camera/LookupCameraModel.h
+        scene/camera/CameraLens.h
         scene/camera/PineHoleCameraModel.cpp
         scene/camera/PineHoleCameraModel.h
         scene/camera/RealisticCameraModel.cpp

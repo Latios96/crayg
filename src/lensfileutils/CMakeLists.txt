@@ -12,3 +12,10 @@ add_executable(lensfileembedder
 target_link_libraries(lensfileembedder crayg ${CONAN_LIBS})
 
 install(TARGETS lensfileembedder DESTINATION bin)
+
+add_executable(lensraylookupgenerator
+        lensraylookupgenerator.cpp)
+
+target_link_libraries(lensraylookupgenerator crayg ${CONAN_LIBS})
+
+install(TARGETS lensraylookupgenerator DESTINATION bin)

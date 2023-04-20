@@ -15,7 +15,7 @@ class RealisticCameraModel : public CameraModel {
     void init() override;
     std::optional<Ray> createPrimaryRay(float x, float y) override;
 
-  private:
+  protected:
     ExitPupil exitPupil;
     Bounds2df filmPhysicalExtend;
     float filmDiagonal;
