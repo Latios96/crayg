@@ -48,18 +48,18 @@ TEST_CASE("Image/addAlphaChannel", "[Image]") {
         REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
         REQUIRE(myImage.hasAlphaChannel());
         REQUIRE(myImage.getAlphaChannel() != nullptr);
-        REQUIRE((*myImage.getAlphaChannel())->getResolution() == myImage.getResolution());
+        REQUIRE((myImage.getAlphaChannel())->getResolution() == myImage.getResolution());
     }
 
     SECTION("should not overwrite alpha channel") {
         Image myImage(16, 9);
 
         myImage.addAlphaChannel();
-        (*myImage.getAlphaChannel())->setValue({2, 3}, Color::createWhite());
+        (myImage.getAlphaChannel())->setValue({2, 3}, Color::createWhite());
         myImage.addAlphaChannel();
 
         REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
-        REQUIRE((*myImage.getAlphaChannel())->getValue({2, 3}) == Color::createWhite());
+        REQUIRE((myImage.getAlphaChannel())->getValue({2, 3}) == Color::createWhite());
     }
 }
 
@@ -72,18 +72,18 @@ TEST_CASE("Image/addDepthChannel", "[Image]") {
         REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "depth"}));
         REQUIRE(myImage.hasDepthChannel());
         REQUIRE(myImage.getDepthChannel() != nullptr);
-        REQUIRE((*myImage.getDepthChannel())->getResolution() == myImage.getResolution());
+        REQUIRE((myImage.getDepthChannel())->getResolution() == myImage.getResolution());
     }
 
     SECTION("should not overwrite depth channel") {
         Image myImage(16, 9);
 
         myImage.addDepthChannel();
-        (*myImage.getDepthChannel())->setValue({2, 3}, Color::createWhite());
+        (myImage.getDepthChannel())->setValue({2, 3}, Color::createWhite());
         myImage.addDepthChannel();
 
         REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "depth"}));
-        REQUIRE((*myImage.getDepthChannel())->getValue({2, 3}) == Color::createWhite());
+        REQUIRE((myImage.getDepthChannel())->getValue({2, 3}) == Color::createWhite());
     }
 }
 
@@ -185,12 +185,12 @@ TEST_CASE("Image/replaceChannel", "[Image]") {
     SECTION("should replace additional channel") {
         Image myImage(16, 9);
         myImage.addAlphaChannel();
-        (*myImage.getAlphaChannel())->setValue({2, 3}, Color::createWhite());
+        (myImage.getAlphaChannel())->setValue({2, 3}, Color::createWhite());
 
         myImage.replaceChannel("alpha", PixelBuffer::createGreyFloat(myImage.getResolution()));
 
         REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
-        REQUIRE((*myImage.getAlphaChannel())->getValue({2, 3}) == Color::createBlack());
+        REQUIRE((myImage.getAlphaChannel())->getValue({2, 3}) == Color::createBlack());
     }
 }
 

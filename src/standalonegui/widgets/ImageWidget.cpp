@@ -78,7 +78,7 @@ void ImageWidget::prepareBucket(const ImageBucket imageBucket) {
 }
 
 void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
-    auto pixelBuffer = *image.getChannel(currentChannel);
+    auto pixelBuffer = image.getChannel(currentChannel);
     if (!pixelBuffer) {
         return;
     }

@@ -40,8 +40,8 @@ TEST_CASE("ImageIO/writeRgbazExrImage") {
     image.addDepthChannel();
 
     createGradientImage(image.rgb);
-    createSplittedImage(**image.getAlphaChannel());
-    createGradientImage(**image.getDepthChannel());
+    createSplittedImage(*image.getAlphaChannel());
+    createGradientImage(*image.getDepthChannel());
 
     ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeRgbazExrImage", ".exr"));
 }
@@ -53,9 +53,9 @@ TEST_CASE("ImageIO/writeRgbazCustomChannelExrImage") {
     image.addChannel("position", PixelBuffer::createRgbUInt8(image.getResolution()));
 
     createGradientImage(image.rgb);
-    createSplittedImage(**image.getAlphaChannel());
-    createGradientImage(**image.getDepthChannel());
-    createSplittedImage(**image.getChannel("position"));
+    createSplittedImage(*image.getAlphaChannel());
+    createGradientImage(*image.getDepthChannel());
+    createSplittedImage(*image.getChannel("position"));
 
     ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeRgbazCustomChannelExrImage", ".exr"));
 }

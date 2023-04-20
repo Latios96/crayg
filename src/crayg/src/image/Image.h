@@ -8,7 +8,6 @@
 #include "basics/Vector2.h"
 #include "basics/Vector3f.h"
 #include <basics/Resolution.h>
-#include <optional>
 #include <ostream>
 #include <tsl/ordered_map.h>
 
@@ -29,15 +28,15 @@ class Image {
 
     void addAlphaChannel();
     bool hasAlphaChannel() const;
-    std::optional<PixelBuffer *> getAlphaChannel() const;
+    PixelBuffer *getAlphaChannel() const;
 
     void addDepthChannel();
     bool hasDepthChannel() const;
-    std::optional<PixelBuffer *> getDepthChannel() const;
+    PixelBuffer *getDepthChannel() const;
 
     void addChannel(const std::string &name, std::unique_ptr<PixelBuffer> pixelBuffer);
     bool hasChannel(const std::string &name) const;
-    std::optional<PixelBuffer *> getChannel(const std::string &name) const;
+    PixelBuffer *getChannel(const std::string &name) const;
 
     void addChannelsFromSpec(const ImageSpec &imageSpec);
 

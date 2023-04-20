@@ -42,7 +42,7 @@ bool Image::hasAlphaChannel() const {
     return hasChannel("alpha");
 }
 
-std::optional<PixelBuffer *> Image::getAlphaChannel() const {
+PixelBuffer *Image::getAlphaChannel() const {
     return getChannel("alpha");
 }
 
@@ -54,7 +54,7 @@ bool Image::hasDepthChannel() const {
     return hasChannel("depth");
 }
 
-std::optional<PixelBuffer *> Image::getDepthChannel() const {
+PixelBuffer *Image::getDepthChannel() const {
     return getChannel("depth");
 }
 
@@ -71,9 +71,9 @@ bool Image::hasChannel(const std::string &name) const {
     return additionalChannels.find(name) != additionalChannels.end();
 }
 
-std::optional<PixelBuffer *> Image::getChannel(const std::string &name) const {
+PixelBuffer *Image::getChannel(const std::string &name) const {
     if (!hasChannel(name)) {
-        return std::nullopt;
+        return nullptr;
     }
     if (name == "rgb") {
         return const_cast<PixelBuffer *>(&rgb);
