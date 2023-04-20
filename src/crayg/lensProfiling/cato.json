@@ -120,31 +120,31 @@
           }
         },
         {
-          "name": "PineHole-render_cam_5",
+          "name": "PineHole-render_cam_7",
           "variables": {
             "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\PineHole\\PineHole.usda",
             "camera": "/cams/render_cam_5/render_cam_5Shape"
           }
         },
         {
-          "name": "ThinLens-render_cam_5",
+          "name": "ThinLens-render_cam_7",
           "variables": {
             "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\ThinLens\\ThinLens.usda",
-            "camera": "/cams/render_cam_5/render_cam_5Shape"
+            "camera": "/cams/render_cam_7/render_cam_7Shape"
           }
         },
         {
-          "name": "Realistic_Biconvex-render_cam_5",
+          "name": "Realistic_Biconvex-render_cam_7",
           "variables": {
             "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\Realistic_Biconvex\\Realistic_Biconvex.usda",
-            "camera": "/cams/render_cam_5/render_cam_5Shape"
+            "camera": "/cams/render_cam_7/render_cam_7Shape"
           }
         },
         {
-          "name": "Realistic_Canon-render_cam_5",
+          "name": "Realistic_Canon-render_cam_7",
           "variables": {
             "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\Realistic_Canon\\Realistic_Canon.usda",
-            "camera": "/cams/render_cam_5/render_cam_5Shape"
+            "camera": "/cams/render_cam_7/render_cam_7Shape"
           }
         }
       ]
@@ -152,7 +152,7 @@
     {
       "name": "StormTrooper",
       "variables": {
-        "camera": "/root/Carender_cam"
+        "camera": "/root/Camera/render_cam"
       },
       "tests": [
         {
