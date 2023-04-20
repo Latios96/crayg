@@ -1,0 +1,2 @@
+Canon 70mm: 48.49769982776436
+double-gauss-angenieux 100mm: 65.34896504653616

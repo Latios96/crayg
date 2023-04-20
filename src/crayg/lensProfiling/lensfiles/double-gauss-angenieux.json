@@ -1,0 +1,96 @@
+{
+    "elements": [
+        {
+            "apertureRadius": 54.0,
+            "curvatureRadius": 164.12001037597656,
+            "ior": 1.6729999780654907,
+            "thickness": 10.989999771118164
+        },
+        {
+            "apertureRadius": 54.0,
+            "curvatureRadius": 559.280029296875,
+            "ior": 1.0,
+            "thickness": 0.23000000417232513
+        },
+        {
+            "apertureRadius": 51.0,
+            "curvatureRadius": 100.12000274658203,
+            "ior": 1.6699999570846558,
+            "thickness": 11.449999809265137
+        },
+        {
+            "apertureRadius": 51.0,
+            "curvatureRadius": 213.54000854492188,
+            "ior": 1.0,
+            "thickness": 0.23000000417232513
+        },
+        {
+            "apertureRadius": 41.0,
+            "curvatureRadius": 58.04000473022461,
+            "ior": 1.690999984741211,
+            "thickness": 22.950000762939453
+        },
+        {
+            "apertureRadius": 41.0,
+            "curvatureRadius": 2551.0,
+            "ior": 1.6729999780654907,
+            "thickness": 2.5799999237060547
+        },
+        {
+            "apertureRadius": 27.0,
+            "curvatureRadius": 32.38999938964844,
+            "ior": 1.0,
+            "thickness": 15.65999984741211
+        },
+        {
+            "apertureRadius": 25.5,
+            "curvatureRadius": 0.0,
+            "ior": 0.0,
+            "thickness": 15.0
+        },
+        {
+            "apertureRadius": 25.0,
+            "curvatureRadius": -40.41999816894531,
+            "ior": 1.6990000009536743,
+            "thickness": 2.7400002479553223
+        },
+        {
+            "apertureRadius": 36.0,
+            "curvatureRadius": 192.98001098632813,
+            "ior": 1.6200000047683716,
+            "thickness": 27.920000076293945
+        },
+        {
+            "apertureRadius": 36.0,
+            "curvatureRadius": -55.529998779296875,
+            "ior": 1.0,
+            "thickness": 0.23000000417232513
+        },
+        {
+            "apertureRadius": 35.0,
+            "curvatureRadius": 192.98001098632813,
+            "ior": 1.690999984741211,
+            "thickness": 7.9800004959106445
+        },
+        {
+            "apertureRadius": 35.0,
+            "curvatureRadius": -225.27999877929688,
+            "ior": 1.0,
+            "thickness": 0.23000000417232513
+        },
+        {
+            "apertureRadius": 35.0,
+            "curvatureRadius": 175.10000610351563,
+            "ior": 1.690999984741211,
+            "thickness": 8.479999542236328
+        },
+        {
+            "apertureRadius": 35.0,
+            "curvatureRadius": -203.54000854492188,
+            "ior": 1.0,
+            "thickness": 55.742000579833984
+        }
+    ],
+    "focalLength": 99.98464965820313,
+    "name": ""
+}

@@ -1,0 +1,11 @@
+#usda 1.0
+(
+    subLayers = [
+        @C:/workspace/crayg/src/crayg/lensProfiling/StormTrooper/_base_scene/StormTrooper_base.usda@
+    ]
+)
+
+over "render_cam_orig" {
+    custom string craygCameraType = "THIN_LENS"
+    custom string craygLensFile = "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/canon-zoom-70.json"
+}

@@ -1,0 +1,263 @@
+#usda 1.0
+(
+    defaultPrim = "render_cam_7_orig"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Camera "render_cam_7_orig" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 35
+    float focusDistance = 24.766499
+    float fStop = 4.5
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (124.46165, 57.8, 180)
+    double3 xformOp:translate = (11.649814763811133, 21.251584837464684, -6.822294534179053)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_7_6mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 6
+    float focusDistance = 8.501084
+    float fStop = 4.5
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (124.46165, 57.8, 180)
+    double3 xformOp:translate = (3.861573193879228, 7.840666105204377, -1.9177770657611573)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_7_14mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 14
+    float focusDistance = 12.5876255
+    float fStop = 4.5
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (124.46165, 57.8, 180)
+    double3 xformOp:translate = (5.818299641351033, 11.210040197248395, -3.1499934725545917)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_7_50mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focusDistance = 34.900097
+    float fStop = 4.5
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (124.46165, 57.8, 180)
+    double3 xformOp:translate = (16.502005720788055, 29.606787743426246, -9.877882255092626)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_7_72mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 72
+    float focusDistance = 73.2642
+    float fStop = 4.5
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (124.46165, 57.8, 180)
+    double3 xformOp:translate = (34.871588786479876, 61.2381879031997, -21.445826087377597)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_7_100mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 130
+    float focusDistance = 90.11546
+    float fStop = 4.5
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (124.46165, 57.8, 180)
+    double3 xformOp:translate = (42.940348218290126, 75.13214278871982, -26.526995081230606)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_7_117mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 117
+    float focusDistance = 75.797134
+    float fStop = 4.5
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (124.46165, 57.8, 180)
+    double3 xformOp:translate = (36.084415077910144, 63.32660730887335, -22.209583564474993)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_3_orig" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 60
+    float focusDistance = 23.593134
+    float fStop = 12
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (-5.138353, 112.2, 360)
+    double3 xformOp:translate = (20.729923291105266, 4.0613460939259936, -1.4013954432997213)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_3_6mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 6
+    float focusDistance = 10.611183
+    float fStop = 12
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (-5.138353, 112.2, 360)
+    double3 xformOp:translate = (8.758619207230149, 2.898669448277867, 3.4840032598283655)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_3_14mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 14
+    float focusDistance = 11.928995
+    float fStop = 12
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (-5.138353, 112.2, 360)
+    double3 xformOp:translate = (9.973839089036073, 3.0166939981517737, 2.9880812121554805)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_3_50mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focusDistance = 21.427952
+    float fStop = 12
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (-5.138353, 112.2, 360)
+    double3 xformOp:translate = (18.733300101731086, 3.8674301148329797, -0.586588612593387)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_3_70mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 70
+    float focusDistance = 26.538443
+    float fStop = 12
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (-5.138353, 112.2, 360)
+    double3 xformOp:translate = (23.44593854844404, 4.3251308484361815, -2.5097807389127125)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_3_100mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 100
+    float focusDistance = 34.019447
+    float fStop = 12
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (-5.138353, 112.2, 360)
+    double3 xformOp:translate = (30.34454723278343, 4.995137319623438, -5.325050795017603)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_3_117mm" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    custom int craygCameraType = 2
+    float focalLength = 117
+    float focusDistance = 39.8453
+    float fStop = 12
+    float horizontalAperture = 35.999928
+    rel material:binding = </GreyMtlSG>
+    float verticalAperture = 23.999952
+    float3 xformOp:rotateXYZ = (-5.138353, 112.2, 360)
+    double3 xformOp:translate = (35.71685566750354, 5.516906502538182, -7.517449256864181)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Material "GreyMtlSG" (
+    kind = "assembly"
+)
+{
+}
+

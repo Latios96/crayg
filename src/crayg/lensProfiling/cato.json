@@ -1,179 +1,66 @@
 {
-  "serverUrl": "https://cato.frmbffr.com",
-  "projectName": "Crayg Lens Profiling",
-  "command": "{{crayg_render_command}}",
-  "comparisonSettings": {
-    "method": "FLIP",
-    "threshold": 0.25
-  },
-  "suites": [
-    {
-      "name": "LensGrid",
-      "variables": {
-        "camera": "/render_cam"
-      },
-      "tests": [
+    "serverUrl": "https://cato.frmbffr.com",
+    "projectName": "Crayg Lens Profiling",
+    "suites": [
         {
-          "name": "PineHole"
+            "name": "OpenChess",
+            "tests": [
+                {
+                    "name": "render_cam_7_orig-thin_lens",
+                    "variables": {
+                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\render_cam_7_orig-thin_lens\\render_cam_7_orig-thin_lens.usda",
+                        "camera": "/render_cam_7_orig"
+                    }
+                },
+                {
+                    "name": "render_cam_7_72mm-realisticcanon-zoom-70",
+                    "variables": {
+                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\render_cam_7_72mm-realistic\\render_cam_7_72mm-realistic.usda",
+                        "camera": "/render_cam_7_72mm"
+                    }
+                },
+                {
+                    "name": "render_cam_7_100mm-realisticdouble-gauss-angenieux",
+                    "variables": {
+                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\render_cam_7_100mm-realistic\\render_cam_7_100mm-realistic.usda",
+                        "camera": "/render_cam_7_100mm"
+                    }
+                }
+            ]
         },
         {
-          "name": "ThinLens"
-        },
-        {
-          "name": "Realistic_Biconvex"
-        },
-        {
-          "name": "Realistic_Canon"
+            "name": "StormTrooper",
+            "tests": [
+                {
+                    "name": "render_cam_orig-thin_lens",
+                    "variables": {
+                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\StormTrooper\\render_cam_orig-thin_lens\\render_cam_orig-thin_lens.usda",
+                        "camera": "/render_cam_orig"
+                    }
+                },
+                {
+                    "name": "render_cam_72mm-realisticcanon-zoom-70",
+                    "variables": {
+                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\StormTrooper\\render_cam_72mm-realistic\\render_cam_72mm-realistic.usda",
+                        "camera": "/render_cam_72mm"
+                    }
+                },
+                {
+                    "name": "render_cam_100mm-realisticdouble-gauss-angenieux",
+                    "variables": {
+                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\StormTrooper\\render_cam_100mm-realistic\\render_cam_100mm-realistic.usda",
+                        "camera": "/render_cam_100mm"
+                    }
+                }
+            ]
         }
-      ]
+    ],
+    "variables": {
+        "crayg_render_command": "C:\\workspace\\crayg\\cmake-build-relwithdebinfo\\bin/crayg-standalone -s {{scene_path}} -o \"{{image_output_exr}}\" --camera {{camera}} --integrator=RAYTRACING --intersector=EMBREE --maxSamples 16"
     },
-    {
-      "name": "HsdLogo",
-      "tests": [
-        {
-          "name": "PineHole-render_cam_3",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\HsdLogo\\PineHole\\PineHole.usda",
-            "camera": "/render_cam_3/render_cam_3Shape"
-          }
-        },
-        {
-          "name": "ThinLens-render_cam_3",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\HsdLogo\\ThinLens\\ThinLens.usda",
-            "camera": "/render_cam_3/render_cam_3Shape"
-          }
-        },
-        {
-          "name": "Realistic_Biconvex-render_cam_3",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\HsdLogo\\Realistic_Biconvex\\Realistic_Biconvex.usda",
-            "camera": "/render_cam_3/render_cam_3Shape"
-          }
-        },
-        {
-          "name": "Realistic_Canon-render_cam_3",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\HsdLogo\\Realistic_Canon\\Realistic_Canon.usda",
-            "camera": "/render_cam_3/render_cam_3Shape"
-          }
-        },
-        {
-          "name": "PineHole-render_cam_5",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\HsdLogo\\PineHole\\PineHole.usda",
-            "camera": "/render_cam_5/render_cam_5Shape"
-          }
-        },
-        {
-          "name": "ThinLens-render_cam_5",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\HsdLogo\\ThinLens\\ThinLens.usda",
-            "camera": "/render_cam_5/render_cam_5Shape"
-          }
-        },
-        {
-          "name": "Realistic_Biconvex-render_cam_5",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\HsdLogo\\Realistic_Biconvex\\Realistic_Biconvex.usda",
-            "camera": "/render_cam_5/render_cam_5Shape"
-          }
-        },
-        {
-          "name": "Realistic_Canon-render_cam_5",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\HsdLogo\\Realistic_Canon\\Realistic_Canon.usda",
-            "camera": "/render_cam_5/render_cam_5Shape"
-          }
-        }
-      ]
-    },
-    {
-      "name": "OpenChess",
-      "tests": [
-        {
-          "name": "PineHole-render_cam_3",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\PineHole\\PineHole.usda",
-            "camera": "/cams/render_cam_3/render_cam_3Shape"
-          }
-        },
-        {
-          "name": "ThinLens-render_cam_3",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\ThinLens\\ThinLens.usda",
-            "camera": "/cams/render_cam_3/render_cam_3Shape"
-          }
-        },
-        {
-          "name": "Realistic_Biconvex-render_cam_3",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\Realistic_Biconvex\\Realistic_Biconvex.usda",
-            "camera": "/cams/render_cam_3/render_cam_3Shape"
-          }
-        },
-        {
-          "name": "Realistic_Canon-render_cam_3",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\Realistic_Canon\\Realistic_Canon.usda",
-            "camera": "/cams/render_cam_3/render_cam_3Shape"
-          }
-        },
-        {
-          "name": "PineHole-render_cam_7",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\PineHole\\PineHole.usda",
-            "camera": "/cams/render_cam_5/render_cam_5Shape"
-          }
-        },
-        {
-          "name": "ThinLens-render_cam_7",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\ThinLens\\ThinLens.usda",
-            "camera": "/cams/render_cam_7/render_cam_7Shape"
-          }
-        },
-        {
-          "name": "Realistic_Biconvex-render_cam_7",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\Realistic_Biconvex\\Realistic_Biconvex.usda",
-            "camera": "/cams/render_cam_7/render_cam_7Shape"
-          }
-        },
-        {
-          "name": "Realistic_Canon-render_cam_7",
-          "variables": {
-            "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\Realistic_Canon\\Realistic_Canon.usda",
-            "camera": "/cams/render_cam_7/render_cam_7Shape"
-          }
-        }
-      ]
-    },
-    {
-      "name": "StormTrooper",
-      "variables": {
-        "camera": "/root/Camera/render_cam"
-      },
-      "tests": [
-        {
-          "name": "PineHole"
-        },
-        {
-          "name": "ThinLens"
-        },
-        {
-          "name": "Realistic_Biconvex"
-        },
-        {
-          "name": "Realistic_Canon"
-        }
-      ]
+    "command": "{{crayg_render_command}}",
+    "comparisonSettings": {
+        "method": "FLIP",
+        "threshold": 0.25
     }
-  ],
-  "variables": {
-    "crayg_bin_folder": "<to-be-supplied-via-commandline>",
-    "crayg_render_command": "{{crayg_bin_folder}}/crayg-standalone -s {{scene_path}} -o \"{{image_output_png}}\" --maxSamples 4 --camera {{camera}}",
-    "reference_image_no_extension": "{{test_resources}}/{{test_name}}",
-    "scene_path": "{{test_resources}}/{{test_name}}.usda"
-  }
 }

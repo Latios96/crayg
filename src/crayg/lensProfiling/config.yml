@@ -1,0 +1,49 @@
+scenes:
+  - name: OpenChess
+    scenePath: "C:/workspace/crayg/src/crayg/lensProfiling/OpenChess/_base_scene/OpenChess_base.usda"
+    cameras:
+     #- name: /render_cam_7_6mm
+     #  lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/fisheye.json"
+     #  cameraTypes: all
+     #- name: /render_cam_7_14mm
+     #  lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/wideangle.json"
+     #  cameraTypes: all
+      - name: /render_cam_7_orig
+        cameraTypes: [thin_lens]
+        lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/canon-zoom-70.json"
+      - name: /render_cam_7_72mm
+        lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/canon-zoom-70.json"
+        cameraTypes: [realistic]
+      - name: /render_cam_7_100mm
+        lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/double-gauss-angenieux.json"
+        cameraTypes: [realistic]
+      # - name: /render_cam_7_117mm
+      #   lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/petzval-kodak.json"
+      #   cameraTypes: all
+      #- name: /render_cam_3_6mm
+      #  lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/fisheye.json"
+      #  cameraTypes: all
+      #- name: /render_cam_3_14mm
+      #  lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/wideangle.json"
+      #  cameraTypes: all
+      #- name: /render_cam_3_70mm
+      #  lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/canon-zoom-70.json"
+      #  cameraTypes: all
+      #- name: /render_cam_3_100mm
+      #  lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/double-gauss-angenieux.json"
+      #  cameraTypes: all
+      #- name: /render_cam_3_117mm
+      #  lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/petzval-kodak.json"
+      #  cameraTypes: all
+  - name: StormTrooper
+    scenePath: "C:/workspace/crayg/src/crayg/lensProfiling/StormTrooper/_base_scene/StormTrooper_base.usda"
+    cameras:
+      - name: /render_cam_orig
+        cameraTypes: [ thin_lens ]
+        lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/canon-zoom-70.json"
+      - name: /render_cam_72mm
+        lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/canon-zoom-70.json"
+        cameraTypes: [ realistic ]
+      - name: /render_cam_100mm
+        lensFile: "C:/workspace/crayg/src/crayg/lensProfiling/lensfiles/double-gauss-angenieux.json"
+        cameraTypes: [ realistic ]

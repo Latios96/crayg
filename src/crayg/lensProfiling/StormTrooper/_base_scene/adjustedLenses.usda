@@ -1,0 +1,52 @@
+#usda 1.0
+(
+    defaultPrim = "render_cam_orig"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Camera "render_cam_orig" (
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (10, 10000)
+    custom int craygCameraType = 2
+    float focusDistance = 82.46398
+    float fStop = 2.8
+    float horizontalAperture = 32
+    float verticalAperture = 18
+    float3 xformOp:rotateXYZ = (2.6936443, 6.189357, -5.3822203)
+    double3 xformOp:translate = (2.838936448097229, -7.944048643112183, 91.33271217346191)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_100mm" (
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (10, 10000)
+    custom int craygCameraType = 2
+    float focusDistance = 147.812
+    float fStop = 0.3
+    float horizontalAperture = 32
+    float verticalAperture = 18
+    float3 xformOp:rotateXYZ = (2.6936443, 6.189357, -5.3822203)
+    double3 xformOp:translate = (9.557632142420943, -11.66176578972938, 156.22897508619232)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+
+def Camera "render_cam_72mm" (
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (10, 10000)
+    custom int craygCameraType = 2
+    float focusDistance = 130.961
+    float fStop = 0.3
+    float horizontalAperture = 32
+    float verticalAperture = 18
+    float3 xformOp:rotateXYZ = (2.6936443, 6.189357, -5.3822203)
+    double3 xformOp:translate = (7.825110089644069, -10.703093565901368, 139.49444627964118)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+}
+

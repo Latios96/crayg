@@ -1,0 +1,54 @@
+{
+    "elements": [
+        {
+            "apertureRadius": 23.0,
+            "curvatureRadius": 70.97000122070313,
+            "ior": 1.5230000019073486,
+            "thickness": 15.0
+        },
+        {
+            "apertureRadius": 23.0,
+            "curvatureRadius": -56.79000473022461,
+            "ior": 1.6169999837875366,
+            "thickness": 4.5
+        },
+        {
+            "apertureRadius": 23.0,
+            "curvatureRadius": 0.0,
+            "ior": 1.0,
+            "thickness": 24.0
+        },
+        {
+            "apertureRadius": 18.0,
+            "curvatureRadius": 0.0,
+            "ior": 0.0,
+            "thickness": 25.299999237060547
+        },
+        {
+            "apertureRadius": 15.0,
+            "curvatureRadius": 119.91000366210938,
+            "ior": 1.6490000486373901,
+            "thickness": 3.799999952316284
+        },
+        {
+            "apertureRadius": 15.0,
+            "curvatureRadius": 40.869998931884766,
+            "ior": 1.0,
+            "thickness": 0.8999999761581421
+        },
+        {
+            "apertureRadius": 15.0,
+            "curvatureRadius": 46.869998931884766,
+            "ior": 1.6970000267028809,
+            "thickness": 7.400000095367432
+        },
+        {
+            "apertureRadius": 15.0,
+            "curvatureRadius": -282.04998779296875,
+            "ior": 1.0,
+            "thickness": 56.5
+        }
+    ],
+    "focalLength": 116.16191864013672,
+    "name": ""
+}
