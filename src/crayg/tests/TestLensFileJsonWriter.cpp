@@ -13,8 +13,9 @@ TEST_CASE("TestLensFileJsonWriter::writeFileContent") {
         auto fileContent = lensFileJsonWriter.writeFileContent(cameraLens);
 
         auto parsedJson = nlohmann::json::parse(fileContent);
-        REQUIRE(parsedJson.size() == 2);
+        REQUIRE(parsedJson.size() == 3);
         REQUIRE(parsedJson["name"] == "Canon 70-200");
+        REQUIRE(parsedJson["focalLength"] == Catch::Detail::Approx(40.38469314575195));
         REQUIRE(parsedJson["elements"].size() == 2);
         REQUIRE(parsedJson["elements"][0].size() == 4);
         REQUIRE(parsedJson["elements"][0]["curvatureRadius"] == Catch::Detail::Approx(10));

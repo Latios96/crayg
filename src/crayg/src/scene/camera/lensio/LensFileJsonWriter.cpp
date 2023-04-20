@@ -1,4 +1,5 @@
 #include "LensFileJsonWriter.h"
+#include "scene/camera/ThickLensApproximation.h"
 #include <nlohmann/json.hpp>
 
 namespace crayg {
@@ -16,6 +17,7 @@ std::string LensFileJsonWriter::writeFileContent(const CameraLens &cameraLens) {
         });
     }
     lensJson["name"] = cameraLens.name;
+    lensJson["focalLength"] = calculateEffectiveFocalLength(cameraLens) * 10;
     lensJson["elements"] = jsonLensElements;
 
     return lensJson.dump(4);
