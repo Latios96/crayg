@@ -130,7 +130,7 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
 }
 
 ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {
-    return ImageSpecBuilder(resolution).createRgbFloatChannel("sampleCount").finish();
+    return ImageSpecBuilder(resolution).finish();
 }
 
 }
