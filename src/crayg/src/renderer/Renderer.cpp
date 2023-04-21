@@ -117,7 +117,6 @@ Color Renderer::renderPixel(const Vector2i &pixel) {
 
     /*for (int i = 0; i < std::pow(scene.renderSettings.maxSamples,2); i++) {
         auto ray = lensRayLookupTable.getRay(pixel, i);
-        auto rayAsIsShouldBe = cameraModel->createPrimaryRay(pixel.x, pixel.y);
         if (ray == Ray({0, 0, 0}, {0, 0, 0})) {
             sampleAccumulator.addSample(Color::createBlack());
             continue;
