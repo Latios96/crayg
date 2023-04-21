@@ -73,16 +73,22 @@ int main(int argc, char **argv) {
         crayg::Renderer renderer(scene, teeOutputDriver);
 
         std::thread renderThread([&image, &renderer, &imageOutputPath]() {
-            renderer.renderScene();
+            try {
+                renderer.renderScene();
 
-            crayg::Logger::info("Writing image to {}..", imageOutputPath);
-            crayg::ImageWriters::writeImage(image, imageOutputPath);
-            crayg::Logger::info("Writing image done.");
+                crayg::Logger::info("Writing image to {}..", imageOutputPath);
+                crayg::ImageWriters::writeImage(image, imageOutputPath);
+                crayg::Logger::info("Writing image done.");
+            } catch (std::exception &e) {
+                crayg::Logger::error("Caught exception: {}", e.what());
+            }
         });
         renderThread.detach();
 
         return QApplication::exec();
-    } catch (std::exception &e) {
+    }
+
+    catch (std::exception &e) {
         crayg::Logger::error("Caught exception: {}", e.what());
         return -1;
     }
