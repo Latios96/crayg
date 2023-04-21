@@ -22,6 +22,9 @@ class LensRayLookupTable {
     Resolution resolution;
     int samplesPerPixel;
     void sampleImageBucket(CameraModel &cameraModel, crayg::ImageBucket &imageBucket);
+
+    int getVec3fIndex(const Vector2i &pixel, int sampleNumber, int offsetInRay);
+    Ray getRay(const Vector2i &pixel, int sampleNumber);
 };
 
 } // crayg

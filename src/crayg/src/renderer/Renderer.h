@@ -3,6 +3,7 @@
 
 #include "integrators/AbstractIntegrator.h"
 #include "scene/camera/PineHoleCameraModel.h"
+#include "scene/camera/lookup/LensRayLookupTable.h"
 #include <basics/Color.h>
 #include <basics/Resolution.h>
 #include <image/Image.h>
@@ -38,6 +39,7 @@ class Renderer {
     std::unique_ptr<AbstractIntegrator> integrator;
     void writeImageMetadata(std::chrono::seconds renderTime);
     ImageSpec requiredImageSpec(const Resolution &resolution) const;
+    LensRayLookupTable lensRayLookupTable;
 };
 
 }

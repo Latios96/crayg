@@ -7,6 +7,7 @@
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
 #include "scene/camera/CameraModelFactory.h"
+#include "scene/camera/RealisticCameraModel.h"
 #include "utils/ImageMetadataCollector.h"
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
@@ -20,7 +21,9 @@
 
 namespace crayg {
 
-Renderer::Renderer(Scene &scene, OutputDriver &outputDriver) : scene(scene), outputDriver(outputDriver) {
+Renderer::Renderer(Scene &scene, OutputDriver &outputDriver)
+    : scene(scene), outputDriver(outputDriver),
+      lensRayLookupTable(scene.renderSettings.resolution, std::pow(scene.renderSettings.maxSamples, 2)) {
 }
 
 void Renderer::renderScene() {
@@ -84,8 +87,9 @@ void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageB
 void Renderer::init() {
     {
         InformativeScopedStopWatch buildBvh("Initialize camera");
-        cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
+        cameraModel = std::make_unique<RealisticCameraModel>(*scene.camera, scene.renderSettings.resolution);
         cameraModel->init();
+        lensRayLookupTable.generate(*cameraModel);
     }
 
     GeometryCompiler geometryCompiler(scene);
@@ -110,6 +114,16 @@ Color Renderer::renderPixel(const Vector2i &pixel) {
             sampleAccumulator.addSample(renderSample(pixel.x + stepSize * i, pixel.y + stepSize * a));
         }
     }
+
+    /*for (int i = 0; i < std::pow(scene.renderSettings.maxSamples,2); i++) {
+        auto ray = lensRayLookupTable.getRay(pixel, i);
+        auto rayAsIsShouldBe = cameraModel->createPrimaryRay(pixel.x, pixel.y);
+        if (ray == Ray({0, 0, 0}, {0, 0, 0})) {
+            sampleAccumulator.addSample(Color::createBlack());
+            continue;
+        }
+        sampleAccumulator.addSample(integrator->integrate(ray, 0));
+    }*/
 
     return sampleAccumulator.getValue();
 }
