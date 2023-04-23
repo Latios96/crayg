@@ -59,6 +59,7 @@ set(UNIT_TEST_LIST
         TestLensRaytracerTracer.cpp
         TestLight.cpp
         TestLineByLineIterator.cpp
+        TestLineByLineSequence.cpp
         TestMathUtils.cpp
         TestMatrix4x4f.cpp
         TestNaiveBvhBuilder.cpp
