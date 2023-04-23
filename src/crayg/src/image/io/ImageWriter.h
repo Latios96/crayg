@@ -1,7 +1,7 @@
 #ifndef CRAYG_IMAGEWRITERS_H
 #define CRAYG_IMAGEWRITERS_H
 
-#include "Image.h"
+#include "image/Image.h"
 #include <string>
 
 namespace crayg {

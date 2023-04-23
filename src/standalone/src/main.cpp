@@ -3,8 +3,8 @@
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/FileSystemUtils.h"
 #include <CraygInfo.h>
-#include <image/ImageWriter.h>
-#include <image/ImageWriters.h>
+#include <image/io/ImageWriter.h>
+#include <image/io/ImageWriters.h>
 #include <iostream>
 #include <renderer/Renderer.h>
 #include <scene/Scene.h>

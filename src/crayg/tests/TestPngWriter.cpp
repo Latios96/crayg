@@ -2,8 +2,8 @@
 #include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
 #include <image/Image.h>
-#include <image/PngWriter.h>
 #include <image/imageiterators/pixels/ImageIterators.h>
+#include <image/io/PngWriter.h>
 
 namespace crayg {
 

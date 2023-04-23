@@ -1,6 +1,6 @@
 #include "PngWriter.h"
-#include "ColorConversion.h"
 #include "Logger.h"
+#include "image/ColorConversion.h"
 #include "utils/ImageChannelPathResolver.h"
 #include <OpenImageIO/imageio.h>
 

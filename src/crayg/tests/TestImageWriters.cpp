@@ -2,7 +2,7 @@
 #include <catch2/catch.hpp>
 #include <fstream>
 #include <image/Image.h>
-#include <image/ImageWriters.h>
+#include <image/io/ImageWriters.h>
 
 namespace crayg {
 

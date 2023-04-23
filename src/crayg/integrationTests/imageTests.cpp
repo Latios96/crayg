@@ -5,7 +5,7 @@
 #include <image/Image.h>
 #include <image/ImageAlgorithms.h>
 #include <image/ImageOutputDriver.h>
-#include <image/ImageWriters.h>
+#include <image/io/ImageWriters.h>
 #include <iostream>
 
 namespace crayg {

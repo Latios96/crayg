@@ -42,19 +42,19 @@ set(crayg_SRCS
         image/ImageOutputDriver.h
         image/ImageSpec.cpp
         image/ImageSpec.h
-        image/ImageWriter.h
-        image/ImageWriters.cpp
-        image/ImageWriters.h
-        image/OpenExrWriter.cpp
-        image/OpenExrWriter.h
-        image/OpenImageIoImageWriter.cpp
-        image/OpenImageIoImageWriter.h
+        image/io/ImageWriter.h
+        image/io/ImageWriters.cpp
+        image/io/ImageWriters.h
+        image/io/OpenExrWriter.cpp
+        image/io/OpenExrWriter.h
+        image/io/OpenImageIoImageWriter.cpp
+        image/io/OpenImageIoImageWriter.h
+        image/io/PngWriter.cpp
+        image/io/PngWriter.h
         image/OutputDriver.h
         image/PixelBuffer.cpp
         image/PixelBuffer.h
         image/PixelFormat.h
-        image/PngWriter.cpp
-        image/PngWriter.h
         image/TeeOutputDriver.cpp
         image/TeeOutputDriver.h
         integrators/AbstractIntegrator.cpp
