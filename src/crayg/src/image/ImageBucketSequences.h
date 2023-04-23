@@ -55,9 +55,8 @@ class SpiralSequence {
             switch (currentDirection) {
             case DOWN:
                 for (int i = 0; i < spiralSize; i++) {
-                    if (bucketIsPartiallyContained(imageBounds, currentPoint,
-                                                   bucketWidth)) { //
-                        buckets.emplace_back(fitToImage(currentPoint, bucketWidth, imageBounds));
+                    if (bucketIsPartiallyContained(currentPoint)) {
+                        buckets.emplace_back(fitToImage(currentPoint));
                     }
                     currentPoint = currentPoint + downTransform;
                 }
@@ -66,8 +65,8 @@ class SpiralSequence {
                 break;
             case LEFT:
                 for (int i = 0; i < spiralSize; i++) {
-                    if (bucketIsPartiallyContained(imageBounds, currentPoint, bucketWidth)) {
-                        buckets.emplace_back(fitToImage(currentPoint, bucketWidth, imageBounds));
+                    if (bucketIsPartiallyContained(currentPoint)) {
+                        buckets.emplace_back(fitToImage(currentPoint));
                     }
                     currentPoint = currentPoint + leftTransform;
                 }
@@ -76,8 +75,8 @@ class SpiralSequence {
                 break;
             case UP:
                 for (int i = 0; i < spiralSize; i++) {
-                    if (bucketIsPartiallyContained(imageBounds, currentPoint, bucketWidth)) {
-                        buckets.emplace_back(fitToImage(currentPoint, bucketWidth, imageBounds));
+                    if (bucketIsPartiallyContained(currentPoint)) {
+                        buckets.emplace_back(fitToImage(currentPoint));
                     }
 
                     currentPoint = currentPoint + upTransform;
@@ -87,8 +86,8 @@ class SpiralSequence {
                 break;
             case RIGHT:
                 for (int i = 0; i < spiralSize; i++) {
-                    if (bucketIsPartiallyContained(imageBounds, currentPoint, bucketWidth)) {
-                        buckets.emplace_back(fitToImage(currentPoint, bucketWidth, imageBounds));
+                    if (bucketIsPartiallyContained(currentPoint)) {
+                        buckets.emplace_back(fitToImage(currentPoint));
                     }
                     currentPoint = currentPoint + rightTransform;
                 }
@@ -107,7 +106,7 @@ class SpiralSequence {
     };
 
   private:
-    bool bucketIsPartiallyContained(const Bounds2di &imageBounds, const Vector2i &currentPoint, int bucketWidth) {
+    bool bucketIsPartiallyContained(const Vector2i &currentPoint) {
         const Vector2i topLeftCorner = currentPoint;
         const Vector2i topRightCorner = currentPoint + Vector2i(bucketWidth, 0);
         const Vector2i bottomLeftCorner = currentPoint + Vector2i(0, bucketWidth);
@@ -126,7 +125,7 @@ class SpiralSequence {
                (bottomRightCornerIsContained && bottomRightCornerIsNotOnImageEdge);
     }
 
-    ImageBucket fitToImage(Vector2i currentPoint, int bucketWidth, const Bounds2di &imageBounds) {
+    ImageBucket fitToImage(Vector2i currentPoint) {
         int calculatedBucketWidth = bucketWidth;
         int calculatedBucketHeight = bucketWidth;
 
@@ -145,7 +144,7 @@ class SpiralSequence {
             calculatedBucketHeight = imageBounds.max.y - currentPoint.y + 1;
         }
 
-        return ImageBucket(currentPoint, calculatedBucketWidth, calculatedBucketHeight);
+        return {currentPoint, calculatedBucketWidth, calculatedBucketHeight};
     }
 
     Resolution resolution;
