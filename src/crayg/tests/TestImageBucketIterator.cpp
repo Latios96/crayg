@@ -1,8 +1,6 @@
 #include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <image/ImageBucketSequences.h>
-#include <image/ImageIterators.h>
-#include <iostream>
 
 namespace crayg {
 
@@ -65,4 +63,118 @@ TEST_CASE("ImageBucketSequences", "[ImageBucketSequences]") {
     }
 }
 
+TEST_CASE("SpiralSequence") {
+    SECTION("should work correctly for square image") {
+        Resolution resolution(32, 32);
+        SpiralSequence spiralSequence;
+
+        auto buckets = spiralSequence.getTiles(resolution, 8);
+
+        REQUIRE(buckets == std::vector<ImageBucket>(
+                               {ImageBucket({16, 8}, 8, 8), ImageBucket({16, 16}, 8, 8), ImageBucket({8, 16}, 8, 8),
+                                ImageBucket({8, 8}, 8, 8), ImageBucket({8, 0}, 8, 8), ImageBucket({16, 0}, 8, 8),
+                                ImageBucket({24, 0}, 8, 8), ImageBucket({24, 8}, 8, 8), ImageBucket({24, 16}, 8, 8),
+                                ImageBucket({24, 24}, 8, 8), ImageBucket({16, 24}, 8, 8), ImageBucket({8, 24}, 8, 8),
+                                ImageBucket({0, 24}, 8, 8), ImageBucket({0, 16}, 8, 8), ImageBucket({0, 8}, 8, 8),
+                                ImageBucket({0, 0}, 8, 8)}));
+    }
+
+    SECTION("should work correctly for landscape rectangular image") {
+        Resolution resolution(48, 32);
+        SpiralSequence spiralSequence;
+
+        auto buckets = spiralSequence.getTiles(resolution, 8);
+
+        REQUIRE(buckets == std::vector<ImageBucket>(
+                               {ImageBucket({24, 8}, 8, 8),  ImageBucket({24, 16}, 8, 8), ImageBucket({16, 16}, 8, 8),
+                                ImageBucket({16, 8}, 8, 8),  ImageBucket({16, 0}, 8, 8),  ImageBucket({24, 0}, 8, 8),
+                                ImageBucket({32, 0}, 8, 8),  ImageBucket({32, 8}, 8, 8),  ImageBucket({32, 16}, 8, 8),
+                                ImageBucket({32, 24}, 8, 8), ImageBucket({24, 24}, 8, 8), ImageBucket({16, 24}, 8, 8),
+                                ImageBucket({8, 24}, 8, 8),  ImageBucket({8, 16}, 8, 8),  ImageBucket({8, 8}, 8, 8),
+                                ImageBucket({8, 0}, 8, 8),   ImageBucket({40, 0}, 8, 8),  ImageBucket({40, 8}, 8, 8),
+                                ImageBucket({40, 16}, 8, 8), ImageBucket({40, 24}, 8, 8), ImageBucket({0, 24}, 8, 8),
+                                ImageBucket({0, 16}, 8, 8),  ImageBucket({0, 8}, 8, 8),   ImageBucket({0, 0}, 8, 8)}));
+    }
+
+    SECTION("should work correctly for portrait rectangular image") {
+        Resolution resolution(32, 48);
+        SpiralSequence spiralSequence;
+
+        auto buckets = spiralSequence.getTiles(resolution, 8);
+
+        REQUIRE(buckets == std::vector<ImageBucket>(
+                               {ImageBucket({16, 16}, 8, 8), ImageBucket({16, 24}, 8, 8), ImageBucket({8, 24}, 8, 8),
+                                ImageBucket({8, 16}, 8, 8),  ImageBucket({8, 8}, 8, 8),   ImageBucket({16, 8}, 8, 8),
+                                ImageBucket({24, 8}, 8, 8),  ImageBucket({24, 16}, 8, 8), ImageBucket({24, 24}, 8, 8),
+                                ImageBucket({24, 32}, 8, 8), ImageBucket({16, 32}, 8, 8), ImageBucket({8, 32}, 8, 8),
+                                ImageBucket({0, 32}, 8, 8),  ImageBucket({0, 24}, 8, 8),  ImageBucket({0, 16}, 8, 8),
+                                ImageBucket({0, 8}, 8, 8),   ImageBucket({0, 0}, 8, 8),   ImageBucket({8, 0}, 8, 8),
+                                ImageBucket({16, 0}, 8, 8),  ImageBucket({24, 0}, 8, 8),  ImageBucket({24, 40}, 8, 8),
+                                ImageBucket({16, 40}, 8, 8), ImageBucket({8, 40}, 8, 8),  ImageBucket({0, 40}, 8, 8)}));
+    }
+
+    SECTION("should work correctly for square image which has no integer-multiple width/height of the bucket size") {
+        Resolution resolution(30, 30);
+        SpiralSequence spiralSequence;
+
+        auto buckets = spiralSequence.getTiles(resolution, 8);
+
+        REQUIRE(buckets == std::vector<ImageBucket>(
+                               {ImageBucket({15, 7}, 8, 8), ImageBucket({15, 15}, 8, 8), ImageBucket({7, 15}, 8, 8),
+                                ImageBucket({7, 7}, 8, 8), ImageBucket({7, 0}, 8, 7), ImageBucket({15, 0}, 8, 7),
+                                ImageBucket({23, 0}, 7, 7), ImageBucket({23, 7}, 7, 8), ImageBucket({23, 15}, 7, 8),
+                                ImageBucket({23, 23}, 7, 7), ImageBucket({15, 23}, 8, 7), ImageBucket({7, 23}, 8, 7),
+                                ImageBucket({0, 23}, 7, 7), ImageBucket({0, 15}, 7, 8), ImageBucket({0, 7}, 7, 8),
+                                ImageBucket({0, 0}, 7, 7)}));
+    }
+
+    SECTION("should work correctly for landscape image which has no integer-multiple width/height of the bucket size") {
+        Resolution resolution(46, 30);
+        SpiralSequence spiralSequence;
+
+        auto buckets = spiralSequence.getTiles(resolution, 8);
+
+        REQUIRE(buckets == std::vector<ImageBucket>(
+                               {ImageBucket{{23, 7}, 8, 8},  ImageBucket{{23, 15}, 8, 8}, ImageBucket{{15, 15}, 8, 8},
+                                ImageBucket{{15, 7}, 8, 8},  ImageBucket{{15, 0}, 8, 7},  ImageBucket{{23, 0}, 8, 7},
+                                ImageBucket{{31, 0}, 8, 7},  ImageBucket{{31, 7}, 8, 8},  ImageBucket{{31, 15}, 8, 8},
+                                ImageBucket{{31, 23}, 8, 7}, ImageBucket{{23, 23}, 8, 7}, ImageBucket{{15, 23}, 8, 7},
+                                ImageBucket{{7, 23}, 8, 7},  ImageBucket{{7, 15}, 8, 8},  ImageBucket{{7, 7}, 8, 8},
+                                ImageBucket{{7, 0}, 8, 7},   ImageBucket{{39, 0}, 7, 7},  ImageBucket{{39, 7}, 7, 8},
+                                ImageBucket{{39, 15}, 7, 8}, ImageBucket{{39, 23}, 7, 7}, ImageBucket{{0, 23}, 7, 7},
+                                ImageBucket{{0, 15}, 7, 8},  ImageBucket{{0, 7}, 7, 8},   ImageBucket{{0, 0}, 7, 7}}));
+    }
+
+    SECTION("should work correctly for portrait image which has no integer-multiple width/height of the bucket size") {
+        Resolution resolution(30, 46);
+        SpiralSequence spiralSequence;
+
+        auto buckets = spiralSequence.getTiles(resolution, 8);
+
+        REQUIRE(buckets == std::vector<ImageBucket>(
+                               {ImageBucket{{15, 15}, 8, 8}, ImageBucket{{15, 23}, 8, 8}, ImageBucket{{7, 23}, 8, 8},
+                                ImageBucket{{7, 15}, 8, 8},  ImageBucket{{7, 7}, 8, 8},   ImageBucket{{15, 7}, 8, 8},
+                                ImageBucket{{23, 7}, 7, 8},  ImageBucket{{23, 15}, 7, 8}, ImageBucket{{23, 23}, 7, 8},
+                                ImageBucket{{23, 31}, 7, 8}, ImageBucket{{15, 31}, 8, 8}, ImageBucket{{7, 31}, 8, 8},
+                                ImageBucket{{0, 31}, 7, 8},  ImageBucket{{0, 23}, 7, 8},  ImageBucket{{0, 15}, 7, 8},
+                                ImageBucket{{0, 7}, 7, 8},   ImageBucket{{0, 0}, 7, 7},   ImageBucket{{7, 0}, 8, 7},
+                                ImageBucket{{15, 0}, 8, 7},  ImageBucket{{23, 0}, 7, 7},  ImageBucket{{23, 39}, 7, 7},
+                                ImageBucket{{15, 39}, 8, 7}, ImageBucket{{7, 39}, 8, 7},  ImageBucket{{0, 39}, 7, 7}}));
+    }
+
+    SECTION("should work correctly for square image with odd pixel count") {
+        Resolution resolution(31, 31);
+        SpiralSequence spiralSequence;
+
+        auto buckets = spiralSequence.getTiles(resolution, 8);
+
+        REQUIRE(buckets == std::vector<ImageBucket>(
+                               {ImageBucket{{15, 7}, 8, 8}, ImageBucket{{15, 15}, 8, 8}, ImageBucket{{7, 15}, 8, 8},
+                                ImageBucket{{7, 7}, 8, 8}, ImageBucket{{7, 0}, 8, 7}, ImageBucket{{15, 0}, 8, 7},
+                                ImageBucket{{23, 0}, 8, 7}, ImageBucket{{23, 7}, 8, 8}, ImageBucket{{23, 15}, 8, 8},
+                                ImageBucket{{23, 23}, 8, 8}, ImageBucket{{15, 23}, 8, 8}, ImageBucket{{7, 23}, 8, 8},
+                                ImageBucket{{0, 23}, 7, 8}, ImageBucket{{0, 15}, 7, 8}, ImageBucket{{0, 7}, 7, 8},
+                                ImageBucket{{0, 0}, 7, 7}}));
+    }
+}
 }

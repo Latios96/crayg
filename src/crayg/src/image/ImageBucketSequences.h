@@ -3,6 +3,7 @@
 
 #include "Image.h"
 #include "ImageBucket.h"
+#include "basics/Bound2d.h"
 #include <vector>
 
 namespace crayg {
@@ -24,6 +25,116 @@ class ImageBucketSequences {
 
   private:
     static int fitImage(int pos, int bucketWidth, int dimension);
+};
+
+class SpiralSequence {
+    enum Direction { DOWN, LEFT, UP, RIGHT };
+
+  public:
+    std::vector<ImageBucket> getTiles(const Resolution &resolution, int bucketWidth) {
+        const Vector2i middle = Vector2i(resolution.getWidth(), resolution.getHeight()) / 2;
+        const int bucketCount = std::ceil(static_cast<float>(resolution.getWidth()) / bucketWidth) *
+                                std::ceil(static_cast<float>(resolution.getHeight()) / bucketWidth);
+        std::vector<ImageBucket> buckets;
+        buckets.reserve(bucketCount);
+        buckets.emplace_back(middle - Vector2i(0, bucketWidth), bucketWidth, bucketWidth);
+
+        const Vector2i downTransform = Vector2i(0, bucketWidth);
+        const Vector2i leftTransform = Vector2i(-bucketWidth, 0);
+        const Vector2i upTransform = Vector2i(0, -bucketWidth);
+        const Vector2i rightTransform = Vector2i(bucketWidth, 0);
+
+        Bounds2di imageBounds({0, 0}, {resolution.getWidth() - 1, resolution.getHeight() - 1});
+        SpiralSequence::Direction currentDirection = DOWN;
+        Vector2i currentPoint = middle;
+        int spiralSize = 1;
+        int iterationsWithSize = 0;
+        while (buckets.size() < bucketCount) {
+            switch (currentDirection) {
+            case DOWN:
+                for (int i = 0; i < spiralSize; i++) {
+                    if (bucketIsPartiallyContained(imageBounds, currentPoint,
+                                                   bucketWidth)) { //
+                        buckets.emplace_back(fitToImage(currentPoint, bucketWidth, imageBounds));
+                    }
+                    currentPoint = currentPoint + downTransform;
+                }
+                currentPoint = currentPoint - downTransform + leftTransform;
+                currentDirection = LEFT;
+                break;
+            case LEFT:
+                for (int i = 0; i < spiralSize; i++) {
+                    if (bucketIsPartiallyContained(imageBounds, currentPoint, bucketWidth)) {
+                        buckets.emplace_back(fitToImage(currentPoint, bucketWidth, imageBounds));
+                    }
+                    currentPoint = currentPoint + leftTransform;
+                }
+                currentPoint = currentPoint - leftTransform + upTransform;
+                currentDirection = UP;
+                break;
+            case UP:
+                for (int i = 0; i < spiralSize; i++) {
+                    if (bucketIsPartiallyContained(imageBounds, currentPoint, bucketWidth)) {
+                        buckets.emplace_back(fitToImage(currentPoint, bucketWidth, imageBounds));
+                    }
+
+                    currentPoint = currentPoint + upTransform;
+                }
+                currentPoint = currentPoint - upTransform + rightTransform;
+                currentDirection = RIGHT;
+                break;
+            case RIGHT:
+                for (int i = 0; i < spiralSize; i++) {
+                    if (bucketIsPartiallyContained(imageBounds, currentPoint, bucketWidth)) {
+                        buckets.emplace_back(fitToImage(currentPoint, bucketWidth, imageBounds));
+                    }
+                    currentPoint = currentPoint + rightTransform;
+                }
+                currentPoint = currentPoint - rightTransform + downTransform;
+                currentDirection = DOWN;
+                break;
+            }
+
+            iterationsWithSize++;
+            if (iterationsWithSize == 2) {
+                iterationsWithSize = 0;
+                spiralSize++;
+            }
+        }
+        return buckets;
+    };
+
+  private:
+    bool bucketIsPartiallyContained(const Bounds2di &imageBounds, const Vector2i &currentPoint, int bucketWidth) {
+        const Vector2i topLeft = currentPoint;
+        const Vector2i topRight = currentPoint + Vector2i(bucketWidth, 0);
+        const Vector2i bottomLeft = currentPoint + Vector2i(0, bucketWidth);
+        const Vector2i bottomRight = currentPoint + Vector2i(bucketWidth, bucketWidth);
+        return imageBounds.contains(topLeft) || (imageBounds.contains(topRight) && topRight.x > 0) ||
+               (imageBounds.contains(bottomLeft) && bottomLeft.x > 0 && bottomLeft.y > 0) ||
+               (imageBounds.contains(bottomRight) && bottomRight.x > 0 && bottomRight.y > 0);
+    }
+
+    ImageBucket fitToImage(Vector2i currentPoint, int bucketWidth, const Bounds2di &imageBounds) {
+        int calculatedBucketWidth = bucketWidth;
+        int calculatedBucketHeight = bucketWidth;
+        if (currentPoint.x < 0) {
+            calculatedBucketWidth = calculatedBucketWidth + currentPoint.x;
+            currentPoint.x = 0;
+        }
+        if (currentPoint.y < 0) {
+            calculatedBucketHeight = calculatedBucketHeight + currentPoint.y;
+            currentPoint.y = 0;
+        }
+        if (currentPoint.x + bucketWidth > imageBounds.max.x) {
+            calculatedBucketWidth = imageBounds.max.x - currentPoint.x + 1;
+        }
+        if (currentPoint.y + bucketWidth > imageBounds.max.y) {
+            calculatedBucketHeight = imageBounds.max.y - currentPoint.y + 1;
+        }
+
+        return ImageBucket(currentPoint, calculatedBucketWidth, calculatedBucketHeight);
+    }
 };
 
 }
