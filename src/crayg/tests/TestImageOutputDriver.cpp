@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <image/ImageAlgorithms.h>
-#include <image/ImageOutputDriver.h>
+#include <outputdrivers/ImageOutputDriver.h>
 
 namespace crayg {
 

@@ -1,6 +1,6 @@
 #include "ImageOutputDriver.h"
-#include "ImageAlgorithms.h"
-#include "ImageMetadata.h"
+#include "image/ImageAlgorithms.h"
+#include "image/ImageMetadata.h"
 
 namespace crayg {
 

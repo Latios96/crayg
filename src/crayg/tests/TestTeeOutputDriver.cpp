@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
-#include <image/OutputDriver.h>
-#include <image/TeeOutputDriver.h>
+#include <outputdrivers/OutputDriver.h>
+#include <outputdrivers/TeeOutputDriver.h>
 
 namespace crayg {
 

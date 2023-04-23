@@ -6,8 +6,8 @@
 #include <basics/Color.h>
 #include <basics/Resolution.h>
 #include <image/Image.h>
-#include <image/ImageOutputDriver.h>
 #include <intersectors/SceneIntersector.h>
+#include <outputdrivers/ImageOutputDriver.h>
 #include <scene/RenderSettings.h>
 #include <scene/Scene.h>
 #include <scene/camera/Camera.h>

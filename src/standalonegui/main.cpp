@@ -10,9 +10,9 @@
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/FileSystemUtils.h"
 #include "widgets/ImageWidgetOutputDriver.h"
-#include <image/TeeOutputDriver.h>
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
+#include <outputdrivers/TeeOutputDriver.h>
 #include <renderer/Renderer.h>
 #include <scene/Scene.h>
 #include <thread>

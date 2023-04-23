@@ -2,7 +2,7 @@
 #define CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_
 
 #include "ImageWidget.h"
-#include <image/OutputDriver.h>
+#include <outputdrivers/OutputDriver.h>
 
 namespace crayg {
 

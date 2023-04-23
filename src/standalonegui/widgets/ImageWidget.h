@@ -4,7 +4,7 @@
 #include "image/BucketImageBuffer.h"
 #include "image/ImageBucket.h"
 #include "image/ImageMetadata.h"
-#include "image/ImageOutputDriver.h"
+#include "outputdrivers/ImageOutputDriver.h"
 #include <QPainter>
 #include <QtWidgets/qwidget.h>
 #include <basics/Resolution.h>

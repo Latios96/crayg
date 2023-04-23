@@ -1,8 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_OUTPUTDRIVER_H_
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_OUTPUTDRIVER_H_
 
-#include "BucketImageBuffer.h"
-#include "ImageSpec.h"
+#include "image/BucketImageBuffer.h"
+#include "image/ImageSpec.h"
 
 namespace crayg {
 

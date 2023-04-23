@@ -38,8 +38,6 @@ set(crayg_SRCS
         image/imageiterators/pixels/LineByLineIterator.h
         image/ImageMetadata.cpp
         image/ImageMetadata.h
-        image/ImageOutputDriver.cpp
-        image/ImageOutputDriver.h
         image/ImageSpec.cpp
         image/ImageSpec.h
         image/io/ImageWriter.h
@@ -51,12 +49,9 @@ set(crayg_SRCS
         image/io/OpenImageIoImageWriter.h
         image/io/PngWriter.cpp
         image/io/PngWriter.h
-        image/OutputDriver.h
         image/PixelBuffer.cpp
         image/PixelBuffer.h
         image/PixelFormat.h
-        image/TeeOutputDriver.cpp
-        image/TeeOutputDriver.h
         integrators/AbstractIntegrator.cpp
         integrators/AbstractIntegrator.h
         integrators/AmbientOcclusionIntegrator.cpp
@@ -93,6 +88,11 @@ set(crayg_SRCS
         intersectors/SceneIntersector.h
         Logger.cpp
         Logger.h
+        outputdrivers/ImageOutputDriver.cpp
+        outputdrivers/ImageOutputDriver.h
+        outputdrivers/OutputDriver.h
+        outputdrivers/TeeOutputDriver.cpp
+        outputdrivers/TeeOutputDriver.h
         renderer/BucketSizeEstimator.cpp
         renderer/BucketSizeEstimator.h
         renderer/GeometryCompiler.cpp
