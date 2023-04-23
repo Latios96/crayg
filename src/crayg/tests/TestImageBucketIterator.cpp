@@ -66,9 +66,9 @@ TEST_CASE("ImageBucketSequences", "[ImageBucketSequences]") {
 TEST_CASE("SpiralSequence") {
     SECTION("should work correctly for square image") {
         Resolution resolution(32, 32);
-        SpiralSequence spiralSequence;
+        SpiralSequence spiralSequence(resolution, 8);
 
-        auto buckets = spiralSequence.getTiles(resolution, 8);
+        auto buckets = spiralSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket({16, 8}, 8, 8), ImageBucket({16, 16}, 8, 8), ImageBucket({8, 16}, 8, 8),
@@ -81,9 +81,9 @@ TEST_CASE("SpiralSequence") {
 
     SECTION("should work correctly for landscape rectangular image") {
         Resolution resolution(48, 32);
-        SpiralSequence spiralSequence;
+        SpiralSequence spiralSequence(resolution, 8);
 
-        auto buckets = spiralSequence.getTiles(resolution, 8);
+        auto buckets = spiralSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket({24, 8}, 8, 8),  ImageBucket({24, 16}, 8, 8), ImageBucket({16, 16}, 8, 8),
@@ -98,9 +98,9 @@ TEST_CASE("SpiralSequence") {
 
     SECTION("should work correctly for portrait rectangular image") {
         Resolution resolution(32, 48);
-        SpiralSequence spiralSequence;
+        SpiralSequence spiralSequence(resolution, 8);
 
-        auto buckets = spiralSequence.getTiles(resolution, 8);
+        auto buckets = spiralSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket({16, 16}, 8, 8), ImageBucket({16, 24}, 8, 8), ImageBucket({8, 24}, 8, 8),
@@ -115,9 +115,9 @@ TEST_CASE("SpiralSequence") {
 
     SECTION("should work correctly for square image which has no integer-multiple width/height of the bucket size") {
         Resolution resolution(30, 30);
-        SpiralSequence spiralSequence;
+        SpiralSequence spiralSequence(resolution, 8);
 
-        auto buckets = spiralSequence.getTiles(resolution, 8);
+        auto buckets = spiralSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket({15, 7}, 8, 8), ImageBucket({15, 15}, 8, 8), ImageBucket({7, 15}, 8, 8),
@@ -130,9 +130,9 @@ TEST_CASE("SpiralSequence") {
 
     SECTION("should work correctly for landscape image which has no integer-multiple width/height of the bucket size") {
         Resolution resolution(46, 30);
-        SpiralSequence spiralSequence;
+        SpiralSequence spiralSequence(resolution, 8);
 
-        auto buckets = spiralSequence.getTiles(resolution, 8);
+        auto buckets = spiralSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket{{23, 7}, 8, 8},  ImageBucket{{23, 15}, 8, 8}, ImageBucket{{15, 15}, 8, 8},
@@ -147,9 +147,9 @@ TEST_CASE("SpiralSequence") {
 
     SECTION("should work correctly for portrait image which has no integer-multiple width/height of the bucket size") {
         Resolution resolution(30, 46);
-        SpiralSequence spiralSequence;
+        SpiralSequence spiralSequence(resolution, 8);
 
-        auto buckets = spiralSequence.getTiles(resolution, 8);
+        auto buckets = spiralSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket{{15, 15}, 8, 8}, ImageBucket{{15, 23}, 8, 8}, ImageBucket{{7, 23}, 8, 8},
@@ -164,9 +164,9 @@ TEST_CASE("SpiralSequence") {
 
     SECTION("should work correctly for square image with odd pixel count") {
         Resolution resolution(31, 31);
-        SpiralSequence spiralSequence;
+        SpiralSequence spiralSequence(resolution, 8);
 
-        auto buckets = spiralSequence.getTiles(resolution, 8);
+        auto buckets = spiralSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket{{15, 7}, 8, 8}, ImageBucket{{15, 15}, 8, 8}, ImageBucket{{7, 15}, 8, 8},

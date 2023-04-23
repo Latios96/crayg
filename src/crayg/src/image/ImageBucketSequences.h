@@ -31,7 +31,12 @@ class SpiralSequence {
     enum Direction { DOWN, LEFT, UP, RIGHT };
 
   public:
-    std::vector<ImageBucket> getTiles(const Resolution &resolution, int bucketWidth) {
+    SpiralSequence(const Resolution &resolution, int bucketWidth)
+        : resolution(resolution), bucketWidth(bucketWidth),
+          imageBounds(Bounds2di({0, 0}, {resolution.getWidth() - 1, resolution.getHeight() - 1})) {
+    }
+
+    std::vector<ImageBucket> getTiles() {
         const Vector2i middle = Vector2i(resolution.getWidth(), resolution.getHeight()) / 2;
         const int bucketCount = std::ceil(static_cast<float>(resolution.getWidth()) / bucketWidth) *
                                 std::ceil(static_cast<float>(resolution.getHeight()) / bucketWidth);
@@ -44,7 +49,6 @@ class SpiralSequence {
         const Vector2i upTransform = Vector2i(0, -bucketWidth);
         const Vector2i rightTransform = Vector2i(bucketWidth, 0);
 
-        imageBounds = Bounds2di({0, 0}, {resolution.getWidth() - 1, resolution.getHeight() - 1});
         currentPoint = middle;
 
         while (buckets.size() < bucketCount) {
@@ -144,6 +148,8 @@ class SpiralSequence {
         return ImageBucket(currentPoint, calculatedBucketWidth, calculatedBucketHeight);
     }
 
+    Resolution resolution;
+    int bucketWidth;
     Bounds2di imageBounds;
     SpiralSequence::Direction currentDirection = DOWN;
     Vector2i currentPoint;
