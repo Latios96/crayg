@@ -49,9 +49,9 @@ void ImageMetadataCollector::collectRenderSettingsIfPresent(ImageMetadata &image
     }
 
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_INTEGRATOR,
-                        std::string(magic_enum::enum_name(scene->renderSettings.integratorType)));
+                        fmt::format("{}", scene->renderSettings.integratorType));
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR,
-                        std::string(magic_enum::enum_name(scene->renderSettings.intersectorType)));
+                        fmt::format("{}", scene->renderSettings.intersectorType));
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES, scene->renderSettings.maxSamples);
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SEQUENCE_TYPE,
                         fmt::format("{}", scene->renderSettings.bucketSequenceType));
