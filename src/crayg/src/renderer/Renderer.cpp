@@ -11,8 +11,8 @@
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
 #include <image/BucketImageBuffer.h>
-#include <image/ImageBucketSequences.h>
-#include <image/ImageIterators.h>
+#include <image/imageiterators/buckets/ImageBucketSequences.h>
+#include <image/imageiterators/pixels/ImageIterators.h>
 #include <memory>
 #include <numeric>
 #include <tbb/concurrent_queue.h>

@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <image/Image.h>
-#include <image/ImageBucketSequences.h>
-#include <image/ImageIterators.h>
+#include <image/imageiterators/buckets/ImageBucketSequences.h>
+#include <image/imageiterators/pixels/ImageIterators.h>
 #include <iostream>
 
 namespace crayg {

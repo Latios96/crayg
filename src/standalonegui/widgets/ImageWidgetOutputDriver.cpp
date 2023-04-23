@@ -1,6 +1,6 @@
 #include "ImageWidgetOutputDriver.h"
 #include <Logger.h>
-#include <image/ImageIterators.h>
+#include <image/imageiterators/pixels/ImageIterators.h>
 #include <iostream>
 
 namespace crayg {

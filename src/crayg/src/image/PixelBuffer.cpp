@@ -1,5 +1,5 @@
 #include "PixelBuffer.h"
-#include "ImageIterators.h"
+#include "imageiterators/pixels/ImageIterators.h"
 #include <utils/Preconditions.h>
 
 namespace crayg {

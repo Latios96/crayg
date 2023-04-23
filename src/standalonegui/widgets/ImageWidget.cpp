@@ -1,7 +1,7 @@
 #include "ImageWidget.h"
 #include "image/ColorConversion.h"
 #include "image/ImageAlgorithms.h"
-#include "image/ImageIterators.h"
+#include "image/imageiterators/pixels/ImageIterators.h"
 
 namespace crayg {
 

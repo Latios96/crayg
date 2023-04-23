@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <image/Image.h>
-#include <image/ImageBucketSequences.h>
+#include <image/imageiterators/buckets/ImageBucketSequences.h>
 
 namespace crayg {
 

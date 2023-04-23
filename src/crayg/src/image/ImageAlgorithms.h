@@ -3,7 +3,7 @@
 
 #include "BucketImageBuffer.h"
 #include "Image.h"
-#include "ImageIterators.h"
+#include "imageiterators/pixels/ImageIterators.h"
 
 namespace crayg {
 

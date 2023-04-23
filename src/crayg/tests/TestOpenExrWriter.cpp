@@ -1,8 +1,8 @@
 #include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
 #include <image/Image.h>
-#include <image/ImageIterators.h>
 #include <image/OpenExrWriter.h>
+#include <image/imageiterators/pixels/ImageIterators.h>
 
 namespace crayg {
 

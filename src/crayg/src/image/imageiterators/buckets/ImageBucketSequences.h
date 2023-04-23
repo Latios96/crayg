@@ -1,9 +1,9 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKETSEQUENCES_H_
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKETSEQUENCES_H_
 
-#include "Image.h"
-#include "ImageBucket.h"
 #include "basics/Bound2d.h"
+#include "image/Image.h"
+#include "image/ImageBucket.h"
 #include <vector>
 
 namespace crayg {

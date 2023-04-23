@@ -17,9 +17,9 @@ set(crayg_SRCS
         basics/Resolution.h
         basics/Transform.cpp
         basics/Transform.h
-        basics/Vector2.h
         basics/Vector3f.cpp
         basics/Vector3f.h
+        basics/Vector2.h
         CraygInfo.cpp
         CraygInfo.h
         image/BucketImageBuffer.cpp
@@ -32,9 +32,10 @@ set(crayg_SRCS
         image/ImageAlgorithms.h
         image/ImageBucket.cpp
         image/ImageBucket.h
-        image/ImageBucketSequences.cpp
-        image/ImageBucketSequences.h
-        image/ImageIterators.h
+        image/imageiterators/buckets/ImageBucketSequences.cpp
+        image/imageiterators/buckets/ImageBucketSequences.h
+        image/imageiterators/pixels/ImageIterators.h
+        image/imageiterators/pixels/LineByLineIterator.h
         image/ImageMetadata.cpp
         image/ImageMetadata.h
         image/ImageOutputDriver.cpp
@@ -44,7 +45,6 @@ set(crayg_SRCS
         image/ImageWriter.h
         image/ImageWriters.cpp
         image/ImageWriters.h
-        image/LineByLineIterator.h
         image/OpenExrWriter.cpp
         image/OpenExrWriter.h
         image/OpenImageIoImageWriter.cpp
@@ -107,6 +107,16 @@ set(crayg_SRCS
         sampling/Sampling.h
         sampling/UnitSphereSampler.cpp
         sampling/UnitSphereSampler.h
+        scene/camera/Camera.cpp
+        scene/camera/Camera.h
+        scene/camera/CameraLens.cpp
+        scene/camera/CameraLens.h
+        scene/camera/CameraModel.h
+        scene/camera/CameraModelFactory.cpp
+        scene/camera/CameraModelFactory.h
+        scene/camera/CameraType.h
+        scene/camera/ExitPupilCalculator.cpp
+        scene/camera/ExitPupilCalculator.h
         scene/camera/lensio/LensFileFormat.h
         scene/camera/lensio/LensFileJsonReader.cpp
         scene/camera/lensio/LensFileJsonReader.h
@@ -124,18 +134,8 @@ set(crayg_SRCS
         scene/camera/lensio/LensFileWriter.h
         scene/camera/lensio/LensFileWriterFactory.cpp
         scene/camera/lensio/LensFileWriterFactory.h
-        scene/camera/Camera.cpp
-        scene/camera/Camera.h
-        scene/camera/CameraModel.h
-        scene/camera/CameraModelFactory.cpp
-        scene/camera/CameraModelFactory.h
-        scene/camera/CameraType.h
-        scene/camera/CameraLens.cpp
-        scene/camera/ExitPupilCalculator.cpp
-        scene/camera/ExitPupilCalculator.h
         scene/camera/LensRaytracerTracer.cpp
         scene/camera/LensRaytracerTracer.h
-        scene/camera/CameraLens.h
         scene/camera/PineHoleCameraModel.cpp
         scene/camera/PineHoleCameraModel.h
         scene/camera/RealisticCameraModel.cpp
@@ -262,6 +262,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.h
         sceneIO/write/usd/UsdTriangleMeshWriter.cpp
         sceneIO/write/usd/UsdTriangleMeshWriter.h
+        utils/DtoUtils.h
+        utils/EnumUtils.h
         utils/FileSystemUtils.cpp
         utils/FileSystemUtils.h
         utils/ImageChannelPathResolver.cpp
@@ -270,8 +272,6 @@ set(crayg_SRCS
         utils/ImageMetadataCollector.h
         utils/ImagePathResolver.cpp
         utils/ImagePathResolver.h
-        utils/DtoUtils.h
-        utils/EnumUtils.h
         utils/Preconditions.h
         utils/ProgressReporter.cpp
         utils/ProgressReporter.h
