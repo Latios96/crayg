@@ -106,13 +106,22 @@ class SpiralSequence {
 
   private:
     bool bucketIsPartiallyContained(const Bounds2di &imageBounds, const Vector2i &currentPoint, int bucketWidth) {
-        const Vector2i topLeft = currentPoint;
-        const Vector2i topRight = currentPoint + Vector2i(bucketWidth, 0);
-        const Vector2i bottomLeft = currentPoint + Vector2i(0, bucketWidth);
-        const Vector2i bottomRight = currentPoint + Vector2i(bucketWidth, bucketWidth);
-        return imageBounds.contains(topLeft) || (imageBounds.contains(topRight) && topRight.x > 0) ||
-               (imageBounds.contains(bottomLeft) && bottomLeft.x > 0 && bottomLeft.y > 0) ||
-               (imageBounds.contains(bottomRight) && bottomRight.x > 0 && bottomRight.y > 0);
+        const Vector2i topLeftCorner = currentPoint;
+        const Vector2i topRightCorner = currentPoint + Vector2i(bucketWidth, 0);
+        const Vector2i bottomLeftCorner = currentPoint + Vector2i(0, bucketWidth);
+        const Vector2i bottomRightCorner = currentPoint + Vector2i(bucketWidth, bucketWidth);
+
+        const bool topLeftCornerIsContained = imageBounds.contains(topLeftCorner);
+        const bool topRightCornerIsContained = imageBounds.contains(topRightCorner);
+        const bool bottomLeftCornerIsContained = imageBounds.contains(bottomLeftCorner);
+        const bool bottomRightCornerIsContained = imageBounds.contains(bottomRightCorner);
+        const bool topRightCornerIsNotOnImageEdge = topRightCorner.x > 0;
+        const bool bottomLeftCornerIsNotOnImageEdge = bottomLeftCorner.x > 0 && bottomLeftCorner.y > 0;
+        const bool bottomRightCornerIsNotOnImageEdge = bottomRightCorner.x > 0 && bottomRightCorner.y > 0;
+
+        return topLeftCornerIsContained || (topRightCornerIsContained && topRightCornerIsNotOnImageEdge) ||
+               (bottomLeftCornerIsContained && bottomLeftCornerIsNotOnImageEdge) ||
+               (bottomRightCornerIsContained && bottomRightCornerIsNotOnImageEdge);
     }
 
     ImageBucket fitToImage(Vector2i currentPoint, int bucketWidth, const Bounds2di &imageBounds) {
