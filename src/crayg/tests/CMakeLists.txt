@@ -84,6 +84,7 @@ set(UNIT_TEST_LIST
         TestSceneReaderFactory.cpp
         TestSceneWriterFactory.cpp
         TestSphere.cpp
+        TestSpiralSequence.cpp
         TestSubdivisionSurfaceMesh.cpp
         TestSurfaceInteraction.cpp
         TestTeeOutputDriver.cpp
