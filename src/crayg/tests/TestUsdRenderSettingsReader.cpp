@@ -21,6 +21,9 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         usdRenderSettings.GetPrim()
             .CreateAttribute(pxr::TfToken("intersectorType"), pxr::SdfValueTypeNames->Token)
             .Set(pxr::TfToken("EMBREE"));
+        usdRenderSettings.GetPrim()
+            .CreateAttribute(pxr::TfToken("bucketSequenceType"), pxr::SdfValueTypeNames->Token)
+            .Set(pxr::TfToken("LINE_BY_LINE"));
 
         UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
         auto renderSettings = usdRenderSettingsReader.read();
@@ -28,7 +31,7 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         REQUIRE(*renderSettings ==
                 RenderSettings(crayg::Resolution(800, 600), 2, IntegratorType::DEBUG,
                                IntegratorSettings({{"DEBUG:someToken", {std::string("someTokenValue")}}}),
-                               IntersectorType::EMBREE));
+                               IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE));
     }
 
     SECTION("should fallback to default values") {

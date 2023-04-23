@@ -22,6 +22,7 @@ class ImageMetadataTokens {
     static const std::string RENDER_SETTINGS_INTEGRATOR;
     static const std::string RENDER_SETTINGS_INTERSECTOR;
     static const std::string RENDER_SETTINGS_MAX_SAMPLES;
+    static const std::string RENDER_SETTINGS_BUCKET_SEQUENCE_TYPE;
     static const std::string CAMERA_NAME;
     static const std::string CAMERA_FOCAL_LENGTH;
     static const std::string CAMERA_FILM_BACK_SIZE;

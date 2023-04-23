@@ -48,6 +48,10 @@ CliParseResult CliParser::parse() {
     app.add_option("--intersector", intersectorType, "Override intersector")
         ->transform(createTransformer<IntersectorType>());
 
+    std::optional<BucketSequenceType> bucketSequenceType;
+    app.add_option("--bucketSequence", bucketSequenceType, "Override bucket sequence")
+        ->transform(createTransformer<BucketSequenceType>());
+
     try {
         app.parse(argc, argv);
 
@@ -63,6 +67,9 @@ CliParseResult CliParser::parse() {
         }
         if (intersectorType) {
             renderSettingsOverride.intersectorType = intersectorType.value();
+        }
+        if (bucketSequenceType) {
+            renderSettingsOverride.bucketSequenceType = bucketSequenceType.value();
         }
 
         return CliParseResult(CliArgs(sceneFileName, imageOutputPath,

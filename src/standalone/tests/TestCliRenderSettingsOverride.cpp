@@ -73,6 +73,7 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     fullOverrides.resolution = Resolution(800, 600);
     fullOverrides.maxSamples = 8;
     fullOverrides.integratorType = IntegratorType::DEBUG;
+    fullOverrides.bucketSequenceType = BucketSequenceType::SPIRAL;
 
     CliRenderSettingsOverride onlyResolution;
     onlyResolution.resolution = Resolution(800, 600);
@@ -86,6 +87,9 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     CliRenderSettingsOverride onlyIntersectorType;
     onlyIntersectorType.intersectorType = IntersectorType::NAIVE_BVH;
 
+    CliRenderSettingsOverride onlyBucketSequenceType;
+    onlyIntersectorType.bucketSequenceType = BucketSequenceType::SPIRAL;
+
     RenderSettings renderSettings;
     renderSettings.resolution = Resolution(1280, 720);
     renderSettings.maxSamples = 4;
@@ -93,22 +97,28 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
 
     SECTION("has overrides") {
         REQUIRE(fullOverrides.resolveOverrides(renderSettings) ==
-                RenderSettings({800, 600}, 8, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE));
+                RenderSettings({800, 600}, 8, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE,
+                               BucketSequenceType::SPIRAL));
 
-        REQUIRE(
-            onlyResolution.resolveOverrides(renderSettings) ==
-            RenderSettings({800, 600}, 4, IntegratorType::RAYTRACING, IntegratorSettings(), IntersectorType::EMBREE));
+        REQUIRE(onlyResolution.resolveOverrides(renderSettings) ==
+                RenderSettings({800, 600}, 4, IntegratorType::RAYTRACING, IntegratorSettings(), IntersectorType::EMBREE,
+                               BucketSequenceType::LINE_BY_LINE));
 
-        REQUIRE(
-            onlyMaxSamples.resolveOverrides(renderSettings) ==
-            RenderSettings({1280, 720}, 8, IntegratorType::RAYTRACING, IntegratorSettings(), IntersectorType::EMBREE));
+        REQUIRE(onlyMaxSamples.resolveOverrides(renderSettings) ==
+                RenderSettings({1280, 720}, 8, IntegratorType::RAYTRACING, IntegratorSettings(),
+                               IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE));
 
         REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings) ==
-                RenderSettings({1280, 720}, 4, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE));
+                RenderSettings({1280, 720}, 4, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE,
+                               BucketSequenceType::LINE_BY_LINE));
 
         REQUIRE(onlyIntersectorType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
-                               IntersectorType::NAIVE_BVH));
+                               IntersectorType::NAIVE_BVH, BucketSequenceType::LINE_BY_LINE));
+
+        REQUIRE(onlyBucketSequenceType.resolveOverrides(renderSettings) ==
+                RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
+                               IntersectorType::EMBREE, BucketSequenceType::SPIRAL));
     }
 
     SECTION("has no overrides") {

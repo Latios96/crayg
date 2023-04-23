@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
 
+#include "image/imageiterators/buckets/BucketSequenceType.h"
 #include "integrators/IntegratorSettings.h"
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"
@@ -15,7 +16,8 @@ class RenderSettings {
     RenderSettings();
     RenderSettings(const RenderSettings &renderSettings);
     explicit RenderSettings(const Resolution &resolution, int maxSamples, IntegratorType integratorType,
-                            IntegratorSettings integratorSettings, IntersectorType intersectorType);
+                            IntegratorSettings integratorSettings, IntersectorType intersectorType,
+                            BucketSequenceType bucketSequenceType);
 
     static RenderSettings createDefault();
 
@@ -29,6 +31,7 @@ class RenderSettings {
                   .addMember("integratorType", renderSettings.integratorType)
                   .addMember("integratorSettings", renderSettings.integratorSettings)
                   .addMember("intersectorType", renderSettings.intersectorType)
+                  .addMember("bucketSequenceType", renderSettings.bucketSequenceType)
                   .finish();
         return os;
     }
@@ -38,6 +41,7 @@ class RenderSettings {
     IntegratorType integratorType = IntegratorType::RAYTRACING;
     IntegratorSettings integratorSettings;
     IntersectorType intersectorType = IntersectorType::EMBREE;
+    BucketSequenceType bucketSequenceType = BucketSequenceType::LINE_BY_LINE;
 };
 
 }

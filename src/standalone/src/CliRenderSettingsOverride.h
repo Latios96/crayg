@@ -12,6 +12,7 @@ struct CliRenderSettingsOverride {
     std::optional<int> maxSamples;
     std::optional<IntegratorType> integratorType;
     std::optional<IntersectorType> intersectorType;
+    std::optional<BucketSequenceType> bucketSequenceType;
 
     RenderSettings resolveOverrides(const RenderSettings &renderSettings) const;
 

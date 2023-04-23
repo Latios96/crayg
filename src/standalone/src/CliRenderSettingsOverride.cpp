@@ -17,6 +17,8 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     resolvedRenderSettings.integratorType = integratorType ? integratorType.value() : renderSettings.integratorType;
     resolvedRenderSettings.integratorSettings = renderSettings.integratorSettings;
     resolvedRenderSettings.intersectorType = intersectorType ? intersectorType.value() : renderSettings.intersectorType;
+    resolvedRenderSettings.bucketSequenceType =
+        bucketSequenceType ? bucketSequenceType.value() : renderSettings.bucketSequenceType;
 
     return resolvedRenderSettings;
 }
@@ -38,6 +40,9 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
     }
     if (intersectorType) {
         report.push_back(fmt::format(R"(intersectorType -> "{}")", *intersectorType));
+    }
+    if (bucketSequenceType) {
+        report.push_back(fmt::format(R"(bucketSequenceType -> "{}")", *bucketSequenceType));
     }
     return boost::algorithm::join(report, ", ");
 }

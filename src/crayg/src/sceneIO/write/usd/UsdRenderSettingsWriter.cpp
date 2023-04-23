@@ -19,6 +19,7 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
     writeIntegratorType(usdRenderSettings);
     writeIntegratorSettings(usdRenderSettings);
     writeIntersectorType(usdRenderSettings);
+    writeBucketSequenceType(usdRenderSettings);
 
     return usdRenderSettings;
 }
@@ -54,6 +55,11 @@ void UsdRenderSettingsWriter::writeIntegratorSettings(const pxr::UsdRenderSettin
 
 void UsdRenderSettingsWriter::writeIntersectorType(const pxr::UsdRenderSettings &usdRenderSettings) const {
     UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "intersectorType", renderSettings.intersectorType);
+}
+
+void UsdRenderSettingsWriter::writeBucketSequenceType(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "bucketSequenceType",
+                                    renderSettings.bucketSequenceType);
 }
 
 } // crayg

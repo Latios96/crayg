@@ -17,12 +17,14 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     IntegratorType integratorType = readIntegratorType();
     IntegratorSettings integratorSettings = readIntegratorSettings();
     IntersectorType intersectorType = readIntersectorType();
+    BucketSequenceType bucketSequenceType = readBucketSequenceType();
 
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
     renderSettings->integratorType = integratorType;
     renderSettings->integratorSettings = integratorSettings;
     renderSettings->intersectorType = intersectorType;
+    renderSettings->bucketSequenceType = bucketSequenceType;
 
     return renderSettings;
 }
@@ -87,6 +89,11 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
 IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
     return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "intersectorType",
                                              RenderSettings::createDefault().intersectorType);
+}
+
+BucketSequenceType UsdRenderSettingsReader::readBucketSequenceType() const {
+    return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "bucketSequenceType",
+                                             RenderSettings::createDefault().bucketSequenceType);
 }
 
 }

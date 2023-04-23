@@ -19,6 +19,7 @@ class UsdRenderSettingsWriter {
     void writeIntegratorType(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeIntegratorSettings(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeIntersectorType(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeBucketSequenceType(const pxr::UsdRenderSettings &usdRenderSettings) const;
 };
 
 } // crayg

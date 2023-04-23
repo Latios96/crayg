@@ -10,6 +10,7 @@ const std::string ImageMetadataTokens::CPU = "crayg/info/cpu";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_INTEGRATOR = "crayg/renderSettings/integrator";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR = "crayg/renderSettings/intersector";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES = "crayg/renderSettings/maxSamples";
+const std::string ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SEQUENCE_TYPE = "crayg/renderSettings/bucketSequenceType";
 const std::string ImageMetadataTokens::CAMERA_NAME = "crayg/camera/name";
 const std::string ImageMetadataTokens::CAMERA_FOCAL_LENGTH = "crayg/camera/focalLength";
 const std::string ImageMetadataTokens::CAMERA_FILM_BACK_SIZE = "crayg/camera/filmBackSize";

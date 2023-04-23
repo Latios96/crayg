@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDTYPEUTIL_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDTYPEUTIL_H_
 
+#include "image/imageiterators/buckets/BucketSequenceType.h"
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"
 #include "scene/camera/CameraType.h"
@@ -58,6 +59,14 @@ template <> struct UsdTypeUtil<IntersectorType> {
 
     static pxr::TfToken convert(IntersectorType intersectorType) {
         return pxr::TfToken(fmt::format("{}", intersectorType));
+    }
+};
+
+template <> struct UsdTypeUtil<BucketSequenceType> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(BucketSequenceType bucketSequenceType) {
+        return pxr::TfToken(fmt::format("{}", bucketSequenceType));
     }
 };
 

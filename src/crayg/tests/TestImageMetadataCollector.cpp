@@ -31,9 +31,9 @@ TEST_CASE("TestImageMetadataCollector::collect") {
 
     SECTION("should collect render settings") {
         Scene scene;
-        scene.renderSettings =
-            RenderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
-                           IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}), IntersectorType::NAIVE_BVH);
+        scene.renderSettings = RenderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
+                                              IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}),
+                                              IntersectorType::NAIVE_BVH, BucketSequenceType::LINE_BY_LINE);
         ImageMetadataCollector imageMetadataCollector;
         imageMetadataCollector.scene = &scene;
         ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
@@ -41,6 +41,8 @@ TEST_CASE("TestImageMetadataCollector::collect") {
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::RENDER_SETTINGS_INTEGRATOR) == "RAYTRACING");
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR) == "NAIVE_BVH");
         REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES) == 4);
+        REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SEQUENCE_TYPE) ==
+                "LINE_BY_LINE");
         REQUIRE(imageMetadata.read<int>("crayg/renderSettings/integratorSettings/AMBIENT_OCCLUSION:sampleCount") == 8);
     }
 
