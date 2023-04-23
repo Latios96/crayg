@@ -33,6 +33,7 @@ set(crayg_SRCS
         image/ImageBucket.cpp
         image/ImageBucket.h
         image/imageiterators/buckets/BucketSequence.h
+        image/imageiterators/buckets/BucketSequenceType.h
         image/imageiterators/buckets/ImageBucketSequences.cpp
         image/imageiterators/buckets/ImageBucketSequences.h
         image/imageiterators/buckets/LineByLineSequence.cpp

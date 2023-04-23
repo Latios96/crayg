@@ -40,7 +40,7 @@ set(UNIT_TEST_LIST
         TestGroundPlane.cpp
         TestImage.cpp
         TestImageAlgorithms.cpp
-        TestImageBucketIterator.cpp
+        TestImageBucketSequences.cpp
         TestImageChannelPathResolver.cpp
         TestImageIterators.cpp
         TestImageMetadata.cpp

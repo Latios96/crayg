@@ -29,7 +29,8 @@ void Renderer::renderScene() {
 
     outputDriver.initialize(requiredImageSpec(scene.renderSettings.resolution));
 
-    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(scene.renderSettings.resolution, 8);
+    std::vector<ImageBucket> bucketSequence =
+        ImageBucketSequences::getSequence(scene.renderSettings.resolution, 8, BucketSequenceType::LINE_BY_LINE);
     ProgressReporter reporter =
         ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()), "Rendering");
 
