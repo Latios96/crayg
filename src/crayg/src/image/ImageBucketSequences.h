@@ -44,11 +44,9 @@ class SpiralSequence {
         const Vector2i upTransform = Vector2i(0, -bucketWidth);
         const Vector2i rightTransform = Vector2i(bucketWidth, 0);
 
-        Bounds2di imageBounds({0, 0}, {resolution.getWidth() - 1, resolution.getHeight() - 1});
-        SpiralSequence::Direction currentDirection = DOWN;
-        Vector2i currentPoint = middle;
-        int spiralSize = 1;
-        int iterationsWithSize = 0;
+        imageBounds = Bounds2di({0, 0}, {resolution.getWidth() - 1, resolution.getHeight() - 1});
+        currentPoint = middle;
+
         while (buckets.size() < bucketCount) {
             switch (currentDirection) {
             case DOWN:
@@ -127,6 +125,7 @@ class SpiralSequence {
     ImageBucket fitToImage(Vector2i currentPoint, int bucketWidth, const Bounds2di &imageBounds) {
         int calculatedBucketWidth = bucketWidth;
         int calculatedBucketHeight = bucketWidth;
+
         if (currentPoint.x < 0) {
             calculatedBucketWidth = calculatedBucketWidth + currentPoint.x;
             currentPoint.x = 0;
@@ -144,6 +143,12 @@ class SpiralSequence {
 
         return ImageBucket(currentPoint, calculatedBucketWidth, calculatedBucketHeight);
     }
+
+    Bounds2di imageBounds;
+    SpiralSequence::Direction currentDirection = DOWN;
+    Vector2i currentPoint;
+    int spiralSize = 1;
+    int iterationsWithSize = 0;
 };
 
 }
