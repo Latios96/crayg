@@ -54,45 +54,21 @@ class SpiralSequence {
         while (buckets.size() < bucketCount) {
             switch (currentDirection) {
             case DOWN:
-                for (int i = 0; i < spiralSize; i++) {
-                    if (bucketIsPartiallyContained(currentPoint)) {
-                        buckets.emplace_back(fitToImage(currentPoint));
-                    }
-                    currentPoint = currentPoint + downTransform;
-                }
-                currentPoint = currentPoint - downTransform + leftTransform;
-                currentDirection = LEFT;
+                addBucketForCurrentDirectionAndChangeDirection(buckets, &currentDirection, &currentPoint, downTransform,
+                                                               leftTransform, SpiralSequence::Direction::LEFT);
                 break;
             case LEFT:
-                for (int i = 0; i < spiralSize; i++) {
-                    if (bucketIsPartiallyContained(currentPoint)) {
-                        buckets.emplace_back(fitToImage(currentPoint));
-                    }
-                    currentPoint = currentPoint + leftTransform;
-                }
-                currentPoint = currentPoint - leftTransform + upTransform;
-                currentDirection = UP;
+                addBucketForCurrentDirectionAndChangeDirection(buckets, &currentDirection, &currentPoint, leftTransform,
+                                                               upTransform, SpiralSequence::Direction::UP);
                 break;
             case UP:
-                for (int i = 0; i < spiralSize; i++) {
-                    if (bucketIsPartiallyContained(currentPoint)) {
-                        buckets.emplace_back(fitToImage(currentPoint));
-                    }
-
-                    currentPoint = currentPoint + upTransform;
-                }
-                currentPoint = currentPoint - upTransform + rightTransform;
-                currentDirection = RIGHT;
+                addBucketForCurrentDirectionAndChangeDirection(buckets, &currentDirection, &currentPoint, upTransform,
+                                                               rightTransform, SpiralSequence::Direction::RIGHT);
                 break;
             case RIGHT:
-                for (int i = 0; i < spiralSize; i++) {
-                    if (bucketIsPartiallyContained(currentPoint)) {
-                        buckets.emplace_back(fitToImage(currentPoint));
-                    }
-                    currentPoint = currentPoint + rightTransform;
-                }
-                currentPoint = currentPoint - rightTransform + downTransform;
-                currentDirection = DOWN;
+                addBucketForCurrentDirectionAndChangeDirection(buckets, &currentDirection, &currentPoint,
+                                                               rightTransform, downTransform,
+                                                               SpiralSequence::Direction::DOWN);
                 break;
             }
 
@@ -106,6 +82,22 @@ class SpiralSequence {
     };
 
   private:
+    void addBucketForCurrentDirectionAndChangeDirection(std::vector<ImageBucket> &buckets,
+                                                        SpiralSequence::Direction *currentDirection,
+                                                        Vector2i *currentPoint,
+                                                        const Vector2i &currentDirectionTransform,
+                                                        const Vector2i &newDirectionTransform,
+                                                        SpiralSequence::Direction newDirection) {
+        for (int i = 0; i < spiralSize; i++) {
+            if (bucketIsPartiallyContained(*currentPoint)) {
+                buckets.emplace_back(fitToImage(*currentPoint));
+            }
+            *currentPoint = *currentPoint + currentDirectionTransform;
+        }
+        *currentPoint = *currentPoint - currentDirectionTransform + newDirectionTransform;
+        *currentDirection = newDirection;
+    }
+
     bool bucketIsPartiallyContained(const Vector2i &currentPoint) {
         const Vector2i topLeftCorner = currentPoint;
         const Vector2i topRightCorner = currentPoint + Vector2i(bucketWidth, 0);
