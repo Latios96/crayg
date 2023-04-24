@@ -1,0 +1,125 @@
+scenes:
+  - name: OpenChessSet
+    cameras:
+      - /cams/render_cam_7/render_cam_7Shape
+      - /cams/render_cam_6/render_cam_6Shape
+      - /cams/render_cam_5/render_cam_5Shape
+      - /cams/render_cam_4/render_cam_4Shape
+      - /cams/render_cam_3/render_cam_3Shape
+      - /cams/render_cam_2/render_cam_2Shape
+      - /cams/render_cam_1/render_cam_1Shape
+    hero_camera: /cams/render_cam_7/render_cam_7Shape
+    integrators:
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/OpenChessSet/OpenChessSetCrayg.usda"
+  - name: CornellBox
+    cameras:
+      - /render_cam
+    hero_camera: /render_cam
+    integrators:
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "C:/workspace/crayg/src/crayg/integrationTests/CornellBox/CornellBox_Original_GI/CornellBox_Original_GI.usda"
+    resolution: "960x960"
+  - name: Intel_Sponza
+    cameras:
+      - /PhysCamera001
+      - /PhysCamera002
+      - /PhysCamera003
+      - /PhysCamera004
+      - /PhysCamera005
+      - /PhysCamera006
+    hero_camera: /PhysCamera001
+    integrators:
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/Intel_Sponza/Default.usda"
+  - name: Intel_Sponza_Candles_Thin_Lens
+    cameras:
+      - /PhysCamera002
+      - /PhysCamera004
+    hero_camera: /PhysCamera002
+    integrators:
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/Intel_Sponza/WithCandlesThinLens.usda"
+  - name: StormTrooper
+    cameras:
+      - /root/Camera/render_cam
+    hero_camera: /root/Camera/render_cam
+    integrators:
+      - debug
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/StormTrooper/StormTrooper.usda"
+  - name: HsdLogo
+    cameras:
+      - /render_cam_1/render_cam_1Shape
+      - /render_cam_2/render_cam_2Shape
+      - /render_cam_3/render_cam_3Shape
+      - /render_cam_4/render_cam_4Shape
+      - /render_cam_5/render_cam_5Shape
+    hero_camera: /render_cam_1/render_cam_1Shape
+    integrators:
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/HsdLogo/HsdLogo.usda"
+  - name: Blenderman
+    cameras:
+      - /CraygRoot/camera/Camera_001
+    hero_camera: /CraygRoot/camera/Camera_001
+    integrators:
+      - debug
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/Blender_Splash_Screens/Blenderman/Blenderman_Crayg.usda"
+  - name: Intel_mooreLane
+    cameras:
+      - /cameras/altCams/dining
+      - /cameras/altCams/inKitchen
+      - /cameras/altCams/toKitchen
+      - /cameras/altCams/droneCamera
+      - /cameras/altCams/frontDoor
+      - /cameras/altCams/droneCose
+      - /cameras/altCams/ivingRoomCorner
+      - /cameras/altCams/intoKitchen
+      - /cameras/altCams/intoStudio
+      - /cameras/altCams/ntoDiningroom
+      - /cameras/altCams/wideLivingroom
+      - /cameras/altCams/entryToKitchen
+      - /cameras/altCams/MorrisStone
+      - /cameras/altCams/wideBackYard
+      - /cameras/altCams/photoStudio
+      - /cameras/altCams/diningTable
+      - /cameras/altCams/kitchenOrtho
+      - /cameras/altCams/studioAndZenGarden
+      - /cameras/altCams/wideFullBackFacade
+      - /cameras/altCams/throughTheWoods
+      - /cameras/altCams/wideDining
+      - /cameras/altCams/acrosstheCenterSpace
+      - /cameras/altCams/kitchenVignette
+      - /cameras/altCams/livingroomFireplace
+      - /cameras/altCams/wideExteriorAlt
+      - /cameras/altCams/outFromZenGarden
+      - /cameras/altCams/floatingInStudio
+    hero_camera: /cameras/MASTER_cameraExtended
+    integrators:
+      - ambient_occlusion
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/Intel_mooreLane/Intel_mooreLane.usda"
