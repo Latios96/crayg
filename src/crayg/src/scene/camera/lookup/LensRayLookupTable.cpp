@@ -1,7 +1,7 @@
 #include "LensRayLookupTable.h"
 #include "image/ImageBucket.h"
-#include "image/ImageBucketSequences.h"
-#include "image/ImageIterators.h"
+#include "image/imageiterators/buckets/ImageBucketSequences.h"
+#include "image/imageiterators/pixels/ImageIterators.h"
 #include "sampling/Random.h"
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
@@ -15,7 +15,8 @@ LensRayLookupTable::LensRayLookupTable(const Resolution &resolution, int samples
 
 void LensRayLookupTable::generate(CameraModel &cameraModel) {
     dirs.resize(resolution.getWidth() * resolution.getHeight() * samplesPerPixel * 2);
-    std::vector<ImageBucket> bucketSequence = ImageBucketSequences::lineByLine(resolution, 8);
+    std::vector<ImageBucket> bucketSequence =
+        ImageBucketSequences::getSequence(resolution, 8, BucketSequenceType::LINE_BY_LINE);
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()),
                                                                                 "Generating lookup table");
     tbb::parallel_for(static_cast<std::size_t>(0), bucketSequence.size(),
