@@ -48,42 +48,45 @@ if __name__ == "__main__":
         suite["tests"] = []
         for camera in scene["cameras"]:
             for camera_type in get_camera_lens_types(camera):
-                test_name = f"{os.path.basename(camera['name'])}-{camera_type}"
-                if camera_type == "realistic":
-                    test_name += os.path.splitext(os.path.basename(camera["lensFile"]))[
-                        0
-                    ]
-                print(test_name)
+                for i in range(3):
+                    test_name = f"{i}-{os.path.basename(camera['name'])}-{camera_type}"
+                    if camera_type == "realistic":
+                        test_name += os.path.splitext(
+                            os.path.basename(camera["lensFile"])
+                        )[0]
+                    print(test_name)
 
-                base_scene_path = scene["scenePath"]
-                target_file = os.path.join(
-                    os.path.dirname(__file__),
-                    scene["name"],
-                    f"{os.path.basename(camera['name'])}-{camera_type}",
-                    f"{os.path.basename(camera['name'])}-{camera_type}.usda",
-                )
-                target_folder = os.path.dirname(target_file)
-                if not os.path.exists(target_folder):
-                    os.makedirs(target_folder)
-                content = (
-                    SCENE_FILE_TEMPLATE.replace("$BASE_SCENE_PATH$", base_scene_path)
-                    .replace("$CAMERA_NAME$", camera["name"][1:])
-                    .replace("$CAMERA_TYPE$", camera_type.upper())
-                    .replace("$LENS_FILE_PATH$", camera["lensFile"])
-                )
-                with open(target_file, "w") as f:
-                    f.write(content)
+                    base_scene_path = scene["scenePath"]
+                    target_file = os.path.join(
+                        os.path.dirname(__file__),
+                        scene["name"],
+                        f"{os.path.basename(camera['name'])}-{camera_type}",
+                        f"{os.path.basename(camera['name'])}-{camera_type}.usda",
+                    )
+                    target_folder = os.path.dirname(target_file)
+                    if not os.path.exists(target_folder):
+                        os.makedirs(target_folder)
+                    content = (
+                        SCENE_FILE_TEMPLATE.replace(
+                            "$BASE_SCENE_PATH$", base_scene_path
+                        )
+                        .replace("$CAMERA_NAME$", camera["name"][1:])
+                        .replace("$CAMERA_TYPE$", camera_type.upper())
+                        .replace("$LENS_FILE_PATH$", camera["lensFile"])
+                    )
+                    with open(target_file, "w") as f:
+                        f.write(content)
 
-                suite["tests"].append(
-                    {
-                        "name": test_name,
-                        "variables": {
-                            "scene_path": target_file,
-                            "camera": camera["name"],
-                        },
-                    }
-                )
-                test_count += 1
+                    suite["tests"].append(
+                        {
+                            "name": test_name,
+                            "variables": {
+                                "scene_path": target_file,
+                                "camera": camera["name"],
+                            },
+                        }
+                    )
+                    test_count += 1
         suite_count += 1
     with open("cato.json", "w") as f:
         json.dump(TEMPLATE, f, indent=4)
