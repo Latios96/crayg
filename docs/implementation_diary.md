@@ -12,5 +12,5 @@ Cato Runs for measuring the performance:
 Baseline Line-by-line: https://cato.frmbffr.com/projects/5/runs/873 \
 Baseline Spiral: https://cato.frmbffr.com/projects/5/runs/874
 
-![](figures/27.04.2023/bucket-sequence-performance-absolute.svg)
-![](figures/27.04.2023/bucket-sequence-performance-absolute.svg)
+![Bucket Sequence Performance Absolute](figures/27.04.2023/bucket-sequence-performance-absolute.svg)
+![Bucket Sequence Performance Absolute](figures/27.04.2023/bucket-sequence-performance-relative.svg)
