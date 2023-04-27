@@ -1,4 +1,4 @@
-<svg width="1536" height="500">
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="500">
     <defs>
         <filter x="-100%" y="-100%" width="300%" height="300%" id="rablfilter5">
             <feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur>
