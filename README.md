@@ -1,6 +1,6 @@
 <img src="logo/LogoFull_black_transparent.svg" height="128px">
 
-[![Build Status](https://github.com/Latios96/crayg/workflows/Github%20Actions%20CI/badge.svg)](https://github.com/Latios96/crayg/workflows/ccpp/badge.svg)
+[![Build Status](https://github.com/Latios96/crayg/workflows/Github%20Actions%20CI/badge.svg)]
 
 Personal Raytracer project started to get familiar with C++ in general and how to do CI and TDD in C++.
 
