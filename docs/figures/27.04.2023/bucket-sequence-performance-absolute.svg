@@ -1,0 +1,196 @@
+<svg width="1536" height="500">
+    <defs>
+        <clipPath id="rablfilter0">
+            <rect x="376.5" y="55.5" width="1009" height="392"></rect>
+        </clipPath>
+    </defs>
+    <g>
+        <rect x="0" y="0" width="1536" height="500" fill="#ffffff" fill-opacity="1" stroke="#ffffff" stroke-opacity="0"
+              stroke-width="0"></rect>
+        <text x="0" y="15"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 16px;"
+              fill="#757575" dx="0px">Benchmark
+        </text>
+        <rect x="1436.171875" y="55.5" width="12" height="12" rx="2" ry="2" fill="#4285f4"></rect>
+        <text x="1456.171875" y="68.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto;"
+              fill="#757575" dx="0px">Baseline
+        </text>
+        <rect x="1436.171875" y="88" width="12" height="12" rx="2" ry="2" fill="#db4437"></rect>
+        <text x="1456.171875" y="101"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto;"
+              fill="#757575" dx="0px">New revision
+        </text>
+        <rect x="376.5" y="55.5" width="1009" height="392" fill="#ffffff" fill-opacity="1" stroke="#ffffff"
+              stroke-opacity="0" stroke-width="1"></rect>
+    </g>
+    <g>
+        <line x1="376.5" x2="376.5" y1="55.5" y2="447.5" stroke="#9E9E9E" stroke-width="1"></line>
+        <line x1="544.6666666666666" x2="544.6666666666666" y1="55.5" y2="447.5" stroke="#E0E0E0"
+              stroke-width="1"></line>
+        <line x1="712.8333333333333" x2="712.8333333333333" y1="55.5" y2="447.5" stroke="#E0E0E0"
+              stroke-width="1"></line>
+        <line x1="881" x2="881" y1="55.5" y2="447.5" stroke="#E0E0E0" stroke-width="1"></line>
+        <line x1="1049.1666666666665" x2="1049.1666666666665" y1="55.5" y2="447.5" stroke="#E0E0E0"
+              stroke-width="1"></line>
+        <line x1="1217.3333333333335" x2="1217.3333333333335" y1="55.5" y2="447.5" stroke="#E0E0E0"
+              stroke-width="1"></line>
+        <line x1="1385.5" x2="1385.5" y1="55.5" y2="447.5" stroke="#E0E0E0" stroke-width="1"></line>
+    </g>
+    <g>
+        <path d="M 1088.67350938 56 A 2 2 0 0 1 1090.67350938 58 L 1090.67350938 62.04761904761905 A 2 2 0 0 1 1088.67350938 64.04761904761905 L 377 64.04761904761905 A 0 0 0 0 1 377 64.04761904761905 L 377 56 A 0 0 0 0 1 377 56 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1107.3696268933331 65.04761904761905 A 2 2 0 0 1 1109.3696268933331 67.04761904761905 L 1109.3696268933331 71.0952380952381 A 2 2 0 0 1 1107.3696268933331 73.0952380952381 L 377 73.0952380952381 A 0 0 0 0 1 377 73.0952380952381 L 377 65.04761904761905 A 0 0 0 0 1 377 65.04761904761905 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 832.37836784 83.83882783882784 A 2 2 0 0 1 834.37836784 85.83882783882784 L 834.37836784 89.88644688644689 A 2 2 0 0 1 832.37836784 91.88644688644689 L 377 91.88644688644689 A 0 0 0 0 1 377 91.88644688644689 L 377 83.83882783882784 A 0 0 0 0 1 377 83.83882783882784 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 844.1995764066667 92.88644688644689 A 2 2 0 0 1 846.1995764066667 94.88644688644689 L 846.1995764066667 98.93406593406593 A 2 2 0 0 1 844.1995764066667 100.93406593406593 L 377 100.93406593406593 A 0 0 0 0 1 377 100.93406593406593 L 377 92.88644688644689 A 0 0 0 0 1 377 92.88644688644689 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 929.3466210833334 111.67765567765568 A 2 2 0 0 1 931.3466210833334 113.67765567765568 L 931.3466210833334 117.72527472527474 A 2 2 0 0 1 929.3466210833334 119.72527472527474 L 377 119.72527472527474 A 0 0 0 0 1 377 119.72527472527474 L 377 111.67765567765568 A 0 0 0 0 1 377 111.67765567765568 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 933.91688322 120.72527472527474 A 2 2 0 0 1 935.91688322 122.72527472527474 L 935.91688322 126.77289377289378 A 2 2 0 0 1 933.91688322 128.77289377289378 L 377 128.77289377289378 A 0 0 0 0 1 377 128.77289377289378 L 377 120.72527472527474 A 0 0 0 0 1 377 120.72527472527474 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 723.6689970866666 139.51648351648353 A 2 2 0 0 1 725.6689970866666 141.51648351648353 L 725.6689970866666 145.5641025641026 A 2 2 0 0 1 723.6689970866666 147.5641025641026 L 377 147.5641025641026 A 0 0 0 0 1 377 147.5641025641026 L 377 139.51648351648353 A 0 0 0 0 1 377 139.51648351648353 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 727.88562154 148.5641025641026 A 2 2 0 0 1 729.88562154 150.5641025641026 L 729.88562154 154.61172161172163 A 2 2 0 0 1 727.88562154 156.61172161172163 L 377 156.61172161172163 A 0 0 0 0 1 377 156.61172161172163 L 377 148.5641025641026 A 0 0 0 0 1 377 148.5641025641026 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1063.58049667 167.35531135531136 A 2 2 0 0 1 1065.58049667 169.35531135531136 L 1065.58049667 173.40293040293042 A 2 2 0 0 1 1063.58049667 175.40293040293042 L 377 175.40293040293042 A 0 0 0 0 1 377 175.40293040293042 L 377 167.35531135531136 A 0 0 0 0 1 377 167.35531135531136 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1084.4269781666667 176.40293040293042 A 2 2 0 0 1 1086.4269781666667 178.40293040293042 L 1086.4269781666667 182.4505494505495 A 2 2 0 0 1 1084.4269781666667 184.4505494505495 L 377 184.4505494505495 A 0 0 0 0 1 377 184.4505494505495 L 377 176.40293040293042 A 0 0 0 0 1 377 176.40293040293042 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 834.26005194 195.1941391941392 A 2 2 0 0 1 836.26005194 197.1941391941392 L 836.26005194 201.24175824175828 A 2 2 0 0 1 834.26005194 203.24175824175828 L 377 203.24175824175828 A 0 0 0 0 1 377 203.24175824175828 L 377 195.1941391941392 A 0 0 0 0 1 377 195.1941391941392 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 841.7234500466667 204.24175824175828 A 2 2 0 0 1 843.7234500466667 206.24175824175828 L 843.7234500466667 210.2893772893773 A 2 2 0 0 1 841.7234500466667 212.2893772893773 L 377 212.2893772893773 A 0 0 0 0 1 377 212.2893772893773 L 377 204.24175824175828 A 0 0 0 0 1 377 204.24175824175828 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 930.5765349066667 223.03296703296706 A 2 2 0 0 1 932.5765349066667 225.03296703296706 L 932.5765349066667 229.0805860805861 A 2 2 0 0 1 930.5765349066667 231.0805860805861 L 377 231.0805860805861 A 0 0 0 0 1 377 231.0805860805861 L 377 223.03296703296706 A 0 0 0 0 1 377 223.03296703296706 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 932.0725388466666 232.0805860805861 A 2 2 0 0 1 934.0725388466666 234.0805860805861 L 934.0725388466666 238.12820512820517 A 2 2 0 0 1 932.0725388466666 240.12820512820517 L 377 240.12820512820517 A 0 0 0 0 1 377 240.12820512820517 L 377 232.0805860805861 A 0 0 0 0 1 377 232.0805860805861 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 830.4784073866667 250.8717948717949 A 2 2 0 0 1 832.4784073866667 252.8717948717949 L 832.4784073866667 256.91941391941396 A 2 2 0 0 1 830.4784073866667 258.91941391941396 L 377 258.91941391941396 A 0 0 0 0 1 377 258.91941391941396 L 377 250.8717948717949 A 0 0 0 0 1 377 250.8717948717949 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 815.38168212 259.91941391941396 A 2 2 0 0 1 817.38168212 261.91941391941396 L 817.38168212 265.967032967033 A 2 2 0 0 1 815.38168212 267.967032967033 L 377 267.967032967033 A 0 0 0 0 1 377 267.967032967033 L 377 259.91941391941396 A 0 0 0 0 1 377 259.91941391941396 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1206.35721538 278.7106227106227 A 2 2 0 0 1 1208.35721538 280.7106227106227 L 1208.35721538 284.75824175824175 A 2 2 0 0 1 1206.35721538 286.75824175824175 L 377 286.75824175824175 A 0 0 0 0 1 377 286.75824175824175 L 377 278.7106227106227 A 0 0 0 0 1 377 278.7106227106227 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1211.12947259 287.75824175824175 A 2 2 0 0 1 1213.12947259 289.75824175824175 L 1213.12947259 293.8058608058608 A 2 2 0 0 1 1211.12947259 295.8058608058608 L 377 295.8058608058608 A 0 0 0 0 1 377 295.8058608058608 L 377 287.75824175824175 A 0 0 0 0 1 377 287.75824175824175 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 839.65090687 306.5494505494506 A 2 2 0 0 1 841.65090687 308.5494505494506 L 841.65090687 312.5970695970696 A 2 2 0 0 1 839.65090687 314.5970695970696 L 377 314.5970695970696 A 0 0 0 0 1 377 314.5970695970696 L 377 306.5494505494506 A 0 0 0 0 1 377 306.5494505494506 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 854.8086329133333 315.5970695970696 A 2 2 0 0 1 856.8086329133333 317.5970695970696 L 856.8086329133333 321.64468864468864 A 2 2 0 0 1 854.8086329133333 323.64468864468864 L 377 323.64468864468864 A 0 0 0 0 1 377 323.64468864468864 L 377 315.5970695970696 A 0 0 0 0 1 377 315.5970695970696 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1034.0216634133335 334.3882783882784 A 2 2 0 0 1 1036.0216634133335 336.3882783882784 L 1036.0216634133335 340.4358974358974 A 2 2 0 0 1 1034.0216634133335 342.4358974358974 L 377 342.4358974358974 A 0 0 0 0 1 377 342.4358974358974 L 377 334.3882783882784 A 0 0 0 0 1 377 334.3882783882784 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1017.1112909166667 343.4358974358974 A 2 2 0 0 1 1019.1112909166667 345.4358974358974 L 1019.1112909166667 349.4835164835165 A 2 2 0 0 1 1017.1112909166667 351.4835164835165 L 377 351.4835164835165 A 0 0 0 0 1 377 351.4835164835165 L 377 343.4358974358974 A 0 0 0 0 1 377 343.4358974358974 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 905.9428055433333 362.2271062271063 A 2 2 0 0 1 907.9428055433333 364.2271062271063 L 907.9428055433333 368.2747252747253 A 2 2 0 0 1 905.9428055433333 370.2747252747253 L 377 370.2747252747253 A 0 0 0 0 1 377 370.2747252747253 L 377 362.2271062271063 A 0 0 0 0 1 377 362.2271062271063 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 901.9728075966666 371.2747252747253 A 2 2 0 0 1 903.9728075966666 373.2747252747253 L 903.9728075966666 377.3223443223443 A 2 2 0 0 1 901.9728075966666 379.3223443223443 L 377 379.3223443223443 A 0 0 0 0 1 377 379.3223443223443 L 377 371.2747252747253 A 0 0 0 0 1 377 371.2747252747253 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1157.5608251200001 390.06593406593413 A 2 2 0 0 1 1159.5608251200001 392.06593406593413 L 1159.5608251200001 396.1135531135531 A 2 2 0 0 1 1157.5608251200001 398.1135531135531 L 377 398.1135531135531 A 0 0 0 0 1 377 398.1135531135531 L 377 390.06593406593413 A 0 0 0 0 1 377 390.06593406593413 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 1146.2406186866667 399.1135531135531 A 2 2 0 0 1 1148.2406186866667 401.1135531135531 L 1148.2406186866667 405.1611721611722 A 2 2 0 0 1 1146.2406186866667 407.1611721611722 L 377 407.1611721611722 A 0 0 0 0 1 377 407.1611721611722 L 377 399.1135531135531 A 0 0 0 0 1 377 399.1135531135531 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+        <path d="M 982.8994877933333 417.9047619047619 A 2 2 0 0 1 984.8994877933333 419.9047619047619 L 984.8994877933333 423.95238095238096 A 2 2 0 0 1 982.8994877933333 425.95238095238096 L 377 425.95238095238096 A 0 0 0 0 1 377 425.95238095238096 L 377 417.9047619047619 A 0 0 0 0 1 377 417.9047619047619 Z"
+              fill="#4285f4" clip-path="url(#rablfilter0)"></path>
+        <path d="M 992.02817986 426.95238095238096 A 2 2 0 0 1 994.02817986 428.95238095238096 L 994.02817986 433 A 2 2 0 0 1 992.02817986 435 L 377 435 A 0 0 0 0 1 377 435 L 377 426.95238095238096 A 0 0 0 0 1 377 426.95238095238096 Z"
+              fill="#db4437" clip-path="url(#rablfilter0)"></path>
+    </g>
+    <g></g>
+    <g>
+        <text x="376.5" y="464.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-3.37109375px">0
+        </text>
+        <text x="544.6666666666666" y="464.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-6.73828125px">50
+        </text>
+        <text x="712.8333333333333" y="464.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-10.109375px">100
+        </text>
+        <text x="881" y="464.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-10.109375px">150
+        </text>
+        <text x="1049.1666666666665" y="464.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-10.109375px">200
+        </text>
+        <text x="1217.3333333333335" y="464.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-10.109375px">250
+        </text>
+        <text x="1385.5" y="464.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-10.109375px">300
+        </text>
+        <text x="884.369140625" y="496.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#424242" dx="-33.62109375px">Render Time
+        </text>
+        <text x="370.5" y="68.54761541457404"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-337.5703125px">OpenChessSet-render_cam_1Shape-ambient_occlusion-embree
+        </text>
+        <text x="370.5" y="96.3864496810969"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-289.828125px">OpenChessSet-render_cam_1Shape-raytracing-embree
+        </text>
+        <text x="370.5" y="124.22527631822527"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-337.5703125px">OpenChessSet-render_cam_2Shape-ambient_occlusion-embree
+        </text>
+        <text x="370.5" y="152.06410295535363"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-289.828125px">OpenChessSet-render_cam_2Shape-raytracing-embree
+        </text>
+        <text x="370.5" y="179.90293722187647"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-337.5703125px">OpenChessSet-render_cam_3Shape-ambient_occlusion-embree
+        </text>
+        <text x="370.5" y="207.7417562296103"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-289.828125px">OpenChessSet-render_cam_3Shape-raytracing-embree
+        </text>
+        <text x="370.5" y="235.58059049613314"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-337.5703125px">OpenChessSet-render_cam_4Shape-ambient_occlusion-embree
+        </text>
+        <text x="370.5" y="263.41942476265604"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-289.828125px">OpenChessSet-render_cam_4Shape-raytracing-embree
+        </text>
+        <text x="370.5" y="291.25824377038975"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-337.5703125px">OpenChessSet-render_cam_5Shape-ambient_occlusion-embree
+        </text>
+        <text x="370.5" y="319.0970627781236"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-289.828125px">OpenChessSet-render_cam_5Shape-raytracing-embree
+        </text>
+        <text x="370.5" y="346.93591230343543"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-337.5703125px">OpenChessSet-render_cam_6Shape-ambient_occlusion-embree
+        </text>
+        <text x="370.5" y="374.7747313111694"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-289.828125px">OpenChessSet-render_cam_6Shape-raytracing-embree
+        </text>
+        <text x="370.5" y="402.6135503189031"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-337.5703125px">OpenChessSet-render_cam_7Shape-ambient_occlusion-embree
+        </text>
+        <text x="370.5" y="430.4523693266369"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#757575" dx="-289.828125px">OpenChessSet-render_cam_7Shape-raytracing-embree
+        </text>
+        <text x="14.9296875" y="242.5"
+              style="cursor: default; user-select: none; -webkit-font-smoothing: antialiased; font-family: Roboto; font-size: 12px;"
+              fill="#424242" dx="-16.37109375px" transform="rotate(-90 14.9296875 245.5)">Scene
+        </text>
+    </g>
+    <g></g>
+    <g></g>
+    <g></g>
+</svg>
