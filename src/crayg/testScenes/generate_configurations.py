@@ -116,7 +116,7 @@ def generate_config(
                         "integrator": chosen_integrator,
                         "camera": chosen_camera,
                         "resolution": resolve_resolution(scene, resolution),
-                        "maxSamples": max_samples,
+                        "maxSamples": str(max_samples),
                     },
                 }
             )
