@@ -84,39 +84,13 @@ scenes:
     integrators:
       - debug
       - ambient_occlusion
-      - raytracing
     intersectors:
       - embree
     scene_path: "M:/Test_Scene_Collection/Blender_Splash_Screens/Blenderman/Blenderman_Crayg.usda"
   - name: Intel_mooreLane
     cameras:
-      - /cameras/altCams/dining
-      - /cameras/altCams/inKitchen
-      - /cameras/altCams/toKitchen
-      - /cameras/altCams/droneCamera
-      - /cameras/altCams/frontDoor
-      - /cameras/altCams/droneCose
-      - /cameras/altCams/ivingRoomCorner
-      - /cameras/altCams/intoKitchen
-      - /cameras/altCams/intoStudio
-      - /cameras/altCams/ntoDiningroom
-      - /cameras/altCams/wideLivingroom
-      - /cameras/altCams/entryToKitchen
+      - /cameras/MASTER_cameraExtended
       - /cameras/altCams/MorrisStone
-      - /cameras/altCams/wideBackYard
-      - /cameras/altCams/photoStudio
-      - /cameras/altCams/diningTable
-      - /cameras/altCams/kitchenOrtho
-      - /cameras/altCams/studioAndZenGarden
-      - /cameras/altCams/wideFullBackFacade
-      - /cameras/altCams/throughTheWoods
-      - /cameras/altCams/wideDining
-      - /cameras/altCams/acrosstheCenterSpace
-      - /cameras/altCams/kitchenVignette
-      - /cameras/altCams/livingroomFireplace
-      - /cameras/altCams/wideExteriorAlt
-      - /cameras/altCams/outFromZenGarden
-      - /cameras/altCams/floatingInStudio
     hero_camera: /cameras/MASTER_cameraExtended
     integrators:
       - ambient_occlusion
