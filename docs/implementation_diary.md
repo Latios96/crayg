@@ -1,7 +1,7 @@
 # Implementation Diary
 
 ## 27.04.2023 - Spiral Bucket Sequence
-First, the bucket ordering for Crayg was determined by TBB - it was essentially a `tbb::parallel_for` over all bucket, which where generated line-by-line. Because that was a bit _weird_, the bucket sequence was changed to be line-by-line. 
+First, the bucket ordering for Crayg was determined by TBB - it was essentially a `tbb::parallel_for` over all bucket, which where generated line-by-line. Because that looked a bit _weird_, the bucket sequence was changed to be line-by-line. 
 
 This is also not ideal, because usually the most interesting part of the image is in the middle and not on the top of the image. That's why a spiral bucket sequence would be more useful.
 
@@ -21,29 +21,19 @@ Relative Measurements:
 
 I experimented a little bit with adaptive sampling in the last days. I implemented the adaptive sampling inspired by [Dammertz et al.’s paper, "A Hierarchical Automatic Stopping Condition for Monte Carlo Global Illumination"](https://jo.dreggn.org/home/2009_stopping.pdf). 
 
-- short summary of the paper
+The method works by subdividing image regions recursively, based on an error metric. If the metric for a block is below a certain split threshold, the block is split and further refoned, if the metric is below a certain termination threshold, the block is considered done. For the error metric they compute a weighted difference between the final pixel color with all samples and the pixel color with half the samples, which is fast to compute and yields good results. Details can be found in the paper.
 
-However, for the first experiments, I skipped the hierarchical part and just rendered the image in 8x8 pixel blocks. 
-- later I found out that this was the same approach Dreamworks first took for their implementation of adaptive sampling for MoonRay.
+For the first experiments, I skipped the hierarchical part and just rendered the image in 8x8 pixel blocks and terminated them using the error metric by Dammertz et al. I decided to skip the hierarchy, because using 8x8 blocks was just simpler and since multiple threads would need to update the error hierarchy, I was afraid to get this working correctly in a performant way. Later, I found out that Dreamworks published [a paper](https://dl-acm-org.ezp.hs-duesseldorf.de/doi/10.1145/3306307.3328205) about their adaptive sampling implementation in MoonRay.  They used to use an approach similiar to mine (8x8 pixels blocks, Dammertz et al.’s error metric, no hierarchy), but they found that this leads to undersampling for low-probability effects such as caustics. However, for a general test how adaptive sampling can improve render times, we are going to ignore this issues. Note that since a few weeks, MoonRay ist available as Open Source and the adaptive sampling implementation can be found [here](https://github.com/dreamworksanimation/moonray/blob/ba155b14779586254212c6973421ac2e7fcb47e9/lib/rendering/rndr/adaptive/AdaptiveRegionTree.h). 
 
-First tests have shown that adaptive sampling can improve the render time quite a bit.
-- to get some better numbers, I run on some test scenes 
+First tests during development have shown that adaptive sampling can improve the render time quite a bit. To get some real numbers, I run some test over a number of test scenes I collected over time. I rendered the scenes twice with adaptive/non-adaptive sampling with a maximum of 1024ssp (so the non-adaptive rendering was done with 1024ssp and the adaptive version chose a sufficient amount of samples <= 1024). The cato test runs can be found here: [uniform sampling](https://cato.frmbffr.com/projects/5/runs/873), [adaptive sampling](https://cato.frmbffr.com/projects/5/runs/879)
 
-uniform sampling: https://cato.frmbffr.com/projects/5/runs/873 \
-adaptive sampling: https://cato.frmbffr.com/projects/5/runs/879
+There was quite some time saving of almost two hours (6h 32min for non-adaptive, 4h 40min for adaptive). The rendered images are visually identical. The greatest improvement was shown by scenes with a lot of constant areas. The Ambient Occlusion scenes benefited a lot from that and showed the greatest improvements. The raytraced Intel Sponza scenes however showed the least improvement (some scenes took also longer to render). I think the issue is, that many parts of the scene are lit by GI and they always require the maximum sample number. Some Intel Sponza scenes where faster, but they also have larger areas that are not only illuminated by GI. I think the increase in rendertime is due to the evalutation of the error metric, which is actually not very useful if the whole image just needs the maximum sample number.
 
-Total Time uniform sampling: 6h 32min
-Total Time adaptive sampling: 4h 40min
+ 
 
-- what showed greatest improvements (scenes with a lot of constant areas, for example ambient occlusion)
-- what showed less improvement (Intel Sponza)
-- why are some Intel Sponza scenes slower? 
+### Conclusion and future plans:
+Until now, I skipped the hierarchy part. I am not sure, how much the sampling would benefit from using the hierarchy. Also, a thread-safe implementation would be challenging. Since Dreamworks found that not using the hierarchy is only an issue for low-probability effects such as caustics, I think it will be fine to go without the hierarchy. Right now, Crayg has no such effects and it will take some time to add them. So adding the hierarchy at some point is probably ok.
 
-- I am not sure, how much the sampling would benefit from using the hierarchy, as they will be some problems with multithreading. since multiple threads are rendering, multiple threads also need to edit the hierarchy 
-- Dreamworks uses an approach based on the paper of Dammertz et al. for their adaptive sampling support in MoonRay. Their implementation can be found here (todo) and they also published a paper about that (https://dl-acm-org.ezp.hs-duesseldorf.de/doi/10.1145/3306307.3328205)
-- They also skipped the hierarchy part at first, but they found that this leads to undersampling for low-probability effects such as caustics.
-- however, since Crayg does not support caustics (and I think it will take quite some time to come to this point), its probalby ok to skip the hierarchy part for now.  
-  
 
 ### Graphs
 Absolute Measurements:
