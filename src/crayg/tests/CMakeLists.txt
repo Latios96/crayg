@@ -22,7 +22,6 @@ set(UNIT_TEST_LIST
         TestBounds2d.cpp
         TestBucketImageBuffer.cpp
         TestBucketSizeEstimator.cpp
-        TestBvhSceneIntersector.cpp
         TestCamera.cpp
         TestCameraLens.cpp
         TestColor.cpp
@@ -62,8 +61,6 @@ set(UNIT_TEST_LIST
         TestLineByLineSequence.cpp
         TestMathUtils.cpp
         TestMatrix4x4f.cpp
-        TestNaiveBvhBuilder.cpp
-        TestNaiveBvhBuilder.cpp
         TestNode.cpp
         TestOpenExrWriter.cpp
         TestOpenSubdivRefiner.cpp

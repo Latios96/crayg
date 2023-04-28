@@ -12,7 +12,7 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
     SECTION("should write rendersettings correctly") {
         RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
                                       IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}),
-                                      IntersectorType::NAIVE_BVH, BucketSequenceType::LINE_BY_LINE);
+                                      IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE);
 
         UsdRenderSettingsWriter usdRenderSettingsWriter(renderSettings);
         usdRenderSettingsWriter.write(stage);
@@ -34,7 +34,7 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
         REQUIRE(maxSamples == 4);
         REQUIRE(integratorType == pxr::TfToken("RAYTRACING"));
         REQUIRE(sampleCount == 8);
-        REQUIRE(intersectorType == pxr::TfToken("NAIVE_BVH"));
+        REQUIRE(intersectorType == pxr::TfToken("EMBREE"));
         REQUIRE(bucketSequenceType == pxr::TfToken("LINE_BY_LINE"));
     }
 }

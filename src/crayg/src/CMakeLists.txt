@@ -84,12 +84,6 @@ set(crayg_SRCS
         intersectors/embree/EmbreeUtils.h
         intersectors/IntersectorFactory.h
         intersectors/IntersectorType.h
-        intersectors/naive/NaiveBvhBuilder.cpp
-        intersectors/naive/NaiveBvhBuilder.h
-        intersectors/naive/NaiveBvhNode.cpp
-        intersectors/naive/NaiveBvhNode.h
-        intersectors/naive/NaiveBvhSceneIntersector.cpp
-        intersectors/naive/NaiveBvhSceneIntersector.h
         intersectors/SceneIntersector.cpp
         intersectors/SceneIntersector.h
         Logger.cpp

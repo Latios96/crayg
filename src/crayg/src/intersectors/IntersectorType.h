@@ -6,7 +6,7 @@
 
 namespace crayg {
 
-enum class IntersectorType { NAIVE_BVH = 1, EMBREE = 2 };
+enum class IntersectorType { EMBREE = 2 };
 
 }
 

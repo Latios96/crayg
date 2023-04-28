@@ -84,11 +84,8 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     CliRenderSettingsOverride onlyIntegratorType;
     onlyIntegratorType.integratorType = IntegratorType::DEBUG;
 
-    CliRenderSettingsOverride onlyIntersectorType;
-    onlyIntersectorType.intersectorType = IntersectorType::NAIVE_BVH;
-
     CliRenderSettingsOverride onlyBucketSequenceType;
-    onlyIntersectorType.bucketSequenceType = BucketSequenceType::SPIRAL;
+    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::SPIRAL;
 
     RenderSettings renderSettings;
     renderSettings.resolution = Resolution(1280, 720);
@@ -111,10 +108,6 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
         REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE,
                                BucketSequenceType::LINE_BY_LINE));
-
-        REQUIRE(onlyIntersectorType.resolveOverrides(renderSettings) ==
-                RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
-                               IntersectorType::NAIVE_BVH, BucketSequenceType::LINE_BY_LINE));
 
         REQUIRE(onlyBucketSequenceType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
