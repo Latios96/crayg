@@ -114,4 +114,13 @@ std::ostream &operator<<(std::ostream &os, const Transform &transform) {
     return os;
 }
 
+Transform Transform::operator*(const Transform &rhs) const {
+    return Transform(matrix * rhs.matrix);
+}
+
+Transform &Transform::operator*=(const Transform &rhs) {
+    matrix = matrix * rhs.matrix;
+    return *this;
+}
+
 }

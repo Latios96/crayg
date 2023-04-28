@@ -126,4 +126,20 @@ TEST_CASE("apply transform to Normal", "[Transform]") {
     }
 }
 
+TEST_CASE("Transform::operator*", "[Transform]") {
+    const Transform transform;
+
+    Transform result = transform * Transform::withPosition({1, 2, 3});
+
+    REQUIRE(result == Transform::withPosition({1, 2, 3}));
+}
+
+TEST_CASE("Transform::operator*=", "[Transform]") {
+    Transform transform;
+
+    transform *= Transform::withPosition({1, 2, 3});
+
+    REQUIRE(transform == Transform::withPosition({1, 2, 3}));
+}
+
 }

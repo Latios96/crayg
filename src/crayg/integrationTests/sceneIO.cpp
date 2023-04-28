@@ -18,8 +18,7 @@ TEST_CASE("SceneIO/sceneWriteReadRendersCorrectly") {
     scene.renderSettings.maxSamples = 4;
 
     std::shared_ptr<Camera> camera = std::make_shared<Camera>(
-        Transform(Transform::withPosition({0, 0, 10}).matrix * Transform::withRotation(0, 180, 0).matrix), 35.0f,
-        36.0f);
+        Transform::withPosition({0, 0, 10}) * Transform::withRotation(0, 180, 0), 35.0f, 36.0f);
     scene.camera = camera;
 
     const std::shared_ptr<Material> diffuseMaterial =

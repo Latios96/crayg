@@ -27,6 +27,8 @@ class Transform {
     bool operator==(const Transform &rhs) const;
     bool operator!=(const Transform &rhs) const;
     Transform &operator=(const Transform &rhs);
+    Transform operator*(const Transform &rhs) const;
+    Transform &operator*=(const Transform &rhs);
 
     Matrix4x4f matrix;
     friend std::ostream &operator<<(std::ostream &os, const Transform &transform);

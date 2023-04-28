@@ -40,8 +40,8 @@ TEST_CASE("RectLight::sampleLightShape") {
     SECTION("sampleLightShape should respect scale") {
         areaLightFixture.areaLight->setWidth(5);
         areaLightFixture.areaLight->setHeight(5);
-        const Transform transform = Transform(Transform::withPosition(areaLightFixture.position).matrix *
-                                              Transform::withScale(1.f / 5, 1.f / 5, 1.f / 5).matrix);
+        const Transform transform =
+            Transform::withPosition(areaLightFixture.position) * Transform::withScale(1.f / 5, 1.f / 5, 1.f / 5);
         areaLightFixture.areaLight->setTransform(transform);
         const float realWidth = 1;
         const float realHeight = 1;
@@ -73,8 +73,7 @@ TEST_CASE("RectLight::area") {
     SECTION("area should respect scale") {
         areaLightFixture.areaLight->setWidth(1);
         areaLightFixture.areaLight->setHeight(1);
-        const Transform transform =
-            Transform(Transform::withPosition(areaLightFixture.position).matrix * Transform::withScale(5, 5, 5).matrix);
+        const Transform transform = Transform::withPosition(areaLightFixture.position) * Transform::withScale(5, 5, 5);
         areaLightFixture.areaLight->setTransform(transform);
 
         const float area = areaLightFixture.areaLight->area();

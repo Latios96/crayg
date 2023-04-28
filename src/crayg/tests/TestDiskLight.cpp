@@ -37,8 +37,7 @@ TEST_CASE("DiskLight::sampleLightShape") {
     }
     SECTION("sampleLightShape should respect scale") {
 
-        const Transform transform =
-            Transform(Transform::withPosition(position).matrix * Transform::withScale(1. / 2, 1. / 2, 1. / 2).matrix);
+        const Transform transform = Transform::withPosition(position) * Transform::withScale(1. / 2, 1. / 2, 1. / 2);
         diskLight.setTransform(transform);
         const float realRadius = 1;
 
@@ -117,8 +116,7 @@ TEST_CASE("Disklight::area") {
 
     SECTION("area should respect scale") {
         diskLight.setRadius(1);
-        const Transform transform =
-            Transform(Transform::withPosition(position).matrix * Transform::withScale(5, 5, 5).matrix);
+        const Transform transform = Transform::withPosition(position) * Transform::withScale(5, 5, 5);
         diskLight.setTransform(transform);
 
         const float area = diskLight.area();
