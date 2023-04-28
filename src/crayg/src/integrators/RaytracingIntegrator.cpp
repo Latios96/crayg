@@ -53,14 +53,9 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light, 
     }
 
     Ray rayToTrace = {lightRadiance.ray.startPoint, lightRadiance.ray.direction.normalize()};
-    auto intersection = sceneIntersector->intersect(rayToTrace);
+    const bool lightIsOccluded = sceneIntersector->isOccluded(rayToTrace, lightRadiance.ray.direction.length());
 
-    if (intersection.imageable == nullptr) {
-        return lightRadiance.radiance;
-    }
-
-    bool lightIsHidden = intersection.rayParameter <= lightRadiance.ray.direction.length();
-    if (lightIsHidden) {
+    if (lightIsOccluded) {
         return Color::createBlack();
     }
 
