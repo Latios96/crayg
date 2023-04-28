@@ -41,7 +41,7 @@ class RenderSettings {
     IntegratorType integratorType = IntegratorType::RAYTRACING;
     IntegratorSettings integratorSettings;
     IntersectorType intersectorType = IntersectorType::EMBREE;
-    BucketSequenceType bucketSequenceType = BucketSequenceType::LINE_BY_LINE;
+    BucketSequenceType bucketSequenceType = BucketSequenceType::SPIRAL;
 };
 
 }
