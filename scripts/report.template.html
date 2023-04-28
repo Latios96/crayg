@@ -1,0 +1,163 @@
+<html>
+<head>
+    <title>Benchmarks</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            margin: 40px auto;
+            font-family: Roboto;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #header {
+            margin: 25px
+        }
+
+        #chart {
+            margin: 25px
+        }
+
+        #runs {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #options-and-runs {
+            display: flex;
+        }
+
+        #options-and-runs > div {
+            margin-right: 50px;
+        }
+
+        form > input, form > fieldset {
+            margin-bottom: 10px;
+        }
+
+        fieldset {
+            display: flex;
+            flex-direction: column;
+            max-width: 200px;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+            var relative = document.getElementById("relative-timings").checked;
+            var sorting = document.querySelector('input[name="sorting"]:checked').value;
+
+            var chartElement = document.getElementById("chart");
+            while (chartElement.firstChild) {
+                chartElement.removeChild(chartElement.firstChild);
+            }
+            var jsonData = $JSONDATA$
+
+            var headline = jsonData.shift();
+            var content = jsonData;
+            content.map(line => {
+                if (relative) {
+                    line[2] = line[2] / line[1]
+                    line[1] = 1
+                }
+                return line
+            })
+            if (sorting === "largest-improvement") {
+                content.sort((a, b) => (a[2] - a[1]) - (b[2] - b[1]));
+            } else if (sorting === "largest-regression") {
+                content.sort((a, b) => (a[1] - a[2]) - (b[1] - b[2]));
+            }
+            jsonData = content;
+            jsonData.unshift(headline);
+            console.log(jsonData)
+
+            var data = google.visualization.arrayToDataTable(jsonData)
+
+            var options = {
+                chart: {
+                    title: `${relative ? "Relative" : "Absolute"} Timing`,
+                }, pointsVisible: true,
+                pointSize: 2.5,
+                height: 35 * jsonData.length,
+                bars: 'horizontal',
+                hAxis: {
+                    title: "Render Time",
+                },
+                vAxis: {
+                    title: "Scene"
+                }
+            }
+
+            var chart = new google.charts.Bar(chartElement);
+            google.visualization.events.addListener(chart, 'ready', () => {
+                const a = document.getElementById("download-link")
+                const svgElement = document.getElementById("chart").getElementsByTagName("svg")[0]
+                svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                const blob = new Blob([svgElement.outerHTML], {type: "image/svg+xml"})
+                const url = URL.createObjectURL(blob)
+                a.setAttribute('href', url)
+                var fileName = `crayg-timing-report-${relative ? "relative" : "absolute"}-${sorting}.svg`;
+                a.setAttribute('download', fileName)
+            });
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+</head>
+<body>
+<div id="header">
+    <h1>Benchmark</h1>
+    <div id="options-and-runs">
+        <div>
+            <h3>Options</h3>
+            <form id="controls">
+                <input type="checkbox" id="relative-timings" name="relative timings" onchange="drawCharts()">
+                <label for="relative-timings">Relative timing</label>
+
+                <fieldset>
+                    <legend>Sorting:</legend>
+
+                    <div>
+                        <input type="radio" id="sort-none" name="sorting" value="None" onchange="drawCharts()" checked>
+                        <label for="sort-none">None</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="largest-improvement" name="sorting" value="largest-improvement"
+                               onchange="drawCharts()">
+                        <label for="largest-improvement">Largest Improvement</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="largest-regression" name="sorting" value="largest-regression"
+                               onchange="drawCharts()">
+                        <label for="largest-regression">Largest Regression</label>
+                    </div>
+                </fieldset>
+                <button onclick=""><a id="download-link">Download SVG</a></button>
+            </form>
+        </div>
+
+        <div id="runs">
+            <h3>Runs</h3>
+            <span>#$BASELINE_RUN_ID$ (Baseline)</span>
+            <span>#$NEW_RUN_ID$</span>
+        </div>
+    </div>
+
+    <h3>Results</h3>
+
+</div>
+<div id="chart">
+    ...
+</div>
+
+</body>
+</html>
+
+
