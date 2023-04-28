@@ -11,7 +11,7 @@ class SceneIntersector {
     explicit SceneIntersector(Scene &scene) : scene(scene){};
 
     virtual Imageable::Intersection intersect(const Ray &ray) const = 0;
-    virtual bool isIntersecting(const Ray &ray, float maxDistance) const = 0;
+    virtual bool isOccluded(const Ray &ray, float maxDistance) const = 0;
 
     virtual ~SceneIntersector() = default;
 

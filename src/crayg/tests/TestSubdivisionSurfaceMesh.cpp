@@ -37,7 +37,7 @@ TEST_CASE("SubdivisionSurfaceMesh::intersect") {
     }
 }
 
-TEST_CASE("SubdivisionSurfaceMesh::isIntersecting") {
+TEST_CASE("SubdivisionSurfaceMesh::isOccluded") {
 
     SubdivisionSurfaceMesh subdivisionSurfaceMesh;
     SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);

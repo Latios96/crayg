@@ -30,7 +30,7 @@ Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray) const 
     return Imageable::Intersection::createInvalid();
 }
 
-bool EmbreeSceneIntersector::isIntersecting(const Ray &ray, float maxDistance) const {
+bool EmbreeSceneIntersector::isOccluded(const Ray &ray, float maxDistance) const {
     RTCIntersectContext context;
     rtcInitIntersectContext(&context);
 

@@ -52,7 +52,7 @@ TEST_CASE("DiskLight::sampleLightShape") {
     }
 }
 
-TEST_CASE("DiskLight isIntersecting", "[DiskLight]") {
+TEST_CASE("DiskLight isOccluded", "[DiskLight]") {
 
     DiskLight diskLight(Transform::withPosition({0, 0, -3}), 1.0f, 1.0f);
 

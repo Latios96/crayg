@@ -11,7 +11,7 @@ TEST_CASE("Sphere") {
         REQUIRE(mySphere->getRadius() == 3.0f);
     }
 
-    SECTION("isIntersecting") {
+    SECTION("isOccluded") {
         // tests intersecting ray
         Ray intersectingRay(Vector3f(1, 0, 0), Vector3f(-1, 0, 0));
         // intersects should return true
