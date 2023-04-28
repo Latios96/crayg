@@ -99,4 +99,45 @@ Vector2f Vector3f::yz() const {
     return {y, z};
 }
 
+Vector3f &Vector3f::operator+=(const Vector3f &right) {
+    x += right.x;
+    y += right.y;
+    z += right.z;
+    return *this;
+}
+
+Vector3f &Vector3f::operator-=(const Vector3f &right) {
+    x -= right.x;
+    y -= right.y;
+    z -= right.z;
+    return *this;
+}
+
+Vector3f &Vector3f::operator+=(float scalar) {
+    x += scalar;
+    y += scalar;
+    z += scalar;
+    return *this;
+}
+
+Vector3f &Vector3f::operator-=(float scalar) {
+    x -= scalar;
+    y -= scalar;
+    z -= scalar;
+    return *this;
+}
+
+Vector3f &Vector3f::operator*=(float scalar) {
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
+    return *this;
+}
+
+Vector3f &Vector3f::operator/=(float scalar) {
+    x /= scalar;
+    y /= scalar;
+    z /= scalar;
+    return *this;
+}
 } // namespace crayg

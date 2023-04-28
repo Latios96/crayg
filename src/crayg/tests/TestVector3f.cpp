@@ -64,6 +64,48 @@ TEST_CASE("Vector3f::operator/") {
     REQUIRE(result.z == 8.f / 5.f);
 }
 
+TEST_CASE("Vector3f::operator+=") {
+    Vector3f myVector(1, 2, 3);
+    myVector += Vector3f(4, 5, 6);
+
+    REQUIRE(myVector == Vector3f(5, 7, 9));
+}
+
+TEST_CASE("Vector3f::operator-=") {
+    Vector3f myVector(1, 2, 3);
+    myVector -= Vector3f(4, 5, 6);
+
+    REQUIRE(myVector == Vector3f(-3, -3, -3));
+}
+
+TEST_CASE("Vector3f::operator+= scalar") {
+    Vector3f myVector(1, 2, 3);
+    myVector += 1;
+
+    REQUIRE(myVector == Vector3f(2, 3, 4));
+}
+
+TEST_CASE("Vector3f::operator-= scalar") {
+    Vector3f myVector(1, 2, 3);
+    myVector -= 1;
+
+    REQUIRE(myVector == Vector3f(0, 1, 2));
+}
+
+TEST_CASE("Vector3f::operator*= scalar") {
+    Vector3f myVector(1, 2, 3);
+    myVector *= 2;
+
+    REQUIRE(myVector == Vector3f(2, 4, 6));
+}
+
+TEST_CASE("Vector3f::operator/= scalar") {
+    Vector3f myVector(1, 2, 3);
+    myVector /= 2;
+
+    REQUIRE(myVector == Vector3f(0.5, 1, 1.5));
+}
+
 TEST_CASE("Vector3f::normalize") {
     Vector3f myVector(5, 6, 8);
     Vector3f result = myVector.normalize();
