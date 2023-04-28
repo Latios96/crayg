@@ -12,6 +12,7 @@ struct Ray {
     float length;
 
   public:
+    Ray() = default;
     Ray(Vector3f startPoint, Vector3f direction);
 
     Ray(Vector3f startPoint, Vector3f direction, float length);
