@@ -15,6 +15,8 @@ class BucketSequence {
 
     virtual std::vector<ImageBucket> getTiles() = 0;
 
+    virtual ~BucketSequence() = default;
+
   protected:
     Resolution resolution;
     int bucketWidth;
