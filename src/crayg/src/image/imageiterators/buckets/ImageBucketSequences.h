@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKETSEQUENCES_H_
 
 #include "BucketSequenceType.h"
+#include "basics/Resolution.h"
 #include "image/ImageBucket.h"
 #include <vector>
 
