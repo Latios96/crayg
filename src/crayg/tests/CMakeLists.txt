@@ -78,7 +78,6 @@ set(UNIT_TEST_LIST
         TestResolution.cpp
         TestSampleAccumulator.cpp
         TestScene.cpp
-        TestSceneIntersector.cpp
         TestSceneReaderFactory.cpp
         TestSceneWriterFactory.cpp
         TestSphere.cpp

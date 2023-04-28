@@ -8,12 +8,12 @@ namespace crayg {
 
 class SceneIntersector {
   public:
-    explicit SceneIntersector(Scene &scene);
+    explicit SceneIntersector(Scene &scene) : scene(scene){};
 
-    virtual Imageable::Intersection intersect(const Ray &ray) const;
-    virtual bool isIntersecting(const Ray &ray, float maxDistance) const;
+    virtual Imageable::Intersection intersect(const Ray &ray) const = 0;
+    virtual bool isIntersecting(const Ray &ray, float maxDistance) const = 0;
 
-    virtual ~SceneIntersector();
+    virtual ~SceneIntersector() = default;
 
   protected:
     Scene &scene;

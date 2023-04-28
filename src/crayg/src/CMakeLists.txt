@@ -84,7 +84,6 @@ set(crayg_SRCS
         intersectors/embree/EmbreeUtils.h
         intersectors/IntersectorFactory.h
         intersectors/IntersectorType.h
-        intersectors/SceneIntersector.cpp
         intersectors/SceneIntersector.h
         Logger.cpp
         Logger.h
