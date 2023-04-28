@@ -92,7 +92,7 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
     auto halfSampledBuffer = PixelBuffer::createRgbFloat({imageBucket.getWidth(), imageBucket.getHeight()});
 
     const int samplesPerPass = 8; // todo make these configurable
-    const int maxSamples = std::pow(64, 2);
+    const int maxSamples = std::pow(scene.renderSettings.maxSamples, 2);
     const float maxError = 0.007;
 
     int samplesTaken = 0;
