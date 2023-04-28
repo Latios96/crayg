@@ -127,4 +127,60 @@ bool Color::operator>=(const Color &rhs) const {
     return !(*this < rhs);
 }
 
+Color &Color::operator+=(const Color &otherColor) {
+    r += otherColor.r;
+    g += otherColor.g;
+    b += otherColor.b;
+    return *this;
+}
+
+Color &Color::operator-=(const Color &otherColor) {
+    r -= otherColor.r;
+    g -= otherColor.g;
+    b -= otherColor.b;
+    return *this;
+}
+
+Color &Color::operator*=(const Color &otherColor) {
+    r *= otherColor.r;
+    g *= otherColor.g;
+    b *= otherColor.b;
+    return *this;
+}
+
+Color &Color::operator/=(const Color &otherColor) {
+    r /= otherColor.r;
+    g /= otherColor.g;
+    b /= otherColor.b;
+    return *this;
+}
+
+Color &Color::operator+=(float scalar) {
+    r += scalar;
+    g += scalar;
+    b += scalar;
+    return *this;
+}
+
+Color &Color::operator-=(float scalar) {
+    r -= scalar;
+    g -= scalar;
+    b -= scalar;
+    return *this;
+}
+
+Color &Color::operator*=(float scalar) {
+    r *= scalar;
+    g *= scalar;
+    b *= scalar;
+    return *this;
+}
+
+Color &Color::operator/=(float scalar) {
+    r /= scalar;
+    g /= scalar;
+    b /= scalar;
+    return *this;
+}
+
 } // namespace crayg

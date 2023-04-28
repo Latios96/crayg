@@ -161,4 +161,68 @@ TEST_CASE("Color/pow", "[Color]") {
     REQUIRE(result == Color(1, 4, 9));
 }
 
+TEST_CASE("Color::operator+=", "[Color]") {
+    Color color(1, 2, 3);
+
+    color += Color(4, 5, 6);
+
+    REQUIRE(color == Color(5, 7, 9));
+}
+
+TEST_CASE("Color::operator-=", "[Color]") {
+    Color color(1, 2, 3);
+
+    color -= Color(4, 5, 6);
+
+    REQUIRE(color == Color(-3, -3, -3));
+}
+
+TEST_CASE("Color::operator*=", "[Color]") {
+    Color color(1, 2, 3);
+
+    color *= Color(4, 5, 6);
+
+    REQUIRE(color == Color(4, 10, 18));
+}
+
+TEST_CASE("Color::operator/=", "[Color]") {
+    Color color(1, 2, 3);
+
+    color /= Color(2, 2, 2);
+
+    REQUIRE(color == Color(0.5, 1, 1.5));
+}
+
+TEST_CASE("Color::operator+= scalar", "[Color]") {
+    Color color(1, 2, 3);
+
+    color += 4;
+
+    REQUIRE(color == Color(5, 6, 7));
+}
+
+TEST_CASE("Color::operator-= scalar", "[Color]") {
+    Color color(1, 2, 3);
+
+    color -= 4;
+
+    REQUIRE(color == Color(-3, -2, -1));
+}
+
+TEST_CASE("Color::operator*= scalar", "[Color]") {
+    Color color(1, 2, 3);
+
+    color *= 4;
+
+    REQUIRE(color == Color(4, 8, 12));
+}
+
+TEST_CASE("Color::operator/= scalar", "[Color]") {
+    Color color(1, 2, 3);
+
+    color /= 2;
+
+    REQUIRE(color == Color(0.5, 1, 1.5));
+}
+
 }

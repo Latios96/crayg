@@ -35,6 +35,22 @@ class Color {
 
     Color operator/(float scalar) const;
 
+    Color &operator+=(const Color &otherColor);
+
+    Color &operator-=(const Color &otherColor);
+
+    Color &operator*=(const Color &otherColor);
+
+    Color &operator/=(const Color &otherColor);
+
+    Color &operator+=(float scalar);
+
+    Color &operator-=(float scalar);
+
+    Color &operator*=(float scalar);
+
+    Color &operator/=(float scalar);
+
     bool operator==(const Color &color) const;
 
     bool operator!=(const Color &color) const;
