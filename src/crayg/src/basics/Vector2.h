@@ -30,12 +30,48 @@ template <typename T> class Vector2 {
         return {x - otherVector.x, y - otherVector.y};
     }
 
+    template <typename OT> Vector2<T> &operator+=(const Vector2<OT> &otherVector) {
+        x += otherVector.x;
+        y += otherVector.y;
+        return *this;
+    }
+
+    template <typename OT> Vector2<T> &operator-=(const Vector2<OT> &otherVector) {
+        x -= otherVector.x;
+        y -= otherVector.y;
+        return *this;
+    }
+
     template <typename OT> Vector2<T> operator*(OT scalar) const {
         return {x * scalar, y * scalar};
     }
 
     template <typename OT> Vector2<T> operator/(OT scalar) const {
         return {x / scalar, y / scalar};
+    }
+
+    template <typename OT> Vector2<T> &operator+=(OT scalar) {
+        x += scalar;
+        y += scalar;
+        return *this;
+    }
+
+    template <typename OT> Vector2<T> &operator-=(OT scalar) {
+        x -= scalar;
+        y -= scalar;
+        return *this;
+    }
+
+    template <typename OT> Vector2<T> &operator*=(OT scalar) {
+        x *= scalar;
+        y *= scalar;
+        return *this;
+    }
+
+    template <typename OT> Vector2<T> &operator/=(OT scalar) {
+        x /= scalar;
+        y /= scalar;
+        return *this;
     }
 
     float length() const {
