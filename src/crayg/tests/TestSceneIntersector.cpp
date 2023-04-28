@@ -14,9 +14,9 @@ TEST_CASE("SceneIntersector") {
     SceneIntersector intersector(scene);
 
     SECTION("isIntersectingReturnsTrue") {
-        REQUIRE(intersector.isIntersecting(Ray(Vector3f(1, 0, -5), Vector3f(0, 0, 1))));
-        REQUIRE(intersector.isIntersecting(Ray(Vector3f(-2, 0, -5), Vector3f(0, 0, 1))));
-        REQUIRE(intersector.isIntersecting(Ray(Vector3f(0, 0, 0), Vector3f(0, 0, 1))));
+        REQUIRE(intersector.isIntersecting(Ray(Vector3f(1, 0, -5), Vector3f(0, 0, 1)), 10));
+        REQUIRE(intersector.isIntersecting(Ray(Vector3f(-2, 0, -5), Vector3f(0, 0, 1)), 10));
+        REQUIRE(intersector.isIntersecting(Ray(Vector3f(0, 0, 0), Vector3f(0, 0, 1)), 10));
     }
 }
 

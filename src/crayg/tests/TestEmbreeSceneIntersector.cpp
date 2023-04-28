@@ -98,4 +98,26 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
     }
 }
 
+TEST_CASE("EmbreeSceneIntersector::isIntersecting") {
+    Scene scene;
+    auto sphere1 = std::make_shared<Sphere>(Vector3f(0.f, 0.f, 2.f), 1.f);
+    scene.addObject(sphere1);
+
+    SECTION("should find intersection for empty scene") {
+        Scene emptyScene;
+        IntersectorFixture fixture(emptyScene);
+        Ray ray({0, 0, 0}, {0, 0, 1});
+
+        REQUIRE_FALSE(fixture.embreeSceneIntersector->isIntersecting(ray, 1.5f));
+    }
+
+    SECTION("should find no intersection for empty scene") {
+        Scene emptyScene;
+        IntersectorFixture fixture(emptyScene);
+        Ray ray({0, 0, 0}, {0, 0, 1});
+
+        REQUIRE_FALSE(fixture.embreeSceneIntersector->isIntersecting(ray, 0.5f));
+    }
+}
+
 }

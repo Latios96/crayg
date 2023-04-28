@@ -14,7 +14,7 @@ Imageable::Intersection SceneIntersector::intersect(const Ray &ray) const {
     return hitIntersection;
 }
 
-bool SceneIntersector::isIntersecting(const Ray &ray) const {
+bool SceneIntersector::isIntersecting(const Ray &ray, float maxDistance) const {
     return std::any_of(scene.objects.begin(), scene.objects.end(), [&ray](std::shared_ptr<SceneObject> &intersectable) {
         return intersectable->isIntersecting(ray);
     });

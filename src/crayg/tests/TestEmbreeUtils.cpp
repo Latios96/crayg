@@ -20,6 +20,15 @@ TEST_CASE("EmbreeUtils::createRtcRay") {
         REQUIRE(rtcRay.tnear == 0.001f);
         REQUIRE(rtcRay.tfar == std::numeric_limits<float>::infinity());
     }
+
+    SECTION("should create RtcRay from given ray with correct tFar") {
+        Ray ray({1, 2, 3}, {4, 5, 6});
+
+        RTCRay rtcRay;
+        EmbreeUtils::createRtcRay(ray, &rtcRay, 5);
+
+        REQUIRE(rtcRay.tfar == 5);
+    }
 }
 
 TEST_CASE("EmbreeUtils::createRTCRayHit") {
@@ -39,6 +48,14 @@ TEST_CASE("EmbreeUtils::createRTCRayHit") {
         REQUIRE(rtcRayHit.ray.tnear == 0.001f);
         REQUIRE(rtcRayHit.ray.tfar == std::numeric_limits<float>::infinity());
         REQUIRE(rtcRayHit.hit.geomID == RTC_INVALID_GEOMETRY_ID);
+    }
+    SECTION("should create RTCRayHit from given ray with corrent tFar") {
+        Ray ray({1, 2, 3}, {4, 5, 6});
+
+        RTCRayHit rtcRayHit;
+        EmbreeUtils::createRTCRayHit(ray, &rtcRayHit, 5);
+
+        REQUIRE(rtcRayHit.ray.tfar == 5);
     }
 }
 
