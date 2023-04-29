@@ -15,7 +15,7 @@ TEST_CASE("RaytracingIntegrator::calculateDirectLight") {
     auto light = std::make_shared<Light>(Transform::withPosition({0, 2, 0}), 10.0f);
 
     SECTION("should calculate direct light for light correctly") {
-        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection::createInvalid());
+        fakeit::When(Method(mockSceneIntersector, isOccluded)).Return(false);
 
         const Color lightContribution = raytracingIntegrator.calculateDirectLight(light, {0, 0, 0}, {0, 1, 0});
 
@@ -24,7 +24,7 @@ TEST_CASE("RaytracingIntegrator::calculateDirectLight") {
 
     SECTION("should respect Light color") {
         light->setColor({1, 0, 0});
-        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection::createInvalid());
+        fakeit::When(Method(mockSceneIntersector, isOccluded)).Return(false);
 
         const Color lightContribution = raytracingIntegrator.calculateDirectLight(light, {0, 0, 0}, {0, 1, 0});
 
