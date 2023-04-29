@@ -14,7 +14,7 @@ class ProgressReporter {
                      std::function<void(std::chrono::seconds)> finishCallback);
     ProgressReporter(const ProgressReporter &progressReporter);
 
-    static ProgressReporter createLoggingProgressReporter(int maxIterations, const std::string &timeElapsed);
+    static ProgressReporter createLoggingProgressReporter(int maxIterations, const std::string &taskName);
 
     void iterationDone();
 
