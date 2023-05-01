@@ -31,12 +31,8 @@ void AdaptiveBucketSampler::sampleBucket(BucketImageBuffer &bucketImageBuffer) c
             const auto samplePos = bucketImageBuffer.imageBucket.getPosition() + pixel;
             samplePixel(samplePos, fullySampled, halfSampled);
 
-            fullySampled =
-                fullySampledBuffer->getValue(pixel) + fullySampled; // todo extract method "addToPixel" to PixelBuffer
-            fullySampledBuffer->setValue(pixel, fullySampled);
-
-            halfSampled = halfSampledBuffer->getValue(pixel) + halfSampled;
-            halfSampledBuffer->setValue(pixel, halfSampled);
+            fullySampledBuffer->addToPixel(pixel, fullySampled);
+            halfSampledBuffer->addToPixel(pixel, halfSampled);
 
             error += evaluateErrorMetric(fullySampled / samplesTaken, halfSampled / (samplesTaken / 2));
         }
@@ -87,9 +83,7 @@ bool AdaptiveBucketSampler::shouldTerminate(int samplesTaken, float error) const
 
 void AdaptiveBucketSampler::divideSampleSumBySampleCount(PixelBuffer *fullySampledBuffer, int samplesTaken) const {
     for (auto pixel : ImageIterators::lineByLine(*fullySampledBuffer)) {
-        auto pixelColor = fullySampledBuffer->getValue(pixel);
-        fullySampledBuffer->setValue(pixel,
-                                     pixelColor / samplesTaken); // todo extract method "dividePixel" to PixelBuffer
+        fullySampledBuffer->dividePixel(pixel, samplesTaken);
     }
 }
 
