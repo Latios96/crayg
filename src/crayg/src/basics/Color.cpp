@@ -187,4 +187,8 @@ Color &Color::operator/=(float scalar) {
     return *this;
 }
 
+bool Color::isNan() const {
+    return std::isnan(r) || std::isnan(g) || std::isnan(b);
+}
+
 } // namespace crayg

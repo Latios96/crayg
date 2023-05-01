@@ -66,6 +66,8 @@ class Color {
 
     bool isBlack() const;
 
+    bool isNan() const;
+
     std::tuple<int, int, int> getRgbValues() const;
 
     Color pow(float exponent) const;

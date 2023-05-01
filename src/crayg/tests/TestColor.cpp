@@ -236,4 +236,19 @@ TEST_CASE("Color::operator/= scalar", "[Color]") {
     REQUIRE(color == Color(0.5, 1, 1.5));
 }
 
+TEST_CASE("Color::isNan", "[Color]") {
+    SECTION("should return false for black color") {
+        REQUIRE_FALSE(Color::createBlack().isNan());
+    }
+    SECTION("should return true if r in NaN") {
+        REQUIRE(Color(std::nan(""), 2, 3).isNan());
+    }
+    SECTION("should return true if g in NaN") {
+        REQUIRE(Color(1, std::nan(""), 3).isNan());
+    }
+    SECTION("should return true if b in NaN") {
+        REQUIRE(Color(1, 2, std::nan("")).isNan());
+    }
+}
+
 }
