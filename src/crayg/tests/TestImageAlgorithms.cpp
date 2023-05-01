@@ -76,4 +76,56 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
     }
 }
 
+TEST_CASE("ImageAlgorithms::minValue") {
+    SECTION("should find black as min color") {
+        Image image(2, 2);
+        image.setValue({0, 0}, Color::createBlack());
+        image.setValue({1, 0}, Color::createGrey(0.2));
+        image.setValue({0, 1}, Color::createGrey(0.6));
+        image.setValue({1, 1}, Color::createWhite());
+
+        auto minValue = ImageAlgorithms::minValue(image);
+
+        REQUIRE(minValue == Color::createBlack());
+    }
+
+    SECTION("should find black as min color") {
+        Image image(2, 2);
+        image.setValue({0, 0}, Color::createGrey(0.1));
+        image.setValue({1, 0}, Color::createGrey(0.2));
+        image.setValue({0, 1}, Color::createGrey(0.6));
+        image.setValue({1, 1}, Color::createWhite());
+
+        auto minValue = ImageAlgorithms::minValue(image);
+
+        REQUIRE(minValue == Color::createGrey(0.1));
+    }
+}
+
+TEST_CASE("ImageAlgorithms::maxValue") {
+    SECTION("should find white as max color") {
+        Image image(2, 2);
+        image.setValue({0, 0}, Color::createBlack());
+        image.setValue({1, 0}, Color::createGrey(0.2));
+        image.setValue({0, 1}, Color::createGrey(0.6));
+        image.setValue({1, 1}, Color::createWhite());
+
+        auto minValue = ImageAlgorithms::maxValue(image);
+
+        REQUIRE(minValue == Color::createWhite());
+    }
+
+    SECTION("should find 0.6 as max color") {
+        Image image(2, 2);
+        image.setValue({0, 0}, Color::createBlack());
+        image.setValue({1, 0}, Color::createGrey(0.2));
+        image.setValue({0, 1}, Color::createGrey(0.6));
+        image.setValue({1, 1}, Color::createGrey(0.3));
+
+        auto minValue = ImageAlgorithms::maxValue(image);
+
+        REQUIRE(minValue == Color::createGrey(0.6));
+    }
+}
+
 }
