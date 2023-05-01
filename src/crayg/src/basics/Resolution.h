@@ -12,6 +12,11 @@ struct Resolution {
     Resolution(int width, int height);
     Resolution(const Resolution &resolution);
     static Resolution parse(const std::string &resolutionString);
+
+    template <typename T> static Resolution deduce(const T &t) {
+        return Resolution(t.getWidth(), t.getHeight());
+    }
+
     bool operator==(const Resolution &rhs) const;
     bool operator!=(const Resolution &rhs) const;
     bool operator<(const Resolution &rhs) const;
