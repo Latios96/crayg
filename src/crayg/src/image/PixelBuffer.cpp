@@ -234,4 +234,14 @@ PixelFormat PixelBuffer::getPixelFormat() const {
     return pixelFormat;
 }
 
+void PixelBuffer::addToPixel(const Vector2i &pixelPosition, const Color &color) {
+    const Color currentColor = getValue(pixelPosition);
+    setValue(pixelPosition, currentColor + color);
+}
+
+void PixelBuffer::dividePixel(const crayg::Vector2i &pixelPosition, float value) {
+    const Color currentColor = getValue(pixelPosition);
+    setValue(pixelPosition, currentColor / value);
+}
+
 } // crayg

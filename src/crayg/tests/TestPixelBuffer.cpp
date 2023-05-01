@@ -223,4 +223,25 @@ TEST_CASE("PixelBuffer::formatting") {
     }
 }
 
+TEST_CASE("PixelBuffer::addToPixel") {
+    SECTION("should add to pixel") {
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, 3);
+
+        pixelBuffer.addToPixel({2, 3}, Color::createGrey(0.1f));
+
+        REQUIRE(pixelBuffer.getValue({2, 3}) == Color::createGrey(0.1f));
+    }
+}
+
+TEST_CASE("PixelBuffer::dividePixel") {
+    SECTION("should add to pixel") {
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, 3);
+
+        pixelBuffer.setValue({2, 3}, Color::createWhite());
+        pixelBuffer.dividePixel({2, 3}, 2.f);
+
+        REQUIRE(pixelBuffer.getValue({2, 3}) == Color::createGrey(0.5f));
+    }
+}
+
 }

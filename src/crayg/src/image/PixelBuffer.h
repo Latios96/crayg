@@ -25,6 +25,8 @@ class PixelBuffer {
     void fill(const Color &color);
     void setValue(const Vector2i &pixelPosition, const Color &color);
     Color getValue(const Vector2i &pixelPosition) const;
+    void addToPixel(const Vector2i &pixelPosition, const Color &color);
+    void dividePixel(const Vector2i &pixelPosition, float value);
     bool isBlack() const;
     bool isWhite() const;
     bool isColor(const Color &color) const;
