@@ -40,3 +40,24 @@ Absolute Measurements:
 ![Adaptive Sampling Performance Absolute](figures/28.04.2023/adaptive-sampling-absolute.svg)
 Relative Measurements:
 ![Adaptive Sampling Performance Relative](figures/28.04.2023/adaptive-sampling-relative.svg)
+
+## 28.04.2023 - Use occlusion rays with tMax for shadow rays and ambient occlusion
+
+For "historic reasons", crayg did not use the full power of occlusion rays for shadow rays and ambient occlusion. Mainly, because the interface was broken and I did not want to fix the naive BVH implementation. Also, some measurements showed in the past, that the benefit was not that huge. It turns out that this measurements where just wrong. 
+
+Since crayg uses Embree for quite some time now, I decided to drop the old naive BVH implementation, since its slower in ray tracing and _way_ slower to construct than the Embree BVH (the naive BVH was not constructed multithreaded for example).
+
+The scenes that benefited the most where the ambient occlusion scenes, I was able to reduce render times down to 20% of the original render time (10min to 2min). But also all other scenes benefited greatly from that. Note that with adaptive sampling, the render time for some AO scenes could be reduced from 10min to about 20 sec in some scenes 
+
+Cato Runs for measuring the performance:
+
+Baseline Line-by-line: https://cato.frmbffr.com/projects/5/runs/873 \
+Baseline Spiral: https://cato.frmbffr.com/projects/5/runs/873
+
+### Graphs
+
+Relative Largest improvements:
+![Adaptive Sampling Performance Relative](figures/28.04.2023/crayg-timing-report-occlusion-rays-relative-largest-improvement.svg)
+
+Absolute Largest improvements:
+![Adaptive Sampling Performance Absolute](figures/28.04.2023/crayg-timing-report-occlusion-rays-absolute-largest-improvement.svg)
