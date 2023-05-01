@@ -8,4 +8,8 @@ float Random::random() {
     static thread_local std::mt19937 generator(std::hash<std::thread::id>()(std::this_thread::get_id()));
     return distribution(generator);
 }
+
+Vector2f Random::randomVector2f() {
+    return {Random::random(), Random::random()};
+}
 } // crayg
