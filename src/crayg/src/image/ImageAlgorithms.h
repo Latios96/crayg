@@ -51,7 +51,7 @@ class ImageAlgorithms {
         const Color rangeEnd = max - min;
         for (auto pixel : ImageIterators::lineByLine(source)) {
             auto pixelColor = source.getValue(pixel) - min;
-            auto gradientPosition = pixelColor / rangeEnd;
+            auto gradientPosition = (pixelColor / rangeEnd).clamp();
             auto gradientColor = gradient.interpolate(gradientPosition.r);
             target.setValue(pixel, gradientColor);
         }
