@@ -31,6 +31,8 @@ class Color {
 
     Color operator*(const Color &otherColor) const;
 
+    Color operator/(const Color &otherColor) const;
+
     Color operator*(float scalar) const;
 
     Color operator/(float scalar) const;

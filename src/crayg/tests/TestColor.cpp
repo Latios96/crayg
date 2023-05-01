@@ -65,6 +65,17 @@ TEST_CASE("Color/operatorMultiplyColor", "[Color]") {
     REQUIRE(result.b == 18);
 }
 
+TEST_CASE("Color/operatorDivideColor", "[Color]") {
+    Color myColor(1, 2, 3);
+    Color otherColor(4, 5, 6);
+
+    Color result = myColor / otherColor;
+
+    REQUIRE(result.r == 0.25f);
+    REQUIRE(result.g == (2.f / 5.f));
+    REQUIRE(result.b == 0.5f);
+}
+
 TEST_CASE("Color/operatorMultiplyScalar", "[Color]") {
     Color myColor(1, 2, 3);
 

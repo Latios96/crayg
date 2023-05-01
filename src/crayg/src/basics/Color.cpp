@@ -32,6 +32,10 @@ Color Color::operator*(const Color &otherColor) const {
     return {r * otherColor.r, g * otherColor.g, b * otherColor.b};
 }
 
+Color Color::operator/(const Color &otherColor) const {
+    return {r / otherColor.r, g / otherColor.g, b / otherColor.b};
+}
+
 Color Color::operator*(float scalar) const {
     return {r * scalar, g * scalar, b * scalar};
 }
