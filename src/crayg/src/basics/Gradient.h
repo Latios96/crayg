@@ -52,19 +52,19 @@ template <typename T> class Gradient {
     explicit Gradient(const std::vector<GradientStop<T>> &stops) : stops(stops) {
     }
 
-    T interpolate(float position);
+    T interpolate(float position) const;
 
   private:
-    T lerp(const T &firstValue, const T &secondValue, float position);
+    T lerp(const T &firstValue, const T &secondValue, float position) const;
     std::vector<GradientStop<T>> stops;
 };
 
-template <typename T> T Gradient<T>::interpolate(float position) {
+template <typename T> T Gradient<T>::interpolate(float position) const {
     position = std::clamp<float>(position, 0, 1);
 
     for (int i = 1; i < stops.size(); i++) {
-        GradientStop<T> &firstStop = stops[i - 1];
-        GradientStop<T> &secondStop = stops[i];
+        const GradientStop<T> &firstStop = stops[i - 1];
+        const GradientStop<T> &secondStop = stops[i];
 
         const bool firstValueIsBeforePosition = firstStop.position <= position;
         const bool secondValueIsAfterPosition = secondStop.position >= position;
@@ -80,7 +80,7 @@ template <typename T> T Gradient<T>::interpolate(float position) {
     throw std::runtime_error(fmt::format("Did not find a stop for position {}", position));
 }
 
-template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondValue, float position) {
+template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondValue, float position) const {
     return firstValue * (1 - position) + secondValue * position;
 }
 
