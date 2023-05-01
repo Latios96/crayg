@@ -92,6 +92,12 @@ set(crayg_SRCS
         outputdrivers/OutputDriver.h
         outputdrivers/TeeOutputDriver.cpp
         outputdrivers/TeeOutputDriver.h
+        renderer/bucketsamplers/AdaptiveBucketSampler.cpp
+        renderer/bucketsamplers/AdaptiveBucketSampler.h
+        renderer/bucketsamplers/BucketSampler.cpp
+        renderer/bucketsamplers/BucketSampler.h
+        renderer/bucketsamplers/UniformBucketSampler.cpp
+        renderer/bucketsamplers/UniformBucketSampler.h
         renderer/BucketSizeEstimator.cpp
         renderer/BucketSizeEstimator.h
         renderer/GeometryCompiler.cpp

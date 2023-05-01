@@ -9,6 +9,7 @@ set(UNIT_TEST_LIST
         fixtures/TriangleMeshFixtures.h
         fixtures/UsdGeomMeshFixtures.cpp
         fixtures/UsdGeomMeshFixtures.h
+        TestAdaptiveBucketSampler.cpp
         TestAreaLight.cpp
         TestBarycentricCoordinates.cpp
         TestBaseUsdImageableReader.cpp
@@ -94,6 +95,7 @@ set(UNIT_TEST_LIST
         TestTriangleMeshPerFacePrimVar.cpp
         TestTriangleMeshPerPointPrimVar.cpp
         TestTriangleMeshPerVertexPrimVar.cpp
+        TestUniformBucketSampler.cpp
         TestUnitImageSampler.cpp
         TestUsdCameraReader.cpp
         TestUsdCameraWriter.cpp

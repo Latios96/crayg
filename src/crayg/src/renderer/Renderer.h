@@ -1,6 +1,7 @@
 #ifndef CRAYG_RENDERER_H
 #define CRAYG_RENDERER_H
 
+#include "bucketsamplers/AdaptiveBucketSampler.h"
 #include "integrators/AbstractIntegrator.h"
 #include "scene/camera/PineHoleCameraModel.h"
 #include <basics/Color.h>
@@ -33,9 +34,11 @@ class Renderer {
     void renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
     void renderBucket(const ImageBucket &imageBucket);
     Color renderPixel(const Vector2i &pixel);
-    Color renderSample(float x, float y);
+    Color renderSample(const Vector2f &samplePos);
 
     std::unique_ptr<AbstractIntegrator> integrator;
+    std::unique_ptr<BucketSampler> bucketSampler;
+
     void writeImageMetadata(std::chrono::seconds renderTime);
     ImageSpec requiredImageSpec(const Resolution &resolution) const;
     void renderAdaptive(const ImageBucket &imageBucket, BucketImageBuffer &bucketImageBuffer);
