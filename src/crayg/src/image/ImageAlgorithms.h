@@ -40,6 +40,23 @@ class ImageAlgorithms {
         return max;
     }
 
+    template <typename I> static void fillWithRelativeGradient(I &source, I &target, const Gradient<Color> &gradient) {
+        Color minValue = ImageAlgorithms::minValue(source);
+        Color maxValue = ImageAlgorithms::maxValue(source);
+        fillWithRelativeGradient(source, target, gradient, minValue, maxValue);
+    }
+
+    template <typename I>
+    static void fillWithRelativeGradient(I &source, I &target, const Gradient<Color> &gradient, Color min, Color max) {
+        const Color rangeEnd = max - min;
+        for (auto pixel : ImageIterators::lineByLine(source)) {
+            auto pixelColor = source.getValue(pixel) - min;
+            auto gradientPosition = pixelColor / rangeEnd;
+            auto gradientColor = gradient.interpolate(gradientPosition.r);
+            target.setValue(pixel, gradientColor);
+        }
+    }
+
     static bool bucketIsContainedInImage(const ImageBucket &bucket, Image &image);
 };
 
