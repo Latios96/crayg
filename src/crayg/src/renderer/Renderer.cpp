@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "BucketSizeEstimator.h"
 #include "GeometryCompiler.h"
 #include "Logger.h"
 #include "SampleAccumulator.h"
