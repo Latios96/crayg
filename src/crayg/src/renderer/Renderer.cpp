@@ -5,6 +5,7 @@
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
+#include "renderer/bucketsamplers/BucketSamplerFactory.h"
 #include "sampling/Random.h"
 #include "scene/camera/CameraModelFactory.h"
 #include "utils/ImageMetadataCollector.h"
@@ -12,7 +13,6 @@
 #include "utils/StopWatch.h"
 #include <image/BucketImageBuffer.h>
 #include <image/imageiterators/buckets/ImageBucketSequences.h>
-#include <image/imageiterators/pixels/ImageIterators.h>
 #include <memory>
 #include <numeric>
 #include <tbb/concurrent_queue.h>
@@ -80,9 +80,8 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
 }
 
 void Renderer::init() {
-    bucketSampler = std::make_unique<AdaptiveBucketSampler>(
-        scene.renderSettings.maxSamples, [this](Vector2f samplePos) { return renderSample(samplePos); }, 8,
-        0.007); // todo switch based on RenderSettings
+    bucketSampler = BucketSamplerFactory::createBucketSampler(
+        scene.renderSettings, [this](Vector2f samplePos) { return renderSample(samplePos); });
     {
         InformativeScopedStopWatch buildBvh("Initialize camera");
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);

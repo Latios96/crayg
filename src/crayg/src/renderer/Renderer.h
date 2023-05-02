@@ -1,7 +1,7 @@
 #ifndef CRAYG_RENDERER_H
 #define CRAYG_RENDERER_H
 
-#include "bucketsamplers/AdaptiveBucketSampler.h"
+#include "bucketsamplers/BucketSampler.h"
 #include "integrators/AbstractIntegrator.h"
 #include "scene/camera/PineHoleCameraModel.h"
 #include <basics/Color.h>
