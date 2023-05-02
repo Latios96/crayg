@@ -22,6 +22,20 @@
       ]
     },
     {
+      "name": "BucketSamplers",
+      "tests": [
+        {
+          "name": "AdaptiveBucketSampler"
+        },
+        {
+          "name": "UniformBucketSampler"
+        }
+      ],
+      "variables": {
+        "image_output_png": "{{image_output_exr}}"
+      }
+    },
+    {
       "name": "CameraModels",
       "tests": [
         {

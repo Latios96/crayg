@@ -1,0 +1,17 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../../Geometry/SpherePrimitive/SpherePrimitive.usda@
+    ]
+)
+
+
+
+over "Render"
+{
+    over "settings"
+    {
+        custom token integratorType = "AMBIENT_OCCLUSION"
+        custom int maxSamples = 8
+    }
+}
