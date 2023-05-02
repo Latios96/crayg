@@ -33,7 +33,6 @@ class Renderer {
     void renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
     void renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
     void renderBucket(const ImageBucket &imageBucket);
-    Color renderPixel(const Vector2i &pixel);
     Color renderSample(const Vector2f &samplePos);
 
     std::unique_ptr<AbstractIntegrator> integrator;
@@ -41,8 +40,6 @@ class Renderer {
 
     void writeImageMetadata(std::chrono::seconds renderTime);
     ImageSpec requiredImageSpec(const Resolution &resolution) const;
-    void renderAdaptive(const ImageBucket &imageBucket, BucketImageBuffer &bucketImageBuffer);
-    void renderUniform(const ImageBucket &imageBucket, BucketImageBuffer &bucketImageBuffer);
 };
 
 }
