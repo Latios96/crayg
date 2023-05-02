@@ -36,7 +36,7 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
 }
 
 Resolution crayg::UsdRenderSettingsReader::readResolution() const {
-    Resolution resolution = Resolution(1280, 720); // todo use default from RenderSettings::createDefault() here
+    Resolution resolution = RenderSettings::createDefault().resolution;
     if (usdPrim.GetResolutionAttr() && usdPrim.GetResolutionAttr().IsAuthored()) {
         auto usdResolution = UsdUtils::getStaticAttributeValueAs<pxr::GfVec2i>(usdPrim.GetResolutionAttr());
         resolution = Resolution(usdResolution[0], usdResolution[1]);
@@ -46,7 +46,7 @@ Resolution crayg::UsdRenderSettingsReader::readResolution() const {
 
 int crayg::UsdRenderSettingsReader::readMaxSamples() const {
     return UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "maxSamples",
-                                                    4); // todo use default from RenderSettings::createDefault() here
+                                                    RenderSettings::createDefault().maxSamples);
 }
 
 IntegratorType crayg::UsdRenderSettingsReader::readIntegratorType() const {
