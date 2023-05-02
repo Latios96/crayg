@@ -4,6 +4,7 @@
 #include "image/imageiterators/buckets/BucketSequenceType.h"
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"
+#include "renderer/bucketsamplers/BucketSamplerType.h"
 #include "scene/camera/CameraType.h"
 #include <fmt/format.h>
 #include <pxr/usd/sdf/types.h>
@@ -67,6 +68,14 @@ template <> struct UsdTypeUtil<BucketSequenceType> {
 
     static pxr::TfToken convert(BucketSequenceType bucketSequenceType) {
         return pxr::TfToken(fmt::format("{}", bucketSequenceType));
+    }
+};
+
+template <> struct UsdTypeUtil<BucketSamplerType> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(BucketSamplerType bucketSamplerType) {
+        return pxr::TfToken(fmt::format("{}", bucketSamplerType));
     }
 };
 

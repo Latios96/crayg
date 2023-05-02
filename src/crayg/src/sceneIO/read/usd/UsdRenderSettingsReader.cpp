@@ -18,6 +18,9 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     IntegratorSettings integratorSettings = readIntegratorSettings();
     IntersectorType intersectorType = readIntersectorType();
     BucketSequenceType bucketSequenceType = readBucketSequenceType();
+    BucketSamplerType bucketSamplerType = readBucketSamplerType();
+    float adaptiveMaxError = readAdaptiveMaxError();
+    int samplesPerAdaptivePass = readSamplesPerAdaptivePass(); // todo this can all be const
 
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
@@ -25,12 +28,15 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     renderSettings->integratorSettings = integratorSettings;
     renderSettings->intersectorType = intersectorType;
     renderSettings->bucketSequenceType = bucketSequenceType;
+    renderSettings->bucketSamplerType = bucketSamplerType;
+    renderSettings->adaptiveMaxError = adaptiveMaxError;
+    renderSettings->samplesPerAdaptivePass = samplesPerAdaptivePass;
 
     return renderSettings;
 }
 
 Resolution crayg::UsdRenderSettingsReader::readResolution() const {
-    Resolution resolution = Resolution(1280, 720);
+    Resolution resolution = Resolution(1280, 720); // todo use default from RenderSettings::createDefault() here
     if (usdPrim.GetResolutionAttr() && usdPrim.GetResolutionAttr().IsAuthored()) {
         auto usdResolution = UsdUtils::getStaticAttributeValueAs<pxr::GfVec2i>(usdPrim.GetResolutionAttr());
         resolution = Resolution(usdResolution[0], usdResolution[1]);
@@ -39,7 +45,8 @@ Resolution crayg::UsdRenderSettingsReader::readResolution() const {
 }
 
 int crayg::UsdRenderSettingsReader::readMaxSamples() const {
-    return UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "maxSamples", 4);
+    return UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "maxSamples",
+                                                    4); // todo use default from RenderSettings::createDefault() here
 }
 
 IntegratorType crayg::UsdRenderSettingsReader::readIntegratorType() const {
@@ -94,6 +101,21 @@ IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
 BucketSequenceType UsdRenderSettingsReader::readBucketSequenceType() const {
     return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "bucketSequenceType",
                                              RenderSettings::createDefault().bucketSequenceType);
+}
+
+BucketSamplerType UsdRenderSettingsReader::readBucketSamplerType() {
+    return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "bucketSamplerType",
+                                             RenderSettings::createDefault().bucketSamplerType);
+}
+
+float UsdRenderSettingsReader::readAdaptiveMaxError() {
+    return UsdUtils::getStaticAttributeValueAs<float>(usdPrim.GetPrim(), "adaptiveMaxError",
+                                                      RenderSettings::createDefault().adaptiveMaxError);
+}
+
+int UsdRenderSettingsReader::readSamplesPerAdaptivePass() {
+    return UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "samplesPerAdaptivePass",
+                                                    RenderSettings::createDefault().samplesPerAdaptivePass);
 }
 
 }

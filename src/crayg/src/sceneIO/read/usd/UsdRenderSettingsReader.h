@@ -25,6 +25,9 @@ class UsdRenderSettingsReader : public BaseUsdReader<pxr::UsdRenderSettings, Ren
     IntegratorSettingsValue readIntegratorSettingsValue(const pxr::UsdAttribute &attribute) const;
     IntersectorType readIntersectorType() const;
     BucketSequenceType readBucketSequenceType() const;
+    BucketSamplerType readBucketSamplerType();
+    float readAdaptiveMaxError();
+    int readSamplesPerAdaptivePass();
 };
 
 }

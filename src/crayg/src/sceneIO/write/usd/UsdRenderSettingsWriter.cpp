@@ -20,6 +20,9 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
     writeIntegratorSettings(usdRenderSettings);
     writeIntersectorType(usdRenderSettings);
     writeBucketSequenceType(usdRenderSettings);
+    writeBucketSamplerType(usdRenderSettings);
+    writeAdaptiveMaxError(usdRenderSettings);
+    writeSamplesPerAdaptivePass(usdRenderSettings);
 
     return usdRenderSettings;
 }
@@ -60,6 +63,19 @@ void UsdRenderSettingsWriter::writeIntersectorType(const pxr::UsdRenderSettings 
 void UsdRenderSettingsWriter::writeBucketSequenceType(const pxr::UsdRenderSettings &usdRenderSettings) const {
     UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "bucketSequenceType",
                                     renderSettings.bucketSequenceType);
+}
+
+void UsdRenderSettingsWriter::writeBucketSamplerType(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "bucketSamplerType", renderSettings.bucketSamplerType);
+}
+
+void UsdRenderSettingsWriter::writeAdaptiveMaxError(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "adaptiveMaxError", renderSettings.adaptiveMaxError);
+}
+
+void UsdRenderSettingsWriter::writeSamplesPerAdaptivePass(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "samplesPerAdaptivePass",
+                                    renderSettings.samplesPerAdaptivePass);
 }
 
 } // crayg

@@ -24,6 +24,15 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         usdRenderSettings.GetPrim()
             .CreateAttribute(pxr::TfToken("bucketSequenceType"), pxr::SdfValueTypeNames->Token)
             .Set(pxr::TfToken("LINE_BY_LINE"));
+        usdRenderSettings.GetPrim()
+            .CreateAttribute(pxr::TfToken("bucketSamplerType"), pxr::SdfValueTypeNames->Token)
+            .Set(pxr::TfToken("UNIFORM"));
+        usdRenderSettings.GetPrim()
+            .CreateAttribute(pxr::TfToken("adaptiveMaxError"), pxr::SdfValueTypeNames->Float)
+            .Set(0.1f);
+        usdRenderSettings.GetPrim()
+            .CreateAttribute(pxr::TfToken("samplesPerAdaptivePass"), pxr::SdfValueTypeNames->Int)
+            .Set(16);
 
         UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
         auto renderSettings = usdRenderSettingsReader.read();
@@ -31,7 +40,8 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         REQUIRE(*renderSettings ==
                 RenderSettings(crayg::Resolution(800, 600), 2, IntegratorType::DEBUG,
                                IntegratorSettings({{"DEBUG:someToken", {std::string("someTokenValue")}}}),
-                               IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE));
+                               IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::UNIFORM,
+                               0.1f, 16));
     }
 
     SECTION("should fallback to default values") {

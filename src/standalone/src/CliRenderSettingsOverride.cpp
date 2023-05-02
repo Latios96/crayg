@@ -19,12 +19,19 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     resolvedRenderSettings.intersectorType = intersectorType ? intersectorType.value() : renderSettings.intersectorType;
     resolvedRenderSettings.bucketSequenceType =
         bucketSequenceType ? bucketSequenceType.value() : renderSettings.bucketSequenceType;
+    resolvedRenderSettings.bucketSamplerType =
+        bucketSamplerType ? bucketSamplerType.value() : renderSettings.bucketSamplerType;
+    resolvedRenderSettings.adaptiveMaxError =
+        adaptiveMaxError ? adaptiveMaxError.value() : renderSettings.adaptiveMaxError;
+    resolvedRenderSettings.samplesPerAdaptivePass =
+        samplesPerAdaptivePass ? samplesPerAdaptivePass.value() : renderSettings.samplesPerAdaptivePass;
 
     return resolvedRenderSettings;
 }
 
 bool CliRenderSettingsOverride::hasAnyOverrides() const {
-    return resolution || maxSamples || integratorType || intersectorType;
+    return resolution || maxSamples || integratorType || intersectorType || bucketSequenceType || bucketSamplerType ||
+           adaptiveMaxError || samplesPerAdaptivePass;
 }
 
 std::string CliRenderSettingsOverride::reportOverrides() const {
@@ -43,6 +50,15 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
     }
     if (bucketSequenceType) {
         report.push_back(fmt::format(R"(bucketSequenceType -> "{}")", *bucketSequenceType));
+    }
+    if (bucketSamplerType) {
+        report.push_back(fmt::format(R"(bucketSamplerType -> "{}")", *bucketSamplerType));
+    }
+    if (adaptiveMaxError) {
+        report.push_back(fmt::format(R"(adaptiveMaxError -> {})", *adaptiveMaxError));
+    }
+    if (samplesPerAdaptivePass) {
+        report.push_back(fmt::format(R"(samplesPerAdaptivePass -> {})", *samplesPerAdaptivePass));
     }
     return boost::algorithm::join(report, ", ");
 }

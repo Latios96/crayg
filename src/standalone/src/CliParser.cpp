@@ -52,6 +52,16 @@ CliParseResult CliParser::parse() {
     app.add_option("--bucketSequence", bucketSequenceType, "Override bucket sequence")
         ->transform(createTransformer<BucketSequenceType>());
 
+    std::optional<BucketSamplerType> bucketSamplerType;
+    app.add_option("--bucketSamplerType", bucketSamplerType, "Use adaptive sampling")
+        ->transform(createTransformer<BucketSamplerType>());
+
+    std::optional<float> adaptiveMaxError;
+    app.add_option("--adaptiveMaxError", adaptiveMaxError, "Override adaptive max error");
+
+    std::optional<int> samplesPerAdaptivePass;
+    app.add_option("--samplesPerAdaptivePass", samplesPerAdaptivePass, "Override samples per adaptive pass");
+
     try {
         app.parse(argc, argv);
 
@@ -70,6 +80,15 @@ CliParseResult CliParser::parse() {
         }
         if (bucketSequenceType) {
             renderSettingsOverride.bucketSequenceType = bucketSequenceType.value();
+        }
+        if (bucketSamplerType) {
+            renderSettingsOverride.bucketSamplerType = bucketSamplerType.value();
+        }
+        if (adaptiveMaxError) {
+            renderSettingsOverride.adaptiveMaxError = adaptiveMaxError.value();
+        }
+        if (samplesPerAdaptivePass) {
+            renderSettingsOverride.samplesPerAdaptivePass = samplesPerAdaptivePass.value();
         }
 
         return CliParseResult(CliArgs(sceneFileName, imageOutputPath,

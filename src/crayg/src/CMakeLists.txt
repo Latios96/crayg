@@ -96,6 +96,9 @@ set(crayg_SRCS
         renderer/bucketsamplers/AdaptiveBucketSampler.h
         renderer/bucketsamplers/BucketSampler.cpp
         renderer/bucketsamplers/BucketSampler.h
+        renderer/bucketsamplers/BucketSamplerType.h
+        renderer/bucketsamplers/BucketSamplerFactory.cpp
+        renderer/bucketsamplers/BucketSamplerFactory.h
         renderer/bucketsamplers/UniformBucketSampler.cpp
         renderer/bucketsamplers/UniformBucketSampler.h
         renderer/BucketSizeEstimator.cpp

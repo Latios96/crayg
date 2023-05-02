@@ -20,6 +20,9 @@ class UsdRenderSettingsWriter {
     void writeIntegratorSettings(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeIntersectorType(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeBucketSequenceType(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeBucketSamplerType(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeAdaptiveMaxError(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeSamplesPerAdaptivePass(const pxr::UsdRenderSettings &usdRenderSettings) const;
 };
 
 } // crayg

@@ -35,9 +35,25 @@ TEST_CASE("CliParser::parse") {
     }
 
     SECTION("should parse optional args") {
-        std::vector<std::string> arguments = {
-            "tests",        "-s",       "/some_scene_path", "-o", "/some_image_path", "--camera", "/usdCamera",
-            "--resolution", "1280x720", "--maxSamples",     "8",  "--intersector",    "EMBREE"};
+        std::vector<std::string> arguments = {"tests",
+                                              "-s",
+                                              "/some_scene_path",
+                                              "-o",
+                                              "/some_image_path",
+                                              "--camera",
+                                              "/usdCamera",
+                                              "--resolution",
+                                              "1280x720",
+                                              "--maxSamples",
+                                              "8",
+                                              "--intersector",
+                                              "EMBREE",
+                                              "--bucketSamplerType",
+                                              "UNIFORM",
+                                              "--adaptiveMaxError",
+                                              "0.1",
+                                              "--samplesPerAdaptivePass",
+                                              "16"};
         ARGC_ARGV_(arguments);
 
         CliParser cli_parser("executable_name", argc, argv);
@@ -50,6 +66,9 @@ TEST_CASE("CliParser::parse") {
         REQUIRE(result.args->cliRenderSettingsOverride.resolution == Resolution(1280, 720));
         REQUIRE(result.args->cliRenderSettingsOverride.maxSamples == 8);
         REQUIRE(result.args->cliRenderSettingsOverride.intersectorType == IntersectorType::EMBREE);
+        REQUIRE(result.args->cliRenderSettingsOverride.bucketSamplerType == BucketSamplerType::UNIFORM);
+        REQUIRE(result.args->cliRenderSettingsOverride.adaptiveMaxError == 0.1f);
+        REQUIRE(result.args->cliRenderSettingsOverride.samplesPerAdaptivePass == 16);
     }
 
     SECTION("invalid args should contain error") {
