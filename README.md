@@ -37,14 +37,14 @@ Cornell Box by http://casual-effects.com/data/index.html
 - Area lights (Rect and Disk)
 - perfect reflections
 - diffuse reflections / GI
-- multiple BVH implementations:
-  - [Intel Embree](https://github.com/embree/embree) 
-  - custom Naive BVH
+- [Intel Embree](https://github.com/embree/embree) based BVH
+- Adaptive sampling inspired by [Dreamwork's Implementation](https://research.dreamworks.com/wp-content/uploads/2019/10/adaptive.pdf) of the paper by [Dammertz et al.](https://jo.dreggn.org/home/2009_stopping.pdf)
 - multiple integrators:
   - Raytracing
   - Ambient Occlusion
   - Debug (Simple "N Dot V shading", inspired
     by [Renderman's PxrVisualizer](https://rmanwiki.pixar.com/display/REN24/PxrVisualizer)))
+- Basic support for Subdivision Surfaces using [OpenSubdiv](https://github.com/PixarAnimationStudios/OpenSubdiv)
 - Scene format uses USD, with basic respect
   for [UsdRender](https://graphics.pixar.com/usd/release/api/usd_render_page_front.html)
 - CLI interface
