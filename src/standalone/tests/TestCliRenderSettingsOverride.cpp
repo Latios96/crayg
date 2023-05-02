@@ -125,7 +125,7 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     onlyIntegratorType.integratorType = IntegratorType::DEBUG;
 
     CliRenderSettingsOverride onlyBucketSequenceType;
-    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::SPIRAL; // todo dont use default here
+    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::LINE_BY_LINE;
 
     CliRenderSettingsOverride onlyBucketSamplerType;
     onlyBucketSamplerType.bucketSamplerType = BucketSamplerType::UNIFORM;
@@ -161,8 +161,8 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
 
         REQUIRE(onlyBucketSequenceType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
-                               IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007,
-                               8));
+                               IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE,
+                               0.007, 8));
 
         REQUIRE(onlyBucketSamplerType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
