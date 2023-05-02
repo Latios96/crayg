@@ -12,15 +12,15 @@ UsdRenderSettingsReader::UsdRenderSettingsReader(const pxr::UsdRenderSettings &u
 std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     auto renderSettings = BaseUsdReader::read();
 
-    Resolution resolution = readResolution();
-    int maxSamples = readMaxSamples();
-    IntegratorType integratorType = readIntegratorType();
-    IntegratorSettings integratorSettings = readIntegratorSettings();
-    IntersectorType intersectorType = readIntersectorType();
-    BucketSequenceType bucketSequenceType = readBucketSequenceType();
-    BucketSamplerType bucketSamplerType = readBucketSamplerType();
-    float adaptiveMaxError = readAdaptiveMaxError();
-    int samplesPerAdaptivePass = readSamplesPerAdaptivePass(); // todo this can all be const
+    const Resolution resolution = readResolution();
+    const int maxSamples = readMaxSamples();
+    const IntegratorType integratorType = readIntegratorType();
+    const IntegratorSettings integratorSettings = readIntegratorSettings();
+    const IntersectorType intersectorType = readIntersectorType();
+    const BucketSequenceType bucketSequenceType = readBucketSequenceType();
+    const BucketSamplerType bucketSamplerType = readBucketSamplerType();
+    const float adaptiveMaxError = readAdaptiveMaxError();
+    const int samplesPerAdaptivePass = readSamplesPerAdaptivePass();
 
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
