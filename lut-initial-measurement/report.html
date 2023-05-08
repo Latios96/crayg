@@ -1,0 +1,62 @@
+
+    <html>
+<head>
+    <title>Benchmarks</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            margin: 40px auto;
+            font-family: Arial;
+            font-size: 14px;
+            color: #333;
+            max-width: 90%;
+        }
+
+        a {
+            text-decoration: none;
+            color: #06b;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {'packages': ['line', 'bar']});
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawChart(chartsContainer,scene) {
+            var data = google.visualization.arrayToDataTable(scene.data)
+
+            var options = {
+                chart: {
+                    title: scene.name,
+
+                }, pointsVisible: true,
+                pointSize: 2.5,
+                height: 500,
+            };
+
+            elem = document.createElement('div');
+            elem.id = scene.sceneName;
+            chartsContainer.appendChild(elem)
+
+            var chart = new google.charts.Bar(elem);
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+
+        function drawCharts() {
+            var chartsContainer = document.getElementById("charts");
+            var jsonData = [{"name": "OpenChess", "data": [["Lens Type", "Baseline", "With Ray LUT"], ["Thin Lens", 41.0, 38.0], ["Canon 70mm (34 Elemente)", 166.0, 36.0], ["Angenieux (15 Elemente)", 97.0, 38.666666666666664]]}, {"name": "StormTrooper", "data": [["Lens Type", "Baseline", "With Ray LUT"], ["Thin Lens", 933.6666666666666, 941.6666666666666], ["Canon 70mm (34 Elemente)", 1041.0, 761.3333333333334], ["Angenieux (15 Elemente)", 1016.3333333333334, 947.0]]}]
+
+            jsonData.forEach((scene) => {
+                drawChart(chartsContainer,scene)
+            })
+        }
+    </script>
+</head>
+<body>
+<h1>Benchmarks</h1>
+<div id="charts">
+
+</div>
+</body>
+</html>
