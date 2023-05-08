@@ -144,6 +144,14 @@ set(crayg_SRCS
         scene/camera/LensRaytracerTracer.h
         scene/camera/lookup/LensRayLookupTable.cpp
         scene/camera/lookup/LensRayLookupTable.h
+        scene/camera/polynomal/init.h
+        scene/camera/polynomal/lens.h
+        scene/camera/polynomal/lt_sample_aperture.h
+        scene/camera/polynomal/pt_evaluate.h
+        scene/camera/polynomal/pt_evaluate_aperture.h
+        scene/camera/polynomal/pt_evaluate_aperture_jacobian.h
+        scene/camera/polynomal/pt_evaluate_jacobian.h
+        scene/camera/polynomal/pt_sample_aperture.h
         scene/camera/Camera.cpp
         scene/camera/Camera.h
         scene/camera/CameraModel.h
@@ -160,6 +168,8 @@ set(crayg_SRCS
         scene/camera/CameraLens.h
         scene/camera/PineHoleCameraModel.cpp
         scene/camera/PineHoleCameraModel.h
+        scene/camera/PolynomalOpticsCameraModel.cpp
+        scene/camera/PolynomalOpticsCameraModel.h
         scene/camera/RealisticCameraModel.cpp
         scene/camera/RealisticCameraModel.h
         scene/camera/ThickLensApproximation.cpp
@@ -321,3 +331,8 @@ add_custom_command(TARGET crayg PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_LIB_DIRS_USD}/usd ${CMAKE_BINARY_DIR}/bin/usd)
 
 target_link_libraries(crayg ${CONAN_LIBS} ${CMAKE_DL_LIBS})
+
+
+add_executable(debuglensevaluation debuglensevaluation.cpp)
+
+target_link_libraries(debuglensevaluation crayg)

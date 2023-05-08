@@ -18,6 +18,7 @@ TEMPLATE = {
 
 
 def get_camera_lens_types(camera):
+    return ["realistic"]
     if camera["cameraTypes"] == "all":
         return ["thin_lens", "realistic"]
     return camera["cameraTypes"]

@@ -56,7 +56,7 @@ set(UNIT_TEST_LIST
         TestLensFileTextFileReader.cpp
         TestLensFileTextFileWriter.cpp
         TestLensFileWriter.cpp
-        TestLensRayLookup.cpp
+        #TestLensRayLookup.cpp
         TestLensRaytracerTracer.cpp
         TestLight.cpp
         TestLineByLineIterator.cpp

@@ -7,7 +7,9 @@
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
 #include "scene/camera/CameraModelFactory.h"
+#include "scene/camera/PolynomalOpticsCameraModel.h"
 #include "scene/camera/RealisticCameraModel.h"
+#include "scene/camera/ThinLensCameraModel.h"
 #include "utils/ImageMetadataCollector.h"
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
@@ -87,7 +89,8 @@ void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageB
 void Renderer::init() {
     {
         InformativeScopedStopWatch buildBvh("Initialize camera");
-        cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
+        // cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
+        cameraModel = std::make_unique<PolynomalOpticsCameraModel>(*scene.camera, scene.renderSettings.resolution);
         cameraModel->init();
         // lensRayLookupTable.generate(*cameraModel);
     }

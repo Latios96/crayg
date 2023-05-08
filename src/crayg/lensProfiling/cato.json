@@ -6,27 +6,6 @@
             "name": "OpenChess",
             "tests": [
                 {
-                    "name": "0-render_cam_7_orig-thin_lens",
-                    "variables": {
-                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\render_cam_7_orig-thin_lens\\render_cam_7_orig-thin_lens.usda",
-                        "camera": "/render_cam_7_orig"
-                    }
-                },
-                {
-                    "name": "1-render_cam_7_orig-thin_lens",
-                    "variables": {
-                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\render_cam_7_orig-thin_lens\\render_cam_7_orig-thin_lens.usda",
-                        "camera": "/render_cam_7_orig"
-                    }
-                },
-                {
-                    "name": "2-render_cam_7_orig-thin_lens",
-                    "variables": {
-                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\render_cam_7_orig-thin_lens\\render_cam_7_orig-thin_lens.usda",
-                        "camera": "/render_cam_7_orig"
-                    }
-                },
-                {
                     "name": "0-render_cam_7_72mm-realisticcanon-zoom-70",
                     "variables": {
                         "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\OpenChess\\render_cam_7_72mm-realistic\\render_cam_7_72mm-realistic.usda",
@@ -74,27 +53,6 @@
             "name": "StormTrooper",
             "tests": [
                 {
-                    "name": "0-render_cam_orig-thin_lens",
-                    "variables": {
-                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\StormTrooper\\render_cam_orig-thin_lens\\render_cam_orig-thin_lens.usda",
-                        "camera": "/render_cam_orig"
-                    }
-                },
-                {
-                    "name": "1-render_cam_orig-thin_lens",
-                    "variables": {
-                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\StormTrooper\\render_cam_orig-thin_lens\\render_cam_orig-thin_lens.usda",
-                        "camera": "/render_cam_orig"
-                    }
-                },
-                {
-                    "name": "2-render_cam_orig-thin_lens",
-                    "variables": {
-                        "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\StormTrooper\\render_cam_orig-thin_lens\\render_cam_orig-thin_lens.usda",
-                        "camera": "/render_cam_orig"
-                    }
-                },
-                {
                     "name": "0-render_cam_72mm-realisticcanon-zoom-70",
                     "variables": {
                         "scene_path": "C:\\workspace\\crayg\\src\\crayg\\lensProfiling\\StormTrooper\\render_cam_72mm-realistic\\render_cam_72mm-realistic.usda",
@@ -140,7 +98,7 @@
         }
     ],
     "variables": {
-        "crayg_render_command": "C:\\workspace\\crayg\\cmake-build-relwithdebinfo\\bin/crayg-standalone -s {{scene_path}} -o \"{{image_output_exr}}\" --camera {{camera}} --integrator=RAYTRACING --intersector=EMBREE --maxSamples 4"
+        "crayg_render_command": "C:\\workspace\\crayg\\cmake-build-relwithdebinfo\\bin/crayg-standalone -s {{scene_path}} -o \"{{image_output_exr}}\" --camera {{camera}} --integrator=RAYTRACING --intersector=EMBREE --maxSamples 16"
     },
     "command": "{{crayg_render_command}}",
     "comparisonSettings": {
