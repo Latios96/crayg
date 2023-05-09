@@ -176,6 +176,18 @@ inline Vector3f FaceForward(const Vector3f &n, const Vector3f &v) {
     return (n.dot(v) < 0.f) ? n.invert() : n;
 }
 
+float selectCorrectSolution(float radius, const Ray &ray, const QuadraticSolutions &quadraticSolutions) {
+    auto [t0, t1] = quadraticSolutions;
+    const bool isConcaveElement = radius < 0;
+    const bool rayFromLeft = ray.direction.z > 0;
+    bool useCloserT = rayFromLeft ^ isConcaveElement;
+
+    if (useCloserT) {
+        return std::min(t0, t1);
+    }
+    return std::max(t0, t1);
+}
+
 bool IntersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
     Vector3f o = ray.startPoint - Vector3f(0, 0, zCenter);
     float A = ray.direction.x * ray.direction.x + ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z;
@@ -186,16 +198,12 @@ bool IntersectSphericalElement(float radius, float zCenter, const Ray &ray, floa
     if (!solutions) {
         return false;
     }
-    auto [t0, t1] = *solutions;
 
-    // Select intersection $t$ based on ray direction and element curvature
-    bool useCloserT = (ray.direction.z > 0) ^ (radius < 0);
-    *t = useCloserT ? std::min(t0, t1) : std::max(t0, t1);
+    *t = selectCorrectSolution(radius, ray, *solutions);
     if (*t < 0) {
         return false;
     }
 
-    // Compute surface normal of element at ray intersection point
     *n = Vector3f(o + ray.direction * *t);
     *n = FaceForward(n->normalize(), ray.direction.invert());
 
@@ -203,7 +211,6 @@ bool IntersectSphericalElement(float radius, float zCenter, const Ray &ray, floa
 }
 
 std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
-    // todo understand and unit test this
     float t = 0;
     Vector3f normal;
     const bool intersects = IntersectSphericalElement(curvatureRadius, -center + curvatureRadius, ray, &t, &normal);
