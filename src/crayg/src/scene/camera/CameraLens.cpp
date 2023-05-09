@@ -228,7 +228,7 @@ std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
 
 bool LensElement::exceedsAperture(const Ray &ray) const {
     const float t = (center - ray.startPoint.z) / ray.direction.z;
-    Vector3f intersectionPosition = ray.constructIntersectionPoint(t); // todo respect aperture opening here
+    Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
     return exceedsAperture(intersectionPosition);
 }
 
