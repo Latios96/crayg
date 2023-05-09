@@ -1,6 +1,7 @@
 #include "CameraLens.h"
 #include "Logger.h"
 #include "ThickLensApproximation.h"
+#include "basics/MathUtils.h"
 #include <iostream>
 #include <utils/Preconditions.h>
 
@@ -171,59 +172,21 @@ std::ostream &operator<<(std::ostream &os, const CameraLens &lens) {
     return os;
 }
 
-float FMA(float a, float b, float c) {
-    return a * b + c;
-}
-
-template <typename Ta, typename Tb, typename Tc, typename Td> inline auto DifferenceOfProducts(Ta a, Tb b, Tc c, Td d) {
-    auto cd = c * d;
-    auto differenceOfProducts = FMA(a, b, -cd);
-    auto error = FMA(-c, d, cd);
-    return differenceOfProducts + error;
-}
-
-bool Quadratic(float a, float b, float c, float *t0, float *t1) {
-    // Handle case of $a=0$ for quadratic solution
-    if (a == 0) {
-        if (b == 0) {
-            return false;
-        }
-        *t0 = *t1 = -c / b;
-        return true;
-    }
-
-    // Find quadratic discriminant
-    float discrim = DifferenceOfProducts(b, b, 4 * a, c);
-    if (discrim < 0) {
-        return false;
-    }
-    float rootDiscrim = std::sqrt(discrim);
-
-    // Compute quadratic _t_ values
-    float q = -0.5f * (b + std::copysign(rootDiscrim, b));
-    *t0 = q / a;
-    *t1 = c / q;
-    if (*t0 > *t1) {
-        std::swap(*t0, *t1);
-    }
-
-    return true;
-}
-
 inline Vector3f FaceForward(const Vector3f &n, const Vector3f &v) {
     return (n.dot(v) < 0.f) ? n.invert() : n;
 }
 
 bool IntersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
-    // Compute _t0_ and _t1_ for ray--element intersection
     Vector3f o = ray.startPoint - Vector3f(0, 0, zCenter);
     float A = ray.direction.x * ray.direction.x + ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z;
     float B = 2 * (ray.direction.x * o.x + ray.direction.y * o.y + ray.direction.z * o.z);
     float C = o.x * o.x + o.y * o.y + o.z * o.z - radius * radius;
-    float t0, t1;
-    if (!Quadratic(A, B, C, &t0, &t1)) {
+
+    auto solutions = MathUtils::solveQuadratic(A, B, C);
+    if (!solutions) {
         return false;
     }
+    auto [t0, t1] = *solutions;
 
     // Select intersection $t$ based on ray direction and element curvature
     bool useCloserT = (ray.direction.z > 0) ^ (radius < 0);
