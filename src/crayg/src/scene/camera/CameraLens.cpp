@@ -188,11 +188,11 @@ float selectCorrectSolution(float radius, const Ray &ray, const QuadraticSolutio
     return std::max(t0, t1);
 }
 
-bool IntersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
+bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
     Vector3f o = ray.startPoint - Vector3f(0, 0, zCenter);
-    float A = ray.direction.x * ray.direction.x + ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z;
-    float B = 2 * (ray.direction.x * o.x + ray.direction.y * o.y + ray.direction.z * o.z);
-    float C = o.x * o.x + o.y * o.y + o.z * o.z - radius * radius;
+    float A = ray.direction.dot(ray.direction);
+    float B = 2 * (ray.direction.dot(o));
+    float C = o.dot(o) - radius * radius;
 
     auto solutions = MathUtils::solveQuadratic(A, B, C);
     if (!solutions) {
@@ -213,7 +213,7 @@ bool IntersectSphericalElement(float radius, float zCenter, const Ray &ray, floa
 std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
     float t = 0;
     Vector3f normal;
-    const bool intersects = IntersectSphericalElement(curvatureRadius, -center + curvatureRadius, ray, &t, &normal);
+    const bool intersects = intersectSphericalElement(curvatureRadius, -center + curvatureRadius, ray, &t, &normal);
     if (!intersects) {
         return std::nullopt;
     }
