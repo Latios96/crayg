@@ -1,5 +1,4 @@
-
-    <html>
+<html>
 <head>
     <title>Benchmarks</title>
     <meta charset="UTF-8">
@@ -22,7 +21,7 @@
         google.charts.load('current', {'packages': ['line', 'bar']});
         google.charts.setOnLoadCallback(drawCharts);
 
-        function drawChart(chartsContainer,scene) {
+        function drawChart(chartsContainer, scene) {
             var data = google.visualization.arrayToDataTable(scene.data)
 
             var options = {
@@ -45,10 +44,16 @@
 
         function drawCharts() {
             var chartsContainer = document.getElementById("charts");
-            var jsonData = [{"name": "OpenChess", "data": [["Lens Type", "Baseline", "With Ray LUT"], ["Thin Lens", 41.0, 38.0], ["Canon 70mm (34 Elemente)", 166.0, 36.0], ["Angenieux (15 Elemente)", 97.0, 38.666666666666664]]}, {"name": "StormTrooper", "data": [["Lens Type", "Baseline", "With Ray LUT"], ["Thin Lens", 933.6666666666666, 941.6666666666666], ["Canon 70mm (34 Elemente)", 1041.0, 761.3333333333334], ["Angenieux (15 Elemente)", 1016.3333333333334, 947.0]]}]
+            var jsonData = [{
+                "name": "OpenChess",
+                "data": [["Lens Type", "Baseline", "With Ray LUT", "Polynomal Optics"], ["Thin Lens", 41.0, 38.0,0], ["Canon 70mm (34 Elemente)", 166.0, 36.0, 61.992], ["Angenieux (15 Elemente)", 97.0, 38.666666666666664, 63.128]]
+            }, {
+                "name": "StormTrooper",
+                "data": [["Lens Type", "Baseline", "With Ray LUT", "Polynomal Optics"], ["Thin Lens", 933.6666666666666, 941.6666666666666,0], ["Canon 70mm (34 Elemente)", 1041.0, 761.3333333333334,960.223], ["Angenieux (15 Elemente)", 1016.3333333333334, 947.0,927.262]]
+            }]
 
             jsonData.forEach((scene) => {
-                drawChart(chartsContainer,scene)
+                drawChart(chartsContainer, scene)
             })
         }
     </script>
