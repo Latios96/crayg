@@ -29,6 +29,7 @@ set(UNIT_TEST_LIST
         TestColorConversion.cpp
         TestDebugIntegrator.cpp
         TestDiskLight.cpp
+        TestDtoUtils.cpp
         TestEmbreeBvhBuilder.cpp
         TestEmbreeSceneIntersector.cpp
         TestEmbreeUtils.cpp
@@ -66,7 +67,6 @@ set(UNIT_TEST_LIST
         TestOpenExrWriter.cpp
         TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp
-        TestDtoUtils.cpp
         TestPixelBuffer.cpp
         TestPngWriter.cpp
         TestPreconditions.cpp
@@ -123,8 +123,8 @@ set(UNIT_TEST_LIST
         TestUsdSubdivisionSurfaceMeshWriter.cpp
         TestUsdTriangleMeshWriter.cpp
         TestUsdUtils.cpp
-        TestVector2.cpp
         TestVector3f.cpp
+        TestVector2.cpp
         )
 
 foreach (NAME IN LISTS UNIT_TEST_LIST)
