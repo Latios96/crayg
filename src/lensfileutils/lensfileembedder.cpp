@@ -53,6 +53,7 @@ int main(int argc, char **argv) {
     } catch (const CLI::Error &e) {
         exit(app.exit(e));
     } catch (std::exception &e) {
+        crayg::Logger::backtrace();
         crayg::Logger::error("Caught exception: {}", e.what());
         return -1;
     }

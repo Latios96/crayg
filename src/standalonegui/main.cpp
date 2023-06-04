@@ -89,6 +89,7 @@ int main(int argc, char **argv) {
     }
 
     catch (std::exception &e) {
+        crayg::Logger::backtrace();
         crayg::Logger::error("Caught exception: {}", e.what());
         return -1;
     }

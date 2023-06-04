@@ -35,6 +35,7 @@ class Logger {
 
     static void initialize();
     static void logToFile(const std::string &fileName);
+    static void backtrace();
 };
 
 template <typename... Args> void Logger::trace(const char *fmt, const Args &...args) {

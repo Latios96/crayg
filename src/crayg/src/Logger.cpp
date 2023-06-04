@@ -33,12 +33,18 @@ void Logger::initialize() {
     spdlog::register_logger(combined_logger);
     spdlog::set_default_logger(combined_logger);
     spdlog::flush_on(spdlog::level::info);
+
+    spdlog::enable_backtrace(32);
 }
 
 void Logger::logToFile(const std::string &fileName) {
     const auto file_synk = std::make_shared<spdlog::sinks::basic_file_sink_mt>(fileName, true);
     file_synk->set_level(spdlog::level::info);
     spdlog::default_logger()->sinks().push_back(file_synk);
+}
+
+void Logger::backtrace() {
+    spdlog::dump_backtrace();
 }
 
 }
