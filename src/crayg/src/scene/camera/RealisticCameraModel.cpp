@@ -1,5 +1,6 @@
 #include "RealisticCameraModel.h"
 #include "ExitPupilCalculator.h"
+#include "sampling/Random.h"
 
 namespace crayg {
 
@@ -16,10 +17,10 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
 void RealisticCameraModel::init() {
     camera.getLens().focusLens(camera.getFocusDistance());
 
-    const float focalLength = calculateEffectiveFocalLength(camera.getLens());
-    const float apertureRadius = (focalLength / camera.getFStop()) / 2.0f;
-    camera.getLens().getAperture().apertureRadius =
-        std::max(apertureRadius, camera.getLens().getAperture().apertureRadius);
+    const float requestedApertureRadius = camera.computeApertureRadius();
+    const float maximumApertureRadius = camera.getLens().getAperture().apertureRadius;
+    const float apertureRadius = std::clamp<float>(requestedApertureRadius, 0, maximumApertureRadius);
+    camera.getLens().getAperture().apertureRadius = apertureRadius;
 
     ExitPupilCalculator exitPupilCalculator(camera.getLens(), filmDiagonal, ExitPupilCalculator::CalculationSettings());
     exitPupil = exitPupilCalculator.calculate();
