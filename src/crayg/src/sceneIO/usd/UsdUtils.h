@@ -73,9 +73,8 @@ class UsdUtils {
             .Set(UsdTypeUtil<T>::convert(defaultValue));
     }
 
-    template <>
-    static void createAndSetAttribute<pxr::SdfAssetPath>(pxr::UsdPrim usdPrim, const std::string &attributeName,
-                                                         pxr::SdfAssetPath defaultAssetPath) {
+    static void createAndSetAttribute(pxr::UsdPrim usdPrim, const std::string &attributeName,
+                                      pxr::SdfAssetPath defaultAssetPath) {
         usdPrim.CreateAttribute(pxr::TfToken(attributeName), pxr::SdfValueTypeNames->Asset).Set(defaultAssetPath);
     }
 
