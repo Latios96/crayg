@@ -78,8 +78,7 @@ Vector2f ExitPupil::samplePupil(const Vector2f &filmPos, float filmDiagonal) con
 
     const float sinTheta = (distanceFromFilmCenter != 0) ? filmPos.y / distanceFromFilmCenter : 0;
     const float cosTheta = (distanceFromFilmCenter != 0) ? filmPos.x / distanceFromFilmCenter : 1;
-    const float pLensX = Random::random();
-    const float pLensY = Random::random();
-    return {cosTheta * pLensX - sinTheta * pLensY, sinTheta * pLensX + cosTheta * pLensY};
+    auto pLens = pupil.lerp(Random::random(), Random::random());
+    return {cosTheta * pLens.x - sinTheta * pLens.y, sinTheta * pLens.x + cosTheta * pLens.y};
 }
 } // crayg
