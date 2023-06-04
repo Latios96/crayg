@@ -36,8 +36,10 @@ void ExitPupilCalculator::calculateParallel(ExitPupil &exitPupil) {
 
 Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) {
     const int maxSamples = calculationSettings.samplesLens * calculationSettings.samplesLens;
-    const float filmIntervalStart = static_cast<float>(intervalIndex) / 64.f * filmDiagonalLength / 2.f;
-    const float filmIntervalEnd = static_cast<float>(intervalIndex + 1) / 64.f * filmDiagonalLength / 2.f;
+    const float filmIntervalStart = static_cast<float>(intervalIndex) /
+                                    static_cast<float>(calculationSettings.samplesFilmX) * filmDiagonalLength / 2.f;
+    const float filmIntervalEnd = static_cast<float>(intervalIndex + 1) /
+                                  static_cast<float>(calculationSettings.samplesFilmX) * filmDiagonalLength / 2.f;
 
     const float rearApertureRadius = lens.getLastElement().apertureRadius;
     const Bounds2df rearElementExtend =
