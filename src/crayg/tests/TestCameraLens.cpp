@@ -128,4 +128,25 @@ TEST_CASE("CameraLens::focusLens") {
     }
 }
 
+TEST_CASE("CameraLens::changeAperture") {
+    CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
+    // todo test clamping
+
+    SECTION("changing the aperture should lead to rays that are cut off") {
+        const Vector3f pointOnLens = {0, 0.9, canon70_200.getLastElement().center};
+        const Vector3f pointOnFilm = {0, 0, 0};
+        const Ray ray = {pointOnFilm, (pointOnLens - pointOnFilm).normalize()};
+
+        REQUIRE(canon70_200.traceFromFilmToWorld(ray));
+
+        // todo this should be extracted
+        const float requestedApertureRadius = (7.12f / 20.f) / 2.0f;
+        const float maximumApertureRadius = canon70_200.getAperture().apertureRadius;
+        const float apertureRadius = std::clamp<float>(requestedApertureRadius, 0, maximumApertureRadius);
+        canon70_200.getAperture().apertureRadius = apertureRadius;
+
+        REQUIRE_FALSE(canon70_200.traceFromFilmToWorld(ray));
+    }
+}
+
 }
