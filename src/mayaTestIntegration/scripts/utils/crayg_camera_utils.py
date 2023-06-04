@@ -18,9 +18,10 @@ def _find_cameras(objects):
     return cameras
 
 
-def _add_usd_user_exported_attribute(node, attribute_name):
+def _add_usd_user_exported_attribute(node, attribute_name, usd_attribute_name=None):
     exported_attributes = read_usd_user_exported_attribute(node)
-    exported_attributes[attribute_name] = {"usdAttrName": attribute_name}
+    usd_attr_name = attribute_name if not usd_attribute_name else usd_attribute_name
+    exported_attributes[attribute_name] = {"usdAttrName": usd_attr_name}
     write_usd_user_exported_attribute(node, exported_attributes)
 
 
@@ -33,7 +34,9 @@ def _add_camera_type_attribute(camera):
         en=":".join(["_", "Pine Hole", "Thin Lens", "Realistic"]),
     )
     camera.craygCameraType.set("Pine Hole")
-    _add_usd_user_exported_attribute(camera, CRAYG_CAMERA_TYPE_ATTRIBUTE_NAME)
+    _add_usd_user_exported_attribute(
+        camera, CRAYG_CAMERA_TYPE_ATTRIBUTE_NAME, "craygLensFileString"
+    )
 
 
 def _add_lens_file_attribute(camera):
