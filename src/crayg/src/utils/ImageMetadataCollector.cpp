@@ -105,8 +105,7 @@ void ImageMetadataCollector::collectCamera(ImageMetadata &imageMetadata) {
         auto &lens = scene->camera->getLens();
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_NAME, fmt::format("{}", lens.name));
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT, static_cast<int>(lens.elements.size()));
-        imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH,
-                            calculateEffectiveFocalLength(lens) * 10);
+        imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH, lens.focalLength * 10);
     }
 }
 

@@ -20,6 +20,10 @@ TEST_CASE("CameraLens::construct") {
     SECTION("thick lens approximation should be populated") {
         REQUIRE(canon70_200.thickLensApproximation != ThickLensApproximation());
     }
+
+    SECTION("focal length should be populated") {
+        REQUIRE(canon70_200.focalLength >= 7);
+    }
 }
 
 TEST_CASE("CameraLens::getFirstElementZ") {

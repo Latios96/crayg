@@ -36,11 +36,13 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
 
     ThickLensApproximationCalculator thickLensCalculator(*this);
     thickLensApproximation = thickLensCalculator.calculate();
+
+    focalLength = calculateEffectiveFocalLength(thickLensApproximation);
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
     : name(cameraLens.name), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
-      thickLensApproximation(cameraLens.thickLensApproximation) {
+      thickLensApproximation(cameraLens.thickLensApproximation), focalLength(cameraLens.focalLength) {
 }
 
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
@@ -143,10 +145,6 @@ void CameraLens::moveLensElements(float offset) {
 }
 
 void CameraLens::focusLens(float focalDistance) {
-    const float focalLength =
-        calculateEffectiveFocalLength(thickLensApproximation); // todo store focal length on camera lens, make sure to
-                                                               // search for unnecessary calculations
-
     const float z = -focalDistance;
     const float c =
         (thickLensApproximation.secondCardinalPoints.pZ - z - thickLensApproximation.firstCardinalPoints.pZ) *

@@ -39,6 +39,7 @@ struct CameraLens {
     std::string name;
     std::vector<LensElement> elements;
     ThickLensApproximation thickLensApproximation;
+    float focalLength;
 
     const LensElement &getFirstElement() const;
     const LensElement &getLastElement() const;
