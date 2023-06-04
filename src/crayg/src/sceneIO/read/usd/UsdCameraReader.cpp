@@ -86,8 +86,11 @@ void UsdCameraReader::readCameraLens(std::shared_ptr<Camera> &camera) const {
         throw std::runtime_error(
             fmt::format("craygLensFile attribute was not authored for camera {}", usdPrim.GetPath()));
     }
+    auto type = lensFileAttribute.GetTypeName().GetAsToken().GetString();
 
-    auto lensFilePath = UsdUtils::getStaticAttributeValueAs<std::string>(lensFileAttribute);
+    auto lensFileAssetPath = UsdUtils::getStaticAttributeValueAs<pxr::SdfAssetPath>(lensFileAttribute);
+    auto lensFilePath = lensFileAssetPath.GetResolvedPath().empty() ? lensFileAssetPath.GetAssetPath()
+                                                                    : lensFileAssetPath.GetResolvedPath();
     if (!lensFilePath.empty()) {
         camera->lens = std::move(readLensFile(lensFilePath));
         return;

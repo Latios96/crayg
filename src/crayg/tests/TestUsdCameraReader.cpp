@@ -73,7 +73,7 @@ TEST_CASE("CameraReader::read") {
         REQUIRE_THROWS_WITH(usdCameraReader.read(), "craygLensFile attribute was not authored for camera /usdCamera");
     }
 
-    SECTION("should read camera with lens file successfully") {
+    SECTION("should read camera with absolute lens file successfully") {
         TemporaryDirectory temporaryDirectory;
         auto lensFilePath = temporaryDirectory.writeToFile("lensfile.txt", R"(# a header comment
 3
@@ -81,7 +81,26 @@ TEST_CASE("CameraReader::read") {
 5 6 7 8)");
         UsdCameraReader usdCameraReader(usdCamera);
         UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygCameraType", CameraType::REALISTIC);
-        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygLensFile", lensFilePath);
+        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygLensFile", pxr::SdfAssetPath(lensFilePath));
+
+        auto camera = usdCameraReader.read();
+
+        REQUIRE(camera->getCameraType() == CameraType::REALISTIC);
+        REQUIRE(camera->getLens() ==
+                CameraLens("", std::vector<LensElement>({{0.1, 0.2, 3, 0.2}, {0.5, 0.6, 7, 0.4}})));
+    }
+
+    SECTION("should read camera with relative lens file successfully") {
+        TemporaryDirectory temporaryDirectory;
+        auto stage = pxr::UsdStage::CreateNew(temporaryDirectory.getFilePath("usdStage.usda"));
+        auto usdCamera = pxr::UsdGeomCamera::Define(stage, pxr::SdfPath("/usdCamera"));
+        auto lensFilePath = temporaryDirectory.writeToFile("lensfile.txt", R"(# a header comment
+3
+1 2 3 4
+5 6 7 8)");
+        UsdCameraReader usdCameraReader(usdCamera);
+        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygCameraType", CameraType::REALISTIC);
+        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygLensFile", pxr::SdfAssetPath("./lensfile.txt"));
 
         auto camera = usdCameraReader.read();
 

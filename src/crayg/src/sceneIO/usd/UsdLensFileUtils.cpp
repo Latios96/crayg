@@ -4,7 +4,7 @@
 namespace crayg {
 
 void UsdLensFileUtils::writeEmbeddedLensFile(const CameraLens &cameraLens, pxr::UsdPrim usdCamera) {
-    UsdUtils::createAndSetAttribute(usdCamera, "craygLensFile", std::string(""));
+    UsdUtils::createAndSetAttribute(usdCamera, "craygLensFile", pxr::SdfAssetPath());
     auto craygLensFileAttribute = usdCamera.GetAttribute(pxr::TfToken("craygLensFile"));
 
     pxr::VtDictionary lensDict;
