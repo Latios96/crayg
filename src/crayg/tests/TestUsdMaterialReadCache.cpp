@@ -195,6 +195,23 @@ TEST_CASE("UsdMaterialReadCache::getCachedReadPrimMaterial") {
         REQUIRE(material->getName() == "/material");
         REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color(0.18f, 0.18f, 0.18f));
     }
+
+    SECTION("assigned UsdPreviewSurface with no connection, no authored value and no default value should fallback to "
+            "default") {
+        UsdMaterialReadCache usdMaterialReadCache;
+        pxr::UsdShadeMaterialBindingAPI bindingApi(geo.GetPrim());
+        bindingApi.Bind(usdShadeMaterial);
+        usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
+        usdShadeMaterial.CreateSurfaceOutput().ConnectToSource(usdShadeShader.ConnectableAPI(),
+                                                               pxr::TfToken("surface"));
+        auto input = usdShadeShader.CreateInput(pxr::TfToken("diffuseColor"), pxr::SdfValueTypeNames->Color3f);
+        REQUIRE_FALSE(input.GetAttr().HasValue());
+
+        auto material = usdMaterialReadCache.getCachedReadPrimMaterial(geo);
+
+        REQUIRE(material->getName() == "/material");
+        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color(0.18f, 0.18f, 0.18f));
+    }
 }
 
 }
