@@ -19,7 +19,9 @@ class UsdUtils {
         if (attribute.Get(&value, timeCodeToRead)) {
             return value;
         }
-        throw std::runtime_error("There was no attribute value to read or attribute was not of the type requested");
+        throw std::runtime_error(fmt::format(
+            "Attribute '{}': There was no attribute value to read or attribute was not of the type requested",
+            attribute.GetName()));
     };
 
     template <typename T> static T getStaticAttributeValueAs(const pxr::UsdAttribute attribute) {
