@@ -1,6 +1,5 @@
 #include "fixtures/CameraLensFixtures.h"
 #include "scene/camera/CameraLens.h"
-#include "scene/camera/CameraUtils.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
@@ -14,7 +13,7 @@ TEST_CASE("CameraLens::construct") {
     }
 
     SECTION("aperture radius should be at maximum opening") {
-        REQUIRE(canon70_200.getAperture().apertureRadius > 2.f);
+        REQUIRE(canon70_200.getApertureRadius() > 2.f);
     }
 
     SECTION("thick lens approximation should be populated") {
@@ -153,7 +152,14 @@ TEST_CASE("CameraLens::focusLens") {
 
 TEST_CASE("CameraLens::changeAperture") {
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
-    // todo test clamping
+
+    SECTION("should clamp fStop if this is too large") {
+        REQUIRE(canon70_200.getApertureRadius() >= 2.f);
+
+        canon70_200.changeAperture(1.f);
+
+        REQUIRE(canon70_200.getApertureRadius() >= 2.f);
+    }
 
     SECTION("changing the aperture should lead to rays that are cut off") {
         const Vector3f pointOnLens = {0, 0.9, canon70_200.getLastElement().center};
@@ -162,11 +168,7 @@ TEST_CASE("CameraLens::changeAperture") {
 
         REQUIRE(canon70_200.traceFromFilmToWorld(ray));
 
-        // todo extract this
-        const float requestedApertureRadius = CameraUtils::computeApertureRadius(7.12f, 20.f);
-        const float maximumApertureRadius = canon70_200.getAperture().apertureRadius;
-        const float apertureRadius = std::clamp<float>(requestedApertureRadius, 0, maximumApertureRadius);
-        canon70_200.getAperture().apertureRadius = apertureRadius;
+        canon70_200.changeAperture(20.f);
 
         REQUIRE_FALSE(canon70_200.traceFromFilmToWorld(ray));
     }

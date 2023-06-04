@@ -26,8 +26,9 @@ struct LensElement {
 
     std::optional<LensElementIntersection> intersect(const Ray &ray);
     bool isAperture() const;
-    bool exceedsAperture(const Ray &ray) const;
+    bool exceedsAperture(const Ray &ray, float apertureRadius) const;
     bool exceedsAperture(const Vector3f &intersectionPosition) const;
+    bool exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const;
     bool operator==(const LensElement &rhs) const;
     bool operator!=(const LensElement &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const LensElement &element);
@@ -44,12 +45,14 @@ struct CameraLens {
     const LensElement &getFirstElement() const;
     const LensElement &getLastElement() const;
     LensElement &getAperture();
+    float getApertureRadius() const;
 
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray) const;
     std::optional<Ray> traceFromWorldToFilm(const Ray &ray) const;
 
     void focusLens(float focalDistance);
     void moveLensElements(float offset);
+    void changeAperture(float fStop);
 
     Ray refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
     bool operator==(const CameraLens &rhs) const;
@@ -61,6 +64,7 @@ struct CameraLens {
     std::optional<Ray> traceRay(const Ray &ray, int startIndex, std::function<int(int)> nextLensIndex,
                                 std::function<float(int)> inIor, std::function<float(int)> outIor) const;
     int apertureIndex = -1;
+    float apertureRadius;
 };
 
 } // crayg

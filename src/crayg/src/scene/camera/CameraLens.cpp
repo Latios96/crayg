@@ -1,4 +1,5 @@
 #include "CameraLens.h"
+#include "CameraUtils.h"
 #include "Logger.h"
 #include "basics/MathUtils.h"
 #include <iostream>
@@ -32,6 +33,8 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
         }
     }
 
+    apertureRadius = apertureIndex != -1 ? getAperture().apertureRadius : 0;
+
     moveLensElements(0);
 
     ThickLensApproximationCalculator thickLensCalculator(*this);
@@ -42,7 +45,8 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
     : name(cameraLens.name), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
-      thickLensApproximation(cameraLens.thickLensApproximation), focalLength(cameraLens.focalLength) {
+      thickLensApproximation(cameraLens.thickLensApproximation), focalLength(cameraLens.focalLength),
+      apertureRadius(cameraLens.apertureRadius) {
 }
 
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
@@ -51,7 +55,7 @@ std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
     for (int i = elements.size() - 1; i >= 0; i--) {
         auto element = elements[i];
         if (element.isAperture()) {
-            if (element.exceedsAperture(ray)) {
+            if (element.exceedsAperture(ray, apertureRadius)) {
                 return std::nullopt;
             }
             continue;
@@ -79,7 +83,7 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
     for (int i = 0; i < elements.size(); i++) {
         auto element = elements[i];
         if (element.isAperture()) {
-            if (element.exceedsAperture(ray)) {
+            if (element.exceedsAperture(ray, apertureRadius)) {
                 return std::nullopt;
             }
             continue;
@@ -174,6 +178,16 @@ std::ostream &operator<<(std::ostream &os, const CameraLens &lens) {
     return os;
 }
 
+float CameraLens::getApertureRadius() const {
+    return apertureRadius;
+}
+
+void CameraLens::changeAperture(float fStop) {
+    const float requestedApertureRadius = CameraUtils::computeApertureRadius(focalLength * 10, fStop);
+    const float maximumApertureRadius = getAperture().apertureRadius;
+    apertureRadius = std::clamp<float>(requestedApertureRadius, 0, maximumApertureRadius);
+}
+
 inline Vector3f FaceForward(const Vector3f &n, const Vector3f &v) {
     return (n.dot(v) < 0.f) ? n.invert() : n;
 }
@@ -228,13 +242,17 @@ std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
     return LensElementIntersection(intersectionPoint, normal);
 }
 
-bool LensElement::exceedsAperture(const Ray &ray) const {
+bool LensElement::exceedsAperture(const Ray &ray, float apertureRadius) const {
     const float t = (center - ray.startPoint.z) / ray.direction.z;
     Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
-    return exceedsAperture(intersectionPosition);
+    return exceedsAperture(intersectionPosition, apertureRadius);
 }
 
 bool LensElement::exceedsAperture(const Vector3f &intersectionPosition) const {
+    return exceedsAperture(intersectionPosition, apertureRadius);
+}
+
+bool LensElement::exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const {
     const float radiusOfIntersectionSquared = intersectionPosition.xy().lengthSquared();
     const float apertureRadiusSquared = std::pow(apertureRadius, 2.f);
     const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;

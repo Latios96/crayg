@@ -17,12 +17,9 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
 
 void RealisticCameraModel::init() {
     Logger::info("Effective focal length: {:.2f}mm", camera.getLens().focalLength * 10);
-    camera.getLens().focusLens(camera.getFocusDistance());
 
-    const float requestedApertureRadius = camera.computeApertureRadius();
-    const float maximumApertureRadius = camera.getLens().getAperture().apertureRadius;
-    const float apertureRadius = std::clamp<float>(requestedApertureRadius, 0, maximumApertureRadius);
-    camera.getLens().getAperture().apertureRadius = apertureRadius;
+    camera.getLens().focusLens(camera.getFocusDistance());
+    camera.getLens().changeAperture(camera.getFStop());
 
     ExitPupilCalculator exitPupilCalculator(camera.getLens(), filmDiagonal, ExitPupilCalculator::CalculationSettings());
     exitPupil = exitPupilCalculator.calculate();
