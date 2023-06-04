@@ -1,5 +1,6 @@
 #include "fixtures/CameraLensFixtures.h"
 #include "scene/camera/CameraLens.h"
+#include "scene/camera/CameraUtils.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
@@ -157,8 +158,8 @@ TEST_CASE("CameraLens::changeAperture") {
 
         REQUIRE(canon70_200.traceFromFilmToWorld(ray));
 
-        // todo this should be extracted
-        const float requestedApertureRadius = (7.12f / 20.f) / 2.0f;
+        // todo extract this
+        const float requestedApertureRadius = CameraUtils::computeApertureRadius(7.12f, 20.f);
         const float maximumApertureRadius = canon70_200.getAperture().apertureRadius;
         const float apertureRadius = std::clamp<float>(requestedApertureRadius, 0, maximumApertureRadius);
         canon70_200.getAperture().apertureRadius = apertureRadius;

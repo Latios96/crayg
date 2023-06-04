@@ -123,6 +123,8 @@ set(crayg_SRCS
         scene/camera/CameraModelFactory.cpp
         scene/camera/CameraModelFactory.h
         scene/camera/CameraType.h
+        scene/camera/CameraUtils.cpp
+        scene/camera/CameraUtils.h
         scene/camera/ExitPupilCalculator.cpp
         scene/camera/ExitPupilCalculator.h
         scene/camera/lensio/LensFileFormat.h

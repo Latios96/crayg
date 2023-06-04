@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "CameraUtils.h"
 #include "utils/ToStringHelper.h"
 
 namespace crayg {
@@ -82,8 +83,7 @@ void Camera::setFStop(float fStop) {
 }
 
 float Camera::computeApertureRadius() const {
-    // see "Optical Imaging and Photography", p. 67
-    return (focalLength * 0.1f / fStop) / 2.0f;
+    return CameraUtils::computeApertureRadius(focalLength, fStop);
 }
 
 }
