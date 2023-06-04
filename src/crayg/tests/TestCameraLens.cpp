@@ -105,4 +105,27 @@ TEST_CASE("CameraLens::getAperture") {
     }
 }
 
+Vector3f pointOnFocalPlane(const CameraLens &cameraLens, float focalDistance) {
+    const Vector3f pointOnLens = {0, 0.5, cameraLens.getLastElement().center};
+    const Vector3f pointOnFilm = {0, 0, 0};
+    const Ray ray = {pointOnFilm, (pointOnLens - pointOnFilm).normalize()};
+    const auto focusedRay = *cameraLens.traceFromFilmToWorld(ray);
+    const float t = (focalDistance - cameraLens.getFirstElement().center) / focusedRay.direction.z;
+    return focusedRay.constructIntersectionPoint(t);
+}
+
+TEST_CASE("CameraLens::focusLens") {
+    CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
+
+    SECTION("should focus lens at given focal distance") {
+        auto focalPlanePoint = pointOnFocalPlane(canon70_200, 100.f);
+        REQUIRE(std::abs(focalPlanePoint.y) > 0.4f);
+
+        canon70_200.focusLens(100.f);
+
+        focalPlanePoint = pointOnFocalPlane(canon70_200, 100.f);
+        REQUIRE(std::abs(focalPlanePoint.y) < 0.01f);
+    }
+}
+
 }
