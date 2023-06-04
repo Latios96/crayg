@@ -71,6 +71,12 @@ class UsdUtils {
             .Set(UsdTypeUtil<T>::convert(defaultValue));
     }
 
+    template <>
+    static void createAndSetAttribute<pxr::SdfAssetPath>(pxr::UsdPrim usdPrim, const std::string &attributeName,
+                                                         pxr::SdfAssetPath defaultAssetPath) {
+        usdPrim.CreateAttribute(pxr::TfToken(attributeName), pxr::SdfValueTypeNames->Asset).Set(defaultAssetPath);
+    }
+
   private:
     template <typename T>
     static T getEnumValueFromTokenAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,

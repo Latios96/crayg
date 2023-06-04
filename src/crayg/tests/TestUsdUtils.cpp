@@ -137,6 +137,15 @@ TEST_CASE("UsdUtils::createAndSetAttribute") {
         REQUIRE(value == "my string");
     }
 
+    SECTION("should create and set asset attribute") {
+        UsdUtils::createAndSetAttribute(sphere.GetPrim(), "myAssetAttribute", pxr::SdfAssetPath("my asset path"));
+
+        auto value = UsdUtils::getStaticAttributeValueAs<pxr::SdfAssetPath>(
+            sphere.GetPrim().GetAttribute(pxr::TfToken("myAssetAttribute")));
+
+        REQUIRE(value.GetAssetPath() == "my asset path");
+    }
+
     SECTION("should create and set enum attribute") {
         UsdUtils::createAndSetAttribute(sphere.GetPrim(), "myEnumAttribute", UsdUtilsTestEnum::MY_FIRST_VALUE);
 
