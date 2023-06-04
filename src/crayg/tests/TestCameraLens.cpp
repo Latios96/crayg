@@ -4,6 +4,23 @@
 
 namespace crayg {
 
+TEST_CASE("CameraLens::construct") {
+    CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
+
+    SECTION("aperture element should be accessible") {
+        REQUIRE(canon70_200.getAperture().apertureRadius > 2);
+        REQUIRE(canon70_200.getAperture().ior == 0);
+    }
+
+    SECTION("aperture radius should be at maximum opening") {
+        REQUIRE(canon70_200.getAperture().apertureRadius > 2.f);
+    }
+
+    SECTION("thick lens approximation should be populated") {
+        REQUIRE(canon70_200.thickLensApproximation != ThickLensApproximation());
+    }
+}
+
 TEST_CASE("CameraLens::getFirstElementZ") {
 
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
@@ -126,6 +143,7 @@ TEST_CASE("CameraLens::focusLens") {
         focalPlanePoint = pointOnFocalPlane(canon70_200, 100.f);
         REQUIRE(std::abs(focalPlanePoint.y) < 0.01f);
     }
+    // todo test focusing multiple times
 }
 
 TEST_CASE("CameraLens::changeAperture") {

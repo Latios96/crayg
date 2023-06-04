@@ -1,6 +1,5 @@
 #include "CameraLens.h"
 #include "Logger.h"
-#include "ThickLensApproximation.h"
 #include "basics/MathUtils.h"
 #include <iostream>
 #include <utils/Preconditions.h>
@@ -34,10 +33,14 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
     }
 
     moveLensElements(0);
+
+    ThickLensApproximationCalculator thickLensCalculator(*this);
+    thickLensApproximation = thickLensCalculator.calculate();
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
-    : name(cameraLens.name), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex) {
+    : name(cameraLens.name), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
+      thickLensApproximation(cameraLens.thickLensApproximation) {
 }
 
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
@@ -140,16 +143,19 @@ void CameraLens::moveLensElements(float offset) {
 }
 
 void CameraLens::focusLens(float focalDistance) {
-    ThickLensApproximationCalculator thickLensCalculator(*this);
-    auto thickLens = thickLensCalculator.calculate();
-
-    const float focalLength = calculateEffectiveFocalLength(thickLens);
-    Logger::info("Effective focal length: {:.2f}mm", focalLength * 10);
+    const float focalLength =
+        calculateEffectiveFocalLength(thickLensApproximation); // todo store focal length on camera lens, make sure to
+                                                               // search for unnecessary calculations
+    Logger::info("Effective focal length: {:.2f}mm",
+                 focalLength * 10); // todo log at another location, for example RealisticCamera::init
 
     const float z = -focalDistance;
-    const float c = (thickLens.secondCardinalPoints.pZ - z - thickLens.firstCardinalPoints.pZ) *
-                    (thickLens.secondCardinalPoints.pZ - z - 4 * focalLength - thickLens.firstCardinalPoints.pZ);
-    const float delta = 0.5f * (thickLens.secondCardinalPoints.pZ - z + thickLens.firstCardinalPoints.pZ - sqrt(c));
+    const float c =
+        (thickLensApproximation.secondCardinalPoints.pZ - z - thickLensApproximation.firstCardinalPoints.pZ) *
+        (thickLensApproximation.secondCardinalPoints.pZ - z - 4 * focalLength -
+         thickLensApproximation.firstCardinalPoints.pZ);
+    const float delta = 0.5f * (thickLensApproximation.secondCardinalPoints.pZ - z +
+                                thickLensApproximation.firstCardinalPoints.pZ - sqrt(c));
 
     moveLensElements(delta);
 }

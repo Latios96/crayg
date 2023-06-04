@@ -1,10 +1,12 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_THICKLENSAPPROXIMATION_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_THICKLENSAPPROXIMATION_H_
 
-#include "CameraLens.h"
+#include "basics/Ray.h"
 #include "utils/DtoUtils.h"
 
 namespace crayg {
+
+class CameraLens;
 
 CRAYG_DTO_2(CardinalPoints, float, pZ, float, fZ);
 CRAYG_DTO_2(ThickLensApproximation, CardinalPoints, firstCardinalPoints, CardinalPoints, secondCardinalPoints);

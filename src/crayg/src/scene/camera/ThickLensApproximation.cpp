@@ -1,4 +1,5 @@
 #include "ThickLensApproximation.h"
+#include "CameraLens.h"
 
 namespace crayg {
 
