@@ -146,8 +146,6 @@ void CameraLens::focusLens(float focalDistance) {
     const float focalLength =
         calculateEffectiveFocalLength(thickLensApproximation); // todo store focal length on camera lens, make sure to
                                                                // search for unnecessary calculations
-    Logger::info("Effective focal length: {:.2f}mm",
-                 focalLength * 10); // todo log at another location, for example RealisticCamera::init
 
     const float z = -focalDistance;
     const float c =

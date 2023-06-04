@@ -1,5 +1,6 @@
 #include "RealisticCameraModel.h"
 #include "ExitPupilCalculator.h"
+#include "Logger.h"
 #include "sampling/Random.h"
 
 namespace crayg {
@@ -15,6 +16,7 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
 }
 
 void RealisticCameraModel::init() {
+    Logger::info("Effective focal length: {:.2f}mm", camera.getLens().focalLength * 10);
     camera.getLens().focusLens(camera.getFocusDistance());
 
     const float requestedApertureRadius = camera.computeApertureRadius();
