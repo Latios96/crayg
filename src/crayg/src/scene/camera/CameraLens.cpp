@@ -26,16 +26,17 @@ const LensElement &CameraLens::getLastElement() const {
 CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &elements)
     : name(name), elements(elements) {
 
+    float center = 0;
     for (int i = elements.size() - 1; i >= 0; i--) {
         auto &lens = this->elements[i];
+        center += lens.thickness;
+        lens.center = center;
         if (lens.isAperture()) {
             apertureIndex = i;
         }
     }
 
     apertureRadius = apertureIndex != -1 ? getAperture().apertureRadius : 0;
-
-    moveLensElements(0);
 
     ThickLensApproximationCalculator thickLensCalculator(*this);
     thickLensApproximation = thickLensCalculator.calculate();
@@ -46,7 +47,7 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
 CameraLens::CameraLens(const CameraLens &cameraLens)
     : name(cameraLens.name), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
       thickLensApproximation(cameraLens.thickLensApproximation), focalLength(cameraLens.focalLength),
-      apertureRadius(cameraLens.apertureRadius) {
+      apertureRadius(cameraLens.apertureRadius), elementsOffset(cameraLens.elementsOffset) {
 }
 
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
@@ -55,13 +56,13 @@ std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
     for (int i = elements.size() - 1; i >= 0; i--) {
         auto element = elements[i];
         if (element.isAperture()) {
-            if (element.exceedsAperture(ray, apertureRadius)) {
+            if (exceedsAperture(element, ray)) {
                 return std::nullopt;
             }
             continue;
         }
 
-        auto resultIntersection = element.intersect(tracedRay);
+        auto resultIntersection = intersect(element, tracedRay);
         if (!resultIntersection) {
             return std::nullopt;
         }
@@ -83,13 +84,13 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
     for (int i = 0; i < elements.size(); i++) {
         auto element = elements[i];
         if (element.isAperture()) {
-            if (element.exceedsAperture(ray, apertureRadius)) {
+            if (exceedsAperture(element, ray)) {
                 return std::nullopt;
             }
             continue;
         }
 
-        auto resultIntersection = element.intersect(tracedRay);
+        auto resultIntersection = intersect(element, tracedRay);
         if (!resultIntersection) {
             return std::nullopt;
         }
@@ -139,25 +140,14 @@ float CameraLens::getNextIor(int currentIndex, int indexOffset) const {
     return nextLens.ior;
 }
 
-void CameraLens::moveLensElements(float offset) {
-    float center = offset;
-    for (int i = elements.size() - 1; i >= 0; i--) {
-        auto &lens = this->elements[i];
-        center += lens.thickness;
-        lens.center = center;
-    }
-}
-
 void CameraLens::focusLens(float focalDistance) {
     const float z = -focalDistance;
     const float c =
         (thickLensApproximation.secondCardinalPoints.pZ - z - thickLensApproximation.firstCardinalPoints.pZ) *
         (thickLensApproximation.secondCardinalPoints.pZ - z - 4 * focalLength -
          thickLensApproximation.firstCardinalPoints.pZ);
-    const float delta = 0.5f * (thickLensApproximation.secondCardinalPoints.pZ - z +
-                                thickLensApproximation.firstCardinalPoints.pZ - sqrt(c));
-
-    moveLensElements(delta);
+    elementsOffset = 0.5f * (thickLensApproximation.secondCardinalPoints.pZ - z +
+                             thickLensApproximation.firstCardinalPoints.pZ - sqrt(c));
 }
 
 LensElement &CameraLens::getAperture() {
@@ -226,33 +216,30 @@ bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, floa
     return true;
 }
 
-std::optional<LensElementIntersection> LensElement::intersect(const Ray &ray) {
+std::optional<LensElementIntersection> CameraLens::intersect(const LensElement &element, const Ray &ray) const {
     float t = 0;
     Vector3f normal;
-    const bool intersects = intersectSphericalElement(curvatureRadius, -center + curvatureRadius, ray, &t, &normal);
+    const bool intersects = intersectSphericalElement(
+        element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
     if (!intersects) {
         return std::nullopt;
     }
 
     const Vector3f &intersectionPoint = ray.startPoint + ray.direction * t;
-    if (exceedsAperture(intersectionPoint)) {
+    if (exceedsAperture(intersectionPoint, element.apertureRadius)) {
         return std::nullopt;
     }
 
     return LensElementIntersection(intersectionPoint, normal);
 }
 
-bool LensElement::exceedsAperture(const Ray &ray, float apertureRadius) const {
-    const float t = (center - ray.startPoint.z) / ray.direction.z;
+bool CameraLens::exceedsAperture(const LensElement &lensElement, const Ray &ray) const {
+    const float t = (lensElement.center + elementsOffset - ray.startPoint.z) / ray.direction.z;
     Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
     return exceedsAperture(intersectionPosition, apertureRadius);
 }
 
-bool LensElement::exceedsAperture(const Vector3f &intersectionPosition) const {
-    return exceedsAperture(intersectionPosition, apertureRadius);
-}
-
-bool LensElement::exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const {
+bool CameraLens::exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const {
     const float radiusOfIntersectionSquared = intersectionPosition.xy().lengthSquared();
     const float apertureRadiusSquared = std::pow(apertureRadius, 2.f);
     const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;
@@ -274,7 +261,7 @@ std::ostream &operator<<(std::ostream &os, const LensElement &element) {
               .addMember("thickness", element.thickness)
               .addMember("ior", element.ior)
               .addMember("apertureRadius", element.apertureRadius)
-              .addMember("center", element.center)
+              .addMember("lensElement", element.center)
               .finish();
     return os;
 }
