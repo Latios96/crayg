@@ -50,7 +50,7 @@ void Renderer::renderParallel(ProgressReporter &reporter, const std::vector<Imag
     tbb::concurrent_queue<ImageBucket> bucketQueue(bucketSequence.begin(), bucketSequence.end());
     tbb::task_group task_group;
 
-    for (int i = 0; i < std::thread::hardware_concurrency(); i++) {
+    for (unsigned int i = 0; i < std::thread::hardware_concurrency(); i++) {
         task_group.run([&bucketQueue, &reporter, this]() {
             ImageBucket imageBucket;
             while (bucketQueue.try_pop(imageBucket)) {

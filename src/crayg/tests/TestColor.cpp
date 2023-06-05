@@ -241,13 +241,13 @@ TEST_CASE("Color::isNan", "[Color]") {
         REQUIRE_FALSE(Color::createBlack().isNan());
     }
     SECTION("should return true if r in NaN") {
-        REQUIRE(Color(std::nan(""), 2, 3).isNan());
+        REQUIRE(Color(std::nan(""), 2.f, 3.f).isNan());
     }
     SECTION("should return true if g in NaN") {
-        REQUIRE(Color(1, std::nan(""), 3).isNan());
+        REQUIRE(Color(1.f, std::nan(""), 3).isNan());
     }
     SECTION("should return true if b in NaN") {
-        REQUIRE(Color(1, 2, std::nan("")).isNan());
+        REQUIRE(Color(1.f, 2.f, std::nan("")).isNan());
     }
 }
 

@@ -48,7 +48,7 @@ class RenderSettings {
     IntersectorType intersectorType = IntersectorType::EMBREE;
     BucketSequenceType bucketSequenceType = BucketSequenceType::SPIRAL;
     BucketSamplerType bucketSamplerType = BucketSamplerType::ADAPTIVE;
-    float adaptiveMaxError = 0.007;
+    float adaptiveMaxError = 0.007f;
     int samplesPerAdaptivePass = 8;
 };
 

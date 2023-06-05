@@ -74,7 +74,7 @@ std::unique_ptr<CameraLens> readEmbeddedLensFile(const pxr::UsdAttribute &lensFi
 
     std::vector<LensElement> elements;
     for (auto &el : lensDict["elements"].Get<pxr::VtArray<pxr::GfVec4f>>()) {
-        elements.emplace_back(el[0] * 0.1, el[1] * 0.1, el[2], el[3] * 0.1);
+        elements.emplace_back(el[0] * 0.1f, el[1] * 0.1f, el[2], el[3] * 0.1f);
     }
 
     return std::make_unique<CameraLens>(lensName, elements);

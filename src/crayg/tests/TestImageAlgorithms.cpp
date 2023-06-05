@@ -98,7 +98,7 @@ TEST_CASE("ImageAlgorithms::minValue") {
 
         auto minValue = ImageAlgorithms::minValue(image);
 
-        REQUIRE(minValue == Color::createGrey(0.1));
+        REQUIRE(minValue == Color::createGrey(0.1f));
     }
 }
 

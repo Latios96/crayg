@@ -7,7 +7,7 @@ TEST_CASE("AdaptiveBucketSampler::addRequiredImageSpecs") {
 
     SECTION("should add required image channels") {
         AdaptiveBucketSampler adaptiveBucketSampler(
-            4, [](Vector2f samplePos) { return Color::createWhite(); }, 8, 0.007);
+            4, [](Vector2f samplePos) { return Color::createWhite(); }, 8, 0.007f);
 
         BucketImageBuffer bucketImageBuffer(ImageBucket({0, 0}, 5, 5));
         ImageSpecBuilder builder(Resolution::deduce(bucketImageBuffer.imageBucket));
@@ -21,22 +21,22 @@ TEST_CASE("AdaptiveBucketSampler::addRequiredImageSpecs") {
 
 TEST_CASE("AdaptiveBucketSampler::shouldTerminate") {
     AdaptiveBucketSampler adaptiveBucketSampler(
-        4, [](Vector2f samplePos) { return Color::createWhite(); }, 8, 0.007);
+        4, [](Vector2f samplePos) { return Color::createWhite(); }, 8, 0.007f);
 
     SECTION("should return false if error is larger than max error and max samples are not reached") {
-        auto shouldTerminate = adaptiveBucketSampler.shouldTerminate(2, 0.1);
+        auto shouldTerminate = adaptiveBucketSampler.shouldTerminate(2, 0.1f);
 
         REQUIRE_FALSE(shouldTerminate);
     }
 
     SECTION("should return true if error is smaller than max error and max samples are not reached") {
-        auto shouldTerminate = adaptiveBucketSampler.shouldTerminate(2, 0.001);
+        auto shouldTerminate = adaptiveBucketSampler.shouldTerminate(2, 0.001f);
 
         REQUIRE(shouldTerminate);
     }
 
     SECTION("should return true if error is larger than max error and max samples are reached") {
-        auto shouldTerminate = adaptiveBucketSampler.shouldTerminate(17, 0.1);
+        auto shouldTerminate = adaptiveBucketSampler.shouldTerminate(17, 0.1f);
 
         REQUIRE(shouldTerminate);
     }
@@ -44,7 +44,7 @@ TEST_CASE("AdaptiveBucketSampler::shouldTerminate") {
 
 TEST_CASE("AdaptiveBucketSampler::evaluateErrorMetric") {
     AdaptiveBucketSampler adaptiveBucketSampler(
-        4, [](Vector2f samplePos) { return Color::createWhite(); }, 8, 0.007);
+        4, [](Vector2f samplePos) { return Color::createWhite(); }, 8, 0.007f);
 
     SECTION("should return 0 if fully sampled color is nan") {
         const float error =
@@ -83,7 +83,7 @@ TEST_CASE("AdaptiveBucketSampler::sampleBucket") {
             renderSampleCount++;
             return colorToReturn();
         },
-        minSamples, 0.007);
+        minSamples, 0.007f);
 
     BucketImageBuffer bucketImageBuffer(ImageBucket({0, 0}, 5, 5));
     ImageSpecBuilder builder(Resolution::deduce(bucketImageBuffer.imageBucket));
@@ -100,7 +100,7 @@ TEST_CASE("AdaptiveBucketSampler::sampleBucket") {
     SECTION("should draw max samples") {
         float counter = 0;
         colorToReturn = [&counter]() {
-            counter += 0.1;
+            counter += 0.1f;
             return Color::createGrey(counter);
         };
         adaptiveBucketSampler.sampleBucket(bucketImageBuffer);

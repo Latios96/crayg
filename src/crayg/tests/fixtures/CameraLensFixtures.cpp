@@ -39,7 +39,7 @@ CameraLens CameraLensFixtures::createCanon70_200mm() {
         {-205.76, 54.5, 1, 21.0},      // 33
     };
 
-    const float factor = 0.1;
+    const float factor = 0.1f;
     for (auto &element : elements) {
         element.curvatureRadius *= factor;
         element.thickness *= factor;

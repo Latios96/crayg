@@ -147,7 +147,7 @@ TEST_CASE("CameraLens::changeAperture") {
     }
 
     SECTION("changing the aperture should lead to rays that are cut off") {
-        const Vector3f pointOnLens = {0, 0.9, canon70_200.getLastElement().center};
+        const Vector3f pointOnLens = {0, 0.9f, canon70_200.getLastElement().center};
         const Vector3f pointOnFilm = {0, 0, 0};
         const Ray ray = {pointOnFilm, (pointOnLens - pointOnFilm).normalize()};
 

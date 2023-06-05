@@ -34,7 +34,7 @@ TEST_CASE("TestImageMetadataCollector::collect") {
         scene.renderSettings =
             RenderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
                            IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}), IntersectorType::EMBREE,
-                           BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007, 8);
+                           BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007f, 8);
         ImageMetadataCollector imageMetadataCollector;
         imageMetadataCollector.scene = &scene;
         ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();

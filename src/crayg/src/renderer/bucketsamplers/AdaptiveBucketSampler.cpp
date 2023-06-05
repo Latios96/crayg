@@ -34,7 +34,8 @@ void AdaptiveBucketSampler::sampleBucket(BucketImageBuffer &bucketImageBuffer) c
             fullySampledBuffer->addToPixel(pixel, fullySampled);
             halfSampledBuffer->addToPixel(pixel, halfSampled);
 
-            error += evaluateErrorMetric(fullySampled / samplesTaken, halfSampled / (samplesTaken / 2));
+            error += evaluateErrorMetric(fullySampled / static_cast<float>(samplesTaken),
+                                         halfSampled / (samplesTaken / 2.f));
         }
         error = error / (bucketImageBuffer.imageBucket.getWidth() * bucketImageBuffer.imageBucket.getHeight());
     }

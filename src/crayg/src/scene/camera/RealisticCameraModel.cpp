@@ -11,8 +11,8 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
     filmPhysicalExtend =
         Bounds2df({camera.getFilmbackSize() * 0.1f / 2.f, -camera.getFilmbackSize() * 0.1f / aspectRatio / 2},
                   {-camera.getFilmbackSize() * 0.1f / 2.f, camera.getFilmbackSize() * 0.1f / aspectRatio / 2});
-    filmDiagonal = std::sqrt(std::pow(camera.getFilmbackSize() * 0.1f, 2) +
-                             std::pow(camera.getFilmbackSize() * 0.1f / aspectRatio, 2));
+    filmDiagonal = std::sqrt(std::pow<float>(camera.getFilmbackSize() * 0.1f, 2) +
+                             std::pow<float>(camera.getFilmbackSize() * 0.1f / aspectRatio, 2));
 }
 
 void RealisticCameraModel::init() {

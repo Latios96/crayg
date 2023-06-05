@@ -37,8 +37,8 @@ template <typename T> class Vector2 {
     }
 
     template <typename OT> Vector2<T> &operator-=(const Vector2<OT> &otherVector) {
-        x -= otherVector.x;
-        y -= otherVector.y;
+        x = x - otherVector.x;
+        y = y - otherVector.y;
         return *this;
     }
 
@@ -75,11 +75,11 @@ template <typename T> class Vector2 {
     }
 
     float length() const {
-        return sqrt(std::pow<float>(static_cast<float>(x), 2) + std::pow<float>(static_cast<float>(y), 2));
+        return sqrt(std::pow<float>(static_cast<float>(x), 2.f) + std::pow<float>(static_cast<float>(y), 2.f));
     }
 
     float lengthSquared() const {
-        return std::pow<float>(static_cast<float>(x), 2) + std::pow<float>(static_cast<float>(y), 2);
+        return std::pow<float>(static_cast<float>(x), 2.f) + std::pow<float>(static_cast<float>(y), 2.f);
     }
 
     bool operator==(const Vector2<T> &rhs) const {
