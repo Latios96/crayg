@@ -6,7 +6,7 @@
 
 namespace crayg {
 
-class CameraLens;
+struct CameraLens;
 
 CRAYG_DTO_2(CardinalPoints, float, pZ, float, fZ);
 CRAYG_DTO_2(ThickLensApproximation, CardinalPoints, firstCardinalPoints, CardinalPoints, secondCardinalPoints);
