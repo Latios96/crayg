@@ -57,9 +57,6 @@ struct CameraLens {
 
   private:
     float getNextIor(int currentIndex, int indexOffset) const;
-    std::optional<Ray> traceRay(const Ray &ray, int startIndex, std::function<int(int)> nextLensIndex,
-                                std::function<float(int)> inIor,
-                                std::function<float(int)> outIor) const; // todo remove method without implementation
     std::optional<LensElementIntersection> intersect(const LensElement &element, const Ray &ray) const;
     bool exceedsAperture(const LensElement &element, const Ray &ray) const;
     bool exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const;
