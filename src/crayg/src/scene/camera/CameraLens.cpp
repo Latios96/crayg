@@ -98,7 +98,7 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
         float eta_i = element.ior;
         float eta_t = (i > 0 && elements[i - 1].ior != 0) ? elements[i - 1].ior : 1;
 
-        auto result = refract(*resultIntersection, tracedRay, /*getNextIor(i,-1),element.ior*/ eta_i, eta_t);
+        auto result = refract(*resultIntersection, tracedRay, eta_i, eta_t);
 
         tracedRay = {result.startPoint, result.direction.invert()};
     }
@@ -127,17 +127,6 @@ Ray CameraLens::refract(const LensElementIntersection &intersection, const Ray &
     const Vector3f &f1 = n * d;
     Vector3f rayDirection = f + f1;
     return {intersection.point, rayDirection.normalize()};
-}
-
-float CameraLens::getNextIor(int currentIndex, int indexOffset) const {
-    if (currentIndex == 0) {
-        return 1;
-    }
-    const auto nextLens = elements[currentIndex + indexOffset];
-    if (nextLens.isAperture()) {
-        return 1;
-    }
-    return nextLens.ior;
 }
 
 void CameraLens::focusLens(float focalDistance) {
