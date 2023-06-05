@@ -4,7 +4,7 @@
 
 namespace crayg {
 
-TEST_CASE("construct Matrix4x4f", "[Matrix4x4f]") {
+TEST_CASE("Matrix4x4f::construct", "[Matrix4x4f]") {
 
     SECTION("default constructor should create identity matrix") {
         Matrix4x4f matrix4X4F;
@@ -56,7 +56,7 @@ TEST_CASE("construct Matrix4x4f", "[Matrix4x4f]") {
     }
 }
 
-TEST_CASE("outstream", "[Matrix4x4f]") {
+TEST_CASE("Matrix4x4f::outstream", "[Matrix4x4f]") {
     Matrix4x4f matrix4X4F;
     std::stringstream ss;
     ss << matrix4X4F;
@@ -67,7 +67,7 @@ TEST_CASE("outstream", "[Matrix4x4f]") {
             "0.00 0.00 0.00 1.00})" == ss.str());
 }
 
-TEST_CASE("multiply matrices", "[Matrix4x4f]") {
+TEST_CASE("Matrix4x4f::multiply", "[Matrix4x4f]") {
     Matrix4x4f matrix1(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
     Matrix4x4f matrix2(17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
 
@@ -134,7 +134,7 @@ TEST_CASE("Matrix4x4f equality", "[Matrix4x4f]") {
     }
 }
 
-TEST_CASE("Matrix4x4f inverse", "[Matrix4x4f]") {
+TEST_CASE("Matrix4x4f::invert", "[Matrix4x4f]") {
 
     SECTION("transformation only") {
         // clang-format off
@@ -263,7 +263,7 @@ TEST_CASE("Matrix4x4 factory methods", "[Matrix4x4f]") {
     }
 }
 
-TEST_CASE("Matrix4x4 transpose", "[Matrix4x4f]") {
+TEST_CASE("Matrix4x4::transpose", "[Matrix4x4f]") {
     Matrix4x4f matrix4X4F(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
     Matrix4x4f result = matrix4X4F.transpose();
