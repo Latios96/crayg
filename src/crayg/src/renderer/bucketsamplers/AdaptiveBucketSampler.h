@@ -14,7 +14,7 @@ class AdaptiveBucketSampler : public BucketSampler {
     AdaptiveBucketSampler(int maxSamples, const std::function<Color(Vector2f)> &renderSample, int samplesPerPass,
                           float maxError);
     void addRequiredImageSpecs(ImageSpecBuilder &imageSpecBuilder) const override;
-    void sampleBucket(BucketImageBuffer &bucketImageBuffer) const;
+    void sampleBucket(BucketImageBuffer &bucketImageBuffer) const override;
     float evaluateErrorMetric(const Color &fullySampled, const Color &halfSampled) const;
     bool shouldTerminate(int samplesTaken, float error) const;
 
