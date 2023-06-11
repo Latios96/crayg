@@ -12,19 +12,16 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     }
     crayg::Logger::info("Applying rendersetting overrides: {}", reportOverrides());
 
-    resolvedRenderSettings.resolution = resolution ? resolution.value() : renderSettings.resolution;
-    resolvedRenderSettings.maxSamples = maxSamples ? maxSamples.value() : renderSettings.maxSamples;
-    resolvedRenderSettings.integratorType = integratorType ? integratorType.value() : renderSettings.integratorType;
+    resolvedRenderSettings.resolution = resolution.value_or(renderSettings.resolution);
+    resolvedRenderSettings.maxSamples = maxSamples.value_or(renderSettings.maxSamples);
+    resolvedRenderSettings.integratorType = integratorType.value_or(renderSettings.integratorType);
     resolvedRenderSettings.integratorSettings = renderSettings.integratorSettings;
-    resolvedRenderSettings.intersectorType = intersectorType ? intersectorType.value() : renderSettings.intersectorType;
-    resolvedRenderSettings.bucketSequenceType =
-        bucketSequenceType ? bucketSequenceType.value() : renderSettings.bucketSequenceType;
-    resolvedRenderSettings.bucketSamplerType =
-        bucketSamplerType ? bucketSamplerType.value() : renderSettings.bucketSamplerType;
-    resolvedRenderSettings.adaptiveMaxError =
-        adaptiveMaxError ? adaptiveMaxError.value() : renderSettings.adaptiveMaxError;
+    resolvedRenderSettings.intersectorType = intersectorType.value_or(renderSettings.intersectorType);
+    resolvedRenderSettings.bucketSequenceType = bucketSequenceType.value_or(renderSettings.bucketSequenceType);
+    resolvedRenderSettings.bucketSamplerType = bucketSamplerType.value_or(renderSettings.bucketSamplerType);
+    resolvedRenderSettings.adaptiveMaxError = adaptiveMaxError.value_or(renderSettings.adaptiveMaxError);
     resolvedRenderSettings.samplesPerAdaptivePass =
-        samplesPerAdaptivePass ? samplesPerAdaptivePass.value() : renderSettings.samplesPerAdaptivePass;
+        samplesPerAdaptivePass.value_or(renderSettings.samplesPerAdaptivePass);
 
     return resolvedRenderSettings;
 }
