@@ -12,6 +12,7 @@ class RemainingTimeCalculator {
     explicit RemainingTimeCalculator(std::chrono::steady_clock::time_point startTime);
 
     float getRemainingTimeByProgress(int progress);
+    std::chrono::seconds getRemainingSecondsByProgress(int progress);
 
   private:
     std::chrono::steady_clock::time_point startTime;

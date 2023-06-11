@@ -1,4 +1,5 @@
 #include "renderUtils.h"
+#include "utils/TaskReporter.h"
 
 namespace crayg {
 
@@ -13,7 +14,8 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
     auto sceneReader = SceneReaderFactory::createSceneReader(scenePath, scene);
     sceneReader->read();
 
-    Renderer renderer(scene, imageOutputDriver);
+    TaskReporter taskReporter;
+    Renderer renderer(scene, imageOutputDriver, taskReporter);
     renderer.renderScene();
 
     ImageWriters::writeImage(myImage, imageOutputPath);

@@ -5,7 +5,8 @@
 
 namespace crayg {
 
-GeometryCompiler::GeometryCompiler(Scene &scene) : scene(scene) {
+GeometryCompiler::GeometryCompiler(Scene &scene, TaskReporter &taskReporter)
+    : scene(scene), taskReporter(taskReporter) {
 }
 
 void GeometryCompiler::compile() {
@@ -16,15 +17,14 @@ void GeometryCompiler::tessellateSubdivisionSurfaces() {
     std::vector<std::shared_ptr<SubdivisionSurfaceMesh>> subdivisionSurfaces;
     findAllSubdivisionSurfaceMeshes(subdivisionSurfaces);
 
-    ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(
-        static_cast<int>(subdivisionSurfaces.size()), "Compiling geometry");
+    auto progressController = taskReporter.startTask("Compiling geometry", subdivisionSurfaces.size());
 
     tbb::parallel_for(static_cast<std::size_t>(0), subdivisionSurfaces.size(),
-                      [&subdivisionSurfaces, &reporter](int i) {
+                      [&subdivisionSurfaces, &progressController](int i) {
                           subdivisionSurfaces[i]->tessellate();
-                          reporter.iterationDone();
+                          progressController.iterationDone();
                       });
-    reporter.finish();
+    progressController.finish();
 }
 
 void GeometryCompiler::findAllSubdivisionSurfaceMeshes(

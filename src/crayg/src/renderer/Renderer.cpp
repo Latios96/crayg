@@ -11,6 +11,7 @@
 #include "utils/ImageMetadataCollector.h"
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
+#include "utils/TaskReporter.h"
 #include <image/BucketImageBuffer.h>
 #include <image/imageiterators/buckets/ImageBucketSequences.h>
 #include <memory>
@@ -20,7 +21,8 @@
 
 namespace crayg {
 
-Renderer::Renderer(Scene &scene, OutputDriver &outputDriver) : scene(scene), outputDriver(outputDriver) {
+Renderer::Renderer(Scene &scene, OutputDriver &outputDriver, TaskReporter &taskReporter)
+    : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter) {
 }
 
 void Renderer::renderScene() {
@@ -31,41 +33,42 @@ void Renderer::renderScene() {
 
     std::vector<ImageBucket> bucketSequence =
         ImageBucketSequences::getSequence(scene.renderSettings.resolution, 8, scene.renderSettings.bucketSequenceType);
-    ProgressReporter reporter =
-        ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()), "Rendering");
+    auto taskProgressController = taskReporter.startTask("Rendering", bucketSequence.size());
 
     bool serialRendering = false;
     if (serialRendering) {
-        renderSerial(reporter, bucketSequence);
+        renderSerial(taskProgressController, bucketSequence);
     } else {
-        renderParallel(reporter, bucketSequence);
+        renderParallel(taskProgressController, bucketSequence);
     }
 
     Logger::info("Rendering done.");
-    const auto renderTime = reporter.finish();
+    const auto renderTime = taskProgressController.finish();
     writeImageMetadata(renderTime);
 }
 
-void Renderer::renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence) {
+void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController,
+                              const std::vector<ImageBucket> &bucketSequence) {
     tbb::concurrent_queue<ImageBucket> bucketQueue(bucketSequence.begin(), bucketSequence.end());
     tbb::task_group task_group;
 
     for (unsigned int i = 0; i < std::thread::hardware_concurrency(); i++) {
-        task_group.run([&bucketQueue, &reporter, this]() {
+        task_group.run([&bucketQueue, &taskProgressController, this]() {
             ImageBucket imageBucket;
             while (bucketQueue.try_pop(imageBucket)) {
                 renderBucket(imageBucket);
-                reporter.iterationDone();
+                taskProgressController.iterationDone();
             }
         });
     }
     task_group.wait();
 }
 
-void Renderer::renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence) {
+void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController,
+                            const std::vector<ImageBucket> &bucketSequence) {
     for (auto &imageBucket : bucketSequence) {
         renderBucket(imageBucket);
-        reporter.iterationDone();
+        taskProgressController.iterationDone();
     }
 }
 
@@ -88,7 +91,7 @@ void Renderer::init() {
         cameraModel->init();
     }
 
-    GeometryCompiler geometryCompiler(scene);
+    GeometryCompiler geometryCompiler(scene, taskReporter);
     geometryCompiler.compile();
     Logger::info("Objects in scene: {:L}", scene.objects.size());
     Logger::info("Primitives in scene: {:L}", scene.primitiveCount());

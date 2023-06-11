@@ -10,6 +10,7 @@
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
+#include "utils/TaskReporter.h"
 #include "widgets/ImageWidgetOutputDriver.h"
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
@@ -69,7 +70,8 @@ int craygMain(int argc, char **argv) {
     ImageOutputDriver imageOutputDriver(image);
     TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
 
-    Renderer renderer(scene, teeOutputDriver);
+    TaskReporter taskReporter;
+    Renderer renderer(scene, teeOutputDriver, taskReporter);
 
     std::thread renderThread([&image, &renderer, &imageOutputPath]() {
         try {

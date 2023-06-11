@@ -4,6 +4,7 @@
 #include "bucketsamplers/BucketSampler.h"
 #include "integrators/AbstractIntegrator.h"
 #include "scene/camera/PineHoleCameraModel.h"
+#include "utils/TaskReporter.h"
 #include <basics/Color.h>
 #include <basics/Resolution.h>
 #include <image/Image.h>
@@ -18,7 +19,7 @@ namespace crayg {
 
 class Renderer {
   public:
-    Renderer(Scene &scene, OutputDriver &outputDriver);
+    Renderer(Scene &scene, OutputDriver &outputDriver, TaskReporter &taskReporter);
 
     void renderScene();
 
@@ -27,11 +28,14 @@ class Renderer {
     OutputDriver &outputDriver;
     std::unique_ptr<CameraModel> cameraModel;
     std::shared_ptr<SceneIntersector> sceneIntersector;
+    TaskReporter &taskReporter;
 
     void init();
 
-    void renderSerial(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
-    void renderParallel(ProgressReporter &reporter, const std::vector<ImageBucket> &bucketSequence);
+    void renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController,
+                      const std::vector<ImageBucket> &bucketSequence);
+    void renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController,
+                        const std::vector<ImageBucket> &bucketSequence);
     void renderBucket(const ImageBucket &imageBucket);
     Color renderSample(const Vector2f &samplePos);
 

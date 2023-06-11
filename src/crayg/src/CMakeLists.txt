@@ -291,6 +291,8 @@ set(crayg_SRCS
         utils/RemainingTimeCalculator.cpp
         utils/RemainingTimeCalculator.h
         utils/StopWatch.h
+        utils/TaskReporter.cpp
+        utils/TaskReporter.h
         utils/ToStringHelper.h
         utils/utils.h
         )

@@ -85,6 +85,7 @@ set(UNIT_TEST_LIST
         TestSpiralSequence.cpp
         TestSubdivisionSurfaceMesh.cpp
         TestSurfaceInteraction.cpp
+        TestTaskReporter.cpp
         TestTeeOutputDriver.cpp
         TestThickLensApproximation.cpp
         TestToStringHelper.cpp

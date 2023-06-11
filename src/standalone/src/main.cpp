@@ -43,7 +43,8 @@ int craygMain(int argc, char *argv[]) {
 
     ImageOutputDriver imageOutputDriver(myImage);
 
-    Renderer renderer(scene, imageOutputDriver);
+    TaskReporter taskReporter;
+    Renderer renderer(scene, imageOutputDriver, taskReporter);
     renderer.renderScene();
 
     Logger::info("Writing image to {}..", imageOutputPath);
