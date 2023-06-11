@@ -4,6 +4,7 @@
 
 #include "scene/camera/lensio/LensFileReaderFactory.h"
 #include "scene/camera/lensio/LensFileWriterFactory.h"
+#include "utils/CraygMain.h"
 #include "utils/DtoUtils.h"
 #include "utils/EnumUtils.h"
 
@@ -27,39 +28,40 @@ void convertLensFile(const LensFileConversionOptions &options) {
     writer->writeFile(options.outputFile, cameraLens);
 }
 
-}
+int craygMain(int argc, char *argv[]) {
+    CLI::App app{
+        fmt::format("Crayg lensfile utils {}, commit {}", crayg::CraygInfo::VERSION, crayg::CraygInfo::COMMIT_HASH),
+        "lensfileutils"};
+    app.require_subcommand(1);
 
-int main(int argc, char **argv) {
-    crayg::Logger::initialize();
+    auto convertCommand = app.add_subcommand("convert", "converts a lens file from one format to another");
+
+    std::string lensFileInput;
+    convertCommand->add_option("-i,--input", lensFileInput, "Lens file input")->required();
+
+    std::string lensFileOutput;
+    convertCommand->add_option("-o,--output", lensFileOutput, "Lens file output. Outputs to stdout if not specified")
+        ->required(false);
+
+    std::string format = "json";
+    convertCommand->add_option("-f,--format", format, "Lens file format, available options: json (default), txt")
+        ->required(false);
+
     try {
-        CLI::App app{
-            fmt::format("Crayg lensfile utils {}, commit {}", crayg::CraygInfo::VERSION, crayg::CraygInfo::COMMIT_HASH),
-            "lensfileutils"};
-        app.require_subcommand(1);
-
-        auto convertCommand = app.add_subcommand("convert", "converts a lens file from one format to another");
-
-        std::string lensFileInput;
-        convertCommand->add_option("-i,--input", lensFileInput, "Lens file input")->required();
-
-        std::string lensFileOutput;
-        convertCommand
-            ->add_option("-o,--output", lensFileOutput, "Lens file output. Outputs to stdout if not specified")
-            ->required(false);
-
-        std::string format = "json";
-        convertCommand->add_option("-f,--format", format, "Lens file format, available options: json (default), txt")
-            ->required(false);
-
         app.parse(argc, argv);
 
-        if (convertCommand->parsed()) {
-            crayg::convertLensFile({lensFileInput, lensFileOutput, format});
-        }
-
-    } catch (std::exception &e) {
-        crayg::Logger::backtrace();
-        crayg::Logger::error("Caught exception: {}", e.what());
-        return -1;
+    } catch (const CLI::Error &e) {
+        exit(app.exit(e));
     }
-};
+
+    if (convertCommand->parsed()) {
+        convertLensFile({lensFileInput, lensFileOutput, format});
+    }
+    return 0;
+}
+
+}
+
+int main(int argc, char *argv[]) {
+    CRAYG_MAIN_IMPL;
+}

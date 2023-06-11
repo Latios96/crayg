@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include "resources/Stylesheet.h"
 #include "sceneIO/SceneReaderFactory.h"
+#include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
 #include "widgets/ImageWidgetOutputDriver.h"
 #include <image/io/ImageWriter.h>
@@ -18,79 +19,76 @@
 #include <thread>
 #include <utils/ImagePathResolver.h>
 
-int main(int argc, char **argv) {
-    crayg::Logger::initialize();
-    try {
-        QApplication a(argc, argv);
-        a.setStyleSheet(STYLESHEET);
+namespace crayg {
 
-        registerQMetaTypes();
+int craygMain(int argc, char **argv) {
+    QApplication a(argc, argv);
+    a.setStyleSheet(STYLESHEET);
 
-        crayg::CliParser cliParser("crayg-standalone-gui", argc, argv);
-        crayg::CliParseResult parseResult = cliParser.parse();
+    registerQMetaTypes();
 
-        if (!parseResult.isValid()) {
-            std::cout << (*parseResult.error) << std::endl;
-            exit(1);
+    CliParser cliParser("crayg-standalone-gui", argc, argv);
+    CliParseResult parseResult = cliParser.parse();
+
+    if (!parseResult.isValid()) {
+        std::cout << (*parseResult.error) << std::endl;
+        exit(1);
+    }
+
+    ImagePathResolver imagePathResolver;
+    std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
+    std::string logFilePath = FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
+    Logger::logToFile(logFilePath);
+
+    Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
+
+    Scene scene;
+
+    std::string scenePath = parseResult.args->scenePath;
+    SceneReader::ReadOptions readOptions;
+    readOptions.cameraName = parseResult.args->cameraName;
+    auto sceneReader = SceneReaderFactory::createSceneReader(scenePath, scene, readOptions);
+    sceneReader->read();
+
+    scene.renderSettings = parseResult.args->cliRenderSettingsOverride.resolveOverrides(scene.renderSettings);
+
+    Image image(scene.renderSettings.resolution);
+    auto imageWidget = new ImageWidget(image);
+    ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
+    FrameBufferWidget frameBufferWidget(*imageWidget);
+    frameBufferWidget.show();
+
+    QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter, &QtSignalAdapter::metadataWritten, &frameBufferWidget,
+                     &FrameBufferWidget::setImageMetadata);
+
+    QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter, &QtSignalAdapter::initialized, &frameBufferWidget,
+                     &FrameBufferWidget::setImageSpec);
+
+    QObject::connect(&frameBufferWidget, &FrameBufferWidget::channelChanged, imageWidget, &ImageWidget::changeChannel);
+
+    ImageOutputDriver imageOutputDriver(image);
+    TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
+
+    Renderer renderer(scene, teeOutputDriver);
+
+    std::thread renderThread([&image, &renderer, &imageOutputPath]() {
+        try {
+            renderer.renderScene();
+
+            Logger::info("Writing image to {}..", imageOutputPath);
+            ImageWriters::writeImage(image, imageOutputPath);
+            Logger::info("Writing image done.");
+        } catch (std::exception &e) {
+            Logger::error("Caught exception: {}", e.what());
         }
+    });
+    renderThread.detach();
 
-        crayg::ImagePathResolver imagePathResolver;
-        std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
-        std::string logFilePath = crayg::FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
-        crayg::Logger::logToFile(logFilePath);
+    return QApplication::exec();
+}
 
-        crayg::Logger::info("Crayg Renderer version {}, commit {}", crayg::CraygInfo::VERSION,
-                            crayg::CraygInfo::COMMIT_HASH);
+}
 
-        crayg::Scene scene;
-
-        std::string scenePath = parseResult.args->scenePath;
-        crayg::SceneReader::ReadOptions readOptions;
-        readOptions.cameraName = parseResult.args->cameraName;
-        auto sceneReader = crayg::SceneReaderFactory::createSceneReader(scenePath, scene, readOptions);
-        sceneReader->read();
-
-        scene.renderSettings = parseResult.args->cliRenderSettingsOverride.resolveOverrides(scene.renderSettings);
-
-        crayg::Image image(scene.renderSettings.resolution);
-        auto imageWidget = new crayg::ImageWidget(image);
-        crayg::ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
-        crayg::FrameBufferWidget frameBufferWidget(*imageWidget);
-        frameBufferWidget.show();
-
-        QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter, &crayg::QtSignalAdapter::metadataWritten,
-                         &frameBufferWidget, &crayg::FrameBufferWidget::setImageMetadata);
-
-        QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter, &crayg::QtSignalAdapter::initialized,
-                         &frameBufferWidget, &crayg::FrameBufferWidget::setImageSpec);
-
-        QObject::connect(&frameBufferWidget, &crayg::FrameBufferWidget::channelChanged, imageWidget,
-                         &crayg::ImageWidget::changeChannel);
-
-        crayg::ImageOutputDriver imageOutputDriver(image);
-        crayg::TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
-
-        crayg::Renderer renderer(scene, teeOutputDriver);
-
-        std::thread renderThread([&image, &renderer, &imageOutputPath]() {
-            try {
-                renderer.renderScene();
-
-                crayg::Logger::info("Writing image to {}..", imageOutputPath);
-                crayg::ImageWriters::writeImage(image, imageOutputPath);
-                crayg::Logger::info("Writing image done.");
-            } catch (std::exception &e) {
-                crayg::Logger::error("Caught exception: {}", e.what());
-            }
-        });
-        renderThread.detach();
-
-        return QApplication::exec();
-    }
-
-    catch (std::exception &e) {
-        crayg::Logger::backtrace();
-        crayg::Logger::error("Caught exception: {}", e.what());
-        return -1;
-    }
+int main(int argc, char *argv[]) {
+    CRAYG_MAIN_IMPL;
 }

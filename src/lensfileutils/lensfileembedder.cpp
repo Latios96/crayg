@@ -4,6 +4,7 @@
 #include "scene/camera/lensio/LensFileReaderFactory.h"
 #include "sceneIO/usd/UsdLensFileUtils.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "utils/CraygMain.h"
 
 #include <pxr/usd/usd/primRange.h>
 #include <pxr/usd/usd/stage.h>
@@ -35,10 +36,7 @@ void embeddLensFiles(const std::string &stagePath) {
     usdStage->Save();
 }
 
-}
-
-int main(int argc, char **argv) {
-    crayg::Logger::initialize();
+int craygMain(int argc, char *argv[]) {
     CLI::App app{fmt::format("Crayg lensfileembedder utils {}, commit {}", crayg::CraygInfo::VERSION,
                              crayg::CraygInfo::COMMIT_HASH),
                  "lensfileutils"};
@@ -52,9 +50,12 @@ int main(int argc, char **argv) {
 
     } catch (const CLI::Error &e) {
         exit(app.exit(e));
-    } catch (std::exception &e) {
-        crayg::Logger::backtrace();
-        crayg::Logger::error("Caught exception: {}", e.what());
-        return -1;
     }
-};
+    return 0;
+}
+
+}
+
+int main(int argc, char *argv[]) {
+    CRAYG_MAIN_IMPL;
+}

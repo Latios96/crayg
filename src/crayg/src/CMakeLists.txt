@@ -272,6 +272,7 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.h
         sceneIO/write/usd/UsdTriangleMeshWriter.cpp
         sceneIO/write/usd/UsdTriangleMeshWriter.h
+        utils/CraygMain.h
         utils/DtoUtils.h
         utils/EnumUtils.h
         utils/FileSystemUtils.cpp
