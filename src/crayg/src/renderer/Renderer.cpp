@@ -96,12 +96,11 @@ void Renderer::init() {
     Logger::info("Objects in scene: {:L}", scene.objects.size());
     Logger::info("Primitives in scene: {:L}", scene.primitiveCount());
 
-    {
-        InformativeScopedStopWatch buildBvh("Building SceneIntersector");
-        sceneIntersector = IntersectorFactory::createSceneIntersector(scene.renderSettings.intersectorType, scene);
-        integrator = std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(
-            scene.renderSettings.integratorType, scene, sceneIntersector, scene.renderSettings.integratorSettings));
-    }
+    auto progressController = taskReporter.startTask("Building SceneIntersector", 1);
+    sceneIntersector = IntersectorFactory::createSceneIntersector(scene.renderSettings.intersectorType, scene);
+    integrator = std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(
+        scene.renderSettings.integratorType, scene, sceneIntersector, scene.renderSettings.integratorSettings));
+    progressController.finish();
 }
 
 Color Renderer::renderSample(const Vector2f &samplePos) {
