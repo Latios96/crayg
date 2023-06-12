@@ -42,6 +42,7 @@ class BaseTaskReporter {
         int progress();
         std::chrono::seconds elapsedTime();
         std::chrono::seconds estimatedTimeRemaining();
+        ~Task() = default;
     };
 
   protected:
