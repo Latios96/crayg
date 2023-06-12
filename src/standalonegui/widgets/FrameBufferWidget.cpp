@@ -1,4 +1,7 @@
 #include "FrameBufferWidget.h"
+#include "QtUtils.h"
+#include <QProgressBar>
+#include <QSpacerItem>
 #include <QStyle>
 #include <QTreeWidget>
 #include <boost/algorithm/string.hpp>
@@ -61,10 +64,10 @@ void FrameBufferWidget::setupUI() {
 }
 
 void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
-    const std::string title =
-        fmt::format("Crayg Frame Buffer - [{} of {}x{}]", zoomFactor, this->panAndZoomArea->getOriginalSize().width(),
-                    this->panAndZoomArea->getOriginalSize().height());
-    this->setWindowTitle(QString::fromStdString(title));
+    const auto title =
+        qformat("Crayg Frame Buffer - [{} of {}x{}]", zoomFactor, this->panAndZoomArea->getOriginalSize().width(),
+                this->panAndZoomArea->getOriginalSize().height());
+    this->setWindowTitle(title);
 }
 
 QTreeWidgetItem *findChildByName(QTreeWidgetItem *item, const QString &name) {
@@ -99,7 +102,7 @@ void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
                 auto item = new QTreeWidgetItem();
                 item->setText(0, QString::fromStdString(pathPart));
                 if (pathPart.data() == strings[strings.size() - 1].data()) {
-                    item->setText(1, QString::fromStdString(fmt::format("{}", metadataEntry.second)));
+                    item->setText(1, qformat("{}", metadataEntry.second));
                 }
                 item->setTextAlignment(1, Qt::AlignRight);
                 currentItem->addChild(item);
