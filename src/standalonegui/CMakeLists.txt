@@ -7,6 +7,7 @@ add_library(crayg-framebuffer
         resources/Stylesheet.h
         widgets/FrameBufferWidget.cpp
         widgets/FrameBufferWidget.h
+        widgets/IdConstants.h
         widgets/ImageWidget.cpp
         widgets/ImageWidget.h
         widgets/ImageWidgetOutputDriver.cpp
@@ -14,10 +15,9 @@ add_library(crayg-framebuffer
         widgets/PanAndZoomArea.cpp
         widgets/PanAndZoomArea.h
         widgets/QtMetaTypes.h
+        widgets/QtUtils.h
         widgets/QtWidgetsBuilderDsl.cpp
         widgets/QtWidgetsBuilderDsl.h
-        widgets/QtUtils.h
-        widgets/IdConstants.h
         )
 
 target_include_directories(crayg-framebuffer PUBLIC
