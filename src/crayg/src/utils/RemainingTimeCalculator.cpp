@@ -16,7 +16,7 @@ float RemainingTimeCalculator::getRemainingTimeByProgress(int progress) {
     if (alreadyDone) {
         return 0;
     }
-    const auto timeElapsed = getRemainingSecondsByProgress(progress);
+    auto timeElapsed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - startTime);
     const auto timeElapsedInSeconds = std::chrono::duration_cast<std::chrono::seconds>(timeElapsed).count();
     const float secondsPerPercent = static_cast<float>(timeElapsedInSeconds) / static_cast<float>(progress);
     return secondsPerPercent * (100.0f - progress);
@@ -34,7 +34,10 @@ std::chrono::seconds RemainingTimeCalculator::getRemainingSecondsByProgress(int 
     }
 
     auto timeElapsed = std::chrono::steady_clock::now() - startTime;
-    return std::chrono::duration_cast<std::chrono::seconds>(timeElapsed);
+    auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(timeElapsed);
+    const auto timeElapsedInSeconds = std::chrono::duration_cast<std::chrono::seconds>(timeElapsed).count();
+    const float secondsPerPercent = static_cast<float>(timeElapsedInSeconds) / static_cast<float>(progress);
+    return std::chrono::seconds(static_cast<int>(secondsPerPercent * (100.0f - progress)));
 }
 
 RemainingTimeCalculator::RemainingTimeCalculator() = default;
