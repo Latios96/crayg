@@ -80,7 +80,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   @include transparentBackground;
 }
 
-QPushButton{
+QPushButton {
   background-color: $backgroundColor;
 
   @include rounded;
@@ -88,7 +88,7 @@ QPushButton{
   padding: 3px;
 }
 
-QPushButton:pressed, QToolButton:pressed  {
+QPushButton:pressed, QToolButton:pressed {
   background-color: $backgroundColorSelected;
 }
 
@@ -123,11 +123,15 @@ QComboBox::down-arrow {
   border-bottom-left-radius: 3px;
   background-color: $fontColor;
 }
+
 QProgressBar {
   @include rounded;
   background-color: $backgroundColorHighlight;
   height: 15px;
+  font-size: 12px;
+  font-weight: bold;
 }
+
 QProgressBar::chunk {
   @include rounded;
   background-color: $primary;

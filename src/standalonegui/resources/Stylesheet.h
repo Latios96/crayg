@@ -110,7 +110,9 @@ QProgressBar {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   background-color: #5b5b5b;
-  height: 15px; }
+  height: 15px;
+  font-size: 12px;
+  font-weight: bold; }
 
 QProgressBar::chunk {
   border-bottom-right-radius: 4px;
