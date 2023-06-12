@@ -82,7 +82,7 @@ void TaskReporter::onTaskStarted() {
 }
 
 void TaskReporter::onTaskFinished() {
-    Logger::info("{} took {:T}.", currentTask->name, currentTask->elapsedTime());
+    Logger::info("{} took {:%Hh %Mm %Ss}.", currentTask->name, currentTask->elapsedTime());
 }
 
 void TaskReporter::onTaskProgressUpdated() {
