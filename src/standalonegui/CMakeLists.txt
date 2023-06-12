@@ -14,6 +14,8 @@ add_library(crayg-framebuffer
         widgets/PanAndZoomArea.cpp
         widgets/PanAndZoomArea.h
         widgets/QtMetaTypes.h
+        widgets/QtWidgetsBuilderDsl.cpp
+        widgets/QtWidgetsBuilderDsl.h
         widgets/QtUtils.h
         )
 
