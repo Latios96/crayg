@@ -3,11 +3,13 @@
 
 #include <QString>
 
+#define CRAYG_DEFINE_UI_ID(name) static const inline QString name = #name;
+
 namespace crayg {
 
 class IDs {
   public:
-    static const inline QString statusProgressBar = "statusProgressBar";
+    CRAYG_DEFINE_UI_ID(statusProgressBar);
 };
 
 } // crayg
