@@ -104,6 +104,21 @@ QComboBox::down-arrow {
   border-bottom-left-radius: 3px;
   background-color: #e3e3e3; }
 
+QProgressBar {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: #5b5b5b;
+  height: 15px; }
+
+QProgressBar::chunk {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: #2ea9de; }
+
 )";
 
 #endif // CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_

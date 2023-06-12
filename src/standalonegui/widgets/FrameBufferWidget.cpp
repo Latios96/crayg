@@ -1,12 +1,31 @@
 #include "FrameBufferWidget.h"
 #include "QtUtils.h"
+#include "QtWidgetsBuilderDsl.h"
 #include <QProgressBar>
 #include <QSpacerItem>
 #include <QStyle>
+#include <QTimer>
 #include <QTreeWidget>
 #include <boost/algorithm/string.hpp>
 
 namespace crayg {
+
+QLayout *statusArea() {
+    return inVBox({[]() {
+                       auto progress = new QProgressBar();
+                       progress->setValue(50);
+                       progress->setAlignment(Qt::AlignCenter);
+                       progress->setFormat("Rendering..");
+                       progress->setObjectName("statusProgressBar");
+                       return progress;
+                   },
+                   inHBox({
+                       new QLabel(qformat("<b>Elapsed:</b> {}", "00h 00m 02s")),
+                       addHSpacer(30),
+                       new QLabel("<b>Remaining:</b> 00h 00m 02s"),
+                       addHStretch(),
+                   })});
+}
 
 void FrameBufferWidget::setupUI() {
     this->panAndZoomArea = new PanAndZoomArea();
@@ -32,6 +51,7 @@ void FrameBufferWidget::setupUI() {
 
     auto metadataButtonLayout = new QHBoxLayout();
     metadataButtonLayout->addStretch();
+    metadataButtonLayout->addLayout(statusArea());
     metadataButton = new QPushButton();
     const QIcon icon = this->style()->standardIcon(QStyle::SP_FileDialogDetailedView);
     metadataButton->setIcon(icon);

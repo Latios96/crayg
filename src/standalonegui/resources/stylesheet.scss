@@ -123,4 +123,12 @@ QComboBox::down-arrow {
   border-bottom-left-radius: 3px;
   background-color: $fontColor;
 }
-
+QProgressBar {
+  @include rounded;
+  background-color: $backgroundColorHighlight;
+  height: 15px;
+}
+QProgressBar::chunk {
+  @include rounded;
+  background-color: $primary;
+}
