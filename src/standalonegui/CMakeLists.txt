@@ -17,6 +17,7 @@ add_library(crayg-framebuffer
         widgets/QtWidgetsBuilderDsl.cpp
         widgets/QtWidgetsBuilderDsl.h
         widgets/QtUtils.h
+        widgets/IdConstants.h
         )
 
 target_include_directories(crayg-framebuffer PUBLIC

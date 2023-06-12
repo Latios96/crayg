@@ -1,4 +1,5 @@
 #include "FrameBufferWidget.h"
+#include "IdConstants.h"
 #include "QtUtils.h"
 #include "QtWidgetsBuilderDsl.h"
 #include <QProgressBar>
@@ -16,7 +17,7 @@ QLayout *statusArea() {
                        progress->setValue(50);
                        progress->setAlignment(Qt::AlignCenter);
                        progress->setFormat("Rendering..");
-                       progress->setObjectName("statusProgressBar");
+                       progress->setObjectName(IDs::statusProgressBar);
                        return progress;
                    },
                    inHBox({
