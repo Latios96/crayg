@@ -33,38 +33,35 @@ void FrameBufferWidget::setupUI() {
     this->panAndZoomArea->setWidget(&imageWidget);
     QObject::connect(panAndZoomArea, &PanAndZoomArea::zoomFactorChanged, this, &FrameBufferWidget::setZoomFactor);
 
-    auto overallLayout = new QHBoxLayout();
+    auto overallLayout = inHBox({inVBox({inHBox({[this]() {
+                                                     channelComboBox = new QComboBox();
+                                                     channelComboBox->setMinimumWidth(150);
+                                                     channelComboBox->setMaximumWidth(150);
+                                                     return channelComboBox;
+                                                 },
+                                                 addHStretch()}),
+                                         this->panAndZoomArea,
+                                         inHBox({addHStretch(), statusArea(),
+                                                 [this]() {
+                                                     metadataButton = new QPushButton();
+                                                     const QIcon icon =
+                                                         this->style()->standardIcon(QStyle::SP_FileDialogDetailedView);
+                                                     metadataButton->setIcon(icon);
+                                                     metadataButton->setFixedSize(QSize(20, 20));
+                                                     return metadataButton;
+                                                 }})}),
+                                 [this]() {
+                                     imageMetadataWidget = new QTreeWidget(this);
+                                     imageMetadataWidget->hide();
+                                     imageMetadataWidget->setHeaderHidden(true);
+                                     imageMetadataWidget->setColumnCount(2);
+                                     imageMetadataWidget->setMaximumWidth(400);
+                                     return imageMetadataWidget;
+                                 }});
 
-    auto middleLayout = new QVBoxLayout();
-    overallLayout->addLayout(middleLayout);
-
-    auto topRowLayout = new QHBoxLayout();
-
-    channelComboBox = new QComboBox();
-    channelComboBox->setMaximumWidth(150);
     QObject::connect(channelComboBox, &QComboBox::currentTextChanged,
                      [this](QString text) { emit channelChanged(text.toStdString()); });
-    topRowLayout->addWidget(channelComboBox, Qt::AlignLeft);
-    topRowLayout->addStretch();
-    middleLayout->addLayout(topRowLayout);
 
-    middleLayout->addWidget(this->panAndZoomArea);
-
-    auto metadataButtonLayout = new QHBoxLayout();
-    metadataButtonLayout->addStretch();
-    metadataButtonLayout->addLayout(statusArea());
-    metadataButton = new QPushButton();
-    const QIcon icon = this->style()->standardIcon(QStyle::SP_FileDialogDetailedView);
-    metadataButton->setIcon(icon);
-    metadataButton->setFixedSize(QSize(20, 20));
-    metadataButtonLayout->addWidget(metadataButton, Qt::AlignRight);
-    middleLayout->addLayout(metadataButtonLayout);
-
-    imageMetadataWidget = new QTreeWidget(this);
-    imageMetadataWidget->hide();
-    imageMetadataWidget->setHeaderHidden(true);
-    imageMetadataWidget->setColumnCount(2);
-    overallLayout->addWidget(imageMetadataWidget);
     QObject::connect(metadataButton, &QPushButton::clicked,
                      [=](bool checked) { imageMetadataWidget->setHidden(!imageMetadataWidget->isHidden()); });
 
@@ -78,9 +75,8 @@ void FrameBufferWidget::setupUI() {
         imageWidget.size().height() > availableSize.height() - 100) {
         resize(availableSize * 3.0f / 5.0f);
     } else {
-        resize(QSize(imageWidget.size().width() + 40, imageWidget.size().height() + 40 +
-                                                          metadataButton->size().height() +
-                                                          topRowLayout->sizeHint().height()));
+        resize(QSize(imageWidget.size().width() + 40,
+                     imageWidget.size().height() + 40 + metadataButton->size().height() + 35));
     }
 }
 
