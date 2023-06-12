@@ -11,19 +11,49 @@
 
 namespace crayg {
 
-QLayout *statusArea() {
-    return inVBox({[]() {
+QString formatElapsed(const std::chrono::seconds &elapsed) {
+    if (elapsed.count() == 0) {
+        return QString("<b>Elapsed:</b> –");
+    }
+    return qformat("<b>Elapsed:</b> {:%Hh %Mm %Ss}", elapsed);
+}
+
+QString formatRemaining(const std::chrono::seconds &remaining) {
+    if (remaining.count() == 0) {
+        return QString("<b>Remaining:</b> –");
+    }
+    return qformat("<b>Remaining:</b> {:%Hh %Mm %Ss}", remaining);
+}
+
+QLayout *progressBarArea() {
+    return inVBox({{[]() {
+                       auto previousTask = new QLabel();
+                       previousTask->setObjectName(IDs::statusPreviousTask);
+                       return previousTask;
+                   }},
+                   []() {
                        auto progress = new QProgressBar();
                        progress->setValue(50);
                        progress->setAlignment(Qt::AlignCenter);
-                       progress->setFormat("Rendering..");
+                       progress->setFormat("");
                        progress->setObjectName(IDs::statusProgressBar);
+                       progress->hide();
                        return progress;
                    },
                    inHBox({
-                       new QLabel(qformat("<b>Elapsed:</b> {}", "00h 00m 02s")),
+                       []() {
+                           auto elapsed = new QLabel(formatElapsed(std::chrono::seconds(0)));
+                           elapsed->setObjectName(IDs::statusElapsed);
+                           elapsed->hide();
+                           return elapsed;
+                       },
                        addHSpacer(30),
-                       new QLabel("<b>Remaining:</b> 00h 00m 02s"),
+                       []() {
+                           auto remaining = new QLabel(formatRemaining(std::chrono::seconds(0)));
+                           remaining->setObjectName(IDs::statusRemaining);
+                           remaining->hide();
+                           return remaining;
+                       },
                        addHStretch(),
                    })});
 }
@@ -41,7 +71,7 @@ void FrameBufferWidget::setupUI() {
                                                  },
                                                  addHStretch()}),
                                          this->panAndZoomArea,
-                                         inHBox({addHStretch(), statusArea(),
+                                         inHBox({addHStretch(), progressBarArea(),
                                                  [this]() {
                                                      metadataButton = new QPushButton();
                                                      const QIcon icon =
@@ -66,6 +96,11 @@ void FrameBufferWidget::setupUI() {
                      [=](bool checked) { imageMetadataWidget->setHidden(!imageMetadataWidget->isHidden()); });
 
     this->setLayout(overallLayout);
+
+    statusProgressBar = this->findChild<QProgressBar *>(IDs::statusProgressBar);
+    statusElapsed = this->findChild<QLabel *>(IDs::statusElapsed);
+    statusRemaining = this->findChild<QLabel *>(IDs::statusRemaining);
+    statusPreviousTask = this->findChild<QLabel *>(IDs::statusPreviousTask);
 
     setZoomFactor(ZoomFactor());
 
@@ -141,6 +176,31 @@ void FrameBufferWidget::setImageSpec(ImageSpec imageSpec) {
         channelComboBox->setItemData(channelComboBox->count() - 1, QString::fromStdString(channelSpec.name),
                                      Qt::ToolTipRole);
     }
+}
+
+void FrameBufferWidget::startTask(TaskReporter::Task task) {
+    statusPreviousTask->hide();
+    statusProgressBar->setFormat(qformat("{}..", task.name));
+    statusProgressBar->setValue(0);
+    statusProgressBar->show();
+    statusElapsed->show();
+    statusElapsed->setText(formatElapsed(std::chrono::seconds(0)));
+    statusRemaining->show();
+    statusRemaining->setText(formatRemaining(std::chrono::seconds(0)));
+}
+
+void FrameBufferWidget::finishTask(TaskReporter::Task task) {
+    statusPreviousTask->show();
+    statusPreviousTask->setText(qformat("{} took {:%Hh %Mm %Ss}", task.name, task.elapsedTime()));
+    statusProgressBar->hide();
+    statusElapsed->hide();
+    statusRemaining->hide();
+}
+
+void FrameBufferWidget::updateTask(TaskReporter::Task task) {
+    statusProgressBar->setValue(task.progress());
+    statusElapsed->setText(formatElapsed(task.elapsedTime()));
+    statusRemaining->setText(formatRemaining(task.estimatedTimeRemaining()));
 }
 
 }

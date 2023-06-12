@@ -4,7 +4,9 @@
 #include "ImageWidget.h"
 #include "PanAndZoomArea.h"
 #include "image/ImageMetadata.h"
+#include "utils/TaskReporter.h"
 #include <QGuiApplication>
+#include <QProgressBar>
 #include <QScreen>
 #include <QTreeWidget>
 #include <QVBoxLayout>
@@ -29,6 +31,9 @@ class FrameBufferWidget : public QWidget {
     void setZoomFactor(ZoomFactor zoomFactor);
     void setImageMetadata(ImageMetadata imageMetadata);
     void setImageSpec(ImageSpec imageSpec);
+    void startTask(BaseTaskReporter::Task task);
+    void finishTask(BaseTaskReporter::Task task);
+    void updateTask(BaseTaskReporter::Task task);
   signals:
     void channelChanged(std::string newChannel);
 
@@ -39,6 +44,10 @@ class FrameBufferWidget : public QWidget {
     QPushButton *metadataButton;
     QTreeWidget *imageMetadataWidget;
     QComboBox *channelComboBox;
+    QProgressBar *statusProgressBar;
+    QLabel *statusElapsed;
+    QLabel *statusRemaining;
+    QLabel *statusPreviousTask;
 };
 
 }

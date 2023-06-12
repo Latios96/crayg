@@ -10,7 +10,7 @@
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
-#include "utils/TaskReporter.h"
+#include "widgets/GuiTaskReporter.h"
 #include "widgets/ImageWidgetOutputDriver.h"
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
@@ -53,6 +53,8 @@ int craygMain(int argc, char **argv) {
 
     scene.renderSettings = parseResult.args->cliRenderSettingsOverride.resolveOverrides(scene.renderSettings);
 
+    TaskReporterQtSignalAdapter taskReporterQtSignalAdapter;
+    GuiTaskReporter taskReporter(taskReporterQtSignalAdapter);
     Image image(scene.renderSettings.resolution);
     auto imageWidget = new ImageWidget(image);
     ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
@@ -67,10 +69,16 @@ int craygMain(int argc, char **argv) {
 
     QObject::connect(&frameBufferWidget, &FrameBufferWidget::channelChanged, imageWidget, &ImageWidget::changeChannel);
 
+    QObject::connect(&taskReporterQtSignalAdapter, &TaskReporterQtSignalAdapter::taskStarted, &frameBufferWidget,
+                     &FrameBufferWidget::startTask);
+    QObject::connect(&taskReporterQtSignalAdapter, &TaskReporterQtSignalAdapter::taskFinished, &frameBufferWidget,
+                     &FrameBufferWidget::finishTask);
+    QObject::connect(&taskReporterQtSignalAdapter, &TaskReporterQtSignalAdapter::taskProgressUpdated,
+                     &frameBufferWidget, &FrameBufferWidget::updateTask);
+
     ImageOutputDriver imageOutputDriver(image);
     TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
 
-    TaskReporter taskReporter;
     Renderer renderer(scene, teeOutputDriver, taskReporter);
 
     std::thread renderThread([&image, &renderer, &imageOutputPath]() {

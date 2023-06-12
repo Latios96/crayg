@@ -7,6 +7,8 @@ add_library(crayg-framebuffer
         resources/Stylesheet.h
         widgets/FrameBufferWidget.cpp
         widgets/FrameBufferWidget.h
+        widgets/GuiTaskReporter.cpp
+        widgets/GuiTaskReporter.h
         widgets/IdConstants.h
         widgets/ImageWidget.cpp
         widgets/ImageWidget.h
