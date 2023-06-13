@@ -59,17 +59,11 @@ void drawBucket(QImage &bufferToShow, const ImageBucket &imageBucket) {
     int CROSS_LENGTH = 5;
     int CROSS_WIDTH = 1;
 
-    drawHLine(bufferToShow, x, y, CROSS_LENGTH, CROSS_WIDTH);
-    drawHLine(bufferToShow, x + imageBucket.getWidth() - CROSS_LENGTH, y, CROSS_LENGTH, CROSS_WIDTH);
-    drawHLine(bufferToShow, x, y + imageBucket.getHeight() - CROSS_WIDTH, CROSS_LENGTH, CROSS_WIDTH);
-    drawHLine(bufferToShow, x + imageBucket.getWidth() - CROSS_LENGTH, y + imageBucket.getHeight() - CROSS_WIDTH,
-              CROSS_LENGTH, CROSS_WIDTH);
+    drawHLine(bufferToShow, x, y, imageBucket.getWidth(), CROSS_WIDTH);
+    drawHLine(bufferToShow, x, y + imageBucket.getHeight() - 1, imageBucket.getWidth(), CROSS_WIDTH);
 
-    drawVLine(bufferToShow, x, y, CROSS_LENGTH, CROSS_WIDTH);
-    drawVLine(bufferToShow, x + imageBucket.getWidth() - CROSS_WIDTH, y, CROSS_LENGTH, CROSS_WIDTH);
-    drawVLine(bufferToShow, x, y + imageBucket.getHeight() - CROSS_LENGTH, CROSS_LENGTH, CROSS_WIDTH);
-    drawVLine(bufferToShow, x + imageBucket.getWidth() - CROSS_WIDTH, y + imageBucket.getHeight() - CROSS_LENGTH,
-              CROSS_LENGTH, CROSS_WIDTH);
+    drawVLine(bufferToShow, x, y, imageBucket.getHeight(), CROSS_WIDTH);
+    drawVLine(bufferToShow, x + imageBucket.getWidth() - 1, y, imageBucket.getHeight(), CROSS_WIDTH);
 }
 
 void ImageWidget::prepareBucket(const ImageBucket imageBucket) {
