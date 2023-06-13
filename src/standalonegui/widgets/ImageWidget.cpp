@@ -30,8 +30,8 @@ void ImageWidget::writeBucketImageBuffer(std::shared_ptr<BucketImageBuffer> buck
 void drawHLine(QImage &image, int x_start, int y_start, int length, int width) {
     for (int x = 0; x < length; x++) {
         for (int y = 0; y < width; y++) {
-            int xPos = x_start + x;
-            int yPos = y_start + y;
+            const int xPos = x_start + x;
+            const int yPos = y_start + y;
             if (xPos >= image.width() || yPos >= image.width()) {
                 continue;
             }
@@ -54,10 +54,9 @@ void drawVLine(QImage &image, int x_start, int y_start, int length, int width) {
 }
 
 void drawBucket(QImage &bufferToShow, const ImageBucket &imageBucket) {
-    int x = imageBucket.getPosition().x;
-    int y = imageBucket.getPosition().y;
-    int CROSS_LENGTH = 5;
-    int CROSS_WIDTH = 1;
+    const int x = imageBucket.getPosition().x;
+    const int y = imageBucket.getPosition().y;
+    const int CROSS_WIDTH = 1;
 
     drawHLine(bufferToShow, x, y, imageBucket.getWidth(), CROSS_WIDTH);
     drawHLine(bufferToShow, x, y + imageBucket.getHeight() - 1, imageBucket.getWidth(), CROSS_WIDTH);
@@ -72,17 +71,17 @@ void ImageWidget::prepareBucket(const ImageBucket imageBucket) {
 }
 
 void ImageWidget::updateBufferToShow(const ImageBucket &imageBucket) {
-    auto pixelBuffer = image.getChannel(currentChannel);
+    const auto pixelBuffer = image.getChannel(currentChannel);
     if (!pixelBuffer) {
         return;
     }
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
-        Vector2i globalPosition = pixel + imageBucket.getPosition();
+        const Vector2i globalPosition = pixel + imageBucket.getPosition();
         Color color = pixelBuffer->getValue(globalPosition);
         if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {
             color = ColorConversion::linearToSRGB(color);
         }
-        auto rgbValues = color.getRgbValues();
+        const auto rgbValues = color.getRgbValues();
         bufferToShow.setPixelColor(
             globalPosition.x, globalPosition.y,
             QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
