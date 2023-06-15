@@ -12,7 +12,7 @@ namespace crayg {
 class RealisticCameraModel : public CameraModel {
   public:
     RealisticCameraModel(Camera &camera, const Resolution &resolution);
-    void init() override;
+    void init(TaskReporter &taskReporter) override;
     std::optional<Ray> createPrimaryRay(float x, float y) override;
 
   private:

@@ -5,33 +5,42 @@
 #include <tbb/parallel_for.h>
 
 namespace crayg {
-ExitPupilCalculator::ExitPupilCalculator(CameraLens &lens, float filmDiagonalLength, const CalculationSettings &samples)
-    : lens(lens), filmDiagonalLength(filmDiagonalLength), calculationSettings(samples) {
+ExitPupilCalculator::ExitPupilCalculator(CameraLens &lens, float filmDiagonalLength, const CalculationSettings &samples,
+                                         TaskReporter &taskReporter)
+    : lens(lens), filmDiagonalLength(filmDiagonalLength), calculationSettings(samples), taskReporter(taskReporter) {
 }
 
 ExitPupil ExitPupilCalculator::calculate() {
-    InformativeScopedStopWatch informativeScopedStopWatch("Computing exit pupil..");
     ExitPupil exitPupil;
     exitPupil.pupilBounds.resize(calculationSettings.samplesFilmX);
 
+    auto progressController = taskReporter.startTask("Computing exit pupil", calculationSettings.samplesFilmX);
+
     if (calculationSettings.serial) {
-        calculateSerial(exitPupil);
+        calculateSerial(exitPupil, progressController);
     } else {
-        calculateParallel(exitPupil);
+        calculateParallel(exitPupil, progressController);
     }
+
+    progressController.finish();
 
     return exitPupil;
 }
 
-void ExitPupilCalculator::calculateSerial(ExitPupil &exitPupil) {
+void ExitPupilCalculator::calculateSerial(ExitPupil &exitPupil,
+                                          BaseTaskReporter::TaskProgressController &progressController) {
     for (int i = 0; i < calculationSettings.samplesFilmX; i++) {
         exitPupil.pupilBounds[i] = calculateExitPupilForInterval(i);
+        progressController.iterationDone();
     }
 }
 
-void ExitPupilCalculator::calculateParallel(ExitPupil &exitPupil) {
-    tbb::parallel_for(0, calculationSettings.samplesFilmX,
-                      [this, &exitPupil](int i) { exitPupil.pupilBounds[i] = calculateExitPupilForInterval(i); });
+void ExitPupilCalculator::calculateParallel(ExitPupil &exitPupil,
+                                            BaseTaskReporter::TaskProgressController &progressController) {
+    tbb::parallel_for(0, calculationSettings.samplesFilmX, [this, &exitPupil, &progressController](int i) {
+        exitPupil.pupilBounds[i] = calculateExitPupilForInterval(i);
+        progressController.iterationDone();
+    });
 }
 
 Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) {

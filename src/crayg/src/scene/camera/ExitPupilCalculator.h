@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_EXITPUPILCALCULATOR_H_
 #include "CameraLens.h"
 #include "basics/Bound2d.h"
+#include "utils/TaskReporter.h"
 #include <array>
 
 namespace crayg {
@@ -20,16 +21,18 @@ class ExitPupilCalculator {
         bool serial = false;
     };
 
-    explicit ExitPupilCalculator(CameraLens &lens, float filmDiagonalLength, const CalculationSettings &samples);
+    explicit ExitPupilCalculator(CameraLens &lens, float filmDiagonalLength, const CalculationSettings &samples,
+                                 TaskReporter &taskReporter);
     ExitPupil calculate();
 
   private:
     Bounds2df calculateExitPupilForInterval(int intervalIndex);
-    void calculateSerial(ExitPupil &exitPupil);
-    void calculateParallel(ExitPupil &exitPupil);
+    void calculateSerial(ExitPupil &exitPupil, BaseTaskReporter::TaskProgressController &progressController);
+    void calculateParallel(ExitPupil &exitPupil, BaseTaskReporter::TaskProgressController &progressController);
     CameraLens &lens;
     float filmDiagonalLength;
     CalculationSettings calculationSettings;
+    TaskReporter &taskReporter;
 };
 
 } // crayg

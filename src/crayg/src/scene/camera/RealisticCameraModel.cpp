@@ -15,13 +15,14 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
                              std::pow<float>(camera.getFilmbackSize() * 0.1f / aspectRatio, 2));
 }
 
-void RealisticCameraModel::init() {
+void RealisticCameraModel::init(TaskReporter &taskReporter) {
     Logger::info("Effective focal length: {:.2f}mm", camera.getLens().focalLength * 10);
 
     camera.getLens().focusLens(camera.getFocusDistance());
     camera.getLens().changeAperture(camera.getFStop());
 
-    ExitPupilCalculator exitPupilCalculator(camera.getLens(), filmDiagonal, ExitPupilCalculator::CalculationSettings());
+    ExitPupilCalculator exitPupilCalculator(camera.getLens(), filmDiagonal, ExitPupilCalculator::CalculationSettings(),
+                                            taskReporter);
     exitPupil = exitPupilCalculator.calculate();
 }
 

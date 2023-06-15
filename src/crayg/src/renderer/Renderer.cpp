@@ -88,7 +88,7 @@ void Renderer::init() {
     {
         InformativeScopedStopWatch buildBvh("Initialize camera");
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
-        cameraModel->init();
+        cameraModel->init(taskReporter);
     }
 
     GeometryCompiler geometryCompiler(scene, taskReporter);
