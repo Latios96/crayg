@@ -36,7 +36,7 @@ void UsdMaterialReadCache::readShaderAttributeValue(const pxr::UsdShadeShader &s
                                                     T &target) {
     auto input = shader.GetInput(pxr::TfToken(attributeName));
 
-    if (!input || input.HasConnectedSource() || !input.GetAttr().HasValue()) {
+    if (!input || !input.GetAttr().HasValue()) {
         return;
     }
 
