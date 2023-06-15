@@ -131,6 +131,16 @@ TEST_CASE("SpiralSequence::getTiles") {
                                 ImageBucket{{0, 20}, 4, 4}, ImageBucket{{0, 12}, 4, 8}, ImageBucket{{0, 4}, 4, 8},
                                 ImageBucket{{0, 0}, 4, 4}}));
     }
+
+    SECTION("should work correctly if half the width/height is smaller than 8") {
+        Resolution resolution(13, 13);
+        SpiralSequence spiralSequence(resolution, 8);
+
+        auto buckets = spiralSequence.getTiles();
+
+        REQUIRE(buckets == std::vector<ImageBucket>({ImageBucket{{6, 0}, 7, 6}, ImageBucket{{6, 6}, 7, 7},
+                                                     ImageBucket{{0, 6}, 6, 7}, ImageBucket{{0, 0}, 6, 6}}));
+    }
 }
 
 }

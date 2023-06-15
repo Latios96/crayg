@@ -12,7 +12,8 @@ std::vector<ImageBucket> SpiralSequence::getTiles() {
                             (std::ceil(static_cast<float>(resolution.getHeight()) / 2 / bucketWidth) * 2);
     std::vector<ImageBucket> buckets;
     buckets.reserve(bucketCount);
-    buckets.emplace_back(middle - Vector2i(0, bucketWidth), bucketWidth, bucketWidth);
+    buckets.emplace_back(Vector2i(middle.x, std::max(0, middle.y - bucketWidth)),
+                         std::min(resolution.getWidth() - middle.x, bucketWidth), std::min(middle.y, bucketWidth));
 
     const Vector2i downTransform = Vector2i(0, bucketWidth);
     const Vector2i leftTransform = Vector2i(-bucketWidth, 0);
