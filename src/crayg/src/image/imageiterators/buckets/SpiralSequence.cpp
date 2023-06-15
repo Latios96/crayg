@@ -8,8 +8,8 @@ SpiralSequence::SpiralSequence(const Resolution &resolution, int bucketWidth)
 
 std::vector<ImageBucket> SpiralSequence::getTiles() {
     const Vector2i middle = Vector2i(resolution.getWidth(), resolution.getHeight()) / 2;
-    const int bucketCount = std::ceil(static_cast<float>(resolution.getWidth()) / bucketWidth) *
-                            std::ceil(static_cast<float>(resolution.getHeight()) / bucketWidth);
+    const int bucketCount = std::ceil(static_cast<float>(resolution.getWidth()) / 2 / bucketWidth) * 2 *
+                            (std::ceil(static_cast<float>(resolution.getHeight()) / 2 / bucketWidth) * 2);
     std::vector<ImageBucket> buckets;
     buckets.reserve(bucketCount);
     buckets.emplace_back(middle - Vector2i(0, bucketWidth), bucketWidth, bucketWidth);
