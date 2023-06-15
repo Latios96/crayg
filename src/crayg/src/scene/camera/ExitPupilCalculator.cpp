@@ -68,7 +68,10 @@ Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) 
         return rearElementExtend;
     }
 
-    // todo expand
+    const float delta = (4.5f * rearApertureRadius) / calculationSettings.samplesLens;
+    pupilBounds = Bounds2df({pupilBounds.min.x - delta, pupilBounds.min.y - delta},
+                            {pupilBounds.max.x + delta, pupilBounds.max.y + delta});
+
     return pupilBounds;
 }
 
