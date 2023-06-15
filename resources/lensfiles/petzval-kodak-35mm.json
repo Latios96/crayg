@@ -1,0 +1,53 @@
+{
+    "elements": [
+        {
+            "apertureRadius": 6.929983615875244,
+            "curvatureRadius": 21.38351821899414,
+            "ior": 1.5230000019073486,
+            "thickness": 4.519554138183594
+        },
+        {
+            "apertureRadius": 6.929983615875244,
+            "curvatureRadius": -17.111034393310547,
+            "ior": 1.6169999837875366,
+            "thickness": 1.3558663129806519
+        },
+        {
+            "apertureRadius": 6.929983615875244,
+            "curvatureRadius": 0.0,
+            "ior": 1.0,
+            "thickness": 7.231287479400635
+        },
+        {
+            "apertureRadius": 5.423465251922607,
+            "curvatureRadius": 0.0,
+            "ior": 0.0,
+            "thickness": 7.622981548309326
+        },
+        {
+            "apertureRadius": 4.519554138183594,
+            "curvatureRadius": 36.12931823730469,
+            "ior": 1.6490000486373901,
+            "thickness": 1.144953727722168
+        },
+        {
+            "apertureRadius": 4.519554138183594,
+            "curvatureRadius": 12.314279556274414,
+            "ior": 1.0,
+            "thickness": 0.27117323875427246
+        },
+        {
+            "apertureRadius": 4.519554138183594,
+            "curvatureRadius": 14.122099876403809,
+            "ior": 1.6970000267028809,
+            "thickness": 2.229646921157837
+        },
+        {
+            "apertureRadius": 4.519554138183594,
+            "curvatureRadius": -84.9826889038086,
+            "ior": 1.0,
+            "thickness": 17.02365493774414
+        }
+    ],
+    "name": "Kodak petzval-type photographic objective (US2500046A)"
+}
