@@ -13,9 +13,9 @@ class PointInstancer : public SceneObject {
     std::string getType() override;
     virtual ~PointInstancer() = default;
 
-    std::vector<int> ids;
+    std::vector<size_t> ids;
     std::vector<Transform> transforms;
-    std::vector<int> protoIndices;
+    std::vector<size_t> protoIndices;
 
     struct Prototype {
         std::vector<std::unique_ptr<Imageable>> members;
