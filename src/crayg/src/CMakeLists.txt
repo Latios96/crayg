@@ -217,6 +217,8 @@ set(crayg_SRCS
         sceneIO/read/usd/UsdMaterialReadCache.h
         sceneIO/read/usd/UsdMeshReader.cpp
         sceneIO/read/usd/UsdMeshReader.h
+        sceneIO/read/usd/UsdPointInstancerReader.cpp
+        sceneIO/read/usd/UsdPointInstancerReader.h
         sceneIO/read/usd/UsdRectLightReader.cpp
         sceneIO/read/usd/UsdRectLightReader.h
         sceneIO/read/usd/UsdRenderSettingsReader.cpp

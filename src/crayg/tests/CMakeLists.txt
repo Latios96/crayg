@@ -108,6 +108,7 @@ set(UNIT_TEST_LIST
         TestUsdMaterialWriteCache.cpp
         TestUsdMeshReader.cpp
         TestUsdPathFactory.cpp
+        TestUsdPointInstancerReader.cpp
         TestUsdPointLightWriter.cpp
         TestUsdPreviewSurface.cpp
         TestUsdReadUtils.cpp
