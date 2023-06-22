@@ -18,10 +18,10 @@ class PointInstancer : public SceneObject {
     std::vector<size_t> protoIndices;
 
     struct Prototype {
-        std::vector<std::unique_ptr<Imageable>> members;
+        std::vector<std::shared_ptr<SceneObject>> members;
     };
 
-    std::vector<std::unique_ptr<Prototype>> protos;
+    std::vector<std::shared_ptr<Prototype>> protos;
 };
 
 } // crayg
