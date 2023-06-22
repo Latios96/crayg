@@ -172,6 +172,8 @@ set(crayg_SRCS
         scene/materials/UsdPreviewSurface.h
         scene/primitives/GroundPlane.cpp
         scene/primitives/GroundPlane.h
+        scene/primitives/PointInstancer.cpp
+        scene/primitives/PointInstancer.h
         scene/primitives/Sphere.cpp
         scene/primitives/Sphere.h
         scene/primitives/subdivisionsurfacemesh/FanTriangulator.cpp
