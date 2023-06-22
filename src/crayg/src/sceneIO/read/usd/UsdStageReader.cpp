@@ -3,6 +3,7 @@
 #include "UsdCameraReader.h"
 #include "UsdDiskLightReader.h"
 #include "UsdMeshReader.h"
+#include "UsdPointInstancerReader.h"
 #include "UsdRectLightReader.h"
 #include "UsdRenderSettingsReader.h"
 #include "UsdSphereLightReader.h"
@@ -13,6 +14,7 @@
 #include <pxr/usd/usd/prim.h>
 #include <pxr/usd/usd/primFlags.h>
 #include <pxr/usd/usd/primRange.h>
+#include <pxr/usd/usdGeom/pointInstancer.h>
 
 namespace crayg {
 
@@ -35,6 +37,8 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
             readRectLight(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomSphere>() && UsdReadUtils::primIsVisible(prim)) {
             readSphere(scene, prim);
+        } else if (prim.IsA<pxr::UsdGeomPointInstancer>() && UsdReadUtils::primIsVisible(prim)) {
+            readPointInstancer(scene, prim);
         } else if (prim.IsA<pxr::UsdLuxDiskLight>() && UsdReadUtils::primIsVisible(prim)) {
             readDiskLight(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomCamera>() && scene.camera == nullptr &&
@@ -50,6 +54,8 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
         }
         throw std::runtime_error("No camera found in USD stage!");
     }
+
+    removeAccidentlyReadInstancerProtos(scene);
 }
 
 void UsdStageReader::readUsdGeomMesh(Scene &scene, const std::shared_ptr<Material> &defaultMaterial,
@@ -111,4 +117,22 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
     scene.renderSettings = RenderSettings::createDefault();
 }
 
+void UsdStageReader::readPointInstancer(Scene &scene, const pxr::UsdPrim &prim) {
+    auto pointInstancer = UsdPointInstancerReader(pxr::UsdGeomPointInstancer(prim), usdMaterialTranslationCache).read();
+    scene.addObject(pointInstancer);
+    for (auto &proto : pointInstancer->protos) {
+        for (auto &member : proto->members) {
+            instancerPrototypeNames.insert(member->getName());
+        }
+    }
+}
+
+void UsdStageReader::removeAccidentlyReadInstancerProtos(Scene &scene) {
+    for (int i = 0; i < scene.objects.size(); i++) {
+        if (instancerPrototypeNames.find(scene.objects[i]->getName()) != instancerPrototypeNames.end()) {
+            scene.objects.erase(scene.objects.begin() + i);
+            i--;
+        }
+    }
+}
 }

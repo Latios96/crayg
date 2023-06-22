@@ -72,7 +72,6 @@ void UsdPointInstancerReader::readProtos(std::shared_ptr<PointInstancer> &pointI
                                                                                 usdMaterialTranslationCache);
                 auto subdMesh = usdSubdivisionSurfaceMeshReader.read();
                 proto->members.push_back(subdMesh);
-
             } else if (prim.IsA<pxr::UsdGeomMesh>() && UsdReadUtils::primIsVisible(prim)) {
                 UsdMeshReader usdMeshReader(pxr::UsdGeomMesh(prim), usdMaterialTranslationCache);
                 auto mesh = usdMeshReader.read();

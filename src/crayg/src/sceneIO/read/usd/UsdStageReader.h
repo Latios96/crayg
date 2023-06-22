@@ -8,6 +8,7 @@
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <optional>
 #include <pxr/usd/usd/stage.h>
+#include <unordered_set>
 
 namespace crayg {
 
@@ -27,11 +28,15 @@ class UsdStageReader {
     void readSubdivisionSurfaceMesh(Scene &scene, const std::shared_ptr<Material> &defaultMaterial,
                                     const pxr::UsdPrim &prim);
     void readSphere(Scene &scene, const pxr::UsdPrim &prim);
+    void readPointInstancer(Scene &scene, const pxr::UsdPrim &prim);
     void readDiskLight(Scene &scene, const pxr::UsdPrim &prim) const;
     void readRenderSettings(Scene &scene);
     bool cameraPathMatches(pxr::SdfPath path, std::optional<std::string> cameraPath);
 
     UsdMaterialReadCache usdMaterialTranslationCache;
+
+    std::unordered_set<std::string> instancerPrototypeNames;
+    void removeAccidentlyReadInstancerProtos(Scene &scene);
 };
 
 }

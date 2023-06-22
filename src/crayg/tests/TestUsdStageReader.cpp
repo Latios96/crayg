@@ -4,6 +4,7 @@
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/mesh.h>
+#include <pxr/usd/usdGeom/pointInstancer.h>
 #include <pxr/usd/usdGeom/sphere.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 #include <pxr/usd/usdLux/diskLight.h>
@@ -205,6 +206,20 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         REQUIRE_THROWS_MATCHES(UsdStageReader(*stage).readStageToScene(scene, readOptions), std::runtime_error,
                                Catch::Message("No camera with path /not_existing found in USD stage!"));
+    }
+
+    SECTION("should read point instancer") {
+        auto proto = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/protos/sphere"));
+        auto usdGeomPointInstancer = pxr::UsdGeomPointInstancer::Define(stage, pxr::SdfPath("/usdGeomPointInstancer"));
+        pxr::VtInt64Array ids({0, 1, 2});
+        usdGeomPointInstancer.GetIdsAttr().Set(ids);
+        pxr::VtIntArray protoIndices({0, 0, 0});
+        usdGeomPointInstancer.GetProtoIndicesAttr().Set(protoIndices);
+        usdGeomPointInstancer.GetPrototypesRel().AddTarget(pxr::SdfPath("/protos/sphere"));
+
+        UsdStageReader(*stage).readStageToScene(scene);
+
+        REQUIRE(scene.objects.size() == 1);
     }
 }
 
