@@ -25,17 +25,17 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
     auto defaultMaterial = std::make_shared<crayg::UsdPreviewSurface>("defaultMaterial", crayg::Color::createWhite());
 
     for (pxr::UsdPrim prim : stage.Traverse(pxr::UsdTraverseInstanceProxies())) {
-        if (isSubdivisionSurfaceMesh(prim) && primIsVisible(prim)) {
+        if (UsdReadUtils::isSubdivisionSurfaceMesh(prim) && UsdReadUtils::primIsVisible(prim)) {
             readSubdivisionSurfaceMesh(scene, defaultMaterial, prim);
-        } else if (prim.IsA<pxr::UsdGeomMesh>() && primIsVisible(prim)) {
+        } else if (prim.IsA<pxr::UsdGeomMesh>() && UsdReadUtils::primIsVisible(prim)) {
             readUsdGeomMesh(scene, defaultMaterial, prim);
-        } else if (prim.IsA<pxr::UsdLuxSphereLight>() && primIsVisible(prim)) {
+        } else if (prim.IsA<pxr::UsdLuxSphereLight>() && UsdReadUtils::primIsVisible(prim)) {
             readSphereLight(scene, prim);
-        } else if (prim.IsA<pxr::UsdLuxRectLight>() && primIsVisible(prim)) {
+        } else if (prim.IsA<pxr::UsdLuxRectLight>() && UsdReadUtils::primIsVisible(prim)) {
             readRectLight(scene, prim);
-        } else if (prim.IsA<pxr::UsdGeomSphere>() && primIsVisible(prim)) {
+        } else if (prim.IsA<pxr::UsdGeomSphere>() && UsdReadUtils::primIsVisible(prim)) {
             readSphere(scene, prim);
-        } else if (prim.IsA<pxr::UsdLuxDiskLight>() && primIsVisible(prim)) {
+        } else if (prim.IsA<pxr::UsdLuxDiskLight>() && UsdReadUtils::primIsVisible(prim)) {
             readDiskLight(scene, prim);
         } else if (prim.IsA<pxr::UsdGeomCamera>() && scene.camera == nullptr &&
                    cameraPathMatches(prim.GetPath(), readOptions.cameraName)) {
@@ -82,10 +82,6 @@ void UsdStageReader::readCamera(Scene &scene, const pxr::UsdPrim &prim) const {
     scene.camera = camera;
 }
 
-bool UsdStageReader::primIsVisible(pxr::UsdPrim &prim) {
-    return pxr::UsdGeomImageable(prim).ComputeVisibility() != pxr::TfToken("invisible");
-}
-
 bool UsdStageReader::cameraPathMatches(pxr::SdfPath path, std::optional<std::string> cameraPath) {
     return path.GetString() == cameraPath.value_or(path.GetString());
 }
@@ -113,16 +109,6 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
         }
     }
     scene.renderSettings = RenderSettings::createDefault();
-}
-
-bool UsdStageReader::isSubdivisionSurfaceMesh(pxr::UsdPrim &prim) {
-    if (!prim.IsA<pxr::UsdGeomMesh>()) {
-        return false;
-    }
-    pxr::UsdGeomMesh usdGeomMesh(prim);
-    auto subdivisionScheme = UsdUtils::getAttributeValueAs<pxr::TfToken>(usdGeomMesh.GetSubdivisionSchemeAttr(),
-                                                                         pxr::UsdTimeCode::EarliestTime());
-    return subdivisionScheme == pxr::UsdGeomTokens->catmullClark;
 }
 
 }
