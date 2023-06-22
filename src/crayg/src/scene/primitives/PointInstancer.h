@@ -12,6 +12,10 @@ class PointInstancer : public SceneObject {
   public:
     std::string getType() override;
     virtual ~PointInstancer() = default;
+    Vector3f getNormal(Vector3f point) override;
+    Intersection intersect(Ray ray) override;
+    bool isIntersecting(Ray ray) override;
+    BoundingBox getBounds() const override;
 
     std::vector<size_t> ids;
     std::vector<Transform> transforms;
