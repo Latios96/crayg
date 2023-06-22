@@ -97,3 +97,16 @@ scenes:
     intersectors:
       - embree
     scene_path: "M:/Test_Scene_Collection/Intel_mooreLane/Intel_mooreLane.usda"
+  - name: EmperorCrown
+    cameras:
+      - /root/c2/Camera/CameraShape
+      - /root/c3/Camera_003/Camera_003Shape
+    hero_camera: /root/c2/Camera/CameraShape
+    integrators:
+      - debug
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/EmperorCrown/EmperorCrownCrayg.usda"
+    resolution: "870x1080"
