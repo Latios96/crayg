@@ -262,6 +262,8 @@ set(crayg_SRCS
         sceneIO/write/usd/UsdMaterialWriteCache.h
         sceneIO/write/usd/UsdPathFactory.cpp
         sceneIO/write/usd/UsdPathFactory.h
+        sceneIO/write/usd/UsdPointInstancerWriter.cpp
+        sceneIO/write/usd/UsdPointInstancerWriter.h
         sceneIO/write/usd/UsdPointLightWriter.cpp
         sceneIO/write/usd/UsdPointLightWriter.h
         sceneIO/write/usd/UsdRectLightWriter.cpp
