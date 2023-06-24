@@ -11,10 +11,12 @@ enum EmbreePrimitiveType { TRIANGLE_MESH, SUBDIVISION_SURFACE_MESH, SPHERE };
 
 CRAYG_DTO_2(EmbreeMappingEntry, std::uint32_t, sceneObjectIndex, EmbreePrimitiveType, primitiveType)
 
+typedef std::unordered_map<unsigned int, EmbreeMappingEntry> GeomToSceneObject;
+
 struct EmbreeBvh {
     RTCDevice rtcDevice;
     RTCScene rtcScene;
-    std::unordered_map<unsigned int, EmbreeMappingEntry> geomIdToSceneObject;
+    GeomToSceneObject geomIdToSceneObject;
     virtual ~EmbreeBvh();
 };
 

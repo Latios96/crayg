@@ -8,39 +8,7 @@ namespace crayg {
 EmbreeBvhBuilder::EmbreeBvhBuilder(const Scene &scene) : scene(scene) {
 }
 
-std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
-    InformativeScopedStopWatch informativeScopedStopWatch("Building Embree BVH");
-    auto embreeBvh = std::make_unique<EmbreeBvh>();
-
-    RTCDevice device = rtcNewDevice(nullptr);
-    RTCScene rtcScene = rtcNewScene(device);
-
-    for (unsigned int i = 0; i < scene.objects.size(); i++) {
-        auto &sceneObject = scene.objects[i];
-        if (sceneObject->getType() == "TriangleMesh") {
-            auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
-            unsigned int geomId = addTriangleMesh(device, rtcScene, *triangleMesh);
-            embreeBvh->geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, TRIANGLE_MESH);
-        } else if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
-            auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
-            unsigned int geomId = addTriangleMesh(device, rtcScene, subdivisionSurfaceMesh->triangleMesh);
-            embreeBvh->geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, SUBDIVISION_SURFACE_MESH);
-        } else if (sceneObject->getType() == "Sphere") {
-            auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
-            unsigned int geomId = addSphere(device, rtcScene, sphere);
-            embreeBvh->geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::SPHERE);
-        }
-    }
-
-    rtcCommitScene(rtcScene);
-
-    embreeBvh->rtcScene = rtcScene;
-
-    return embreeBvh;
-}
-
-unsigned int EmbreeBvhBuilder::addTriangleMesh(RTCDevice device, RTCScene rtcScene,
-                                               const TriangleMesh &triangleMesh) const {
+unsigned int addTriangleMesh(RTCDevice device, RTCScene rtcScene, const TriangleMesh &triangleMesh) {
     RTCGeometry mesh = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
 
     rtcSetSharedGeometryBuffer(mesh, RTC_BUFFER_TYPE_VERTEX, 0, RTC_FORMAT_FLOAT3, triangleMesh.points.data(), 0,
@@ -54,8 +22,7 @@ unsigned int EmbreeBvhBuilder::addTriangleMesh(RTCDevice device, RTCScene rtcSce
     return geomId;
 }
 
-unsigned int EmbreeBvhBuilder::addSphere(RTCDevice device, RTCScene rtcScene,
-                                         const std::shared_ptr<Sphere> &sphere) const {
+unsigned int addSphere(RTCDevice device, RTCScene rtcScene, const std::shared_ptr<Sphere> &sphere) {
     RTCGeometry embreeSphere = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_SPHERE_POINT);
 
     auto embreeSphereBuffer = (float *)rtcSetNewGeometryBuffer(embreeSphere, RTC_BUFFER_TYPE_VERTEX, 0,
@@ -71,4 +38,43 @@ unsigned int EmbreeBvhBuilder::addSphere(RTCDevice device, RTCScene rtcScene,
     rtcReleaseGeometry(embreeSphere);
     return geomId;
 }
+
+RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_ptr<SceneObject>> &objects,
+                               GeomToSceneObject &geomIdToSceneObject) {
+    RTCScene rtcScene = rtcNewScene(device);
+
+    for (unsigned int i = 0; i < objects.size(); i++) {
+        auto &sceneObject = objects[i];
+        if (sceneObject->getType() == "TriangleMesh") {
+            auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
+            unsigned int geomId = addTriangleMesh(device, rtcScene, *triangleMesh);
+            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, TRIANGLE_MESH);
+        } else if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
+            auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
+            unsigned int geomId = addTriangleMesh(device, rtcScene, subdivisionSurfaceMesh->triangleMesh);
+            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, SUBDIVISION_SURFACE_MESH);
+        } else if (sceneObject->getType() == "Sphere") {
+            auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
+            unsigned int geomId = addSphere(device, rtcScene, sphere);
+            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::SPHERE);
+        }
+    }
+
+    rtcCommitScene(rtcScene);
+
+    return rtcScene;
+}
+
+std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
+    InformativeScopedStopWatch informativeScopedStopWatch("Building Embree BVH");
+    auto embreeBvh = std::make_unique<EmbreeBvh>();
+
+    RTCDevice device = rtcNewDevice(nullptr);
+
+    RTCScene rtcScene = buildFromSceneObjects(device, scene.objects, embreeBvh->geomIdToSceneObject);
+    embreeBvh->rtcScene = rtcScene;
+
+    return embreeBvh;
+}
+
 } // crayg

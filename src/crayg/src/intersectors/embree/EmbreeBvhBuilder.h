@@ -15,8 +15,6 @@ class EmbreeBvhBuilder {
 
   private:
     const Scene &scene;
-    unsigned int addTriangleMesh(RTCDevice device, RTCScene rtcScene, const TriangleMesh &sceneObject) const;
-    unsigned int addSphere(RTCDevice device, RTCScene rtcScene, const std::shared_ptr<Sphere> &sphere) const;
 };
 
 } // crayg
