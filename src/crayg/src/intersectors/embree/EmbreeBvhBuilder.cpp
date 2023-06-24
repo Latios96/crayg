@@ -1,5 +1,5 @@
 #include "EmbreeBvhBuilder.h"
-#include "scene/primitives/Sphere.h"
+
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "utils/StopWatch.h"
@@ -29,20 +29,8 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
             embreeBvh->geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, SUBDIVISION_SURFACE_MESH);
         } else if (sceneObject->getType() == "Sphere") {
             auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
-            RTCGeometry embreeSphere = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_SPHERE_POINT);
-
-            auto embreeSphereBuffer = (float *)rtcSetNewGeometryBuffer(embreeSphere, RTC_BUFFER_TYPE_VERTEX, 0,
-                                                                       RTC_FORMAT_FLOAT4, 4 * sizeof(float), 1);
-            const Vector3f &position = sphere->getPosition();
-            embreeSphereBuffer[0] = position.x;
-            embreeSphereBuffer[1] = position.y;
-            embreeSphereBuffer[2] = position.z;
-            embreeSphereBuffer[3] = sphere->getRadius();
-
-            rtcCommitGeometry(embreeSphere);
-            unsigned int geomId = rtcAttachGeometry(rtcScene, embreeSphere);
+            unsigned int geomId = addSphere(device, rtcScene, sphere);
             embreeBvh->geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::SPHERE);
-            rtcReleaseGeometry(embreeSphere);
         }
     }
 
@@ -63,6 +51,24 @@ unsigned int EmbreeBvhBuilder::addTriangleMesh(RTCDevice device, RTCScene rtcSce
     rtcCommitGeometry(mesh);
     unsigned int geomId = rtcAttachGeometry(rtcScene, mesh);
     rtcReleaseGeometry(mesh);
+    return geomId;
+}
+
+unsigned int EmbreeBvhBuilder::addSphere(RTCDevice device, RTCScene rtcScene,
+                                         const std::shared_ptr<Sphere> &sphere) const {
+    RTCGeometry embreeSphere = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_SPHERE_POINT);
+
+    auto embreeSphereBuffer = (float *)rtcSetNewGeometryBuffer(embreeSphere, RTC_BUFFER_TYPE_VERTEX, 0,
+                                                               RTC_FORMAT_FLOAT4, 4 * sizeof(float), 1);
+    const Vector3f &position = sphere->getPosition();
+    embreeSphereBuffer[0] = position.x;
+    embreeSphereBuffer[1] = position.y;
+    embreeSphereBuffer[2] = position.z;
+    embreeSphereBuffer[3] = sphere->getRadius();
+
+    rtcCommitGeometry(embreeSphere);
+    unsigned int geomId = rtcAttachGeometry(rtcScene, embreeSphere);
+    rtcReleaseGeometry(embreeSphere);
     return geomId;
 }
 } // crayg
