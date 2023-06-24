@@ -66,6 +66,7 @@ void UsdPointInstancerReader::readProtos(std::shared_ptr<PointInstancer> &pointI
     for (auto &protoSdfPath : protoSdfPaths) {
         auto protoPrim = usdPrim.GetPrim().GetStage()->GetPrimAtPath(protoSdfPath);
         auto proto = std::make_shared<PointInstancer::Prototype>();
+        proto->name = protoSdfPath.GetString();
         for (auto prim : pxr::UsdPrimRange(protoPrim)) {
             if (UsdReadUtils::isSubdivisionSurfaceMesh(prim) && UsdReadUtils::primIsVisible(prim)) {
                 UsdSubdivisionSurfaceMeshReader usdSubdivisionSurfaceMeshReader(pxr::UsdGeomMesh(prim),

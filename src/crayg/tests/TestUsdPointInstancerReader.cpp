@@ -46,6 +46,7 @@ TEST_CASE("UsdPointInstancerReader::read") {
         REQUIRE(pointInstancer->ids == std::vector<size_t>({0, 1, 2}));
         REQUIRE(pointInstancer->protoIndices == std::vector<size_t>({0, 0, 0}));
         REQUIRE(pointInstancer->protos.size() == 1);
+        REQUIRE(pointInstancer->protos[0]->name == "/protos/sphere");
         REQUIRE(pointInstancer->protos[0]->members.size() == 1);
         REQUIRE(pointInstancer->protos[0]->members[0]->getType() == "Sphere");
     }
@@ -67,6 +68,7 @@ TEST_CASE("UsdPointInstancerReader::read") {
         REQUIRE(pointInstancer->protoIndices == std::vector<size_t>({0, 0, 0}));
         REQUIRE(pointInstancer->protos.size() == 1);
         REQUIRE(pointInstancer->protos[0]->members.size() == 2);
+        REQUIRE(pointInstancer->protos[0]->name == "/protos/myProto");
         REQUIRE(pointInstancer->protos[0]->members[0]->getType() == "Sphere");
         REQUIRE(pointInstancer->protos[0]->members[1]->getType() == "Sphere");
     }
@@ -89,8 +91,10 @@ TEST_CASE("UsdPointInstancerReader::read") {
         REQUIRE(pointInstancer->protoIndices == std::vector<size_t>({0, 1, 0, 1}));
         REQUIRE(pointInstancer->protos.size() == 2);
         REQUIRE(pointInstancer->protos[0]->members.size() == 1);
+        REQUIRE(pointInstancer->protos[0]->name == "/protos/myProto/proto1");
         REQUIRE(pointInstancer->protos[0]->members[0]->getType() == "Sphere");
         REQUIRE(pointInstancer->protos[1]->members.size() == 1);
+        REQUIRE(pointInstancer->protos[1]->name == "/protos/myProto/proto2");
         REQUIRE(pointInstancer->protos[1]->members[0]->getType() == "Sphere");
     }
 
@@ -114,9 +118,11 @@ TEST_CASE("UsdPointInstancerReader::read") {
         REQUIRE(pointInstancer->protoIndices == std::vector<size_t>({0, 1, 0, 1}));
         REQUIRE(pointInstancer->protos.size() == 2);
         REQUIRE(pointInstancer->protos[0]->members.size() == 2);
+        REQUIRE(pointInstancer->protos[0]->name == "/protos/myProto1");
         REQUIRE(pointInstancer->protos[0]->members[0]->getType() == "Sphere");
         REQUIRE(pointInstancer->protos[0]->members[1]->getType() == "Sphere");
         REQUIRE(pointInstancer->protos[1]->members.size() == 2);
+        REQUIRE(pointInstancer->protos[1]->name == "/protos/myProto2");
         REQUIRE(pointInstancer->protos[1]->members[0]->getType() == "Sphere");
         REQUIRE(pointInstancer->protos[1]->members[1]->getType() == "Sphere");
     }

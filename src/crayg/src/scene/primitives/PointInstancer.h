@@ -22,6 +22,7 @@ class PointInstancer : public SceneObject {
     std::vector<size_t> protoIndices;
 
     struct Prototype {
+        std::string name;
         std::vector<std::shared_ptr<SceneObject>> members;
     };
 
