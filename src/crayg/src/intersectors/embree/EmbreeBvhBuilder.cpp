@@ -13,9 +13,7 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
     auto embreeBvh = std::make_unique<EmbreeBvh>();
 
     RTCDevice device = rtcNewDevice(nullptr);
-
     RTCScene rtcScene = rtcNewScene(device);
-    embreeBvh->rtcScene = rtcScene;
 
     for (unsigned int i = 0; i < scene.objects.size(); i++) {
         auto &sceneObject = scene.objects[i];
@@ -35,6 +33,8 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
     }
 
     rtcCommitScene(rtcScene);
+
+    embreeBvh->rtcScene = rtcScene;
 
     return embreeBvh;
 }
