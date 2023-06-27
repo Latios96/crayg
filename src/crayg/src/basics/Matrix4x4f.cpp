@@ -63,11 +63,41 @@ bool Matrix4x4f::operator!=(const Matrix4x4f &rhs) const {
 }
 
 Matrix4x4f::Matrix4x4f(const Matrix4x4f &matrix4X4F) {
-    memcpy(values, matrix4X4F.values, sizeof(float) * 16);
+    values[0][0] = matrix4X4F.values[0][0];
+    values[0][1] = matrix4X4F.values[0][1];
+    values[0][2] = matrix4X4F.values[0][2];
+    values[0][3] = matrix4X4F.values[0][3];
+    values[1][0] = matrix4X4F.values[1][0];
+    values[1][1] = matrix4X4F.values[1][1];
+    values[1][2] = matrix4X4F.values[1][2];
+    values[1][3] = matrix4X4F.values[1][3];
+    values[2][0] = matrix4X4F.values[2][0];
+    values[2][1] = matrix4X4F.values[2][1];
+    values[2][2] = matrix4X4F.values[2][2];
+    values[2][3] = matrix4X4F.values[2][3];
+    values[3][0] = matrix4X4F.values[3][0];
+    values[3][1] = matrix4X4F.values[3][1];
+    values[3][2] = matrix4X4F.values[3][2];
+    values[3][3] = matrix4X4F.values[3][3];
 }
 
 Matrix4x4f &Matrix4x4f::operator=(const Matrix4x4f &rhs) {
-    memcpy(values, rhs.values, sizeof(float) * 16);
+    values[0][0] = rhs.values[0][0];
+    values[0][1] = rhs.values[0][1];
+    values[0][2] = rhs.values[0][2];
+    values[0][3] = rhs.values[0][3];
+    values[1][0] = rhs.values[1][0];
+    values[1][1] = rhs.values[1][1];
+    values[1][2] = rhs.values[1][2];
+    values[1][3] = rhs.values[1][3];
+    values[2][0] = rhs.values[2][0];
+    values[2][1] = rhs.values[2][1];
+    values[2][2] = rhs.values[2][2];
+    values[2][3] = rhs.values[2][3];
+    values[3][0] = rhs.values[3][0];
+    values[3][1] = rhs.values[3][1];
+    values[3][2] = rhs.values[3][2];
+    values[3][3] = rhs.values[3][3];
     return *this;
 }
 
