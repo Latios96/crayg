@@ -12,6 +12,7 @@ class Transform {
   public:
     Transform();
     explicit Transform(const Matrix4x4f &matrix);
+    explicit Transform(const Matrix4x4f &matrix, const Matrix4x4f &inverse);
     Transform(const Transform &transform);
     static Transform withPosition(const Vector3f &vector3f);
     static Transform withRotation(float x, float y, float z);
@@ -22,6 +23,11 @@ class Transform {
     Vector3f applyForNormal(const Vector3f &vector3f) const;
     Ray apply(const Ray &ray) const;
 
+    Vector3f applyInverse(const Vector3f &vector3f) const;
+    Vector3f applyInverseForPoint(const Vector3f &vector3f) const;
+    Vector3f applyInverseForNormal(const Vector3f &vector3f) const;
+    Ray applyInverse(const Ray &ray) const;
+
     Vector3f toPosition() const;
 
     bool operator==(const Transform &rhs) const;
@@ -29,9 +35,16 @@ class Transform {
     Transform &operator=(const Transform &rhs);
     Transform operator*(const Transform &rhs) const;
     Transform &operator*=(const Transform &rhs);
+    friend std::ostream &operator<<(std::ostream &os, const Transform &transform);
 
     Matrix4x4f matrix;
-    friend std::ostream &operator<<(std::ostream &os, const Transform &transform);
+    Matrix4x4f inverseMatrix;
+
+  private:
+    Vector3f apply(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const;
+    Vector3f applyForPoint(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const;
+    Vector3f applyForNormal(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const;
+    Ray apply(const Matrix4x4f &matrixToApply, const Ray &ray) const;
 };
 
 }

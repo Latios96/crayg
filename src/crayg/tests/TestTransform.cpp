@@ -9,6 +9,7 @@ TEST_CASE("Transform Construction", "[Transform]") {
         Transform transform;
 
         REQUIRE(transform.matrix == Matrix4x4f());
+        REQUIRE(transform.inverseMatrix == Matrix4x4f().invert());
     }
 
     SECTION("should create with position") {
@@ -80,6 +81,15 @@ TEST_CASE("apply transform to point", "[Transform]") {
     }
 }
 
+TEST_CASE("apply inverse transform to point", "[Transform]") {
+    SECTION("point should be at origin") {
+        Vector3f vector3f(1, 2, 3);
+        Transform transform = Transform::withPosition({1, 2, 3});
+
+        REQUIRE(transform.applyInverseForPoint(vector3f) == Vector3f());
+    }
+}
+
 TEST_CASE("apply transform to Ray", "[Transform]") {
     SECTION("apply identity matrix should not change") {
         Ray ray({1, 2, 3}, {1, 0, 0});
@@ -99,6 +109,15 @@ TEST_CASE("apply transform to Ray", "[Transform]") {
         REQUIRE(result.direction.x == Catch::Detail::Approx(0.45584f));
         REQUIRE(result.direction.x == Catch::Detail::Approx(0.45584f));
         REQUIRE(ray.length == 5);
+    }
+}
+
+TEST_CASE("apply inverse transform to Ray", "[Transform]") {
+    SECTION("ray should be at origin") {
+        Ray ray({1, 2, 3}, {1, 0, 0});
+        Transform transform = Transform::withPosition({1, 2, 3});
+
+        REQUIRE(transform.applyInverse(ray) == Ray(Vector3f(), ray.direction));
     }
 }
 
@@ -123,6 +142,19 @@ TEST_CASE("apply transform to Normal", "[Transform]") {
         Transform transform = Transform::withRotation(90, 0, 0);
 
         REQUIRE(transform.applyForNormal(vector3f) == Vector3f(0, 0, 1));
+    }
+}
+
+TEST_CASE("apply inverse transform to normal", "[Transform]") {
+    SECTION("normal should be at x axis") {
+        Vector3f normal(0, 1, 0);
+        Transform transform = Transform::withRotation(0, 0, 90);
+
+        const Vector3f &transformedNormal = transform.applyInverseForNormal(normal);
+
+        REQUIRE(transformedNormal.x == Catch::Detail::Approx(1));
+        REQUIRE((transformedNormal.y < 0 && transformedNormal.y > -0.01));
+        REQUIRE(transformedNormal.z == Catch::Detail::Approx(0));
     }
 }
 
