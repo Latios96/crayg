@@ -2,12 +2,14 @@
 
 namespace crayg {
 
-Transform::Transform() = default;
+Transform::Transform() {
+    inverseMatrix = matrix.invert();
+}
 
 Transform::Transform(const Matrix4x4f &matrix) : matrix(matrix), inverseMatrix(matrix.invert()) {
 }
 
-Transform::Transform(const Transform &transform) = default;
+Transform::Transform(const Transform &transform) : matrix(transform.matrix), inverseMatrix(transform.inverseMatrix){};
 
 Transform Transform::withPosition(const Vector3f &vector3f) {
     Matrix4x4f matrix4X4f;
@@ -124,6 +126,7 @@ bool Transform::operator!=(const Transform &rhs) const {
 
 Transform &Transform::operator=(const Transform &rhs) {
     matrix = rhs.matrix;
+    inverseMatrix = matrix.invert();
     return *this;
 }
 
@@ -151,6 +154,7 @@ Transform Transform::operator*(const Transform &rhs) const {
 
 Transform &Transform::operator*=(const Transform &rhs) {
     matrix = matrix * rhs.matrix;
+    inverseMatrix = matrix.invert();
     return *this;
 }
 
