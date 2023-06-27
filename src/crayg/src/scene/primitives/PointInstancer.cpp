@@ -22,4 +22,11 @@ BoundingBox PointInstancer::getBounds() const {
     throw std::runtime_error("PointInstancer::getBounds is not supported.");
 }
 
+void PointInstancer::init() {
+    auto &instancerTransform = getTransform();
+    for (auto &transform : transforms) {
+        transform = instancerTransform * transform;
+    }
+}
+
 } // crayg

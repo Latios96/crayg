@@ -120,6 +120,7 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
 void UsdStageReader::readPointInstancer(Scene &scene, const pxr::UsdPrim &prim) {
     auto pointInstancer = UsdPointInstancerReader(pxr::UsdGeomPointInstancer(prim), usdMaterialTranslationCache).read();
     scene.addObject(pointInstancer);
+    pointInstancer->init();
     for (auto &proto : pointInstancer->protos) {
         for (auto &member : proto->members) {
             instancerPrototypeNames.insert(member->getName());

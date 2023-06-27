@@ -17,6 +17,8 @@ class PointInstancer : public SceneObject {
     bool isIntersecting(Ray ray) override;
     BoundingBox getBounds() const override;
 
+    void init();
+
     std::vector<size_t> ids;
     std::vector<Transform> transforms;
     std::vector<size_t> protoIndices;
