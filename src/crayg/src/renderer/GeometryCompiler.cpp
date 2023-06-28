@@ -1,4 +1,5 @@
 #include "GeometryCompiler.h"
+#include "scene/primitives/PointInstancer.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "utils/ProgressReporter.h"
 #include <tbb/parallel_for.h>
@@ -33,6 +34,16 @@ void GeometryCompiler::findAllSubdivisionSurfaceMeshes(
         if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
             auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
             subdivisionSurfaces.push_back(subdivisionSurfaceMesh);
+        } else if (sceneObject->getType() == "PointInstancer") {
+            auto pointInstancer = std::dynamic_pointer_cast<PointInstancer>(sceneObject);
+            for (auto &proto : pointInstancer->protos) {
+                for (auto &member : proto->members) {
+                    if (member->getType() == "SubdivisionSurfaceMesh") {
+                        auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(member);
+                        subdivisionSurfaces.push_back(subdivisionSurfaceMesh);
+                    }
+                }
+            }
         }
     }
 }

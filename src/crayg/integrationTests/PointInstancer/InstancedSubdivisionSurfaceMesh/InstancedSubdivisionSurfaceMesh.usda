@@ -1,0 +1,27 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../InstancedTriangleMesh/InstancedTriangleMesh.usda@
+    ]
+)
+
+over "MASH1_Instancer" {
+    over "Prototypes"{
+        over "proto1_0" {
+            over "pSphere4"{
+                uniform token subdivisionScheme = "catmullClark"
+            }
+            over "pSphere3"{
+                uniform token subdivisionScheme = "catmullClark"
+            }
+        }
+        over "proto2_1" {
+            over "pCube2"{
+                uniform token subdivisionScheme = "catmullClark"
+            }
+            over "pCube1"{
+                uniform token subdivisionScheme = "catmullClark"
+            }
+        }
+    }
+}

@@ -2,6 +2,7 @@
 #define CRAYG_IMAGEABLE_H
 
 #include "basics/OrthonormalBasis.h"
+#include "basics/Transform.h"
 #include "materials/Material.h"
 #include <basics/BoundingBox.h>
 #include <basics/Color.h>
@@ -55,6 +56,9 @@ class Imageable {
     virtual std::shared_ptr<Material> getMaterial() const;
     void setMaterial(const std::shared_ptr<Material> &material);
     virtual ~Imageable() = default;
+
+  protected:
+    Transform *instanceTransform = nullptr;
 
   private:
     std::shared_ptr<Material> material;

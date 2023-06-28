@@ -76,6 +76,7 @@ void UsdPointInstancerReader::readProtos(std::shared_ptr<PointInstancer> &pointI
             } else if (prim.IsA<pxr::UsdGeomMesh>() && UsdReadUtils::primIsVisible(prim)) {
                 UsdMeshReader usdMeshReader(pxr::UsdGeomMesh(prim), usdMaterialTranslationCache);
                 auto mesh = usdMeshReader.read();
+                mesh->init();
                 proto->members.push_back(mesh);
             } else if (prim.IsA<pxr::UsdGeomSphere>() && UsdReadUtils::primIsVisible(prim)) {
                 UsdSphereReader usdSphereReader(pxr::UsdGeomSphere(prim), usdMaterialTranslationCache);

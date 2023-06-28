@@ -1,0 +1,20 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../InstancedTriangleMesh/InstancedTriangleMesh.usda@
+    ]
+)
+
+def "MASH1_Instancer" {
+    def "Prototypes"{
+        def "proto1_0" {
+            def Sphere "pSphere4"{
+                double radius = 0.5
+            }
+            def Sphere "pSphere3"{
+                double radius = 0.5
+            }
+        }
+
+    }
+}

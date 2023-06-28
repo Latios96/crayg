@@ -1,3 +1,4 @@
+#include "fixtures/PointInstancerFixtures.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
 #include "fixtures/TriangleMeshFixtures.h"
 #include "intersectors/embree/EmbreeBvhBuilder.h"
@@ -95,6 +96,59 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         auto intersection = fixture.embreeSceneIntersector->intersect(RAY_ON_TRIANGLE);
 
         REQUIRE_FALSE(intersection.isValid());
+    }
+
+    SECTION("should find intersection for instanced TriangleMesh") {
+        Scene scene;
+        auto pointInstancer = std::make_shared<PointInstancer>();
+        PointInstancerFixtures::createInstancerWithSingleTriangleProtoType(*pointInstancer);
+        scene.addObject(pointInstancer);
+        IntersectorFixture fixture(scene);
+
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_TRIANGLE_INTERSECTION);
+
+        REQUIRE(intersection.isValid());
+        REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
+        auto triangle = dynamic_cast<Triangle *>(intersection.imageable);
+        REQUIRE(triangle->faceId == 3);
+        REQUIRE(intersection.isOwning == true);
+    }
+
+    SECTION("should find intersection for instanced SubdivisionSurfaceMesh") {
+        Scene scene;
+        auto pointInstancer = std::make_shared<PointInstancer>();
+        PointInstancerFixtures::createInstancerWithSingleSubdivisionSurfaceMeshProtoType(*pointInstancer);
+        std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(pointInstancer->protos[0]->members[0])->tessellate();
+        scene.addObject(pointInstancer);
+        IntersectorFixture fixture(scene);
+
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SUBD_MESH_INTERSECTION);
+
+        REQUIRE(intersection.isValid());
+        REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
+        auto triangle = dynamic_cast<Triangle *>(intersection.imageable);
+        REQUIRE(triangle->faceId == 64);
+        REQUIRE(intersection.isOwning == true);
+    }
+
+    SECTION("should find intersection for instanced Sphere") {
+        Scene scene;
+        auto pointInstancer = std::make_shared<PointInstancer>();
+        PointInstancerFixtures::createInstancerWithSingleSphereProtoType(*pointInstancer);
+        auto sphere = std::dynamic_pointer_cast<Sphere>(pointInstancer->protos[0]->members[0]);
+        sphere->setTransform(Transform::withPosition({0.f, 2.f, 0.f}));
+        sphere->setRadius(1);
+
+        scene.addObject(pointInstancer);
+        IntersectorFixture fixture(scene);
+
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SPHERE_INTERSECTION);
+
+        REQUIRE(intersection.isValid());
+        REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
+        auto sphereI = dynamic_cast<Sphere *>(intersection.imageable);
+        REQUIRE(sphereI->getRadius() == 1.f);
+        REQUIRE(intersection.isOwning == true);
     }
 }
 

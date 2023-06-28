@@ -11,6 +11,7 @@ class Triangle : public Imageable {
   public:
     Triangle();
     Triangle(TriangleMesh *triangleMesh, std::size_t faceId);
+    Triangle(TriangleMesh *triangleMesh, std::size_t faceId, Transform *instanceTransform);
 
     bool isIntersecting(Ray ray) override;
     Imageable::Intersection intersect(Ray ray) override;

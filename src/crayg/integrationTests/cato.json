@@ -146,6 +146,24 @@
       ]
     },
     {
+      "name": "PointInstancer",
+      "comparisonSettings": {
+        "method": "FLIP",
+        "threshold": 0.01
+      },
+      "tests": [
+        {
+          "name": "InstancedSubdivisionSurfaceMesh"
+        },
+        {
+          "name": "InstancedTriangleMesh"
+        },
+        {
+          "name": "InstancedSphere"
+        }
+      ]
+    },
+    {
       "name": "UsdPreviewSurface",
       "tests": [
         {

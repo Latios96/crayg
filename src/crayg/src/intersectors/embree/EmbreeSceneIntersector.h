@@ -15,11 +15,22 @@ class EmbreeSceneIntersector : public SceneIntersector {
 
   private:
     std::unique_ptr<EmbreeBvh> embreeBvh;
-    Imageable::Intersection mapToTriangle(const RTCRayHit &rtcRayHit,
-                                          const EmbreeMappingEntry &embreeMappingEntry) const;
+    Imageable::Intersection map(GeomToSceneObject &geomIdToSceneObject, RTCRayHit &rtcRayHit,
+                                const std::vector<std::shared_ptr<SceneObject>> &objects,
+                                Transform *instanceTransform) const;
+    Imageable::Intersection mapToTriangle(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
+                                          const std::vector<std::shared_ptr<SceneObject>> &objects,
+                                          Transform *instanceTransform) const;
     Imageable::Intersection mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
-                                                        const EmbreeMappingEntry &embreeMappingEntry) const;
-    Imageable::Intersection mapToSphere(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry) const;
+                                                        const EmbreeMappingEntry &embreeMappingEntry,
+                                                        const std::vector<std::shared_ptr<SceneObject>> &objects,
+                                                        Transform *instanceTransform) const;
+    Imageable::Intersection mapToSphere(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
+                                        const std::vector<std::shared_ptr<SceneObject>> &objects) const;
+    Imageable::Intersection mapToInstancedSphere(const RTCRayHit &rtcRayHit,
+                                                 const EmbreeMappingEntry &embreeMappingEntry,
+                                                 const std::vector<std::shared_ptr<SceneObject>> &objects,
+                                                 Transform *instanceTransform) const;
 };
 
 } // crayg

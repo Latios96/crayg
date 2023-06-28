@@ -13,10 +13,22 @@ CRAYG_DTO_2(EmbreeMappingEntry, std::uint32_t, sceneObjectIndex, EmbreePrimitive
 
 typedef std::unordered_map<unsigned int, EmbreeMappingEntry> GeomToSceneObject;
 
+struct EmbreeProtoInstanceMappingEntry {
+    GeomToSceneObject geomToSceneObject;
+    std::uint32_t pointInstancerIndex;
+    std::uint32_t protoId;
+};
+
+CRAYG_DTO_2(EmbreeInstanceInfo, std::uint32_t, globalProtoId, std::uint32_t, instanceId);
+
+typedef std::unordered_map<unsigned int, EmbreeInstanceInfo> EmbreeInstanceIdToInstanceInfo;
+
 struct EmbreeBvh {
     RTCDevice rtcDevice;
     RTCScene rtcScene;
     GeomToSceneObject geomIdToSceneObject;
+    std::vector<EmbreeProtoInstanceMappingEntry> globalProtoGeomToSceneObject;
+    EmbreeInstanceIdToInstanceInfo embreeInstanceIdToInstanceInfo;
     virtual ~EmbreeBvh();
 };
 
