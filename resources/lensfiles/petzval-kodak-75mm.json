@@ -14,7 +14,7 @@
         },
         {
             "apertureRadius": 14.849964141845703,
-            "curvatureRadius": 0.0,
+            "curvatureRadius": 100000,
             "ior": 1.0,
             "thickness": 15.49561595916748
         },
