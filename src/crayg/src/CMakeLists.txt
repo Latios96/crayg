@@ -127,6 +127,8 @@ set(crayg_SRCS
         scene/camera/CameraUtils.h
         scene/camera/ExitPupilCalculator.cpp
         scene/camera/ExitPupilCalculator.h
+        scene/camera/LensGeometry.h
+        scene/camera/LensMaterial.h
         scene/camera/lensio/LensFileFormat.h
         scene/camera/lensio/LensFileJsonReader.cpp
         scene/camera/lensio/LensFileJsonReader.h
