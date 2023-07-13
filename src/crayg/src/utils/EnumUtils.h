@@ -6,6 +6,15 @@
 #include <magic_enum.hpp>
 #include <string>
 
+#define CRAYG_FMT_ENUM_FORMATTER(FullQualifiedType)                                                                    \
+    template <> struct fmt::formatter<FullQualifiedType> {                                                             \
+        template <typename ParseContext> constexpr auto parse(ParseContext &ctx) { return ctx.begin(); }               \
+                                                                                                                       \
+        template <typename FormatContext> auto format(FullQualifiedType const &integratorType, FormatContext &ctx) {   \
+            return fmt::format_to(ctx.out(), magic_enum::enum_name(integratorType));                                   \
+        };                                                                                                             \
+    }
+
 namespace crayg {
 
 class EnumUtils {
@@ -42,7 +51,6 @@ class EnumUtils {
         return maybeValue.value();
     }
 };
-
 }
 
 #endif // CRAYG_SRC_CRAYG_SRC_UTILS_ENUMUTILS_H_
