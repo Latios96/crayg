@@ -5,7 +5,7 @@
 
 namespace crayg {
 
-// Materials tkane from Schott Glas Catalog, 2022
+// Materials taken from Schott Glas Catalog, 2022
 enum LensMaterial {
     UNKNOWN,
     BK7G18,
