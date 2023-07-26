@@ -19,8 +19,16 @@ namespace crayg {
 
 class EnumUtils {
   public:
+    template <typename T> static std::optional<T> parse(const std::string &string) {
+        return magic_enum::enum_cast<T>(boost::algorithm::to_upper_copy(string));
+    }
+
+    template <typename T> static std::optional<T> parse(int value) {
+        return magic_enum::enum_cast<T>(value);
+    }
+
     template <typename T> static T parseOrThrow(const std::string &string) {
-        auto maybeValue = magic_enum::enum_cast<T>(boost::algorithm::to_upper_copy(string));
+        auto maybeValue = EnumUtils::parse<T>(string);
         if (!maybeValue.has_value()) {
             throw std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", string));
         }
@@ -28,7 +36,7 @@ class EnumUtils {
     }
 
     template <typename T> static T parseOrThrow(int value) {
-        auto maybeValue = magic_enum::enum_cast<T>(value);
+        auto maybeValue = EnumUtils::parse<T>(value);
         if (!maybeValue.has_value()) {
             throw std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", value));
         }
@@ -36,19 +44,13 @@ class EnumUtils {
     }
 
     template <typename T> static T parseOrDefault(const std::string &string, T defaultValue) {
-        auto maybeValue = magic_enum::enum_cast<T>(boost::algorithm::to_upper_copy(string));
-        if (!maybeValue.has_value()) {
-            return defaultValue;
-        }
-        return maybeValue.value();
+        auto maybeValue = EnumUtils::parse<T>(string);
+        return maybeValue.value_or(defaultValue);
     }
 
     template <typename T> static T parseOrDefault(int value, T defaultValue) {
-        auto maybeValue = magic_enum::enum_cast<T>(value);
-        if (!maybeValue.has_value()) {
-            return defaultValue;
-        }
-        return maybeValue.value();
+        auto maybeValue = EnumUtils::parse<T>(value);
+        return maybeValue.value_or(defaultValue);
     }
 };
 }

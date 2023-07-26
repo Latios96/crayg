@@ -5,6 +5,42 @@ namespace crayg {
 
 enum MyTestEnum { VALUE_1, VALUE_2 };
 
+TEST_CASE("EnumUtils::parse(string)") {
+
+    SECTION("should parse value successfully") {
+        auto value = EnumUtils::parse<MyTestEnum>("VALUE_1");
+
+        REQUIRE(value == MyTestEnum::VALUE_1);
+    }
+
+    SECTION("should parse value case insensitive") {
+        auto value = EnumUtils::parse<MyTestEnum>("value_1");
+
+        REQUIRE(value == MyTestEnum::VALUE_1);
+    }
+
+    SECTION("should return empty enum if value does not exist") {
+        auto value = EnumUtils::parse<MyTestEnum>("value_!t ru");
+
+        REQUIRE(value == std::nullopt);
+    }
+}
+
+TEST_CASE("EnumUtils::parse(int)") {
+
+    SECTION("should parse value successfully") {
+        auto value = EnumUtils::parse<MyTestEnum>(0);
+
+        REQUIRE(value == MyTestEnum::VALUE_1);
+    }
+
+    SECTION("should throw if value does not exist") {
+        auto value = EnumUtils::parse<MyTestEnum>(4);
+
+        REQUIRE(value == std::nullopt);
+    }
+}
+
 TEST_CASE("EnumUtils::parseOrThrow(string)") {
 
     SECTION("should parse value successfully") {
