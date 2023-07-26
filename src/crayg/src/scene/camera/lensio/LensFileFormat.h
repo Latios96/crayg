@@ -5,7 +5,7 @@
 
 namespace crayg {
 
-enum class LensFileFormat { TXT, JSON };
+enum class LensFileFormat { TXT, JSON, EXTENDED_FORMAT };
 
 }
 

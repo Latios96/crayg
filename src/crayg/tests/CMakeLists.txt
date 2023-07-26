@@ -53,6 +53,7 @@ set(UNIT_TEST_LIST
         TestImageWriters.cpp
         TestIntegratorContext.cpp
         TestIntegratorSettings.cpp
+        TestLensFileExtendedFormatReader.cpp
         TestLensFileJsonReader.cpp
         TestLensFileJsonWriter.cpp
         TestLensFileReader.cpp

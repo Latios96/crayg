@@ -130,6 +130,8 @@ set(crayg_SRCS
         scene/camera/LensGeometry.h
         scene/camera/LensMaterial.h
         scene/camera/lensio/LensFileFormat.h
+        scene/camera/lensio/LensFileExtendedFormatReader.cpp
+        scene/camera/lensio/LensFileExtendedFormatReader.h
         scene/camera/lensio/LensFileJsonReader.cpp
         scene/camera/lensio/LensFileJsonReader.h
         scene/camera/lensio/LensFileJsonWriter.cpp
@@ -302,6 +304,7 @@ set(crayg_SRCS
         utils/TaskReporter.cpp
         utils/TaskReporter.h
         utils/ToStringHelper.h
+        utils/utils.cpp
         utils/utils.h
         )
 

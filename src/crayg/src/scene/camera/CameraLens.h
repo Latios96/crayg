@@ -1,6 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_
 
+#include "LensGeometry.h"
+#include "LensMaterial.h"
 #include "ThickLensApproximation.h"
 #include "basics/Ray.h"
 #include "utils/DtoUtils.h"
@@ -17,12 +19,17 @@ CRAYG_DTO_2(LensElementIntersection, Vector3f, point, Vector3f, normal);
 
 struct LensElement {
     LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius);
+    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+                LensMaterial lensMaterial, LensGeometry geometry);
 
     float curvatureRadius;
     float thickness;
     float ior;
     float apertureRadius;
     float center;
+    float abbeNumber;
+    LensMaterial material;
+    LensGeometry geometry;
 
     bool isAperture() const;
 

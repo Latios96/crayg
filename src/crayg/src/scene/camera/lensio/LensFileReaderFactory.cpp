@@ -1,4 +1,5 @@
 #include "LensFileReaderFactory.h"
+#include "LensFileExtendedFormatReader.h"
 #include "LensFileJsonReader.h"
 #include "LensFileTextFileReader.h"
 #include "Logger.h"
@@ -25,6 +26,8 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(Lens
         return std::make_unique<LensFileTextFileReader>();
     } else if (lensFileFormat == LensFileFormat::JSON) {
         return std::make_unique<LensFileJsonReader>();
+    } else if (lensFileFormat == LensFileFormat::EXTENDED_FORMAT) {
+        return std::make_unique<LensFileExtendedFormatReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", lensFileFormat);
         throw std::runtime_error(fmt::format("No LensFileReader found for extension {}", lensFileFormat));
