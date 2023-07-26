@@ -1,4 +1,5 @@
 #include "LensFileTextFileReader.h"
+#include "utils/utils.h"
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim_all.hpp>
 #include <boost/filesystem.hpp>
@@ -6,15 +7,6 @@
 #include <sstream>
 
 namespace crayg {
-
-std::string stripCommentFromLine(std::string line) {
-    auto commentPosition = line.find('#');
-    if (commentPosition != std::string::npos) {
-        line = line.substr(0, commentPosition);
-    }
-    boost::algorithm::trim_all(line);
-    return line;
-}
 
 bool lineIsSingleInteger(const std::string &line) {
     static const std::regex txt_regex("\\d+");
