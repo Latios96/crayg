@@ -15,6 +15,7 @@ cpuinfo/cci.20220228
 embree3/3.13.5
 tsl-ordered-map/1.1.0
 nlohmann_json/3.11.2
+pystring/1.1.4
 
 zlib/1.2.13
 libpng/1.6.39
