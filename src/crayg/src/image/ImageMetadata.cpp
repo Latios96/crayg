@@ -24,6 +24,10 @@ const std::string ImageMetadataTokens::CAMERA_CAMERA_TYPE = "crayg/camera/camera
 const std::string ImageMetadataTokens::CAMERA_LENS_NAME = "crayg/camera/lens/name";
 const std::string ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT = "crayg/camera/lens/elementCount";
 const std::string ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH = "crayg/camera/lens/effectiveFocalLength";
+const std::string ImageMetadataTokens::CAMERA_LENS_MAXIMUM_F_NUMBER = "crayg/camera/lens/maximumfnumber";
+const std::string ImageMetadataTokens::CAMERA_LENS_SQUEEZE = "crayg/camera/lens/squeeze";
+const std::string ImageMetadataTokens::CAMERA_LENS_PATENT = "crayg/camera/lens/patent";
+const std::string ImageMetadataTokens::CAMERA_LENS_DESCRIPTION = "crayg/camera/lens/description";
 const std::string ImageMetadataTokens::SCENE_STATS_OBJECT_COUNT = "crayg/scene/stats/objectCount";
 const std::string ImageMetadataTokens::SCENE_STATS_PRIMITIVE_COUNT = "crayg/scene/stats/primitiveCount";
 

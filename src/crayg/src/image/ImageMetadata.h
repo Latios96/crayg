@@ -35,6 +35,10 @@ class ImageMetadataTokens {
     static const std::string CAMERA_LENS_NAME;
     static const std::string CAMERA_LENS_ELEMENT_COUNT;
     static const std::string CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH;
+    static const std::string CAMERA_LENS_MAXIMUM_F_NUMBER;
+    static const std::string CAMERA_LENS_SQUEEZE;
+    static const std::string CAMERA_LENS_PATENT;
+    static const std::string CAMERA_LENS_DESCRIPTION;
     static const std::string SCENE_STATS_OBJECT_COUNT;
     static const std::string SCENE_STATS_PRIMITIVE_COUNT;
 };

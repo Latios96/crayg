@@ -82,6 +82,9 @@ TEST_CASE("TestImageMetadataCollector::collect") {
         scene.camera->setFStop(2.8f);
         scene.camera->setCameraType(CameraType::REALISTIC);
         scene.camera->lens = std::make_unique<CameraLens>(CameraLensFixtures::createCanon70_200mm());
+        scene.camera->lens->metadata.squeeze = 2;
+        scene.camera->lens->metadata.patent = "US 132";
+        scene.camera->lens->metadata.description = "A Canon Lens";
 
         ImageMetadataCollector imageMetadataCollector;
         imageMetadataCollector.scene = &scene;
@@ -93,6 +96,11 @@ TEST_CASE("TestImageMetadataCollector::collect") {
                 scene.camera->getLens().elements.size());
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH) ==
                 Catch::Detail::Approx(72.1183792f));
+        REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_MAXIMUM_F_NUMBER) ==
+                Catch::Detail::Approx(3.4342f));
+        REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_SQUEEZE) == 2);
+        REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_LENS_PATENT) == "US 132");
+        REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_LENS_DESCRIPTION) == "A Canon Lens");
     }
 
     SECTION("should collect scene stats") {
