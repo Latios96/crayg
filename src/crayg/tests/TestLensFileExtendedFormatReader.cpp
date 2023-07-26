@@ -20,7 +20,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
         REQUIRE(cameraLens ==
-                CameraLens("A Zoom Lens",
+                CameraLens(CameraLensMetadata("A Zoom Lens"),
                            std::vector<LensElement>(
                                {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
                                 {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
@@ -40,7 +40,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
         REQUIRE(cameraLens ==
-                CameraLens("A Zoom Lens",
+                CameraLens(CameraLensMetadata("A Zoom Lens"),
                            std::vector<LensElement>(
                                {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
                                 {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
@@ -58,7 +58,7 @@ name: A Zoom Lens
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
         REQUIRE(cameraLens ==
-                CameraLens("A Zoom Lens",
+                CameraLens(CameraLensMetadata("A Zoom Lens"),
                            std::vector<LensElement>(
                                {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
                                 {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));

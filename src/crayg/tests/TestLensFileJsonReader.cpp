@@ -29,7 +29,8 @@ TEST_CASE("LensFileJsonReader::readFileContent") {
 
         auto cameraLens = lensFileJsonReader.readFileContent(content);
 
-        REQUIRE(cameraLens == CameraLens("Canon 70-200", {{0.1f, 0.2f, 3.f, 0.4f}, {0.5f, 0.6f, 7.f, 0.8f}}));
+        REQUIRE(cameraLens ==
+                CameraLens(CameraLensMetadata("Canon 70-200"), {{0.1f, 0.2f, 3.f, 0.4f}, {0.5f, 0.6f, 7.f, 0.8f}}));
     }
 }
 

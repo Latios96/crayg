@@ -38,13 +38,23 @@ struct LensElement {
     friend std::ostream &operator<<(std::ostream &os, const LensElement &element);
 };
 
-struct CameraLens {
-    CameraLens(const std::string &name, const std::vector<LensElement> &elements);
-    CameraLens(const CameraLens &cameraLens);
+struct CameraLensMetadata {
+    CameraLensMetadata() = default;
+    explicit CameraLensMetadata(const std::string &name);
     std::string name;
+    bool operator==(const CameraLensMetadata &rhs) const;
+    bool operator!=(const CameraLensMetadata &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata);
+};
+
+struct CameraLens {
+    CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements);
+    CameraLens(const CameraLens &cameraLens);
     std::vector<LensElement> elements;
     ThickLensApproximation thickLensApproximation;
     float focalLength;
+
+    CameraLensMetadata metadata;
 
     const LensElement &getFirstElement() const;
     const LensElement &getLastElement() const;
@@ -75,6 +85,8 @@ struct CameraLens {
 } // crayg
 
 template <> struct fmt::formatter<crayg::LensElement> : ostream_formatter {};
+
+template <> struct fmt::formatter<crayg::CameraLensMetadata> : ostream_formatter {};
 
 CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensElement);
 

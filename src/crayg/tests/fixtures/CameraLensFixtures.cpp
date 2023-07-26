@@ -46,6 +46,6 @@ CameraLens CameraLensFixtures::createCanon70_200mm() {
         element.apertureRadius *= factor;
     }
 
-    return CameraLens("Canon F/2.8, 70-200mm", elements);
+    return CameraLens(CameraLensMetadata("Canon F/2.8, 70-200mm"), elements);
 }
 } // crayg

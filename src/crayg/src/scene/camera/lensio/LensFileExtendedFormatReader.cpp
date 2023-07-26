@@ -148,7 +148,7 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
         throw InvalidExtendedLensFileFormatException("[Elements] section is empty");
     }
 
-    return {parsedMetadata.name, elements};
+    return {CameraLensMetadata(parsedMetadata.name), elements};
 }
 
 } // crayg

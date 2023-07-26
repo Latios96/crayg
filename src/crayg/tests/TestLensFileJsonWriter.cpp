@@ -8,7 +8,7 @@ TEST_CASE("TestLensFileJsonWriter::writeFileContent") {
 
     SECTION("should write file content with name") {
         LensFileJsonWriter lensFileJsonWriter;
-        CameraLens cameraLens("Canon 70-200", {{1, 2, 3, 4}, {5, 6, 7, 8}});
+        CameraLens cameraLens(CameraLensMetadata("Canon 70-200"), {{1, 2, 3, 4}, {5, 6, 7, 8}});
 
         auto fileContent = lensFileJsonWriter.writeFileContent(cameraLens);
 

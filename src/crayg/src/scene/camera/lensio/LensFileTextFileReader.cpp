@@ -31,7 +31,7 @@ CameraLens LensFileTextFileReader::readFileContent(const std::string &content) {
         elements.push_back(readLensElement(line));
     }
 
-    return {"", elements};
+    return {CameraLensMetadata(), elements};
 }
 
 LensElement LensFileTextFileReader::readLensElement(const std::string &line) const {

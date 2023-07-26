@@ -5,8 +5,8 @@ namespace crayg {
 std::string LensFileTextFileWriter::writeFileContent(const CameraLens &cameraLens) {
     std::string content;
 
-    if (!cameraLens.name.empty()) {
-        content += fmt::format("# {}\n", cameraLens.name);
+    if (!cameraLens.metadata.name.empty()) {
+        content += fmt::format("# {}\n", cameraLens.metadata.name);
     }
 
     content += fmt::format("{}\n", cameraLens.elements.size());

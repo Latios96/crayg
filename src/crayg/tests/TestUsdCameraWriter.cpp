@@ -18,7 +18,7 @@ TEST_CASE("UsdCameraReader::write") {
         myCamera.setFocusDistance(50.f);
         myCamera.setFStop(2.8f);
         myCamera.setCameraType(CameraType::REALISTIC);
-        CameraLens cameraLens("Canon", {{1.f, 2.f, 3.f, 4.f}});
+        CameraLens cameraLens(CameraLensMetadata("Canon"), {{1.f, 2.f, 3.f, 4.f}});
         myCamera.lens = std::make_unique<CameraLens>(cameraLens);
 
         UsdCameraWriter usdCameraWriter(myCamera);

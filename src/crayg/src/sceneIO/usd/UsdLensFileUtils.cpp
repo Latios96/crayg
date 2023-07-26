@@ -8,7 +8,7 @@ void UsdLensFileUtils::writeEmbeddedLensFile(const CameraLens &cameraLens, pxr::
     auto craygLensFileAttribute = usdCamera.GetAttribute(pxr::TfToken("craygLensFile"));
 
     pxr::VtDictionary lensDict;
-    lensDict["name"] = cameraLens.name;
+    lensDict["name"] = cameraLens.metadata.name;
 
     pxr::VtArray<pxr::GfVec4f> elements;
     for (auto &element : cameraLens.elements) {

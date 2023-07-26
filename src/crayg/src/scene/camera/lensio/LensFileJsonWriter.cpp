@@ -15,7 +15,7 @@ std::string LensFileJsonWriter::writeFileContent(const CameraLens &cameraLens) {
             {"apertureRadius", element.apertureRadius * 10},
         });
     }
-    lensJson["name"] = cameraLens.name;
+    lensJson["name"] = cameraLens.metadata.name;
     lensJson["elements"] = jsonLensElements;
 
     return lensJson.dump(4);

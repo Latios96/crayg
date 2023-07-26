@@ -13,7 +13,7 @@ CameraLens LensFileJsonReader::readFileContent(const std::string &content) {
                               element["ior"].get<float>(), element["apertureRadius"].get<float>() * 0.1f);
     }
 
-    return {name, elements};
+    return {CameraLensMetadata(name), elements};
 }
 
 } // crayg

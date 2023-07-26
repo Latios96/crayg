@@ -77,7 +77,7 @@ std::unique_ptr<CameraLens> readEmbeddedLensFile(const pxr::UsdAttribute &lensFi
         elements.emplace_back(el[0] * 0.1f, el[1] * 0.1f, el[2], el[3] * 0.1f);
     }
 
-    return std::make_unique<CameraLens>(lensName, elements);
+    return std::make_unique<CameraLens>(CameraLensMetadata(lensName), elements);
 }
 
 void UsdCameraReader::readCameraLens(std::shared_ptr<Camera> &camera) const {

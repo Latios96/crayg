@@ -13,7 +13,7 @@ class DummyLensFileWriter : public LensFileWriter {
 
 TEST_CASE("TestLensFileWriter::readFile") {
 
-    CameraLens cameraLens("Canon 70-200", {{1, 2, 3, 4}, {5, 6, 7, 8}});
+    CameraLens cameraLens(CameraLensMetadata("Canon 70-200"), {{1, 2, 3, 4}, {5, 6, 7, 8}});
 
     SECTION("should throw if file does not exist") {
         DummyLensFileWriter dummyLensFileWriter;

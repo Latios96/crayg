@@ -47,7 +47,7 @@ void scaleLensFile(const LensFileScaleOptions &options) {
             element.curvatureRadius *= ratio;
             element.thickness *= ratio;
         }
-        auto scaledLens = CameraLens(cameraLens.name, scaled);
+        auto scaledLens = CameraLens(cameraLens.metadata, scaled);
         auto path = boost::filesystem::path(options.outputFile);
         const std::string targetPath =
             (boost::filesystem::absolute(path).parent_path() /

@@ -43,7 +43,7 @@ void LensRaytracerTracer::emit(const boost::filesystem::path &path) {
             {"center", element.center},
         });
     }
-    j["lens"]["name"] = cameraLens.name;
+    j["lens"]["name"] = cameraLens.metadata.name;
     j["lens"]["elements"] = jsonLensElements;
 
     auto jsonFilePath = path / fmt::format("{}.json", traceName);

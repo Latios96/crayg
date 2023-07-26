@@ -30,8 +30,8 @@ const LensElement &CameraLens::getLastElement() const {
     return elements[elements.size() - 1];
 }
 
-CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &elements)
-    : name(name), elements(elements) {
+CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements)
+    : metadata(metadata), elements(elements) {
 
     float center = 0;
     for (int i = elements.size() - 1; i >= 0; i--) {
@@ -52,7 +52,7 @@ CameraLens::CameraLens(const std::string &name, const std::vector<LensElement> &
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
-    : name(cameraLens.name), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
+    : metadata(cameraLens.metadata), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
       thickLensApproximation(cameraLens.thickLensApproximation), focalLength(cameraLens.focalLength),
       apertureRadius(cameraLens.apertureRadius), elementsOffset(cameraLens.elementsOffset) {
 }
@@ -152,7 +152,7 @@ LensElement &CameraLens::getAperture() {
 }
 
 bool CameraLens::operator==(const CameraLens &rhs) const {
-    return name == rhs.name && elements == rhs.elements && apertureIndex == rhs.apertureIndex;
+    return metadata == rhs.metadata && elements == rhs.elements && apertureIndex == rhs.apertureIndex;
 }
 
 bool CameraLens::operator!=(const CameraLens &rhs) const {
@@ -160,7 +160,10 @@ bool CameraLens::operator!=(const CameraLens &rhs) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const CameraLens &lens) {
-    os << ToStringHelper("CameraLens").addMember("name", lens.name).addMember("elements", lens.elements).finish();
+    os << ToStringHelper("CameraLens")
+              .addMember("metadata", lens.metadata)
+              .addMember("elements", lens.elements)
+              .finish();
     return os;
 }
 
@@ -266,4 +269,19 @@ std::ostream &operator<<(std::ostream &os, const LensElement &element) {
     return os;
 }
 
+CameraLensMetadata::CameraLensMetadata(const std::string &name) : name(name) {
+}
+
+bool CameraLensMetadata::operator==(const CameraLensMetadata &rhs) const {
+    return name == rhs.name;
+}
+
+bool CameraLensMetadata::operator!=(const CameraLensMetadata &rhs) const {
+    return !(rhs == *this);
+}
+
+std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata) {
+    os << ToStringHelper("CameraLensMetadata").addMember("name", metadata.name).finish();
+    return os;
+}
 } // crayg
