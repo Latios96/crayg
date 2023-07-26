@@ -38,9 +38,9 @@ void convertLensFile(const LensFileConversionOptions &options) {
 void scaleLensFile(const LensFileScaleOptions &options) {
     auto lensFileReader = LensFileReaderFactory::createLensFileReader(options.inputFile);
     auto cameraLens = lensFileReader->readFile(options.inputFile);
-    Logger::info("Original focal length: {}mm", cameraLens.focalLength * 10);
+    Logger::info("Original focal length: {}mm", cameraLens.metadata.focalLength * 10);
     for (auto targetFocalLength : options.focalLengths) {
-        const float ratio = targetFocalLength / (cameraLens.focalLength * 10);
+        const float ratio = targetFocalLength / (cameraLens.metadata.focalLength * 10);
         auto scaled = cameraLens.elements;
         for (auto &element : scaled) {
             element.apertureRadius *= ratio;

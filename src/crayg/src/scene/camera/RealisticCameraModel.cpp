@@ -16,7 +16,7 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
 }
 
 void RealisticCameraModel::init(TaskReporter &taskReporter) {
-    Logger::info("Effective focal length: {:.2f}mm", camera.getLens().focalLength * 10);
+    Logger::info("Effective focal length: {:.2f}mm", camera.getLens().metadata.focalLength * 10);
 
     camera.getLens().focusLens(camera.getFocusDistance());
     camera.getLens().changeAperture(camera.getFStop());

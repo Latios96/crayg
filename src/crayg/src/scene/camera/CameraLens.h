@@ -41,9 +41,10 @@ struct LensElement {
 struct CameraLensMetadata {
     CameraLensMetadata() = default;
     explicit CameraLensMetadata(const std::string &name);
-    CameraLensMetadata(const std::string &name, float maximumAperture, float squeeze, const std::string &patent,
-                       const std::string &description);
+    CameraLensMetadata(const std::string &name, float focalLength, float maximumAperture, float squeeze,
+                       const std::string &patent, const std::string &description);
     std::string name;
+    float focalLength;
     float maximumAperture;
     float squeeze;
     std::string patent;
@@ -59,7 +60,6 @@ struct CameraLens {
     CameraLens(const CameraLens &cameraLens);
     std::vector<LensElement> elements;
     ThickLensApproximation thickLensApproximation;
-    float focalLength;
 
     CameraLensMetadata metadata;
 

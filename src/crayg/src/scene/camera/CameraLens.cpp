@@ -48,13 +48,13 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
     ThickLensApproximationCalculator thickLensCalculator(*this);
     thickLensApproximation = thickLensCalculator.calculate();
 
-    focalLength = calculateEffectiveFocalLength(thickLensApproximation);
+    this->metadata.focalLength = calculateEffectiveFocalLength(thickLensApproximation);
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
     : metadata(cameraLens.metadata), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
-      thickLensApproximation(cameraLens.thickLensApproximation), focalLength(cameraLens.focalLength),
-      apertureRadius(cameraLens.apertureRadius), elementsOffset(cameraLens.elementsOffset) {
+      thickLensApproximation(cameraLens.thickLensApproximation), apertureRadius(cameraLens.apertureRadius),
+      elementsOffset(cameraLens.elementsOffset) {
 }
 
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
@@ -140,7 +140,7 @@ void CameraLens::focusLens(float focalDistance) {
     const float z = -focalDistance;
     const float c =
         (thickLensApproximation.secondCardinalPoints.pZ - z - thickLensApproximation.firstCardinalPoints.pZ) *
-        (thickLensApproximation.secondCardinalPoints.pZ - z - 4 * focalLength -
+        (thickLensApproximation.secondCardinalPoints.pZ - z - 4 * metadata.focalLength -
          thickLensApproximation.firstCardinalPoints.pZ);
     elementsOffset = 0.5f * (thickLensApproximation.secondCardinalPoints.pZ - z +
                              thickLensApproximation.firstCardinalPoints.pZ - sqrt(c));
@@ -172,7 +172,7 @@ float CameraLens::getApertureRadius() const {
 }
 
 void CameraLens::changeAperture(float fStop) {
-    const float requestedApertureRadius = CameraUtils::computeApertureRadius(focalLength * 10, fStop);
+    const float requestedApertureRadius = CameraUtils::computeApertureRadius(metadata.focalLength * 10, fStop);
     const float maximumApertureRadius = getAperture().apertureRadius;
     apertureRadius = std::clamp<float>(requestedApertureRadius, 0, maximumApertureRadius);
 }
@@ -272,14 +272,16 @@ std::ostream &operator<<(std::ostream &os, const LensElement &element) {
 CameraLensMetadata::CameraLensMetadata(const std::string &name) : name(name) {
 }
 
-CameraLensMetadata::CameraLensMetadata(const std::string &name, float maximumAperture, float squeeze,
+CameraLensMetadata::CameraLensMetadata(const std::string &name, float focalLength, float maximumAperture, float squeeze,
                                        const std::string &patent, const std::string &description)
-    : name(name), maximumAperture(maximumAperture), squeeze(squeeze), patent(patent), description(description) {
+    : name(name), focalLength(focalLength), maximumAperture(maximumAperture), squeeze(squeeze), patent(patent),
+      description(description) {
 }
 
 std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata) {
     os << ToStringHelper("CameraLensMetadata")
               .addMember("name", metadata.name)
+              .addMember("focalLength", metadata.focalLength)
               .addMember("maximumAperture", metadata.maximumAperture)
               .addMember("squeeze", metadata.squeeze)
               .addMember("patent", metadata.patent)
@@ -289,8 +291,8 @@ std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata) {
 }
 
 bool CameraLensMetadata::operator==(const CameraLensMetadata &rhs) const {
-    return name == rhs.name && maximumAperture == rhs.maximumAperture && squeeze == rhs.squeeze &&
-           patent == rhs.patent && description == rhs.description;
+    return name == rhs.name && focalLength == rhs.focalLength && maximumAperture == rhs.maximumAperture &&
+           squeeze == rhs.squeeze && patent == rhs.patent && description == rhs.description;
 }
 
 bool CameraLensMetadata::operator!=(const CameraLensMetadata &rhs) const {

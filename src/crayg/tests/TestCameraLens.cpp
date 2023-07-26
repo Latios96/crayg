@@ -21,7 +21,7 @@ TEST_CASE("CameraLens::construct") {
     }
 
     SECTION("focal length should be populated") {
-        REQUIRE(canon70_200.focalLength >= 7);
+        REQUIRE(canon70_200.metadata.focalLength >= 7);
     }
 }
 
