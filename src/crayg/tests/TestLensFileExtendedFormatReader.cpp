@@ -11,6 +11,9 @@ TEST_CASE("LensFileExtendedFormatReader::readFileContent with success") {
 [Metadata]
 # comment
 name: A Zoom Lens
+Maximum F Number: 2.8
+Patent: US 123
+Description: An Example Lens
 [Elements]
 Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 1       2           3   4              5       LAFN7    PLANAR
@@ -20,7 +23,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
         REQUIRE(cameraLens ==
-                CameraLens(CameraLensMetadata("A Zoom Lens"),
+                CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, 1, 0, "US 123", "An Example Lens"),
                            std::vector<LensElement>(
                                {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
                                 {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
@@ -41,6 +44,30 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 
         REQUIRE(cameraLens ==
                 CameraLens(CameraLensMetadata("A Zoom Lens"),
+                           std::vector<LensElement>(
+                               {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
+                                {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
+    }
+    SECTION("should ignore metadata that is calculated anyway") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+# comment
+name: A Zoom Lens
+Focal Length: 50
+Squeeze: 2
+Maximum F Number: 2.8
+Patent: US 123
+Description: An Example Lens
+[Elements]
+Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
+1       2           3   4              5       LAFN7    PLANAR
+6       7           8   9              10      K7       SPHERICAL
+)";
+
+        auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
+
+        REQUIRE(cameraLens ==
+                CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, 1, 0, "US 123", "An Example Lens"),
                            std::vector<LensElement>(
                                {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
                                 {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));

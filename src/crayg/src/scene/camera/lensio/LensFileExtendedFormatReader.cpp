@@ -37,14 +37,10 @@ bool checkLineForStateAndChangeIfNeeded(std::string line, ParseState &parseState
     return false;
 }
 
-void parseMetadataLine(const std::string &line, LensFileExtendedFormatReader::ParsedMetadata &parsedMetadata) {
-    std::string lowerLine = line;
-    boost::algorithm::to_lower(lowerLine);
-    if (pystring::startswith(lowerLine, "name:")) {
-        auto name = line.substr(5);
-        boost::algorithm::trim_all(name);
-        parsedMetadata.name = name;
-    }
+std::string readMetadataString(const std::string &line, const std::string &token) {
+    auto value = line.substr(token.size());
+    boost::algorithm::trim_all(value);
+    return value;
 }
 
 float parseFloat(int lineNumber, std::string &floatStr, const std::string &name) {
@@ -53,6 +49,26 @@ float parseFloat(int lineNumber, std::string &floatStr, const std::string &name)
     } catch (std::invalid_argument &e) {
         throw InvalidExtendedLensFileFormatException(lineNumber,
                                                      fmt::format("Value '{}' for {} is not a float", floatStr, name));
+    }
+}
+
+void parseMetadataLine(int lineNumber, const std::string &line, CameraLensMetadata &parsedMetadata) {
+    static std::string nameToken = "name:";
+    static std::string maximumFNumberToken = "maximum f number:";
+    static std::string patentToken = "patent:";
+    static std::string descriptionToken = "description:";
+
+    std::string lowerLine = line;
+    boost::algorithm::to_lower(lowerLine);
+    if (pystring::startswith(lowerLine, nameToken)) {
+        parsedMetadata.name = readMetadataString(line, nameToken);
+    } else if (pystring::startswith(lowerLine, maximumFNumberToken)) {
+        std::string maxFNumberStr = readMetadataString(line, maximumFNumberToken);
+        parsedMetadata.maximumAperture = parseFloat(lineNumber, maxFNumberStr, "Maximum F Number");
+    } else if (pystring::startswith(lowerLine, patentToken)) {
+        parsedMetadata.patent = readMetadataString(line, patentToken);
+    } else if (pystring::startswith(lowerLine, descriptionToken)) {
+        parsedMetadata.description = readMetadataString(line, descriptionToken);
     }
 }
 
@@ -113,7 +129,7 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
     boost::split(lines, content, boost::is_any_of("\n"));
 
     ParseState parseState = ParseState::UNDEFINED;
-    ParsedMetadata parsedMetadata;
+    CameraLensMetadata cameraLensMetadata;
 
     for (int i = 0; i < lines.size(); i++) {
         auto &line = lines[i];
@@ -126,13 +142,13 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
             continue;
         }
 
-        const bool metadataWasParsedButNameIsEmpty = parseState == ELEMENTS && parsedMetadata.name.empty();
+        const bool metadataWasParsedButNameIsEmpty = parseState == ELEMENTS && cameraLensMetadata.name.empty();
         if (metadataWasParsedButNameIsEmpty) {
             throw InvalidExtendedLensFileFormatException("[Metadata] section is missing 'name'");
         }
 
         if (parseState == METADATA) {
-            parseMetadataLine(line, parsedMetadata);
+            parseMetadataLine(i, line, cameraLensMetadata);
         } else if (parseState == ELEMENTS) {
             parseElementsLine(i, line, elements);
         }
@@ -148,7 +164,7 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
         throw InvalidExtendedLensFileFormatException("[Elements] section is empty");
     }
 
-    return {CameraLensMetadata(parsedMetadata.name), elements};
+    return {cameraLensMetadata, elements};
 }
 
 } // crayg

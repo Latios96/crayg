@@ -23,6 +23,13 @@ TEST_CASE("CameraLens::construct") {
     SECTION("focal length should be populated") {
         REQUIRE(canon70_200.metadata.focalLength >= 7);
     }
+
+    SECTION("should calculate metadata on the fly") {
+        REQUIRE(canon70_200.metadata.focalLength >= 7);
+        REQUIRE(canon70_200.metadata.elementCount == 34);
+        REQUIRE(Catch::Detail::Approx(canon70_200.metadata.maximumAperture) == 3.4342f);
+        REQUIRE(canon70_200.metadata.squeeze == 1);
+    }
 }
 
 TEST_CASE("CameraLens::getFirstElementZ") {
