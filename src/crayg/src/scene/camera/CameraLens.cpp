@@ -272,16 +272,29 @@ std::ostream &operator<<(std::ostream &os, const LensElement &element) {
 CameraLensMetadata::CameraLensMetadata(const std::string &name) : name(name) {
 }
 
+CameraLensMetadata::CameraLensMetadata(const std::string &name, float maximumAperture, float squeeze,
+                                       const std::string &patent, const std::string &description)
+    : name(name), maximumAperture(maximumAperture), squeeze(squeeze), patent(patent), description(description) {
+}
+
+std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata) {
+    os << ToStringHelper("CameraLensMetadata")
+              .addMember("name", metadata.name)
+              .addMember("maximumAperture", metadata.maximumAperture)
+              .addMember("squeeze", metadata.squeeze)
+              .addMember("patent", metadata.patent)
+              .addMember("description", metadata.description)
+              .finish();
+    return os;
+}
+
 bool CameraLensMetadata::operator==(const CameraLensMetadata &rhs) const {
-    return name == rhs.name;
+    return name == rhs.name && maximumAperture == rhs.maximumAperture && squeeze == rhs.squeeze &&
+           patent == rhs.patent && description == rhs.description;
 }
 
 bool CameraLensMetadata::operator!=(const CameraLensMetadata &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata) {
-    os << ToStringHelper("CameraLensMetadata").addMember("name", metadata.name).finish();
-    return os;
-}
 } // crayg

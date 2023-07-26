@@ -41,7 +41,14 @@ struct LensElement {
 struct CameraLensMetadata {
     CameraLensMetadata() = default;
     explicit CameraLensMetadata(const std::string &name);
+    CameraLensMetadata(const std::string &name, float maximumAperture, float squeeze, const std::string &patent,
+                       const std::string &description);
     std::string name;
+    float maximumAperture;
+    float squeeze;
+    std::string patent;
+    std::string description;
+
     bool operator==(const CameraLensMetadata &rhs) const;
     bool operator!=(const CameraLensMetadata &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata);
