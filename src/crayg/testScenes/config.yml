@@ -110,3 +110,14 @@ scenes:
       - embree
     scene_path: "M:/Test_Scene_Collection/EmperorCrown/EmperorCrownCrayg.usda"
     resolution: "870x1080"
+  - name: DailyDweeb
+    cameras:
+      - /Camera/Camera/CameraShape
+    hero_camera: /Camera/Camera/CameraShape
+    integrators:
+      - debug
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/DailyDweeb/DailyDweeb.usda"
