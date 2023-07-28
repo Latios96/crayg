@@ -46,9 +46,9 @@ void ExitPupilCalculator::calculateParallel(ExitPupil &exitPupil,
 Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) {
     const int maxSamples = calculationSettings.samplesLens * calculationSettings.samplesLens;
     const float filmIntervalStart = static_cast<float>(intervalIndex) /
-                                    static_cast<float>(calculationSettings.samplesFilmX) * filmDiagonalLength / 2.f;
+                                    static_cast<float>(calculationSettings.samplesFilmX) * (filmDiagonalLength / 2.f);
     const float filmIntervalEnd = static_cast<float>(intervalIndex + 1) /
-                                  static_cast<float>(calculationSettings.samplesFilmX) * filmDiagonalLength / 2.f;
+                                  static_cast<float>(calculationSettings.samplesFilmX) * (filmDiagonalLength / 2.f);
 
     const float rearApertureRadius = lens.getLastElement().apertureRadius;
     const Bounds2df rearElementExtend =
@@ -86,7 +86,7 @@ Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) 
 
 Vector2f ExitPupil::samplePupil(const Vector2f &filmPos, float filmDiagonal) const {
     const float distanceFromFilmCenter = filmPos.length();
-    int boundsIndex = distanceFromFilmCenter / filmDiagonal * pupilBounds.size();
+    int boundsIndex = distanceFromFilmCenter / (filmDiagonal / 2) * pupilBounds.size();
     boundsIndex = std::min<int>(pupilBounds.size() - 1, boundsIndex);
     const auto pupil = pupilBounds[boundsIndex];
 

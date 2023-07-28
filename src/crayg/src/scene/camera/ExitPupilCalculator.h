@@ -16,8 +16,8 @@ struct ExitPupil {
 class ExitPupilCalculator {
   public:
     struct CalculationSettings {
-        int samplesFilmX = 128;
-        int samplesLens = 2048;
+        int samplesFilmX = 64;
+        int samplesLens = 1024;
         bool serial = false;
     };
 
