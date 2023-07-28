@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_CAMERALENSFIXTURES_H_
 #define CRAYG_SRC_CRAYG_TESTS_FIXTURES_CAMERALENSFIXTURES_H_
 
-#include "scene/camera/CameraLens.h"
+#include "scene/camera/realistic/CameraLens.h"
 
 namespace crayg {
 

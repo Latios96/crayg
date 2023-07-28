@@ -1,6 +1,6 @@
 #include "fixtures/CameraLensFixtures.h"
 #include "fixtures/TemporaryDirectory.h"
-#include "scene/camera/LensRaytracerTracer.h"
+#include "scene/camera/realistic/LensRaytracerTracer.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

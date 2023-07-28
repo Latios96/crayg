@@ -1,5 +1,5 @@
 #include "fixtures/TemporaryDirectory.h"
-#include "scene/camera/lensio/LensFileReader.h"
+#include "scene/camera/realistic/lensio/LensFileReader.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

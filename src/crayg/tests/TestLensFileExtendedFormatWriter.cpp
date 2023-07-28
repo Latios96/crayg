@@ -1,6 +1,6 @@
 #include "fixtures/CameraLensFixtures.h"
-#include "scene/camera/CameraLens.h"
-#include "scene/camera/lensio/LensFileExtendedFormatWriter.h"
+#include "scene/camera/realistic/CameraLens.h"
+#include "scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatWriter.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

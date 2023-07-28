@@ -3,7 +3,7 @@
 
 #include "bucketsamplers/BucketSampler.h"
 #include "integrators/AbstractIntegrator.h"
-#include "scene/camera/PineHoleCameraModel.h"
+#include "scene/camera/pinehole/PineHoleCameraModel.h"
 #include "utils/TaskReporter.h"
 #include <basics/Color.h>
 #include <basics/Resolution.h>

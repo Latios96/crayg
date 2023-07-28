@@ -1,7 +1,7 @@
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
 #include "Logger.h"
-#include "scene/camera/lensio/LensFileReaderFactory.h"
+#include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "sceneIO/usd/UsdLensFileUtils.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "utils/CraygMain.h"

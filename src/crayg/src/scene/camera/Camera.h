@@ -1,9 +1,9 @@
 #ifndef CRAYG_CAMERA_H
 #define CRAYG_CAMERA_H
 
-#include "CameraLens.h"
 #include "CameraType.h"
 #include "basics/Vector3f.h"
+#include "realistic/CameraLens.h"
 #include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"
 #include "utils/ToStringHelper.h"

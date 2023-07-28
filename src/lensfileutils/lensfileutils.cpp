@@ -3,8 +3,8 @@
 #include "Logger.h"
 #include <boost/filesystem.hpp>
 
-#include "scene/camera/lensio/LensFileReaderFactory.h"
-#include "scene/camera/lensio/LensFileWriterFactory.h"
+#include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
+#include "scene/camera/realistic/lensio/LensFileWriterFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/DtoUtils.h"
 #include "utils/EnumUtils.h"

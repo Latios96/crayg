@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILETEXTFILEWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILETEXTFILEWRITER_H_
 
-#include "LensFileWriter.h"
+#include "scene/camera/realistic/lensio/LensFileWriter.h"
 
 namespace crayg {
 

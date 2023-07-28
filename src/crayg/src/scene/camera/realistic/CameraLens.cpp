@@ -1,7 +1,7 @@
 #include "CameraLens.h"
-#include "CameraUtils.h"
 #include "Logger.h"
 #include "basics/MathUtils.h"
+#include "scene/camera/CameraUtils.h"
 #include <iostream>
 #include <utils/Preconditions.h>
 

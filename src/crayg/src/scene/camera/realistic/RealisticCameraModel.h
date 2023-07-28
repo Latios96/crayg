@@ -2,9 +2,9 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTICCAMERA_H_
 
 #include "CameraLens.h"
-#include "CameraModel.h"
 #include "ExitPupilCalculator.h"
 #include "ThickLensApproximation.h"
+#include "scene/camera/CameraModel.h"
 #include <basics/Ray.h>
 
 namespace crayg {

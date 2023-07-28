@@ -117,49 +117,49 @@ set(crayg_SRCS
         sampling/UnitSphereSampler.h
         scene/camera/Camera.cpp
         scene/camera/Camera.h
-        scene/camera/CameraLens.cpp
-        scene/camera/CameraLens.h
         scene/camera/CameraModel.h
         scene/camera/CameraModelFactory.cpp
         scene/camera/CameraModelFactory.h
         scene/camera/CameraType.h
         scene/camera/CameraUtils.cpp
         scene/camera/CameraUtils.h
-        scene/camera/ExitPupilCalculator.cpp
-        scene/camera/ExitPupilCalculator.h
-        scene/camera/LensGeometry.h
-        scene/camera/LensMaterial.h
-        scene/camera/lensio/LensFileFormat.h
-        scene/camera/lensio/LensFileExtendedFormatReader.cpp
-        scene/camera/lensio/LensFileExtendedFormatReader.h
-        scene/camera/lensio/LensFileExtendedFormatWriter.cpp
-        scene/camera/lensio/LensFileExtendedFormatWriter.h
-        scene/camera/lensio/LensFileJsonReader.cpp
-        scene/camera/lensio/LensFileJsonReader.h
-        scene/camera/lensio/LensFileJsonWriter.cpp
-        scene/camera/lensio/LensFileJsonWriter.h
-        scene/camera/lensio/LensFileReader.cpp
-        scene/camera/lensio/LensFileReader.h
-        scene/camera/lensio/LensFileReaderFactory.cpp
-        scene/camera/lensio/LensFileReaderFactory.h
-        scene/camera/lensio/LensFileTextFileReader.cpp
-        scene/camera/lensio/LensFileTextFileReader.h
-        scene/camera/lensio/LensFileTextFileWriter.cpp
-        scene/camera/lensio/LensFileTextFileWriter.h
-        scene/camera/lensio/LensFileWriter.cpp
-        scene/camera/lensio/LensFileWriter.h
-        scene/camera/lensio/LensFileWriterFactory.cpp
-        scene/camera/lensio/LensFileWriterFactory.h
-        scene/camera/LensRaytracerTracer.cpp
-        scene/camera/LensRaytracerTracer.h
-        scene/camera/PineHoleCameraModel.cpp
-        scene/camera/PineHoleCameraModel.h
-        scene/camera/RealisticCameraModel.cpp
-        scene/camera/RealisticCameraModel.h
-        scene/camera/ThickLensApproximation.cpp
-        scene/camera/ThickLensApproximation.h
-        scene/camera/ThinLensCameraModel.cpp
-        scene/camera/ThinLensCameraModel.h
+        scene/camera/pinehole/PineHoleCameraModel.cpp
+        scene/camera/pinehole/PineHoleCameraModel.h
+        scene/camera/realistic/CameraLens.cpp
+        scene/camera/realistic/CameraLens.h
+        scene/camera/realistic/ExitPupilCalculator.cpp
+        scene/camera/realistic/ExitPupilCalculator.h
+        scene/camera/realistic/LensGeometry.h
+        scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.cpp
+        scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.h
+        scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatWriter.cpp
+        scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatWriter.h
+        scene/camera/realistic/lensio/json/LensFileJsonReader.cpp
+        scene/camera/realistic/lensio/json/LensFileJsonReader.h
+        scene/camera/realistic/lensio/json/LensFileJsonWriter.cpp
+        scene/camera/realistic/lensio/json/LensFileJsonWriter.h
+        scene/camera/realistic/lensio/LensFileFormat.h
+        scene/camera/realistic/lensio/LensFileReader.cpp
+        scene/camera/realistic/lensio/LensFileReader.h
+        scene/camera/realistic/lensio/LensFileReaderFactory.cpp
+        scene/camera/realistic/lensio/LensFileReaderFactory.h
+        scene/camera/realistic/lensio/LensFileWriter.cpp
+        scene/camera/realistic/lensio/LensFileWriter.h
+        scene/camera/realistic/lensio/LensFileWriterFactory.cpp
+        scene/camera/realistic/lensio/LensFileWriterFactory.h
+        scene/camera/realistic/lensio/textfile/LensFileTextFileReader.cpp
+        scene/camera/realistic/lensio/textfile/LensFileTextFileReader.h
+        scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.cpp
+        scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.h
+        scene/camera/realistic/LensMaterial.h
+        scene/camera/realistic/LensRaytracerTracer.cpp
+        scene/camera/realistic/LensRaytracerTracer.h
+        scene/camera/realistic/RealisticCameraModel.cpp
+        scene/camera/realistic/RealisticCameraModel.h
+        scene/camera/realistic/ThickLensApproximation.cpp
+        scene/camera/realistic/ThickLensApproximation.h
+        scene/camera/thinlens/ThinLensCameraModel.cpp
+        scene/camera/thinlens/ThinLensCameraModel.h
         scene/Imageable.cpp
         scene/Imageable.h
         scene/lights/AreaLight.cpp

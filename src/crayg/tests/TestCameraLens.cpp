@@ -1,5 +1,5 @@
 #include "fixtures/CameraLensFixtures.h"
-#include "scene/camera/CameraLens.h"
+#include "scene/camera/realistic/CameraLens.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

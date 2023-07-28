@@ -1,6 +1,6 @@
 #include "LensFileExtendedFormatReader.h"
-#include "scene/camera/LensGeometry.h"
-#include "scene/camera/LensMaterial.h"
+#include "scene/camera/realistic/LensGeometry.h"
+#include "scene/camera/realistic/LensMaterial.h"
 #include "utils/EnumUtils.h"
 #include "utils/utils.h"
 #include <boost/algorithm/string/case_conv.hpp>

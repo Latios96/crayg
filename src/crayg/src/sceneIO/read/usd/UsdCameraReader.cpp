@@ -1,7 +1,7 @@
 #include "UsdCameraReader.h"
 #include "Logger.h"
 #include "basics/Transform.h"
-#include "scene/camera/lensio/LensFileReaderFactory.h"
+#include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/ar/resolver.h>
 #include <pxr/usd/ar/resolverContextBinder.h>

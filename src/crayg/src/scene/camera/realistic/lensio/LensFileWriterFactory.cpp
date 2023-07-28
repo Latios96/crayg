@@ -1,8 +1,8 @@
 #include "LensFileWriterFactory.h"
-#include "LensFileExtendedFormatWriter.h"
-#include "LensFileJsonWriter.h"
-#include "LensFileTextFileWriter.h"
 #include "Logger.h"
+#include "extendedformat/LensFileExtendedFormatWriter.h"
+#include "textfile/LensFileTextFileWriter.h"
+#include "json/LensFileJsonWriter.h"
 #include <boost/filesystem/path.hpp>
 
 namespace crayg {

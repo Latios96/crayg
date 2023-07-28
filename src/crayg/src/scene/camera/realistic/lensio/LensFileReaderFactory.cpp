@@ -1,8 +1,8 @@
 #include "LensFileReaderFactory.h"
-#include "LensFileExtendedFormatReader.h"
-#include "LensFileJsonReader.h"
-#include "LensFileTextFileReader.h"
 #include "Logger.h"
+#include "extendedformat/LensFileExtendedFormatReader.h"
+#include "textfile/LensFileTextFileReader.h"
+#include "json/LensFileJsonReader.h"
 #include <boost/filesystem/path.hpp>
 
 namespace crayg {

@@ -1,8 +1,8 @@
 #include "CameraModelFactory.h"
 
-#include "PineHoleCameraModel.h"
-#include "RealisticCameraModel.h"
-#include "ThinLensCameraModel.h"
+#include "scene/camera/pinehole/PineHoleCameraModel.h"
+#include "scene/camera/realistic/RealisticCameraModel.h"
+#include "scene/camera/thinlens/ThinLensCameraModel.h"
 
 namespace crayg {
 std::unique_ptr<CameraModel> CameraModelFactory::createCameraModel(Camera &camera, const Resolution &resolution) {
