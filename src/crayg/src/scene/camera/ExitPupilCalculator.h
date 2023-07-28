@@ -1,16 +1,20 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_EXITPUPILCALCULATOR_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_EXITPUPILCALCULATOR_H_
+
 #include "CameraLens.h"
 #include "basics/Bound2d.h"
+#include "utils/DtoUtils.h"
 #include "utils/TaskReporter.h"
 #include <array>
 
 namespace crayg {
 
+CRAYG_DTO_2(PositionAndArea, Vector2f, point, float, sampleBoundsArea);
+
 struct ExitPupil {
     std::vector<Bounds2df> pupilBounds;
 
-    Vector2f samplePupil(const Vector2f &filmPos, float filmDiagonal) const;
+    PositionAndArea samplePupil(const Vector2f &filmPos, float filmDiagonal) const;
 };
 
 class ExitPupilCalculator {

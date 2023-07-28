@@ -33,7 +33,8 @@ std::optional<Ray> RealisticCameraModel::createPrimaryRay(float x, float y) {
     const Vector3f positionOnFilm = {filmPos.x, filmPos.y, 0};
 
     const auto pupilSample = exitPupil.samplePupil(filmPos, filmDiagonal);
-    const auto pointOnPupil = Vector3f(pupilSample.x, pupilSample.y, camera.getLens().getLastElement().center);
+    const auto pointOnPupil =
+        Vector3f(pupilSample.point.x, pupilSample.point.y, camera.getLens().getLastElement().center);
     const Ray ray = {positionOnFilm, (pointOnPupil - positionOnFilm).normalize()};
     const auto tracedRay = camera.getLens().traceFromFilmToWorld(ray);
     if (!tracedRay) {
