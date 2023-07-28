@@ -172,6 +172,24 @@ TEST_CASE("Bounds2d::contains") {
     }
 }
 
+TEST_CASE("Bounds2d::diagonal") {
+    SECTION("should return correct diagonal for Bounds2df") {
+        Bounds2df bounds2Df({0, 0}, {2, 3});
+
+        const Vector2f diagonal = bounds2Df.diagonal();
+
+        REQUIRE(diagonal == Vector2f(2, 3));
+    }
+
+    SECTION("should return correct diagonal for Bounds2di") {
+        Bounds2di bounds2Df({0, 0}, {2, 3});
+
+        const Vector2i diagonal = bounds2Df.diagonal();
+
+        REQUIRE(diagonal == Vector2i(2, 3));
+    }
+}
+
 TEST_CASE("Bounds2d::equality") {
     SECTION("should be equal") {
         Bounds2df left;

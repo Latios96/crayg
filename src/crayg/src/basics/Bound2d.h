@@ -40,6 +40,10 @@ template <typename T> class Bounds2d {
         return {MathUtils::lerp(u, min.x, max.x), MathUtils::lerp(v, min.y, max.y)};
     }
 
+    Vector2<T> diagonal() const {
+        return max - min;
+    }
+
     template <typename OT> bool contains(const Vector2<OT> &other) const {
         return min.x <= other.x && min.y <= other.y && max.x >= other.x && max.y >= other.y;
     }
