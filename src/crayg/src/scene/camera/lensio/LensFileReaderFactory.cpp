@@ -15,6 +15,8 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(cons
         return std::make_unique<LensFileTextFileReader>();
     } else if (extension == ".json") {
         return std::make_unique<LensFileJsonReader>();
+    } else if (extension == ".fx") {
+        return std::make_unique<LensFileExtendedFormatReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", extension);
         throw std::runtime_error(fmt::format("No LensFileReader found for extension {}", extension));
