@@ -54,6 +54,7 @@ set(UNIT_TEST_LIST
         TestIntegratorContext.cpp
         TestIntegratorSettings.cpp
         TestLensFileExtendedFormatReader.cpp
+        TestLensFileExtendedFormatWriter.cpp
         TestLensFileJsonReader.cpp
         TestLensFileJsonWriter.cpp
         TestLensFileReader.cpp
