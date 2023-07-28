@@ -3,11 +3,14 @@
 
 #include "Camera.h"
 #include "basics/Resolution.h"
+#include "utils/DtoUtils.h"
 #include "utils/TaskReporter.h"
 #include <basics/Ray.h>
 #include <optional>
 
 namespace crayg {
+
+CRAYG_DTO_2(RayWithWeight, std::optional<Ray>, ray, float, weight);
 
 class CameraModel {
   public:
@@ -16,7 +19,7 @@ class CameraModel {
 
     virtual void init(crayg::TaskReporter &taskReporter){};
 
-    virtual std::optional<Ray> createPrimaryRay(float x, float y) = 0;
+    virtual RayWithWeight createPrimaryRay(float x, float y) = 0;
 
     virtual ~CameraModel() = default;
 

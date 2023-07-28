@@ -12,9 +12,9 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, const Resolution &resol
     upVector = upVector * (imagePlaneHeight / 2.0f);
 }
 
-std::optional<Ray> PineHoleCameraModel::createPrimaryRay(float x, float y) {
+RayWithWeight PineHoleCameraModel::createPrimaryRay(float x, float y) {
     const Vector3f pineHoleRayDirection = createPineHoleRayDirection(x, y);
-    return Ray(camera.getPosition(), camera.getTransform().applyForNormal(pineHoleRayDirection).normalize());
+    return {Ray(camera.getPosition(), camera.getTransform().applyForNormal(pineHoleRayDirection).normalize()), 1};
 }
 
 Vector3f PineHoleCameraModel::createPineHoleRayDirection(float x, float y) {

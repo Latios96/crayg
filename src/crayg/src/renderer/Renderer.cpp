@@ -104,11 +104,11 @@ void Renderer::init() {
 }
 
 Color Renderer::renderSample(const Vector2f &samplePos) {
-    auto ray = cameraModel->createPrimaryRay(samplePos.x, samplePos.y);
-    if (!ray) {
+    auto rayWithWeight = cameraModel->createPrimaryRay(samplePos.x, samplePos.y);
+    if (!rayWithWeight.ray) {
         return Color::createBlack();
     }
-    return integrator->integrate(*ray, 0);
+    return integrator->integrate(*rayWithWeight.ray, 0) * rayWithWeight.weight;
 }
 
 void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {

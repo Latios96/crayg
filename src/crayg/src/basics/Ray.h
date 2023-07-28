@@ -3,6 +3,7 @@
 
 #include "Vector3f.h"
 #include <fmt/ostream.h>
+#include <optional>
 #include <ostream>
 
 namespace crayg {
@@ -35,5 +36,15 @@ struct Ray {
 }
 
 template <> struct fmt::formatter<crayg::Ray> : ostream_formatter {};
+
+template <> struct fmt::formatter<std::optional<crayg::Ray>> {
+    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext> auto format(std::optional<crayg::Ray> const &ray, FormatContext &ctx) {
+        return fmt::format_to(ctx.out(), "{}", ray.has_value() ? fmt::format("{}", *ray) : "<empty>");
+    };
+};
 
 #endif // CRAYG_RAY_H
