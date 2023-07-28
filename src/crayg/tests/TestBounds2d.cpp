@@ -9,7 +9,8 @@ TEST_CASE("Bounds2d::construct") {
     SECTION("should default construct") {
         Bounds2df bounds2Df;
 
-        REQUIRE(bounds2Df == Bounds2df({0, 0}, {0, 0}));
+        REQUIRE(bounds2Df == Bounds2df({std::numeric_limits<float>::max(), std::numeric_limits<float>::max()},
+                                       {std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest()}));
     }
 
     SECTION("should construct with params") {
@@ -27,30 +28,30 @@ TEST_CASE("Bounds2d::construct") {
 }
 
 TEST_CASE("Bounds2d::union with Vector2") {
-    SECTION("Bounds2df should union with Vector2f") {
+    SECTION("default constructed Bounds2df should union with Vector2f") {
         Bounds2df bounds2Df;
         auto unionBounds = bounds2Df.unionWith(Vector2f(-1, 1));
 
-        REQUIRE(unionBounds == Bounds2df({-1, 0}, {0, 1}));
+        REQUIRE(unionBounds == Bounds2df({-1, 1}, {-1, 1}));
     }
 
-    SECTION("Bounds2df should union with Vector2i") {
+    SECTION("default constructed Bounds2df should union with Vector2i") {
         Bounds2df bounds2Df;
         auto unionBounds = bounds2Df.unionWith(Vector2i(-1, 1));
 
-        REQUIRE(unionBounds == Bounds2df({-1, 0}, {0, 1}));
+        REQUIRE(unionBounds == Bounds2df({-1, 1}, {-1, 1}));
     }
 
-    SECTION("Bounds2di should union with Vector2f") {
-        Bounds2di bounds2Df;
+    SECTION("Bounds2df should union with Vector2f") {
+        Bounds2df bounds2Df(Vector2f(0), Vector2f(0));
         auto unionBounds = bounds2Df.unionWith(Vector2f(-1, 1));
 
-        REQUIRE(unionBounds == Bounds2di({-1, 0}, {0, 1}));
+        REQUIRE(unionBounds == Bounds2df({-1, 0}, {0, 1}));
     }
 
     SECTION("Bounds2di should union with Vector2i") {
-        Bounds2di bounds2Df;
-        auto unionBounds = bounds2Df.unionWith(Vector2i(-1, 1));
+        Bounds2di bounds2Di(Vector2i(0), Vector2i(0));
+        auto unionBounds = bounds2Di.unionWith(Vector2i(-1, 1));
 
         REQUIRE(unionBounds == Bounds2di({-1, 0}, {0, 1}));
     }
@@ -88,7 +89,7 @@ TEST_CASE("Bounds2d::union with Bounds") {
 
 TEST_CASE("Bounds2d::expand") {
     SECTION("Bounds2df should expand by Vector2f") {
-        Bounds2df bounds2Df;
+        Bounds2df bounds2Df({0, 0}, {0, 0});
         auto expandedBounds = bounds2Df.expand(Vector2f(1, 2));
 
         REQUIRE(expandedBounds == Bounds2df({-1, -2}, {1, 2}));

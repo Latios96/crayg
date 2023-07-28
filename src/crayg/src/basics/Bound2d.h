@@ -11,7 +11,7 @@ namespace crayg {
 
 template <typename T> class Bounds2d {
   public:
-    Bounds2d() : min({0}), max({0}) {
+    Bounds2d() : min({std::numeric_limits<T>::max()}), max({std::numeric_limits<T>::lowest()}) {
     }
 
     Bounds2d(const Vector2<T> &min, const Vector2<T> &max) : min(min), max(max) {
