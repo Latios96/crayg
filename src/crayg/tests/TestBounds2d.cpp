@@ -190,6 +190,40 @@ TEST_CASE("Bounds2d::diagonal") {
     }
 }
 
+TEST_CASE("Bounds2d::area") {
+    SECTION("should return correct area for Bounds2df consisting of one point") {
+        Bounds2df bounds2df({1, 1}, {1, 1});
+
+        const float area = bounds2df.area();
+
+        REQUIRE(area == 0);
+    }
+
+    SECTION("should return correct area for Bounds2df") {
+        Bounds2df bounds2df({1, 1}, {3, 3});
+
+        const float area = bounds2df.area();
+
+        REQUIRE(area == 4);
+    }
+
+    SECTION("should return correct area for Bounds2di consisting of one point") {
+        Bounds2di bounds2di({1, 1}, {1, 1});
+
+        const float area = bounds2di.area();
+
+        REQUIRE(area == 0);
+    }
+
+    SECTION("should return correct area for Bounds2di") {
+        Bounds2di bounds2di({1, 1}, {3, 3});
+
+        const float area = bounds2di.area();
+
+        REQUIRE(area == 4);
+    }
+}
+
 TEST_CASE("Bounds2d::equality") {
     SECTION("should be equal") {
         Bounds2df left;

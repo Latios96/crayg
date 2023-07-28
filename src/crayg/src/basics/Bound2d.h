@@ -44,6 +44,11 @@ template <typename T> class Bounds2d {
         return max - min;
     }
 
+    float area() const {
+        const auto d = diagonal();
+        return (d.x * d.y);
+    }
+
     template <typename OT> bool contains(const Vector2<OT> &other) const {
         return min.x <= other.x && min.y <= other.y && max.x >= other.x && max.y >= other.y;
     }
