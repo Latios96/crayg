@@ -245,7 +245,7 @@ bool CameraLens::exceedsAperture(const LensElement &lensElement, const Ray &ray)
 
 bool CameraLens::exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const {
     const float radiusOfIntersectionSquared = intersectionPosition.xy().lengthSquared();
-    const float apertureRadiusSquared = std::pow(apertureRadius, 2.f);
+    const float apertureRadiusSquared = apertureRadius * apertureRadius;
     const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;
     return rayExceedsAperture;
 }

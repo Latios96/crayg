@@ -13,11 +13,11 @@ Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) {
 }
 
 float Vector3f::length() const {
-    return static_cast<float>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
+    return static_cast<float>(sqrt(x * x + y * y + z * z));
 }
 
 float Vector3f::lengthSquared() const {
-    return static_cast<float>((pow(x, 2) + pow(y, 2) + pow(z, 2)));
+    return static_cast<float>(x * x + y * y + z * z);
 }
 
 Vector3f Vector3f::normalize() const {
