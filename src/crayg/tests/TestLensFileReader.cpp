@@ -18,7 +18,7 @@ TEST_CASE("TestLensFileReader::readFile") {
     SECTION("should throw if file does not exist") {
         DummyLensFileReader dummyLensFileReader;
 
-        REQUIRE_THROWS_AS(dummyLensFileReader.readFile("not-existing-file.txt"), std::runtime_error);
+        REQUIRE_THROWS_AS(dummyLensFileReader.readFile("foo/not-existing-file.txt"), std::runtime_error);
     }
 
     SECTION("should read file correctly") {
