@@ -3,9 +3,6 @@
 
 namespace crayg {
 
-// convex: positive curvate radius
-// concave: negative curvate radius
-
 TEST_CASE("LensElement::intersectSphericalElement convex") {
 
     SECTION("should intersect with spherical element") {
