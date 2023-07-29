@@ -44,6 +44,9 @@ struct CameraLens {
     friend std::ostream &operator<<(std::ostream &os, const CameraLens &lens);
 
   private:
+    void calculateMetadata();
+    void handleAnamorphicFocussing();
+
     std::optional<LensElementIntersection> intersect(const LensElement &element, const Ray &ray) const;
     bool exceedsAperture(const LensElement &element, const Ray &ray) const;
     bool exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const;

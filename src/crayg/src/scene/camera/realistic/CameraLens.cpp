@@ -24,23 +24,30 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
     ThickLensApproximationCalculator thickLensCalculator(*this);
     thickLensApproximation = thickLensCalculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
 
-    this->metadata.focalLength = calculateEffectiveFocalLength(thickLensApproximation);
-    this->metadata.elementCount = elements.size();
-    if (!this->metadata.maximumAperture) {
-        this->metadata.maximumAperture = this->metadata.focalLength / apertureRadius;
-    }
-    this->metadata.isAnamorphic =
-        std::any_of(this->elements.begin(), this->elements.end(), [](const LensElement &element) {
-            return element.geometry == LensGeometry::CYLINDER_X || element.geometry == LensGeometry::CYLINDER_Y;
-        });
+    calculateMetadata();
 
     if (this->metadata.isAnamorphic) {
-        auto horizontalThickLensApproximation =
-            thickLensCalculator.calculate(ThickLensApproximationCalculator::HORIZONTAL);
-        auto horizontalFocalLength = calculateEffectiveFocalLength(horizontalThickLensApproximation);
-        this->metadata.squeeze = this->metadata.focalLength / horizontalFocalLength;
-        thickLensApproximation = horizontalThickLensApproximation;
+        handleAnamorphicFocussing();
     }
+}
+
+void CameraLens::calculateMetadata() {
+    metadata.focalLength = calculateEffectiveFocalLength(thickLensApproximation);
+    metadata.elementCount = elements.size();
+    if (!metadata.maximumAperture) {
+        metadata.maximumAperture = metadata.focalLength / apertureRadius;
+    }
+    metadata.isAnamorphic = std::any_of(elements.begin(), elements.end(), [](const LensElement &element) {
+        return element.geometry == CYLINDER_X || element.geometry == CYLINDER_Y;
+    });
+}
+
+void CameraLens::handleAnamorphicFocussing() {
+    ThickLensApproximationCalculator thickLensCalculator(*this);
+    auto horizontalThickLensApproximation = thickLensCalculator.calculate(ThickLensApproximationCalculator::HORIZONTAL);
+    auto horizontalFocalLength = calculateEffectiveFocalLength(horizontalThickLensApproximation);
+    metadata.squeeze = metadata.focalLength / horizontalFocalLength;
+    thickLensApproximation = horizontalThickLensApproximation;
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
