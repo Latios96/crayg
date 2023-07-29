@@ -9,7 +9,7 @@ over "render_cam"
 {
     over "render_camShape"{
         custom string craygCameraType = "REALISTIC"
-        custom asset craygLensFile = @./Panavision.txt@
+        custom asset craygLensFile = @./Panavision.fx@
         float fStop = 1
     }
 }
