@@ -12,8 +12,6 @@ CRAYG_DTO_2(CardinalPoints, float, pZ, float, fZ);
 CRAYG_DTO_2(ThickLensApproximation, CardinalPoints, firstCardinalPoints, CardinalPoints, secondCardinalPoints);
 
 float calculateEffectiveFocalLength(const ThickLensApproximation &thickLensApproximation);
-float calculateEffectiveFocalLength(
-    const CameraLens &cameraLens); // todo move to Utils or something else to match code style
 
 class ThickLensApproximationCalculator {
   public:
