@@ -45,7 +45,10 @@
           "name": "ThinLens"
         },
         {
-          "name": "Realistic"
+          "name": "RealisticSpherical"
+        },
+        {
+          "name": "RealisticAnamorphic"
         }
       ]
     },
