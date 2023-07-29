@@ -170,8 +170,27 @@ void CameraLens::changeAperture(float fStop) {
 std::optional<LensElementIntersection> CameraLens::intersect(const LensElement &element, const Ray &ray) const {
     float t = 0;
     Vector3f normal;
-    const bool intersects = intersectSphericalElement(
-        element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+    bool intersects = false;
+
+    switch (element.geometry) {
+    case SPHERICAL:
+        intersects = intersectSphericalElement(
+            element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        break;
+    case CYLINDER_X:
+        intersects = intersectCylindricalXElement(
+            element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        break;
+    case CYLINDER_Y:
+        intersects = intersectCylindricalYElement(
+            element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        break;
+    case PLANAR:
+        intersects =
+            intersectPlanarElement(-(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        break;
+    }
+
     if (!intersects) {
         return std::nullopt;
     }
