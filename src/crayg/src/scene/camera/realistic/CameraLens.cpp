@@ -23,7 +23,7 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
     apertureRadius = apertureIndex != -1 ? getAperture().apertureRadius : 0;
 
     ThickLensApproximationCalculator thickLensCalculator(*this);
-    thickLensApproximation = thickLensCalculator.calculate();
+    thickLensApproximation = thickLensCalculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
 
     this->metadata.focalLength = calculateEffectiveFocalLength(thickLensApproximation);
     this->metadata.elementCount = elements.size();

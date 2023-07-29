@@ -16,7 +16,10 @@ float calculateEffectiveFocalLength(const ThickLensApproximation &thickLensAppro
 class ThickLensApproximationCalculator {
   public:
     explicit ThickLensApproximationCalculator(const CameraLens &lens);
-    ThickLensApproximation calculate();
+
+    enum Direction { HORIZONTAL, VERTICAL };
+
+    ThickLensApproximation calculate(const Direction &direction);
 
   private:
     CardinalPoints computeCardinalPoints(const Ray &in, const Ray &out);

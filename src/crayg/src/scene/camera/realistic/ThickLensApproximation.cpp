@@ -10,7 +10,7 @@ float calculateEffectiveFocalLength(const ThickLensApproximation &thickLensAppro
 ThickLensApproximationCalculator::ThickLensApproximationCalculator(const CameraLens &lens) : lens(lens) {
 }
 
-ThickLensApproximation ThickLensApproximationCalculator::calculate() {
+ThickLensApproximation ThickLensApproximationCalculator::calculate(const Direction &direction) {
     const int factor = 100;
     const float offsetX = 3.5e-05f * factor;
 

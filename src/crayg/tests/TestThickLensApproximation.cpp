@@ -12,7 +12,7 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
     SECTION("should calculate calculate ThickLensApproximation correctly for Canon 70-200mm") {
         ThickLensApproximationCalculator calculator(canon70_200);
 
-        auto thickLensApproximation = calculator.calculate();
+        auto thickLensApproximation = calculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
 
         const float focalLength = calculateEffectiveFocalLength(thickLensApproximation);
         REQUIRE(focalLength == Catch::Detail::Approx(7.21183792f));
@@ -27,7 +27,8 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
         canon70_200.changeAperture(50000000.f);
         ThickLensApproximationCalculator calculator(canon70_200);
 
-        REQUIRE_THROWS_AS(calculator.calculate(), std::runtime_error);
+        REQUIRE_THROWS_AS(calculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL),
+                          std::runtime_error);
     }
 }
 
