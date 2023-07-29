@@ -9,11 +9,12 @@ namespace crayg {
 struct CameraLensMetadata {
     CameraLensMetadata() = default;
     explicit CameraLensMetadata(const std::string &name);
-    CameraLensMetadata(const std::string &name, float focalLength, float maximumAperture, float squeeze, int lensCount,
-                       const std::string &patent, const std::string &description);
+    CameraLensMetadata(const std::string &name, float focalLength, float maximumAperture, bool isAnamorphic,
+                       float squeeze, int lensCount, const std::string &patent, const std::string &description);
     std::string name;
     float focalLength = 0;
     float maximumAperture = 0;
+    bool isAnamorphic = false;
     float squeeze = 1;
     int elementCount = 0;
     std::string patent;

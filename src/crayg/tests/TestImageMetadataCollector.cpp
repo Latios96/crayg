@@ -98,6 +98,7 @@ TEST_CASE("TestImageMetadataCollector::collect") {
                 Catch::Detail::Approx(72.1183792f));
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_MAXIMUM_F_NUMBER) ==
                 Catch::Detail::Approx(3.4342f));
+        REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::CAMERA_LENS_IS_ANAMORPHIC) == 0);
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_SQUEEZE) == 2);
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_LENS_PATENT) == "US 132");
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_LENS_DESCRIPTION) == "A Canon Lens");

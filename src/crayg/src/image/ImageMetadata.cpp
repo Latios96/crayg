@@ -25,6 +25,7 @@ const std::string ImageMetadataTokens::CAMERA_LENS_NAME = "crayg/camera/lens/nam
 const std::string ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT = "crayg/camera/lens/elementCount";
 const std::string ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH = "crayg/camera/lens/effectiveFocalLength";
 const std::string ImageMetadataTokens::CAMERA_LENS_MAXIMUM_F_NUMBER = "crayg/camera/lens/maximumfnumber";
+const std::string ImageMetadataTokens::CAMERA_LENS_IS_ANAMORPHIC = "crayg/camera/lens/isAnamorphic";
 const std::string ImageMetadataTokens::CAMERA_LENS_SQUEEZE = "crayg/camera/lens/squeeze";
 const std::string ImageMetadataTokens::CAMERA_LENS_PATENT = "crayg/camera/lens/patent";
 const std::string ImageMetadataTokens::CAMERA_LENS_DESCRIPTION = "crayg/camera/lens/description";

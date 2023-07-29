@@ -23,7 +23,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
         REQUIRE(cameraLens ==
-                CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, 1, 0, "US 123", "An Example Lens"),
+                CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, "US 123", "An Example Lens"),
                            std::vector<LensElement>(
                                {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
                                 {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
@@ -67,7 +67,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
         REQUIRE(cameraLens ==
-                CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, 1, 0, "US 123", "An Example Lens"),
+                CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, "US 123", "An Example Lens"),
                            std::vector<LensElement>(
                                {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
                                 {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
