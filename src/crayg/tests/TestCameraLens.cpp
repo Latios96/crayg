@@ -28,7 +28,14 @@ TEST_CASE("CameraLens::construct") {
         REQUIRE(canon70_200.metadata.focalLength >= 7);
         REQUIRE(canon70_200.metadata.elementCount == 34);
         REQUIRE(Catch::Detail::Approx(canon70_200.metadata.maximumAperture) == 3.4342f);
+        REQUIRE(canon70_200.metadata.isAnamorphic == false);
         REQUIRE(canon70_200.metadata.squeeze == 1);
+    }
+
+    SECTION("should calculate metadata correctly for anamorphic lens") {
+        CameraLens schneider30mm = CameraLensFixtures::createSchneider30mmAnamorphic();
+        REQUIRE(schneider30mm.metadata.isAnamorphic == true);
+        REQUIRE(schneider30mm.metadata.squeeze == 1);
     }
 }
 

@@ -19,7 +19,6 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
             apertureIndex = i;
         }
     }
-
     apertureRadius = apertureIndex != -1 ? getAperture().apertureRadius : 0;
 
     ThickLensApproximationCalculator thickLensCalculator(*this);
@@ -30,6 +29,10 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
     if (!this->metadata.maximumAperture) {
         this->metadata.maximumAperture = this->metadata.focalLength / apertureRadius;
     }
+    this->metadata.isAnamorphic =
+        std::any_of(this->elements.begin(), this->elements.end(), [](const LensElement &element) {
+            return element.geometry == LensGeometry::CYLINDER_X || element.geometry == LensGeometry::CYLINDER_Y;
+        });
     // todo calculate squeeze
 }
 
