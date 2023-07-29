@@ -33,7 +33,14 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
         std::any_of(this->elements.begin(), this->elements.end(), [](const LensElement &element) {
             return element.geometry == LensGeometry::CYLINDER_X || element.geometry == LensGeometry::CYLINDER_Y;
         });
-    // todo calculate squeeze
+
+    if (this->metadata.isAnamorphic) {
+        auto horizontalThickLensApproximation =
+            thickLensCalculator.calculate(ThickLensApproximationCalculator::HORIZONTAL);
+        auto horizontalFocalLength = calculateEffectiveFocalLength(horizontalThickLensApproximation);
+        this->metadata.squeeze = this->metadata.focalLength / horizontalFocalLength;
+        thickLensApproximation = horizontalThickLensApproximation;
+    }
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
