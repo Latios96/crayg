@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_
 
+#include "CameraLensMetadata.h"
 #include "LensGeometry.h"
 #include "LensMaterial.h"
 #include "ThickLensApproximation.h"
@@ -36,24 +37,6 @@ struct LensElement {
     bool operator==(const LensElement &rhs) const;
     bool operator!=(const LensElement &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const LensElement &element);
-};
-
-struct CameraLensMetadata {
-    CameraLensMetadata() = default;
-    explicit CameraLensMetadata(const std::string &name);
-    CameraLensMetadata(const std::string &name, float focalLength, float maximumAperture, float squeeze, int lensCount,
-                       const std::string &patent, const std::string &description);
-    std::string name;
-    float focalLength = 0;
-    float maximumAperture = 0;
-    float squeeze = 1;
-    int elementCount = 0;
-    std::string patent;
-    std::string description;
-
-    bool operator==(const CameraLensMetadata &rhs) const;
-    bool operator!=(const CameraLensMetadata &rhs) const;
-    friend std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata);
 };
 
 struct CameraLens {

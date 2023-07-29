@@ -127,6 +127,8 @@ set(crayg_SRCS
         scene/camera/pinehole/PineHoleCameraModel.h
         scene/camera/realistic/CameraLens.cpp
         scene/camera/realistic/CameraLens.h
+        scene/camera/realistic/CameraLensMetadata.cpp
+        scene/camera/realistic/CameraLensMetadata.h
         scene/camera/realistic/ExitPupil.cpp
         scene/camera/realistic/ExitPupil.h
         scene/camera/realistic/ExitPupilCalculator.cpp
