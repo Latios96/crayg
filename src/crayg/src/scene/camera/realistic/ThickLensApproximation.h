@@ -22,7 +22,8 @@ class ThickLensApproximationCalculator {
     ThickLensApproximation calculate(const Direction &direction);
 
   private:
-    CardinalPoints computeCardinalPoints(const Ray &in, const Ray &out);
+    CardinalPoints computeHorizontalCardinalPoints(const Ray &in, const Ray &out);
+    CardinalPoints computeVerticalCardinalPoints(const Ray &in, const Ray &out);
     const CameraLens &lens;
 };
 
