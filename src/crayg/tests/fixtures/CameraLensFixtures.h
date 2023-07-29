@@ -8,6 +8,7 @@ namespace crayg {
 class CameraLensFixtures {
   public:
     static CameraLens createCanon70_200mm();
+    static CameraLens createSchneider30mmAnamorphic();
 };
 
 } // crayg
