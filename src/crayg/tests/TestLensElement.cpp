@@ -153,4 +153,18 @@ TEST_CASE("LensElement::intersectCylindricalXElement concave") {
     }
 }
 
+TEST_CASE("LensElement::intersectPlanarElement") {
+
+    SECTION("should intersect with planar element") {
+        Vector3f n;
+        float t = 0;
+
+        const bool intersects = intersectPlanarElement(-3, Ray({2, 0, 0}, {0, 0, -1}), &t, &n);
+
+        REQUIRE(intersects);
+        REQUIRE(n == Vector3f(0, 0, 1));
+        REQUIRE(t == 3);
+    }
+}
+
 }

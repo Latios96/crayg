@@ -110,6 +110,13 @@ bool intersectCylindricalXElement(float radius, float zCenter, const Ray &ray, f
     return true;
 }
 
+bool intersectPlanarElement(float zCenter, const Ray &ray, float *t, Vector3f *n) {
+    *t = zCenter / ray.direction.z;
+    *n = Vector3f(0, 0, -1);
+    *n = *n = FaceForward(*n, ray.direction * -1);
+    return true;
+}
+
 bool LensElement::operator==(const LensElement &rhs) const {
     return curvatureRadius == rhs.curvatureRadius && thickness == rhs.thickness && ior == rhs.ior &&
            apertureRadius == rhs.apertureRadius && center == rhs.center && abbeNumber == rhs.abbeNumber &&
