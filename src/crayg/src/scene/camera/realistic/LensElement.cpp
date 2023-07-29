@@ -58,6 +58,58 @@ bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, floa
     return true;
 }
 
+bool intersectCylindricalYElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
+    const Vector3f transformedOrigin = ray.startPoint - Vector3f(0, 0, zCenter);
+    const float A = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
+    const float B = 2 * (ray.direction.x * transformedOrigin.x + ray.direction.z * transformedOrigin.z);
+    const float C =
+        transformedOrigin.x * transformedOrigin.x + transformedOrigin.z * transformedOrigin.z - radius * radius;
+
+    auto solutions = MathUtils::solveQuadratic(A, B, C);
+    if (!solutions) {
+        return false;
+    }
+
+    *t = selectCorrectSolution(radius, ray, *solutions);
+    if (*t < 0) {
+        return false;
+    }
+
+    const auto posOnCylinder = Vector3f(transformedOrigin + ray.direction * *t);
+    n->x = posOnCylinder.x / radius;
+    n->y = 0;
+    n->z = posOnCylinder.z / radius;
+    *n = FaceForward(*n, ray.direction * -1);
+
+    return true;
+}
+
+bool intersectCylindricalXElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
+    Vector3f transformedOrigin = ray.startPoint - Vector3f(0, 0, zCenter);
+    const float A = ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z;
+    const float B = 2 * (ray.direction.y * transformedOrigin.y + ray.direction.z * transformedOrigin.z);
+    const float C =
+        transformedOrigin.y * transformedOrigin.y + transformedOrigin.z * transformedOrigin.z - radius * radius;
+
+    auto solutions = MathUtils::solveQuadratic(A, B, C);
+    if (!solutions) {
+        return false;
+    }
+
+    *t = selectCorrectSolution(radius, ray, *solutions);
+    if (*t < 0) {
+        return false;
+    }
+
+    const auto posOnCylinder = Vector3f(transformedOrigin + ray.direction * *t);
+    n->x = 0;
+    n->y = posOnCylinder.y / radius;
+    n->z = posOnCylinder.z / radius;
+    *n = FaceForward(*n, ray.direction * -1);
+
+    return true;
+}
+
 bool LensElement::operator==(const LensElement &rhs) const {
     return curvatureRadius == rhs.curvatureRadius && thickness == rhs.thickness && ior == rhs.ior &&
            apertureRadius == rhs.apertureRadius && center == rhs.center && abbeNumber == rhs.abbeNumber &&

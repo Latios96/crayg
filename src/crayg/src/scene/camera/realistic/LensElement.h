@@ -31,6 +31,8 @@ struct LensElement {
 };
 
 bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
+bool intersectCylindricalYElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
+bool intersectCylindricalXElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
 
 // cylinder x
 // cylinder y
