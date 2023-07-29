@@ -3,6 +3,8 @@
 
 #include "LensGeometry.h"
 #include "LensMaterial.h"
+#include "basics/Ray.h"
+#include "basics/Vector3f.h"
 #include <fmt/ostream.h>
 
 namespace crayg {
@@ -27,6 +29,12 @@ struct LensElement {
     bool operator!=(const LensElement &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const LensElement &element);
 };
+
+bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
+
+// cylinder x
+// cylinder y
+// planar
 
 } // crayg
 
