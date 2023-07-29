@@ -2,6 +2,7 @@
 
 namespace crayg {
 CameraLens CameraLensFixtures::createCanon70_200mm() {
+    // US Patent 5537259
     std::vector<LensElement> elements = {
         {311.919, 2.80, 1.7495, 38.0}, // 0
         {118.63, 0.42, 1, 38.0},       // 1
@@ -50,6 +51,7 @@ CameraLens CameraLensFixtures::createCanon70_200mm() {
 }
 
 CameraLens CameraLensFixtures::createSchneider30mmAnamorphic() {
+    // US Patent 6310731B1
     std::vector<LensElement> elements = {
         {-101.3, 4, 1.591, 60, 0, LensMaterial::UNKNOWN, CYLINDER_Y},
         {50, 7.7, 1.762, 60, 0, LensMaterial::UNKNOWN, CYLINDER_Y},
