@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_CAMERALENSMETADATA_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_CAMERALENSMETADATA_H_
 
+#include <fmt/ostream.h>
 #include <string>
 
 namespace crayg {
@@ -24,5 +25,7 @@ struct CameraLensMetadata {
 };
 
 } // crayg
+
+template <> struct fmt::formatter<crayg::CameraLensMetadata> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_CAMERALENSMETADATA_H_
