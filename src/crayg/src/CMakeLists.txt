@@ -133,6 +133,8 @@ set(crayg_SRCS
         scene/camera/realistic/ExitPupil.h
         scene/camera/realistic/ExitPupilCalculator.cpp
         scene/camera/realistic/ExitPupilCalculator.h
+        scene/camera/realistic/LensElement.cpp
+        scene/camera/realistic/LensElement.h
         scene/camera/realistic/LensGeometry.h
         scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.cpp
         scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.h

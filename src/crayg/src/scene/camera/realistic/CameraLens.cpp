@@ -7,29 +7,6 @@
 
 namespace crayg {
 
-LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
-                         LensMaterial lensMaterial, LensGeometry geometry)
-    : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
-      abbeNumber(abbeNumber), material(lensMaterial), geometry(geometry) {
-}
-
-LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius)
-    : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
-      abbeNumber(0), material(LensMaterial::UNKNOWN), geometry(LensGeometry::SPHERICAL) {
-}
-
-bool LensElement::isAperture() const {
-    return curvatureRadius == 0;
-}
-
-const LensElement &CameraLens::getFirstElement() const {
-    return elements[0];
-}
-
-const LensElement &CameraLens::getLastElement() const {
-    return elements[elements.size() - 1];
-}
-
 CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements)
     : metadata(metadata), elements(elements) {
 
@@ -60,6 +37,14 @@ CameraLens::CameraLens(const CameraLens &cameraLens)
     : metadata(cameraLens.metadata), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
       thickLensApproximation(cameraLens.thickLensApproximation), apertureRadius(cameraLens.apertureRadius),
       elementsOffset(cameraLens.elementsOffset) {
+}
+
+const LensElement &CameraLens::getFirstElement() const {
+    return elements[0];
+}
+
+const LensElement &CameraLens::getLastElement() const {
+    return elements[elements.size() - 1];
 }
 
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
@@ -248,30 +233,6 @@ bool CameraLens::exceedsAperture(const Vector3f &intersectionPosition, float ape
     const float apertureRadiusSquared = apertureRadius * apertureRadius;
     const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;
     return rayExceedsAperture;
-}
-
-bool LensElement::operator==(const LensElement &rhs) const {
-    return curvatureRadius == rhs.curvatureRadius && thickness == rhs.thickness && ior == rhs.ior &&
-           apertureRadius == rhs.apertureRadius && center == rhs.center && abbeNumber == rhs.abbeNumber &&
-           material == rhs.material && geometry == rhs.geometry;
-}
-
-bool LensElement::operator!=(const LensElement &rhs) const {
-    return !(rhs == *this);
-}
-
-std::ostream &operator<<(std::ostream &os, const LensElement &element) {
-    os << ToStringHelper("LensElement")
-              .addMember("curvatureRadius", element.curvatureRadius)
-              .addMember("thickness", element.thickness)
-              .addMember("ior", element.ior)
-              .addMember("apertureRadius", element.apertureRadius)
-              .addMember("center", element.center)
-              .addMember("abbeNumber", element.abbeNumber)
-              .addMember("material", element.material)
-              .addMember("geometry", element.geometry)
-              .finish();
-    return os;
 }
 
 } // crayg

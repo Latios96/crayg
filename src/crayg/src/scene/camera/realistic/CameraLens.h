@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_
 
 #include "CameraLensMetadata.h"
+#include "LensElement.h"
 #include "LensGeometry.h"
 #include "LensMaterial.h"
 #include "ThickLensApproximation.h"
@@ -17,27 +18,6 @@
 namespace crayg {
 
 CRAYG_DTO_2(LensElementIntersection, Vector3f, point, Vector3f, normal);
-
-struct LensElement {
-    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius);
-    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
-                LensMaterial lensMaterial, LensGeometry geometry);
-
-    float curvatureRadius;
-    float thickness;
-    float ior;
-    float apertureRadius;
-    float center;
-    float abbeNumber;
-    LensMaterial material;
-    LensGeometry geometry;
-
-    bool isAperture() const;
-
-    bool operator==(const LensElement &rhs) const;
-    bool operator!=(const LensElement &rhs) const;
-    friend std::ostream &operator<<(std::ostream &os, const LensElement &element);
-};
 
 struct CameraLens {
     CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements);
@@ -74,10 +54,6 @@ struct CameraLens {
 };
 
 } // crayg
-
-template <> struct fmt::formatter<crayg::LensElement> : ostream_formatter {};
-
-template <> struct fmt::formatter<crayg::CameraLensMetadata> : ostream_formatter {};
 
 CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensElement);
 
