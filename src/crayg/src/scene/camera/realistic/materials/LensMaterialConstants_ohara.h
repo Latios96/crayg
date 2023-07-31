@@ -1,1300 +1,390 @@
 case LensMaterialId::OHARA_S_FPL51:
-return NLensMaterial(LensMaterialId::OHARA_S_FPL51, 1.496945, 81.0,
-                     {
-                         1.17010505,
-                         0.0475710783,
-                         0.763832445,
-                         0.00616203924,
-                         0.0263372876,
-                         141.882642,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FPL51, 1.496945f, 81.0f,
+                     {1.17010505f, 0.0475710783f, 0.763832445f, 0.00616203924f, 0.0263372876f, 141.882642f});
 case LensMaterialId::OHARA_S_FPL53:
-return NLensMaterial(LensMaterialId::OHARA_S_FPL53, 1.438709, 94.6,
-                     {
-                         0.983532327,
-                         0.069568814,
-                         1.11409238,
-                         0.00492234955,
-                         0.0193581091,
-                         264.275294,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FPL53, 1.438709f, 94.6f,
+                     {0.983532327f, 0.069568814f, 1.11409238f, 0.00492234955f, 0.0193581091f, 264.275294f});
 case LensMaterialId::OHARA_S_FPL55:
-return NLensMaterial(LensMaterialId::OHARA_S_FPL55, 1.438708, 94.2,
-                     {
-                         0.839067682,
-                         0.214083503,
-                         1.47914677,
-                         0.00795286639,
-                         -0.00232581717,
-                         340.0437,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FPL55, 1.438708f, 94.2f,
+                     {0.839067682f, 0.214083503f, 1.47914677f, 0.00795286639f, -0.00232581717f, 340.0437f});
 case LensMaterialId::OHARA_S_FPM_2:
-return NLensMaterial(LensMaterialId::OHARA_S_FPM_2, 1.595142, 67.4,
-                     {
-                         0.761242785,
-                         0.747033375,
-                         0.938928947,
-                         0.00321174095,
-                         0.0140234423,
-                         139.52353,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FPM_2, 1.595142f, 67.4f,
+                     {0.761242785f, 0.747033375f, 0.938928947f, 0.00321174095f, 0.0140234423f, 139.52353f});
 case LensMaterialId::OHARA_S_FPM_3:
-return NLensMaterial(LensMaterialId::OHARA_S_FPM_3, 1.537686, 74.3,
-                     {
-                         0.809407286,
-                         0.527007033,
-                         0.909127704,
-                         0.00376072389,
-                         0.0135654895,
-                         142.503612,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FPM_3, 1.537686f, 74.3f,
+                     {0.809407286f, 0.527007033f, 0.909127704f, 0.00376072389f, 0.0135654895f, 142.503612f});
 case LensMaterialId::OHARA_S_FPM_4:
-return NLensMaterial(LensMaterialId::OHARA_S_FPM_4, 1.528349, 76.0,
-                     {
-                         0.685585084,
-                         0.623380215,
-                         0.914178386,
-                         0.0028817201,
-                         0.0124701707,
-                         153.5772,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FPM_4, 1.528349f, 76.0f,
+                     {0.685585084f, 0.623380215f, 0.914178386f, 0.0028817201f, 0.0124701707f, 153.5772f});
 case LensMaterialId::OHARA_S_FPM_5:
-return NLensMaterial(LensMaterialId::OHARA_S_FPM_5, 1.551931, 70.3,
-                     {
-                         0.839899764,
-                         0.537721312,
-                         0.953247759,
-                         0.00376448295,
-                         0.0148022622,
-                         145.67555,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FPM_5, 1.551931f, 70.3f,
+                     {0.839899764f, 0.537721312f, 0.953247759f, 0.00376448295f, 0.0148022622f, 145.67555f});
 case LensMaterialId::OHARA_S_FSL_5:
-return NLensMaterial(LensMaterialId::OHARA_S_FSL_5, 1.487428, 70.1,
-                     {
-                         1.17447043,
-                         0.0140056154,
-                         1.19272435,
-                         0.00841855181,
-                         -0.0581790767,
-                         129.599726,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FSL_5, 1.487428f, 70.1f,
+                     {1.17447043f, 0.0140056154f, 1.19272435f, 0.00841855181f, -0.0581790767f, 129.599726f});
 case LensMaterialId::OHARA_S_BSL_7:
-return NLensMaterial(LensMaterialId::OHARA_S_BSL_7, 1.516258, 63.9,
-                     {
-                         1.1515019,
-                         0.118583612,
-                         1.26301359,
-                         0.010598413,
-                         -0.011822519,
-                         129.617662,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSL_7, 1.516258f, 63.9f,
+                     {1.1515019f, 0.118583612f, 1.26301359f, 0.010598413f, -0.011822519f, 129.617662f});
 case LensMaterialId::OHARA_S_BSM_2:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM_2, 1.607284, 56.5,
-                     {
-                         0.867168676,
-                         0.672848343,
-                         1.18456107,
-                         0.00369311003,
-                         0.0181652804,
-                         132.376147,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM_2, 1.607284f, 56.5f,
+                     {0.867168676f, 0.672848343f, 1.18456107f, 0.00369311003f, 0.0181652804f, 132.376147f});
 case LensMaterialId::OHARA_S_BSM10:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM10, 1.622702, 56.8,
-                     {
-                         0.945443081,
-                         0.643237376,
-                         1.17752968,
-                         0.0157263798,
-                         0.00161924066,
-                         121.361748,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM10, 1.622702f, 56.8f,
+                     {0.945443081f, 0.643237376f, 1.17752968f, 0.0157263798f, 0.00161924066f, 121.361748f});
 case LensMaterialId::OHARA_S_BSM14:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM14, 1.603023, 60.4,
-                     {
-                         1.2828627,
-                         0.247647429,
-                         1.10383999,
-                         0.0122902399,
-                         -0.00613142361,
-                         106.883378,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM14, 1.603023f, 60.4f,
+                     {1.2828627f, 0.247647429f, 1.10383999f, 0.0122902399f, -0.00613142361f, 106.883378f});
 case LensMaterialId::OHARA_S_BSM15:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM15, 1.622897, 57.9,
-                     {
-                         0.953128328,
-                         0.637613977,
-                         1.65245647,
-                         0.00387638985,
-                         0.0185094632,
-                         159.442367,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM15, 1.622897f, 57.9f,
+                     {0.953128328f, 0.637613977f, 1.65245647f, 0.00387638985f, 0.0185094632f, 159.442367f});
 case LensMaterialId::OHARA_S_BSM16:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM16, 1.620319, 60.1,
-                     {
-                         1.14490383,
-                         0.439563911,
-                         1.27688079,
-                         0.0137034916,
-                         -0.00186514205,
-                         119.535585,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM16, 1.620319f, 60.1f,
+                     {1.14490383f, 0.439563911f, 1.27688079f, 0.0137034916f, -0.00186514205f, 119.535585f});
 case LensMaterialId::OHARA_S_BSM18:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM18, 1.638437, 55.1,
-                     {
-                         0.927886025,
-                         0.708858526,
-                         1.18610897,
-                         0.00417549199,
-                         0.0184691838,
-                         122.210416,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM18, 1.638437f, 55.1f,
+                     {0.927886025f, 0.708858526f, 1.18610897f, 0.00417549199f, 0.0184691838f, 122.210416f});
 case LensMaterialId::OHARA_S_BSM25:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM25, 1.658327, 50.6,
-                     {
-                         1.34814257,
-                         0.347530319,
-                         1.38798368,
-                         0.00695364366,
-                         0.0277863478,
-                         142.138122,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM25, 1.658327f, 50.6f,
+                     {1.34814257f, 0.347530319f, 1.38798368f, 0.00695364366f, 0.0277863478f, 142.138122f});
 case LensMaterialId::OHARA_S_BSM28:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM28, 1.617613, 49.5,
-                     {
-                         1.43822841,
-                         0.128100017,
-                         1.3435553,
-                         0.0085977975,
-                         0.0408617854,
-                         143.70989,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM28, 1.617613f, 49.5f,
+                     {1.43822841f, 0.128100017f, 1.3435553f, 0.0085977975f, 0.0408617854f, 143.70989f});
 case LensMaterialId::OHARA_S_BSM71:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM71, 1.64839, 52.7,
-                     {
-                         1.50847885,
-                         0.158099826,
-                         1.36815368,
-                         0.00812769076,
-                         0.0354200898,
-                         136.110038,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM71, 1.64839f, 52.7f,
+                     {1.50847885f, 0.158099826f, 1.36815368f, 0.00812769076f, 0.0354200898f, 136.110038f});
 case LensMaterialId::OHARA_S_BSM81:
-return NLensMaterial(LensMaterialId::OHARA_S_BSM81, 1.639904, 59.9,
-                     {
-                         0.996356844,
-                         0.651392837,
-                         1.22432622,
-                         0.0144821587,
-                         0.00154826389,
-                         89.9818604,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BSM81, 1.639904f, 59.9f,
+                     {0.996356844f, 0.651392837f, 1.22432622f, 0.0144821587f, 0.00154826389f, 89.9818604f});
 case LensMaterialId::OHARA_S_NSL_3:
-return NLensMaterial(LensMaterialId::OHARA_S_NSL_3, 1.518151, 58.6,
-                     {
-                         0.882514764,
-                         0.389271907,
-                         1.10693448,
-                         0.00464504582,
-                         0.0200551397,
-                         136.234339,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NSL_3, 1.518151f, 58.6f,
+                     {0.882514764f, 0.389271907f, 1.10693448f, 0.00464504582f, 0.0200551397f, 136.234339f});
 case LensMaterialId::OHARA_S_NSL36:
-return NLensMaterial(LensMaterialId::OHARA_S_NSL36, 1.51733, 52.2,
-                     {
-                         1.09666153,
-                         0.168990073,
-                         1.20580827,
-                         0.00667491123,
-                         0.033609545,
-                         141.668738,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NSL36, 1.51733f, 52.2f,
+                     {1.09666153f, 0.168990073f, 1.20580827f, 0.00667491123f, 0.033609545f, 141.668738f});
 case LensMaterialId::OHARA_S_BAL_3:
-return NLensMaterial(LensMaterialId::OHARA_S_BAL_3, 1.571256, 52.7,
-                     {
-                         1.2936689,
-                         0.132440252,
-                         1.10197293,
-                         0.00800367962,
-                         0.0354711196,
-                         134.517431,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAL_3, 1.571256f, 52.7f,
+                     {1.2936689f, 0.132440252f, 1.10197293f, 0.00800367962f, 0.0354711196f, 134.517431f});
 case LensMaterialId::OHARA_S_BAL12:
-return NLensMaterial(LensMaterialId::OHARA_S_BAL12, 1.539875, 59.2,
-                     {
-                         0.714605258,
-                         0.621993289,
-                         1.22537681,
-                         0.00301763913,
-                         0.016650545,
-                         143.506314,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAL12, 1.539875f, 59.2f,
+                     {0.714605258f, 0.621993289f, 1.22537681f, 0.00301763913f, 0.016650545f, 143.506314f});
 case LensMaterialId::OHARA_S_BAL14:
-return NLensMaterial(LensMaterialId::OHARA_S_BAL14, 1.568742, 56.1,
-                     {
-                         1.27553696,
-                         0.146083393,
-                         1.16754699,
-                         0.00749692359,
-                         0.031042153,
-                         128.947092,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAL14, 1.568742f, 56.1f,
+                     {1.27553696f, 0.146083393f, 1.16754699f, 0.00749692359f, 0.031042153f, 128.947092f});
 case LensMaterialId::OHARA_S_BAL35:
-return NLensMaterial(LensMaterialId::OHARA_S_BAL35, 1.589044, 60.9,
-                     {
-                         0.941357273,
-                         0.546174895,
-                         1.16168917,
-                         0.0140333996,
-                         0.000906635683,
-                         114.163758,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAL35, 1.589044f, 60.9f,
+                     {0.941357273f, 0.546174895f, 1.16168917f, 0.0140333996f, 0.000906635683f, 114.163758f});
 case LensMaterialId::OHARA_S_BAL42:
-return NLensMaterial(LensMaterialId::OHARA_S_BAL42, 1.583039, 59.1,
-                     {
-                         1.39570615,
-                         0.071850507,
-                         1.27129267,
-                         0.0112218843,
-                         -0.0252117422,
-                         134.49786,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAL42, 1.583039f, 59.1f,
+                     {1.39570615f, 0.071850507f, 1.27129267f, 0.0112218843f, -0.0252117422f, 134.49786f});
 case LensMaterialId::OHARA_S_BAM_4:
-return NLensMaterial(LensMaterialId::OHARA_S_BAM_4, 1.605498, 43.4,
-                     {
-                         1.41059317,
-                         0.111201306,
-                         1.34148939,
-                         0.00963312192,
-                         0.049877821,
-                         152.237696,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAM_4, 1.605498f, 43.4f,
+                     {1.41059317f, 0.111201306f, 1.34148939f, 0.00963312192f, 0.049877821f, 152.237696f});
 case LensMaterialId::OHARA_S_BAM12:
-return NLensMaterial(LensMaterialId::OHARA_S_BAM12, 1.639175, 44.6,
-                     {
-                         1.50161605,
-                         0.126987445,
-                         1.43544052,
-                         0.00940761826,
-                         0.0472602195,
-                         141.666499,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAM12, 1.639175f, 44.6f,
+                     {1.50161605f, 0.126987445f, 1.43544052f, 0.00940761826f, 0.0472602195f, 141.666499f});
 case LensMaterialId::OHARA_S_BAH11:
-return NLensMaterial(LensMaterialId::OHARA_S_BAH11, 1.666596, 48.0,
-                     {
-                         1.5713886,
-                         0.147869313,
-                         1.28092846,
-                         0.00910807936,
-                         0.0402401684,
-                         130.399367,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAH11, 1.666596f, 48.0f,
+                     {1.5713886f, 0.147869313f, 1.28092846f, 0.00910807936f, 0.0402401684f, 130.399367f});
 case LensMaterialId::OHARA_S_BAH27:
-return NLensMaterial(LensMaterialId::OHARA_S_BAH27, 1.701387, 41.0,
-                     {
-                         1.68939052,
-                         0.133081013,
-                         1.41165515,
-                         0.0103598193,
-                         0.0533982239,
-                         126.515503,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAH27, 1.701387f, 41.0f,
+                     {1.68939052f, 0.133081013f, 1.41165515f, 0.0103598193f, 0.0533982239f, 126.515503f});
 case LensMaterialId::OHARA_S_BAH28:
-return NLensMaterial(LensMaterialId::OHARA_S_BAH28, 1.723254, 37.7,
-                     {
-                         1.69493484,
-                         0.192890298,
-                         1.56385948,
-                         0.010272319,
-                         0.052118764,
-                         137.818035,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_BAH28, 1.723254f, 37.7f,
+                     {1.69493484f, 0.192890298f, 1.56385948f, 0.010272319f, 0.052118764f, 137.818035f});
 case LensMaterialId::OHARA_S_PHM52:
-return NLensMaterial(LensMaterialId::OHARA_S_PHM52, 1.617913, 63.0,
-                     {
-                         1.0996655,
-                         0.478125422,
-                         1.13214074,
-                         0.0132718559,
-                         -0.000601649685,
-                         130.595472,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_PHM52, 1.617913f, 63.0f,
+                     {1.0996655f, 0.478125422f, 1.13214074f, 0.0132718559f, -0.000601649685f, 130.595472f});
 case LensMaterialId::OHARA_S_PHM52Q:
-return NLensMaterial(LensMaterialId::OHARA_S_PHM52Q, 1.617913, 63.0,
-                     {
-                         1.2696875,
-                         0.308418136,
-                         1.04078976,
-                         0.00621622949,
-                         0.0207785265,
-                         112.05125,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_PHM52Q, 1.617913f, 63.0f,
+                     {1.2696875f, 0.308418136f, 1.04078976f, 0.00621622949f, 0.0207785265f, 112.05125f});
 case LensMaterialId::OHARA_S_PHM53:
-return NLensMaterial(LensMaterialId::OHARA_S_PHM53, 1.602919, 65.1,
-                     {
-                         1.09775423,
-                         0.434816432,
-                         1.13894976,
-                         0.01233694,
-                         -0.000372522903,
-                         124.276984,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_PHM53, 1.602919f, 65.1f,
+                     {1.09775423f, 0.434816432f, 1.13894976f, 0.01233694f, -0.000372522903f, 124.276984f});
 case LensMaterialId::OHARA_S_TIL_1:
-return NLensMaterial(LensMaterialId::OHARA_S_TIL_1, 1.548036, 45.5,
-                     {
-                         1.25088944,
-                         0.0997973327,
-                         1.20583504,
-                         0.00883921279,
-                         0.0482685052,
-                         137.414953,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIL_1, 1.548036f, 45.5f,
+                     {1.25088944f, 0.0997973327f, 1.20583504f, 0.00883921279f, 0.0482685052f, 137.414953f});
 case LensMaterialId::OHARA_S_TIL_2:
-return NLensMaterial(LensMaterialId::OHARA_S_TIL_2, 1.540619, 46.9,
-                     {
-                         1.23401499,
-                         0.0959796833,
-                         1.20503991,
-                         0.00869507801,
-                         0.0465611429,
-                         137.953301,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIL_2, 1.540619f, 46.9f,
+                     {1.23401499f, 0.0959796833f, 1.20503991f, 0.00869507801f, 0.0465611429f, 137.953301f});
 case LensMaterialId::OHARA_S_TIL_6:
-return NLensMaterial(LensMaterialId::OHARA_S_TIL_6, 1.531621, 48.5,
-                     {
-                         1.17701777,
-                         0.12795803,
-                         1.34740124,
-                         0.00771087686,
-                         0.0411325328,
-                         154.531692,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIL_6, 1.531621f, 48.5f,
+                     {1.17701777f, 0.12795803f, 1.34740124f, 0.00771087686f, 0.0411325328f, 154.531692f});
 case LensMaterialId::OHARA_S_TIL25:
-return NLensMaterial(LensMaterialId::OHARA_S_TIL25, 1.581314, 40.5,
-                     {
-                         1.32122534,
-                         0.123824976,
-                         1.43685254,
-                         0.00952091436,
-                         0.0516062665,
-                         149.064883,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIL25, 1.581314f, 40.5f,
+                     {1.32122534f, 0.123824976f, 1.43685254f, 0.00952091436f, 0.0516062665f, 149.064883f});
 case LensMaterialId::OHARA_S_TIL26:
-return NLensMaterial(LensMaterialId::OHARA_S_TIL26, 1.567206, 42.5,
-                     {
-                         1.31066488,
-                         0.0941903094,
-                         1.23292644,
-                         0.00968897812,
-                         0.0527763106,
-                         133.296422,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIL26, 1.567206f, 42.5f,
+                     {1.31066488f, 0.0941903094f, 1.23292644f, 0.00968897812f, 0.0527763106f, 133.296422f});
 case LensMaterialId::OHARA_S_TIL27:
-return NLensMaterial(LensMaterialId::OHARA_S_TIL27, 1.574885, 41.2,
-                     {
-                         1.31433154,
-                         0.112300168,
-                         1.413901,
-                         0.00950404477,
-                         0.0524112772,
-                         148.429972,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIL27, 1.574885f, 41.2f,
+                     {1.31433154f, 0.112300168f, 1.413901f, 0.00950404477f, 0.0524112772f, 148.429972f});
 case LensMaterialId::OHARA_S_TIM_2:
-return NLensMaterial(LensMaterialId::OHARA_S_TIM_2, 1.619892, 36.0,
-                     {
-                         1.42193846,
-                         0.133827968,
-                         1.45060574,
-                         0.0107291511,
-                         0.0572587546,
-                         145.381805,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIM_2, 1.619892f, 36.0f,
+                     {1.42193846f, 0.133827968f, 1.45060574f, 0.0107291511f, 0.0572587546f, 145.381805f});
 case LensMaterialId::OHARA_S_TIM_5:
-return NLensMaterial(LensMaterialId::OHARA_S_TIM_5, 1.603281, 37.8,
-                     {
-                         1.38531342,
-                         0.122372945,
-                         1.40508326,
-                         0.0104074567,
-                         0.0557440088,
-                         144.878733,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIM_5, 1.603281f, 37.8f,
+                     {1.38531342f, 0.122372945f, 1.40508326f, 0.0104074567f, 0.0557440088f, 144.878733f});
 case LensMaterialId::OHARA_S_TIM_8:
-return NLensMaterial(LensMaterialId::OHARA_S_TIM_8, 1.595376, 39.0,
-                     {
-                         1.37262713,
-                         0.112636276,
-                         1.39786421,
-                         0.0103220068,
-                         0.0550195044,
-                         147.735609,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIM_8, 1.595376f, 39.0f,
+                     {1.37262713f, 0.112636276f, 1.39786421f, 0.0103220068f, 0.0550195044f, 147.735609f});
 case LensMaterialId::OHARA_S_TIM25:
-return NLensMaterial(LensMaterialId::OHARA_S_TIM25, 1.672518, 31.8,
-                     {
-                         1.50659233,
-                         0.204786135,
-                         1.92036668,
-                         0.0109501562,
-                         0.0574980285,
-                         178.128535,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIM25, 1.672518f, 31.8f,
+                     {1.50659233f, 0.204786135f, 1.92036668f, 0.0109501562f, 0.0574980285f, 178.128535f});
 case LensMaterialId::OHARA_S_TIM27:
-return NLensMaterial(LensMaterialId::OHARA_S_TIM27, 1.639637, 34.2,
-                     {
-                         1.4168047,
-                         0.196785057,
-                         1.68001322,
-                         0.0100732158,
-                         0.0537616908,
-                         164.672436,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIM27, 1.639637f, 34.2f,
+                     {1.4168047f, 0.196785057f, 1.68001322f, 0.0100732158f, 0.0537616908f, 164.672436f});
 case LensMaterialId::OHARA_S_TIM28:
-return NLensMaterial(LensMaterialId::OHARA_S_TIM28, 1.688739, 30.8,
-                     {
-                         1.5427081,
-                         0.217113891,
-                         1.81904459,
-                         0.0113925005,
-                         0.0579224572,
-                         167.697189,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIM28, 1.688739f, 30.8f,
+                     {1.5427081f, 0.217113891f, 1.81904459f, 0.0113925005f, 0.0579224572f, 167.697189f});
 case LensMaterialId::OHARA_S_TIM35:
-return NLensMaterial(LensMaterialId::OHARA_S_TIM35, 1.698746, 29.9,
-                     {
-                         1.55849775,
-                         0.230767007,
-                         1.84436099,
-                         0.0115367235,
-                         0.0586095947,
-                         162.981888,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIM35, 1.698746f, 29.9f,
+                     {1.55849775f, 0.230767007f, 1.84436099f, 0.0115367235f, 0.0586095947f, 162.981888f});
 case LensMaterialId::OHARA_S_TIH_1:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH_1, 1.717152, 29.3,
-                     {
-                         1.60326759,
-                         0.242980935,
-                         1.81313592,
-                         0.0118019139,
-                         0.0591363658,
-                         161.218747,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH_1, 1.717152f, 29.3f,
+                     {1.60326759f, 0.242980935f, 1.81313592f, 0.0118019139f, 0.0591363658f, 161.218747f});
 case LensMaterialId::OHARA_S_TIH_3:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH_3, 1.739772, 28.1,
-                     {
-                         1.64797648,
-                         0.267261917,
-                         2.19772845,
-                         0.0121917693,
-                         0.0597893039,
-                         192.15834,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH_3, 1.739772f, 28.1f,
+                     {1.64797648f, 0.267261917f, 2.19772845f, 0.0121917693f, 0.0597893039f, 192.15834f});
 case LensMaterialId::OHARA_S_TIH_4:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH_4, 1.754962, 27.3,
-                     {
-                         1.66755531,
-                         0.294411865,
-                         2.49422119,
-                         0.0122052137,
-                         0.0597775329,
-                         214.869618,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH_4, 1.754962f, 27.3f,
+                     {1.66755531f, 0.294411865f, 2.49422119f, 0.0122052137f, 0.0597775329f, 214.869618f});
 case LensMaterialId::OHARA_S_TIH_6:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH_6, 1.804908, 25.2,
-                     {
-                         1.77227611,
-                         0.34569125,
-                         2.40788501,
-                         0.0131182633,
-                         0.0614479619,
-                         200.753254,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH_6, 1.804908f, 25.2f,
+                     {1.77227611f, 0.34569125f, 2.40788501f, 0.0131182633f, 0.0614479619f, 200.753254f});
 case LensMaterialId::OHARA_S_TIH10:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH10, 1.728029, 28.2,
-                     {
-                         1.61549392,
-                         0.262433239,
-                         2.09426189,
-                         0.0119830897,
-                         0.059651024,
-                         181.657554,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH10, 1.728029f, 28.2f,
+                     {1.61549392f, 0.262433239f, 2.09426189f, 0.0119830897f, 0.059651024f, 181.657554f});
 case LensMaterialId::OHARA_S_TIH11:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH11, 1.78446, 25.5,
-                     {
-                         1.72677471,
-                         0.324568628,
-                         2.65816809,
-                         0.0129369958,
-                         0.0618255245,
-                         221.904637,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH11, 1.78446f, 25.5f,
+                     {1.72677471f, 0.324568628f, 2.65816809f, 0.0129369958f, 0.0618255245f, 221.904637f});
 case LensMaterialId::OHARA_S_TIH13:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH13, 1.740539, 27.6,
-                     {
-                         1.62224674,
-                         0.293844589,
-                         1.99225164,
-                         0.0118368386,
-                         0.0590208025,
-                         171.959976,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH13, 1.740539f, 27.6f,
+                     {1.62224674f, 0.293844589f, 1.99225164f, 0.0118368386f, 0.0590208025f, 171.959976f});
 case LensMaterialId::OHARA_S_TIH14:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH14, 1.761573, 26.3,
-                     {
-                         1.68915108,
-                         0.290462024,
-                         2.37971516,
-                         0.0128202514,
-                         0.0618090841,
-                         201.094352,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH14, 1.761573f, 26.3f,
+                     {1.68915108f, 0.290462024f, 2.37971516f, 0.0128202514f, 0.0618090841f, 201.094352f});
 case LensMaterialId::OHARA_S_TIH18:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH18, 1.721293, 29.0,
-                     {
-                         1.59921608,
-                         0.259532164,
-                         2.12454543,
-                         0.0116469304,
-                         0.0584824883,
-                         186.927779,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH18, 1.721293f, 29.0f,
+                     {1.59921608f, 0.259532164f, 2.12454543f, 0.0116469304f, 0.0584824883f, 186.927779f});
 case LensMaterialId::OHARA_S_TIH53:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH53, 1.846354, 23.6,
-                     {
-                         1.87904886,
-                         0.369719775,
-                         2.33730863,
-                         0.014412177,
-                         0.063881799,
-                         182.66818,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH53, 1.846354f, 23.6f,
+                     {1.87904886f, 0.369719775f, 2.33730863f, 0.014412177f, 0.063881799f, 182.66818f});
 case LensMaterialId::OHARA_S_TIH53W:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH53W, 1.846354, 23.6,
-                     {
-                         1.87904886,
-                         0.369719775,
-                         2.33730863,
-                         0.014412177,
-                         0.063881799,
-                         182.66818,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH53W, 1.846354f, 23.6f,
+                     {1.87904886f, 0.369719775f, 2.33730863f, 0.014412177f, 0.063881799f, 182.66818f});
 case LensMaterialId::OHARA_S_TIH57:
-return NLensMaterial(LensMaterialId::OHARA_S_TIH57, 1.962657, 23.9,
-                     {
-                         2.21103256,
-                         0.450346986,
-                         2.47746663,
-                         0.0142330268,
-                         0.0638573392,
-                         161.9376,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_TIH57, 1.962657f, 23.9f,
+                     {2.21103256f, 0.450346986f, 2.47746663f, 0.0142330268f, 0.0638573392f, 161.9376f});
 case LensMaterialId::OHARA_S_LAL_7Q:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL_7Q, 1.651501, 58.4,
-                     {
-                         0.905277143,
-                         0.777955684,
-                         1.18137286,
-                         0.0155606507,
-                         0.00284718626,
-                         88.07379,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL_7Q, 1.651501f, 58.4f,
+                     {0.905277143f, 0.777955684f, 1.18137286f, 0.0155606507f, 0.00284718626f, 88.07379f});
 case LensMaterialId::OHARA_S_LAL_8:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL_8, 1.712877, 53.6,
-                     {
-                         1.30663291,
-                         0.571377253,
-                         1.24303605,
-                         0.00611862448,
-                         0.021272147,
-                         90.6285686,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL_8, 1.712877f, 53.6f,
+                     {1.30663291f, 0.571377253f, 1.24303605f, 0.00611862448f, 0.021272147f, 90.6285686f});
 case LensMaterialId::OHARA_S_LAL_9:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL_9, 1.69089, 54.6,
-                     {
-                         1.16195687,
-                         0.644860099,
-                         1.25062221,
-                         0.0159659509,
-                         0.000505502467,
-                         93.8284169,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL_9, 1.69089f, 54.6f,
+                     {1.16195687f, 0.644860099f, 1.25062221f, 0.0159659509f, 0.000505502467f, 93.8284169f});
 case LensMaterialId::OHARA_S_LAL10:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL10, 1.719868, 50.0,
-                     {
-                         1.52812575,
-                         0.367965267,
-                         1.11751784,
-                         0.00776817644,
-                         0.0272026548,
-                         88.86974,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL10, 1.719868f, 50.0f,
+                     {1.52812575f, 0.367965267f, 1.11751784f, 0.00776817644f, 0.0272026548f, 88.86974f});
 case LensMaterialId::OHARA_S_LAL12:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL12, 1.677791, 55.1,
-                     {
-                         0.992053895,
-                         0.771377731,
-                         1.18296264,
-                         0.0167095063,
-                         0.00236750156,
-                         105.90108,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL12, 1.677791f, 55.1f,
+                     {0.992053895f, 0.771377731f, 1.18296264f, 0.0167095063f, 0.00236750156f, 105.90108f});
 case LensMaterialId::OHARA_S_LAL12Q:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL12Q, 1.677791, 55.1,
-                     {
-                         1.09887025,
-                         0.665500482,
-                         1.07183658,
-                         0.00538103754,
-                         0.0186717709,
-                         83.08165,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL12Q, 1.677791f, 55.1f,
+                     {1.09887025f, 0.665500482f, 1.07183658f, 0.00538103754f, 0.0186717709f, 83.08165f});
 case LensMaterialId::OHARA_S_LAL14:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL14, 1.696685, 55.3,
-                     {
-                         1.2372097,
-                         0.589722623,
-                         1.3192188,
-                         0.015355132,
-                         -0.00030789625,
-                         93.7202947,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL14, 1.696685f, 55.3f,
+                     {1.2372097f, 0.589722623f, 1.3192188f, 0.015355132f, -0.00030789625f, 93.7202947f});
 case LensMaterialId::OHARA_S_LAL18:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL18, 1.729038, 54.4,
-                     {
-                         1.50276318,
-                         0.430224497,
-                         1.3472606,
-                         0.0145462356,
-                         -0.00332784153,
-                         93.3508342,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL18, 1.729038f, 54.4f,
+                     {1.50276318f, 0.430224497f, 1.3472606f, 0.0145462356f, -0.00332784153f, 93.3508342f});
 case LensMaterialId::OHARA_S_LAL19:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL19, 1.72904, 53.9,
-                     {
-                         0.973997577,
-                         0.958186322,
-                         1.20163359,
-                         0.00379332678,
-                         0.0177574581,
-                         83.79896,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL19, 1.72904f, 53.9f,
+                     {0.973997577f, 0.958186322f, 1.20163359f, 0.00379332678f, 0.0177574581f, 83.79896f});
 case LensMaterialId::OHARA_S_LAL20:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL20, 1.699179, 50.8,
-                     {
-                         1.06788467,
-                         0.75873535,
-                         1.02804682,
-                         0.00518896058,
-                         0.0204004357,
-                         120.82632,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL20, 1.699179f, 50.8f,
+                     {1.06788467f, 0.75873535f, 1.02804682f, 0.00518896058f, 0.0204004357f, 120.82632f});
 case LensMaterialId::OHARA_S_LAL21:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL21, 1.702881, 52.1,
-                     {
-                         0.935250779,
-                         0.905988706,
-                         1.43351212,
-                         0.0180836047,
-                         0.00408452643,
-                         138.68341,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL21, 1.702881f, 52.1f,
+                     {0.935250779f, 0.905988706f, 1.43351212f, 0.0180836047f, 0.00408452643f, 138.68341f});
 case LensMaterialId::OHARA_S_LAL54Q:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL54Q, 1.650897, 56.0,
-                     {
-                         0.920085087,
-                         0.758646115,
-                         1.07073096,
-                         0.0160829667,
-                         0.00292059306,
-                         85.12112,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL54Q, 1.650897f, 56.0f,
+                     {0.920085087f, 0.758646115f, 1.07073096f, 0.0160829667f, 0.00292059306f, 85.12112f});
 case LensMaterialId::OHARA_S_LAL58:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL58, 1.693374, 50.5,
-                     {
-                         1.06368789,
-                         0.744939067,
-                         1.59178942,
-                         0.018519964,
-                         0.00116295862,
-                         156.636025,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL58, 1.693374f, 50.5f,
+                     {1.06368789f, 0.744939067f, 1.59178942f, 0.018519964f, 0.00116295862f, 156.636025f});
 case LensMaterialId::OHARA_S_LAL59:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL59, 1.73387, 51.2,
-                     {
-                         1.13962742,
-                         0.805227838,
-                         1.29488061,
-                         0.00493294862,
-                         0.020247996,
-                         93.4746507,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL59, 1.73387f, 51.2f,
+                     {1.13962742f, 0.805227838f, 1.29488061f, 0.00493294862f, 0.020247996f, 93.4746507f});
 case LensMaterialId::OHARA_S_LAL61:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL61, 1.740874, 52.4,
-                     {
-                         1.11073292,
-                         0.859347773,
-                         1.26707433,
-                         0.00464181248,
-                         0.0192989261,
-                         87.3917698,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL61, 1.740874f, 52.4f,
+                     {1.11073292f, 0.859347773f, 1.26707433f, 0.00464181248f, 0.0192989261f, 87.3917698f});
 case LensMaterialId::OHARA_S_LAL61Q:
-return NLensMaterial(LensMaterialId::OHARA_S_LAL61Q, 1.740874, 52.3,
-                     {
-                         1.38144225,
-                         0.587690089,
-                         1.15245465,
-                         0.00669192652,
-                         0.0215981233,
-                         87.19233,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAL61Q, 1.740874f, 52.3f,
+                     {1.38144225f, 0.587690089f, 1.15245465f, 0.00669192652f, 0.0215981233f, 87.19233f});
 case LensMaterialId::OHARA_S_LAM_2:
-return NLensMaterial(LensMaterialId::OHARA_S_LAM_2, 1.743851, 44.5,
-                     {
-                         1.7713,
-                         0.19581423,
-                         1.19487834,
-                         0.00976652444,
-                         0.0412718628,
-                         110.458122,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAM_2, 1.743851f, 44.5f,
+                     {1.7713f, 0.19581423f, 1.19487834f, 0.00976652444f, 0.0412718628f, 110.458122f});
 case LensMaterialId::OHARA_S_LAM_3:
-return NLensMaterial(LensMaterialId::OHARA_S_LAM_3, 1.716872, 47.6,
-                     {
-                         1.64258713,
-                         0.23963461,
-                         1.22483026,
-                         0.0086824602,
-                         0.0351226242,
-                         116.604369,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAM_3, 1.716872f, 47.6f,
+                     {1.64258713f, 0.23963461f, 1.22483026f, 0.0086824602f, 0.0351226242f, 116.604369f});
 case LensMaterialId::OHARA_S_LAM_7:
-return NLensMaterial(LensMaterialId::OHARA_S_LAM_7, 1.749312, 35.0,
-                     {
-                         1.71014712,
-                         0.256943292,
-                         1.63986271,
-                         0.010516108,
-                         0.0502809636,
-                         146.181217,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAM_7, 1.749312f, 35.0f,
+                     {1.71014712f, 0.256943292f, 1.63986271f, 0.010516108f, 0.0502809636f, 146.181217f});
 case LensMaterialId::OHARA_S_LAM55:
-return NLensMaterial(LensMaterialId::OHARA_S_LAM55, 1.761834, 39.8,
-                     {
-                         1.85412979,
-                         0.165450323,
-                         1.27255422,
-                         0.0108438152,
-                         0.051405098,
-                         109.986837,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAM55, 1.761834f, 39.8f,
+                     {1.85412979f, 0.165450323f, 1.27255422f, 0.0108438152f, 0.051405098f, 109.986837f});
 case LensMaterialId::OHARA_S_LAM60:
-return NLensMaterial(LensMaterialId::OHARA_S_LAM60, 1.743065, 49.1,
-                     {
-                         1.60673056,
-                         0.36641564,
-                         1.31761804,
-                         0.0077504614,
-                         0.0289967611,
-                         93.0720709,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAM60, 1.743065f, 49.1f,
+                     {1.60673056f, 0.36641564f, 1.31761804f, 0.0077504614f, 0.0289967611f, 93.0720709f});
 case LensMaterialId::OHARA_S_LAM66:
-return NLensMaterial(LensMaterialId::OHARA_S_LAM66, 1.800799, 34.7,
-                     {
-                         1.92094221,
-                         0.219901208,
-                         1.72705231,
-                         0.0115075241,
-                         0.0547993543,
-                         120.133674,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAM66, 1.800799f, 34.7f,
+                     {1.92094221f, 0.219901208f, 1.72705231f, 0.0115075241f, 0.0547993543f, 120.133674f});
 case LensMaterialId::OHARA_S_LAM73:
-return NLensMaterial(LensMaterialId::OHARA_S_LAM73, 1.793413, 36.8,
-                     {
-                         1.86353123,
-                         0.255215617,
-                         1.23399133,
-                         0.0107620673,
-                         0.0487248679,
-                         117.12511,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAM73, 1.793413f, 36.8f,
+                     {1.86353123f, 0.255215617f, 1.23399133f, 0.0107620673f, 0.0487248679f, 117.12511f});
 case LensMaterialId::OHARA_S_LAH51:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH51, 1.785739, 43.9,
-                     {
-                         1.82586991,
-                         0.283023349,
-                         1.35964319,
-                         0.00935297152,
-                         0.0373803057,
-                         100.655798,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH51, 1.785739f, 43.9f,
+                     {1.82586991f, 0.283023349f, 1.35964319f, 0.00935297152f, 0.0373803057f, 100.655798f});
 case LensMaterialId::OHARA_S_LAH52:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH52, 1.799349, 42.0,
-                     {
-                         1.85390925,
-                         0.297925555,
-                         1.39382086,
-                         0.00955320687,
-                         0.039381685,
-                         102.706848,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH52, 1.799349f, 42.0f,
+                     {1.85390925f, 0.297925555f, 1.39382086f, 0.00955320687f, 0.039381685f, 102.706848f});
 case LensMaterialId::OHARA_S_LAH52Q:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH52Q, 1.799354, 42.0,
-                     {
-                         1.91082318,
-                         0.239854589,
-                         1.16159733,
-                         0.0103565352,
-                         0.0413805081,
-                         96.60373,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH52Q, 1.799354f, 42.0f,
+                     {1.91082318f, 0.239854589f, 1.16159733f, 0.0103565352f, 0.0413805081f, 96.60373f});
 case LensMaterialId::OHARA_S_LAH53:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH53, 1.805925, 40.7,
-                     {
-                         1.91811619,
-                         0.253724399,
-                         1.39473885,
-                         0.0102147684,
-                         0.0433176011,
-                         101.938021,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH53, 1.805925f, 40.7f,
+                     {1.91811619f, 0.253724399f, 1.39473885f, 0.0102147684f, 0.0433176011f, 101.938021f});
 case LensMaterialId::OHARA_S_LAH53V:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH53V, 1.805927, 40.7,
-                     {
-                         1.96600955,
-                         0.205143305,
-                         1.23200934,
-                         0.0107817785,
-                         0.0463727869,
-                         97.69406,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH53V, 1.805927f, 40.7f,
+                     {1.96600955f, 0.205143305f, 1.23200934f, 0.0107817785f, 0.0463727869f, 97.69406f});
 case LensMaterialId::OHARA_S_LAH55V:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH55V, 1.834635, 42.5,
-                     {
-                         1.97025325,
-                         0.30489414,
-                         1.39214665,
-                         0.00991088134,
-                         0.0383202295,
-                         97.7785249,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH55V, 1.834635f, 42.5f,
+                     {1.97025325f, 0.30489414f, 1.39214665f, 0.00991088134f, 0.0383202295f, 97.7785249f});
 case LensMaterialId::OHARA_S_LAH55VS:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH55VS, 1.834638, 42.5,
-                     {
-                         1.92591095,
-                         0.34895346,
-                         1.42230744,
-                         0.0096115249,
-                         0.036513298,
-                         103.36409,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH55VS, 1.834638f, 42.5f,
+                     {1.92591095f, 0.34895346f, 1.42230744f, 0.0096115249f, 0.036513298f, 103.36409f});
 case LensMaterialId::OHARA_S_LAH58:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH58, 1.882807, 40.5,
-                     {
-                         1.78764964,
-                         0.6526356,
-                         1.79914564,
-                         0.00847378536,
-                         0.0313126408,
-                         132.788001,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH58, 1.882807f, 40.5f,
+                     {1.78764964f, 0.6526356f, 1.79914564f, 0.00847378536f, 0.0313126408f, 132.788001f});
 case LensMaterialId::OHARA_S_LAH59:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH59, 1.815845, 46.4,
-                     {
-                         1.51372967,
-                         0.702462343,
-                         1.33600982,
-                         0.00705246901,
-                         0.0249488689,
-                         100.085908,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH59, 1.815845f, 46.4f,
+                     {1.51372967f, 0.702462343f, 1.33600982f, 0.00705246901f, 0.0249488689f, 100.085908f});
 case LensMaterialId::OHARA_S_LAH60:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH60, 1.833803, 36.9,
-                     {
-                         1.95243469,
-                         0.30710021,
-                         1.56578094,
-                         0.0106442437,
-                         0.0456735302,
-                         110.28141,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH60, 1.833803f, 36.9f,
+                     {1.95243469f, 0.30710021f, 1.56578094f, 0.0106442437f, 0.0456735302f, 110.28141f});
 case LensMaterialId::OHARA_S_LAH60MQ:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH60MQ, 1.833803, 36.9,
-                     {
-                         1.95539063,
-                         0.302550219,
-                         1.3431139,
-                         0.0109111365,
-                         0.04546667,
-                         113.58085,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH60MQ, 1.833803f, 36.9f,
+                     {1.95539063f, 0.302550219f, 1.3431139f, 0.0109111365f, 0.04546667f, 113.58085f});
 case LensMaterialId::OHARA_S_LAH60V:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH60V, 1.833804, 37.0,
-                     {
-                         2.05081962,
-                         0.208475257,
-                         1.31486394,
-                         0.0116035991,
-                         0.0526489359,
-                         99.38065,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH60V, 1.833804f, 37.0f,
+                     {2.05081962f, 0.208475257f, 1.31486394f, 0.0116035991f, 0.0526489359f, 99.38065f});
 case LensMaterialId::OHARA_S_LAH63Q:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH63Q, 1.804222, 39.3,
-                     {
-                         1.96723017,
-                         0.194953915,
-                         1.25386282,
-                         0.0110456086,
-                         0.0497137061,
-                         104.84352,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH63Q, 1.804222f, 39.3f,
+                     {1.96723017f, 0.194953915f, 1.25386282f, 0.0110456086f, 0.0497137061f, 104.84352f});
 case LensMaterialId::OHARA_S_LAH64:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH64, 1.787854, 47.1,
-                     {
-                         1.83021453,
-                         0.29156359,
-                         1.28544024,
-                         0.0090482329,
-                         0.0330756689,
-                         89.3675501,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH64, 1.787854f, 47.1f,
+                     {1.83021453f, 0.29156359f, 1.28544024f, 0.0090482329f, 0.0330756689f, 89.3675501f});
 case LensMaterialId::OHARA_S_LAH65V:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH65V, 1.803847, 46.3,
-                     {
-                         1.81419034,
-                         0.361376301,
-                         1.32729484,
-                         0.00874935029,
-                         0.0318352836,
-                         91.3406898,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH65V, 1.803847f, 46.3f,
+                     {1.81419034f, 0.361376301f, 1.32729484f, 0.00874935029f, 0.0318352836f, 91.3406898f});
 case LensMaterialId::OHARA_S_LAH65VS:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH65VS, 1.803847, 46.3,
-                     {
-                         1.76068422,
-                         0.414128906,
-                         1.33415439,
-                         0.00853607198,
-                         0.0301826383,
-                         98.09421,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH65VS, 1.803847f, 46.3f,
+                     {1.76068422f, 0.414128906f, 1.33415439f, 0.00853607198f, 0.0301826383f, 98.09421f});
 case LensMaterialId::OHARA_S_LAH66:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH66, 1.772361, 49.3,
-                     {
-                         1.39280586,
-                         0.679577094,
-                         1.38702069,
-                         0.00608475118,
-                         0.0233925351,
-                         95.8354094,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH66, 1.772361f, 49.3f,
+                     {1.39280586f, 0.679577094f, 1.38702069f, 0.00608475118f, 0.0233925351f, 95.8354094f});
 case LensMaterialId::OHARA_S_LAH71:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH71, 1.85003, 32.0,
-                     {
-                         1.98280031,
-                         0.31675845,
-                         2.44472646,
-                         0.0118987459,
-                         0.0527156001,
-                         213.220697,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH71, 1.85003f, 32.0f,
+                     {1.98280031f, 0.31675845f, 2.44472646f, 0.0118987459f, 0.0527156001f, 213.220697f});
 case LensMaterialId::OHARA_S_LAH79:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH79, 2.002993, 28.1,
-                     {
-                         2.32557148,
-                         0.507967133,
-                         2.43087198,
-                         0.0132895208,
-                         0.0528335449,
-                         161.122408,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH79, 2.002993f, 28.1f,
+                     {2.32557148f, 0.507967133f, 2.43087198f, 0.0132895208f, 0.0528335449f, 161.122408f});
 case LensMaterialId::OHARA_S_LAH88:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH88, 1.916247, 31.4,
-                     {
-                         2.1284434,
-                         0.405082139,
-                         1.67918461,
-                         0.0117309815,
-                         0.0508706599,
-                         107.091456,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH88, 1.916247f, 31.4f,
+                     {2.1284434f, 0.405082139f, 1.67918461f, 0.0117309815f, 0.0508706599f, 107.091456f});
 case LensMaterialId::OHARA_S_LAH89:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH89, 1.851316, 40.5,
-                     {
-                         1.95118827,
-                         0.377607223,
-                         1.47757262,
-                         0.00976560799,
-                         0.0382232043,
-                         112.23672,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH89, 1.851316f, 40.5f,
+                     {1.95118827f, 0.377607223f, 1.47757262f, 0.00976560799f, 0.0382232043f, 112.23672f});
 case LensMaterialId::OHARA_S_LAH92:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH92, 1.891689, 36.9,
-                     {
-                         2.10440311,
-                         0.358346161,
-                         1.63010064,
-                         0.0108531811,
-                         0.044340592,
-                         123.2498,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH92, 1.891689f, 36.9f,
+                     {2.10440311f, 0.358346161f, 1.63010064f, 0.0108531811f, 0.044340592f, 123.2498f});
 case LensMaterialId::OHARA_S_LAH93:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH93, 1.905025, 34.8,
-                     {
-                         2.17884378,
-                         0.325508683,
-                         1.70608646,
-                         0.0115760879,
-                         0.0495982503,
-                         128.91358,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH93, 1.905025f, 34.8f,
+                     {2.17884378f, 0.325508683f, 1.70608646f, 0.0115760879f, 0.0495982503f, 128.91358f});
 case LensMaterialId::OHARA_S_LAH95:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH95, 1.903409, 31.1,
-                     {
-                         2.15636617,
-                         0.329558178,
-                         1.72178935,
-                         0.012288051,
-                         0.0555507835,
-                         124.43934,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH95, 1.903409f, 31.1f,
+                     {2.15636617f, 0.329558178f, 1.72178935f, 0.012288051f, 0.0555507835f, 124.43934f});
 case LensMaterialId::OHARA_S_LAH96:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH96, 1.763711, 48.2,
-                     {
-                         1.85078519,
-                         0.189204854,
-                         1.19763137,
-                         0.00940657541,
-                         0.0380345187,
-                         101.426835,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH96, 1.763711f, 48.2f,
+                     {1.85078519f, 0.189204854f, 1.19763137f, 0.00940657541f, 0.0380345187f, 101.426835f});
 case LensMaterialId::OHARA_S_LAH97:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH97, 1.754872, 52.1,
-                     {
-                         1.0273018,
-                         0.989293564,
-                         1.25781057,
-                         0.0183406129,
-                         0.00371264195,
-                         87.85105,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH97, 1.754872f, 52.1f,
+                     {1.0273018f, 0.989293564f, 1.25781057f, 0.0183406129f, 0.00371264195f, 87.85105f});
 case LensMaterialId::OHARA_S_LAH98:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH98, 1.953493, 32.1,
-                     {
-                         2.28510629,
-                         0.385532264,
-                         2.0655112,
-                         0.0122178962,
-                         0.0514752342,
-                         145.92087,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH98, 1.953493f, 32.1f,
+                     {2.28510629f, 0.385532264f, 2.0655112f, 0.0122178962f, 0.0514752342f, 145.92087f});
 case LensMaterialId::OHARA_S_LAH99:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH99, 2.000703, 28.9,
-                     {
-                         2.39140662,
-                         0.439219228,
-                         2.38358467,
-                         0.01314675,
-                         0.0553226042,
-                         161.2599,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH99, 2.000703f, 28.9f,
+                     {2.39140662f, 0.439219228f, 2.38358467f, 0.01314675f, 0.0553226042f, 161.2599f});
 case LensMaterialId::OHARA_S_LAH99W:
-return NLensMaterial(LensMaterialId::OHARA_S_LAH99W, 2.000703, 28.9,
-                     {
-                         2.39140662,
-                         0.439219228,
-                         2.38358467,
-                         0.01314675,
-                         0.0553226042,
-                         161.2599,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_LAH99W, 2.000703f, 28.9f,
+                     {2.39140662f, 0.439219228f, 2.38358467f, 0.01314675f, 0.0553226042f, 161.2599f});
 case LensMaterialId::OHARA_S_FTM16:
-return NLensMaterial(LensMaterialId::OHARA_S_FTM16, 1.592555, 35.0,
-                     {
-                         1.32940907,
-                         0.141512125,
-                         1.44299068,
-                         0.0102377287,
-                         0.0578081956,
-                         150.597139,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_FTM16, 1.592555f, 35.0f,
+                     {1.32940907f, 0.141512125f, 1.44299068f, 0.0102377287f, 0.0578081956f, 150.597139f});
 case LensMaterialId::OHARA_S_NBM51:
-return NLensMaterial(LensMaterialId::OHARA_S_NBM51, 1.613275, 44.0,
-                     {
-                         1.37023101,
-                         0.177665568,
-                         1.30515471,
-                         0.00871920342,
-                         0.0405725552,
-                         112.703058,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBM51, 1.613275f, 44.0f,
+                     {1.37023101f, 0.177665568f, 1.30515471f, 0.00871920342f, 0.0405725552f, 112.703058f});
 case LensMaterialId::OHARA_S_NBH_5:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH_5, 1.653971, 39.5,
-                     {
-                         1.47544521,
-                         0.193060095,
-                         1.5093901,
-                         0.0095583674,
-                         0.0460430483,
-                         126.422746,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH_5, 1.653971f, 39.5f,
+                     {1.47544521f, 0.193060095f, 1.5093901f, 0.0095583674f, 0.0460430483f, 126.422746f});
 case LensMaterialId::OHARA_S_NBH_8:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH_8, 1.720286, 34.5,
-                     {
-                         1.61344136,
-                         0.257295888,
-                         1.98364455,
-                         0.0106386752,
-                         0.0487071624,
-                         159.784404,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH_8, 1.720286f, 34.5f,
+                     {1.61344136f, 0.257295888f, 1.98364455f, 0.0106386752f, 0.0487071624f, 159.784404f});
 case LensMaterialId::OHARA_S_NBH51:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH51, 1.749319, 35.1,
-                     {
-                         1.71203689,
-                         0.255989588,
-                         1.81456998,
-                         0.0107724134,
-                         0.0488593504,
-                         136.359013,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH51, 1.749319f, 35.1f,
+                     {1.71203689f, 0.255989588f, 1.81456998f, 0.0107724134f, 0.0488593504f, 136.359013f});
 case LensMaterialId::OHARA_S_NBH52V:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH52V, 1.672845, 38.0,
-                     {
-                         1.51336868,
-                         0.212341478,
-                         1.54149143,
-                         0.00987077827,
-                         0.0462843662,
-                         126.97851,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH52V, 1.672845f, 38.0f,
+                     {1.51336868f, 0.212341478f, 1.54149143f, 0.00987077827f, 0.0462843662f, 126.97851f});
 case LensMaterialId::OHARA_S_NBH53V:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH53V, 1.737801, 32.1,
-                     {
-                         1.65444141,
-                         0.267453927,
-                         2.14530347,
-                         0.0112485533,
-                         0.052027274,
-                         167.3661,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH53V, 1.737801f, 32.1f,
+                     {1.65444141f, 0.267453927f, 2.14530347f, 0.0112485533f, 0.052027274f, 167.3661f});
 case LensMaterialId::OHARA_S_NBH55:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH55, 1.799767, 29.6,
-                     {
-                         1.83145156,
-                         0.287818024,
-                         2.152083,
-                         0.0122443139,
-                         0.057387731,
-                         186.099124,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH55, 1.799767f, 29.6f,
+                     {1.83145156f, 0.287818024f, 2.152083f, 0.0122443139f, 0.057387731f, 186.099124f});
 case LensMaterialId::OHARA_S_NBH56:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH56, 1.854482, 24.6,
-                     {
-                         1.85191438,
-                         0.431102852,
-                         3.45278284,
-                         0.013273262,
-                         0.0585944644,
-                         239.357089,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH56, 1.854482f, 24.6f,
+                     {1.85191438f, 0.431102852f, 3.45278284f, 0.013273262f, 0.0585944644f, 239.357089f});
 case LensMaterialId::OHARA_S_NBH57:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH57, 1.850004, 29.8,
-                     {
-                         1.92026488,
-                         0.37153524,
-                         2.55205704,
-                         0.0118468028,
-                         0.0532105472,
-                         204.5493,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH57, 1.850004f, 29.8f,
+                     {1.92026488f, 0.37153524f, 2.55205704f, 0.0118468028f, 0.0532105472f, 204.5493f});
 case LensMaterialId::OHARA_S_NBH58:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH58, 1.78856, 28.2,
-                     {
-                         1.71408219,
-                         0.362966167,
-                         2.56486266,
-                         0.0116812775,
-                         0.0540847347,
-                         188.7857,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH58, 1.78856f, 28.2f,
+                     {1.71408219f, 0.362966167f, 2.56486266f, 0.0116812775f, 0.0540847347f, 188.7857f});
 case LensMaterialId::OHARA_S_NBH59:
-return NLensMaterial(LensMaterialId::OHARA_S_NBH59, 1.766155, 35.6,
-                     {
-                         1.73689864,
-                         0.287362541,
-                         1.85126136,
-                         0.0107866506,
-                         0.0458085077,
-                         149.6469,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NBH59, 1.766155f, 35.6f,
+                     {1.73689864f, 0.287362541f, 1.85126136f, 0.0107866506f, 0.0458085077f, 149.6469f});
 case LensMaterialId::OHARA_S_NPH_1:
-return NLensMaterial(LensMaterialId::OHARA_S_NPH_1, 1.807791, 22.6,
-                     {
-                         1.75156623,
-                         0.364006304,
-                         2.47874141,
-                         0.0135004681,
-                         0.0668245147,
-                         170.756006,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NPH_1, 1.807791f, 22.6f,
+                     {1.75156623f, 0.364006304f, 2.47874141f, 0.0135004681f, 0.0668245147f, 170.756006f});
 case LensMaterialId::OHARA_S_NPH_1W:
-return NLensMaterial(LensMaterialId::OHARA_S_NPH_1W, 1.807791, 22.6,
-                     {
-                         1.75156623,
-                         0.364006304,
-                         2.47874141,
-                         0.0135004681,
-                         0.0668245147,
-                         170.756006,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NPH_1W, 1.807791f, 22.6f,
+                     {1.75156623f, 0.364006304f, 2.47874141f, 0.0135004681f, 0.0668245147f, 170.756006f});
 case LensMaterialId::OHARA_S_NPH_2:
-return NLensMaterial(LensMaterialId::OHARA_S_NPH_2, 1.922445, 18.7,
-                     {
-                         2.0386951,
-                         0.437269641,
-                         2.96711461,
-                         0.0170796224,
-                         0.0749254813,
-                         174.155354,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NPH_2, 1.922445f, 18.7f,
+                     {2.0386951f, 0.437269641f, 2.96711461f, 0.0170796224f, 0.0749254813f, 174.155354f});
 case LensMaterialId::OHARA_S_NPH_3:
-return NLensMaterial(LensMaterialId::OHARA_S_NPH_3, 1.958596, 17.3,
-                     {
-                         2.09834903,
-                         0.489088388,
-                         2.94009268,
-                         0.0179123869,
-                         0.0776653353,
-                         160.930428,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NPH_3, 1.958596f, 17.3f,
+                     {2.09834903f, 0.489088388f, 2.94009268f, 0.0179123869f, 0.0776653353f, 160.930428f});
 case LensMaterialId::OHARA_S_NPH_4:
-return NLensMaterial(LensMaterialId::OHARA_S_NPH_4, 1.892486, 20.2,
-                     {
-                         1.93563931,
-                         0.449596478,
-                         2.71828573,
-                         0.0152585289,
-                         0.0696815778,
-                         170.327149,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NPH_4, 1.892486f, 20.2f,
+                     {1.93563931f, 0.449596478f, 2.71828573f, 0.0152585289f, 0.0696815778f, 170.327149f});
 case LensMaterialId::OHARA_S_NPH_5:
-return NLensMaterial(LensMaterialId::OHARA_S_NPH_5, 1.858632, 22.5,
-                     {
-                         1.89108996,
-                         0.395220126,
-                         2.20492127,
-                         0.0141164499,
-                         0.0662834445,
-                         148.6807,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NPH_5, 1.858632f, 22.5f,
+                     {1.89108996f, 0.395220126f, 2.20492127f, 0.0141164499f, 0.0662834445f, 148.6807f});
 case LensMaterialId::OHARA_S_NPH_7:
-return NLensMaterial(LensMaterialId::OHARA_S_NPH_7, 1.778021, 23.7,
-                     {
-                         1.68236554,
-                         0.339649644,
-                         2.25049208,
-                         0.0131431682,
-                         0.0645040012,
-                         181.3863,
-                     });
+return NLensMaterial(LensMaterialId::OHARA_S_NPH_7, 1.778021f, 23.7f,
+                     {1.68236554f, 0.339649644f, 2.25049208f, 0.0131431682f, 0.0645040012f, 181.3863f});

@@ -71,7 +71,7 @@ def process_ohara() -> List[Material]:
         name = safe_name(sh.cell_value(rowx=rx, colx=1)).upper()
         ior = sh.cell_value(rowx=rx, colx=15)
         abbe_no = sh.cell_value(rowx=rx, colx=25)
-        coefficients = [sh.cell_value(rowx=rx, colx=x) for x in range(60, 67)]
+        coefficients = [sh.cell_value(rowx=rx, colx=x) for x in range(60, 66)]
         material = Material(name, ior, abbe_no, coefficients)
         materials.append(material)
 
@@ -82,8 +82,12 @@ def get_id_line(catalog_name: str, mat: Material) -> str:
     return f"{catalog_name.upper()}_{mat.name},\n"
 
 
+def float_lit(f: float) -> str:
+    return f"{f}f"
+
+
 def get_constants_line(catalog_name: str, mat: Material) -> str:
-    return f'case LensMaterialId::{catalog_name.upper()}_{mat.name}: return NLensMaterial(LensMaterialId::{catalog_name.upper()}_{mat.name}, {mat.ior}, {mat.abbe_no}, {{{",".join(map(str, mat.sellmeyer_coefficients))}}});\n'
+    return f'case LensMaterialId::{catalog_name.upper()}_{mat.name}: return NLensMaterial(LensMaterialId::{catalog_name.upper()}_{mat.name}, {float_lit(mat.ior)}, {float_lit(mat.abbe_no)}, {{{",".join(map(float_lit, mat.sellmeyer_coefficients))}}});\n'
 
 
 def write_catalog(catalog_name: str, materials: List[Material]):
