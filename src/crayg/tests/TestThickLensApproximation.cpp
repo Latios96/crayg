@@ -16,12 +16,12 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
         auto thickLensApproximation = calculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
 
         const float focalLength = calculateEffectiveFocalLength(thickLensApproximation);
-        REQUIRE(focalLength == Catch::Detail::Approx(7.21183792f));
+        REQUIRE(focalLength == Catch::Detail::Approx(7.21649));
 
-        REQUIRE(thickLensApproximation.firstCardinalPoints.pZ == Catch::Detail::Approx(-7.4172355f));
-        REQUIRE(thickLensApproximation.firstCardinalPoints.fZ == Catch::Detail::Approx(-0.205406189));
-        REQUIRE(thickLensApproximation.secondCardinalPoints.pZ == Catch::Detail::Approx(-11.7357));
-        REQUIRE(thickLensApproximation.secondCardinalPoints.fZ == Catch::Detail::Approx(-18.94753f));
+        REQUIRE(thickLensApproximation.firstCardinalPoints.pZ == Catch::Detail::Approx(-7.40887f));
+        REQUIRE(thickLensApproximation.firstCardinalPoints.fZ == Catch::Detail::Approx(-0.19238f));
+        REQUIRE(thickLensApproximation.secondCardinalPoints.pZ == Catch::Detail::Approx(-11.73287f));
+        REQUIRE(thickLensApproximation.secondCardinalPoints.fZ == Catch::Detail::Approx(-18.94935f));
     }
 
     SECTION("should calculate horizontal ThickLensApproximation correctly for Canon 70-200mm") {
@@ -30,7 +30,7 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
         auto thickLensApproximation = calculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
 
         const float focalLength = calculateEffectiveFocalLength(thickLensApproximation);
-        REQUIRE(focalLength == Catch::Detail::Approx(7.21183792f));
+        REQUIRE(focalLength == Catch::Detail::Approx(7.21649f));
     }
 
     SECTION("should calculate vertical ThickLensApproximation correctly for anamorphic Schneider 30mm") {
@@ -39,7 +39,7 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
         auto thickLensApproximation = calculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
 
         const float focalLength = calculateEffectiveFocalLength(thickLensApproximation);
-        REQUIRE(focalLength == Catch::Detail::Approx(6.05536f));
+        REQUIRE(focalLength == Catch::Detail::Approx(6.03882f));
     }
 
     SECTION("should calculate horizontal ThickLensApproximation correctly for anamorphic Schneider 30mm") {
@@ -48,7 +48,7 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
         auto thickLensApproximation = calculator.calculate(ThickLensApproximationCalculator::Direction::HORIZONTAL);
 
         const float focalLength = calculateEffectiveFocalLength(thickLensApproximation);
-        REQUIRE(focalLength == Catch::Detail::Approx(3.14917f));
+        REQUIRE(focalLength == Catch::Detail::Approx(3.13495f));
     }
 
     SECTION("should throw if aperture is too small") {

@@ -1,4 +1,5 @@
 #include "ExitPupilCalculator.h"
+#include "Wavelengths.h"
 #include "basics/MathUtils.h"
 #include "sampling/Random.h"
 #include "utils/StopWatch.h"
@@ -66,7 +67,7 @@ Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) 
         const bool positionOnLensIsAlreadyInBounds = pupilBounds.contains(posOnExtend);
         if (!positionOnLensIsAlreadyInBounds) {
             const Ray ray(positionOnFilm, (positionOnRearExtend - positionOnFilm).normalize());
-            auto resultingRay = lens.traceFromFilmToWorld(ray);
+            auto resultingRay = lens.traceFromFilmToWorld(ray, FraunhoferLines::SODIUM.wavelength);
             if (resultingRay) {
                 pupilBounds = pupilBounds.unionWith(posOnExtend);
                 exitingRays++;

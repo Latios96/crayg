@@ -1,6 +1,7 @@
 #include "RealisticCameraModel.h"
 #include "ExitPupilCalculator.h"
 #include "Logger.h"
+#include "Wavelengths.h"
 #include "sampling/Random.h"
 
 namespace crayg {
@@ -36,7 +37,7 @@ RayWithWeight RealisticCameraModel::createPrimaryRay(float x, float y) {
     const auto pointOnPupil =
         Vector3f(pupilSample.point.x, pupilSample.point.y, camera.getLens().getLastElement().center);
     const Ray ray = {positionOnFilm, (pointOnPupil - positionOnFilm).normalize()};
-    const auto tracedRay = camera.getLens().traceFromFilmToWorld(ray);
+    const auto tracedRay = camera.getLens().traceFromFilmToWorld(ray, FraunhoferLines::SODIUM.wavelength);
     if (!tracedRay) {
         return {std::nullopt, 0};
     }

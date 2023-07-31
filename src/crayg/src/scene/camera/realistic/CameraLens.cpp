@@ -21,16 +21,7 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
     }
     apertureRadius = apertureIndex != -1 ? getAperture().apertureRadius : 0;
 
-    for (int i = 0; i < this->elements.size(); i++) {
-        auto &lensElement = this->elements[i];
-        LensMaterial::MaterialSearchError searchError{};
-        auto material = LensMaterial::findMaterialByIorAndAbbe(lensElement.ior, lensElement.abbeNumber, &searchError);
-        if (searchError.isCriticalError()) {
-            Logger::error("Did not find a sufficient material for element {}, ior error: {:.3f}, abbe error: {:.3f}", i,
-                          searchError.iorError, searchError.abbeNoError);
-        }
-        lensElement.material = material;
-    }
+    initializeLensMaterials();
 
     ThickLensApproximationCalculator thickLensCalculator(*this);
     thickLensApproximation = thickLensCalculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
@@ -39,6 +30,26 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
 
     if (this->metadata.isAnamorphic) {
         handleAnamorphicFocussing();
+    }
+}
+
+void CameraLens::initializeLensMaterials() {
+    for (int i = 0; i < elements.size(); i++) {
+        if (i == apertureIndex) {
+            continue;
+        }
+        auto &lensElement = elements[i];
+        if (lensElement.material.id != LensMaterialId::UNKNOWN && lensElement.material.id != LensMaterialId::AIR) {
+            lensElement.material = LensMaterial::createMaterialById(lensElement.material.id);
+            continue;
+        }
+        LensMaterial::MaterialSearchError searchError{};
+        auto material = LensMaterial::findMaterialByIorAndAbbe(lensElement.ior, lensElement.abbeNumber, &searchError);
+        if (searchError.isCriticalError()) {
+            Logger::error("Did not find a sufficient material for element {}, ior error: {:.3f}, abbe error: {:.3f}", i,
+                          searchError.iorError, searchError.abbeNoError);
+        }
+        lensElement.material = material;
     }
 }
 
@@ -75,7 +86,7 @@ const LensElement &CameraLens::getLastElement() const {
     return elements[elements.size() - 1];
 }
 
-std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
+std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray, float wavelength) const {
     Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
                      {ray.direction.x, ray.direction.y, -ray.direction.z}};
     for (int i = elements.size() - 1; i >= 0; i--) {
@@ -91,8 +102,10 @@ std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
         if (!resultIntersection) {
             return std::nullopt;
         }
-        float eta_i = element.ior;
-        float eta_t = (i > 0 && elements[i - 1].ior != 0) ? elements[i - 1].ior : 1;
+        float eta_i = element.material.getIor(wavelength);
+        float eta_t = (i > 0 && elements[i - 1].material.getIor(wavelength) != 0)
+                          ? elements[i - 1].material.getIor(wavelength)
+                          : 1;
 
         auto result = refract(*resultIntersection, tracedRay, eta_t, eta_i);
 
@@ -102,7 +115,7 @@ std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray) const {
                {tracedRay.direction.x, tracedRay.direction.y, -tracedRay.direction.z});
 }
 
-std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
+std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray, float wavelength) const {
     // todo regeneralize this
     Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
                      {ray.direction.x, ray.direction.y, -ray.direction.z}};
@@ -120,8 +133,10 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray) const {
             return std::nullopt;
         }
 
-        float eta_i = element.ior;
-        float eta_t = (i > 0 && elements[i - 1].ior != 0) ? elements[i - 1].ior : 1;
+        float eta_i = element.material.getIor(wavelength);
+        float eta_t = (i > 0 && elements[i - 1].material.getIor(wavelength) != 0)
+                          ? elements[i - 1].material.getIor(wavelength)
+                          : 1;
 
         auto result = refract(*resultIntersection, tracedRay, eta_i, eta_t);
 

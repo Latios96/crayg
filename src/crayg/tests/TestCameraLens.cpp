@@ -1,5 +1,6 @@
 #include "fixtures/CameraLensFixtures.h"
 #include "scene/camera/realistic/CameraLens.h"
+#include "scene/camera/realistic/Wavelengths.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
@@ -27,7 +28,7 @@ TEST_CASE("CameraLens::construct") {
     SECTION("should calculate metadata on the fly") {
         REQUIRE(canon70_200.metadata.focalLength >= 7);
         REQUIRE(canon70_200.metadata.elementCount == 34);
-        REQUIRE(Catch::Detail::Approx(canon70_200.metadata.maximumAperture) == 3.4342f);
+        REQUIRE(Catch::Detail::Approx(canon70_200.metadata.maximumAperture) == 3.4364244938f);
         REQUIRE(canon70_200.metadata.isAnamorphic == false);
         REQUIRE(canon70_200.metadata.squeeze == 1);
     }
@@ -35,7 +36,7 @@ TEST_CASE("CameraLens::construct") {
     SECTION("should calculate metadata correctly for anamorphic lens") {
         CameraLens schneider30mm = CameraLensFixtures::createSchneider30mmAnamorphic();
         REQUIRE(schneider30mm.metadata.isAnamorphic == true);
-        REQUIRE(schneider30mm.metadata.squeeze == Catch::Detail::Approx(1.92284f));
+        REQUIRE(schneider30mm.metadata.squeeze == Catch::Detail::Approx(1.92629f));
     }
 }
 
@@ -68,7 +69,7 @@ TEST_CASE("CameraLens::traceFromFilmToWorld") {
     SECTION("should trace correctly along optical axis") {
         Ray rayIn({0, 0, 0}, {0, 0, 1});
 
-        auto rayOut = *canon70_200.traceFromFilmToWorld(rayIn);
+        auto rayOut = *canon70_200.traceFromFilmToWorld(rayIn, FraunhoferLines::SODIUM.wavelength);
 
         REQUIRE(rayOut.startPoint.x == 0);
         REQUIRE(rayOut.startPoint.y == 0);
@@ -81,7 +82,7 @@ TEST_CASE("CameraLens::traceFromFilmToWorld") {
     SECTION("should return empty optional for ray exceeding aperture") {
         Ray rayIn({2.2f, 0, 0}, {0, 0, 1});
 
-        auto rayOut = canon70_200.traceFromFilmToWorld(rayIn);
+        auto rayOut = canon70_200.traceFromFilmToWorld(rayIn, FraunhoferLines::SODIUM.wavelength);
 
         REQUIRE_FALSE(rayOut);
     }
@@ -94,7 +95,7 @@ TEST_CASE("CameraLens::traceFromWorldToFilm") {
     SECTION("should trace correctly along optical axis") {
         Ray rayIn({0, 0, canon70_200.getFirstElement().center + 1}, {0, 0, -1});
 
-        auto rayOut = *canon70_200.traceFromWorldToFilm(rayIn);
+        auto rayOut = *canon70_200.traceFromWorldToFilm(rayIn, FraunhoferLines::SODIUM.wavelength);
 
         REQUIRE(rayOut.startPoint.x == 0);
         REQUIRE(rayOut.startPoint.y == 0);
@@ -107,7 +108,7 @@ TEST_CASE("CameraLens::traceFromWorldToFilm") {
     SECTION("should return empty optional for ray exceeding aperture") {
         Ray rayIn({2.2f, 0, 0}, {0, 0, -1});
 
-        auto rayOut = canon70_200.traceFromWorldToFilm(rayIn);
+        auto rayOut = canon70_200.traceFromWorldToFilm(rayIn, FraunhoferLines::SODIUM.wavelength);
 
         REQUIRE_FALSE(rayOut);
     }
@@ -129,7 +130,7 @@ Vector3f pointOnFocalPlane(const CameraLens &cameraLens, float focalDistance) {
     const Vector3f pointOnLens = {0, 0.5, cameraLens.getLastElement().center};
     const Vector3f pointOnFilm = {0, 0, 0};
     const Ray ray = {pointOnFilm, (pointOnLens - pointOnFilm).normalize()};
-    const auto focusedRay = *cameraLens.traceFromFilmToWorld(ray);
+    const auto focusedRay = *cameraLens.traceFromFilmToWorld(ray, FraunhoferLines::SODIUM.wavelength);
     const float t = (focalDistance - cameraLens.getFirstElement().center) / focusedRay.direction.z;
     return focusedRay.constructIntersectionPoint(t);
 }
@@ -144,7 +145,7 @@ TEST_CASE("CameraLens::focusLens") {
         canon70_200.focusLens(100.f);
 
         focalPlanePoint = pointOnFocalPlane(canon70_200, 100.f);
-        REQUIRE(std::abs(focalPlanePoint.y) < 0.011f);
+        REQUIRE(std::abs(focalPlanePoint.y) < 0.01135f);
     }
     // todo test focusing multiple times
 }
@@ -165,11 +166,11 @@ TEST_CASE("CameraLens::changeAperture") {
         const Vector3f pointOnFilm = {0, 0, 0};
         const Ray ray = {pointOnFilm, (pointOnLens - pointOnFilm).normalize()};
 
-        REQUIRE(canon70_200.traceFromFilmToWorld(ray));
+        REQUIRE(canon70_200.traceFromFilmToWorld(ray, FraunhoferLines::SODIUM.wavelength));
 
         canon70_200.changeAperture(20.f);
 
-        REQUIRE_FALSE(canon70_200.traceFromFilmToWorld(ray));
+        REQUIRE_FALSE(canon70_200.traceFromFilmToWorld(ray, FraunhoferLines::SODIUM.wavelength));
     }
 }
 

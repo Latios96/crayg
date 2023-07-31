@@ -1,5 +1,6 @@
 #include "ThickLensApproximation.h"
 #include "CameraLens.h"
+#include "Wavelengths.h"
 
 namespace crayg {
 
@@ -16,7 +17,7 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate(const Directi
     const float offsetY = direction == VERTICAL ? 3.5e-05f * factor : 0;
 
     const Ray fromWorldToFilmIn{{offsetX, offsetY, lens.getFirstElement().center + 1 * factor}, {0, 0, -1}};
-    auto fromWorldToFilmOut = lens.traceFromWorldToFilm(fromWorldToFilmIn);
+    auto fromWorldToFilmOut = lens.traceFromWorldToFilm(fromWorldToFilmIn, FraunhoferLines::SODIUM.wavelength);
     if (!fromWorldToFilmOut) {
         throw std::runtime_error(
             "Could not trace ray from world to film to compute thick lens approximation. Is aperture stop very small?");
@@ -26,7 +27,7 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate(const Directi
                                          : computeVerticalCardinalPoints(fromWorldToFilmIn, *fromWorldToFilmOut);
 
     Ray fromFilmToWorldIn{{offsetX, offsetY, lens.getLastElement().center - 1 * factor}, {0, 0, 1}};
-    auto fromFilmToWorldOut = lens.traceFromFilmToWorld(fromFilmToWorldIn);
+    auto fromFilmToWorldOut = lens.traceFromFilmToWorld(fromFilmToWorldIn, FraunhoferLines::SODIUM.wavelength);
     if (!fromFilmToWorldOut) {
         throw std::runtime_error(
             "Could not trace ray from film to world to compute thick lens approximation. Is aperture stop very small?");

@@ -11,6 +11,7 @@ namespace crayg {
 
 struct LensElement {
     LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius);
+    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber);
     LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
                 LensMaterial lensMaterial, LensGeometry geometry);
 

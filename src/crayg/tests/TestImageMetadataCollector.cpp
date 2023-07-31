@@ -95,9 +95,9 @@ TEST_CASE("TestImageMetadataCollector::collect") {
         REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT) ==
                 scene.camera->getLens().elements.size());
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH) ==
-                Catch::Detail::Approx(72.1183792f));
+                Catch::Detail::Approx(72.16492f));
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_MAXIMUM_F_NUMBER) ==
-                Catch::Detail::Approx(3.4342f));
+                Catch::Detail::Approx(3.43642f));
         REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::CAMERA_LENS_IS_ANAMORPHIC) == 0);
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_SQUEEZE) == 2);
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_LENS_PATENT) == "US 132");

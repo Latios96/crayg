@@ -32,8 +32,8 @@ struct CameraLens {
     LensElement &getAperture();
     float getApertureRadius() const;
 
-    std::optional<Ray> traceFromFilmToWorld(const Ray &ray) const;
-    std::optional<Ray> traceFromWorldToFilm(const Ray &ray) const;
+    std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength) const;
+    std::optional<Ray> traceFromWorldToFilm(const Ray &ray, float wavelength) const;
 
     void focusLens(float focalDistance);
     void changeAperture(float fStop);
@@ -44,6 +44,7 @@ struct CameraLens {
     friend std::ostream &operator<<(std::ostream &os, const CameraLens &lens);
 
   private:
+    void initializeLensMaterials();
     void calculateMetadata();
     void handleAnamorphicFocussing();
 
