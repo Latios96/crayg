@@ -87,7 +87,7 @@ def float_lit(f: float) -> str:
 
 
 def get_constants_line(catalog_name: str, mat: Material) -> str:
-    return f'case LensMaterialId::{catalog_name.upper()}_{mat.name}: return NLensMaterial(LensMaterialId::{catalog_name.upper()}_{mat.name}, {float_lit(mat.ior)}, {float_lit(mat.abbe_no)}, {{{",".join(map(float_lit, mat.sellmeyer_coefficients))}}});\n'
+    return f'case LensMaterialId::{catalog_name.upper()}_{mat.name}: return LensMaterial(LensMaterialId::{catalog_name.upper()}_{mat.name}, {float_lit(mat.ior)}, {float_lit(mat.abbe_no)}, {{{",".join(map(float_lit, mat.sellmeyer_coefficients))}}});\n'
 
 
 def write_catalog(catalog_name: str, materials: List[Material]):

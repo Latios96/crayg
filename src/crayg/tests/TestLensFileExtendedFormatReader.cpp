@@ -15,18 +15,21 @@ Maximum F Number: 2.8
 Patent: US 123
 Description: An Example Lens
 [Elements]
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
-1       2           3   4              5       LAFN7    PLANAR
-6       7           8   9              10      K7       SPHERICAL
+Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
+1       2           3   4              5       SCHOTT_LAFN7    PLANAR
+6       7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
 
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
-        REQUIRE(cameraLens ==
-                CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, "US 123", "An Example Lens"),
-                           std::vector<LensElement>(
-                               {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
-                                {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
+        REQUIRE(
+            cameraLens ==
+            CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, "US 123", "An Example Lens"),
+                       std::vector<LensElement>(
+                           {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
+                             LensGeometry::PLANAR},
+                            {0.6f, 0.7f, 8.f, 0.90000004f, 10,
+                             LensMaterial::createMaterialById(LensMaterialId::SCHOTT_K7), LensGeometry::SPHERICAL}})));
     }
 
     SECTION("should parse extended lens file with minimal metadata") {
@@ -35,18 +38,21 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 # comment
 name: A Zoom Lens
 [Elements]
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
-1       2           3   4              5       LAFN7    PLANAR
-6       7           8   9              10      K7       SPHERICAL
+Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
+1       2           3   4              5       SCHOTT_LAFN7    PLANAR
+6       7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
 
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
-        REQUIRE(cameraLens ==
-                CameraLens(CameraLensMetadata("A Zoom Lens"),
-                           std::vector<LensElement>(
-                               {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
-                                {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
+        REQUIRE(
+            cameraLens ==
+            CameraLens(CameraLensMetadata("A Zoom Lens"),
+                       std::vector<LensElement>(
+                           {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
+                             LensGeometry::PLANAR},
+                            {0.6f, 0.7f, 8.f, 0.90000004f, 10,
+                             LensMaterial::createMaterialById(LensMaterialId::SCHOTT_K7), LensGeometry::SPHERICAL}})));
     }
     SECTION("should ignore metadata that is calculated anyway") {
         const std::string fileContent = R"(# a header comment
@@ -59,18 +65,21 @@ Maximum F Number: 2.8
 Patent: US 123
 Description: An Example Lens
 [Elements]
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
-1       2           3   4              5       LAFN7    PLANAR
-6       7           8   9              10      K7       SPHERICAL
+Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
+1       2           3   4              5       SCHOTT_LAFN7    PLANAR
+6       7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
 
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
-        REQUIRE(cameraLens ==
-                CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, "US 123", "An Example Lens"),
-                           std::vector<LensElement>(
-                               {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
-                                {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
+        REQUIRE(
+            cameraLens ==
+            CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, "US 123", "An Example Lens"),
+                       std::vector<LensElement>(
+                           {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
+                             LensGeometry::PLANAR},
+                            {0.6f, 0.7f, 8.f, 0.90000004f, 10,
+                             LensMaterial::createMaterialById(LensMaterialId::SCHOTT_K7), LensGeometry::SPHERICAL}})));
     }
 
     SECTION("should parse extended lens file with no elements header") {
@@ -78,17 +87,20 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 [Metadata]
 name: A Zoom Lens
 [Elements]
-1       2           3   4              5       LAFN7    PLANAR
-6       7           8   9              10      K7       SPHERICAL
+1       2           3   4              5       SCHOTT_LAFN7    PLANAR
+6       7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
 
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
 
-        REQUIRE(cameraLens ==
-                CameraLens(CameraLensMetadata("A Zoom Lens"),
-                           std::vector<LensElement>(
-                               {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::LAFN7, LensGeometry::PLANAR},
-                                {0.6f, 0.7f, 8.f, 0.90000004f, 10, LensMaterial::K7, LensGeometry::SPHERICAL}})));
+        REQUIRE(
+            cameraLens ==
+            CameraLens(CameraLensMetadata("A Zoom Lens"),
+                       std::vector<LensElement>(
+                           {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
+                             LensGeometry::PLANAR},
+                            {0.6f, 0.7f, 8.f, 0.90000004f, 10,
+                             LensMaterial::createMaterialById(LensMaterialId::SCHOTT_K7), LensGeometry::SPHERICAL}})));
     }
 }
 
@@ -99,8 +111,8 @@ TEST_CASE("LensFileExtendedFormatReader::readFileContent with failure") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 [Elements]
-1       2           3   4              5       LAFN7    PLANAR
-6       7           8   9              10      K7       SPHERICAL
+1       2           3   4              5       SCHOTT_LAFN7    PLANAR
+6       7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
@@ -137,9 +149,9 @@ name: A Zoom Lens
 # comment
 Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 # comment
-1     2           3   4              5       LAFN7    PLANAR
+1     2           3   4              5       SCHOTT_LAFN7    PLANAR
 # comment
-abc   7           8   9              10      K7       SPHERICAL
+abc   7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: Line 10: Value 'abc' for Radius is not a float"));
@@ -152,11 +164,11 @@ abc   7           8   9              10      K7       SPHERICAL
 name: A Zoom Lens
 [Elements]
 # comment
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
+Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 # comment
-1     2           3   4              5       LAFN7    PLANAR
+1     2           3   4              5       SCHOTT_LAFN7    PLANAR
 # comment
-1     abc         8   9              10      K7       SPHERICAL
+1     abc         8   9              10      SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: Line 10: Value 'abc' for Thickness is not a float"));
@@ -169,11 +181,11 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 name: A Zoom Lens
 [Elements]
 # comment
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
+Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 # comment
-1     2           3   4              5       LAFN7    PLANAR
+1     2           3   4              5       SCHOTT_LAFN7    PLANAR
 # comment
-1     2           abc 9              10      K7       SPHERICAL
+1     2           abc 9              10      SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: Line 10: Value 'abc' for IOR is not a float"));
@@ -186,11 +198,11 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 name: A Zoom Lens
 [Elements]
 # comment
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
+Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 # comment
-1     2           3   4              5       LAFN7    PLANAR
+1     2           3   4              5       SCHOTT_LAFN7    PLANAR
 # comment
-1     2           3   abc            10      K7       SPHERICAL
+1     2           3   abc            10      SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: Line 10: Value 'abc' for Housing Radius is not a float"));
@@ -203,11 +215,11 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 name: A Zoom Lens
 [Elements]
 # comment
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
+Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 # comment
-1     2           3     4              5       LAFN7    PLANAR
+1     2           3     4              5       SCHOTT_LAFN7    PLANAR
 # comment
-1     2           3     4              abc     K7       SPHERICAL
+1     2           3     4              abc     SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: Line 10: Value 'abc' for Abbe-No is not a float"));
@@ -220,11 +232,11 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 name: A Zoom Lens
 [Elements]
 # comment
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
+Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 # comment
-1     2           3     4              5       LAFN7    PLANAR
+1     2           3     4              5       SCHOTT_LAFN7    PLANAR
 # comment
-1     2           3     4              5       foo      SPHERICAL
+1     2           3     4              5       foo             SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: Line 10: 'foo' is an unsupported material value"));
@@ -237,11 +249,11 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 name: A Zoom Lens
 [Elements]
 # comment
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
+Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 # comment
-1     2           3     4              5       LAFN7    PLANAR
+1     2           3     4              5       SCHOTT_LAFN7    PLANAR
 # comment
-1     2           3     4              5       LAFN7    CUBICAL
+1     2           3     4              5       SCHOTT_F2    CUBICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: Line 10: 'cubical' is an unsupported LensGeometry"));
@@ -253,10 +265,10 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 # comment
 name: A Zoom Lens
 [Elements]
-Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
-1       2           3   4              5       LAFN7    PLANAR
+Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
+1       2           3   4              5       SCHOTT_LAFN7    PLANAR
 1
-6       7           8   9              10      K7       SPHERICAL
+6       7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),

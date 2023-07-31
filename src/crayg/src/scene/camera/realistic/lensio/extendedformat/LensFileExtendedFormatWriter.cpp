@@ -37,7 +37,7 @@ std::string LensFileExtendedFormatWriter::writeFileContent(const CameraLens &cam
     for (auto &element : cameraLens.elements) {
         styled_table.add_row({formatFloat(element.curvatureRadius * 10), formatFloat(element.thickness * 10),
                               formatFloat(element.ior), formatFloat(element.apertureRadius * 10),
-                              formatFloat(element.abbeNumber), fmt::format("{}", element.material),
+                              formatFloat(element.abbeNumber), fmt::format("{}", element.material.id),
                               fmt::format("{}", element.geometry)});
     }
 

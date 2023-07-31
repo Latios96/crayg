@@ -74,12 +74,12 @@ void parseMetadataLine(int lineNumber, const std::string &line, CameraLensMetada
 
 LensMaterial parseMaterial(int lineNumber, std::string &material) {
     boost::algorithm::trim_all(material);
-    auto lensMaterial = EnumUtils::parse<LensMaterial>(material);
+    auto lensMaterial = EnumUtils::parse<LensMaterialId>(material);
     if (!lensMaterial) {
         throw InvalidExtendedLensFileFormatException(lineNumber,
                                                      fmt::format("'{}' is an unsupported material value", material));
     }
-    return *lensMaterial;
+    return LensMaterial::createMaterialById(*lensMaterial);
 }
 
 LensGeometry parseLensGeometry(int lineNumber, std::string &geometry) {
