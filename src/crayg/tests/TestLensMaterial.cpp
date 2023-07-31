@@ -73,7 +73,7 @@ TEST_CASE("LensMaterial::findMaterialByIorAndAbbe") {
 
 TEST_CASE("LensMaterial::getIor") {
 
-    SECTION("should return correct ior for Natrium line from Schott catalog") {
+    SECTION("should return correct ior for sodium line from Schott catalog") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::SCHOTT_BK7G18);
 
         const float ior = material.getIor(589.29);
@@ -81,7 +81,7 @@ TEST_CASE("LensMaterial::getIor") {
         REQUIRE(ior == Catch::Detail::Approx(1.51968f));
     }
 
-    SECTION("should return correct ior for Hg line from Schott catalog") {
+    SECTION("should return correct ior for mercury line from Schott catalog") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::SCHOTT_BK7G18);
 
         const float ior = material.getIor(546.073);
@@ -89,7 +89,7 @@ TEST_CASE("LensMaterial::getIor") {
         REQUIRE(ior == Catch::Detail::Approx(1.52170f));
     }
 
-    SECTION("should return correct ior for Natrium line from Ohara catalog") {
+    SECTION("should return correct ior for sodium line from Ohara catalog") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::OHARA_S_FPL51);
 
         const float ior = material.getIor(589.29);
@@ -97,7 +97,7 @@ TEST_CASE("LensMaterial::getIor") {
         REQUIRE(ior == Catch::Detail::Approx(1.496945f));
     }
 
-    SECTION("should return correct ior for Hg line from Ohara catalog") {
+    SECTION("should return correct ior for mercury line from Ohara catalog") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::OHARA_S_FPL51);
 
         const float ior = material.getIor(546.073);
@@ -105,7 +105,7 @@ TEST_CASE("LensMaterial::getIor") {
         REQUIRE(ior == Catch::Detail::Approx(1.498455f));
     }
 
-    SECTION("should return 1 for AIR Material for Natrium Line") {
+    SECTION("should return 1 for AIR Material for sodium Line") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::AIR);
 
         const float ior = material.getIor(589.29);
@@ -113,7 +113,7 @@ TEST_CASE("LensMaterial::getIor") {
         REQUIRE(ior == Catch::Detail::Approx(1));
     }
 
-    SECTION("should return 1 for AIR Material for Hg Line") {
+    SECTION("should return 1 for AIR Material for mercury Line") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::AIR);
 
         const float ior = material.getIor(546.073);
