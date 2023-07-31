@@ -65,4 +65,39 @@ TEST_CASE("LensMaterial::findMaterialByIorAndAbbe") {
     }
 }
 
+TEST_CASE("LensMaterial::getIor") {
+
+    SECTION("should return correct ior for Natrium line from Schott catalog") {
+        const auto material = NLensMaterial::createMaterialById(LensMaterialId::SCHOTT_BK7G18);
+
+        const float ior = material.getIor(589.29);
+
+        REQUIRE(ior == Catch::Detail::Approx(1.51968f));
+    }
+
+    SECTION("should return correct ior for Hg line from Schott catalog") {
+        const auto material = NLensMaterial::createMaterialById(LensMaterialId::SCHOTT_BK7G18);
+
+        const float ior = material.getIor(546.073);
+
+        REQUIRE(ior == Catch::Detail::Approx(1.52170f));
+    }
+
+    SECTION("should return correct ior for Natrium line from Ohara catalog") {
+        const auto material = NLensMaterial::createMaterialById(LensMaterialId::OHARA_S_FPL51);
+
+        const float ior = material.getIor(589.29);
+
+        REQUIRE(ior == Catch::Detail::Approx(1.496945f));
+    }
+
+    SECTION("should return correct ior for Hg line from Ohara catalog") {
+        const auto material = NLensMaterial::createMaterialById(LensMaterialId::OHARA_S_FPL51);
+
+        const float ior = material.getIor(546.073);
+
+        REQUIRE(ior == Catch::Detail::Approx(1.498455f));
+    }
+}
+
 }

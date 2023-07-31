@@ -126,4 +126,12 @@ std::optional<NLensMaterial> NLensMaterial::findMaterialByIorAndAbbe(float ior, 
     return abbeNoResults[0];
 }
 
+float NLensMaterial::getIor(float lambda_nm) const {
+    const float lambda_micrometer = lambda_nm / 1000.f;
+    float lambdaSquared = lambda_micrometer * lambda_micrometer;
+    return std::sqrt(1 + (sellmeierCoefficients[0] * lambdaSquared / (lambdaSquared - sellmeierCoefficients[3])) +
+                     (sellmeierCoefficients[1] * lambdaSquared / (lambdaSquared - sellmeierCoefficients[4])) +
+                     (sellmeierCoefficients[2] * lambdaSquared / (lambdaSquared - sellmeierCoefficients[5])));
+}
+
 }
