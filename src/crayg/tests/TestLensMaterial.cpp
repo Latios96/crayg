@@ -1,4 +1,5 @@
 #include "scene/camera/realistic/LensMaterial.h"
+#include "scene/camera/realistic/Wavelengths.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
@@ -76,7 +77,7 @@ TEST_CASE("LensMaterial::getIor") {
     SECTION("should return correct ior for sodium line from Schott catalog") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::SCHOTT_BK7G18);
 
-        const float ior = material.getIor(589.29);
+        const float ior = material.getIor(FraunhoferLines::SODIUM.wavelength);
 
         REQUIRE(ior == Catch::Detail::Approx(1.51968f));
     }
@@ -84,7 +85,7 @@ TEST_CASE("LensMaterial::getIor") {
     SECTION("should return correct ior for mercury line from Schott catalog") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::SCHOTT_BK7G18);
 
-        const float ior = material.getIor(546.073);
+        const float ior = material.getIor(FraunhoferLines::MERCURY.wavelength);
 
         REQUIRE(ior == Catch::Detail::Approx(1.52170f));
     }
@@ -92,7 +93,7 @@ TEST_CASE("LensMaterial::getIor") {
     SECTION("should return correct ior for sodium line from Ohara catalog") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::OHARA_S_FPL51);
 
-        const float ior = material.getIor(589.29);
+        const float ior = material.getIor(FraunhoferLines::SODIUM.wavelength);
 
         REQUIRE(ior == Catch::Detail::Approx(1.496945f));
     }
@@ -100,7 +101,7 @@ TEST_CASE("LensMaterial::getIor") {
     SECTION("should return correct ior for mercury line from Ohara catalog") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::OHARA_S_FPL51);
 
-        const float ior = material.getIor(546.073);
+        const float ior = material.getIor(FraunhoferLines::MERCURY.wavelength);
 
         REQUIRE(ior == Catch::Detail::Approx(1.498455f));
     }
@@ -108,7 +109,7 @@ TEST_CASE("LensMaterial::getIor") {
     SECTION("should return 1 for AIR Material for sodium Line") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::AIR);
 
-        const float ior = material.getIor(589.29);
+        const float ior = material.getIor(FraunhoferLines::SODIUM.wavelength);
 
         REQUIRE(ior == Catch::Detail::Approx(1));
     }
@@ -116,7 +117,7 @@ TEST_CASE("LensMaterial::getIor") {
     SECTION("should return 1 for AIR Material for mercury Line") {
         const auto material = LensMaterial::createMaterialById(LensMaterialId::AIR);
 
-        const float ior = material.getIor(546.073);
+        const float ior = material.getIor(FraunhoferLines::MERCURY.wavelength);
 
         REQUIRE(ior == Catch::Detail::Approx(1));
     }

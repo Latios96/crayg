@@ -169,6 +169,8 @@ set(crayg_SRCS
         scene/camera/realistic/RealisticCameraModel.h
         scene/camera/realistic/ThickLensApproximation.cpp
         scene/camera/realistic/ThickLensApproximation.h
+        scene/camera/realistic/Wavelengths.cpp
+        scene/camera/realistic/Wavelengths.h
         scene/camera/thinlens/ThinLensCameraModel.cpp
         scene/camera/thinlens/ThinLensCameraModel.h
         scene/Imageable.cpp
