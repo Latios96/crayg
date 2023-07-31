@@ -3,17 +3,17 @@
 
 namespace crayg {
 
+NLensMaterial::NLensMaterial(const LensMaterialId &id, float ior, float abbeNo,
+                             const std::array<float, 6> &sellmeierCoefficients)
+    : id(id), ior(ior), abbeNo(abbeNo), sellmeierCoefficients(sellmeierCoefficients) {
+}
+
 bool NLensMaterial::operator==(const NLensMaterial &rhs) const {
     return id == rhs.id && ior == rhs.ior && abbeNo == rhs.abbeNo && sellmeierCoefficients == rhs.sellmeierCoefficients;
 }
 
 bool NLensMaterial::operator!=(const NLensMaterial &rhs) const {
     return !(rhs == *this);
-}
-
-NLensMaterial::NLensMaterial(const LensMaterialId &id, float ior, float abbeNo,
-                             const std::array<float, 6> &sellmeierCoefficients)
-    : id(id), ior(ior), abbeNo(abbeNo), sellmeierCoefficients(sellmeierCoefficients) {
 }
 
 std::ostream &operator<<(std::ostream &os, const NLensMaterial &material) {
