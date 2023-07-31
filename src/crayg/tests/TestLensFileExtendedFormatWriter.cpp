@@ -10,6 +10,10 @@ TEST_CASE("LensFileExtendedFormatWriter::writeFileContent") {
     canon70_200.metadata.patent = "US 123";
     canon70_200.metadata.description = "Super nice lens";
 
+    for (auto &element : canon70_200.elements) {
+        element.material.id = LensMaterialId::UNKNOWN;
+    }
+
     SECTION("should ") {
         LensFileExtendedFormatWriter lensFileExtendedFormatWriter;
 

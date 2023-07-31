@@ -21,6 +21,17 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
     }
     apertureRadius = apertureIndex != -1 ? getAperture().apertureRadius : 0;
 
+    for (int i = 0; i < this->elements.size(); i++) {
+        auto &lensElement = this->elements[i];
+        LensMaterial::MaterialSearchError searchError{};
+        auto material = LensMaterial::findMaterialByIorAndAbbe(lensElement.ior, lensElement.abbeNumber, &searchError);
+        if (searchError.isCriticalError()) {
+            Logger::error("Did not find a sufficient material for element {}, ior error: {:.3f}, abbe error: {:.3f}", i,
+                          searchError.iorError, searchError.abbeNoError);
+        }
+        lensElement.material = material;
+    }
+
     ThickLensApproximationCalculator thickLensCalculator(*this);
     thickLensApproximation = thickLensCalculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
 
