@@ -181,16 +181,15 @@ struct NLensMaterial {
     }
 };
 
+inline std::ostream &operator<<(std::ostream &os, const crayg::LensMaterialId &v) {
+    os << fmt::format("{}", v);
+    return os;
+}
 }
 
 template <> struct fmt::formatter<crayg::NLensMaterial> : ostream_formatter {};
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::LensMaterial);
 CRAYG_FMT_ENUM_FORMATTER(crayg::LensMaterialId);
-
-inline std::ostream &operator<<(std::ostream &os, crayg::LensMaterialId v) {
-    os << fmt::format("{}", v);
-    return os;
-}
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSMATERIAL_H_
