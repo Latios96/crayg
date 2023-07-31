@@ -13,6 +13,12 @@ TEST_CASE("LensMaterial::findMaterialByIorAndAbbe") {
 
     std::sort(testMaterials.begin(), testMaterials.end(), LensMaterial::compareByIor);
 
+    SECTION("should return AIR material") {
+        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 5, testMaterials);
+
+        REQUIRE(material->id == LensMaterialId::SCHOTT_LF5HTI);
+    }
+
     SECTION("should find material with exact ior and abbe no") {
         const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 5, testMaterials);
 
@@ -98,6 +104,21 @@ TEST_CASE("LensMaterial::getIor") {
 
         REQUIRE(ior == Catch::Detail::Approx(1.498455f));
     }
-}
 
+    SECTION("should return 1 for AIR Material for Natrium Line") {
+        const auto material = LensMaterial::createMaterialById(LensMaterialId::AIR);
+
+        const float ior = material.getIor(589.29);
+
+        REQUIRE(ior == Catch::Detail::Approx(1));
+    }
+
+    SECTION("should return 1 for AIR Material for Hg Line") {
+        const auto material = LensMaterial::createMaterialById(LensMaterialId::AIR);
+
+        const float ior = material.getIor(546.073);
+
+        REQUIRE(ior == Catch::Detail::Approx(1));
+    }
+}
 }

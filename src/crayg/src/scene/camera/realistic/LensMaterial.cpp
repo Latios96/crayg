@@ -1,4 +1,5 @@
 #include "LensMaterial.h"
+#include "Logger.h"
 #include "utils/ToStringHelper.h"
 
 namespace crayg {
@@ -34,6 +35,8 @@ LensMaterial LensMaterial::createMaterialById(LensMaterialId lensMaterialId) {
     switch (lensMaterialId) {
     case LensMaterialId::UNKNOWN:
         return {};
+    case LensMaterialId::AIR:
+        return LensMaterial(LensMaterialId::AIR, 1, 0, {0, 0, 0, 0, 0, 0});
 #include "materials/LensMaterialConstants_ohara.h"
 #include "materials/LensMaterialConstants_schott.h"
     }
@@ -45,6 +48,9 @@ std::vector<LensMaterial> collectAllMaterials() {
     std::vector<LensMaterial> materials;
     materials.reserve(materialIds.size());
     for (auto &materialId : materialIds) {
+        if (materialId.first == LensMaterialId::UNKNOWN || materialId.first == LensMaterialId::AIR) {
+            continue;
+        }
         materials.push_back(LensMaterial::createMaterialById(materialId.first));
     }
     return materials;
@@ -106,6 +112,9 @@ float findElementsWithSmalledDifference(const std::vector<T> &elements, std::vec
 
 std::optional<LensMaterial> LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo,
                                                                    const std::vector<LensMaterial> &allMaterials) {
+    if (ior == 1) {
+        return createMaterialById(LensMaterialId::AIR);
+    }
     std::vector<LensMaterial> iorResults;
     const float minimalIorError = findElementsWithSmalledDifference<LensMaterial>(
         allMaterials, iorResults, [ior](const LensMaterial &material) { return std::abs(material.ior - ior); });
@@ -123,6 +132,7 @@ std::optional<LensMaterial> LensMaterial::findMaterialByIorAndAbbe(float ior, fl
     if (minimalAbbeNoError > 1) {
         return std::nullopt;
     }
+    Logger::info("minimalIorError: {} minimalAbbeNoError: {}", minimalIorError, minimalAbbeNoError);
     return abbeNoResults[0];
 }
 
@@ -136,5 +146,4 @@ float LensMaterial::getIor(float lambda_nm) const {
 float LensMaterial::sellmeierTerm(float lambdaSquared, int index) const {
     return sellmeierCoefficients[index] * lambdaSquared / (lambdaSquared - sellmeierCoefficients[index + 3]);
 }
-
 }

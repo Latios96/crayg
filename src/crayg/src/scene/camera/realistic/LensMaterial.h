@@ -8,6 +8,7 @@ namespace crayg {
 
 enum class LensMaterialId {
     UNKNOWN,
+    AIR,
 #include "materials/LensMaterialIds_ohara.h"
 #include "materials/LensMaterialIds_schott.h"
 };
