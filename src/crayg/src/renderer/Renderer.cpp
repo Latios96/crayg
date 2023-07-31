@@ -8,6 +8,7 @@
 #include "renderer/bucketsamplers/BucketSamplerFactory.h"
 #include "sampling/Random.h"
 #include "scene/camera/CameraModelFactory.h"
+#include "scene/camera/realistic/Wavelengths.h"
 #include "utils/ImageMetadataCollector.h"
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
@@ -104,7 +105,7 @@ void Renderer::init() {
 }
 
 Color Renderer::renderSample(const Vector2f &samplePos) {
-    auto rayWithWeight = cameraModel->createPrimaryRay(samplePos.x, samplePos.y);
+    auto rayWithWeight = cameraModel->createPrimaryRay(samplePos.x, samplePos.y, FraunhoferLines::SODIUM.wavelength);
     if (!rayWithWeight.ray) {
         return Color::createBlack();
     }

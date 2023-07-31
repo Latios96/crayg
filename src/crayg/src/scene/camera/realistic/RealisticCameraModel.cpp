@@ -27,7 +27,7 @@ void RealisticCameraModel::init(TaskReporter &taskReporter) {
     exitPupil = exitPupilCalculator.calculate();
 }
 
-RayWithWeight RealisticCameraModel::createPrimaryRay(float x, float y) {
+RayWithWeight RealisticCameraModel::createPrimaryRay(float x, float y, float wavelength) {
     const float relatixeX = x / resolution.getWidth();
     const float relatixeY = y / resolution.getHeight();
     const auto filmPos = filmPhysicalExtend.lerp(relatixeX, relatixeY);
@@ -37,7 +37,7 @@ RayWithWeight RealisticCameraModel::createPrimaryRay(float x, float y) {
     const auto pointOnPupil =
         Vector3f(pupilSample.point.x, pupilSample.point.y, camera.getLens().getLastElement().center);
     const Ray ray = {positionOnFilm, (pointOnPupil - positionOnFilm).normalize()};
-    const auto tracedRay = camera.getLens().traceFromFilmToWorld(ray, FraunhoferLines::SODIUM.wavelength);
+    const auto tracedRay = camera.getLens().traceFromFilmToWorld(ray, wavelength);
     if (!tracedRay) {
         return {std::nullopt, 0};
     }

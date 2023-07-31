@@ -19,7 +19,7 @@ class CameraModel {
 
     virtual void init(crayg::TaskReporter &taskReporter){};
 
-    virtual RayWithWeight createPrimaryRay(float x, float y) = 0;
+    virtual RayWithWeight createPrimaryRay(float x, float y, float wavelength) = 0;
 
     virtual ~CameraModel() = default;
 

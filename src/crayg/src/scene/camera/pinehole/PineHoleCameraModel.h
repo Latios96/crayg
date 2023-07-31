@@ -23,7 +23,7 @@ class PineHoleCameraModel : public CameraModel {
   public:
     PineHoleCameraModel(Camera &camera, const Resolution &resolution);
 
-    RayWithWeight createPrimaryRay(float x, float y) override;
+    RayWithWeight createPrimaryRay(float x, float y, float wavelength) override;
 };
 
 }
