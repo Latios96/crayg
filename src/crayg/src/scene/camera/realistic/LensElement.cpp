@@ -13,7 +13,7 @@ LensElement::LensElement(float curvatureRadius, float thickness, float ior, floa
 
 LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
-      abbeNumber(0), material(LensMaterial::UNKNOWN), geometry(LensGeometry::SPHERICAL) {
+      abbeNumber(0), material(LensMaterial()), geometry(LensGeometry::SPHERICAL) {
 }
 
 bool LensElement::isAperture() const {

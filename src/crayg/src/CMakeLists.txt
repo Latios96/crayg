@@ -157,6 +157,11 @@ set(crayg_SRCS
         scene/camera/realistic/lensio/textfile/LensFileTextFileReader.h
         scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.cpp
         scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.h
+        scene/camera/realistic/materials/LensMaterialConstants_ohara.h
+        scene/camera/realistic/materials/LensMaterialConstants_schott.h
+        scene/camera/realistic/materials/LensMaterialIds_ohara.h
+        scene/camera/realistic/materials/LensMaterialIds_schott.h
+        scene/camera/realistic/LensMaterial.cpp
         scene/camera/realistic/LensMaterial.h
         scene/camera/realistic/LensRaytracerTracer.cpp
         scene/camera/realistic/LensRaytracerTracer.h

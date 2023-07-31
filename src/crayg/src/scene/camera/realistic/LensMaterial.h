@@ -2,10 +2,12 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSMATERIAL_H_
 
 #include "utils/EnumUtils.h"
+#include <ostream>
 
 namespace crayg {
 
-// Materials taken from Schott Glas Catalog, 2022
+// Materials taken from Schott Glas Catalog, 2022, Ohara Catalog 2023
+
 enum LensMaterial {
     UNKNOWN,
     BK7G18,
@@ -145,8 +147,42 @@ enum LensMaterial {
     SF6HT,
 };
 
+enum class LensMaterialId {
+    UNKNOWN,
+#include "materials/LensMaterialIds_ohara.h"
+#include "materials/LensMaterialIds_schott.h"
+};
+
+struct NLensMaterial {
+    LensMaterialId id = LensMaterialId::UNKNOWN;
+    float ior = 1;
+    float abbeNo = 0;
+    std::array<float, 6> sellmeierCoefficients = {0, 0, 0, 0, 0, 0};
+
+    NLensMaterial() = default;
+    NLensMaterial(const LensMaterialId &id, float ior, float abbeNo, const std::array<float, 6> &sellmeierCoefficients);
+
+    bool operator==(const NLensMaterial &rhs) const;
+    bool operator!=(const NLensMaterial &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const NLensMaterial &material);
+
+    static std::vector<NLensMaterial> &getAllMaterials();
+    static NLensMaterial createMaterialById(LensMaterialId lensMaterialId);
+    static std::optional<NLensMaterial> findMaterialByIorAndAbbe(float ior, float abbeNo);
+    static std::optional<NLensMaterial> findMaterialByIorAndAbbe(float ior, float abbeNo,
+                                                                 const std::vector<NLensMaterial> &allMaterials);
+};
+
 }
 
+template <> struct fmt::formatter<crayg::NLensMaterial> : ostream_formatter {};
+
 CRAYG_FMT_ENUM_FORMATTER(crayg::LensMaterial);
+CRAYG_FMT_ENUM_FORMATTER(crayg::LensMaterialId);
+
+inline std::ostream &operator<<(std::ostream &os, crayg::LensMaterialId v) {
+    os << fmt::format("{}", v);
+    return os;
+}
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSMATERIAL_H_
