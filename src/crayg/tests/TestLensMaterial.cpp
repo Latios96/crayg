@@ -11,8 +11,7 @@ TEST_CASE("LensMaterial::findMaterialByIorAndAbbe") {
         {LensMaterialId::SCHOTT_N_BAF52, 1.51, 5.5, {}},
     };
 
-    std::sort(testMaterials.begin(), testMaterials.end(),
-              [](const NLensMaterial &a, const NLensMaterial &b) { return a.ior < b.ior; }); // todo extract predicates
+    std::sort(testMaterials.begin(), testMaterials.end(), NLensMaterial::compareByIor);
 
     SECTION("should find material with exact ior and abbe no") {
         const auto material = NLensMaterial::findMaterialByIorAndAbbe(1.4, 5, testMaterials);

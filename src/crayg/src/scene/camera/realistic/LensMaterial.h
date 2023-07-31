@@ -171,6 +171,14 @@ struct NLensMaterial {
     static std::optional<NLensMaterial> findMaterialByIorAndAbbe(float ior, float abbeNo);
     static std::optional<NLensMaterial> findMaterialByIorAndAbbe(float ior, float abbeNo,
                                                                  const std::vector<NLensMaterial> &allMaterials);
+
+    static bool compareByIor(const NLensMaterial &a, const NLensMaterial &b) {
+        return a.ior < b.ior;
+    }
+
+    static bool compareByAbbeNo(const NLensMaterial &a, const NLensMaterial &b) {
+        return a.abbeNo < b.abbeNo;
+    }
 };
 
 }

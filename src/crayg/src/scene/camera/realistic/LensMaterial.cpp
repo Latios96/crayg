@@ -108,9 +108,7 @@ std::optional<NLensMaterial> NLensMaterial::findMaterialByIorAndAbbe(float ior, 
         return std::nullopt;
     }
 
-    std::sort(iorResults.begin(), iorResults.end(), [](const NLensMaterial &a, const NLensMaterial &b) {
-        return a.abbeNo < b.abbeNo;
-    }); // todo extract predicates
+    std::sort(iorResults.begin(), iorResults.end(), NLensMaterial::compareByAbbeNo);
 
     std::vector<NLensMaterial> abbeNoResults;
     const float minimalAbbeNoError = findElementsWithSmalledDifference<NLensMaterial>(
