@@ -326,6 +326,7 @@ target_include_directories(crayg PUBLIC
 if (WIN32)
     target_compile_definitions(crayg PUBLIC NOMINMAX _USE_MATH_DEFINES)
 endif ()
+target_compile_definitions(crayg PUBLIC MAGIC_ENUM_RANGE_MAX=256)
 
 add_custom_command(TARGET crayg PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_LIB_DIRS_USD}/usd ${CMAKE_BINARY_DIR}/bin/usd)
