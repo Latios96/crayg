@@ -67,8 +67,8 @@ std::vector<LensMaterial> &getAllMaterialsSortedByIor() {
     return allMaterialsSortedByIor;
 }
 
-std::optional<LensMaterial> LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo) {
-    return LensMaterial::findMaterialByIorAndAbbe(ior, abbeNo, getAllMaterialsSortedByIor());
+LensMaterial LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo, MaterialSearchError *searchError) {
+    return LensMaterial::findMaterialByIorAndAbbe(ior, abbeNo, searchError, getAllMaterialsSortedByIor());
 }
 
 template <typename T>
@@ -110,18 +110,18 @@ float findElementsWithSmalledDifference(const std::vector<T> &elements, std::vec
     return minimalError;
 }
 
-std::optional<LensMaterial> LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo,
-                                                                   const std::vector<LensMaterial> &allMaterials) {
+LensMaterial LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo, MaterialSearchError *searchError,
+                                                    const std::vector<LensMaterial> &allMaterials) {
     if (ior == 1) {
+        if (searchError) {
+            searchError->iorError = 0;
+            searchError->abbeNoError = 0;
+        }
         return createMaterialById(LensMaterialId::AIR);
     }
     std::vector<LensMaterial> iorResults;
     const float minimalIorError = findElementsWithSmalledDifference<LensMaterial>(
         allMaterials, iorResults, [ior](const LensMaterial &material) { return std::abs(material.ior - ior); });
-
-    if (minimalIorError > 0.1) {
-        return std::nullopt;
-    }
 
     std::sort(iorResults.begin(), iorResults.end(), LensMaterial::compareByAbbeNo);
 
@@ -129,10 +129,12 @@ std::optional<LensMaterial> LensMaterial::findMaterialByIorAndAbbe(float ior, fl
     const float minimalAbbeNoError = findElementsWithSmalledDifference<LensMaterial>(
         iorResults, abbeNoResults,
         [abbeNo](const LensMaterial &material) { return std::abs(material.abbeNo - abbeNo); });
-    if (minimalAbbeNoError > 1) {
-        return std::nullopt;
+
+    if (searchError) {
+        searchError->iorError = minimalIorError;
+        searchError->abbeNoError = minimalAbbeNoError;
     }
-    Logger::info("minimalIorError: {} minimalAbbeNoError: {}", minimalIorError, minimalAbbeNoError);
+
     return abbeNoResults[0];
 }
 
@@ -145,5 +147,9 @@ float LensMaterial::getIor(float lambda_nm) const {
 
 float LensMaterial::sellmeierTerm(float lambdaSquared, int index) const {
     return sellmeierCoefficients[index] * lambdaSquared / (lambdaSquared - sellmeierCoefficients[index + 3]);
+}
+
+bool LensMaterial::MaterialSearchError::isCriticalError() const {
+    return iorError > 0.1 || abbeNoError >= 1;
 }
 }

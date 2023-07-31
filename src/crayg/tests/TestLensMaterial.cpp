@@ -14,61 +14,63 @@ TEST_CASE("LensMaterial::findMaterialByIorAndAbbe") {
 
     std::sort(testMaterials.begin(), testMaterials.end(), LensMaterial::compareByIor);
 
-    SECTION("should return AIR material") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 5, testMaterials);
+    LensMaterial::MaterialSearchError searchError;
 
-        REQUIRE(material->id == LensMaterialId::SCHOTT_LF5HTI);
+    SECTION("should return AIR material") {
+        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 5, &searchError, testMaterials);
+
+        REQUIRE(material.id == LensMaterialId::SCHOTT_LF5HTI);
     }
 
     SECTION("should find material with exact ior and abbe no") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 5, testMaterials);
+        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 5, &searchError, testMaterials);
 
-        REQUIRE(material->id == LensMaterialId::SCHOTT_LF5HTI);
+        REQUIRE(material.id == LensMaterialId::SCHOTT_LF5HTI);
     }
 
     SECTION("should find material with multiple exact ior and roughly matching abbe no") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 5.015, testMaterials);
+        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 5.015, &searchError, testMaterials);
 
-        REQUIRE(material->id == LensMaterialId::SCHOTT_LLF1);
+        REQUIRE(material.id == LensMaterialId::SCHOTT_LLF1);
     }
 
     SECTION("should find material with roughly matching ior and roughly matching abbe no") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4101, 5.015, testMaterials);
+        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.4101, 5.015, &searchError, testMaterials);
 
-        REQUIRE(material->id == LensMaterialId::SCHOTT_N_BAF10);
+        REQUIRE(material.id == LensMaterialId::SCHOTT_N_BAF10);
     }
 
     SECTION("should find material with roughly matching ior if its the last material") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.515, 5.015, testMaterials);
+        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.515, 5.015, &searchError, testMaterials);
 
-        REQUIRE(material->id == LensMaterialId::SCHOTT_N_BAF52);
+        REQUIRE(material.id == LensMaterialId::SCHOTT_N_BAF52);
     }
     SECTION("should find material with roughly matching ior if its the first material") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.39, 5, testMaterials);
+        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.39, 5, &searchError, testMaterials);
 
-        REQUIRE(material->id == LensMaterialId::SCHOTT_LF5HTI);
+        REQUIRE(material.id == LensMaterialId::SCHOTT_LF5HTI);
     }
 
-    SECTION("should not find material if ior difference is too large") {
-        auto material = LensMaterial::findMaterialByIorAndAbbe(1.62, 5.015, testMaterials);
-        REQUIRE(material == std::nullopt);
+    SECTION("should find material with search error if ior difference is too large") {
+        LensMaterial::findMaterialByIorAndAbbe(1.62, 5.015, &searchError, testMaterials);
+        REQUIRE(searchError.isCriticalError());
 
-        material = LensMaterial::findMaterialByIorAndAbbe(1.29, 5.015, testMaterials);
-        REQUIRE(material == std::nullopt);
+        LensMaterial::findMaterialByIorAndAbbe(1.29, 5.015, &searchError, testMaterials);
+        REQUIRE(searchError.isCriticalError());
     }
 
-    SECTION("should not find material if abbe no difference is too large") {
-        auto material = LensMaterial::findMaterialByIorAndAbbe(1.4, 3.9, testMaterials);
-        REQUIRE(material == std::nullopt);
+    SECTION("should find material with search error if abbe no difference is too large") {
+        LensMaterial::findMaterialByIorAndAbbe(1.4, 3.9, &searchError, testMaterials);
+        REQUIRE(searchError.isCriticalError());
 
-        material = LensMaterial::findMaterialByIorAndAbbe(1.4, 6.1, testMaterials);
-        REQUIRE(material == std::nullopt);
+        LensMaterial::findMaterialByIorAndAbbe(1.4, 6.1, &searchError, testMaterials);
+        REQUIRE(searchError.isCriticalError());
     }
 
     SECTION("should find material in generated code") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.54814, 45.47);
+        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.54814, 45.47, &searchError);
 
-        REQUIRE(material->id == LensMaterialId::SCHOTT_LLF1);
+        REQUIRE(material.id == LensMaterialId::SCHOTT_LLF1);
     }
 }
 

@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSMATERIAL_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSMATERIAL_H_
 
+#include "utils/DtoUtils.h"
 #include "utils/EnumUtils.h"
 #include <ostream>
 
@@ -28,9 +29,16 @@ struct LensMaterial {
 
     static std::vector<LensMaterial> &getAllMaterials();
     static LensMaterial createMaterialById(LensMaterialId lensMaterialId);
-    static std::optional<LensMaterial> findMaterialByIorAndAbbe(float ior, float abbeNo);
-    static std::optional<LensMaterial> findMaterialByIorAndAbbe(float ior, float abbeNo,
-                                                                const std::vector<LensMaterial> &allMaterials);
+
+    struct MaterialSearchError {
+        float iorError;
+        float abbeNoError;
+        bool isCriticalError() const;
+    };
+
+    static LensMaterial findMaterialByIorAndAbbe(float ior, float abbeNo, MaterialSearchError *searchError);
+    static LensMaterial findMaterialByIorAndAbbe(float ior, float abbeNo, MaterialSearchError *searchError,
+                                                 const std::vector<LensMaterial> &allMaterials);
 
     static bool compareByIor(const LensMaterial &a, const LensMaterial &b) {
         return a.ior < b.ior;
