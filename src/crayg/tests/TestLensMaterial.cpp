@@ -57,6 +57,12 @@ TEST_CASE("LensMaterial::findMaterialByIorAndAbbe") {
         material = NLensMaterial::findMaterialByIorAndAbbe(1.4, 6.1, testMaterials);
         REQUIRE(material == std::nullopt);
     }
+
+    SECTION("should find material in generated code") {
+        const auto material = NLensMaterial::findMaterialByIorAndAbbe(1.54814, 45.47);
+
+        REQUIRE(material->id == LensMaterialId::SCHOTT_LLF1);
+    }
 }
 
 }

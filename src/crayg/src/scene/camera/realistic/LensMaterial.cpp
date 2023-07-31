@@ -55,8 +55,14 @@ std::vector<NLensMaterial> &NLensMaterial::getAllMaterials() {
     return allMaterials;
 }
 
+std::vector<NLensMaterial> &getAllMaterialsSortedByIor() {
+    static std::vector<NLensMaterial> allMaterialsSortedByIor = collectAllMaterials();
+    std::sort(allMaterialsSortedByIor.begin(), allMaterialsSortedByIor.end(), NLensMaterial::compareByIor);
+    return allMaterialsSortedByIor;
+}
+
 std::optional<NLensMaterial> NLensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo) {
-    return NLensMaterial::findMaterialByIorAndAbbe(ior, abbeNo, getAllMaterials());
+    return NLensMaterial::findMaterialByIorAndAbbe(ior, abbeNo, getAllMaterialsSortedByIor());
 }
 
 template <typename T>
