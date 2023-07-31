@@ -35,10 +35,6 @@ bool intersectCylindricalYElement(float radius, float zCenter, const Ray &ray, f
 bool intersectCylindricalXElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
 bool intersectPlanarElement(float zCenter, const Ray &ray, float *t, Vector3f *n);
 
-// cylinder x
-// cylinder y
-// planar
-
 } // crayg
 
 template <> struct fmt::formatter<crayg::LensElement> : ostream_formatter {};
