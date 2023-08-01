@@ -38,6 +38,7 @@ class Renderer {
                         const std::vector<ImageBucket> &bucketSequence);
     void renderBucket(const ImageBucket &imageBucket);
     Color renderSample(const Vector2f &samplePos);
+    Color renderSample(const Vector2f &samplePos, float waveLength);
 
     std::unique_ptr<AbstractIntegrator> integrator;
     std::unique_ptr<BucketSampler> bucketSampler;

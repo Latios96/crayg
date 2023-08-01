@@ -105,7 +105,17 @@ void Renderer::init() {
 }
 
 Color Renderer::renderSample(const Vector2f &samplePos) {
-    auto rayWithWeight = cameraModel->createPrimaryRay(samplePos.x, samplePos.y, FraunhoferLines::SODIUM.wavelength);
+    if (scene.renderSettings.useSpectralLensing) {
+        const float r = renderSample(samplePos, WavelengthsRgb::R).r;
+        const float g = renderSample(samplePos, WavelengthsRgb::G).g;
+        const float b = renderSample(samplePos, WavelengthsRgb::B).b;
+        return {r, g, b};
+    }
+    return renderSample(samplePos, FraunhoferLines::SODIUM.wavelength);
+}
+
+Color Renderer::renderSample(const Vector2f &samplePos, float waveLength) {
+    auto rayWithWeight = cameraModel->createPrimaryRay(samplePos.x, samplePos.y, waveLength);
     if (!rayWithWeight.ray) {
         return Color::createBlack();
     }
