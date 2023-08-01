@@ -61,6 +61,8 @@ void ImageMetadataCollector::collectRenderSettingsIfPresent(ImageMetadata &image
                         scene->renderSettings.adaptiveMaxError);
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_SAMPLES_PER_ADAPTIVE_PASS,
                         scene->renderSettings.samplesPerAdaptivePass);
+    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_USE_SPECTRAL_LENSING,
+                        scene->renderSettings.useSpectralLensing ? 1 : 0);
     collectIntegratorSettings(imageMetadata);
 }
 

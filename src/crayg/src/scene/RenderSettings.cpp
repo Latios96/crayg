@@ -6,10 +6,11 @@ namespace crayg {
 RenderSettings::RenderSettings(const Resolution &resolution, int maxSamples, IntegratorType integratorType,
                                IntegratorSettings integratorSettings, IntersectorType intersectorType,
                                BucketSequenceType bucketSequenceType, BucketSamplerType bucketSamplerType,
-                               float maxError, int samplesPerAdaptivePass)
+                               float maxError, int samplesPerAdaptivePass, bool useSpectralLensing)
     : resolution(resolution), maxSamples(maxSamples), integratorType(integratorType),
       integratorSettings(integratorSettings), intersectorType(intersectorType), bucketSequenceType(bucketSequenceType),
-      bucketSamplerType(bucketSamplerType), adaptiveMaxError(maxError), samplesPerAdaptivePass(samplesPerAdaptivePass) {
+      bucketSamplerType(bucketSamplerType), adaptiveMaxError(maxError), samplesPerAdaptivePass(samplesPerAdaptivePass),
+      useSpectralLensing(useSpectralLensing) {
 }
 
 RenderSettings::RenderSettings() : resolution(Resolution(0, 0)) {
@@ -21,14 +22,15 @@ RenderSettings::RenderSettings(const RenderSettings &renderSettings)
       integratorType(renderSettings.integratorType), integratorSettings(renderSettings.integratorSettings),
       intersectorType(renderSettings.intersectorType), bucketSequenceType(renderSettings.bucketSequenceType),
       bucketSamplerType(renderSettings.bucketSamplerType), adaptiveMaxError(renderSettings.adaptiveMaxError),
-      samplesPerAdaptivePass(renderSettings.samplesPerAdaptivePass) {
+      samplesPerAdaptivePass(renderSettings.samplesPerAdaptivePass),
+      useSpectralLensing(renderSettings.useSpectralLensing) {
 }
 
 bool RenderSettings::operator==(const RenderSettings &rhs) const {
     return resolution == rhs.resolution && maxSamples == rhs.maxSamples && integratorType == rhs.integratorType &&
            integratorSettings == rhs.integratorSettings && intersectorType == rhs.intersectorType &&
            bucketSamplerType == rhs.bucketSamplerType && adaptiveMaxError == rhs.adaptiveMaxError &&
-           samplesPerAdaptivePass == rhs.samplesPerAdaptivePass;
+           samplesPerAdaptivePass == rhs.samplesPerAdaptivePass && useSpectralLensing == rhs.useSpectralLensing;
 }
 
 bool RenderSettings::operator!=(const RenderSettings &rhs) const {
@@ -37,7 +39,8 @@ bool RenderSettings::operator!=(const RenderSettings &rhs) const {
 
 RenderSettings RenderSettings::createDefault() {
     return RenderSettings(crayg::Resolution(1280, 720), 4, IntegratorType::RAYTRACING, IntegratorSettings(),
-                          IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f, 8);
+                          IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f, 8,
+                          false);
 }
 
 std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings) {
@@ -51,6 +54,7 @@ std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings)
               .addMember("bucketSamplerType", renderSettings.bucketSamplerType)
               .addMember("adaptiveMaxError", renderSettings.adaptiveMaxError)
               .addMember("samplesPerAdaptivePass", renderSettings.samplesPerAdaptivePass)
+              .addMember("useSpectralLensing", renderSettings.useSpectralLensing)
               .finish();
     return os;
 }

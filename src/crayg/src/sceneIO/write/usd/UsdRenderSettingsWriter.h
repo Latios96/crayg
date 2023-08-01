@@ -23,6 +23,7 @@ class UsdRenderSettingsWriter {
     void writeBucketSamplerType(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeAdaptiveMaxError(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeSamplesPerAdaptivePass(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeUseSpectralLensing(const pxr::UsdRenderSettings &usdRenderSettings) const;
 };
 
 } // crayg

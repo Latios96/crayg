@@ -18,7 +18,7 @@ class RenderSettings {
     explicit RenderSettings(const Resolution &resolution, int maxSamples, IntegratorType integratorType,
                             IntegratorSettings integratorSettings, IntersectorType intersectorType,
                             BucketSequenceType bucketSequenceType, BucketSamplerType bucketSamplerType, float maxError,
-                            int samplesPerAdaptivePass);
+                            int samplesPerAdaptivePass, bool useSpectralLensing);
 
     static RenderSettings createDefault();
 
@@ -36,6 +36,7 @@ class RenderSettings {
     BucketSamplerType bucketSamplerType = BucketSamplerType::ADAPTIVE;
     float adaptiveMaxError = 0.007f;
     int samplesPerAdaptivePass = 8;
+    bool useSpectralLensing = false;
 };
 
 }

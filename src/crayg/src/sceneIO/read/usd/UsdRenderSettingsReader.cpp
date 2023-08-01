@@ -21,6 +21,7 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     const BucketSamplerType bucketSamplerType = readBucketSamplerType();
     const float adaptiveMaxError = readAdaptiveMaxError();
     const int samplesPerAdaptivePass = readSamplesPerAdaptivePass();
+    const int useSpectralLensing = readUseSpectralLensing();
 
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
@@ -31,6 +32,7 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     renderSettings->bucketSamplerType = bucketSamplerType;
     renderSettings->adaptiveMaxError = adaptiveMaxError;
     renderSettings->samplesPerAdaptivePass = samplesPerAdaptivePass;
+    renderSettings->useSpectralLensing = useSpectralLensing;
 
     return renderSettings;
 }
@@ -116,6 +118,11 @@ float UsdRenderSettingsReader::readAdaptiveMaxError() {
 int UsdRenderSettingsReader::readSamplesPerAdaptivePass() {
     return UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "samplesPerAdaptivePass",
                                                     RenderSettings::createDefault().samplesPerAdaptivePass);
+}
+
+int UsdRenderSettingsReader::readUseSpectralLensing() {
+    return UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "useSpectralLensing",
+                                                    RenderSettings::createDefault().useSpectralLensing);
 }
 
 }

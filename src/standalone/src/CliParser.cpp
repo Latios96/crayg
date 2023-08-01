@@ -62,6 +62,9 @@ CliParseResult CliParser::parse() {
     std::optional<int> samplesPerAdaptivePass;
     app.add_option("--samplesPerAdaptivePass", samplesPerAdaptivePass, "Override samples per adaptive pass");
 
+    std::optional<bool> useSpectralLensing;
+    app.add_flag("--useSpectralLensing", useSpectralLensing, "Override if spectral lens simulation should be used");
+
     try {
         app.parse(argc, argv);
 
@@ -89,6 +92,9 @@ CliParseResult CliParser::parse() {
         }
         if (samplesPerAdaptivePass) {
             renderSettingsOverride.samplesPerAdaptivePass = samplesPerAdaptivePass.value();
+        }
+        if (useSpectralLensing) {
+            renderSettingsOverride.useSpectralLensing = useSpectralLensing.value();
         }
 
         return CliParseResult(CliArgs(sceneFileName, imageOutputPath,

@@ -28,6 +28,7 @@ class UsdRenderSettingsReader : public BaseUsdReader<pxr::UsdRenderSettings, Ren
     BucketSamplerType readBucketSamplerType();
     float readAdaptiveMaxError();
     int readSamplesPerAdaptivePass();
+    int readUseSpectralLensing();
 };
 
 }

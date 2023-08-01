@@ -15,6 +15,7 @@ const std::string ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SAMPLER_TYPE = "cr
 const std::string ImageMetadataTokens::RENDER_SETTINGS_ADAPTIVE_MAX_ERROR = "crayg/renderSettings/adaptiveMaxError";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_SAMPLES_PER_ADAPTIVE_PASS =
     "crayg/renderSettings/samplesPerAdaptivePass";
+const std::string ImageMetadataTokens::RENDER_SETTINGS_USE_SPECTRAL_LENSING = "crayg/renderSettings/useSpectralLensing";
 const std::string ImageMetadataTokens::CAMERA_NAME = "crayg/camera/name";
 const std::string ImageMetadataTokens::CAMERA_FOCAL_LENGTH = "crayg/camera/focalLength";
 const std::string ImageMetadataTokens::CAMERA_FILM_BACK_SIZE = "crayg/camera/filmBackSize";

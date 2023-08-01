@@ -16,6 +16,7 @@ struct CliRenderSettingsOverride {
     std::optional<BucketSamplerType> bucketSamplerType;
     std::optional<float> adaptiveMaxError;
     std::optional<int> samplesPerAdaptivePass;
+    std::optional<bool> useSpectralLensing;
 
     RenderSettings resolveOverrides(const RenderSettings &renderSettings) const;
 

@@ -23,6 +23,7 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
     writeBucketSamplerType(usdRenderSettings);
     writeAdaptiveMaxError(usdRenderSettings);
     writeSamplesPerAdaptivePass(usdRenderSettings);
+    writeUseSpectralLensing(usdRenderSettings);
 
     return usdRenderSettings;
 }
@@ -76,6 +77,11 @@ void UsdRenderSettingsWriter::writeAdaptiveMaxError(const pxr::UsdRenderSettings
 void UsdRenderSettingsWriter::writeSamplesPerAdaptivePass(const pxr::UsdRenderSettings &usdRenderSettings) const {
     UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "samplesPerAdaptivePass",
                                     renderSettings.samplesPerAdaptivePass);
+}
+
+void UsdRenderSettingsWriter::writeUseSpectralLensing(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "useSpectralLensing",
+                                    renderSettings.useSpectralLensing ? 1 : 0);
 }
 
 } // crayg

@@ -22,13 +22,13 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     resolvedRenderSettings.adaptiveMaxError = adaptiveMaxError.value_or(renderSettings.adaptiveMaxError);
     resolvedRenderSettings.samplesPerAdaptivePass =
         samplesPerAdaptivePass.value_or(renderSettings.samplesPerAdaptivePass);
-
+    resolvedRenderSettings.useSpectralLensing = useSpectralLensing.value_or(renderSettings.useSpectralLensing);
     return resolvedRenderSettings;
 }
 
 bool CliRenderSettingsOverride::hasAnyOverrides() const {
     return resolution || maxSamples || integratorType || intersectorType || bucketSequenceType || bucketSamplerType ||
-           adaptiveMaxError || samplesPerAdaptivePass;
+           adaptiveMaxError || samplesPerAdaptivePass || useSpectralLensing;
 }
 
 std::string CliRenderSettingsOverride::reportOverrides() const {
@@ -56,6 +56,9 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
     }
     if (samplesPerAdaptivePass) {
         report.push_back(fmt::format(R"(samplesPerAdaptivePass -> {})", *samplesPerAdaptivePass));
+    }
+    if (useSpectralLensing) {
+        report.push_back(fmt::format(R"(useSpectralLensing -> {})", *useSpectralLensing));
     }
     return boost::algorithm::join(report, ", ");
 }

@@ -26,6 +26,7 @@ class ImageMetadataTokens {
     static const std::string RENDER_SETTINGS_BUCKET_SAMPLER_TYPE;
     static const std::string RENDER_SETTINGS_ADAPTIVE_MAX_ERROR;
     static const std::string RENDER_SETTINGS_SAMPLES_PER_ADAPTIVE_PASS;
+    static const std::string RENDER_SETTINGS_USE_SPECTRAL_LENSING;
     static const std::string CAMERA_NAME;
     static const std::string CAMERA_FOCAL_LENGTH;
     static const std::string CAMERA_FILM_BACK_SIZE;
