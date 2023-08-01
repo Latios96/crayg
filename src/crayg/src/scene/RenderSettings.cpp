@@ -1,4 +1,5 @@
 #include "RenderSettings.h"
+#include <utils/ToStringHelper.h>
 
 namespace crayg {
 
@@ -37,6 +38,21 @@ bool RenderSettings::operator!=(const RenderSettings &rhs) const {
 RenderSettings RenderSettings::createDefault() {
     return RenderSettings(crayg::Resolution(1280, 720), 4, IntegratorType::RAYTRACING, IntegratorSettings(),
                           IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f, 8);
+}
+
+std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings) {
+    os << ToStringHelper("RenderSettings")
+              .addMember("resolution", renderSettings.resolution)
+              .addMember("maxSamples", renderSettings.maxSamples)
+              .addMember("integratorType", renderSettings.integratorType)
+              .addMember("integratorSettings", renderSettings.integratorSettings)
+              .addMember("intersectorType", renderSettings.intersectorType)
+              .addMember("bucketSequenceType", renderSettings.bucketSequenceType)
+              .addMember("bucketSamplerType", renderSettings.bucketSamplerType)
+              .addMember("adaptiveMaxError", renderSettings.adaptiveMaxError)
+              .addMember("samplesPerAdaptivePass", renderSettings.samplesPerAdaptivePass)
+              .finish();
+    return os;
 }
 
 }

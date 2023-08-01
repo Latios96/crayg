@@ -26,20 +26,7 @@ class RenderSettings {
     bool operator==(const RenderSettings &rhs) const;
     bool operator!=(const RenderSettings &rhs) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings) {
-        os << ToStringHelper("RenderSettings")
-                  .addMember("resolution", renderSettings.resolution)
-                  .addMember("maxSamples", renderSettings.maxSamples)
-                  .addMember("integratorType", renderSettings.integratorType)
-                  .addMember("integratorSettings", renderSettings.integratorSettings)
-                  .addMember("intersectorType", renderSettings.intersectorType)
-                  .addMember("bucketSequenceType", renderSettings.bucketSequenceType)
-                  .addMember("bucketSamplerType", renderSettings.bucketSamplerType)
-                  .addMember("adaptiveMaxError", renderSettings.adaptiveMaxError)
-                  .addMember("samplesPerAdaptivePass", renderSettings.samplesPerAdaptivePass)
-                  .finish();
-        return os;
-    }
+    friend std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings);
 
     Resolution resolution;
     int maxSamples;
