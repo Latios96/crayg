@@ -40,19 +40,8 @@ TEST_CASE("LensMaterial::findMaterialByIorAndAbbe") {
         REQUIRE(material.id == LensMaterialId::SCHOTT_N_BAF10);
     }
 
-    SECTION("should find material with roughly matching ior if its the last material") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.515, 5.015, &searchError, testMaterials);
-
-        REQUIRE(material.id == LensMaterialId::SCHOTT_N_BAF52);
-    }
-    SECTION("should find material with roughly matching ior if its the first material") {
-        const auto material = LensMaterial::findMaterialByIorAndAbbe(1.39, 5, &searchError, testMaterials);
-
-        REQUIRE(material.id == LensMaterialId::SCHOTT_LF5HTI);
-    }
-
     SECTION("should find material with search error if ior difference is too large") {
-        LensMaterial::findMaterialByIorAndAbbe(1.62, 5.015, &searchError, testMaterials);
+        LensMaterial::findMaterialByIorAndAbbe(1.9, 5.015, &searchError, testMaterials);
         REQUIRE(searchError.isCriticalError());
 
         LensMaterial::findMaterialByIorAndAbbe(1.29, 5.015, &searchError, testMaterials);

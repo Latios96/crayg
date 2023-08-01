@@ -39,7 +39,8 @@ void CameraLens::initializeLensMaterials() {
             continue;
         }
         auto &lensElement = elements[i];
-        if (lensElement.material.id != LensMaterialId::UNKNOWN && lensElement.material.id != LensMaterialId::AIR) {
+        const bool isKnownMaterial = lensElement.material.id != LensMaterialId::UNKNOWN;
+        if (isKnownMaterial) {
             lensElement.material = LensMaterial::createMaterialById(lensElement.material.id);
             continue;
         }

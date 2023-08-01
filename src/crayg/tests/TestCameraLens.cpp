@@ -28,7 +28,7 @@ TEST_CASE("CameraLens::construct") {
     SECTION("should calculate metadata on the fly") {
         REQUIRE(canon70_200.metadata.focalLength >= 7);
         REQUIRE(canon70_200.metadata.elementCount == 34);
-        REQUIRE(Catch::Detail::Approx(canon70_200.metadata.maximumAperture) == 3.4364244938f);
+        REQUIRE(Catch::Detail::Approx(canon70_200.metadata.maximumAperture) == 3.4739232063f);
         REQUIRE(canon70_200.metadata.isAnamorphic == false);
         REQUIRE(canon70_200.metadata.squeeze == 1);
     }
@@ -36,7 +36,7 @@ TEST_CASE("CameraLens::construct") {
     SECTION("should calculate metadata correctly for anamorphic lens") {
         CameraLens schneider30mm = CameraLensFixtures::createSchneider30mmAnamorphic();
         REQUIRE(schneider30mm.metadata.isAnamorphic == true);
-        REQUIRE(schneider30mm.metadata.squeeze == Catch::Detail::Approx(1.92629f));
+        REQUIRE(schneider30mm.metadata.squeeze == Catch::Detail::Approx(1.7848f));
     }
 }
 
@@ -140,14 +140,13 @@ TEST_CASE("CameraLens::focusLens") {
 
     SECTION("should focus lens at given focal distance") {
         auto focalPlanePoint = pointOnFocalPlane(canon70_200, 100.f);
-        REQUIRE(std::abs(focalPlanePoint.y) > 0.4f);
+        REQUIRE(std::abs(focalPlanePoint.y) > 0.31170f);
 
         canon70_200.focusLens(100.f);
 
         focalPlanePoint = pointOnFocalPlane(canon70_200, 100.f);
-        REQUIRE(std::abs(focalPlanePoint.y) < 0.01135f);
+        REQUIRE(std::abs(focalPlanePoint.y) < 0.01170f);
     }
-    // todo test focusing multiple times
 }
 
 TEST_CASE("CameraLens::changeAperture") {

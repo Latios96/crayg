@@ -119,23 +119,27 @@ LensMaterial LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo, Mat
         }
         return createMaterialById(LensMaterialId::AIR);
     }
-    std::vector<LensMaterial> iorResults;
-    const float minimalIorError = findElementsWithSmalledDifference<LensMaterial>(
-        allMaterials, iorResults, [ior](const LensMaterial &material) { return std::abs(material.ior - ior); });
 
-    std::sort(iorResults.begin(), iorResults.end(), LensMaterial::compareByAbbeNo);
-
-    std::vector<LensMaterial> abbeNoResults;
-    const float minimalAbbeNoError = findElementsWithSmalledDifference<LensMaterial>(
-        iorResults, abbeNoResults,
-        [abbeNo](const LensMaterial &material) { return std::abs(material.abbeNo - abbeNo); });
-
-    if (searchError) {
-        searchError->iorError = minimalIorError;
-        searchError->abbeNoError = minimalAbbeNoError;
+    float minDistance = std::numeric_limits<float>::max();
+    int index = -1;
+    for (int i = 0; i < allMaterials.size(); i++) {
+        const auto &material = allMaterials[i];
+        const float iorDifference = material.ior - ior;
+        const float abbeNoDifference = material.abbeNo - abbeNo;
+        const float distance = std::sqrt(iorDifference * iorDifference + abbeNoDifference * abbeNoDifference);
+        if (distance < minDistance) {
+            minDistance = distance;
+            index = i;
+        }
     }
 
-    return abbeNoResults[0];
+    const auto &material = allMaterials[index];
+    const float iorDifference = material.ior - ior;
+    const float abbeNoDifference = material.abbeNo - abbeNo;
+    searchError->iorError = iorDifference;
+    searchError->abbeNoError = abbeNoDifference;
+
+    return material;
 }
 
 float LensMaterial::getIor(float lambda_nm) const {
@@ -150,6 +154,6 @@ float LensMaterial::sellmeierTerm(float lambdaSquared, int index) const {
 }
 
 bool LensMaterial::MaterialSearchError::isCriticalError() const {
-    return iorError > 0.1 || abbeNoError >= 1;
+    return std::abs(iorError) > 0.1 || std::abs(abbeNoError) >= 1;
 }
 }
