@@ -6,9 +6,8 @@
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"
 #include "renderer/bucketsamplers/BucketSamplerType.h"
-#include "spdlog/fmt/ostr.h"
 #include <basics/Resolution.h>
-#include <utils/ToStringHelper.h>
+#include <fmt/ostream.h>
 
 namespace crayg {
 
@@ -40,5 +39,7 @@ class RenderSettings {
 };
 
 }
+
+template <> struct fmt::formatter<crayg::RenderSettings> : ostream_formatter {};
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
