@@ -2,7 +2,6 @@
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETQUEUES_BUCKETQUEUE_H_
 
 #include "BucketQueueMode.h"
-#include "FollowMouseBucketQueue.h"
 #include "FollowSequenceBucketQueue.h"
 #include "image/ImageBucket.h"
 #include <mutex>
