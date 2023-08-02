@@ -4,6 +4,8 @@ Focal Length: 72.1
 Maximum F Number: 3.43
 Squeeze: 1
 Elements Count: 34
+Patent: US Patent 5537259, Example 1
+Patent Location: https://patents.google.com/patent/US5537259A/en?oq=US+Patent+5537259
 [Elements]
 Radius    Thickness IOR  Housing-Radius Abbe-No Material        Geometry  
 312       2.8       1.75 38             35      SCHOTT_LAFN7    SPHERICAL 
