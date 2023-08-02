@@ -44,6 +44,10 @@ void CameraLens::initializeLensMaterials() {
             lensElement.material = LensMaterial::createMaterialById(lensElement.material.id);
             continue;
         }
+        if (lensElement.abbeNumber == 0) {
+            lensElement.material.ior = lensElement.ior;
+            continue;
+        }
         LensMaterial::MaterialSearchError searchError{};
         auto material = LensMaterial::findMaterialByIorAndAbbe(lensElement.ior, lensElement.abbeNumber, &searchError);
         if (searchError.isCriticalError()) {

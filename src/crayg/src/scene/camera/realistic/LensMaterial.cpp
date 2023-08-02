@@ -143,6 +143,9 @@ LensMaterial LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo, Mat
 }
 
 float LensMaterial::getIor(float lambda_nm) const {
+    if (abbeNo == 0) {
+        return ior;
+    }
     const float lambda_micrometer = lambda_nm / 1000.f;
     float lambdaSquared = lambda_micrometer * lambda_micrometer;
     return std::sqrt(1 + sellmeierTerm(lambdaSquared, 0) + sellmeierTerm(lambdaSquared, 1) +
