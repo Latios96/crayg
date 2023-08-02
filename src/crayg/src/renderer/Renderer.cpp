@@ -2,6 +2,7 @@
 #include "GeometryCompiler.h"
 #include "Logger.h"
 #include "SampleAccumulator.h"
+#include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
@@ -17,7 +18,6 @@
 #include <image/imageiterators/buckets/ImageBucketSequences.h>
 #include <memory>
 #include <numeric>
-#include <tbb/concurrent_queue.h>
 #include <tbb/task_group.h>
 
 namespace crayg {
@@ -49,15 +49,18 @@ void Renderer::renderScene() {
 }
 
 void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController,
-                              const std::vector<ImageBucket> &bucketSequence) {
-    tbb::concurrent_queue<ImageBucket> bucketQueue(bucketSequence.begin(), bucketSequence.end());
+                              std::vector<ImageBucket> &bucketSequence) {
+    BucketQueue bucketQueue(bucketSequence);
     tbb::task_group task_group;
 
     for (unsigned int i = 0; i < std::thread::hardware_concurrency(); i++) {
         task_group.run([&bucketQueue, &taskProgressController, this]() {
-            ImageBucket imageBucket;
-            while (bucketQueue.try_pop(imageBucket)) {
-                renderBucket(imageBucket);
+            while (true) {
+                const auto imageBucket = bucketQueue.nextBucket();
+                if (!imageBucket) {
+                    return;
+                }
+                renderBucket(*imageBucket);
                 taskProgressController.iterationDone();
             }
         });

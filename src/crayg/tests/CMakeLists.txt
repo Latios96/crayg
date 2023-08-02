@@ -24,6 +24,7 @@ set(UNIT_TEST_LIST
         TestBoundingBox.cpp
         TestBounds2d.cpp
         TestBucketImageBuffer.cpp
+        TestBucketQueue.cpp
         TestBucketSizeEstimator.cpp
         TestCamera.cpp
         TestCameraLens.cpp
@@ -39,6 +40,7 @@ set(UNIT_TEST_LIST
         TestExitPupilCalculator.cpp
         TestFanTriangulator.cpp
         TestFileSystemUtils.cpp
+        TestFollowSequenceBucketQueue.cpp
         TestGradient.cpp
         TestGroundPlane.cpp
         TestImage.cpp

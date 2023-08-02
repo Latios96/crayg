@@ -35,7 +35,7 @@ class Renderer {
     void renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController,
                       const std::vector<ImageBucket> &bucketSequence);
     void renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController,
-                        const std::vector<ImageBucket> &bucketSequence);
+                        std::vector<ImageBucket> &bucketSequence);
     void renderBucket(const ImageBucket &imageBucket);
     Color renderSample(const Vector2f &samplePos);
     Color renderSample(const Vector2f &samplePos, float waveLength);

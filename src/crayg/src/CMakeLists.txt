@@ -32,6 +32,11 @@ set(crayg_SRCS
         image/ImageAlgorithms.h
         image/ImageBucket.cpp
         image/ImageBucket.h
+        image/imageiterators/buckets/bucketqueues/BucketQueueMode.h
+        image/imageiterators/buckets/bucketqueues/BucketQueue.cpp
+        image/imageiterators/buckets/bucketqueues/BucketQueue.h
+        image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.cpp
+        image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h
         image/imageiterators/buckets/BucketSequence.h
         image/imageiterators/buckets/BucketSequenceType.h
         image/imageiterators/buckets/ImageBucketSequences.cpp
@@ -321,7 +326,7 @@ set(crayg_SRCS
         utils/ToStringHelper.h
         utils/utils.cpp
         utils/utils.h
-        )
+)
 
 
 add_library(crayg STATIC
