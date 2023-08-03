@@ -22,8 +22,8 @@
 
 namespace crayg {
 
-Renderer::Renderer(Scene &scene, OutputDriver &outputDriver, TaskReporter &taskReporter)
-    : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter) {
+Renderer::Renderer(Scene &scene, OutputDriver &outputDriver, TaskReporter &taskReporter, BucketQueue &bucketQueue)
+    : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter), bucketQueue(bucketQueue) {
 }
 
 void Renderer::renderScene() {
@@ -32,15 +32,15 @@ void Renderer::renderScene() {
 
     outputDriver.initialize(requiredImageSpec(scene.renderSettings.resolution));
 
-    std::vector<ImageBucket> bucketSequence =
+    bucketSequence =
         ImageBucketSequences::getSequence(scene.renderSettings.resolution, 8, scene.renderSettings.bucketSequenceType);
     auto taskProgressController = taskReporter.startTask("Rendering", bucketSequence.size());
 
     bool serialRendering = false;
     if (serialRendering) {
-        renderSerial(taskProgressController, bucketSequence);
+        renderSerial(taskProgressController);
     } else {
-        renderParallel(taskProgressController, bucketSequence);
+        renderParallel(taskProgressController);
     }
 
     Logger::info("Rendering done.");
@@ -48,13 +48,12 @@ void Renderer::renderScene() {
     writeImageMetadata(renderTime);
 }
 
-void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController,
-                              std::vector<ImageBucket> &bucketSequence) {
-    BucketQueue bucketQueue(bucketSequence);
+void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController) {
+    bucketQueue.start(bucketSequence);
     tbb::task_group task_group;
 
     for (unsigned int i = 0; i < std::thread::hardware_concurrency(); i++) {
-        task_group.run([&bucketQueue, &taskProgressController, this]() {
+        task_group.run([&taskProgressController, this]() {
             while (true) {
                 const auto imageBucket = bucketQueue.nextBucket();
                 if (!imageBucket) {
@@ -68,10 +67,14 @@ void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProg
     task_group.wait();
 }
 
-void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController,
-                            const std::vector<ImageBucket> &bucketSequence) {
-    for (auto &imageBucket : bucketSequence) {
-        renderBucket(imageBucket);
+void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController) {
+    bucketQueue.start(bucketSequence);
+    while (true) {
+        const auto imageBucket = bucketQueue.nextBucket();
+        if (!imageBucket) {
+            return;
+        }
+        renderBucket(*imageBucket);
         taskProgressController.iterationDone();
     }
 }

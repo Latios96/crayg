@@ -1,6 +1,7 @@
 set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 find_package(Qt5 COMPONENTS Core Widgets REQUIRED CONFIG)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 add_library(crayg-framebuffer
         QtBase.h
@@ -20,6 +21,9 @@ add_library(crayg-framebuffer
         widgets/QtUtils.h
         widgets/QtWidgetsBuilderDsl.cpp
         widgets/QtWidgetsBuilderDsl.h
+        widgets/IconToggleButton.cpp
+        widgets/IconToggleButton.h
+        resources/resources.qrc
         )
 
 target_include_directories(crayg-framebuffer PUBLIC

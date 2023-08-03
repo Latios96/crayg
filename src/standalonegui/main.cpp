@@ -12,6 +12,8 @@
 #include "utils/FileSystemUtils.h"
 #include "widgets/GuiTaskReporter.h"
 #include "widgets/ImageWidgetOutputDriver.h"
+#include <QDirIterator>
+#include <QResource>
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
 #include <outputdrivers/TeeOutputDriver.h>
@@ -79,7 +81,17 @@ int craygMain(int argc, char **argv) {
     ImageOutputDriver imageOutputDriver(image);
     TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
 
-    Renderer renderer(scene, teeOutputDriver, taskReporter);
+    const std::function<Vector2i()> getMousePosition = [imageWidget, &scene]() {
+        auto point = imageWidget->mapFromGlobal(QCursor::pos());
+        const int x = static_cast<float>(point.x()) / imageWidget->width() * scene.renderSettings.resolution.getWidth();
+        const int y =
+            static_cast<float>(point.y()) / imageWidget->height() * scene.renderSettings.resolution.getHeight();
+        return Vector2i(x, y);
+    };
+    BucketQueue bucketQueue(getMousePosition);
+
+    Renderer renderer(scene, teeOutputDriver, taskReporter, bucketQueue);
+    frameBufferWidget.connectToggleFollowMouse([&bucketQueue]() { bucketQueue.switchMode(); });
 
     std::thread renderThread([&image, &renderer, &imageOutputPath]() {
         try {

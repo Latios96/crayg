@@ -15,7 +15,8 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
     sceneReader->read();
 
     TaskReporter taskReporter;
-    Renderer renderer(scene, imageOutputDriver, taskReporter);
+    BucketQueue bucketQueue([]() { return Vector2i(); });
+    Renderer renderer(scene, imageOutputDriver, taskReporter, bucketQueue);
     renderer.renderScene();
 
     ImageWriters::writeImage(myImage, imageOutputPath);

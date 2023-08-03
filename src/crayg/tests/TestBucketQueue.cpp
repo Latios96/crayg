@@ -12,7 +12,8 @@ TEST_CASE("TestBucketQueue::construct") {
         {{{0, 0}, 10, 10}, {{0, 10}, 10, 10}, {{0, 20}, 10, 10}, {{0, 30}, 10, 10}, {{0, 40}, 10, 10}});
 
     SECTION("should default to FOLLOW_SEQUENCE ") {
-        BucketQueue bucketQueue(buckets);
+        BucketQueue bucketQueue([]() { return Vector2i(); });
+        bucketQueue.start(buckets);
 
         REQUIRE(bucketQueue.getCurrentMode() == BucketQueue::Mode::FOLLOW_SEQUENCE);
     }
@@ -22,7 +23,8 @@ TEST_CASE("TestBucketQueue::nextBucket") {
     SECTION("should return buckets thread safe") {
         std::vector<ImageBucket> bucketSequence =
             ImageBucketSequences::getSequence(Resolution(1920, 1080), 8, BucketSequenceType::SPIRAL);
-        BucketQueue bucketQueue(bucketSequence);
+        BucketQueue bucketQueue([]() { return Vector2i(); });
+        bucketQueue.start(bucketSequence);
 
         tbb::task_group task_group;
         for (unsigned int i = 0; i < std::thread::hardware_concurrency(); i++) {

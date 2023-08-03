@@ -7,6 +7,7 @@
 #include <QStyle>
 #include <QTimer>
 #include <QTreeWidget>
+
 #include <boost/algorithm/string.hpp>
 
 namespace crayg {
@@ -69,7 +70,11 @@ void FrameBufferWidget::setupUI() {
                                                      channelComboBox->setMaximumWidth(150);
                                                      return channelComboBox;
                                                  },
-                                                 addHStretch()}),
+                                                 addHStretch(),
+                                                 [this]() {
+                                                     followMouseToggle = new IconToggleButton();
+                                                     return followMouseToggle;
+                                                 }}),
                                          this->panAndZoomArea,
                                          inHBox({addHStretch(), progressBarArea(),
                                                  [this]() {
@@ -201,6 +206,10 @@ void FrameBufferWidget::updateTask(TaskReporter::Task task) {
     statusProgressBar->setValue(task.progress());
     statusElapsed->setText(formatElapsed(task.elapsedTime()));
     statusRemaining->setText(formatRemaining(task.estimatedTimeRemaining()));
+}
+
+void FrameBufferWidget::connectToggleFollowMouse(const std::function<void()> &toggle) {
+    QObject::connect(followMouseToggle, &QCheckBox::toggled, [=](bool checked) { toggle(); });
 }
 
 }

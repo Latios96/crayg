@@ -44,7 +44,8 @@ int craygMain(int argc, char *argv[]) {
     ImageOutputDriver imageOutputDriver(myImage);
 
     TaskReporter taskReporter;
-    Renderer renderer(scene, imageOutputDriver, taskReporter);
+    BucketQueue bucketQueue([]() { return Vector2i(); });
+    Renderer renderer(scene, imageOutputDriver, taskReporter, bucketQueue);
     renderer.renderScene();
 
     Logger::info("Writing image to {}..", imageOutputPath);

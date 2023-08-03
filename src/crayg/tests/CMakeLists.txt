@@ -40,6 +40,7 @@ set(UNIT_TEST_LIST
         TestExitPupilCalculator.cpp
         TestFanTriangulator.cpp
         TestFileSystemUtils.cpp
+        TestFollowMouseBucketQueue.cpp
         TestFollowSequenceBucketQueue.cpp
         TestGradient.cpp
         TestGroundPlane.cpp

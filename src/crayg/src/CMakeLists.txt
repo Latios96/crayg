@@ -35,6 +35,8 @@ set(crayg_SRCS
         image/imageiterators/buckets/bucketqueues/BucketQueueMode.h
         image/imageiterators/buckets/bucketqueues/BucketQueue.cpp
         image/imageiterators/buckets/bucketqueues/BucketQueue.h
+        image/imageiterators/buckets/bucketqueues/FollowMouseBucketQueue.cpp
+        image/imageiterators/buckets/bucketqueues/FollowMouseBucketQueue.h
         image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.cpp
         image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h
         image/imageiterators/buckets/BucketSequence.h

@@ -2,6 +2,7 @@ $primary: rgb(46, 169, 222);
 $backgroundColor: rgb(56, 56, 56);
 $backgroundColorHighlight: rgb(91, 91, 91);
 $backgroundColorSelected: rgb(84, 126, 189);
+$backgroundColorSelectedHighlight: rgb(111, 148, 211);
 $disabled: rgb(122, 122, 122);
 $borderHighlight: rgb(126, 126, 126);
 $darkBackground: rgb(42, 42, 42);
@@ -135,4 +136,35 @@ QProgressBar {
 QProgressBar::chunk {
   @include rounded;
   background-color: $primary;
+}
+
+crayg--IconToggleButton {
+  @include rounded;
+  spacing: 0px;
+  padding: 5px;
+}
+
+crayg--IconToggleButton:hover {
+  background-color: $backgroundColorSelectedHighlight;
+}
+
+crayg--IconToggleButton:checked:hover {
+  background-color: $backgroundColorSelectedHighlight;
+}
+
+crayg--IconToggleButton:checked {
+  background-color: $backgroundColorSelected;
+}
+
+crayg--IconToggleButton::indicator {
+  width: 20px;
+  height: 20px;
+}
+
+crayg--IconToggleButton::indicator:unchecked {
+  image: url(:/icons/followMouse.png)
+}
+
+crayg--IconToggleButton::indicator:checked {
+  image: url(:/icons/followMouse.png);
 }

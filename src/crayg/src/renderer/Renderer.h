@@ -2,6 +2,7 @@
 #define CRAYG_RENDERER_H
 
 #include "bucketsamplers/BucketSampler.h"
+#include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
 #include "integrators/AbstractIntegrator.h"
 #include "scene/camera/pinehole/PineHoleCameraModel.h"
 #include "utils/TaskReporter.h"
@@ -19,7 +20,7 @@ namespace crayg {
 
 class Renderer {
   public:
-    Renderer(Scene &scene, OutputDriver &outputDriver, TaskReporter &taskReporter);
+    Renderer(Scene &scene, OutputDriver &outputDriver, TaskReporter &taskReporter, BucketQueue &bucketQueue);
 
     void renderScene();
 
@@ -29,13 +30,13 @@ class Renderer {
     std::unique_ptr<CameraModel> cameraModel;
     std::shared_ptr<SceneIntersector> sceneIntersector;
     TaskReporter &taskReporter;
+    BucketQueue &bucketQueue;
+    std::vector<ImageBucket> bucketSequence;
 
     void init();
 
-    void renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController,
-                      const std::vector<ImageBucket> &bucketSequence);
-    void renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController,
-                        std::vector<ImageBucket> &bucketSequence);
+    void renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController);
+    void renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController);
     void renderBucket(const ImageBucket &imageBucket);
     Color renderSample(const Vector2f &samplePos);
     Color renderSample(const Vector2f &samplePos, float waveLength);

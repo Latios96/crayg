@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_
 #define CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_
 
+#include "IconToggleButton.h"
 #include "ImageWidget.h"
 #include "PanAndZoomArea.h"
 #include "image/ImageMetadata.h"
@@ -23,8 +24,11 @@ class FrameBufferWidget : public QWidget {
     Q_OBJECT
   public:
     FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr) : QWidget(parent), imageWidget(imageWidget) {
+        Q_INIT_RESOURCE(resources);
         setupUI();
     }
+
+    void connectToggleFollowMouse(const std::function<void()> &toggle);
 
     ~FrameBufferWidget() override = default;
   public slots:
@@ -48,6 +52,7 @@ class FrameBufferWidget : public QWidget {
     QLabel *statusElapsed;
     QLabel *statusRemaining;
     QLabel *statusPreviousTask;
+    IconToggleButton *followMouseToggle;
 };
 
 }

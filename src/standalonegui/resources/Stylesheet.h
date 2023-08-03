@@ -121,6 +121,33 @@ QProgressBar::chunk {
   border-top-right-radius: 4px;
   background-color: #2ea9de; }
 
+crayg--IconToggleButton {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  spacing: 0px;
+  padding: 5px; }
+
+crayg--IconToggleButton:hover {
+  background-color: #6f94d3; }
+
+crayg--IconToggleButton:checked:hover {
+  background-color: #6f94d3; }
+
+crayg--IconToggleButton:checked {
+  background-color: #547ebd; }
+
+crayg--IconToggleButton::indicator {
+  width: 20px;
+  height: 20px; }
+
+crayg--IconToggleButton::indicator:unchecked {
+  image: url(:/icons/followMouse.png); }
+
+crayg--IconToggleButton::indicator:checked {
+  image: url(:/icons/followMouse.png); }
+
 )";
 
 #endif // CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
