@@ -64,17 +64,19 @@ void FrameBufferWidget::setupUI() {
     this->panAndZoomArea->setWidget(&imageWidget);
     QObject::connect(panAndZoomArea, &PanAndZoomArea::zoomFactorChanged, this, &FrameBufferWidget::setZoomFactor);
 
-    auto overallLayout = inHBox({inVBox({inHBox({[this]() {
-                                                     channelComboBox = new QComboBox();
-                                                     channelComboBox->setMinimumWidth(150);
-                                                     channelComboBox->setMaximumWidth(150);
-                                                     return channelComboBox;
-                                                 },
-                                                 addHStretch(),
-                                                 [this]() {
-                                                     followMouseToggle = new IconToggleButton();
-                                                     return followMouseToggle;
-                                                 }}),
+    auto overallLayout = inHBox({inVBox({inHBox({
+                                             [this]() {
+                                                 channelComboBox = new QComboBox();
+                                                 channelComboBox->setMinimumWidth(150);
+                                                 channelComboBox->setMaximumWidth(150);
+                                                 return channelComboBox;
+                                             },
+                                             [this]() {
+                                                 followMouseToggle = new IconToggleButton();
+                                                 return followMouseToggle;
+                                             },
+                                             addHStretch(),
+                                         }),
                                          this->panAndZoomArea,
                                          inHBox({addHStretch(), progressBarArea(),
                                                  [this]() {
