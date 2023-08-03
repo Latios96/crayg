@@ -13,6 +13,9 @@ std::optional<ImageBucket> FollowSequenceBucketQueue::nextBucket() {
 }
 
 FollowSequenceBucketQueue::~FollowSequenceBucketQueue() {
+    if (buckets.empty()) {
+        return;
+    }
     if (lastBucketIndex < 0) {
         return;
     }
