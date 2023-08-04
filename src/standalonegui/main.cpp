@@ -112,5 +112,6 @@ int craygMain(int argc, char **argv) {
 }
 
 int main(int argc, char *argv[]) {
+    Q_INIT_RESOURCE(resources);
     CRAYG_MAIN_IMPL;
 }
