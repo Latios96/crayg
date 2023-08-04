@@ -12,6 +12,11 @@
 
 namespace crayg {
 
+FrameBufferWidget::FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent)
+    : QWidget(parent), imageWidget(imageWidget) {
+    setupUI();
+}
+
 QString formatElapsed(const std::chrono::seconds &elapsed) {
     if (elapsed.count() == 0) {
         return QString("<b>Elapsed:</b> –");

@@ -23,9 +23,7 @@ namespace crayg {
 class FrameBufferWidget : public QWidget {
     Q_OBJECT
   public:
-    FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr) : QWidget(parent), imageWidget(imageWidget) {
-        setupUI();
-    }
+    FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr);
 
     void connectToggleFollowMouse(const std::function<void()> &toggle);
 
