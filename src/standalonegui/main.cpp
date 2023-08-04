@@ -6,13 +6,12 @@
 #include "CliParser.h"
 #include "CraygInfo.h"
 #include "Logger.h"
-#include "resources/Stylesheet.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
 #include "widgets/GuiTaskReporter.h"
 #include "widgets/ImageWidgetOutputDriver.h"
-#include <QDirIterator>
+#include "widgets/QtUtils.h"
 #include <QResource>
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
@@ -26,7 +25,7 @@ namespace crayg {
 
 int craygMain(int argc, char **argv) {
     QApplication a(argc, argv);
-    a.setStyleSheet(STYLESHEET);
+    applyStyleSheet(a);
 
     registerQMetaTypes();
 

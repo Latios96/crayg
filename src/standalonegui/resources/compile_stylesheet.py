@@ -6,23 +6,8 @@ import sass
 from watchdog.observers.polling import PollingObserver as Observer
 from watchdog.events import FileSystemEventHandler
 
-HEADER_TEMPLATE = """#ifndef CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
-#define CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
-
-/*
-THIS FILE IS GENERATED, DO NOT EDIT DIRECTLY!
-*/
-
-const char * STYLESHEET = R"(
-{}
-)";
-
-#endif //CRAYG_SRC_STANDALONEGUI_STYLESHEET_H_
-
-"""
-
 SOURCE_PATH = os.path.join(os.path.dirname(__file__), "stylesheet.scss")
-TARGET_PATH = os.path.join(os.path.dirname(__file__), "Stylesheet.h")
+TARGET_PATH = os.path.join(os.path.dirname(__file__), "stylesheet.css")
 
 
 def compile():
@@ -31,9 +16,8 @@ def compile():
 
     compiled = sass.compile(string=source)
 
-    header = HEADER_TEMPLATE.format(compiled)
     with open(TARGET_PATH, "w") as f:
-        f.write(header)
+        f.write(compiled)
 
     print("Compilation finished")
 

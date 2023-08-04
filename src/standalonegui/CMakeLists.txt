@@ -5,7 +5,6 @@ set(CMAKE_AUTORCC ON)
 
 add_library(crayg-framebuffer
         QtBase.h
-        resources/Stylesheet.h
         widgets/FrameBufferWidget.cpp
         widgets/FrameBufferWidget.h
         widgets/GuiTaskReporter.cpp
@@ -18,6 +17,7 @@ add_library(crayg-framebuffer
         widgets/PanAndZoomArea.cpp
         widgets/PanAndZoomArea.h
         widgets/QtMetaTypes.h
+        widgets/QtUtils.cpp
         widgets/QtUtils.h
         widgets/QtWidgetsBuilderDsl.cpp
         widgets/QtWidgetsBuilderDsl.h
