@@ -118,7 +118,7 @@ void FrameBufferWidget::setupUI() {
         resize(availableSize * 3.0f / 5.0f);
     } else {
         resize(QSize(imageWidget.size().width() + 40,
-                     imageWidget.size().height() + 40 + metadataButton->size().height() + 35));
+                     imageWidget.size().height() + 40 + metadataButton->size().height() + 45));
     }
 }
 
