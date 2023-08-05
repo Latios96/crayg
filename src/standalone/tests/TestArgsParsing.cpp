@@ -53,7 +53,13 @@ TEST_CASE("CliParser::parse") {
                                               "--adaptiveMaxError",
                                               "0.1",
                                               "--samplesPerAdaptivePass",
-                                              "16"};
+                                              "16",
+                                              "--variantSelection",
+                                              "/Camera/Camera:camera_lens=realistic_realistic_canon_50mm",
+                                              "--variantSelection",
+                                              "/Camera/OtherCamera:other_camera_lens=realistic_realistic_canon_50mm"
+
+        };
         ARGC_ARGV_(arguments);
 
         CliParser cli_parser("executable_name", argc, argv);
@@ -69,6 +75,11 @@ TEST_CASE("CliParser::parse") {
         REQUIRE(result.args->cliRenderSettingsOverride.bucketSamplerType == BucketSamplerType::UNIFORM);
         REQUIRE(result.args->cliRenderSettingsOverride.adaptiveMaxError == 0.1f);
         REQUIRE(result.args->cliRenderSettingsOverride.samplesPerAdaptivePass == 16);
+        REQUIRE(result.args->variantSelections[0] ==
+                SceneReader::VariantSelection("/Camera/Camera", "camera_lens", "realistic_realistic_canon_50mm"));
+        REQUIRE(result.args->variantSelections[1] == SceneReader::VariantSelection("/Camera/OtherCamera",
+                                                                                   "other_camera_lens",
+                                                                                   "realistic_realistic_canon_50mm"));
     }
 
     SECTION("invalid args should contain error") {
@@ -88,6 +99,9 @@ TEST_CASE("CliParser::parse") {
         assertHasError(arguments);
 
         arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path", "--resolution", "8"};
+        assertHasError(arguments);
+
+        arguments = {"tests", "-s", "/some_scene_path", "-o", "/some_image_path", "--variantSelection", "8"};
         assertHasError(arguments);
     }
 }

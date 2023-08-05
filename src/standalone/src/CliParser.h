@@ -3,6 +3,7 @@
 
 #include "CliRenderSettingsOverride.h"
 #include "basics/Resolution.h"
+#include "sceneIO/read/SceneReader.h"
 #include <optional>
 #include <string>
 #include <utility>
@@ -11,10 +12,12 @@ namespace crayg {
 
 struct CliArgs {
     CliArgs(std::string scenePath, std::string imageOutputPath, std::optional<std::string> cameraName,
-            CliRenderSettingsOverride cliRenderSettingsOverride);
+            CliRenderSettingsOverride cliRenderSettingsOverride,
+            const std::vector<SceneReader::VariantSelection> &variantSelections);
     std::string scenePath;
     std::string imageOutputPath;
     std::optional<std::string> cameraName;
+    std::vector<SceneReader::VariantSelection> variantSelections;
     CliRenderSettingsOverride cliRenderSettingsOverride;
 };
 

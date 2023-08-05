@@ -34,6 +34,7 @@ int craygMain(int argc, char *argv[]) {
     std::string scenePath = parseResult.args->scenePath;
     SceneReader::ReadOptions readOptions;
     readOptions.cameraName = parseResult.args->cameraName;
+    readOptions.variantSelections = parseResult.args->variantSelections;
     auto sceneReader = SceneReaderFactory::createSceneReader(scenePath, scene, readOptions);
     sceneReader->read();
 

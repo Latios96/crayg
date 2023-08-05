@@ -14,6 +14,12 @@ class SceneReader {
         std::string primPath;
         std::string variantSetName;
         std::string selectedVariant;
+
+        VariantSelection() = default;
+        VariantSelection(const std::string &primPath, const std::string &variantSetName,
+                         const std::string &selectedVariant);
+        bool operator==(const VariantSelection &rhs) const;
+        bool operator!=(const VariantSelection &rhs) const;
     };
 
     struct ReadOptions {

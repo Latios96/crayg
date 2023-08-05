@@ -1,7 +1,8 @@
 #include "CliParser.h"
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
-#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/split.hpp>
 #include <sstream>
 
 namespace crayg {
@@ -19,6 +20,31 @@ CliParser::CliParser(const std::string &executableName, int argc, char **argv)
     : argc(argc), argv(argv), executableName(executableName) {
 }
 
+std::vector<SceneReader::VariantSelection> parseVariantSelections(const std::vector<std::string> &variantSelections) {
+    std::vector<SceneReader::VariantSelection> parsedVariantSelections;
+
+    for (auto &variantSelection : variantSelections) {
+        std::vector<std::string> splitByColumnResult;
+        boost::algorithm::split(splitByColumnResult, variantSelection, boost::is_any_of(":"));
+        if (splitByColumnResult.size() != 2) {
+            throw std::runtime_error(fmt::format("Invalid variant selection string: '{}'", variantSelection));
+        }
+
+        std::vector<std::string> splitByEqualSignResult;
+        boost::algorithm::split(splitByEqualSignResult, splitByColumnResult[1], boost::is_any_of("="));
+        if (splitByEqualSignResult.size() != 2) {
+            throw std::runtime_error(fmt::format("Invalid variant selection string: '{}'", variantSelection));
+        }
+
+        const std::string primPath = splitByColumnResult[0];
+        const std::string variantSetName = splitByEqualSignResult[0];
+        const std::string selectedVariant = splitByEqualSignResult[1];
+        parsedVariantSelections.push_back({primPath, variantSetName, selectedVariant});
+    }
+
+    return parsedVariantSelections;
+}
+
 CliParseResult CliParser::parse() {
     CLI::App app{
         fmt::format("Crayg Renderer version {}, commit {}", crayg::CraygInfo::VERSION, crayg::CraygInfo::COMMIT_HASH),
@@ -33,6 +59,10 @@ CliParseResult CliParser::parse() {
     std::string cameraName;
     app.add_option("--camera", cameraName,
                    "Name of the camera to render. Defaulting to the first camera found in the scene");
+
+    std::vector<std::string> variantSelections;
+    app.add_option("--variantSelection", variantSelections,
+                   "Variant selections to apply to USD Stage. Format: /prim/path:variant_set=variant_name");
 
     std::string resolution;
     app.add_option("--resolution", resolution, "Override resolution to render, format: 1280x720");
@@ -97,9 +127,11 @@ CliParseResult CliParser::parse() {
             renderSettingsOverride.useSpectralLensing = useSpectralLensing.value();
         }
 
+        std::vector<SceneReader::VariantSelection> parsedVariantSelections = parseVariantSelections(variantSelections);
+
         return CliParseResult(CliArgs(sceneFileName, imageOutputPath,
                                       !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,
-                                      renderSettingsOverride),
+                                      renderSettingsOverride, parsedVariantSelections),
                               std::nullopt);
     } catch (const CLI::Error &e) {
         std::stringstream out;
@@ -112,8 +144,9 @@ CliParseResult CliParser::parse() {
 }
 
 CliArgs::CliArgs(std::string scenePath, std::string imageOutputPath, std::optional<std::string> cameraName,
-                 CliRenderSettingsOverride cliRenderSettingsOverride)
+                 CliRenderSettingsOverride cliRenderSettingsOverride,
+                 const std::vector<SceneReader::VariantSelection> &variantSelections)
     : scenePath(scenePath), imageOutputPath(imageOutputPath), cameraName(cameraName),
-      cliRenderSettingsOverride(cliRenderSettingsOverride) {
+      cliRenderSettingsOverride(cliRenderSettingsOverride), variantSelections(variantSelections) {
 }
 }
