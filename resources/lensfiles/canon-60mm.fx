@@ -1,6 +1,6 @@
 [Metadata]
 Name: Canon 50mm f/1.8
-Focal Length: 50mm
+Focal Length: 60mm
 Maximum F Number: 1.8
 Squeeze: 1
 Elements Count: 12
