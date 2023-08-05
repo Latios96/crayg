@@ -22,6 +22,8 @@ UsdStageReader::UsdStageReader(pxr::UsdStage &stage) : stage(stage) {
 }
 
 void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptions &readOptions) {
+    applyVariantSets(readOptions);
+
     readRenderSettings(scene);
 
     auto defaultMaterial = std::make_shared<crayg::UsdPreviewSurface>("defaultMaterial", crayg::Color::createWhite());
@@ -134,6 +136,48 @@ void UsdStageReader::removeAccidentlyReadInstancerProtos(Scene &scene) {
             scene.objects.erase(scene.objects.begin() + i);
             i--;
         }
+    }
+}
+
+void UsdStageReader::applyVariantSets(const SceneReader::ReadOptions &readOptions) {
+    for (auto &variantSelection : readOptions.variantSelections) {
+        pxr::UsdPrim prim = stage.GetPrimAtPath(pxr::SdfPath(variantSelection.primPath));
+        if (!prim.IsValid()) {
+            throw std::runtime_error(fmt::format("Error when applying variant selections: invalid prim path {}.",
+                                                 variantSelection.primPath));
+        }
+
+        const auto variantSetNames = prim.GetVariantSets().GetNames();
+        const bool variantSetExists = std::any_of(variantSetNames.begin(), variantSetNames.end(),
+                                                  [&variantSelection](const auto &variantSetName) {
+                                                      return variantSetName == variantSelection.variantSetName;
+                                                  });
+        if (!variantSetExists) {
+            throw std::runtime_error(fmt::format(
+                "Error when applying variant selections: variant set with name '{}' does not exist on prim {}.",
+                variantSelection.variantSetName, variantSelection.primPath));
+        }
+        auto variantSet = prim.GetVariantSet(variantSelection.variantSetName);
+
+        const auto variantNames = variantSet.GetVariantNames();
+        const bool variantExists =
+            std::any_of(variantNames.begin(), variantNames.end(), [&variantSelection](const auto &variantName) {
+                return variantName == variantSelection.selectedVariant;
+            });
+        if (!variantExists) {
+            throw std::runtime_error(fmt::format("Error when applying variant selections: variant with name '{}' does "
+                                                 "not exist on variant set '{}'on prim {}.",
+                                                 variantSelection.selectedVariant, variantSelection.variantSetName,
+                                                 variantSelection.primPath));
+        }
+        if (!variantSet.SetVariantSelection(variantSelection.selectedVariant)) {
+            throw std::runtime_error(fmt::format("Error when applying variant selections: could not set variant with "
+                                                 "name '{}' does on variant set '{}'on prim {}.",
+                                                 variantSelection.selectedVariant, variantSelection.variantSetName,
+                                                 variantSelection.primPath));
+        }
+        Logger::info("Applied variant selection: set variant set '{}' on {} to '{}'", variantSelection.variantSetName,
+                     variantSelection.primPath, variantSelection.selectedVariant);
     }
 }
 }

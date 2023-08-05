@@ -37,6 +37,7 @@ class UsdStageReader {
 
     std::unordered_set<std::string> instancerPrototypeNames;
     void removeAccidentlyReadInstancerProtos(Scene &scene);
+    void applyVariantSets(const SceneReader::ReadOptions &readOptions);
 };
 
 }

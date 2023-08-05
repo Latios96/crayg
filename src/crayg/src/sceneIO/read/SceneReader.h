@@ -4,13 +4,21 @@
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include <optional>
 #include <scene/Scene.h>
+#include <vector>
 
 namespace crayg {
 
 class SceneReader {
   public:
+    struct VariantSelection {
+        std::string primPath;
+        std::string variantSetName;
+        std::string selectedVariant;
+    };
+
     struct ReadOptions {
         std::optional<std::string> cameraName;
+        std::vector<VariantSelection> variantSelections;
 
         static ReadOptions empty() {
             return {};

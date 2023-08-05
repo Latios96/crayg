@@ -1,6 +1,8 @@
+#include "scene/primitives/Sphere.h"
 #include "sceneIO/read/usd/UsdStageReader.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/sdf/types.h>
+#include <pxr/usd/usd/editContext.h>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
 #include <pxr/usd/usdGeom/mesh.h>
@@ -220,6 +222,71 @@ TEST_CASE("UsdStageReader::readStageToScene") {
         UsdStageReader(*stage).readStageToScene(scene);
 
         REQUIRE(scene.objects.size() == 1);
+    }
+}
+
+TEST_CASE("UsdStageReader::applyVariantSets") {
+    auto stage = pxr::UsdStage::CreateInMemory();
+    auto usdCamera = pxr::UsdGeomCamera::Define(stage, pxr::SdfPath("/usdCamera"));
+    auto sphere = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/SphereGrp/Sphere"));
+    sphere.CreateRadiusAttr().Clear();
+    auto variantPrim = stage->GetPrimAtPath(pxr::SdfPath("/SphereGrp"));
+    auto variantSet = variantPrim.GetVariantSets().AddVariantSet("myVariantSet");
+    variantSet.AddVariant("small");
+    variantSet.AddVariant("big");
+    variantSet.SetVariantSelection("small");
+    {
+        pxr::UsdEditContext context(variantSet.GetVariantEditContext());
+        sphere.GetRadiusAttr().Set(1.0);
+    }
+    variantSet.SetVariantSelection("big");
+    {
+        pxr::UsdEditContext context(variantSet.GetVariantEditContext());
+        sphere.GetRadiusAttr().Set(10.0);
+    }
+
+    Scene scene;
+
+    SECTION("not applying variant selection to stage should result in big sphere") {
+        UsdStageReader(*stage).readStageToScene(scene);
+
+        const auto sphere = std::dynamic_pointer_cast<Sphere>(scene.objects[0]);
+        REQUIRE(sphere->getRadius() == 10);
+    }
+
+    SECTION("should apply variant selection to stage") {
+        SceneReader::ReadOptions readOptions{};
+        readOptions.variantSelections.push_back({"/SphereGrp", "myVariantSet", "small"});
+        UsdStageReader(*stage).readStageToScene(scene, readOptions);
+
+        const auto sphere = std::dynamic_pointer_cast<Sphere>(scene.objects[0]);
+        REQUIRE(sphere->getRadius() == 1);
+    }
+
+    SECTION("should throw if invalid prim path was supplied") {
+        SceneReader::ReadOptions readOptions{};
+        readOptions.variantSelections.push_back({"/invalid", "myVariantSet", "small"});
+
+        REQUIRE_THROWS_WITH(UsdStageReader(*stage).readStageToScene(scene, readOptions),
+                            "Error when applying variant selections: invalid prim path /invalid.");
+    }
+
+    SECTION("should throw if invalid variant set name was supplied") {
+        SceneReader::ReadOptions readOptions{};
+        readOptions.variantSelections.push_back({"/SphereGrp", "invalid", "small"});
+
+        REQUIRE_THROWS_WITH(UsdStageReader(*stage).readStageToScene(scene, readOptions),
+                            "Error when applying variant selections: variant set with name 'invalid' does not exist on "
+                            "prim /SphereGrp.");
+    }
+
+    SECTION("should throw if invalid variant name was supplied") {
+        SceneReader::ReadOptions readOptions{};
+        readOptions.variantSelections.push_back({"/SphereGrp", "myVariantSet", "invalid"});
+
+        REQUIRE_THROWS_WITH(UsdStageReader(*stage).readStageToScene(scene, readOptions),
+                            "Error when applying variant selections: variant with name 'invalid' does not exist on "
+                            "variant set 'myVariantSet'on prim /SphereGrp.");
     }
 }
 
