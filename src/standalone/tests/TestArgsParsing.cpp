@@ -76,10 +76,10 @@ TEST_CASE("CliParser::parse") {
         REQUIRE(result.args->cliRenderSettingsOverride.adaptiveMaxError == 0.1f);
         REQUIRE(result.args->cliRenderSettingsOverride.samplesPerAdaptivePass == 16);
         REQUIRE(result.args->variantSelections[0] ==
-                SceneReader::VariantSelection("/Camera/Camera", "camera_lens", "realistic_realistic_canon_50mm"));
-        REQUIRE(result.args->variantSelections[1] == SceneReader::VariantSelection("/Camera/OtherCamera",
-                                                                                   "other_camera_lens",
-                                                                                   "realistic_realistic_canon_50mm"));
+                SceneReaderVariantSelection("/Camera/Camera", "camera_lens", "realistic_realistic_canon_50mm"));
+        REQUIRE(result.args->variantSelections[1] == SceneReaderVariantSelection("/Camera/OtherCamera",
+                                                                                 "other_camera_lens",
+                                                                                 "realistic_realistic_canon_50mm"));
     }
 
     SECTION("invalid args should contain error") {

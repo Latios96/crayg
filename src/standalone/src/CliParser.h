@@ -13,11 +13,11 @@ namespace crayg {
 struct CliArgs {
     CliArgs(std::string scenePath, std::string imageOutputPath, std::optional<std::string> cameraName,
             CliRenderSettingsOverride cliRenderSettingsOverride,
-            const std::vector<SceneReader::VariantSelection> &variantSelections);
+            const std::vector<SceneReaderVariantSelection> &variantSelections);
     std::string scenePath;
     std::string imageOutputPath;
     std::optional<std::string> cameraName;
-    std::vector<SceneReader::VariantSelection> variantSelections;
+    std::vector<SceneReaderVariantSelection> variantSelections;
     CliRenderSettingsOverride cliRenderSettingsOverride;
 };
 

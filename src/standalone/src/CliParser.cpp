@@ -20,8 +20,8 @@ CliParser::CliParser(const std::string &executableName, int argc, char **argv)
     : argc(argc), argv(argv), executableName(executableName) {
 }
 
-std::vector<SceneReader::VariantSelection> parseVariantSelections(const std::vector<std::string> &variantSelections) {
-    std::vector<SceneReader::VariantSelection> parsedVariantSelections;
+std::vector<SceneReaderVariantSelection> parseVariantSelections(const std::vector<std::string> &variantSelections) {
+    std::vector<SceneReaderVariantSelection> parsedVariantSelections;
 
     for (auto &variantSelection : variantSelections) {
         std::vector<std::string> splitByColumnResult;
@@ -127,7 +127,7 @@ CliParseResult CliParser::parse() {
             renderSettingsOverride.useSpectralLensing = useSpectralLensing.value();
         }
 
-        std::vector<SceneReader::VariantSelection> parsedVariantSelections = parseVariantSelections(variantSelections);
+        std::vector<SceneReaderVariantSelection> parsedVariantSelections = parseVariantSelections(variantSelections);
 
         return CliParseResult(CliArgs(sceneFileName, imageOutputPath,
                                       !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,
@@ -145,7 +145,7 @@ CliParseResult CliParser::parse() {
 
 CliArgs::CliArgs(std::string scenePath, std::string imageOutputPath, std::optional<std::string> cameraName,
                  CliRenderSettingsOverride cliRenderSettingsOverride,
-                 const std::vector<SceneReader::VariantSelection> &variantSelections)
+                 const std::vector<SceneReaderVariantSelection> &variantSelections)
     : scenePath(scenePath), imageOutputPath(imageOutputPath), cameraName(cameraName),
       cliRenderSettingsOverride(cliRenderSettingsOverride), variantSelections(variantSelections) {
 }

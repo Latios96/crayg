@@ -8,23 +8,14 @@
 
 namespace crayg {
 
+CRAYG_DTO_3(SceneReaderVariantSelection, std::string, primPath, std::string, variantSetName, std::string,
+            selectedVariant);
+
 class SceneReader {
   public:
-    struct VariantSelection {
-        std::string primPath;
-        std::string variantSetName;
-        std::string selectedVariant;
-
-        VariantSelection() = default;
-        VariantSelection(const std::string &primPath, const std::string &variantSetName,
-                         const std::string &selectedVariant);
-        bool operator==(const VariantSelection &rhs) const;
-        bool operator!=(const VariantSelection &rhs) const;
-    };
-
     struct ReadOptions {
         std::optional<std::string> cameraName;
-        std::vector<VariantSelection> variantSelections;
+        std::vector<SceneReaderVariantSelection> variantSelections;
 
         static ReadOptions empty() {
             return {};
