@@ -121,3 +121,27 @@ scenes:
     intersectors:
       - embree
     scene_path: "M:/Test_Scene_Collection/DailyDweeb/DailyDweeb.usda"
+  - name: CameraTestGround
+    cameras:
+      - /Camera/Camera/VariantCamera
+    hero_camera: /Camera/Camera/VariantCamera
+    integrators:
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/DailyDweeb/DailyDweeb.usda"
+    variant_set:
+      prim_path: /Camera/Camera
+      variant_set: camera_lens
+      variants:
+        - 'thin_lens'
+        - 'realistic_realistic_canon_60mm'
+        - 'realistic_realistic_canon_50mm'
+        - 'realistic_petzval_kodak_50mm'
+        - 'realistic_double_gauss_angenieux_50mm'
+        - 'realistic_canon_70_200mm_70mm'
+        - 'realistic_brendel_tessar_100mm'
+        - 'realistic_Schneider_anamorphic'
+        - 'realistic_Panavision_anamorphic'
+        - 'realistic_Navarro_anamorphic'
+        - 'realistic_Canon_anamorphic'
