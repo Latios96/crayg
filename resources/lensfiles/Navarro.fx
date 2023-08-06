@@ -1,5 +1,5 @@
 [Metadata]
-Name: Anamorphic Lens
+Name: Navarro Anamorphic Lens
 Focal Length: 78.6
 Maximum F Number: 5.56
 Squeeze: 1
