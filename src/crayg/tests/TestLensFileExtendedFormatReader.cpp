@@ -154,7 +154,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 abc   7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 10: Value 'abc' for Radius is not a float"));
+                            Catch::Equals("Invalid lens file: Line 11: Value 'abc' for Radius is not a float"));
     }
 
     SECTION("should throw exception if an element contains non-float thickness") {
@@ -171,7 +171,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 1     abc         8   9              10      SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 10: Value 'abc' for Thickness is not a float"));
+                            Catch::Equals("Invalid lens file: Line 11: Value 'abc' for Thickness is not a float"));
     }
 
     SECTION("should throw exception if an element contains non-float IOR") {
@@ -188,7 +188,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 1     2           abc 9              10      SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 10: Value 'abc' for IOR is not a float"));
+                            Catch::Equals("Invalid lens file: Line 11: Value 'abc' for IOR is not a float"));
     }
 
     SECTION("should throw exception if an element contains non-float housing radius") {
@@ -205,7 +205,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 1     2           3   abc            10      SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 10: Value 'abc' for Housing Radius is not a float"));
+                            Catch::Equals("Invalid lens file: Line 11: Value 'abc' for Housing Radius is not a float"));
     }
 
     SECTION("should throw exception if an element contains non-float abbe no") {
@@ -222,7 +222,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 1     2           3     4              abc     SCHOTT_K7       SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 10: Value 'abc' for Abbe-No is not a float"));
+                            Catch::Equals("Invalid lens file: Line 11: Value 'abc' for Abbe-No is not a float"));
     }
 
     SECTION("should throw exception if an element contains invalid material") {
@@ -239,7 +239,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 1     2           3     4              5       foo             SPHERICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 10: 'foo' is an unsupported material value"));
+                            Catch::Equals("Invalid lens file: Line 11: 'foo' is an unsupported material value"));
     }
 
     SECTION("should throw exception if an element contains invalid lens geometry") {
@@ -256,7 +256,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 1     2           3     4              5       SCHOTT_F2    CUBICAL
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 10: 'cubical' is an unsupported LensGeometry"));
+                            Catch::Equals("Invalid lens file: Line 11: 'cubical' is an unsupported LensGeometry"));
     }
 
     SECTION("should throw because element line is empty") {
@@ -272,7 +272,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 7: Value '' for Thickness is not a float"));
+                            Catch::Equals("Invalid lens file: Line 8: Value '' for Thickness is not a float"));
     }
 }
 

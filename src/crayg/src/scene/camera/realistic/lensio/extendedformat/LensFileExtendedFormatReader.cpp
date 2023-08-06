@@ -20,8 +20,8 @@ class InvalidExtendedLensFileFormatException : public std::runtime_error {
         : runtime_error(fmt::format("Invalid lens file: {}", message)) {
     }
 
-    InvalidExtendedLensFileFormatException(int lineNumber, const std::string message)
-        : runtime_error(fmt::format("Invalid lens file: Line {}: {}", lineNumber, message)) {
+    InvalidExtendedLensFileFormatException(int lineIndex, const std::string message)
+        : runtime_error(fmt::format("Invalid lens file: Line {}: {}", lineIndex + 1, message)) {
     }
 };
 
@@ -43,16 +43,16 @@ std::string readMetadataString(const std::string &line, const std::string &token
     return value;
 }
 
-float parseFloat(int lineNumber, std::string &floatStr, const std::string &name) {
+float parseFloat(int lineIndex, std::string &floatStr, const std::string &name) {
     try {
         return std::stof(floatStr);
     } catch (std::invalid_argument &e) {
-        throw InvalidExtendedLensFileFormatException(lineNumber,
+        throw InvalidExtendedLensFileFormatException(lineIndex,
                                                      fmt::format("Value '{}' for {} is not a float", floatStr, name));
     }
 }
 
-void parseMetadataLine(int lineNumber, const std::string &line, CameraLensMetadata &parsedMetadata) {
+void parseMetadataLine(int lineIndex, const std::string &line, CameraLensMetadata &parsedMetadata) {
     static std::string nameToken = "name:";
     static std::string maximumFNumberToken = "maximum f number:";
     static std::string patentToken = "patent:";
@@ -64,7 +64,7 @@ void parseMetadataLine(int lineNumber, const std::string &line, CameraLensMetada
         parsedMetadata.name = readMetadataString(line, nameToken);
     } else if (pystring::startswith(lowerLine, maximumFNumberToken)) {
         std::string maxFNumberStr = readMetadataString(line, maximumFNumberToken);
-        parsedMetadata.maximumAperture = parseFloat(lineNumber, maxFNumberStr, "Maximum F Number");
+        parsedMetadata.maximumAperture = parseFloat(lineIndex, maxFNumberStr, "Maximum F Number");
     } else if (pystring::startswith(lowerLine, patentToken)) {
         parsedMetadata.patent = readMetadataString(line, patentToken);
     } else if (pystring::startswith(lowerLine, descriptionToken)) {
@@ -72,27 +72,27 @@ void parseMetadataLine(int lineNumber, const std::string &line, CameraLensMetada
     }
 }
 
-LensMaterial parseMaterial(int lineNumber, std::string &material) {
+LensMaterial parseMaterial(int lineIndex, std::string &material) {
     boost::algorithm::trim_all(material);
     auto lensMaterial = EnumUtils::parse<LensMaterialId>(material);
     if (!lensMaterial) {
-        throw InvalidExtendedLensFileFormatException(lineNumber,
+        throw InvalidExtendedLensFileFormatException(lineIndex,
                                                      fmt::format("'{}' is an unsupported material value", material));
     }
     return LensMaterial::createMaterialById(*lensMaterial);
 }
 
-LensGeometry parseLensGeometry(int lineNumber, std::string &geometry) {
+LensGeometry parseLensGeometry(int lineIndex, std::string &geometry) {
     boost::algorithm::trim_all(geometry);
     auto lensGeometry = EnumUtils::parse<LensGeometry>(geometry);
     if (!lensGeometry) {
-        throw InvalidExtendedLensFileFormatException(lineNumber,
+        throw InvalidExtendedLensFileFormatException(lineIndex,
                                                      fmt::format("'{}' is an unsupported LensGeometry", geometry));
     }
     return *lensGeometry;
 }
 
-void parseElementsLine(int lineNumber, std::string line, std::vector<LensElement> &elements) {
+void parseElementsLine(int lineIndex, std::string line, std::vector<LensElement> &elements) {
     boost::algorithm::to_lower(line);
     if (pystring::startswith(line, "radius")) {
         return;
@@ -110,14 +110,14 @@ void parseElementsLine(int lineNumber, std::string line, std::vector<LensElement
     iss >> material;
     iss >> geometry;
 
-    float radius = parseFloat(lineNumber, radiusStr, "Radius");
-    float thickness = parseFloat(lineNumber, thicknessStr, "Thickness");
-    float ior = parseFloat(lineNumber, iorStr, "IOR");
-    float housingRadius = parseFloat(lineNumber, housingRadiusStr, "Housing Radius");
-    float abbeNumber = parseFloat(lineNumber, abbeNumberStr, "Abbe-No");
+    float radius = parseFloat(lineIndex, radiusStr, "Radius");
+    float thickness = parseFloat(lineIndex, thicknessStr, "Thickness");
+    float ior = parseFloat(lineIndex, iorStr, "IOR");
+    float housingRadius = parseFloat(lineIndex, housingRadiusStr, "Housing Radius");
+    float abbeNumber = parseFloat(lineIndex, abbeNumberStr, "Abbe-No");
 
-    auto lensMaterial = parseMaterial(lineNumber, material);
-    auto lensGeometry = parseLensGeometry(lineNumber, geometry);
+    auto lensMaterial = parseMaterial(lineIndex, material);
+    auto lensGeometry = parseLensGeometry(lineIndex, geometry);
 
     elements.emplace_back(radius * 0.1f, thickness * 0.1f, ior, housingRadius * 0.1f, abbeNumber, lensMaterial,
                           lensGeometry);
