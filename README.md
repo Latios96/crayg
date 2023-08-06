@@ -34,6 +34,7 @@ Cornell Box by http://casual-effects.com/data/index.html
 ### Rendering related features
 
 - Sphere / Trianglemesh intersection
+- PointInstancer (Single-Level Instancing)
 - Area lights (Rect and Disk)
 - perfect reflections
 - diffuse reflections / GI
