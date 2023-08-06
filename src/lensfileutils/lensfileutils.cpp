@@ -59,6 +59,53 @@ void scaleLensFile(const LensFileScaleOptions &options) {
     }
 }
 
+float mse(const std::vector<float> &data) {
+    float result = 0;
+    for (auto f : data) {
+        result += f * f;
+    }
+    return result / data.size();
+}
+
+void calculateLensMaterialError(const std::string &inputFile) {
+    auto lensFileReader = LensFileReaderFactory::createLensFileReader(inputFile);
+    auto cameraLens = lensFileReader->readFile(inputFile);
+    std::vector<float> iorErrors;
+    std::vector<float> abbeErrors;
+
+    for (auto &lens : cameraLens.elements) {
+        if (lens.ior == 1 || lens.ior == 0) {
+            continue;
+        }
+        iorErrors.push_back(std::abs(lens.ior - lens.material.ior));
+        abbeErrors.push_back(std::abs(lens.abbeNumber - lens.material.abbeNo));
+    }
+
+    const float minIorError = *std::min_element(iorErrors.begin(), iorErrors.end());
+    const float maxIorError = *std::max_element(iorErrors.begin(), iorErrors.end());
+    const float iorMse = mse(iorErrors);
+
+    const float minAbbeNoError = *std::min_element(abbeErrors.begin(), abbeErrors.end());
+    const float maxAbbeNoError = *std::max_element(abbeErrors.begin(), abbeErrors.end());
+    const float abbeNoMse = mse(iorErrors);
+
+    fmt::print("IOR errors:\n");
+    for (auto f : iorErrors) {
+        fmt::print("{}\n", f);
+    }
+    fmt::print("Min IOR error: {}\n", minIorError);
+    fmt::print("Max IOR error: {}\n", maxIorError);
+    fmt::print("IOR error MSE: {}\n", iorMse);
+
+    fmt::print("Abbe No errors:\n");
+    for (auto f : abbeErrors) {
+        fmt::print("{}\n", f);
+    }
+    fmt::print("Min Abbe no error: {}\n", minAbbeNoError);
+    fmt::print("Max Abbe no error: {}\n", maxAbbeNoError);
+    fmt::print("Abbe no error MSE: {}\n", abbeNoMse);
+}
+
 int craygMain(int argc, char *argv[]) {
     CLI::App app{
         fmt::format("Crayg lensfile utils {}, commit {}", crayg::CraygInfo::VERSION, crayg::CraygInfo::COMMIT_HASH),
@@ -88,6 +135,11 @@ int craygMain(int argc, char *argv[]) {
     scaleCommand->add_option("-o,--output", lensFileOutput, "Lens file output. Outputs to stdout if not specified")
         ->required(false);
 
+    auto convertGlasMaterialErrorCommand =
+        app.add_subcommand("material-error", "outputs the errors of the chosen lens materials");
+
+    convertGlasMaterialErrorCommand->add_option("-i,--input", lensFileInput, "Lens file input")->required();
+
     try {
         app.parse(argc, argv);
 
@@ -99,6 +151,8 @@ int craygMain(int argc, char *argv[]) {
         convertLensFile({lensFileInput, lensFileOutput, format});
     } else if (scaleCommand->parsed()) {
         scaleLensFile({lensFileInput, lensFileOutput, focalLengths_mm});
+    } else if (convertGlasMaterialErrorCommand->parsed()) {
+        calculateLensMaterialError(lensFileInput);
     }
     return 0;
 }
