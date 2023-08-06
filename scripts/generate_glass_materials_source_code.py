@@ -51,7 +51,7 @@ def process_schott() -> List[Material]:
             continue
         name = safe_name(sh.cell_value(rowx=rx, colx=0)).upper()
         ior = sh.cell_value(rowx=rx, colx=1)
-        abbe_no = sh.cell_value(rowx=rx, colx=4)
+        abbe_no = sh.cell_value(rowx=rx, colx=3)
         coefficients = [sh.cell_value(rowx=rx, colx=x) for x in range(6, 12)]
         material = Material(name, ior, abbe_no, coefficients)
         materials.append(material)
@@ -70,7 +70,7 @@ def process_ohara() -> List[Material]:
             continue
         name = safe_name(sh.cell_value(rowx=rx, colx=1)).upper()
         ior = sh.cell_value(rowx=rx, colx=15)
-        abbe_no = sh.cell_value(rowx=rx, colx=25)
+        abbe_no = sh.cell_value(rowx=rx, colx=24)
         coefficients = [sh.cell_value(rowx=rx, colx=x) for x in range(60, 66)]
         material = Material(name, ior, abbe_no, coefficients)
         materials.append(material)
