@@ -74,6 +74,7 @@ void CameraLens::handleAnamorphicFocussing() {
     auto horizontalThickLensApproximation = thickLensCalculator.calculate(ThickLensApproximationCalculator::HORIZONTAL);
     auto horizontalFocalLength = calculateEffectiveFocalLength(horizontalThickLensApproximation);
     metadata.squeeze = metadata.focalLength / horizontalFocalLength;
+    metadata.focalLength = horizontalFocalLength;
     thickLensApproximation = horizontalThickLensApproximation;
 }
 
