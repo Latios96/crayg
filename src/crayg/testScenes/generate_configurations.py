@@ -13,11 +13,17 @@ TEMPLATE = {
     "projectName": "Crayg Test Scenes",
     "suites": [],
     "variables": {
-        "crayg_render_command": 'C:\\workspace\\crayg\\cmake-build-relwithdebinfo\\bin/crayg-standalone -s {{scene_path}} -o "{{image_output_exr}}" --camera {{camera}} --integrator={{integrator}} --intersector={{intersector}} --maxSamples {{maxSamples}} --resolution {{resolution}}'
+        "crayg_render_command": 'C:\\workspace\\crayg\\cmake-build-relwithdebinfo\\bin/crayg-standalone -s {{scene_path}} -o "{{image_output_exr}}" --camera {{camera}} --integrator={{integrator}} --intersector={{intersector}} --maxSamples {{maxSamples}} --resolution {{resolution}} {{useSpectralLensing}} {{selectedVariant}}'
     },
     "command": "{{crayg_render_command}}",
     "comparisonSettings": {"method": "FLIP", "threshold": 0.25},
 }
+
+
+class VariantSet(BaseModel):
+    prim_path: str
+    variant_set: str
+    variants: List[str]
 
 
 class Scene(BaseModel):
@@ -28,6 +34,7 @@ class Scene(BaseModel):
     intersectors: List[str]
     hero_camera: Optional[str] = None
     resolution: Optional[str] = None
+    variant_set: Optional[VariantSet] = None
 
 
 def load_config() -> List[Scene]:
@@ -85,6 +92,7 @@ def generate_config(
     scene_names: List[str] = None,
     max_samples: Optional[int] = 32,
     resolution: Optional[str] = None,
+    use_spectral_lensing: Optional[bool] = False,
 ):
     scenes = load_config()
     scenes = remove_unselected_configurations(
@@ -99,27 +107,41 @@ def generate_config(
         suite["name"] = scene.name
         suite["tests"] = []
         settings_variations = itertools.product(
-            scene.integrators, scene.intersectors, scene.cameras
+            scene.integrators,
+            scene.intersectors,
+            scene.cameras,
+            scene.variant_set.variants if scene.variant_set else [None],
         )
         for (
             chosen_integrator,
             chosen_intersector,
             chosen_camera,
+            chosen_variant,
         ) in settings_variations:
-            test_name = f"{scene.name}-{os.path.basename(chosen_camera)}-{chosen_integrator.lower()}-{chosen_intersector.lower()}"
-            suite["tests"].append(
-                {
-                    "name": test_name,
-                    "variables": {
-                        "scene_path": scene.scene_path,
-                        "intersector": chosen_intersector,
-                        "integrator": chosen_integrator,
-                        "camera": chosen_camera,
-                        "resolution": resolve_resolution(scene, resolution),
-                        "maxSamples": str(max_samples),
-                    },
-                }
-            )
+            variant_str = "-" + chosen_variant.lower() if chosen_variant else ""
+            spectral_lensing_str = "-spectral" if use_spectral_lensing else ""
+            test_name = f"{scene.name}-{os.path.basename(chosen_camera)}-{chosen_integrator.lower()}-{chosen_intersector.lower()}{variant_str}{spectral_lensing_str}"
+
+            test = {
+                "name": test_name,
+                "variables": {
+                    "scene_path": scene.scene_path,
+                    "intersector": chosen_intersector,
+                    "integrator": chosen_integrator,
+                    "camera": chosen_camera,
+                    "resolution": resolve_resolution(scene, resolution),
+                    "maxSamples": str(max_samples),
+                    "useSpectralLensing": "",
+                },
+            }
+            if chosen_variant:
+                test["variables"][
+                    "selectedVariant"
+                ] = f"--variantSelection {scene.variant_set.prim_path}:{scene.variant_set.variant_set}={chosen_variant}"
+            if use_spectral_lensing:
+                test["variables"]["useSpectralLensing"] = "--useSpectralLensing"
+
+            suite["tests"].append(test)
             test_count += 1
         suite_count += 1
     with open("cato.json", "w") as f:
