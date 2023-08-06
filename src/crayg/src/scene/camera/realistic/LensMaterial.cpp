@@ -110,6 +110,8 @@ float findElementsWithSmalledDifference(const std::vector<T> &elements, std::vec
     return minimalError;
 }
 
+static const int EMPIRICALLY_DETERMINED_IOR_WEIGHT = 4;
+
 LensMaterial LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo, MaterialSearchError *searchError,
                                                     const std::vector<LensMaterial> &allMaterials) {
     if (ior == 1) {
@@ -124,7 +126,7 @@ LensMaterial LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo, Mat
     int index = -1;
     for (int i = 0; i < allMaterials.size(); i++) {
         const auto &material = allMaterials[i];
-        const float iorDifference = material.ior - ior;
+        const float iorDifference = (material.ior - ior) * EMPIRICALLY_DETERMINED_IOR_WEIGHT;
         const float abbeNoDifference = material.abbeNo - abbeNo;
         const float distance = std::sqrt(iorDifference * iorDifference + abbeNoDifference * abbeNoDifference);
         if (distance < minDistance) {

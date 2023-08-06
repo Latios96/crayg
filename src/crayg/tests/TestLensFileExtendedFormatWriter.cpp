@@ -21,8 +21,8 @@ TEST_CASE("LensFileExtendedFormatWriter::writeFileContent") {
 
         REQUIRE(content == R"([Metadata]
 Name: Canon F/2.8, 70-200mm
-Focal Length: 71.6
-Maximum F Number: 3.41
+Focal Length: 71.9
+Maximum F Number: 3.42
 Squeeze: 1
 Elements Count: 34
 Patent: US 123
