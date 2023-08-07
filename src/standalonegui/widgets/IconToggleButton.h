@@ -10,6 +10,12 @@ class IconToggleButton : public QCheckBox {
     explicit IconToggleButton(QWidget *parent = nullptr);
 };
 
+class SmallIconToggleButton : public IconToggleButton {
+    Q_OBJECT
+  public:
+    explicit SmallIconToggleButton(QWidget *parent = nullptr);
+};
+
 } // crayg
 
 #endif // CRAYG_SRC_STANDALONEGUI_WIDGETS_ICONTOGGLEBUTTON_H_

@@ -42,7 +42,7 @@ class FrameBufferWidget : public QWidget {
     void setupUI();
     ImageWidget &imageWidget;
     PanAndZoomArea *panAndZoomArea;
-    QPushButton *metadataButton;
+    SmallIconToggleButton *metadataButton;
     QTreeWidget *imageMetadataWidget;
     QComboBox *channelComboBox;
     QProgressBar *statusProgressBar;

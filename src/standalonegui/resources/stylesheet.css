@@ -137,8 +137,18 @@ crayg--IconToggleButton::indicator {
   width: 20px;
   height: 20px; }
 
+crayg--SmallIconToggleButton::indicator {
+  width: 15px;
+  height: 15px; }
+
 #followMouseToggle::indicator:unchecked {
   image: url(:/icons/followMouse.png); }
 
 #followMouseToggle::indicator:checked {
   image: url(:/icons/followMouse.png); }
+
+#metadataButton::indicator:unchecked {
+  image: url(:/icons/imageMedatadata.png); }
+
+#metadataButton::indicator:checked {
+  image: url(:/icons/imageMedatadata.png); }

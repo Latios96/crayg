@@ -87,11 +87,12 @@ void FrameBufferWidget::setupUI() {
                                          this->panAndZoomArea,
                                          inHBox({addHStretch(), progressBarArea(),
                                                  [this]() {
-                                                     metadataButton = new QPushButton();
-                                                     const QIcon icon =
+                                                     metadataButton = new SmallIconToggleButton();
+                                                     metadataButton->setObjectName("metadataButton");
+                                                     /*const QIcon icon =
                                                          this->style()->standardIcon(QStyle::SP_FileDialogDetailedView);
                                                      metadataButton->setIcon(icon);
-                                                     metadataButton->setFixedSize(QSize(20, 20));
+                                                     metadataButton->setFixedSize(QSize(20, 20));*/
                                                      return metadataButton;
                                                  }})}),
                                  [this]() {
