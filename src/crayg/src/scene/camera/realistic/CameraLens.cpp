@@ -204,6 +204,11 @@ Ray CameraLens::refract(const LensElementIntersection &intersection, const Ray &
 }
 
 void CameraLens::focusLens(float focalDistance) {
+    if (focalDistance < metadata.closestFocalDistance) {
+        Logger::warning("Focal distance {} is shorter than closest focal distance, clamping to {}", focalDistance,
+                        metadata.closestFocalDistance);
+        focalDistance = metadata.closestFocalDistance;
+    }
     elementsOffset = calculateElementsOffset(focalDistance);
 }
 

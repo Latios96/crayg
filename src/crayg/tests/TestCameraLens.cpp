@@ -148,6 +148,13 @@ TEST_CASE("CameraLens::focusLens") {
         focalPlanePoint = pointOnFocalPlane(canon70_200, 100.f);
         REQUIRE(std::abs(focalPlanePoint.y) < 0.03270f);
     }
+
+    SECTION("should clamp focus distance if closer than closest focal distance") {
+        canon70_200.focusLens(10.f);
+
+        const Ray fromFilmToWorld{{0, 0, -1}, {0, 0, 1}};
+        REQUIRE(canon70_200.traceFromFilmToWorld(fromFilmToWorld, FraunhoferLines::SODIUM.wavelength));
+    }
 }
 
 TEST_CASE("CameraLens::changeAperture") {
