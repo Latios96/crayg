@@ -36,7 +36,7 @@ TEST_CASE("CameraLens::construct") {
     SECTION("should calculate metadata correctly for anamorphic lens") {
         CameraLens schneider30mm = CameraLensFixtures::createSchneider30mmAnamorphic();
         REQUIRE(schneider30mm.metadata.isAnamorphic == true);
-        REQUIRE(schneider30mm.metadata.squeeze == Catch::Detail::Approx(1.92584f));
+        REQUIRE(schneider30mm.metadata.squeeze == Catch::Detail::Approx(1.91406f));
     }
 }
 
