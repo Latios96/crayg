@@ -111,6 +111,8 @@ void ImageMetadataCollector::collectCamera(ImageMetadata &imageMetadata) {
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_MAXIMUM_F_NUMBER, lens.metadata.maximumAperture);
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_IS_ANAMORPHIC, lens.metadata.isAnamorphic ? 1 : 0);
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_SQUEEZE, lens.metadata.squeeze);
+        imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_CLOSEST_FOCAL_DISTANCE,
+                            lens.metadata.closestFocalDistance);
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_PATENT, lens.metadata.patent);
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_DESCRIPTION, lens.metadata.description);
     }
