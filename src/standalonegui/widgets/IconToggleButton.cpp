@@ -1,5 +1,4 @@
 #include "IconToggleButton.h"
-#include "Logger.h"
 #include <QVariant>
 
 namespace crayg {
