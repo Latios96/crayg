@@ -164,10 +164,10 @@ crayg--IconToggleButton::indicator {
   height: 20px;
 }
 
-crayg--IconToggleButton::indicator:unchecked {
+#followMouseToggle::indicator:unchecked {
   image: url(:/icons/followMouse.png)
 }
 
-crayg--IconToggleButton::indicator:checked {
+#followMouseToggle::indicator:checked {
   image: url(:/icons/followMouse.png);
 }

@@ -78,6 +78,7 @@ void FrameBufferWidget::setupUI() {
                                              },
                                              [this]() {
                                                  followMouseToggle = new IconToggleButton();
+                                                 followMouseToggle->setObjectName("followMouseToggle");
                                                  followMouseToggle->setDisabled(true);
                                                  return followMouseToggle;
                                              },
