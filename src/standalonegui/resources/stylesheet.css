@@ -124,6 +124,12 @@ crayg--IconToggleButton {
 crayg--IconToggleButton:hover {
   background-color: #6f94d3; }
 
+crayg--IconToggleButton:disabled {
+  background-color: #7a7a7a; }
+
+crayg--IconToggleButton:disabled:hover {
+  background-color: #6f94d3; }
+
 crayg--IconToggleButton:checked:hover {
   background-color: #6f94d3; }
 

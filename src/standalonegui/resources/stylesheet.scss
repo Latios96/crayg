@@ -147,6 +147,9 @@ crayg--IconToggleButton {
 crayg--IconToggleButton:hover {
   background-color: $backgroundColorSelectedHighlight;
 }
+crayg--IconToggleButton:disabled {
+  background-color: $disabled;
+}
 
 crayg--IconToggleButton:checked:hover {
   background-color: $backgroundColorSelectedHighlight;

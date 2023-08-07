@@ -78,6 +78,7 @@ void FrameBufferWidget::setupUI() {
                                              },
                                              [this]() {
                                                  followMouseToggle = new IconToggleButton();
+                                                 followMouseToggle->setDisabled(true);
                                                  return followMouseToggle;
                                              },
                                              addHStretch(),
@@ -199,6 +200,11 @@ void FrameBufferWidget::startTask(TaskReporter::Task task) {
     statusElapsed->setText(formatElapsed(std::chrono::seconds(0)));
     statusRemaining->show();
     statusRemaining->setText(formatRemaining(std::chrono::seconds(0)));
+
+    const bool renderingStarted = task.name == "Rendering";
+    if (renderingStarted) {
+        followMouseToggle->setEnabled(true);
+    }
 }
 
 void FrameBufferWidget::finishTask(TaskReporter::Task task) {
