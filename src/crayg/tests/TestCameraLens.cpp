@@ -31,6 +31,7 @@ TEST_CASE("CameraLens::construct") {
         REQUIRE(Catch::Detail::Approx(canon70_200.metadata.maximumAperture) == 3.4220621586f);
         REQUIRE(canon70_200.metadata.isAnamorphic == false);
         REQUIRE(canon70_200.metadata.squeeze == 1);
+        REQUIRE(canon70_200.metadata.closestFocalDistance == Catch::Detail::Approx(32.95898f));
     }
 
     SECTION("should calculate metadata correctly for anamorphic lens") {

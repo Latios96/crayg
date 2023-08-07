@@ -1,5 +1,6 @@
 #include "CameraLens.h"
 #include "Logger.h"
+#include "Wavelengths.h"
 #include "basics/MathUtils.h"
 #include "scene/camera/CameraUtils.h"
 #include <iostream>
@@ -67,6 +68,7 @@ void CameraLens::calculateMetadata() {
     metadata.isAnamorphic = std::any_of(elements.begin(), elements.end(), [](const LensElement &element) {
         return element.geometry == CYLINDER_X || element.geometry == CYLINDER_Y;
     });
+    metadata.closestFocalDistance = computeClosestFocalDistance();
 }
 
 void CameraLens::handleAnamorphicFocussing() {
@@ -76,6 +78,32 @@ void CameraLens::handleAnamorphicFocussing() {
     metadata.squeeze = metadata.focalLength / horizontalFocalLength;
     metadata.focalLength = horizontalFocalLength;
     thickLensApproximation = horizontalThickLensApproximation;
+}
+
+float CameraLens::calculateElementsOffset(float focalDistance) const {
+    const float z = -focalDistance;
+    const float c =
+        (thickLensApproximation.secondCardinalPoints.pZ - z - thickLensApproximation.firstCardinalPoints.pZ) *
+        (thickLensApproximation.secondCardinalPoints.pZ - z - 4 * metadata.focalLength -
+         thickLensApproximation.firstCardinalPoints.pZ);
+    return 0.5f * (thickLensApproximation.secondCardinalPoints.pZ - z + thickLensApproximation.firstCardinalPoints.pZ -
+                   sqrt(c));
+}
+
+float CameraLens::computeClosestFocalDistance() const {
+    float middle = 0;
+    float start = 250;
+    float end = 0;
+    for (int i = 0; i < 10; i++) {
+        middle = end + ((start - end) / 2.f);
+        const float offset = calculateElementsOffset(middle);
+        if (std::isnan(offset)) {
+            end = middle;
+        } else {
+            start = middle;
+        }
+    }
+    return middle;
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
@@ -176,13 +204,7 @@ Ray CameraLens::refract(const LensElementIntersection &intersection, const Ray &
 }
 
 void CameraLens::focusLens(float focalDistance) {
-    const float z = -focalDistance;
-    const float c =
-        (thickLensApproximation.secondCardinalPoints.pZ - z - thickLensApproximation.firstCardinalPoints.pZ) *
-        (thickLensApproximation.secondCardinalPoints.pZ - z - 4 * metadata.focalLength -
-         thickLensApproximation.firstCardinalPoints.pZ);
-    elementsOffset = 0.5f * (thickLensApproximation.secondCardinalPoints.pZ - z +
-                             thickLensApproximation.firstCardinalPoints.pZ - sqrt(c));
+    elementsOffset = calculateElementsOffset(focalDistance);
 }
 
 LensElement &CameraLens::getAperture() {

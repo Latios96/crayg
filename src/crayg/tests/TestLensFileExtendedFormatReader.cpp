@@ -24,7 +24,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 
         REQUIRE(
             cameraLens ==
-            CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, "US 123", "An Example Lens"),
+            CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, 42, "US 123", "An Example Lens"),
                        std::vector<LensElement>(
                            {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
                              LensGeometry::PLANAR},
@@ -74,7 +74,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 
         REQUIRE(
             cameraLens ==
-            CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, "US 123", "An Example Lens"),
+            CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, 42, "US 123", "An Example Lens"),
                        std::vector<LensElement>(
                            {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
                              LensGeometry::PLANAR},

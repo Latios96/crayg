@@ -47,6 +47,8 @@ struct CameraLens {
     void initializeLensMaterials();
     void calculateMetadata();
     void handleAnamorphicFocussing();
+    float computeClosestFocalDistance() const;
+    float calculateElementsOffset(float focalDistance) const;
 
     std::optional<LensElementIntersection> intersect(const LensElement &element, const Ray &ray) const;
     bool exceedsAperture(const LensElement &element, const Ray &ray) const;
