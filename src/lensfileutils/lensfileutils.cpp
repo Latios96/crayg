@@ -3,11 +3,13 @@
 #include "Logger.h"
 #include <boost/filesystem.hpp>
 
+#include "scene/camera/realistic/ExitPupilCalculator.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "scene/camera/realistic/lensio/LensFileWriterFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/DtoUtils.h"
 #include "utils/EnumUtils.h"
+#include <nlohmann/json.hpp>
 
 namespace crayg {
 
@@ -106,6 +108,47 @@ void calculateLensMaterialError(const std::string &inputFile) {
     fmt::print("Abbe no error MSE: {}\n", abbeNoMse);
 }
 
+class NullTaskReporter : public TaskReporter {
+  protected:
+    void onTaskStarted() override {
+    }
+
+    void onTaskFinished() override {
+    }
+
+    void onTaskProgressUpdated() override {
+    }
+};
+
+void calculateExitPupilBounds(const std::string &inputFile) {
+    auto lensFileReader = LensFileReaderFactory::createLensFileReader(inputFile);
+    auto cameraLens = lensFileReader->readFile(inputFile);
+    NullTaskReporter taskReporter;
+    ExitPupilCalculator exitPupilCalculator(cameraLens, Vector2f(3.670f, 2.554f).length(),
+                                            ExitPupilCalculator::CalculationSettings(), taskReporter);
+
+    auto exitPupils = nlohmann::json::array();
+    const float start = 60;
+    const float end = 1000;
+    for (float d = start; d < end; d += 10) {
+        Logger::info("Calculating exit pupil for {}cm", d);
+        cameraLens.focusLens(d);
+        auto exitPupil = exitPupilCalculator.calculate();
+        auto exitPupilJson = nlohmann::json::object();
+        exitPupilJson["focusDistance"] = d;
+        exitPupilJson["pupilBounds"] = nlohmann::json::array();
+        for (auto &bound : exitPupil.pupilBounds) {
+            auto boundJson = {bound.min.x, bound.min.y, bound.max.x, bound.max.y};
+            exitPupilJson["pupilBounds"].push_back(boundJson);
+        }
+        exitPupils.push_back(exitPupilJson);
+    }
+
+    std::ofstream o("C:\\workspace\\crayg\\pupils\\pupils.json");
+    o << exitPupils.dump(4);
+    o.close();
+}
+
 int craygMain(int argc, char *argv[]) {
     CLI::App app{
         fmt::format("Crayg lensfile utils {}, commit {}", crayg::CraygInfo::VERSION, crayg::CraygInfo::COMMIT_HASH),
@@ -140,6 +183,10 @@ int craygMain(int argc, char *argv[]) {
 
     convertGlasMaterialErrorCommand->add_option("-i,--input", lensFileInput, "Lens file input")->required();
 
+    auto calculateExitPupilBoundsCommand = app.add_subcommand("exit-pupil-bounds", "outputs the exit pupils");
+
+    calculateExitPupilBoundsCommand->add_option("-i,--input", lensFileInput, "Lens file input")->required();
+
     try {
         app.parse(argc, argv);
 
@@ -153,6 +200,8 @@ int craygMain(int argc, char *argv[]) {
         scaleLensFile({lensFileInput, lensFileOutput, focalLengths_mm});
     } else if (convertGlasMaterialErrorCommand->parsed()) {
         calculateLensMaterialError(lensFileInput);
+    } else if (calculateExitPupilBoundsCommand->parsed()) {
+        calculateExitPupilBounds(lensFileInput);
     }
     return 0;
 }
