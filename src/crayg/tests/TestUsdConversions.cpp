@@ -90,6 +90,24 @@ TEST_CASE("ConvertVec3f") {
     }
 }
 
+TEST_CASE("ConvertVec2f") {
+    SECTION("should convert GfVec2f to Vector2f") {
+        const pxr::GfVec2f vectorToConvert(1, 2);
+
+        const Vector2f convertedVector = UsdConversions::convert(vectorToConvert);
+
+        REQUIRE(convertedVector == Vector2f(1, 2));
+    }
+
+    SECTION("should convert Vector2f to GfVec2f") {
+        const Vector2f vectorToConvert(1, 2);
+
+        const pxr::GfVec2f convertedVector = UsdConversions::convert(vectorToConvert);
+
+        REQUIRE(convertedVector == pxr::GfVec2f(1, 2));
+    }
+}
+
 TEST_CASE("convertColor") {
     SECTION("should convert Vec3f to Color") {
         const pxr::GfVec3f colorToConvert(1, 2, 3);

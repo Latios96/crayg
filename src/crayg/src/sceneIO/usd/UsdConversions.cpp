@@ -29,6 +29,10 @@ Vector3f UsdConversions::convert(const pxr::GfVec3d &vector) {
     return {static_cast<float>(vector[0]), static_cast<float>(vector[1]), -static_cast<float>(vector[2])};
 }
 
+Vector2f UsdConversions::convert(const pxr::GfVec2f &vector) {
+    return {vector[0], vector[1]};
+}
+
 Color UsdConversions::convertColor(const pxr::GfVec3f &vector) {
     return {vector[0], vector[1], vector[2]};
 }
@@ -48,6 +52,10 @@ pxr::GfVec3f UsdConversions::convert(const Vector3f &vector) {
 
 pxr::GfVec3f UsdConversions::convert(const Color &color) {
     return {color.r, color.g, color.b};
+}
+
+pxr::GfVec2f UsdConversions::convert(const Vector2f &vector2f) {
+    return {vector2f.x, vector2f.y};
 }
 
 pxr::GfVec2i UsdConversions::convert(const Resolution &resolution) {
