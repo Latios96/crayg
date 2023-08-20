@@ -134,8 +134,8 @@ TEST_CASE("UsdMeshReader::read") {
                                                     pxr::UsdGeomTokens->faceVarying);
         pxr::VtVec2fArray uvs({{1, 0}, {1, 1}, {0, 0}, {1, 0}});
         pxr::VtIntArray uvIndices({0, 1, 2, 2, 1, 3});
-        assert(uvsPrimvar.Set(uvs));
-        assert(uvsPrimvar.SetIndices(uvIndices));
+        uvsPrimvar.Set(uvs);
+        uvsPrimvar.SetIndices(uvIndices);
 
         UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = usdMeshReader.read();
@@ -156,8 +156,8 @@ TEST_CASE("UsdMeshReader::read") {
                                                     pxr::UsdGeomTokens->faceVarying);
         pxr::VtVec2fArray uvs({{0, 0}, {1, 0}, {0, 1}, {1, 1}});
         pxr::VtIntArray uvIndices({0, 1, 3, 2});
-        assert(uvsPrimvar.Set(uvs));
-        assert(uvsPrimvar.SetIndices(uvIndices));
+        uvsPrimvar.Set(uvs);
+        uvsPrimvar.SetIndices(uvIndices);
 
         UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = usdMeshReader.read();
@@ -177,8 +177,8 @@ TEST_CASE("UsdMeshReader::read") {
                                                     pxr::UsdGeomTokens->uniform);
         pxr::VtVec2fArray uvs({{0, 0}, {1, 0}, {0, 1}, {1, 1}});
         pxr::VtIntArray uvIndices({0, 1, 3, 2});
-        assert(uvsPrimvar.Set(uvs));
-        assert(uvsPrimvar.SetIndices(uvIndices));
+        uvsPrimvar.Set(uvs);
+        uvsPrimvar.SetIndices(uvIndices);
 
         UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
         auto triangleMesh = usdMeshReader.read();
