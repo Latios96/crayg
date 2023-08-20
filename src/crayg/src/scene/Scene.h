@@ -19,21 +19,15 @@ class Scene {
 
     void addObject(const std::shared_ptr<SceneObject> &sceneObject);
     void addLight(const std::shared_ptr<Light> &sceneObject);
-    void addMaterial(const std::shared_ptr<Material> &material);
 
     std::vector<std::shared_ptr<SceneObject>> objects;
     std::vector<std::shared_ptr<Light>> lights;
-    std::set<std::shared_ptr<Material>> materials;
     std::shared_ptr<Camera> camera = nullptr;
     RenderSettings renderSettings;
-    bool materialWithNameExists(const std::shared_ptr<Material> &material);
-    std::shared_ptr<Material> materialByName(const std::string &name);
 
     std::size_t primitiveCount() const;
 
     virtual ~Scene() = default;
-
-    void addMaterialIfObjectHasMaterial(const std::shared_ptr<SceneObject> &sceneObject);
 };
 
 }
