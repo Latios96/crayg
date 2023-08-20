@@ -16,6 +16,7 @@ pxr::UsdGeomMesh UsdTriangleMeshWriter::write(pxr::UsdStagePtr stage, UsdPathFac
     writeFaceVertexIndices(usdGeomMesh);
     writeFaceVertexCounts(usdGeomMesh);
     writeNormals(usdGeomMesh);
+    writeUvs(usdGeomMesh);
     writeSubdivisionScheme(usdGeomMesh);
 
     return usdGeomMesh;
@@ -90,6 +91,34 @@ void UsdTriangleMeshWriter::writePerVertexNormals(pxr::UsdGeomMesh &mesh) const 
 
     mesh.GetNormalsAttr().Set(normals);
     mesh.SetNormalsInterpolation(pxr::UsdGeomTokens->faceVarying);
+}
+
+void UsdTriangleMeshWriter::writeUvs(pxr::UsdGeomMesh &usdGeomMesh) const {
+    if (!this->craygObject.uvsPrimVar) {
+        return;
+    }
+    if (this->craygObject.uvsPrimVar->getType() == PER_VERTEX) {
+        writePerVertexUvs(usdGeomMesh);
+    } else {
+        Logger::warning(R"(Normals interpolation "{}" of mesh {} is not supported)",
+                        this->craygObject.normalsPrimVar->getType(), this->craygObject.getName());
+    }
+}
+
+void UsdTriangleMeshWriter::writePerVertexUvs(pxr::UsdGeomMesh &mesh) const {
+    pxr::VtVec2fArray uvs;
+    uvs.reserve(this->craygObject.faceCount() * 3);
+    auto uvsPrimvar = this->craygObject.getUvsPrimVarAs<TriangleMeshPerVertexPrimVar<Vector2f>>();
+    for (auto faceId : this->craygObject.faceIds()) {
+        auto vertexData = uvsPrimvar->read(faceId);
+        uvs.push_back(UsdConversions::convert(vertexData.v0));
+        uvs.push_back(UsdConversions::convert(vertexData.v2));
+        uvs.push_back(UsdConversions::convert(vertexData.v1));
+    }
+
+    auto usdUvsPrimvar = mesh.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+                                            pxr::UsdGeomTokens->faceVarying);
+    usdUvsPrimvar.Set(uvs);
 }
 
 void UsdTriangleMeshWriter::writeSubdivisionScheme(const pxr::UsdGeomMesh &usdGeomMesh) const {
