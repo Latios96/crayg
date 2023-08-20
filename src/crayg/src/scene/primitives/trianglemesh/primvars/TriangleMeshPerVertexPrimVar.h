@@ -27,7 +27,7 @@ template <typename T> struct VertexData {
         return !(rhs == *this);
     }
 
-    template <typename OStream> friend std::ostream &operator<<(std::ostream &os, const VertexData &data) {
+    friend std::ostream &operator<<(std::ostream &os, const VertexData &data) {
         os << ToStringHelper("VertexData")
                   .addMember("v0", data.v0)
                   .addMember("v0", data.v1)
@@ -74,7 +74,6 @@ template <typename T> class TriangleMeshPerVertexPrimVar : public TriangleMeshAb
         return vertexData != otherVertexData;
     }
 
-    template <typename OStream>
     friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerVertexPrimVar<T> &var) {
         os << ToStringHelper("TriangleMeshPerVertexPrimVar").addMember("vertexData", var.vertexData).finish();
         return os;
@@ -98,6 +97,17 @@ template <typename T> class TriangleMeshPerVertexPrimVar : public TriangleMeshAb
 }
 
 template <typename T> struct fmt::formatter<crayg::VertexData<T>> : ostream_formatter {};
+
+template <typename T> struct fmt::formatter<std::vector<crayg::VertexData<T>>> {
+    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(std::vector<crayg::VertexData<T>> const &dtos, FormatContext &ctx) const {
+        return fmt::format_to(ctx.out(), "[{}]", fmt::join(dtos, ", "));
+    };
+};
 
 template <typename T> struct fmt::formatter<crayg::TriangleMeshPerVertexPrimVar<T>> : ostream_formatter {};
 
