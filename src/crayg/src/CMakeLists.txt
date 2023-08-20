@@ -275,6 +275,7 @@ set(crayg_SRCS
         sceneIO/write/SceneWriter.cpp
         sceneIO/write/SceneWriter.h
         sceneIO/write/usd/base/BaseUsdLightWriter.h
+        sceneIO/write/usd/base/BaseUsdMaterialWriter.h
         sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h
         sceneIO/write/usd/base/BaseUsdTransformableWriter.h
         sceneIO/write/usd/base/BaseUsdWriter.h
@@ -288,6 +289,8 @@ set(crayg_SRCS
         sceneIO/write/usd/lights/UsdRectLightWriter.h
         sceneIO/write/usd/materials/UsdMaterialWriteCache.cpp
         sceneIO/write/usd/materials/UsdMaterialWriteCache.h
+        sceneIO/write/usd/materials/UsdPreviewSurfaceWriter.cpp
+        sceneIO/write/usd/materials/UsdPreviewSurfaceWriter.h
         sceneIO/write/usd/primitives/UsdGroundPlaneWriter.cpp
         sceneIO/write/usd/primitives/UsdGroundPlaneWriter.h
         sceneIO/write/usd/primitives/UsdPointInstancerWriter.cpp

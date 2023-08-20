@@ -46,7 +46,8 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
         usdMaterialWriteCache.getCachedUsdMaterial(material);
 
         auto matPrim = pxr::UsdShadeMaterial(stage->GetPrimAtPath(pxr::SdfPath("/myMat")));
-        auto shaderPrim = pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myMat/usdPreviewSurface")));
+        auto d = matPrim.ComputeSurfaceSource().GetPath().GetString();
+        auto shaderPrim = pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myMat/UsdPreviewSurface")));
         auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(shaderPrim.GetIdAttr());
         REQUIRE(id == pxr::TfToken("UsdPreviewSurface"));
         auto diffuseColor =
@@ -85,7 +86,7 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
 
         auto matPrim = pxr::UsdShadeMaterial(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat")));
         auto shaderPrim =
-            pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat/usdPreviewSurface")));
+            pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myUnsupportedMat/UsdPreviewSurface")));
         auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(shaderPrim.GetIdAttr());
         REQUIRE(id == pxr::TfToken("UsdPreviewSurface"));
         auto diffuseColorAttr = shaderPrim.GetInput(pxr::TfToken("diffuseColor"));
