@@ -89,6 +89,7 @@ set(UNIT_TEST_LIST
         TestScene.cpp
         TestSceneReaderFactory.cpp
         TestSceneWriterFactory.cpp
+        TestShadingNode.cpp
         TestSphere.cpp
         TestSpiralSequence.cpp
         TestSubdivisionSurfaceMesh.cpp

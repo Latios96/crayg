@@ -18,6 +18,10 @@ class UnsupportedMaterial : public Material {
     std::string getType() override {
         return "UnsupportedMaterial";
     }
+
+    ShadingNodeOutputType getOutputType() override {
+        return COLOR;
+    }
 };
 
 TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {

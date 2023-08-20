@@ -11,6 +11,7 @@ class UsdPreviewSurface : public Material {
     UsdPreviewSurface(const std::string &name, const Color &diffuseColor);
     Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) override;
     std::string getType() override;
+    ShadingNodeOutputType getOutputType() override;
 
     Color diffuseColor = Color::createGrey(0.18f);
     Color emissiveColor = Color::createBlack();

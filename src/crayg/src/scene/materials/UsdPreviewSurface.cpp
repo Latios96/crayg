@@ -27,6 +27,10 @@ std::string UsdPreviewSurface::getType() {
     return "UsdPreviewSurface";
 }
 
+ShadingNodeOutputType UsdPreviewSurface::getOutputType() {
+    return COLOR;
+}
+
 Color UsdPreviewSurface::getReflectivity() const {
     if (useSpecularWorkflow) {
         return specularColor;
