@@ -29,8 +29,13 @@ class TriangleMesh : public SceneObject {
 
     template <typename T> T *getNormalsPrimVarAs();
 
+    template <typename T> T *addUvsPrimVar();
+
+    template <typename T> T *getUvsPrimVarAs();
+
     std::vector<Vector3f> points;
     std::unique_ptr<TriangleMeshAbstractPrimVar<Vector3f>> normalsPrimVar = nullptr;
+    std::unique_ptr<TriangleMeshAbstractPrimVar<Vector2f>> uvsPrimVar = nullptr;
 
     struct FaceVertexIndices {
         int v0, v1, v2;
@@ -90,6 +95,16 @@ template <typename T> T *TriangleMesh::addNormalsPrimVar() {
 
 template <typename T> T *TriangleMesh::getNormalsPrimVarAs() {
     return dynamic_cast<T *>(normalsPrimVar.get());
+}
+
+template <typename T> T *TriangleMesh::addUvsPrimVar() {
+    uvsPrimVar = std::make_unique<T>(*this);
+    uvsPrimVar->allocate();
+    return getUvsPrimVarAs<T>();
+}
+
+template <typename T> T *TriangleMesh::getUvsPrimVarAs() {
+    return dynamic_cast<T *>(uvsPrimVar.get());
 }
 
 }

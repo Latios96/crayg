@@ -117,6 +117,74 @@ TEST_CASE("UsdMeshReader::read") {
         REQUIRE(triangleMesh->faceVertexIndices ==
                 std::vector<TriangleMesh::FaceVertexIndices>({{0, 3, 1}, {0, 2, 3}}));
     }
+
+    SECTION("usdGeomMesh with no authored uvs should have no uvs after translation") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
+
+        UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto triangleMesh = usdMeshReader.read();
+
+        REQUIRE(triangleMesh->uvsPrimVar == nullptr);
+    }
+
+    SECTION("authored faceVarying uvs should be translated for triangle mesh") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
+
+        auto uvsPrimvar = usdGeomMesh.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+                                                    pxr::UsdGeomTokens->faceVarying);
+        pxr::VtVec2fArray uvs({{1, 0}, {1, 1}, {0, 0}, {1, 0}});
+        pxr::VtIntArray uvIndices({0, 1, 2, 2, 1, 3});
+        assert(uvsPrimvar.Set(uvs));
+        assert(uvsPrimvar.SetIndices(uvIndices));
+
+        UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto triangleMesh = usdMeshReader.read();
+
+        REQUIRE(triangleMesh->uvsPrimVar != nullptr);
+        REQUIRE(*triangleMesh->getUvsPrimVarAs<TriangleMeshPerVertexPrimVar<Vector2f>>() ==
+                std::vector<VertexData<Vector2f>>({
+                    VertexData(Vector2f{1, 0}, Vector2f{0, 0}, Vector2f{1, 1}),
+                    VertexData(Vector2f{0, 0}, Vector2f{1, 0}, Vector2f{1, 1}),
+
+                }));
+    }
+
+    SECTION("authored faceVarying uvs should be translated for quad mesh") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage);
+
+        auto uvsPrimvar = usdGeomMesh.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+                                                    pxr::UsdGeomTokens->faceVarying);
+        pxr::VtVec2fArray uvs({{0, 0}, {1, 0}, {0, 1}, {1, 1}});
+        pxr::VtIntArray uvIndices({0, 1, 3, 2});
+        assert(uvsPrimvar.Set(uvs));
+        assert(uvsPrimvar.SetIndices(uvIndices));
+
+        UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto triangleMesh = usdMeshReader.read();
+
+        REQUIRE(triangleMesh->uvsPrimVar != nullptr);
+        REQUIRE(*triangleMesh->getUvsPrimVarAs<TriangleMeshPerVertexPrimVar<Vector2f>>() ==
+                std::vector<VertexData<Vector2f>>({
+                    VertexData(Vector2f{0, 0}, Vector2f{1, 1}, Vector2f{1, 0}),
+                    VertexData(Vector2f{0, 0}, Vector2f{0, 1}, Vector2f{1, 1}),
+                }));
+    }
+
+    SECTION("authored uvs with unsupported interpolation should not be translated") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage);
+
+        auto uvsPrimvar = usdGeomMesh.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+                                                    pxr::UsdGeomTokens->uniform);
+        pxr::VtVec2fArray uvs({{0, 0}, {1, 0}, {0, 1}, {1, 1}});
+        pxr::VtIntArray uvIndices({0, 1, 3, 2});
+        assert(uvsPrimvar.Set(uvs));
+        assert(uvsPrimvar.SetIndices(uvIndices));
+
+        UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto triangleMesh = usdMeshReader.read();
+
+        REQUIRE(triangleMesh->uvsPrimVar == nullptr);
+    }
 }
 
 }

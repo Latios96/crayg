@@ -24,6 +24,7 @@ std::shared_ptr<TriangleMesh> crayg::UsdMeshReader::read() {
     translateFaceIndices(triangleMesh, triangleIndices);
     translatePoints(triangleMesh);
     translateNormals(triangleMesh, meshUtil);
+    translateUvs(triangleMesh, meshUtil);
 
     return triangleMesh;
 }
@@ -119,6 +120,57 @@ bool UsdMeshReader::normalsAreAuthored() const {
     pxr::VtVec3fArray normals;
     usdPrim.GetNormalsAttr().Get(&normals, timeCodeToRead);
     return normals.size() > 0;
+}
+
+void UsdMeshReader::translateUvs(std::shared_ptr<TriangleMesh> &triangleMesh, pxr::HdMeshUtil &meshUtil) {
+    std::optional<pxr::UsdGeomPrimvar> uvsPrimVar = getAuthoredUvPrimVar();
+    if (!uvsPrimVar) {
+        return;
+    }
+
+    const pxr::TfToken uvsInterpolation = uvsPrimVar->GetInterpolation();
+
+    if (uvsInterpolation == pxr::UsdGeomTokens->faceVarying) {
+        translateFaceVaryingUvs(triangleMesh, meshUtil, *uvsPrimVar);
+    } else {
+        Logger::warning(R"(UV interpolation "{}" of mesh {} is not supported)", uvsInterpolation, usdPrim.GetPath());
+    }
+}
+
+std::optional<pxr::UsdGeomPrimvar> UsdMeshReader::getAuthoredUvPrimVar() const {
+    for (auto &primvar : usdPrim.GetPrimvars()) {
+        const bool isFloat2PrimVar = primvar.GetTypeName() == pxr::SdfValueTypeNames->TexCoord2fArray;
+        if (isFloat2PrimVar) {
+            return primvar;
+        }
+    }
+    return std::nullopt;
+}
+
+void UsdMeshReader::translateFaceVaryingUvs(std::shared_ptr<TriangleMesh> &triangleMesh,
+                                            const pxr::HdMeshUtil &meshUtil, pxr::UsdGeomPrimvar &uvsPrimvar) const {
+    pxr::VtValue triangulated;
+    triangulated = computeTriangulatedFaceVaryingUvs(meshUtil, triangulated, uvsPrimvar);
+
+    auto *primVar = triangleMesh->addUvsPrimVar<TriangleMeshPerVertexPrimVar<Vector2f>>();
+
+    auto data = static_cast<const pxr::GfVec2f *>(pxr::HdGetValueData(triangulated));
+    for (auto id : triangleMesh->faceIds()) {
+        primVar->write(id, UsdConversions::convert(data[id * 3]), UsdConversions::convert(data[id * 3 + 2]),
+                       UsdConversions::convert(data[id * 3 + 1]));
+    }
+}
+
+pxr::VtValue &UsdMeshReader::computeTriangulatedFaceVaryingUvs(const pxr::HdMeshUtil &meshUtil,
+                                                               pxr::VtValue &triangulated,
+                                                               pxr::UsdGeomPrimvar &uvsPrimvar) const {
+    pxr::VtVec2fArray uvs;
+    uvsPrimvar.Get(&uvs, timeCodeToRead);
+
+    uvsPrimvar.ComputeFlattened(&uvs);
+
+    meshUtil.ComputeTriangulatedFaceVaryingPrimvar(uvs.data(), uvs.size(), pxr::HdTypeFloatVec2, &triangulated);
+    return triangulated;
 }
 
 }
