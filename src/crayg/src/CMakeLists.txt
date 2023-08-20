@@ -32,9 +32,9 @@ set(crayg_SRCS
         image/ImageAlgorithms.h
         image/ImageBucket.cpp
         image/ImageBucket.h
-        image/imageiterators/buckets/bucketqueues/BucketQueueMode.h
         image/imageiterators/buckets/bucketqueues/BucketQueue.cpp
         image/imageiterators/buckets/bucketqueues/BucketQueue.h
+        image/imageiterators/buckets/bucketqueues/BucketQueueMode.h
         image/imageiterators/buckets/bucketqueues/FollowMouseBucketQueue.cpp
         image/imageiterators/buckets/bucketqueues/FollowMouseBucketQueue.h
         image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.cpp
@@ -164,14 +164,14 @@ set(crayg_SRCS
         scene/camera/realistic/lensio/textfile/LensFileTextFileReader.h
         scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.cpp
         scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.h
-        scene/camera/realistic/materials/LensMaterialConstants_ohara.h
-        scene/camera/realistic/materials/LensMaterialConstants_schott.h
-        scene/camera/realistic/materials/LensMaterialIds_ohara.h
-        scene/camera/realistic/materials/LensMaterialIds_schott.h
         scene/camera/realistic/LensMaterial.cpp
         scene/camera/realistic/LensMaterial.h
         scene/camera/realistic/LensRaytracerTracer.cpp
         scene/camera/realistic/LensRaytracerTracer.h
+        scene/camera/realistic/materials/LensMaterialConstants_ohara.h
+        scene/camera/realistic/materials/LensMaterialConstants_schott.h
+        scene/camera/realistic/materials/LensMaterialIds_ohara.h
+        scene/camera/realistic/materials/LensMaterialIds_schott.h
         scene/camera/realistic/RealisticCameraModel.cpp
         scene/camera/realistic/RealisticCameraModel.h
         scene/camera/realistic/ThickLensApproximation.cpp
@@ -231,34 +231,34 @@ set(crayg_SRCS
         scene/Transformable.h
         sceneIO/read/SceneReader.cpp
         sceneIO/read/SceneReader.h
-        sceneIO/read/usd/BaseUsdImageableReader.h
-        sceneIO/read/usd/BaseUsdLightReader.h
-        sceneIO/read/usd/BaseUsdReader.h
-        sceneIO/read/usd/BaseUsdXformableReader.h
-        sceneIO/read/usd/UsdCameraReader.cpp
-        sceneIO/read/usd/UsdCameraReader.h
-        sceneIO/read/usd/UsdDiskLightReader.cpp
-        sceneIO/read/usd/UsdDiskLightReader.h
-        sceneIO/read/usd/UsdMaterialReadCache.cpp
-        sceneIO/read/usd/UsdMaterialReadCache.h
-        sceneIO/read/usd/UsdMeshReader.cpp
-        sceneIO/read/usd/UsdMeshReader.h
-        sceneIO/read/usd/UsdPointInstancerReader.cpp
-        sceneIO/read/usd/UsdPointInstancerReader.h
-        sceneIO/read/usd/UsdRectLightReader.cpp
-        sceneIO/read/usd/UsdRectLightReader.h
+        sceneIO/read/usd/base/BaseUsdImageableReader.h
+        sceneIO/read/usd/base/BaseUsdLightReader.h
+        sceneIO/read/usd/base/BaseUsdReader.h
+        sceneIO/read/usd/base/BaseUsdXformableReader.h
+        sceneIO/read/usd/camera/UsdCameraReader.cpp
+        sceneIO/read/usd/camera/UsdCameraReader.h
+        sceneIO/read/usd/lights/UsdDiskLightReader.cpp
+        sceneIO/read/usd/lights/UsdDiskLightReader.h
+        sceneIO/read/usd/lights/UsdRectLightReader.cpp
+        sceneIO/read/usd/lights/UsdRectLightReader.h
+        sceneIO/read/usd/lights/UsdSphereLightReader.cpp
+        sceneIO/read/usd/lights/UsdSphereLightReader.h
+        sceneIO/read/usd/materials/UsdMaterialReadCache.cpp
+        sceneIO/read/usd/materials/UsdMaterialReadCache.h
+        sceneIO/read/usd/primitives/UsdMeshReader.cpp
+        sceneIO/read/usd/primitives/UsdMeshReader.h
+        sceneIO/read/usd/primitives/UsdPointInstancerReader.cpp
+        sceneIO/read/usd/primitives/UsdPointInstancerReader.h
+        sceneIO/read/usd/primitives/UsdSphereReader.cpp
+        sceneIO/read/usd/primitives/UsdSphereReader.h
+        sceneIO/read/usd/primitives/UsdSubdivisionSurfaceMeshReader.cpp
+        sceneIO/read/usd/primitives/UsdSubdivisionSurfaceMeshReader.h
         sceneIO/read/usd/UsdRenderSettingsReader.cpp
         sceneIO/read/usd/UsdRenderSettingsReader.h
         sceneIO/read/usd/UsdSceneReader.cpp
         sceneIO/read/usd/UsdSceneReader.h
-        sceneIO/read/usd/UsdSphereLightReader.cpp
-        sceneIO/read/usd/UsdSphereLightReader.h
-        sceneIO/read/usd/UsdSphereReader.cpp
-        sceneIO/read/usd/UsdSphereReader.h
         sceneIO/read/usd/UsdStageReader.cpp
         sceneIO/read/usd/UsdStageReader.h
-        sceneIO/read/usd/UsdSubdivisionSurfaceMeshReader.cpp
-        sceneIO/read/usd/UsdSubdivisionSurfaceMeshReader.h
         sceneIO/SceneReaderFactory.cpp
         sceneIO/SceneReaderFactory.h
         sceneIO/SceneWriterFactory.cpp
@@ -274,36 +274,36 @@ set(crayg_SRCS
         sceneIO/usd/UsdUtils.h
         sceneIO/write/SceneWriter.cpp
         sceneIO/write/SceneWriter.h
-        sceneIO/write/usd/BaseUsdLightWriter.h
-        sceneIO/write/usd/BaseUsdSceneObjectWriter.h
-        sceneIO/write/usd/BaseUsdTransformableWriter.h
-        sceneIO/write/usd/BaseUsdWriter.h
-        sceneIO/write/usd/UsdCameraWriter.cpp
-        sceneIO/write/usd/UsdCameraWriter.h
-        sceneIO/write/usd/UsdDiskLightWriter.cpp
-        sceneIO/write/usd/UsdDiskLightWriter.h
-        sceneIO/write/usd/UsdGroundPlaneWriter.cpp
-        sceneIO/write/usd/UsdGroundPlaneWriter.h
-        sceneIO/write/usd/UsdMaterialWriteCache.cpp
-        sceneIO/write/usd/UsdMaterialWriteCache.h
+        sceneIO/write/usd/base/BaseUsdLightWriter.h
+        sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h
+        sceneIO/write/usd/base/BaseUsdTransformableWriter.h
+        sceneIO/write/usd/base/BaseUsdWriter.h
+        sceneIO/write/usd/camera/UsdCameraWriter.cpp
+        sceneIO/write/usd/camera/UsdCameraWriter.h
+        sceneIO/write/usd/lights/UsdDiskLightWriter.cpp
+        sceneIO/write/usd/lights/UsdDiskLightWriter.h
+        sceneIO/write/usd/lights/UsdPointLightWriter.cpp
+        sceneIO/write/usd/lights/UsdPointLightWriter.h
+        sceneIO/write/usd/lights/UsdRectLightWriter.cpp
+        sceneIO/write/usd/lights/UsdRectLightWriter.h
+        sceneIO/write/usd/materials/UsdMaterialWriteCache.cpp
+        sceneIO/write/usd/materials/UsdMaterialWriteCache.h
+        sceneIO/write/usd/primitives/UsdGroundPlaneWriter.cpp
+        sceneIO/write/usd/primitives/UsdGroundPlaneWriter.h
+        sceneIO/write/usd/primitives/UsdPointInstancerWriter.cpp
+        sceneIO/write/usd/primitives/UsdPointInstancerWriter.h
+        sceneIO/write/usd/primitives/UsdSphereWriter.cpp
+        sceneIO/write/usd/primitives/UsdSphereWriter.h
+        sceneIO/write/usd/primitives/UsdSubdivisionSurfaceMeshWriter.cpp
+        sceneIO/write/usd/primitives/UsdSubdivisionSurfaceMeshWriter.h
+        sceneIO/write/usd/primitives/UsdTriangleMeshWriter.cpp
+        sceneIO/write/usd/primitives/UsdTriangleMeshWriter.h
         sceneIO/write/usd/UsdPathFactory.cpp
         sceneIO/write/usd/UsdPathFactory.h
-        sceneIO/write/usd/UsdPointInstancerWriter.cpp
-        sceneIO/write/usd/UsdPointInstancerWriter.h
-        sceneIO/write/usd/UsdPointLightWriter.cpp
-        sceneIO/write/usd/UsdPointLightWriter.h
-        sceneIO/write/usd/UsdRectLightWriter.cpp
-        sceneIO/write/usd/UsdRectLightWriter.h
         sceneIO/write/usd/UsdRenderSettingsWriter.cpp
         sceneIO/write/usd/UsdRenderSettingsWriter.h
         sceneIO/write/usd/UsdSceneWriter.cpp
         sceneIO/write/usd/UsdSceneWriter.h
-        sceneIO/write/usd/UsdSphereWriter.cpp
-        sceneIO/write/usd/UsdSphereWriter.h
-        sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.cpp
-        sceneIO/write/usd/UsdSubdivisionSurfaceMeshWriter.h
-        sceneIO/write/usd/UsdTriangleMeshWriter.cpp
-        sceneIO/write/usd/UsdTriangleMeshWriter.h
         utils/CraygMain.h
         utils/DtoUtils.h
         utils/EnumUtils.h

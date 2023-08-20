@@ -1,5 +1,5 @@
 #include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/UsdGroundPlaneWriter.h"
+#include "sceneIO/write/usd/primitives/UsdGroundPlaneWriter.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>

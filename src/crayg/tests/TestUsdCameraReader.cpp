@@ -1,5 +1,5 @@
 #include "fixtures/TemporaryDirectory.h"
-#include "sceneIO/read/usd/UsdCameraReader.h"
+#include "sceneIO/read/usd/camera/UsdCameraReader.h"
 #include "sceneIO/usd/UsdLensFileUtils.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <catch2/catch.hpp>

@@ -2,7 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDPOINTLIGHTWRITER_H_
 
 #include "scene/lights/Light.h"
-#include "sceneIO/write/usd/BaseUsdLightWriter.h"
+#include "sceneIO/write/usd/base/BaseUsdLightWriter.h"
 #include <pxr/usd/usdLux/sphereLight.h>
 
 namespace crayg {

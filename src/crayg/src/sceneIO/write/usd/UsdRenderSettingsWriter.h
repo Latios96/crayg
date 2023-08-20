@@ -1,8 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDRENDERSETTINGSWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDRENDERSETTINGSWRITER_H_
 
-#include "BaseUsdWriter.h"
 #include "scene/RenderSettings.h"
+#include "sceneIO/write/usd/base/BaseUsdWriter.h"
 #include <pxr/usd/usdRender/settings.h>
 
 namespace crayg {

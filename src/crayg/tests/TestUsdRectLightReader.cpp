@@ -1,4 +1,4 @@
-#include "sceneIO/read/usd/UsdRectLightReader.h"
+#include "sceneIO/read/usd/lights/UsdRectLightReader.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <pxr/usd/usd/stage.h>

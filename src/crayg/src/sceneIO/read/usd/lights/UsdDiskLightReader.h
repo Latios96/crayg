@@ -1,8 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDDISKLIGHTREADER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDDISKLIGHTREADER_H_
 
-#include "BaseUsdLightReader.h"
 #include "scene/lights/DiskLight.h"
+#include "sceneIO/read/usd/base/BaseUsdLightReader.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdLux/diskLight.h>
 

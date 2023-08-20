@@ -1,5 +1,5 @@
 #include "scene/lights/DiskLight.h"
-#include "sceneIO/read/usd/BaseUsdLightReader.h"
+#include "sceneIO/read/usd/base/BaseUsdLightReader.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>

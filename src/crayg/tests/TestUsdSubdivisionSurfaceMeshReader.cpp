@@ -1,5 +1,5 @@
 #include "fixtures/UsdGeomMeshFixtures.h"
-#include "sceneIO/read/usd/UsdSubdivisionSurfaceMeshReader.h"
+#include "sceneIO/read/usd/primitives/UsdSubdivisionSurfaceMeshReader.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

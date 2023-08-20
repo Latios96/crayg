@@ -1,9 +1,9 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDGROUNDPLANEWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDGROUNDPLANEWRITER_H_
 
-#include "BaseUsdSceneObjectWriter.h"
 #include "UsdTriangleMeshWriter.h"
 #include "scene/primitives/GroundPlane.h"
+#include "sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h"
 #include <pxr/usd/usdGeom/mesh.h>
 
 namespace crayg {

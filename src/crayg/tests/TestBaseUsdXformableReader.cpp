@@ -1,5 +1,5 @@
 #include "scene/primitives/Sphere.h"
-#include "sceneIO/read/usd/BaseUsdXformableReader.h"
+#include "sceneIO/read/usd/base/BaseUsdXformableReader.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>

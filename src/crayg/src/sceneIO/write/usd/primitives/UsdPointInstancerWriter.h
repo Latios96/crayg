@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDPOINTINSTANCERWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDPOINTINSTANCERWRITER_H_
-#include "BaseUsdSceneObjectWriter.h"
 #include "scene/primitives/PointInstancer.h"
+#include "sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h"
 #include <pxr/usd/usdGeom/pointInstancer.h>
 
 namespace crayg {

@@ -1,8 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRECTLIGHTREADER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRECTLIGHTREADER_H_
 
-#include "BaseUsdLightReader.h"
 #include "scene/lights/RectLight.h"
+#include "sceneIO/read/usd/base/BaseUsdLightReader.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdLux/rectLight.h>
 

@@ -1,7 +1,6 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSCENEWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSCENEWRITER_H_
 
-#include "UsdMaterialWriteCache.h"
 #include "UsdPathFactory.h"
 #include "scene/Scene.h"
 #include "sceneIO/usd/CraygUsdBase.h"

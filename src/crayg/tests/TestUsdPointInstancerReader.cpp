@@ -1,5 +1,5 @@
-#include "sceneIO/read/usd/UsdMaterialReadCache.h"
-#include "sceneIO/read/usd/UsdPointInstancerReader.h"
+#include "sceneIO/read/usd/materials/UsdMaterialReadCache.h"
+#include "sceneIO/read/usd/primitives/UsdPointInstancerReader.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <pxr/usd/usd/stage.h>

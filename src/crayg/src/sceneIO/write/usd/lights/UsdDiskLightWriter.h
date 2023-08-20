@@ -1,8 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDDISKLIGHTWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDDISKLIGHTWRITER_H_
 
-#include "BaseUsdLightWriter.h"
 #include "scene/lights/DiskLight.h"
+#include "sceneIO/write/usd/base/BaseUsdLightWriter.h"
 #include <pxr/usd/usdLux/diskLight.h>
 
 namespace crayg {

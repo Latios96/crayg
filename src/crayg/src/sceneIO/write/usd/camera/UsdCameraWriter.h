@@ -1,9 +1,9 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDCAMERAWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDCAMERAWRITER_H_
 
-#include "BaseUsdTransformableWriter.h"
 #include "scene/camera/Camera.h"
 #include "sceneIO/usd/CraygUsdBase.h"
+#include "sceneIO/write/usd/base/BaseUsdTransformableWriter.h"
 #include <pxr/usd/usdGeom/camera.h>
 
 namespace crayg {

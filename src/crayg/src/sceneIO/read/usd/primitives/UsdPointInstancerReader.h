@@ -1,8 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDPOINTINSTANCERREADER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDPOINTINSTANCERREADER_H_
 
-#include "BaseUsdImageableReader.h"
 #include "scene/primitives/PointInstancer.h"
+#include "sceneIO/read/usd/base/BaseUsdImageableReader.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdGeom/pointInstancer.h>
 

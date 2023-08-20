@@ -1,8 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRENDERSETTINGSREADER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRENDERSETTINGSREADER_H_
 
-#include "BaseUsdReader.h"
 #include "scene/RenderSettings.h"
+#include "sceneIO/read/usd/base/BaseUsdReader.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdRender/settings.h>
 

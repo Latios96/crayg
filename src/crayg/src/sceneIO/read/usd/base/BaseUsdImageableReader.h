@@ -1,8 +1,8 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDIMAGEABLEREADER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDIMAGEABLEREADER_H_
 
-#include "BaseUsdXformableReader.h"
-#include "UsdMaterialReadCache.h"
+#include "sceneIO/read/usd/base/BaseUsdXformableReader.h"
+#include "sceneIO/read/usd/materials/UsdMaterialReadCache.h"
 #include "sceneIO/usd/UsdReadUtils.h"
 #include <memory>
 

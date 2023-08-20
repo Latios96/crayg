@@ -1,6 +1,6 @@
 #include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/UsdCameraWriter.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
+#include "sceneIO/write/usd/camera/UsdCameraWriter.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>

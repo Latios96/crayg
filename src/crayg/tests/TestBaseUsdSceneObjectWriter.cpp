@@ -1,7 +1,7 @@
 #include "scene/materials/UsdPreviewSurface.h"
 #include "scene/primitives/Sphere.h"
 #include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/BaseUsdSceneObjectWriter.h"
+#include "sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>

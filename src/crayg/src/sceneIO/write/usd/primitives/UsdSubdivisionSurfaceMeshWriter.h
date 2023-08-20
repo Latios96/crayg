@@ -1,8 +1,10 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSUBDIVISIONSURFACEMESHWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSUBDIVISIONSURFACEMESHWRITER_H_
 
-#include "BaseUsdSceneObjectWriter.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "sceneIO/write/usd/UsdPathFactory.h"
+#include "sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h"
+#include "sceneIO/write/usd/materials/UsdMaterialWriteCache.h"
 #include <pxr/usd/usdGeom/mesh.h>
 
 namespace crayg {

@@ -1,7 +1,7 @@
 #include "scene/lights/Light.h"
 #include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/BaseUsdLightWriter.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
+#include "sceneIO/write/usd/base/BaseUsdLightWriter.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usdLux/sphereLight.h>
 
