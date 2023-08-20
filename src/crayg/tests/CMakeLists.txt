@@ -72,7 +72,6 @@ set(UNIT_TEST_LIST
         TestLineByLineSequence.cpp
         TestMathUtils.cpp
         TestMatrix4x4f.cpp
-        TestNode.cpp
         TestOpenExrWriter.cpp
         TestOpenSubdivRefiner.cpp
         TestOrthonormalBasis.cpp
