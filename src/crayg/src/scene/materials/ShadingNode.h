@@ -13,7 +13,7 @@ class ShadingNode {
     ShadingNode();
     explicit ShadingNode(std::string name);
     std::string getName() const;
-    void generateName();
+    virtual std::string getType() = 0;
 
   private:
     std::string name;

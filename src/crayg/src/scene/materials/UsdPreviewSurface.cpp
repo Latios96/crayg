@@ -2,7 +2,7 @@
 
 namespace crayg {
 
-UsdPreviewSurface::UsdPreviewSurface(const Color &diffuseColor) : diffuseColor(diffuseColor) {
+UsdPreviewSurface::UsdPreviewSurface(const Color &diffuseColor) : Material(), diffuseColor(diffuseColor) {
 }
 
 UsdPreviewSurface::UsdPreviewSurface(const std::string &name) : Material(name) {

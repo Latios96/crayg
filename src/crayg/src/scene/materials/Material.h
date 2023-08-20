@@ -15,9 +15,6 @@ class Material : public ShadingNode {
     explicit Material(const std::string &name);
 
     virtual Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) = 0;
-    virtual std::string getType() = 0;
-    void connectOutputToInput(const std::string &inputPlugName, PlugPtr outputPlug) override;
-    PlugPtr getPlugByName(const std::string &inputPlugName) override;
 };
 
 } // namespace crayg
