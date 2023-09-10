@@ -1,0 +1,26 @@
+#include "scene/materials/ConstantShadingNodes.h"
+#include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/materials/UsdConstantShadingNodeWriters.h"
+#include <catch2/catch.hpp>
+
+namespace crayg {
+
+TEST_CASE("TestUsdFloatConstantWriter::write") {
+    auto stage = pxr::UsdStage::CreateInMemory();
+    UsdPathFactory usdPathFactory;
+
+    SECTION("should write correctly") {
+        FloatConstant floatConstant = .5f;
+        UsdFloatConstantWriter usdFloatConstantWriter(floatConstant);
+
+        auto shaderAndOutput = usdFloatConstantWriter.writeAndGetShaderAndOutput(stage, usdPathFactory);
+
+        REQUIRE(shaderAndOutput.shader.GetPath() == pxr::SdfPath("/FloatConstant0"));
+        REQUIRE(shaderAndOutput.output.GetFullName() == pxr::TfToken("outputs:out"));
+
+        auto value = UsdUtils::getStaticAttributeValueAs<float>(shaderAndOutput.shader.GetInput(pxr::TfToken("value")));
+        REQUIRE(value == .5f);
+    }
+}
+
+}
