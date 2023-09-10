@@ -129,4 +129,19 @@ TEST_CASE("ShadingNodeInput::evaluate") {
     }
 }
 
+TEST_CASE("ShadingNodeInput::hasInputConnection") {
+    std::shared_ptr<MyColorShadingNode> myColorShadingNode = std::make_shared<MyColorShadingNode>();
+    std::shared_ptr<MyShadingNodeWithInputs> myShadingNodeWithInputs = std::make_shared<MyShadingNodeWithInputs>();
+
+    SECTION("should return true") {
+        myShadingNodeWithInputs->colorInput.connectTo(myColorShadingNode);
+
+        REQUIRE(myShadingNodeWithInputs->colorInput.hasInputConnection());
+    }
+
+    SECTION("should return false") {
+        REQUIRE_FALSE(myShadingNodeWithInputs->colorInput.hasInputConnection());
+    }
+}
+
 }

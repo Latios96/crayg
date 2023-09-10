@@ -23,6 +23,10 @@ bool ShadingNodeInput::operator!=(const ShadingNodeInput &rhs) const {
     return !(rhs == *this);
 }
 
+bool ShadingNodeInput::hasInputConnection() const {
+    return inputNode != nullptr;
+}
+
 ShadingNodeOutputType FloatShadingNodeInput::getOutputType() const {
     return FLOAT;
 }

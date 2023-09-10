@@ -21,6 +21,7 @@ class ShadingNodeInput {
 
     virtual bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const = 0;
     virtual ShadingNodeOutputType getOutputType() const = 0;
+    bool hasInputConnection() const;
 
     bool operator==(const ShadingNodeInput &rhs) const;
     bool operator!=(const ShadingNodeInput &rhs) const;
