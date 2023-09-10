@@ -233,6 +233,7 @@ set(crayg_SRCS
         sceneIO/read/SceneReader.h
         sceneIO/read/usd/base/BaseUsdImageableReader.h
         sceneIO/read/usd/base/BaseUsdLightReader.h
+        sceneIO/read/usd/base/BaseUsdMaterialReader.h
         sceneIO/read/usd/base/BaseUsdReader.h
         sceneIO/read/usd/base/BaseUsdXformableReader.h
         sceneIO/read/usd/camera/UsdCameraReader.cpp
