@@ -1,12 +1,7 @@
-add_executable(
-    crayg-binary-integration-tests
-    imageTests.cpp
-    main.cpp
-    renderUtils.cpp
-    renderUtils.h
-    sceneIO.cpp
-    utils.cpp
-    utils.h)
+set(INTEGRATION_TEST_SRCS imageTests.cpp renderUtils.cpp renderUtils.h sceneIO.cpp utils.cpp utils.h)
+
+add_executable(crayg-binary-integration-tests # cmake-format: unsortable
+               main.cpp ${INTEGRATION_TEST_SRCS})
 
 target_link_libraries(crayg-binary-integration-tests crayg)
 

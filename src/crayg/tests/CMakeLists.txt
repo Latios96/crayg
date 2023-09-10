@@ -146,7 +146,8 @@ endforeach()
 
 set(TARGET_NAME crayg-unit-tests)
 
-add_executable(${TARGET_NAME} ${UNIT_TEST_SOURCE_LIST} main.cpp)
+add_executable(${TARGET_NAME} # cmake-format: unsortable
+               main.cpp ${UNIT_TEST_SOURCE_LIST})
 
 target_link_libraries(${TARGET_NAME} PUBLIC crayg)
 
