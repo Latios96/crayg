@@ -13,6 +13,8 @@ namespace crayg {
 
 class UsdConversions {
   public:
+    static float convert(float value);
+    static int convert(int value);
     static Matrix4x4f convert(const pxr::GfMatrix4d &matrix);
     static Vector3f convert(const pxr::GfVec3f &vector);
     static pxr::GfVec3f convert(const Vector3f &vector);

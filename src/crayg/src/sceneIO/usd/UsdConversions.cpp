@@ -9,6 +9,14 @@ const Matrix4x4f BASE_TRANSFORM_CRAYG_INVERTED = Matrix4x4f::scale(1, 1, -1).inv
 const pxr::GfMatrix4d BASE_TRANSFORM_USD = pxr::GfMatrix4d().SetScale(pxr::GfVec3d(1, 1, -1));
 const pxr::GfMatrix4d BASE_TRANSFORM_USD_INVERTED = pxr::GfMatrix4d().SetScale(pxr::GfVec3d(1, 1, -1)).GetInverse();
 
+float UsdConversions::convert(float value) {
+    return value;
+}
+
+int UsdConversions::convert(int value) {
+    return value;
+}
+
 Matrix4x4f UsdConversions::convert(const pxr::GfMatrix4d &matrix) {
     return BASE_TRANSFORM_CRAYG *
            Matrix4x4f(
