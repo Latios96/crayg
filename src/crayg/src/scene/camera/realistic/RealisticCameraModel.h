@@ -12,7 +12,7 @@ namespace crayg {
 class RealisticCameraModel : public CameraModel {
   public:
     RealisticCameraModel(Camera &camera, const Resolution &resolution);
-    void init(TaskReporter &taskReporter) override;
+    void init(BaseTaskReporter &taskReporter) override;
     RayWithWeight createPrimaryRay(float x, float y, float wavelength) override;
 
   private:

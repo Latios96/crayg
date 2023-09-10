@@ -9,9 +9,9 @@ namespace crayg {
 class TaskReporterQtSignalAdapter : public QObject {
     Q_OBJECT
   public:
-    void emitTaskStarted(const TaskReporter::Task &task);
-    void emitTaskFinished(const TaskReporter::Task &task);
-    void emitTaskProgressUpdated(const TaskReporter::Task &task);
+    void emitTaskStarted(const BaseTaskReporter::Task &task);
+    void emitTaskFinished(const BaseTaskReporter::Task &task);
+    void emitTaskProgressUpdated(const BaseTaskReporter::Task &task);
   signals:
     void taskStarted(BaseTaskReporter::Task task);
     void taskFinished(BaseTaskReporter::Task task);

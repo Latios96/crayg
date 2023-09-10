@@ -22,7 +22,7 @@
 
 namespace crayg {
 
-Renderer::Renderer(Scene &scene, OutputDriver &outputDriver, TaskReporter &taskReporter, BucketQueue &bucketQueue)
+Renderer::Renderer(Scene &scene, OutputDriver &outputDriver, BaseTaskReporter &taskReporter, BucketQueue &bucketQueue)
     : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter), bucketQueue(bucketQueue) {
 }
 

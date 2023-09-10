@@ -6,7 +6,7 @@
 
 namespace crayg {
 
-GeometryCompiler::GeometryCompiler(Scene &scene, TaskReporter &taskReporter)
+GeometryCompiler::GeometryCompiler(Scene &scene, BaseTaskReporter &taskReporter)
     : scene(scene), taskReporter(taskReporter) {
 }
 

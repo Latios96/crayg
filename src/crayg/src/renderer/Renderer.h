@@ -20,7 +20,7 @@ namespace crayg {
 
 class Renderer {
   public:
-    Renderer(Scene &scene, OutputDriver &outputDriver, TaskReporter &taskReporter, BucketQueue &bucketQueue);
+    Renderer(Scene &scene, OutputDriver &outputDriver, BaseTaskReporter &taskReporter, BucketQueue &bucketQueue);
 
     void renderScene();
 
@@ -29,7 +29,7 @@ class Renderer {
     OutputDriver &outputDriver;
     std::unique_ptr<CameraModel> cameraModel;
     std::shared_ptr<SceneIntersector> sceneIntersector;
-    TaskReporter &taskReporter;
+    BaseTaskReporter &taskReporter;
     BucketQueue &bucketQueue;
     std::vector<ImageBucket> bucketSequence;
 

@@ -17,7 +17,7 @@ class CameraModel {
     CameraModel(Camera &camera, const Resolution &resolution) : camera(camera), resolution(resolution) {
     }
 
-    virtual void init(crayg::TaskReporter &taskReporter){};
+    virtual void init(crayg::BaseTaskReporter &taskReporter){};
 
     virtual RayWithWeight createPrimaryRay(float x, float y, float wavelength) = 0;
 

@@ -16,7 +16,7 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
                              std::pow<float>(camera.getFilmbackSize() * 0.1f / aspectRatio, 2));
 }
 
-void RealisticCameraModel::init(TaskReporter &taskReporter) {
+void RealisticCameraModel::init(BaseTaskReporter &taskReporter) {
     Logger::info("Effective focal length: {:.2f}mm", camera.getLens().metadata.focalLength * 10);
 
     camera.getLens().focusLens(camera.getFocusDistance());

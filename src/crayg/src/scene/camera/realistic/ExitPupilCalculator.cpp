@@ -7,7 +7,7 @@
 
 namespace crayg {
 ExitPupilCalculator::ExitPupilCalculator(CameraLens &lens, float filmDiagonalLength, const CalculationSettings &samples,
-                                         TaskReporter &taskReporter)
+                                         BaseTaskReporter &taskReporter)
     : lens(lens), filmDiagonalLength(filmDiagonalLength), calculationSettings(samples), taskReporter(taskReporter) {
 }
 

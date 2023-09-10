@@ -2,15 +2,15 @@
 
 namespace crayg {
 
-void TaskReporterQtSignalAdapter::emitTaskStarted(const TaskReporter::Task &task) {
+void TaskReporterQtSignalAdapter::emitTaskStarted(const BaseTaskReporter::Task &task) {
     emit taskStarted(task);
 }
 
-void TaskReporterQtSignalAdapter::emitTaskFinished(const TaskReporter::Task &task) {
+void TaskReporterQtSignalAdapter::emitTaskFinished(const BaseTaskReporter::Task &task) {
     emit taskFinished(task);
 }
 
-void TaskReporterQtSignalAdapter::emitTaskProgressUpdated(const TaskReporter::Task &task) {
+void TaskReporterQtSignalAdapter::emitTaskProgressUpdated(const BaseTaskReporter::Task &task) {
     emit taskProgressUpdated(task);
 }
 

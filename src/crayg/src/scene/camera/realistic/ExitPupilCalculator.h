@@ -19,7 +19,7 @@ class ExitPupilCalculator {
     };
 
     explicit ExitPupilCalculator(CameraLens &lens, float filmDiagonalLength, const CalculationSettings &samples,
-                                 TaskReporter &taskReporter);
+                                 BaseTaskReporter &taskReporter);
     ExitPupil calculate();
 
   private:
@@ -29,7 +29,7 @@ class ExitPupilCalculator {
     CameraLens &lens;
     float filmDiagonalLength;
     CalculationSettings calculationSettings;
-    TaskReporter &taskReporter;
+    BaseTaskReporter &taskReporter;
 };
 
 } // crayg

@@ -193,7 +193,7 @@ void FrameBufferWidget::setImageSpec(ImageSpec imageSpec) {
     }
 }
 
-void FrameBufferWidget::startTask(TaskReporter::Task task) {
+void FrameBufferWidget::startTask(BaseTaskReporter::Task task) {
     statusPreviousTask->hide();
     statusProgressBar->setFormat(qformat("{}..", task.name));
     statusProgressBar->setValue(0);
@@ -209,7 +209,7 @@ void FrameBufferWidget::startTask(TaskReporter::Task task) {
     }
 }
 
-void FrameBufferWidget::finishTask(TaskReporter::Task task) {
+void FrameBufferWidget::finishTask(BaseTaskReporter::Task task) {
     statusPreviousTask->show();
     statusPreviousTask->setText(qformat("{} took {:%Hh %Mm %Ss}", task.name, task.elapsedTime()));
     statusProgressBar->hide();
@@ -217,7 +217,7 @@ void FrameBufferWidget::finishTask(TaskReporter::Task task) {
     statusRemaining->hide();
 }
 
-void FrameBufferWidget::updateTask(TaskReporter::Task task) {
+void FrameBufferWidget::updateTask(BaseTaskReporter::Task task) {
     statusProgressBar->setValue(task.progress());
     statusElapsed->setText(formatElapsed(task.elapsedTime()));
     statusRemaining->setText(formatRemaining(task.estimatedTimeRemaining()));
