@@ -107,7 +107,7 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         UsdStageReader(*stage).readStageToScene(scene);
 
-        REQUIRE(scene.objects[0]->getMaterial()->getName() == "/material");
+        REQUIRE(scene.objects[0]->getMaterial()->getName() == "/material/shader");
     }
 
     SECTION("should read sphere") {

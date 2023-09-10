@@ -246,6 +246,8 @@ set(crayg_SRCS
         sceneIO/read/usd/lights/UsdSphereLightReader.h
         sceneIO/read/usd/materials/UsdMaterialReadCache.cpp
         sceneIO/read/usd/materials/UsdMaterialReadCache.h
+        sceneIO/read/usd/materials/UsdPreviewSurfaceReader.cpp
+        sceneIO/read/usd/materials/UsdPreviewSurfaceReader.h
         sceneIO/read/usd/primitives/UsdMeshReader.cpp
         sceneIO/read/usd/primitives/UsdMeshReader.h
         sceneIO/read/usd/primitives/UsdPointInstancerReader.cpp
