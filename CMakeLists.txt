@@ -47,6 +47,15 @@ conan_cmake_run(CONANFILE conanfile.txt
 # for some reasons we can not link against this under Ubuntu-20.04
 list(REMOVE_ITEM CONAN_LIBS "Qt5XcbQpa")
 
+if (MSVC)
+    add_compile_options(
+            /wd4305 # double constant assigned to float 
+            /wd4244 # int -> float conversion
+            /wd4267 # size_t -> int conversion
+    )
+endif ()
+
+
 add_subdirectory(src)
 
 # Create distribution target
