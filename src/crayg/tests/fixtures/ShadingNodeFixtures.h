@@ -16,8 +16,10 @@ class MyFloatShadingNode : public ShadingNode {
     }
 
     float evaluateFloat(const SurfaceInteraction &surfaceInteraction) override {
-        return 0;
+        return value;
     }
+
+    float value;
 };
 
 class MyIntShadingNode : public ShadingNode {
@@ -31,8 +33,10 @@ class MyIntShadingNode : public ShadingNode {
     }
 
     int evaluateInt(const SurfaceInteraction &surfaceInteraction) override {
-        return 0;
+        return value;
     }
+
+    int value;
 };
 
 class MyVector2fShadingNode : public ShadingNode {
@@ -46,14 +50,16 @@ class MyVector2fShadingNode : public ShadingNode {
     }
 
     Vector2f evaluateVector2f(const SurfaceInteraction &surfaceInteraction) override {
-        return {};
+        return value;
     }
+
+    Vector2f value;
 };
 
 class MyColorShadingNode : public ShadingNode {
   public:
     std::string getType() override {
-        return "MyShadingNode";
+        return "MyColorShadingNode";
     }
 
     ShadingNodeOutputType getOutputType() override {
