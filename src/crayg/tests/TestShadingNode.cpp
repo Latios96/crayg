@@ -1,4 +1,4 @@
-#include "fixtures/ShadingNodeFixtures.h"
+#include "scene/materials/ConstantShadingNodes.h"
 #include "scene/materials/ShadingNode.h"
 #include <catch2/catch.hpp>
 
@@ -21,10 +21,10 @@ class MyShadingNodeWithInputs : public ShadingNode {
 };
 
 TEST_CASE("ShadingNodeInput::connect") {
-    std::shared_ptr<MyColorShadingNode> myColorShadingNode = std::make_shared<MyColorShadingNode>();
-    std::shared_ptr<MyIntShadingNode> myIntShadingNode = std::make_shared<MyIntShadingNode>();
-    std::shared_ptr<MyFloatShadingNode> myFloatShadingNode = std::make_shared<MyFloatShadingNode>();
-    std::shared_ptr<MyVector2fShadingNode> myVector2FShadingNode = std::make_shared<MyVector2fShadingNode>();
+    std::shared_ptr<ColorConstant> myColorShadingNode = std::make_shared<ColorConstant>();
+    std::shared_ptr<IntConstant> myIntShadingNode = std::make_shared<IntConstant>();
+    std::shared_ptr<FloatConstant> myFloatShadingNode = std::make_shared<FloatConstant>();
+    std::shared_ptr<Vector2fConstant> myVector2FShadingNode = std::make_shared<Vector2fConstant>();
     std::shared_ptr<MyShadingNodeWithInputs> myShadingNodeWithInputs = std::make_shared<MyShadingNodeWithInputs>();
 
     SECTION("should connect FloatShadingNodeInput to float and int nodes") {
@@ -69,10 +69,10 @@ TEST_CASE("ShadingNodeInput::connect") {
 }
 
 TEST_CASE("ShadingNodeInput::evaluate") {
-    std::shared_ptr<MyColorShadingNode> myColorShadingNode = std::make_shared<MyColorShadingNode>();
-    std::shared_ptr<MyIntShadingNode> myIntShadingNode = std::make_shared<MyIntShadingNode>();
-    std::shared_ptr<MyFloatShadingNode> myFloatShadingNode = std::make_shared<MyFloatShadingNode>();
-    std::shared_ptr<MyVector2fShadingNode> myVector2FShadingNode = std::make_shared<MyVector2fShadingNode>();
+    std::shared_ptr<ColorConstant> myColorShadingNode = std::make_shared<ColorConstant>();
+    std::shared_ptr<IntConstant> myIntShadingNode = std::make_shared<IntConstant>();
+    std::shared_ptr<FloatConstant> myFloatShadingNode = std::make_shared<FloatConstant>();
+    std::shared_ptr<Vector2fConstant> myVector2FShadingNode = std::make_shared<Vector2fConstant>();
     std::shared_ptr<MyShadingNodeWithInputs> myShadingNodeWithInputs = std::make_shared<MyShadingNodeWithInputs>();
     SurfaceInteraction surfaceInteraction({}, {}, {{}, {}});
 
@@ -130,7 +130,7 @@ TEST_CASE("ShadingNodeInput::evaluate") {
 }
 
 TEST_CASE("ShadingNodeInput::hasInputConnection") {
-    std::shared_ptr<MyColorShadingNode> myColorShadingNode = std::make_shared<MyColorShadingNode>();
+    std::shared_ptr<ColorConstant> myColorShadingNode = std::make_shared<ColorConstant>();
     std::shared_ptr<MyShadingNodeWithInputs> myShadingNodeWithInputs = std::make_shared<MyShadingNodeWithInputs>();
 
     SECTION("should return true") {

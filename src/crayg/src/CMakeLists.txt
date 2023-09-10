@@ -191,6 +191,8 @@ set(crayg_SRCS
     scene/lights/Light.h
     scene/lights/RectLight.cpp
     scene/lights/RectLight.h
+    scene/materials/ConstantShadingNodes.cpp
+    scene/materials/ConstantShadingNodes.h
     scene/materials/Material.cpp
     scene/materials/Material.h
     scene/materials/ShadingNode.cpp
