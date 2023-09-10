@@ -23,6 +23,8 @@ template <class CraygType> class BaseUsdMaterialReader : public BaseUsdReader<px
 
 class UsdMaterialReadUtils {
   public:
+    template <typename T, typename UsdType, typename InputType>
+    static void readShaderInput(const pxr::UsdShadeShader &shader, const std::string &attributeName, InputType &target);
     template <typename T, typename UsdType>
     static void readShaderAttributeValue(const pxr::UsdShadeShader &shader, const std::string &attributeName,
                                          T &target);
@@ -45,6 +47,18 @@ void UsdMaterialReadUtils::readShaderAttributeValue(const pxr::UsdShadeShader &s
     }
 
     target = readValue<T, UsdType>(input);
+}
+
+template <typename T, typename UsdType, typename InputType>
+void UsdMaterialReadUtils::readShaderInput(const pxr::UsdShadeShader &shader, const std::string &attributeName,
+                                           InputType &target) {
+    auto input = shader.GetInput(pxr::TfToken(attributeName));
+
+    if (!input || !input.GetAttr().HasValue()) {
+        return;
+    }
+
+    target.value = readValue<T, UsdType>(input);
 }
 
 template <> Color UsdMaterialReadUtils::readValue<Color, pxr::GfVec3f>(const pxr::UsdShadeInput &input);

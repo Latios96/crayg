@@ -16,14 +16,14 @@ UsdPreviewSurface::UsdPreviewSurface(const std::string &name, const Color &diffu
 }
 
 Color UsdPreviewSurface::evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) {
-    const Color reflectivity = getReflectivity();
+    const Color reflectivity = getReflectivity(surfaceInteraction);
 
     if (reflectivity.isBlack()) {
-        return diffuseColor;
+        return diffuseColor.evaluate(surfaceInteraction);
     }
 
     const Ray reflectionRay = surfaceInteraction.spawnReflectionRayFromSurface();
-    return diffuseColor + reflectivity * integratorContext.integrateRay(reflectionRay);
+    return diffuseColor.evaluate(surfaceInteraction) + reflectivity * integratorContext.integrateRay(reflectionRay);
 }
 
 std::string UsdPreviewSurface::getType() {
@@ -34,11 +34,11 @@ ShadingNodeOutputType UsdPreviewSurface::getOutputType() {
     return COLOR;
 }
 
-Color UsdPreviewSurface::getReflectivity() const {
+Color UsdPreviewSurface::getReflectivity(const SurfaceInteraction &surfaceInteraction) {
     if (useSpecularWorkflow) {
-        return specularColor;
+        return specularColor.evaluate(surfaceInteraction);
     }
-    return Color::createGrey(metallic);
+    return Color::createGrey(metallic.evaluate(surfaceInteraction));
 }
 
 }

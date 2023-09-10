@@ -14,18 +14,18 @@ class UsdPreviewSurface : public Material {
     std::string getType() override;
     ShadingNodeOutputType getOutputType() override;
 
-    Color diffuseColor = Color::createGrey(0.18f);
-    Color emissiveColor = Color::createBlack();
+    ColorShadingNodeInput diffuseColor = Color::createGrey(0.18f);
+    ColorShadingNodeInput emissiveColor = Color::createBlack();
     bool useSpecularWorkflow = false;
-    Color specularColor = Color::createBlack();
-    float metallic = 0;
-    float roughness = 0.5f;
-    float clearcoat = 0;
-    float clearcoatRoughness = 0.01f;
-    float opacity = 1;
-    float opacityThreshold = 0;
-    float ior = 1.5;
-    Color getReflectivity() const;
+    ColorShadingNodeInput specularColor = Color::createBlack();
+    FloatShadingNodeInput metallic = 0;
+    FloatShadingNodeInput roughness = 0.5f;
+    FloatShadingNodeInput clearcoat = 0;
+    FloatShadingNodeInput clearcoatRoughness = 0.01f;
+    FloatShadingNodeInput opacity = 1;
+    FloatShadingNodeInput opacityThreshold = 0;
+    FloatShadingNodeInput ior = 1.5;
+    Color getReflectivity(const SurfaceInteraction &surfaceInteraction);
 };
 
 } // namespace crayg

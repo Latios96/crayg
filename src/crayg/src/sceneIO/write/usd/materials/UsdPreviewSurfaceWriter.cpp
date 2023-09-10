@@ -16,26 +16,26 @@ pxr::UsdShadeMaterial UsdPreviewSurfaceWriter::write(pxr::UsdStagePtr stage, Usd
 
     usdPreviewSurfaceShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPreviewSurface")));
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("diffuseColor"), pxr::SdfValueTypeNames->Color3f)
-        .Set(UsdConversions::convert(craygObject.diffuseColor));
+        .Set(UsdConversions::convert(craygObject.diffuseColor.value));
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("emissiveColor"), pxr::SdfValueTypeNames->Color3f)
-        .Set(UsdConversions::convert(craygObject.emissiveColor));
+        .Set(UsdConversions::convert(craygObject.emissiveColor.value));
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("useSpecularWorkflow"), pxr::SdfValueTypeNames->Int)
         .Set(craygObject.useSpecularWorkflow == true ? 1 : 0);
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("specularColor"), pxr::SdfValueTypeNames->Color3f)
-        .Set(UsdConversions::convert(craygObject.specularColor));
+        .Set(UsdConversions::convert(craygObject.specularColor.value));
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("metallic"), pxr::SdfValueTypeNames->Float)
-        .Set(craygObject.metallic);
+        .Set(craygObject.metallic.value);
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("roughness"), pxr::SdfValueTypeNames->Float)
-        .Set(craygObject.roughness);
+        .Set(craygObject.roughness.value);
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("clearcoat"), pxr::SdfValueTypeNames->Float)
-        .Set(craygObject.clearcoat);
+        .Set(craygObject.clearcoat.value);
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("clearcoatRoughness"), pxr::SdfValueTypeNames->Float)
-        .Set(craygObject.clearcoatRoughness);
+        .Set(craygObject.clearcoatRoughness.value);
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("opacity"), pxr::SdfValueTypeNames->Float)
-        .Set(craygObject.opacity);
+        .Set(craygObject.opacity.value);
     usdPreviewSurfaceShader.CreateInput(pxr::TfToken("opacityThreshold"), pxr::SdfValueTypeNames->Float)
-        .Set(craygObject.opacityThreshold);
-    usdPreviewSurfaceShader.CreateInput(pxr::TfToken("ior"), pxr::SdfValueTypeNames->Float).Set(craygObject.ior);
+        .Set(craygObject.opacityThreshold.value);
+    usdPreviewSurfaceShader.CreateInput(pxr::TfToken("ior"), pxr::SdfValueTypeNames->Float).Set(craygObject.ior.value);
 
     return usdPreviewSurfaceMaterial;
 }

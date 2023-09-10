@@ -49,17 +49,17 @@ TEST_CASE("UsdPreviewSurfaceReader::read") {
 
         REQUIRE(material->getName() == "/material/shader");
         const auto usdPreviewSurface = getAsUsdPreviewSurface(material);
-        REQUIRE(usdPreviewSurface->diffuseColor == Color(1, 2, 3));
-        REQUIRE(usdPreviewSurface->emissiveColor == Color(4, 5, 6));
+        REQUIRE(usdPreviewSurface->diffuseColor.value == Color(1, 2, 3));
+        REQUIRE(usdPreviewSurface->emissiveColor.value == Color(4, 5, 6));
         REQUIRE(usdPreviewSurface->useSpecularWorkflow == true);
-        REQUIRE(usdPreviewSurface->specularColor == Color(7, 8, 9));
-        REQUIRE(usdPreviewSurface->metallic == 0.1f);
-        REQUIRE(usdPreviewSurface->roughness == 0.2f);
-        REQUIRE(usdPreviewSurface->clearcoat == 0.3f);
-        REQUIRE(usdPreviewSurface->clearcoatRoughness == 0.4f);
-        REQUIRE(usdPreviewSurface->opacity == 0.5f);
-        REQUIRE(usdPreviewSurface->opacityThreshold == 0.6f);
-        REQUIRE(usdPreviewSurface->ior == 0.7f);
+        REQUIRE(usdPreviewSurface->specularColor.value == Color(7, 8, 9));
+        REQUIRE(usdPreviewSurface->metallic.value == 0.1f);
+        REQUIRE(usdPreviewSurface->roughness.value == 0.2f);
+        REQUIRE(usdPreviewSurface->clearcoat.value == 0.3f);
+        REQUIRE(usdPreviewSurface->clearcoatRoughness.value == 0.4f);
+        REQUIRE(usdPreviewSurface->opacity.value == 0.5f);
+        REQUIRE(usdPreviewSurface->opacityThreshold.value == 0.6f);
+        REQUIRE(usdPreviewSurface->ior.value == 0.7f);
     }
 
     SECTION("assigned UsdPreviewSurface with no authored attributes should fallback to spec default") {
@@ -75,17 +75,17 @@ TEST_CASE("UsdPreviewSurfaceReader::read") {
         REQUIRE(material->getName() == "/material/shader");
         const UsdPreviewSurface specsDefaults("spec");
         const auto usdPreviewSurface = getAsUsdPreviewSurface(material);
-        REQUIRE(usdPreviewSurface->diffuseColor == specsDefaults.diffuseColor);
-        REQUIRE(usdPreviewSurface->emissiveColor == specsDefaults.emissiveColor);
+        REQUIRE(usdPreviewSurface->diffuseColor.value == specsDefaults.diffuseColor.value);
+        REQUIRE(usdPreviewSurface->emissiveColor.value == specsDefaults.emissiveColor.value);
         REQUIRE(usdPreviewSurface->useSpecularWorkflow == specsDefaults.useSpecularWorkflow);
-        REQUIRE(usdPreviewSurface->specularColor == specsDefaults.specularColor);
-        REQUIRE(usdPreviewSurface->metallic == specsDefaults.metallic);
-        REQUIRE(usdPreviewSurface->roughness == specsDefaults.roughness);
-        REQUIRE(usdPreviewSurface->clearcoat == specsDefaults.clearcoat);
-        REQUIRE(usdPreviewSurface->clearcoatRoughness == specsDefaults.clearcoatRoughness);
-        REQUIRE(usdPreviewSurface->opacity == specsDefaults.opacity);
-        REQUIRE(usdPreviewSurface->opacityThreshold == specsDefaults.opacityThreshold);
-        REQUIRE(usdPreviewSurface->ior == specsDefaults.ior);
+        REQUIRE(usdPreviewSurface->specularColor.value == specsDefaults.specularColor.value);
+        REQUIRE(usdPreviewSurface->metallic.value == specsDefaults.metallic.value);
+        REQUIRE(usdPreviewSurface->roughness.value == specsDefaults.roughness.value);
+        REQUIRE(usdPreviewSurface->clearcoat.value == specsDefaults.clearcoat.value);
+        REQUIRE(usdPreviewSurface->clearcoatRoughness.value == specsDefaults.clearcoatRoughness.value);
+        REQUIRE(usdPreviewSurface->opacity.value == specsDefaults.opacity.value);
+        REQUIRE(usdPreviewSurface->opacityThreshold.value == specsDefaults.opacityThreshold.value);
+        REQUIRE(usdPreviewSurface->ior.value == specsDefaults.ior.value);
     }
 
     SECTION("assigned UsdPreviewSurface with a connection in diffuseColor should fallback to authored value") {
@@ -104,7 +104,7 @@ TEST_CASE("UsdPreviewSurfaceReader::read") {
         auto material = usdMaterialReadCache.getCachedReadPrimMaterial(geo);
 
         REQUIRE(material->getName() == "/material/shader");
-        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color::createGrey(0.5f));
+        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor.value == Color::createGrey(0.5f));
     }
 
     SECTION("assigned UsdPreviewSurface with no connection, no authored value and no default value should fallback to "
@@ -121,7 +121,7 @@ TEST_CASE("UsdPreviewSurfaceReader::read") {
         auto material = usdMaterialReadCache.getCachedReadPrimMaterial(geo);
 
         REQUIRE(material->getName() == "/material/shader");
-        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor == Color(0.18f, 0.18f, 0.18f));
+        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor.value == Color(0.18f, 0.18f, 0.18f));
     }
 }
 
