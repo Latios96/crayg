@@ -13,6 +13,9 @@ float FloatConstant::evaluateFloat(const SurfaceInteraction &surfaceInteraction)
     return value;
 }
 
+FloatConstant::FloatConstant(float value) : value(value) {
+}
+
 std::string IntConstant::getType() {
     return "IntConstant";
 }
@@ -23,6 +26,9 @@ ShadingNodeOutputType IntConstant::getOutputType() {
 
 int IntConstant::evaluateInt(const SurfaceInteraction &surfaceInteraction) {
     return value;
+}
+
+IntConstant::IntConstant(int value) : value(value) {
 }
 
 std::string Vector2fConstant::getType() {
@@ -37,6 +43,9 @@ Vector2f Vector2fConstant::evaluateVector2f(const SurfaceInteraction &surfaceInt
     return value;
 }
 
+Vector2fConstant::Vector2fConstant(const Vector2f &value) : value(value) {
+}
+
 std::string ColorConstant::getType() {
     return "ColorConstant";
 }
@@ -47,5 +56,8 @@ ShadingNodeOutputType ColorConstant::getOutputType() {
 
 Color ColorConstant::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
     return value;
+}
+
+ColorConstant::ColorConstant(const Color &value) : value(value) {
 }
 } // crayg
