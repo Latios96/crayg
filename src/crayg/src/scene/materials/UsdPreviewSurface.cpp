@@ -26,7 +26,7 @@ Color UsdPreviewSurface::evaluate(const SurfaceInteraction &surfaceInteraction, 
     return diffuseColor.evaluate(surfaceInteraction) + reflectivity * integratorContext.integrateRay(reflectionRay);
 }
 
-std::string UsdPreviewSurface::getType() {
+std::string UsdPreviewSurface::getType() const {
     return "UsdPreviewSurface";
 }
 

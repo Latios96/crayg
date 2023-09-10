@@ -1,7 +1,8 @@
 #include "ConstantShadingNodes.h"
 
 namespace crayg {
-std::string FloatConstant::getType() {
+
+std::string FloatConstant::getType() const {
     return "FloatConstant";
 }
 
@@ -16,7 +17,7 @@ float FloatConstant::evaluateFloat(const SurfaceInteraction &surfaceInteraction)
 FloatConstant::FloatConstant(float value) : value(value) {
 }
 
-std::string IntConstant::getType() {
+std::string IntConstant::getType() const {
     return "IntConstant";
 }
 
@@ -31,7 +32,7 @@ int IntConstant::evaluateInt(const SurfaceInteraction &surfaceInteraction) {
 IntConstant::IntConstant(int value) : value(value) {
 }
 
-std::string Vector2fConstant::getType() {
+std::string Vector2fConstant::getType() const {
     return "Vector2fConstant";
 }
 
@@ -46,7 +47,7 @@ Vector2f Vector2fConstant::evaluateVector2f(const SurfaceInteraction &surfaceInt
 Vector2fConstant::Vector2fConstant(const Vector2f &value) : value(value) {
 }
 
-std::string ColorConstant::getType() {
+std::string ColorConstant::getType() const {
     return "ColorConstant";
 }
 

@@ -89,7 +89,7 @@ class ShadingNode {
     explicit ShadingNode(std::string name);
     std::string getName() const;
     void setName(const std::string &name);
-    virtual std::string getType() = 0;
+    virtual std::string getType() const = 0;
     virtual ShadingNodeOutputType getOutputType() = 0;
 
     virtual float evaluateFloat(const SurfaceInteraction &surfaceInteraction) {

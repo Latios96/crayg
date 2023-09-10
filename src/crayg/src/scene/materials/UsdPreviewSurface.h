@@ -11,7 +11,7 @@ class UsdPreviewSurface : public Material {
     explicit UsdPreviewSurface(const std::string &name);
     UsdPreviewSurface(const std::string &name, const Color &diffuseColor);
     Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) override;
-    std::string getType() override;
+    std::string getType() const override;
     ShadingNodeOutputType getOutputType() override;
 
     ColorShadingNodeInput diffuseColor = Color::createGrey(0.18f);

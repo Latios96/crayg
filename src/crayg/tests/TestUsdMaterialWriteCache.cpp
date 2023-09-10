@@ -15,7 +15,7 @@ class UnsupportedMaterial : public Material {
         return {};
     }
 
-    std::string getType() override {
+    std::string getType() const override {
         return "UnsupportedMaterial";
     }
 

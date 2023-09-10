@@ -6,7 +6,7 @@ namespace crayg {
 
 class MyShadingNodeWithInputs : public ShadingNode {
   public:
-    std::string getType() override {
+    std::string getType() const override {
         return "MyShadingNodeWithInputs";
     }
 
