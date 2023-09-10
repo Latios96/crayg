@@ -16,19 +16,18 @@ unset(ENV{CI})
 set(CONAN_SYSTEM_INCLUDES ON)
 
 execute_process(
-        COMMAND git describe --tags
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        OUTPUT_VARIABLE GIT_COMMIT_HASH
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-)
+    COMMAND git describe --tags
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE GIT_COMMIT_HASH
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
 
-if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
     file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
-            "${CMAKE_BINARY_DIR}/conan.cmake")
-endif ()
+         "${CMAKE_BINARY_DIR}/conan.cmake")
+endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
@@ -38,51 +37,55 @@ if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
 endif()
 message(STATUS "Using BUILD_TYPE=${CMAKE_BUILD_TYPE_FOR_CONAN} for Conan dependencies")
 
-conan_cmake_run(CONANFILE conanfile.txt
-        BASIC_SETUP
-        BUILD missing
-        KEEP_RPATHS
-        BUILD_TYPE ${CMAKE_BUILD_TYPE_FOR_CONAN})
+conan_cmake_run(
+    CONANFILE
+    conanfile.txt
+    BASIC_SETUP
+    BUILD
+    missing
+    KEEP_RPATHS
+    BUILD_TYPE
+    ${CMAKE_BUILD_TYPE_FOR_CONAN})
 
 # for some reasons we can not link against this under Ubuntu-20.04
 list(REMOVE_ITEM CONAN_LIBS "Qt5XcbQpa")
 
-if (MSVC)
+if(MSVC)
     add_compile_options(
-            /wd4305 # double constant assigned to float 
-            /wd4244 # int -> float conversion
-            /wd4267 # size_t -> int conversion
+        /wd4305 # double constant assigned to float
+        /wd4244 # int -> float conversion
+        /wd4267 # size_t -> int conversion
     )
-endif ()
-
+endif()
 
 add_subdirectory(src)
 
 # Create distribution target
 set(CRAYG_EXECUTABLE_EXTENSION "")
 set(CRAYG_STANDALONE_EXECUTABLE_EXTENSION "")
-if (WIN32)
+if(WIN32)
     set(CRAYG_EXECUTABLE_EXTENSION .exe)
     set(CRAYG_STANDALONE_EXECUTABLE_EXTENSION .exe)
     set(CRAYG_ARCHITECTURE win_amd64)
     set(CRAYG_LIBS_TO_PACKAGE bin/*.dll)
-endif ()
-if (UNIX AND NOT APPLE)
+endif()
+if(UNIX AND NOT APPLE)
     set(CRAYG_LIBS_TO_PACKAGE ${CRAYG_LIBS_TO_PACKAGE} lib/*.so)
     set(CRAYG_ARCHITECTURE linux)
     set(CRAYG_LIBS_TO_PACKAGE lib/*.so)
-endif ()
-if (APPLE)
+endif()
+if(APPLE)
     set(CRAYG_STANDALONE_EXECUTABLE_EXTENSION .app)
     set(CRAYG_LIBS_TO_PACKAGE ${CRAYG_LIBS_TO_PACKAGE} lib/*.dylib)
     set(CRAYG_ARCHITECTURE macosx)
     set(CRAYG_LIBS_TO_PACKAGE lib/*.dylib)
-endif ()
-set(CRAYG_EXECUTABLES bin/crayg-standalone${CRAYG_EXECUTABLE_EXTENSION} bin/crayg-standalone-gui${CRAYG_STANDALONE_EXECUTABLE_EXTENSION})
+endif()
+set(CRAYG_EXECUTABLES bin/crayg-standalone${CRAYG_EXECUTABLE_EXTENSION}
+                      bin/crayg-standalone-gui${CRAYG_STANDALONE_EXECUTABLE_EXTENSION})
 set(CRAYG_PACKAGE_CONTENTS ${CRAYG_EXECUTABLES} ${CRAYG_LIBS_TO_PACKAGE} bin/archdatadir)
 
-
-add_custom_target(createDistribution
-        COMMAND tar -czvf "crayg-${GIT_COMMIT_HASH}-${CRAYG_ARCHITECTURE}.tar.gz" -C ${CMAKE_BINARY_DIR} ${CRAYG_PACKAGE_CONTENTS}
-        DEPENDS crayg crayg-standalone crayg-standalone-gui)
-
+add_custom_target(
+    createDistribution
+    COMMAND tar -czvf "crayg-${GIT_COMMIT_HASH}-${CRAYG_ARCHITECTURE}.tar.gz" -C ${CMAKE_BINARY_DIR}
+            ${CRAYG_PACKAGE_CONTENTS}
+    DEPENDS crayg crayg-standalone crayg-standalone-gui)
