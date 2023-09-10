@@ -1,4 +1,4 @@
-set(UNIT_TEST_LIST
+set(UNIT_TEST_SOURCE_LIST
     # cmake-format: sortable
     fixtures/CameraLensFixtures.cpp
     fixtures/CameraLensFixtures.h
@@ -139,10 +139,6 @@ set(UNIT_TEST_LIST
     TestUsdUtils.cpp
     TestVector2.cpp
     TestVector3f.cpp)
-
-foreach(NAME IN LISTS UNIT_TEST_LIST)
-    list(APPEND UNIT_TEST_SOURCE_LIST ${NAME})
-endforeach()
 
 set(TARGET_NAME crayg-unit-tests)
 
