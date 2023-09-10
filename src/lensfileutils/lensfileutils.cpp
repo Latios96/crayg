@@ -108,18 +108,6 @@ void calculateLensMaterialError(const std::string &inputFile) {
     fmt::print("Abbe no error MSE: {}\n", abbeNoMse);
 }
 
-class NullTaskReporter : public TaskReporter {
-  protected:
-    void onTaskStarted() override {
-    }
-
-    void onTaskFinished() override {
-    }
-
-    void onTaskProgressUpdated() override {
-    }
-};
-
 void calculateExitPupilBounds(const std::string &inputFile) {
     auto lensFileReader = LensFileReaderFactory::createLensFileReader(inputFile);
     auto cameraLens = lensFileReader->readFile(inputFile);

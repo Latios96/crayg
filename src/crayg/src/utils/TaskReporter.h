@@ -53,6 +53,18 @@ class BaseTaskReporter {
     std::optional<Task> currentTask;
 };
 
+class NullTaskReporter : public BaseTaskReporter {
+  protected:
+    void onTaskStarted() override {
+    }
+
+    void onTaskFinished() override {
+    }
+
+    void onTaskProgressUpdated() override {
+    }
+};
+
 class TaskReporter : public BaseTaskReporter {
   protected:
     void onTaskStarted() override;
