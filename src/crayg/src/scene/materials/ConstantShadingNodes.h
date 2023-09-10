@@ -36,6 +36,7 @@ class ColorConstant : public ShadingNode {
     std::string getType() override;
     ShadingNodeOutputType getOutputType() override;
     Color evaluateColor(const SurfaceInteraction &surfaceInteraction) override;
+    Color value;
 };
 
 } // crayg

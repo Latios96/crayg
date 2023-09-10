@@ -46,6 +46,6 @@ ShadingNodeOutputType ColorConstant::getOutputType() {
 }
 
 Color ColorConstant::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
-    return {};
+    return value;
 }
 } // crayg
