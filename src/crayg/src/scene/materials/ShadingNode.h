@@ -6,6 +6,7 @@
 #include <basics/Vector2.h>
 #include <functional>
 #include <integrators/SurfaceInteraction.h>
+#include <ostream>
 #include <utility>
 
 namespace crayg {
@@ -21,40 +22,64 @@ class ShadingNodeInput {
     virtual bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const = 0;
     virtual ShadingNodeOutputType getOutputType() const = 0;
 
+    bool operator==(const ShadingNodeInput &rhs) const;
+    bool operator!=(const ShadingNodeInput &rhs) const;
+
     std::shared_ptr<ShadingNode> inputNode;
     virtual ~ShadingNodeInput();
 };
 
 class FloatShadingNodeInput : public ShadingNodeInput {
   public:
+    FloatShadingNodeInput() = default;
+    FloatShadingNodeInput(float value);
     bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
     ShadingNodeOutputType getOutputType() const override;
     float evaluate(const SurfaceInteraction &surfaceInteraction);
     float value;
+    bool operator==(const FloatShadingNodeInput &rhs) const;
+    bool operator!=(const FloatShadingNodeInput &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const FloatShadingNodeInput &input);
 };
 
 class IntShadingNodeInput : public ShadingNodeInput {
   public:
+    IntShadingNodeInput() = default;
+    IntShadingNodeInput(int value);
     bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
     ShadingNodeOutputType getOutputType() const override;
     int evaluate(const SurfaceInteraction &surfaceInteraction);
     int value;
+    bool operator==(const IntShadingNodeInput &rhs) const;
+    bool operator!=(const IntShadingNodeInput &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const IntShadingNodeInput &input);
 };
 
 class Vector2fShadingNodeInput : public ShadingNodeInput {
   public:
+    Vector2fShadingNodeInput() = default;
+    explicit Vector2fShadingNodeInput(const Vector2f &value);
     bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
     ShadingNodeOutputType getOutputType() const override;
     Vector2f evaluate(const SurfaceInteraction &surfaceInteraction);
     Vector2f value;
+    bool operator==(const Vector2fShadingNodeInput &rhs) const;
+    bool operator!=(const Vector2fShadingNodeInput &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const Vector2fShadingNodeInput &input);
 };
 
 class ColorShadingNodeInput : public ShadingNodeInput {
   public:
+    ColorShadingNodeInput() = default;
+    ColorShadingNodeInput(const Color &value);
+
     bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
     ShadingNodeOutputType getOutputType() const override;
     Color evaluate(const SurfaceInteraction &surfaceInteraction);
     Color value;
+    bool operator==(const ColorShadingNodeInput &rhs) const;
+    bool operator!=(const ColorShadingNodeInput &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const ColorShadingNodeInput &input);
 };
 
 class ShadingNode {

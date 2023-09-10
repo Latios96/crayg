@@ -15,6 +15,14 @@ void ShadingNodeInput::connectTo(const std::shared_ptr<ShadingNode> &newInput) {
 ShadingNodeInput::~ShadingNodeInput() {
 }
 
+bool ShadingNodeInput::operator==(const ShadingNodeInput &rhs) const {
+    return inputNode == rhs.inputNode;
+}
+
+bool ShadingNodeInput::operator!=(const ShadingNodeInput &rhs) const {
+    return !(rhs == *this);
+}
+
 ShadingNodeOutputType FloatShadingNodeInput::getOutputType() const {
     return FLOAT;
 }
@@ -28,6 +36,26 @@ float FloatShadingNodeInput::evaluate(const SurfaceInteraction &surfaceInteracti
         return inputNode->evaluateFloat(surfaceInteraction);
     }
     return value;
+}
+
+FloatShadingNodeInput::FloatShadingNodeInput(float value) : value(value) {
+}
+
+bool FloatShadingNodeInput::operator==(const FloatShadingNodeInput &rhs) const {
+    return static_cast<const crayg::ShadingNodeInput &>(*this) == static_cast<const crayg::ShadingNodeInput &>(rhs) &&
+           value == rhs.value;
+}
+
+bool FloatShadingNodeInput::operator!=(const FloatShadingNodeInput &rhs) const {
+    return !(rhs == *this);
+}
+
+std::ostream &operator<<(std::ostream &os, const FloatShadingNodeInput &input) {
+    os << ToStringHelper("FloatShadingNodeInput")
+              .addMember("value", input.value)
+              .addMember("inputNode", input.inputNode->getName())
+              .finish();
+    return os;
 }
 
 ShadingNodeOutputType IntShadingNodeInput::getOutputType() const {
@@ -45,6 +73,26 @@ int IntShadingNodeInput::evaluate(const SurfaceInteraction &surfaceInteraction) 
     return value;
 }
 
+IntShadingNodeInput::IntShadingNodeInput(int value) : value(value) {
+}
+
+bool IntShadingNodeInput::operator==(const IntShadingNodeInput &rhs) const {
+    return static_cast<const crayg::ShadingNodeInput &>(*this) == static_cast<const crayg::ShadingNodeInput &>(rhs) &&
+           value == rhs.value;
+}
+
+bool IntShadingNodeInput::operator!=(const IntShadingNodeInput &rhs) const {
+    return !(rhs == *this);
+}
+
+std::ostream &operator<<(std::ostream &os, const IntShadingNodeInput &input) {
+    os << ToStringHelper("IntShadingNodeInput")
+              .addMember("value", input.value)
+              .addMember("inputNode", input.inputNode->getName())
+              .finish();
+    return os;
+}
+
 ShadingNodeOutputType Vector2fShadingNodeInput::getOutputType() const {
     return VECTOR2F;
 }
@@ -60,6 +108,26 @@ Vector2f Vector2fShadingNodeInput::evaluate(const SurfaceInteraction &surfaceInt
     return value;
 }
 
+Vector2fShadingNodeInput::Vector2fShadingNodeInput(const Vector2f &value) : value(value) {
+}
+
+bool Vector2fShadingNodeInput::operator==(const Vector2fShadingNodeInput &rhs) const {
+    return static_cast<const crayg::ShadingNodeInput &>(*this) == static_cast<const crayg::ShadingNodeInput &>(rhs) &&
+           value == rhs.value;
+}
+
+bool Vector2fShadingNodeInput::operator!=(const Vector2fShadingNodeInput &rhs) const {
+    return !(rhs == *this);
+}
+
+std::ostream &operator<<(std::ostream &os, const Vector2fShadingNodeInput &input) {
+    os << ToStringHelper("Vector2fShadingNodeInput")
+              .addMember("value", input.value)
+              .addMember("inputNode", input.inputNode->getName())
+              .finish();
+    return os;
+}
+
 ShadingNodeOutputType ColorShadingNodeInput::getOutputType() const {
     return COLOR;
 }
@@ -73,6 +141,26 @@ Color ColorShadingNodeInput::evaluate(const SurfaceInteraction &surfaceInteracti
         return inputNode->evaluateColor(surfaceInteraction);
     }
     return value;
+}
+
+ColorShadingNodeInput::ColorShadingNodeInput(const Color &value) : value(value) {
+}
+
+bool ColorShadingNodeInput::operator==(const ColorShadingNodeInput &rhs) const {
+    return static_cast<const crayg::ShadingNodeInput &>(*this) == static_cast<const crayg::ShadingNodeInput &>(rhs) &&
+           value == rhs.value;
+}
+
+bool ColorShadingNodeInput::operator!=(const ColorShadingNodeInput &rhs) const {
+    return !(rhs == *this);
+}
+
+std::ostream &operator<<(std::ostream &os, const ColorShadingNodeInput &input) {
+    os << ToStringHelper("ColorShadingNodeInput")
+              .addMember("value", input.value)
+              .addMember("inputNode", input.inputNode->getName())
+              .finish();
+    return os;
 }
 
 ShadingNode::ShadingNode() {
