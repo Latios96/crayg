@@ -62,6 +62,7 @@ class ShadingNode {
     ShadingNode();
     explicit ShadingNode(std::string name);
     std::string getName() const;
+    void setName(const std::string &name);
     virtual std::string getType() = 0;
     virtual ShadingNodeOutputType getOutputType() = 0;
 

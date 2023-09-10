@@ -85,6 +85,10 @@ std::string ShadingNode::getName() const {
     return name;
 }
 
+void ShadingNode::setName(const std::string &name) {
+    ShadingNode::name = name;
+}
+
 ShadingNode::~ShadingNode() {
 }
 
