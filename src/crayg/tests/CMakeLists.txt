@@ -4,6 +4,8 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/CameraLensFixtures.h
     fixtures/PointInstancerFixtures.cpp
     fixtures/PointInstancerFixtures.h
+    fixtures/ShadingNodeFixtures.cpp
+    fixtures/ShadingNodeFixtures.h
     fixtures/SubdivisionSurfaceMeshFixtures.cpp
     fixtures/SubdivisionSurfaceMeshFixtures.h
     fixtures/TemporaryDirectory.cpp
