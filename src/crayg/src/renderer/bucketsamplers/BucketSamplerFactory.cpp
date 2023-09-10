@@ -13,6 +13,7 @@ BucketSamplerFactory::createBucketSampler(const RenderSettings &renderSettings,
         return std::make_unique<AdaptiveBucketSampler>(renderSettings.maxSamples, renderSample,
                                                        renderSettings.samplesPerAdaptivePass,
                                                        renderSettings.adaptiveMaxError);
+    default:
         throw std::runtime_error(
             fmt::format(R"(Unsupported BucketSamplerType : "{}")", renderSettings.bucketSamplerType));
     }
