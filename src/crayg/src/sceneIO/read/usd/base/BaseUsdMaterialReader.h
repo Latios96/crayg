@@ -47,19 +47,11 @@ void UsdMaterialReadUtils::readShaderAttributeValue(const pxr::UsdShadeShader &s
     target = readValue<T, UsdType>(input);
 }
 
-template <> Color UsdMaterialReadUtils::readValue<Color, pxr::GfVec3f>(const pxr::UsdShadeInput &input) {
-    auto value = UsdUtils::getAttributeValueAs<pxr::GfVec3f>(input, pxr::UsdTimeCode::Default());
-    return UsdConversions::convertColor(value);
-}
+template <> Color UsdMaterialReadUtils::readValue<Color, pxr::GfVec3f>(const pxr::UsdShadeInput &input);
 
-template <> bool UsdMaterialReadUtils::readValue<bool, int>(const pxr::UsdShadeInput &input) {
-    auto value = UsdUtils::getAttributeValueAs<int>(input, pxr::UsdTimeCode::Default());
-    return value != 0;
-}
+template <> bool UsdMaterialReadUtils::readValue<bool, int>(const pxr::UsdShadeInput &input);
 
-template <> float UsdMaterialReadUtils::readValue<float, float>(const pxr::UsdShadeInput &input) {
-    return UsdUtils::getAttributeValueAs<float>(input, pxr::UsdTimeCode::Default());
-}
+template <> float UsdMaterialReadUtils::readValue<float, float>(const pxr::UsdShadeInput &input);
 
 }
 #endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASE_BASEUSDMATERIALREADER_H_
