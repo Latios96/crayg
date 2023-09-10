@@ -125,6 +125,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestUsdPointLightWriter.cpp
     TestUsdPreviewSurface.cpp
     TestUsdPreviewSurfaceReader.cpp
+    TestUsdPreviewSurfaceWriter.cpp
     TestUsdReadUtils.cpp
     TestUsdRectLightReader.cpp
     TestUsdRectLightWriter.cpp
