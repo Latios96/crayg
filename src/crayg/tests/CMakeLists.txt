@@ -133,6 +133,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestUsdRenderSettingsReader.cpp
     TestUsdRenderSettingsWriter.cpp
     TestUsdSceneWriter.cpp
+    TestUsdShadingNodeWriteCache.cpp
     TestUsdSphereLightReader.cpp
     TestUsdSphereReader.cpp
     TestUsdSphereWriter.cpp

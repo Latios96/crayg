@@ -301,6 +301,8 @@ set(crayg_SRCS
     sceneIO/write/usd/materials/UsdMaterialWriteCache.h
     sceneIO/write/usd/materials/UsdPreviewSurfaceWriter.cpp
     sceneIO/write/usd/materials/UsdPreviewSurfaceWriter.h
+    sceneIO/write/usd/materials/UsdShadingNodeWriteCache.cpp
+    sceneIO/write/usd/materials/UsdShadingNodeWriteCache.h
     sceneIO/write/usd/primitives/UsdGroundPlaneWriter.cpp
     sceneIO/write/usd/primitives/UsdGroundPlaneWriter.h
     sceneIO/write/usd/primitives/UsdPointInstancerWriter.cpp
