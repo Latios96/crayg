@@ -1,6 +1,7 @@
 #include "CameraModelFactory.h"
 
 #include "scene/camera/pinehole/PineHoleCameraModel.h"
+#include "scene/camera/polynomial/PolynomialCameraModel.h"
 #include "scene/camera/realistic/RealisticCameraModel.h"
 #include "scene/camera/thinlens/ThinLensCameraModel.h"
 
@@ -13,6 +14,8 @@ std::unique_ptr<CameraModel> CameraModelFactory::createCameraModel(Camera &camer
         return std::make_unique<ThinLensCameraModel>(camera, resolution);
     case CameraType::REALISTIC:
         return std::make_unique<RealisticCameraModel>(camera, resolution);
+    case CameraType::POLYNOMIAL:
+        return std::make_unique<PolynomialCameraModell>(camera, resolution);
     default:
         throw std::runtime_error(fmt::format(R"(Unsupported CameraType: "{}")", camera.getCameraType()));
     }

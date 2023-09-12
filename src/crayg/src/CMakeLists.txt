@@ -133,6 +133,9 @@ set(crayg_SRCS
     scene/camera/CameraUtils.h
     scene/camera/pinehole/PineHoleCameraModel.cpp
     scene/camera/pinehole/PineHoleCameraModel.h
+    scene/camera/polynomial/PolynomialCameraModel.cpp
+    scene/camera/polynomial/PolynomialCameraModel.h
+    scene/camera/polynomial/PolynomialLenses.h
     scene/camera/realistic/CameraLens.cpp
     scene/camera/realistic/CameraLens.h
     scene/camera/realistic/CameraLensMetadata.cpp

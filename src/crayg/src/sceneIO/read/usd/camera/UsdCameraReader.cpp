@@ -35,6 +35,11 @@ std::shared_ptr<Camera> UsdCameraReader::read() {
     const auto fStop = UsdUtils::getAttributeValueAs<float>(usdPrim.GetFStopAttr(), this->timeCodeToRead);
     camera->setFStop(fStop);
 
+    if (auto polynomiaLensAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken("polynomialLens"))) {
+        const auto polynomialLens = UsdUtils::getAttributeValueAs<std::string>(polynomiaLensAttr, this->timeCodeToRead);
+        camera->setPolynomialLens(EnumUtils::parseOrThrow<PolynomialLens>(polynomialLens));
+    }
+
     return camera;
 }
 

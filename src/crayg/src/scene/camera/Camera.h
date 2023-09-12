@@ -5,6 +5,7 @@
 #include "basics/Vector3f.h"
 #include "realistic/CameraLens.h"
 #include "scene/Transformable.h"
+#include "scene/camera/polynomial/PolynomialLenses.h"
 #include "spdlog/fmt/ostr.h"
 #include "utils/ToStringHelper.h"
 #include <fmt/ostream.h>
@@ -20,6 +21,7 @@ class Camera : public Transformable {
     CameraType cameraType = CameraType::PINE_HOLE;
     float focusDistance = 0;
     float fStop = 0;
+    std::optional<PolynomialLens> polynomialLens;
 
   public:
     std::unique_ptr<CameraLens> lens;
@@ -56,6 +58,9 @@ class Camera : public Transformable {
     CameraLens &getLens() const {
         return *lens;
     }
+
+    const std::optional<PolynomialLens> &getPolynomialLens() const;
+    void setPolynomialLens(const std::optional<PolynomialLens> &polynomialLens);
 
     bool operator==(const Camera &rhs) const;
     bool operator!=(const Camera &rhs) const;

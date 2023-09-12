@@ -86,4 +86,12 @@ float Camera::computeApertureRadius() const {
     return CameraUtils::computeApertureRadius(focalLength, fStop);
 }
 
+const std::optional<PolynomialLens> &Camera::getPolynomialLens() const {
+    return polynomialLens;
+}
+
+void Camera::setPolynomialLens(const std::optional<PolynomialLens> &polynomialLens) {
+    Camera::polynomialLens = polynomialLens;
+}
+
 }

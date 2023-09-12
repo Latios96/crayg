@@ -6,7 +6,7 @@
 
 namespace crayg {
 
-enum class CameraType { PINE_HOLE = 1, THIN_LENS = 2, REALISTIC = 3 };
+enum class CameraType { PINE_HOLE = 1, THIN_LENS = 2, REALISTIC = 3, POLYNOMIAL = 4 };
 
 }
 
