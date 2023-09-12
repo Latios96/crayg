@@ -3,7 +3,9 @@
 
 namespace crayg {
 
-UsdFloatConstantWriter::UsdFloatConstantWriter(FloatConstant &craygObject) : BaseUsdShadingNodeWriter(craygObject) {
+UsdFloatConstantWriter::UsdFloatConstantWriter(FloatConstant &craygObject,
+                                               UsdShadingNodeWriteCache &usdShadingNodeWriteCache)
+    : BaseUsdShadingNodeWriter(craygObject, usdShadingNodeWriteCache) {
 }
 
 pxr::UsdShadeShader UsdFloatConstantWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
@@ -24,7 +26,8 @@ std::string UsdFloatConstantWriter::getTranslatedType() {
     return "FloatConstant";
 }
 
-UsdIntConstantWriter::UsdIntConstantWriter(IntConstant &craygObject) : BaseUsdShadingNodeWriter(craygObject) {
+UsdIntConstantWriter::UsdIntConstantWriter(IntConstant &craygObject, UsdShadingNodeWriteCache &usdShadingNodeWriteCache)
+    : BaseUsdShadingNodeWriter(craygObject, usdShadingNodeWriteCache) {
 }
 
 pxr::UsdShadeShader UsdIntConstantWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
@@ -45,8 +48,9 @@ std::string UsdIntConstantWriter::getTranslatedType() {
     return "IntConstant";
 }
 
-UsdVector2fConstantWriter::UsdVector2fConstantWriter(Vector2fConstant &craygObject)
-    : BaseUsdShadingNodeWriter(craygObject) {
+UsdVector2fConstantWriter::UsdVector2fConstantWriter(Vector2fConstant &craygObject,
+                                                     UsdShadingNodeWriteCache &usdShadingNodeWriteCache)
+    : BaseUsdShadingNodeWriter(craygObject, usdShadingNodeWriteCache) {
 }
 
 pxr::UsdShadeShader UsdVector2fConstantWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
@@ -68,7 +72,9 @@ std::string UsdVector2fConstantWriter::getTranslatedType() {
     return "Vector2fConstant";
 }
 
-UsdColorConstantWriter::UsdColorConstantWriter(ColorConstant &craygObject) : BaseUsdShadingNodeWriter(craygObject) {
+UsdColorConstantWriter::UsdColorConstantWriter(ColorConstant &craygObject,
+                                               UsdShadingNodeWriteCache &usdShadingNodeWriteCache)
+    : BaseUsdShadingNodeWriter(craygObject, usdShadingNodeWriteCache) {
 }
 
 pxr::UsdShadeShader UsdColorConstantWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {

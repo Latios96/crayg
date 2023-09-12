@@ -37,18 +37,18 @@ UsdShaderAndOutput &UsdShadingNodeWriteCache::getCachedShadingNode(ShadingNode &
 
 UsdShaderAndOutput UsdShadingNodeWriteCache::translateShadingNode(ShadingNode &shadingNode) {
     const std::string &type = shadingNode.getType();
-    // todo make recursive writes possible
+
     if (type == "FloatConstant") {
-        return UsdFloatConstantWriter(dynamic_cast<FloatConstant &>(shadingNode))
+        return UsdFloatConstantWriter(dynamic_cast<FloatConstant &>(shadingNode), *this)
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     } else if (type == "IntConstant") {
-        return UsdIntConstantWriter(dynamic_cast<IntConstant &>(shadingNode))
+        return UsdIntConstantWriter(dynamic_cast<IntConstant &>(shadingNode), *this)
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     } else if (type == "Vector2fConstant") {
-        return UsdVector2fConstantWriter(dynamic_cast<Vector2fConstant &>(shadingNode))
+        return UsdVector2fConstantWriter(dynamic_cast<Vector2fConstant &>(shadingNode), *this)
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     } else if (type == "ColorConstant") {
-        return UsdColorConstantWriter(dynamic_cast<ColorConstant &>(shadingNode))
+        return UsdColorConstantWriter(dynamic_cast<ColorConstant &>(shadingNode), *this)
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     }
     throw std::runtime_error(fmt::format("ShadingNode of type '' is not supported!", type));

@@ -17,9 +17,13 @@ struct UsdShaderAndOutput {
     pxr::UsdShadeOutput output;
 };
 
+class UsdShadingNodeWriteCache;
+
 template <class CraygType> class BaseUsdShadingNodeWriter : public BaseUsdWriter<pxr::UsdShadeShader, CraygType> {
   public:
-    BaseUsdShadingNodeWriter(CraygType &craygObject) : BaseUsdWriter<pxr::UsdShadeShader, CraygType>(craygObject) {
+    BaseUsdShadingNodeWriter(CraygType &craygObject, UsdShadingNodeWriteCache &usdShadingNodeWriteCache)
+        : BaseUsdWriter<pxr::UsdShadeShader, CraygType>(craygObject),
+          usdShadingNodeWriteCache(usdShadingNodeWriteCache) {
     }
 
     virtual pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
@@ -40,6 +44,7 @@ template <class CraygType> class BaseUsdShadingNodeWriter : public BaseUsdWriter
 
   protected:
     virtual std::string getTranslatedType() = 0;
+    UsdShadingNodeWriteCache &usdShadingNodeWriteCache;
 };
 
 }

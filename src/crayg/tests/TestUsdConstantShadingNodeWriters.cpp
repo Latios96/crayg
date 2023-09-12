@@ -1,6 +1,7 @@
 #include "scene/materials/ConstantShadingNodes.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "sceneIO/write/usd/materials/UsdConstantShadingNodeWriters.h"
+#include "sceneIO/write/usd/materials/UsdShadingNodeWriteCache.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
@@ -8,10 +9,11 @@ namespace crayg {
 TEST_CASE("TestUsdFloatConstantWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
 
     SECTION("should write correctly") {
         FloatConstant floatConstant = .5f;
-        UsdFloatConstantWriter usdFloatConstantWriter(floatConstant);
+        UsdFloatConstantWriter usdFloatConstantWriter(floatConstant, usdShadingNodeWriteCache);
 
         auto shaderAndOutput = usdFloatConstantWriter.writeAndGetShaderAndOutput(stage, usdPathFactory);
 
@@ -26,10 +28,11 @@ TEST_CASE("TestUsdFloatConstantWriter::write") {
 TEST_CASE("TestUsdIntConstantWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
 
     SECTION("should write correctly") {
         IntConstant intConstant = 5;
-        UsdIntConstantWriter usdIntConstantWriter(intConstant);
+        UsdIntConstantWriter usdIntConstantWriter(intConstant, usdShadingNodeWriteCache);
 
         auto shaderAndOutput = usdIntConstantWriter.writeAndGetShaderAndOutput(stage, usdPathFactory);
 
@@ -44,10 +47,11 @@ TEST_CASE("TestUsdIntConstantWriter::write") {
 TEST_CASE("TestUsdVector2fConstantWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
 
     SECTION("should write correctly") {
         Vector2fConstant vector2fConstant = Vector2f(.5f);
-        UsdVector2fConstantWriter usdVector2fConstantWriter(vector2fConstant);
+        UsdVector2fConstantWriter usdVector2fConstantWriter(vector2fConstant, usdShadingNodeWriteCache);
 
         auto shaderAndOutput = usdVector2fConstantWriter.writeAndGetShaderAndOutput(stage, usdPathFactory);
 
@@ -63,10 +67,11 @@ TEST_CASE("TestUsdVector2fConstantWriter::write") {
 TEST_CASE("TestUsdColorConstantWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
 
     SECTION("should write correctly") {
         ColorConstant colorConstant = Color::createGrey(.5f);
-        UsdColorConstantWriter usdColorConstantWriter(colorConstant);
+        UsdColorConstantWriter usdColorConstantWriter(colorConstant, usdShadingNodeWriteCache);
 
         auto shaderAndOutput = usdColorConstantWriter.writeAndGetShaderAndOutput(stage, usdPathFactory);
 

@@ -10,7 +10,7 @@ namespace crayg {
 
 class UsdFloatConstantWriter : public BaseUsdShadingNodeWriter<FloatConstant> {
   public:
-    explicit UsdFloatConstantWriter(FloatConstant &craygObject);
+    explicit UsdFloatConstantWriter(FloatConstant &craygObject, UsdShadingNodeWriteCache &usdShadingNodeWriteCache);
     pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
     pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
 
@@ -20,7 +20,7 @@ class UsdFloatConstantWriter : public BaseUsdShadingNodeWriter<FloatConstant> {
 
 class UsdIntConstantWriter : public BaseUsdShadingNodeWriter<IntConstant> {
   public:
-    explicit UsdIntConstantWriter(IntConstant &craygObject);
+    explicit UsdIntConstantWriter(IntConstant &craygObject, UsdShadingNodeWriteCache &usdShadingNodeWriteCache);
     pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
     pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
 
@@ -30,7 +30,8 @@ class UsdIntConstantWriter : public BaseUsdShadingNodeWriter<IntConstant> {
 
 class UsdVector2fConstantWriter : public BaseUsdShadingNodeWriter<Vector2fConstant> {
   public:
-    explicit UsdVector2fConstantWriter(Vector2fConstant &craygObject);
+    explicit UsdVector2fConstantWriter(Vector2fConstant &craygObject,
+                                       UsdShadingNodeWriteCache &usdShadingNodeWriteCache);
     pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
     pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
 
@@ -40,7 +41,7 @@ class UsdVector2fConstantWriter : public BaseUsdShadingNodeWriter<Vector2fConsta
 
 class UsdColorConstantWriter : public BaseUsdShadingNodeWriter<ColorConstant> {
   public:
-    explicit UsdColorConstantWriter(ColorConstant &craygObject);
+    explicit UsdColorConstantWriter(ColorConstant &craygObject, UsdShadingNodeWriteCache &usdShadingNodeWriteCache);
     pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
     pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
 
