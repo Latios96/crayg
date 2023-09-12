@@ -1,4 +1,5 @@
 #include "scene/materials/ConstantShadingNodes.h"
+#include "scene/materials/ConversionNodes.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "sceneIO/write/usd/materials/UsdShadingNodeWriteCache.h"
 #include <catch2/catch.hpp>
@@ -103,6 +104,21 @@ TEST_CASE("UsdShadingNodeWriteCache::createInputAndWriteCachedGraph") {
         auto firstInstance = UsdUtils::getConnectedUsdShadeShader(shader, firstUsdInput);
         auto secondInstance = UsdUtils::getConnectedUsdShadeShader(shader, secondUsdInput);
         REQUIRE(firstInstance.GetPath() == secondInstance.GetPath());
+    }
+
+    SECTION("should support recursive writes") {
+        auto vector2fConstant = std::make_shared<Vector2fConstant>(Vector2f(1, 2));
+        auto vector2fToColor = std::make_shared<Vector2fToColor>();
+        vector2fToColor->vector2fInput.connectTo(vector2fConstant);
+        ColorShadingNodeInput colorShadingNodeInput;
+        colorShadingNodeInput.connectTo(vector2fToColor);
+
+        usdShadingNodeWriteCache.createInputAndWriteCachedGraph(shader, "myColor", colorShadingNodeInput);
+
+        auto usdMyColor = shader.GetInput(pxr::TfToken("myColor"));
+        auto usdVector2fToColor = UsdUtils::getConnectedUsdShadeShader(shader, usdMyColor);
+        auto usdVector2fInput = usdVector2fToColor.GetInput(pxr::TfToken("vector2fInput"));
+        auto usdVector2fConstant = UsdUtils::getConnectedUsdShadeShader(shader, usdVector2fInput);
     }
 }
 
