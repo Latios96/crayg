@@ -12,7 +12,7 @@ class FloatConstant : public ShadingNode {
     ShadingNodeOutputType getOutputType() override;
     float evaluateFloat(const SurfaceInteraction &surfaceInteraction) override;
 
-    float value;
+    float value = 0;
 };
 
 class IntConstant : public ShadingNode {
@@ -23,7 +23,7 @@ class IntConstant : public ShadingNode {
     ShadingNodeOutputType getOutputType() override;
     int evaluateInt(const SurfaceInteraction &surfaceInteraction) override;
 
-    int value;
+    int value = 0;
 };
 
 class Vector2fConstant : public ShadingNode {
