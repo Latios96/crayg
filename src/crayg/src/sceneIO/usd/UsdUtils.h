@@ -6,6 +6,8 @@
 #include "utils/EnumUtils.h"
 #include <magic_enum.hpp>
 #include <pxr/usd/usd/attribute.h>
+#include <pxr/usd/usdShade/connectableAPI.h>
+#include <pxr/usd/usdShade/shader.h>
 #include <type_traits>
 
 namespace crayg {
@@ -76,6 +78,15 @@ class UsdUtils {
     static void createAndSetAttribute(pxr::UsdPrim usdPrim, const std::string &attributeName,
                                       pxr::SdfAssetPath defaultAssetPath) {
         usdPrim.CreateAttribute(pxr::TfToken(attributeName), pxr::SdfValueTypeNames->Asset).Set(defaultAssetPath);
+    }
+
+    static pxr::UsdShadeShader getConnectedUsdShadeShader(const pxr::UsdShadeShader &shader,
+                                                          const pxr::UsdShadeInput &usdShadeInput) {
+        pxr::UsdShadeConnectableAPI connectedOutput;
+        pxr::TfToken connectedOutputName;
+        pxr::UsdShadeAttributeType type;
+        shader.ConnectableAPI().GetConnectedSource(usdShadeInput, &connectedOutput, &connectedOutputName, &type);
+        return pxr::UsdShadeShader(connectedOutput.GetPrim());
     }
 
   private:

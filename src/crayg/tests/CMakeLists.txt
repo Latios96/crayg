@@ -113,6 +113,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestUsdCameraReader.cpp
     TestUsdCameraWriter.cpp
     TestUsdConstantShadingNodeWriters.cpp
+    TestUsdConversionNodesWriters.cpp
     TestUsdConversions.cpp
     TestUsdDiskLightReader.cpp
     TestUsdDiskLightWriter.cpp

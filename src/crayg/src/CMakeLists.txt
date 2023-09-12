@@ -193,6 +193,8 @@ set(crayg_SRCS
     scene/lights/RectLight.h
     scene/materials/ConstantShadingNodes.cpp
     scene/materials/ConstantShadingNodes.h
+    scene/materials/ConversionNodes.cpp
+    scene/materials/ConversionNodes.h
     scene/materials/Material.cpp
     scene/materials/Material.h
     scene/materials/ShadingNode.cpp
@@ -297,6 +299,8 @@ set(crayg_SRCS
     sceneIO/write/usd/lights/UsdRectLightWriter.h
     sceneIO/write/usd/materials/UsdConstantShadingNodeWriters.cpp
     sceneIO/write/usd/materials/UsdConstantShadingNodeWriters.h
+    sceneIO/write/usd/materials/UsdConversionNodeWriters.cpp
+    sceneIO/write/usd/materials/UsdConversionNodeWriters.h
     sceneIO/write/usd/materials/UsdMaterialWriteCache.cpp
     sceneIO/write/usd/materials/UsdMaterialWriteCache.h
     sceneIO/write/usd/materials/UsdPreviewSurfaceWriter.cpp
