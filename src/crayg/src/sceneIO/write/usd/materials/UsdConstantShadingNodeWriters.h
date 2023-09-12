@@ -6,9 +6,41 @@
 
 namespace crayg {
 
+// todo refactor and replace with one templated version
+
 class UsdFloatConstantWriter : public BaseUsdShadingNodeWriter<FloatConstant> {
   public:
     explicit UsdFloatConstantWriter(FloatConstant &craygObject);
+    pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
+    pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
+
+  protected:
+    std::string getTranslatedType() override;
+};
+
+class UsdIntConstantWriter : public BaseUsdShadingNodeWriter<IntConstant> {
+  public:
+    explicit UsdIntConstantWriter(IntConstant &craygObject);
+    pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
+    pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
+
+  protected:
+    std::string getTranslatedType() override;
+};
+
+class UsdVector2fConstantWriter : public BaseUsdShadingNodeWriter<Vector2fConstant> {
+  public:
+    explicit UsdVector2fConstantWriter(Vector2fConstant &craygObject);
+    pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
+    pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
+
+  protected:
+    std::string getTranslatedType() override;
+};
+
+class UsdColorConstantWriter : public BaseUsdShadingNodeWriter<ColorConstant> {
+  public:
+    explicit UsdColorConstantWriter(ColorConstant &craygObject);
     pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
     pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
 

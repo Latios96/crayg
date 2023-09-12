@@ -1,6 +1,8 @@
 #include "UsdConstantShadingNodeWriters.h"
+#include "sceneIO/usd/UsdConversions.h"
 
 namespace crayg {
+
 UsdFloatConstantWriter::UsdFloatConstantWriter(FloatConstant &craygObject) : BaseUsdShadingNodeWriter(craygObject) {
 }
 
@@ -21,4 +23,71 @@ pxr::UsdShadeOutput UsdFloatConstantWriter::getOutput(pxr::UsdShadeShader &usdSh
 std::string UsdFloatConstantWriter::getTranslatedType() {
     return "FloatConstant";
 }
+
+UsdIntConstantWriter::UsdIntConstantWriter(IntConstant &craygObject) : BaseUsdShadingNodeWriter(craygObject) {
+}
+
+pxr::UsdShadeShader UsdIntConstantWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
+    auto usdShadeShader = BaseUsdShadingNodeWriter::write(stage, usdPathFactory);
+
+    usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:IntConstant")));
+    usdShadeShader.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Int).Set(craygObject.value);
+    usdShadeShader.CreateOutput(pxr::TfToken("out"), pxr::SdfValueTypeNames->Int);
+
+    return usdShadeShader;
+}
+
+pxr::UsdShadeOutput UsdIntConstantWriter::getOutput(pxr::UsdShadeShader &usdShadeShader) {
+    return usdShadeShader.GetOutput(pxr::TfToken("out"));
+}
+
+std::string UsdIntConstantWriter::getTranslatedType() {
+    return "IntConstant";
+}
+
+UsdVector2fConstantWriter::UsdVector2fConstantWriter(Vector2fConstant &craygObject)
+    : BaseUsdShadingNodeWriter(craygObject) {
+}
+
+pxr::UsdShadeShader UsdVector2fConstantWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
+    auto usdShadeShader = BaseUsdShadingNodeWriter::write(stage, usdPathFactory);
+
+    usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:Vector2fConstant")));
+    usdShadeShader.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Float2)
+        .Set(UsdConversions::convert(craygObject.value));
+    usdShadeShader.CreateOutput(pxr::TfToken("out"), pxr::SdfValueTypeNames->Float2);
+
+    return usdShadeShader;
+}
+
+pxr::UsdShadeOutput UsdVector2fConstantWriter::getOutput(pxr::UsdShadeShader &usdShadeShader) {
+    return usdShadeShader.GetOutput(pxr::TfToken("out"));
+}
+
+std::string UsdVector2fConstantWriter::getTranslatedType() {
+    return "Vector2fConstant";
+}
+
+UsdColorConstantWriter::UsdColorConstantWriter(ColorConstant &craygObject) : BaseUsdShadingNodeWriter(craygObject) {
+}
+
+pxr::UsdShadeShader UsdColorConstantWriter::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
+    auto usdShadeShader = BaseUsdShadingNodeWriter::write(stage, usdPathFactory);
+
+    usdShadeShader.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:ColorConstant")));
+    usdShadeShader.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Color3f)
+        .Set(UsdConversions::convert(craygObject.value));
+    usdShadeShader.CreateOutput(pxr::TfToken("out"), pxr::SdfValueTypeNames->Color3f);
+
+    return usdShadeShader;
+}
+
+pxr::UsdShadeOutput UsdColorConstantWriter::getOutput(pxr::UsdShadeShader &usdShadeShader) {
+    return usdShadeShader.GetOutput(pxr::TfToken("out"));
+}
+
+std::string UsdColorConstantWriter::getTranslatedType() {
+    return "ColorConstant";
+}
+
 } // crayg

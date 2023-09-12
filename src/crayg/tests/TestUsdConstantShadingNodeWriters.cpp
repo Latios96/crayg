@@ -23,4 +23,60 @@ TEST_CASE("TestUsdFloatConstantWriter::write") {
     }
 }
 
+TEST_CASE("TestUsdIntConstantWriter::write") {
+    auto stage = pxr::UsdStage::CreateInMemory();
+    UsdPathFactory usdPathFactory;
+
+    SECTION("should write correctly") {
+        IntConstant intConstant = 5;
+        UsdIntConstantWriter usdIntConstantWriter(intConstant);
+
+        auto shaderAndOutput = usdIntConstantWriter.writeAndGetShaderAndOutput(stage, usdPathFactory);
+
+        REQUIRE(shaderAndOutput.shader.GetPath() == pxr::SdfPath("/IntConstant0"));
+        REQUIRE(shaderAndOutput.output.GetFullName() == pxr::TfToken("outputs:out"));
+
+        auto value = UsdUtils::getStaticAttributeValueAs<int>(shaderAndOutput.shader.GetInput(pxr::TfToken("value")));
+        REQUIRE(value == 5);
+    }
+}
+
+TEST_CASE("TestUsdVector2fConstantWriter::write") {
+    auto stage = pxr::UsdStage::CreateInMemory();
+    UsdPathFactory usdPathFactory;
+
+    SECTION("should write correctly") {
+        Vector2fConstant vector2fConstant = Vector2f(.5f);
+        UsdVector2fConstantWriter usdVector2fConstantWriter(vector2fConstant);
+
+        auto shaderAndOutput = usdVector2fConstantWriter.writeAndGetShaderAndOutput(stage, usdPathFactory);
+
+        REQUIRE(shaderAndOutput.shader.GetPath() == pxr::SdfPath("/Vector2fConstant0"));
+        REQUIRE(shaderAndOutput.output.GetFullName() == pxr::TfToken("outputs:out"));
+
+        auto value =
+            UsdUtils::getStaticAttributeValueAs<pxr::GfVec2f>(shaderAndOutput.shader.GetInput(pxr::TfToken("value")));
+        REQUIRE(value == pxr::GfVec2f(.5f));
+    }
+}
+
+TEST_CASE("TestUsdColorConstantWriter::write") {
+    auto stage = pxr::UsdStage::CreateInMemory();
+    UsdPathFactory usdPathFactory;
+
+    SECTION("should write correctly") {
+        ColorConstant colorConstant = Color::createGrey(.5f);
+        UsdColorConstantWriter usdColorConstantWriter(colorConstant);
+
+        auto shaderAndOutput = usdColorConstantWriter.writeAndGetShaderAndOutput(stage, usdPathFactory);
+
+        REQUIRE(shaderAndOutput.shader.GetPath() == pxr::SdfPath("/ColorConstant0"));
+        REQUIRE(shaderAndOutput.output.GetFullName() == pxr::TfToken("outputs:out"));
+
+        auto value =
+            UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(shaderAndOutput.shader.GetInput(pxr::TfToken("value")));
+        REQUIRE(value == pxr::GfVec3f(.5f));
+    }
+}
+
 }
