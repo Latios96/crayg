@@ -59,7 +59,7 @@ class IntShadingNodeInput : public ShadingNodeInput {
 class Vector2fShadingNodeInput : public ShadingNodeInput {
   public:
     Vector2fShadingNodeInput() = default;
-    explicit Vector2fShadingNodeInput(const Vector2f &value);
+    Vector2fShadingNodeInput(const Vector2f &value);
     bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
     ShadingNodeOutputType getOutputType() const override;
     Vector2f evaluate(const SurfaceInteraction &surfaceInteraction);
