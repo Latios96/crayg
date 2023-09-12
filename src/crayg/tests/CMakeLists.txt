@@ -33,6 +33,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestCameraLens.cpp
     TestColor.cpp
     TestColorConversion.cpp
+    TestConversionNodes.cpp
     TestDebugIntegrator.cpp
     TestDiskLight.cpp
     TestDtoUtils.cpp
