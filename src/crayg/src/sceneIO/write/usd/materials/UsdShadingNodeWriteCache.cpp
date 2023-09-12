@@ -51,7 +51,7 @@ UsdShaderAndOutput UsdShadingNodeWriteCache::translateShadingNode(ShadingNode &s
         return UsdColorConstantWriter(dynamic_cast<ColorConstant &>(shadingNode), *this)
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     }
-    throw std::runtime_error(fmt::format("ShadingNode of type '' is not supported!", type));
+    throw std::runtime_error(fmt::format("ShadingNode of type '{}' is not supported!", type));
 }
 
 } // crayg
