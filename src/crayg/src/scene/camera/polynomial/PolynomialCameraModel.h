@@ -6,12 +6,12 @@
 
 namespace crayg {
 
-class PolynomialCameraModell : public CameraModel {
+class PolynomialCameraModel : public CameraModel {
   public:
-    PolynomialCameraModell(Camera &camera, const Resolution &resolution);
+    PolynomialCameraModel(Camera &camera, const Resolution &resolution);
     void init(BaseTaskReporter &taskReporter) override;
     RayWithWeight createPrimaryRay(float x, float y, float wavelength) override;
-    ~PolynomialCameraModell() override = default;
+    ~PolynomialCameraModel() override = default;
 
   private:
     Bounds2df filmPhysicalExtend;

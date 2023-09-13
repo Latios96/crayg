@@ -5,7 +5,7 @@
 #include "scene/camera/CameraUtils.h"
 
 namespace crayg {
-PolynomialCameraModell::PolynomialCameraModell(Camera &camera, const Resolution &resolution)
+PolynomialCameraModel::PolynomialCameraModel(Camera &camera, const Resolution &resolution)
     : CameraModel(camera, resolution) {
     const float aspectRatio = static_cast<float>(resolution.getWidth()) / static_cast<float>(resolution.getHeight());
     filmPhysicalExtend =
@@ -13,11 +13,11 @@ PolynomialCameraModell::PolynomialCameraModell(Camera &camera, const Resolution 
                   {-camera.getFilmbackSize() * 0.1f / 2.f, camera.getFilmbackSize() * 0.1f / aspectRatio / 2});
 }
 
-void PolynomialCameraModell::init(BaseTaskReporter &taskReporter) {
+void PolynomialCameraModel::init(BaseTaskReporter &taskReporter) {
     CameraModel::init(taskReporter);
 }
 
-RayWithWeight PolynomialCameraModell::createPrimaryRay(float x, float y, float wavelength) {
+RayWithWeight PolynomialCameraModel::createPrimaryRay(float x, float y, float wavelength) {
     const float polynomialOffset = 0;
     if (!camera.getPolynomialLens()) {
         // throw std::runtime_error("No polynomial lens was set! Please specify a polynomial lens on the camera.");

@@ -15,7 +15,7 @@ std::unique_ptr<CameraModel> CameraModelFactory::createCameraModel(Camera &camer
     case CameraType::REALISTIC:
         return std::make_unique<RealisticCameraModel>(camera, resolution);
     case CameraType::POLYNOMIAL:
-        return std::make_unique<PolynomialCameraModell>(camera, resolution);
+        return std::make_unique<PolynomialCameraModel>(camera, resolution);
     default:
         throw std::runtime_error(fmt::format(R"(Unsupported CameraType: "{}")", camera.getCameraType()));
     }
