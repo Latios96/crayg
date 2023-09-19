@@ -24,7 +24,7 @@ std::shared_ptr<Camera> UsdCameraReader::read() {
         UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "craygCameraType", CameraType::PINE_HOLE);
     camera->setCameraType(cameraType);
 
-    if (cameraType == CameraType::REALISTIC) {
+    if (cameraType == CameraType::REALISTIC || cameraType == CameraType::RAY_LUT) {
         readCameraLens(camera);
     }
 

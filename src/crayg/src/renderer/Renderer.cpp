@@ -7,7 +7,6 @@
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
-#include "renderer/bucketsamplers/BucketSamplerFactory.h"
 #include "sampling/Random.h"
 #include "scene/camera/CameraModelFactory.h"
 #include "scene/camera/realistic/Wavelengths.h"
@@ -84,24 +83,24 @@ void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgre
 
 Color Renderer::renderPixel(const Vector2i &pixel) {
     SampleAccumulator sampleAccumulator;
-#define RAY_LUT
-#ifdef RAY_LUT
-    const int samples = std::pow(scene.renderSettings.maxSamples, 2);
-    for (int i = 0; i < samples; i++) {
-        auto ray = lensRayLookupTable.getRay(pixel, i);
-        if (ray == Ray({0, 0, 0}, {0, 0, 0})) {
-            sampleAccumulator.addSample(Color::createBlack());
-            continue;
+
+    if (scene.camera->getCameraType() == CameraType::RAY_LUT) {
+        const int samples = std::pow(scene.renderSettings.maxSamples, 2);
+        for (int i = 0; i < samples; i++) {
+            auto ray = lensRayLookupTable.getRay(pixel, i);
+            if (ray == Ray({0, 0, 0}, {0, 0, 0})) {
+                sampleAccumulator.addSample(Color::createBlack());
+                continue;
+            }
+            sampleAccumulator.addSample(integrator->integrate(ray, 0));
         }
-        sampleAccumulator.addSample(integrator->integrate(ray, 0));
-    }
-#else
-    for (int i = 0; i < scene.renderSettings.maxSamples; i++) {
-        for (int a = 0; a < scene.renderSettings.maxSamples; a++) {
-            sampleAccumulator.addSample(renderSample(Random::randomVector2f() + pixel));
+    } else {
+        for (int i = 0; i < scene.renderSettings.maxSamples; i++) {
+            for (int a = 0; a < scene.renderSettings.maxSamples; a++) {
+                sampleAccumulator.addSample(renderSample(Random::randomVector2f() + pixel));
+            }
         }
     }
-#endif
 
     return sampleAccumulator.getValue();
 }
@@ -111,7 +110,6 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
     bucketImageBuffer.image.addChannelsFromSpec(requiredImageSpec({imageBucket.getWidth(), imageBucket.getHeight()}));
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
-    // bucketSampler->sampleBucket(bucketImageBuffer);
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
         Color pixelColor = renderPixel(pixel + imageBucket.getPosition());
         bucketImageBuffer.image.setValue(pixel, pixelColor);
@@ -121,16 +119,14 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
 }
 
 void Renderer::init() {
-    bucketSampler = BucketSamplerFactory::createBucketSampler(
-        scene.renderSettings, [this](Vector2f samplePos) { return renderSample(samplePos); });
     {
-        InformativeScopedStopWatch buildBvh("Initialize camera");
+        InformativeScopedStopWatch buildBvh(fmt::format("Initialize camera of type {}", scene.camera->getCameraType()));
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
         cameraModel->init(taskReporter);
     }
-#ifdef RAY_LUT
-    lensRayLookupTable.generate(*cameraModel);
-#endif
+    if (scene.camera->getCameraType() == CameraType::RAY_LUT) {
+        lensRayLookupTable.generate(*cameraModel);
+    }
 
     GeometryCompiler geometryCompiler(scene, taskReporter);
     geometryCompiler.compile();
@@ -172,8 +168,6 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
 
 ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {
     ImageSpecBuilder builder(resolution);
-    bucketSampler->addRequiredImageSpecs(builder);
     return builder.finish();
 }
-
 }
