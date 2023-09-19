@@ -4,6 +4,7 @@
 #include "bucketsamplers/BucketSampler.h"
 #include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
 #include "integrators/AbstractIntegrator.h"
+#include "scene/camera/lookup/LensRayLookupTable.h"
 #include "scene/camera/pinehole/PineHoleCameraModel.h"
 #include "utils/TaskReporter.h"
 #include <basics/Color.h>
@@ -38,6 +39,7 @@ class Renderer {
     void renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController);
     void renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController);
     void renderBucket(const ImageBucket &imageBucket);
+    Color renderPixel(const Vector2i &samplePos);
     Color renderSample(const Vector2f &samplePos);
     Color renderSample(const Vector2f &samplePos, float waveLength);
 
@@ -46,6 +48,7 @@ class Renderer {
 
     void writeImageMetadata(std::chrono::seconds renderTime);
     ImageSpec requiredImageSpec(const Resolution &resolution) const;
+    LensRayLookupTable lensRayLookupTable;
 };
 
 }

@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "SampleAccumulator.h"
 #include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
+#include "image/imageiterators/pixels/ImageIterators.h"
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
@@ -23,7 +24,9 @@
 namespace crayg {
 
 Renderer::Renderer(Scene &scene, OutputDriver &outputDriver, BaseTaskReporter &taskReporter, BucketQueue &bucketQueue)
-    : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter), bucketQueue(bucketQueue) {
+    : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter), bucketQueue(bucketQueue),
+      lensRayLookupTable(scene.renderSettings.resolution,
+                         scene.renderSettings.maxSamples * scene.renderSettings.maxSamples) {
 }
 
 void Renderer::renderScene() {
@@ -79,12 +82,40 @@ void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgre
     }
 }
 
+Color Renderer::renderPixel(const Vector2i &pixel) {
+    SampleAccumulator sampleAccumulator;
+#define RAY_LUT
+#ifdef RAY_LUT
+    const int samples = std::pow(scene.renderSettings.maxSamples, 2);
+    for (int i = 0; i < samples; i++) {
+        auto ray = lensRayLookupTable.getRay(pixel, i);
+        if (ray == Ray({0, 0, 0}, {0, 0, 0})) {
+            sampleAccumulator.addSample(Color::createBlack());
+            continue;
+        }
+        sampleAccumulator.addSample(integrator->integrate(ray, 0));
+    }
+#else
+    for (int i = 0; i < scene.renderSettings.maxSamples; i++) {
+        for (int a = 0; a < scene.renderSettings.maxSamples; a++) {
+            sampleAccumulator.addSample(renderSample(Random::randomVector2f() + pixel));
+        }
+    }
+#endif
+
+    return sampleAccumulator.getValue();
+}
+
 void Renderer::renderBucket(const ImageBucket &imageBucket) {
     BucketImageBuffer bucketImageBuffer(imageBucket);
     bucketImageBuffer.image.addChannelsFromSpec(requiredImageSpec({imageBucket.getWidth(), imageBucket.getHeight()}));
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
-    bucketSampler->sampleBucket(bucketImageBuffer);
+    // bucketSampler->sampleBucket(bucketImageBuffer);
+    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+        Color pixelColor = renderPixel(pixel + imageBucket.getPosition());
+        bucketImageBuffer.image.setValue(pixel, pixelColor);
+    }
 
     outputDriver.writeBucketImageBuffer(bucketImageBuffer);
 }
@@ -97,6 +128,9 @@ void Renderer::init() {
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
         cameraModel->init(taskReporter);
     }
+#ifdef RAY_LUT
+    lensRayLookupTable.generate(*cameraModel);
+#endif
 
     GeometryCompiler geometryCompiler(scene, taskReporter);
     geometryCompiler.compile();

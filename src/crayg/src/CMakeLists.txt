@@ -131,6 +131,8 @@ set(crayg_SRCS
     scene/camera/CameraType.h
     scene/camera/CameraUtils.cpp
     scene/camera/CameraUtils.h
+    scene/camera/lookup/LensRayLookupTable.cpp
+    scene/camera/lookup/LensRayLookupTable.h
     scene/camera/pinehole/PineHoleCameraModel.cpp
     scene/camera/pinehole/PineHoleCameraModel.h
     scene/camera/polynomial/PolynomialCameraModel.cpp
