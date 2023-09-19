@@ -12,7 +12,7 @@ namespace crayg {
 
 class LensRayLookupTable {
   public:
-    LensRayLookupTable(const Resolution &resolution, int samplesPerPixel);
+    LensRayLookupTable(const Resolution &resolution, int samplesPerPixel, bool useSpectralLensing);
 
     void generate(CameraModel &cameraModel);
 
@@ -21,10 +21,12 @@ class LensRayLookupTable {
     std::vector<Vector3f> dirs; // todo also store position on lens..
     Resolution resolution;
     int samplesPerPixel;
+    bool useSpectralLensing;
     void sampleImageBucket(CameraModel &cameraModel, crayg::ImageBucket &imageBucket);
 
     int getVec3fIndex(const Vector2i &pixel, int sampleNumber, int offsetInRay);
     Ray getRay(const Vector2i &pixel, int sampleNumber);
+    void storeRay(const std::optional<Ray> &ray, const Vector2i &pixel, int sampleNumber, int waveLengthIndex);
 };
 
 } // crayg

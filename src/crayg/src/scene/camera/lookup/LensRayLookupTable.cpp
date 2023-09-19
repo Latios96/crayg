@@ -10,12 +10,14 @@
 
 namespace crayg {
 
-LensRayLookupTable::LensRayLookupTable(const Resolution &resolution, int samplesPerPixel)
-    : resolution(resolution), samplesPerPixel(samplesPerPixel) {
+LensRayLookupTable::LensRayLookupTable(const Resolution &resolution, int samplesPerPixel, bool useSpectralLensing)
+    : resolution(resolution), samplesPerPixel(samplesPerPixel), useSpectralLensing(useSpectralLensing) {
 }
 
 void LensRayLookupTable::generate(CameraModel &cameraModel) {
-    dirs.resize(resolution.getWidth() * resolution.getHeight() * samplesPerPixel * 2);
+    const int spectralFactor = useSpectralLensing ? 3 : 1;
+    dirs.resize(resolution.getWidth() * resolution.getHeight() * samplesPerPixel * 2 *
+                (useSpectralLensing ? spectralFactor * 2 : 1));
     std::vector<ImageBucket> bucketSequence =
         ImageBucketSequences::getSequence(resolution, 8, BucketSequenceType::LINE_BY_LINE);
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()),
@@ -26,27 +28,24 @@ void LensRayLookupTable::generate(CameraModel &cameraModel) {
                           sampleImageBucket(cameraModel, imageBucket);
                           reporter.iterationDone();
                       });
-    /*for (auto bucket : bucketSequence) {
-        sampleImageBucket(cameraModel, bucket);
-        reporter.iterationDone();
-    }*/
 }
 
 void LensRayLookupTable::sampleImageBucket(CameraModel &cameraModel, ImageBucket &imageBucket) {
     for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
         const auto pixelPos = pixel + imageBucket.getPosition();
         for (int i = 0; i < samplesPerPixel; i++) {
-            const auto ray = cameraModel
-                                 .createPrimaryRay(pixelPos.x + Random::random(), pixelPos.y + Random::random(),
-                                                   FraunhoferLines::SODIUM.wavelength)
-                                 .ray;
-            const int pixelIndex = getVec3fIndex(pixelPos, i, 0);
-            if (ray) {
-                dirs[pixelIndex] = ray->startPoint;
-                dirs[pixelIndex + 1] = ray->direction;
+            const Vector2f samplePos = Random::randomVector2f() + pixelPos;
+            if (useSpectralLensing) {
+                const auto ray_r = cameraModel.createPrimaryRay(samplePos.x, samplePos.y, WavelengthsRgb::R).ray;
+                storeRay(ray_r, pixelPos, i, 0);
+                const auto ray_g = cameraModel.createPrimaryRay(samplePos.x, samplePos.y, WavelengthsRgb::G).ray;
+                storeRay(ray_g, pixelPos, i, 1);
+                const auto ray_b = cameraModel.createPrimaryRay(samplePos.x, samplePos.y, WavelengthsRgb::B).ray;
+                storeRay(ray_b, pixelPos, i, 2);
             } else {
-                dirs[pixelIndex] = Vector3f(0, 0, 0);
-                dirs[pixelIndex + 1] = Vector3f(0, 0, 0);
+                const auto ray =
+                    cameraModel.createPrimaryRay(samplePos.x, samplePos.y, FraunhoferLines::SODIUM.wavelength).ray;
+                storeRay(ray, pixelPos, i, 0);
             }
         }
     }
@@ -75,6 +74,21 @@ Ray LensRayLookupTable::getRay(const Vector2i &pixel, int sampleNumber) {
 }
 
 int LensRayLookupTable::getVec3fIndex(const Vector2i &pixel, int sampleNumber, int offsetInRay) {
-    return (pixel.x + pixel.y * resolution.getWidth()) * samplesPerPixel * 2 + sampleNumber * 2 + offsetInRay;
+    const int spectralFactor = useSpectralLensing ? 3 : 1;
+    return ((pixel.x + pixel.y * resolution.getWidth()) * samplesPerPixel * 2 + sampleNumber * 2) *
+               (useSpectralLensing ? spectralFactor * 2 : 1) +
+           offsetInRay * 2;
+}
+
+void LensRayLookupTable::storeRay(const std::optional<Ray> &ray, const Vector2i &pixelPos, int sampleNumber,
+                                  int waveLengthIndex) {
+    const int pixelIndex = getVec3fIndex(pixelPos, sampleNumber, waveLengthIndex);
+    if (ray) {
+        dirs[pixelIndex] = ray->startPoint;
+        dirs[pixelIndex + 1] = ray->direction;
+    } else {
+        dirs[pixelIndex] = Vector3f(0, 0, 0);
+        dirs[pixelIndex + 1] = Vector3f(0, 0, 0);
+    }
 }
 } // crayg

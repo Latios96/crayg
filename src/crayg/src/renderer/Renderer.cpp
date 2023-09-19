@@ -25,7 +25,8 @@ namespace crayg {
 Renderer::Renderer(Scene &scene, OutputDriver &outputDriver, BaseTaskReporter &taskReporter, BucketQueue &bucketQueue)
     : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter), bucketQueue(bucketQueue),
       lensRayLookupTable(scene.renderSettings.resolution,
-                         scene.renderSettings.maxSamples * scene.renderSettings.maxSamples) {
+                         scene.renderSettings.maxSamples * scene.renderSettings.maxSamples,
+                         scene.renderSettings.useSpectralLensing) {
 }
 
 void Renderer::renderScene() {
@@ -87,12 +88,33 @@ Color Renderer::renderPixel(const Vector2i &pixel) {
     if (scene.camera->getCameraType() == CameraType::RAY_LUT) {
         const int samples = std::pow(scene.renderSettings.maxSamples, 2);
         for (int i = 0; i < samples; i++) {
-            auto ray = lensRayLookupTable.getRay(pixel, i);
-            if (ray == Ray({0, 0, 0}, {0, 0, 0})) {
-                sampleAccumulator.addSample(Color::createBlack());
-                continue;
+            if (scene.renderSettings.useSpectralLensing) {
+                auto ray_r = lensRayLookupTable.getRay(pixel, i);
+                float r = 0;
+                if (ray_r == Ray({0, 0, 0}, {0, 0, 0})) {
+                    continue;
+                }
+                r = integrator->integrate(ray_r, 0).r;
+
+                auto ray_g = lensRayLookupTable.getRay(pixel, i);
+
+                float g = 0;
+                if (ray_g == Ray({0, 0, 0}, {0, 0, 0})) {
+                    continue;
+                }
+                g = integrator->integrate(ray_g, 0).g;
+
+                auto ray_b = lensRayLookupTable.getRay(pixel, i);
+
+                float b = 0;
+                if (ray_b == Ray({0, 0, 0}, {0, 0, 0})) {
+                    continue;
+                }
+                b = integrator->integrate(ray_b, 0).b;
+
+                sampleAccumulator.addSample(Color(r, g, b));
+            } else {
             }
-            sampleAccumulator.addSample(integrator->integrate(ray, 0));
         }
     } else {
         for (int i = 0; i < scene.renderSettings.maxSamples; i++) {
