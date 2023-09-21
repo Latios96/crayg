@@ -18,7 +18,7 @@ class LensRayLookupTable {
 
     void write(const std::string &path);
     void read(const std::string &path);
-    std::vector<Vector3f> dirs; // todo also store position on lens..
+    std::vector<Ray> rays; // todo also store position on lens..
     Resolution resolution;
     int samplesPerPixel;
     bool useSpectralLensing;

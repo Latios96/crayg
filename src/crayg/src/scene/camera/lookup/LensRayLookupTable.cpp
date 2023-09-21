@@ -16,12 +16,13 @@ LensRayLookupTable::LensRayLookupTable(const Resolution &resolution, int samples
 
 void LensRayLookupTable::generate(CameraModel &cameraModel) {
     const int spectralFactor = useSpectralLensing ? 3 : 1;
-    unsigned long long elementsCount = resolution.getWidth() * resolution.getHeight() * samplesPerPixel * 2 *
-                                       (useSpectralLensing ? spectralFactor * 2 : 1);
-    Logger::info("Allocating {:L} GB for Ray-LUT", (elementsCount * sizeof(Vector3f)) * 1e-9);
+    unsigned long long elementsCount =
+        resolution.getWidth() * resolution.getHeight() * samplesPerPixel * spectralFactor;
+    Logger::info("Allocating {:L} GB for Ray-LUT", (elementsCount * sizeof(Ray)) * 1e-9);
     Logger::info("Elements count: {:L}", elementsCount);
-    Logger::info("Max vector size: {:L}", dirs.max_size());
-    dirs.resize(elementsCount);
+    Logger::info("Max vector size: {:L}", rays.max_size());
+    rays.resize(elementsCount);
+    Logger::info("Vector capacity: {:L}", rays.capacity());
 
     std::vector<ImageBucket> bucketSequence =
         ImageBucketSequences::getSequence(resolution, 8, BucketSequenceType::LINE_BY_LINE);
@@ -61,39 +62,36 @@ void LensRayLookupTable::write(const std::string &path) {
     InformativeScopedStopWatch generateRays("Write ray data");
     std::ofstream out;
     out.open(path, std::ios::out | std::ios::binary);
-    out.write(reinterpret_cast<const char *>(dirs.data()), sizeof(float) * dirs.size() * 3 * 2);
+    out.write(reinterpret_cast<const char *>(rays.data()), sizeof(float) * rays.size() * 3 * 2);
     out.close();
 }
 
 void LensRayLookupTable::read(const std::string &path) {
 
     InformativeScopedStopWatch generateRays("Read ray data");
-    dirs.resize(resolution.getWidth() * resolution.getHeight() * samplesPerPixel);
+    rays.resize(resolution.getWidth() * resolution.getHeight() * samplesPerPixel);
     std::ifstream fin(path, std::ios::binary);
-    fin.read(reinterpret_cast<char *>(dirs.data()), sizeof(float) * dirs.size() * 3 * 2);
+    fin.read(reinterpret_cast<char *>(rays.data()), sizeof(float) * rays.size() * 3 * 2);
 }
 
 Ray LensRayLookupTable::getRay(const Vector2i &pixel, int sampleNumber) {
     auto rayNumber = getVec3fIndex(pixel, sampleNumber, 0);
-    return Ray(dirs[rayNumber], dirs[rayNumber + 1]); // todo respect camera transforms in the future
+    return rays[rayNumber]; // todo respect camera transforms in the future
 }
 
 int LensRayLookupTable::getVec3fIndex(const Vector2i &pixel, int sampleNumber, int offsetInRay) {
     const int spectralFactor = useSpectralLensing ? 3 : 1;
-    return ((pixel.x + pixel.y * resolution.getWidth()) * samplesPerPixel * 2 + sampleNumber * 2) *
-               (useSpectralLensing ? spectralFactor * 2 : 1) +
-           offsetInRay * 2;
+    return ((pixel.x + pixel.y * resolution.getWidth()) * samplesPerPixel + sampleNumber) * spectralFactor +
+           offsetInRay;
 }
 
 void LensRayLookupTable::storeRay(const std::optional<Ray> &ray, const Vector2i &pixelPos, int sampleNumber,
                                   int waveLengthIndex) {
     const int pixelIndex = getVec3fIndex(pixelPos, sampleNumber, waveLengthIndex);
     if (ray) {
-        dirs[pixelIndex] = ray->startPoint;
-        dirs[pixelIndex + 1] = ray->direction;
+        rays[pixelIndex] = *ray;
     } else {
-        dirs[pixelIndex] = Vector3f(0, 0, 0);
-        dirs[pixelIndex + 1] = Vector3f(0, 0, 0);
+        rays[pixelIndex] = Ray();
     }
 }
 } // crayg
