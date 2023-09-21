@@ -16,8 +16,11 @@ LensRayLookupTable::LensRayLookupTable(const Resolution &resolution, int samples
 
 void LensRayLookupTable::generate(CameraModel &cameraModel) {
     const int spectralFactor = useSpectralLensing ? 3 : 1;
-    dirs.resize(resolution.getWidth() * resolution.getHeight() * samplesPerPixel * 2 *
-                (useSpectralLensing ? spectralFactor * 2 : 1));
+    unsigned long long elementsCount = resolution.getWidth() * resolution.getHeight() * samplesPerPixel * 2 *
+                                       (useSpectralLensing ? spectralFactor * 2 : 1);
+    Logger::info("Allocating {:L} GB for Ray-LUT", (elementsCount * sizeof(Vector3f)) * 1e-9);
+    dirs.resize(elementsCount);
+
     std::vector<ImageBucket> bucketSequence =
         ImageBucketSequences::getSequence(resolution, 8, BucketSequenceType::LINE_BY_LINE);
     ProgressReporter reporter = ProgressReporter::createLoggingProgressReporter(static_cast<int>(bucketSequence.size()),
