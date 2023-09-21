@@ -19,6 +19,8 @@ void LensRayLookupTable::generate(CameraModel &cameraModel) {
     unsigned long long elementsCount = resolution.getWidth() * resolution.getHeight() * samplesPerPixel * 2 *
                                        (useSpectralLensing ? spectralFactor * 2 : 1);
     Logger::info("Allocating {:L} GB for Ray-LUT", (elementsCount * sizeof(Vector3f)) * 1e-9);
+    Logger::info("Elements count: {:L}", elementsCount);
+    Logger::info("Max vector size: {:L}", dirs.max_size());
     dirs.resize(elementsCount);
 
     std::vector<ImageBucket> bucketSequence =
