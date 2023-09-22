@@ -25,7 +25,7 @@ class LensRayLookupTable {
     void sampleImageBucket(CameraModel &cameraModel, crayg::ImageBucket &imageBucket);
 
     int getVec3fIndex(const Vector2i &pixel, int sampleNumber, int offsetInRay);
-    Ray getRay(const Vector2i &pixel, int sampleNumber);
+    Ray getRay(const Vector2i &pixel, int sampleNumber, int wavelengthIndex);
     void storeRay(const std::optional<Ray> &ray, const Vector2i &pixel, int sampleNumber, int waveLengthIndex);
 };
 

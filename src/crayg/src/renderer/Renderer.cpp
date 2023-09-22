@@ -89,14 +89,14 @@ Color Renderer::renderPixel(const Vector2i &pixel) {
         const int samples = std::pow(scene.renderSettings.maxSamples, 2);
         for (int i = 0; i < samples; i++) {
             if (scene.renderSettings.useSpectralLensing) {
-                auto ray_r = lensRayLookupTable.getRay(pixel, i);
+                auto ray_r = lensRayLookupTable.getRay(pixel, i, 0);
                 float r = 0;
                 if (ray_r == Ray({0, 0, 0}, {0, 0, 0})) {
                     continue;
                 }
                 r = integrator->integrate(ray_r, 0).r;
 
-                auto ray_g = lensRayLookupTable.getRay(pixel, i);
+                auto ray_g = lensRayLookupTable.getRay(pixel, i, 1);
 
                 float g = 0;
                 if (ray_g == Ray({0, 0, 0}, {0, 0, 0})) {
@@ -104,7 +104,7 @@ Color Renderer::renderPixel(const Vector2i &pixel) {
                 }
                 g = integrator->integrate(ray_g, 0).g;
 
-                auto ray_b = lensRayLookupTable.getRay(pixel, i);
+                auto ray_b = lensRayLookupTable.getRay(pixel, i, 2);
 
                 float b = 0;
                 if (ray_b == Ray({0, 0, 0}, {0, 0, 0})) {
@@ -114,6 +114,8 @@ Color Renderer::renderPixel(const Vector2i &pixel) {
 
                 sampleAccumulator.addSample(Color(r, g, b));
             } else {
+                auto ray = lensRayLookupTable.getRay(pixel, i, 0);
+                sampleAccumulator.addSample(integrator->integrate(ray, 0));
             }
         }
     } else {

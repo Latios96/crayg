@@ -74,8 +74,8 @@ void LensRayLookupTable::read(const std::string &path) {
     fin.read(reinterpret_cast<char *>(rays.data()), sizeof(float) * rays.size() * 3 * 2);
 }
 
-Ray LensRayLookupTable::getRay(const Vector2i &pixel, int sampleNumber) {
-    auto rayNumber = getVec3fIndex(pixel, sampleNumber, 0);
+Ray LensRayLookupTable::getRay(const Vector2i &pixel, int sampleNumber, int wavelengthIndex) {
+    auto rayNumber = getVec3fIndex(pixel, sampleNumber, wavelengthIndex);
     return rays[rayNumber]; // todo respect camera transforms in the future
 }
 
