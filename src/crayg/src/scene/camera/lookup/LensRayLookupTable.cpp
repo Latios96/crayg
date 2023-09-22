@@ -57,23 +57,6 @@ void LensRayLookupTable::sampleImageBucket(CameraModel &cameraModel, ImageBucket
     }
 }
 
-void LensRayLookupTable::write(const std::string &path) {
-
-    InformativeScopedStopWatch generateRays("Write ray data");
-    std::ofstream out;
-    out.open(path, std::ios::out | std::ios::binary);
-    out.write(reinterpret_cast<const char *>(rays.data()), sizeof(float) * rays.size() * 3 * 2);
-    out.close();
-}
-
-void LensRayLookupTable::read(const std::string &path) {
-
-    InformativeScopedStopWatch generateRays("Read ray data");
-    rays.resize(resolution.getWidth() * resolution.getHeight() * samplesPerPixel);
-    std::ifstream fin(path, std::ios::binary);
-    fin.read(reinterpret_cast<char *>(rays.data()), sizeof(float) * rays.size() * 3 * 2);
-}
-
 Ray LensRayLookupTable::getRay(const Vector2i &pixel, int sampleNumber, int wavelengthIndex) {
     auto rayNumber = getVec3fIndex(pixel, sampleNumber, wavelengthIndex);
     return rays[rayNumber]; // todo respect camera transforms in the future

@@ -16,8 +16,6 @@ class LensRayLookupTable {
 
     void generate(CameraModel &cameraModel);
 
-    void write(const std::string &path);
-    void read(const std::string &path);
     std::vector<Ray> rays; // todo also store position on lens..
     Resolution resolution;
     int samplesPerPixel;
