@@ -32,6 +32,9 @@ TEST_CASE("CliRenderSettingsOverride::hasAnyOverrides") {
     CliRenderSettingsOverride onlySamplesPerAdaptivePass;
     onlySamplesPerAdaptivePass.samplesPerAdaptivePass = 16;
 
+    CliRenderSettingsOverride onlyIntegratorSettingsOverrides;
+    onlyIntegratorSettingsOverrides.integratorSettingsOverrides.emplace_back("test", 1);
+
     SECTION("has overrides") {
         REQUIRE(fullOverrides.hasAnyOverrides());
 
@@ -50,6 +53,8 @@ TEST_CASE("CliRenderSettingsOverride::hasAnyOverrides") {
         REQUIRE(onlyAdaptiveMaxError.hasAnyOverrides());
 
         REQUIRE(onlySamplesPerAdaptivePass.hasAnyOverrides());
+
+        REQUIRE(onlyIntegratorSettingsOverrides.hasAnyOverrides());
     }
 
     SECTION("has no overrides") {
@@ -87,6 +92,9 @@ TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
     CliRenderSettingsOverride onlyUseSpectralLensing;
     onlyUseSpectralLensing.useSpectralLensing = true;
 
+    CliRenderSettingsOverride onlyIntegratorSettingsOverrides;
+    onlyIntegratorSettingsOverrides.integratorSettingsOverrides.emplace_back("test", 1);
+
     SECTION("has overrides") {
         REQUIRE(fullOverrides.reportOverrides() ==
                 R"(resolution -> 800x600, maxSamples -> 8, integratorType -> "DEBUG")");
@@ -106,6 +114,8 @@ TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
         REQUIRE(onlySamplesPerAdaptivePass.reportOverrides() == R"(samplesPerAdaptivePass -> 16)");
 
         REQUIRE(onlyUseSpectralLensing.reportOverrides() == R"(useSpectralLensing -> true)");
+
+        REQUIRE(onlyIntegratorSettingsOverrides.reportOverrides() == R"(test -> 1)");
     }
 
     SECTION("has no overrides") {
@@ -149,6 +159,9 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     CliRenderSettingsOverride onlyUseSpectralLensing;
     onlyUseSpectralLensing.useSpectralLensing = true;
 
+    CliRenderSettingsOverride onlyIntegratorSettingsOverrides;
+    onlyIntegratorSettingsOverrides.integratorSettingsOverrides.emplace_back("test", 1);
+
     SECTION("has overrides") {
         REQUIRE(fullOverrides.resolveOverrides(renderSettings) ==
                 RenderSettings({800, 600}, 8, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE,
@@ -191,6 +204,11 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
                                IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f,
                                8, true));
+
+        REQUIRE(onlyIntegratorSettingsOverrides.resolveOverrides(renderSettings) ==
+                RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings({{"test", 1}}),
+                               IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f,
+                               8, false));
     }
 
     SECTION("has no overrides") {

@@ -57,9 +57,13 @@ TEST_CASE("CliParser::parse") {
                                               "--variantSelection",
                                               "/Camera/Camera:camera_lens=realistic_realistic_canon_50mm",
                                               "--variantSelection",
-                                              "/Camera/OtherCamera:other_camera_lens=realistic_realistic_canon_50mm"
-
-        };
+                                              "/Camera/OtherCamera:other_camera_lens=realistic_realistic_canon_50mm",
+                                              "--integrator-setting-int",
+                                              "testInt=1",
+                                              "--integrator-setting-float",
+                                              "testFloat=1.0",
+                                              "--integrator-setting-string",
+                                              "testString=test"};
         ARGC_ARGV_(arguments);
 
         CliParser cli_parser("executable_name", argc, argv);
@@ -80,6 +84,12 @@ TEST_CASE("CliParser::parse") {
         REQUIRE(result.args->variantSelections[1] == SceneReaderVariantSelection("/Camera/OtherCamera",
                                                                                  "other_camera_lens",
                                                                                  "realistic_realistic_canon_50mm"));
+        REQUIRE(result.args->cliRenderSettingsOverride.integratorSettingsOverrides[0] ==
+                IntegratorSettingsOverride("testInt", 1));
+        REQUIRE(result.args->cliRenderSettingsOverride.integratorSettingsOverrides[1] ==
+                IntegratorSettingsOverride("testFloat", 1.f));
+        REQUIRE(result.args->cliRenderSettingsOverride.integratorSettingsOverrides[2] ==
+                IntegratorSettingsOverride("testString", "test"));
     }
 
     SECTION("invalid args should contain error") {

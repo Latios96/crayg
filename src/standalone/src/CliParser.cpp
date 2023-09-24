@@ -45,6 +45,39 @@ std::vector<SceneReaderVariantSelection> parseVariantSelections(const std::vecto
     return parsedVariantSelections;
 }
 
+template <typename T> T parseIntegratorSettingsValue(const std::string &str);
+
+template <> int parseIntegratorSettingsValue(const std::string &str) {
+    return stoi(str);
+}
+
+template <> float parseIntegratorSettingsValue(const std::string &str) {
+    return stof(str);
+}
+
+template <> std::string parseIntegratorSettingsValue(const std::string &str) {
+    return str;
+}
+
+template <typename T>
+void parseIntegratorSettings(std::vector<IntegratorSettingsOverride> &integratorSettingsOverrides,
+                             const std::vector<std::string> &overrideStrings) {
+
+    for (auto &overrideString : overrideStrings) {
+        std::vector<std::string> splittedOverrideString;
+        boost::algorithm::split(splittedOverrideString, overrideString, boost::algorithm::is_any_of("="));
+        const bool overrideStringHasTwoElements = splittedOverrideString.size() != 2;
+        const bool elementsAreNotEmpty =
+            overrideStringHasTwoElements && !(splittedOverrideString[0].empty() || splittedOverrideString[1].empty());
+        if (overrideStringHasTwoElements && elementsAreNotEmpty) {
+            throw std::runtime_error(fmt::format("Invalid integrator settings override: '{}'", overrideString));
+        }
+
+        T value = parseIntegratorSettingsValue<T>(splittedOverrideString[1]);
+        integratorSettingsOverrides.emplace_back(splittedOverrideString[0], value);
+    }
+}
+
 CliParseResult CliParser::parse() {
     CLI::App app{
         fmt::format("Crayg Renderer version {}, commit {}", crayg::CraygInfo::VERSION, crayg::CraygInfo::COMMIT_HASH),
@@ -63,6 +96,16 @@ CliParseResult CliParser::parse() {
     std::vector<std::string> variantSelections;
     app.add_option("--variantSelection", variantSelections,
                    "Variant selections to apply to USD Stage. Format: /prim/path:variant_set=variant_name");
+
+    std::vector<std::string> integratorSettingsIntOverrides;
+    app.add_option("--integrator-setting-int", integratorSettingsIntOverrides,
+                   "Override integrator settings. Format: INTEGRATOR_NAME:settingsName=value");
+    std::vector<std::string> integratorSettingsFloatOverrides;
+    app.add_option("--integrator-setting-float", integratorSettingsFloatOverrides,
+                   "Override integrator settings. Format: INTEGRATOR_NAME:settingsName=value");
+    std::vector<std::string> integratorSettingsStringOverrides;
+    app.add_option("--integrator-setting-string", integratorSettingsStringOverrides,
+                   "Override integrator settings. Format: INTEGRATOR_NAME:settingsName=value");
 
     CliRenderSettingsOverride renderSettingsOverride;
 
@@ -100,6 +143,13 @@ CliParseResult CliParser::parse() {
         }
 
         std::vector<SceneReaderVariantSelection> parsedVariantSelections = parseVariantSelections(variantSelections);
+
+        parseIntegratorSettings<int>(renderSettingsOverride.integratorSettingsOverrides,
+                                     integratorSettingsIntOverrides);
+        parseIntegratorSettings<float>(renderSettingsOverride.integratorSettingsOverrides,
+                                       integratorSettingsFloatOverrides);
+        parseIntegratorSettings<std::string>(renderSettingsOverride.integratorSettingsOverrides,
+                                             integratorSettingsStringOverrides);
 
         return CliParseResult(CliArgs(sceneFileName, imageOutputPath,
                                       !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,
