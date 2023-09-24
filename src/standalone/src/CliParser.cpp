@@ -7,7 +7,7 @@
 
 namespace crayg {
 
-template <typename T> CLI::CheckedTransformer createTransformer() {
+template <typename T> CLI::CheckedTransformer createEnumTransformer() {
     constexpr auto entries = magic_enum::enum_entries<T>();
     std::map<std::string, T> map;
     for (auto &entry : entries) {
@@ -72,16 +72,16 @@ CliParseResult CliParser::parse() {
     app.add_option("--maxSamples", renderSettingsOverride.maxSamples, "Override max samples");
 
     app.add_option("--integrator", renderSettingsOverride.integratorType, "Override integrator")
-        ->transform(createTransformer<IntegratorType>());
+        ->transform(createEnumTransformer<IntegratorType>());
 
     app.add_option("--intersector", renderSettingsOverride.intersectorType, "Override intersector")
-        ->transform(createTransformer<IntersectorType>());
+        ->transform(createEnumTransformer<IntersectorType>());
 
     app.add_option("--bucketSequence", renderSettingsOverride.bucketSequenceType, "Override bucket sequence")
-        ->transform(createTransformer<BucketSequenceType>());
+        ->transform(createEnumTransformer<BucketSequenceType>());
 
     app.add_option("--bucketSamplerType", renderSettingsOverride.bucketSamplerType, "Use adaptive sampling")
-        ->transform(createTransformer<BucketSamplerType>());
+        ->transform(createEnumTransformer<BucketSamplerType>());
 
     app.add_option("--adaptiveMaxError", renderSettingsOverride.adaptiveMaxError, "Override adaptive max error");
 
