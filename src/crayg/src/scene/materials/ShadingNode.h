@@ -34,7 +34,7 @@ class FloatShadingNodeInput : public ShadingNodeInput {
   public:
     FloatShadingNodeInput() = default;
     FloatShadingNodeInput(float value);
-    bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
+    bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const override;
     ShadingNodeOutputType getOutputType() const override;
     float evaluate(const SurfaceInteraction &surfaceInteraction);
     float value;
@@ -47,7 +47,7 @@ class IntShadingNodeInput : public ShadingNodeInput {
   public:
     IntShadingNodeInput() = default;
     IntShadingNodeInput(int value);
-    bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
+    bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const override;
     ShadingNodeOutputType getOutputType() const override;
     int evaluate(const SurfaceInteraction &surfaceInteraction);
     int value;
@@ -60,7 +60,7 @@ class Vector2fShadingNodeInput : public ShadingNodeInput {
   public:
     Vector2fShadingNodeInput() = default;
     Vector2fShadingNodeInput(const Vector2f &value);
-    bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
+    bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const override;
     ShadingNodeOutputType getOutputType() const override;
     Vector2f evaluate(const SurfaceInteraction &surfaceInteraction);
     Vector2f value;
@@ -74,7 +74,7 @@ class ColorShadingNodeInput : public ShadingNodeInput {
     ColorShadingNodeInput() = default;
     ColorShadingNodeInput(const Color &value);
 
-    bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const;
+    bool isCompatibleTo(ShadingNodeOutputType shadingNodeType) const override;
     ShadingNodeOutputType getOutputType() const override;
     Color evaluate(const SurfaceInteraction &surfaceInteraction);
     Color value;
