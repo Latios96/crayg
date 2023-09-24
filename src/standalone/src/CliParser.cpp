@@ -64,67 +64,39 @@ CliParseResult CliParser::parse() {
     app.add_option("--variantSelection", variantSelections,
                    "Variant selections to apply to USD Stage. Format: /prim/path:variant_set=variant_name");
 
+    CliRenderSettingsOverride renderSettingsOverride;
+
     std::string resolution;
     app.add_option("--resolution", resolution, "Override resolution to render, format: 1280x720");
 
-    int maxSamples = 0;
-    app.add_option("--maxSamples", maxSamples, "Override max samples");
+    app.add_option("--maxSamples", renderSettingsOverride.maxSamples, "Override max samples");
 
-    std::optional<IntegratorType> integratorType;
-    app.add_option("--integrator", integratorType, "Override integrator")
+    app.add_option("--integrator", renderSettingsOverride.integratorType, "Override integrator")
         ->transform(createTransformer<IntegratorType>());
 
-    std::optional<IntersectorType> intersectorType;
-    app.add_option("--intersector", intersectorType, "Override intersector")
+    app.add_option("--intersector", renderSettingsOverride.intersectorType, "Override intersector")
         ->transform(createTransformer<IntersectorType>());
 
-    std::optional<BucketSequenceType> bucketSequenceType;
-    app.add_option("--bucketSequence", bucketSequenceType, "Override bucket sequence")
+    app.add_option("--bucketSequence", renderSettingsOverride.bucketSequenceType, "Override bucket sequence")
         ->transform(createTransformer<BucketSequenceType>());
 
-    std::optional<BucketSamplerType> bucketSamplerType;
-    app.add_option("--bucketSamplerType", bucketSamplerType, "Use adaptive sampling")
+    app.add_option("--bucketSamplerType", renderSettingsOverride.bucketSamplerType, "Use adaptive sampling")
         ->transform(createTransformer<BucketSamplerType>());
 
-    std::optional<float> adaptiveMaxError;
-    app.add_option("--adaptiveMaxError", adaptiveMaxError, "Override adaptive max error");
+    app.add_option("--adaptiveMaxError", renderSettingsOverride.adaptiveMaxError, "Override adaptive max error");
 
-    std::optional<int> samplesPerAdaptivePass;
-    app.add_option("--samplesPerAdaptivePass", samplesPerAdaptivePass, "Override samples per adaptive pass");
+    app.add_option("--samplesPerAdaptivePass", renderSettingsOverride.samplesPerAdaptivePass,
+                   "Override samples per adaptive pass");
 
     std::optional<bool> useSpectralLensing;
-    app.add_flag("--useSpectralLensing", useSpectralLensing, "Override if spectral lens simulation should be used");
+    app.add_flag("--useSpectralLensing", renderSettingsOverride.useSpectralLensing,
+                 "Override if spectral lens simulation should be used");
 
     try {
         app.parse(argc, argv);
 
-        CliRenderSettingsOverride renderSettingsOverride;
         if (!resolution.empty()) {
             renderSettingsOverride.resolution = Resolution::parse(resolution);
-        }
-        if (maxSamples) {
-            renderSettingsOverride.maxSamples = maxSamples;
-        }
-        if (integratorType) {
-            renderSettingsOverride.integratorType = integratorType.value();
-        }
-        if (intersectorType) {
-            renderSettingsOverride.intersectorType = intersectorType.value();
-        }
-        if (bucketSequenceType) {
-            renderSettingsOverride.bucketSequenceType = bucketSequenceType.value();
-        }
-        if (bucketSamplerType) {
-            renderSettingsOverride.bucketSamplerType = bucketSamplerType.value();
-        }
-        if (adaptiveMaxError) {
-            renderSettingsOverride.adaptiveMaxError = adaptiveMaxError.value();
-        }
-        if (samplesPerAdaptivePass) {
-            renderSettingsOverride.samplesPerAdaptivePass = samplesPerAdaptivePass.value();
-        }
-        if (useSpectralLensing) {
-            renderSettingsOverride.useSpectralLensing = useSpectralLensing.value();
         }
 
         std::vector<SceneReaderVariantSelection> parsedVariantSelections = parseVariantSelections(variantSelections);
