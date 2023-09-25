@@ -71,19 +71,11 @@ void ImageMetadataCollector::collectIntegratorSettings(ImageMetadata &imageMetad
         return;
     }
     for (const auto &entry : scene->renderSettings.integratorSettings.settings) {
-        switch (entry.second.index()) {
-        case 0:
-            imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first,
-                                std::get<std::string>(entry.second));
-            break;
-        case 1:
-            imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first, std::get<int>(entry.second));
-            break;
-        case 2:
-            imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first,
-                                std::get<float>(entry.second));
-            break;
-        }
+        return std::visit(
+            [&imageMetadata, &entry](auto &integratorSettingsValue) {
+                imageMetadata.write("crayg/renderSettings/integratorSettings/" + entry.first, integratorSettingsValue);
+            },
+            entry.second);
     }
 }
 
