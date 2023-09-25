@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEMETADATA_H_
 
 #include <chrono>
+#include <fmt/chrono.h>
 #include <fmt/format.h>
 #include <ostream>
 #include <string>
@@ -108,17 +109,7 @@ template <> struct fmt::formatter<crayg::ImageMetadataValue> {
 
     template <typename FormatContext>
     auto format(crayg::ImageMetadataValue const &imageMetadataValue, FormatContext &ctx) {
-        if (std::holds_alternative<std::string>(imageMetadataValue)) {
-            return fmt::format_to(ctx.out(), "{}", std::get<std::string>(imageMetadataValue));
-        } else if (std::holds_alternative<int>(imageMetadataValue)) {
-            return fmt::format_to(ctx.out(), "{}", std::get<int>(imageMetadataValue));
-        } else if (std::holds_alternative<float>(imageMetadataValue)) {
-            return fmt::format_to(ctx.out(), "{}", std::get<float>(imageMetadataValue));
-        } else if (std::holds_alternative<std::chrono::seconds>(imageMetadataValue)) {
-            return fmt::format_to(ctx.out(), "{}s", std::get<std::chrono::seconds>(imageMetadataValue).count());
-        }
-        throw std::runtime_error(
-            fmt::format("Unsupported type with index {} in ImageMetadataValue", imageMetadataValue.index()));
+        return std::visit([&ctx](auto &value) { return fmt::format_to(ctx.out(), "{}", value); }, imageMetadataValue);
     };
 };
 
