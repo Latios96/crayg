@@ -15,13 +15,19 @@ unset(ENV{CI})
 
 set(CONAN_SYSTEM_INCLUDES ON)
 
-execute_process(
-    COMMAND git describe --tags
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE GIT_COMMIT_HASH
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
+option(CRAYG_USE_COMMIT_HASH "Automatically detect the Git commit hash" OFF)
 
-add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
+if(CRAYG_USE_COMMIT_HASH)
+    execute_process(
+        COMMAND git describe --tags
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_COMMIT_HASH
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+    add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
+else()
+    add_definitions(-DGIT_COMMIT_HASH="SNAPSHOT")
+endif()
 
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
