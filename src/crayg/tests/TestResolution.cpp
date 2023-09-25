@@ -16,6 +16,10 @@ TEST_CASE("Resolution/parse") {
         REQUIRE_THROWS_AS(Resolution::parse("800"), std::runtime_error);
         REQUIRE_THROWS_AS(Resolution::parse("800x"), std::runtime_error);
         REQUIRE_THROWS_AS(Resolution::parse("x600"), std::runtime_error);
+        REQUIRE_THROWS_AS(Resolution::parse("600xertz"), std::runtime_error);
+        REQUIRE_THROWS_AS(Resolution::parse("abcxser"), std::runtime_error);
+        REQUIRE_THROWS_AS(Resolution::parse("1280xrtz"), std::runtime_error);
+        REQUIRE_THROWS_AS(Resolution::parse("-1x-1"), std::runtime_error);
     }
 }
 

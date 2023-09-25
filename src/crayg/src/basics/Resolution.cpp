@@ -1,4 +1,5 @@
 #include "Resolution.h"
+#include "utils/FromStringUtils.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <fmt/format.h>
@@ -59,12 +60,33 @@ Resolution::Resolution(const Resolution &resolution) : width(resolution.width), 
 }
 
 Resolution Resolution::parse(const std::string &resolutionString) {
+    const std::runtime_error error =
+        std::runtime_error(fmt::format("Resolution string '{}' has invalid format", resolutionString));
     std::vector<std::string> splitResults;
     boost::algorithm::split(splitResults, resolutionString, boost::algorithm::is_any_of("x"));
     if (splitResults.size() != 2 || splitResults.size() == 2 && (splitResults[0].empty() || splitResults[1].empty())) {
-        throw std::runtime_error(fmt::format("Resolution string {} has invalid format", resolutionString));
+        throw error;
     }
-    return {std::atoi(splitResults[0].c_str()), std::atoi(splitResults[1].c_str())};
+
+    int width = 0;
+    int height = 0;
+    try {
+        width = FromStringUtils::parseIntOrThrow(splitResults[0]);
+        height = FromStringUtils::parseIntOrThrow(splitResults[1]);
+    } catch (std::runtime_error &e) {
+        throw error;
+    }
+
+    if (width < 0) {
+        throw std::runtime_error(
+            fmt::format("Invalid resolution string '{}', width needs to be >=0", resolutionString));
+    }
+    if (height < 0) {
+        throw std::runtime_error(
+            fmt::format("Invalid resolution string '{}', width needs to be >=0", resolutionString));
+    }
+
+    return {width, height};
 }
 
 }
