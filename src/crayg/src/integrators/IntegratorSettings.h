@@ -31,14 +31,7 @@ template <> struct fmt::formatter<crayg::IntegratorSettingsValue> {
     }
 
     template <typename FormatContext> auto format(crayg::IntegratorSettingsValue const &value, FormatContext &ctx) {
-        switch (value.index()) {
-        case 0:
-            return fmt::format_to(ctx.out(), fmt::format("{}", std::get<std::string>(value)));
-        case 1:
-            return fmt::format_to(ctx.out(), fmt::format("{}", std::get<int>(value)));
-        case 2:
-            return fmt::format_to(ctx.out(), fmt::format("{}", std::get<float>(value)));
-        }
+        return std::visit([&ctx](auto &v) { return fmt::format_to(ctx.out(), fmt::format("{}", v)); }, value);
     };
 };
 
