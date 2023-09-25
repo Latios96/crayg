@@ -1,6 +1,7 @@
 #include "CliParser.h"
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
+#include "utils/FromStringUtils.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <sstream>
@@ -48,7 +49,7 @@ std::vector<SceneReaderVariantSelection> parseVariantSelections(const std::vecto
 template <typename T> T parseIntegratorSettingsValue(const std::string &str);
 
 template <> int parseIntegratorSettingsValue(const std::string &str) {
-    return stoi(str);
+    return FromStringUtils::parseIntOrThrow(str);
 }
 
 template <> float parseIntegratorSettingsValue(const std::string &str) {
