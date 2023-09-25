@@ -328,6 +328,8 @@ set(crayg_SRCS
     utils/EnumUtils.h
     utils/FileSystemUtils.cpp
     utils/FileSystemUtils.h
+    utils/FromStringUtils.cpp
+    utils/FromStringUtils.h
     utils/ImageChannelPathResolver.cpp
     utils/ImageChannelPathResolver.h
     utils/ImageMetadataCollector.cpp

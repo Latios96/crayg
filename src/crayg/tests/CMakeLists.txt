@@ -46,6 +46,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestFileSystemUtils.cpp
     TestFollowMouseBucketQueue.cpp
     TestFollowSequenceBucketQueue.cpp
+    TestFromStringUtils.cpp
     TestGradient.cpp
     TestGroundPlane.cpp
     TestImage.cpp
