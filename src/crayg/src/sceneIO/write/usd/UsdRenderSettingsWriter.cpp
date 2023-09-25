@@ -42,18 +42,11 @@ void UsdRenderSettingsWriter::writeResolution(const pxr::UsdRenderSettings &usdR
 
 void UsdRenderSettingsWriter::writeIntegratorSettings(const pxr::UsdRenderSettings &usdRenderSettings) const {
     for (const auto &entry : renderSettings.integratorSettings.settings) {
-        switch (entry.second.index()) {
-        case 0:
-            UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), entry.first,
-                                            std::get<std::string>(entry.second));
-            break;
-        case 1:
-            UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), entry.first, std::get<int>(entry.second));
-            break;
-        case 2:
-            UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), entry.first, std::get<float>(entry.second));
-            break;
-        }
+        std::visit(
+            [&entry, &usdRenderSettings](auto &integratorSettingsValue) {
+                UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), entry.first, integratorSettingsValue);
+            },
+            entry.second);
     }
 }
 
