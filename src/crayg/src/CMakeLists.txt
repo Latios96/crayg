@@ -326,6 +326,7 @@ set(crayg_SRCS
     utils/CraygMain.h
     utils/DtoUtils.h
     utils/EnumUtils.h
+    utils/Exceptions.h
     utils/FileSystemUtils.cpp
     utils/FileSystemUtils.h
     utils/FromStringUtils.cpp

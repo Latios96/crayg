@@ -29,10 +29,6 @@
         CRAYG_LOG_AND_THROW(message)                                                                                   \
     }
 
-#define CRAYG_LOG_AND_THROW(message)                                                                                   \
-    Logger::error("Error at {}:{}: {}", __FILE__, __LINE__, message);                                                  \
-    throw std::runtime_error(fmt::format("Error at {}:{}: {}", __FILE__, __LINE__, message));
-
 #define EMPTY_CHECK                                                                                                    \
     do {                                                                                                               \
     } while (false)
