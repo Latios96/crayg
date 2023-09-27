@@ -72,7 +72,11 @@ FetchContent_Declare(
     GIT_TAG v0.2.0-beta2 # <HASH or TAG>
 )
 FetchContent_MakeAvailable(cpptrace)
-set_target_properties(cpptrace PROPERTIES UNITY_BUILD OFF)
+set(cpptrace_targets cpptrace)
+if(TARGET dwarf)
+    list(APPEND cpptrace_targets dwarf)
+endif()
+set_target_properties(${cpptrace_targets} PROPERTIES UNITY_BUILD OFF)
 
 add_subdirectory(src)
 
