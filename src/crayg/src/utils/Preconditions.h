@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_
 #define CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_
 
+#include "Exceptions.h"
 #include "Logger.h"
 #include <basics/Vector3f.h>
 #include <fmt/format.h>
@@ -26,7 +27,7 @@
 
 #define CRAYG_CHECK_OR_THROW(condition, message)                                                                       \
     if (!(condition)) {                                                                                                \
-        CRAYG_LOG_AND_THROW(message)                                                                                   \
+        CRAYG_LOG_AND_THROW_MESSAGE(message)                                                                           \
     }
 
 #define EMPTY_CHECK                                                                                                    \
