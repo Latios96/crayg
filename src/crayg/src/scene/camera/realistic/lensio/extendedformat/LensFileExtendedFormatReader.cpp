@@ -2,6 +2,7 @@
 #include "scene/camera/realistic/LensGeometry.h"
 #include "scene/camera/realistic/LensMaterial.h"
 #include "utils/EnumUtils.h"
+#include "utils/Exceptions.h"
 #include "utils/utils.h"
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/classification.hpp>
@@ -47,8 +48,8 @@ float parseFloat(int lineIndex, std::string &floatStr, const std::string &name) 
     try {
         return std::stof(floatStr);
     } catch (std::invalid_argument &e) {
-        throw InvalidExtendedLensFileFormatException(lineIndex,
-                                                     fmt::format("Value '{}' for {} is not a float", floatStr, name));
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("Value '{}' for {} is not a float", floatStr, name)));
     }
 }
 
@@ -76,8 +77,8 @@ LensMaterial parseMaterial(int lineIndex, std::string &material) {
     boost::algorithm::trim_all(material);
     auto lensMaterial = EnumUtils::parse<LensMaterialId>(material);
     if (!lensMaterial) {
-        throw InvalidExtendedLensFileFormatException(lineIndex,
-                                                     fmt::format("'{}' is an unsupported material value", material));
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("'{}' is an unsupported material value", material)));
     }
     return LensMaterial::createMaterialById(*lensMaterial);
 }
@@ -86,8 +87,8 @@ LensGeometry parseLensGeometry(int lineIndex, std::string &geometry) {
     boost::algorithm::trim_all(geometry);
     auto lensGeometry = EnumUtils::parse<LensGeometry>(geometry);
     if (!lensGeometry) {
-        throw InvalidExtendedLensFileFormatException(lineIndex,
-                                                     fmt::format("'{}' is an unsupported LensGeometry", geometry));
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("'{}' is an unsupported LensGeometry", geometry)));
     }
     return *lensGeometry;
 }
@@ -144,7 +145,7 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
 
         const bool metadataWasParsedButNameIsEmpty = parseState == ELEMENTS && cameraLensMetadata.name.empty();
         if (metadataWasParsedButNameIsEmpty) {
-            throw InvalidExtendedLensFileFormatException("[Metadata] section is missing 'name'");
+            CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Metadata] section is missing 'name'"));
         }
 
         if (parseState == METADATA) {
@@ -156,12 +157,12 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
 
     const bool elementsSectionWasNotFound = parseState == METADATA;
     if (elementsSectionWasNotFound) {
-        throw InvalidExtendedLensFileFormatException("[Elements] section is missing");
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Elements] section is missing"));
     }
 
     const bool elementsSectionWasEmpty = parseState == ELEMENTS && elements.empty();
     if (elementsSectionWasEmpty) {
-        throw InvalidExtendedLensFileFormatException("[Elements] section is empty");
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Elements] section is empty"));
     }
 
     return {cameraLensMetadata, elements};

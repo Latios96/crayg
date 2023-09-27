@@ -1,6 +1,7 @@
 #include "ImageBucketSequences.h"
 #include "LineByLineSequence.h"
 #include "SpiralSequence.h"
+#include "utils/Exceptions.h"
 #include <fmt/format.h>
 
 namespace crayg {
@@ -15,7 +16,8 @@ std::vector<ImageBucket> ImageBucketSequences::getSequence(const Resolution &res
         bucketSequence = std::make_unique<SpiralSequence>(resolution, bucketWidth);
         break;
     default:
-        throw std::runtime_error(fmt::format(R"(Unsupported BucketSequenceType : "{}")", bucketSequenceType));
+        CRAYG_LOG_AND_THROW(
+            std::runtime_error(fmt::format(R"(Unsupported BucketSequenceType : "{}")", bucketSequenceType)));
     }
     return bucketSequence->getTiles();
 }

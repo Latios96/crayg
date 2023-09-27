@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "extendedformat/LensFileExtendedFormatWriter.h"
 #include "textfile/LensFileTextFileWriter.h"
+#include "utils/Exceptions.h"
 #include "json/LensFileJsonWriter.h"
 #include <boost/filesystem/path.hpp>
 
@@ -19,7 +20,7 @@ std::unique_ptr<LensFileWriter> LensFileWriterFactory::createLensFileWriter(cons
         return std::make_unique<LensFileExtendedFormatWriter>();
     } else {
         Logger::error("No LensFileWriter found for extension {}", extension);
-        throw std::runtime_error(fmt::format("No LensFileWriter found for extension {}", extension));
+        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No LensFileWriter found for extension {}", extension)));
     }
 }
 
@@ -32,7 +33,8 @@ std::unique_ptr<LensFileWriter> LensFileWriterFactory::createLensFileWriter(Lens
         return std::make_unique<LensFileExtendedFormatWriter>();
     } else {
         Logger::error("No LensFileWriter found for LensFileFormat {}", lensFileFormat);
-        throw std::runtime_error(fmt::format("No LensFileWriter found for LensFileFormat {}", lensFileFormat));
+        CRAYG_LOG_AND_THROW(
+            std::runtime_error(fmt::format("No LensFileWriter found for LensFileFormat {}", lensFileFormat)));
     }
 }
 } // crayg

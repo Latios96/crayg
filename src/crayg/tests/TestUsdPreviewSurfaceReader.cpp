@@ -1,6 +1,7 @@
 #include "scene/materials/Material.h"
 #include "scene/materials/UsdPreviewSurface.h"
 #include "sceneIO/read/usd/materials/UsdMaterialReadCache.h"
+#include "utils/Exceptions.h"
 #include <catch2/catch.hpp>
 #include <pxr/base/gf/vec3f.h>
 #include <pxr/usd/sdf/types.h>
@@ -11,7 +12,7 @@ namespace crayg {
 
 std::shared_ptr<UsdPreviewSurface> getAsUsdPreviewSurface(const std::shared_ptr<Material> &material) {
     if (material->getType() != "UsdPreviewSurface") {
-        throw std::runtime_error("This is not a UsdPreviewSurface.");
+        CRAYG_LOG_AND_THROW(std::runtime_error("This is not a UsdPreviewSurface."));
     }
     return std::static_pointer_cast<UsdPreviewSurface>(material);
 }

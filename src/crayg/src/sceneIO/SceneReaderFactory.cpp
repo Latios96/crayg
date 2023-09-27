@@ -1,6 +1,7 @@
 #include "SceneReaderFactory.h"
 #include "Logger.h"
 #include "sceneIO/read/usd/UsdSceneReader.h"
+#include "utils/Exceptions.h"
 #include <boost/filesystem/path.hpp>
 
 namespace crayg {
@@ -14,7 +15,7 @@ std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(std::string s
         return std::shared_ptr<SceneReader>(new UsdSceneReader(scenePath, scene, readOptions));
     } else {
         Logger::error("No SceneReader found for extension {}", extension);
-        throw std::runtime_error(fmt::format("No SceneReader found for extension {}", extension));
+        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No SceneReader found for extension {}", extension)));
     }
 }
 

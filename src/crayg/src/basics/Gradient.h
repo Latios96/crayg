@@ -2,6 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_BASICS_GRADIENT_H_
 
 #include "Color.h"
+#include "utils/Exceptions.h"
 #include "utils/ToStringHelper.h"
 #include <fmt/format.h>
 #include <fmt/ostream.h>
@@ -77,7 +78,7 @@ template <typename T> T Gradient<T>::interpolate(float position) const {
         }
     }
 
-    throw std::runtime_error(fmt::format("Did not find a stop for position {}", position));
+    CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Did not find a stop for position {}", position)));
 }
 
 template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondValue, float position) const {

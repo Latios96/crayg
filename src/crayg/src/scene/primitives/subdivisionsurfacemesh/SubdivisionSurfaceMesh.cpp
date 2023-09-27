@@ -31,7 +31,7 @@ std::string SubdivisionSurfaceMesh::getType() {
 
 void SubdivisionSurfaceMesh::verifyIsTessellated() const {
     if (!isTessellated) {
-        throw std::runtime_error("SubdivisionSurfaceMesh instance was not tesselated!");
+        CRAYG_LOG_AND_THROW(std::runtime_error("SubdivisionSurfaceMesh instance was not tesselated!"));
     }
 }
 

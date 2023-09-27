@@ -1,5 +1,6 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_UTILS_EXCEPTIONS_H_
 #define CRAYG_SRC_CRAYG_SRC_UTILS_EXCEPTIONS_H_
+#include "Logger.h"
 
 #define CRAYG_LOG_AND_THROW(exception)                                                                                 \
     Logger::error("Error at {}:{}: {}", __FILE__, __LINE__, (exception.what()));                                       \

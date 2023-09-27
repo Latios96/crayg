@@ -40,7 +40,7 @@ LensMaterial LensMaterial::createMaterialById(LensMaterialId lensMaterialId) {
 #include "materials/LensMaterialConstants_ohara.h"
 #include "materials/LensMaterialConstants_schott.h"
     }
-    throw std::runtime_error(fmt::format("Unsupported material id: {}", lensMaterialId));
+    CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Unsupported material id: {}", lensMaterialId)));
 }
 
 std::vector<LensMaterial> collectAllMaterials() {

@@ -1,6 +1,8 @@
 #include "UsdSubdivisionSurfaceMeshReader.h"
+#include "utils/Exceptions.h"
 
 namespace crayg {
+
 std::string UsdSubdivisionSurfaceMeshReader::getTranslatedType() {
     return "SubD mesh";
 }
@@ -26,7 +28,8 @@ void UsdSubdivisionSurfaceMeshReader::ensureCatmullClarkScheme() const {
     auto subdivisionScheme =
         UsdUtils::getAttributeValueAs<pxr::TfToken>(usdPrim.GetSubdivisionSchemeAttr(), timeCodeToRead);
     if (subdivisionScheme != pxr::UsdGeomTokens->catmullClark) {
-        throw std::runtime_error(fmt::format("Can not read mesh with subdivision scheme {}", subdivisionScheme));
+        CRAYG_LOG_AND_THROW(
+            std::runtime_error(fmt::format("Can not read mesh with subdivision scheme {}", subdivisionScheme)));
     }
 }
 

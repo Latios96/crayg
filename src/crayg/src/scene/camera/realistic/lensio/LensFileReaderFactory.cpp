@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "extendedformat/LensFileExtendedFormatReader.h"
 #include "textfile/LensFileTextFileReader.h"
+#include "utils/Exceptions.h"
 #include "json/LensFileJsonReader.h"
 #include <boost/filesystem/path.hpp>
 
@@ -19,7 +20,7 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(cons
         return std::make_unique<LensFileExtendedFormatReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", extension);
-        throw std::runtime_error(fmt::format("No LensFileReader found for extension {}", extension));
+        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No LensFileReader found for extension {}", extension)));
     }
 }
 
@@ -32,7 +33,8 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(Lens
         return std::make_unique<LensFileExtendedFormatReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", lensFileFormat);
-        throw std::runtime_error(fmt::format("No LensFileReader found for extension {}", lensFileFormat));
+        CRAYG_LOG_AND_THROW(
+            std::runtime_error(fmt::format("No LensFileReader found for extension {}", lensFileFormat)));
     }
 }
 

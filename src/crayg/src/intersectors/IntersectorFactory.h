@@ -4,6 +4,7 @@
 #include "SceneIntersector.h"
 #include "intersectors/embree/EmbreeBvhBuilder.h"
 #include "intersectors/embree/EmbreeSceneIntersector.h"
+#include "utils/Exceptions.h"
 
 namespace crayg {
 
@@ -15,7 +16,8 @@ class IntersectorFactory {
         case IntersectorType::EMBREE:
             return createEmbreeBvh(scene);
         default:
-            throw std::runtime_error(fmt::format(R"(Unsupported Intersector type: "{}")", intersectorType));
+            CRAYG_LOG_AND_THROW(
+                std::runtime_error(fmt::format(R"(Unsupported Intersector type: "{}")", intersectorType)));
         }
     }
 

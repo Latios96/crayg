@@ -7,6 +7,7 @@
 #include "DebugIntegrator.h"
 #include "IntegratorType.h"
 #include "RaytracingIntegrator.h"
+#include "utils/Exceptions.h"
 #include <magic_enum.hpp>
 
 namespace crayg {
@@ -24,7 +25,8 @@ class IntegratorFactory {
         case IntegratorType::AMBIENT_OCCLUSION:
             return new AmbientOcclusionIntegrator(scene, sceneIntersector, integratorSettings);
         default:
-            throw std::runtime_error(fmt::format(R"(Unsupported Integrator type: "{}")", integratorType));
+            CRAYG_LOG_AND_THROW(
+                std::runtime_error(fmt::format(R"(Unsupported Integrator type: "{}")", integratorType)));
         }
     }
 };

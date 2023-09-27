@@ -4,6 +4,7 @@
 #include "CraygUsdBase.h"
 #include "UsdTypeUtil.h"
 #include "utils/EnumUtils.h"
+#include "utils/Exceptions.h"
 #include <magic_enum.hpp>
 #include <pxr/usd/usd/attribute.h>
 #include <pxr/usd/usdShade/connectableAPI.h>
@@ -21,9 +22,9 @@ class UsdUtils {
         if (attribute.Get(&value, timeCodeToRead)) {
             return value;
         }
-        throw std::runtime_error(fmt::format(
+        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(
             "Attribute '{}': There was no attribute value to read or attribute was not of the type requested",
-            attribute.GetName()));
+            attribute.GetName())));
     };
 
     template <typename T> static T getStaticAttributeValueAs(const pxr::UsdAttribute attribute) {
@@ -57,8 +58,9 @@ class UsdUtils {
         const bool enumValueAuthoredAsInt = usdAttr.GetTypeName() == pxr::SdfValueTypeNames->Int;
 
         if (!enumValueAuthoredAsToken && !enumValueAuthoredAsInt && !enumValueAuthoredAsString) {
-            throw std::runtime_error(fmt::format("USD attribute {} has type {}, which is not supported for enum",
-                                                 attributeName, usdAttr.GetTypeName()));
+            CRAYG_LOG_AND_THROW(
+                std::runtime_error(fmt::format("USD attribute {} has type {}, which is not supported for enum",
+                                               attributeName, usdAttr.GetTypeName())));
         }
 
         if (enumValueAuthoredAsToken) {

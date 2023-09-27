@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include "utils/Exceptions.h"
 
 namespace crayg {
 
@@ -61,7 +62,7 @@ Vector3f Transform::applyForPoint(const Matrix4x4f &matrixToApply, const Vector3
     float w = matrixToApply.values[3][0] * vector3f.x + matrixToApply.values[3][1] * vector3f.y +
               matrixToApply.values[3][2] * vector3f.z + matrixToApply.values[3][3];
     if (w == 0) {
-        throw std::runtime_error("w is 0!");
+        CRAYG_LOG_AND_THROW(std::runtime_error("w is 0!"));
     }
     if (w == 1) {
         return {

@@ -2,6 +2,7 @@
 #include "UsdConstantShadingNodeWriters.h"
 #include "UsdConversionNodeWriters.h"
 #include "scene/materials/ConversionNodes.h"
+#include "utils/Exceptions.h"
 
 namespace crayg {
 
@@ -56,7 +57,7 @@ UsdShaderAndOutput UsdShadingNodeWriteCache::translateShadingNode(ShadingNode &s
         return UsdVector2fToColorWriter(dynamic_cast<Vector2fToColor &>(shadingNode), *this)
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     }
-    throw std::runtime_error(fmt::format("ShadingNode of type '{}' is not supported!", type));
+    CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("ShadingNode of type '{}' is not supported!", type)));
 }
 
 } // crayg

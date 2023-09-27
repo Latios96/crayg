@@ -3,6 +3,7 @@
 #include "basics/Transform.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "utils/Exceptions.h"
 #include <pxr/usd/ar/resolver.h>
 #include <pxr/usd/ar/resolverContextBinder.h>
 
@@ -55,21 +56,22 @@ std::unique_ptr<CameraLens> readEmbeddedLensFile(const pxr::UsdAttribute &lensFi
     auto cameraLensData = lensFileAttribute.GetCustomDataByKey(pxr::TfToken("lens"));
 
     if (cameraLensData.IsEmpty()) {
-        throw std::runtime_error("Could not read embedded lens data, 'lens' value was not authored");
+        CRAYG_LOG_AND_THROW(std::runtime_error("Could not read embedded lens data, 'lens' value was not authored"));
     }
 
     if (!cameraLensData.CanCast<pxr::VtDictionary>()) {
-        throw std::runtime_error("Could not read embedded lens data, 'lens' value was no VtDictionary");
+        CRAYG_LOG_AND_THROW(std::runtime_error("Could not read embedded lens data, 'lens' value was no VtDictionary"));
     }
     auto lensDict = cameraLensData.Get<pxr::VtDictionary>();
 
     if (!lensDict["name"].CanCast<std::string>()) {
-        throw std::runtime_error("Could not read embedded lens data, 'name' value was no std::string");
+        CRAYG_LOG_AND_THROW(std::runtime_error("Could not read embedded lens data, 'name' value was no std::string"));
     }
     auto lensName = lensDict["name"].Get<std::string>();
 
     if (!lensDict["elements"].CanCast<pxr::VtArray<pxr::GfVec4f>>()) {
-        throw std::runtime_error("Could not read embedded lens data, 'elements' value was no VtArray<pxr::GfVec4f>");
+        CRAYG_LOG_AND_THROW(
+            std::runtime_error("Could not read embedded lens data, 'elements' value was no VtArray<pxr::GfVec4f>"));
     }
 
     std::vector<LensElement> elements;
@@ -83,8 +85,8 @@ std::unique_ptr<CameraLens> readEmbeddedLensFile(const pxr::UsdAttribute &lensFi
 void UsdCameraReader::readCameraLens(std::shared_ptr<Camera> &camera) const {
     auto lensFileAttribute = usdPrim.GetPrim().GetAttribute(pxr::TfToken("craygLensFile"));
     if (!lensFileAttribute) {
-        throw std::runtime_error(
-            fmt::format("craygLensFile attribute was not authored for camera {}", usdPrim.GetPath()));
+        CRAYG_LOG_AND_THROW(std::runtime_error(
+            fmt::format("craygLensFile attribute was not authored for camera {}", usdPrim.GetPath())));
     }
     auto type = lensFileAttribute.GetTypeName().GetAsToken().GetString();
 

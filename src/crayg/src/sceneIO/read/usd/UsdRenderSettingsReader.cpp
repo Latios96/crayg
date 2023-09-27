@@ -1,5 +1,6 @@
 #include "UsdRenderSettingsReader.h"
 #include "sceneIO/usd/UsdUtils.h"
+#include "utils/Exceptions.h"
 #include <boost/algorithm/string/predicate.hpp>
 #include <magic_enum.hpp>
 #include <pxr/base/gf/vec2i.h>
@@ -90,9 +91,10 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
         return {UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(attribute).GetString()};
     }
 
-    throw std::runtime_error(fmt::format("The attribute {} is of type {}, which is not supported. Only token, int and "
-                                         "float are suppored as Integrator settings values",
-                                         attribute.GetName(), attribute.GetTypeName()));
+    CRAYG_LOG_AND_THROW(
+        std::runtime_error(fmt::format("The attribute {} is of type {}, which is not supported. Only token, int and "
+                                       "float are suppored as Integrator settings values",
+                                       attribute.GetName(), attribute.GetTypeName())));
 }
 
 IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {

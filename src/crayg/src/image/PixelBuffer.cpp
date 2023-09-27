@@ -1,5 +1,6 @@
 #include "PixelBuffer.h"
 #include "imageiterators/pixels/ImageIterators.h"
+#include "utils/Exceptions.h"
 #include <utils/Preconditions.h>
 
 namespace crayg {
@@ -97,7 +98,7 @@ PixelBuffer::PixelBuffer(const PixelBuffer &pixelBuffer)
         std::memcpy(std::get<uint8_t *>(data), std::get<uint8_t *>(pixelBuffer.data),
                     pixelCount() * colorChannelCount * sizeof(uint8_t));
     } else {
-        throw std::runtime_error("Unsupported pixel format");
+        CRAYG_LOG_AND_THROW(std::runtime_error("Unsupported pixel format"));
     }
 }
 
@@ -155,7 +156,7 @@ void PixelBuffer::init(PixelFormat pixelFormat) {
     } else if (pixelFormat == PixelFormat::UINT8) {
         data = new uint8_t[count];
     } else {
-        throw std::runtime_error("Unsupported pixel format");
+        CRAYG_LOG_AND_THROW(std::runtime_error("Unsupported pixel format"));
     }
     std::visit(PixelBufferSetValue{0, pixelCount(), colorChannelCount, Color::createBlack()}, data);
 }

@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_UTILS_ENUMUTILS_H_
 #define CRAYG_SRC_CRAYG_SRC_UTILS_ENUMUTILS_H_
 
+#include "utils/Exceptions.h"
 #include <boost/algorithm/string/case_conv.hpp>
 #include <fmt/format.h>
 #include <magic_enum.hpp>
@@ -30,7 +31,7 @@ class EnumUtils {
     template <typename T> static T parseOrThrow(const std::string &string) {
         auto maybeValue = EnumUtils::parse<T>(string);
         if (!maybeValue.has_value()) {
-            throw std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", string));
+            CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", string)));
         }
         return maybeValue.value();
     }
@@ -38,7 +39,7 @@ class EnumUtils {
     template <typename T> static T parseOrThrow(int value) {
         auto maybeValue = EnumUtils::parse<T>(value);
         if (!maybeValue.has_value()) {
-            throw std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", value));
+            CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", value)));
         }
         return maybeValue.value();
     }

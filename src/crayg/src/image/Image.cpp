@@ -1,4 +1,5 @@
 #include "Image.h"
+#include "utils/Exceptions.h"
 
 namespace crayg {
 
@@ -146,8 +147,8 @@ ImageSpec Image::getImageSpec() const {
 
 void Image::addChannelsFromSpec(const ImageSpec &imageSpec) {
     if (getResolution() != imageSpec.resolution) {
-        throw std::runtime_error(fmt::format("Image resolution does not match, was {}, required was {}",
-                                             getResolution(), imageSpec.resolution));
+        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Image resolution does not match, was {}, required was {}",
+                                                           getResolution(), imageSpec.resolution)));
     }
     for (auto &channel : imageSpec.channels) {
         if (channel.name == "rgb") {

@@ -1,6 +1,7 @@
 #include "PngWriter.h"
 #include "Logger.h"
 #include "image/ColorConversion.h"
+#include "utils/Exceptions.h"
 #include "utils/ImageChannelPathResolver.h"
 #include <OpenImageIO/imageio.h>
 
@@ -12,7 +13,7 @@ OIIO::TypeDesc mapPixelFormat(PixelFormat pixelFormat) {
     } else if (pixelFormat == PixelFormat::UINT8) {
         return OIIO::TypeDesc::UINT8;
     } else {
-        throw std::runtime_error("Unsupported pixel format");
+        CRAYG_LOG_AND_THROW(std::runtime_error("Unsupported pixel format"));
     }
 }
 
@@ -23,7 +24,7 @@ void write(std::unique_ptr<OIIO::ImageOutput> &out, PixelBuffer &pixelBuffer) {
     } else if (pixelFormat == PixelFormat::UINT8) {
         out->write_image(OIIO::TypeDesc::UINT8, std::get<std::uint8_t *>(pixelBuffer.getData()));
     } else {
-        throw std::runtime_error("Unsupported pixel format");
+        CRAYG_LOG_AND_THROW(std::runtime_error("Unsupported pixel format"));
     }
 }
 

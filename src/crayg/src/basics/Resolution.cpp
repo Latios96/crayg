@@ -1,4 +1,5 @@
 #include "Resolution.h"
+#include "utils/Exceptions.h"
 #include "utils/FromStringUtils.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -65,7 +66,7 @@ Resolution Resolution::parse(const std::string &resolutionString) {
     std::vector<std::string> splitResults;
     boost::algorithm::split(splitResults, resolutionString, boost::algorithm::is_any_of("x"));
     if (splitResults.size() != 2 || splitResults.size() == 2 && (splitResults[0].empty() || splitResults[1].empty())) {
-        throw error;
+        CRAYG_LOG_AND_THROW(error);
     }
 
     int width = 0;
@@ -74,16 +75,16 @@ Resolution Resolution::parse(const std::string &resolutionString) {
         width = FromStringUtils::parseIntOrThrow(splitResults[0]);
         height = FromStringUtils::parseIntOrThrow(splitResults[1]);
     } catch (std::runtime_error &e) {
-        throw error;
+        CRAYG_LOG_AND_THROW(error);
     }
 
     if (width < 0) {
-        throw std::runtime_error(
-            fmt::format("Invalid resolution string '{}', width needs to be >=0", resolutionString));
+        CRAYG_LOG_AND_THROW(
+            std::runtime_error(fmt::format("Invalid resolution string '{}', width needs to be >=0", resolutionString)));
     }
     if (height < 0) {
-        throw std::runtime_error(
-            fmt::format("Invalid resolution string '{}', width needs to be >=0", resolutionString));
+        CRAYG_LOG_AND_THROW(
+            std::runtime_error(fmt::format("Invalid resolution string '{}', width needs to be >=0", resolutionString)));
     }
 
     return {width, height};

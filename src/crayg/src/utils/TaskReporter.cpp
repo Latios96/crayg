@@ -1,5 +1,6 @@
 #include "TaskReporter.h"
 #include "RemainingTimeCalculator.h"
+#include "utils/Exceptions.h"
 
 namespace crayg {
 
@@ -40,7 +41,8 @@ std::chrono::seconds BaseTaskReporter::Task::estimatedTimeRemaining() {
 
 void BaseTaskReporter::TaskProgressController::requireCurrentTaskDidNotChange() {
     if (taskReporter.currentTask->name.data() != taskNameData) {
-        throw std::runtime_error(fmt::format("Task changed to {}, unsupported", taskReporter.currentTask->name));
+        CRAYG_LOG_AND_THROW(
+            std::runtime_error(fmt::format("Task changed to {}, unsupported", taskReporter.currentTask->name)));
     }
 }
 
@@ -69,8 +71,8 @@ std::chrono::seconds BaseTaskReporter::TaskProgressController::finish() {
 
 BaseTaskReporter::TaskProgressController BaseTaskReporter::startTask(const std::string &taskName, int maxIterations) {
     if (currentTask) {
-        throw std::runtime_error(
-            fmt::format("Can't start a new task, a task with name {} is already running", currentTask->name));
+        CRAYG_LOG_AND_THROW(std::runtime_error(
+            fmt::format("Can't start a new task, a task with name {} is already running", currentTask->name)));
     }
     currentTask = std::make_optional(Task(taskName, maxIterations));
     onTaskStarted();

@@ -2,6 +2,7 @@
 #include "ImageWriter.h"
 #include "OpenExrWriter.h"
 #include "PngWriter.h"
+#include "utils/Exceptions.h"
 #include <Logger.h>
 #include <boost/filesystem.hpp>
 #include <fmt/format.h>
@@ -19,7 +20,7 @@ bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) 
         imageWriter = std::unique_ptr<ImageWriter>(new OpenExrWriter());
     } else {
         Logger::error("No ImageWriter found for extension {}", extension);
-        throw std::runtime_error(fmt::format("No ImageWriter found for extension {}", extension));
+        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No ImageWriter found for extension {}", extension)));
     }
 
     if (!imageWriter) {

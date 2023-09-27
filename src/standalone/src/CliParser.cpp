@@ -1,6 +1,7 @@
 #include "CliParser.h"
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
+#include "utils/Exceptions.h"
 #include "utils/FromStringUtils.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -28,13 +29,15 @@ std::vector<SceneReaderVariantSelection> parseVariantSelections(const std::vecto
         std::vector<std::string> splitByColumnResult;
         boost::algorithm::split(splitByColumnResult, variantSelection, boost::is_any_of(":"));
         if (splitByColumnResult.size() != 2) {
-            throw std::runtime_error(fmt::format("Invalid variant selection string: '{}'", variantSelection));
+            CRAYG_LOG_AND_THROW(
+                std::runtime_error(fmt::format("Invalid variant selection string: '{}'", variantSelection)));
         }
 
         std::vector<std::string> splitByEqualSignResult;
         boost::algorithm::split(splitByEqualSignResult, splitByColumnResult[1], boost::is_any_of("="));
         if (splitByEqualSignResult.size() != 2) {
-            throw std::runtime_error(fmt::format("Invalid variant selection string: '{}'", variantSelection));
+            CRAYG_LOG_AND_THROW(
+                std::runtime_error(fmt::format("Invalid variant selection string: '{}'", variantSelection)));
         }
 
         const std::string primPath = splitByColumnResult[0];
@@ -71,7 +74,8 @@ void parseIntegratorSettings(std::vector<IntegratorSettingsOverride> &integrator
         const bool elementsAreNotEmpty =
             overrideStringHasTwoElements && !(splittedOverrideString[0].empty() || splittedOverrideString[1].empty());
         if (overrideStringHasTwoElements && elementsAreNotEmpty) {
-            throw std::runtime_error(fmt::format("Invalid integrator settings override: '{}'", overrideString));
+            CRAYG_LOG_AND_THROW(
+                std::runtime_error(fmt::format("Invalid integrator settings override: '{}'", overrideString)));
         }
 
         T value = parseIntegratorSettingsValue<T>(splittedOverrideString[1]);

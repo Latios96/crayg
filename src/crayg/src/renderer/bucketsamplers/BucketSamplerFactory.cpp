@@ -1,8 +1,10 @@
 #include "BucketSamplerFactory.h"
 #include "AdaptiveBucketSampler.h"
 #include "UniformBucketSampler.h"
+#include "utils/Exceptions.h"
 
 namespace crayg {
+
 std::unique_ptr<BucketSampler>
 BucketSamplerFactory::createBucketSampler(const RenderSettings &renderSettings,
                                           const std::function<Color(Vector2f)> &renderSample) {
@@ -14,8 +16,8 @@ BucketSamplerFactory::createBucketSampler(const RenderSettings &renderSettings,
                                                        renderSettings.samplesPerAdaptivePass,
                                                        renderSettings.adaptiveMaxError);
     default:
-        throw std::runtime_error(
-            fmt::format(R"(Unsupported BucketSamplerType : "{}")", renderSettings.bucketSamplerType));
+        CRAYG_LOG_AND_THROW(std::runtime_error(
+            fmt::format(R"(Unsupported BucketSamplerType : "{}")", renderSettings.bucketSamplerType)));
     }
 }
 } // crayg

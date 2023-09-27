@@ -93,23 +93,23 @@ class ShadingNode {
     virtual ShadingNodeOutputType getOutputType() = 0;
 
     virtual float evaluateFloat(const SurfaceInteraction &surfaceInteraction) {
-        throw std::runtime_error(
-            fmt::format("Can not evaluate to float on ShadingNode '{}' of type {}", getName(), getType()));
+        CRAYG_LOG_AND_THROW(std::runtime_error(
+            fmt::format("Can not evaluate to float on ShadingNode '{}' of type {}", getName(), getType())));
     };
 
     virtual Vector2f evaluateVector2f(const SurfaceInteraction &surfaceInteraction) {
-        throw std::runtime_error(
-            fmt::format("Can not evaluate to Vector2f on ShadingNode '{}' of type {}", getName(), getType()));
+        CRAYG_LOG_AND_THROW(std::runtime_error(
+            fmt::format("Can not evaluate to Vector2f on ShadingNode '{}' of type {}", getName(), getType())));
     };
 
     virtual int evaluateInt(const SurfaceInteraction &surfaceInteraction) {
-        throw std::runtime_error(
-            fmt::format("Can not evaluate to int on ShadingNode '{}' of type {}", getName(), getType()));
+        CRAYG_LOG_AND_THROW(std::runtime_error(
+            fmt::format("Can not evaluate to int on ShadingNode '{}' of type {}", getName(), getType())));
     };
 
     virtual Color evaluateColor(const SurfaceInteraction &surfaceInteraction) {
-        throw std::runtime_error(
-            fmt::format("Can not evaluate to Color on ShadingNode '{}' of type {}", getName(), getType()));
+        CRAYG_LOG_AND_THROW(std::runtime_error(
+            fmt::format("Can not evaluate to Color on ShadingNode '{}' of type {}", getName(), getType())));
     };
 
     virtual ~ShadingNode();
