@@ -64,6 +64,15 @@ if(MSVC)
     )
 endif()
 
+# Note: cpptrace has no Conan package so far and creating one is too much work for now..
+include(FetchContent)
+FetchContent_Declare(
+    cpptrace
+    GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
+    GIT_TAG v0.2.0-beta2 # <HASH or TAG>
+)
+FetchContent_MakeAvailable(cpptrace)
+
 add_subdirectory(src)
 
 # Create distribution target
