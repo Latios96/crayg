@@ -51,25 +51,23 @@ def render_demo_images_with_deadline(demo_images: List[DemoImage]) -> None:
     batch_id = str(uuid.uuid4()).split("-")[0]
 
     for demo_image in demo_images:
-        command = generate_render_command(demo_image, resolve_path("images"))
-        splitted_command = command.split(" ")
-        executable = splitted_command[0]
-        arguments = " ".join(splitted_command[1:])
-
+        output_path = demo_image.output_path(resolve_path("images"))
         job_info = {
-            "Plugin": "CommandLine",
+            "Plugin": "Crayg",
             "Name": demo_image.name,
             "BatchName": f"Crayg Demo Images {batch_id}",
+            "OutputDirectory0": str(output_path.parent),
+            "OutputFilename0": str(output_path.name),
         }
 
         plugin_info = {
-            "Arguments": arguments,
-            "Executable": executable,
-            "Shell": "default",
-            "ShellExecute": "False",
-            "SingleFramesOnly": "True",
-            "StartupDirectory": str(get_repository_root()),
+            "CraygExecutable": str(get_executable()),
+            "Scene": str(demo_image.scene_path),
+            "Resolution": f"{demo_image.resolution[0]}x{demo_image.resolution[1]}",
+            "MaxSamples": demo_image.max_samples,
         }
+        if demo_image.camera:
+            plugin_info["Camera"] = demo_image.camera
 
         jobs.append({"JobInfo": job_info, "PluginInfo": plugin_info, "AuxFiles": []})
 
