@@ -88,7 +88,7 @@ template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondVa
 class Gradients {
   public:
     static Gradient<Color> heatmap() {
-        return Gradient<Color>({Color::fromRGB(0, 12, 253), Color::fromRGB(0, 252, 129)});
+        return Gradient<Color>({Color::fromRGB(0, 15, 255), Color::fromRGB(32, 249, 29), Color::fromRGB(250, 5, 3)});
     }
 };
 
