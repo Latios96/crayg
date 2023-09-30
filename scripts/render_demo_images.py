@@ -58,6 +58,8 @@ def render_demo_images_with_deadline(demo_images: List[DemoImage]) -> None:
             "BatchName": f"Crayg Demo Images {batch_id}",
             "OutputDirectory0": str(output_path.parent),
             "OutputFilename0": str(output_path.name),
+            "FailureDetectionJobErrors": 1,
+            "FailureDetectionTaskErrors": 1,
         }
 
         plugin_info = {
