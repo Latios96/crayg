@@ -18,12 +18,12 @@ class PineHoleCameraModel : public CameraModel {
     Vector3f viewVector = {0, 0, 1};
 
   protected:
-    Vector3f createPineHoleRayDirection(float x, float y);
+    Vector3f createPineHoleRayDirection(const Vector2f &pixelPos);
 
   public:
     PineHoleCameraModel(Camera &camera, const Resolution &resolution);
 
-    RayWithWeight createPrimaryRay(float x, float y, float wavelength) override;
+    RayWithWeight createPrimaryRay(const Vector2f &pixelPos, float wavelength) override;
 };
 
 }

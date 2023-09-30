@@ -12,14 +12,14 @@ PineHoleCameraModel::PineHoleCameraModel(Camera &camera, const Resolution &resol
     upVector = upVector * (imagePlaneHeight / 2.0f);
 }
 
-RayWithWeight PineHoleCameraModel::createPrimaryRay(float x, float y, float wavelength) {
-    const Vector3f pineHoleRayDirection = createPineHoleRayDirection(x, y);
+RayWithWeight PineHoleCameraModel::createPrimaryRay(const Vector2f &pixelPos, float wavelength) {
+    const Vector3f pineHoleRayDirection = createPineHoleRayDirection(pixelPos);
     return {Ray(camera.getPosition(), camera.getTransform().applyForNormal(pineHoleRayDirection).normalize()), 1};
 }
 
-Vector3f PineHoleCameraModel::createPineHoleRayDirection(float x, float y) {
-    float wScale = 2.0f * x / static_cast<float>(resolution.getWidth()) - 1.0f;
-    float hScale = 2.0f * y / static_cast<float>(resolution.getHeight()) - 1.0f;
+Vector3f PineHoleCameraModel::createPineHoleRayDirection(const Vector2f &pixelPos) {
+    float wScale = 2.0f * pixelPos.x / static_cast<float>(resolution.getWidth()) - 1.0f;
+    float hScale = 2.0f * pixelPos.y / static_cast<float>(resolution.getHeight()) - 1.0f;
 
     return (viewVector + sideVector * wScale + upVector * hScale * -1).normalize();
 }

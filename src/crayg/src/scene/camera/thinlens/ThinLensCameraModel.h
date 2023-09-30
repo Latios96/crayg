@@ -9,7 +9,7 @@ class ThinLensCameraModel : public PineHoleCameraModel {
   public:
     ThinLensCameraModel(Camera &camera, const Resolution &resolution);
 
-    RayWithWeight createPrimaryRay(float x, float y, float wavelength) override;
+    RayWithWeight createPrimaryRay(const Vector2f &pixelPos, float wavelength) override;
 };
 
 } // crayg

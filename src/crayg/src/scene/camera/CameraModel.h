@@ -6,6 +6,7 @@
 #include "utils/DtoUtils.h"
 #include "utils/TaskReporter.h"
 #include <basics/Ray.h>
+#include <basics/Vector2.h>
 #include <optional>
 
 namespace crayg {
@@ -19,7 +20,7 @@ class CameraModel {
 
     virtual void init(crayg::BaseTaskReporter &taskReporter){};
 
-    virtual RayWithWeight createPrimaryRay(float x, float y, float wavelength) = 0;
+    virtual RayWithWeight createPrimaryRay(const Vector2f &pixelPos, float wavelength) = 0;
 
     virtual ~CameraModel() = default;
 

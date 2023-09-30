@@ -27,9 +27,9 @@ void RealisticCameraModel::init(BaseTaskReporter &taskReporter) {
     exitPupil = exitPupilCalculator.calculate();
 }
 
-RayWithWeight RealisticCameraModel::createPrimaryRay(float x, float y, float wavelength) {
-    const float relatixeX = x / resolution.getWidth();
-    const float relatixeY = y / resolution.getHeight();
+RayWithWeight RealisticCameraModel::createPrimaryRay(const Vector2f &pixelPos, float wavelength) {
+    const float relatixeX = pixelPos.x / resolution.getWidth();
+    const float relatixeY = pixelPos.y / resolution.getHeight();
     const auto filmPos = filmPhysicalExtend.lerp(relatixeX, relatixeY);
     const Vector3f positionOnFilm = {filmPos.x, filmPos.y, 0};
     // const Vector3f positionOnFilm = {filmPos.x / camera.getLens().metadata.squeeze, filmPos.y, 0};

@@ -121,7 +121,7 @@ Color Renderer::renderSample(const Vector2f &samplePos) {
 }
 
 Color Renderer::renderSample(const Vector2f &samplePos, float waveLength) {
-    auto rayWithWeight = cameraModel->createPrimaryRay(samplePos.x, samplePos.y, waveLength);
+    auto rayWithWeight = cameraModel->createPrimaryRay(samplePos, waveLength);
     if (!rayWithWeight.ray) {
         return Color::createBlack();
     }

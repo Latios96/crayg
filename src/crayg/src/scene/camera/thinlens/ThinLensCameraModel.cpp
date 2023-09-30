@@ -6,8 +6,8 @@ ThinLensCameraModel::ThinLensCameraModel(Camera &camera, const Resolution &resol
     : PineHoleCameraModel(camera, resolution) {
 }
 
-RayWithWeight ThinLensCameraModel::createPrimaryRay(float x, float y, float wavelength) { // todo add tests
-    const Vector3f rayDirection = createPineHoleRayDirection(x, y);
+RayWithWeight ThinLensCameraModel::createPrimaryRay(const Vector2f &pixelPos, float wavelength) { // todo add tests
+    const Vector3f rayDirection = createPineHoleRayDirection(pixelPos);
     const float ft = camera.getFocusDistance() / rayDirection.z;
     const Vector3f pointOnFocalPlane = rayDirection * ft;
     auto apertureSample = Sampling::concentricSampleDisk() * camera.computeApertureRadius();

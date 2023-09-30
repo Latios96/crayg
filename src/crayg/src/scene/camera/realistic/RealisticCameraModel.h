@@ -13,7 +13,7 @@ class RealisticCameraModel : public CameraModel {
   public:
     RealisticCameraModel(Camera &camera, const Resolution &resolution);
     void init(BaseTaskReporter &taskReporter) override;
-    RayWithWeight createPrimaryRay(float x, float y, float wavelength) override;
+    RayWithWeight createPrimaryRay(const Vector2f &pixelPos, float wavelength) override;
 
   private:
     ExitPupil exitPupil;
