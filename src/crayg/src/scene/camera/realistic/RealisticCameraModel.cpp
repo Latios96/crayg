@@ -32,7 +32,6 @@ RayWithWeight RealisticCameraModel::createPrimaryRay(const Vector2f &pixelPos, f
     const float relatixeY = pixelPos.y / resolution.getHeight();
     const auto filmPos = filmPhysicalExtend.lerp(relatixeX, relatixeY);
     const Vector3f positionOnFilm = {filmPos.x, filmPos.y, 0};
-    // const Vector3f positionOnFilm = {filmPos.x / camera.getLens().metadata.squeeze, filmPos.y, 0};
 
     const auto pupilSample = exitPupil.samplePupil(filmPos, filmDiagonal);
     const auto pointOnPupil =
