@@ -1,6 +1,6 @@
 import os
 import subprocess
-from typing import Tuple, Optional, Dict
+from typing import Optional, Dict
 
 import typer
 from pxr import Usd, Sdf, UsdShade, Gf, UsdGeom
