@@ -32,4 +32,16 @@ void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bu
     }
 }
 
+void ImageAlgorithms::updateChannel(Image &image, const std::string &channelName, PixelBuffer *pixelBuffer) {
+    if (!image.hasChannel(channelName)) {
+        return;
+    }
+
+    auto imageChannel = image.getChannel(channelName);
+
+    for (auto pixel : ImageIterators::lineByLine(*pixelBuffer)) {
+        imageChannel->setValue(pixel, pixelBuffer->getValue(pixel));
+    }
+}
+
 }

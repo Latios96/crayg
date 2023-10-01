@@ -99,6 +99,28 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
     }
 }
 
+TEST_CASE("ImageAlgorithms::updateChannel") {
+    Image imageToUpdate(10, 10);
+
+    SECTION("should not update because channel does not exist") {
+        auto pixelBuffer = PixelBuffer::createGreyFloat(imageToUpdate.getResolution());
+
+        ImageAlgorithms::updateChannel(imageToUpdate, "channelToUpdate", pixelBuffer.get());
+
+        REQUIRE(imageToUpdate.getValue({0, 0}) == Color::createBlack());
+    }
+
+    SECTION("should update channel") {
+        auto pixelBuffer = PixelBuffer::createGreyFloat(imageToUpdate.getResolution());
+        ImageAlgorithms::fill(*pixelBuffer, Color::createWhite());
+        imageToUpdate.addChannel("channelToUpdate", PixelBuffer::createGreyFloat(imageToUpdate.getResolution()));
+
+        ImageAlgorithms::updateChannel(imageToUpdate, "channelToUpdate", pixelBuffer.get());
+
+        REQUIRE(imageToUpdate.getChannel("channelToUpdate")->getValue({0, 0}) == Color::createWhite());
+    }
+}
+
 TEST_CASE("ImageAlgorithms::minValue") {
     SECTION("should find black as min color") {
         Image image(2, 2);

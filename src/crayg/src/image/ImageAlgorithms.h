@@ -13,6 +13,7 @@ class ImageAlgorithms {
     static void copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image);
     static void copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image,
                                                const std::vector<std::string> &channelsToUpdate);
+    static void updateChannel(Image &image, const std::string &channelName, PixelBuffer *pixelBuffer);
 
     template <typename I> static void fill(I &image, const Color &color) {
         for (auto pixel : ImageIterators::lineByLine(image)) {
