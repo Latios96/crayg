@@ -60,6 +60,8 @@ def render_demo_images_with_deadline(demo_images: List[DemoImage]) -> None:
             "OutputFilename0": str(output_path.name),
             "FailureDetectionJobErrors": 1,
             "FailureDetectionTaskErrors": 1,
+            "OverrideJobFailureDetection": True,
+            "OverrideTaskFailureDetection": True,
         }
 
         plugin_info = {
