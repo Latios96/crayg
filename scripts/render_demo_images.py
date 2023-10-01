@@ -45,7 +45,9 @@ def render_demo_images_locally(demo_images: List[DemoImage]) -> None:
         subprocess.check_call(command)
 
 
-def render_demo_images_with_deadline(demo_images: List[DemoImage]) -> None:
+def render_demo_images_with_deadline(
+    demo_images: List[DemoImage], submit_suspended: bool
+) -> None:
     jobs = []
 
     batch_id = str(uuid.uuid4()).split("-")[0]
@@ -63,6 +65,8 @@ def render_demo_images_with_deadline(demo_images: List[DemoImage]) -> None:
             "OverrideJobFailureDetection": True,
             "OverrideTaskFailureDetection": True,
         }
+        if submit_suspended:
+            job_info["InitialStatus"] = ("Suspended",)
 
         plugin_info = {
             "CraygExecutable": str(get_executable()),
@@ -137,9 +141,9 @@ def render_local(max_samples: Optional[int] = 32):
 
 
 @app.command(help="Render demo images using AWS Deadline")
-def submit(max_samples: Optional[int] = 32):
+def submit(max_samples: Optional[int] = 32, submit_suspended: Optional[bool] = False):
     demo_images = get_demo_images(max_samples)
-    render_demo_images_with_deadline(demo_images)
+    render_demo_images_with_deadline(demo_images, submit_suspended)
 
 
 if __name__ == "__main__":
