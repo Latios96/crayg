@@ -46,6 +46,8 @@ class Renderer {
 
     void writeImageMetadata(std::chrono::seconds renderTime);
     ImageSpec requiredImageSpec(const Resolution &resolution) const;
+    void drawAbsoluteRendertime(BucketImageBuffer &bucketImageBuffer,
+                                const std::chrono::steady_clock::time_point &startTime);
 };
 
 }

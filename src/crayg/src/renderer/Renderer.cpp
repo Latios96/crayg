@@ -2,6 +2,7 @@
 #include "GeometryCompiler.h"
 #include "Logger.h"
 #include "SampleAccumulator.h"
+#include "image/ImageAlgorithms.h"
 #include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
@@ -80,11 +81,15 @@ void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgre
 }
 
 void Renderer::renderBucket(const ImageBucket &imageBucket) {
+    std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
+
     BucketImageBuffer bucketImageBuffer(imageBucket);
     bucketImageBuffer.image.addChannelsFromSpec(requiredImageSpec({imageBucket.getWidth(), imageBucket.getHeight()}));
     outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
 
     bucketSampler->sampleBucket(bucketImageBuffer);
+
+    drawAbsoluteRendertime(bucketImageBuffer, startTime);
 
     outputDriver.writeBucketImageBuffer(bucketImageBuffer);
 }
@@ -139,7 +144,17 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
 ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {
     ImageSpecBuilder builder(resolution);
     bucketSampler->addRequiredImageSpecs(builder);
+    builder.createRgbFloatChannel("absoluteRenderTime");
     return builder.finish();
+}
+
+void Renderer::drawAbsoluteRendertime(BucketImageBuffer &bucketImageBuffer,
+                                      const std::chrono::steady_clock::time_point &startTime) {
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    const auto secondsForBucket =
+        std::chrono::duration_cast<std::chrono::milliseconds>(end - startTime).count() / 1000.f;
+    ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("absoluteRenderTime"),
+                          Color::createGrey(secondsForBucket));
 }
 
 }
