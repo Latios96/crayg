@@ -10,7 +10,7 @@ TEST_CASE("Image/constructImage", "[Image]") {
     REQUIRE(myImage.getHeight() == 100);
 
     REQUIRE(myImage.rgb.isBlack());
-    REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb"}));
+    REQUIRE(myImage.channelNames() == std::vector<std::string>({"rgb"}));
 }
 
 TEST_CASE("Image/copyImage", "[Image]") {
@@ -45,7 +45,7 @@ TEST_CASE("Image/addAlphaChannel", "[Image]") {
 
         myImage.addAlphaChannel();
 
-        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
+        REQUIRE(myImage.channelNames() == std::vector<std::string>({"rgb", "alpha"}));
         REQUIRE(myImage.hasAlphaChannel());
         REQUIRE(myImage.getAlphaChannel() != nullptr);
         REQUIRE((myImage.getAlphaChannel())->getResolution() == myImage.getResolution());
@@ -58,7 +58,7 @@ TEST_CASE("Image/addAlphaChannel", "[Image]") {
         (myImage.getAlphaChannel())->setValue({2, 3}, Color::createWhite());
         myImage.addAlphaChannel();
 
-        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
+        REQUIRE(myImage.channelNames() == std::vector<std::string>({"rgb", "alpha"}));
         REQUIRE((myImage.getAlphaChannel())->getValue({2, 3}) == Color::createWhite());
     }
 }
@@ -69,7 +69,7 @@ TEST_CASE("Image/addDepthChannel", "[Image]") {
 
         myImage.addDepthChannel();
 
-        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "depth"}));
+        REQUIRE(myImage.channelNames() == std::vector<std::string>({"rgb", "depth"}));
         REQUIRE(myImage.hasDepthChannel());
         REQUIRE(myImage.getDepthChannel() != nullptr);
         REQUIRE((myImage.getDepthChannel())->getResolution() == myImage.getResolution());
@@ -82,7 +82,7 @@ TEST_CASE("Image/addDepthChannel", "[Image]") {
         (myImage.getDepthChannel())->setValue({2, 3}, Color::createWhite());
         myImage.addDepthChannel();
 
-        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "depth"}));
+        REQUIRE(myImage.channelNames() == std::vector<std::string>({"rgb", "depth"}));
         REQUIRE((myImage.getDepthChannel())->getValue({2, 3}) == Color::createWhite());
     }
 }
@@ -95,7 +95,7 @@ TEST_CASE("Image/addChannel", "[Image]") {
         myImage.addDepthChannel();
         myImage.addChannel("custom", PixelBuffer::createRgbFloat({16, 9}));
 
-        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha", "depth", "custom"}));
+        REQUIRE(myImage.channelNames() == std::vector<std::string>({"rgb", "alpha", "depth", "custom"}));
     }
 
     SECTION("should add a custom channel") {
@@ -103,7 +103,7 @@ TEST_CASE("Image/addChannel", "[Image]") {
 
         myImage.addChannel("custom", PixelBuffer::createRgbFloat({16, 9}));
 
-        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "custom"}));
+        REQUIRE(myImage.channelNames() == std::vector<std::string>({"rgb", "custom"}));
         REQUIRE(myImage.getChannel("custom") != nullptr);
     }
 }
@@ -189,7 +189,7 @@ TEST_CASE("Image/replaceChannel", "[Image]") {
 
         myImage.replaceChannel("alpha", PixelBuffer::createGreyFloat(myImage.getResolution()));
 
-        REQUIRE(myImage.channelNames() == std::vector<std::string_view>({"rgb", "alpha"}));
+        REQUIRE(myImage.channelNames() == std::vector<std::string>({"rgb", "alpha"}));
         REQUIRE((myImage.getAlphaChannel())->getValue({2, 3}) == Color::createBlack());
     }
 }

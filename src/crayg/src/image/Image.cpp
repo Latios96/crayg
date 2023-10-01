@@ -82,8 +82,8 @@ PixelBuffer *Image::getChannel(const std::string &name) const {
     return additionalChannels.at(name).get();
 }
 
-std::vector<std::string_view> Image::channelNames() const {
-    std::vector<std::string_view> names;
+std::vector<std::string> Image::channelNames() const {
+    std::vector<std::string> names;
     names.emplace_back("rgb");
     for (auto &channel : additionalChannels) {
         names.push_back(channel.first);

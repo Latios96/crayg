@@ -49,7 +49,7 @@ class Image {
     };
 
     std::vector<ChannelView> getChannels() const;
-    std::vector<std::string_view> channelNames() const;
+    std::vector<std::string> channelNames() const;
 
     bool operator==(const Image &rhs) const;
     bool operator!=(const Image &rhs) const;
