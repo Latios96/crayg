@@ -96,7 +96,7 @@ def get_demo_images(max_samples=32):
             scene_path=Path("M:\Test_Scene_Collection\StormTrooper\StormTrooper.usda"),
             max_samples=max_samples,
             resolution=(1920, 1080),
-            camera=f"/helmet_root/helmet_Camera/helmet_Camera/helmet_CameraShape",
+            camera=f"/root/Camera/render_cam",
         )
     )
     for i in range(1, 7):
