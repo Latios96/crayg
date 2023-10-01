@@ -11,6 +11,8 @@ namespace crayg {
 class ImageAlgorithms {
   public:
     static void copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image);
+    static void copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image,
+                                               const std::vector<std::string> &channelsToUpdate);
 
     template <typename I> static void fill(I &image, const Color &color) {
         for (auto pixel : ImageIterators::lineByLine(image)) {

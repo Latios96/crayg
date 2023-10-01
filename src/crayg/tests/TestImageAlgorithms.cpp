@@ -74,6 +74,29 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
         REQUIRE(image.getChannel("channelExistingInTargetImage")->getValue({0, 0}) == Color::createWhite());
         REQUIRE(image.getChannel("untouchedChannel")->getValue({0, 0}) == Color::createBlack());
     }
+
+    SECTION("should copy image channel that are in update list") {
+        BucketImageBuffer bucketImageBuffer({0, 0}, 5, 5);
+        auto specImageBucket = ImageSpecBuilder({5, 5})
+                                   .createGreyFloatChannel("updatedChannel")
+                                   .createGreyFloatChannel("untouchedChannel")
+                                   .finish();
+        bucketImageBuffer.image.addChannelsFromSpec(specImageBucket);
+        ImageAlgorithms::fill(bucketImageBuffer.image, Color::createWhite());
+        ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("updatedChannel"), Color::createWhite());
+
+        auto specImage = ImageSpecBuilder({10, 10})
+                             .createGreyFloatChannel("updatedChannel")
+                             .createGreyFloatChannel("untouchedChannel")
+                             .finish();
+        image.addChannelsFromSpec(specImage);
+
+        ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image, {"updatedChannel"});
+
+        REQUIRE(image.getValue({0, 0}) == Color::createBlack());
+        REQUIRE(image.getChannel("updatedChannel")->getValue({0, 0}) == Color::createWhite());
+        REQUIRE(image.getChannel("untouchedChannel")->getValue({0, 0}) == Color::createBlack());
+    }
 }
 
 TEST_CASE("ImageAlgorithms::minValue") {
