@@ -111,6 +111,8 @@ set(crayg_SRCS
     renderer/bucketsamplers/UniformBucketSampler.h
     renderer/BucketSizeEstimator.cpp
     renderer/BucketSizeEstimator.h
+    renderer/BucketStats.cpp
+    renderer/BucketStats.h
     renderer/GeometryCompiler.cpp
     renderer/GeometryCompiler.h
     renderer/Renderer.cpp

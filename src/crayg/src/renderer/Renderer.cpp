@@ -47,6 +47,7 @@ void Renderer::renderScene() {
     Logger::info("Rendering done.");
     const auto renderTime = taskProgressController.finish();
     writeImageMetadata(renderTime);
+    bucketStats.processBucketTimes(outputDriver, scene.renderSettings.resolution);
 }
 
 void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController) {
@@ -89,7 +90,7 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
 
     bucketSampler->sampleBucket(bucketImageBuffer);
 
-    drawAbsoluteRendertime(bucketImageBuffer, startTime);
+    bucketStats.processBucketTime(bucketImageBuffer, startTime);
 
     outputDriver.writeBucketImageBuffer(bucketImageBuffer);
 }
@@ -144,17 +145,9 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
 ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {
     ImageSpecBuilder builder(resolution);
     bucketSampler->addRequiredImageSpecs(builder);
-    builder.createRgbFloatChannel("absoluteRenderTime");
+    builder.createGreyFloatChannel("absoluteRenderTime");
+    builder.createRgbFloatChannel("relativeRenderTime");
     return builder.finish();
-}
-
-void Renderer::drawAbsoluteRendertime(BucketImageBuffer &bucketImageBuffer,
-                                      const std::chrono::steady_clock::time_point &startTime) {
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    const auto secondsForBucket =
-        std::chrono::duration_cast<std::chrono::milliseconds>(end - startTime).count() / 1000.f;
-    ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("absoluteRenderTime"),
-                          Color::createGrey(secondsForBucket));
 }
 
 }

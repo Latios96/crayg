@@ -1,6 +1,7 @@
 #ifndef CRAYG_RENDERER_H
 #define CRAYG_RENDERER_H
 
+#include "BucketStats.h"
 #include "bucketsamplers/BucketSampler.h"
 #include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
 #include "integrators/AbstractIntegrator.h"
@@ -33,6 +34,8 @@ class Renderer {
     BucketQueue &bucketQueue;
     std::vector<ImageBucket> bucketSequence;
 
+    BucketStats bucketStats;
+
     void init();
 
     void renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController);
@@ -46,8 +49,6 @@ class Renderer {
 
     void writeImageMetadata(std::chrono::seconds renderTime);
     ImageSpec requiredImageSpec(const Resolution &resolution) const;
-    void drawAbsoluteRendertime(BucketImageBuffer &bucketImageBuffer,
-                                const std::chrono::steady_clock::time_point &startTime);
 };
 
 }
