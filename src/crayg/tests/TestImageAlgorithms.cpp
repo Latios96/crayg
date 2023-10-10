@@ -258,4 +258,16 @@ TEST_CASE("ImageAlgorithms::fillWithRelativeGradient") {
     }
 }
 
+TEST_CASE("ImageAlgorithms::fill Image Bucket") {
+    SECTION("should fill bucket") {
+        Image image(10, 10);
+        ImageBucket region({5, 5}, 2, 2);
+
+        ImageAlgorithms::fill(image, Color::createWhite(), region);
+
+        REQUIRE(image.getValue({4, 4}) == Color::createBlack());
+        REQUIRE(image.getValue({5, 5}) == Color::createWhite());
+        REQUIRE(image.getValue({7, 5}) == Color::createBlack());
+    }
+}
 }

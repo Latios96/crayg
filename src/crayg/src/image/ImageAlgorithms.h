@@ -21,6 +21,19 @@ class ImageAlgorithms {
         }
     }
 
+    template <typename I> static void fill(I &image, const Color &color, const ImageBucket &region) {
+        const bool isContained = bucketIsContainedInImage(region, image);
+
+        if (!isContained) {
+            return;
+        }
+
+        for (auto pixel : ImageIterators::lineByLine(region)) {
+            const auto globalPos = region.getPosition() + pixel;
+            image.setValue(globalPos, color);
+        }
+    }
+
     template <typename I> static Color minValue(I &image) {
         Color min = image.getValue({0, 0});
         for (auto pixel : ImageIterators::lineByLine(image)) {
