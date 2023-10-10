@@ -28,4 +28,8 @@ void ImageWidgetOutputDriver::writeImageMetadata(const ImageMetadata &imageMetad
     qtSignalAdapter.metadataWritten(imageMetadata);
 }
 
+void ImageWidgetOutputDriver::updateChannel(const std::string &channelName, PixelBuffer *pixelBuffer) {
+    qtSignalAdapter.updateChannel(channelName);
+}
+
 }

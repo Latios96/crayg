@@ -26,6 +26,7 @@ class ImageWidget : public QWidget {
     void writeMetadata(ImageMetadata imageMetadata);
     void prepareBucket(const ImageBucket imageBucket);
     void writeBucketImageBuffer(std::shared_ptr<BucketImageBuffer> bucketImageBuffer);
+    void updateChannel(const std::string channelName);
     void changeChannel(std::string newChannel);
 
   private:

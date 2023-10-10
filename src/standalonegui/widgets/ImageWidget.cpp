@@ -98,4 +98,11 @@ void ImageWidget::changeChannel(std::string newChannel) {
     updateBufferToShow({{0, 0}, image.getWidth(), image.getHeight()});
 }
 
+void ImageWidget::updateChannel(const std::string channelName) {
+    if (channelName != currentChannel) {
+        return;
+    }
+    updateBufferToShow({{0, 0}, image.getWidth(), image.getHeight()});
+}
+
 }

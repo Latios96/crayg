@@ -25,4 +25,9 @@ void TeeOutputDriver::writeImageMetadata(const ImageMetadata &imageMetadata) {
     right.writeImageMetadata(imageMetadata);
 }
 
+void TeeOutputDriver::updateChannel(const std::string &channelName, PixelBuffer *pixelBuffer) {
+    left.updateChannel(channelName, pixelBuffer);
+    right.updateChannel(channelName, pixelBuffer); // todo tests
+}
+
 }

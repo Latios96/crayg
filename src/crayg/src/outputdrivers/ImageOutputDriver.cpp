@@ -22,6 +22,10 @@ void ImageOutputDriver::writeImageMetadata(const ImageMetadata &imageMetadata) {
     image.metadata = imageMetadata;
 }
 
+void ImageOutputDriver::updateChannel(const std::string &channelName, PixelBuffer *pixelBuffer) {
+    ImageAlgorithms::updateChannel(image, channelName, pixelBuffer);
+}
+
 ImageOutputDriver::~ImageOutputDriver() = default;
 
 }

@@ -30,11 +30,16 @@ class QtSignalAdapter : public QObject {
         emit bucketImageBufferWritten(buf);
     }
 
+    void updateChannel(const std::string &channelName) {
+        emit channelUpdated(channelName);
+    }
+
   signals:
     void initialized(ImageSpec imageSpec);
     void metadataWritten(ImageMetadata imageMetadata);
     void bucketPrepared(const ImageBucket imageBucket);
     void bucketImageBufferWritten(std::shared_ptr<BucketImageBuffer> bucketImageBuffer);
+    void channelUpdated(const std::string channelName);
 };
 
 class ImageWidgetOutputDriver : public OutputDriver {
@@ -43,6 +48,7 @@ class ImageWidgetOutputDriver : public OutputDriver {
     void initialize(const ImageSpec &imageSpec) override;
     void prepareBucket(const ImageBucket &imageBucket) override;
     void writeBucketImageBuffer(const BucketImageBuffer &bucketImageBuffer) override;
+    void updateChannel(const std::string &channelName, PixelBuffer *pixelBuffer) override;
     void writeImageMetadata(const ImageMetadata &imageMetadata) override;
     QtSignalAdapter qtSignalAdapter;
 
