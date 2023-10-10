@@ -6,12 +6,6 @@ void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bu
     copyBucketImageBufferIntoImage(bucketImageBuffer, image, bucketImageBuffer.image.channelNames());
 }
 
-bool ImageAlgorithms::bucketIsContainedInImage(const ImageBucket &bucket, Image &image) {
-    return bucket.getPosition().x >= 0 && bucket.getPosition().y >= 0 &&
-           bucket.getPosition().x + bucket.getWidth() <= image.getWidth() &&
-           bucket.getPosition().y + bucket.getHeight() <= image.getHeight();
-}
-
 void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image,
                                                      const std::vector<std::string> &channelsToUpdate) {
     const bool isContained = bucketIsContainedInImage(bucketImageBuffer.imageBucket, image);

@@ -73,7 +73,11 @@ class ImageAlgorithms {
         }
     }
 
-    static bool bucketIsContainedInImage(const ImageBucket &bucket, Image &image);
+    template <typename I> static bool bucketIsContainedInImage(const ImageBucket &bucket, I &image) {
+        return bucket.getPosition().x >= 0 && bucket.getPosition().y >= 0 &&
+               bucket.getPosition().x + bucket.getWidth() <= image.getWidth() &&
+               bucket.getPosition().y + bucket.getHeight() <= image.getHeight();
+    }
 };
 
 }
