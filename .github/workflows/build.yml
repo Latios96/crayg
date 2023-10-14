@@ -48,6 +48,9 @@ jobs:
         env:
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
       - name: setup conan profile
+        run: |
+          conan profile new default --detect
+      - name: setup conan profile
         if: runner.os == 'Linux'
         run: |
           conan profile new default --detect
