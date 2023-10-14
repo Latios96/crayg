@@ -1,26 +1,6 @@
 [requires]
-fmt/9.1.0
-spdlog/1.11.0
-catch2/2.13.9
-fakeit/2.3.2
-cli11/2.3.2
 boost/1.78.0
-openimageio/2.4.7.1
-tinyobjloader/1.0.7
-onetbb/2020.3
-qt/5.15.8
-magic_enum/0.8.2
-cpuinfo/cci.20220228
-embree3/3.13.5
-tsl-ordered-map/1.1.0
-nlohmann_json/3.11.2
-pystring/1.1.4
-tabulate/1.5
-
 zlib/1.2.13
-libpng/1.6.39
-zstd/1.5.4
-expat/2.5.0
 
 [options]
 libtiff:jpeg=libjpeg
