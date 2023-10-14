@@ -38,15 +38,6 @@ jobs:
         run: |
           pip install conan==1.61.0
           conan --version
-      - name: add remotes
-        run: |
-          conan remote list
-          python scripts/add_conan_remotes.py
-          conan remote list
-      - name: conan login
-        run: conan user ci_github_actions -p -r=framebffr
-        env:
-          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
       - name: setup conan profile
         run: |
           conan profile new default --detect

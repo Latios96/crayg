@@ -9,7 +9,6 @@ openimageio/2.4.7.1
 tinyobjloader/1.0.7
 onetbb/2020.3
 qt/5.15.8
-USD/22.05@latios96/stable
 magic_enum/0.8.2
 cpuinfo/cci.20220228
 embree3/3.13.5
