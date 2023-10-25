@@ -128,7 +128,7 @@ static inline float lens_evaluate(const float *in, float *out, crayg::Polynomial
         return MAX(0.0f, out_transmittance);
     }
     case crayg::CANON_70MM: {
-#include "canon-70mm//pt_evaluate.h"
+#include "canon-70mm/pt_evaluate.h"
         out[0] = out_x;
         out[1] = out_y;
         out[2] = out_dx;
