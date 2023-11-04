@@ -101,7 +101,7 @@ Relative Largest improvements:
 Absolute Largest improvements:
 ![Adaptive Sampling Performance Absolute](figures/28.04.2023/crayg-timing-report-occlusion-rays-absolute-largest-improvement.svg)
 
-## 28.04.2023 - Replace std::pow(x,2) in performance critical sections with explicit multiplication
+## 28.07.2023 - Replace std::pow(x,2) in performance critical sections with explicit multiplication
 
 During the development of my master thesis, I became aware of the fact that using `std::pow` to compute square of a
 number can be really slow, especially, if the exponent is two and the calculatioon could be done easily without `std::pow`.
