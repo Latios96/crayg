@@ -5,6 +5,7 @@
 #include <fmt/ostream.h>
 #include <optional>
 #include <ostream>
+#include <utils/Preconditions.h>
 
 namespace crayg {
 
@@ -14,22 +15,49 @@ struct Ray {
 
   public:
     Ray() = default;
-    Ray(Vector3f startPoint, Vector3f direction);
 
-    Ray(Vector3f startPoint, Vector3f direction, float length);
+    Ray(Vector3f startPoint, Vector3f direction) {
+        CRAYG_CHECKD_IS_NORMALIZED_VECTOR(direction);
+        this->startPoint = startPoint;
+        this->direction = direction;
+        this->length = std::numeric_limits<float>::min();
+    }
 
-    static Ray createInvalid();
+    Ray(Vector3f startPoint, Vector3f direction, float length) {
+        CRAYG_CHECKD_IS_NORMALIZED_VECTOR(direction);
+        this->startPoint = startPoint;
+        this->direction = direction;
+        this->length = length;
+    }
 
-    bool isValid();
+    static Ray createInvalid() {
+        return {Vector3f::createInvalid(), Vector3f::createInvalid(), std::numeric_limits<float>::max()};
+    }
 
-    Vector3f constructIntersectionPoint() const;
+    bool isValid() {
+        return startPoint.isValid() && direction.isValid() && length != std::numeric_limits<float>::max();
+    }
 
-    Vector3f constructIntersectionPoint(float t) const;
+    Vector3f constructIntersectionPoint() const {
+        return startPoint + (direction * length);
+    }
 
-    Ray offsetStartPointBy(float offset) const;
+    Vector3f constructIntersectionPoint(float t) const {
+        return startPoint + (direction * t);
+    }
 
-    bool operator==(const Ray &rhs) const;
-    bool operator!=(const Ray &rhs) const;
+    Ray offsetStartPointBy(float offset) const {
+        return Ray(startPoint + direction * offset, direction, length);
+    }
+
+    bool operator==(const Ray &rhs) const {
+        return startPoint == rhs.startPoint && direction == rhs.direction && length == rhs.length;
+    }
+
+    bool operator!=(const Ray &rhs) const {
+        return !(rhs == *this);
+    }
+
     friend std::ostream &operator<<(std::ostream &os, const Ray &ray);
 };
 
