@@ -127,3 +127,17 @@ Relative Largest improvements:
 
 Absolute Largest improvements:
 ![Explicit Multiplication instead of std::pow Performance Absolute](figures/28.07.2023/crayg-timing-report-absolute-largest-improvement.svg)
+
+## 04.11.2023 - inline basic methods
+
+I started to inline some of the most basics methods in crayg (e.g. Vector3f, Color and other classes, see [a60b06](https://github.com/Latios96/crayg/commit/a60b0645561beee552176a4f7d8f570499079923)).
+This led to a substential performance boost (up to 60%).
+
+Relative Largest improvements:
+![inline basic methods Relative](figures/04.11.2023/inline-basic-methods-relative.svg)
+
+Absolute Largest improvements:
+![inline basic methods Absolute](figures/04.11.2023/inline-basic-methods-absolute.svg)
+
+Baseline: https://cato.frmbffr.com/projects/5/runs/1216 \
+With Inlining: https://cato.frmbffr.com/projects/5/runs/1217
