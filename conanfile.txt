@@ -17,6 +17,7 @@ tsl-ordered-map/1.1.0
 nlohmann_json/3.11.2
 pystring/1.1.4
 tabulate/1.5
+cpptrace/0.2.1
 
 zlib/1.2.13
 libpng/1.6.39

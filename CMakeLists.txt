@@ -64,20 +64,6 @@ if(MSVC)
     )
 endif()
 
-# Note: cpptrace has no Conan package so far and creating one is too much work for now..
-include(FetchContent)
-FetchContent_Declare(
-    cpptrace
-    GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
-    GIT_TAG v0.2.0-beta2 # <HASH or TAG>
-)
-FetchContent_MakeAvailable(cpptrace)
-set(cpptrace_targets cpptrace)
-if(TARGET dwarf)
-    list(APPEND cpptrace_targets dwarf)
-endif()
-set_target_properties(${cpptrace_targets} PROPERTIES UNITY_BUILD OFF)
-
 add_subdirectory(src)
 
 # Create distribution target
