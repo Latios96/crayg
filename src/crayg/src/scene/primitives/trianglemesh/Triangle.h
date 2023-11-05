@@ -9,9 +9,18 @@ class TriangleMesh;
 
 class Triangle : public Imageable {
   public:
-    Triangle();
-    Triangle(TriangleMesh *triangleMesh, std::size_t faceId);
-    Triangle(TriangleMesh *triangleMesh, std::size_t faceId, Transform *instanceTransform);
+    Triangle() {
+        triangleMesh = nullptr;
+        faceId = 0;
+    }
+
+    Triangle(TriangleMesh *triangleMesh, std::size_t faceId) : triangleMesh(triangleMesh), faceId(faceId) {
+    }
+
+    Triangle(TriangleMesh *triangleMesh, std::size_t faceId, Transform *instanceTransform)
+        : Triangle(triangleMesh, faceId) {
+        this->instanceTransform = instanceTransform;
+    }
 
     bool isIntersecting(Ray ray) override;
     Imageable::Intersection intersect(Ray ray) override;

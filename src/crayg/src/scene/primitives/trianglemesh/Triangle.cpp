@@ -4,20 +4,6 @@
 
 namespace crayg {
 
-Triangle::Triangle() {
-    triangleMesh = nullptr;
-    faceId = 0;
-}
-
-Triangle::Triangle(TriangleMesh *triangleMesh, std::size_t faceId) : triangleMesh(triangleMesh), faceId(faceId) {
-    setMaterial(triangleMesh->getMaterial());
-}
-
-Triangle::Triangle(TriangleMesh *triangleMesh, std::size_t faceId, Transform *instancedTransform)
-    : Triangle(triangleMesh, faceId) {
-    this->instanceTransform = instancedTransform;
-}
-
 Vector3f Triangle::v0() const {
     return triangleMesh->points[triangleMesh->faceVertexIndices[faceId].v0];
 }
@@ -123,8 +109,7 @@ bool Triangle::isIntersecting(Ray ray) {
 
 Vector3f Triangle::getNormal(Vector3f point) {
     if (instanceTransform) {
-        point = Transform(instanceTransform->matrix.invert())
-                    .applyForPoint(point); // todo think about storing the inverse on the transform..
+        point = instanceTransform->applyInverseForPoint(point);
     }
     return this->triangleMesh->normalsPrimVar->interpolateAt(this->faceId, point).normalize();
 }
