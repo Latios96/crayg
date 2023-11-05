@@ -8,7 +8,7 @@ namespace crayg {
 
 class TriangleMeshConversion {
   public:
-    static void toTriangleMesh(const GroundPlane &groundPlane, TriangleMesh &triangleMesh);
+    static void toTriangleMesh(GroundPlane &groundPlane, TriangleMesh &triangleMesh);
 };
 
 } // crayg

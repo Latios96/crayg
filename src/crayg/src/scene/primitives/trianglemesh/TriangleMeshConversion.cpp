@@ -1,7 +1,7 @@
 #include "TriangleMeshConversion.h"
 
 namespace crayg {
-void TriangleMeshConversion::toTriangleMesh(const GroundPlane &groundPlane, TriangleMesh &triangleMesh) {
+void TriangleMeshConversion::toTriangleMesh(GroundPlane &groundPlane, TriangleMesh &triangleMesh) {
     triangleMesh.points.emplace_back(-1000.0f, 0.0f, -1000.0f);
     triangleMesh.points.emplace_back(-1000.0f, 0.0f, 1000.0f);
     triangleMesh.points.emplace_back(1000.0f, 0.0f, 1000.0f);

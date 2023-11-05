@@ -26,7 +26,7 @@ Imageable::Intersection::~Intersection() {
     }
 }
 
-std::shared_ptr<Material> Imageable::getMaterial() const {
+std::shared_ptr<Material> &Imageable::getMaterial() {
     return material;
 }
 

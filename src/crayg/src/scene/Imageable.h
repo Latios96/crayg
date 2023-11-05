@@ -53,7 +53,7 @@ class Imageable {
 
     virtual BoundingBox getBounds() const = 0;
 
-    virtual std::shared_ptr<Material> getMaterial() const;
+    virtual std::shared_ptr<Material> &getMaterial();
     void setMaterial(const std::shared_ptr<Material> &material);
     virtual ~Imageable() = default;
 

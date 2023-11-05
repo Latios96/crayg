@@ -126,7 +126,7 @@ BoundingBox Triangle::getBounds() const {
     return boundingBox;
 }
 
-std::shared_ptr<Material> Triangle::getMaterial() const {
+std::shared_ptr<Material> &Triangle::getMaterial() {
     return triangleMesh->getMaterial();
 }
 
