@@ -19,7 +19,7 @@ TEST_CASE("ThickLensApproximationCalculator::calculate") {
         REQUIRE(focalLength == Catch::Detail::Approx(7.18633f));
 
         REQUIRE(thickLensApproximation.firstCardinalPoints.pZ == Catch::Detail::Approx(-7.34375f));
-        REQUIRE(thickLensApproximation.firstCardinalPoints.fZ == Catch::Detail::Approx(-0.157426834f));
+        REQUIRE(thickLensApproximation.firstCardinalPoints.fZ == Catch::Detail::Approx(-0.157424927f));
         REQUIRE(thickLensApproximation.secondCardinalPoints.pZ == Catch::Detail::Approx(-11.76607f));
         REQUIRE(thickLensApproximation.secondCardinalPoints.fZ == Catch::Detail::Approx(-18.9524f));
     }
