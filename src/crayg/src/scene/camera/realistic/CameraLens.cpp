@@ -182,7 +182,7 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray, float wavele
 
 Ray CameraLens::refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const {
     Vector3f n = intersection.normal.invert();
-    float cosTheta_i = n.dot(ray.direction.normalize());
+    float cosTheta_i = n.dot(ray.direction);
     float eta = iorIn / iorOut;
     // Potentially flip interface orientation for Snell's law
     if (cosTheta_i < 0) {
