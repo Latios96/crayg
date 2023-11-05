@@ -156,3 +156,16 @@ Absolute Largest improvements:
 
 Baseline: https://cato.frmbffr.com/projects/5/runs/1217 \
 Without unnecessary calls: https://cato.frmbffr.com/projects/5/runs/1218
+
+## 05.11.2023 - Return reference to shared_ptr for getMaterial()
+
+I found that getMaterial returns a shared_ptr to the material. Return a reference instead to avoid reference count increment/decrement. This shows a slight improvement in some scenes. 
+
+Relative Largest improvements:
+![Return reference to shared_ptr for getMaterial() Relative](figures/05.11.2023/return-shared-ptr-reference-relative.svg)
+
+Absolute Largest improvements:
+![Return reference to shared_ptr for getMaterial() Absolute](figures/05.11.2023/return-shared-ptr-reference-absolute.svg)
+
+Baseline: https://cato.frmbffr.com/projects/5/runs/1217 \
+With returning reference to shared_ptr: https://cato.frmbffr.com/projects/5/runs/1218
