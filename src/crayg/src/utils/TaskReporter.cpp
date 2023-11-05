@@ -88,7 +88,11 @@ void TaskReporter::onTaskFinished() {
 }
 
 void TaskReporter::onTaskProgressUpdated() {
-    Logger::info("{} done by {}%, elapsed time: {:%Hh %Mm %Ss}, remaining time: {:%Hh %Mm %Ss}", currentTask->name,
-                 currentTask->progress(), currentTask->elapsedTime(), currentTask->estimatedTimeRemaining());
+    const auto elapsedTime = currentTask->elapsedTime();
+    const auto estimatedTimeRemaining = currentTask->estimatedTimeRemaining();
+    const auto estimatedTotalTime = elapsedTime + estimatedTimeRemaining;
+    Logger::info("{} done by {}%, elapsed time: {:%Hh %Mm %Ss}, remaining time: {:%Hh %Mm %Ss}, estimated total time: "
+                 "{:%Hh %Mm %Ss}",
+                 currentTask->name, currentTask->progress(), elapsedTime, estimatedTimeRemaining, estimatedTotalTime);
 }
 } // crayg

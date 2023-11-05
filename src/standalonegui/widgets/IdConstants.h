@@ -12,6 +12,7 @@ class IDs {
     CRAYG_DEFINE_UI_ID(statusProgressBar);
     CRAYG_DEFINE_UI_ID(statusElapsed);
     CRAYG_DEFINE_UI_ID(statusRemaining);
+    CRAYG_DEFINE_UI_ID(statusEstimatedTotal);
     CRAYG_DEFINE_UI_ID(statusPreviousTask);
 };
 

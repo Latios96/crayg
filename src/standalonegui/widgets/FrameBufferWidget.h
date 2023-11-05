@@ -48,6 +48,7 @@ class FrameBufferWidget : public QWidget {
     QProgressBar *statusProgressBar;
     QLabel *statusElapsed;
     QLabel *statusRemaining;
+    QLabel *statusEstimatedTotal;
     QLabel *statusPreviousTask;
     IconToggleButton *followMouseToggle;
 };

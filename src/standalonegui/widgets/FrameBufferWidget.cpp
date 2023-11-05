@@ -31,6 +31,13 @@ QString formatRemaining(const std::chrono::seconds &remaining) {
     return qformat("<b>Remaining:</b> {:%Hh %Mm %Ss}", remaining);
 }
 
+QString formatEstimatedTotal(const std::chrono::seconds &total) {
+    if (total.count() == 0) {
+        return QString("<b>Estimated Total:</b> –");
+    }
+    return qformat("<b>Estimated Total:</b> {:%Hh %Mm %Ss}", total);
+}
+
 QLayout *progressBarArea() {
     return inVBox({{[]() {
                        auto previousTask = new QLabel();
@@ -59,6 +66,13 @@ QLayout *progressBarArea() {
                            remaining->setObjectName(IDs::statusRemaining);
                            remaining->hide();
                            return remaining;
+                       },
+                       addHSpacer(30),
+                       []() {
+                           auto estimatedTotal = new QLabel(formatRemaining(std::chrono::seconds(0)));
+                           estimatedTotal->setObjectName(IDs::statusEstimatedTotal);
+                           estimatedTotal->hide();
+                           return estimatedTotal;
                        },
                        addHStretch(),
                    })});
@@ -111,6 +125,7 @@ void FrameBufferWidget::setupUI() {
     statusProgressBar = this->findChild<QProgressBar *>(IDs::statusProgressBar);
     statusElapsed = this->findChild<QLabel *>(IDs::statusElapsed);
     statusRemaining = this->findChild<QLabel *>(IDs::statusRemaining);
+    statusEstimatedTotal = this->findChild<QLabel *>(IDs::statusEstimatedTotal);
     statusPreviousTask = this->findChild<QLabel *>(IDs::statusPreviousTask);
 
     setZoomFactor(ZoomFactor());
@@ -198,6 +213,8 @@ void FrameBufferWidget::startTask(BaseTaskReporter::Task task) {
     statusElapsed->setText(formatElapsed(std::chrono::seconds(0)));
     statusRemaining->show();
     statusRemaining->setText(formatRemaining(std::chrono::seconds(0)));
+    statusEstimatedTotal->show();
+    statusEstimatedTotal->setText(formatRemaining(std::chrono::seconds(0)));
 
     const bool renderingStarted = task.name == "Rendering";
     if (renderingStarted) {
@@ -211,12 +228,18 @@ void FrameBufferWidget::finishTask(BaseTaskReporter::Task task) {
     statusProgressBar->hide();
     statusElapsed->hide();
     statusRemaining->hide();
+    statusEstimatedTotal->hide();
 }
 
 void FrameBufferWidget::updateTask(BaseTaskReporter::Task task) {
+    const auto elapsedTime = task.elapsedTime();
+    const auto estimatedTimeRemaining = task.estimatedTimeRemaining();
+    const auto estimatedTotalTime = elapsedTime + estimatedTimeRemaining;
+
     statusProgressBar->setValue(task.progress());
-    statusElapsed->setText(formatElapsed(task.elapsedTime()));
-    statusRemaining->setText(formatRemaining(task.estimatedTimeRemaining()));
+    statusElapsed->setText(formatElapsed(elapsedTime));
+    statusRemaining->setText(formatRemaining(estimatedTimeRemaining));
+    statusEstimatedTotal->setText(formatEstimatedTotal(estimatedTotalTime));
 }
 
 void FrameBufferWidget::connectToggleFollowMouse(const std::function<void()> &toggle) {
