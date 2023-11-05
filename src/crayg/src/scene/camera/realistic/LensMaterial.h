@@ -48,10 +48,20 @@ struct LensMaterial {
         return a.abbeNo < b.abbeNo;
     }
 
-    float getIor(float lambda_nm) const;
+    float getIor(float lambda_nm) const {
+        if (abbeNo == 0) {
+            return ior;
+        }
+        const float lambda_micrometer = lambda_nm / 1000.f;
+        float lambdaSquared = lambda_micrometer * lambda_micrometer;
+        return std::sqrt(1 + sellmeierTerm(lambdaSquared, 0) + sellmeierTerm(lambdaSquared, 1) +
+                         sellmeierTerm(lambdaSquared, 2));
+    }
 
   private:
-    float sellmeierTerm(float lambdaSquared, int index) const;
+    float sellmeierTerm(float lambdaSquared, int index) const {
+        return sellmeierCoefficients[index] * lambdaSquared / (lambdaSquared - sellmeierCoefficients[index + 3]);
+    }
 };
 
 inline std::ostream &operator<<(std::ostream &os, const crayg::LensMaterialId &v) {
