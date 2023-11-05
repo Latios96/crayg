@@ -4,15 +4,15 @@
 
 namespace crayg {
 
-Vector3f Triangle::v0() const {
+Vector3f &Triangle::v0() const {
     return triangleMesh->points[triangleMesh->faceVertexIndices[faceId].v0];
 }
 
-Vector3f Triangle::v1() const {
+Vector3f &Triangle::v1() const {
     return triangleMesh->points[triangleMesh->faceVertexIndices[faceId].v1];
 }
 
-Vector3f Triangle::v2() const {
+Vector3f &Triangle::v2() const {
     return triangleMesh->points[triangleMesh->faceVertexIndices[faceId].v2];
 }
 
