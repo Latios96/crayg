@@ -141,3 +141,18 @@ Absolute Largest improvements:
 
 Baseline: https://cato.frmbffr.com/projects/5/runs/1216 \
 With Inlining: https://cato.frmbffr.com/projects/5/runs/1217
+
+## 05.11.2023 - Remove unnecessary calls to Imageable:setMaterial()
+
+During profiling, I noticed quite some time was spend in Imageable:setMaterial(). After investigating, I found out that in one constructor on Triangle the material was always set. But this is not needed, since a Triangle always returns the material of the corresponding TriangleMesh in getMaterial(). See diff [b51c3a](https://github.com/Latios96/crayg/commit/b51c3ab95fb62e622d27316f37303b7283c616dc).
+
+This led to a substential performance boost (up to 50%).  
+
+Relative Largest improvements:
+![Remove unnecessary calls to Imageable:setMaterial() Relative](figures/05.11.2023/remove-set-material-relative.svg)
+
+Absolute Largest improvements:
+![Remove unnecessary calls to Imageable:setMaterial() Absolute](figures/05.11.2023/remove-set-material-absolute.svg)
+
+Baseline: https://cato.frmbffr.com/projects/5/runs/1217 \
+Without unnecessary calls: https://cato.frmbffr.com/projects/5/runs/1218
