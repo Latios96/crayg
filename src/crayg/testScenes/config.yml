@@ -52,6 +52,18 @@ scenes:
     intersectors:
       - embree
     scene_path: "M:/Test_Scene_Collection/Intel_Sponza/WithCandlesThinLens.usda"
+  - name: Intel_Sponza_Knight
+    cameras:
+      - /KnightCam001
+      - /KnightCam002
+      - /KnightCam003
+    hero_camera: /KnightCam001
+    integrators:
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/Intel_Sponza/WithKnight.usda"
   - name: StormTrooper
     cameras:
       - /root/Camera/render_cam
