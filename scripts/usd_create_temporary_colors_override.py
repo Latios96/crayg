@@ -39,7 +39,7 @@ def collect_average_material_colors(stage) -> Dict[str, Gf.Vec3f]:
                 if not surface_shader.GetIdAttr().Get() == "UsdPreviewSurface":
                     continue
                 diffuse_color = surface_shader.GetInput("diffuseColor")
-                if diffuse_color.HasConnectedSource():
+                if diffuse_color and diffuse_color.HasConnectedSource():
                     maybe_file_node = UsdShade.Shader(
                         diffuse_color.GetConnectedSource()[0].GetPrim()
                     )
