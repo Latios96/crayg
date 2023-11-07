@@ -45,7 +45,6 @@ class UsdShadingNodeWriteCache {
 
     UsdShaderAndOutput translateShadingNode(ShadingNode &shadingNode);
 
-  private:
     std::map<std::string, UsdShaderAndOutput> materialCache;
     pxr::UsdStagePtr stage;
     UsdPathFactory &usdPathFactory;
