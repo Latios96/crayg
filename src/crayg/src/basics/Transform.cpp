@@ -5,9 +5,9 @@ namespace crayg {
 
 Transform Transform::withPosition(const Vector3f &vector3f) {
     Matrix4x4f matrix4X4f;
-    matrix4X4f.values[0][3] = vector3f.x;
-    matrix4X4f.values[1][3] = vector3f.y;
-    matrix4X4f.values[2][3] = vector3f.z;
+    matrix4X4f.values(0, 3) = vector3f.x;
+    matrix4X4f.values(1, 3) = vector3f.y;
+    matrix4X4f.values(2, 3) = vector3f.z;
     return Transform(matrix4X4f);
 }
 
@@ -32,9 +32,9 @@ Transform Transform::withRotation(float x, float y, float z) {
 
 Transform Transform::withScale(float x, float y, float z) {
     Matrix4x4f matrix4X4f;
-    matrix4X4f.values[0][0] = x;
-    matrix4X4f.values[1][1] = y;
-    matrix4X4f.values[2][2] = z;
+    matrix4X4f.values(0, 0) = x;
+    matrix4X4f.values(1, 1) = y;
+    matrix4X4f.values(2, 2) = z;
     return Transform(matrix4X4f);
 }
 

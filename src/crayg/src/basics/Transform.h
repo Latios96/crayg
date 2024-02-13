@@ -56,7 +56,7 @@ class Transform {
     }
 
     Vector3f toPosition() const {
-        return {matrix.values[0][3], matrix.values[1][3], matrix.values[2][3]};
+        return {matrix.values(0, 3), matrix.values(1, 3), matrix.values(2, 3)};
     }
 
     bool operator==(const Transform &rhs) const;
@@ -71,12 +71,12 @@ class Transform {
 
   private:
     Vector3f apply(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const {
-        const float x = matrixToApply.values[0][0] * vector3f.x + matrixToApply.values[0][1] * vector3f.y +
-                        matrixToApply.values[0][2] * vector3f.z;
-        const float y = matrixToApply.values[1][0] * vector3f.x + matrixToApply.values[1][1] * vector3f.y +
-                        matrixToApply.values[1][2] * vector3f.z;
-        const float z = matrixToApply.values[2][0] * vector3f.x + matrixToApply.values[2][1] * vector3f.y +
-                        matrixToApply.values[2][2] * vector3f.z;
+        const float x = matrixToApply.values(0, 0) * vector3f.x + matrixToApply.values(0, 1) * vector3f.y +
+                        matrixToApply.values(0, 2) * vector3f.z;
+        const float y = matrixToApply.values(1, 0) * vector3f.x + matrixToApply.values(1, 1) * vector3f.y +
+                        matrixToApply.values(1, 2) * vector3f.z;
+        const float z = matrixToApply.values(2, 0) * vector3f.x + matrixToApply.values(2, 1) * vector3f.y +
+                        matrixToApply.values(2, 2) * vector3f.z;
 
         return {
             x,
@@ -86,14 +86,14 @@ class Transform {
     }
 
     Vector3f applyForPoint(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const {
-        float x = matrixToApply.values[0][0] * vector3f.x + matrixToApply.values[0][1] * vector3f.y +
-                  matrixToApply.values[0][2] * vector3f.z + matrixToApply.values[0][3];
-        float y = matrixToApply.values[1][0] * vector3f.x + matrixToApply.values[1][1] * vector3f.y +
-                  matrixToApply.values[1][2] * vector3f.z + matrixToApply.values[1][3];
-        float z = matrixToApply.values[2][0] * vector3f.x + matrixToApply.values[2][1] * vector3f.y +
-                  matrixToApply.values[2][2] * vector3f.z + matrixToApply.values[2][3];
-        float w = matrixToApply.values[3][0] * vector3f.x + matrixToApply.values[3][1] * vector3f.y +
-                  matrixToApply.values[3][2] * vector3f.z + matrixToApply.values[3][3];
+        float x = matrixToApply.values(0, 0) * vector3f.x + matrixToApply.values(0, 1) * vector3f.y +
+                  matrixToApply.values(0, 2) * vector3f.z + matrixToApply.values(0, 3);
+        float y = matrixToApply.values(1, 0) * vector3f.x + matrixToApply.values(1, 1) * vector3f.y +
+                  matrixToApply.values(1, 2) * vector3f.z + matrixToApply.values(1, 3);
+        float z = matrixToApply.values(2, 0) * vector3f.x + matrixToApply.values(2, 1) * vector3f.y +
+                  matrixToApply.values(2, 2) * vector3f.z + matrixToApply.values(2, 3);
+        float w = matrixToApply.values(3, 0) * vector3f.x + matrixToApply.values(3, 1) * vector3f.y +
+                  matrixToApply.values(3, 2) * vector3f.z + matrixToApply.values(3, 3);
         if (w == 0) {
             CRAYG_LOG_AND_THROW(std::runtime_error("w is 0!"));
         }
@@ -113,12 +113,12 @@ class Transform {
 
     Vector3f applyForNormal(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const {
         const Matrix4x4f transpose = matrixToApply.transpose();
-        float x = transpose.values[0][0] * vector3f.x + transpose.values[0][1] * vector3f.y +
-                  transpose.values[0][2] * vector3f.z + transpose.values[0][3];
-        float y = transpose.values[1][0] * vector3f.x + transpose.values[1][1] * vector3f.y +
-                  transpose.values[1][2] * vector3f.z + transpose.values[1][3];
-        float z = transpose.values[2][0] * vector3f.x + transpose.values[2][1] * vector3f.y +
-                  transpose.values[2][2] * vector3f.z + transpose.values[2][3];
+        float x = transpose.values(0, 0) * vector3f.x + transpose.values(0, 1) * vector3f.y +
+                  transpose.values(0, 2) * vector3f.z + transpose.values(0, 3);
+        float y = transpose.values(1, 0) * vector3f.x + transpose.values(1, 1) * vector3f.y +
+                  transpose.values(1, 2) * vector3f.z + transpose.values(1, 3);
+        float z = transpose.values(2, 0) * vector3f.x + transpose.values(2, 1) * vector3f.y +
+                  transpose.values(2, 2) * vector3f.z + transpose.values(2, 3);
 
         return {
             x,
