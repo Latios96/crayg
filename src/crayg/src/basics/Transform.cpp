@@ -13,9 +13,9 @@ Transform::Transform(const Transform &transform) : matrix(transform.matrix), inv
 
 Transform Transform::withPosition(const Vector3f &vector3f) {
     Matrix4x4f matrix4X4f;
-    matrix4X4f.values[0][3] = vector3f.x;
-    matrix4X4f.values[1][3] = vector3f.y;
-    matrix4X4f.values[2][3] = vector3f.z;
+    matrix4X4f.values(0, 3) = vector3f.x;
+    matrix4X4f.values(1, 3) = vector3f.y;
+    matrix4X4f.values(2, 3) = vector3f.z;
     return Transform(matrix4X4f);
 }
 
@@ -52,14 +52,22 @@ Ray Transform::applyInverse(const Ray &ray) const {
 }
 
 Vector3f Transform::applyForPoint(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const {
-    float x = matrixToApply.values[0][0] * vector3f.x + matrixToApply.values[0][1] * vector3f.y +
-              matrixToApply.values[0][2] * vector3f.z + matrixToApply.values[0][3];
-    float y = matrixToApply.values[1][0] * vector3f.x + matrixToApply.values[1][1] * vector3f.y +
-              matrixToApply.values[1][2] * vector3f.z + matrixToApply.values[1][3];
-    float z = matrixToApply.values[2][0] * vector3f.x + matrixToApply.values[2][1] * vector3f.y +
-              matrixToApply.values[2][2] * vector3f.z + matrixToApply.values[2][3];
-    float w = matrixToApply.values[3][0] * vector3f.x + matrixToApply.values[3][1] * vector3f.y +
-              matrixToApply.values[3][2] * vector3f.z + matrixToApply.values[3][3];
+    float x = matrixToApply.values_[matrixToApply.index(0, 0)] * vector3f.x +
+              matrixToApply.values_[matrixToApply.index(0, 1)] * vector3f.y +
+              matrixToApply.values_[matrixToApply.index(0, 2)] * vector3f.z +
+              matrixToApply.values_[matrixToApply.index(0, 3)];
+    float y = matrixToApply.values_[matrixToApply.index(1, 0)] * vector3f.x +
+              matrixToApply.values_[matrixToApply.index(1, 1)] * vector3f.y +
+              matrixToApply.values_[matrixToApply.index(1, 2)] * vector3f.z +
+              matrixToApply.values_[matrixToApply.index(1, 3)];
+    float z = matrixToApply.values_[matrixToApply.index(2, 0)] * vector3f.x +
+              matrixToApply.values_[matrixToApply.index(2, 1)] * vector3f.y +
+              matrixToApply.values_[matrixToApply.index(2, 2)] * vector3f.z +
+              matrixToApply.values_[matrixToApply.index(2, 3)];
+    float w = matrixToApply.values_[matrixToApply.index(3, 0)] * vector3f.x +
+              matrixToApply.values_[matrixToApply.index(3, 1)] * vector3f.y +
+              matrixToApply.values_[matrixToApply.index(3, 2)] * vector3f.z +
+              matrixToApply.values_[matrixToApply.index(3, 3)];
     if (w == 0) {
         throw std::runtime_error("w is 0!");
     }
@@ -78,12 +86,15 @@ Vector3f Transform::applyForPoint(const Matrix4x4f &matrixToApply, const Vector3
 }
 
 Vector3f Transform::apply(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const {
-    const float x = matrixToApply.values[0][0] * vector3f.x + matrixToApply.values[0][1] * vector3f.y +
-                    matrixToApply.values[0][2] * vector3f.z;
-    const float y = matrixToApply.values[1][0] * vector3f.x + matrixToApply.values[1][1] * vector3f.y +
-                    matrixToApply.values[1][2] * vector3f.z;
-    const float z = matrixToApply.values[2][0] * vector3f.x + matrixToApply.values[2][1] * vector3f.y +
-                    matrixToApply.values[2][2] * vector3f.z;
+    const float x = matrixToApply.values_[matrixToApply.index(0, 0)] * vector3f.x +
+                    matrixToApply.values_[matrixToApply.index(0, 1)] * vector3f.y +
+                    matrixToApply.values_[matrixToApply.index(0, 2)] * vector3f.z;
+    const float y = matrixToApply.values_[matrixToApply.index(1, 0)] * vector3f.x +
+                    matrixToApply.values_[matrixToApply.index(1, 1)] * vector3f.y +
+                    matrixToApply.values_[matrixToApply.index(1, 2)] * vector3f.z;
+    const float z = matrixToApply.values_[matrixToApply.index(2, 0)] * vector3f.x +
+                    matrixToApply.values_[matrixToApply.index(2, 1)] * vector3f.y +
+                    matrixToApply.values_[matrixToApply.index(2, 2)] * vector3f.z;
 
     return {
         x,
@@ -94,12 +105,15 @@ Vector3f Transform::apply(const Matrix4x4f &matrixToApply, const Vector3f &vecto
 
 Vector3f Transform::applyForNormal(const Matrix4x4f &matrixToApply, const Vector3f &vector3f) const {
     const Matrix4x4f transpose = matrixToApply.transpose();
-    float x = transpose.values[0][0] * vector3f.x + transpose.values[0][1] * vector3f.y +
-              transpose.values[0][2] * vector3f.z + transpose.values[0][3];
-    float y = transpose.values[1][0] * vector3f.x + transpose.values[1][1] * vector3f.y +
-              transpose.values[1][2] * vector3f.z + transpose.values[1][3];
-    float z = transpose.values[2][0] * vector3f.x + transpose.values[2][1] * vector3f.y +
-              transpose.values[2][2] * vector3f.z + transpose.values[2][3];
+    float x = transpose.values_[matrixToApply.index(0, 0)] * vector3f.x +
+              transpose.values_[matrixToApply.index(0, 1)] * vector3f.y +
+              transpose.values_[matrixToApply.index(0, 2)] * vector3f.z + transpose.values_[matrixToApply.index(0, 3)];
+    float y = transpose.values_[matrixToApply.index(1, 0)] * vector3f.x +
+              transpose.values_[matrixToApply.index(1, 1)] * vector3f.y +
+              transpose.values_[matrixToApply.index(1, 2)] * vector3f.z + transpose.values_[matrixToApply.index(1, 3)];
+    float z = transpose.values_[matrixToApply.index(2, 0)] * vector3f.x +
+              transpose.values_[matrixToApply.index(2, 1)] * vector3f.y +
+              transpose.values_[matrixToApply.index(2, 2)] * vector3f.z + transpose.values_[matrixToApply.index(2, 3)];
 
     return {
         x,
@@ -113,7 +127,7 @@ Ray Transform::apply(const Matrix4x4f &matrixToApply, const Ray &ray) const {
 }
 
 Vector3f Transform::toPosition() const {
-    return {matrix.values[0][3], matrix.values[1][3], matrix.values[2][3]};
+    return {matrix.values(0, 3), matrix.values(1, 3), matrix.values(2, 3)};
 }
 
 bool Transform::operator==(const Transform &rhs) const {
@@ -137,9 +151,9 @@ Transform Transform::withRotation(float x, float y, float z) {
 
 Transform Transform::withScale(float x, float y, float z) {
     Matrix4x4f matrix4X4f;
-    matrix4X4f.values[0][0] = x;
-    matrix4X4f.values[1][1] = y;
-    matrix4X4f.values[2][2] = z;
+    matrix4X4f.values(0, 0) = x;
+    matrix4X4f.values(1, 1) = y;
+    matrix4X4f.values(2, 2) = z;
     return Transform(matrix4X4f);
 }
 

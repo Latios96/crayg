@@ -29,7 +29,19 @@ class Matrix4x4f {
     Matrix4x4f invert() const;
     Matrix4x4f transpose() const;
 
-    float values[4][4] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}; //[ROW][COLUMN]
+    int index(int row, int column) const {
+        return row * 4 + column;
+    }
+
+    float values(int row, int column) const {
+        return values_[index(row, column)];
+    }
+
+    float &values(int row, int column) {
+        return values_[index(row, column)];
+    }
+
+    float values_[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}; //[ROW][COLUMN]
 };
 
 }
