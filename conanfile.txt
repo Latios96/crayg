@@ -52,6 +52,7 @@ openimageio:with_openjpeg=False
 fmt:header_only=True
 spdlog:header_only=True
 fakeit:integration=catch
+boost:without_stacktrace=True
 
 [imports]
 bin,*.dll->./bin
