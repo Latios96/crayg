@@ -119,9 +119,9 @@ std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> OpenSubdivRefiner::createRefin
     OpenSubdiv::Sdc::Options options;
     options.SetVtxBoundaryInterpolation(getBoundaryInterpolation());
 
-    auto refiner = OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Create(
+    auto refiner = OpenSubdiv::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Create(
         descriptor,
-        OpenSubdiv::v3_4_4::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Options(type, options));
+        OpenSubdiv::Far::TopologyRefinerFactory<OpenSubdiv::Far::TopologyDescriptor>::Options(type, options));
     return std::unique_ptr<OpenSubdiv::Far::TopologyRefiner>(refiner);
 }
 
