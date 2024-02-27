@@ -2,6 +2,7 @@
 #define CRAYG_COLOR_H
 
 #include "sampling/Random.h"
+#include <algorithm>
 #include <fmt/ostream.h>
 #include <ostream>
 #include <tuple>
