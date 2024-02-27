@@ -5,6 +5,7 @@
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/imaging/hd/meshTopology.h>
 #include <pxr/imaging/hd/vtBufferSource.h>
+#include <pxr/usd/usdGeom/primvarsAPI.h>
 
 namespace crayg {
 
@@ -138,7 +139,9 @@ void UsdMeshReader::translateUvs(std::shared_ptr<TriangleMesh> &triangleMesh, px
 }
 
 std::optional<pxr::UsdGeomPrimvar> UsdMeshReader::getAuthoredUvPrimVar() const {
-    for (auto &primvar : usdPrim.GetPrimvars()) {
+    pxr::UsdGeomPrimvarsAPI primvarsApi(usdPrim);
+
+    for (auto &primvar : primvarsApi.GetPrimvars()) {
         const bool isFloat2PrimVar = primvar.GetTypeName() == pxr::SdfValueTypeNames->TexCoord2fArray;
         if (isFloat2PrimVar) {
             return primvar;

@@ -2,6 +2,7 @@
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include "sceneIO/usd/UsdConversions.h"
+#include <pxr/usd/usdGeom/primvarsAPI.h>
 
 namespace crayg {
 
@@ -116,8 +117,9 @@ void UsdTriangleMeshWriter::writePerVertexUvs(pxr::UsdGeomMesh &mesh) const {
         uvs.push_back(UsdConversions::convert(vertexData.v1));
     }
 
-    auto usdUvsPrimvar = mesh.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
-                                            pxr::UsdGeomTokens->faceVarying);
+    pxr::UsdGeomPrimvarsAPI primvarsApi(mesh);
+    auto usdUvsPrimvar = primvarsApi.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+                                                   pxr::UsdGeomTokens->faceVarying);
     usdUvsPrimvar.Set(uvs);
 }
 

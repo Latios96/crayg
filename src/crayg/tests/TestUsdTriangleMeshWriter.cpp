@@ -6,6 +6,7 @@
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
+#include <pxr/usd/usdGeom/primvarsAPI.h>
 
 namespace crayg {
 
@@ -98,7 +99,9 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
         usdTriangleMeshWriter.write(stage, usdPathFactory);
 
         auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));
-        auto uvsPrimvar = usdGeomMesh.GetPrimvar(pxr::TfToken("st"));
+        pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
+
+        auto uvsPrimvar = primvarsApi.GetPrimvar(pxr::TfToken("st"));
         REQUIRE(uvsPrimvar.GetInterpolation() == pxr::UsdGeomTokens->faceVarying);
         auto uvs = UsdUtils::getStaticAttributeValueAs<pxr::VtVec2fArray>(uvsPrimvar);
         REQUIRE(uvs ==

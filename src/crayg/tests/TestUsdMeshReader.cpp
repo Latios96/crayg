@@ -6,6 +6,7 @@
 #include <iostream>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
+#include <pxr/usd/usdGeom/primvarsAPI.h>
 
 namespace crayg {
 
@@ -129,8 +130,9 @@ TEST_CASE("UsdMeshReader::read") {
 
     SECTION("authored faceVarying uvs should be translated for triangle mesh") {
         auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
+        pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
 
-        auto uvsPrimvar = usdGeomMesh.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+        auto uvsPrimvar = primvarsApi.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
                                                     pxr::UsdGeomTokens->faceVarying);
         pxr::VtVec2fArray uvs({{1, 0}, {1, 1}, {0, 0}, {1, 0}});
         pxr::VtIntArray uvIndices({0, 1, 2, 2, 1, 3});
@@ -151,8 +153,9 @@ TEST_CASE("UsdMeshReader::read") {
 
     SECTION("authored faceVarying uvs should be translated for quad mesh") {
         auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage);
+        pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
 
-        auto uvsPrimvar = usdGeomMesh.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+        auto uvsPrimvar = primvarsApi.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
                                                     pxr::UsdGeomTokens->faceVarying);
         pxr::VtVec2fArray uvs({{0, 0}, {1, 0}, {0, 1}, {1, 1}});
         pxr::VtIntArray uvIndices({0, 1, 3, 2});
@@ -172,8 +175,9 @@ TEST_CASE("UsdMeshReader::read") {
 
     SECTION("authored uvs with unsupported interpolation should not be translated") {
         auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage);
+        pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
 
-        auto uvsPrimvar = usdGeomMesh.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+        auto uvsPrimvar = primvarsApi.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
                                                     pxr::UsdGeomTokens->uniform);
         pxr::VtVec2fArray uvs({{0, 0}, {1, 0}, {0, 1}, {1, 1}});
         pxr::VtIntArray uvIndices({0, 1, 3, 2});
