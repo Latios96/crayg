@@ -49,12 +49,12 @@ openimageio:with_ptex=False
 openimageio:with_raw=False
 openimageio:with_libjpeg=libjpeg
 openimageio:with_openjpeg=False
+openimageio:with_opencolorio=False
 fmt:header_only=True
 spdlog:header_only=True
 fakeit:integration=catch
 boost:without_stacktrace=True
 USD:with_imaging=True
-minizip-ng:with_zlib=True
 
 [imports]
 bin,*.dll->./bin
