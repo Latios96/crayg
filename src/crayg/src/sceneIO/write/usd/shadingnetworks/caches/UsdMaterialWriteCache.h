@@ -2,7 +2,7 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDMATERIALWRITECACHE_H_
 
 #include "UsdShadingNodeWriteCache.h"
-#include "scene/materials/Material.h"
+#include "scene/shadingnetworks/materials/Material.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include <map>

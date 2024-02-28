@@ -1,5 +1,5 @@
-#include "scene/materials/ConstantShadingNodes.h"
-#include "scene/materials/ConversionNodes.h"
+#include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
+#include "scene/shadingnetworks/shadingnodes/ConversionNodes.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDCONSTANTSHADINGNODEWRITERS_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDCONSTANTSHADINGNODEWRITERS_H_
 
-#include "scene/materials/ConstantShadingNodes.h"
+#include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
 #include "sceneIO/write/usd/base/BaseUsdShadingNodeWriter.h"
 
 namespace crayg {

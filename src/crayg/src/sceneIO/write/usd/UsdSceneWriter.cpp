@@ -5,11 +5,11 @@
 #include "sceneIO/write/usd/lights/UsdDiskLightWriter.h"
 #include "sceneIO/write/usd/lights/UsdPointLightWriter.h"
 #include "sceneIO/write/usd/lights/UsdRectLightWriter.h"
-#include "sceneIO/write/usd/materials/UsdMaterialWriteCache.h"
 #include "sceneIO/write/usd/primitives/UsdGroundPlaneWriter.h"
 #include "sceneIO/write/usd/primitives/UsdSphereWriter.h"
 #include "sceneIO/write/usd/primitives/UsdSubdivisionSurfaceMeshWriter.h"
 #include "sceneIO/write/usd/primitives/UsdTriangleMeshWriter.h"
+#include "sceneIO/write/usd/shadingnetworks/caches/UsdMaterialWriteCache.h"
 
 void crayg::UsdSceneWriter::writeScene(const std::string &scenePath) {
     auto stage = pxr::UsdStage::CreateNew(scenePath);

@@ -3,7 +3,7 @@
 
 #include "basics/OrthonormalBasis.h"
 #include "basics/Transform.h"
-#include "materials/Material.h"
+#include "shadingnetworks/materials/Material.h"
 #include <basics/BoundingBox.h>
 #include <basics/Color.h>
 #include <basics/Ray.h>

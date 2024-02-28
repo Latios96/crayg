@@ -1,5 +1,5 @@
 #include "integrators/AbstractIntegrator.h"
-#include "scene/materials/UsdPreviewSurface.h"
+#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
 

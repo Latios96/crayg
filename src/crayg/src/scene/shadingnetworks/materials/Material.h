@@ -1,9 +1,9 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_MATERIAL_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_MATERIAL_H_
 
-#include "ShadingNode.h"
 #include "integrators/IntegratorContext.h"
 #include "integrators/SurfaceInteraction.h"
+#include "scene/shadingnetworks/ShadingNode.h"
 #include <basics/Color.h>
 #include <basics/Ray.h>
 

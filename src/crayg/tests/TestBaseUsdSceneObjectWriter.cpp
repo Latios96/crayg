@@ -1,5 +1,5 @@
-#include "scene/materials/UsdPreviewSurface.h"
 #include "scene/primitives/Sphere.h"
+#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h"
 #include <catch2/catch.hpp>

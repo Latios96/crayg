@@ -4,8 +4,8 @@
 #include "RenderSettings.h"
 #include "camera/Camera.h"
 #include "lights/Light.h"
-#include "materials/ShadingNode.h"
 #include "scene/SceneObject.h"
+#include "shadingnetworks/ShadingNode.h"
 #include <memory>
 #include <set>
 #include <vector>

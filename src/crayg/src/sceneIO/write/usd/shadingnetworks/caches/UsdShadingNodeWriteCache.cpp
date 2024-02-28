@@ -1,7 +1,7 @@
 #include "UsdShadingNodeWriteCache.h"
-#include "UsdConstantShadingNodeWriters.h"
-#include "UsdConversionNodeWriters.h"
-#include "scene/materials/ConversionNodes.h"
+#include "scene/shadingnetworks/shadingnodes/ConversionNodes.h"
+#include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.h"
+#include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.h"
 #include "utils/Exceptions.h"
 
 namespace crayg {

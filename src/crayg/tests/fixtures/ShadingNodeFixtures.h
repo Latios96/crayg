@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_SHADINGNODEFIXTURES_H_
 #define CRAYG_SRC_CRAYG_TESTS_FIXTURES_SHADINGNODEFIXTURES_H_
 
-#include "scene/materials/Material.h"
+#include "scene/shadingnetworks/materials/Material.h"
 
 namespace crayg {
 

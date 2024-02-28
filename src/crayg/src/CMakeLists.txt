@@ -193,16 +193,6 @@ set(crayg_SRCS
     scene/lights/Light.h
     scene/lights/RectLight.cpp
     scene/lights/RectLight.h
-    scene/materials/ConstantShadingNodes.cpp
-    scene/materials/ConstantShadingNodes.h
-    scene/materials/ConversionNodes.cpp
-    scene/materials/ConversionNodes.h
-    scene/materials/Material.cpp
-    scene/materials/Material.h
-    scene/materials/ShadingNode.cpp
-    scene/materials/ShadingNode.h
-    scene/materials/UsdPreviewSurface.cpp
-    scene/materials/UsdPreviewSurface.h
     scene/primitives/GroundPlane.cpp
     scene/primitives/GroundPlane.h
     scene/primitives/PointInstancer.cpp
@@ -234,6 +224,16 @@ set(crayg_SRCS
     scene/Scene.h
     scene/SceneObject.cpp
     scene/SceneObject.h
+    scene/shadingnetworks/materials/Material.cpp
+    scene/shadingnetworks/materials/Material.h
+    scene/shadingnetworks/materials/UsdPreviewSurface.cpp
+    scene/shadingnetworks/materials/UsdPreviewSurface.h
+    scene/shadingnetworks/ShadingNode.cpp
+    scene/shadingnetworks/ShadingNode.h
+    scene/shadingnetworks/shadingnodes/ConstantShadingNodes.cpp
+    scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h
+    scene/shadingnetworks/shadingnodes/ConversionNodes.cpp
+    scene/shadingnetworks/shadingnodes/ConversionNodes.h
     scene/Transformable.cpp
     scene/Transformable.h
     sceneIO/read/SceneReader.cpp
@@ -252,10 +252,6 @@ set(crayg_SRCS
     sceneIO/read/usd/lights/UsdRectLightReader.h
     sceneIO/read/usd/lights/UsdSphereLightReader.cpp
     sceneIO/read/usd/lights/UsdSphereLightReader.h
-    sceneIO/read/usd/materials/UsdMaterialReadCache.cpp
-    sceneIO/read/usd/materials/UsdMaterialReadCache.h
-    sceneIO/read/usd/materials/UsdPreviewSurfaceReader.cpp
-    sceneIO/read/usd/materials/UsdPreviewSurfaceReader.h
     sceneIO/read/usd/primitives/UsdMeshReader.cpp
     sceneIO/read/usd/primitives/UsdMeshReader.h
     sceneIO/read/usd/primitives/UsdPointInstancerReader.cpp
@@ -264,6 +260,10 @@ set(crayg_SRCS
     sceneIO/read/usd/primitives/UsdSphereReader.h
     sceneIO/read/usd/primitives/UsdSubdivisionSurfaceMeshReader.cpp
     sceneIO/read/usd/primitives/UsdSubdivisionSurfaceMeshReader.h
+    sceneIO/read/usd/shadingnetworks/caches/UsdMaterialReadCache.cpp
+    sceneIO/read/usd/shadingnetworks/caches/UsdMaterialReadCache.h
+    sceneIO/read/usd/shadingnetworks/materials/UsdPreviewSurfaceReader.cpp
+    sceneIO/read/usd/shadingnetworks/materials/UsdPreviewSurfaceReader.h
     sceneIO/read/usd/UsdRenderSettingsReader.cpp
     sceneIO/read/usd/UsdRenderSettingsReader.h
     sceneIO/read/usd/UsdSceneReader.cpp
@@ -299,16 +299,6 @@ set(crayg_SRCS
     sceneIO/write/usd/lights/UsdPointLightWriter.h
     sceneIO/write/usd/lights/UsdRectLightWriter.cpp
     sceneIO/write/usd/lights/UsdRectLightWriter.h
-    sceneIO/write/usd/materials/UsdConstantShadingNodeWriters.cpp
-    sceneIO/write/usd/materials/UsdConstantShadingNodeWriters.h
-    sceneIO/write/usd/materials/UsdConversionNodeWriters.cpp
-    sceneIO/write/usd/materials/UsdConversionNodeWriters.h
-    sceneIO/write/usd/materials/UsdMaterialWriteCache.cpp
-    sceneIO/write/usd/materials/UsdMaterialWriteCache.h
-    sceneIO/write/usd/materials/UsdPreviewSurfaceWriter.cpp
-    sceneIO/write/usd/materials/UsdPreviewSurfaceWriter.h
-    sceneIO/write/usd/materials/UsdShadingNodeWriteCache.cpp
-    sceneIO/write/usd/materials/UsdShadingNodeWriteCache.h
     sceneIO/write/usd/primitives/UsdGroundPlaneWriter.cpp
     sceneIO/write/usd/primitives/UsdGroundPlaneWriter.h
     sceneIO/write/usd/primitives/UsdPointInstancerWriter.cpp
@@ -319,6 +309,16 @@ set(crayg_SRCS
     sceneIO/write/usd/primitives/UsdSubdivisionSurfaceMeshWriter.h
     sceneIO/write/usd/primitives/UsdTriangleMeshWriter.cpp
     sceneIO/write/usd/primitives/UsdTriangleMeshWriter.h
+    sceneIO/write/usd/shadingnetworks/caches/UsdMaterialWriteCache.cpp
+    sceneIO/write/usd/shadingnetworks/caches/UsdMaterialWriteCache.h
+    sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.cpp
+    sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h
+    sceneIO/write/usd/shadingnetworks/materials/UsdPreviewSurfaceWriter.cpp
+    sceneIO/write/usd/shadingnetworks/materials/UsdPreviewSurfaceWriter.h
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.cpp
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.h
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.cpp
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.h
     sceneIO/write/usd/UsdPathFactory.cpp
     sceneIO/write/usd/UsdPathFactory.h
     sceneIO/write/usd/UsdRenderSettingsWriter.cpp

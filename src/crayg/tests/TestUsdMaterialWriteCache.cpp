@@ -1,6 +1,6 @@
-#include "scene/materials/UsdPreviewSurface.h"
+#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/materials/UsdMaterialWriteCache.h"
+#include "sceneIO/write/usd/shadingnetworks/caches/UsdMaterialWriteCache.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 

@@ -2,9 +2,9 @@
 #define CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_
 
 #include "scene/Scene.h"
-#include "scene/materials/UsdPreviewSurface.h"
+#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/read/SceneReader.h"
-#include "sceneIO/read/usd/materials/UsdMaterialReadCache.h"
+#include "sceneIO/read/usd/shadingnetworks/caches/UsdMaterialReadCache.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include <optional>
 #include <pxr/usd/usd/stage.h>

@@ -1,8 +1,8 @@
 #include "UsdMaterialWriteCache.h"
 #include "Logger.h"
-#include "UsdPreviewSurfaceWriter.h"
-#include "scene/materials/UsdPreviewSurface.h"
+#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdConversions.h"
+#include "sceneIO/write/usd/shadingnetworks/materials/UsdPreviewSurfaceWriter.h"
 
 namespace crayg {
 

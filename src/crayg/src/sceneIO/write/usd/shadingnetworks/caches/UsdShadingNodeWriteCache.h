@@ -1,6 +1,6 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDSHADINGNODEWRITECACHE_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDSHADINGNODEWRITECACHE_H_
-#include "scene/materials/ShadingNode.h"
+#include "scene/shadingnetworks/ShadingNode.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include "sceneIO/write/usd/base/BaseUsdShadingNodeWriter.h"

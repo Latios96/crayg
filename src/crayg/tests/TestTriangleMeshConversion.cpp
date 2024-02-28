@@ -1,7 +1,7 @@
-#include "scene/materials/UsdPreviewSurface.h"
 #include "scene/primitives/GroundPlane.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "scene/primitives/trianglemesh/TriangleMeshConversion.h"
+#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

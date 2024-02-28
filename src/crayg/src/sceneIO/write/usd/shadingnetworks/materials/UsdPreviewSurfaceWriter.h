@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDPREVIEWSURFACEWRITER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDPREVIEWSURFACEWRITER_H_
 
-#include "scene/materials/UsdPreviewSurface.h"
+#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/write/usd/base/BaseUsdMaterialWriter.h"
 #include "sceneIO/write/usd/base/BaseUsdWriter.h"
 #include <pxr/usd/usdShade/material.h>

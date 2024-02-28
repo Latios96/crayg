@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENE_MATERIALS_CONVERSIONNODES_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENE_MATERIALS_CONVERSIONNODES_H_
 
-#include "ShadingNode.h"
+#include "scene/shadingnetworks/ShadingNode.h"
 
 namespace crayg {
 

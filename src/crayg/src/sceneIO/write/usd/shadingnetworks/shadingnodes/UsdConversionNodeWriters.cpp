@@ -1,5 +1,5 @@
 #include "UsdConversionNodeWriters.h"
-#include "sceneIO/write/usd/materials/UsdShadingNodeWriteCache.h"
+#include "sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
 
 namespace crayg {
 

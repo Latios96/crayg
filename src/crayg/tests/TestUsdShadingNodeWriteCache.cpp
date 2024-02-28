@@ -1,7 +1,7 @@
-#include "scene/materials/ConstantShadingNodes.h"
-#include "scene/materials/ConversionNodes.h"
+#include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
+#include "scene/shadingnetworks/shadingnodes/ConversionNodes.h"
 #include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/materials/UsdShadingNodeWriteCache.h"
+#include "sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <pxr/usd/usdShade/materialBindingAPI.h>

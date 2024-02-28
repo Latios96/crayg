@@ -4,7 +4,7 @@
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include "sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h"
-#include "sceneIO/write/usd/materials/UsdMaterialWriteCache.h"
+#include "sceneIO/write/usd/shadingnetworks/caches/UsdMaterialWriteCache.h"
 #include <pxr/usd/usdGeom/mesh.h>
 
 namespace crayg {

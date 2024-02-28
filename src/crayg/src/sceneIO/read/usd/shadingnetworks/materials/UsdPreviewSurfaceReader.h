@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_MATERIALS_USDPREVIEWSURFACEREADER_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_MATERIALS_USDPREVIEWSURFACEREADER_H_
 
-#include "scene/materials/UsdPreviewSurface.h"
+#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/read/usd/base/BaseUsdMaterialReader.h"
 
 namespace crayg {
