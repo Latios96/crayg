@@ -10,7 +10,8 @@ TEST_CASE("UsdGroundPlaneMeshWriter::write") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
-    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
+    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory, usdShadingNodeWriteCache);
 
     SECTION("should write groundPlane") {
         GroundPlane groundPlane;

@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDMATERIALWRITECACHE_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDMATERIALWRITECACHE_H_
 
+#include "UsdShadingNodeWriteCache.h"
 #include "scene/materials/Material.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
@@ -11,7 +12,8 @@ namespace crayg {
 
 class UsdMaterialWriteCache {
   public:
-    UsdMaterialWriteCache(const pxr::UsdStagePtr &usdStagePtr, UsdPathFactory &usdPathFactory);
+    UsdMaterialWriteCache(const pxr::UsdStagePtr &usdStagePtr, UsdPathFactory &usdPathFactory,
+                          UsdShadingNodeWriteCache &usdShadingNodeWriteCache);
     pxr::UsdShadeMaterial getCachedUsdMaterial(const std::shared_ptr<Material> material);
 
   private:
@@ -20,6 +22,7 @@ class UsdMaterialWriteCache {
     pxr::UsdStagePtr stage;
     UsdPathFactory &usdPathFactory;
     pxr::UsdShadeShader createUsdPreviewSurface(const pxr::UsdShadeMaterial &usdShadeMaterial);
+    UsdShadingNodeWriteCache &usdShadingNodeWriteCache;
 };
 
 } // crayg

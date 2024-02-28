@@ -10,7 +10,8 @@ namespace crayg {
 
 class UsdPreviewSurfaceWriter : public BaseUsdMaterialWriter<UsdPreviewSurface> {
   public:
-    explicit UsdPreviewSurfaceWriter(UsdPreviewSurface &craygObject);
+    explicit UsdPreviewSurfaceWriter(UsdPreviewSurface &craygObject,
+                                     UsdShadingNodeWriteCache &usdShadingNodeWriteCache);
     pxr::UsdShadeMaterial write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 
   protected:

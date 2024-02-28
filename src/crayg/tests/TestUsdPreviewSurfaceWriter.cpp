@@ -1,3 +1,4 @@
+#include "scene/materials/ConstantShadingNodes.h"
 #include "scene/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "sceneIO/write/usd/materials/UsdMaterialWriteCache.h"
@@ -10,9 +11,14 @@ TEST_CASE("UsdPreviewSurfaceWriter::write") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
-    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
+    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory, usdShadingNodeWriteCache);
+
+    auto colorConstant = std::make_shared<ColorConstant>(Color(1.5f, 2.5f, 3.5f));
+
     auto material = std::make_shared<UsdPreviewSurface>("myMat");
     material->diffuseColor = Color(1, 2, 3);
+    material->diffuseColor.connectTo(colorConstant);
     material->emissiveColor = Color(4, 5, 6);
     material->useSpecularWorkflow = true;
     material->specularColor = Color(7, 8, 9);
@@ -28,6 +34,7 @@ TEST_CASE("UsdPreviewSurfaceWriter::write") {
         usdMaterialWriteCache.getCachedUsdMaterial(material);
 
         auto matPrim = pxr::UsdShadeMaterial(stage->GetPrimAtPath(pxr::SdfPath("/myMat")));
+        auto colorConstantPrim = pxr::UsdShadeMaterial(stage->GetPrimAtPath(pxr::SdfPath("/ColorConstant0")));
 
         auto d = matPrim.ComputeSurfaceSource().GetPath().GetString();
         auto shaderPrim = pxr::UsdShadeShader(stage->GetPrimAtPath(pxr::SdfPath("/myMat/UsdPreviewSurface")));
@@ -36,6 +43,9 @@ TEST_CASE("UsdPreviewSurfaceWriter::write") {
         auto diffuseColor =
             UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("diffuseColor")));
         REQUIRE(diffuseColor == pxr::GfVec3f(1, 2, 3));
+        auto constantColorValue =
+            UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(colorConstantPrim.GetInput(pxr::TfToken("value")));
+        REQUIRE(constantColorValue == pxr::GfVec3f(1.5f, 2.5f, 3.5f));
         auto emissiveColor =
             UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(shaderPrim.GetInput(pxr::TfToken("emissiveColor")));
         REQUIRE(emissiveColor == pxr::GfVec3f(4, 5, 6));

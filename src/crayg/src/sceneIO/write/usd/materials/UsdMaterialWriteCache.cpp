@@ -6,8 +6,9 @@
 
 namespace crayg {
 
-UsdMaterialWriteCache::UsdMaterialWriteCache(const pxr::UsdStagePtr &usdStagePtr, UsdPathFactory &usdPathFactory)
-    : stage(usdStagePtr), usdPathFactory(usdPathFactory) {
+UsdMaterialWriteCache::UsdMaterialWriteCache(const pxr::UsdStagePtr &usdStagePtr, UsdPathFactory &usdPathFactory,
+                                             UsdShadingNodeWriteCache &usdShadingNodeWriteCache)
+    : stage(usdStagePtr), usdPathFactory(usdPathFactory), usdShadingNodeWriteCache(usdShadingNodeWriteCache) {
 }
 
 pxr::UsdShadeMaterial UsdMaterialWriteCache::getCachedUsdMaterial(const std::shared_ptr<Material> material) {
@@ -22,7 +23,7 @@ pxr::UsdShadeMaterial UsdMaterialWriteCache::translateMaterial(const std::shared
 
     if (material->getType() == "UsdPreviewSurface") {
         const auto usdPreviewSurfaceMaterial = std::static_pointer_cast<UsdPreviewSurface>(material);
-        UsdPreviewSurfaceWriter usdPreviewSurfaceWriter(*usdPreviewSurfaceMaterial);
+        UsdPreviewSurfaceWriter usdPreviewSurfaceWriter(*usdPreviewSurfaceMaterial, usdShadingNodeWriteCache);
         return usdPreviewSurfaceWriter.write(stage, usdPathFactory);
     }
 

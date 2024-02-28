@@ -28,7 +28,8 @@ TEST_CASE("UsdMaterialWriteCache::getCachedUsdMaterial") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
-    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
+    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory, usdShadingNodeWriteCache);
     auto material = std::make_shared<UsdPreviewSurface>("myMat");
     material->diffuseColor = Color(1, 2, 3);
     material->emissiveColor = Color(4, 5, 6);

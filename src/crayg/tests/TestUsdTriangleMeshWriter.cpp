@@ -14,7 +14,8 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
 
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
-    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
+    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory, usdShadingNodeWriteCache);
 
     SECTION("should write triangle plane") {
         TriangleMesh triangleMesh;

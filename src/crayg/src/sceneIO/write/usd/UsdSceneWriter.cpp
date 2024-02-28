@@ -26,7 +26,8 @@ void crayg::UsdSceneWriter::writeScene(pxr::UsdStagePtr stage) {
     }
 
     UsdRenderSettingsWriter(scene.renderSettings).write(stage);
-    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory);
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
+    UsdMaterialWriteCache usdMaterialWriteCache(stage, usdPathFactory, usdShadingNodeWriteCache);
 
     for (auto sceneObject : scene.objects) {
         if (sceneObject->getType() == "Sphere") {

@@ -5,6 +5,7 @@
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include "sceneIO/write/usd/base/BaseUsdWriter.h"
+#include "sceneIO/write/usd/materials/UsdShadingNodeWriteCache.h"
 #include <memory>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdShade/material.h>
@@ -13,7 +14,9 @@ namespace crayg {
 
 template <class CraygType> class BaseUsdMaterialWriter : public BaseUsdWriter<pxr::UsdShadeMaterial, CraygType> {
   public:
-    BaseUsdMaterialWriter(CraygType &craygObject) : BaseUsdWriter<pxr::UsdShadeMaterial, CraygType>(craygObject) {
+    BaseUsdMaterialWriter(CraygType &craygObject, UsdShadingNodeWriteCache &usdShadingNodeWriteCache)
+        : BaseUsdWriter<pxr::UsdShadeMaterial, CraygType>(craygObject),
+          usdShadingNodeWriteCache(usdShadingNodeWriteCache) {
     }
 
     virtual pxr::UsdShadeMaterial write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
@@ -32,6 +35,7 @@ template <class CraygType> class BaseUsdMaterialWriter : public BaseUsdWriter<px
 
   protected:
     virtual std::string getTranslatedType() = 0;
+    UsdShadingNodeWriteCache &usdShadingNodeWriteCache;
 };
 
 } // crayg
