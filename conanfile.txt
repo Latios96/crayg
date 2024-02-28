@@ -63,4 +63,3 @@ lib,*.so*->./lib
 
 [generators]
 cmake_find_package_multi
-qt
