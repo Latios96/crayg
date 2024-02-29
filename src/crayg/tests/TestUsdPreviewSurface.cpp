@@ -1,4 +1,5 @@
 #include "integrators/AbstractIntegrator.h"
+#include "scene/primitives/Sphere.h"
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
@@ -6,7 +7,8 @@
 namespace crayg {
 
 TEST_CASE("UsdPreviewSurface::evaluate") {
-    SurfaceInteraction surfaceInteraction({0, 0, 0}, {0, 1, 0}, {{1, 1, 0}, {-1, -1, 0}});
+    auto sphere = std::make_shared<Sphere>();
+    SurfaceInteraction surfaceInteraction(*sphere, {0, 0, 0}, {0, 1, 0}, {{1, 1, 0}, {-1, -1, 0}});
     fakeit::Mock<AbstractIntegrator> mockAbstractIntegrator;
     IntegratorContext integratorContext(mockAbstractIntegrator.get(), 0);
 

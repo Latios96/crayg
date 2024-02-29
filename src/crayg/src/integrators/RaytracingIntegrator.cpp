@@ -24,7 +24,7 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
     const Vector3f location = ray.constructIntersectionPoint(intersection.rayParameter);
     Imageable &object = *intersection.imageable;
     const Vector3f normal = object.getNormal(location);
-    const SurfaceInteraction surfaceInteraction = SurfaceInteraction(location, normal, ray);
+    const SurfaceInteraction surfaceInteraction = SurfaceInteraction(object, location, normal, ray);
     IntegratorContext integratorContext = createIntegratorContext(recursionDepth);
     Color shadedColor = object.getMaterial()->evaluate(surfaceInteraction, integratorContext);
 

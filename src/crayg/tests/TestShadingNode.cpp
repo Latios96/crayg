@@ -1,3 +1,4 @@
+#include "scene/primitives/Sphere.h"
 #include "scene/shadingnetworks/ShadingNode.h"
 #include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
 #include <catch2/catch.hpp>
@@ -83,7 +84,8 @@ TEST_CASE("ShadingNodeInput::evaluate") {
     std::shared_ptr<FloatConstant> myFloatShadingNode = std::make_shared<FloatConstant>();
     std::shared_ptr<Vector2fConstant> myVector2FShadingNode = std::make_shared<Vector2fConstant>();
     std::shared_ptr<MyShadingNodeWithInputs> myShadingNodeWithInputs = std::make_shared<MyShadingNodeWithInputs>();
-    SurfaceInteraction surfaceInteraction({}, {}, {{}, {}});
+    std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>();
+    SurfaceInteraction surfaceInteraction(*sphere, {}, {}, {{}, {}});
 
     SECTION("should return connect input for FloatShadingNodeInput") {
         myShadingNodeWithInputs->floatInput.connectTo(myFloatShadingNode);

@@ -2,9 +2,9 @@
 
 namespace crayg {
 
-SurfaceInteraction::SurfaceInteraction(const crayg::Vector3f &point, const crayg::Vector3f &normal,
-                                       const crayg::Ray &ray)
-    : point(point), normal(normal), ray(ray) {
+SurfaceInteraction::SurfaceInteraction(Imageable &imageable, const crayg::Vector3f &point,
+                                       const crayg::Vector3f &normal, const crayg::Ray &ray)
+    : imageable(imageable), point(point), normal(normal), ray(ray) {
 }
 
 Ray SurfaceInteraction::spawnRayFromSurface(const Vector3f &direction) const {

@@ -234,6 +234,8 @@ set(crayg_SRCS
     scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h
     scene/shadingnetworks/shadingnodes/ConversionNodes.cpp
     scene/shadingnetworks/shadingnodes/ConversionNodes.h
+    scene/shadingnetworks/shadingnodes/PrimVarReaders.cpp
+    scene/shadingnetworks/shadingnodes/PrimVarReaders.h
     scene/Transformable.cpp
     scene/Transformable.h
     sceneIO/read/SceneReader.cpp

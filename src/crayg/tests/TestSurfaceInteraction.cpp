@@ -1,10 +1,12 @@
+#include "scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>
 #include <integrators/SurfaceInteraction.h>
 
 namespace crayg {
 
 TEST_CASE("SurfaceInteraction::spawnRayFromSurface") {
-    const SurfaceInteraction surfaceInteraction({0, 0, 0}, {0, 1, 0}, {{0, 1, -1}, {0, -1, 1}});
+    auto sphere = std::make_shared<Sphere>();
+    const SurfaceInteraction surfaceInteraction(*sphere, {0, 0, 0}, {0, 1, 0}, {{0, 1, -1}, {0, -1, 1}});
 
     const Ray spawnedRay = surfaceInteraction.spawnRayFromSurface({1, 1, 1});
 
@@ -12,7 +14,8 @@ TEST_CASE("SurfaceInteraction::spawnRayFromSurface") {
 }
 
 TEST_CASE("SurfaceInteraction::spawnReflectionRayFromSurface") {
-    const SurfaceInteraction surfaceInteraction({0, 0, 0}, {0, 1, 0}, {{0, 1, -1}, {0, -1, 1}});
+    auto sphere = std::make_shared<Sphere>();
+    const SurfaceInteraction surfaceInteraction(*sphere, {0, 0, 0}, {0, 1, 0}, {{0, 1, -1}, {0, -1, 1}});
 
     const Ray spawnedRay = surfaceInteraction.spawnReflectionRayFromSurface();
 

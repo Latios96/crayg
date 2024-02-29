@@ -5,9 +5,13 @@
 #include "basics/Vector3f.h"
 
 namespace crayg {
+
+class Imageable;
+
 class SurfaceInteraction {
   public:
-    SurfaceInteraction(const Vector3f &point, const Vector3f &normal, const Ray &ray);
+    SurfaceInteraction(Imageable &imageable, const Vector3f &point, const Vector3f &normal, const Ray &ray);
+    Imageable &imageable;
     Vector3f point;
     Vector3f normal;
     Ray ray;
