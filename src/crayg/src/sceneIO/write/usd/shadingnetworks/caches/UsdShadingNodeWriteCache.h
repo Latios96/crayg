@@ -9,8 +9,6 @@
 
 namespace crayg {
 
-// todo restructure: rename "materials" folder to "shadingnetworks", create subfolders for shadingnodes and materials
-// and a "caches" folder. create this structure in both USD io and in prod code
 class UsdShadingNodeWriteCache {
 
   public:
