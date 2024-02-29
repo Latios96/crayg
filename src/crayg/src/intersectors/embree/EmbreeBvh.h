@@ -8,7 +8,7 @@
 
 namespace crayg {
 
-enum EmbreePrimitiveType { TRIANGLE_MESH, SUBDIVISION_SURFACE_MESH, SPHERE };
+enum class EmbreePrimitiveType { TRIANGLE_MESH, SUBDIVISION_SURFACE_MESH, SPHERE };
 
 }
 
