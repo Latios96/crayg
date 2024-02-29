@@ -262,8 +262,14 @@ set(crayg_SRCS
     sceneIO/read/usd/primitives/UsdSubdivisionSurfaceMeshReader.h
     sceneIO/read/usd/shadingnetworks/caches/UsdMaterialReadCache.cpp
     sceneIO/read/usd/shadingnetworks/caches/UsdMaterialReadCache.h
+    sceneIO/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.cpp
+    sceneIO/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h
     sceneIO/read/usd/shadingnetworks/materials/UsdPreviewSurfaceReader.cpp
     sceneIO/read/usd/shadingnetworks/materials/UsdPreviewSurfaceReader.h
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.cpp
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.cpp
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.h
     sceneIO/read/usd/UsdRenderSettingsReader.cpp
     sceneIO/read/usd/UsdRenderSettingsReader.h
     sceneIO/read/usd/UsdSceneReader.cpp

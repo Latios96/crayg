@@ -114,7 +114,9 @@ set(UNIT_TEST_SOURCE_LIST
     TestUnitImageSampler.cpp
     TestUsdCameraReader.cpp
     TestUsdCameraWriter.cpp
+    TestUsdConstantShadingNodeReaders.cpp
     TestUsdConstantShadingNodeWriters.cpp
+    TestUsdConversionNodesReaders.cpp
     TestUsdConversionNodesWriters.cpp
     TestUsdConversions.cpp
     TestUsdDiskLightReader.cpp
