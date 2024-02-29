@@ -25,11 +25,11 @@ UsdIntConstantReader::UsdIntConstantReader(const pxr::UsdShadeShader &usdPrim,
 }
 
 std::shared_ptr<IntConstant> UsdIntConstantReader::read() {
-    auto IntConstant = BaseUsdShadingNodeReader::read();
+    auto intConstant = BaseUsdShadingNodeReader::read();
 
-    UsdShadingNodeReadUtils::readShaderAttributeValue<int, int>(usdPrim, "value", IntConstant->value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<int, int>(usdPrim, "value", intConstant->value);
 
-    return IntConstant;
+    return intConstant;
 }
 
 std::string UsdIntConstantReader::getTranslatedType() {
@@ -42,12 +42,12 @@ UsdVector2fConstantReader::UsdVector2fConstantReader(const pxr::UsdShadeShader &
 }
 
 std::shared_ptr<Vector2fConstant> UsdVector2fConstantReader::read() {
-    auto Vector2fConstant = BaseUsdShadingNodeReader::read();
+    auto vector2fConstant = BaseUsdShadingNodeReader::read();
 
     UsdShadingNodeReadUtils::readShaderAttributeValue<Vector2f, pxr::GfVec2f>(usdPrim, "value",
-                                                                              Vector2fConstant->value);
+                                                                              vector2fConstant->value);
 
-    return Vector2fConstant;
+    return vector2fConstant;
 }
 
 std::string UsdVector2fConstantReader::getTranslatedType() {
@@ -60,11 +60,11 @@ UsdColorConstantReader::UsdColorConstantReader(const pxr::UsdShadeShader &usdPri
 }
 
 std::shared_ptr<ColorConstant> UsdColorConstantReader::read() {
-    auto ColorConstant = BaseUsdShadingNodeReader::read();
+    auto colorConstant = BaseUsdShadingNodeReader::read();
 
-    UsdShadingNodeReadUtils::readShaderAttributeValue<Color, pxr::GfVec3f>(usdPrim, "value", ColorConstant->value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<Color, pxr::GfVec3f>(usdPrim, "value", colorConstant->value);
 
-    return ColorConstant;
+    return colorConstant;
 }
 
 std::string UsdColorConstantReader::getTranslatedType() {
