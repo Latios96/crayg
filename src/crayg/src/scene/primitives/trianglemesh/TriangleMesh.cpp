@@ -12,7 +12,7 @@ bool TriangleMesh::isIntersecting(Ray ray) {
 
 Imageable::Intersection TriangleMesh::intersect(Ray ray) {
     if (boundingBox.isIntersecting(ray)) {
-        Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr);
+        Imageable::Intersection hitIntersection(std::numeric_limits<float>::max(), nullptr, ImageableType::INVALID);
 
         for (auto id : faceIds()) {
             Triangle triangle(this, id);
@@ -21,7 +21,7 @@ Imageable::Intersection TriangleMesh::intersect(Ray ray) {
         }
         return hitIntersection;
     } else {
-        return {std::numeric_limits<float>::max(), nullptr};
+        return {std::numeric_limits<float>::max(), nullptr, ImageableType::INVALID};
     }
 }
 

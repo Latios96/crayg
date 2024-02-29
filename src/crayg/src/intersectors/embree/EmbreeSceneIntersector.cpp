@@ -68,7 +68,7 @@ Imageable::Intersection
 EmbreeSceneIntersector::mapToSphere(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
                                     const std::vector<std::shared_ptr<SceneObject>> &objects) const {
     auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
-    return {rtcRayHit.ray.tfar, sceneObject.get(), false};
+    return {rtcRayHit.ray.tfar, sceneObject.get(), false, ImageableType::SPHERE};
 }
 
 Imageable::Intersection
@@ -80,7 +80,7 @@ EmbreeSceneIntersector::mapToInstancedSphere(const RTCRayHit &rtcRayHit, const E
     auto instancedSphere = new Sphere();
     instancedSphere->setTransform(*instanceTransform * sphere->getTransform());
     instancedSphere->setRadius(sphere->getRadius());
-    return {rtcRayHit.ray.tfar, instancedSphere, true};
+    return {rtcRayHit.ray.tfar, instancedSphere, true, ImageableType::SPHERE};
 }
 
 Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &rtcRayHit,
@@ -90,7 +90,7 @@ Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &r
     auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
     auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
     auto triangle = new Triangle(triangleMesh.get(), rtcRayHit.hit.primID, instanceTransform);
-    return {rtcRayHit.ray.tfar, triangle, true};
+    return {rtcRayHit.ray.tfar, triangle, true, ImageableType::TRIANGLE};
 }
 
 Imageable::Intersection EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(
@@ -99,7 +99,7 @@ Imageable::Intersection EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(
     auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
     auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
     auto triangle = new Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID, instanceTransform);
-    return {rtcRayHit.ray.tfar, triangle, true};
+    return {rtcRayHit.ray.tfar, triangle, true, ImageableType::TRIANGLE};
 }
 
 EmbreeSceneIntersector::~EmbreeSceneIntersector() = default;

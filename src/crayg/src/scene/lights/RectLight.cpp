@@ -35,7 +35,7 @@ Imageable::Intersection RectLight::intersect(Ray ray) {
     const float distanceToCenter = (pointOnPlane - center).lengthSquared();
     const bool isIntersecting = distanceToCenter <= (pow(width, 2));
     if (isIntersecting) {
-        return Imageable::Intersection(t, this);
+        return Imageable::Intersection(t, this, ImageableType::INVALID);
     }
     return Imageable::Intersection::createInvalid();
 }

@@ -49,7 +49,8 @@ TEST_CASE("RaytracingIntegrator::calculateDirectLight") {
 
     SECTION("should return 0 if light is occluded") {
         std::unique_ptr<Sphere> sphere = std::make_unique<Sphere>(Vector3f(), 1.0f);
-        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1, sphere.get()));
+        fakeit::When(Method(mockSceneIntersector, intersect))
+            .Return(Imageable::Intersection(1, sphere.get(), ImageableType::SPHERE));
 
         const Color lightContribution = raytracingIntegrator.calculateDirectLight(light, {0, 0, 0}, {0, -1, 0});
 

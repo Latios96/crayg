@@ -4,8 +4,8 @@
 
 namespace crayg {
 
-Imageable::Intersection::Intersection(float rayParameter, Imageable *imageable)
-    : rayParameter(rayParameter), imageable(imageable) {
+Imageable::Intersection::Intersection(float rayParameter, Imageable *imageable, ImageableType imageableType)
+    : rayParameter(rayParameter), imageable(imageable), imageableType(imageableType) {
 }
 
 Imageable::Intersection Imageable::Intersection::nearest(const Imageable::Intersection &first,
@@ -16,8 +16,9 @@ Imageable::Intersection Imageable::Intersection::nearest(const Imageable::Inters
     return second;
 }
 
-Imageable::Intersection::Intersection(float rayParameter, Imageable *imageable, bool isOwning)
-    : rayParameter(rayParameter), imageable(imageable), isOwning(isOwning) {
+Imageable::Intersection::Intersection(float rayParameter, Imageable *imageable, bool isOwning,
+                                      ImageableType imageableType)
+    : rayParameter(rayParameter), imageable(imageable), isOwning(isOwning), imageableType(imageableType) {
 }
 
 Imageable::Intersection::~Intersection() {
