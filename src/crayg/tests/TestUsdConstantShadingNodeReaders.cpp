@@ -8,7 +8,7 @@ namespace crayg {
 TEST_CASE("TestUsdFloatConstantReader::read") {
     auto stage = pxr::UsdStage::CreateInMemory();
     auto usdFloatConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/FloatConstant"));
-    usdFloatConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg::FloatConstant")));
+    usdFloatConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:FloatConstant")));
     usdFloatConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Float).Set(0.1f);
 
     SECTION("should read correctly") {
@@ -23,7 +23,7 @@ TEST_CASE("TestUsdFloatConstantReader::read") {
 TEST_CASE("TestUsdIntConstantReader::read") {
     auto stage = pxr::UsdStage::CreateInMemory();
     auto usdIntConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/IntConstant"));
-    usdIntConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg::IntConstant")));
+    usdIntConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:IntConstant")));
     usdIntConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Int).Set(1);
 
     SECTION("should read correctly") {
@@ -38,7 +38,7 @@ TEST_CASE("TestUsdIntConstantReader::read") {
 TEST_CASE("TestUsdVector2fConstantReader::read") {
     auto stage = pxr::UsdStage::CreateInMemory();
     auto usdVector2fConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/Vector2fConstant"));
-    usdVector2fConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg::Vector2fConstant")));
+    usdVector2fConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:Vector2fConstant")));
     usdVector2fConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Float2).Set(pxr::GfVec2f(1, 2));
 
     SECTION("should read correctly") {
@@ -53,7 +53,7 @@ TEST_CASE("TestUsdVector2fConstantReader::read") {
 TEST_CASE("TestUsdColorConstantReader::read") {
     auto stage = pxr::UsdStage::CreateInMemory();
     auto usdColorConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/ColorConstant"));
-    usdColorConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg::ColorConstant")));
+    usdColorConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:ColorConstant")));
     usdColorConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Vector3f).Set(pxr::GfVec3f(1, 2, 3));
 
     SECTION("should read correctly") {
