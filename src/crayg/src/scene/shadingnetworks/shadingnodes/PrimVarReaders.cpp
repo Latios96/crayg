@@ -6,13 +6,13 @@ namespace crayg {
 
 Vector2f PrimVarReaderVector2f::evaluateVector2f(const SurfaceInteraction &surfaceInteraction) {
     if (primVarReaderType == PrimVarReaderType::UNKNOWN) {
-        return Vector2f();
+        return {};
     }
     if (primVarReaderType == PrimVarReaderType::UV) {
         return readUvs(surfaceInteraction);
     }
 
-    return Vector2f();
+    return {};
 }
 
 Vector2f PrimVarReaderVector2f::readUvs(const SurfaceInteraction &surfaceInteraction) {
