@@ -5,6 +5,10 @@
 namespace crayg {
 
 void ShadingNodeInput::connectTo(const std::shared_ptr<ShadingNode> &newInput) {
+    if (!newInput) {
+        inputNode = nullptr;
+        return;
+    }
     if (!isCompatibleTo(newInput->getOutputType())) {
         CRAYG_LOG_AND_THROW(
             std::runtime_error(fmt::format("Can not connect ShadingNode '{}' of type {} to Input of type {}",

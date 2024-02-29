@@ -66,6 +66,15 @@ TEST_CASE("ShadingNodeInput::connect") {
         REQUIRE_THROWS_AS(myShadingNodeWithInputs->colorInput.connectTo(myFloatShadingNode), std::runtime_error);
         REQUIRE_THROWS_AS(myShadingNodeWithInputs->colorInput.connectTo(myVector2FShadingNode), std::runtime_error);
     }
+
+    SECTION("connecting to nullptr should clear connection") {
+        myShadingNodeWithInputs->colorInput.connectTo(myColorShadingNode);
+        REQUIRE(myShadingNodeWithInputs->colorInput.inputNode != nullptr);
+
+        myShadingNodeWithInputs->colorInput.connectTo(nullptr);
+
+        REQUIRE(myShadingNodeWithInputs->colorInput.inputNode == nullptr);
+    }
 }
 
 TEST_CASE("ShadingNodeInput::evaluate") {
