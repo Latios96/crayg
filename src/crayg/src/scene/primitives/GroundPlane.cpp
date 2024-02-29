@@ -20,7 +20,7 @@ Imageable::Intersection GroundPlane::intersect(Ray ray) {
         const float t = -(normal.dot(ray.startPoint) + getPosition().length()) / scalar;
 
         if (t > 0) {
-            return {t, this, ImageableType::INVALID};
+            return {t, this};
         }
         return Imageable::Intersection::createInvalid();
     }

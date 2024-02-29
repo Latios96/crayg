@@ -11,8 +11,6 @@
 
 namespace crayg {
 
-enum class ImageableType { INVALID, TRIANGLE, SPHERE };
-
 class Imageable {
   public:
     virtual Vector3f getNormal(Vector3f point) = 0;
@@ -21,7 +19,7 @@ class Imageable {
     class Intersection {
       public:
         static Intersection createInvalid() {
-            return {std::numeric_limits<float>::max(), nullptr, ImageableType::INVALID};
+            return {std::numeric_limits<float>::max(), nullptr};
         }
 
         Intersection() {
@@ -29,19 +27,17 @@ class Imageable {
             imageable = nullptr;
         }
 
-        Intersection(float rayParameter, Imageable *imageable, ImageableType imageableType);
-        Intersection(float rayParameter, Imageable *imageable, bool isOwning, ImageableType imageableType);
+        Intersection(float rayParameter, Imageable *imageable);
+        Intersection(float rayParameter, Imageable *imageable, bool isOwning);
 
         Intersection(const Intersection &intersection) {
             this->rayParameter = intersection.rayParameter;
             this->imageable = intersection.imageable;
-            this->imageableType = intersection.imageableType;
         }
 
         float rayParameter;
         Imageable *imageable;
         bool isOwning = false;
-        ImageableType imageableType;
 
         bool isValid() const {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
@@ -69,7 +65,5 @@ class Imageable {
 };
 
 }
-
-CRAYG_FMT_ENUM_FORMATTER(crayg::ImageableType);
 
 #endif // CRAYG_IMAGEABLE_H

@@ -34,7 +34,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     float det = v0v1.dot(pvec);
 
     if (det < 0.000001) {
-        return {std::numeric_limits<float>::max(), nullptr, ImageableType::INVALID};
+        return {std::numeric_limits<float>::max(), nullptr};
     }
 
     float invDet = 1.0f / det;
@@ -46,7 +46,7 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     float u = tvec.dot(pvec) * invDet;
 
     if (u < 0 || u > 1) {
-        return {std::numeric_limits<float>::max(), nullptr, ImageableType::INVALID};
+        return {std::numeric_limits<float>::max(), nullptr};
     }
 
     // Vec3 qvec = cross(tvec, v0v1);
@@ -56,10 +56,10 @@ Imageable::Intersection Triangle::getIntersectionMullerTrumbore(const Ray &ray) 
     float v = ray.direction.dot(qvec) * invDet;
 
     if (v < 0 || u + v > 1) {
-        return {std::numeric_limits<float>::max(), nullptr, ImageableType::INVALID};
+        return {std::numeric_limits<float>::max(), nullptr};
     }
     // dot(v0v2, qvec) * invDet;
-    return {v0v2.dot(qvec) * invDet, this, ImageableType::TRIANGLE};
+    return {v0v2.dot(qvec) * invDet, this};
 }
 
 bool Triangle::isIntersecting(Ray ray) {

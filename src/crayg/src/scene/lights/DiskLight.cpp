@@ -27,7 +27,7 @@ Imageable::Intersection DiskLight::intersect(Ray ray) {
     const float distanceToCenter = (pointOnPlane - center).lengthSquared();
     const bool isIntersecting = distanceToCenter <= (pow(radius, 2));
     if (isIntersecting) {
-        return Imageable::Intersection(t, this, ImageableType::INVALID);
+        return Imageable::Intersection(t, this);
     }
     return Imageable::Intersection::createInvalid();
 }

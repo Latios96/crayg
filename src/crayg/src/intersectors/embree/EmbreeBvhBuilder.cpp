@@ -109,11 +109,11 @@ RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_p
         if (sceneObject->getType() == "TriangleMesh") {
             auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
             unsigned int geomId = addTriangleMesh(device, rtcScene, *triangleMesh);
-            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::TRIANGLE_MESH);
+            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, TRIANGLE_MESH);
         } else if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
             auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
             unsigned int geomId = addTriangleMesh(device, rtcScene, subdivisionSurfaceMesh->triangleMesh);
-            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::SUBDIVISION_SURFACE_MESH);
+            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, SUBDIVISION_SURFACE_MESH);
         } else if (sceneObject->getType() == "Sphere") {
             auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
             unsigned int geomId = addSphere(device, rtcScene, sphere);

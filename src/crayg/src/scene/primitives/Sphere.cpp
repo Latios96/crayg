@@ -17,11 +17,11 @@ Sphere::Intersection Sphere::intersect(Ray ray) {
     const bool isTangent = d == 0;
 
     if (noIntersection) {
-        return {std::numeric_limits<float>::max(), nullptr, ImageableType::INVALID};
+        return {std::numeric_limits<float>::max(), nullptr};
     } else if (isTangent) {
         // only one solution, calculate t
         const float t0 = (float)(b * (-1.0) / 2.0);
-        return {t0, this, ImageableType::SPHERE};
+        return {t0, this};
     } else {
         const double sqrtD = sqrt(d);
 
@@ -29,9 +29,9 @@ Sphere::Intersection Sphere::intersect(Ray ray) {
 
         // if t0 > 0 its the point we want to render
         if (t0 > 0) {
-            return {t0, this, ImageableType::SPHERE};
+            return {t0, this};
         } else {
-            return {std::numeric_limits<float>::max(), nullptr, ImageableType::SPHERE};
+            return {std::numeric_limits<float>::max(), nullptr};
         }
     }
 }

@@ -15,8 +15,7 @@ TEST_CASE("DebugIntegrator::integrate") {
         std::unique_ptr<Sphere> sphere = std::make_unique<Sphere>(Vector3f(), 1.0f);
         auto testData = GENERATE(table<Vector3f, Color>(
             {{{0, 0, -5}, Color::createGrey(1)}, {{-1, 0, -5}, Color::createGrey(0.97014254f)}}));
-        fakeit::When(Method(mockSceneIntersector, intersect))
-            .Return(Imageable::Intersection(1, sphere.get(), ImageableType::SPHERE));
+        fakeit::When(Method(mockSceneIntersector, intersect)).Return(Imageable::Intersection(1, sphere.get()));
         fakeit::Fake((mockSceneIntersector.dtor()));
         auto sceneIntersector = std::shared_ptr<SceneIntersector>(&mockSceneIntersector.get());
         DebugIntegrator debugIntegrator(scene, sceneIntersector);
