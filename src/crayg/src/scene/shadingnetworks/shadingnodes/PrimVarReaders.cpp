@@ -15,20 +15,20 @@ Vector2f PrimVarReaderVector2f::evaluateVector2f(const SurfaceInteraction &surfa
     return Vector2f();
 }
 
-std::string PrimVarReaderVector2f::getType() const {
-    return "PrimVarReaderVector2f";
-}
-
-ShadingNodeOutputType PrimVarReaderVector2f::getOutputType() {
-    return VECTOR2F;
-}
-
 Vector2f PrimVarReaderVector2f::readUvs(const SurfaceInteraction &surfaceInteraction) {
     if (surfaceInteraction.imageable.imageableType == ImageableType::TRIANGLE) {
         Triangle *triangle = (Triangle *)&surfaceInteraction.imageable;
         return triangle->triangleMesh->uvsPrimVar->interpolateAt(triangle->faceId, surfaceInteraction.point);
     }
     return {};
+}
+
+std::string PrimVarReaderVector2f::getType() const {
+    return "PrimVarReaderVector2f";
+}
+
+ShadingNodeOutputType PrimVarReaderVector2f::getOutputType() {
+    return VECTOR2F;
 }
 
 } // crayg
