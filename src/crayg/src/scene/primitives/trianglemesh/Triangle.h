@@ -12,14 +12,17 @@ class Triangle : public Imageable {
     Triangle() {
         triangleMesh = nullptr;
         faceId = 0;
+        imageableType = ImageableType::TRIANGLE;
     }
 
     Triangle(TriangleMesh *triangleMesh, std::size_t faceId) : triangleMesh(triangleMesh), faceId(faceId) {
+        imageableType = ImageableType::TRIANGLE;
     }
 
     Triangle(TriangleMesh *triangleMesh, std::size_t faceId, Transform *instanceTransform)
         : Triangle(triangleMesh, faceId) {
         this->instanceTransform = instanceTransform;
+        imageableType = ImageableType::TRIANGLE;
     }
 
     bool isIntersecting(Ray ray) override;

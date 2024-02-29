@@ -52,6 +52,7 @@ bool Sphere::isIntersecting(Ray ray) {
 }
 
 Sphere::Sphere(Vector3f position, float radius) : SceneObject(position), radius(radius) {
+    imageableType = ImageableType::SPHERE;
 }
 
 float Sphere::getRadius() const {
@@ -62,6 +63,7 @@ Sphere::~Sphere() = default;
 
 Sphere::Sphere() {
     radius = 0;
+    imageableType = ImageableType::SPHERE;
 }
 
 Vector3f Sphere::getNormal(Vector3f point) {

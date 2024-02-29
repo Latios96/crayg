@@ -11,6 +11,8 @@
 
 namespace crayg {
 
+enum class ImageableType { INVALID, TRIANGLE, SPHERE };
+
 class Imageable {
   public:
     virtual Vector3f getNormal(Vector3f point) = 0;
@@ -56,6 +58,8 @@ class Imageable {
     virtual std::shared_ptr<Material> &getMaterial();
     void setMaterial(const std::shared_ptr<Material> &material);
     virtual ~Imageable() = default;
+
+    ImageableType imageableType;
 
   protected:
     Transform *instanceTransform = nullptr;
