@@ -6,6 +6,7 @@
 #include "intersectors/IntersectorType.h"
 #include "renderer/bucketsamplers/BucketSamplerType.h"
 #include "scene/camera/CameraType.h"
+#include "scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
 #include <fmt/format.h>
 #include <pxr/usd/sdf/types.h>
 #include <pxr/usd/sdf/valueTypeName.h>
@@ -76,6 +77,14 @@ template <> struct UsdTypeUtil<BucketSamplerType> {
 
     static pxr::TfToken convert(BucketSamplerType bucketSamplerType) {
         return pxr::TfToken(fmt::format("{}", bucketSamplerType));
+    }
+};
+
+template <> struct UsdTypeUtil<PrimVarReaderType> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(PrimVarReaderType primVarReaderType) {
+        return pxr::TfToken(fmt::format("{}", primVarReaderType));
     }
 };
 

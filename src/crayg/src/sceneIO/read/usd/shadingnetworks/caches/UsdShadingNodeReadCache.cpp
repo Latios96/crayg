@@ -1,6 +1,7 @@
 #include "UsdShadingNodeReadCache.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.h"
+#include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderReaders.h"
 
 namespace crayg {
 std::shared_ptr<ShadingNode> UsdShadingNodeReadCache::getCachedOrReadShadingNode(pxr::UsdShadeShader &shader) {
@@ -33,6 +34,10 @@ std::shared_ptr<ShadingNode> UsdShadingNodeReadCache::translateShadingNode(pxr::
     } else if (shadingNodeId == pxr::TfToken("crayg:Vector2fToColor")) {
         UsdVector2fToColorReader vector2fToColorReader(shader, *this);
         return vector2fToColorReader.read();
+    } else if (shadingNodeId == pxr::TfToken("UsdPrimvarReader_float2") ||
+               shadingNodeId == pxr::TfToken("crayg:PrimVarReaderVector2f")) {
+        UsdPrimVarReaderVector2fReader primVarReaderVector2fReader(shader, *this);
+        return primVarReaderVector2fReader.read();
     }
 
     Logger::warning("ShadingNode of id '{}' is not supported!", shadingNodeId);
