@@ -8,7 +8,7 @@ namespace crayg {
 
 class UsdFloatConstantReader : public BaseUsdShadingNodeReader<FloatConstant> {
   public:
-    explicit UsdFloatConstantReader(const pxr::UsdShadeShader &usdPrim);
+    UsdFloatConstantReader(const pxr::UsdShadeShader &usdPrim, UsdShadingNodeReadCache &usdShadingNodeReadCache);
     std::shared_ptr<FloatConstant> read() override;
 
   protected:
@@ -17,7 +17,7 @@ class UsdFloatConstantReader : public BaseUsdShadingNodeReader<FloatConstant> {
 
 class UsdIntConstantReader : public BaseUsdShadingNodeReader<IntConstant> {
   public:
-    explicit UsdIntConstantReader(const pxr::UsdShadeShader &usdPrim);
+    UsdIntConstantReader(const pxr::UsdShadeShader &usdPrim, UsdShadingNodeReadCache &usdShadingNodeReadCache);
     std::shared_ptr<IntConstant> read() override;
 
   protected:
@@ -26,7 +26,7 @@ class UsdIntConstantReader : public BaseUsdShadingNodeReader<IntConstant> {
 
 class UsdVector2fConstantReader : public BaseUsdShadingNodeReader<Vector2fConstant> {
   public:
-    explicit UsdVector2fConstantReader(const pxr::UsdShadeShader &usdPrim);
+    UsdVector2fConstantReader(const pxr::UsdShadeShader &usdPrim, UsdShadingNodeReadCache &usdShadingNodeReadCache);
     std::shared_ptr<Vector2fConstant> read() override;
 
   protected:
@@ -35,7 +35,7 @@ class UsdVector2fConstantReader : public BaseUsdShadingNodeReader<Vector2fConsta
 
 class UsdColorConstantReader : public BaseUsdShadingNodeReader<ColorConstant> {
   public:
-    explicit UsdColorConstantReader(const pxr::UsdShadeShader &usdPrim);
+    UsdColorConstantReader(const pxr::UsdShadeShader &usdPrim, UsdShadingNodeReadCache &usdShadingNodeReadCache);
     std::shared_ptr<ColorConstant> read() override;
 
   protected:

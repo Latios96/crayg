@@ -9,9 +9,10 @@ TEST_CASE("TestUsdVector2fToColorReader::read") {
     auto stage = pxr::UsdStage::CreateInMemory();
     auto usdFloatConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/Vector2fToColor"));
     usdFloatConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:Vector2fToColor")));
+    UsdShadingNodeReadCache usdShadingNodeReadCache;
 
     SECTION("should read correctly") {
-        UsdVector2fToColorReader vector2fToColorReader(usdFloatConstant);
+        UsdVector2fToColorReader vector2fToColorReader(usdFloatConstant, usdShadingNodeReadCache);
 
         auto vector2FToColor = vector2fToColorReader.read();
 

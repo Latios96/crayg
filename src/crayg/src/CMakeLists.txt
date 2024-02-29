@@ -240,8 +240,8 @@ set(crayg_SRCS
     sceneIO/read/SceneReader.h
     sceneIO/read/usd/base/BaseUsdImageableReader.h
     sceneIO/read/usd/base/BaseUsdLightReader.h
-    sceneIO/read/usd/base/BaseUsdMaterialReader.cpp
     sceneIO/read/usd/base/BaseUsdReader.h
+    sceneIO/read/usd/base/BaseUsdShadingNodeReader.cpp
     sceneIO/read/usd/base/BaseUsdShadingNodeReader.h
     sceneIO/read/usd/base/BaseUsdXformableReader.h
     sceneIO/read/usd/camera/UsdCameraReader.cpp
@@ -270,6 +270,8 @@ set(crayg_SRCS
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.cpp
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.h
+    sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.cpp
+    sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h
     sceneIO/read/usd/UsdRenderSettingsReader.cpp
     sceneIO/read/usd/UsdRenderSettingsReader.h
     sceneIO/read/usd/UsdSceneReader.cpp

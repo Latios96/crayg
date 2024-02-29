@@ -2,8 +2,9 @@
 
 namespace crayg {
 
-UsdVector2fToColorReader::UsdVector2fToColorReader(const pxr::UsdShadeShader &usdPrim)
-    : BaseUsdShadingNodeReader(usdPrim) {
+UsdVector2fToColorReader::UsdVector2fToColorReader(const pxr::UsdShadeShader &usdPrim,
+                                                   UsdShadingNodeReadCache &usdShadingNodeReadCache)
+    : BaseUsdShadingNodeReader(usdPrim, usdShadingNodeReadCache) {
 }
 
 std::shared_ptr<Vector2fToColor> UsdVector2fToColorReader::read() {

@@ -10,9 +10,10 @@ TEST_CASE("TestUsdFloatConstantReader::read") {
     auto usdFloatConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/FloatConstant"));
     usdFloatConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:FloatConstant")));
     usdFloatConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Float).Set(0.1f);
+    UsdShadingNodeReadCache usdShadingNodeReadCache;
 
     SECTION("should read correctly") {
-        UsdFloatConstantReader usdFloatConstantReader(usdFloatConstant);
+        UsdFloatConstantReader usdFloatConstantReader(usdFloatConstant, usdShadingNodeReadCache);
 
         auto floatConstant = usdFloatConstantReader.read();
 
@@ -25,9 +26,10 @@ TEST_CASE("TestUsdIntConstantReader::read") {
     auto usdIntConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/IntConstant"));
     usdIntConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:IntConstant")));
     usdIntConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Int).Set(1);
+    UsdShadingNodeReadCache usdShadingNodeReadCache;
 
     SECTION("should read correctly") {
-        UsdIntConstantReader usdIntConstantReader(usdIntConstant);
+        UsdIntConstantReader usdIntConstantReader(usdIntConstant, usdShadingNodeReadCache);
 
         auto IntConstant = usdIntConstantReader.read();
 
@@ -40,9 +42,10 @@ TEST_CASE("TestUsdVector2fConstantReader::read") {
     auto usdVector2fConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/Vector2fConstant"));
     usdVector2fConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:Vector2fConstant")));
     usdVector2fConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Float2).Set(pxr::GfVec2f(1, 2));
+    UsdShadingNodeReadCache usdShadingNodeReadCache;
 
     SECTION("should read correctly") {
-        UsdVector2fConstantReader usdVector2fConstantReader(usdVector2fConstant);
+        UsdVector2fConstantReader usdVector2fConstantReader(usdVector2fConstant, usdShadingNodeReadCache);
 
         auto Vector2fConstant = usdVector2fConstantReader.read();
 
@@ -55,9 +58,10 @@ TEST_CASE("TestUsdColorConstantReader::read") {
     auto usdColorConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/ColorConstant"));
     usdColorConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:ColorConstant")));
     usdColorConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Vector3f).Set(pxr::GfVec3f(1, 2, 3));
+    UsdShadingNodeReadCache usdShadingNodeReadCache;
 
     SECTION("should read correctly") {
-        UsdColorConstantReader usdColorConstantReader(usdColorConstant);
+        UsdColorConstantReader usdColorConstantReader(usdColorConstant, usdShadingNodeReadCache);
 
         auto ColorConstant = usdColorConstantReader.read();
 

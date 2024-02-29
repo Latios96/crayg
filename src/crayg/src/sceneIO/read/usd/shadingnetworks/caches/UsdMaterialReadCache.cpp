@@ -35,7 +35,7 @@ std::shared_ptr<Material> UsdMaterialReadCache::translateMaterial(const pxr::Usd
         Logger::warning("Shader at {} is of id {}, which is not supported", shader.GetPath(), shaderId);
         return getDefaultMaterial();
     }
-    UsdPreviewSurfaceReader usdPreviewSurfaceReader(shader);
+    UsdPreviewSurfaceReader usdPreviewSurfaceReader(shader, usdShadingNodeReadCache);
     return usdPreviewSurfaceReader.read();
 }
 

@@ -8,7 +8,7 @@ namespace crayg {
 
 class UsdPreviewSurfaceReader : public BaseUsdShadingNodeReader<UsdPreviewSurface> {
   public:
-    explicit UsdPreviewSurfaceReader(const pxr::UsdShadeShader &usdPrim);
+    explicit UsdPreviewSurfaceReader(const pxr::UsdShadeShader &usdPrim, UsdShadingNodeReadCache &shadingNodeReadCache);
 
     std::shared_ptr<UsdPreviewSurface> read() override;
 

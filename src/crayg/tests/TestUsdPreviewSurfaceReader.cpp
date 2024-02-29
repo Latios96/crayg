@@ -89,9 +89,11 @@ TEST_CASE("UsdPreviewSurfaceReader::read") {
         REQUIRE(usdPreviewSurface->ior.value == specsDefaults.ior.value);
     }
 
-    SECTION("assigned UsdPreviewSurface with a connection in diffuseColor should fallback to authored value") {
-        auto usdUvTexture = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/material/UsdUVTexture"));
-        auto rgbOutput = usdUvTexture.CreateOutput(pxr::TfToken("rgb"), pxr::SdfValueTypeNames->Float3);
+    SECTION("assigned UsdPreviewSurface with a connection in diffuseColor should translate this connection") {
+        auto colorConstant = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/material/UsdUVTexture"));
+        colorConstant.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:ColorConstant")));
+        colorConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Color3f);
+        auto rgbOutput = colorConstant.CreateOutput(pxr::TfToken("rgb"), pxr::SdfValueTypeNames->Float3);
         UsdMaterialReadCache usdMaterialReadCache;
         pxr::UsdShadeMaterialBindingAPI bindingApi(geo.GetPrim());
         bindingApi.Bind(usdShadeMaterial);
@@ -106,6 +108,7 @@ TEST_CASE("UsdPreviewSurfaceReader::read") {
 
         REQUIRE(material->getName() == "/material/shader");
         REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor.value == Color::createGrey(0.5f));
+        REQUIRE(getAsUsdPreviewSurface(material)->diffuseColor.hasInputConnection());
     }
 
     SECTION("assigned UsdPreviewSurface with no connection, no authored value and no default value should fallback to "

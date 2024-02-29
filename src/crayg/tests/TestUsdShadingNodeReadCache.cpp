@@ -68,6 +68,20 @@ TEST_CASE("UsdShadingNodeReadCache::readCachedGraph") {
     auto usdColorInput = usdMaterialShader.CreateInput(pxr::TfToken("ColorInput"), pxr::SdfValueTypeNames->Vector3f);
     usdColorInput.Set(pxr::GfVec3f(4, 5, 6));
 
+    SECTION("should read connected float constant with no value authored") {
+        auto floatConstantNoValueAuthored = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/FloatConstant"));
+        floatConstantNoValueAuthored.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:FloatConstant")));
+        auto floatConstantNoValueAuthoredOutput =
+            floatConstantNoValueAuthored.CreateOutput(pxr::TfToken("out"), pxr::SdfValueTypeNames->Float);
+        usdFloatInput.ConnectToSource(floatConstantNoValueAuthoredOutput);
+        FloatShadingNodeInput targetInput;
+
+        usdShadingNodeReadCache.readCachedGraph(usdMaterialShader, usdFloatInput, targetInput);
+
+        REQUIRE(targetInput.value == 0.2f);
+        REQUIRE(targetInput.hasInputConnection());
+    }
+
     SECTION("should read float graph without connections") {
         FloatShadingNodeInput targetInput;
 

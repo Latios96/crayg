@@ -2,7 +2,9 @@
 
 namespace crayg {
 
-UsdFloatConstantReader::UsdFloatConstantReader(const pxr::UsdShadeShader &usdPrim) : BaseUsdShadingNodeReader(usdPrim) {
+UsdFloatConstantReader::UsdFloatConstantReader(const pxr::UsdShadeShader &usdPrim,
+                                               UsdShadingNodeReadCache &usdShadingNodeReadCache)
+    : BaseUsdShadingNodeReader(usdPrim, usdShadingNodeReadCache) {
 }
 
 std::shared_ptr<FloatConstant> UsdFloatConstantReader::read() {
@@ -17,7 +19,9 @@ std::string UsdFloatConstantReader::getTranslatedType() {
     return "FloatConstant";
 }
 
-UsdIntConstantReader::UsdIntConstantReader(const pxr::UsdShadeShader &usdPrim) : BaseUsdShadingNodeReader(usdPrim) {
+UsdIntConstantReader::UsdIntConstantReader(const pxr::UsdShadeShader &usdPrim,
+                                           UsdShadingNodeReadCache &usdShadingNodeReadCache)
+    : BaseUsdShadingNodeReader(usdPrim, usdShadingNodeReadCache) {
 }
 
 std::shared_ptr<IntConstant> UsdIntConstantReader::read() {
@@ -32,8 +36,9 @@ std::string UsdIntConstantReader::getTranslatedType() {
     return "IntConstant";
 }
 
-UsdVector2fConstantReader::UsdVector2fConstantReader(const pxr::UsdShadeShader &usdPrim)
-    : BaseUsdShadingNodeReader(usdPrim) {
+UsdVector2fConstantReader::UsdVector2fConstantReader(const pxr::UsdShadeShader &usdPrim,
+                                                     UsdShadingNodeReadCache &usdShadingNodeReadCache)
+    : BaseUsdShadingNodeReader(usdPrim, usdShadingNodeReadCache) {
 }
 
 std::shared_ptr<Vector2fConstant> UsdVector2fConstantReader::read() {
@@ -49,7 +54,9 @@ std::string UsdVector2fConstantReader::getTranslatedType() {
     return "Vector2fConstant";
 }
 
-UsdColorConstantReader::UsdColorConstantReader(const pxr::UsdShadeShader &usdPrim) : BaseUsdShadingNodeReader(usdPrim) {
+UsdColorConstantReader::UsdColorConstantReader(const pxr::UsdShadeShader &usdPrim,
+                                               UsdShadingNodeReadCache &usdShadingNodeReadCache)
+    : BaseUsdShadingNodeReader(usdPrim, usdShadingNodeReadCache) {
 }
 
 std::shared_ptr<ColorConstant> UsdColorConstantReader::read() {

@@ -1,6 +1,7 @@
 #ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDMATERIALREADCACHE_H_
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDMATERIALREADCACHE_H_
 
+#include "UsdShadingNodeReadCache.h"
 #include "scene/shadingnetworks/materials/Material.h"
 #include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/usd/UsdConversions.h"
@@ -24,6 +25,7 @@ class UsdMaterialReadCache {
 
     std::map<pxr::SdfPath, std::shared_ptr<Material>> materialCache;
     pxr::UsdTimeCode timeCodeToRead = pxr::UsdTimeCode::EarliestTime();
+    UsdShadingNodeReadCache usdShadingNodeReadCache;
 };
 
 }
