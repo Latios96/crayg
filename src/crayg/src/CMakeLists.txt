@@ -241,8 +241,8 @@ set(crayg_SRCS
     sceneIO/read/usd/base/BaseUsdImageableReader.h
     sceneIO/read/usd/base/BaseUsdLightReader.h
     sceneIO/read/usd/base/BaseUsdMaterialReader.cpp
-    sceneIO/read/usd/base/BaseUsdMaterialReader.h
     sceneIO/read/usd/base/BaseUsdReader.h
+    sceneIO/read/usd/base/BaseUsdShadingNodeReader.h
     sceneIO/read/usd/base/BaseUsdXformableReader.h
     sceneIO/read/usd/camera/UsdCameraReader.cpp
     sceneIO/read/usd/camera/UsdCameraReader.h

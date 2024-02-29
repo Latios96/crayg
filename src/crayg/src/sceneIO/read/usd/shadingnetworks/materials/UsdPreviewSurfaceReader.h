@@ -2,11 +2,11 @@
 #define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_MATERIALS_USDPREVIEWSURFACEREADER_H_
 
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
-#include "sceneIO/read/usd/base/BaseUsdMaterialReader.h"
+#include "sceneIO/read/usd/base/BaseUsdShadingNodeReader.h"
 
 namespace crayg {
 
-class UsdPreviewSurfaceReader : public BaseUsdMaterialReader<UsdPreviewSurface> {
+class UsdPreviewSurfaceReader : public BaseUsdShadingNodeReader<UsdPreviewSurface> {
   public:
     explicit UsdPreviewSurfaceReader(const pxr::UsdShadeShader &usdPrim);
 

@@ -1,24 +1,25 @@
 #include "UsdPreviewSurfaceReader.h"
 
 namespace crayg {
-UsdPreviewSurfaceReader::UsdPreviewSurfaceReader(const pxr::UsdShadeShader &usdPrim) : BaseUsdMaterialReader(usdPrim) {
+UsdPreviewSurfaceReader::UsdPreviewSurfaceReader(const pxr::UsdShadeShader &usdPrim)
+    : BaseUsdShadingNodeReader(usdPrim) {
 }
 
 std::shared_ptr<UsdPreviewSurface> UsdPreviewSurfaceReader::read() {
-    auto material = BaseUsdMaterialReader::read();
+    auto material = BaseUsdShadingNodeReader::read();
 
-    UsdMaterialReadUtils::readShaderInput<Color, pxr::GfVec3f>(usdPrim, "diffuseColor", material->diffuseColor);
-    UsdMaterialReadUtils::readShaderInput<Color, pxr::GfVec3f>(usdPrim, "emissiveColor", material->emissiveColor);
-    UsdMaterialReadUtils::readShaderAttributeValue<bool, int>(usdPrim, "useSpecularWorkflow",
-                                                              material->useSpecularWorkflow);
-    UsdMaterialReadUtils::readShaderInput<Color, pxr::GfVec3f>(usdPrim, "specularColor", material->specularColor);
-    UsdMaterialReadUtils::readShaderInput<float, float>(usdPrim, "metallic", material->metallic);
-    UsdMaterialReadUtils::readShaderInput<float, float>(usdPrim, "roughness", material->roughness);
-    UsdMaterialReadUtils::readShaderInput<float, float>(usdPrim, "clearcoat", material->clearcoat);
-    UsdMaterialReadUtils::readShaderInput<float, float>(usdPrim, "clearcoatRoughness", material->clearcoatRoughness);
-    UsdMaterialReadUtils::readShaderInput<float, float>(usdPrim, "opacity", material->opacity);
-    UsdMaterialReadUtils::readShaderInput<float, float>(usdPrim, "opacityThreshold", material->opacityThreshold);
-    UsdMaterialReadUtils::readShaderInput<float, float>(usdPrim, "ior", material->ior);
+    UsdShadingNodeReadUtils::readShaderInput<Color, pxr::GfVec3f>(usdPrim, "diffuseColor", material->diffuseColor);
+    UsdShadingNodeReadUtils::readShaderInput<Color, pxr::GfVec3f>(usdPrim, "emissiveColor", material->emissiveColor);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<bool, int>(usdPrim, "useSpecularWorkflow",
+                                                                 material->useSpecularWorkflow);
+    UsdShadingNodeReadUtils::readShaderInput<Color, pxr::GfVec3f>(usdPrim, "specularColor", material->specularColor);
+    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "metallic", material->metallic);
+    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "roughness", material->roughness);
+    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "clearcoat", material->clearcoat);
+    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "clearcoatRoughness", material->clearcoatRoughness);
+    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "opacity", material->opacity);
+    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "opacityThreshold", material->opacityThreshold);
+    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "ior", material->ior);
 
     return material;
 }
