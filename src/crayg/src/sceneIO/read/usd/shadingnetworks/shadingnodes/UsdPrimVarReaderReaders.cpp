@@ -24,6 +24,10 @@ std::string UsdPrimVarReaderVector2fReader::getTranslatedType() {
     return "UsdPrimVarReaderVector2fReader";
 }
 
+bool primVarIsUVs(const std::string &varname) {
+    return varname == "st" || varname == "UVMap";
+}
+
 void UsdPrimVarReaderVector2fReader::readPrimVarReaderTypeFromUsd(
     std::shared_ptr<PrimVarReaderVector2f> &primVarReader) {
     pxr::UsdShadeConnectableAPI connectedOutput;
@@ -38,7 +42,13 @@ void UsdPrimVarReaderVector2fReader::readPrimVarReaderTypeFromUsd(
     }
 
     const auto varname = UsdUtils::getStaticAttributeValueAs<std::string>(varnameInput);
-    primVarReader->primVarReaderType = varname == "st" ? PrimVarReaderType::UV : PrimVarReaderType::UNKNOWN;
+    if (primVarIsUVs(varname)) {
+        primVarReader->primVarReaderType = PrimVarReaderType::UV;
+        return;
+    }
+    primVarReader->primVarReaderType = PrimVarReaderType::UNKNOWN;
+    Logger::warning("PrimVarReader {} has unknown varname {} specified, falling back to PrimVarReaderType::UNKNOWN",
+                    usdPrim.GetPath(), varname);
 }
 
 void UsdPrimVarReaderVector2fReader::readPrimVarReaderTypeFromCrayg(
