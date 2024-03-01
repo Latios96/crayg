@@ -31,14 +31,13 @@ void UsdPrimVarReaderVector2fReader::readPrimVarReaderTypeFromUsd(
     pxr::UsdShadeAttributeType type;
     usdPrim.ConnectableAPI().GetConnectedSource(usdPrim.GetInput(pxr::TfToken("varname")), &connectedOutput,
                                                 &connectedOutputName, &type);
-    const auto input = connectedOutput.GetInput(pxr::TfToken("varname"));
-
-    if (!input) {
+    const auto varnameInput = connectedOutput.GetInput(connectedOutputName);
+    if (!varnameInput) {
         primVarReader->primVarReaderType = PrimVarReaderType::UNKNOWN;
         return;
     }
 
-    const auto varname = UsdUtils::getStaticAttributeValueAs<std::string>(input);
+    const auto varname = UsdUtils::getStaticAttributeValueAs<std::string>(varnameInput);
     primVarReader->primVarReaderType = varname == "st" ? PrimVarReaderType::UV : PrimVarReaderType::UNKNOWN;
 }
 
