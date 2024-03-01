@@ -10,11 +10,14 @@ UsdVector2fToColorReader::UsdVector2fToColorReader(const pxr::UsdShadeShader &us
 std::shared_ptr<Vector2fToColor> UsdVector2fToColorReader::read() {
     auto vector2fToColor = BaseUsdShadingNodeReader::read();
 
+    UsdShadingNodeReadUtils::readShaderInput<Vector2f, pxr::GfVec2f>(
+        usdPrim, "vector2fInput", vector2fToColor->vector2fInput, usdShadingNodeReadCache);
+
     return vector2fToColor;
 }
 
 std::string UsdVector2fToColorReader::getTranslatedType() {
-    return "FloatConstant";
+    return "Vector2fToColor";
 }
 
 } // crayg
