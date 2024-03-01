@@ -89,7 +89,12 @@
         },
         {
           "name": "SubdivisionSurfaceSuzanne"
-        },
+        }
+      ]
+    },
+    {
+      "name": "Geometry_UVs",
+      "tests": [
         {
           "name": "TriangleMeshUvs"
         }
