@@ -8,7 +8,8 @@ BarycentricCoordinates::BarycentricCoordinates(float alpha, float beta, float ga
 }
 
 BarycentricCoordinates::BarycentricCoordinates(const Triangle &triangle, const Vector3f &point)
-    : BarycentricCoordinates(triangle.v0(), triangle.v1(), triangle.v2(), triangle.getNormal(), point) {
+    : BarycentricCoordinates(triangle.v0(), triangle.v1(), triangle.v2(),
+                             (triangle.v1() - triangle.v0()).cross(triangle.v2() - triangle.v0()), point) {
 }
 
 BarycentricCoordinates::BarycentricCoordinates(const Vector3f &v0, const Vector3f &v1, const Vector3f &v2,
