@@ -111,7 +111,7 @@ Vector3f Triangle::getNormal(Vector3f point) {
     if (instanceTransform) {
         point = instanceTransform->applyInverseForPoint(point);
     }
-    return this->triangleMesh->normalsPrimVar->interpolateAt(this->faceId, point);
+    return this->triangleMesh->normalsPrimVar->interpolateAt(this->faceId, point).normalize();
 }
 
 Vector3f Triangle::getNormal() const {
