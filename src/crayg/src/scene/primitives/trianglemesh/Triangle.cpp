@@ -115,8 +115,8 @@ Vector3f Triangle::getNormal(Vector3f point) {
 }
 
 Vector3f Triangle::getNormal() const {
-    const Vector3f normal = (v2() - v0()).cross(v1() - v0()).normalize();
-    return normal.invert();
+    const Vector3f normal = (v1() - v0()).cross(v2() - v0()).normalize();
+    return normal;
 }
 
 BoundingBox Triangle::getBounds() const {
