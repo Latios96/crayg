@@ -66,7 +66,7 @@ void CameraLens::calculateMetadata() {
         metadata.maximumAperture = metadata.focalLength / apertureRadius;
     }
     metadata.isAnamorphic = std::any_of(elements.begin(), elements.end(), [](const LensElement &element) {
-        return element.geometry == CYLINDER_X || element.geometry == CYLINDER_Y;
+        return element.geometry == LensGeometry::CYLINDER_X || element.geometry == LensGeometry::CYLINDER_Y;
     });
     metadata.closestFocalDistance = computeClosestFocalDistance();
 }
@@ -249,19 +249,19 @@ std::optional<LensElementIntersection> CameraLens::intersect(const LensElement &
     bool intersects = false;
 
     switch (element.geometry) {
-    case SPHERICAL:
+    case LensGeometry::SPHERICAL:
         intersects = intersectSphericalElement(
             element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
         break;
-    case CYLINDER_X:
+    case LensGeometry::CYLINDER_X:
         intersects = intersectCylindricalXElement(
             element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
         break;
-    case CYLINDER_Y:
+    case LensGeometry::CYLINDER_Y:
         intersects = intersectCylindricalYElement(
             element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
         break;
-    case PLANAR:
+    case LensGeometry::PLANAR:
         intersects =
             intersectPlanarElement(-(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
         break;
