@@ -3,7 +3,7 @@
 
 namespace crayg {
 
-enum MyTestEnum { VALUE_1, VALUE_2 };
+enum class MyTestEnum { VALUE_1, VALUE_2 };
 
 TEST_CASE("EnumUtils::parse(string)") {
 
