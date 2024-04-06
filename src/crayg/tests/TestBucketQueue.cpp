@@ -15,7 +15,7 @@ TEST_CASE("TestBucketQueue::construct") {
         BucketQueue bucketQueue([]() { return Vector2i(); });
         bucketQueue.start(buckets);
 
-        REQUIRE(bucketQueue.getCurrentMode() == BucketQueue::Mode::FOLLOW_SEQUENCE);
+        REQUIRE(bucketQueue.getCurrentMode() == BucketQueue::BucketFollowMode::FOLLOW_SEQUENCE);
     }
 }
 

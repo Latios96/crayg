@@ -12,16 +12,16 @@
 namespace crayg {
 
 struct BucketQueue {
-    enum Mode { FOLLOW_SEQUENCE, FOLLOW_MOUSE };
+    enum class BucketFollowMode { FOLLOW_SEQUENCE, FOLLOW_MOUSE };
 
     explicit BucketQueue(const std::function<Vector2i()> &getMousePosition);
     void start(std::vector<ImageBucket> &buckets);
     std::optional<ImageBucket> nextBucket();
-    Mode getCurrentMode() const;
+    BucketFollowMode getCurrentMode() const;
     void switchMode();
 
   private:
-    Mode currentMode;
+    BucketFollowMode currentMode;
     std::unique_ptr<BucketQueueMode> modeDelegate;
 
     std::vector<ImageBucket> *buckets = nullptr;
