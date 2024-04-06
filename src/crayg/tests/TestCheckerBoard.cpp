@@ -23,8 +23,8 @@ TEST_CASE("CheckerBoard::evaluateColor") {
     auto sphere = std::make_shared<Sphere>();
     auto unitPlaneUvs = std::make_shared<UnitPlaneUvs>();
 
-    const Color colorA = Color(1, 0, 0);
-    const Color colorB = Color(0, 1, 0);
+    const Color colorA = Color::createRed();
+    const Color colorB = Color::createGreen();
 
     CheckerBoard checkerBoard;
     checkerBoard.repetitions = 2;

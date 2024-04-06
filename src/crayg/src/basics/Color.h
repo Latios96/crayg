@@ -34,6 +34,18 @@ class Color {
         return {1, 1, 1};
     }
 
+    static Color createRed() {
+        return {1, 0, 0};
+    }
+
+    static Color createGreen() {
+        return {0, 1, 0};
+    }
+
+    static Color createBlue() {
+        return {0, 0, 1};
+    }
+
     static Color fromRGB(int r, int g, int b) {
         return {static_cast<float>(r) / 255.f, static_cast<float>(g) / 255.f, static_cast<float>(b) / 255.f};
     }

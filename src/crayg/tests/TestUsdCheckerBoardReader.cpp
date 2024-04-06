@@ -22,8 +22,8 @@ TEST_CASE("TestUsdCheckerBoardReader::read") {
         auto checkerBoard = usdCheckerBoardReader.read();
 
         REQUIRE(checkerBoard->repetitions == 2);
-        REQUIRE(checkerBoard->colorA == Color(1, 0, 0));
-        REQUIRE(checkerBoard->colorB == Color(0, 1, 0));
+        REQUIRE(checkerBoard->colorA == Color::createRed());
+        REQUIRE(checkerBoard->colorB == Color::createGreen());
     }
 }
 }
