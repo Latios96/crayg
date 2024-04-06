@@ -13,7 +13,7 @@
 
 namespace crayg {
 
-enum ParseState { UNDEFINED, METADATA, ELEMENTS };
+enum class ParseState { UNDEFINED, METADATA, ELEMENTS };
 
 class InvalidExtendedLensFileFormatException : public std::runtime_error {
   public:
@@ -29,10 +29,10 @@ class InvalidExtendedLensFileFormatException : public std::runtime_error {
 bool checkLineForStateAndChangeIfNeeded(std::string line, ParseState &parseState) {
     boost::algorithm::to_lower(line);
     if (line == "[metadata]") {
-        parseState = METADATA;
+        parseState = ParseState::METADATA;
         return true;
     } else if (line == "[elements]") {
-        parseState = ELEMENTS;
+        parseState = ParseState::ELEMENTS;
         return true;
     }
     return false;
@@ -143,24 +143,25 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
             continue;
         }
 
-        const bool metadataWasParsedButNameIsEmpty = parseState == ELEMENTS && cameraLensMetadata.name.empty();
+        const bool metadataWasParsedButNameIsEmpty =
+            parseState == ParseState::ELEMENTS && cameraLensMetadata.name.empty();
         if (metadataWasParsedButNameIsEmpty) {
             CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Metadata] section is missing 'name'"));
         }
 
-        if (parseState == METADATA) {
+        if (parseState == ParseState::METADATA) {
             parseMetadataLine(i, line, cameraLensMetadata);
-        } else if (parseState == ELEMENTS) {
+        } else if (parseState == ParseState::ELEMENTS) {
             parseElementsLine(i, line, elements);
         }
     }
 
-    const bool elementsSectionWasNotFound = parseState == METADATA;
+    const bool elementsSectionWasNotFound = parseState == ParseState::METADATA;
     if (elementsSectionWasNotFound) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Elements] section is missing"));
     }
 
-    const bool elementsSectionWasEmpty = parseState == ELEMENTS && elements.empty();
+    const bool elementsSectionWasEmpty = parseState == ParseState::ELEMENTS && elements.empty();
     if (elementsSectionWasEmpty) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Elements] section is empty"));
     }
