@@ -230,6 +230,8 @@ set(crayg_SRCS
     scene/shadingnetworks/materials/UsdPreviewSurface.h
     scene/shadingnetworks/ShadingNode.cpp
     scene/shadingnetworks/ShadingNode.h
+    scene/shadingnetworks/shadingnodes/CheckerBoard.cpp
+    scene/shadingnetworks/shadingnodes/CheckerBoard.h
     scene/shadingnetworks/shadingnodes/ConstantShadingNodes.cpp
     scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h
     scene/shadingnetworks/shadingnodes/ConversionNodes.cpp
@@ -268,6 +270,8 @@ set(crayg_SRCS
     sceneIO/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h
     sceneIO/read/usd/shadingnetworks/materials/UsdPreviewSurfaceReader.cpp
     sceneIO/read/usd/shadingnetworks/materials/UsdPreviewSurfaceReader.h
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdCheckerBoardReader.cpp
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdCheckerBoardReader.h
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.cpp
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.cpp
@@ -327,6 +331,8 @@ set(crayg_SRCS
     sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h
     sceneIO/write/usd/shadingnetworks/materials/UsdPreviewSurfaceWriter.cpp
     sceneIO/write/usd/shadingnetworks/materials/UsdPreviewSurfaceWriter.h
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdCheckerBoardWriter.cpp
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdCheckerBoardWriter.h
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.cpp
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.h
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.cpp

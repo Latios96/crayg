@@ -1,4 +1,5 @@
 #include "UsdShadingNodeReadCache.h"
+#include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdCheckerBoardReader.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderReaders.h"
@@ -38,6 +39,9 @@ std::shared_ptr<ShadingNode> UsdShadingNodeReadCache::translateShadingNode(pxr::
                shadingNodeId == pxr::TfToken("crayg:PrimVarReaderVector2f")) {
         UsdPrimVarReaderVector2fReader primVarReaderVector2fReader(shader, *this);
         return primVarReaderVector2fReader.read();
+    } else if (shadingNodeId == pxr::TfToken("crayg:CheckerBoard")) {
+        UsdCheckerBoardReader checkerBoardReader(shader, *this);
+        return checkerBoardReader.read();
     }
 
     Logger::warning("ShadingNode of id '{}' is not supported!", shadingNodeId);

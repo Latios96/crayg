@@ -1,0 +1,165 @@
+#usda 1.0
+(
+    defaultPrim = "render_cam"
+    metersPerUnit = 0.01
+    upAxis = "Y"
+)
+
+def Camera "render_cam" (
+    kind = "assembly"
+)
+{
+    float2 clippingRange = (0.1, 10000)
+    float focalLength = 35
+    float focusDistance = 5
+    float horizontalAperture = 35.999928
+    float verticalAperture = 23.999952
+    double3 xformOp:translate = (0, 0, 3.862311033781285)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+}
+
+def Mesh "pPlane1" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "component"
+)
+{
+    uniform bool doubleSided = 1
+    float3[] extent = [(-0.5, 0, -0.5), (0.5, 0, 0.5)]
+    int[] faceVertexCounts = [4]
+    int[] faceVertexIndices = [0, 1, 3, 2]
+    rel material:binding = </pPlane1/mtl/usdPreviewSurface2SG>
+    normal3f[] normals = [(0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0)] (
+        interpolation = "faceVarying"
+    )
+    point3f[] points = [(-0.5, 0, 0.5), (0.5, 0, 0.5), (-0.5, 0, -0.5), (0.5, 0, -0.5)]
+    texCoord2f[] primvars:st = [(0, 0), (1, 0), (0, 1), (1, 1)] (
+        customData = {
+            dictionary Maya = {
+                token name = "map1"
+            }
+        }
+        interpolation = "faceVarying"
+    )
+    int[] primvars:st:indices = [0, 1, 3, 2]
+    uniform token subdivisionScheme = "none"
+    float3 xformOp:rotateXYZ = (90, 0, 0)
+    double3 xformOp:translate = (1, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+
+    def Scope "mtl"
+    {
+        def Material "usdPreviewSurface2SG"
+        {
+            token outputs:surface.connect = </pPlane1/mtl/usdPreviewSurface2SG/usdPreviewSurface2.outputs:surface>
+
+            def Shader "usdPreviewSurface2"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor.connect = </pPlane1/mtl/usdPreviewSurface2SG/CheckerBoard.outputs:out>
+                token outputs:displacement
+                token outputs:surface
+            }
+            
+            def Shader "CheckerBoard"
+			{
+				uniform token info:id = "crayg:CheckerBoard"
+				color3f outputs:out
+				color3f inputs:colorA = (1,1,1)
+				color3f inputs:colorB = (0,0,0)
+				int inputs:repetitions = 4
+				float2 inputs:uvInput.connect = </pPlane1/mtl/usdPreviewSurface2SG/PrimVarReaderVector2f.outputs:result>
+			}
+			
+			 def Shader "PrimVarReaderVector2f"
+			{
+				uniform token info:id = "crayg:PrimVarReaderVector2f"
+				string primVarReaderType = "UV"
+				float2 outputs:result
+			}
+        }
+    }
+}
+
+def Mesh "pPlane2" (
+    prepend apiSchemas = ["MaterialBindingAPI"]
+    kind = "component"
+)
+{
+    uniform bool doubleSided = 1
+    float3[] extent = [(-0.5, 0, -0.5), (0.5, 0, 0.5)]
+    int[] faceVertexCounts = [4]
+    int[] faceVertexIndices = [0, 1, 3, 2]
+    rel material:binding = </pPlane2/mtl/usdPreviewSurface1SG>
+    normal3f[] normals = [(0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0)] (
+        interpolation = "faceVarying"
+    )
+    point3f[] points = [(-0.5, 0, 0.5), (0.5, 0, 0.5), (-0.5, 0, -0.5), (0.5, 0, -0.5)]
+    texCoord2f[] primvars:st = [(0, 0), (1, 0), (0, 1), (1, 1)] (
+        customData = {
+            dictionary Maya = {
+                token name = "map1"
+            }
+        }
+        interpolation = "faceVarying"
+    )
+    int[] primvars:st:indices = [0, 1, 3, 2]
+    uniform token subdivisionScheme = "none"
+    float3 xformOp:rotateXYZ = (90, 0, 0)
+    double3 xformOp:translate = (-1, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+
+    def Scope "mtl"
+    {
+        def Material "usdPreviewSurface1SG"
+        {
+            token outputs:surface.connect = </pPlane2/mtl/usdPreviewSurface1SG/usdPreviewSurface1.outputs:surface>
+
+            def Shader "usdPreviewSurface1"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor.connect = </pPlane2/mtl/usdPreviewSurface1SG/CheckerBoard.outputs:out>
+                token outputs:displacement
+                token outputs:surface
+            }
+            
+             def Shader "CheckerBoard"
+			{
+				uniform token info:id = "crayg:CheckerBoard"
+				color3f outputs:out
+				color3f inputs:colorA = (1,0,0)
+				color3f inputs:colorB = (0,1,0)
+				int inputs:repetitions = 2
+				float2 inputs:uvInput.connect = </pPlane2/mtl/usdPreviewSurface1SG/PrimVarReaderVector2f.outputs:result>
+			}
+			
+			 def Shader "PrimVarReaderVector2f"
+			{
+				uniform token info:id = "crayg:PrimVarReaderVector2f"
+				string primVarReaderType = "UV"
+				float2 outputs:result
+			}
+        }
+    }
+}
+
+def RectLight "areaLight1" (
+    prepend apiSchemas = ["ShadowAPI"]
+    kind = "assembly"
+)
+{
+    bool inputs:normalize = 1
+    float inputs:intensity = 22500000
+    color3f inputs:shadow:color
+    bool inputs:shadow:enable
+    double3 xformOp:translate = (0, 0, 15)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+}
+
+def "Render"
+{
+    def RenderSettings "settings"
+    {
+        uniform int2 resolution = (960, 540)
+    }
+}
+

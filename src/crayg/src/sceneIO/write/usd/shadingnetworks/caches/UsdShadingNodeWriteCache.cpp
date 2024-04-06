@@ -1,5 +1,7 @@
 #include "UsdShadingNodeWriteCache.h"
+#include "scene/shadingnetworks/shadingnodes/CheckerBoard.h"
 #include "scene/shadingnetworks/shadingnodes/ConversionNodes.h"
+#include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdCheckerBoardWriter.h"
 #include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.h"
 #include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.h"
 #include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderWriters.h"
@@ -59,6 +61,9 @@ UsdShaderAndOutput UsdShadingNodeWriteCache::translateShadingNode(ShadingNode &s
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     } else if (type == "PrimVarReaderVector2f") {
         return UsdPrimVarReaderVector2fWriter(dynamic_cast<PrimVarReaderVector2f &>(shadingNode), *this)
+            .writeAndGetShaderAndOutput(stage, usdPathFactory);
+    } else if (type == "CheckerBoard") {
+        return UsdCheckerBoardWriter(dynamic_cast<CheckerBoard &>(shadingNode), *this)
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     }
     CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("ShadingNode of type '{}' is not supported!", type)));

@@ -97,6 +97,9 @@
       "tests": [
         {
           "name": "TriangleMeshUvs"
+        },
+        {
+          "name": "SubdivisionSurfaceMeshUvs"
         }
       ]
     },
@@ -136,6 +139,14 @@
       "tests": [
         {
           "name": "sceneWriteReadRendersCorrectly"
+        }
+      ]
+    },
+    {
+      "name": "ShadingNodes",
+      "tests": [
+        {
+          "name": "CheckerBoard"
         }
       ]
     },

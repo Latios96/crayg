@@ -31,6 +31,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestBucketSizeEstimator.cpp
     TestCamera.cpp
     TestCameraLens.cpp
+    TestCheckerBoard.cpp
     TestColor.cpp
     TestColorConversion.cpp
     TestConversionNodes.cpp
@@ -114,6 +115,8 @@ set(UNIT_TEST_SOURCE_LIST
     TestUnitImageSampler.cpp
     TestUsdCameraReader.cpp
     TestUsdCameraWriter.cpp
+    TestUsdCheckerBoardReader.cpp
+    TestUsdCheckerBoardWriter.cpp
     TestUsdConstantShadingNodeReaders.cpp
     TestUsdConstantShadingNodeWriters.cpp
     TestUsdConversionNodesReaders.cpp
