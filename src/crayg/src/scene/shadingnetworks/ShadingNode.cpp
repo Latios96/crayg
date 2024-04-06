@@ -33,7 +33,7 @@ bool ShadingNodeInput::hasInputConnection() const {
 }
 
 ShadingNodeOutputType FloatShadingNodeInput::getOutputType() const {
-    return FLOAT;
+    return ShadingNodeOutputType::FLOAT;
 }
 
 bool FloatShadingNodeInput::isCompatibleTo(ShadingNodeOutputType shadingNodeType) const {
@@ -68,7 +68,7 @@ std::ostream &operator<<(std::ostream &os, const FloatShadingNodeInput &input) {
 }
 
 ShadingNodeOutputType IntShadingNodeInput::getOutputType() const {
-    return INT;
+    return ShadingNodeOutputType::INT;
 }
 
 bool IntShadingNodeInput::isCompatibleTo(ShadingNodeOutputType shadingNodeType) const {
@@ -103,7 +103,7 @@ std::ostream &operator<<(std::ostream &os, const IntShadingNodeInput &input) {
 }
 
 ShadingNodeOutputType Vector2fShadingNodeInput::getOutputType() const {
-    return VECTOR2F;
+    return ShadingNodeOutputType::VECTOR2F;
 }
 
 bool Vector2fShadingNodeInput::isCompatibleTo(ShadingNodeOutputType shadingNodeType) const {
@@ -138,7 +138,7 @@ std::ostream &operator<<(std::ostream &os, const Vector2fShadingNodeInput &input
 }
 
 ShadingNodeOutputType ColorShadingNodeInput::getOutputType() const {
-    return COLOR;
+    return ShadingNodeOutputType::COLOR;
 }
 
 bool ColorShadingNodeInput::isCompatibleTo(ShadingNodeOutputType shadingNodeType) const {

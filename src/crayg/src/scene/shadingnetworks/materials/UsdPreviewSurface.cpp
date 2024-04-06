@@ -31,7 +31,7 @@ std::string UsdPreviewSurface::getType() const {
 }
 
 ShadingNodeOutputType UsdPreviewSurface::getOutputType() {
-    return COLOR;
+    return ShadingNodeOutputType::COLOR;
 }
 
 Color UsdPreviewSurface::getReflectivity(const SurfaceInteraction &surfaceInteraction) {

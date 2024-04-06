@@ -28,7 +28,7 @@ std::string PrimVarReaderVector2f::getType() const {
 }
 
 ShadingNodeOutputType PrimVarReaderVector2f::getOutputType() {
-    return VECTOR2F;
+    return ShadingNodeOutputType::VECTOR2F;
 }
 
 } // crayg

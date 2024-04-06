@@ -12,7 +12,7 @@ class MyShadingNodeWithInputs : public ShadingNode {
     }
 
     ShadingNodeOutputType getOutputType() override {
-        return COLOR;
+        return ShadingNodeOutputType::COLOR;
     }
 
     IntShadingNodeInput intInput;

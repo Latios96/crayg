@@ -15,7 +15,7 @@ class UnitPlaneUvs : public ShadingNode {
     }
 
     ShadingNodeOutputType getOutputType() override {
-        return VECTOR2F;
+        return ShadingNodeOutputType::VECTOR2F;
     }
 };
 

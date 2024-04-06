@@ -12,7 +12,7 @@ std::string Vector2fToColor::getType() const {
 }
 
 ShadingNodeOutputType Vector2fToColor::getOutputType() {
-    return COLOR;
+    return ShadingNodeOutputType::COLOR;
 }
 
 } // crayg

@@ -20,7 +20,7 @@ class UnsupportedMaterial : public Material {
     }
 
     ShadingNodeOutputType getOutputType() override {
-        return COLOR;
+        return ShadingNodeOutputType::COLOR;
     }
 };
 

@@ -13,7 +13,7 @@ namespace crayg {
 
 class ShadingNode;
 
-enum ShadingNodeOutputType { INT, FLOAT, VECTOR2F, COLOR };
+enum class ShadingNodeOutputType { INT, FLOAT, VECTOR2F, COLOR };
 
 class ShadingNodeInput {
   public:
