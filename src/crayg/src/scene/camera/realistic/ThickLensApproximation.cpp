@@ -13,8 +13,8 @@ ThickLensApproximationCalculator::ThickLensApproximationCalculator(const CameraL
 
 ThickLensApproximation ThickLensApproximationCalculator::calculate(const Direction &direction) {
     const int factor = 100;
-    const float offsetX = direction == HORIZONTAL ? 3.5e-05f * factor : 0;
-    const float offsetY = direction == VERTICAL ? 3.5e-05f * factor : 0;
+    const float offsetX = direction == Direction::HORIZONTAL ? 3.5e-05f * factor : 0;
+    const float offsetY = direction == Direction::VERTICAL ? 3.5e-05f * factor : 0;
 
     const Ray fromWorldToFilmIn{{offsetX, offsetY, lens.getFirstElement().center + 1 * factor}, {0, 0, -1}};
     auto fromWorldToFilmOut = lens.traceFromWorldToFilm(fromWorldToFilmIn, FraunhoferLines::SODIUM.wavelength);
@@ -22,7 +22,7 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate(const Directi
         CRAYG_LOG_AND_THROW(std::runtime_error("Could not trace ray from world to film to compute thick lens "
                                                "approximation. Is aperture stop very small?"));
     }
-    const auto firstCardinalPoints = direction == HORIZONTAL
+    const auto firstCardinalPoints = direction == Direction::HORIZONTAL
                                          ? computeHorizontalCardinalPoints(fromWorldToFilmIn, *fromWorldToFilmOut)
                                          : computeVerticalCardinalPoints(fromWorldToFilmIn, *fromWorldToFilmOut);
 
@@ -32,7 +32,7 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate(const Directi
         CRAYG_LOG_AND_THROW(std::runtime_error("Could not trace ray from film to world to compute thick lens "
                                                "approximation. Is aperture stop very small?"));
     }
-    const auto secondCardinalPoints = direction == HORIZONTAL
+    const auto secondCardinalPoints = direction == Direction::HORIZONTAL
                                           ? computeHorizontalCardinalPoints(fromFilmToWorldIn, *fromFilmToWorldOut)
                                           : computeVerticalCardinalPoints(fromFilmToWorldIn, *fromFilmToWorldOut);
 

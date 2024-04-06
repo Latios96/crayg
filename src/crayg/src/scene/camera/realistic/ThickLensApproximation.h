@@ -17,7 +17,7 @@ class ThickLensApproximationCalculator {
   public:
     explicit ThickLensApproximationCalculator(const CameraLens &lens);
 
-    enum Direction { HORIZONTAL, VERTICAL };
+    enum class Direction { HORIZONTAL, VERTICAL };
 
     ThickLensApproximation calculate(const Direction &direction);
 
