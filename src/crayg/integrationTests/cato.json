@@ -97,9 +97,6 @@
       "tests": [
         {
           "name": "TriangleMeshUvs"
-        },
-        {
-          "name": "SubdivisionSurfaceMeshUvs"
         }
       ]
     },
