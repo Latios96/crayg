@@ -24,19 +24,19 @@ std::vector<ImageBucket> SpiralSequence::getTiles() {
 
     while (buckets.size() < bucketCount) {
         switch (currentDirection) {
-        case DOWN:
+        case Direction::DOWN:
             addBucketForCurrentDirectionAndChangeDirection(buckets, &currentDirection, &currentPoint, downTransform,
                                                            leftTransform, SpiralSequence::Direction::LEFT);
             break;
-        case LEFT:
+        case Direction::LEFT:
             addBucketForCurrentDirectionAndChangeDirection(buckets, &currentDirection, &currentPoint, leftTransform,
                                                            upTransform, SpiralSequence::Direction::UP);
             break;
-        case UP:
+        case Direction::UP:
             addBucketForCurrentDirectionAndChangeDirection(buckets, &currentDirection, &currentPoint, upTransform,
                                                            rightTransform, SpiralSequence::Direction::RIGHT);
             break;
-        case RIGHT:
+        case Direction::RIGHT:
             addBucketForCurrentDirectionAndChangeDirection(buckets, &currentDirection, &currentPoint, rightTransform,
                                                            downTransform, SpiralSequence::Direction::DOWN);
             break;

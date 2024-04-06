@@ -10,7 +10,7 @@ class SpiralSequence : public BucketSequence {
     std::vector<ImageBucket> getTiles() override;
 
   private:
-    enum Direction { DOWN, LEFT, UP, RIGHT };
+    enum class Direction { DOWN, LEFT, UP, RIGHT };
 
     void addBucketForCurrentDirectionAndChangeDirection(std::vector<ImageBucket> &buckets,
                                                         SpiralSequence::Direction *currentDirection,
@@ -23,7 +23,7 @@ class SpiralSequence : public BucketSequence {
 
     ImageBucket fitToImage(Vector2i currentPoint);
 
-    SpiralSequence::Direction currentDirection = DOWN;
+    SpiralSequence::Direction currentDirection = Direction::DOWN;
     Vector2i currentPoint;
     int spiralSize = 1;
     int iterationsWithSize = 0;
