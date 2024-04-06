@@ -51,7 +51,7 @@ template <typename T> class TriangleMeshPerFacePrimVar : public TriangleMeshAbst
     }
 
     PrimVarType getType() override {
-        return PER_FACE;
+        return PrimVarType::PER_FACE;
     }
 
   private:

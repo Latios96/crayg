@@ -88,7 +88,7 @@ template <typename T> class TriangleMeshPerVertexPrimVar : public TriangleMeshAb
     }
 
     PrimVarType getType() override {
-        return PER_VERTEX;
+        return PrimVarType::PER_VERTEX;
     }
 
   private:

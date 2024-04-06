@@ -57,9 +57,9 @@ void UsdTriangleMeshWriter::writeNormals(pxr::UsdGeomMesh &usdGeomMesh) const {
     if (!this->craygObject.normalsPrimVar) {
         return;
     }
-    if (this->craygObject.normalsPrimVar->getType() == PER_POINT) {
+    if (this->craygObject.normalsPrimVar->getType() == PrimVarType::PER_POINT) {
         writePerPointNormals(usdGeomMesh);
-    } else if (this->craygObject.normalsPrimVar->getType() == PER_VERTEX) {
+    } else if (this->craygObject.normalsPrimVar->getType() == PrimVarType::PER_VERTEX) {
         writePerVertexNormals(usdGeomMesh);
     } else {
         Logger::warning(R"(Normals interpolation "{}" of mesh {} is not supported)",
@@ -98,7 +98,7 @@ void UsdTriangleMeshWriter::writeUvs(pxr::UsdGeomMesh &usdGeomMesh) const {
     if (!this->craygObject.uvsPrimVar) {
         return;
     }
-    if (this->craygObject.uvsPrimVar->getType() == PER_VERTEX) {
+    if (this->craygObject.uvsPrimVar->getType() == PrimVarType::PER_VERTEX) {
         writePerVertexUvs(usdGeomMesh);
     } else {
         Logger::warning(R"(Normals interpolation "{}" of mesh {} is not supported)",

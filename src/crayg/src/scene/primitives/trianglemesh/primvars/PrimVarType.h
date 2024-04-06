@@ -5,7 +5,7 @@
 
 namespace crayg {
 
-enum PrimVarType { PER_FACE, PER_POINT, PER_VERTEX };
+enum class PrimVarType { PER_FACE, PER_POINT, PER_VERTEX };
 
 }
 

@@ -54,7 +54,7 @@ template <typename T> class TriangleMeshPerPointPrimVar : public TriangleMeshAbs
     }
 
     PrimVarType getType() override {
-        return PER_POINT;
+        return PrimVarType::PER_POINT;
     }
 
     virtual ~TriangleMeshPerPointPrimVar() = default;
