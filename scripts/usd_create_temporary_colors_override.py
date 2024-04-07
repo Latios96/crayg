@@ -49,9 +49,9 @@ def collect_average_material_colors(stage) -> Dict[str, Gf.Vec3f]:
                     average_color = get_average_color_for_texture(resolved_path)
                     if not average_color:
                         continue
-                    average_material_colors_by_material_path[
-                        prim.GetPath()
-                    ] = average_color
+                    average_material_colors_by_material_path[prim.GetPath()] = (
+                        average_color
+                    )
     return average_material_colors_by_material_path
 
 
