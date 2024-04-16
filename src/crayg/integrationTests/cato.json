@@ -97,6 +97,9 @@
       "tests": [
         {
           "name": "TriangleMeshUvs"
+        },
+        {
+          "name": "SphereUvs"
         }
       ]
     },

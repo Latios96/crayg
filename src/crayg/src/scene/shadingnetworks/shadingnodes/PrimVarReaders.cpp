@@ -1,6 +1,8 @@
 #include "PrimVarReaders.h"
+#include "scene/primitives/Sphere.h"
 #include "scene/primitives/trianglemesh/Triangle.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include <boost/math/constants/constants.hpp>
 
 namespace crayg {
 
@@ -19,6 +21,16 @@ Vector2f PrimVarReaderVector2f::readUvs(const SurfaceInteraction &surfaceInterac
     if (surfaceInteraction.imageable.imageableType == ImageableType::TRIANGLE) {
         Triangle *triangle = (Triangle *)&surfaceInteraction.imageable;
         return triangle->triangleMesh->uvsPrimVar->interpolateAt(triangle->faceId, surfaceInteraction.point);
+    }
+    if (surfaceInteraction.imageable.imageableType == ImageableType::SPHERE) {
+        Sphere *sphere = (Sphere *)&surfaceInteraction.imageable;
+        const Vector3f pointInOrigin =
+            sphere->getTransform().applyInverseForPoint(surfaceInteraction.point) / sphere->getRadius();
+
+        const float u = 0.5f + std::atan2(pointInOrigin.y, pointInOrigin.x) / 2 * boost::math::constants::pi<float>();
+        const float v = 0.5f + std::asin(pointInOrigin.z) / boost::math::constants::pi<float>();
+
+        return {u, v};
     }
     return {};
 }
