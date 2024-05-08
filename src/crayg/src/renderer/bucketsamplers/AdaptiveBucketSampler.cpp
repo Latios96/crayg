@@ -140,7 +140,7 @@ static Color magmaHeatmap[256] = {
 void AdaptiveBucketSampler::drawSampleHeatmap(const BucketImageBuffer &bucketImageBuffer, int samplesTaken) const {
     const float relativeSampleCount =
         std::clamp(static_cast<float>(samplesTaken) / static_cast<float>(maxSamples), 0.f, 1.f);
-    const int heatMapIndex = static_cast<int>(relativeSampleCount * 256);
+    const int heatMapIndex = static_cast<int>(relativeSampleCount * 255);
     ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("sampleCount"), magmaHeatmap[heatMapIndex]);
 }
 
