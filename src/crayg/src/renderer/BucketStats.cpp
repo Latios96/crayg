@@ -24,7 +24,8 @@ void BucketStats::processBucketTimes(OutputDriver &outputDriver, const Resolutio
     const auto heatmap = Gradients::heatmap();
 
     for (auto &imageBucketTime : imageBucketTimes) {
-        const float relativeTime = imageBucketTime.seconds / maxTime;
+        float relativeTime = imageBucketTime.seconds / maxTime;
+        relativeTime = std::isnan(relativeTime) ? 0 : relativeTime;
         const Color relativeTimeColor = heatmap.interpolate(relativeTime);
         ImageAlgorithms::fill(*pixelBuffer, relativeTimeColor, imageBucketTime.imageBucket);
     }
