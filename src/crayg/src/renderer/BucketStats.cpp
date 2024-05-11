@@ -1,4 +1,5 @@
 #include "BucketStats.h"
+#include "utils/Heatmap.h"
 #include <image/ImageAlgorithms.h>
 
 namespace crayg {
@@ -21,12 +22,11 @@ void BucketStats::processBucketTimes(OutputDriver &outputDriver, const Resolutio
     const float maxTime = bucketWithMaxTime.seconds;
 
     auto pixelBuffer = PixelBuffer::createRgbFloat(resolution);
-    const auto heatmap = Gradients::heatmap();
 
     for (auto &imageBucketTime : imageBucketTimes) {
         float relativeTime = imageBucketTime.seconds / maxTime;
         relativeTime = std::isnan(relativeTime) ? 0 : relativeTime;
-        const Color relativeTimeColor = heatmap.interpolate(relativeTime);
+        const Color relativeTimeColor = MagmaHeatmap::lookup(relativeTime);
         ImageAlgorithms::fill(*pixelBuffer, relativeTimeColor, imageBucketTime.imageBucket);
     }
 

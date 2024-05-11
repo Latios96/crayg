@@ -50,6 +50,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestFromStringUtils.cpp
     TestGradient.cpp
     TestGroundPlane.cpp
+    TestHeatMap.cpp
     TestImage.cpp
     TestImageAlgorithms.cpp
     TestImageBucketSequences.cpp

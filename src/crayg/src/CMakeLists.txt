@@ -353,6 +353,8 @@ set(crayg_SRCS
     utils/FileSystemUtils.h
     utils/FromStringUtils.cpp
     utils/FromStringUtils.h
+    utils/Heatmap.cpp
+    utils/Heatmap.h
     utils/ImageChannelPathResolver.cpp
     utils/ImageChannelPathResolver.h
     utils/ImageMetadataCollector.cpp

@@ -85,13 +85,6 @@ template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondVa
     return firstValue * (1 - position) + secondValue * position;
 }
 
-class Gradients {
-  public:
-    static Gradient<Color> heatmap() {
-        return Gradient<Color>({Color::fromRGB(0, 15, 255), Color::fromRGB(32, 249, 29), Color::fromRGB(250, 5, 3)});
-    }
-};
-
 } // crayg
 
 template <typename T> struct fmt::formatter<crayg::Gradient<T>> : ostream_formatter {};
