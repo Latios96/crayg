@@ -35,7 +35,6 @@ class UsdMeshReader : public BaseUsdImageableReader<pxr::UsdGeomMesh, TriangleMe
                                  pxr::UsdGeomPrimvar &uvsPrimvar) const;
     pxr::VtValue &computeTriangulatedFaceVaryingUvs(const pxr::HdMeshUtil &meshUtil, pxr::VtValue &triangulated,
                                                     pxr::UsdGeomPrimvar &uvsPrimvar) const;
-    std::optional<pxr::UsdGeomPrimvar> getAuthoredUvPrimVar() const;
 };
 
 }

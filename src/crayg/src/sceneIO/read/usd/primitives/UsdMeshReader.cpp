@@ -124,7 +124,7 @@ bool UsdMeshReader::normalsAreAuthored() const {
 }
 
 void UsdMeshReader::translateUvs(std::shared_ptr<TriangleMesh> &triangleMesh, pxr::HdMeshUtil &meshUtil) {
-    std::optional<pxr::UsdGeomPrimvar> uvsPrimVar = getAuthoredUvPrimVar();
+    std::optional<pxr::UsdGeomPrimvar> uvsPrimVar = UsdReadUtils::getAuthoredUvPrimVar(this->usdPrim);
     if (!uvsPrimVar) {
         return;
     }
@@ -136,18 +136,6 @@ void UsdMeshReader::translateUvs(std::shared_ptr<TriangleMesh> &triangleMesh, px
     } else {
         Logger::warning(R"(UV interpolation "{}" of mesh {} is not supported)", uvsInterpolation, usdPrim.GetPath());
     }
-}
-
-std::optional<pxr::UsdGeomPrimvar> UsdMeshReader::getAuthoredUvPrimVar() const {
-    pxr::UsdGeomPrimvarsAPI primvarsApi(usdPrim);
-
-    for (auto &primvar : primvarsApi.GetPrimvars()) {
-        const bool isFloat2PrimVar = primvar.GetTypeName() == pxr::SdfValueTypeNames->TexCoord2fArray;
-        if (isFloat2PrimVar) {
-            return primvar;
-        }
-    }
-    return std::nullopt;
 }
 
 void UsdMeshReader::translateFaceVaryingUvs(std::shared_ptr<TriangleMesh> &triangleMesh,

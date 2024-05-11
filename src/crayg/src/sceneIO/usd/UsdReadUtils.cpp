@@ -25,3 +25,15 @@ bool crayg::UsdReadUtils::isSubdivisionSurfaceMesh(pxr::UsdPrim &prim) {
 bool crayg::UsdReadUtils::primIsVisible(pxr::UsdPrim &prim) {
     return pxr::UsdGeomImageable(prim).ComputeVisibility() != pxr::TfToken("invisible");
 }
+
+std::optional<pxr::UsdGeomPrimvar> crayg::UsdReadUtils::getAuthoredUvPrimVar(const pxr::UsdGeomMesh &mesh) {
+    pxr::UsdGeomPrimvarsAPI primvarsApi(mesh);
+
+    for (auto &primvar : primvarsApi.GetPrimvars()) {
+        const bool isFloat2PrimVar = primvar.GetTypeName() == pxr::SdfValueTypeNames->TexCoord2fArray;
+        if (isFloat2PrimVar) {
+            return primvar;
+        }
+    }
+    return std::nullopt;
+}
