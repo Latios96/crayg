@@ -27,7 +27,6 @@ class OpenSubdivRefiner {
     OpenSubdiv::Sdc::Options::VtxBoundaryInterpolation getBoundaryInterpolation() const;
 
     OpenSubdiv::Far::TopologyDescriptor::FVarChannel channels[1];
-    std::vector<int> normalsIndices;
 };
 
 } // crayg
