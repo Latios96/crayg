@@ -132,18 +132,6 @@ OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     descriptor.numVertsPerFace = subdivisionSurfaceMesh.faceVertexCounts.data();
     descriptor.vertIndicesPerFace = subdivisionSurfaceMesh.faceVertexIndices.data();
 
-    if (!subdivisionSurfaceMesh.normals.empty()) {
-        channels[0].numValues = subdivisionSurfaceMesh.normals.size();
-        normalsIndices.reserve(subdivisionSurfaceMesh.normals.size());
-        for (int i = 0; i < subdivisionSurfaceMesh.normals.size(); i++) {
-            normalsIndices.push_back(i);
-        }
-        channels[0].valueIndices = normalsIndices.data();
-
-        descriptor.numFVarChannels = 1;
-        descriptor.fvarChannels = channels;
-    }
-
     return descriptor;
 }
 
