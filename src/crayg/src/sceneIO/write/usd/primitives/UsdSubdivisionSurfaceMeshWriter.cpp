@@ -1,5 +1,6 @@
 #include "UsdSubdivisionSurfaceMeshWriter.h"
 #include "UsdTriangleMeshWriter.h"
+#include <pxr/usd/usdGeom/primvar.h>
 
 namespace crayg {
 
@@ -32,6 +33,7 @@ pxr::UsdGeomMesh UsdSubdivisionSurfaceMeshWriter::write(pxr::UsdStagePtr stage, 
     writeFaceVertexIndices(usdGeomMesh);
     writeFaceVertexCounts(usdGeomMesh);
     writeSubdivisionScheme(usdGeomMesh);
+    writeUvs(usdGeomMesh);
 
     return usdGeomMesh;
 }
@@ -65,5 +67,23 @@ void UsdSubdivisionSurfaceMeshWriter::writeFaceVertexCounts(pxr::UsdGeomMesh usd
 
 void UsdSubdivisionSurfaceMeshWriter::writeSubdivisionScheme(pxr::UsdGeomMesh usdGeomMesh) const {
     usdGeomMesh.GetSubdivisionSchemeAttr().Set(pxr::UsdGeomTokens->catmullClark);
+}
+
+void UsdSubdivisionSurfaceMeshWriter::writeUvs(pxr::UsdGeomMesh usdGeomMesh) const {
+    pxr::VtVec2fArray uvs;
+    uvs.reserve(this->craygObject.uvs.size());
+    for (auto &uv : this->craygObject.uvs) {
+        uvs.push_back(UsdConversions::convert(uv));
+    }
+
+    pxr::VtIntArray uvIndices;
+    uvIndices.reserve(this->craygObject.uvIndices.size());
+    for (auto i : this->craygObject.uvIndices) {
+        uvIndices.push_back(i);
+    }
+
+    pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
+    primvarsApi.CreateIndexedPrimvar(pxr::TfToken("uv"), pxr::SdfValueTypeNames->TexCoord2fArray, uvs, uvIndices,
+                                     pxr::UsdGeomTokens->faceVarying);
 }
 } // crayg

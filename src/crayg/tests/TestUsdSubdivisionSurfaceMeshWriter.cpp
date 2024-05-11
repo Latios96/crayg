@@ -1,5 +1,6 @@
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "sceneIO/usd/UsdReadUtils.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include "sceneIO/write/usd/primitives/UsdSubdivisionSurfaceMeshWriter.h"
 #include <catch2/catch.hpp>
@@ -30,10 +31,17 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
         auto faceVertexCounts =
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexCountsAttr());
+        auto uvsPrimVar = UsdReadUtils::getAuthoredUvPrimVar(usdGeomMesh);
+        pxr::VtVec2fArray uvs;
+        pxr::VtIntArray uvIndices;
+        uvsPrimVar->Get(&uvs);
+        uvsPrimVar->GetIndices(&uvIndices);
         REQUIRE(translation == pxr::GfVec3f(1, 2, -3));
         REQUIRE(points == pxr::VtVec3fArray({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {0.5, 0, -0.5}, {-0.5, 0, -0.5}}));
         REQUIRE(triangleIndices == pxr::VtIntArray({0, 1, 2, 3}));
         REQUIRE(faceVertexCounts == pxr::VtIntArray({4}));
+        REQUIRE(uvs == pxr::VtVec2fArray({{0, 1}, {1, 1}, {0, 0}, {1, 0}}));
+        REQUIRE(uvIndices == pxr::VtIntArray({0, 1, 2, 3}));
         REQUIRE_FALSE(usdGeomMesh.GetNormalsAttr().HasAuthoredValue());
     }
 
