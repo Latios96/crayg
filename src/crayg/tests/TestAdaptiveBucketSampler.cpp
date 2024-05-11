@@ -78,7 +78,7 @@ TEST_CASE("AdaptiveBucketSampler::sampleBucket") {
     std::function<Color()> colorToReturn = []() { return Color::createBlack(); };
     const int minSamples = 8;
     AdaptiveBucketSampler adaptiveBucketSampler(
-        4,
+        16,
         [&renderSampleCount, &colorToReturn](Vector2f samplePos) {
             renderSampleCount++;
             return colorToReturn();
@@ -105,7 +105,7 @@ TEST_CASE("AdaptiveBucketSampler::sampleBucket") {
         };
         adaptiveBucketSampler.sampleBucket(bucketImageBuffer);
 
-        REQUIRE(renderSampleCount == 5 * 5 * std::pow(4, 2));
+        REQUIRE(renderSampleCount == 5 * 5 * 16);
     }
 
     SECTION("should populate sampleCount buffer") {

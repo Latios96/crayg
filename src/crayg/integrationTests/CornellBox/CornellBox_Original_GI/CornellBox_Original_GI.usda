@@ -12,7 +12,7 @@ over "Render"
     over "settings"
     {
         custom int RAYTRACING:useGi = 1
-        custom int maxSamples = 8
+        custom int maxSamples = 64
         uniform int2 resolution = (200, 200)
     }
 }

@@ -19,6 +19,6 @@ over "Render"
     over "settings"
     {
         uniform int2 resolution = (240, 135)
-        custom int maxSamples = 8
+        custom int maxSamples = 64
     }
 }

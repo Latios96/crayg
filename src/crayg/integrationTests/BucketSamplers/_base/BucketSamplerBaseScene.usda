@@ -12,6 +12,6 @@ over "Render"
     over "settings"
     {
         custom token integratorType = "AMBIENT_OCCLUSION"
-        custom int maxSamples = 8
+        custom int maxSamples = 64
     }
 }

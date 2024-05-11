@@ -94,7 +94,7 @@ def "Render"
     def RenderSettings "settings"
     {
         uniform int2 resolution = (480, 270)
-        uniform int maxSamples = 8
+        uniform int maxSamples = 64
     }
 }
 

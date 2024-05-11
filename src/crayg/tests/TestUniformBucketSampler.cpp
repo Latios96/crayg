@@ -21,7 +21,7 @@ TEST_CASE("UniformBucketSampler::sampleBucket") {
 
     SECTION("should sample bucket uniformly") {
         int renderSampleCount = 0;
-        UniformBucketSampler uniformBucketSampler(4, [&renderSampleCount](Vector2f samplePos) {
+        UniformBucketSampler uniformBucketSampler(16, [&renderSampleCount](Vector2f samplePos) {
             renderSampleCount++;
             return Color::createWhite();
         });

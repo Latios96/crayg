@@ -38,7 +38,7 @@ bool RenderSettings::operator!=(const RenderSettings &rhs) const {
 }
 
 RenderSettings RenderSettings::createDefault() {
-    return RenderSettings(crayg::Resolution(1280, 720), 4, IntegratorType::RAYTRACING, IntegratorSettings(),
+    return RenderSettings(crayg::Resolution(1280, 720), 16, IntegratorType::RAYTRACING, IntegratorSettings(),
                           IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f, 8,
                           false);
 }
