@@ -41,6 +41,7 @@ class SubdivisionSurfaceMesh : public SceneObject {
     bool isTessellated = false;
     void verifyIsTessellated() const;
     void copyNormalsToTriangleMesh();
+    void copyUvsToTriangleMesh();
 };
 
 } // crayg

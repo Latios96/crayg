@@ -25,6 +25,25 @@ class OsdVector3fAdapter : public Vector3f {
     }
 };
 
+class OsdVector2fAdapter : public Vector2f {
+  public:
+    OsdVector2fAdapter() : Vector2f() {
+    }
+
+    OsdVector2fAdapter(const Vector2f &src) : Vector2f(src) {
+    }
+
+    void Clear(void * = 0) {
+        x = 0;
+        y = 0;
+    }
+
+    void AddWithWeight(OsdVector2fAdapter const &src, float weight) {
+        x += weight * src.x;
+        y += weight * src.y;
+    }
+};
+
 OpenSubdivRefiner::OpenSubdivRefiner(SubdivisionSurfaceMesh &subdivisionSurfaceMesh)
     : subdivisionSurfaceMesh(subdivisionSurfaceMesh) {
 }
@@ -44,6 +63,7 @@ void OpenSubdivRefiner::refine(int maxLevel) {
     refinePoints(refiner, maxLevel, refLastLevel);
     refineIndices(refLastLevel);
     refineNormals(refiner, refLastLevel);
+    refineUvs(refiner, maxLevel, refLastLevel);
 }
 
 void OpenSubdivRefiner::refinePoints(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner, int maxlevel,
@@ -132,6 +152,12 @@ OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     descriptor.numVertsPerFace = subdivisionSurfaceMesh.faceVertexCounts.data();
     descriptor.vertIndicesPerFace = subdivisionSurfaceMesh.faceVertexIndices.data();
 
+    if (!subdivisionSurfaceMesh.uvs.empty() && !subdivisionSurfaceMesh.uvIndices.empty()) {
+        channels[0].numValues = subdivisionSurfaceMesh.uvs.size();
+        channels[0].valueIndices = subdivisionSurfaceMesh.uvIndices.data();
+        descriptor.numFVarChannels = 1;
+        descriptor.fvarChannels = channels;
+    }
     return descriptor;
 }
 
@@ -140,6 +166,45 @@ OpenSubdiv::Sdc::Options::VtxBoundaryInterpolation OpenSubdivRefiner::getBoundar
         return OpenSubdiv::Sdc::Options::VTX_BOUNDARY_EDGE_ONLY;
     }
     return OpenSubdiv::Sdc::Options::VTX_BOUNDARY_EDGE_AND_CORNER;
+}
+
+void OpenSubdivRefiner::refineUvs(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner, int maxlevel,
+                                  const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
+    if (subdivisionSurfaceMesh.uvs.empty() || subdivisionSurfaceMesh.uvIndices.empty()) {
+        return;
+    }
+    std::vector<Vector2f> subdividedUvs(refiner->GetNumFVarValuesTotal(0));
+    for (int i = 0; i < subdivisionSurfaceMesh.uvs.size(); i++) {
+        subdividedUvs[i] = subdivisionSurfaceMesh.uvs[i];
+    }
+
+    OpenSubdiv::Far::PrimvarRefiner primvarRefiner(*refiner);
+
+    auto *src = static_cast<OsdVector2fAdapter *>(subdividedUvs.data());
+    OsdVector2fAdapter *src1 = src;
+    for (int level = 1; level <= maxlevel; ++level) {
+        OsdVector2fAdapter *dst = src1 + refiner->GetLevel(level - 1).GetNumFVarValues();
+        primvarRefiner.InterpolateFaceVarying(level, src1, dst);
+        src1 = dst;
+    }
+
+    subdivisionSurfaceMesh.uvs.resize(refLastLevel.GetNumFVarValues());
+    int firstOfLastUvs = refiner->GetNumFVarValuesTotal() - refLastLevel.GetNumFVarValues();
+    for (int i = 0; i < refLastLevel.GetNumFVarValues(); i++) {
+        subdivisionSurfaceMesh.uvs[i] = subdividedUvs[firstOfLastUvs + i];
+    }
+
+    std::vector<int> newUvIndices;
+    const int numberOfFaces = refLastLevel.GetNumFaces();
+
+    for (int face = 0; face < numberOfFaces; face++) {
+        OpenSubdiv::Far::ConstIndexArray fverts = refLastLevel.GetFaceFVarValues(face);
+        for (int fvert : fverts) {
+            newUvIndices.push_back(fvert);
+        }
+    }
+
+    subdivisionSurfaceMesh.uvIndices = newUvIndices;
 }
 
 } // crayg

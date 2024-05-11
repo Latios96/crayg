@@ -60,10 +60,17 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexIndicesAttr());
         auto faceVertexCounts =
             UsdUtils::getStaticAttributeValueAs<pxr::VtIntArray>(usdGeomMesh.GetFaceVertexCountsAttr());
+        auto uvsPrimVar = UsdReadUtils::getAuthoredUvPrimVar(usdGeomMesh);
+        pxr::VtVec2fArray uvs;
+        pxr::VtIntArray uvIndices;
+        uvsPrimVar->Get(&uvs);
+        uvsPrimVar->GetIndices(&uvIndices);
         REQUIRE(translation == pxr::GfVec3f(1, 2, -3));
         REQUIRE(points.size() == 81);
         REQUIRE(triangleIndices.size() == 384);
         REQUIRE(faceVertexCounts.size() == 128);
+        REQUIRE(uvs.size() == 384);
+        REQUIRE(uvIndices.size() == 0);
         REQUIRE_FALSE(normals.empty());
     }
 }

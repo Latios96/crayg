@@ -2,6 +2,7 @@
 #include "FanTriangulator.h"
 #include "OpenSubdivRefiner.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 
 namespace crayg {
 
@@ -56,6 +57,7 @@ void SubdivisionSurfaceMesh::tessellate() {
     triangleMesh.setMaterial(getMaterial());
     triangleMesh.setTransform(getTransform());
     copyNormalsToTriangleMesh();
+    copyUvsToTriangleMesh();
 
     triangleMesh.init();
 
@@ -63,6 +65,8 @@ void SubdivisionSurfaceMesh::tessellate() {
     faceVertexIndices.clear();
     faceVertexCounts.clear();
     normals.clear();
+    uvs.clear();
+    uvIndices.clear();
 
     isTessellated = true;
 }
@@ -81,5 +85,19 @@ void SubdivisionSurfaceMesh::copyNormalsToTriangleMesh() {
 
 bool SubdivisionSurfaceMesh::isTesselated() const {
     return isTessellated;
+}
+
+void SubdivisionSurfaceMesh::copyUvsToTriangleMesh() {
+    auto uvPrimvar = triangleMesh.addUvsPrimVar<TriangleMeshPerVertexPrimVar<Vector2f>>();
+    uvPrimvar->allocate();
+
+    FanTriangulator uvFanTriangulator(uvIndices, faceVertexCounts);
+    std::vector<TriangleMesh::FaceVertexIndices> triangulatedUvIndices;
+    uvFanTriangulator.fanTriangulate(triangulatedUvIndices);
+
+    for (int faceId = 0; faceId < triangulatedUvIndices.size(); faceId++) {
+        auto faceIndices = triangulatedUvIndices[faceId];
+        uvPrimvar->write(faceId, uvs[faceIndices.v0], uvs[faceIndices.v1], uvs[faceIndices.v2]);
+    }
 }
 } // crayg

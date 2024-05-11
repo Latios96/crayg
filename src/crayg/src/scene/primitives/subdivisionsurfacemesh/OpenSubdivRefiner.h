@@ -22,6 +22,8 @@ class OpenSubdivRefiner {
     void refineIndices(const OpenSubdiv::Far::TopologyLevel &refLastLevel);
     void refineNormals(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner,
                        const OpenSubdiv::Far::TopologyLevel &refLastLevel);
+    void refineUvs(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner, int maxlevel,
+                   const OpenSubdiv::Far::TopologyLevel &refLastLevel);
     OpenSubdiv::Sdc::Options::VtxBoundaryInterpolation getBoundaryInterpolation() const;
 
     OpenSubdiv::Far::TopologyDescriptor::FVarChannel channels[1];
