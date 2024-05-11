@@ -20,6 +20,9 @@ Vector2f PrimVarReaderVector2f::evaluateVector2f(const SurfaceInteraction &surfa
 Vector2f PrimVarReaderVector2f::readUvs(const SurfaceInteraction &surfaceInteraction) {
     if (surfaceInteraction.imageable.imageableType == ImageableType::TRIANGLE) {
         Triangle *triangle = (Triangle *)&surfaceInteraction.imageable;
+        if (!triangle->triangleMesh->uvsPrimVar) {
+            return Vector2f();
+        }
         return triangle->triangleMesh->uvsPrimVar->interpolateAt(triangle->faceId, surfaceInteraction.point);
     }
     if (surfaceInteraction.imageable.imageableType == ImageableType::SPHERE) {
