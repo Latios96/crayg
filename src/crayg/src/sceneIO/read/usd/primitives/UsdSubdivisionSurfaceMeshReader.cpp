@@ -20,6 +20,7 @@ std::shared_ptr<SubdivisionSurfaceMesh> UsdSubdivisionSurfaceMeshReader::read() 
     translatePoints(subdivisionSurfaceMesh);
     translateIndices(subdivisionSurfaceMesh);
     translateBoundaryInterpolation(subdivisionSurfaceMesh);
+    translateUvs(subdivisionSurfaceMesh);
 
     return subdivisionSurfaceMesh;
 }
@@ -72,6 +73,35 @@ void UsdSubdivisionSurfaceMeshReader::translateBoundaryInterpolation(
         return;
     }
     subdivisionSurfaceMesh->boundaryInterpolation = SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_ONLY;
+}
+
+void UsdSubdivisionSurfaceMeshReader::translateUvs(
+    std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) const {
+    std::optional<pxr::UsdGeomPrimvar> uvsPrimVar = UsdReadUtils::getAuthoredUvPrimVar(this->usdPrim);
+    if (!uvsPrimVar) {
+        return;
+    }
+
+    const pxr::TfToken uvsInterpolation = uvsPrimVar->GetInterpolation();
+
+    if (uvsInterpolation != pxr::UsdGeomTokens->faceVarying) {
+        Logger::warning(R"(UV interpolation "{}" of mesh {} is not supported)", uvsInterpolation, usdPrim.GetPath());
+        return;
+    }
+
+    pxr::VtVec2fArray uvs;
+    uvsPrimVar->Get(&uvs, timeCodeToRead);
+    subdivisionSurfaceMesh->uvs.reserve(uvs.size());
+    for (auto &uv : uvs) {
+        subdivisionSurfaceMesh->uvs.push_back(UsdConversions::convert(uv));
+    }
+
+    pxr::VtIntArray indices;
+    uvsPrimVar->GetIndices(&indices);
+    subdivisionSurfaceMesh->uvIndices.reserve(indices.size());
+    for (auto &i : indices) {
+        subdivisionSurfaceMesh->uvIndices.push_back(i);
+    }
 }
 
 } // crayg

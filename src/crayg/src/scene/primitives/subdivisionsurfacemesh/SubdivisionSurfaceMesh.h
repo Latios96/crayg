@@ -28,6 +28,9 @@ class SubdivisionSurfaceMesh : public SceneObject {
 
     std::vector<Vector3f> normals;
 
+    std::vector<Vector2f> uvs;
+    std::vector<int> uvIndices;
+
     enum class BoundaryInterpolation { EDGE_ONLY, EDGE_AND_CORNER };
 
     BoundaryInterpolation boundaryInterpolation = BoundaryInterpolation::EDGE_ONLY;

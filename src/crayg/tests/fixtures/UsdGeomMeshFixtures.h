@@ -1,8 +1,10 @@
 #ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_USDGEOMMESHFIXTURES_H_
 #define CRAYG_SRC_CRAYG_TESTS_FIXTURES_USDGEOMMESHFIXTURES_H_
 
+#include "Logger.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
+#include <pxr/usd/usdGeom/primvarsAPI.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 
 namespace crayg {
@@ -21,6 +23,12 @@ class UsdGeomMeshFixtures {
         usdGeomMesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
         pxr::VtIntArray faceVertexIndices({0, 1, 3, 2});
         usdGeomMesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+
+        pxr::VtVec2fArray uvs{{0, 1}, {1, 1}, {0, 0}, {1, 0}};
+        pxr::VtIntArray uvIndices({0, 1, 2, 3});
+        pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
+        primvarsApi.CreateIndexedPrimvar(pxr::TfToken("uv"), pxr::SdfValueTypeNames->TexCoord2fArray, uvs, uvIndices,
+                                         pxr::UsdGeomTokens->faceVarying);
 
         usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->constant);
 
