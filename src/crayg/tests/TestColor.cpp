@@ -17,6 +17,16 @@ TEST_CASE("Color/createColor", "[Color]") {
     REQUIRE(myColor.b == 3);
 }
 
+TEST_CASE("Color/createColor from float*", "[Color]") {
+    float data[3] = {1, 2, 3};
+
+    Color myColor(data);
+
+    REQUIRE(myColor.r == 1);
+    REQUIRE(myColor.g == 2);
+    REQUIRE(myColor.b == 3);
+}
+
 TEST_CASE("Color/fromRGB", "[Color]") {
     const Color color = Color::fromRGB(10, 20, 30);
     REQUIRE(color == Color(0.039215688f, 0.078431375f, 0.11764706f));

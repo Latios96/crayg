@@ -22,6 +22,9 @@ class Color {
     Color(float r, float g, float b) : r(r), g(g), b(b) {
     }
 
+    explicit Color(float *data) : r(data[0]), g(data[1]), b(data[2]) {
+    }
+
     static Color createGrey(float grey) {
         return {grey, grey, grey};
     }
