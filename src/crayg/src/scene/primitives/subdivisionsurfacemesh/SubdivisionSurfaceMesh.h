@@ -20,6 +20,7 @@ class SubdivisionSurfaceMesh : public SceneObject {
 
     void tessellate();
     bool isTesselated() const;
+    bool hasUvs() const;
     std::size_t faceCount() const;
 
     std::vector<Vector3f> points;

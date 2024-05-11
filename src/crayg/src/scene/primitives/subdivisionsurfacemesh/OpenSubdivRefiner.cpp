@@ -152,7 +152,7 @@ OpenSubdiv::Far::TopologyDescriptor OpenSubdivRefiner::createDescriptor() {
     descriptor.numVertsPerFace = subdivisionSurfaceMesh.faceVertexCounts.data();
     descriptor.vertIndicesPerFace = subdivisionSurfaceMesh.faceVertexIndices.data();
 
-    if (!subdivisionSurfaceMesh.uvs.empty() && !subdivisionSurfaceMesh.uvIndices.empty()) {
+    if (subdivisionSurfaceMesh.hasUvs()) {
         channels[0].numValues = subdivisionSurfaceMesh.uvs.size();
         channels[0].valueIndices = subdivisionSurfaceMesh.uvIndices.data();
         descriptor.numFVarChannels = 1;
@@ -170,7 +170,7 @@ OpenSubdiv::Sdc::Options::VtxBoundaryInterpolation OpenSubdivRefiner::getBoundar
 
 void OpenSubdivRefiner::refineUvs(const std::unique_ptr<OpenSubdiv::Far::TopologyRefiner> &refiner, int maxlevel,
                                   const OpenSubdiv::Far::TopologyLevel &refLastLevel) {
-    if (subdivisionSurfaceMesh.uvs.empty() || subdivisionSurfaceMesh.uvIndices.empty()) {
+    if (!subdivisionSurfaceMesh.hasUvs()) {
         return;
     }
     std::vector<Vector2f> subdividedUvs(refiner->GetNumFVarValuesTotal(0));

@@ -88,6 +88,9 @@ bool SubdivisionSurfaceMesh::isTesselated() const {
 }
 
 void SubdivisionSurfaceMesh::copyUvsToTriangleMesh() {
+    if (!hasUvs()) {
+        return;
+    }
     auto uvPrimvar = triangleMesh.addUvsPrimVar<TriangleMeshPerVertexPrimVar<Vector2f>>();
     uvPrimvar->allocate();
 
@@ -99,5 +102,9 @@ void SubdivisionSurfaceMesh::copyUvsToTriangleMesh() {
         auto faceIndices = triangulatedUvIndices[faceId];
         uvPrimvar->write(faceId, uvs[faceIndices.v0], uvs[faceIndices.v1], uvs[faceIndices.v2]);
     }
+}
+
+bool SubdivisionSurfaceMesh::hasUvs() const {
+    return !uvs.empty() && !uvIndices.empty();
 }
 } // crayg
