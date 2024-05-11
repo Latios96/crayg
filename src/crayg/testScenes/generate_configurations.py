@@ -90,7 +90,7 @@ def generate_config(
     only_hero_cam: bool = False,
     integrators: List[str] = None,
     scene_names: List[str] = None,
-    max_samples: Optional[int] = 32,
+    max_samples: Optional[int] = 1024,
     resolution: Optional[str] = None,
     use_spectral_lensing: Optional[bool] = False,
 ):
