@@ -33,13 +33,12 @@ def RectLight "areaLight1" (
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
 }
 
-def "Render" (
-    kind = "assembly"
-)
+def "Render"
 {
     def RenderSettings "settings"
     {
-        uniform int2 resolution = (960, 540)
+        uniform int2 resolution = (480, 270)
+        uniform int maxSamples = 64
     }
 }
 
@@ -139,13 +138,4 @@ def Mesh "pCube1" (
                 }
             }
         }
-}
-
-def "Render"
-{
-    def RenderSettings "settings"
-    {
-        uniform int2 resolution = (480, 270)
-        uniform int maxSamples = 64
-    }
 }
