@@ -1,6 +1,7 @@
 #include "UsdSubdivisionSurfaceMeshWriter.h"
 #include "UsdTriangleMeshWriter.h"
 #include <pxr/usd/usdGeom/primvar.h>
+#include <pxr/usd/usdGeom/primvarsAPI.h>
 
 namespace crayg {
 
