@@ -22,7 +22,7 @@ std::shared_ptr<Camera> UsdCameraReader::read() {
     camera->setFilmbackSize(filmbackSize);
 
     const auto cameraType =
-        UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "craygCameraType", CameraType::PINE_HOLE);
+        UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "craygCameraType", CameraType::PINHOLE);
     camera->setCameraType(cameraType);
 
     if (cameraType == CameraType::REALISTIC) {

@@ -63,7 +63,7 @@ TEST_CASE("CameraReader::read") {
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
 
-        REQUIRE(camera->getCameraType() == CameraType::PINE_HOLE);
+        REQUIRE(camera->getCameraType() == CameraType::PINHOLE);
     }
 
     SECTION("should require lens file when reading realistic lens") {

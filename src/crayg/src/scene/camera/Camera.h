@@ -17,7 +17,7 @@ class Camera : public Transformable {
     float focalLength;
     float filmbackSize;
     std::string name;
-    CameraType cameraType = CameraType::PINE_HOLE;
+    CameraType cameraType = CameraType::PINHOLE;
     float focusDistance = 0;
     float fStop = 0;
 

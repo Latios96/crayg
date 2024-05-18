@@ -19,7 +19,7 @@ void embeddLensFiles(const std::string &stagePath) {
         if (!prim.IsA<pxr::UsdGeomCamera>()) {
             continue;
         }
-        auto cameraType = UsdUtils::getAttributeValueAsEnum<CameraType>(prim, "craygCameraType", CameraType::PINE_HOLE);
+        auto cameraType = UsdUtils::getAttributeValueAsEnum<CameraType>(prim, "craygCameraType", CameraType::PINHOLE);
         if (cameraType != CameraType::REALISTIC) {
             continue;
         }

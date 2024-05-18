@@ -7,7 +7,7 @@
 namespace crayg {
 std::unique_ptr<CameraModel> CameraModelFactory::createCameraModel(Camera &camera, const Resolution &resolution) {
     switch (camera.getCameraType()) {
-    case CameraType::PINE_HOLE:
+    case CameraType::PINHOLE:
         return std::make_unique<PineHoleCameraModel>(camera, resolution);
     case CameraType::THIN_LENS:
         return std::make_unique<ThinLensCameraModel>(camera, resolution);
