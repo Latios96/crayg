@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "Wavelengths.h"
 #include "sampling/Random.h"
+#include "utils/tracing/CraygTracing.h"
 
 namespace crayg {
 
@@ -17,6 +18,7 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
 }
 
 void RealisticCameraModel::init(BaseTaskReporter &taskReporter) {
+    CRG_TRACE_SCOPE("Renderer");
     Logger::info("Effective focal length: {:.2f}mm", camera.getLens().metadata.focalLength * 10);
 
     camera.getLens().focusLens(camera.getFocusDistance());

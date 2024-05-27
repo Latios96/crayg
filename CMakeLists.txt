@@ -16,6 +16,12 @@ unset(ENV{CI})
 set(CONAN_SYSTEM_INCLUDES ON)
 
 option(CRAYG_USE_COMMIT_HASH "Automatically detect the Git commit hash" OFF)
+option(CRAYG_ENABLE_TRACING "Enable tracing using Chromium tracing format" OFF)
+
+if(CRAYG_ENABLE_TRACING)
+    add_definitions(-DCRAYG_ENABLE_TRACING="ON")
+    add_definitions(-DMTR_ENABLED="ON")
+endif()
 
 if(CRAYG_USE_COMMIT_HASH)
     execute_process(

@@ -1,8 +1,10 @@
 #include "OpenImageIoImageWriter.h"
+#include "utils/tracing/CraygTracing.h"
 
 namespace crayg {
 
 void OpenImageIoImageWriter::writeImageMetadata(const Image &image, OIIO::ImageSpec &spec) {
+    CRG_TRACE_SCOPE("ImageWriters");
     for (auto &metadata : image.metadata) {
         if (std::holds_alternative<std::string>(metadata.second)) {
             spec.attribute(metadata.first, std::get<std::string>(metadata.second));

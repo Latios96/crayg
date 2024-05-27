@@ -3,6 +3,7 @@
 #include "OpenSubdivRefiner.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
+#include "utils/tracing/CraygTracing.h"
 
 namespace crayg {
 
@@ -47,6 +48,7 @@ size_t SubdivisionSurfaceMesh::primitiveCount() const {
 }
 
 void SubdivisionSurfaceMesh::tessellate() {
+    CRG_TRACE_SCOPE("SubdivisionSurfaceMesh");
     OpenSubdivRefiner openSubdivRefiner(*this);
     openSubdivRefiner.refine();
 

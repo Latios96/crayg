@@ -2,6 +2,7 @@
 #include "scene/primitives/PointInstancer.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "utils/ProgressReporter.h"
+#include "utils/tracing/CraygTracing.h"
 #include <tbb/parallel_for.h>
 
 namespace crayg {
@@ -11,10 +12,12 @@ GeometryCompiler::GeometryCompiler(Scene &scene, BaseTaskReporter &taskReporter)
 }
 
 void GeometryCompiler::compile() {
+    CRG_TRACE_SCOPE("GeometryCompiler");
     tessellateSubdivisionSurfaces();
 }
 
 void GeometryCompiler::tessellateSubdivisionSurfaces() {
+    CRG_TRACE_SCOPE("GeometryCompiler");
     std::vector<std::shared_ptr<SubdivisionSurfaceMesh>> subdivisionSurfaces;
     findAllSubdivisionSurfaceMeshes(subdivisionSurfaces);
 
@@ -30,6 +33,7 @@ void GeometryCompiler::tessellateSubdivisionSurfaces() {
 
 void GeometryCompiler::findAllSubdivisionSurfaceMeshes(
     std::vector<std::shared_ptr<SubdivisionSurfaceMesh>> &subdivisionSurfaces) {
+    CRG_TRACE_SCOPE("GeometryCompiler");
     for (auto &sceneObject : scene.objects) {
         if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
             auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);

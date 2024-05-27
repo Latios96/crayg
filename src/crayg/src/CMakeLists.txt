@@ -372,6 +372,9 @@ set(crayg_SRCS
     utils/TaskReporter.cpp
     utils/TaskReporter.h
     utils/ToStringHelper.h
+    utils/tracing/CraygTracing.h
+    utils/tracing/minitrace.c
+    utils/tracing/minitrace.h
     utils/utils.cpp
     utils/utils.h)
 

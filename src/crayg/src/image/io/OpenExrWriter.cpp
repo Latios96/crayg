@@ -1,9 +1,11 @@
 #include "OpenExrWriter.h"
 #include "utils/Exceptions.h"
+#include "utils/tracing/CraygTracing.h"
 
 namespace crayg {
 
 void OpenExrWriter::writeImage(const Image &image, std::string image_name) {
+    CRG_TRACE_SCOPE("OpenExrWriter");
     unsigned int pixelCountPerChannel = image.getWidth() * image.getHeight();
 
     unsigned int totalValuesCount = 0;
@@ -23,14 +25,17 @@ void OpenExrWriter::writeImage(const Image &image, std::string image_name) {
 
     writeImageMetadata(image, spec);
     writeChannelsToSpec(channels, spec);
-
-    out->open(image_name, spec);
-    out->write_image(OIIO::TypeDesc::UNKNOWN, pixels.data(), totalValuesCount);
-    out->close();
+    {
+        CRG_IF_TRACE(MTR_SCOPE("OpenExrWriter", "OpenImageIO::write_image"));
+        out->open(image_name, spec);
+        out->write_image(OIIO::TypeDesc::UNKNOWN, pixels.data(), totalValuesCount);
+        out->close();
+    }
 }
 
 void OpenExrWriter::countChannelsAndPixels(const std::vector<Image::ChannelView> &channels,
                                            unsigned int &totalValuesCount, int &colorChannelCount) const {
+    CRG_TRACE_SCOPE("OpenExrWriter");
     for (auto &channel : channels) {
         PixelBuffer &channelBuffer = channel.channelBuffer;
         unsigned int bytesForChannel =
@@ -43,6 +48,7 @@ void OpenExrWriter::countChannelsAndPixels(const std::vector<Image::ChannelView>
 void OpenExrWriter::collectPixelDataIntoSingleBuffer(unsigned int pixelCount,
                                                      const std::vector<Image::ChannelView> &channels,
                                                      std::vector<std::byte> &pixels) const {
+    CRG_TRACE_SCOPE("OpenExrWriter");
     std::byte *data = pixels.data();
     for (unsigned int pixel = 0; pixel < pixelCount; pixel++) {
         for (auto &channel : channels) {
@@ -69,6 +75,7 @@ void OpenExrWriter::collectPixelDataIntoSingleBuffer(unsigned int pixelCount,
 }
 
 void OpenExrWriter::writeChannelsToSpec(const std::vector<Image::ChannelView> &channels, OIIO::ImageSpec &spec) {
+    CRG_TRACE_SCOPE("OpenExrWriter");
     spec.channelnames.clear();
     for (auto &channel : channels) {
         PixelBuffer &channelBuffer = channel.channelBuffer;
@@ -79,6 +86,7 @@ void OpenExrWriter::writeChannelsToSpec(const std::vector<Image::ChannelView> &c
 
 void OpenExrWriter::writeChannelNames(OIIO::ImageSpec &spec, const Image::ChannelView &channel,
                                       const PixelBuffer &channelBuffer) const {
+    CRG_TRACE_SCOPE("OpenExrWriter");
     int channelIndex = 0;
     if (channel.channelName == "rgb") {
         spec.channelnames.emplace_back("R");
@@ -107,6 +115,7 @@ void OpenExrWriter::writeChannelNames(OIIO::ImageSpec &spec, const Image::Channe
 }
 
 void OpenExrWriter::writeChannelFormats(OIIO::ImageSpec &spec, const PixelBuffer &channelBuffer) const {
+    CRG_TRACE_SCOPE("OpenExrWriter");
     for (int i = 0; i < channelBuffer.getColorChannelCount(); i++) {
         if (channelBuffer.getPixelFormat() == PixelFormat::FLOAT) {
             spec.channelformats.push_back(OIIO::TypeFloat);

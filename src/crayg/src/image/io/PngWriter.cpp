@@ -3,6 +3,7 @@
 #include "image/ColorConversion.h"
 #include "utils/Exceptions.h"
 #include "utils/ImageChannelPathResolver.h"
+#include "utils/tracing/CraygTracing.h"
 #include <OpenImageIO/imageio.h>
 
 namespace crayg {
@@ -29,6 +30,7 @@ void write(std::unique_ptr<OIIO::ImageOutput> &out, PixelBuffer &pixelBuffer) {
 }
 
 void PngWriter::writeImage(const Image &image, std::string image_name) {
+    CRG_TRACE_SCOPE("PngWriter");
     ImageChannelPathResolver imageChannelPathResolver;
     for (auto &channel : image.getChannels()) {
         auto channelBuffer = channel.channelBuffer;

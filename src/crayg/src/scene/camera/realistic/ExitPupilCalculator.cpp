@@ -3,6 +3,7 @@
 #include "basics/MathUtils.h"
 #include "sampling/Random.h"
 #include "utils/StopWatch.h"
+#include "utils/tracing/CraygTracing.h"
 #include <tbb/parallel_for.h>
 
 namespace crayg {
@@ -12,6 +13,7 @@ ExitPupilCalculator::ExitPupilCalculator(CameraLens &lens, float filmDiagonalLen
 }
 
 ExitPupil ExitPupilCalculator::calculate() {
+    CRG_TRACE_SCOPE("RealisticCamera");
     ExitPupil exitPupil;
     exitPupil.pupilBounds.resize(calculationSettings.samplesFilmX);
 

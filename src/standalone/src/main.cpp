@@ -3,6 +3,7 @@
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
+#include "utils/tracing/CraygTracing.h"
 #include <CraygInfo.h>
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
@@ -26,6 +27,11 @@ int craygMain(int argc, char *argv[]) {
     std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
     std::string logFilePath = FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
     Logger::logToFile(logFilePath);
+    CRG_IF_TRACE({
+        std::string traceFilePath = FileSystemUtils::swapFileExtension(imageOutputPath, "json");
+        Logger::info("Tracing enabled, tracing to {}", traceFilePath);
+        mtr_init(traceFilePath.c_str());
+    });
 
     Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
 
@@ -52,6 +58,13 @@ int craygMain(int argc, char *argv[]) {
     Logger::info("Writing image to {}..", imageOutputPath);
     ImageWriters::writeImage(myImage, imageOutputPath);
     Logger::info("Writing image done.");
+
+    CRG_IF_TRACE({
+        mtr_flush();
+        Logger::info("Shutting down trace.");
+        mtr_shutdown();
+        Logger::info("Flushing trace.");
+    });
 
     return 0;
 }

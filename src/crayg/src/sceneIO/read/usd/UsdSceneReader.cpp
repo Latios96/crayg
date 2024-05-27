@@ -1,6 +1,7 @@
 #include "sceneIO/read/usd/UsdSceneReader.h"
 #include "UsdStageReader.h"
 #include "utils/StopWatch.h"
+#include "utils/tracing/CraygTracing.h"
 #include <pxr/usd/usd/stage.h>
 
 namespace crayg {
@@ -10,6 +11,7 @@ UsdSceneReader::UsdSceneReader(const std::string &path, Scene &scene, const Scen
 }
 
 void UsdSceneReader::read() {
+    CRG_TRACE_SCOPE("UsdSceneReader");
     InformativeScopedStopWatch informativeScopedStopWatch(fmt::format("Reading USD Stage {}", path));
     auto stage = pxr::UsdStage::Open(path);
     UsdStageReader translator(*stage);

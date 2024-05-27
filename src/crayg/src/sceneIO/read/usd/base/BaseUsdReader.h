@@ -3,6 +3,7 @@
 
 #include "Logger.h"
 #include "sceneIO/usd/UsdReadUtils.h"
+#include "utils/tracing/CraygTracing.h"
 #include <memory>
 
 namespace crayg {
@@ -13,6 +14,7 @@ template <class UsdType, class CraygType> class BaseUsdReader {
     }
 
     virtual std::shared_ptr<CraygType> read() {
+        CRG_TRACE_SCOPE("UsdSceneReader");
         Logger::debug("Read {} {}", getTranslatedType(), usdPrim.GetPath());
 
         auto craygObject = std::make_shared<CraygType>();

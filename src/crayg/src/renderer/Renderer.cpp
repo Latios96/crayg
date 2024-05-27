@@ -15,6 +15,7 @@
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
 #include "utils/TaskReporter.h"
+#include "utils/tracing/CraygTracing.h"
 #include <image/BucketImageBuffer.h>
 #include <image/imageiterators/buckets/ImageBucketSequences.h>
 #include <memory>
@@ -51,6 +52,7 @@ void Renderer::renderScene() {
 }
 
 void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController) {
+    CRG_TRACE_SCOPE("Renderer");
     bucketQueue.start(bucketSequence);
     tbb::task_group task_group;
 
@@ -70,6 +72,7 @@ void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProg
 }
 
 void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController) {
+    CRG_TRACE_SCOPE("Renderer");
     bucketQueue.start(bucketSequence);
     while (true) {
         const auto imageBucket = bucketQueue.nextBucket();
@@ -96,6 +99,7 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
 }
 
 void Renderer::init() {
+    CRG_TRACE_SCOPE("Renderer");
     bucketSampler = BucketSamplerFactory::createBucketSampler(
         scene.renderSettings, [this](Vector2f samplePos) { return renderSample(samplePos); });
     {

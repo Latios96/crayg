@@ -4,6 +4,7 @@
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "utils/StopWatch.h"
+#include "utils/tracing/CraygTracing.h"
 
 namespace crayg {
 EmbreeBvhBuilder::EmbreeBvhBuilder(const Scene &scene) : scene(scene) {
@@ -131,6 +132,7 @@ RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_p
 }
 
 std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
+    CRG_TRACE_SCOPE("EmbreeBvhBuilder");
     InformativeScopedStopWatch informativeScopedStopWatch("Building Embree BVH");
     auto embreeBvh = std::make_unique<EmbreeBvh>();
 
