@@ -99,7 +99,7 @@ void Renderer::init() {
     bucketSampler = BucketSamplerFactory::createBucketSampler(
         scene.renderSettings, [this](Vector2f samplePos) { return renderSample(samplePos); });
     {
-        InformativeScopedStopWatch buildBvh("Initialize camera");
+        InformativeScopedStopWatch initializeCamera("Initialize camera");
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
         cameraModel->init(taskReporter);
     }
