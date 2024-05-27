@@ -11,9 +11,8 @@ namespace crayg {
 void verifyImageMetadata(const std::string &path) {
 
     auto imageInput = OIIO::ImageInput::open(path);
-    if (!imageInput) {
-        return;
-    }
+    REQUIRE(imageInput);
+
     const OIIO::ImageSpec &spec = imageInput->spec();
 
     REQUIRE(spec.get_string_attribute("stringAttr") == "stringAttrValue");
