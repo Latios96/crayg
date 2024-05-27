@@ -1,3 +1,4 @@
+#include "fixtures/TemporaryDirectory.h"
 #include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
 #include <fstream>
@@ -6,42 +7,30 @@
 
 namespace crayg {
 
-static const char *const TEST_IMAGE_EXR = "ImageWriters_exr.exr";
-static const char *const TEST_IMAGE_PNG = "ImageWriters_png.png";
-static const char *const TEST_IMAGE_UNKNOWN = "ImageWriters_unknown.unknown";
-
 TEST_CASE("ImageWriters/ImageWriterType") {
     Image image(20, 10);
 
     SECTION("PNG") {
-        if (boost::filesystem::exists(TEST_IMAGE_PNG)) {
-            REQUIRE(remove(TEST_IMAGE_PNG) == 0);
-        }
+        TemporaryDirectory temporaryDirectory;
+        const std::string pngPath = temporaryDirectory.getFilePath("ImageWriters_png.png");
 
-        REQUIRE(ImageWriters::writeImage(image, TEST_IMAGE_PNG));
-        REQUIRE(boost::filesystem::exists(TEST_IMAGE_PNG));
-
-        if (boost::filesystem::exists(TEST_IMAGE_PNG)) {
-            REQUIRE(remove(TEST_IMAGE_PNG) == 0);
-        }
+        REQUIRE(ImageWriters::writeImage(image, pngPath));
+        REQUIRE(boost::filesystem::exists(pngPath));
     }
 
     SECTION("EXR") {
-        if (boost::filesystem::exists(TEST_IMAGE_EXR)) {
-            REQUIRE(remove(TEST_IMAGE_EXR) == 0);
-        }
+        TemporaryDirectory temporaryDirectory;
+        const std::string exrPath = temporaryDirectory.getFilePath("ImageWriters_exr.png");
 
-        REQUIRE(ImageWriters::writeImage(image, TEST_IMAGE_EXR));
-        REQUIRE(boost::filesystem::exists(TEST_IMAGE_EXR));
-
-        if (boost::filesystem::exists(TEST_IMAGE_EXR)) {
-            REQUIRE(remove(TEST_IMAGE_EXR) == 0);
-        }
+        REQUIRE(ImageWriters::writeImage(image, exrPath));
+        REQUIRE(boost::filesystem::exists(exrPath));
     }
 
     SECTION("unknown") {
-        REQUIRE_THROWS_AS(ImageWriters::writeImage(image, TEST_IMAGE_UNKNOWN), std::runtime_error);
-        REQUIRE_FALSE(boost::filesystem::exists(TEST_IMAGE_UNKNOWN));
+        TemporaryDirectory temporaryDirectory;
+        const std::string unknownFormatPath = temporaryDirectory.getFilePath("ImageWriters_unknown.unknown");
+        REQUIRE_THROWS_AS(ImageWriters::writeImage(image, unknownFormatPath), std::runtime_error);
+        REQUIRE_FALSE(boost::filesystem::exists(unknownFormatPath));
     }
 }
 
