@@ -1,4 +1,5 @@
 #include "fixtures/TemporaryDirectory.h"
+#include <OpenImageIO/imageio.h>
 #include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
 #include <fstream>
@@ -7,8 +8,24 @@
 
 namespace crayg {
 
+void verifyImageMetadata(const std::string &path) {
+
+    auto imageInput = OIIO::ImageInput::open(path);
+    if (!imageInput) {
+        return;
+    }
+    const OIIO::ImageSpec &spec = imageInput->spec();
+
+    REQUIRE(spec.get_string_attribute("stringAttr") == "stringAttrValue");
+    REQUIRE(spec.get_int_attribute("intAttr") == 42);
+    REQUIRE(spec.get_float_attribute("floatAttr") == 42.f);
+}
+
 TEST_CASE("ImageWriters/ImageWriterType") {
     Image image(20, 10);
+    image.metadata.write("stringAttr", "stringAttrValue");
+    image.metadata.write("intAttr", 42);
+    image.metadata.write("floatAttr", 42.f);
 
     SECTION("PNG") {
         TemporaryDirectory temporaryDirectory;
@@ -16,6 +33,7 @@ TEST_CASE("ImageWriters/ImageWriterType") {
 
         REQUIRE(ImageWriters::writeImage(image, pngPath));
         REQUIRE(boost::filesystem::exists(pngPath));
+        verifyImageMetadata(pngPath);
     }
 
     SECTION("EXR") {
@@ -24,6 +42,7 @@ TEST_CASE("ImageWriters/ImageWriterType") {
 
         REQUIRE(ImageWriters::writeImage(image, exrPath));
         REQUIRE(boost::filesystem::exists(exrPath));
+        verifyImageMetadata(exrPath);
     }
 
     SECTION("unknown") {

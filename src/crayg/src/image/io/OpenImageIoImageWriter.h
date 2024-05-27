@@ -8,7 +8,7 @@ namespace crayg {
 
 class OpenImageIoImageWriter : public ImageWriter {
   public:
-    void writeImageMetadata(const Image &image, OIIO::ImageSpec &spec);
+    virtual void writeImageMetadata(const Image &image, OIIO::ImageSpec &spec);
     ~OpenImageIoImageWriter() override = default;
 };
 

@@ -60,6 +60,23 @@ void PngWriter::writeImage(const Image &image, std::string image_name) {
     }
 }
 
+void PngWriter::writeImageMetadata(const Image &image, OIIO::ImageSpec &spec) {
+    CRG_TRACE_SCOPE("PngWriter");
+    for (auto &metadata : image.metadata) {
+        if (std::holds_alternative<std::string>(metadata.second)) {
+            spec.attribute(metadata.first, std::get<std::string>(metadata.second));
+        } else if (std::holds_alternative<int>(metadata.second)) {
+            spec.attribute(metadata.first, fmt::format("{}", std::get<int>(metadata.second)));
+        } else if (std::holds_alternative<float>(metadata.second)) {
+            spec.attribute(metadata.first, fmt::format("{}", std::get<float>(metadata.second)));
+        } else if (std::holds_alternative<std::chrono::seconds>(metadata.second)) {
+            spec.attribute(
+                metadata.first,
+                fmt::format("{}s", static_cast<unsigned int>(std::get<std::chrono::seconds>(metadata.second).count())));
+        }
+    }
+}
+
 PngWriter::~PngWriter() = default;
 
 }
