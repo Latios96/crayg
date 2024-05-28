@@ -116,6 +116,14 @@ TEST_CASE("convertColor") {
 
         REQUIRE(convertedColor == Color(1, 2, 3));
     }
+
+    SECTION("should convert Vec4f to Color") {
+        const pxr::GfVec4f colorToConvert(1, 2, 3, 1);
+
+        const Color convertedColor = UsdConversions::convertColor(colorToConvert);
+
+        REQUIRE(convertedColor == Color(1, 2, 3));
+    }
 }
 
 TEST_CASE("ConvertResolution") {

@@ -45,6 +45,10 @@ Color UsdConversions::convertColor(const pxr::GfVec3f &vector) {
     return {vector[0], vector[1], vector[2]};
 }
 
+Color UsdConversions::convertColor(const pxr::GfVec4f &vector) {
+    return {vector[0], vector[1], vector[2]};
+}
+
 pxr::GfMatrix4d UsdConversions::convert(const Matrix4x4f &matrix) {
     return BASE_TRANSFORM_USD *
            pxr::GfMatrix4d((matrix.values(0, 0)), (matrix.values(1, 0)), (matrix.values(2, 0)), (matrix.values(3, 0)),
