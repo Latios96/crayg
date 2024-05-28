@@ -1,0 +1,20 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/base_scene.usda@
+    ]
+)
+
+over "geo"{
+	over "mtl" {
+		over "usdPreviewSurface2SG"{
+			over "file1"{
+				asset inputs:file = @./not-existing.jpg@ (
+									colorSpace = "sRGB"
+								)
+				color4f inputs:fallback = (1,0,0,1)
+			}
+		}
+	}
+}
+

@@ -164,6 +164,9 @@
         },
         {
           "name": "exr_texture"
+        },
+        {
+          "name": "fallback_color"
         }
       ]
     },
