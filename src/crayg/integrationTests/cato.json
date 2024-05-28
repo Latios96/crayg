@@ -154,6 +154,20 @@
       ]
     },
     {
+      "name": "ShadingNodes_FileTexture",
+      "tests": [
+        {
+          "name": "jpeg_texture"
+        },
+        {
+          "name": "png_texture"
+        },
+        {
+          "name": "exr_texture"
+        }
+      ]
+    },
+    {
       "name": "Lights",
       "tests": [
         {

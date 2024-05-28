@@ -1,0 +1,19 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/base_scene.usda@
+    ]
+)
+
+over "geo"{
+	over "mtl" {
+		over "usdPreviewSurface2SG"{
+			over "file1"{
+				asset inputs:file = @./checker.png@ (
+									colorSpace = "sRGB"
+								)
+			}
+		}
+	}
+}
+
