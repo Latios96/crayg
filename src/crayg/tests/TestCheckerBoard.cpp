@@ -1,23 +1,9 @@
+#include "fixtures/UnitPlaneUvs.h"
 #include "scene/primitives/Sphere.h"
 #include "scene/shadingnetworks/shadingnodes/CheckerBoard.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
-
-class UnitPlaneUvs : public ShadingNode {
-  public:
-    Vector2f evaluateVector2f(const SurfaceInteraction &surfaceInteraction) override {
-        return surfaceInteraction.point.xy();
-    }
-
-    std::string getType() const override {
-        return "UnitPlaneUvs";
-    }
-
-    ShadingNodeOutputType getOutputType() override {
-        return ShadingNodeOutputType::VECTOR2F;
-    }
-};
 
 TEST_CASE("CheckerBoard::evaluateColor") {
     auto sphere = std::make_shared<Sphere>();

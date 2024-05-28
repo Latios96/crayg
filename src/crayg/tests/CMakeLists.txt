@@ -12,6 +12,7 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/TemporaryDirectory.h
     fixtures/TriangleMeshFixtures.cpp
     fixtures/TriangleMeshFixtures.h
+    fixtures/UnitPlaneUvs.h
     fixtures/UsdGeomMeshFixtures.cpp
     fixtures/UsdGeomMeshFixtures.h
     TestAdaptiveBucketSampler.cpp
