@@ -39,7 +39,7 @@
       "name": "CameraModels",
       "tests": [
         {
-          "name": "PineHole"
+          "name": "Pinhole"
         },
         {
           "name": "ThinLens"
