@@ -46,6 +46,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestExitPupilCalculator.cpp
     TestFanTriangulator.cpp
     TestFileSystemUtils.cpp
+    TestFileTexture.cpp
     TestFollowMouseBucketQueue.cpp
     TestFollowSequenceBucketQueue.cpp
     TestFromStringUtils.cpp
@@ -126,6 +127,8 @@ set(UNIT_TEST_SOURCE_LIST
     TestUsdConversions.cpp
     TestUsdDiskLightReader.cpp
     TestUsdDiskLightWriter.cpp
+    TestUsdFileTextureReader.cpp
+    TestUsdFileTextureWriter.cpp
     TestUsdGroundPlaneWriter.cpp
     TestUsdMaterialReadCache.cpp
     TestUsdMaterialWriteCache.cpp

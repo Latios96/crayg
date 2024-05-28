@@ -1,0 +1,53 @@
+#include "FileTexture.h"
+
+namespace crayg {
+Color FileTexture::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
+    if (badTexture) {
+        return fallbackColor;
+    }
+    const Vector2f &uv = uvInput.evaluate(surfaceInteraction);
+
+    OIIO::TextureOpt textureOpt;
+    textureOpt.swrap = OIIO::TextureOpt::Wrap::WrapPeriodic;
+    textureOpt.twrap = OIIO::TextureOpt::Wrap::WrapPeriodic;
+
+    float result[3];
+    const bool ok = textureSystem->texture(filePath, textureOpt, uv.x, uv.y, 0, 0, 0, 0, 3, result);
+    if (!ok) {
+        badTexture = true;
+        Logger::error("Could not load texture file {} from {}", filePath, getName());
+        return fallbackColor;
+    }
+    return Color(result) * 0.54f;
+}
+
+std::string FileTexture::getType() const {
+    return "FileTexture";
+}
+
+ShadingNodeOutputType FileTexture::getOutputType() {
+    return ShadingNodeOutputType::COLOR;
+}
+
+FileTexture::FileTexture() : FileTexture("") {
+}
+
+FileTexture::FileTexture(const std::string &name) : ShadingNode(name) {
+    imageCache = OIIO::ImageCache::create(true);
+    imageCache->attribute("max_memory_MB", 4000.0f);
+    textureSystem = OIIO::TextureSystem::create(imageCache);
+}
+
+FileTexture::~FileTexture() {
+    OIIO::TextureSystem::destroy(textureSystem);
+}
+
+const std::string FileTexture::getFilePath() const {
+    return filePath.string();
+}
+
+void FileTexture::setFilePath(const std::string &path) {
+    filePath = OIIO::ustring(path);
+}
+
+} // crayg

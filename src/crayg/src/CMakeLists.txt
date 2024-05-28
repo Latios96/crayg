@@ -236,6 +236,8 @@ set(crayg_SRCS
     scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h
     scene/shadingnetworks/shadingnodes/ConversionNodes.cpp
     scene/shadingnetworks/shadingnodes/ConversionNodes.h
+    scene/shadingnetworks/shadingnodes/FileTexture.cpp
+    scene/shadingnetworks/shadingnodes/FileTexture.h
     scene/shadingnetworks/shadingnodes/PrimVarReaders.cpp
     scene/shadingnetworks/shadingnodes/PrimVarReaders.h
     scene/Transformable.cpp
@@ -276,6 +278,8 @@ set(crayg_SRCS
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.cpp
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.h
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdFileTextureReader.cpp
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdFileTextureReader.h
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderReaders.cpp
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderReaders.h
     sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.cpp
@@ -337,8 +341,10 @@ set(crayg_SRCS
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.h
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.cpp
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.h
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.cpp
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.cpp
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.h
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderWriters.cpp
-    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderWriters.h
     sceneIO/write/usd/UsdPathFactory.cpp
     sceneIO/write/usd/UsdPathFactory.h
     sceneIO/write/usd/UsdRenderSettingsWriter.cpp

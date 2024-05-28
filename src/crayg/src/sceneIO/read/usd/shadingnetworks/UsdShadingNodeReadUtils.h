@@ -52,6 +52,7 @@ void UsdShadingNodeReadUtils::readShaderInput(pxr::UsdShadeShader &shader, const
 }
 
 template <> Color UsdShadingNodeReadUtils::readValue<Color, pxr::GfVec3f>(const pxr::UsdShadeInput &input);
+template <> Color UsdShadingNodeReadUtils::readValue<Color, pxr::GfVec4f>(const pxr::UsdShadeInput &input);
 
 template <> bool UsdShadingNodeReadUtils::readValue<bool, int>(const pxr::UsdShadeInput &input);
 

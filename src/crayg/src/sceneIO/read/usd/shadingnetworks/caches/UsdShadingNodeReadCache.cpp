@@ -2,6 +2,7 @@
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdCheckerBoardReader.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.h"
+#include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdFileTextureReader.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderReaders.h"
 
 namespace crayg {
@@ -42,6 +43,9 @@ std::shared_ptr<ShadingNode> UsdShadingNodeReadCache::translateShadingNode(pxr::
     } else if (shadingNodeId == pxr::TfToken("crayg:CheckerBoard")) {
         UsdCheckerBoardReader checkerBoardReader(shader, *this);
         return checkerBoardReader.read();
+    } else if (shadingNodeId == pxr::TfToken("UsdUVTexture") || shadingNodeId == pxr::TfToken("crayg:FileTexture")) {
+        UsdFileTextureReader fileTextureReader(shader, *this);
+        return fileTextureReader.read();
     }
 
     Logger::warning("ShadingNode of id '{}' is not supported!", shadingNodeId);
