@@ -1,14 +1,12 @@
 scenes:
   - name: OpenChessSet
     cameras:
-      - /cams/render_cam_7/render_cam_7Shape
-      - /cams/render_cam_6/render_cam_6Shape
-      - /cams/render_cam_5/render_cam_5Shape
-      - /cams/render_cam_4/render_cam_4Shape
-      - /cams/render_cam_3/render_cam_3Shape
-      - /cams/render_cam_2/render_cam_2Shape
-      - /cams/render_cam_1/render_cam_1Shape
-    hero_camera: /cams/render_cam_7/render_cam_7Shape
+      - /cams/render_cam_top/render_cam_topShape
+      - /cams/render_cam_top_70mm/render_cam_top_70mmShape
+      - /cams/render_cam_detail/render_cam_detailShape
+      - /cams/render_cam_top_side/render_cam_top_sideShape
+      - /cams/render_cam_top_side_2/render_cam_top_side_2Shape
+    hero_camera: /cams/render_cam_detail/render_cam_detailShape
     integrators:
       - ambient_occlusion
       - raytracing
