@@ -1,4 +1,5 @@
 #include "UsdPreviewSurfaceReader.h"
+#include "scene/shadingnetworks/shadingnodes/CheckerBoard.h"
 #include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
 
 namespace crayg {
@@ -17,21 +18,18 @@ std::shared_ptr<UsdPreviewSurface> UsdPreviewSurfaceReader::read() {
                                                                   usdShadingNodeReadCache);
     UsdShadingNodeReadUtils::readShaderAttributeValue<bool, int>(usdPrim, "useSpecularWorkflow",
                                                                  material->useSpecularWorkflow);
-    UsdShadingNodeReadUtils::readShaderInput<Color, pxr::GfVec3f>(usdPrim, "specularColor", material->specularColor,
-                                                                  usdShadingNodeReadCache);
-    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "metallic", material->metallic,
-                                                           usdShadingNodeReadCache);
-    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "roughness", material->roughness,
-                                                           usdShadingNodeReadCache);
-    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "clearcoat", material->clearcoat,
-                                                           usdShadingNodeReadCache);
-    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "clearcoatRoughness", material->clearcoatRoughness,
-                                                           usdShadingNodeReadCache);
-    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "opacity", material->opacity,
-                                                           usdShadingNodeReadCache);
-    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "opacityThreshold", material->opacityThreshold,
-                                                           usdShadingNodeReadCache);
-    UsdShadingNodeReadUtils::readShaderInput<float, float>(usdPrim, "ior", material->ior, usdShadingNodeReadCache);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<Color, pxr::GfVec3f>(usdPrim, "specularColor",
+                                                                           material->specularColor.value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "metallic", material->metallic.value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "metallic", material->metallic.value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "roughness", material->roughness.value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "clearcoat", material->clearcoat.value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "clearcoatRoughness",
+                                                                    material->clearcoatRoughness.value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "opacity", material->opacity.value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "opacityThreshold",
+                                                                    material->opacityThreshold.value);
+    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "ior", material->ior.value);
 
     return material;
 }
