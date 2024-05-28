@@ -30,8 +30,8 @@ template <typename T> struct VertexData {
     friend std::ostream &operator<<(std::ostream &os, const VertexData &data) {
         os << ToStringHelper("VertexData")
                   .addMember("v0", data.v0)
-                  .addMember("v0", data.v1)
-                  .addMember("v0", data.v2)
+                  .addMember("v1", data.v1)
+                  .addMember("v2", data.v2)
                   .finish();
         return os;
     }
