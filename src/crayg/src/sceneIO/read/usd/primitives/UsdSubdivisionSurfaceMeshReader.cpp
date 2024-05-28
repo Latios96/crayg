@@ -93,7 +93,9 @@ void UsdSubdivisionSurfaceMeshReader::translateUvs(
     uvsPrimVar->Get(&uvs, timeCodeToRead);
     subdivisionSurfaceMesh->uvs.reserve(uvs.size());
     for (auto &uv : uvs) {
-        subdivisionSurfaceMesh->uvs.push_back(UsdConversions::convert(uv));
+        Vector2f vec2f = UsdConversions::convert(uv);
+        vec2f.y = 1 - vec2f.y;
+        subdivisionSurfaceMesh->uvs.push_back(vec2f);
     }
 
     pxr::VtIntArray indices;

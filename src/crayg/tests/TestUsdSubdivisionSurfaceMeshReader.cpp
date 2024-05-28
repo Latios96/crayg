@@ -28,7 +28,7 @@ TEST_CASE("UsdSubdivisionSurfaceMeshReader::read") {
         REQUIRE(subdivisionSurfaceMesh->faceVertexIndices == std::vector<int>({2, 3, 1, 0}));
         REQUIRE(subdivisionSurfaceMesh->faceVertexCounts == std::vector<int>({4}));
         REQUIRE(subdivisionSurfaceMesh->getMaterial()->getName() == "defaultMaterial");
-        REQUIRE(subdivisionSurfaceMesh->uvs == std::vector<Vector2f>({{0, 1}, {1, 1}, {0, 0}, {1, 0}}));
+        REQUIRE(subdivisionSurfaceMesh->uvs == std::vector<Vector2f>({{0, 0}, {1, 0}, {0, 1}, {1, 1}}));
         REQUIRE(subdivisionSurfaceMesh->uvIndices == std::vector<int>({0, 1, 2, 3}));
     }
 

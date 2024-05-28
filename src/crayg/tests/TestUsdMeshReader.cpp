@@ -145,8 +145,8 @@ TEST_CASE("UsdMeshReader::read") {
         REQUIRE(triangleMesh->uvsPrimVar != nullptr);
         REQUIRE(*triangleMesh->getUvsPrimVarAs<TriangleMeshPerVertexPrimVar<Vector2f>>() ==
                 std::vector<VertexData<Vector2f>>({
-                    VertexData(Vector2f{1, 0}, Vector2f{0, 0}, Vector2f{1, 1}),
-                    VertexData(Vector2f{0, 0}, Vector2f{1, 0}, Vector2f{1, 1}),
+                    VertexData(Vector2f{1, 1}, Vector2f{0, 1}, Vector2f{1, 0}),
+                    VertexData(Vector2f{0, 1}, Vector2f{1, 1}, Vector2f{1, 0}),
 
                 }));
     }
@@ -168,8 +168,8 @@ TEST_CASE("UsdMeshReader::read") {
         REQUIRE(triangleMesh->uvsPrimVar != nullptr);
         REQUIRE(*triangleMesh->getUvsPrimVarAs<TriangleMeshPerVertexPrimVar<Vector2f>>() ==
                 std::vector<VertexData<Vector2f>>({
-                    VertexData(Vector2f{0, 0}, Vector2f{1, 1}, Vector2f{1, 0}),
-                    VertexData(Vector2f{0, 0}, Vector2f{0, 1}, Vector2f{1, 1}),
+                    VertexData(Vector2f{0, 1}, Vector2f{1, 0}, Vector2f{1, 1}),
+                    VertexData(Vector2f{0, 1}, Vector2f{0, 0}, Vector2f{1, 0}),
                 }));
     }
 
