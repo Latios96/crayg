@@ -1,4 +1,5 @@
 #include "UsdPrimVarReaderReaders.h"
+#include <pxr/usd/sdf/types.h>
 
 namespace crayg {
 
@@ -41,7 +42,7 @@ void UsdPrimVarReaderVector2fReader::readPrimVarReaderTypeFromUsd(
         return;
     }
 
-    const auto varname = UsdUtils::getStaticAttributeValueAs<std::string>(varnameInput);
+    std::string varname = getVarname(varnameInput);
     if (primVarIsUVs(varname)) {
         primVarReader->primVarReaderType = PrimVarReaderType::UV;
         return;
@@ -49,6 +50,17 @@ void UsdPrimVarReaderVector2fReader::readPrimVarReaderTypeFromUsd(
     primVarReader->primVarReaderType = PrimVarReaderType::UNKNOWN;
     Logger::warning("PrimVarReader {} has unknown varname {} specified, falling back to PrimVarReaderType::UNKNOWN",
                     usdPrim.GetPath(), varname);
+}
+
+std::string UsdPrimVarReaderVector2fReader::getVarname(const pxr::UsdShadeInput &varnameInput) const {
+    if (varnameInput.GetTypeName() == pxr::SdfValueTypeNames->String) {
+        return UsdUtils::getStaticAttributeValueAs<std::string>(varnameInput);
+    } else if (varnameInput.GetTypeName() == pxr::SdfValueTypeNames->Token) {
+        const auto varnameToken = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(varnameInput);
+        return varnameToken.GetString();
+    }
+    CRAYG_LOG_AND_THROW_MESSAGE(fmt::format("varname attribute has unknown type {} on {}",
+                                            varnameInput.GetTypeName().GetAsToken(), varnameInput.GetPrim().GetPath()))
 }
 
 void UsdPrimVarReaderVector2fReader::readPrimVarReaderTypeFromCrayg(
