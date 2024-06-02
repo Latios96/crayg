@@ -7,10 +7,6 @@ Color FileTexture::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
     }
     const Vector2f &uv = uvInput.evaluate(surfaceInteraction);
 
-    OIIO::TextureOpt textureOpt;
-    textureOpt.swrap = OIIO::TextureOpt::Wrap::WrapPeriodic;
-    textureOpt.twrap = OIIO::TextureOpt::Wrap::WrapPeriodic;
-
     float result[3];
     const bool ok = textureSystem->texture(filePath, textureOpt, uv.x, uv.y, 0, 0, 0, 0, 3, result);
     if (!ok) {
@@ -39,6 +35,8 @@ FileTexture::FileTexture(const std::string &name) : ShadingNode(name) {
     imageCache = OIIO::ImageCache::create(true);
     imageCache->attribute("max_memory_MB", 4000.0f);
     textureSystem = OIIO::TextureSystem::create(imageCache);
+    textureOpt.swrap = OIIO::TextureOpt::Wrap::WrapPeriodic;
+    textureOpt.twrap = OIIO::TextureOpt::Wrap::WrapPeriodic;
 }
 
 FileTexture::~FileTexture() {

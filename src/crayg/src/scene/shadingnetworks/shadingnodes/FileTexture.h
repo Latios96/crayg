@@ -32,6 +32,7 @@ class FileTexture : public ShadingNode {
     OIIO::ustring filePath;
     OIIO::ImageCache *imageCache;
     std::atomic<bool> badTexture;
+    OIIO::TextureOpt textureOpt;
 };
 } // crayg
 
