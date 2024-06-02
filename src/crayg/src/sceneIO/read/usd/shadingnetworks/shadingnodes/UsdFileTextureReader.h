@@ -15,6 +15,7 @@ class UsdFileTextureReader : public BaseUsdShadingNodeReader<FileTexture> {
     void readCraygFileTexture(std::shared_ptr<FileTexture> &fileTexture);
     std::string getTranslatedType() override;
     void readFilePath(std::shared_ptr<FileTexture> &fileTexture) const;
+    FileTexture::ColorSpace getDefaultColorSpaceFromFilePath(std::shared_ptr<FileTexture> &fileTexture);
 };
 
 } // crayg

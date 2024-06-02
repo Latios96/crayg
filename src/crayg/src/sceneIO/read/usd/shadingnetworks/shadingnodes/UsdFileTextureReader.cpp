@@ -1,4 +1,5 @@
 #include "UsdFileTextureReader.h"
+#include <boost/filesystem/path.hpp>
 
 namespace crayg {
 UsdFileTextureReader::UsdFileTextureReader(const pxr::UsdShadeShader &usdPrim,
@@ -29,6 +30,8 @@ void UsdFileTextureReader::readUsdUvTextureUsd(std::shared_ptr<FileTexture> &fil
                                                                      usdShadingNodeReadCache);
     UsdShadingNodeReadUtils::readShaderAttributeValue<Color, pxr::GfVec4f>(usdPrim, "fallback",
                                                                            fileTexture->fallbackColor);
+    fileTexture->colorSpace = UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "inputs:sourceColorSpace",
+                                                                getDefaultColorSpaceFromFilePath(fileTexture));
 }
 
 void UsdFileTextureReader::readCraygFileTexture(std::shared_ptr<FileTexture> &fileTexture) {
@@ -37,6 +40,9 @@ void UsdFileTextureReader::readCraygFileTexture(std::shared_ptr<FileTexture> &fi
                                                                      usdShadingNodeReadCache);
     UsdShadingNodeReadUtils::readShaderAttributeValue<Color, pxr::GfVec4f>(usdPrim, "fallbackColor",
                                                                            fileTexture->fallbackColor);
+
+    fileTexture->colorSpace = UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "inputs:sourceColorSpace",
+                                                                getDefaultColorSpaceFromFilePath(fileTexture));
 }
 
 void UsdFileTextureReader::readFilePath(std::shared_ptr<FileTexture> &fileTexture) const {
@@ -53,4 +59,16 @@ void UsdFileTextureReader::readFilePath(std::shared_ptr<FileTexture> &fileTextur
     Logger::info("{} file path resolved to {}", usdPrim.GetPath(), filePath);
     fileTexture->setFilePath(filePath);
 }
+
+FileTexture::ColorSpace
+UsdFileTextureReader::getDefaultColorSpaceFromFilePath(std::shared_ptr<FileTexture> &fileTexture) {
+    const std::string filePath = fileTexture->getFilePath();
+    boost::filesystem::path path(filePath);
+    std::string extension = path.extension().string();
+    if (extension == ".exr") {
+        return FileTexture::ColorSpace::RAW;
+    }
+    return FileTexture::ColorSpace::S_RGB;
+}
+
 } // crayg

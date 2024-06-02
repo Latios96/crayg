@@ -9,9 +9,7 @@ over "geo"{
 	over "mtl" {
 		over "usdPreviewSurface2SG"{
 			over "file1"{
-				asset inputs:file = @./checker.exr@ (
-									colorSpace = "sRGB"
-								)
+				asset inputs:file = @./checker.exr@ 
 			}
 		}
 	}

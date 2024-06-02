@@ -8,14 +8,15 @@
 
 namespace crayg {
 
-enum class ColorSpace { RAW, S_RGB };
-
 class FileTexture : public ShadingNode {
   public:
     explicit FileTexture();
     explicit FileTexture(const std::string &name);
 
     Color fallbackColor;
+
+    enum class ColorSpace { RAW, S_RGB };
+
     ColorSpace colorSpace;
     Vector2fShadingNodeInput uvInput;
 
@@ -33,5 +34,7 @@ class FileTexture : public ShadingNode {
     std::atomic<bool> badTexture;
 };
 } // crayg
+
+CRAYG_FMT_ENUM_FORMATTER(crayg::FileTexture::ColorSpace);
 
 #endif // CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNETWORKS_SHADINGNODES_FILETEXTURE_H_

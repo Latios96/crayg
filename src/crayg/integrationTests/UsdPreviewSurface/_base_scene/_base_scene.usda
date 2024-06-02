@@ -9,3 +9,14 @@ over "areaLight1"
 {
     float inputs:intensity = 30
 }
+
+over "Background"{
+	over "Looks"{
+		over "BackGroundMat2"{
+			over "Image_Texture2"{
+				asset inputs:file = @./textures/Checker.jpg@ 
+			}
+		}
+	}
+}
+

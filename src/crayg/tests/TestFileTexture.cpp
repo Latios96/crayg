@@ -20,13 +20,14 @@ TEST_CASE("TestFileTexture::evaluateColor") {
         TemporaryDirectory temporaryDirectory;
         const std::string texturePath = temporaryDirectory.getFilePath("blue.png");
         fileTexture.setFilePath(texturePath);
+        fileTexture.colorSpace = FileTexture::ColorSpace::RAW;
         Image image(10, 10);
         ImageAlgorithms::fill(image, Color(0, 1, 0));
         ImageWriters::writeImage(image, texturePath);
 
         auto color = fileTexture.evaluateColor(SurfaceInteraction(*sphere, {0.5, 0.5, 0}, {}, {}));
 
-        REQUIRE(color == Color(0, 0.54f, 0));
+        REQUIRE(color == Color(0, 1, 0));
     }
 
     SECTION("should fall back to fallback color if file not found") {

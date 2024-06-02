@@ -18,7 +18,10 @@ Color FileTexture::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
         Logger::error("Could not load texture file {} from {}", filePath, getName());
         return fallbackColor;
     }
-    return Color(result) * 0.54f;
+    if (colorSpace == ColorSpace::RAW) {
+        return Color(result);
+    }
+    return Color(result).pow(2.2f);
 }
 
 std::string FileTexture::getType() const {
