@@ -29,9 +29,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ "windows-2019", "ubuntu-20.04"]
-        use_unity_build: ${{ github.event_name != 'schedule' && ["True", "False"] || ["True"] }}
-        build_type: ${{ github.event_name != 'schedule' && ["RelWithDebInfo ", "Debug"] || "RelWithDebInfo" }}
-        with_tracing: ${{ github.event_name != 'schedule' && ["True", "False"] || "False" }}
+        use_unity_build: ${{ github.event_name != 'schedule' && fromJSON('["True", "False"]') || fromJSON('["True"]') }}
+        build_type: ${{ github.event_name != 'schedule' && fromJSON('["RelWithDebInfo ", "Debug"]') || fromJSON('["RelWithDebInfo"]') }}
+        with_tracing: ${{ github.event_name != 'schedule' && fromJSON('["True", "False"]') || fromJSON('["False"]') }}
     name: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
