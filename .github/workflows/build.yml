@@ -34,7 +34,7 @@ jobs:
         with_tracing: ${{ github.event_name != 'schedule' && fromJSON('["True", "False"]') || fromJSON('["False"]') }}
     name: "${{ matrix.os }}"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
