@@ -94,4 +94,4 @@ jobs:
           GITHUB_JOB_NAME: "${{matrix.os}} ${{matrix.build_type}} unity_build=${{matrix.use_unity_build}} with_tracing=${{matrix.with_tracing}}"
       - name: create package
         working-directory: build
-        run: cmake --build . --config Release --target createDistribution
+        run: cmake --build . --config ${{matrix.build_type}} --target createDistribution
