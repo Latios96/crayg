@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_ENUMUTILS_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_ENUMUTILS_H_
+#pragma once
 
 #include "utils/Exceptions.h"
 #include <boost/algorithm/string/case_conv.hpp>
@@ -55,5 +54,3 @@ class EnumUtils {
     }
 };
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_ENUMUTILS_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_BASICS_BOUND2D_H_
-#define CRAYG_SRC_CRAYG_SRC_BASICS_BOUND2D_H_
+#pragma once
 
 #include "MathUtils.h"
 #include "Vector2.h"
@@ -73,5 +72,3 @@ typedef Bounds2d<int> Bounds2di;
 }
 
 template <typename T> struct fmt::formatter<crayg::Bounds2d<T>> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_BASICS_BOUND2D_H_

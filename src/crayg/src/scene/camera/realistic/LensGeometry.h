@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSGEOMETRY_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSGEOMETRY_H_
+#pragma once
 
 #include "utils/EnumUtils.h"
 
@@ -10,5 +9,3 @@ enum class LensGeometry { SPHERICAL, PLANAR, CYLINDER_X, CYLINDER_Y };
 }
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::LensGeometry);
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSGEOMETRY_H_

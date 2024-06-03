@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_BASE_BASEUSDSHADINGNODEWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_BASE_BASEUSDSHADINGNODEWRITER_H_
+#pragma once
 
 #include "Logger.h"
 #include "sceneIO/usd/CraygUsdBase.h"
@@ -48,5 +47,3 @@ template <class CraygType> class BaseUsdShadingNodeWriter : public BaseUsdWriter
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_BASE_BASEUSDSHADINGNODEWRITER_H_

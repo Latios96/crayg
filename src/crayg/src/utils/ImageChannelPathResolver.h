@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_IMAGECHANNELPATHRESOLVER_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_IMAGECHANNELPATHRESOLVER_H_
+#pragma once
 
 #include <string>
 
@@ -11,5 +10,3 @@ class ImageChannelPathResolver {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_IMAGECHANNELPATHRESOLVER_H_

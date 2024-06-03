@@ -1,5 +1,4 @@
-#ifndef CRAYG_GROUNDPLANE_H
-#define CRAYG_GROUNDPLANE_H
+#pragma once
 
 #include "scene/SceneObject.h"
 
@@ -20,5 +19,3 @@ class GroundPlane : public SceneObject {
 };
 
 }
-
-#endif // CRAYG_GROUNDPLANE_H

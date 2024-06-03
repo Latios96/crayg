@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_BASICS_ORTHONORMALBASIS_H_
-#define CRAYG_SRC_CRAYG_SRC_BASICS_ORTHONORMALBASIS_H_
+#pragma once
 
 #include "Vector3f.h"
 #include "utils/ToStringHelper.h"
@@ -46,5 +45,3 @@ class OrthonormalBasis {
 } // crayg
 
 template <> struct fmt::formatter<crayg::OrthonormalBasis> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_BASICS_ORTHONORMALBASIS_H_

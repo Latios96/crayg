@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREEBVH_H_
-#define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREEBVH_H_
+#pragma once
 
 #include "utils/DtoUtils.h"
 #include "utils/EnumUtils.h"
@@ -40,5 +39,3 @@ struct EmbreeBvh {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREEBVH_H_

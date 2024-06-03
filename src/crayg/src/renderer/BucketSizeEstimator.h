@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSIZEESTIMATOR_H_
-#define CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSIZEESTIMATOR_H_
+#pragma once
 
 #include "scene/RenderSettings.h"
 
@@ -19,5 +18,3 @@ class BucketSizeEstimator {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSIZEESTIMATOR_H_

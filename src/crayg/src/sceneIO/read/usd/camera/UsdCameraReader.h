@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_
+#pragma once
 
 #include "scene/camera/Camera.h"
 #include "sceneIO/read/usd/base/BaseUsdXformableReader.h"
@@ -19,5 +18,3 @@ class UsdCameraReader : public BaseUsdXformableReader<pxr::UsdGeomCamera, Camera
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYGUSD_SRC_USDCAMERATRANSLATOR_H_

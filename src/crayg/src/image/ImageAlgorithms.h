@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEALGORITHMS_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEALGORITHMS_H_
+#pragma once
 
 #include "BucketImageBuffer.h"
 #include "Image.h"
@@ -81,5 +80,3 @@ class ImageAlgorithms {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEALGORITHMS_H_

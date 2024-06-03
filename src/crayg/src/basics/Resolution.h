@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_BASICS_RESOLUTION_H_
-#define CRAYG_SRC_CRAYG_SRC_BASICS_RESOLUTION_H_
+#pragma once
 
 #include <fmt/ostream.h>
 #include <ostream>
@@ -34,5 +33,3 @@ struct Resolution {
 }
 
 template <> struct fmt::formatter<crayg::Resolution> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_BASICS_RESOLUTION_H_

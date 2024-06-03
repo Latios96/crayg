@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDSCENEOBJECTWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDSCENEOBJECTWRITER_H_
+#pragma once
 
 #include "BaseUsdTransformableWriter.h"
 #include "Logger.h"
@@ -41,5 +40,3 @@ class BaseUsdSceneObjectWriter : public BaseUsdTransformableWriter<UsdType, Cray
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDSCENEOBJECTWRITER_H_

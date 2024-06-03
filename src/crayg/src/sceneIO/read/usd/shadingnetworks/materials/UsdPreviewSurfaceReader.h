@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_MATERIALS_USDPREVIEWSURFACEREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_MATERIALS_USDPREVIEWSURFACEREADER_H_
+#pragma once
 
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/read/usd/base/BaseUsdShadingNodeReader.h"
@@ -17,5 +16,3 @@ class UsdPreviewSurfaceReader : public BaseUsdShadingNodeReader<UsdPreviewSurfac
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_MATERIALS_USDPREVIEWSURFACEREADER_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_UNITPLANEUVS_H_
-#define CRAYG_SRC_CRAYG_TESTS_FIXTURES_UNITPLANEUVS_H_
+#pragma once
 
 #include "integrators/SurfaceInteraction.h"
 #include "scene/shadingnetworks/ShadingNode.h"
@@ -22,5 +21,3 @@ class UnitPlaneUvs : public ShadingNode {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_TESTS_FIXTURES_UNITPLANEUVS_H_

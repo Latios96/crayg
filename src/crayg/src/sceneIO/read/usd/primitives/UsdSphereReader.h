@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDSPHEREREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDSPHEREREADER_H_
+#pragma once
 
 #include "scene/primitives/Sphere.h"
 #include "sceneIO/read/usd/base/BaseUsdImageableReader.h"
@@ -19,5 +18,3 @@ class UsdSphereReader : public BaseUsdImageableReader<pxr::UsdGeomSphere, Sphere
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDSPHEREREADER_H_

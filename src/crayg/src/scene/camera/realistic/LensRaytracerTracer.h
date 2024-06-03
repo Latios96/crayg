@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSRAYTRACERTRACER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSRAYTRACERTRACER_H_
+#pragma once
 
 #include "CameraLens.h"
 #include "basics/Ray.h"
@@ -35,4 +34,3 @@ class LensRaytracerTracer {
     void emit(const boost::filesystem::path &path);
 };
 }
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSRAYTRACERTRACER_H_

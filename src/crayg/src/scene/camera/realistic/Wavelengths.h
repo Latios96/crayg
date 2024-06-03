@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_WAVELENGTHS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_WAVELENGTHS_H_
+#pragma once
 #include "utils/DtoUtils.h"
 
 namespace crayg {
@@ -20,5 +19,3 @@ class FraunhoferLines {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_WAVELENGTHS_H_

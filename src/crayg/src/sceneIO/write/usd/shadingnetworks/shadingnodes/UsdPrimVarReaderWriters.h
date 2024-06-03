@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_PRIMVARREADERWRITERS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_PRIMVARREADERWRITERS_H_
+#pragma once
 
 #include "scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
 #include "sceneIO/write/usd/base/BaseUsdShadingNodeWriter.h"
@@ -18,5 +17,3 @@ class UsdPrimVarReaderVector2fWriter : public BaseUsdShadingNodeWriter<PrimVarRe
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_PRIMVARREADERWRITERS_H_

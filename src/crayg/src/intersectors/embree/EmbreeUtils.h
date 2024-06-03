@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREEUTILS_H_
-#define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREEUTILS_H_
+#pragma once
 
 #include "basics/Ray.h"
 #include <embree3/rtcore_ray.h>
@@ -14,5 +13,3 @@ class EmbreeUtils {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREEUTILS_H_

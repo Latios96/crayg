@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_
+#pragma once
 
 #include "scene/SceneObject.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
@@ -46,5 +45,3 @@ class SubdivisionSurfaceMesh : public SceneObject {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_PRIMITIVES_SUBDIVISIONSURFACEMESH_SUBDIVISIONSURFACEMESH_H_

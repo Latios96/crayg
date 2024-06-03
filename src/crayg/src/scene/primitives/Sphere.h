@@ -1,5 +1,4 @@
-#ifndef CRAYG_SPHERE_H
-#define CRAYG_SPHERE_H
+#pragma once
 
 #include "scene/SceneObject.h"
 #include "string"
@@ -30,5 +29,3 @@ class Sphere : public SceneObject {
 };
 
 }
-
-#endif // CRAYG_SPHERE_H

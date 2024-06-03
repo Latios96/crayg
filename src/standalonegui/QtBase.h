@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_QTBASE_H_
-#define CRAYG_SRC_STANDALONEGUI_QTBASE_H_
+#pragma once
 
 #include <QPoint>
 #include <QSize>
@@ -44,5 +43,3 @@ template <> struct fmt::formatter<QSizeF> {
         return fmt::format_to(ctx.out(), "({},{}))", size.width(), size.height());
     };
 };
-
-#endif // CRAYG_SRC_STANDALONEGUI_QTBASE_H_

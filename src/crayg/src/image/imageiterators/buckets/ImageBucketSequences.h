@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKETSEQUENCES_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKETSEQUENCES_H_
+#pragma once
 
 #include "BucketSequenceType.h"
 #include "basics/Resolution.h"
@@ -20,4 +19,3 @@ class ImageBucketSequences {
 };
 
 }
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKETSEQUENCES_H_

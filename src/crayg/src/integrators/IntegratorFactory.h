@@ -1,6 +1,5 @@
 
-#ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORFACTORY_H_
-#define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORFACTORY_H_
+#pragma once
 
 #include "AbstractIntegrator.h"
 #include "AmbientOcclusionIntegrator.h"
@@ -32,5 +31,3 @@ class IntegratorFactory {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORFACTORY_H_

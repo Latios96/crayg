@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSAMPLERS_BUCKETSAMPLERFACTORY_H_
-#define CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSAMPLERS_BUCKETSAMPLERFACTORY_H_
+#pragma once
 
 #include "BucketSampler.h"
 #include "scene/RenderSettings.h"
@@ -14,5 +13,3 @@ class BucketSamplerFactory {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSAMPLERS_BUCKETSAMPLERFACTORY_H_

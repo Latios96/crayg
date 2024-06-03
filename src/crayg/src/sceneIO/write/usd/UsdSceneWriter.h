@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSCENEWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSCENEWRITER_H_
+#pragma once
 
 #include "UsdPathFactory.h"
 #include "scene/Scene.h"
@@ -18,5 +17,3 @@ class UsdSceneWriter : public SceneWriter {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSCENEWRITER_H_

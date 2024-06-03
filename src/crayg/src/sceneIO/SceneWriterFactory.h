@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_SCENEWRITERFACTORY_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_SCENEWRITERFACTORY_H_
+#pragma once
 
 #include "sceneIO/write/SceneWriter.h"
 
@@ -11,5 +10,3 @@ class SceneWriterFactory {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_SCENEWRITERFACTORY_H_

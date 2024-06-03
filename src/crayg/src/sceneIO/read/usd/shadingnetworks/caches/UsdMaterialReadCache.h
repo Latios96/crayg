@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDMATERIALREADCACHE_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDMATERIALREADCACHE_H_
+#pragma once
 
 #include "UsdShadingNodeReadCache.h"
 #include "scene/shadingnetworks/materials/Material.h"
@@ -29,5 +28,3 @@ class UsdMaterialReadCache {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDMATERIALREADCACHE_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_LENSELEMENT_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_LENSELEMENT_H_
+#pragma once
 
 #include "LensGeometry.h"
 #include "LensMaterial.h"
@@ -39,5 +38,3 @@ bool intersectPlanarElement(float zCenter, const Ray &ray, float *t, Vector3f *n
 } // crayg
 
 template <> struct fmt::formatter<crayg::LensElement> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_LENSELEMENT_H_

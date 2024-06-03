@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDPATHFACTORY_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDPATHFACTORY_H_
+#pragma once
 
 #include <pxr/usd/sdf/path.h>
 #include <string>
@@ -16,5 +15,3 @@ class UsdPathFactory {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDPATHFACTORY_H_

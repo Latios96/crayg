@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_BASICS_VECTOR2_H_
-#define CRAYG_SRC_CRAYG_SRC_BASICS_VECTOR2_H_
+#pragma once
 
 #include "utils/ToStringHelper.h"
 #include <fmt/ostream.h>
@@ -102,5 +101,3 @@ typedef Vector2<int> Vector2i;
 }
 
 template <typename T> struct fmt::formatter<crayg::Vector2<T>> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_BASICS_VECTOR2_H_

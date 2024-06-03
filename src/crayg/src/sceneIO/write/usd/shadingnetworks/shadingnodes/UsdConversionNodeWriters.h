@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDCONVERSIONNODEWRITERS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDCONVERSIONNODEWRITERS_H_
+#pragma once
 
 #include "scene/shadingnetworks/shadingnodes/ConversionNodes.h"
 #include "sceneIO/write/usd/base/BaseUsdShadingNodeWriter.h"
@@ -16,5 +15,3 @@ class UsdVector2fToColorWriter : public BaseUsdShadingNodeWriter<Vector2fToColor
     std::string getTranslatedType() override;
 };
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDCONVERSIONNODEWRITERS_H_

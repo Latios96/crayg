@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILEWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILEWRITER_H_
+#pragma once
 
 #include "scene/camera/realistic/CameraLens.h"
 #include <string>
@@ -19,5 +18,3 @@ class LensFileWriter {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILEWRITER_H_

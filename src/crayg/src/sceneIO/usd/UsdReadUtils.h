@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDTRANSLATORUTILS_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_USDTRANSLATORUTILS_H_
+#pragma once
 
 #include "scene/Transformable.h"
 #include "sceneIO/usd/CraygUsdBase.h"
@@ -19,5 +18,3 @@ class UsdReadUtils {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYGUSD_SRC_USDTRANSLATORUTILS_H_

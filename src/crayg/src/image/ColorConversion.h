@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_COLORCONVERSION_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_COLORCONVERSION_H_
+#pragma once
 
 #include "PixelBuffer.h"
 #include "basics/Color.h"
@@ -14,5 +13,3 @@ class ColorConversion {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_COLORCONVERSION_H_

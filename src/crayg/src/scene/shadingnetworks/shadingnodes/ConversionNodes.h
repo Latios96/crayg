@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_MATERIALS_CONVERSIONNODES_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_MATERIALS_CONVERSIONNODES_H_
+#pragma once
 
 #include "scene/shadingnetworks/ShadingNode.h"
 
@@ -16,5 +15,3 @@ class Vector2fToColor : public ShadingNode {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_MATERIALS_CONVERSIONNODES_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_TEEOUTPUTDRIVER_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_TEEOUTPUTDRIVER_H_
+#pragma once
 
 #include "OutputDriver.h"
 
@@ -20,5 +19,3 @@ class TeeOutputDriver : public OutputDriver {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_TEEOUTPUTDRIVER_H_

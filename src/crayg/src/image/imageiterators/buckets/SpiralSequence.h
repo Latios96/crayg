@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETS_SPIRALSEQUENCE_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETS_SPIRALSEQUENCE_H_
+#pragma once
 #include "BucketSequence.h"
 
 namespace crayg {
@@ -30,5 +29,3 @@ class SpiralSequence : public BucketSequence {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETS_SPIRALSEQUENCE_H_

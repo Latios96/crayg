@@ -1,5 +1,4 @@
-#ifndef CRAYG_LOGGER_H_
-#define CRAYG_LOGGER_H_
+#pragma once
 
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
@@ -83,5 +82,3 @@ template <typename T> void Logger::critical(const T &msg) {
 }
 
 }
-
-#endif // RASPITOLIGHT_SRC_CORE_LIB_LOGGER_H_

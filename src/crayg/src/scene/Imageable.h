@@ -1,5 +1,4 @@
-#ifndef CRAYG_IMAGEABLE_H
-#define CRAYG_IMAGEABLE_H
+#pragma once
 
 #include "basics/OrthonormalBasis.h"
 #include "basics/Transform.h"
@@ -69,5 +68,3 @@ class Imageable {
 };
 
 }
-
-#endif // CRAYG_IMAGEABLE_H

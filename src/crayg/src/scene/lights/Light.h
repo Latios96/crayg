@@ -1,5 +1,4 @@
-#ifndef CRAYG_LIGHT_H
-#define CRAYG_LIGHT_H
+#pragma once
 
 #include "scene/Imageable.h"
 #include "scene/Transformable.h"
@@ -47,5 +46,3 @@ class Light : public Transformable, public Imageable {
 }
 
 template <> struct fmt::formatter<crayg::Light::Radiance> : ostream_formatter {};
-
-#endif // CRAYG_L

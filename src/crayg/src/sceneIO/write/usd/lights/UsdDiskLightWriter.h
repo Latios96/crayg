@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDDISKLIGHTWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDDISKLIGHTWRITER_H_
+#pragma once
 
 #include "scene/lights/DiskLight.h"
 #include "sceneIO/write/usd/base/BaseUsdLightWriter.h"
@@ -14,5 +13,3 @@ class UsdDiskLightWriter : public BaseUsdLightWriter<pxr::UsdLuxDiskLight, DiskL
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDDISKLIGHTWRITER_H_

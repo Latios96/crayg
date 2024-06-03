@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_
-#define CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_
+#pragma once
 
 #include "CliRenderSettingsOverride.h"
 #include "basics/Resolution.h"
@@ -48,5 +47,3 @@ class CliParser {
 };
 
 }
-
-#endif // CRAYG_SRC_STANDALONE_SRC_CLI_PARSER_H_

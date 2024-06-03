@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_CRAYGUSDBASE_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_CRAYGUSDBASE_H_
+#pragma once
 #include <fmt/format.h>
 #include <pxr/base/tf/token.h>
 #include <pxr/usd/sdf/path.h>
@@ -47,5 +46,3 @@ template <> struct fmt::formatter<pxr::UsdStagePtr> {
         return fmt::format_to(ctx.out(), "{}", result);
     };
 };
-
-#endif // CRAYG_SRC_CRAYGUSD_SRC_CRAYGUSDBASE_H_

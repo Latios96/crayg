@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONE_SRC_CLIRENDERSETTINGSOVERRIDE_H_
-#define CRAYG_SRC_STANDALONE_SRC_CLIRENDERSETTINGSOVERRIDE_H_
+#pragma once
 
 #include "basics/Resolution.h"
 #include "scene/RenderSettings.h"
@@ -30,5 +29,3 @@ struct CliRenderSettingsOverride {
 };
 
 }
-
-#endif // CRAYG_SRC_STANDALONE_SRC_CLIRENDERSETTINGSOVERRIDE_H_

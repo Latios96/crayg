@@ -1,5 +1,4 @@
-#ifndef CRAYG_IMAGEITERATOR_H
-#define CRAYG_IMAGEITERATOR_H
+#pragma once
 
 #include "basics/Vector2.h"
 #include "image/Image.h"
@@ -38,5 +37,3 @@ template <typename I> class LineByLineIterator {
 };
 
 }
-
-#endif // CRAYG_IMAGEITERATOR_H

@@ -1,5 +1,4 @@
-#ifndef CRAYG_COLOR_H
-#define CRAYG_COLOR_H
+#pragma once
 
 #include "sampling/Random.h"
 #include <algorithm>
@@ -215,5 +214,3 @@ class Color {
 } // namespace crayg
 
 template <> struct fmt::formatter<crayg::Color> : ostream_formatter {};
-
-#endif // CRAYG_COLOR_H

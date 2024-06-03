@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_IMAGEWIDGET_H_
-#define CRAYG_SRC_STANDALONEGUI_IMAGEWIDGET_H_
+#pragma once
 
 #include "image/BucketImageBuffer.h"
 #include "image/ImageBucket.h"
@@ -38,5 +37,3 @@ class ImageWidget : public QWidget {
 };
 
 }
-
-#endif // CRAYG_SRC_STANDALONEGUI_IMAGEWIDGET_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEMETADATA_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEMETADATA_H_
+#pragma once
 
 #include <chrono>
 #include <fmt/chrono.h>
@@ -112,5 +111,3 @@ template <> struct fmt::formatter<crayg::ImageMetadataValue> {
         return std::visit([&ctx](auto &value) { return fmt::format_to(ctx.out(), "{}", value); }, imageMetadataValue);
     };
 };
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEMETADATA_H_

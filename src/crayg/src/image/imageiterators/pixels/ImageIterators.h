@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_LINEBYLINEITERATOR_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_LINEBYLINEITERATOR_H_
+#pragma once
 
 #include "LineByLineIterator.h"
 
@@ -30,5 +29,3 @@ class ImageIterators {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_LINEBYLINEITERATOR_H_

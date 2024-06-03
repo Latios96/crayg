@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_OPENIMAGEIOIMAGEWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_OPENIMAGEIOIMAGEWRITER_H_
+#pragma once
 
 #include "ImageWriter.h"
 #include <OpenImageIO/imageio.h>
@@ -13,5 +12,3 @@ class OpenImageIoImageWriter : public ImageWriter {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_OPENIMAGEIOIMAGEWRITER_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_ABSTRACTINTEGRATOR_H_
-#define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_ABSTRACTINTEGRATOR_H_
+#pragma once
 
 #include "IntegratorContext.h"
 #include "basics/Color.h"
@@ -21,5 +20,3 @@ class AbstractIntegrator {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_ABSTRACTINTEGRATOR_H_

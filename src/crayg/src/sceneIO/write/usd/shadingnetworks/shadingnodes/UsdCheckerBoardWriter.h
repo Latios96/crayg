@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_USDCHECKERBOARDWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_USDCHECKERBOARDWRITER_H_
+#pragma once
 
 #include "scene/shadingnetworks/shadingnodes/CheckerBoard.h"
 #include "sceneIO/write/usd/base/BaseUsdShadingNodeWriter.h"
@@ -16,5 +15,3 @@ class UsdCheckerBoardWriter : public BaseUsdShadingNodeWriter<CheckerBoard> {
     std::string getTranslatedType() override;
 };
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_USDCHECKERBOARDWRITER_H_

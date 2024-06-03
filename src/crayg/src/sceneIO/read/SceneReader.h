@@ -1,5 +1,4 @@
-#ifndef CRAYG_SCENEREADER_H
-#define CRAYG_SCENEREADER_H
+#pragma once
 
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include <optional>
@@ -33,5 +32,3 @@ class SceneReader {
 };
 
 }
-
-#endif // CRAYG_SCENEREADER_H

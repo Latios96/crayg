@@ -1,5 +1,4 @@
-#ifndef CRAYG_STOPWATCH_H
-#define CRAYG_STOPWATCH_H
+#pragma once
 
 #include <chrono>
 #include <iostream>
@@ -60,4 +59,3 @@ class InformativeScopedStopWatch : public ScopedStopWatch {
 };
 
 }
-#endif // CRAYG_STOPWATCH_H

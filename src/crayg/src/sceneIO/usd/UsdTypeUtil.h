@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDTYPEUTIL_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDTYPEUTIL_H_
+#pragma once
 
 #include "image/imageiterators/buckets/BucketSequenceType.h"
 #include "integrators/IntegratorType.h"
@@ -89,4 +88,3 @@ template <> struct UsdTypeUtil<PrimVarReaderType> {
 };
 
 }
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDTYPEUTIL_H_

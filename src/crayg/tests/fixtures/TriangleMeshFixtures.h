@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_TRIANGLEMESHFIXTURES_H_
-#define CRAYG_SRC_CRAYG_TESTS_FIXTURES_TRIANGLEMESHFIXTURES_H_
+#pragma once
 
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 
@@ -55,5 +54,3 @@ class TriangleMeshFixtures {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_TESTS_FIXTURES_TRIANGLEMESHFIXTURES_H_

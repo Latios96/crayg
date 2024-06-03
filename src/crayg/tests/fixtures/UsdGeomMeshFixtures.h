@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_USDGEOMMESHFIXTURES_H_
-#define CRAYG_SRC_CRAYG_TESTS_FIXTURES_USDGEOMMESHFIXTURES_H_
+#pragma once
 
 #include "Logger.h"
 #include <pxr/usd/usd/stage.h>
@@ -54,5 +53,3 @@ class UsdGeomMeshFixtures {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_TESTS_FIXTURES_USDGEOMMESHFIXTURES_H_

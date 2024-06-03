@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_DTOUTILS_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_DTOUTILS_H_
+#pragma once
 
 #include "ToStringHelper.h"
 #include <fmt/ostream.h>
@@ -80,5 +79,3 @@
     };                                                                                                                 \
     CRAYG_DTO_UTILS_VECTOR_FORMATTER(Name)                                                                             \
     namespace crayg {
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_DTOUTILS_H_

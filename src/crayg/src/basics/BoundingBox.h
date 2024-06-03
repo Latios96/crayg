@@ -1,5 +1,4 @@
-#ifndef CRAYG_BOUNDINGBOX_H
-#define CRAYG_BOUNDINGBOX_H
+#pragma once
 
 #include "Ray.h"
 #include "Vector3f.h"
@@ -34,5 +33,3 @@ class BoundingBox {
 }
 
 template <> struct fmt::formatter<crayg::BoundingBox> : ostream_formatter {};
-
-#endif // CRAYG_BOUNDINGBOX_H

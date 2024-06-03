@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDPREVIEWSURFACEWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDPREVIEWSURFACEWRITER_H_
+#pragma once
 
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/write/usd/base/BaseUsdMaterialWriter.h"
@@ -19,5 +18,3 @@ class UsdPreviewSurfaceWriter : public BaseUsdMaterialWriter<UsdPreviewSurface> 
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDPREVIEWSURFACEWRITER_H_

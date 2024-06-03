@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_
-#define CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_
+#pragma once
 
 #include "ImageWidget.h"
 #include <outputdrivers/OutputDriver.h>
@@ -57,5 +56,3 @@ class ImageWidgetOutputDriver : public OutputDriver {
 };
 
 }
-
-#endif // CRAYG_SRC_STANDALONEGUI_IMAGEWIDGETOUTPUTDRIVER_H_

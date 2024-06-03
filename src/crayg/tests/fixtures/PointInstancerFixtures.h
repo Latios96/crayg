@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_POINTINSTANCERFIXTURES_H_
-#define CRAYG_SRC_CRAYG_TESTS_FIXTURES_POINTINSTANCERFIXTURES_H_
+#pragma once
 
 #include "scene/primitives/PointInstancer.h"
 
@@ -17,5 +16,3 @@ class PointInstancerFixtures {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_TESTS_FIXTURES_POINTINSTANCERFIXTURES_H_

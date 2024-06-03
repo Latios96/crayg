@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDLENSFILEUTILS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDLENSFILEUTILS_H_
+#pragma once
 
 #include "scene/camera/realistic/CameraLens.h"
 #include <pxr/usd/usd/prim.h>
@@ -12,5 +11,3 @@ class UsdLensFileUtils {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_USD_USDLENSFILEUTILS_H_

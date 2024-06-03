@@ -1,5 +1,4 @@
-#ifndef CRAYG_CAMERAMODEL_H
-#define CRAYG_CAMERAMODEL_H
+#pragma once
 
 #include "Camera.h"
 #include "basics/Resolution.h"
@@ -30,4 +29,3 @@ class CameraModel {
 };
 
 }
-#endif // CRAYG_CAMERAMODEL_H

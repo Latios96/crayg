@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_
+#pragma once
 
 #include "Image.h"
 #include "ImageBucket.h"
@@ -16,5 +15,3 @@ struct BucketImageBuffer {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_BUCKETIMAGEBUFFER_H_

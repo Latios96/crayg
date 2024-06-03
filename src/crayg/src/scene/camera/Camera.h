@@ -1,5 +1,4 @@
-#ifndef CRAYG_CAMERA_H
-#define CRAYG_CAMERA_H
+#pragma once
 
 #include "CameraType.h"
 #include "basics/Vector3f.h"
@@ -79,5 +78,3 @@ class Camera : public Transformable {
 }
 
 template <> struct fmt::formatter<crayg::Camera> : ostream_formatter {};
-
-#endif // CRAYG_CAMERA_H

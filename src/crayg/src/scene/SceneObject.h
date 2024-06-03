@@ -1,5 +1,4 @@
-#ifndef CRAYG_SCENEOBJECT_H
-#define CRAYG_SCENEOBJECT_H
+#pragma once
 
 #include "Imageable.h"
 #include "Transformable.h"
@@ -25,5 +24,3 @@ class SceneObject : public Imageable, public Transformable {
 };
 
 }
-
-#endif // CRAYG_SCENEOBJECT_H

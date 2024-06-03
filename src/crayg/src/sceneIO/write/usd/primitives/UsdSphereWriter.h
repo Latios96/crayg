@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSPHEREWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSPHEREWRITER_H_
+#pragma once
 
 #include "scene/primitives/Sphere.h"
 #include "sceneIO/write/usd/base/BaseUsdSceneObjectWriter.h"
@@ -15,5 +14,3 @@ class UsdSphereWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomSphere, Sphe
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSPHEREWRITER_H_

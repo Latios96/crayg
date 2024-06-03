@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_
+#pragma once
 
 #include "image/imageiterators/buckets/BucketSequenceType.h"
 #include "integrators/IntegratorSettings.h"
@@ -42,5 +41,3 @@ class RenderSettings {
 }
 
 template <> struct fmt::formatter<crayg::RenderSettings> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_RENDERSETTINGS_H_

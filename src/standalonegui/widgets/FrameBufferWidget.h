@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_
-#define CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_
+#pragma once
 
 #include "IconToggleButton.h"
 #include "ImageWidget.h"
@@ -54,5 +53,3 @@ class FrameBufferWidget : public QWidget {
 };
 
 }
-
-#endif // CRAYG_SRC_STANDALONE_GUI_FRAMEBUFFERWIDGET_H_

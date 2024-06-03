@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSTATS_H_
-#define CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSTATS_H_
+#pragma once
 
 #include "image/BucketImageBuffer.h"
 #include "outputdrivers/OutputDriver.h"
@@ -22,5 +21,3 @@ class BucketStats {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSTATS_H_

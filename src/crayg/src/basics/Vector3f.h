@@ -1,5 +1,4 @@
-#ifndef CRAYG_VECTOR3F_H
-#define CRAYG_VECTOR3F_H
+#pragma once
 
 #include "Vector2.h"
 #include <cmath>
@@ -155,5 +154,3 @@ class Vector3f {
 }
 
 template <> struct fmt::formatter<crayg::Vector3f> : ostream_formatter {};
-
-#endif // CRAYG_VECTOR3F_H

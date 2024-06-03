@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGESPEC_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGESPEC_H_
+#pragma once
 
 #include "PixelFormat.h"
 #include "basics/Resolution.h"
@@ -62,5 +61,3 @@ class ImageSpecBuilder {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGESPEC_H_

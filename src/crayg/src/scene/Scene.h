@@ -1,5 +1,4 @@
-#ifndef CRAYG_SCENE_H
-#define CRAYG_SCENE_H
+#pragma once
 
 #include "RenderSettings.h"
 #include "camera/Camera.h"
@@ -31,4 +30,3 @@ class Scene {
 };
 
 }
-#endif // CRAYG_SCENE_H

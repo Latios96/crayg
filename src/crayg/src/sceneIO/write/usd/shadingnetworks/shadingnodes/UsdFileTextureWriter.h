@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_USDFILETEXTUREREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_USDFILETEXTUREREADER_H_
+#pragma once
 
 #include "scene/shadingnetworks/shadingnodes/FileTexture.h"
 #include "sceneIO/write/usd/base/BaseUsdShadingNodeWriter.h"
@@ -17,5 +16,3 @@ class UsdFileTextureWriter : public BaseUsdShadingNodeWriter<FileTexture> {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_SHADINGNETWORKS_SHADINGNODES_USDFILETEXTUREREADER_H_

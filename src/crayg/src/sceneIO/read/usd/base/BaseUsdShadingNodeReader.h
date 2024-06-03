@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASE_BASEUSDSHADINGNODEREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASE_BASEUSDSHADINGNODEREADER_H_
+#pragma once
 #include "BaseUsdReader.h"
 #include "sceneIO/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h"
 #include "sceneIO/usd/UsdConversions.h"
@@ -26,4 +25,3 @@ template <class CraygType> class BaseUsdShadingNodeReader : public BaseUsdReader
 };
 
 }
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASE_BASEUSDSHADINGNODEREADER_H_

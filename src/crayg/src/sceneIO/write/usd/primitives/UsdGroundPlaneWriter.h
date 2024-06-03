@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDGROUNDPLANEWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDGROUNDPLANEWRITER_H_
+#pragma once
 
 #include "UsdTriangleMeshWriter.h"
 #include "scene/primitives/GroundPlane.h"
@@ -19,5 +18,3 @@ class UsdGroundPlaneWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, G
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDGROUNDPLANEWRITER_H_

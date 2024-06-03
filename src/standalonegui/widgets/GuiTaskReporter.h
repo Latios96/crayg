@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_WIDGETS_GUITASKREPORTER_H_
-#define CRAYG_SRC_STANDALONEGUI_WIDGETS_GUITASKREPORTER_H_
+#pragma once
 
 #include "utils/TaskReporter.h"
 #include <QObject>
@@ -33,5 +32,3 @@ class GuiTaskReporter : public TaskReporter {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_STANDALONEGUI_WIDGETS_GUITASKREPORTER_H_

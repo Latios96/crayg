@@ -1,5 +1,4 @@
-#ifndef CRAYG_IMAGE_H
-#define CRAYG_IMAGE_H
+#pragma once
 
 #include "ImageMetadata.h"
 #include "ImageSpec.h"
@@ -64,4 +63,3 @@ class Image {
 };
 
 }
-#endif // CRAYG_IMAGE_H

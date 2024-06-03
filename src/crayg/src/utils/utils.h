@@ -1,5 +1,4 @@
-#ifndef CRAYG_UTILS_H
-#define CRAYG_UTILS_H
+#pragma once
 
 #include <cmath>
 #include <string>
@@ -13,4 +12,3 @@ inline bool compareWithPrecision(float A, float B, float epsilon = 0.001f) {
 std::string stripCommentFromLine(std::string line);
 
 }
-#endif // CRAYG_UTILS_H

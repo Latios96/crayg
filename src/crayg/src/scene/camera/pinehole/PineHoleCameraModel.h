@@ -1,5 +1,4 @@
-#ifndef CRAYG_PINEHOLECAMERAMODEL_H
-#define CRAYG_PINEHOLECAMERAMODEL_H
+#pragma once
 
 #include "basics/Ray.h"
 #include "basics/Resolution.h"
@@ -27,5 +26,3 @@ class PineHoleCameraModel : public CameraModel {
 };
 
 }
-
-#endif // CRAYG_PINEHOLECAMERAMODEL_H

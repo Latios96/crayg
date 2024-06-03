@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_
-#define CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_
+#pragma once
 
 #include "Exceptions.h"
 #include "Logger.h"
@@ -33,5 +32,3 @@
 #define EMPTY_CHECK                                                                                                    \
     do {                                                                                                               \
     } while (false)
-
-#endif // CRAYG_SRC_CRAYG_SRC_PRECONDITIONS_H_

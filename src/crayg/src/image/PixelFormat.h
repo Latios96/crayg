@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELFORMAT_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELFORMAT_H_
+#pragma once
 
 #include "utils/EnumUtils.h"
 
@@ -10,5 +9,3 @@ enum class PixelFormat { FLOAT, UINT8 };
 }
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::PixelFormat);
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELFORMAT_H_

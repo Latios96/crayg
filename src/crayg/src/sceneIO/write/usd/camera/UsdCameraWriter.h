@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDCAMERAWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDCAMERAWRITER_H_
+#pragma once
 
 #include "scene/camera/Camera.h"
 #include "sceneIO/usd/CraygUsdBase.h"
@@ -19,5 +18,3 @@ class UsdCameraWriter : public BaseUsdTransformableWriter<pxr::UsdGeomCamera, Ca
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDCAMERAWRITER_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDSPHERELIGHTTRANSLATOR_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_USDSPHERELIGHTTRANSLATOR_H_
+#pragma once
 #include "scene/lights/Light.h"
 #include "sceneIO/read/usd/base/BaseUsdLightReader.h"
 #include "sceneIO/usd/CraygUsdBase.h"
@@ -17,4 +16,3 @@ class UsdSphereLightReader : public BaseUsdLightReader<pxr::UsdLuxSphereLight, L
 };
 
 }
-#endif // CRAYG_SRC_CRAYGUSD_SRC_USDSPHERELIGHTTRANSLATOR_H_

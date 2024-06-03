@@ -1,5 +1,4 @@
-#ifndef CRAYG_TRIANGLE_H
-#define CRAYG_TRIANGLE_H
+#pragma once
 
 #include "scene/Imageable.h"
 
@@ -45,5 +44,3 @@ class Triangle : public Imageable {
 };
 
 }
-
-#endif // CRAYG_TRIANGLE_H

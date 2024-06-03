@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORSETTINGS_H_
-#define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORSETTINGS_H_
+#pragma once
 #include <fmt/ostream.h>
 #include <ostream>
 #include <unordered_map>
@@ -34,5 +33,3 @@ template <> struct fmt::formatter<crayg::IntegratorSettingsValue> {
         return std::visit([&ctx](auto &v) { return fmt::format_to(ctx.out(), fmt::format("{}", v)); }, value);
     };
 };
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORSETTINGS_H_

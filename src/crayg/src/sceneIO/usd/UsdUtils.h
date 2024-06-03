@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDUTILS_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_USDUTILS_H_
+#pragma once
 
 #include "CraygUsdBase.h"
 #include "UsdTypeUtil.h"
@@ -115,5 +114,3 @@ class UsdUtils {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYGUSD_SRC_USDUTILS_H_

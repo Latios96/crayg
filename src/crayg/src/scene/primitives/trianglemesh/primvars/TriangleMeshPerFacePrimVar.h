@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHPERFACEPRIMVAR_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHPERFACEPRIMVAR_H_
+#pragma once
 
 #include "TriangleMeshAbstractPrimVar.h"
 #include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
@@ -60,5 +59,3 @@ template <typename T> class TriangleMeshPerFacePrimVar : public TriangleMeshAbst
 }
 
 template <typename T> struct fmt::formatter<crayg::TriangleMeshPerFacePrimVar<T>> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHPERFACEPRIMVAR_H_

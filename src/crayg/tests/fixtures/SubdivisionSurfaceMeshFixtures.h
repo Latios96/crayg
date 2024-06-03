@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_TESTS_FIXTURES_SUBDIVISIONSURFACEMESHFIXTURES_H_
-#define CRAYG_SRC_CRAYG_TESTS_FIXTURES_SUBDIVISIONSURFACEMESHFIXTURES_H_
+#pragma once
 
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 
@@ -13,5 +12,3 @@ class SubdivisionSurfaceMeshFixtures {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_TESTS_FIXTURES_SUBDIVISIONSURFACEMESHFIXTURES_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETS_BUCKETSEQUENCE_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETS_BUCKETSEQUENCE_H_
+#pragma once
 #include "basics/Bound2d.h"
 #include "basics/Resolution.h"
 #include "image/ImageBucket.h"
@@ -24,5 +23,3 @@ class BucketSequence {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETS_BUCKETSEQUENCE_H_

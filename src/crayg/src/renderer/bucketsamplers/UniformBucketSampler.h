@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSAMPLERS_UNIFORMBUCKETSAMPLER_H_
-#define CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSAMPLERS_UNIFORMBUCKETSAMPLER_H_
+#pragma once
 #include "BucketSampler.h"
 
 namespace crayg {
@@ -15,5 +14,3 @@ class UniformBucketSampler : public BucketSampler {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_BUCKETSAMPLERS_UNIFORMBUCKETSAMPLER_H_

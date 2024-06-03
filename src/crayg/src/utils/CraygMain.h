@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_CRAYGMAIN_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_CRAYGMAIN_H_
+#pragma once
 
 #define CRAYG_MAIN_IMPL                                                                                                \
     crayg::Logger::initialize();                                                                                       \
@@ -10,5 +9,3 @@
         crayg::Logger::error("Caught exception: {}", e.what());                                                        \
         return -1;                                                                                                     \
     }
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_CRAYGMAIN_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_CRAYGINFO_H_
-#define CRAYG_SRC_CRAYG_SRC_CRAYGINFO_H_
+#pragma once
 
 #include <string>
 #ifndef GIT_COMMIT_HASH
@@ -15,5 +14,3 @@ class CraygInfo {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_CRAYGINFO_H_

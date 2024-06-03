@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_FILESYSTEMUTILS_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_FILESYSTEMUTILS_H_
+#pragma once
 
 #include <string>
 
@@ -11,5 +10,3 @@ class FileSystemUtils {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_FILESYSTEMUTILS_H_

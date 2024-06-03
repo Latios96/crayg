@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSUBDIVISIONSURFACEMESHWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSUBDIVISIONSURFACEMESHWRITER_H_
+#pragma once
 
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
@@ -24,5 +23,3 @@ class UsdSubdivisionSurfaceMeshWriter : public BaseUsdSceneObjectWriter<pxr::Usd
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDSUBDIVISIONSURFACEMESHWRITER_H_

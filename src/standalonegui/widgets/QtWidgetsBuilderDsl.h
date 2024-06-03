@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_WIDGETS_QTWIDGETSBUILDERDSL_H_
-#define CRAYG_SRC_STANDALONEGUI_WIDGETS_QTWIDGETSBUILDERDSL_H_
+#pragma once
 
 #include <QLayout>
 #include <QWidget>
@@ -22,5 +21,3 @@ QLayout *inHBox(const std::vector<Renderable> &children);
 QLayout *inVBox(const std::vector<Renderable> &children);
 
 } // crayg
-
-#endif // CRAYG_SRC_STANDALONEGUI_WIDGETS_QTWIDGETSBUILDERDSL_H_

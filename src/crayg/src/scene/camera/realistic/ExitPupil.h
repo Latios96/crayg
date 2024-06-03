@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_EXITPUPIL_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_EXITPUPIL_H_
+#pragma once
 
 #include "basics/Bound2d.h"
 #include "basics/Vector2.h"
@@ -16,5 +15,3 @@ struct ExitPupil {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTIC_EXITPUPIL_H_

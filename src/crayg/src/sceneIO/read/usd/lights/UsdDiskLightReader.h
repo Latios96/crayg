@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDDISKLIGHTREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDDISKLIGHTREADER_H_
+#pragma once
 
 #include "scene/lights/DiskLight.h"
 #include "sceneIO/read/usd/base/BaseUsdLightReader.h"
@@ -18,5 +17,3 @@ class UsdDiskLightReader : public BaseUsdLightReader<pxr::UsdLuxDiskLight, DiskL
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDDISKLIGHTREADER_H_

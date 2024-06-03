@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERATYPE_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERATYPE_H_
+#pragma once
 
 #include "utils/EnumUtils.h"
 #include <fmt/format.h>
@@ -11,5 +10,3 @@ enum class CameraType { PINHOLE = 1, THIN_LENS = 2, REALISTIC = 3 };
 }
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::CameraType);
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERATYPE_H_

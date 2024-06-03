@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_HEATMAP_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_HEATMAP_H_
+#pragma once
 
 #include "basics/Color.h"
 
@@ -11,5 +10,3 @@ class MagmaHeatmap {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_HEATMAP_H_

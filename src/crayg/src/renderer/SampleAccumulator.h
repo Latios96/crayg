@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_RENDERER_SAMPLEACCUMULATOR_H_
-#define CRAYG_SRC_CRAYG_SRC_RENDERER_SAMPLEACCUMULATOR_H_
+#pragma once
 
 #include "basics/Color.h"
 
@@ -17,5 +16,3 @@ class SampleAccumulator {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_SAMPLEACCUMULATOR_H_

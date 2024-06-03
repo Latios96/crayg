@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDMATERIALWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDMATERIALWRITER_H_
+#pragma once
 
 #include "Logger.h"
 #include "sceneIO/usd/CraygUsdBase.h"
@@ -39,5 +38,3 @@ template <class CraygType> class BaseUsdMaterialWriter : public BaseUsdWriter<px
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDMATERIALWRITER_H_

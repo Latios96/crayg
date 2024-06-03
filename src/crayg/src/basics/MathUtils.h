@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_BASICS_MATHUTILS_H_
-#define CRAYG_SRC_CRAYG_SRC_BASICS_MATHUTILS_H_
+#pragma once
 
 #include "utils/DtoUtils.h"
 #include <optional>
@@ -42,5 +41,3 @@ class MathUtils {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_BASICS_MATHUTILS_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_REMAININGTIMECALCULATOR_H
-#define CRAYG_REMAININGTIMECALCULATOR_H
+#pragma once
 
 #include <chrono>
 
@@ -19,5 +18,3 @@ class RemainingTimeCalculator {
 };
 
 }
-
-#endif // CRAYG_REMAININGTIMECALCULATOR_H

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_SURFACEINTERACTION_H_
-#define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_SURFACEINTERACTION_H_
+#pragma once
 
 #include "basics/Ray.h"
 #include "basics/Vector3f.h"
@@ -22,4 +21,3 @@ class SurfaceInteraction {
 };
 
 }
-#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_SURFACEINTERACTION_H_

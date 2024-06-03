@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDPOINTINSTANCERREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDPOINTINSTANCERREADER_H_
+#pragma once
 
 #include "scene/primitives/PointInstancer.h"
 #include "sceneIO/read/usd/base/BaseUsdImageableReader.h"
@@ -23,5 +22,3 @@ class UsdPointInstancerReader : public BaseUsdImageableReader<pxr::UsdGeomPointI
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDPOINTINSTANCERREADER_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_TASKREPORTER_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_TASKREPORTER_H_
+#pragma once
 
 #include "Logger.h"
 #include <chrono>
@@ -75,5 +74,3 @@ class TaskReporter : public BaseTaskReporter {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_TASKREPORTER_H_

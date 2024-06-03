@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_RENDERER_ADAPTIVEBUCKETSAMPLER_H_
-#define CRAYG_SRC_CRAYG_SRC_RENDERER_ADAPTIVEBUCKETSAMPLER_H_
+#pragma once
 
 #include "BucketSampler.h"
 #include "basics/Color.h"
@@ -27,5 +26,3 @@ class AdaptiveBucketSampler : public BucketSampler {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_ADAPTIVEBUCKETSAMPLER_H_

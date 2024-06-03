@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_WIDGETS_QTMETATYPES_H_
-#define CRAYG_SRC_STANDALONEGUI_WIDGETS_QTMETATYPES_H_
+#pragma once
 
 #include "utils/TaskReporter.h"
 #include <QMetaType>
@@ -21,5 +20,3 @@ void registerQMetaTypes() {
     qRegisterMetaType<crayg::ImageSpec>("ImageSpec");
     qRegisterMetaType<crayg::BaseTaskReporter::Task>("BaseTaskReporter::Task");
 }
-
-#endif // CRAYG_SRC_STANDALONEGUI_WIDGETS_QTMETATYPES_H_

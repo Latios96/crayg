@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRECTLIGHTREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRECTLIGHTREADER_H_
+#pragma once
 
 #include "scene/lights/RectLight.h"
 #include "sceneIO/read/usd/base/BaseUsdLightReader.h"
@@ -18,5 +17,3 @@ class UsdRectLightReader : public BaseUsdLightReader<pxr::UsdLuxRectLight, RectL
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRECTLIGHTREADER_H_

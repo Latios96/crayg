@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_
+#pragma once
 
 #include "basics/Color.h"
 #include "basics/Matrix4x4f.h"
@@ -29,5 +28,3 @@ class UsdConversions {
 };
 
 };
-
-#endif // CRAYG_SRC_CRAYGUSD_SRC_USDCONVERSIONS_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SCENEINTERSECTOR_H
-#define CRAYG_SCENEINTERSECTOR_H
+#pragma once
 
 #include <basics/Ray.h>
 #include <scene/Scene.h>
@@ -20,5 +19,3 @@ class SceneIntersector {
 };
 
 }
-
-#endif // CRAYG_SCENEINTERSECTOR_H

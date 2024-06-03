@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDREADER_H_
+#pragma once
 
 #include "Logger.h"
 #include "sceneIO/usd/UsdReadUtils.h"
@@ -29,5 +28,3 @@ template <class UsdType, class CraygType> class BaseUsdReader {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_BASEUSDREADER_H_

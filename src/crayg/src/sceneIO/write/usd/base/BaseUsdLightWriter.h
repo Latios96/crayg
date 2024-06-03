@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_BASEUSDLIGHTWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_BASEUSDLIGHTWRITER_H_
+#pragma once
 
 #include "BaseUsdTransformableWriter.h"
 
@@ -27,5 +26,3 @@ class BaseUsdLightWriter : public BaseUsdTransformableWriter<UsdType, CraygType>
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_BASEUSDLIGHTWRITER_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_TEMPORARYDIRECTORY_H
-#define CRAYG_TEMPORARYDIRECTORY_H
+#pragma once
 
 #include <boost/filesystem.hpp>
 
@@ -18,5 +17,3 @@ class TemporaryDirectory {
 };
 
 } // crayg
-
-#endif // CRAYG_TEMPORARYDIRECTORY_H

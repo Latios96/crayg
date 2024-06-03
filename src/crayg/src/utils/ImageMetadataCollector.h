@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_IMAGEMETADATACOLLECTOR_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_IMAGEMETADATACOLLECTOR_H_
+#pragma once
 
 #include "image/ImageMetadata.h"
 #include "scene/RenderSettings.h"
@@ -29,5 +28,3 @@ class ImageMetadataCollector {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_IMAGEMETADATACOLLECTOR_H_

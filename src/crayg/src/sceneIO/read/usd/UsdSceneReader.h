@@ -1,5 +1,4 @@
-#ifndef CRAYG_USDSCENEREADER_H
-#define CRAYG_USDSCENEREADER_H
+#pragma once
 
 #include "sceneIO/read/SceneReader.h"
 
@@ -13,5 +12,3 @@ class UsdSceneReader : public SceneReader {
 };
 
 }
-
-#endif // CRAYG_USDSCENEREADER_H

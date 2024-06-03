@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_RECTLIGHT_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_RECTLIGHT_H_
+#pragma once
 
 #include "AreaLight.h"
 
@@ -28,5 +27,3 @@ class RectLight : public AreaLight {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_RECTLIGHT_H_

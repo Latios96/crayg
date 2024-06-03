@@ -1,5 +1,4 @@
-#ifndef CRAYG_IMAGEWRITERS_H
-#define CRAYG_IMAGEWRITERS_H
+#pragma once
 
 #include "image/Image.h"
 #include <string>
@@ -14,5 +13,3 @@ class ImageWriter {
 };
 
 }
-
-#endif // CRAYG_IMAGEWRITERS_H

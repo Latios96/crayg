@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_
+#pragma once
 
 #include "CameraLensMetadata.h"
 #include "LensElement.h"
@@ -62,5 +61,3 @@ struct CameraLens {
 } // crayg
 
 CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensElement);
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_CAMERALENS_H_

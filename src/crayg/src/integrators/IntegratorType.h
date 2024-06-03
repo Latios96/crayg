@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORTYPE_H_
-#define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORTYPE_H_
+#pragma once
 
 #include "utils/EnumUtils.h"
 
@@ -10,5 +9,3 @@ enum class IntegratorType { RAYTRACING = 1, DEBUG = 2, AMBIENT_OCCLUSION = 3 };
 }
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::IntegratorType);
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_INTEGRATORTYPE_H_

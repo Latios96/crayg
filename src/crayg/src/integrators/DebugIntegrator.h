@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_DEBUGINTEGRATOR_H_
-#define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_DEBUGINTEGRATOR_H_
+#pragma once
 
 #include "AbstractIntegrator.h"
 
@@ -12,5 +11,3 @@ class DebugIntegrator : public AbstractIntegrator {
     ~DebugIntegrator() override;
 };
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_DEBUGINTEGRATOR_H_

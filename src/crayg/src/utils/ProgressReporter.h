@@ -1,5 +1,4 @@
-#ifndef CRAYG_PROGRESSREPORTER_H
-#define CRAYG_PROGRESSREPORTER_H
+#pragma once
 
 #include "Logger.h"
 #include "RemainingTimeCalculator.h"
@@ -32,5 +31,3 @@ class ProgressReporter {
 };
 
 }
-
-#endif // CRAYG_PROGRESSREPORTER_H

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDMATERIALWRITECACHE_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDMATERIALWRITECACHE_H_
+#pragma once
 
 #include "UsdShadingNodeWriteCache.h"
 #include "scene/shadingnetworks/materials/Material.h"
@@ -26,5 +25,3 @@ class UsdMaterialWriteCache {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_USDMATERIALWRITECACHE_H_

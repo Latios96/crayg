@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SAMPLERS_UNITSPHERESAMPLER_H_
-#define CRAYG_SRC_CRAYG_SRC_SAMPLERS_UNITSPHERESAMPLER_H_
+#pragma once
 
 #include <basics/Vector3f.h>
 
@@ -11,4 +10,3 @@ class UnitSphereSampler {
 };
 
 }
-#endif // CRAYG_SRC_CRAYG_SRC_SAMPLERS_UNITSPHERESAMPLER_H_

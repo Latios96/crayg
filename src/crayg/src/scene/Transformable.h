@@ -1,5 +1,4 @@
-#ifndef CRAYG_TRANSFORMABLE_H
-#define CRAYG_TRANSFORMABLE_H
+#pragma once
 
 #include "basics/Vector3f.h"
 #include <basics/Transform.h>
@@ -23,5 +22,3 @@ class Transformable {
 };
 
 }
-
-#endif // CRAYG_TRANSFORMABLE_H

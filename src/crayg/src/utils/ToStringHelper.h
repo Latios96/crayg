@@ -1,5 +1,4 @@
-#ifndef CRAYG_TOSTRINGHELPER_H
-#define CRAYG_TOSTRINGHELPER_H
+#pragma once
 
 #include <fmt/format.h>
 #include <fmt/ostream.h>
@@ -38,4 +37,3 @@ class ToStringHelper {
 };
 
 }
-#endif // CRAYG_TOSTRINGHELPER_H

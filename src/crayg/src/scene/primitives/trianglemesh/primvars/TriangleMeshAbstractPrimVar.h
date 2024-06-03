@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHABSTRACTPRIMVAR_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHABSTRACTPRIMVAR_H_
+#pragma once
 
 #include "PrimVarType.h"
 #include "basics/Vector3f.h"
@@ -24,4 +23,3 @@ template <typename T> class TriangleMeshAbstractPrimVar {
 };
 
 }
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_TRIANGLEMESHABSTRACTPRIMVAR_H_

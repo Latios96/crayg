@@ -1,5 +1,4 @@
-#ifndef CRAYG_RENDERER_H
-#define CRAYG_RENDERER_H
+#pragma once
 
 #include "BucketStats.h"
 #include "bucketsamplers/BucketSampler.h"
@@ -52,5 +51,3 @@ class Renderer {
 };
 
 }
-
-#endif // CRAYG_RENDERER_H

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRENDERSETTINGSREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRENDERSETTINGSREADER_H_
+#pragma once
 
 #include "scene/RenderSettings.h"
 #include "sceneIO/read/usd/base/BaseUsdReader.h"
@@ -32,5 +31,3 @@ class UsdRenderSettingsReader : public BaseUsdReader<pxr::UsdRenderSettings, Ren
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDRENDERSETTINGSREADER_H_

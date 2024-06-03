@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_WIDGETS_IDCONSTANTS_H_
-#define CRAYG_SRC_STANDALONEGUI_WIDGETS_IDCONSTANTS_H_
+#pragma once
 
 #include <QString>
 
@@ -17,5 +16,3 @@ class IDs {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_STANDALONEGUI_WIDGETS_IDCONSTANTS_H_

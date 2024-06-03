@@ -1,5 +1,4 @@
-#ifndef CRAYG_TRIANGEMESH_H
-#define CRAYG_TRIANGEMESH_H
+#pragma once
 
 #include "Triangle.h"
 #include "basics/BoundingBox.h"
@@ -108,5 +107,3 @@ template <typename T> T *TriangleMesh::getUvsPrimVarAs() {
 }
 
 }
-
-#endif // CRAYG_TRIANGEMESH_H

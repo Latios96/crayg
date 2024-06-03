@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTICCAMERA_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTICCAMERA_H_
+#pragma once
 
 #include "CameraLens.h"
 #include "ExitPupilCalculator.h"
@@ -22,5 +21,3 @@ class RealisticCameraModel : public CameraModel {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_REALISTICCAMERA_H_

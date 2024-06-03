@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_AREALIGHT_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_AREALIGHT_H_
+#pragma once
 
 #include "Light.h"
 #include "intersectors/SceneIntersector.h"
@@ -17,5 +16,3 @@ class AreaLight : public Light {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_AREALIGHT_H_

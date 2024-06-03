@@ -1,6 +1,5 @@
 
-#ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_RAYTRACINGINTEGRATOR_H_
-#define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_RAYTRACINGINTEGRATOR_H_
+#pragma once
 
 #include "AbstractIntegrator.h"
 
@@ -21,5 +20,3 @@ class RaytracingIntegrator : public AbstractIntegrator {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_RAYTRACINGINTEGRATOR_H_

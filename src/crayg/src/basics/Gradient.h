@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_BASICS_GRADIENT_H_
-#define CRAYG_SRC_CRAYG_SRC_BASICS_GRADIENT_H_
+#pragma once
 
 #include "Color.h"
 #include "utils/Exceptions.h"
@@ -90,5 +89,3 @@ template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondVa
 template <typename T> struct fmt::formatter<crayg::Gradient<T>> : ostream_formatter {};
 
 template <typename T> struct fmt::formatter<crayg::GradientStop<T>> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_BASICS_GRADIENT_H_

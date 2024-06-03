@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_
+#pragma once
 
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include "sceneIO/read/usd/base/BaseUsdImageableReader.h"
@@ -38,5 +37,3 @@ class UsdMeshReader : public BaseUsdImageableReader<pxr::UsdGeomMesh, TriangleMe
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYGUSD_SRC_USDMESHTRANSLATOR_H_

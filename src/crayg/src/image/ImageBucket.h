@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_
+#pragma once
 
 #include "basics/Vector2.h"
 #include <fmt/ostream.h>
@@ -34,5 +33,3 @@ template <> struct hash<crayg::ImageBucket> {
 }
 
 template <> struct fmt::formatter<crayg::ImageBucket> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEBUCKET_H_

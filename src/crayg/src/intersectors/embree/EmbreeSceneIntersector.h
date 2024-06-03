@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREESCENEINTERSECTOR_H_
-#define CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREESCENEINTERSECTOR_H_
+#pragma once
 
 #include "EmbreeBvh.h"
 #include "intersectors/SceneIntersector.h"
@@ -34,5 +33,3 @@ class EmbreeSceneIntersector : public SceneIntersector {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTERSECTORS_EMBREE_EMBREESCENEINTERSECTOR_H_

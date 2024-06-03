@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_UTILS_TRACING_CRAYGTRACING_H_
-#define CRAYG_SRC_CRAYG_SRC_UTILS_TRACING_CRAYGTRACING_H_
+#pragma once
 
 #define CRG_EMPTY_TRACE                                                                                                \
     do {                                                                                                               \
@@ -18,5 +17,3 @@
 #define CRG_IF_TRACE(s) CRG_EMPTY_TRACE
 
 #endif
-
-#endif // CRAYG_SRC_CRAYG_SRC_UTILS_TRACING_CRAYGTRACING_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETQUEUES_BUCKETQUEUE_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETQUEUES_BUCKETQUEUE_H_
+#pragma once
 
 #include "BucketQueueMode.h"
 #include "FollowMouseBucketQueue.h"
@@ -31,5 +30,3 @@ struct BucketQueue {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEITERATORS_BUCKETQUEUES_BUCKETQUEUE_H_

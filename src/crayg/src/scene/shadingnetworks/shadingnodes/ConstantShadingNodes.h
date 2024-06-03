@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_MATERIALS_CONSTANTSHADINGNODES_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_MATERIALS_CONSTANTSHADINGNODES_H_
+#pragma once
 
 #include "scene/shadingnetworks/ShadingNode.h"
 
@@ -49,5 +48,3 @@ class ColorConstant : public ShadingNode {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_MATERIALS_CONSTANTSHADINGNODES_H_

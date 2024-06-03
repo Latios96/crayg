@@ -1,5 +1,4 @@
-#ifndef CRAYG_SCENEWRITER_H
-#define CRAYG_SCENEWRITER_H
+#pragma once
 
 #include "scene/Scene.h"
 #include <utils/StopWatch.h>
@@ -16,5 +15,3 @@ class SceneWriter {
 };
 
 }
-
-#endif // CRAYG_SCENEWRITER_H

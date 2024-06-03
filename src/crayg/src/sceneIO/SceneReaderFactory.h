@@ -1,5 +1,4 @@
-#ifndef CRAYG_SCENEREADERFACTORY_H
-#define CRAYG_SCENEREADERFACTORY_H
+#pragma once
 
 #include <memory>
 #include <sceneIO/read/SceneReader.h>
@@ -14,5 +13,3 @@ class SceneReaderFactory {
 };
 
 }
-
-#endif // CRAYG_SCENEREADERFACTORY_H

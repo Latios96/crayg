@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_RENDERER_GEOMETRYCOMPILER_H_
-#define CRAYG_SRC_CRAYG_SRC_RENDERER_GEOMETRYCOMPILER_H_
+#pragma once
 
 #include "scene/Scene.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
@@ -20,5 +19,3 @@ class GeometryCompiler {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_RENDERER_GEOMETRYCOMPILER_H_

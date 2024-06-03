@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_
-#define CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_
+#pragma once
 
 #include "scene/Scene.h"
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
@@ -41,5 +40,3 @@ class UsdStageReader {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYGUSD_SRC_USDSTAGETRANSLATOR_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_CACHES_USDSHADINGNODEREADCACHE_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_CACHES_USDSHADINGNODEREADCACHE_H_
+#pragma once
 
 #include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
 #include "sceneIO/usd/UsdConversions.h"
@@ -28,5 +27,3 @@ class UsdShadingNodeReadCache {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_CACHES_USDSHADINGNODEREADCACHE_H_

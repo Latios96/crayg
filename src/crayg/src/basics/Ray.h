@@ -1,5 +1,4 @@
-#ifndef CRAYG_RAY_H
-#define CRAYG_RAY_H
+#pragma once
 
 #include "Vector3f.h"
 #include <fmt/ostream.h>
@@ -74,5 +73,3 @@ template <> struct fmt::formatter<std::optional<crayg::Ray>> {
         return fmt::format_to(ctx.out(), "{}", ray.has_value() ? fmt::format("{}", *ray) : "<empty>");
     };
 };
-
-#endif // CRAYG_RAY_H

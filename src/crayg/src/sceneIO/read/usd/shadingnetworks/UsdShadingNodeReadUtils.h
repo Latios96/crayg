@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_USDSHADINGNODEREADUTILS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_USDSHADINGNODEREADUTILS_H_
+#pragma once
 
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdUtils.h"
@@ -59,4 +58,3 @@ template <> bool UsdShadingNodeReadUtils::readValue<bool, int>(const pxr::UsdSha
 template <> float UsdShadingNodeReadUtils::readValue<float, float>(const pxr::UsdShadeInput &input);
 
 }
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_USDSHADINGNODEREADUTILS_H_

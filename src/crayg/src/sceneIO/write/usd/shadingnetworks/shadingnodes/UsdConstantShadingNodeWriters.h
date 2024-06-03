@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDCONSTANTSHADINGNODEWRITERS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDCONSTANTSHADINGNODEWRITERS_H_
+#pragma once
 
 #include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
 #include "sceneIO/write/usd/base/BaseUsdShadingNodeWriter.h"
@@ -50,5 +49,3 @@ class UsdColorConstantWriter : public BaseUsdShadingNodeWriter<ColorConstant> {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_WRITE_USD_MATERIALS_USDCONSTANTSHADINGNODEWRITERS_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_SHADINGNODES_USDFILETEXTUREREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_SHADINGNODES_USDFILETEXTUREREADER_H_
+#pragma once
 #include "scene/shadingnetworks/shadingnodes/FileTexture.h"
 #include "sceneIO/read/usd/base/BaseUsdShadingNodeReader.h"
 
@@ -19,5 +18,3 @@ class UsdFileTextureReader : public BaseUsdShadingNodeReader<FileTexture> {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_SHADINGNETWORKS_SHADINGNODES_USDFILETEXTUREREADER_H_

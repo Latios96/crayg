@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNETWORKS_SHADINGNODES_PRIMVARREADERS_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNETWORKS_SHADINGNODES_PRIMVARREADERS_H_
+#pragma once
 
 #include "scene/shadingnetworks/ShadingNode.h"
 
@@ -23,5 +22,3 @@ class PrimVarReaderVector2f : public ShadingNode {
 } // crayg
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::PrimVarReaderType);
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_SHADINGNETWORKS_SHADINGNODES_PRIMVARREADERS_H_

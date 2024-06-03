@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDSUBDIVISIONSURFACEMESHREADER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDSUBDIVISIONSURFACEMESHREADER_H_
+#pragma once
 
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "sceneIO/read/usd/base/BaseUsdImageableReader.h"
@@ -26,5 +25,3 @@ class UsdSubdivisionSurfaceMeshReader : public BaseUsdImageableReader<pxr::UsdGe
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENEIO_READ_USD_USDSUBDIVISIONSURFACEMESHREADER_H_

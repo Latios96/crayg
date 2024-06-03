@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_WIDGETS_QTUTILS_H_
-#define CRAYG_SRC_STANDALONEGUI_WIDGETS_QTUTILS_H_
+#pragma once
 
 #include <QApplication>
 #include <QString>
@@ -14,5 +13,3 @@ template <typename... T> QString qformat(fmt::format_string<T...> fmt, T &&...ar
 void applyStyleSheet(QApplication &application);
 
 }
-
-#endif // CRAYG_SRC_STANDALONEGUI_WIDGETS_QTUTILS_H_

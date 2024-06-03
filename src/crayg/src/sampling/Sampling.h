@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SAMPLING_SAMPLING_H_
-#define CRAYG_SRC_CRAYG_SRC_SAMPLING_SAMPLING_H_
+#pragma once
 
 #include "basics/Vector2.h"
 #include "basics/Vector3f.h"
@@ -17,5 +16,3 @@ class Sampling {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SAMPLING_SAMPLING_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_
+#pragma once
 
 #include "PixelFormat.h"
 #include "basics/Color.h"
@@ -55,5 +54,3 @@ class PixelBuffer {
 } // crayg
 
 template <> struct fmt::formatter<crayg::PixelBuffer> : ostream_formatter {};
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_PIXELBUFFER_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_INTEGRATORS_AMBIENTOCCLUSIONINTEGRATOR_H_
-#define CRAYG_SRC_CRAYG_SRC_INTEGRATORS_AMBIENTOCCLUSIONINTEGRATOR_H_
+#pragma once
 
 #include "AbstractIntegrator.h"
 #include "IntegratorSettings.h"
@@ -19,5 +18,3 @@ class AmbientOcclusionIntegrator : public AbstractIntegrator {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_INTEGRATORS_AMBIENTOCCLUSIONINTEGRATOR_H_

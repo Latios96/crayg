@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEWRITERS_H_
-#define CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEWRITERS_H_
+#pragma once
 
 #include "image/Image.h"
 #include <string>
@@ -12,5 +11,3 @@ class ImageWriters {
 };
 
 }
-
-#endif // CRAYG_SRC_CRAYG_SRC_IMAGE_IMAGEWRITERS_H_

@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_STANDALONEGUI_WIDGETS_ICONTOGGLEBUTTON_H_
-#define CRAYG_SRC_STANDALONEGUI_WIDGETS_ICONTOGGLEBUTTON_H_
+#pragma once
 #include <QCheckBox>
 
 namespace crayg {
@@ -17,5 +16,3 @@ class SmallIconToggleButton : public IconToggleButton {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_STANDALONEGUI_WIDGETS_ICONTOGGLEBUTTON_H_

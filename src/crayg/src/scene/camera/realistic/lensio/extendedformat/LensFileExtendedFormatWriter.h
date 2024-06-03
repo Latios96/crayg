@@ -1,5 +1,4 @@
-#ifndef CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILEEXTENDEDFORMATWRITER_H_
-#define CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILEEXTENDEDFORMATWRITER_H_
+#pragma once
 
 #include "scene/camera/realistic/lensio/LensFileWriter.h"
 
@@ -11,5 +10,3 @@ class LensFileExtendedFormatWriter : public LensFileWriter {
 };
 
 } // crayg
-
-#endif // CRAYG_SRC_CRAYG_SRC_SCENE_CAMERA_LENSIO_LENSFILEEXTENDEDFORMATWRITER_H_
