@@ -28,10 +28,10 @@ class FileTexture : public ShadingNode {
     ~FileTexture() override;
 
   private:
-    OIIO::TextureSystem *textureSystem;
+    OIIO::TextureSystem *textureSystem = nullptr;
     OIIO::ustring filePath;
-    OIIO::ImageCache *imageCache;
-    std::atomic<bool> badTexture;
+    OIIO::ImageCache *imageCache = nullptr;
+    std::atomic<bool> badTexture = 0;
     OIIO::TextureOpt textureOpt;
 };
 } // crayg
