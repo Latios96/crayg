@@ -29,6 +29,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ "windows-2019", "ubuntu-20.04"]
+        use_unity_build: ${{ github.event_name != 'schedule' && ["True", "False"] || ["True"] }}
+        build_type: ${{ github.event_name != 'schedule' && ["RelWithDebInfo ", "Debug"] || "RelWithDebInfo" }}
+        with_tracing: ${{ github.event_name != 'schedule' && ["True", "False"] || "False" }}
     name: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
@@ -67,7 +70,7 @@ jobs:
         run: mkdir build
       - name: run CMake
         working-directory: build
-        run: cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_UNITY_BUILD=${{ github.event_name != 'schedule' }} -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 -DCRAYG_USE_COMMIT_HASH=ON
+        run: cmake .. -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DCMAKE_UNITY_BUILD=${{matrix.use_unity_build}} -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 -DCRAYG_USE_COMMIT_HASH=ON -DCRAYG_ENABLE_TRACING=${{matrix.with_tracing}}
       - name: upload dependencies
         run: conan upload "*" --all --confirm -r=framebffr --parallel
       - name: build
@@ -77,18 +80,18 @@ jobs:
       - name: build
         if: runner.os == 'Windows'
         working-directory: build
-        run: cmake --build . --config RelWithDebInfo -- /M:%NUMBER_OF_PROCESSORS%
+        run: cmake --build . --config ${{matrix.build_type}} -- /M:%NUMBER_OF_PROCESSORS%
         shell: cmd
       - name: switch to nightly branch
         if: github.event_name == 'schedule'
         run: git checkout -b nightly
       - name: run tests
         working-directory: build
-        run: ctest -C RelWithDebInfo -V
+        run: ctest -C ${{matrix.build_type}} -V
         env:
-          CATO_API_TOKEN: ${{ secrets.CATO_API_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_JOB_NAME: "${{ matrix.os }}"
+          CATO_API_TOKEN: ${{secrets.CATO_API_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_JOB_NAME: "${{matrix.os}}-${{matrix.build_type}}-unity_build=${{matrix.use_unity_build}}-with_tracing=${{with_tracing}}"
       - name: create package
         working-directory: build
         run: cmake --build . --config Release --target createDistribution
