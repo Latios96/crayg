@@ -5,18 +5,22 @@ Color FileTexture::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
     if (badTexture) {
         return fallbackColor;
     }
+
     const Vector2f &uv = uvInput.evaluate(surfaceInteraction);
 
     float result[3];
     const bool ok = textureSystem->texture(filePath, textureOpt, uv.x, uv.y, 0, 0, 0, 0, 3, result);
+
     if (!ok) {
         badTexture = true;
         Logger::error("Could not load texture file {} from {}", filePath, getName());
         return fallbackColor;
     }
+
     if (colorSpace == ColorSpace::RAW) {
         return Color(result);
     }
+
     return Color(result).pow(2.2f);
 }
 
