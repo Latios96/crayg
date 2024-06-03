@@ -67,7 +67,7 @@ jobs:
         run: mkdir build
       - name: run CMake
         working-directory: build
-        run: cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_UNITY_BUILD=${{ github.event_name != 'schedule' }} -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 -DCRAYG_USE_COMMIT_HASH=ON
+        run: cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_UNITY_BUILD=${{ github.event_name != 'schedule' }} -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 -DCRAYG_USE_COMMIT_HASH=ON
       - name: upload dependencies
         run: conan upload "*" --all --confirm -r=framebffr --parallel
       - name: build
@@ -77,14 +77,14 @@ jobs:
       - name: build
         if: runner.os == 'Windows'
         working-directory: build
-        run: cmake --build . --config Release -- /M:%NUMBER_OF_PROCESSORS%
+        run: cmake --build . --config RelWithDebInfo -- /M:%NUMBER_OF_PROCESSORS%
         shell: cmd
       - name: switch to nightly branch
         if: github.event_name == 'schedule'
         run: git checkout -b nightly
       - name: run tests
         working-directory: build
-        run: ctest -C Release -V
+        run: ctest -C RelWithDebInfo -V
         env:
           CATO_API_TOKEN: ${{ secrets.CATO_API_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
