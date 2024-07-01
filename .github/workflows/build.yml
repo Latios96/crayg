@@ -32,6 +32,9 @@ jobs:
         use_unity_build: ${{ github.event_name == 'schedule' && fromJSON('["True", "False"]') || fromJSON('["True"]') }}
         build_type: ${{ github.event_name == 'schedule' && fromJSON('["RelWithDebInfo ", "Debug"]') || fromJSON('["RelWithDebInfo"]') }}
         with_tracing: ${{ github.event_name == 'schedule' && fromJSON('["True"]') || fromJSON('["False"]') }}
+        exclude:
+          - os: "ubuntu-20.04"
+            build_type: "Debug"
     name: "${{matrix.os}} ${{matrix.build_type}} unity_build=${{matrix.use_unity_build}} with_tracing=${{matrix.with_tracing}}"
     steps:
       - uses: actions/checkout@v4
