@@ -10,6 +10,8 @@ add_library(
     crayg-framebuffer
     QtBase.h
     resources/resources.qrc
+    resources/StyleSheetLoader.cpp
+    resources/StyleSheetLoader.h
     widgets/FrameBufferWidget.cpp
     widgets/FrameBufferWidget.h
     widgets/GuiTaskReporter.cpp

@@ -6,6 +6,7 @@
 #include "CliParser.h"
 #include "CraygInfo.h"
 #include "Logger.h"
+#include "resources/StyleSheetLoader.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
@@ -26,7 +27,8 @@ namespace crayg {
 
 int craygMain(int argc, char **argv) {
     QApplication application(argc, argv);
-    applyStyleSheet(application);
+    StyleSheetLoader styleSheetLoader(StyleSheetLoader::Mode::EMBEDDED, application);
+    styleSheetLoader.loadAndApply();
 
     registerQMetaTypes();
 
