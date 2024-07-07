@@ -19,6 +19,7 @@ pystring/1.1.4
 tabulate/1.5
 cpptrace/0.5.4
 cairomm/1.18.0
+libsass/3.6.6
 
 zlib/1.2.13
 libpng/1.6.39
