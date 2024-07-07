@@ -1,6 +1,16 @@
 #include "CameraLensFixtures.h"
 
 namespace crayg {
+
+void convertMillimetersToCentimeters(std::vector<LensElement> &elements) {
+    const float factor = 0.1f;
+    for (auto &element : elements) {
+        element.curvatureRadius *= factor;
+        element.thickness *= factor;
+        element.apertureRadius *= factor;
+    }
+}
+
 CameraLens CameraLensFixtures::createCanon70_200mm() {
     // US Patent 5537259
     std::vector<LensElement> elements = {
@@ -40,12 +50,7 @@ CameraLens CameraLensFixtures::createCanon70_200mm() {
         {-205.76, 54.5, 1, 21.0},            // 33
     };
 
-    const float factor = 0.1f;
-    for (auto &element : elements) {
-        element.curvatureRadius *= factor;
-        element.thickness *= factor;
-        element.apertureRadius *= factor;
-    }
+    convertMillimetersToCentimeters(elements);
 
     return CameraLens(CameraLensMetadata("Canon F/2.8, 70-200mm"), elements);
 }
@@ -81,12 +86,7 @@ CameraLens CameraLensFixtures::createSchneider30mmAnamorphic() {
         {-53.2, 43.3809, 1, 28, 0, LensMaterial::createMaterialById(LensMaterialId::UNKNOWN), LensGeometry::SPHERICAL},
     };
 
-    const float factor = 0.1f;
-    for (auto &element : elements) {
-        element.curvatureRadius *= factor;
-        element.thickness *= factor;
-        element.apertureRadius *= factor;
-    }
+    convertMillimetersToCentimeters(elements);
 
     return CameraLens(crayg::CameraLensMetadata("Schneider 30mm anamorphic"), elements);
 }
