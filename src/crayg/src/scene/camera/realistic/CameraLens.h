@@ -20,8 +20,11 @@ CRAYG_DTO_2(LensElementIntersection, Vector3f, point, Vector3f, normal);
 
 struct CameraLens {
     CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements);
+    CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements,
+               const std::vector<AsphericCoefficients> &asphericCoefficients);
     CameraLens(const CameraLens &cameraLens);
     std::vector<LensElement> elements;
+    std::vector<AsphericCoefficients> asphericCoefficients;
     ThickLensApproximation thickLensApproximation;
 
     CameraLensMetadata metadata;
@@ -38,6 +41,7 @@ struct CameraLens {
     void changeAperture(float fStop);
 
     Ray refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
+    bool hasAsphericElements() const;
     bool operator==(const CameraLens &rhs) const;
     bool operator!=(const CameraLens &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const CameraLens &lens);

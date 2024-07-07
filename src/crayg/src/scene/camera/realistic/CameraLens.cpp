@@ -9,7 +9,12 @@
 namespace crayg {
 
 CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements)
-    : metadata(metadata), elements(elements) {
+    : CameraLens(metadata, elements, {}) {
+}
+
+CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements,
+                       const std::vector<AsphericCoefficients> &asphericCoefficients)
+    : metadata(metadata), elements(elements), asphericCoefficients(asphericCoefficients) {
 
     float center = 0;
     for (int i = elements.size() - 1; i >= 0; i--) {
@@ -108,7 +113,8 @@ float CameraLens::computeClosestFocalDistance() const {
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
-    : metadata(cameraLens.metadata), elements(cameraLens.elements), apertureIndex(cameraLens.apertureIndex),
+    : metadata(cameraLens.metadata), elements(cameraLens.elements),
+      asphericCoefficients(cameraLens.asphericCoefficients), apertureIndex(cameraLens.apertureIndex),
       thickLensApproximation(cameraLens.thickLensApproximation), apertureRadius(cameraLens.apertureRadius),
       elementsOffset(cameraLens.elementsOffset) {
 }
@@ -230,6 +236,7 @@ std::ostream &operator<<(std::ostream &os, const CameraLens &lens) {
     os << ToStringHelper("CameraLens")
               .addMember("metadata", lens.metadata)
               .addMember("elements", lens.elements)
+              .addMember("asphericCoefficients", lens.asphericCoefficients)
               .finish();
     return os;
 }
@@ -252,6 +259,10 @@ std::optional<LensElementIntersection> CameraLens::intersect(const LensElement &
     switch (element.geometry) {
     case LensGeometry::SPHERICAL:
         intersects = intersectSphericalElement(
+            element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        break;
+    case LensGeometry::ASPHERICAL:
+        intersects = intersectAsphericalElement(
             element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
         break;
     case LensGeometry::CYLINDER_X:
@@ -291,6 +302,10 @@ bool CameraLens::exceedsAperture(const Vector3f &intersectionPosition, float ape
     const float apertureRadiusSquared = apertureRadius * apertureRadius;
     const bool rayExceedsAperture = radiusOfIntersectionSquared > apertureRadiusSquared;
     return rayExceedsAperture;
+}
+
+bool CameraLens::hasAsphericElements() const {
+    return !asphericCoefficients.empty();
 }
 
 } // crayg

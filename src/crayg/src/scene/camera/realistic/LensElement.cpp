@@ -8,17 +8,40 @@ namespace crayg {
 LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
                          LensMaterial lensMaterial, LensGeometry geometry)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
-      abbeNumber(abbeNumber), material(lensMaterial), geometry(geometry) {
+      abbeNumber(abbeNumber), material(lensMaterial), geometry(geometry), asphericCoefficientsIndex(std::nullopt) {
+}
+
+LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+                         LensMaterial lensMaterial, LensGeometry geometry, std::optional<int> asphericCoefficientsIndex)
+    : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
+      abbeNumber(abbeNumber), material(lensMaterial), geometry(geometry),
+      asphericCoefficientsIndex(asphericCoefficientsIndex) {
 }
 
 LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
-      abbeNumber(0), material(LensMaterial()), geometry(LensGeometry::SPHERICAL) {
+      abbeNumber(0), material(LensMaterial()), geometry(LensGeometry::SPHERICAL),
+      asphericCoefficientsIndex(std::nullopt) {
+}
+
+LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius,
+                         std::optional<int> asphericCoefficientsIndex)
+    : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
+      abbeNumber(0), material(LensMaterial()), geometry(LensGeometry::SPHERICAL),
+      asphericCoefficientsIndex(asphericCoefficientsIndex) {
 }
 
 LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
-      abbeNumber(abbeNumber), material(LensMaterial()), geometry(LensGeometry::SPHERICAL) {
+      abbeNumber(abbeNumber), material(LensMaterial()), geometry(LensGeometry::SPHERICAL),
+      asphericCoefficientsIndex(std::nullopt) {
+}
+
+LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+                         std::optional<int> asphericCoefficientsIndex)
+    : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
+      abbeNumber(abbeNumber), material(LensMaterial()), geometry(LensGeometry::SPHERICAL),
+      asphericCoefficientsIndex(asphericCoefficientsIndex) {
 }
 
 bool LensElement::isAperture() const {
@@ -42,6 +65,28 @@ float selectCorrectSolution(float radius, const Ray &ray, const QuadraticSolutio
 }
 
 bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
+    Vector3f o = ray.startPoint - Vector3f(0, 0, zCenter);
+    float A = ray.direction.dot(ray.direction);
+    float B = 2 * (ray.direction.dot(o));
+    float C = o.dot(o) - radius * radius;
+
+    auto solutions = MathUtils::solveQuadratic(A, B, C);
+    if (!solutions) {
+        return false;
+    }
+
+    *t = selectCorrectSolution(radius, ray, *solutions);
+    if (*t < 0) {
+        return false;
+    }
+
+    *n = Vector3f(o + ray.direction * *t);
+    *n = FaceForward(n->normalize(), ray.direction.invert());
+
+    return true;
+}
+
+bool intersectAsphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
     Vector3f o = ray.startPoint - Vector3f(0, 0, zCenter);
     float A = ray.direction.dot(ray.direction);
     float B = 2 * (ray.direction.dot(o));
@@ -125,7 +170,8 @@ bool intersectPlanarElement(float zCenter, const Ray &ray, float *t, Vector3f *n
 bool LensElement::operator==(const LensElement &rhs) const {
     return curvatureRadius == rhs.curvatureRadius && thickness == rhs.thickness && ior == rhs.ior &&
            apertureRadius == rhs.apertureRadius && center == rhs.center && abbeNumber == rhs.abbeNumber &&
-           material == rhs.material && geometry == rhs.geometry;
+           material == rhs.material && geometry == rhs.geometry &&
+           asphericCoefficientsIndex == rhs.asphericCoefficientsIndex;
 }
 
 bool LensElement::operator!=(const LensElement &rhs) const {
@@ -146,4 +192,26 @@ std::ostream &operator<<(std::ostream &os, const LensElement &element) {
     return os;
 }
 
+std::ostream &operator<<(std::ostream &os, const AsphericCoefficients &coefficients) {
+    os << ToStringHelper("LensElement")
+              .addMember("k", coefficients.k)
+              .addMember("a2", coefficients.a2)
+              .addMember("a4", coefficients.a4)
+              .addMember("a6", coefficients.a6)
+              .addMember("a8", coefficients.a8)
+              .addMember("a10", coefficients.a10)
+              .addMember("a12", coefficients.a12)
+              .addMember("a14", coefficients.a14)
+              .finish();
+    return os;
+}
+
+bool AsphericCoefficients::operator==(const AsphericCoefficients &rhs) const {
+    return k == rhs.k && a2 == rhs.a2 && a4 == rhs.a4 && a6 == rhs.a6 && a8 == rhs.a8 && a10 == rhs.a10 &&
+           a12 == rhs.a12 && a14 == rhs.a14;
+}
+
+bool AsphericCoefficients::operator!=(const AsphericCoefficients &rhs) const {
+    return !(rhs == *this);
+}
 } // crayg

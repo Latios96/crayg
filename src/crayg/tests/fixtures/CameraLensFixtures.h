@@ -8,6 +8,7 @@ class CameraLensFixtures {
   public:
     static CameraLens createCanon70_200mm();
     static CameraLens createSchneider30mmAnamorphic();
+    static CameraLens createEdmondAsphericLens();
 };
 
 } // crayg

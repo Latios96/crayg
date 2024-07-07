@@ -90,4 +90,27 @@ CameraLens CameraLensFixtures::createSchneider30mmAnamorphic() {
 
     return CameraLens(crayg::CameraLensMetadata("Schneider 30mm anamorphic"), elements);
 }
+
+CameraLens CameraLensFixtures::createEdmondAsphericLens() {
+    // Edmond Optics, 50mm Dia., 0.83 Numerical Aperture, 600-1050nm Coated, Precision Aspheric Lens
+    std::vector<LensElement> elements = {
+        {{24.156, 21.45, 1.80518f, 50, 25.36f, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
+          LensGeometry::ASPHERICAL, 0},
+         {0, 18.06, 1, 50, 0, LensMaterial::createMaterialById(LensMaterialId::AIR), LensGeometry::PLANAR}
+
+        }};
+    std::vector<AsphericCoefficients> asphericCoefficients = {
+        {-1.103426, 0, 4.605084E-06, 4.544628E-10, -2.257169E-12, 5.828326E-16, 0, 0}};
+
+    const float factor = 0.1f;
+    for (auto &element : elements) {
+        element.curvatureRadius *= factor;
+        element.thickness *= factor;
+        element.apertureRadius *= factor;
+    }
+
+    return CameraLens(crayg::CameraLensMetadata("Edmond Optics Precision Aspheric Lens"), elements,
+                      asphericCoefficients);
+}
+
 } // crayg

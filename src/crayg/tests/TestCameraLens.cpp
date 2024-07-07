@@ -181,4 +181,17 @@ TEST_CASE("CameraLens::changeAperture") {
     }
 }
 
+TEST_CASE("CameraLens::hasAsphericElements") {
+    CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
+    CameraLens edmondAsphericLens = CameraLensFixtures::createEdmondAsphericLens();
+
+    SECTION("should return false") {
+        REQUIRE_FALSE(canon70_200.hasAsphericElements());
+    }
+
+    SECTION("should return true") {
+        REQUIRE(edmondAsphericLens.hasAsphericElements());
+    }
+}
+
 }

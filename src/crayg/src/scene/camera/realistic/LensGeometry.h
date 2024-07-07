@@ -4,7 +4,7 @@
 
 namespace crayg {
 
-enum class LensGeometry { SPHERICAL, PLANAR, CYLINDER_X, CYLINDER_Y };
+enum class LensGeometry { SPHERICAL, PLANAR, CYLINDER_X, CYLINDER_Y, ASPHERICAL };
 
 }
 
