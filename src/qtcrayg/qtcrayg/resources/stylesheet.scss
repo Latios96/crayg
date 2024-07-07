@@ -138,6 +138,40 @@ QProgressBar::chunk {
   background-color: $primary;
 }
 
+@mixin tableBorder {
+  border-right: 1px solid rgb(84, 84, 84);
+  border-bottom: 1px solid rgb(84, 84, 84);
+  border-top: none;
+  border-left: none;
+}
+
+QHeaderView::section{
+  background-color: $backgroundColor;
+  alternate-background-color: $backgroundColorHighlight;
+  @include tableBorder;
+  font-weight: bold;
+}
+QHeaderView::section:checked{
+  font-weight: bolder;
+}
+
+QTableView {
+  alternate-background-color: $backgroundColorHighlight;
+  
+}
+QTableView QTableCornerButton::section{
+  @include tableBorder;
+  background-color: $backgroundColor;
+}
+
+QTableView::item {
+  @include tableBorder;
+}
+
+QTableView::item::selected{
+  background: $backgroundColorSelected
+}
+
 crayg--IconToggleButton {
   @include rounded;
   spacing: 0px;
