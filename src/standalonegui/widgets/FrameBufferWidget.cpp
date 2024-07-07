@@ -1,7 +1,7 @@
 #include "FrameBufferWidget.h"
 #include "IdConstants.h"
-#include "QtUtils.h"
-#include "QtWidgetsBuilderDsl.h"
+#include "qtcrayg/utils/QtUtils.h"
+#include "qtcrayg/widgets/QtWidgetsBuilderDsl.h"
 #include <QProgressBar>
 #include <QSpacerItem>
 #include <QStyle>

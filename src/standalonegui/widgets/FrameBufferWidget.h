@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IconToggleButton.h"
 #include "ImageWidget.h"
 #include "PanAndZoomArea.h"
 #include "image/ImageMetadata.h"
+#include "qtcrayg/widgets/IconToggleButton.h"
 #include "utils/TaskReporter.h"
 #include <QGuiApplication>
 #include <QProgressBar>

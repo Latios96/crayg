@@ -8,31 +8,20 @@ set(CMAKE_AUTORCC ON)
 
 add_library(
     crayg-framebuffer
-    QtBase.h
-    resources/resources.qrc
-    resources/StyleSheetLoader.cpp
-    resources/StyleSheetLoader.h
     widgets/FrameBufferWidget.cpp
     widgets/FrameBufferWidget.h
     widgets/GuiTaskReporter.cpp
     widgets/GuiTaskReporter.h
-    widgets/IconToggleButton.cpp
-    widgets/IconToggleButton.h
     widgets/IdConstants.h
     widgets/ImageWidget.cpp
     widgets/ImageWidget.h
     widgets/ImageWidgetOutputDriver.cpp
     widgets/ImageWidgetOutputDriver.h
     widgets/PanAndZoomArea.cpp
-    widgets/PanAndZoomArea.h
-    widgets/QtMetaTypes.h
-    widgets/QtUtils.cpp
-    widgets/QtUtils.h
-    widgets/QtWidgetsBuilderDsl.cpp
-    widgets/QtWidgetsBuilderDsl.h)
+    widgets/PanAndZoomArea.h)
 
 target_include_directories(crayg-framebuffer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(crayg-framebuffer crayg Qt5::Core Qt5::Widgets ${CONAN_LIBS})
+target_link_libraries(crayg-framebuffer crayg qtcrayg Qt5::Core Qt5::Widgets ${CONAN_LIBS})
 
 if(APPLE)
     set(MAC_OS_ICON_PATH ${CMAKE_SOURCE_DIR}/logo/generated/Logo_black_white.icns)
@@ -59,13 +48,3 @@ target_link_libraries(
     Qt5::Widgets
     Qt5::Core
     ${CONAN_LIBS})
-
-add_custom_command(
-    TARGET crayg-standalone-gui
-    PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/qt.conf ${CMAKE_BINARY_DIR}/bin/qt.conf)
-
-add_custom_command(
-    TARGET crayg-standalone-gui
-    PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_QT_ROOT}/plugins ${CMAKE_BINARY_DIR}/bin/archdatadir/plugins)

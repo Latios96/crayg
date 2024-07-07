@@ -1,19 +1,19 @@
-#include "QtBase.h"
+#include "qtcrayg/foundation/QtBase.h"
+#include "qtcrayg/foundation/QtMetaTypes.h"
 #include "widgets/FrameBufferWidget.h"
-#include "widgets/QtMetaTypes.h"
 #include <QtWidgets/qapplication.h>
 
 #include "CliParser.h"
 #include "CraygInfo.h"
 #include "Logger.h"
-#include "resources/StyleSheetLoader.h"
+#include "qtcrayg/resources/StyleSheetLoader.h"
+#include "qtcrayg/utils/QtUtils.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
 #include "utils/tracing/CraygTracing.h"
 #include "widgets/GuiTaskReporter.h"
 #include "widgets/ImageWidgetOutputDriver.h"
-#include "widgets/QtUtils.h"
 #include <QResource>
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
