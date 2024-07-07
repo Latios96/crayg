@@ -59,5 +59,3 @@ struct CameraLens {
 };
 
 } // crayg
-
-CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensElement);

@@ -4,6 +4,7 @@
 #include "LensMaterial.h"
 #include "basics/Ray.h"
 #include "basics/Vector3f.h"
+#include "utils/DtoUtils.h"
 #include <fmt/ostream.h>
 
 namespace crayg {
@@ -38,3 +39,5 @@ bool intersectPlanarElement(float zCenter, const Ray &ray, float *t, Vector3f *n
 } // crayg
 
 template <> struct fmt::formatter<crayg::LensElement> : ostream_formatter {};
+
+CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensElement);
