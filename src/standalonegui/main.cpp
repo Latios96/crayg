@@ -25,8 +25,8 @@
 namespace crayg {
 
 int craygMain(int argc, char **argv) {
-    QApplication a(argc, argv);
-    applyStyleSheet(a);
+    QApplication application(argc, argv);
+    applyStyleSheet(application);
 
     registerQMetaTypes();
 
