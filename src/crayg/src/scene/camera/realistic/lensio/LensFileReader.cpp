@@ -1,5 +1,6 @@
 #include "LensFileReader.h"
 #include "utils/Exceptions.h"
+#include "utils/FileSystemUtils.h"
 #include <boost/filesystem.hpp>
 #include <sstream>
 
@@ -10,10 +11,8 @@ CameraLens LensFileReader::readFile(const std::string &filePath) {
         CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Lens file {} does not exist.", filePath)));
     }
 
-    std::ifstream t(filePath);
-    std::stringstream buffer;
-    buffer << t.rdbuf();
-    return readFileContent(buffer.str());
+    const std::string buffer = FileSystemUtils::readFileAsString(filePath);
+    return readFileContent(buffer);
 }
 
 }

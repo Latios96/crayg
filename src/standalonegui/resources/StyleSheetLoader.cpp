@@ -1,8 +1,7 @@
 #include "StyleSheetLoader.h"
 #include "QtBase.h"
+#include "utils/FileSystemUtils.h"
 #include <filesystem>
-#include <fstream>
-#include <sstream>
 
 namespace crayg {
 void StyleSheetLoader::loadAndApply() {
@@ -22,13 +21,6 @@ void StyleSheetLoader::applyEmbedded() {
     compileAndApply(path);
 }
 
-std::string readFileAsString(const std::string &filePath) {
-    std::ifstream inputStream(filePath);
-    std::stringstream buffer;
-    buffer << inputStream.rdbuf();
-    return buffer.str();
-}
-
 void StyleSheetLoader::startWatching() {
     const QString stylesheetPath = getStyleSheetPathForWatching();
 
@@ -36,11 +28,11 @@ void StyleSheetLoader::startWatching() {
 
     QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, [this](const QString &path) {
         const std::string inputPath = path.toStdString();
-        const std::string fileContent = readFileAsString(inputPath);
+        const std::string fileContent = FileSystemUtils::readFileAsString(inputPath);
         compileAndApply(fileContent);
     });
 
-    const std::string fileContent = readFileAsString(stylesheetPath.toStdString());
+    const std::string fileContent = FileSystemUtils::readFileAsString(stylesheetPath.toStdString());
     compileAndApply(fileContent);
     Logger::info("Started to watch stylesheet file {}", stylesheetPath);
 }
