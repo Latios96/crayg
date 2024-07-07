@@ -2,6 +2,6 @@
     <qresource prefix="/">
         <file>icons/followMouse.png</file>
         <file>icons/imageMedatadata.png</file>
-        <file>stylesheet.css</file>
+        <file>stylesheet.scss</file>
     </qresource>
 </RCC>

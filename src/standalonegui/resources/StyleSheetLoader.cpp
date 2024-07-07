@@ -1,10 +1,12 @@
 #include "StyleSheetLoader.h"
 #include "QtBase.h"
 #include <filesystem>
+#include <fstream>
+#include <sstream>
 
 namespace crayg {
 void StyleSheetLoader::loadAndApply() {
-    if (mode == Mode::EMBEDDED) {
+    if (mode == Mode::WATCH) {
         applyEmbedded();
     } else {
         startWatching();
@@ -12,12 +14,19 @@ void StyleSheetLoader::loadAndApply() {
 }
 
 void StyleSheetLoader::applyEmbedded() {
-    QFile stylesheetFile(":/stylesheet.css");
+    QFile stylesheetFile(":/stylesheet.scss");
     if (!stylesheetFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         Logger::error("Could not open stylesheet file");
     }
-    QString stylesheet(stylesheetFile.readAll());
-    application.setStyleSheet(stylesheet);
+    const std::string &path = stylesheetFile.readAll().toStdString();
+    compileAndApply(path);
+}
+
+std::string readFileAsString(const std::string &filePath) {
+    std::ifstream inputStream(filePath);
+    std::stringstream buffer;
+    buffer << inputStream.rdbuf();
+    return buffer.str();
 }
 
 void StyleSheetLoader::startWatching() {
@@ -26,20 +35,21 @@ void StyleSheetLoader::startWatching() {
     watcher.addPath(stylesheetPath);
 
     QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, [this](const QString &path) {
-        Logger::info("Recompiling stylesheet..");
-
         const std::string inputPath = path.toStdString();
-        compileAndApply(inputPath);
-        Logger::info("Applied recompiled stylesheet");
+        const std::string fileContent = readFileAsString(inputPath);
+        compileAndApply(fileContent);
     });
 
-    compileAndApply(stylesheetPath.toStdString());
+    const std::string fileContent = readFileAsString(stylesheetPath.toStdString());
+    compileAndApply(fileContent);
     Logger::info("Started to watch stylesheet file {}", stylesheetPath);
 }
 
-void StyleSheetLoader::compileAndApply(const std::string &inputPath) {
-    const std::string compiledStylesheet = compileSass(inputPath);
-    application.setStyleSheet(QString::fromStdString(compiledStylesheet));
+void StyleSheetLoader::compileAndApply(const std::string &stylesheetString) {
+    const std::string compiledStylesheet = compileSass(stylesheetString);
+    const QString &sheet = QString::fromStdString(compiledStylesheet);
+    Logger::info("Applied stylesheet.");
+    application.setStyleSheet(sheet);
 }
 
 QString StyleSheetLoader::getStyleSheetPathForWatching() {
@@ -48,21 +58,25 @@ QString StyleSheetLoader::getStyleSheetPathForWatching() {
     return QString::fromStdString((styleSheetFolder / "stylesheet.scss").string());
 }
 
-std::string StyleSheetLoader::compileSass(const std::string &inputPath) {
+std::string StyleSheetLoader::compileSass(const std::string &stylesheetString) {
+    Logger::info("Compiling stylesheet..");
     struct Sass_Options *options = sass_make_options();
     sass_option_set_output_style(options, SASS_STYLE_NESTED);
     sass_option_set_precision(options, 10);
 
-    struct Sass_File_Context *ctx = sass_make_file_context(inputPath.c_str());
-    struct Sass_Context *ctx_out = sass_file_context_get_context(ctx);
-    sass_option_set_input_path(options, inputPath.c_str());
-    sass_file_context_set_options(ctx, options);
+    char *localBuffer = new char[stylesheetString.size() + 1];
+    strcpy(localBuffer, stylesheetString.c_str());
+    struct Sass_Data_Context *ctx = sass_make_data_context(localBuffer);
+    struct Sass_Context *ctx_out = sass_data_context_get_context(ctx);
+    sass_data_context_set_options(ctx, options);
 
-    sass_compile_file_context(ctx);
+    sass_compile_data_context(ctx);
     sass_context_get_error_status(ctx_out);
     sass_context_get_error_message(ctx_out);
-    std::string compiledStylesheet = sass_context_get_output_string(ctx_out);
-    sass_delete_file_context(ctx);
+    const std::string compiledStylesheet = sass_context_get_output_string(ctx_out);
+
+    sass_delete_data_context(ctx);
+    sass_delete_options(options);
 
     return compiledStylesheet;
 }
