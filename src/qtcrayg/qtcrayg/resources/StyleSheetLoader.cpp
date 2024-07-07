@@ -2,11 +2,12 @@
 #include "Logger.h"
 #include "qtcrayg/foundation/QtBase.h"
 #include "utils/FileSystemUtils.h"
+#include <QFontDatabase>
 #include <filesystem>
 
 namespace crayg {
 void StyleSheetLoader::loadAndApply() {
-    if (mode == Mode::WATCH) {
+    if (mode == Mode::EMBEDDED) {
         applyEmbedded();
     } else {
         startWatching();
