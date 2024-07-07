@@ -1,5 +1,6 @@
 add_subdirectory(crayg)
+add_subdirectory(qtcrayg)
 add_subdirectory(standalone)
 add_subdirectory(standalonegui)
 add_subdirectory(lensfileutils)
-add_subdirectory(qtcrayg)
+add_subdirectory(lensfileeditor)

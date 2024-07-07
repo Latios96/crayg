@@ -6,7 +6,25 @@
 #include <filesystem>
 
 namespace crayg {
+
+void loadFonts() {
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Black.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-BlackItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Bold.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-BoldItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Italic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Light.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-LightItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Medium.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-MediumItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Regular.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Thin.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-ThinItalic.ttf");
+}
+
 void StyleSheetLoader::loadAndApply() {
+    loadFonts();
+
     if (mode == Mode::EMBEDDED) {
         applyEmbedded();
     } else {
