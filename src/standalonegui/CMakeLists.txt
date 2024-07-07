@@ -63,10 +63,7 @@ add_custom_command(
     PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/qt.conf ${CMAKE_BINARY_DIR}/bin/qt.conf)
 
-if(UNIX)
-    add_custom_command(
-        TARGET crayg-standalone-gui
-        PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_QT_ROOT}/bin/archdatadir/plugins
-                ${CMAKE_BINARY_DIR}/bin/archdatadir/plugins)
-endif()
+add_custom_command(
+    TARGET crayg-standalone-gui
+    PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_QT_ROOT}/plugins ${CMAKE_BINARY_DIR}/bin/archdatadir/plugins)
