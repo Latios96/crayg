@@ -10,11 +10,13 @@ TEST_CASE("LensFileExtendedFormatWriter::writeFileContent") {
     canon70_200.metadata.patent = "US 123";
     canon70_200.metadata.description = "Super nice lens";
 
+    CameraLens edmondAsphericLens = CameraLensFixtures::createEdmondAsphericLens();
+
     for (auto &element : canon70_200.elements) {
         element.material.id = LensMaterialId::UNKNOWN;
     }
 
-    SECTION("should ") {
+    SECTION("should write Canon 70-200mm correctly") {
         LensFileExtendedFormatWriter lensFileExtendedFormatWriter;
 
         const std::string content = lensFileExtendedFormatWriter.writeFileContent(canon70_200);
@@ -63,6 +65,25 @@ Radius    Thickness IOR  Housing-Radius Abbe-No Material Geometry
 -95.7     0.15      1    21             0       UNKNOWN  SPHERICAL 
 148       3.62      1.74 21             49.3    UNKNOWN  SPHERICAL 
 -206      54.5      1    21             0       UNKNOWN  SPHERICAL )");
+    }
+
+    SECTION("should write Aspherics correctly") {
+        LensFileExtendedFormatWriter lensFileExtendedFormatWriter;
+
+        const std::string content = lensFileExtendedFormatWriter.writeFileContent(edmondAsphericLens);
+
+        REQUIRE(content == R"([Metadata]
+Name: Edmond Optics Precision Aspheric Lens
+Focal Length: 54.2
+Maximum F Number: 1.08
+Squeeze: 1
+Elements Count: 2
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24.2   21.5      1.81 50             25.4    SCHOTT_N_SF6 ASPHERICAL 
+0      18.1      1    50             0       AIR          PLANAR     
+[Aspheric Coefficients]
+0: k=-1.103426 a2=0 a4=4.605084e-06 a6=4.544628e-10 a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0)");
     }
 }
 

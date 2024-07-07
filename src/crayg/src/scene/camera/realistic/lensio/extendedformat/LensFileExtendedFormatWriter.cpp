@@ -17,18 +17,7 @@ std::string formatFloat(float t) {
     return fmt::format("{:.3}", t);
 }
 
-std::string LensFileExtendedFormatWriter::writeFileContent(const CameraLens &cameraLens) {
-    std::string content;
-
-    content += "[Metadata]\n";
-    writeMetadata(content, "Name", cameraLens.metadata.name);
-    writeMetadata(content, "Focal Length", cameraLens.metadata.focalLength * 10);
-    writeMetadata(content, "Maximum F Number", cameraLens.metadata.maximumAperture);
-    writeMetadata(content, "Squeeze", cameraLens.metadata.squeeze);
-    writeMetadata(content, "Elements Count", cameraLens.metadata.elementCount);
-    writeMetadata(content, "Patent", cameraLens.metadata.patent);
-    writeMetadata(content, "Description", cameraLens.metadata.description);
-
+void writeElements(std::string &content, const CameraLens &cameraLens) {
     content += "[Elements]\n";
 
     tabulate::Table styled_table;
@@ -42,6 +31,40 @@ std::string LensFileExtendedFormatWriter::writeFileContent(const CameraLens &cam
     }
 
     content += styled_table.str();
+}
+
+void writeAsphericElements(std::string &content, const CameraLens &cameraLens) {
+    content += "\n[Aspheric Coefficients]\n";
+    for (int i = 0; i < cameraLens.elements.size(); i++) {
+        const auto &element = cameraLens.elements[i];
+        if (element.geometry == LensGeometry::ASPHERICAL) {
+            const AsphericCoefficients &asphericCoefficients =
+                cameraLens.asphericCoefficients[*element.asphericCoefficientsIndex];
+            content += fmt::format("{}: k={} a2={} a4={} a6={} a8={} a10={} a12={} a14={}", i, asphericCoefficients.k,
+                                   asphericCoefficients.a2, asphericCoefficients.a4, asphericCoefficients.a6,
+                                   asphericCoefficients.a8, asphericCoefficients.a10, asphericCoefficients.a12,
+                                   asphericCoefficients.a14);
+        }
+    }
+}
+
+std::string LensFileExtendedFormatWriter::writeFileContent(const CameraLens &cameraLens) {
+    std::string content;
+
+    content += "[Metadata]\n";
+    writeMetadata(content, "Name", cameraLens.metadata.name);
+    writeMetadata(content, "Focal Length", cameraLens.metadata.focalLength * 10);
+    writeMetadata(content, "Maximum F Number", cameraLens.metadata.maximumAperture);
+    writeMetadata(content, "Squeeze", cameraLens.metadata.squeeze);
+    writeMetadata(content, "Elements Count", cameraLens.metadata.elementCount);
+    writeMetadata(content, "Patent", cameraLens.metadata.patent);
+    writeMetadata(content, "Description", cameraLens.metadata.description);
+
+    writeElements(content, cameraLens);
+
+    if (cameraLens.hasAsphericElements()) {
+        writeAsphericElements(content, cameraLens);
+    }
 
     return content;
 }
