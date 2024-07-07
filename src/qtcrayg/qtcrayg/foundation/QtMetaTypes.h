@@ -1,5 +1,7 @@
 #pragma once
 
+#include "image/BucketImageBuffer.h"
+#include "image/ImageBucket.h"
 #include "utils/TaskReporter.h"
 #include <QMetaType>
 #include <image/ImageMetadata.h>
