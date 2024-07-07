@@ -59,6 +59,9 @@ void StyleSheetLoader::startWatching() {
 
 void StyleSheetLoader::compileAndApply(const std::string &stylesheetString) {
     const std::string compiledStylesheet = compileSass(stylesheetString);
+    if (compiledStylesheet.empty()) {
+        return;
+    }
     const QString &sheet = QString::fromStdString(compiledStylesheet);
     Logger::info("Applied stylesheet.");
     application.setStyleSheet(sheet);
@@ -83,9 +86,14 @@ std::string StyleSheetLoader::compileSass(const std::string &stylesheetString) {
     sass_data_context_set_options(ctx, options);
 
     sass_compile_data_context(ctx);
-    sass_context_get_error_status(ctx_out);
-    sass_context_get_error_message(ctx_out);
-    const std::string compiledStylesheet = sass_context_get_output_string(ctx_out);
+    const int error = sass_context_get_error_status(ctx_out);
+    std::string compiledStylesheet;
+    if (error) {
+        const std::string error = sass_context_get_error_message(ctx_out);
+        Logger::error("Error when compiling stylesheet:\n{}", error);
+    } else {
+        compiledStylesheet = sass_context_get_output_string(ctx_out);
+    }
 
     sass_delete_data_context(ctx);
     sass_delete_options(options);
