@@ -187,6 +187,47 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray, float wavele
                {tracedRay.direction.x, tracedRay.direction.y, -tracedRay.direction.z});
 }
 
+std::vector<Vector3f> CameraLens::traceAndRecordFromWorldToFilm(const Ray &ray, float wavelength) const {
+    std::vector<Vector3f> recordedPoints;
+    recordedPoints.reserve(elements.size() + 2);
+
+    Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
+                     {ray.direction.x, ray.direction.y, -ray.direction.z}};
+
+    recordedPoints.push_back(tracedRay.startPoint);
+
+    for (int i = 0; i < elements.size(); i++) {
+        auto element = elements[i];
+        if (element.isAperture()) {
+            if (exceedsAperture(element, ray)) {
+                return recordedPoints;
+            }
+            continue;
+        }
+
+        auto resultIntersection = intersect(element, tracedRay);
+        if (!resultIntersection) {
+            return recordedPoints;
+        }
+
+        float eta_i = element.material.getIor(wavelength);
+        float eta_t = (i > 0 && elements[i - 1].material.getIor(wavelength) != 0)
+                          ? elements[i - 1].material.getIor(wavelength)
+                          : 1;
+
+        auto result = refract(*resultIntersection, tracedRay, eta_i, eta_t);
+
+        tracedRay = {result.startPoint, result.direction.invert()};
+        recordedPoints.push_back(tracedRay.startPoint);
+    }
+
+    Vector3f pointOnFilm =
+        tracedRay.startPoint - (tracedRay.direction / tracedRay.direction.z) * tracedRay.startPoint.z;
+    recordedPoints.push_back(pointOnFilm);
+
+    return recordedPoints;
+}
+
 Ray CameraLens::refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const {
     Vector3f n = intersection.normal.invert();
     float cosTheta_i = n.dot(ray.direction);
