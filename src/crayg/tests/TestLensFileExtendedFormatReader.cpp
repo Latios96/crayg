@@ -1,3 +1,4 @@
+#include "fixtures/CameraLensFixtures.h"
 #include "scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.h"
 #include <catch2/catch.hpp>
 
@@ -273,6 +274,159 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: Line 8: Value '' for Thickness is not a float"));
+    }
+
+    SECTION("should parse valid extended lens file with aspheric lens") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+Focal Length: 54.2
+Maximum F Number: 1.08
+Squeeze: 1
+Elements Count: 2
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
+0      18        1    50             0       AIR          PLANAR     
+[Aspheric Coefficients]
+0: k=-1.103426 a2=0 a4=4.605084e-06 a6=4.544628e-10 a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0
+1: k=1      a2=0 a4=4.605084e-06      a6=4.544628e-10    a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0
+)";
+        auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
+        for (auto &element : cameraLens.elements) {
+            element.center = 0;
+        }
+        REQUIRE(cameraLens.metadata ==
+                CameraLensMetadata("Aspheric Lens", 5.3816013, 1.08, false, 1, 3, 21.728516, "", ""));
+        REQUIRE(cameraLens.elements[0] ==
+                LensElement({2.4, 2.1000001, 1., 5, 25, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
+                             LensGeometry::ASPHERICAL, 0}));
+        REQUIRE(cameraLens.elements[1] ==
+                LensElement({2.4, 2.1000001, 1., 5, 25, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
+                             LensGeometry::ASPHERICAL, 1}));
+        REQUIRE(cameraLens.elements[2] ==
+                LensElement({0, 1.8000001, 1, 5, 0, LensMaterial::createMaterialById(LensMaterialId::AIR),
+                             LensGeometry::PLANAR}));
+
+        REQUIRE(cameraLens.asphericCoefficients ==
+                std::vector<AsphericCoefficients>(
+                    {{-1.103426, 0, 4.605084E-06, 4.544628E-10, -2.257169E-12, 5.828326E-16, 0, 0},
+                     {1, 0, 4.605084E-06, 4.544628E-10, -2.257169E-12, 5.828326E-16, 0, 0}}));
+    }
+
+    SECTION("should throw error because aspheric coefficient line contains too many :") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
+
+[Aspheric Coefficients]
+0::
+)";
+
+        REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
+                            Catch::Equals("Invalid lens file: Line 9: '0::' is an invalid aspheric coefficients line"));
+    }
+
+    SECTION("should throw error because aspheric coefficient line contains too many :") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
+
+[Aspheric Coefficients]
+0
+)";
+
+        REQUIRE_THROWS_WITH(
+            lensFileExtendedFormatReader.readFileContent(fileContent),
+            Catch::Equals("Invalid lens file: Line 9: '0' is an incomplete aspheric coefficients line"));
+    }
+
+    SECTION("should throw error because lens index is invalid") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
+
+[Aspheric Coefficients]
+10: k=1 a2=0 a4=4.605084e-06 a6=4.544628e-10 a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0
+)";
+
+        REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
+                            Catch::Equals("Invalid lens file: Line 9: 10 is an invalid lens index, valid is [0-1]"));
+    }
+
+    SECTION("should throw error because lens with specidied coefficients is not aspheric") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 SPHERICAL 
+
+[Aspheric Coefficients]
+0: k=1 a2=0 a4=4.605084e-06 a6=4.544628e-10 a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0
+)";
+
+        REQUIRE_THROWS_WITH(
+            lensFileExtendedFormatReader.readFileContent(fileContent),
+            Catch::Equals("Invalid lens file: Line 9: lens element 0 is not an aspheric lens, it's SPHERICAL"));
+    }
+
+    SECTION("should throw error because coefficient format is invalid") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
+
+[Aspheric Coefficients]
+0: k1 a2=0 a4=4.605084e-06 a6=4.544628e-10 a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0
+)";
+
+        REQUIRE_THROWS_WITH(
+            lensFileExtendedFormatReader.readFileContent(fileContent),
+            Catch::Equals("Invalid lens file: Line 9: 'k1' is an invalid coefficient format, only k=v is allowed"));
+    }
+
+    SECTION("should throw error because coefficient name is invalid") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
+
+[Aspheric Coefficients]
+0: b=1 a2=0 a4=4.605084e-06 a6=4.544628e-10 a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0
+)";
+
+        REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
+                            Catch::Equals("Invalid lens file: Line 9: 'b' is an invalid coefficient name"));
+    }
+
+    SECTION("should throw error because no coefficients for aspheric lens") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
+
+[Aspheric Coefficients]
+)";
+
+        REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
+                            Catch::Equals("Invalid lens file: element 0 is aspheric, but has no coefficients"));
     }
 }
 

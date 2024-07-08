@@ -13,7 +13,7 @@
 
 namespace crayg {
 
-enum class ParseState { UNDEFINED, METADATA, ELEMENTS };
+enum class ParseState { UNDEFINED, METADATA, ELEMENTS, ASPHERIC_COEFFICIENTS };
 
 class InvalidExtendedLensFileFormatException : public std::runtime_error {
   public:
@@ -34,6 +34,9 @@ bool checkLineForStateAndChangeIfNeeded(std::string line, ParseState &parseState
     } else if (line == "[elements]") {
         parseState = ParseState::ELEMENTS;
         return true;
+    } else if (line == "[aspheric coefficients]") {
+        parseState = ParseState::ASPHERIC_COEFFICIENTS;
+        return true;
     }
     return false;
 }
@@ -44,12 +47,21 @@ std::string readMetadataString(const std::string &line, const std::string &token
     return value;
 }
 
-float parseFloat(int lineIndex, std::string &floatStr, const std::string &name) {
+float parseFloat(int lineIndex, const std::string &floatStr, const std::string &name) {
     try {
         return std::stof(floatStr);
     } catch (std::invalid_argument &e) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
             lineIndex, fmt::format("Value '{}' for {} is not a float", floatStr, name)));
+    }
+}
+
+int parseInt(int lineIndex, const std::string &intStr, const std::string &name) {
+    try {
+        return std::stoi(intStr);
+    } catch (std::invalid_argument &e) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("Value '{}' for {} is not a int", intStr, name)));
     }
 }
 
@@ -124,8 +136,86 @@ void parseElementsLine(int lineIndex, std::string line, std::vector<LensElement>
                           lensGeometry);
 }
 
+void checkLensElementIndex(int lineIndex, int indexToCheck, std::vector<LensElement> &elements) {
+    if (indexToCheck < 0 || indexToCheck >= elements.size()) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("{} is an invalid lens index, valid is [0-{}]", indexToCheck, elements.size())));
+    }
+}
+
+void checkLensGeometry(int lineIndex, int indexToCheck, std::vector<LensElement> &elements) {
+    if (elements[indexToCheck].geometry != LensGeometry::ASPHERICAL) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("lens element {} is not an aspheric lens, it's {}", indexToCheck,
+                                   elements[indexToCheck].geometry)));
+    }
+}
+
+void parseAsphericCoefficientsLine(int lineIndex, std::string line, std::vector<LensElement> &elements,
+                                   std::vector<AsphericCoefficients> &asphericCoefficients) {
+
+    std::vector<std::string> indexAndCoefficients;
+    boost::split(indexAndCoefficients, line, boost::is_any_of(":"));
+    if (indexAndCoefficients.size() > 2) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("'{}' is an invalid aspheric coefficients line", line)));
+    }
+    if (indexAndCoefficients.size() < 2) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("'{}' is an incomplete aspheric coefficients line", line)));
+    }
+
+    const int lensIndex = parseInt(lineIndex, indexAndCoefficients[0], "Aspheric Lens Index");
+    checkLensElementIndex(lineIndex, lensIndex, elements);
+    checkLensGeometry(lineIndex, lensIndex, elements);
+
+    boost::algorithm::trim_all(indexAndCoefficients[1]);
+    boost::algorithm::to_lower(indexAndCoefficients[1]);
+
+    std::vector<std::string> coefficientStrs;
+    boost::split(coefficientStrs, indexAndCoefficients[1], boost::is_any_of(" "));
+
+    AsphericCoefficients coefficients;
+
+    for (auto &coefficientStr : coefficientStrs) {
+        std::vector<std::string> splittedNameAndValue;
+        boost::split(splittedNameAndValue, coefficientStr, boost::is_any_of("="));
+        if (splittedNameAndValue.size() != 2) {
+            CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+                lineIndex, fmt::format("'{}' is an invalid coefficient format, only k=v is allowed", coefficientStr)));
+        }
+
+        const std::string coefficientName = splittedNameAndValue[0];
+        const std::string coefficientValue = splittedNameAndValue[1];
+
+        if (coefficientName == "k") {
+            coefficients.k = parseFloat(lineIndex, coefficientValue, "k");
+        } else if (coefficientName == "a2") {
+            coefficients.a2 = parseFloat(lineIndex, coefficientValue, "a2");
+        } else if (coefficientName == "a4") {
+            coefficients.a4 = parseFloat(lineIndex, coefficientValue, "a4");
+        } else if (coefficientName == "a6") {
+            coefficients.a6 = parseFloat(lineIndex, coefficientValue, "a6");
+        } else if (coefficientName == "a8") {
+            coefficients.a8 = parseFloat(lineIndex, coefficientValue, "a8");
+        } else if (coefficientName == "a10") {
+            coefficients.a10 = parseFloat(lineIndex, coefficientValue, "a10");
+        } else if (coefficientName == "a12") {
+            coefficients.a12 = parseFloat(lineIndex, coefficientValue, "a12");
+        } else if (coefficientName == "a14") {
+            coefficients.a14 = parseFloat(lineIndex, coefficientValue, "a14");
+        } else {
+            CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+                lineIndex, fmt::format("'{}' is an invalid coefficient name", coefficientName)));
+        }
+    }
+    asphericCoefficients.push_back(coefficients);
+    elements[lensIndex].asphericCoefficientsIndex = asphericCoefficients.size() - 1;
+}
+
 CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &content) {
     std::vector<LensElement> elements;
+    std::vector<AsphericCoefficients> asphericCoefficients;
     std::vector<std::string> lines;
     boost::split(lines, content, boost::is_any_of("\n"));
 
@@ -153,6 +243,8 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
             parseMetadataLine(i, line, cameraLensMetadata);
         } else if (parseState == ParseState::ELEMENTS) {
             parseElementsLine(i, line, elements);
+        } else if (parseState == ParseState::ASPHERIC_COEFFICIENTS) {
+            parseAsphericCoefficientsLine(i, line, elements, asphericCoefficients);
         }
     }
 
@@ -166,7 +258,15 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Elements] section is empty"));
     }
 
-    return {cameraLensMetadata, elements};
+    for (int i = 0; i < elements.size(); i++) {
+        auto &element = elements[i];
+        if (element.geometry == LensGeometry::ASPHERICAL && !element.asphericCoefficientsIndex.has_value()) {
+            CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+                fmt::format("element {} is aspheric, but has no coefficients", i)));
+        }
+    }
+
+    return {cameraLensMetadata, elements, asphericCoefficients};
 }
 
 } // crayg
