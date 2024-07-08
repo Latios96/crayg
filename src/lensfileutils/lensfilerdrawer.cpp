@@ -1,0 +1,181 @@
+#include "basics/Color.h"
+#include "scene/camera/realistic/CameraLens.h"
+#include "scene/camera/realistic/LensElement.h"
+#include "scene/camera/realistic/Wavelengths.h"
+#include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
+#include "utils/CraygMain.h"
+#include <cairo-svg.h>
+#include <iostream>
+
+namespace crayg {
+
+struct CameraLensRendererOptions {
+    bool drawReferenceSphere;
+    bool drawRays;
+    bool drawChromaticRays;
+};
+
+class CameraLensRenderer {
+  public:
+    explicit CameraLensRenderer(CameraLens &cameraLens, const CameraLensRendererOptions &cameraLensRendererOptions)
+        : cameraLens(cameraLens), cameraLensRendererOptions(cameraLensRendererOptions) {
+    }
+
+    std::string render() {
+        // todo use stream instead
+        std::string filename = "image.svg";
+
+        auto surface = cairo_svg_surface_create(filename.c_str(), WIDTH, HEIGHT);
+        auto cr = cairo_create(surface);
+
+        cairo_scale(cr, SCALE, SCALE);
+        cairo_translate(cr, WIDTH / SCALE - 2, HEIGHT / SCALE / 2);
+        cairo_set_line_width(cr, SCALE / WIDTH);
+
+        drawOpticalAxis(cr);
+        drawFilmPlane(cr);
+
+        for (auto &element : cameraLens.elements) {
+            if (element.isAperture()) {
+                drawAperture(cr, element);
+                continue;
+            }
+            switch (element.geometry) {
+                // todo support all supported geometrys
+            case LensGeometry::SPHERICAL:
+                drawSphericalLens(cr, element);
+                break;
+
+            case LensGeometry::ASPHERICAL:
+                drawAsphericalLens(cr, element, cameraLens.asphericCoefficients[*element.asphericCoefficientsIndex]);
+                break;
+            }
+        }
+
+        drawRays(cr);
+
+        cairo_show_page(cr);
+        cairo_surface_flush(surface);
+        cairo_surface_finish(surface);
+        cairo_surface_destroy(surface);
+
+        std::cout << "Wrote SVG file \"" << filename << "\"" << std::endl;
+
+        return "";
+    }
+
+    void drawOpticalAxis(cairo_t *cr) const {
+
+        cairo_move_to(cr, -WIDTH / SCALE, 0);
+        cairo_line_to(cr, 0, 0);
+        cairo_stroke(cr);
+    }
+
+    void drawFilmPlane(cairo_t *cr) const {
+        const float filmHeight = 1.5f; // Arri Alexa 35 4.6K 16:9
+        cairo_move_to(cr, 0, -filmHeight / 2);
+        cairo_line_to(cr, 0, filmHeight / 2);
+        cairo_stroke(cr);
+    }
+
+    void drawAperture(cairo_t *cr, const LensElement &lensElement) const {
+        cairo_move_to(cr, -lensElement.center, lensElement.apertureRadius);
+        cairo_line_to(cr, -lensElement.center, lensElement.apertureRadius + 1.5);
+        cairo_stroke(cr);
+
+        cairo_move_to(cr, -lensElement.center, -lensElement.apertureRadius);
+        cairo_line_to(cr, -lensElement.center, -lensElement.apertureRadius - 1.5);
+        cairo_stroke(cr);
+    }
+
+    void drawSphericalLens(cairo_t *cr, const LensElement &lensElement) {
+        const float curvatureRadius = std::abs(lensElement.curvatureRadius);
+        float alpha = std::asin((lensElement.apertureRadius * 2) / (2 * curvatureRadius));
+        float start = -alpha;
+        float end = alpha;
+        float arcCenter = -lensElement.center - curvatureRadius;
+        if (lensElement.curvatureRadius > 0) {
+            start = -alpha + M_PI;
+            end = alpha + M_PI;
+            arcCenter = -lensElement.center + curvatureRadius;
+        }
+        cairo_arc(cr, arcCenter, 0, curvatureRadius, start, end);
+        cairo_stroke(cr);
+    }
+
+    void drawAsphericalLens(cairo_t *cr, const LensElement &lensElement,
+                            const AsphericCoefficients &asphericCoefficients) {
+        // todo properly implement this
+        const int steps = 100;
+        const float housingRadius = 2.5;
+        const float stepSize = housingRadius * 2.f / steps;
+        float currentHeight = -housingRadius;
+        for (int i = 0; i < steps; i++) {
+            const float x =
+                evaluateAsphericalElement({0, currentHeight}, lensElement.curvatureRadius, asphericCoefficients);
+            cairo_line_to(cr, x, currentHeight);
+            currentHeight += stepSize;
+        }
+        cairo_stroke(cr);
+    }
+
+    void drawRays(cairo_t *cr) {
+        std::vector<std::pair<float, Color>> wavelengths;
+        if (cameraLensRendererOptions.drawChromaticRays) {
+            wavelengths.push_back({WavelengthsRgb::R, Color::createRed()});
+            wavelengths.push_back({WavelengthsRgb::G, Color::createGreen()});
+            wavelengths.push_back({WavelengthsRgb::B, Color::createBlue()});
+        } else {
+            wavelengths.emplace_back(FraunhoferLines::SODIUM.wavelength, Color::createBlack());
+        }
+        for (auto &wavelength : wavelengths) {
+            cairo_set_source_rgba(cr, std::get<1>(wavelength).r, std::get<1>(wavelength).g, std::get<1>(wavelength).b,
+                                  0.333f);
+            const int steps = 6;
+            const float housingRadius = cameraLens.getAperture().apertureRadius - 0.1f;
+            const float stepSize = housingRadius * 2.f / steps;
+            float currentHeight = -housingRadius;
+
+            for (int step = 0; step <= steps; step++) {
+                Ray ray{{0, currentHeight, 50}, {0, 0, -1}};
+                auto points = cameraLens.traceAndRecordFromWorldToFilm(ray, std::get<0>(wavelength));
+                for (int i = 0; i < points.size(); i++) {
+                    Vector3f &recordedPoint = points[i];
+                    if (!i) {
+                        cairo_move_to(cr, recordedPoint.z, recordedPoint.y);
+                        continue;
+                    }
+                    cairo_line_to(cr, recordedPoint.z, recordedPoint.y);
+                }
+                cairo_stroke(cr);
+                currentHeight += stepSize;
+            }
+        }
+    }
+
+  private:
+    constexpr static const float WIDTH = 1600;
+    constexpr static const float HEIGHT = 800;
+    constexpr static const float SCALE = 40;
+
+    CameraLens &cameraLens;
+    CameraLensRendererOptions cameraLensRendererOptions;
+};
+
+int craygMain(int argc, char *argv[]) {
+
+    const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\canon-zoom-70.fx";
+    auto reader = LensFileReaderFactory::createLensFileReader(lensFilePath);
+    auto cameraLens = std::make_unique<CameraLens>(reader->readFile(lensFilePath));
+
+    CameraLensRendererOptions cameraLensRendererOptions;
+    CameraLensRenderer cameraLensRenderer(*cameraLens, cameraLensRendererOptions);
+    cameraLensRenderer.render();
+
+    return 0;
+}
+}
+
+int main(int argc, char *argv[]) {
+    CRAYG_MAIN_IMPL;
+}
