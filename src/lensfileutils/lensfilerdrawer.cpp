@@ -113,7 +113,7 @@ class CameraLensRenderer {
         for (int i = 0; i < steps; i++) {
             const float x =
                 evaluateAsphericalElement({0, currentHeight}, lensElement.curvatureRadius, asphericCoefficients);
-            cairo_line_to(cr, x, currentHeight);
+            cairo_line_to(cr, -lensElement.center + x, currentHeight);
             currentHeight += stepSize;
         }
         cairo_stroke(cr);
