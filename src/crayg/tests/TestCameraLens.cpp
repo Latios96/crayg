@@ -194,4 +194,12 @@ TEST_CASE("CameraLens::hasAsphericElements") {
     }
 }
 
+TEST_CASE("CameraLens::length") {
+    CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
+
+    SECTION("should return correct length") {
+        REQUIRE_THAT(canon70_200.length(), Catch::WithinRel(23.752f, 0.1f));
+    }
+}
+
 }

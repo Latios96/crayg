@@ -349,4 +349,12 @@ bool CameraLens::hasAsphericElements() const {
     return !asphericCoefficients.empty();
 }
 
+float CameraLens::length() const {
+    float length = 0;
+    for (auto &element : elements) {
+        length += element.thickness;
+    }
+    return length;
+}
+
 } // crayg

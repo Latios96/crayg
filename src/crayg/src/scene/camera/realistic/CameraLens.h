@@ -33,6 +33,7 @@ struct CameraLens {
     const LensElement &getLastElement() const;
     LensElement &getAperture();
     float getApertureRadius() const;
+    float length() const;
 
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength) const;
     std::optional<Ray> traceFromWorldToFilm(const Ray &ray, float wavelength) const;
