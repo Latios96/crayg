@@ -11,14 +11,14 @@
 namespace crayg {
 
 struct AsphericCoefficients {
-    float k;
-    float a2;
-    float a4;
-    float a6;
-    float a8;
-    float a10;
-    float a12;
-    float a14;
+    float k = 0;
+    float a2 = 0;
+    float a4 = 0;
+    float a6 = 0;
+    float a8 = 0;
+    float a10 = 0;
+    float a12 = 0;
+    float a14 = 0;
     bool operator==(const AsphericCoefficients &rhs) const;
     bool operator!=(const AsphericCoefficients &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const AsphericCoefficients &coefficients);

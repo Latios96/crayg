@@ -315,6 +315,22 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
                      {1, 0, 4.605084E-06, 4.544628E-10, -2.257169E-12, 5.828326E-16, 0, 0}}));
     }
 
+    SECTION("should default unspecified coefficients to 0") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+
+[Elements]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL
+[Aspheric Coefficients]
+0: k=0 a4=1  a6=2 a8=3
+)";
+        auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
+
+        REQUIRE(cameraLens.asphericCoefficients == std::vector<AsphericCoefficients>({{0, 0, 1, 2, 3, 0, 0, 0}}));
+    }
+
     SECTION("should throw error because aspheric coefficient line contains too many :") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
