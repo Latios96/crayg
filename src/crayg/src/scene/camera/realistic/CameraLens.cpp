@@ -303,8 +303,9 @@ std::optional<LensElementIntersection> CameraLens::intersect(const LensElement &
             element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
         break;
     case LensGeometry::ASPHERICAL:
-        intersects = intersectAsphericalElement(
-            element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        intersects = intersectAsphericalElement(element.curvatureRadius,
+                                                -(element.center + elementsOffset) + element.curvatureRadius, ray, &t,
+                                                &normal, asphericCoefficients[*element.asphericCoefficientsIndex]);
         break;
     case LensGeometry::CYLINDER_X:
         intersects = intersectCylindricalXElement(

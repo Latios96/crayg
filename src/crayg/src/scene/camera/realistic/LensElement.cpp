@@ -86,24 +86,79 @@ bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, floa
     return true;
 }
 
-bool intersectAsphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
-    Vector3f o = ray.startPoint - Vector3f(0, 0, zCenter);
-    float A = ray.direction.dot(ray.direction);
-    float B = 2 * (ray.direction.dot(o));
-    float C = o.dot(o) - radius * radius;
+float evaluateAsphericalElement(const Vector2f &position, float radius,
+                                const AsphericCoefficients &asphericCoefficients) {
+    const float h = position.length();
+    const float h2 = h * h;
+    const float h4 = h2 * h2;
+    const float h6 = h4 * h2;
+    const float h8 = h4 * h4;
+    const float h10 = h8 * h2;
+    const float h12 = h10 * h2;
+    const float h14 = h12 * h2;
+    float curvature = 1.f / radius;
+    const float sumOfCorrectionTerms = asphericCoefficients.a2 * h2 + asphericCoefficients.a4 * h4 +
+                                       asphericCoefficients.a6 * h6 + asphericCoefficients.a8 * h8 +
+                                       asphericCoefficients.a10 * h10 + asphericCoefficients.a12 * h12 +
+                                       asphericCoefficients.a14 * h14;
+    return (curvature * h2) /
+               (1 + std::sqrtf(std::max(0.f, 1 - (1 + asphericCoefficients.k) * curvature * curvature * h2))) +
+           sumOfCorrectionTerms;
+}
 
-    auto solutions = MathUtils::solveQuadratic(A, B, C);
-    if (!solutions) {
+float evaluateAsphericalElementDerivate(const Vector2f &position, float radius,
+                                        const AsphericCoefficients &asphericCoefficients) {
+    const float h = position.length();
+    const float h2 = h * h;
+    const float h3 = h2 * h;
+    const float h5 = h3 * h2;
+    const float h7 = h5 * h2;
+    const float h9 = h7 * h2;
+    const float h11 = h9 * h2;
+    const float h13 = h11 * h2;
+    float curvature = 1.f / radius;
+    float curvature2 = curvature * curvature;
+
+    const float sumOfCorrectionTerms = 2 * asphericCoefficients.a2 * h + 4 * asphericCoefficients.a4 * h3 +
+                                       6 * asphericCoefficients.a6 * h5 + 8 * asphericCoefficients.a8 * h7 +
+                                       10 * asphericCoefficients.a10 * h9 + 12 * asphericCoefficients.a12 * h11 +
+                                       14 * asphericCoefficients.a14 * h13;
+
+    return (2.f * curvature * h) / (std::sqrt(1 - curvature2 * h2 * (asphericCoefficients.k + 1)) + 1) +
+           (curvature2 * curvature * h3 * (asphericCoefficients.k + 1)) /
+               (std::sqrt(1 - curvature2 * h2 * (asphericCoefficients.k + 1)) *
+                std::pow(std::sqrt(1 - curvature2 * h2 * (asphericCoefficients.k + 1)) + 1, 2)) +
+           sumOfCorrectionTerms;
+}
+
+bool intersectAsphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n,
+                                const AsphericCoefficients &asphericCoefficients) {
+    if (!intersectSphericalElement(radius, zCenter, ray, t, n)) {
         return false;
     }
+    Vector3f intersectionPointWithAsphere = ray.constructIntersectionPoint(*t);
+    float asphericSagitta = evaluateAsphericalElement(intersectionPointWithAsphere.xy(), radius, asphericCoefficients);
 
-    *t = selectCorrectSolution(radius, ray, *solutions);
-    if (*t < 0) {
-        return false;
+    float positionError = 1e10;
+    for (int i = 0; i < 100; i++) {
+        positionError = zCenter + asphericSagitta - intersectionPointWithAsphere.z;
+        float tError = positionError / ray.direction.z;
+        *t = +tError;
+        intersectionPointWithAsphere = ray.constructIntersectionPoint(*t);
+        if (std::abs(positionError) < 1e-4) {
+            break;
+        }
+    };
+
+    float dz = evaluateAsphericalElementDerivate(intersectionPointWithAsphere.xy(), radius, asphericCoefficients);
+    const float r = intersectionPointWithAsphere.xy().length();
+
+    if (n->z > 0) {
+        dz = -dz;
     }
-
-    *n = Vector3f(o + ray.direction * *t);
-    *n = FaceForward(n->normalize(), ray.direction.invert());
+    Vector3f normal(intersectionPointWithAsphere.x / r * dz, intersectionPointWithAsphere.y / r * dz,
+                    n->z / std::abs(n->z));
+    *n = normal.normalize();
 
     return true;
 }
