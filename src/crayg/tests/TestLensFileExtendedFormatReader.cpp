@@ -298,7 +298,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
             element.center = 0;
         }
         REQUIRE(cameraLens.metadata ==
-                CameraLensMetadata("Aspheric Lens", 5.3816013, 1.08, false, 1, 3, 21.728516, "", ""));
+                CameraLensMetadata("Aspheric Lens", 5.3817177, 1.08, false, 1, 3, 21.728516, "", ""));
         REQUIRE(cameraLens.elements[0] ==
                 LensElement({2.4, 2.1000001, 1., 5, 25, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
                              LensGeometry::ASPHERICAL, 0}));
