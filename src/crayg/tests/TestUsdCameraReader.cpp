@@ -87,7 +87,7 @@ TEST_CASE("CameraReader::read") {
 
         REQUIRE(camera->getCameraType() == CameraType::REALISTIC);
         REQUIRE(camera->getLens() ==
-                CameraLens(CameraLensMetadata(), std::vector<LensElement>({{0.1, 0.2, 3, 0.2}, {0.5, 0.6, 7, 0.4}})));
+                CameraLens(CameraLensMetadata(), std::vector<LensSurface>({{0.1, 0.2, 3, 0.2}, {0.5, 0.6, 7, 0.4}})));
     }
 
     SECTION("should read camera with relative lens file successfully") {
@@ -107,7 +107,7 @@ TEST_CASE("CameraReader::read") {
         REQUIRE(camera->getCameraType() == CameraType::REALISTIC);
         REQUIRE(camera->getLens() ==
                 CameraLens(CameraLensMetadata(),
-                           std::vector<LensElement>({{0.1f, 0.2f, 3.f, 0.2f}, {0.5f, 0.6f, 7.f, 0.4f}})));
+                           std::vector<LensSurface>({{0.1f, 0.2f, 3.f, 0.2f}, {0.5f, 0.6f, 7.f, 0.4f}})));
     }
 
     SECTION("should read embedded lens file successfully") {

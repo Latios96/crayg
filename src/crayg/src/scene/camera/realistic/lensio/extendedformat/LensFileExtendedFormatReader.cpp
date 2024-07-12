@@ -13,7 +13,7 @@
 
 namespace crayg {
 
-enum class ParseState { UNDEFINED, METADATA, ELEMENTS, ASPHERIC_COEFFICIENTS };
+enum class ParseState { UNDEFINED, METADATA, SURFACES, ASPHERIC_COEFFICIENTS };
 
 class InvalidExtendedLensFileFormatException : public std::runtime_error {
   public:
@@ -31,8 +31,8 @@ bool checkLineForStateAndChangeIfNeeded(std::string line, ParseState &parseState
     if (line == "[metadata]") {
         parseState = ParseState::METADATA;
         return true;
-    } else if (line == "[elements]") {
-        parseState = ParseState::ELEMENTS;
+    } else if (line == "[surfaces]") {
+        parseState = ParseState::SURFACES;
         return true;
     } else if (line == "[aspheric coefficients]") {
         parseState = ParseState::ASPHERIC_COEFFICIENTS;
@@ -105,7 +105,7 @@ LensGeometry parseLensGeometry(int lineIndex, std::string &geometry) {
     return *lensGeometry;
 }
 
-void parseElementsLine(int lineIndex, std::string line, std::vector<LensElement> &elements) {
+void parseSurfaceLine(int lineIndex, std::string line, std::vector<LensSurface> &surfaces) {
     boost::algorithm::to_lower(line);
     if (pystring::startswith(line, "radius")) {
         return;
@@ -132,26 +132,26 @@ void parseElementsLine(int lineIndex, std::string line, std::vector<LensElement>
     auto lensMaterial = parseMaterial(lineIndex, material);
     auto lensGeometry = parseLensGeometry(lineIndex, geometry);
 
-    elements.emplace_back(radius * 0.1f, thickness * 0.1f, ior, housingRadius * 0.1f, abbeNumber, lensMaterial,
+    surfaces.emplace_back(radius * 0.1f, thickness * 0.1f, ior, housingRadius * 0.1f, abbeNumber, lensMaterial,
                           lensGeometry);
 }
 
-void checkLensElementIndex(int lineIndex, int indexToCheck, std::vector<LensElement> &elements) {
-    if (indexToCheck < 0 || indexToCheck >= elements.size()) {
+void checkLensSurfaceIndex(int lineIndex, int indexToCheck, std::vector<LensSurface> &surfaces) {
+    if (indexToCheck < 0 || indexToCheck >= surfaces.size()) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
-            lineIndex, fmt::format("{} is an invalid lens index, valid is [0-{}]", indexToCheck, elements.size())));
+            lineIndex, fmt::format("{} is an invalid lens index, valid is [0-{}]", indexToCheck, surfaces.size())));
     }
 }
 
-void checkLensGeometry(int lineIndex, int indexToCheck, std::vector<LensElement> &elements) {
-    if (elements[indexToCheck].geometry != LensGeometry::ASPHERICAL) {
+void checkLensGeometry(int lineIndex, int indexToCheck, std::vector<LensSurface> &surfaces) {
+    if (surfaces[indexToCheck].geometry != LensGeometry::ASPHERICAL) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
-            lineIndex, fmt::format("lens element {} is not an aspheric lens, it's {}", indexToCheck,
-                                   elements[indexToCheck].geometry)));
+            lineIndex, fmt::format("lens surface {} is not an aspheric lens, it's {}", indexToCheck,
+                                   surfaces[indexToCheck].geometry)));
     }
 }
 
-void parseAsphericCoefficientsLine(int lineIndex, std::string line, std::vector<LensElement> &elements,
+void parseAsphericCoefficientsLine(int lineIndex, std::string line, std::vector<LensSurface> &surfaces,
                                    std::vector<AsphericCoefficients> &asphericCoefficients) {
 
     std::vector<std::string> indexAndCoefficients;
@@ -166,8 +166,8 @@ void parseAsphericCoefficientsLine(int lineIndex, std::string line, std::vector<
     }
 
     const int lensIndex = parseInt(lineIndex, indexAndCoefficients[0], "Aspheric Lens Index");
-    checkLensElementIndex(lineIndex, lensIndex, elements);
-    checkLensGeometry(lineIndex, lensIndex, elements);
+    checkLensSurfaceIndex(lineIndex, lensIndex, surfaces);
+    checkLensGeometry(lineIndex, lensIndex, surfaces);
 
     boost::algorithm::trim_all(indexAndCoefficients[1]);
     boost::algorithm::to_lower(indexAndCoefficients[1]);
@@ -210,11 +210,11 @@ void parseAsphericCoefficientsLine(int lineIndex, std::string line, std::vector<
         }
     }
     asphericCoefficients.push_back(coefficients);
-    elements[lensIndex].asphericCoefficientsIndex = asphericCoefficients.size() - 1;
+    surfaces[lensIndex].asphericCoefficientsIndex = asphericCoefficients.size() - 1;
 }
 
 CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &content) {
-    std::vector<LensElement> elements;
+    std::vector<LensSurface> surfaces;
     std::vector<AsphericCoefficients> asphericCoefficients;
     std::vector<std::string> lines;
     boost::split(lines, content, boost::is_any_of("\n"));
@@ -234,39 +234,39 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
         }
 
         const bool metadataWasParsedButNameIsEmpty =
-            parseState == ParseState::ELEMENTS && cameraLensMetadata.name.empty();
+            parseState == ParseState::SURFACES && cameraLensMetadata.name.empty();
         if (metadataWasParsedButNameIsEmpty) {
             CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Metadata] section is missing 'name'"));
         }
 
         if (parseState == ParseState::METADATA) {
             parseMetadataLine(i, line, cameraLensMetadata);
-        } else if (parseState == ParseState::ELEMENTS) {
-            parseElementsLine(i, line, elements);
+        } else if (parseState == ParseState::SURFACES) {
+            parseSurfaceLine(i, line, surfaces);
         } else if (parseState == ParseState::ASPHERIC_COEFFICIENTS) {
-            parseAsphericCoefficientsLine(i, line, elements, asphericCoefficients);
+            parseAsphericCoefficientsLine(i, line, surfaces, asphericCoefficients);
         }
     }
 
-    const bool elementsSectionWasNotFound = parseState == ParseState::METADATA;
-    if (elementsSectionWasNotFound) {
-        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Elements] section is missing"));
+    const bool surfacesSectionWasNotFound = parseState == ParseState::METADATA;
+    if (surfacesSectionWasNotFound) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is missing"));
     }
 
-    const bool elementsSectionWasEmpty = parseState == ParseState::ELEMENTS && elements.empty();
-    if (elementsSectionWasEmpty) {
-        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Elements] section is empty"));
+    const bool surfacesSectionWasEmpty = parseState == ParseState::SURFACES && surfaces.empty();
+    if (surfacesSectionWasEmpty) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is empty"));
     }
 
-    for (int i = 0; i < elements.size(); i++) {
-        auto &element = elements[i];
-        if (element.geometry == LensGeometry::ASPHERICAL && !element.asphericCoefficientsIndex.has_value()) {
+    for (int i = 0; i < surfaces.size(); i++) {
+        auto &surface = surfaces[i];
+        if (surface.geometry == LensGeometry::ASPHERICAL && !surface.asphericCoefficientsIndex.has_value()) {
             CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
-                fmt::format("element {} is aspheric, but has no coefficients", i)));
+                fmt::format("surface {} is aspheric, but has no coefficients", i)));
         }
     }
 
-    return {cameraLensMetadata, elements, asphericCoefficients};
+    return {cameraLensMetadata, surfaces, asphericCoefficients};
 }
 
 } // crayg

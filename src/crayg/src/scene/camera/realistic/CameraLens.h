@@ -1,9 +1,9 @@
 #pragma once
 
 #include "CameraLensMetadata.h"
-#include "LensElement.h"
 #include "LensGeometry.h"
 #include "LensMaterial.h"
+#include "LensSurface.h"
 #include "ThickLensApproximation.h"
 #include "basics/Ray.h"
 #include "utils/DtoUtils.h"
@@ -16,22 +16,22 @@
 
 namespace crayg {
 
-CRAYG_DTO_2(LensElementIntersection, Vector3f, point, Vector3f, normal);
+CRAYG_DTO_2(LensSurfaceIntersection, Vector3f, point, Vector3f, normal);
 
 struct CameraLens {
-    CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements);
-    CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements,
+    CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces);
+    CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces,
                const std::vector<AsphericCoefficients> &asphericCoefficients);
     CameraLens(const CameraLens &cameraLens);
-    std::vector<LensElement> elements;
+    std::vector<LensSurface> surfaces;
     std::vector<AsphericCoefficients> asphericCoefficients;
     ThickLensApproximation thickLensApproximation;
 
     CameraLensMetadata metadata;
 
-    const LensElement &getFirstElement() const;
-    const LensElement &getLastElement() const;
-    LensElement &getAperture();
+    const LensSurface &getFirstSurface() const;
+    const LensSurface &getLastSurface() const;
+    LensSurface &getAperture();
     float getApertureRadius() const;
     float length() const;
 
@@ -42,8 +42,8 @@ struct CameraLens {
     void focusLens(float focalDistance);
     void changeAperture(float fStop);
 
-    Ray refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
-    bool hasAsphericElements() const;
+    Ray refract(const LensSurfaceIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
+    bool hasAsphericSurfaces() const;
     bool operator==(const CameraLens &rhs) const;
     bool operator!=(const CameraLens &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const CameraLens &lens);
@@ -53,15 +53,15 @@ struct CameraLens {
     void calculateMetadata();
     void handleAnamorphicFocussing();
     float computeClosestFocalDistance() const;
-    float calculateElementsOffset(float focalDistance) const;
+    float calculateSurfaceOffset(float focalDistance) const;
 
-    std::optional<LensElementIntersection> intersect(const LensElement &element, const Ray &ray) const;
-    bool exceedsAperture(const LensElement &element, const Ray &ray) const;
+    std::optional<LensSurfaceIntersection> intersect(const LensSurface &surface, const Ray &ray) const;
+    bool exceedsAperture(const LensSurface &surface, const Ray &ray) const;
     bool exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const;
 
     int apertureIndex = -1;
     float apertureRadius;
-    float elementsOffset = 0;
+    float surfacesOffset = 0;
 };
 
 } // crayg

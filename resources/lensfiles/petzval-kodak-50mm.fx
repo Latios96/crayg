@@ -3,10 +3,10 @@ Name: Kodak petzval-type photographic objective
 Focal Length: 43
 Maximum F Number: 5.55
 Squeeze: 1
-Elements Count: 8
+Surface Count: 8
 Patent: US2500046A (scaled by 50%)
 Patent Location: https://patentimages.storage.googleapis.com/d1/82/65/2e1188e6e199a3/US2500046.pdf
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material Geometry  
 30.5   6.46      1.52 9.9            58.6    UNKNOWN  SPHERICAL 
 -24.4  1.94      1.62 9.9            38.5    UNKNOWN  SPHERICAL 

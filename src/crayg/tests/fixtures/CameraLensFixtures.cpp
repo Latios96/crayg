@@ -2,18 +2,18 @@
 
 namespace crayg {
 
-void convertMillimetersToCentimeters(std::vector<LensElement> &elements) {
+void convertMillimetersToCentimeters(std::vector<LensSurface> &surfaces) {
     const float factor = 0.1f;
-    for (auto &element : elements) {
-        element.curvatureRadius *= factor;
-        element.thickness *= factor;
-        element.apertureRadius *= factor;
+    for (auto &surface : surfaces) {
+        surface.curvatureRadius *= factor;
+        surface.thickness *= factor;
+        surface.apertureRadius *= factor;
     }
 }
 
 CameraLens CameraLensFixtures::createCanon70_200mm() {
     // US Patent 5537259
-    std::vector<LensElement> elements = {
+    std::vector<LensSurface> surfaces = {
         {311.919, 2.80, 1.7495, 38.0, 35},   // 0
         {118.63, 0.42, 1, 38.0},             // 1
         {128.135, 8.68, 1.497, 38.0, 81.6},  // 2
@@ -50,14 +50,14 @@ CameraLens CameraLensFixtures::createCanon70_200mm() {
         {-205.76, 54.5, 1, 21.0},            // 33
     };
 
-    convertMillimetersToCentimeters(elements);
+    convertMillimetersToCentimeters(surfaces);
 
-    return CameraLens(CameraLensMetadata("Canon F/2.8, 70-200mm"), elements);
+    return CameraLens(CameraLensMetadata("Canon F/2.8, 70-200mm"), surfaces);
 }
 
 CameraLens CameraLensFixtures::createSchneider30mmAnamorphic() {
     // US Patent 6310731B1
-    std::vector<LensElement> elements = {
+    std::vector<LensSurface> surfaces = {
         {-101.3, 4, 1.591, 60, 61, LensMaterial::createMaterialById(LensMaterialId::UNKNOWN), LensGeometry::CYLINDER_Y},
         {50, 7.7, 1.762, 60, 27.2, LensMaterial::createMaterialById(LensMaterialId::UNKNOWN), LensGeometry::CYLINDER_Y},
         {87.3, 71.3, 1, 60, 0, LensMaterial::createMaterialById(LensMaterialId::UNKNOWN), LensGeometry::CYLINDER_Y},
@@ -86,14 +86,14 @@ CameraLens CameraLensFixtures::createSchneider30mmAnamorphic() {
         {-53.2, 43.3809, 1, 28, 0, LensMaterial::createMaterialById(LensMaterialId::UNKNOWN), LensGeometry::SPHERICAL},
     };
 
-    convertMillimetersToCentimeters(elements);
+    convertMillimetersToCentimeters(surfaces);
 
-    return CameraLens(crayg::CameraLensMetadata("Schneider 30mm anamorphic"), elements);
+    return CameraLens(crayg::CameraLensMetadata("Schneider 30mm anamorphic"), surfaces);
 }
 
 CameraLens CameraLensFixtures::createEdmondAsphericLens() {
     // Edmond Optics, 50mm Dia., 0.83 Numerical Aperture, 600-1050nm Coated, Precision Aspheric Lens
-    std::vector<LensElement> elements = {
+    std::vector<LensSurface> surfaces = {
         {{24.156, 21.45, 1.80518f, 50, 25.36f, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
           LensGeometry::ASPHERICAL, 0},
          {0, 18.06, 1, 50, 0, LensMaterial::createMaterialById(LensMaterialId::AIR), LensGeometry::PLANAR}
@@ -103,13 +103,13 @@ CameraLens CameraLensFixtures::createEdmondAsphericLens() {
         {-1.103426, 0, 4.605084E-06, 4.544628E-10, -2.257169E-12, 5.828326E-16, 0, 0}};
 
     const float factor = 0.1f;
-    for (auto &element : elements) {
-        element.curvatureRadius *= factor;
-        element.thickness *= factor;
-        element.apertureRadius *= factor;
+    for (auto &surface : surfaces) {
+        surface.curvatureRadius *= factor;
+        surface.thickness *= factor;
+        surface.apertureRadius *= factor;
     }
 
-    return CameraLens(crayg::CameraLensMetadata("Edmond Optics Precision Aspheric Lens"), elements,
+    return CameraLens(crayg::CameraLensMetadata("Edmond Optics Precision Aspheric Lens"), surfaces,
                       asphericCoefficients);
 }
 

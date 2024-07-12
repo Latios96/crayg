@@ -9,7 +9,7 @@ TEST_CASE("LensFileJsonReader::readFileContent") {
         std::string content = R"(
 {
    "name":"Canon 70-200",
-   "elements":[
+   "surfaces":[
       {
          "curvatureRadius":1,
          "thickness":2,

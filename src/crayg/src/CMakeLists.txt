@@ -143,8 +143,6 @@ set(crayg_SRCS
     scene/camera/realistic/ExitPupil.h
     scene/camera/realistic/ExitPupilCalculator.cpp
     scene/camera/realistic/ExitPupilCalculator.h
-    scene/camera/realistic/LensElement.cpp
-    scene/camera/realistic/LensElement.h
     scene/camera/realistic/LensGeometry.h
     scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.cpp
     scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.h
@@ -171,6 +169,8 @@ set(crayg_SRCS
     scene/camera/realistic/LensMaterial.h
     scene/camera/realistic/LensRaytracerTracer.cpp
     scene/camera/realistic/LensRaytracerTracer.h
+    scene/camera/realistic/LensSurface.cpp
+    scene/camera/realistic/LensSurface.h
     scene/camera/realistic/materials/LensMaterialConstants_ohara.h
     scene/camera/realistic/materials/LensMaterialConstants_schott.h
     scene/camera/realistic/materials/LensMaterialIds_ohara.h

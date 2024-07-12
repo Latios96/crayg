@@ -98,7 +98,7 @@ void ImageMetadataCollector::collectCamera(ImageMetadata &imageMetadata) {
     if (isRealisticCamera) {
         auto &lens = scene->camera->getLens();
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_NAME, fmt::format("{}", lens.metadata.name));
-        imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT, static_cast<int>(lens.elements.size()));
+        imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_SURFACE_COUNT, static_cast<int>(lens.surfaces.size()));
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH, lens.metadata.focalLength * 10);
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_MAXIMUM_F_NUMBER, lens.metadata.maximumAperture);
         imageMetadata.write(ImageMetadataTokens::CAMERA_LENS_IS_ANAMORPHIC, lens.metadata.isAnamorphic ? 1 : 0);

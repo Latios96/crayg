@@ -9,7 +9,7 @@ class DummyLensFileReader : public LensFileReader {
     explicit DummyLensFileReader() = default;
 
     CameraLens readFileContent(const std::string &content) override {
-        return {CameraLensMetadata(), std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})};
+        return {CameraLensMetadata(), std::vector<LensSurface>({{1, 2, 3, 4}, {5, 6, 7, 8}})};
     }
 };
 
@@ -31,7 +31,7 @@ TEST_CASE("TestLensFileReader::readFile") {
 
         auto cameraLens = dummyLensFileReader.readFile(filePath);
 
-        REQUIRE(cameraLens == CameraLens(CameraLensMetadata(), std::vector<LensElement>({{1, 2, 3, 4}, {5, 6, 7, 8}})));
+        REQUIRE(cameraLens == CameraLens(CameraLensMetadata(), std::vector<LensSurface>({{1, 2, 3, 4}, {5, 6, 7, 8}})));
     }
 }
 

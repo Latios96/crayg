@@ -3,8 +3,8 @@ Name: Schneider Anamorphic Lens
 Focal Length: 31.5
 Maximum F Number: 3
 Squeeze: 1
-Elements Count: 19
-[Elements]
+Surface Count: 19
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material Geometry  
 -101   4         1.59 30             61      UNKNOWN  CYLINDER_Y 
 50     7.7       1.76 30             27.2    UNKNOWN  CYLINDER_Y 

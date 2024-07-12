@@ -3,11 +3,11 @@ Name: Navarro Anamorphic Lens
 Focal Length: 78.6
 Maximum F Number: 5.56
 Squeeze: 1
-Elements Count: 31
+Surface Count: 31
 Description: Aspherics ignored
 Patent:
 Patent Location: 
-[Elements]
+[Surfaces]
 Radius   Thickness IOR  Housing-Radius Abbe-No Material Geometry   
 59.7     13.5      1.78 30.1           37.4    UNKNOWN  SPHERICAL  
 1e+05    8.32      1    28.2           0       UNKNOWN  SPHERICAL  

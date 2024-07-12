@@ -43,11 +43,11 @@ void scaleLensFile(const LensFileScaleOptions &options) {
     Logger::info("Original focal length: {}mm", cameraLens.metadata.focalLength * 10);
     for (auto targetFocalLength : options.focalLengths) {
         const float ratio = targetFocalLength / (cameraLens.metadata.focalLength * 10);
-        auto scaled = cameraLens.elements;
-        for (auto &element : scaled) {
-            element.apertureRadius *= ratio;
-            element.curvatureRadius *= ratio;
-            element.thickness *= ratio;
+        auto scaled = cameraLens.surfaces;
+        for (auto &surface : scaled) {
+            surface.apertureRadius *= ratio;
+            surface.curvatureRadius *= ratio;
+            surface.thickness *= ratio;
         }
         auto scaledLens = CameraLens(cameraLens.metadata, scaled);
         auto path = std::filesystem::path(options.outputFile);
@@ -75,7 +75,7 @@ void calculateLensMaterialError(const std::string &inputFile) {
     std::vector<float> iorErrors;
     std::vector<float> abbeErrors;
 
-    for (auto &lens : cameraLens.elements) {
+    for (auto &lens : cameraLens.surfaces) {
         if (lens.ior == 1 || lens.ior == 0) {
             continue;
         }

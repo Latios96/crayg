@@ -24,16 +24,16 @@ struct AsphericCoefficients {
     friend std::ostream &operator<<(std::ostream &os, const AsphericCoefficients &coefficients);
 };
 
-struct LensElement {
-    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius);
-    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius,
+struct LensSurface {
+    LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius);
+    LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius,
                 std::optional<int> asphericCoefficientsIndex);
-    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber);
-    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+    LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber);
+    LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
                 std::optional<int> asphericCoefficientsIndex);
-    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+    LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
                 LensMaterial lensMaterial, LensGeometry geometry);
-    LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+    LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
                 LensMaterial lensMaterial, LensGeometry geometry, std::optional<int> asphericCoefficientsIndex);
 
     float curvatureRadius;
@@ -48,26 +48,26 @@ struct LensElement {
 
     bool isAperture() const;
 
-    bool operator==(const LensElement &rhs) const;
-    bool operator!=(const LensElement &rhs) const;
-    friend std::ostream &operator<<(std::ostream &os, const LensElement &element);
+    bool operator==(const LensSurface &rhs) const;
+    bool operator!=(const LensSurface &rhs) const;
+    friend std::ostream &operator<<(std::ostream &os, const LensSurface &surface);
 };
 
-bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
-bool intersectAsphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n,
+bool intersectSphericalSurface(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
+bool intersectAsphericalSurface(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n,
                                 const AsphericCoefficients &asphericCoefficients);
-bool intersectCylindricalYElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
-bool intersectCylindricalXElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
-bool intersectPlanarElement(float zCenter, const Ray &ray, float *t, Vector3f *n);
+bool intersectCylindricalYSurface(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
+bool intersectCylindricalXSurface(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n);
+bool intersectPlanarSurface(float zCenter, const Ray &ray, float *t, Vector3f *n);
 
-float evaluateAsphericalElement(const Vector2f &position, float radius,
+float evaluateAsphericalSurface(const Vector2f &position, float radius,
                                 const AsphericCoefficients &asphericCoefficients);
 
 } // crayg
 
-template <> struct fmt::formatter<crayg::LensElement> : ostream_formatter {};
+template <> struct fmt::formatter<crayg::LensSurface> : ostream_formatter {};
 
 template <> struct fmt::formatter<crayg::AsphericCoefficients> : ostream_formatter {};
 
-CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensElement);
+CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensSurface);
 CRAYG_DTO_UTILS_VECTOR_FORMATTER(AsphericCoefficients);

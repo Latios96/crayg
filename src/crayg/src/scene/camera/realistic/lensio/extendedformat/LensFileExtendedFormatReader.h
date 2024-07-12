@@ -9,8 +9,7 @@ class LensFileExtendedFormatReader : public LensFileReader {
     explicit LensFileExtendedFormatReader() = default;
     CameraLens readFileContent(const std::string &content) override;
 
-    CameraLensMetadata parseMetadata(const std::vector<std::string> &lines);
-    std::vector<LensElement> parseElements(const std::vector<std::string> &lines);
+    std::vector<LensSurface> parseSurfaces(const std::vector<std::string> &lines);
 };
 
 } // crayg

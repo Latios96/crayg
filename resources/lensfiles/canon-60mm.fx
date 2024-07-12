@@ -3,10 +3,10 @@ Name: Canon 50mm f/1.8
 Focal Length: 60mm
 Maximum F Number: 1.8
 Squeeze: 1
-Elements Count: 12
+Surface Count: 12
 Patent: JPA 1987087922-000000
 Patent Location: https://www.photonstophotos.net/GeneralTopics/Lenses/OpticalBench/OpticalBench.htm#Data/JP1987-087922_Example01P.txt,figureOpacity=0.25,AxisO,OffAxis
-[Elements]
+[Surfaces]
 Radius  Thickness   IOR     Housing-Radius  Abbe-No Material    Geometry  
 34.30	4.50	    1.62280	30.99	        57.0    UNKNOWN     SPHERICAL
 247.65	2.40	    1	    30.99           0       UNKNOWN     SPHERICAL

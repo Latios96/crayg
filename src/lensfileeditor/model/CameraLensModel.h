@@ -15,7 +15,7 @@ class CameraLensModel : public QAbstractTableModel {
     }
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override {
-        return cameraLens.elements.size();
+        return cameraLens.surfaces.size();
     }
     enum class Columns {
         CURVATURE_RADIUS,
@@ -42,26 +42,26 @@ class CameraLensModel : public QAbstractTableModel {
 
     QVariant handleDisplayRole(const QModelIndex &index) const {
         const int elementIndex = index.row();
-        if (elementIndex < 0 || elementIndex >= cameraLens.elements.size()) {
+        if (elementIndex < 0 || elementIndex >= cameraLens.surfaces.size()) {
             return {};
         }
 
         const Columns column = static_cast<Columns>(index.column());
         switch (column) {
         case Columns::CURVATURE_RADIUS:
-            return cameraLens.elements[elementIndex].curvatureRadius;
+            return cameraLens.surfaces[elementIndex].curvatureRadius;
         case Columns::THICKNESS:
-            return cameraLens.elements[elementIndex].thickness;
+            return cameraLens.surfaces[elementIndex].thickness;
         case Columns::IOR:
-            return cameraLens.elements[elementIndex].ior;
+            return cameraLens.surfaces[elementIndex].ior;
         case Columns::HOUSING_RADIUS:
-            return cameraLens.elements[elementIndex].apertureRadius;
+            return cameraLens.surfaces[elementIndex].apertureRadius;
         case Columns::ABBE_NUMBER:
-            return cameraLens.elements[elementIndex].material.abbeNo;
+            return cameraLens.surfaces[elementIndex].material.abbeNo;
         case Columns::MATERIAL:
-            return qformat("{}", cameraLens.elements[elementIndex].material.id);
+            return qformat("{}", cameraLens.surfaces[elementIndex].material.id);
         case Columns::GEOMETRY:
-            return qformat("{}", cameraLens.elements[elementIndex].geometry);
+            return qformat("{}", cameraLens.surfaces[elementIndex].geometry);
         }
         return QVariant();
     }

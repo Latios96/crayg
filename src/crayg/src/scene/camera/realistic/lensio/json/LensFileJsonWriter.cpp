@@ -6,17 +6,17 @@ namespace crayg {
 std::string LensFileJsonWriter::writeFileContent(const CameraLens &cameraLens) {
     nlohmann::json lensJson = nlohmann::json{};
 
-    auto jsonLensElements = nlohmann::json::array();
-    for (auto &element : cameraLens.elements) {
-        jsonLensElements.push_back({
-            {"curvatureRadius", element.curvatureRadius * 10},
-            {"thickness", element.thickness * 10},
-            {"ior", element.ior},
-            {"apertureRadius", element.apertureRadius * 10},
+    auto jsonLensSurfaces = nlohmann::json::array();
+    for (auto &surface : cameraLens.surfaces) {
+        jsonLensSurfaces.push_back({
+            {"curvatureRadius", surface.curvatureRadius * 10},
+            {"thickness", surface.thickness * 10},
+            {"ior", surface.ior},
+            {"apertureRadius", surface.apertureRadius * 10},
         });
     }
     lensJson["name"] = cameraLens.metadata.name;
-    lensJson["elements"] = jsonLensElements;
+    lensJson["surfaces"] = jsonLensSurfaces;
 
     return lensJson.dump(4);
 }

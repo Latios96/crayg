@@ -15,7 +15,7 @@ name: A Zoom Lens
 Maximum F Number: 2.8
 Patent: US 123
 Description: An Example Lens
-[Elements]
+[Surfaces]
 Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 1       2           3   4              5       SCHOTT_LAFN7    PLANAR
 6       7           8   9              10      SCHOTT_K7       SPHERICAL
@@ -26,7 +26,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
         REQUIRE(
             cameraLens ==
             CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, 42, "US 123", "An Example Lens"),
-                       std::vector<LensElement>(
+                       std::vector<LensSurface>(
                            {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
                              LensGeometry::PLANAR},
                             {0.6f, 0.7f, 8.f, 0.90000004f, 10,
@@ -38,7 +38,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 1       2           3   4              5       SCHOTT_LAFN7    PLANAR
 6       7           8   9              10      SCHOTT_K7       SPHERICAL
@@ -49,7 +49,7 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
         REQUIRE(
             cameraLens ==
             CameraLens(CameraLensMetadata("A Zoom Lens"),
-                       std::vector<LensElement>(
+                       std::vector<LensSurface>(
                            {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
                              LensGeometry::PLANAR},
                             {0.6f, 0.7f, 8.f, 0.90000004f, 10,
@@ -65,7 +65,7 @@ Squeeze: 2
 Maximum F Number: 2.8
 Patent: US 123
 Description: An Example Lens
-[Elements]
+[Surfaces]
 Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 1       2           3   4              5       SCHOTT_LAFN7    PLANAR
 6       7           8   9              10      SCHOTT_K7       SPHERICAL
@@ -76,18 +76,18 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
         REQUIRE(
             cameraLens ==
             CameraLens(CameraLensMetadata("A Zoom Lens", 0.46001232, 2.8, false, 1, 0, 42, "US 123", "An Example Lens"),
-                       std::vector<LensElement>(
+                       std::vector<LensSurface>(
                            {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
                              LensGeometry::PLANAR},
                             {0.6f, 0.7f, 8.f, 0.90000004f, 10,
                              LensMaterial::createMaterialById(LensMaterialId::SCHOTT_K7), LensGeometry::SPHERICAL}})));
     }
 
-    SECTION("should parse extended lens file with no elements header") {
+    SECTION("should parse extended lens file with no surfaces header") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 1       2           3   4              5       SCHOTT_LAFN7    PLANAR
 6       7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
@@ -97,7 +97,7 @@ name: A Zoom Lens
         REQUIRE(
             cameraLens ==
             CameraLens(CameraLensMetadata("A Zoom Lens"),
-                       std::vector<LensElement>(
+                       std::vector<LensSurface>(
                            {{0.1f, 0.2f, 3.f, 0.4f, 5, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_LAFN7),
                              LensGeometry::PLANAR},
                             {0.6f, 0.7f, 8.f, 0.90000004f, 10,
@@ -111,7 +111,7 @@ TEST_CASE("LensFileExtendedFormatReader::readFileContent with failure") {
     SECTION("should throw exception if lens name is missing") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
-[Elements]
+[Surfaces]
 1       2           3   4              5       SCHOTT_LAFN7    PLANAR
 6       7           8   9              10      SCHOTT_K7       SPHERICAL
 )";
@@ -120,33 +120,33 @@ TEST_CASE("LensFileExtendedFormatReader::readFileContent with failure") {
                             Catch::Equals("Invalid lens file: [Metadata] section is missing 'name'"));
     }
 
-    SECTION("should throw exception if elements section is missing") {
+    SECTION("should throw exception if surfaces section is missing") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 name: A Zoom Lens
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: [Elements] section is missing"));
+                            Catch::Equals("Invalid lens file: [Surfaces] section is missing"));
     }
 
-    SECTION("should throw exception if elements section is empty") {
+    SECTION("should throw exception if surfaces section is empty") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: [Elements] section is empty"));
+                            Catch::Equals("Invalid lens file: [Surfaces] section is empty"));
     }
 
-    SECTION("should throw exception if an element contains non-float radius") {
+    SECTION("should throw exception if an surfaces contains non-float radius") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 # comment
 Radius  Thickness   IOR HousingRadius  Abbe-no Material Geometry
 # comment
@@ -158,12 +158,12 @@ abc   7           8   9              10      SCHOTT_K7       SPHERICAL
                             Catch::Equals("Invalid lens file: Line 11: Value 'abc' for Radius is not a float"));
     }
 
-    SECTION("should throw exception if an element contains non-float thickness") {
+    SECTION("should throw exception if an surfaces contains non-float thickness") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 # comment
 Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 # comment
@@ -175,12 +175,12 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
                             Catch::Equals("Invalid lens file: Line 11: Value 'abc' for Thickness is not a float"));
     }
 
-    SECTION("should throw exception if an element contains non-float IOR") {
+    SECTION("should throw exception if an surfaces contains non-float IOR") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 # comment
 Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 # comment
@@ -192,12 +192,12 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
                             Catch::Equals("Invalid lens file: Line 11: Value 'abc' for IOR is not a float"));
     }
 
-    SECTION("should throw exception if an element contains non-float housing radius") {
+    SECTION("should throw exception if an surface contains non-float housing radius") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 # comment
 Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
 # comment
@@ -209,12 +209,12 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material      Geometry
                             Catch::Equals("Invalid lens file: Line 11: Value 'abc' for Housing Radius is not a float"));
     }
 
-    SECTION("should throw exception if an element contains non-float abbe no") {
+    SECTION("should throw exception if an surface contains non-float abbe no") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 # comment
 Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 # comment
@@ -226,12 +226,12 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
                             Catch::Equals("Invalid lens file: Line 11: Value 'abc' for Abbe-No is not a float"));
     }
 
-    SECTION("should throw exception if an element contains invalid material") {
+    SECTION("should throw exception if an surface contains invalid material") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 # comment
 Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 # comment
@@ -243,12 +243,12 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
                             Catch::Equals("Invalid lens file: Line 11: 'foo' is an unsupported material value"));
     }
 
-    SECTION("should throw exception if an element contains invalid lens geometry") {
+    SECTION("should throw exception if an surface contains invalid lens geometry") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 # comment
 Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 # comment
@@ -260,12 +260,12 @@ Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
                             Catch::Equals("Invalid lens file: Line 11: 'cubical' is an unsupported LensGeometry"));
     }
 
-    SECTION("should throw because element line is empty") {
+    SECTION("should throw because surface line is empty") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 # comment
 name: A Zoom Lens
-[Elements]
+[Surfaces]
 Radius  Thickness   IOR HousingRadius  Abbe-no Material        Geometry
 1       2           3   4              5       SCHOTT_LAFN7    PLANAR
 1
@@ -283,8 +283,8 @@ Name: Aspheric Lens
 Focal Length: 54.2
 Maximum F Number: 1.08
 Squeeze: 1
-Elements Count: 2
-[Elements]
+Surface Count: 2
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
@@ -294,19 +294,19 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
 1: k=1      a2=0 a4=4.605084e-06      a6=4.544628e-10    a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0
 )";
         auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
-        for (auto &element : cameraLens.elements) {
-            element.center = 0;
+        for (auto &surface : cameraLens.surfaces) {
+            surface.center = 0;
         }
         REQUIRE(cameraLens.metadata ==
                 CameraLensMetadata("Aspheric Lens", 5.3817177, 1.08, false, 1, 3, 21.728516, "", ""));
-        REQUIRE(cameraLens.elements[0] ==
-                LensElement({2.4, 2.1000001, 1., 5, 25, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
+        REQUIRE(cameraLens.surfaces[0] ==
+                LensSurface({2.4, 2.1000001, 1., 5, 25, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
                              LensGeometry::ASPHERICAL, 0}));
-        REQUIRE(cameraLens.elements[1] ==
-                LensElement({2.4, 2.1000001, 1., 5, 25, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
+        REQUIRE(cameraLens.surfaces[1] ==
+                LensSurface({2.4, 2.1000001, 1., 5, 25, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_SF6),
                              LensGeometry::ASPHERICAL, 1}));
-        REQUIRE(cameraLens.elements[2] ==
-                LensElement({0, 1.8000001, 1, 5, 0, LensMaterial::createMaterialById(LensMaterialId::AIR),
+        REQUIRE(cameraLens.surfaces[2] ==
+                LensSurface({0, 1.8000001, 1, 5, 0, LensMaterial::createMaterialById(LensMaterialId::AIR),
                              LensGeometry::PLANAR}));
 
         REQUIRE(cameraLens.asphericCoefficients ==
@@ -320,7 +320,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
 [Metadata]
 Name: Aspheric Lens
 
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL
 [Aspheric Coefficients]
@@ -335,7 +335,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
         const std::string fileContent = R"(# a header comment
 [Metadata]
 Name: Aspheric Lens
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
 
@@ -351,7 +351,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
         const std::string fileContent = R"(# a header comment
 [Metadata]
 Name: Aspheric Lens
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
 
@@ -368,7 +368,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
         const std::string fileContent = R"(# a header comment
 [Metadata]
 Name: Aspheric Lens
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
 
@@ -384,7 +384,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
         const std::string fileContent = R"(# a header comment
 [Metadata]
 Name: Aspheric Lens
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 SPHERICAL 
 
@@ -394,14 +394,14 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
 
         REQUIRE_THROWS_WITH(
             lensFileExtendedFormatReader.readFileContent(fileContent),
-            Catch::Equals("Invalid lens file: Line 9: lens element 0 is not an aspheric lens, it's SPHERICAL"));
+            Catch::Equals("Invalid lens file: Line 9: lens surface 0 is not an aspheric lens, it's SPHERICAL"));
     }
 
     SECTION("should throw error because coefficient format is invalid") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
 Name: Aspheric Lens
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
 
@@ -418,7 +418,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
         const std::string fileContent = R"(# a header comment
 [Metadata]
 Name: Aspheric Lens
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
 
@@ -434,7 +434,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
         const std::string fileContent = R"(# a header comment
 [Metadata]
 Name: Aspheric Lens
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24     21        1    50             25      SCHOTT_N_SF6 ASPHERICAL 
 
@@ -442,7 +442,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: element 0 is aspheric, but has no coefficients"));
+                            Catch::Equals("Invalid lens file: surface 0 is aspheric, but has no coefficients"));
     }
 }
 

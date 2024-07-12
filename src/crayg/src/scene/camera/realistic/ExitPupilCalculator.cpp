@@ -53,8 +53,8 @@ Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) 
     const float filmIntervalEnd = static_cast<float>(intervalIndex + 1) /
                                   static_cast<float>(calculationSettings.samplesFilmX) * (filmDiagonalLength / 2.f);
 
-    const float rearApertureRadius = lens.getLastElement().apertureRadius;
-    const Bounds2df rearElementExtend =
+    const float rearApertureRadius = lens.getLastSurface().apertureRadius;
+    const Bounds2df rearSurfaceExtend =
         Bounds2df(Vector2f(-1.5f * rearApertureRadius), Vector2f(1.5f * rearApertureRadius));
 
     Bounds2df pupilBounds;
@@ -63,8 +63,8 @@ Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) 
         const float filmX = MathUtils::lerp(static_cast<float>(sampleIndex) / static_cast<float>(maxSamples),
                                             filmIntervalStart, filmIntervalEnd);
         const Vector3f positionOnFilm = {filmX, 0, 0};
-        const Vector2f posOnExtend = rearElementExtend.lerp(Random::random(), Random::random());
-        const Vector3f positionOnRearExtend(posOnExtend.x, posOnExtend.y, lens.getLastElement().center);
+        const Vector2f posOnExtend = rearSurfaceExtend.lerp(Random::random(), Random::random());
+        const Vector3f positionOnRearExtend(posOnExtend.x, posOnExtend.y, lens.getLastSurface().center);
 
         const bool positionOnLensIsAlreadyInBounds = pupilBounds.contains(posOnExtend);
         if (!positionOnLensIsAlreadyInBounds) {
@@ -77,9 +77,9 @@ Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) 
         }
     }
     if (!exitingRays) {
-        return rearElementExtend;
+        return rearSurfaceExtend;
     }
-    const float delta = 2 * rearElementExtend.diagonal().length() / calculationSettings.samplesLens;
+    const float delta = 2 * rearSurfaceExtend.diagonal().length() / calculationSettings.samplesLens;
     pupilBounds = Bounds2df({pupilBounds.min.x - delta, pupilBounds.min.y - delta},
                             {pupilBounds.max.x + delta, pupilBounds.max.y + delta});
 

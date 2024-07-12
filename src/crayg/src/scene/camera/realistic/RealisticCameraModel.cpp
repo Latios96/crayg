@@ -37,7 +37,7 @@ RayWithWeight RealisticCameraModel::createPrimaryRay(const Vector2f &pixelPos, f
 
     const auto pupilSample = exitPupil.samplePupil(filmPos, filmDiagonal);
     const auto pointOnPupil =
-        Vector3f(pupilSample.point.x, pupilSample.point.y, camera.getLens().getLastElement().center);
+        Vector3f(pupilSample.point.x, pupilSample.point.y, camera.getLens().getLastSurface().center);
     const Ray ray = {positionOnFilm, (pointOnPupil - positionOnFilm).normalize()};
     const auto tracedRay = camera.getLens().traceFromFilmToWorld(ray, wavelength);
     if (!tracedRay) {

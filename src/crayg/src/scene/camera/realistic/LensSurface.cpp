@@ -1,4 +1,4 @@
-#include "LensElement.h"
+#include "LensSurface.h"
 
 #include "basics/MathUtils.h"
 #include "utils/ToStringHelper.h"
@@ -6,46 +6,46 @@
 
 namespace crayg {
 
-LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+LensSurface::LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
                          LensMaterial lensMaterial, LensGeometry geometry)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
       abbeNumber(abbeNumber), material(lensMaterial), geometry(geometry), asphericCoefficientsIndex(std::nullopt) {
 }
 
-LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+LensSurface::LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
                          LensMaterial lensMaterial, LensGeometry geometry, std::optional<int> asphericCoefficientsIndex)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
       abbeNumber(abbeNumber), material(lensMaterial), geometry(geometry),
       asphericCoefficientsIndex(asphericCoefficientsIndex) {
 }
 
-LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius)
+LensSurface::LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
       abbeNumber(0), material(LensMaterial()), geometry(LensGeometry::SPHERICAL),
       asphericCoefficientsIndex(std::nullopt) {
 }
 
-LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius,
+LensSurface::LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius,
                          std::optional<int> asphericCoefficientsIndex)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
       abbeNumber(0), material(LensMaterial()), geometry(LensGeometry::SPHERICAL),
       asphericCoefficientsIndex(asphericCoefficientsIndex) {
 }
 
-LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber)
+LensSurface::LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
       abbeNumber(abbeNumber), material(LensMaterial()), geometry(LensGeometry::SPHERICAL),
       asphericCoefficientsIndex(std::nullopt) {
 }
 
-LensElement::LensElement(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
+LensSurface::LensSurface(float curvatureRadius, float thickness, float ior, float apertureRadius, float abbeNumber,
                          std::optional<int> asphericCoefficientsIndex)
     : curvatureRadius(curvatureRadius), thickness(thickness), ior(ior), apertureRadius(apertureRadius), center(0),
       abbeNumber(abbeNumber), material(LensMaterial()), geometry(LensGeometry::SPHERICAL),
       asphericCoefficientsIndex(asphericCoefficientsIndex) {
 }
 
-bool LensElement::isAperture() const {
+bool LensSurface::isAperture() const {
     return curvatureRadius == 0;
 }
 
@@ -55,9 +55,9 @@ inline Vector3f FaceForward(const Vector3f &n, const Vector3f &v) {
 
 float selectCorrectSolution(float radius, const Ray &ray, const QuadraticSolutions &quadraticSolutions) {
     auto [t0, t1] = quadraticSolutions;
-    const bool isConcaveElement = radius < 0;
+    const bool isConcaveSurface = radius < 0;
     const bool rayFromLeft = ray.direction.z > 0;
-    bool useCloserT = rayFromLeft ^ isConcaveElement;
+    bool useCloserT = rayFromLeft ^ isConcaveSurface;
 
     if (useCloserT) {
         return std::min(t0, t1);
@@ -65,7 +65,7 @@ float selectCorrectSolution(float radius, const Ray &ray, const QuadraticSolutio
     return std::max(t0, t1);
 }
 
-bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
+bool intersectSphericalSurface(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
     Vector3f o = ray.startPoint - Vector3f(0, 0, zCenter);
     float A = ray.direction.dot(ray.direction);
     float B = 2 * (ray.direction.dot(o));
@@ -87,7 +87,7 @@ bool intersectSphericalElement(float radius, float zCenter, const Ray &ray, floa
     return true;
 }
 
-float evaluateAsphericalElement(const Vector2f &position, float radius,
+float evaluateAsphericalSurface(const Vector2f &position, float radius,
                                 const AsphericCoefficients &asphericCoefficients) {
     const float h = position.length();
     const float h2 = h * h;
@@ -107,7 +107,7 @@ float evaluateAsphericalElement(const Vector2f &position, float radius,
            sumOfCorrectionTerms;
 }
 
-float evaluateAsphericalElementDerivate(const Vector2f &position, float radius,
+float evaluateAsphericalSurfaceDerivate(const Vector2f &position, float radius,
                                         const AsphericCoefficients &asphericCoefficients) {
     const float h = position.length();
     const float h2 = h * h;
@@ -132,13 +132,13 @@ float evaluateAsphericalElementDerivate(const Vector2f &position, float radius,
            sumOfCorrectionTerms;
 }
 
-bool intersectAsphericalElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n,
+bool intersectAsphericalSurface(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n,
                                 const AsphericCoefficients &asphericCoefficients) {
-    if (!intersectSphericalElement(radius, zCenter, ray, t, n)) {
+    if (!intersectSphericalSurface(radius, zCenter, ray, t, n)) {
         return false;
     }
     Vector3f intersectionPointWithAsphere = ray.constructIntersectionPoint(*t);
-    float asphericSagitta = evaluateAsphericalElement(intersectionPointWithAsphere.xy(), radius, asphericCoefficients);
+    float asphericSagitta = evaluateAsphericalSurface(intersectionPointWithAsphere.xy(), radius, asphericCoefficients);
 
     float positionError = 1e10;
     for (int i = 0; i < 100; i++) {
@@ -151,7 +151,7 @@ bool intersectAsphericalElement(float radius, float zCenter, const Ray &ray, flo
         }
     };
 
-    float dz = evaluateAsphericalElementDerivate(intersectionPointWithAsphere.xy(), radius, asphericCoefficients);
+    float dz = evaluateAsphericalSurfaceDerivate(intersectionPointWithAsphere.xy(), radius, asphericCoefficients);
     const float r = intersectionPointWithAsphere.xy().length();
 
     if (n->z > 0) {
@@ -164,7 +164,7 @@ bool intersectAsphericalElement(float radius, float zCenter, const Ray &ray, flo
     return true;
 }
 
-bool intersectCylindricalYElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
+bool intersectCylindricalYSurface(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
     const Vector3f transformedOrigin = ray.startPoint - Vector3f(0, 0, zCenter);
     const float A = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
     const float B = 2 * (ray.direction.x * transformedOrigin.x + ray.direction.z * transformedOrigin.z);
@@ -190,7 +190,7 @@ bool intersectCylindricalYElement(float radius, float zCenter, const Ray &ray, f
     return true;
 }
 
-bool intersectCylindricalXElement(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
+bool intersectCylindricalXSurface(float radius, float zCenter, const Ray &ray, float *t, Vector3f *n) {
     Vector3f transformedOrigin = ray.startPoint - Vector3f(0, 0, zCenter);
     const float A = ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z;
     const float B = 2 * (ray.direction.y * transformedOrigin.y + ray.direction.z * transformedOrigin.z);
@@ -216,40 +216,40 @@ bool intersectCylindricalXElement(float radius, float zCenter, const Ray &ray, f
     return true;
 }
 
-bool intersectPlanarElement(float zCenter, const Ray &ray, float *t, Vector3f *n) {
+bool intersectPlanarSurface(float zCenter, const Ray &ray, float *t, Vector3f *n) {
     *t = zCenter / ray.direction.z;
     *n = Vector3f(0, 0, -1);
     *n = *n = FaceForward(*n, ray.direction * -1);
     return true;
 }
 
-bool LensElement::operator==(const LensElement &rhs) const {
+bool LensSurface::operator==(const LensSurface &rhs) const {
     return curvatureRadius == rhs.curvatureRadius && thickness == rhs.thickness && ior == rhs.ior &&
            apertureRadius == rhs.apertureRadius && center == rhs.center && abbeNumber == rhs.abbeNumber &&
            material == rhs.material && geometry == rhs.geometry &&
            asphericCoefficientsIndex == rhs.asphericCoefficientsIndex;
 }
 
-bool LensElement::operator!=(const LensElement &rhs) const {
+bool LensSurface::operator!=(const LensSurface &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const LensElement &element) {
-    os << ToStringHelper("LensElement")
-              .addMember("curvatureRadius", element.curvatureRadius)
-              .addMember("thickness", element.thickness)
-              .addMember("ior", element.ior)
-              .addMember("apertureRadius", element.apertureRadius)
-              .addMember("center", element.center)
-              .addMember("abbeNumber", element.abbeNumber)
-              .addMember("material", element.material)
-              .addMember("geometry", element.geometry)
+std::ostream &operator<<(std::ostream &os, const LensSurface &surface) {
+    os << ToStringHelper("LensSurface")
+              .addMember("curvatureRadius", surface.curvatureRadius)
+              .addMember("thickness", surface.thickness)
+              .addMember("ior", surface.ior)
+              .addMember("apertureRadius", surface.apertureRadius)
+              .addMember("center", surface.center)
+              .addMember("abbeNumber", surface.abbeNumber)
+              .addMember("material", surface.material)
+              .addMember("geometry", surface.geometry)
               .finish();
     return os;
 }
 
 std::ostream &operator<<(std::ostream &os, const AsphericCoefficients &coefficients) {
-    os << ToStringHelper("LensElement")
+    os << ToStringHelper("AsphericCoefficients")
               .addMember("k", coefficients.k)
               .addMember("a2", coefficients.a2)
               .addMember("a4", coefficients.a4)

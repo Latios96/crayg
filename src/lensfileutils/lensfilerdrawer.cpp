@@ -1,6 +1,6 @@
 #include "basics/Color.h"
 #include "scene/camera/realistic/CameraLens.h"
-#include "scene/camera/realistic/LensElement.h"
+#include "scene/camera/realistic/LensSurface.h"
 #include "scene/camera/realistic/Wavelengths.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "utils/CraygMain.h"
@@ -35,7 +35,7 @@ class CameraLensRenderer {
         drawOpticalAxis(cr);
         drawFilmPlane(cr);
 
-        for (auto &element : cameraLens.elements) {
+        for (auto &element : cameraLens.surfaces) {
             if (element.isAperture()) {
                 drawAperture(cr, element);
                 continue;
@@ -78,7 +78,7 @@ class CameraLensRenderer {
         cairo_stroke(cr);
     }
 
-    void drawAperture(cairo_t *cr, const LensElement &lensElement) const {
+    void drawAperture(cairo_t *cr, const LensSurface &lensElement) const {
         cairo_move_to(cr, -lensElement.center, lensElement.apertureRadius);
         cairo_line_to(cr, -lensElement.center, lensElement.apertureRadius + 1.5);
         cairo_stroke(cr);
@@ -88,7 +88,7 @@ class CameraLensRenderer {
         cairo_stroke(cr);
     }
 
-    void drawSphericalLens(cairo_t *cr, const LensElement &lensElement) {
+    void drawSphericalLens(cairo_t *cr, const LensSurface &lensElement) {
         const float curvatureRadius = std::abs(lensElement.curvatureRadius);
         float alpha = std::asin((lensElement.apertureRadius * 2) / (2 * curvatureRadius));
         float start = -alpha;
@@ -103,16 +103,17 @@ class CameraLensRenderer {
         cairo_stroke(cr);
     }
 
-    void drawAsphericalLens(cairo_t *cr, const LensElement &lensElement,
+    void drawAsphericalLens(cairo_t *cr, const LensSurface &lensElement,
                             const AsphericCoefficients &asphericCoefficients) {
         // todo properly implement this
+        // todo handle convex / concave elements
         const int steps = 100;
-        const float housingRadius = 2.5;
+        const float housingRadius = lensElement.apertureRadius;
         const float stepSize = housingRadius * 2.f / steps;
         float currentHeight = -housingRadius;
         for (int i = 0; i < steps; i++) {
             const float x =
-                evaluateAsphericalElement({0, currentHeight}, lensElement.curvatureRadius, asphericCoefficients);
+                evaluateAsphericalSurface({0, currentHeight}, lensElement.curvatureRadius, asphericCoefficients);
             cairo_line_to(cr, -lensElement.center + x, currentHeight);
             currentHeight += stepSize;
         }
@@ -156,7 +157,7 @@ class CameraLensRenderer {
   private:
     constexpr static const float WIDTH = 1600;
     constexpr static const float HEIGHT = 800;
-    constexpr static const float SCALE = 40;
+    constexpr static const float SCALE = 80;
 
     CameraLens &cameraLens;
     CameraLensRendererOptions cameraLensRendererOptions;
@@ -164,9 +165,11 @@ class CameraLensRenderer {
 
 int craygMain(int argc, char *argv[]) {
 
-    const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\canon-zoom-70.fx";
+    // const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\EdmundOpticsAsphere.fx";
+    const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\AsphericZoomLens.fx";
     auto reader = LensFileReaderFactory::createLensFileReader(lensFilePath);
     auto cameraLens = std::make_unique<CameraLens>(reader->readFile(lensFilePath));
+    // cameraLens->focusLens(100000); // todo move elements during drawing
 
     CameraLensRendererOptions cameraLensRendererOptions;
     CameraLensRenderer cameraLensRenderer(*cameraLens, cameraLensRendererOptions);

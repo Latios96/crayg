@@ -13,7 +13,7 @@ bool lineIsSingleInteger(const std::string &line) {
 }
 
 CameraLens LensFileTextFileReader::readFileContent(const std::string &content) {
-    std::vector<LensElement> elements;
+    std::vector<LensSurface> surfaces;
     std::vector<std::string> lines;
     boost::split(lines, content, boost::is_any_of("\n"));
 
@@ -27,13 +27,13 @@ CameraLens LensFileTextFileReader::readFileContent(const std::string &content) {
             hasSeenLensCount = true;
             continue;
         }
-        elements.push_back(readLensElement(line));
+        surfaces.push_back(readLensSurface(line));
     }
 
-    return {CameraLensMetadata(), elements};
+    return {CameraLensMetadata(), surfaces};
 }
 
-LensElement LensFileTextFileReader::readLensElement(const std::string &line) const {
+LensSurface LensFileTextFileReader::readLensSurface(const std::string &line) const {
     std::istringstream iss(line);
 
     float radius, thickness, ior, diameter;

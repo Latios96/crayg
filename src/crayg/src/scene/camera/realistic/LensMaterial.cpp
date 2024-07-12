@@ -71,45 +71,6 @@ LensMaterial LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo, Mat
     return LensMaterial::findMaterialByIorAndAbbe(ior, abbeNo, searchError, getAllMaterialsSortedByIor());
 }
 
-template <typename T>
-float findElementsWithSmalledDifference(const std::vector<T> &elements, std::vector<T> &elementsWithMinimalError,
-                                        const std::function<float(const T &a)> &errorFunc) {
-    if (elements.empty()) {
-        return 0;
-    }
-    float minimalError = std::numeric_limits<float>::max();
-    int indexOfMinimalError = -1;
-
-    for (int i = 0; i < elements.size(); i++) {
-        const float elementError = errorFunc(elements[i]);
-        if (elementError < minimalError) {
-            minimalError = elementError;
-            indexOfMinimalError = i;
-        }
-    }
-
-    for (int i = indexOfMinimalError; i < elements.size(); i++) {
-        const float elementError = errorFunc(elements[i]);
-        if (elementError == minimalError) {
-            elementsWithMinimalError.push_back(elements[i]);
-        }
-        if (elementError > minimalError) {
-            break;
-        }
-    }
-
-    for (int i = indexOfMinimalError - 1; i >= 0; i--) {
-        const float elementError = errorFunc(elements[i]);
-        if (elementError == minimalError) {
-            elementsWithMinimalError.push_back(elements[i]);
-        }
-        if (elementError > minimalError) {
-            break;
-        }
-    }
-    return minimalError;
-}
-
 static const int IOR_WEIGHT = 129;
 
 LensMaterial LensMaterial::findMaterialByIorAndAbbe(float ior, float abbeNo, MaterialSearchError *searchError,

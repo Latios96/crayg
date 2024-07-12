@@ -10,12 +10,12 @@ void UsdLensFileUtils::writeEmbeddedLensFile(const CameraLens &cameraLens, pxr::
     pxr::VtDictionary lensDict;
     lensDict["name"] = cameraLens.metadata.name;
 
-    pxr::VtArray<pxr::GfVec4f> elements;
-    for (auto &element : cameraLens.elements) {
-        elements.push_back(
-            {element.curvatureRadius * 10, element.thickness * 10, element.ior, element.apertureRadius * 10});
+    pxr::VtArray<pxr::GfVec4f> surfaces;
+    for (auto &surface : cameraLens.surfaces) {
+        surfaces.push_back(
+            {surface.curvatureRadius * 10, surface.thickness * 10, surface.ior, surface.apertureRadius * 10});
     }
-    lensDict["elements"] = elements;
+    lensDict["surfaces"] = surfaces;
 
     craygLensFileAttribute.SetCustomDataByKey(pxr::TfToken("lens"), pxr::VtValue(lensDict));
 }

@@ -3,8 +3,8 @@ Name: Canon anamorphic lens
 Focal Length: 88.6
 Maximum F Number: 5.91
 Squeeze: 1
-Elements Count: 30
-[Elements]
+Surface Count: 30
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material Geometry   
 1e+05  3.5       1.81 40             25.4    UNKNOWN  SPHERICAL  
 127    10.8      1    40             0       UNKNOWN  SPHERICAL  

@@ -34,7 +34,7 @@ class ImageMetadataTokens {
     static const std::string CAMERA_F_STOP;
     static const std::string CAMERA_CAMERA_TYPE;
     static const std::string CAMERA_LENS_NAME;
-    static const std::string CAMERA_LENS_ELEMENT_COUNT;
+    static const std::string CAMERA_LENS_SURFACE_COUNT;
     static const std::string CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH;
     static const std::string CAMERA_LENS_MAXIMUM_F_NUMBER;
     static const std::string CAMERA_LENS_IS_ANAMORPHIC;

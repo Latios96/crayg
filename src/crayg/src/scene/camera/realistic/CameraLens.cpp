@@ -8,17 +8,17 @@
 
 namespace crayg {
 
-CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements)
-    : CameraLens(metadata, elements, {}) {
+CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces)
+    : CameraLens(metadata, surfaces, {}) {
 }
 
-CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensElement> &elements,
+CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces,
                        const std::vector<AsphericCoefficients> &asphericCoefficients)
-    : metadata(metadata), elements(elements), asphericCoefficients(asphericCoefficients) {
+    : metadata(metadata), surfaces(surfaces), asphericCoefficients(asphericCoefficients) {
 
     float center = 0;
-    for (int i = elements.size() - 1; i >= 0; i--) {
-        auto &lens = this->elements[i];
+    for (int i = surfaces.size() - 1; i >= 0; i--) {
+        auto &lens = this->surfaces[i];
         center += lens.thickness;
         lens.center = center;
         if (lens.isAperture()) {
@@ -40,38 +40,38 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
 }
 
 void CameraLens::initializeLensMaterials() {
-    for (int i = 0; i < elements.size(); i++) {
+    for (int i = 0; i < surfaces.size(); i++) {
         if (i == apertureIndex) {
             continue;
         }
-        auto &lensElement = elements[i];
-        const bool isKnownMaterial = lensElement.material.id != LensMaterialId::UNKNOWN;
+        auto &surface = surfaces[i];
+        const bool isKnownMaterial = surface.material.id != LensMaterialId::UNKNOWN;
         if (isKnownMaterial) {
-            lensElement.material = LensMaterial::createMaterialById(lensElement.material.id);
+            surface.material = LensMaterial::createMaterialById(surface.material.id);
             continue;
         }
-        if (lensElement.abbeNumber == 0) {
-            lensElement.material.ior = lensElement.ior;
+        if (surface.abbeNumber == 0) {
+            surface.material.ior = surface.ior;
             continue;
         }
         LensMaterial::MaterialSearchError searchError{};
-        auto material = LensMaterial::findMaterialByIorAndAbbe(lensElement.ior, lensElement.abbeNumber, &searchError);
+        auto material = LensMaterial::findMaterialByIorAndAbbe(surface.ior, surface.abbeNumber, &searchError);
         if (searchError.isCriticalError()) {
-            Logger::error("Did not find a sufficient material for element {}, ior error: {:.3f}, abbe error: {:.3f}", i,
+            Logger::error("Did not find a sufficient material for surface {}, ior error: {:.3f}, abbe error: {:.3f}", i,
                           searchError.iorError, searchError.abbeNoError);
         }
-        lensElement.material = material;
+        surface.material = material;
     }
 }
 
 void CameraLens::calculateMetadata() {
     metadata.focalLength = calculateEffectiveFocalLength(thickLensApproximation);
-    metadata.elementCount = elements.size();
+    metadata.surfaceCount = surfaces.size();
     if (!metadata.maximumAperture) {
         metadata.maximumAperture = metadata.focalLength / apertureRadius;
     }
-    metadata.isAnamorphic = std::any_of(elements.begin(), elements.end(), [](const LensElement &element) {
-        return element.geometry == LensGeometry::CYLINDER_X || element.geometry == LensGeometry::CYLINDER_Y;
+    metadata.isAnamorphic = std::any_of(surfaces.begin(), surfaces.end(), [](const LensSurface &surface) {
+        return surface.geometry == LensGeometry::CYLINDER_X || surface.geometry == LensGeometry::CYLINDER_Y;
     });
     metadata.closestFocalDistance = computeClosestFocalDistance();
 }
@@ -86,7 +86,7 @@ void CameraLens::handleAnamorphicFocussing() {
     thickLensApproximation = horizontalThickLensApproximation;
 }
 
-float CameraLens::calculateElementsOffset(float focalDistance) const {
+float CameraLens::calculateSurfaceOffset(float focalDistance) const {
     const float z = -focalDistance;
     const float c =
         (thickLensApproximation.secondCardinalPoints.pZ - z - thickLensApproximation.firstCardinalPoints.pZ) *
@@ -102,7 +102,7 @@ float CameraLens::computeClosestFocalDistance() const {
     float end = 0;
     for (int i = 0; i < 10; i++) {
         middle = end + ((start - end) / 2.f);
-        const float offset = calculateElementsOffset(middle);
+        const float offset = calculateSurfaceOffset(middle);
         if (std::isnan(offset)) {
             end = middle;
         } else {
@@ -113,39 +113,39 @@ float CameraLens::computeClosestFocalDistance() const {
 }
 
 CameraLens::CameraLens(const CameraLens &cameraLens)
-    : metadata(cameraLens.metadata), elements(cameraLens.elements),
+    : metadata(cameraLens.metadata), surfaces(cameraLens.surfaces),
       asphericCoefficients(cameraLens.asphericCoefficients), apertureIndex(cameraLens.apertureIndex),
       thickLensApproximation(cameraLens.thickLensApproximation), apertureRadius(cameraLens.apertureRadius),
-      elementsOffset(cameraLens.elementsOffset) {
+      surfacesOffset(cameraLens.surfacesOffset) {
 }
 
-const LensElement &CameraLens::getFirstElement() const {
-    return elements[0];
+const LensSurface &CameraLens::getFirstSurface() const {
+    return surfaces[0];
 }
 
-const LensElement &CameraLens::getLastElement() const {
-    return elements[elements.size() - 1];
+const LensSurface &CameraLens::getLastSurface() const {
+    return surfaces[surfaces.size() - 1];
 }
 
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray, float wavelength) const {
     Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
                      {ray.direction.x, ray.direction.y, -ray.direction.z}};
-    for (int i = elements.size() - 1; i >= 0; i--) {
-        auto element = elements[i];
-        if (element.isAperture()) {
-            if (exceedsAperture(element, ray)) {
+    for (int i = surfaces.size() - 1; i >= 0; i--) {
+        auto surface = surfaces[i];
+        if (surface.isAperture()) {
+            if (exceedsAperture(surface, ray)) {
                 return std::nullopt;
             }
             continue;
         }
 
-        auto resultIntersection = intersect(element, tracedRay);
+        auto resultIntersection = intersect(surface, tracedRay);
         if (!resultIntersection) {
             return std::nullopt;
         }
-        float eta_i = element.material.getIor(wavelength);
-        float eta_t = (i > 0 && elements[i - 1].material.getIor(wavelength) != 0)
-                          ? elements[i - 1].material.getIor(wavelength)
+        float eta_i = surface.material.getIor(wavelength);
+        float eta_t = (i > 0 && surfaces[i - 1].material.getIor(wavelength) != 0)
+                          ? surfaces[i - 1].material.getIor(wavelength)
                           : 1;
 
         auto result = refract(*resultIntersection, tracedRay, eta_t, eta_i);
@@ -160,23 +160,23 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray, float wavele
     // todo regeneralize this
     Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
                      {ray.direction.x, ray.direction.y, -ray.direction.z}};
-    for (int i = 0; i < elements.size(); i++) {
-        auto element = elements[i];
-        if (element.isAperture()) {
-            if (exceedsAperture(element, ray)) {
+    for (int i = 0; i < surfaces.size(); i++) {
+        auto surface = surfaces[i];
+        if (surface.isAperture()) {
+            if (exceedsAperture(surface, ray)) {
                 return std::nullopt;
             }
             continue;
         }
 
-        auto resultIntersection = intersect(element, tracedRay);
+        auto resultIntersection = intersect(surface, tracedRay);
         if (!resultIntersection) {
             return std::nullopt;
         }
 
-        float eta_i = element.material.getIor(wavelength);
-        float eta_t = (i > 0 && elements[i - 1].material.getIor(wavelength) != 0)
-                          ? elements[i - 1].material.getIor(wavelength)
+        float eta_i = surface.material.getIor(wavelength);
+        float eta_t = (i > 0 && surfaces[i - 1].material.getIor(wavelength) != 0)
+                          ? surfaces[i - 1].material.getIor(wavelength)
                           : 1;
 
         auto result = refract(*resultIntersection, tracedRay, eta_i, eta_t);
@@ -189,30 +189,30 @@ std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray, float wavele
 
 std::vector<Vector3f> CameraLens::traceAndRecordFromWorldToFilm(const Ray &ray, float wavelength) const {
     std::vector<Vector3f> recordedPoints;
-    recordedPoints.reserve(elements.size() + 2);
+    recordedPoints.reserve(surfaces.size() + 2);
 
     Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
                      {ray.direction.x, ray.direction.y, -ray.direction.z}};
 
     recordedPoints.push_back(tracedRay.startPoint);
 
-    for (int i = 0; i < elements.size(); i++) {
-        auto element = elements[i];
-        if (element.isAperture()) {
-            if (exceedsAperture(element, ray)) {
+    for (int i = 0; i < surfaces.size(); i++) {
+        auto surface = surfaces[i];
+        if (surface.isAperture()) {
+            if (exceedsAperture(surface, ray)) {
                 return recordedPoints;
             }
             continue;
         }
 
-        auto resultIntersection = intersect(element, tracedRay);
+        auto resultIntersection = intersect(surface, tracedRay);
         if (!resultIntersection) {
             return recordedPoints;
         }
 
-        float eta_i = element.material.getIor(wavelength);
-        float eta_t = (i > 0 && elements[i - 1].material.getIor(wavelength) != 0)
-                          ? elements[i - 1].material.getIor(wavelength)
+        float eta_i = surface.material.getIor(wavelength);
+        float eta_t = (i > 0 && surfaces[i - 1].material.getIor(wavelength) != 0)
+                          ? surfaces[i - 1].material.getIor(wavelength)
                           : 1;
 
         auto result = refract(*resultIntersection, tracedRay, eta_i, eta_t);
@@ -228,7 +228,7 @@ std::vector<Vector3f> CameraLens::traceAndRecordFromWorldToFilm(const Ray &ray, 
     return recordedPoints;
 }
 
-Ray CameraLens::refract(const LensElementIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const {
+Ray CameraLens::refract(const LensSurfaceIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const {
     Vector3f n = intersection.normal.invert();
     float cosTheta_i = n.dot(ray.direction);
     float eta = iorIn / iorOut;
@@ -257,16 +257,16 @@ void CameraLens::focusLens(float focalDistance) {
                         metadata.closestFocalDistance);
         focalDistance = metadata.closestFocalDistance;
     }
-    elementsOffset = calculateElementsOffset(focalDistance);
+    surfacesOffset = calculateSurfaceOffset(focalDistance);
 }
 
-LensElement &CameraLens::getAperture() {
-    CRAYG_CHECK_IS_VALID_INDEX(apertureIndex, elements.size());
-    return elements[apertureIndex];
+LensSurface &CameraLens::getAperture() {
+    CRAYG_CHECK_IS_VALID_INDEX(apertureIndex, surfaces.size());
+    return surfaces[apertureIndex];
 }
 
 bool CameraLens::operator==(const CameraLens &rhs) const {
-    return metadata == rhs.metadata && elements == rhs.elements && apertureIndex == rhs.apertureIndex;
+    return metadata == rhs.metadata && surfaces == rhs.surfaces && apertureIndex == rhs.apertureIndex;
 }
 
 bool CameraLens::operator!=(const CameraLens &rhs) const {
@@ -276,7 +276,7 @@ bool CameraLens::operator!=(const CameraLens &rhs) const {
 std::ostream &operator<<(std::ostream &os, const CameraLens &lens) {
     os << ToStringHelper("CameraLens")
               .addMember("metadata", lens.metadata)
-              .addMember("elements", lens.elements)
+              .addMember("surfaces", lens.surfaces)
               .addMember("asphericCoefficients", lens.asphericCoefficients)
               .finish();
     return os;
@@ -292,32 +292,32 @@ void CameraLens::changeAperture(float fStop) {
     apertureRadius = std::clamp<float>(requestedApertureRadius, 0, maximumApertureRadius);
 }
 
-std::optional<LensElementIntersection> CameraLens::intersect(const LensElement &element, const Ray &ray) const {
+std::optional<LensSurfaceIntersection> CameraLens::intersect(const LensSurface &surface, const Ray &ray) const {
     float t = 0;
     Vector3f normal;
     bool intersects = false;
 
-    switch (element.geometry) {
+    switch (surface.geometry) {
     case LensGeometry::SPHERICAL:
-        intersects = intersectSphericalElement(
-            element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        intersects = intersectSphericalSurface(
+            surface.curvatureRadius, -(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t, &normal);
         break;
     case LensGeometry::ASPHERICAL:
-        intersects = intersectAsphericalElement(element.curvatureRadius,
-                                                -(element.center + elementsOffset) + element.curvatureRadius, ray, &t,
-                                                &normal, asphericCoefficients[*element.asphericCoefficientsIndex]);
+        intersects = intersectAsphericalSurface(surface.curvatureRadius,
+                                                -(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t,
+                                                &normal, asphericCoefficients[*surface.asphericCoefficientsIndex]);
         break;
     case LensGeometry::CYLINDER_X:
-        intersects = intersectCylindricalXElement(
-            element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        intersects = intersectCylindricalXSurface(
+            surface.curvatureRadius, -(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t, &normal);
         break;
     case LensGeometry::CYLINDER_Y:
-        intersects = intersectCylindricalYElement(
-            element.curvatureRadius, -(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+        intersects = intersectCylindricalYSurface(
+            surface.curvatureRadius, -(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t, &normal);
         break;
     case LensGeometry::PLANAR:
         intersects =
-            intersectPlanarElement(-(element.center + elementsOffset) + element.curvatureRadius, ray, &t, &normal);
+            intersectPlanarSurface(-(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t, &normal);
         break;
     }
 
@@ -326,15 +326,15 @@ std::optional<LensElementIntersection> CameraLens::intersect(const LensElement &
     }
 
     const Vector3f &intersectionPoint = ray.startPoint + ray.direction * t;
-    if (exceedsAperture(intersectionPoint, element.apertureRadius)) {
+    if (exceedsAperture(intersectionPoint, surface.apertureRadius)) {
         return std::nullopt;
     }
 
-    return LensElementIntersection(intersectionPoint, normal);
+    return LensSurfaceIntersection(intersectionPoint, normal);
 }
 
-bool CameraLens::exceedsAperture(const LensElement &lensElement, const Ray &ray) const {
-    const float t = (lensElement.center + elementsOffset - ray.startPoint.z) / ray.direction.z;
+bool CameraLens::exceedsAperture(const LensSurface &surface, const Ray &ray) const {
+    const float t = (surface.center + surfacesOffset - ray.startPoint.z) / ray.direction.z;
     Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
     return exceedsAperture(intersectionPosition, apertureRadius);
 }
@@ -346,14 +346,14 @@ bool CameraLens::exceedsAperture(const Vector3f &intersectionPosition, float ape
     return rayExceedsAperture;
 }
 
-bool CameraLens::hasAsphericElements() const {
+bool CameraLens::hasAsphericSurfaces() const {
     return !asphericCoefficients.empty();
 }
 
 float CameraLens::length() const {
     float length = 0;
-    for (auto &element : elements) {
-        length += element.thickness;
+    for (auto &surface : surfaces) {
+        length += surface.thickness;
     }
     return length;
 }

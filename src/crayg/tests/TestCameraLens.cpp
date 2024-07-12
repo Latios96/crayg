@@ -8,7 +8,7 @@ namespace crayg {
 TEST_CASE("CameraLens::construct") {
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
 
-    SECTION("aperture element should be accessible") {
+    SECTION("aperture surface should be accessible") {
         REQUIRE(canon70_200.getAperture().apertureRadius > 2);
         REQUIRE(canon70_200.getAperture().ior == 0);
     }
@@ -27,7 +27,7 @@ TEST_CASE("CameraLens::construct") {
 
     SECTION("should calculate metadata on the fly") {
         REQUIRE(canon70_200.metadata.focalLength >= 7);
-        REQUIRE(canon70_200.metadata.elementCount == 34);
+        REQUIRE(canon70_200.metadata.surfaceCount == 34);
         REQUIRE(Catch::Detail::Approx(canon70_200.metadata.maximumAperture) == 3.4220621586f);
         REQUIRE(canon70_200.metadata.isAnamorphic == false);
         REQUIRE(canon70_200.metadata.squeeze == 1);
@@ -41,25 +41,25 @@ TEST_CASE("CameraLens::construct") {
     }
 }
 
-TEST_CASE("CameraLens::getFirstElementZ") {
+TEST_CASE("CameraLens::getFirstSurfaceZ") {
 
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
 
-    SECTION("should calculate z depth for first element correctly") {
-        auto firstElement = canon70_200.getFirstElement();
+    SECTION("should calculate z depth for first surface correctly") {
+        auto firstsurface = canon70_200.getFirstSurface();
 
-        REQUIRE(firstElement.center == Catch::Detail::Approx(23.752f));
+        REQUIRE(firstsurface.center == Catch::Detail::Approx(23.752f));
     }
 }
 
-TEST_CASE("CameraLens::getLastElementZ") {
+TEST_CASE("CameraLens::getLastSurfaceZ") {
 
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
 
-    SECTION("should calculate z depth for last element correctly") {
-        auto lastElement = canon70_200.getLastElement();
+    SECTION("should calculate z depth for last surface correctly") {
+        auto lastsurface = canon70_200.getLastSurface();
 
-        REQUIRE(lastElement.center == Catch::Detail::Approx(5.45f));
+        REQUIRE(lastsurface.center == Catch::Detail::Approx(5.45f));
     }
 }
 
@@ -74,7 +74,7 @@ TEST_CASE("CameraLens::traceFromFilmToWorld") {
 
         REQUIRE(rayOut.startPoint.x == 0);
         REQUIRE(rayOut.startPoint.y == 0);
-        REQUIRE(rayOut.startPoint.z == Catch::Detail::Approx(canon70_200.getFirstElement().center));
+        REQUIRE(rayOut.startPoint.z == Catch::Detail::Approx(canon70_200.getFirstSurface().center));
         REQUIRE(rayOut.direction.x == 0);
         REQUIRE(rayOut.direction.y == 0);
         REQUIRE(rayOut.direction.z == Catch::Detail::Approx(1));
@@ -94,7 +94,7 @@ TEST_CASE("CameraLens::traceFromWorldToFilm") {
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
 
     SECTION("should trace correctly along optical axis") {
-        Ray rayIn({0, 0, canon70_200.getFirstElement().center + 1}, {0, 0, -1});
+        Ray rayIn({0, 0, canon70_200.getFirstSurface().center + 1}, {0, 0, -1});
 
         auto rayOut = *canon70_200.traceFromWorldToFilm(rayIn, FraunhoferLines::SODIUM.wavelength);
 
@@ -119,7 +119,7 @@ TEST_CASE("CameraLens::getAperture") {
 
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
 
-    SECTION("should return the aperture element") {
+    SECTION("should return the aperture surface") {
         const auto aperture = canon70_200.getAperture();
 
         REQUIRE(aperture.ior == 0);
@@ -128,11 +128,11 @@ TEST_CASE("CameraLens::getAperture") {
 }
 
 Vector3f pointOnFocalPlane(const CameraLens &cameraLens, float focalDistance) {
-    const Vector3f pointOnLens = {0, 0.5, cameraLens.getLastElement().center};
+    const Vector3f pointOnLens = {0, 0.5, cameraLens.getLastSurface().center};
     const Vector3f pointOnFilm = {0, 0, 0};
     const Ray ray = {pointOnFilm, (pointOnLens - pointOnFilm).normalize()};
     const auto focusedRay = *cameraLens.traceFromFilmToWorld(ray, FraunhoferLines::SODIUM.wavelength);
-    const float t = (focalDistance - cameraLens.getFirstElement().center) / focusedRay.direction.z;
+    const float t = (focalDistance - cameraLens.getFirstSurface().center) / focusedRay.direction.z;
     return focusedRay.constructIntersectionPoint(t);
 }
 
@@ -169,7 +169,7 @@ TEST_CASE("CameraLens::changeAperture") {
     }
 
     SECTION("changing the aperture should lead to rays that are cut off") {
-        const Vector3f pointOnLens = {0, 0.9f, canon70_200.getLastElement().center};
+        const Vector3f pointOnLens = {0, 0.9f, canon70_200.getLastSurface().center};
         const Vector3f pointOnFilm = {0, 0, 0};
         const Ray ray = {pointOnFilm, (pointOnLens - pointOnFilm).normalize()};
 
@@ -181,16 +181,16 @@ TEST_CASE("CameraLens::changeAperture") {
     }
 }
 
-TEST_CASE("CameraLens::hasAsphericElements") {
+TEST_CASE("CameraLens::hasAsphericSurfaces") {
     CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
     CameraLens edmondAsphericLens = CameraLensFixtures::createEdmondAsphericLens();
 
     SECTION("should return false") {
-        REQUIRE_FALSE(canon70_200.hasAsphericElements());
+        REQUIRE_FALSE(canon70_200.hasAsphericSurfaces());
     }
 
     SECTION("should return true") {
-        REQUIRE(edmondAsphericLens.hasAsphericElements());
+        REQUIRE(edmondAsphericLens.hasAsphericSurfaces());
     }
 }
 

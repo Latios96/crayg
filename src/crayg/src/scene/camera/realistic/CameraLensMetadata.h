@@ -16,7 +16,7 @@ struct CameraLensMetadata {
     float maximumAperture = 0;
     bool isAnamorphic = false;
     float squeeze = 1;
-    int elementCount = 0;
+    int surfaceCount = 0;
     float closestFocalDistance = 0;
     std::string patent;
     std::string description;

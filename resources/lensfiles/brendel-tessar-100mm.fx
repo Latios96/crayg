@@ -3,10 +3,10 @@ Name: Brendel Tessar,
 Focal Length: 100
 Maximum F Number: 6.67
 Squeeze: 1
-Elements Count: 8
+Surface Count: 8
 Patent: USP 2854889
 Patent Location: https://patentimages.storage.googleapis.com/1c/dd/68/79f73568b4717d/US2854889.pdf
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material       Geometry  
 43     9.8       1.69 19.2           54.8    SCHOTT_N_LAK12 SPHERICAL 
 -115   2.1       1.55 19.2           45.4    SCHOTT_LLF1    SPHERICAL 

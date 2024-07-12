@@ -3,8 +3,8 @@ Name: Canon 70-200mm f/2.8
 Focal Length: 72.1
 Maximum F Number: 3.43
 Squeeze: 1
-Elements Count: 34
-[Elements]
+Surface Count: 34
+[Surfaces]
 Radius    Thickness IOR  Housing-Radius Abbe-No Material        Geometry  
 312       2.8       1.75 38             35      SCHOTT_LAFN7    SPHERICAL 
 119       0.42      1    38             0       AIR             SPHERICAL 

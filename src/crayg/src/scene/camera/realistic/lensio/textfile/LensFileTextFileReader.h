@@ -10,7 +10,7 @@ class LensFileTextFileReader : public LensFileReader {
     CameraLens readFileContent(const std::string &content) override;
 
   private:
-    LensElement readLensElement(const std::string &line) const;
+    LensSurface readLensSurface(const std::string &line) const;
 };
 
 } // crayg

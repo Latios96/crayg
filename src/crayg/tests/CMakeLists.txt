@@ -65,7 +65,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestImageWriters.cpp
     TestIntegratorContext.cpp
     TestIntegratorSettings.cpp
-    TestLensElement.cpp
     TestLensFileExtendedFormatReader.cpp
     TestLensFileExtendedFormatWriter.cpp
     TestLensFileJsonReader.cpp
@@ -76,6 +75,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestLensFileWriter.cpp
     TestLensMaterial.cpp
     TestLensRaytracerTracer.cpp
+    TestLensSurface.cpp
     TestLight.cpp
     TestLineByLineIterator.cpp
     TestLineByLineSequence.cpp

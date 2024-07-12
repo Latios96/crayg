@@ -10,7 +10,7 @@ CameraLensMetadata::CameraLensMetadata(const std::string &name, float focalLengt
                                        bool isAnamorphic, float squeeze, int lensCount, float closestFocalDistance,
                                        const std::string &patent, const std::string &description)
     : name(name), focalLength(focalLength), maximumAperture(maximumAperture), isAnamorphic(isAnamorphic),
-      squeeze(squeeze), elementCount(lensCount), closestFocalDistance(closestFocalDistance), patent(patent),
+      squeeze(squeeze), surfaceCount(lensCount), closestFocalDistance(closestFocalDistance), patent(patent),
       description(description) {
 }
 
@@ -21,7 +21,7 @@ std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata) {
               .addMember("maximumAperture", metadata.maximumAperture)
               .addMember("isAnamorphic", metadata.isAnamorphic)
               .addMember("squeeze", metadata.squeeze)
-              .addMember("elementCount", metadata.elementCount)
+              .addMember("surfaceCount", metadata.surfaceCount)
               .addMember("closestFocalDistance", metadata.closestFocalDistance)
               .addMember("patent", metadata.patent)
               .addMember("description", metadata.description)
@@ -31,7 +31,7 @@ std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata) {
 
 bool CameraLensMetadata::operator==(const CameraLensMetadata &rhs) const {
     return name == rhs.name && focalLength == rhs.focalLength && maximumAperture == rhs.maximumAperture &&
-           isAnamorphic == rhs.isAnamorphic && squeeze == rhs.squeeze && elementCount == rhs.elementCount &&
+           isAnamorphic == rhs.isAnamorphic && squeeze == rhs.squeeze && surfaceCount == rhs.surfaceCount &&
            closestFocalDistance == rhs.closestFocalDistance && patent == rhs.patent && description == rhs.description;
 }
 

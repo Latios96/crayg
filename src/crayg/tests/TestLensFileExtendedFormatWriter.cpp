@@ -12,8 +12,8 @@ TEST_CASE("LensFileExtendedFormatWriter::writeFileContent") {
 
     CameraLens edmondAsphericLens = CameraLensFixtures::createEdmondAsphericLens();
 
-    for (auto &element : canon70_200.elements) {
-        element.material.id = LensMaterialId::UNKNOWN;
+    for (auto &surface : canon70_200.surfaces) {
+        surface.material.id = LensMaterialId::UNKNOWN;
     }
 
     SECTION("should write Canon 70-200mm correctly") {
@@ -26,10 +26,10 @@ Name: Canon F/2.8, 70-200mm
 Focal Length: 71.9
 Maximum F Number: 3.42
 Squeeze: 1
-Elements Count: 34
+Surface Count: 34
 Patent: US 123
 Description: Super nice lens
-[Elements]
+[Surfaces]
 Radius    Thickness IOR  Housing-Radius Abbe-No Material Geometry  
 312       2.8       1.75 38             35      UNKNOWN  SPHERICAL 
 119       0.42      1    38             0       UNKNOWN  SPHERICAL 
@@ -77,8 +77,8 @@ Name: Edmond Optics Precision Aspheric Lens
 Focal Length: 54.2
 Maximum F Number: 1.08
 Squeeze: 1
-Elements Count: 2
-[Elements]
+Surface Count: 2
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24.2   21.5      1.81 50             25.4    SCHOTT_N_SF6 ASPHERICAL 
 0      18.1      1    50             0       AIR          PLANAR     

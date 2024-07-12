@@ -3,10 +3,10 @@ Name: Angenieux Double Gauss Lens
 Focal Length: 50
 Maximum F Number: 3.92
 Squeeze: 1
-Elements Count: 15
+Surface Count: 15
 Patent: (US Patent 2701982) (scaled by 50%)
 Patent Location: https://patentimages.storage.googleapis.com/2f/75/dd/b76ccb73bc0f44/US2701982.pdf 
-[Elements]
+[Surfaces]
 Radius   Thickness IOR  Housing-Radius Abbe-No Material Geometry  
 82.1     5.5       1.67 27             32.3    UNKNOWN  SPHERICAL 
 280      0.115     1    27             0       UNKNOWN  SPHERICAL 

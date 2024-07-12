@@ -16,7 +16,7 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate(const Directi
     const float offsetX = direction == Direction::HORIZONTAL ? 3.5e-05f * factor : 0;
     const float offsetY = direction == Direction::VERTICAL ? 3.5e-05f * factor : 0;
 
-    const Ray fromWorldToFilmIn{{offsetX, offsetY, lens.getFirstElement().center + 1 * factor}, {0, 0, -1}};
+    const Ray fromWorldToFilmIn{{offsetX, offsetY, lens.getFirstSurface().center + 1 * factor}, {0, 0, -1}};
     auto fromWorldToFilmOut = lens.traceFromWorldToFilm(fromWorldToFilmIn, FraunhoferLines::SODIUM.wavelength);
     if (!fromWorldToFilmOut) {
         CRAYG_LOG_AND_THROW(std::runtime_error("Could not trace ray from world to film to compute thick lens "
@@ -26,7 +26,7 @@ ThickLensApproximation ThickLensApproximationCalculator::calculate(const Directi
                                          ? computeHorizontalCardinalPoints(fromWorldToFilmIn, *fromWorldToFilmOut)
                                          : computeVerticalCardinalPoints(fromWorldToFilmIn, *fromWorldToFilmOut);
 
-    Ray fromFilmToWorldIn{{offsetX, offsetY, lens.getLastElement().center - 1 * factor}, {0, 0, 1}};
+    Ray fromFilmToWorldIn{{offsetX, offsetY, lens.getLastSurface().center - 1 * factor}, {0, 0, 1}};
     auto fromFilmToWorldOut = lens.traceFromFilmToWorld(fromFilmToWorldIn, FraunhoferLines::SODIUM.wavelength);
     if (!fromFilmToWorldOut) {
         CRAYG_LOG_AND_THROW(std::runtime_error("Could not trace ray from film to world to compute thick lens "

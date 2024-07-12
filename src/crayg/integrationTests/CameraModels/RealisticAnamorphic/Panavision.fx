@@ -3,10 +3,10 @@ Name: Panavision 20mm anamorphic
 Focal Length: 19.7
 Maximum F Number: 1.87
 Squeeze: 1.3
-Elements Count: 57
+Surface Count: 57
 Patent: US 2006/0050403 A1
 Patent Location: https://patentimages.storage.googleapis.com/5e/43/8b/3fd30ce5890d6f/US20060050403A1.pdf
-[Elements]
+[Surfaces]
 Radius   Thickness IOR  Housing-Radius Abbe-No Material Geometry  
 219      5         1.44 50.1           0       UNKNOWN  SPHERICAL 
 38.5     23.5      1    38.2           0       UNKNOWN  SPHERICAL 

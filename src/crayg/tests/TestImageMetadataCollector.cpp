@@ -93,8 +93,8 @@ TEST_CASE("TestImageMetadataCollector::collect") {
 
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::CAMERA_LENS_NAME) ==
                 scene.camera->getLens().metadata.name);
-        REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::CAMERA_LENS_ELEMENT_COUNT) ==
-                scene.camera->getLens().elements.size());
+        REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::CAMERA_LENS_SURFACE_COUNT) ==
+                scene.camera->getLens().surfaces.size());
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_EFFECTIVE_FOCAL_LENGTH) ==
                 Catch::Detail::Approx(71.86331f));
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::CAMERA_LENS_MAXIMUM_F_NUMBER) ==

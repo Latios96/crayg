@@ -3,8 +3,8 @@ Name: Panavision
 Focal Length: 19.7
 Maximum F Number: 1.87
 Squeeze: 1
-Elements Count: 57
-[Elements]
+Surface Count: 57
+[Surfaces]
 Radius   Thickness IOR    Housing-Radius Abbe-No Material       Geometry   
 219      5         1.44   50.1           0       OHARA_S_FPL53  SPHERICAL  
 38.5     23.5      1      38.2           0       AIR            SPHERICAL  

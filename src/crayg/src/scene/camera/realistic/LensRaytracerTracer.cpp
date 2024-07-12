@@ -32,18 +32,18 @@ void LensRaytracerTracer::emit(const std::filesystem::path &path) {
     }
     j["events"] = jsonEvents;
 
-    auto jsonLensElements = json::array();
-    for (auto &element : cameraLens.elements) {
-        jsonLensElements.push_back({
-            {"curvatureRadius", element.curvatureRadius},
-            {"thickness", element.thickness},
-            {"ior", element.ior},
-            {"apertureRadius", element.apertureRadius},
-            {"center", element.center},
+    auto jsonLensSurfaces = json::array();
+    for (auto &surface : cameraLens.surfaces) {
+        jsonLensSurfaces.push_back({
+            {"curvatureRadius", surface.curvatureRadius},
+            {"thickness", surface.thickness},
+            {"ior", surface.ior},
+            {"apertureRadius", surface.apertureRadius},
+            {"center", surface.center},
         });
     }
     j["lens"]["name"] = cameraLens.metadata.name;
-    j["lens"]["elements"] = jsonLensElements;
+    j["lens"]["surfaces"] = jsonLensSurfaces;
 
     auto jsonFilePath = path / fmt::format("{}.json", traceName);
     std::ofstream o(jsonFilePath.string());

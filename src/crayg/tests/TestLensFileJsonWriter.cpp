@@ -15,12 +15,12 @@ TEST_CASE("TestLensFileJsonWriter::writeFileContent") {
         auto parsedJson = nlohmann::json::parse(fileContent);
         REQUIRE(parsedJson.size() == 2);
         REQUIRE(parsedJson["name"] == "Canon 70-200");
-        REQUIRE(parsedJson["elements"].size() == 2);
-        REQUIRE(parsedJson["elements"][0].size() == 4);
-        REQUIRE(parsedJson["elements"][0]["curvatureRadius"] == Catch::Detail::Approx(10));
-        REQUIRE(parsedJson["elements"][0]["thickness"] == Catch::Detail::Approx(20));
-        REQUIRE(parsedJson["elements"][0]["ior"] == 3);
-        REQUIRE(parsedJson["elements"][0]["apertureRadius"] == Catch::Detail::Approx(40));
+        REQUIRE(parsedJson["surfaces"].size() == 2);
+        REQUIRE(parsedJson["surfaces"][0].size() == 4);
+        REQUIRE(parsedJson["surfaces"][0]["curvatureRadius"] == Catch::Detail::Approx(10));
+        REQUIRE(parsedJson["surfaces"][0]["thickness"] == Catch::Detail::Approx(20));
+        REQUIRE(parsedJson["surfaces"][0]["ior"] == 3);
+        REQUIRE(parsedJson["surfaces"][0]["apertureRadius"] == Catch::Detail::Approx(40));
     }
 }
 

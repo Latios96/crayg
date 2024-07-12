@@ -3,8 +3,8 @@ Name: Fisheye
 Focal Length: 6.3
 Maximum F Number: 0.382
 Squeeze: 1
-Elements Count: 24
-[Elements]
+Surfaces Count: 24
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material Geometry  
 143    7         1.52 107            64.2    UNKNOWN  SPHERICAL 
 52.5   28        1    52.3           0       UNKNOWN  SPHERICAL 

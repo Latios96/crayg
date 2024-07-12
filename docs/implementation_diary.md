@@ -116,8 +116,8 @@ collection. Only the hero cameras were rendered and 64 was chosen as a max sampl
 
 Almost every scene rendered faster after this small change. The speed improvement was most dominant in the DailyDweeb
 scene, which rendered in one case in only 36% of the baseline time.
-The DailyDweeb scene was rendered using the RealisticCamera and a Canon 70-200mm lens with 34 elements.
-When tracing the ray through the elements of the lens, at each intersection it's checked if the ray escaped the lens.
+The DailyDweeb scene was rendered using the RealisticCamera and a Canon 70-200mm lens with 34 surfaces.
+When tracing the ray through the surfaces of the lens, at each intersection it's checked if the ray escaped the lens.
 This involves a length calculation, so the scene benefited heavily from this performance improvement.
 
 ### Graphs
