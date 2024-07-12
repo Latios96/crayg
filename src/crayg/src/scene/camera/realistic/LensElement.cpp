@@ -2,6 +2,7 @@
 
 #include "basics/MathUtils.h"
 #include "utils/ToStringHelper.h"
+#include <cmath>
 
 namespace crayg {
 
@@ -102,7 +103,7 @@ float evaluateAsphericalElement(const Vector2f &position, float radius,
                                        asphericCoefficients.a10 * h10 + asphericCoefficients.a12 * h12 +
                                        asphericCoefficients.a14 * h14;
     return (curvature * h2) /
-               (1 + std::sqrtf(std::max(0.f, 1 - (1 + asphericCoefficients.k) * curvature * curvature * h2))) +
+               (1 + std::sqrt(std::max(0.f, 1 - (1 + asphericCoefficients.k) * curvature * curvature * h2))) +
            sumOfCorrectionTerms;
 }
 
