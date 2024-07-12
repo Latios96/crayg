@@ -4,12 +4,12 @@
 #include "textfile/LensFileTextFileWriter.h"
 #include "utils/Exceptions.h"
 #include "json/LensFileJsonWriter.h"
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 
 namespace crayg {
 
 std::unique_ptr<LensFileWriter> LensFileWriterFactory::createLensFileWriter(const std::string &filePath) {
-    boost::filesystem::path path(filePath);
+    std::filesystem::path path(filePath);
     std::string extension = path.extension().string();
 
     if (extension == ".txt") {

@@ -1,7 +1,7 @@
 #include "fixtures/TemporaryDirectory.h"
 #include <OpenImageIO/imageio.h>
-#include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
+#include <filesystem>
 #include <fstream>
 #include <image/Image.h>
 #include <image/io/ImageWriters.h>
@@ -31,7 +31,7 @@ TEST_CASE("ImageWriters/ImageWriterType") {
         const std::string pngPath = temporaryDirectory.getFilePath("ImageWriters_png.png");
 
         REQUIRE(ImageWriters::writeImage(image, pngPath));
-        REQUIRE(boost::filesystem::exists(pngPath));
+        REQUIRE(std::filesystem::exists(pngPath));
         verifyImageMetadata(pngPath);
     }
 
@@ -40,7 +40,7 @@ TEST_CASE("ImageWriters/ImageWriterType") {
         const std::string exrPath = temporaryDirectory.getFilePath("ImageWriters_exr.png");
 
         REQUIRE(ImageWriters::writeImage(image, exrPath));
-        REQUIRE(boost::filesystem::exists(exrPath));
+        REQUIRE(std::filesystem::exists(exrPath));
         verifyImageMetadata(exrPath);
     }
 
@@ -48,7 +48,7 @@ TEST_CASE("ImageWriters/ImageWriterType") {
         TemporaryDirectory temporaryDirectory;
         const std::string unknownFormatPath = temporaryDirectory.getFilePath("ImageWriters_unknown.unknown");
         REQUIRE_THROWS_AS(ImageWriters::writeImage(image, unknownFormatPath), std::runtime_error);
-        REQUIRE_FALSE(boost::filesystem::exists(unknownFormatPath));
+        REQUIRE_FALSE(std::filesystem::exists(unknownFormatPath));
     }
 }
 

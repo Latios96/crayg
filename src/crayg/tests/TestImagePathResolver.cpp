@@ -1,6 +1,7 @@
-#include <boost/filesystem.hpp>
 #include <boost/regex.hpp>
 #include <catch2/catch.hpp>
+#include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <utils/ImagePathResolver.h>
 
@@ -8,21 +9,21 @@ namespace crayg {
 
 class FileFixture {
   public:
-    explicit FileFixture(const boost::filesystem::path &path) : path(path) {
-        const boost::filesystem::path folder = path.parent_path();
+    explicit FileFixture(const std::filesystem::path &path) : path(path) {
+        const std::filesystem::path folder = path.parent_path();
         if (!folder.empty()) {
-            boost::filesystem::create_directories(folder);
+            std::filesystem::create_directories(folder);
         }
         std::ofstream outfile(path.string());
         outfile.close();
     }
 
     ~FileFixture() {
-        boost::filesystem::remove(path);
+        std::filesystem::remove(path);
     }
 
   private:
-    boost::filesystem::path path;
+    std::filesystem::path path;
 };
 
 TEST_CASE("ImagePathResolver should replace #") {

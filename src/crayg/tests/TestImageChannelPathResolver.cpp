@@ -1,11 +1,11 @@
 #include "utils/ImageChannelPathResolver.h"
-#include <boost/filesystem/path.hpp>
 #include <catch2/catch.hpp>
+#include <filesystem>
 
 namespace crayg {
 
 std::string normalize(const std::string &p) {
-    return boost::filesystem::path(p).normalize().string();
+    return (std::filesystem::absolute(std::filesystem::path(p))).string();
 }
 
 TEST_CASE("ImageChannelPathResolver::resolve") {

@@ -1,6 +1,6 @@
 #include "ImageChannelPathResolver.h"
-#include <boost/filesystem/path.hpp>
 #include <boost/regex.hpp>
+#include <filesystem>
 #include <fmt/format.h>
 
 namespace crayg {
@@ -9,9 +9,9 @@ std::string ImageChannelPathResolver::resolve(const std::string &path, const std
         return path;
     }
 
-    auto boostPath = boost::filesystem::path(path);
+    auto boostPath = std::filesystem::path(path);
     auto pathWithoutExtension = boostPath.parent_path() / boostPath.stem();
-    const boost::filesystem::path &hashOrDigits = pathWithoutExtension.extension();
+    const std::filesystem::path &hashOrDigits = pathWithoutExtension.extension();
     if (hashOrDigits == ".#" || boost::regex_match(hashOrDigits.string(), boost::regex("\\.\\d+"))) {
         pathWithoutExtension = pathWithoutExtension.parent_path() / pathWithoutExtension.stem();
     }

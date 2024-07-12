@@ -5,14 +5,14 @@
 #include "utils/Exceptions.h"
 #include "utils/tracing/CraygTracing.h"
 #include <Logger.h>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <fmt/format.h>
 
 namespace crayg {
 
 bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) {
     CRG_TRACE_SCOPE("ImageWriters");
-    boost::filesystem::path path(imagePath);
+    std::filesystem::path path(imagePath);
     std::string extension = path.extension().string();
     std::unique_ptr<ImageWriter> imageWriter;
 

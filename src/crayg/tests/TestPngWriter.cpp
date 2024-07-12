@@ -1,6 +1,6 @@
 #include "fixtures/TemporaryDirectory.h"
-#include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
+#include <filesystem>
 #include <image/Image.h>
 #include <image/imageiterators/pixels/ImageIterators.h>
 #include <image/io/PngWriter.h>
@@ -21,7 +21,7 @@ TEST_CASE("PngWriter") {
 
         pngWriter.writeImage(image, targetPathRgb);
 
-        REQUIRE(boost::filesystem::exists(targetPathRgb));
+        REQUIRE(std::filesystem::exists(targetPathRgb));
     }
 
     SECTION("should write PNG with rgb, alpha and depth") {
@@ -34,9 +34,9 @@ TEST_CASE("PngWriter") {
 
         pngWriter.writeImage(image, targetPathRgb);
 
-        REQUIRE(boost::filesystem::exists(targetPathRgb));
-        REQUIRE(boost::filesystem::exists(targetPathAlpha));
-        REQUIRE(boost::filesystem::exists(targetPathDepth));
+        REQUIRE(std::filesystem::exists(targetPathRgb));
+        REQUIRE(std::filesystem::exists(targetPathAlpha));
+        REQUIRE(std::filesystem::exists(targetPathDepth));
     }
 }
 

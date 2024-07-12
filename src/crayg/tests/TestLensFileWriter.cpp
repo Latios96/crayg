@@ -1,6 +1,7 @@
 #include "fixtures/TemporaryDirectory.h"
 #include "scene/camera/realistic/lensio/LensFileWriter.h"
 #include <catch2/catch.hpp>
+#include <filesystem>
 
 namespace crayg {
 
@@ -29,7 +30,7 @@ TEST_CASE("TestLensFileWriter::writeFile") {
 
         dummyLensFileWriter.writeFile(temporaryDirectory.getFilePath("lensfile.txt"), cameraLens);
 
-        REQUIRE(boost::filesystem::exists(temporaryDirectory.getFilePath("lensfile.txt")));
+        REQUIRE(std::filesystem::exists(temporaryDirectory.getFilePath("lensfile.txt")));
     }
 }
 

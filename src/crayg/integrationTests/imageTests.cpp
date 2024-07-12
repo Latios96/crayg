@@ -1,6 +1,4 @@
 #include "utils.h"
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
 #include <catch2/catch.hpp>
 #include <image/Image.h>
 #include <image/ImageAlgorithms.h>

@@ -2,13 +2,13 @@
 #include "Logger.h"
 #include "sceneIO/read/usd/UsdSceneReader.h"
 #include "utils/Exceptions.h"
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 
 namespace crayg {
 
 std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(std::string scenePath, Scene &scene,
                                                                    const SceneReader::ReadOptions &readOptions) {
-    boost::filesystem::path path(scenePath);
+    std::filesystem::path path(scenePath);
     std::string extension = path.extension().string();
 
     if (extension == ".usd" || extension == ".usda" || extension == ".usdc") {

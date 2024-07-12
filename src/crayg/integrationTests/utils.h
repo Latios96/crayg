@@ -1,7 +1,5 @@
 #pragma once
 
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
 #include <string>
 
 namespace crayg {

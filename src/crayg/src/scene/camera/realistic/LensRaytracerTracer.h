@@ -3,14 +3,9 @@
 #include "CameraLens.h"
 #include "basics/Ray.h"
 #include "basics/Vector3f.h"
+#include <filesystem>
 #include <fmt/format.h>
 #include <vector>
-
-namespace boost {
-namespace filesystem {
-class path;
-}
-}
 
 namespace crayg {
 
@@ -31,6 +26,6 @@ class LensRaytracerTracer {
     void collect(const Ray &ray, const Vector3f &normal);
 
     void emit();
-    void emit(const boost::filesystem::path &path);
+    void emit(const std::filesystem::path &path);
 };
 }

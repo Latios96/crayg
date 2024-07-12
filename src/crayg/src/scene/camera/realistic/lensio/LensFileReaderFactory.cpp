@@ -4,12 +4,12 @@
 #include "textfile/LensFileTextFileReader.h"
 #include "utils/Exceptions.h"
 #include "json/LensFileJsonReader.h"
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 
 namespace crayg {
 
 std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(const std::string &filePath) {
-    boost::filesystem::path path(filePath);
+    std::filesystem::path path(filePath);
     std::string extension = path.extension().string();
 
     if (extension == ".txt") {

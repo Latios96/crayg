@@ -1,5 +1,5 @@
-#include <boost/filesystem.hpp>
 #include <catch2/catch.hpp>
+#include <filesystem>
 #include <image/Image.h>
 #include <image/imageiterators/pixels/ImageIterators.h>
 #include <image/io/OpenExrWriter.h>
@@ -14,14 +14,14 @@ TEST_CASE("OpenExrWriter") {
         image.setValue(p, Color::createGrey(static_cast<float>(p.x) / static_cast<float>(image.getWidth())));
     }
 
-    if (boost::filesystem::exists("OpenExrWriter.png")) {
+    if (std::filesystem::exists("OpenExrWriter.png")) {
         REQUIRE(remove("OpenExrWriter.png") == 0);
     }
 
     openExrWriter.writeImage(image, "OpenExrWriter.png");
-    REQUIRE(boost::filesystem::exists("OpenExrWriter.png"));
+    REQUIRE(std::filesystem::exists("OpenExrWriter.png"));
 
-    if (boost::filesystem::exists("testImage.png")) {
+    if (std::filesystem::exists("testImage.png")) {
         REQUIRE(remove("testImage.png") == 0);
     }
 }

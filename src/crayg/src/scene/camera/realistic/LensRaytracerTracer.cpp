@@ -1,5 +1,4 @@
 #include "LensRaytracerTracer.h"
-#include <boost/filesystem.hpp>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -19,10 +18,10 @@ void LensRaytracerTracer::collect(const Ray &ray, const Vector3f &normal) {
 }
 
 void LensRaytracerTracer::emit() {
-    emit(boost::filesystem::current_path());
+    emit(std::filesystem::current_path());
 }
 
-void LensRaytracerTracer::emit(const boost::filesystem::path &path) {
+void LensRaytracerTracer::emit(const std::filesystem::path &path) {
     json j = json{{"traceName", traceName}, {"unit", "centimeters"}};
 
     auto jsonEvents = json::array();

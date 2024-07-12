@@ -1,7 +1,7 @@
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
 #include "Logger.h"
-#include <boost/filesystem.hpp>
+#include <filesystem>
 
 #include "scene/camera/realistic/ExitPupilCalculator.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
@@ -50,9 +50,9 @@ void scaleLensFile(const LensFileScaleOptions &options) {
             element.thickness *= ratio;
         }
         auto scaledLens = CameraLens(cameraLens.metadata, scaled);
-        auto path = boost::filesystem::path(options.outputFile);
+        auto path = std::filesystem::path(options.outputFile);
         const std::string targetPath =
-            (boost::filesystem::absolute(path).parent_path() /
+            (std::filesystem::absolute(path).parent_path() /
              fmt::format("{}-{}mm{}", path.stem().string(), targetFocalLength, path.extension().string()))
                 .string();
         auto writer = LensFileWriterFactory::createLensFileWriter(targetPath);

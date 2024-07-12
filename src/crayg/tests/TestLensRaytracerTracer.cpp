@@ -2,6 +2,7 @@
 #include "fixtures/TemporaryDirectory.h"
 #include "scene/camera/realistic/LensRaytracerTracer.h"
 #include <catch2/catch.hpp>
+#include <filesystem>
 
 namespace crayg {
 
@@ -17,7 +18,7 @@ TEST_CASE("LensRaytracerTracer::collect and emit") {
 
         lensRaytracerTracer.emit(temporaryDirectory.getPath());
 
-        REQUIRE(boost::filesystem::exists(temporaryDirectory.getPath() / "crayg-testing.json"));
+        REQUIRE(std::filesystem::exists(temporaryDirectory.getPath() / "crayg-testing.json"));
     }
 }
 

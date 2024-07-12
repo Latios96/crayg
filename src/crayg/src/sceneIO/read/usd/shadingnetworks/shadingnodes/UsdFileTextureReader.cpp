@@ -1,5 +1,5 @@
 #include "UsdFileTextureReader.h"
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 
 namespace crayg {
 UsdFileTextureReader::UsdFileTextureReader(const pxr::UsdShadeShader &usdPrim,
@@ -63,7 +63,7 @@ void UsdFileTextureReader::readFilePath(std::shared_ptr<FileTexture> &fileTextur
 FileTexture::ColorSpace
 UsdFileTextureReader::getDefaultColorSpaceFromFilePath(std::shared_ptr<FileTexture> &fileTexture) {
     const std::string filePath = fileTexture->getFilePath();
-    boost::filesystem::path path(filePath);
+    std::filesystem::path path(filePath);
     std::string extension = path.extension().string();
     if (extension == ".exr") {
         return FileTexture::ColorSpace::RAW;
