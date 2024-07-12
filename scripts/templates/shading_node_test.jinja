@@ -1,0 +1,20 @@
+#include "fixtures/UnitPlaneUvs.h"
+#include "scene/primitives/Sphere.h"
+#include "scene/shadingnetworks/shadingnodes/{{pascalcase(name)}}.h"
+#include <catch2/catch.hpp>
+
+namespace crayg {
+
+TEST_CASE("{{pascalcase(name)}}::") {
+    auto sphere = std::make_shared<Sphere>();
+    auto unitPlaneUvs = std::make_shared<UnitPlaneUvs>();
+    
+    {{pascalcase(name)}} {{lower(pascalcase(name))}};
+
+    SECTION("should") {
+       
+    }
+
+}
+
+}

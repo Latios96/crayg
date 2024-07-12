@@ -1,0 +1,18 @@
+#include "Usd{{pascalcase(name)}}Reader.h"
+
+namespace crayg {
+Usd{{pascalcase(name)}}Reader::Usd{{pascalcase(name)}}Reader(const pxr::UsdShadeShader &usdPrim,
+                                             UsdShadingNodeReadCache &usdShadingNodeReadCache)
+    : BaseUsdShadingNodeReader(usdPrim, usdShadingNodeReadCache) {
+}
+
+std::shared_ptr<{{pascalcase(name)}}> Usd{{pascalcase(name)}}Reader::read() {
+    auto {{lower(pascalcase(name))}} = BaseUsdShadingNodeReader::read();
+
+    return {{lower(pascalcase(name))}};
+}
+
+std::string Usd{{pascalcase(name)}}Reader::getTranslatedType() {
+    return "{{pascalcase(name)}}";
+}
+} // crayg

@@ -1,0 +1,17 @@
+#pragma once
+
+#include "scene/shadingnetworks/shadingnodes/{{pascalcase(name)}}.h"
+#include "sceneIO/read/usd/base/BaseUsdShadingNodeReader.h"
+
+namespace crayg {
+
+class Usd{{pascalcase(name)}}Reader : public BaseUsdShadingNodeReader<{{pascalcase(name)}}> {
+  public:
+    Usd{{pascalcase(name)}}Reader(const pxr::UsdShadeShader &usdPrim, UsdShadingNodeReadCache &usdShadingNodeReadCache);
+    std::shared_ptr<{{pascalcase(name)}}> read() override;
+
+  protected:
+    std::string getTranslatedType() override;
+};
+
+} // crayg

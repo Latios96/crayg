@@ -1,0 +1,23 @@
+#include "Usd{{pascalcase(name)}}Writer.h"
+#include "sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
+
+namespace crayg {
+Usd{{pascalcase(name)}}Writer::Usd{{pascalcase(name)}}Writer({{pascalcase(name)}} &craygObject,
+                                             UsdShadingNodeWriteCache &usdShadingNodeWriteCache)
+    : BaseUsdShadingNodeWriter(craygObject, usdShadingNodeWriteCache) {
+}
+
+pxr::UsdShadeShader Usd{{pascalcase(name)}}Writer::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
+    auto usd{{pascalcase(name)}} = BaseUsdShadingNodeWriter::write(stage, usdPathFactory);
+
+    return usd{{pascalcase(name)}};
+}
+
+pxr::UsdShadeOutput Usd{{pascalcase(name)}}Writer::getOutput(pxr::UsdShadeShader &usdShadeShader) {
+    return usdShadeShader.GetOutput(pxr::TfToken("out"));
+}
+
+std::string Usd{{pascalcase(name)}}Writer::getTranslatedType() {
+    return "{{pascalcase(name)}}";
+}
+} // crayg

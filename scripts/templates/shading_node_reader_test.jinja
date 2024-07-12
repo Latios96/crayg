@@ -1,0 +1,22 @@
+#include "sceneIO/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h"
+#include "sceneIO/read/usd/shadingnetworks/shadingnodes/Usd{{pascalcase(name)}}Reader.h"
+#include <catch2/catch.hpp>
+#include <pxr/usd/usd/stage.h>
+#include <pxr/usd/usdShade/shader.h>
+
+
+namespace crayg {
+
+TEST_CASE("TestUsd{{pascalcase(name)}}Reader::read") {
+    auto stage = pxr::UsdStage::CreateInMemory();
+    UsdShadingNodeReadCache usdShadingNodeReadCache;
+
+    SECTION("should read correctly") {
+        auto usdPrim = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/Usd{{pascalcase(name)}}"));
+        Usd{{pascalcase(name)}}Reader usd{{pascalcase(name)}}Reader(usdPrim, usdShadingNodeReadCache);
+
+        auto {{lower(pascalcase(name))}} = usd{{pascalcase(name)}}Reader.read();
+    }
+}
+
+}

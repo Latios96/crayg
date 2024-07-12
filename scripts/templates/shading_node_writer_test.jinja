@@ -1,0 +1,28 @@
+#include "scene/shadingnetworks/shadingnodes/{{pascalcase(name)}}.h"
+#include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
+#include "sceneIO/usd/UsdUtils.h"
+#include "sceneIO/write/usd/UsdPathFactory.h"
+#include "sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
+#include "sceneIO/write/usd/shadingnetworks/shadingnodes/Usd{{pascalcase(name)}}Writer.h"
+#include <catch2/catch.hpp>
+#include <pxr/usd/usd/stage.h>
+
+namespace crayg {
+
+TEST_CASE("TestUsd{{pascalcase(name)}}Writer::write") {
+    auto stage = pxr::UsdStage::CreateInMemory();
+    UsdPathFactory usdPathFactory;
+    UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
+
+    SECTION("should write correctly") {
+        {{pascalcase(name)}} {{lower(pascalcase(name))}};
+        {{lower(pascalcase(name))}}.colorA.value = Color(1, 0, 0);
+        {{lower(pascalcase(name))}}.colorB.value = Color(0, 1, 0);
+        Usd{{pascalcase(name)}}Writer usd{{pascalcase(name)}}Writer({{lower(pascalcase(name))}}, usdShadingNodeWriteCache);
+
+        auto shaderAndOutput = usd{{pascalcase(name)}}Writer.writeAndGetShaderAndOutput(stage, usdPathFactory);
+        
+    }
+}
+
+}

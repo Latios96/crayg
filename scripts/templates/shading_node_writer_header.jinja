@@ -1,0 +1,17 @@
+#pragma once
+
+#include "scene/shadingnetworks/shadingnodes/{{pascalcase(name)}}.h"
+#include "sceneIO/write/usd/base/BaseUsdShadingNodeWriter.h"
+
+namespace crayg {
+
+class Usd{{pascalcase(name)}}Writer : public BaseUsdShadingNodeWriter<{{pascalcase(name)}}> {
+  public:
+    explicit Usd{{pascalcase(name)}}Writer({{pascalcase(name)}} &craygObject, UsdShadingNodeWriteCache &usdShadingNodeWriteCache);
+    pxr::UsdShadeShader write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
+    pxr::UsdShadeOutput getOutput(pxr::UsdShadeShader &usdShadeShader) override;
+
+  protected:
+    std::string getTranslatedType() override;
+};
+} // crayg

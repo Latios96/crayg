@@ -1,0 +1,13 @@
+#pragma once
+
+#include "scene/shadingnetworks/ShadingNode.h"
+
+namespace crayg {
+
+class {{pascalcase(name)}} : public ShadingNode {
+  public:
+    std::string getType() const override;
+    ShadingNodeOutputType getOutputType() override;
+};
+
+} // crayg
