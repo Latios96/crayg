@@ -4,7 +4,7 @@
 
 namespace crayg {
 
-enum class BucketSequenceType { LINE_BY_LINE = 1, SPIRAL = 2 };
+enum class BucketSequenceType { LINE_BY_LINE = 1, SPIRAL = 2, MORTON = 3 };
 
 }
 

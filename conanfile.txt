@@ -20,6 +20,7 @@ tabulate/1.5
 cpptrace/0.5.4
 cairo/1.18.0
 libsass/3.6.6
+libmorton/0.2.12
 
 zlib/1.2.13
 libpng/1.6.39
