@@ -5,7 +5,6 @@
 #include "realistic/CameraLens.h"
 #include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"
-#include "utils/ToStringHelper.h"
 #include <fmt/ostream.h>
 #include <ostream>
 
@@ -59,17 +58,7 @@ class Camera : public Transformable {
     bool operator==(const Camera &rhs) const;
     bool operator!=(const Camera &rhs) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const Camera &camera) {
-        os << ToStringHelper("Camera")
-                  .addMember("transform", camera.transform)
-                  .addMember("focalLength", camera.focalLength)
-                  .addMember("filmbackSize", camera.filmbackSize)
-                  .addMember("cameraType", camera.cameraType)
-                  .addMember("focusDistance", camera.focusDistance)
-                  .addMember("fStop", camera.fStop)
-                  .finish();
-        return os;
-    }
+    friend std::ostream &operator<<(std::ostream &os, const Camera &camera);
 
     void setFocalLength(float focalLength);
     void setFilmbackSize(float filmbackSize);
