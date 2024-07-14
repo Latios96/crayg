@@ -1,10 +1,14 @@
 #pragma once
-#include "Logger.h"
-#include <cpptrace/cpptrace.hpp>
+#include <exception>
 
 #define CRAYG_LOG_AND_THROW(exception)                                                                                 \
-    const auto raw_trace = cpptrace::generate_raw_trace();                                                             \
-    Logger::error("Error at {}:{}: {}\n{}", __FILE__, __LINE__, (exception.what()), raw_trace.resolve().to_string());  \
+    logAndThrow(exception, __FILE__, __LINE__);                                                                        \
     throw(exception);
 
 #define CRAYG_LOG_AND_THROW_MESSAGE(message) CRAYG_LOG_AND_THROW(std::runtime_error(message))
+
+namespace crayg {
+
+void logAndThrow(const std::exception &e, const char *file, int line);
+
+}
