@@ -3,7 +3,7 @@ Name: Aspheric Zoom Lens
 Patent: US Patent US5793533A, Example 1
 Patent Location: https://patents.google.com/patent/US5793533A/en?oq=US+5793533
 
-[Elements]
+[Surfaces]
 Radius   Thickness IOR      Housing-Radius Abbe-No Material Geometry
 -31.706  1.3       1.84666  10             23.8    UNKNOWN  SPHERICAL  
 -44.598  0.1       1        10             0       UNKNOWN  SPHERICAL  

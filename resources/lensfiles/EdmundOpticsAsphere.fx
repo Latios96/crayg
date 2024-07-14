@@ -3,9 +3,9 @@ Name: Edmond Optics Precision Aspheric Lens
 Focal Length: 54.2
 Maximum F Number: 1.08
 Squeeze: 1
-Elements Count: 2
+Surface Count: 2
 
-[Elements]
+[Surfaces]
 Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
 24.2   21.5      1.81 50             25.4    SCHOTT_N_SF6 ASPHERICAL 
 0      18.1      1    50             0       AIR          PLANAR     

@@ -3,7 +3,7 @@ Name: Arri Zeiss Master Prime
 Patent: US Patent 5537259, Example 1
 Patent Location: https://patents.google.com/patent/US5537259A/en?oq=US+Patent+5537259
 
-[Elements]
+[Surfaces]
 Radius     Thickness IOR     Housing-Radius Abbe-No Material Geometry   
 -1883.6    4.7       1.54075 44.53          47.23   UNKNOWN  SPHERICAL
 101.45     3.14      1       41.97          0       AIR      SPHERICAL

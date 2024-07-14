@@ -4,7 +4,7 @@ Name: Smartphone Lens
 Patent: US Patent 5537259, Example 1
 Patent Location: https://patents.google.com/patent/US5537259A/en?oq=US+Patent+5537259
 
-[Elements]
+[Surfaces]
 Radius     Thickness IOR   Housing-Radius Abbe-No Material Geometry   
 0          0.118    0     0.15            0       AIR      SPHERICAL  
 1.952      0.398     1.544 6            55.9    UNKNOWN  ASPHERICAL 

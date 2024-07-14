@@ -2,7 +2,7 @@
 Name: Aspherical Fisheye
 Patent Location: # https://www4.j-platpat.inpit.go.jp/cgi-bin/tran_web_cgi_ejje?u=http://www4.j-platpat.inpit.go.jp/eng/translation/20160222021211715297740869134316565C7225049C00CF316521F1B88C986193
 
-[Elements]
+[Surfaces]
 Radius  Thickness IOR   Housing-Radius Abbe-No Material Geometry   
 40.82   2.0       1.883 22             40.81   UNKNOWN  SPHERICAL
 12.969  12.306    1     12.7           0       AIR      SPHERICAL
