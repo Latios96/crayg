@@ -1,7 +1,6 @@
 #pragma once
 
 #include "utils/Exceptions.h"
-#include <boost/algorithm/string/case_conv.hpp>
 #include <fmt/format.h>
 #include <magic_enum.hpp>
 #include <string>
@@ -20,7 +19,11 @@ namespace crayg {
 class EnumUtils {
   public:
     template <typename T> static std::optional<T> parse(const std::string &string) {
-        return magic_enum::enum_cast<T>(boost::algorithm::to_upper_copy(string));
+        std::string upper = string;
+        for (auto &c : upper) {
+            c = toupper(c);
+        }
+        return magic_enum::enum_cast<T>(upper);
     }
 
     template <typename T> static std::optional<T> parse(int value) {
