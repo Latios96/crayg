@@ -1,4 +1,5 @@
 #include "FileTexture.h"
+#include "Logger.h"
 
 namespace crayg {
 Color FileTexture::evaluateColor(const SurfaceInteraction &surfaceInteraction) {

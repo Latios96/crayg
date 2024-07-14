@@ -1,15 +1,14 @@
 #pragma once
 
-#include "Exceptions.h"
-#include "Logger.h"
-#include <basics/Vector3f.h>
-#include <fmt/format.h>
-#include <stdexcept>
-
 #define CRAYG_CHECK_IS_NORMALIZED_VECTOR(vector) CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector)
 #define CRAYG_CHECK_IS_VALID_INDEX(index, size) CRAYG_CHECK_IS_VALID_INDEX_IMPL(index, size)
 
 #ifdef CRAYG_DEBUG_CHECKS
+
+#include "Exceptions.h"
+#include <basics/Vector3f.h>
+#include <fmt/format.h>
+
 #define CRAYG_CHECKD_IS_NORMALIZED_VECTOR(vector) CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector)
 #define CRAYG_CHECKD_IS_VALID_INDEX(index, size) CRAYG_CHECK_IS_VALID_INDEX_IMPL(index, size)
 #else
