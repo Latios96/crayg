@@ -12,7 +12,8 @@ AmbientOcclusionIntegrator::AmbientOcclusionIntegrator(Scene &scene,
 }
 
 Color AmbientOcclusionIntegrator::integrate(const Ray &ray, int recursionDepth) {
-    auto intersection = sceneIntersector->intersect(ray);
+    thread_local HitStorage hitStorage;
+    auto intersection = sceneIntersector->intersect(ray, hitStorage);
 
     const bool hasHit = intersection.imageable != nullptr;
     if (!hasHit) {
@@ -29,11 +30,12 @@ Color AmbientOcclusionIntegrator::calculateAmbientOcclusionAtPoint(Imageable::In
     const auto orthonormalBasis = intersection.imageable->getOrthonormalBasis(location);
 
     int countClear = 0;
+    thread_local HitStorage hitStorage;
     for (int i = 0; i < sampleCount; i++) {
         Vector3f directionOnHemisphere = Sampling::uniformSampleHemisphere();
         Vector3f direction = orthonormalBasis.toLocalCoordinates(directionOnHemisphere);
         Ray aoRay(location, direction);
-        const bool isOccluded = sceneIntersector->isOccluded(aoRay, radius);
+        const bool isOccluded = sceneIntersector->isOccluded(aoRay, hitStorage, radius);
         if (!isOccluded) {
             countClear++;
         }

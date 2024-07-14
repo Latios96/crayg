@@ -13,8 +13,8 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
     if (recursionDepth == RaytracingIntegrator::MAX_RECURSION_DEPTH) {
         return Color::createBlack();
     }
-
-    auto intersection = sceneIntersector->intersect(ray);
+    thread_local HitStorage hitStorage;
+    auto intersection = sceneIntersector->intersect(ray, hitStorage);
 
     const bool hasHit = intersection.imageable != nullptr;
     if (!hasHit) {
@@ -53,7 +53,9 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light, 
     }
 
     Ray rayToTrace = {lightRadiance.ray.startPoint, lightRadiance.ray.direction.normalize()};
-    const bool lightIsOccluded = sceneIntersector->isOccluded(rayToTrace, lightRadiance.ray.direction.length());
+    thread_local HitStorage hitStorage;
+    const bool lightIsOccluded =
+        sceneIntersector->isOccluded(rayToTrace, hitStorage, lightRadiance.ray.direction.length());
 
     if (lightIsOccluded) {
         return Color::createBlack();

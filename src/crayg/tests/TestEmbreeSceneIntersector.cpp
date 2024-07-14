@@ -31,12 +31,13 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
     scene.addObject(std::shared_ptr<TriangleMesh>(TriangleMeshFixtures::createPrimVarFixtureMesh()));
     auto sphere = std::make_shared<Sphere>(Vector3f(0.f, 2.f, 0.f), 1.f);
     scene.addObject(sphere);
+    HitStorage hitStorage;
 
     SECTION("should find no intersection for empty scene") {
         Scene emptyScene;
         IntersectorFixture fixture(emptyScene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_NO_INTERSECTION);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_NO_INTERSECTION, hitStorage);
 
         REQUIRE_FALSE(intersection.isValid());
     }
@@ -44,7 +45,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
     SECTION("should find no intersection for scene with TriangleMesh and Sphere") {
         IntersectorFixture fixture(scene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_NO_INTERSECTION);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_NO_INTERSECTION, hitStorage);
 
         REQUIRE_FALSE(intersection.isValid());
     }
@@ -52,7 +53,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
     SECTION("should find intersection for Triangle") {
         IntersectorFixture fixture(scene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_TRIANGLE_INTERSECTION);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_TRIANGLE_INTERSECTION, hitStorage);
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
@@ -69,7 +70,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         scene.addObject(subdivisionSurfaceMesh);
         IntersectorFixture fixture(scene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SUBD_MESH_INTERSECTION);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SUBD_MESH_INTERSECTION, hitStorage);
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
@@ -81,7 +82,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
     SECTION("should find intersection for Sphere") {
         IntersectorFixture fixture(scene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SPHERE_INTERSECTION);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SPHERE_INTERSECTION, hitStorage);
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
@@ -93,7 +94,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
     SECTION("should ignore triangle if ray starts at triangle") {
         IntersectorFixture fixture(scene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_ON_TRIANGLE);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_ON_TRIANGLE, hitStorage);
 
         REQUIRE_FALSE(intersection.isValid());
     }
@@ -105,7 +106,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         scene.addObject(pointInstancer);
         IntersectorFixture fixture(scene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_TRIANGLE_INTERSECTION);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_TRIANGLE_INTERSECTION, hitStorage);
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
@@ -122,7 +123,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         scene.addObject(pointInstancer);
         IntersectorFixture fixture(scene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SUBD_MESH_INTERSECTION);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SUBD_MESH_INTERSECTION, hitStorage);
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
@@ -142,7 +143,7 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         scene.addObject(pointInstancer);
         IntersectorFixture fixture(scene);
 
-        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SPHERE_INTERSECTION);
+        auto intersection = fixture.embreeSceneIntersector->intersect(RAY_WITH_SPHERE_INTERSECTION, hitStorage);
 
         REQUIRE(intersection.isValid());
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
@@ -156,13 +157,14 @@ TEST_CASE("EmbreeSceneIntersector::isOccluded") {
     Scene scene;
     auto sphere1 = std::make_shared<Sphere>(Vector3f(0.f, 0.f, 2.f), 1.f);
     scene.addObject(sphere1);
+    HitStorage hitStorage;
 
     SECTION("should find intersection for empty scene") {
         Scene emptyScene;
         IntersectorFixture fixture(emptyScene);
         Ray ray({0, 0, 0}, {0, 0, 1});
 
-        REQUIRE_FALSE(fixture.embreeSceneIntersector->isOccluded(ray, 1.5f));
+        REQUIRE_FALSE(fixture.embreeSceneIntersector->isOccluded(ray, hitStorage, 1.5f));
     }
 
     SECTION("should find no intersection for empty scene") {
@@ -170,7 +172,7 @@ TEST_CASE("EmbreeSceneIntersector::isOccluded") {
         IntersectorFixture fixture(emptyScene);
         Ray ray({0, 0, 0}, {0, 0, 1});
 
-        REQUIRE_FALSE(fixture.embreeSceneIntersector->isOccluded(ray, 0.5f));
+        REQUIRE_FALSE(fixture.embreeSceneIntersector->isOccluded(ray, hitStorage, 0.5f));
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace crayg {
 
-Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray) const {
+Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray, HitStorage &hitStorage) const {
     RTCIntersectContext context;
     rtcInitIntersectContext(&context);
 
@@ -29,13 +29,13 @@ Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray) const 
             std::dynamic_pointer_cast<PointInstancer>(scene.objects[instanceMappingEntry.pointInstancerIndex]);
         auto &members = pointInstancer->protos[instanceMappingEntry.protoId]->members;
         return map(instanceMappingEntry.geomToSceneObject, rtcRayHit, members,
-                   &pointInstancer->transforms[embreeInstanceInfo.instanceId]);
+                   &pointInstancer->transforms[embreeInstanceInfo.instanceId], hitStorage);
     }
 
-    return map(embreeBvh->geomIdToSceneObject, rtcRayHit, scene.objects, nullptr);
+    return map(embreeBvh->geomIdToSceneObject, rtcRayHit, scene.objects, nullptr, hitStorage);
 }
 
-bool EmbreeSceneIntersector::isOccluded(const Ray &ray, float maxDistance) const {
+bool EmbreeSceneIntersector::isOccluded(const Ray &ray, HitStorage &hitStorage, float maxDistance) const {
     RTCIntersectContext context;
     rtcInitIntersectContext(&context);
 
@@ -49,15 +49,15 @@ bool EmbreeSceneIntersector::isOccluded(const Ray &ray, float maxDistance) const
 
 Imageable::Intersection EmbreeSceneIntersector::map(GeomToSceneObject &geomIdToSceneObject, RTCRayHit &rtcRayHit,
                                                     const std::vector<std::shared_ptr<SceneObject>> &objects,
-                                                    Transform *instanceTransform) const {
+                                                    Transform *instanceTransform, HitStorage &hitStorage) const {
     const auto sceneObjectMapping = geomIdToSceneObject[rtcRayHit.hit.geomID];
     if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::TRIANGLE_MESH) {
-        return mapToTriangle(rtcRayHit, sceneObjectMapping, objects, instanceTransform);
+        return mapToTriangle(rtcRayHit, sceneObjectMapping, objects, instanceTransform, hitStorage);
     } else if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::SUBDIVISION_SURFACE_MESH) {
-        return mapToSubdivisionSurfaceMesh(rtcRayHit, sceneObjectMapping, objects, instanceTransform);
+        return mapToSubdivisionSurfaceMesh(rtcRayHit, sceneObjectMapping, objects, instanceTransform, hitStorage);
     } else if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::SPHERE) {
         if (instanceTransform) {
-            return mapToInstancedSphere(rtcRayHit, sceneObjectMapping, objects, instanceTransform);
+            return mapToInstancedSphere(rtcRayHit, sceneObjectMapping, objects, instanceTransform, hitStorage);
         }
         return mapToSphere(rtcRayHit, sceneObjectMapping, objects);
     }
@@ -74,32 +74,38 @@ EmbreeSceneIntersector::mapToSphere(const RTCRayHit &rtcRayHit, const EmbreeMapp
 Imageable::Intersection
 EmbreeSceneIntersector::mapToInstancedSphere(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
                                              const std::vector<std::shared_ptr<SceneObject>> &objects,
-                                             Transform *instanceTransform) const {
+                                             Transform *instanceTransform, HitStorage &hitStorage) const {
     auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
     auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
-    auto instancedSphere = new Sphere();
+    hitStorage.sphere = Sphere();
+    auto instancedSphere = &hitStorage.sphere;
     instancedSphere->setTransform(*instanceTransform * sphere->getTransform());
     instancedSphere->setRadius(sphere->getRadius());
-    return {rtcRayHit.ray.tfar, instancedSphere, true};
+    return {rtcRayHit.ray.tfar, instancedSphere, false};
 }
 
 Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &rtcRayHit,
                                                               const EmbreeMappingEntry &embreeMappingEntry,
                                                               const std::vector<std::shared_ptr<SceneObject>> &objects,
-                                                              Transform *instanceTransform) const {
+                                                              Transform *instanceTransform,
+                                                              HitStorage &hitStorage) const {
     auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
     auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
-    auto triangle = new Triangle(triangleMesh.get(), rtcRayHit.hit.primID, instanceTransform);
-    return {rtcRayHit.ray.tfar, triangle, true};
+    hitStorage.triangle = Triangle(triangleMesh.get(), rtcRayHit.hit.primID, instanceTransform);
+    auto triangle = &hitStorage.triangle;
+    return {rtcRayHit.ray.tfar, triangle, false};
 }
 
-Imageable::Intersection EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(
-    const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
-    const std::vector<std::shared_ptr<SceneObject>> &objects, Transform *instanceTransform) const {
+Imageable::Intersection
+EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
+                                                    const EmbreeMappingEntry &embreeMappingEntry,
+                                                    const std::vector<std::shared_ptr<SceneObject>> &objects,
+                                                    Transform *instanceTransform, HitStorage &hitStorage) const {
     auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
     auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
-    auto triangle = new Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID, instanceTransform);
-    return {rtcRayHit.ray.tfar, triangle, true};
+    hitStorage.triangle = Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID, instanceTransform);
+    auto triangle = &hitStorage.triangle;
+    return {rtcRayHit.ray.tfar, triangle, false};
 }
 
 EmbreeSceneIntersector::~EmbreeSceneIntersector() = default;

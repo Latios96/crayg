@@ -7,7 +7,8 @@ DebugIntegrator::DebugIntegrator(Scene &scene, const std::shared_ptr<SceneInters
 }
 
 Color DebugIntegrator::integrate(const Ray &ray, int recursionDepth) {
-    auto intersection = sceneIntersector->intersect(ray);
+    thread_local HitStorage hitStorage;
+    auto intersection = sceneIntersector->intersect(ray, hitStorage);
 
     const bool hasHit = intersection.imageable != nullptr;
     if (!hasHit) {

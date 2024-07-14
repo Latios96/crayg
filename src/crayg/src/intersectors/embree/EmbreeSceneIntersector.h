@@ -8,28 +8,28 @@ namespace crayg {
 class EmbreeSceneIntersector : public SceneIntersector {
   public:
     EmbreeSceneIntersector(Scene &scene, std::unique_ptr<EmbreeBvh> embreeBvh);
-    Imageable::Intersection intersect(const Ray &ray) const override;
-    bool isOccluded(const Ray &ray, float maxDistance) const override;
+    Imageable::Intersection intersect(const Ray &ray, HitStorage &hitStorage) const override;
+    bool isOccluded(const Ray &ray, HitStorage &hitStorage, float maxDistance) const override;
     ~EmbreeSceneIntersector() override;
 
   private:
     std::unique_ptr<EmbreeBvh> embreeBvh;
     Imageable::Intersection map(GeomToSceneObject &geomIdToSceneObject, RTCRayHit &rtcRayHit,
-                                const std::vector<std::shared_ptr<SceneObject>> &objects,
-                                Transform *instanceTransform) const;
+                                const std::vector<std::shared_ptr<SceneObject>> &objects, Transform *instanceTransform,
+                                HitStorage &hitStorage) const;
     Imageable::Intersection mapToTriangle(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
                                           const std::vector<std::shared_ptr<SceneObject>> &objects,
-                                          Transform *instanceTransform) const;
+                                          Transform *instanceTransform, HitStorage &hitStorage) const;
     Imageable::Intersection mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
                                                         const EmbreeMappingEntry &embreeMappingEntry,
                                                         const std::vector<std::shared_ptr<SceneObject>> &objects,
-                                                        Transform *instanceTransform) const;
+                                                        Transform *instanceTransform, HitStorage &hitStorage) const;
     Imageable::Intersection mapToSphere(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
                                         const std::vector<std::shared_ptr<SceneObject>> &objects) const;
     Imageable::Intersection mapToInstancedSphere(const RTCRayHit &rtcRayHit,
                                                  const EmbreeMappingEntry &embreeMappingEntry,
                                                  const std::vector<std::shared_ptr<SceneObject>> &objects,
-                                                 Transform *instanceTransform) const;
+                                                 Transform *instanceTransform, HitStorage &hitStorage) const;
 };
 
 } // crayg
