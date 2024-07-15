@@ -62,12 +62,10 @@ TEST_CASE("Sphere/getBounds") {
 TEST_CASE("Sphere::getPrimitives") {
     Sphere sphere({1, 2, 3}, 2);
     std::vector<Imageable *> target;
-    bool isOwning = true;
 
-    sphere.getPrimitives(target, &isOwning);
+    sphere.getPrimitives(target);
 
     REQUIRE(target == std::vector<Imageable *>({&sphere}));
-    REQUIRE(isOwning == false);
 }
 
 }

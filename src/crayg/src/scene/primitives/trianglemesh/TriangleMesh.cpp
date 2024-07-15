@@ -159,7 +159,7 @@ TriangleMesh::FaceIdIteratorAdapter TriangleMesh::faceIds() const {
     return {*const_cast<TriangleMesh *>(this)};
 }
 
-void TriangleMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const {
+void TriangleMesh::getPrimitives(std::vector<Imageable *> &target) const {
     target.reserve(target.size() + faceCount());
     auto triangles = new Triangle[faceCount()];
     Logger::debug("{:p}", (void *)triangles);
@@ -168,8 +168,6 @@ void TriangleMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwnin
         triangles[i] = Triangle(const_cast<TriangleMesh *>(this), i);
         target.push_back(&triangles[i]);
     }
-
-    *isOwning = true;
 }
 
 std::size_t TriangleMesh::primitiveCount() const {

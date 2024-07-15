@@ -37,9 +37,9 @@ void SubdivisionSurfaceMesh::verifyIsTessellated() const {
     }
 }
 
-void SubdivisionSurfaceMesh::getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const {
+void SubdivisionSurfaceMesh::getPrimitives(std::vector<Imageable *> &target) const {
     verifyIsTessellated();
-    triangleMesh.getPrimitives(target, isOwning);
+    triangleMesh.getPrimitives(target);
 }
 
 size_t SubdivisionSurfaceMesh::primitiveCount() const {

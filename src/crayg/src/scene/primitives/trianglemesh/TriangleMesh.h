@@ -17,7 +17,7 @@ class TriangleMesh : public SceneObject {
     bool isIntersecting(Ray ray) override;
     BoundingBox getBounds() const override;
     Vector3f getNormal(Vector3f point) override;
-    void getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const override;
+    void getPrimitives(std::vector<Imageable *> &target) const override;
     std::size_t primitiveCount() const override;
     friend class Triangle;
     void init();

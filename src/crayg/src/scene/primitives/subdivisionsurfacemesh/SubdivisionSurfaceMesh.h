@@ -14,7 +14,7 @@ class SubdivisionSurfaceMesh : public SceneObject {
     bool isIntersecting(Ray ray) override;
     BoundingBox getBounds() const override;
     std::string getType() override;
-    void getPrimitives(std::vector<Imageable *> &target, bool *isOwning) const override;
+    void getPrimitives(std::vector<Imageable *> &target) const override;
     size_t primitiveCount() const override;
 
     void tessellate();

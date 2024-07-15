@@ -59,7 +59,6 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
         auto triangle = dynamic_cast<Triangle *>(intersection.imageable);
         REQUIRE(triangle->faceId == 3);
-        REQUIRE(intersection.isOwning == true);
     }
 
     SECTION("should find intersection for SubdivisionSurfaceMesh") {
@@ -76,7 +75,6 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
         auto triangle = dynamic_cast<Triangle *>(intersection.imageable);
         REQUIRE(triangle->faceId == 64);
-        REQUIRE(intersection.isOwning == true);
     }
 
     SECTION("should find intersection for Sphere") {
@@ -88,7 +86,6 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
         auto sphere = dynamic_cast<Sphere *>(intersection.imageable);
         REQUIRE(sphere->getRadius() == 1.f);
-        REQUIRE(intersection.isOwning == false);
     }
 
     SECTION("should ignore triangle if ray starts at triangle") {
@@ -112,7 +109,6 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
         auto triangle = dynamic_cast<Triangle *>(intersection.imageable);
         REQUIRE(triangle->faceId == 3);
-        REQUIRE(intersection.isOwning == true);
     }
 
     SECTION("should find intersection for instanced SubdivisionSurfaceMesh") {
@@ -129,7 +125,6 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
         auto triangle = dynamic_cast<Triangle *>(intersection.imageable);
         REQUIRE(triangle->faceId == 64);
-        REQUIRE(intersection.isOwning == true);
     }
 
     SECTION("should find intersection for instanced Sphere") {
@@ -149,7 +144,6 @@ TEST_CASE("EmbreeSceneIntersector::intersect") {
         REQUIRE(intersection.rayParameter == Catch::Detail::Approx(1.0f));
         auto sphereI = dynamic_cast<Sphere *>(intersection.imageable);
         REQUIRE(sphereI->getRadius() == 1.f);
-        REQUIRE(intersection.isOwning == true);
     }
 }
 

@@ -101,12 +101,10 @@ TEST_CASE("TriangleMesh::getPrimitives") {
     auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
 
     std::vector<Imageable *> target;
-    bool isOwning = false;
 
-    triangleMesh->getPrimitives(target, &isOwning);
+    triangleMesh->getPrimitives(target);
 
     REQUIRE(target.size() == 4);
-    REQUIRE(isOwning == true);
 }
 
 }

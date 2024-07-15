@@ -72,15 +72,14 @@ TEST_CASE("SubdivisionSurfaceMesh::getPrimitives") {
     SubdivisionSurfaceMesh subdivisionSurfaceMesh;
     SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
     std::vector<Imageable *> target;
-    bool isOwning;
 
     SECTION("should throw because mesh was not tessellated yet") {
-        REQUIRE_THROWS_AS(subdivisionSurfaceMesh.getPrimitives(target, &isOwning), std::runtime_error);
+        REQUIRE_THROWS_AS(subdivisionSurfaceMesh.getPrimitives(target), std::runtime_error);
     }
 
     SECTION("should delegate to TriangleMesh") {
         subdivisionSurfaceMesh.tessellate();
-        subdivisionSurfaceMesh.getPrimitives(target, &isOwning);
+        subdivisionSurfaceMesh.getPrimitives(target);
     }
 }
 

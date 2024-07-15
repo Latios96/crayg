@@ -44,12 +44,10 @@ TEST_CASE("GroundPlaneIntersectionGetBounds::getPrimitives") {
     GroundPlane groundPlane;
 
     std::vector<Imageable *> target;
-    bool isOwning = true;
 
-    groundPlane.getPrimitives(target, &isOwning);
+    groundPlane.getPrimitives(target);
 
     REQUIRE(target == std::vector<Imageable *>({&groundPlane}));
-    REQUIRE(isOwning == false);
 }
 
 }

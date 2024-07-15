@@ -29,7 +29,6 @@ class Imageable {
         }
 
         Intersection(float rayParameter, Imageable *imageable);
-        Intersection(float rayParameter, Imageable *imageable, bool isOwning);
 
         Intersection(const Intersection &intersection) {
             this->rayParameter = intersection.rayParameter;
@@ -38,7 +37,6 @@ class Imageable {
 
         float rayParameter;
         Imageable *imageable;
-        bool isOwning = false;
 
         bool isValid() const {
             return imageable != nullptr && rayParameter != std::numeric_limits<float>::max();
