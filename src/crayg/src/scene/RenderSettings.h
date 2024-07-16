@@ -31,7 +31,7 @@ class RenderSettings {
     IntegratorType integratorType = IntegratorType::RAYTRACING;
     IntegratorSettings integratorSettings;
     IntersectorType intersectorType = IntersectorType::EMBREE;
-    BucketSequenceType bucketSequenceType = BucketSequenceType::SPIRAL;
+    BucketSequenceType bucketSequenceType = BucketSequenceType::MORTON;
     BucketSamplerType bucketSamplerType = BucketSamplerType::ADAPTIVE;
     float adaptiveMaxError = 0.007f;
     int samplesPerAdaptivePass = 8;
