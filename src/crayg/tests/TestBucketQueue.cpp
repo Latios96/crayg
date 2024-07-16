@@ -2,6 +2,7 @@
 #include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
 #include <catch2/catch.hpp>
 #include <tbb/task_group.h>
+#include <thread>
 
 namespace crayg {
 // constructing should default to FOLLOW_SEQUENCE

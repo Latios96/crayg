@@ -1,4 +1,7 @@
+#include "utils/Exceptions.h"
+#include <basics/Vector3f.h>
 #include <catch2/catch.hpp>
+#include <fmt/format.h>
 #include <utils/Preconditions.h>
 
 namespace crayg {
