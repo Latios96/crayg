@@ -162,53 +162,64 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     CliRenderSettingsOverride onlyIntegratorSettingsOverrides;
     onlyIntegratorSettingsOverrides.integratorSettingsOverrides.emplace_back("test", 1);
 
+    CliRenderSettingsOverride onlyRegionToRender;
+    onlyRegionToRender.regionToRender = Bounds2di({0, 1}, {2, 3});
+
     SECTION("has overrides") {
         REQUIRE(fullOverrides.resolveOverrides(renderSettings) ==
                 RenderSettings({800, 600}, 8, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE,
-                               BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f, 8, false));
+                               BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
+                               std::nullopt));
 
         REQUIRE(onlyResolution.resolveOverrides(renderSettings) ==
                 RenderSettings({800, 600}, 4, IntegratorType::RAYTRACING, IntegratorSettings(), IntersectorType::EMBREE,
-                               BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false));
+                               BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
+                               std::nullopt));
 
         REQUIRE(onlyMaxSamples.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 8, IntegratorType::RAYTRACING, IntegratorSettings(),
                                IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE,
-                               0.007f, 8, false));
+                               0.007f, 8, false, std::nullopt));
 
         REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE,
-                               BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false));
+                               BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
+                               std::nullopt));
 
         REQUIRE(onlyBucketSequenceType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
                                IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE,
-                               0.007f, 8, false));
+                               0.007f, 8, false, std::nullopt));
 
         REQUIRE(onlyBucketSamplerType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
                                IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::UNIFORM, 0.007f,
-                               8, false));
+                               8, false, std::nullopt));
 
         REQUIRE(onlyAdaptiveMaxError.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
                                IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.1f,
-                               8, false));
+                               8, false, std::nullopt));
 
         REQUIRE(onlySamplesPerAdaptivePass.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
                                IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f,
-                               16, false));
+                               16, false, std::nullopt));
 
         REQUIRE(onlyUseSpectralLensing.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
                                IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f,
-                               8, true));
+                               8, true, std::nullopt));
+
+        REQUIRE(onlyRegionToRender.resolveOverrides(renderSettings) ==
+                RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
+                               IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f,
+                               8, false, Bounds2di({0, 1}, {2, 3})));
 
         REQUIRE(onlyIntegratorSettingsOverrides.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings({{"test", 1}}),
                                IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f,
-                               8, false));
+                               8, false, std::nullopt));
     }
 
     SECTION("has no overrides") {

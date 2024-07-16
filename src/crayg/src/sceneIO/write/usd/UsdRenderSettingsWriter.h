@@ -23,6 +23,7 @@ class UsdRenderSettingsWriter {
     void writeAdaptiveMaxError(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeSamplesPerAdaptivePass(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeUseSpectralLensing(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeRegionToRender(const pxr::UsdRenderSettings &usdRenderSettings) const;
 };
 
 } // crayg

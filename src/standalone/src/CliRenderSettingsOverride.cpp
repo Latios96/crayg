@@ -23,6 +23,8 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     resolvedRenderSettings.samplesPerAdaptivePass =
         samplesPerAdaptivePass.value_or(renderSettings.samplesPerAdaptivePass);
     resolvedRenderSettings.useSpectralLensing = useSpectralLensing.value_or(renderSettings.useSpectralLensing);
+    resolvedRenderSettings.regionToRender =
+        regionToRender.has_value() ? *regionToRender : renderSettings.regionToRender;
     for (auto &override : integratorSettingsOverrides) {
         resolvedRenderSettings.integratorSettings.settings[override.settingName] = override.value;
     }
@@ -31,7 +33,8 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
 
 bool CliRenderSettingsOverride::hasAnyOverrides() const {
     return resolution || maxSamples || integratorType || intersectorType || bucketSequenceType || bucketSamplerType ||
-           adaptiveMaxError || samplesPerAdaptivePass || useSpectralLensing || (!integratorSettingsOverrides.empty());
+           adaptiveMaxError || samplesPerAdaptivePass || useSpectralLensing || regionToRender ||
+           (!integratorSettingsOverrides.empty());
 }
 
 std::string CliRenderSettingsOverride::reportOverrides() const {
@@ -62,6 +65,10 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
     }
     if (useSpectralLensing) {
         report.push_back(fmt::format(R"(useSpectralLensing -> {})", *useSpectralLensing));
+    }
+    if (regionToRender) {
+        report.push_back(fmt::format(R"(regionToRender -> [({},{}),({},{})])", regionToRender->min.x,
+                                     regionToRender->min.y, regionToRender->max.x, regionToRender->max.y));
     }
     if (!integratorSettingsOverrides.empty()) {
         for (auto &override : integratorSettingsOverrides) {

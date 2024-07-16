@@ -23,6 +23,7 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     const float adaptiveMaxError = readAdaptiveMaxError();
     const int samplesPerAdaptivePass = readSamplesPerAdaptivePass();
     const int useSpectralLensing = readUseSpectralLensing();
+    const std::optional<Bounds2di> regionToRender = readRegionToRender();
 
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
@@ -34,6 +35,7 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     renderSettings->adaptiveMaxError = adaptiveMaxError;
     renderSettings->samplesPerAdaptivePass = samplesPerAdaptivePass;
     renderSettings->useSpectralLensing = useSpectralLensing;
+    renderSettings->regionToRender = regionToRender;
 
     return renderSettings;
 }
@@ -125,6 +127,15 @@ int UsdRenderSettingsReader::readSamplesPerAdaptivePass() {
 int UsdRenderSettingsReader::readUseSpectralLensing() {
     return UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "useSpectralLensing",
                                                     RenderSettings::createDefault().useSpectralLensing);
+}
+
+std::optional<Bounds2di> UsdRenderSettingsReader::readRegionToRender() {
+    auto usdAttr = usdPrim.GetPrim().GetAttribute(pxr::TfToken("regionToRender"));
+    if (!usdAttr) {
+        return RenderSettings::createDefault().regionToRender;
+    }
+    const auto regionToRender = UsdUtils::getStaticAttributeValueAs<pxr::GfVec4i>(usdAttr);
+    return Bounds2di({regionToRender[0], regionToRender[1]}, {regionToRender[2], regionToRender[3]});
 }
 
 }

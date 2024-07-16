@@ -72,3 +72,13 @@ typedef Bounds2d<int> Bounds2di;
 }
 
 template <typename T> struct fmt::formatter<crayg::Bounds2d<T>> : ostream_formatter {};
+
+template <typename T> struct fmt::formatter<std::optional<crayg::Bounds2d<T>>> {
+    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext> auto format(std::optional<crayg::Bounds2d<T>> const &bounds, FormatContext &ctx) {
+        return fmt::format_to(ctx.out(), "{}", bounds.has_value() ? fmt::format("{}", *bounds) : "<empty>");
+    };
+};

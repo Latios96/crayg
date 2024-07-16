@@ -24,6 +24,7 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
     writeAdaptiveMaxError(usdRenderSettings);
     writeSamplesPerAdaptivePass(usdRenderSettings);
     writeUseSpectralLensing(usdRenderSettings);
+    writeRegionToRender(usdRenderSettings);
 
     return usdRenderSettings;
 }
@@ -75,6 +76,16 @@ void UsdRenderSettingsWriter::writeSamplesPerAdaptivePass(const pxr::UsdRenderSe
 void UsdRenderSettingsWriter::writeUseSpectralLensing(const pxr::UsdRenderSettings &usdRenderSettings) const {
     UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "useSpectralLensing",
                                     renderSettings.useSpectralLensing ? 1 : 0);
+}
+
+void UsdRenderSettingsWriter::writeRegionToRender(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    if (!renderSettings.regionToRender) {
+        return;
+    }
+    usdRenderSettings.GetPrim()
+        .CreateAttribute(pxr::TfToken("regionToRender"), pxr::SdfValueTypeNames->Int4)
+        .Set(pxr::GfVec4i(renderSettings.regionToRender->min.x, renderSettings.regionToRender->min.y,
+                          renderSettings.regionToRender->max.x, renderSettings.regionToRender->max.y));
 }
 
 } // crayg

@@ -136,9 +136,12 @@ CliParseResult CliParser::parse() {
     app.add_option("--samplesPerAdaptivePass", renderSettingsOverride.samplesPerAdaptivePass,
                    "Override samples per adaptive pass");
 
-    std::optional<bool> useSpectralLensing;
     app.add_flag("--useSpectralLensing", renderSettingsOverride.useSpectralLensing,
                  "Override if spectral lens simulation should be used");
+
+    std::string regionToRender;
+    app.add_flag("--regionToRender", regionToRender,
+                 "Render only a specified region, provide in [(min_x,mix_y),(max_x,max_y)]");
 
     try {
         app.parse(argc, argv);
@@ -155,6 +158,10 @@ CliParseResult CliParser::parse() {
                                        integratorSettingsFloatOverrides);
         parseIntegratorSettings<std::string>(renderSettingsOverride.integratorSettingsOverrides,
                                              integratorSettingsStringOverrides);
+
+        if (!regionToRender.empty()) {
+            renderSettingsOverride.regionToRender = parseRegionFromString(regionToRender);
+        }
 
         return CliParseResult(CliArgs(sceneFileName, imageOutputPath,
                                       !cameraName.empty() ? std::make_optional(cameraName) : std::nullopt,

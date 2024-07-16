@@ -28,6 +28,7 @@ class UsdRenderSettingsReader : public BaseUsdReader<pxr::UsdRenderSettings, Ren
     float readAdaptiveMaxError();
     int readSamplesPerAdaptivePass();
     int readUseSpectralLensing();
+    std::optional<Bounds2di> readRegionToRender();
 };
 
 }

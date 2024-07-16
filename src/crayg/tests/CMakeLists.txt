@@ -93,6 +93,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestReadableFormatter.cpp
     TestRectLight.cpp
     TestRemainingTimeCalculator.cpp
+    TestRenderSettings.cpp
     TestResolution.cpp
     TestSampleAccumulator.cpp
     TestScene.cpp

@@ -13,7 +13,7 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
         const RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
                                             IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}),
                                             IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE,
-                                            BucketSamplerType::ADAPTIVE, 0.007f, 8, true);
+                                            BucketSamplerType::ADAPTIVE, 0.007f, 8, true, Bounds2di({0, 1}, {2, 3}));
 
         UsdRenderSettingsWriter usdRenderSettingsWriter(renderSettings);
         usdRenderSettingsWriter.write(stage);
@@ -39,6 +39,8 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
             usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("samplesPerAdaptivePass")));
         const int useSpectralLensing = UsdUtils::getStaticAttributeValueAs<int>(
             usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("useSpectralLensing")));
+        const pxr::GfVec4i regionToRender = UsdUtils::getStaticAttributeValueAs<pxr::GfVec4i>(
+            usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("regionToRender")));
         REQUIRE(resolution == pxr::GfVec2i(1280, 720));
         REQUIRE(maxSamples == 4);
         REQUIRE(integratorType == pxr::TfToken("RAYTRACING"));
@@ -49,6 +51,7 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
         REQUIRE(adaptiveMaxError == 0.007f);
         REQUIRE(samplesPerAdaptivePass == 8);
         REQUIRE(useSpectralLensing == 1);
+        REQUIRE(regionToRender == pxr::GfVec4i(0, 1, 2, 3));
     }
 }
 

@@ -19,6 +19,7 @@ struct CliRenderSettingsOverride {
     std::optional<float> adaptiveMaxError;
     std::optional<int> samplesPerAdaptivePass;
     std::optional<bool> useSpectralLensing;
+    std::optional<Bounds2di> regionToRender;
     std::vector<IntegratorSettingsOverride> integratorSettingsOverrides;
 
     RenderSettings resolveOverrides(const RenderSettings &renderSettings) const;
