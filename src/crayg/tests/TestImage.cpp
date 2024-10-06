@@ -205,7 +205,7 @@ TEST_CASE("Image/getImageSpec", "[Image]") {
     SECTION("should return correct spec for rgb-only image") {
         Image image(10, 20);
 
-        REQUIRE(image.getImageSpec() == ImageSpec({10, 20}, {{"rgb", PixelFormat::FLOAT, 3}}));
+        REQUIRE(image.getImageSpec() == ImageSpec({10, 20}, {{"rgb", PixelFormat::FLOAT, 3}}, std::nullopt));
     }
 
     SECTION("should return correct spec for rgb-only image") {
@@ -213,9 +213,11 @@ TEST_CASE("Image/getImageSpec", "[Image]") {
         image.addAlphaChannel();
         image.addDepthChannel();
 
-        REQUIRE(image.getImageSpec() == ImageSpec({10, 20}, {{"rgb", PixelFormat::FLOAT, 3},
-                                                             {"alpha", PixelFormat::FLOAT, 1},
-                                                             {"depth", PixelFormat::FLOAT, 1}}));
+        REQUIRE(image.getImageSpec() == ImageSpec({10, 20},
+                                                  {{"rgb", PixelFormat::FLOAT, 3},
+                                                   {"alpha", PixelFormat::FLOAT, 1},
+                                                   {"depth", PixelFormat::FLOAT, 1}},
+                                                  std::nullopt));
     }
 }
 
@@ -223,7 +225,7 @@ TEST_CASE("Image/addChannelsFromSpec", "[Image]") {
 
     SECTION("should throw if resolutions do not match") {
         Image image(10, 20);
-        ImageSpec imageSpec({1, 1}, {{"rgb", PixelFormat::FLOAT, 3}});
+        ImageSpec imageSpec({1, 1}, {{"rgb", PixelFormat::FLOAT, 3}}, std::nullopt);
 
         REQUIRE_THROWS_AS(image.addChannelsFromSpec(imageSpec), std::runtime_error);
     }
@@ -232,13 +234,16 @@ TEST_CASE("Image/addChannelsFromSpec", "[Image]") {
         Image image(10, 20);
         ImageSpec imageSpec(
             {10, 20},
-            {{"rgb", PixelFormat::FLOAT, 3}, {"alpha", PixelFormat::FLOAT, 1}, {"depth", PixelFormat::FLOAT, 1}});
+            {{"rgb", PixelFormat::FLOAT, 3}, {"alpha", PixelFormat::FLOAT, 1}, {"depth", PixelFormat::FLOAT, 1}},
+            std::nullopt);
 
         image.addChannelsFromSpec(imageSpec);
 
-        REQUIRE(image.getImageSpec() == ImageSpec({10, 20}, {{"rgb", PixelFormat::FLOAT, 3},
-                                                             {"alpha", PixelFormat::FLOAT, 1},
-                                                             {"depth", PixelFormat::FLOAT, 1}}));
+        REQUIRE(image.getImageSpec() == ImageSpec({10, 20},
+                                                  {{"rgb", PixelFormat::FLOAT, 3},
+                                                   {"alpha", PixelFormat::FLOAT, 1},
+                                                   {"depth", PixelFormat::FLOAT, 1}},
+                                                  std::nullopt));
     }
 }
 
