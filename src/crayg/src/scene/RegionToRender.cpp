@@ -136,4 +136,12 @@ bool RegionToRender::isNDCRegion() const {
     return region.index() == 1;
 }
 
+bool RegionToRender::operator==(const RegionToRender &rhs) const {
+    return region == rhs.region;
+}
+
+bool RegionToRender::operator!=(const RegionToRender &rhs) const {
+    return !(rhs == *this);
+}
+
 }

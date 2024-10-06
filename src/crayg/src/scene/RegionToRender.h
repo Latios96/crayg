@@ -2,6 +2,7 @@
 
 #include "basics/Bound2d.h"
 #include "basics/Resolution.h"
+#include <fmt/ostream.h>
 #include <ostream>
 #include <variant>
 
@@ -18,19 +19,31 @@ class RegionToRender {
 
     static RegionToRender fromString(const std::string &str);
     std::string toString() const;
-    // ostream
-    // formatter
 
     PixelRegion toPixelRegion(const Resolution &resolution) const;
     NDCRegion toNDCRegion(const Resolution &resolution) const;
 
     bool isPixelRegion() const;
-
     bool isNDCRegion() const;
 
     friend std::ostream &operator<<(std::ostream &os, const RegionToRender &render);
+    bool operator==(const RegionToRender &rhs) const;
+    bool operator!=(const RegionToRender &rhs) const;
 
     std::variant<PixelRegion, NDCRegion> region;
 };
 
 }
+
+template <> struct fmt::formatter<crayg::RegionToRender> : ostream_formatter {};
+
+template <> struct fmt::formatter<std::optional<crayg::RegionToRender>> {
+    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(std::optional<crayg::RegionToRender> const &bounds, FormatContext &ctx) {
+        return fmt::format_to(ctx.out(), "{}", bounds.has_value() ? fmt::format("{}", *bounds) : "<empty>");
+    };
+};
