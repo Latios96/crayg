@@ -48,6 +48,14 @@ template <typename T> class Bounds2d {
         return (d.x * d.y);
     }
 
+    T getWidth() const {
+        return max.x - min.x;
+    }
+
+    T getHeight() const {
+        return max.y - min.y;
+    }
+
     template <typename OT> bool contains(const Vector2<OT> &other) const {
         return min.x <= other.x && min.y <= other.y && max.x >= other.x && max.y >= other.y;
     }

@@ -36,6 +36,7 @@ class Renderer {
     BucketStats bucketStats;
 
     void init();
+    void initBuckets();
 
     void renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController);
     void renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController);

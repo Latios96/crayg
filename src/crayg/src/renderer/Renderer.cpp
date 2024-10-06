@@ -36,8 +36,8 @@ void Renderer::renderScene() {
 
     outputDriver.initialize(requiredImageSpec(scene.renderSettings.resolution));
 
-    bucketSequence =
-        ImageBucketSequences::getSequence(scene.renderSettings.resolution, 8, scene.renderSettings.bucketSequenceType);
+    initBuckets();
+
     auto taskProgressController = taskReporter.startTask("Rendering", bucketSequence.size());
 
     bool serialRendering = false;
@@ -120,6 +120,23 @@ void Renderer::init() {
     integrator = std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(
         scene.renderSettings.integratorType, scene, sceneIntersector, scene.renderSettings.integratorSettings));
     progressController.finish();
+}
+
+void Renderer::initBuckets() {
+    if (!scene.renderSettings.regionToRender) {
+        bucketSequence = ImageBucketSequences::getSequence(scene.renderSettings.resolution, 8,
+                                                           scene.renderSettings.bucketSequenceType);
+        return;
+    }
+
+    PixelRegion pixelRegion = scene.renderSettings.regionToRender->toPixelRegion(scene.renderSettings.resolution);
+    Logger::info("Cropping rendered region to {}", pixelRegion);
+    auto buckets = ImageBucketSequences::getSequence(pixelRegion, 8, scene.renderSettings.bucketSequenceType);
+
+    for (auto &bucket : buckets) {
+        bucket = ImageBucket(bucket.getPosition() + pixelRegion.min, bucket.getWidth(), bucket.getHeight());
+    }
+    bucketSequence = buckets;
 }
 
 Color Renderer::renderSample(const Vector2f &samplePos) {
