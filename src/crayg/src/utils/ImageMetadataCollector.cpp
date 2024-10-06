@@ -63,13 +63,9 @@ void ImageMetadataCollector::collectRenderSettingsIfPresent(ImageMetadata &image
                         scene->renderSettings.samplesPerAdaptivePass);
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_USE_SPECTRAL_LENSING,
                         scene->renderSettings.useSpectralLensing ? 1 : 0);
-    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_REGION_TO_RENDER,
-                        scene->renderSettings.regionToRender.has_value()
-                            ? fmt::format("[({},{}),({},{})]", scene->renderSettings.regionToRender->min.x,
-                                          scene->renderSettings.regionToRender->min.y,
-                                          scene->renderSettings.regionToRender->max.x,
-                                          scene->renderSettings.regionToRender->max.y)
-                            : "none");
+    imageMetadata.write(
+        ImageMetadataTokens::RENDER_SETTINGS_REGION_TO_RENDER,
+        scene->renderSettings.regionToRender.has_value() ? scene->renderSettings.regionToRender->toString() : "none");
     collectIntegratorSettings(imageMetadata);
 }
 

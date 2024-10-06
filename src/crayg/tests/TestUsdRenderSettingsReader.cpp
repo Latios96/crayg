@@ -33,9 +33,7 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         usdRenderSettings.GetPrim()
             .CreateAttribute(pxr::TfToken("samplesPerAdaptivePass"), pxr::SdfValueTypeNames->Int)
             .Set(16);
-        usdRenderSettings.GetPrim()
-            .CreateAttribute(pxr::TfToken("regionToRender"), pxr::SdfValueTypeNames->Int4)
-            .Set(pxr::GfVec4i(0, 1, 2, 3));
+        usdRenderSettings.CreateDataWindowNDCAttr().Set(pxr::GfVec4f(0, 1, 2, 3));
         usdRenderSettings.GetPrim()
             .CreateAttribute(pxr::TfToken("useSpectralLensing"), pxr::SdfValueTypeNames->Int)
             .Set(1);
@@ -47,7 +45,7 @@ TEST_CASE("UsdRenderSettingsReader::read") {
                 RenderSettings(crayg::Resolution(800, 600), 2, IntegratorType::DEBUG,
                                IntegratorSettings({{"DEBUG:someToken", {std::string("someTokenValue")}}}),
                                IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::UNIFORM,
-                               0.1f, 16, true, Bounds2di({0, 1}, {2, 3})));
+                               0.1f, 16, true, RegionToRender(NDCRegion({0, 1}, {2, 3}))));
     }
 
     SECTION("should fallback to default values") {

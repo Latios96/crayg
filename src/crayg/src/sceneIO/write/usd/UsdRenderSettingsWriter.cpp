@@ -82,10 +82,10 @@ void UsdRenderSettingsWriter::writeRegionToRender(const pxr::UsdRenderSettings &
     if (!renderSettings.regionToRender) {
         return;
     }
-    usdRenderSettings.GetPrim()
-        .CreateAttribute(pxr::TfToken("regionToRender"), pxr::SdfValueTypeNames->Int4)
-        .Set(pxr::GfVec4i(renderSettings.regionToRender->min.x, renderSettings.regionToRender->min.y,
-                          renderSettings.regionToRender->max.x, renderSettings.regionToRender->max.y));
+
+    NDCRegion ndcRegion = renderSettings.regionToRender->toNDCRegion(renderSettings.resolution);
+    usdRenderSettings.CreateDataWindowNDCAttr().Set(
+        pxr::GfVec4f(ndcRegion.min.x, ndcRegion.min.y, ndcRegion.max.x, ndcRegion.max.y));
 }
 
 } // crayg

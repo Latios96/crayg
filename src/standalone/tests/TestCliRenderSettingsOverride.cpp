@@ -163,7 +163,7 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     onlyIntegratorSettingsOverrides.integratorSettingsOverrides.emplace_back("test", 1);
 
     CliRenderSettingsOverride onlyRegionToRender;
-    onlyRegionToRender.regionToRender = Bounds2di({0, 1}, {2, 3});
+    onlyRegionToRender.regionToRender = RegionToRender(PixelRegion({0, 1}, {2, 3}));
 
     SECTION("has overrides") {
         REQUIRE(fullOverrides.resolveOverrides(renderSettings) ==
@@ -214,7 +214,7 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
         REQUIRE(onlyRegionToRender.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
                                IntersectorType::EMBREE, BucketSequenceType::SPIRAL, BucketSamplerType::ADAPTIVE, 0.007f,
-                               8, false, Bounds2di({0, 1}, {2, 3})));
+                               8, false, RegionToRender(PixelRegion({0, 1}, {2, 3}))));
 
         REQUIRE(onlyIntegratorSettingsOverrides.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings({{"test", 1}}),

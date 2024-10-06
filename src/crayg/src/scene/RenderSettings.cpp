@@ -8,7 +8,7 @@ RenderSettings::RenderSettings(const Resolution &resolution, int maxSamples, Int
                                IntegratorSettings integratorSettings, IntersectorType intersectorType,
                                BucketSequenceType bucketSequenceType, BucketSamplerType bucketSamplerType,
                                float maxError, int samplesPerAdaptivePass, bool useSpectralLensing,
-                               const std::optional<Bounds2di> &regionToRender)
+                               const std::optional<RegionToRender> &regionToRender)
     : resolution(resolution), maxSamples(maxSamples), integratorType(integratorType),
       integratorSettings(integratorSettings), intersectorType(intersectorType), bucketSequenceType(bucketSequenceType),
       bucketSamplerType(bucketSamplerType), adaptiveMaxError(maxError), samplesPerAdaptivePass(samplesPerAdaptivePass),

@@ -67,8 +67,7 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
         report.push_back(fmt::format(R"(useSpectralLensing -> {})", *useSpectralLensing));
     }
     if (regionToRender) {
-        report.push_back(fmt::format(R"(regionToRender -> [({},{}),({},{})])", regionToRender->min.x,
-                                     regionToRender->min.y, regionToRender->max.x, regionToRender->max.y));
+        report.push_back(fmt::format(R"(regionToRender -> {})", regionToRender));
     }
     if (!integratorSettingsOverrides.empty()) {
         for (auto &override : integratorSettingsOverrides) {

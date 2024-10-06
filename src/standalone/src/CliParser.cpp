@@ -160,7 +160,7 @@ CliParseResult CliParser::parse() {
                                              integratorSettingsStringOverrides);
 
         if (!regionToRender.empty()) {
-            renderSettingsOverride.regionToRender = parseRegionFromString(regionToRender);
+            renderSettingsOverride.regionToRender = RegionToRender::fromString(regionToRender);
         }
 
         return CliParseResult(CliArgs(sceneFileName, imageOutputPath,

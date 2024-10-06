@@ -16,11 +16,13 @@
 #include "utils/StopWatch.h"
 #include "utils/TaskReporter.h"
 #include "utils/tracing/CraygTracing.h"
+#include <Imath/half.h>
 #include <image/BucketImageBuffer.h>
 #include <image/imageiterators/buckets/ImageBucketSequences.h>
 #include <memory>
 #include <numeric>
 #include <tbb/task_group.h>
+#include <variant>
 
 namespace crayg {
 

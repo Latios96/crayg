@@ -13,7 +13,8 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
         const RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
                                             IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}),
                                             IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE,
-                                            BucketSamplerType::ADAPTIVE, 0.007f, 8, true, Bounds2di({0, 1}, {2, 3}));
+                                            BucketSamplerType::ADAPTIVE, 0.007f, 8, true,
+                                            RegionToRender(NDCRegion({0, 1}, {2, 3})));
 
         UsdRenderSettingsWriter usdRenderSettingsWriter(renderSettings);
         usdRenderSettingsWriter.write(stage);
@@ -39,8 +40,8 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
             usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("samplesPerAdaptivePass")));
         const int useSpectralLensing = UsdUtils::getStaticAttributeValueAs<int>(
             usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("useSpectralLensing")));
-        const pxr::GfVec4i regionToRender = UsdUtils::getStaticAttributeValueAs<pxr::GfVec4i>(
-            usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("regionToRender")));
+        const pxr::GfVec4f regionToRender = UsdUtils::getStaticAttributeValueAs<pxr::GfVec4f>(
+            usdRenderSettings.GetPrim().GetAttribute(pxr::TfToken("dataWindowNDC")));
         REQUIRE(resolution == pxr::GfVec2i(1280, 720));
         REQUIRE(maxSamples == 4);
         REQUIRE(integratorType == pxr::TfToken("RAYTRACING"));
@@ -51,7 +52,10 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
         REQUIRE(adaptiveMaxError == 0.007f);
         REQUIRE(samplesPerAdaptivePass == 8);
         REQUIRE(useSpectralLensing == 1);
-        REQUIRE(regionToRender == pxr::GfVec4i(0, 1, 2, 3));
+        REQUIRE(regionToRender[0] == 0);
+        REQUIRE(regionToRender[1] == Catch::Detail::Approx(1.f));
+        REQUIRE(regionToRender[2] == Catch::Detail::Approx(2.f));
+        REQUIRE(regionToRender[3] == Catch::Detail::Approx(3.f));
     }
 }
 
