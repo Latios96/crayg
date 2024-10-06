@@ -5,6 +5,7 @@ on:
     paths-ignore:
       - '**/README.md'
       - 'docs/**/*'
+
 jobs:
   check-format:
     runs-on: "ubuntu-20.04"
