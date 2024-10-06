@@ -10,6 +10,7 @@ ImageWidgetOutputDriver::ImageWidgetOutputDriver(ImageWidget &imageWidget) : ima
     QObject::connect(&qtSignalAdapter, &QtSignalAdapter::bucketImageBufferWritten, &imageWidget,
                      &ImageWidget::writeBucketImageBuffer);
     QObject::connect(&qtSignalAdapter, &QtSignalAdapter::metadataWritten, &imageWidget, &ImageWidget::writeMetadata);
+    QObject::connect(&qtSignalAdapter, &QtSignalAdapter::initialized, &imageWidget, &ImageWidget::initialize);
 }
 
 void ImageWidgetOutputDriver::initialize(const ImageSpec &imageSpec) {
