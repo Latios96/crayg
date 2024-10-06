@@ -141,7 +141,7 @@ CliParseResult CliParser::parse() {
 
     std::string regionToRender;
     app.add_flag("--regionToRender", regionToRender,
-                 "Render only a specified region, provide in [(min_x,mix_y),(max_x,max_y)]");
+                 "Render only a specified region, provide in [(min_x,min_y),(max_x,max_y)]");
 
     try {
         app.parse(argc, argv);
