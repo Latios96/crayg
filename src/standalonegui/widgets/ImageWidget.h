@@ -33,6 +33,7 @@ class ImageWidget : public QWidget {
     std::string currentChannel = "rgb";
     QImage bufferToShow;
     Image &image;
+    std::optional<Bounds2di> regionToRender;
     std::unordered_set<ImageBucket> activeBuckets;
 };
 
