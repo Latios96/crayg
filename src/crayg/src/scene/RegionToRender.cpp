@@ -34,7 +34,7 @@ std::string RegionToRender::toString() const {
     return std::visit(RegionToStringVisitor(), region);
 }
 
-PixelRegion RegionToRender::toPixelRegion(const Resolution &resolution) {
+PixelRegion RegionToRender::toPixelRegion(const Resolution &resolution) const {
     if (isPixelRegion()) {
         return std::get<PixelRegion>(region);
     }
@@ -49,7 +49,7 @@ PixelRegion RegionToRender::toPixelRegion(const Resolution &resolution) {
     return pixelRegion;
 }
 
-NDCRegion RegionToRender::toNDCRegion(const Resolution &resolution) {
+NDCRegion RegionToRender::toNDCRegion(const Resolution &resolution) const {
     if (isNDCRegion()) {
         return std::get<NDCRegion>(region);
     }

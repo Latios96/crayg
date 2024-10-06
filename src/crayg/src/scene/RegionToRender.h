@@ -21,8 +21,8 @@ class RegionToRender {
     // ostream
     // formatter
 
-    PixelRegion toPixelRegion(const Resolution &resolution);
-    NDCRegion toNDCRegion(const Resolution &resolution);
+    PixelRegion toPixelRegion(const Resolution &resolution) const;
+    NDCRegion toNDCRegion(const Resolution &resolution) const;
 
     bool isPixelRegion() const {
         return region.index() == 0;
