@@ -92,6 +92,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestRaytracingIntegrator.cpp
     TestReadableFormatter.cpp
     TestRectLight.cpp
+    TestRegionToRender.cpp
     TestRemainingTimeCalculator.cpp
     TestRenderSettings.cpp
     TestResolution.cpp

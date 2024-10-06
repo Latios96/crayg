@@ -220,6 +220,8 @@ set(crayg_SRCS
     scene/primitives/trianglemesh/TriangleMesh.h
     scene/primitives/trianglemesh/TriangleMeshConversion.cpp
     scene/primitives/trianglemesh/TriangleMeshConversion.h
+    scene/RegionToRender.cpp
+    scene/RegionToRender.h
     scene/RenderSettings.cpp
     scene/RenderSettings.h
     scene/Scene.cpp
