@@ -21,7 +21,7 @@ def main():
     ensure_remote(
         remotes,
         "framebffr",
-        "https://artifactory.frmbffr.com/artifactory/api/conan/conan-repository",
+        "https://artifactory.frmbffr.com/artifactory/api/conan/conan",
     )
 
     print(pprint.pformat(remotes))
