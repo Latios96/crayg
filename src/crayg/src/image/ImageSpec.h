@@ -1,7 +1,9 @@
 #pragma once
 
 #include "PixelFormat.h"
+#include "basics/Bound2d.h"
 #include "basics/Resolution.h"
+#include "scene/RegionToRender.h"
 #include "utils/DtoUtils.h"
 #include <vector>
 
@@ -9,12 +11,13 @@ namespace crayg {
 
 CRAYG_DTO_3(ChannelSpec, std::string, name, PixelFormat, pixelFormat, int, colorChannelCount);
 
-CRAYG_DTO_2(ImageSpec, Resolution, resolution, std::vector<ChannelSpec>, channels);
+CRAYG_DTO_3(ImageSpec, Resolution, resolution, std::vector<ChannelSpec>, channels, std::optional<Bounds2di>,
+            regionToRender);
 
 class ImageSpecBuilder {
   public:
     ImageSpecBuilder(const Resolution &resolution) {
-        imageSpec = ImageSpec(resolution, {{"rgb", PixelFormat::FLOAT, 3}});
+        imageSpec = ImageSpec(resolution, {{"rgb", PixelFormat::FLOAT, 3}}, std::nullopt);
     }
 
     ImageSpecBuilder &addAlphaChannel() {
@@ -49,6 +52,11 @@ class ImageSpecBuilder {
 
     ImageSpecBuilder &createVector3fChannel(const std::string &name) {
         imageSpec.channels.emplace_back(name, PixelFormat::FLOAT, 3);
+        return *this;
+    }
+
+    ImageSpecBuilder &addRenderRegion(const RegionToRender &regionToRender) {
+        imageSpec.regionToRender = regionToRender.toPixelRegion(imageSpec.resolution);
         return *this;
     }
 

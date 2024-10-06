@@ -142,7 +142,7 @@ ImageSpec Image::getImageSpec() const {
                                   channel.second->getColorChannelCount());
     }
 
-    return {getResolution(), channelSpecs};
+    return {getResolution(), channelSpecs, std::nullopt};
 }
 
 void Image::addChannelsFromSpec(const ImageSpec &imageSpec) {

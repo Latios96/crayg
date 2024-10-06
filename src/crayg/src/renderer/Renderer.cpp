@@ -167,6 +167,9 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
 
 ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {
     ImageSpecBuilder builder(resolution);
+    if (scene.renderSettings.regionToRender) {
+        builder.addRenderRegion(*scene.renderSettings.regionToRender);
+    }
     bucketSampler->addRequiredImageSpecs(builder);
     builder.createGreyFloatChannel("absoluteRenderTime");
     builder.createRgbFloatChannel("relativeRenderTime");
