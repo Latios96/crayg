@@ -127,4 +127,13 @@ RegionToRender RegionToRender::fromString(const std::string &str) {
             std::runtime_error(fmt::format("Invalid format specified, allowed are px and ndc, was '{}'", str)));
     }
 }
+
+bool RegionToRender::isPixelRegion() const {
+    return region.index() == 0;
+}
+
+bool RegionToRender::isNDCRegion() const {
+    return region.index() == 1;
+}
+
 }
