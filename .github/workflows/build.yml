@@ -24,6 +24,8 @@ jobs:
           pre-commit run --all-files
   build:
     runs-on: ${{ matrix.os }}
+    env:
+      CONAN_REVISIONS_ENABLED: true
     strategy:
       fail-fast: false
       matrix:
