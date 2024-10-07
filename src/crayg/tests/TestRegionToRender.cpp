@@ -73,7 +73,7 @@ TEST_CASE("RegionToRender::toPixelRegion") {
     SECTION("should return pixel region from ndc") {
         RegionToRender regionToRender(NDCRegion({{0.1, 0.2}, {0.3, 0.4}}));
 
-        REQUIRE(regionToRender.toPixelRegion(Resolution(1920, 1080)) == PixelRegion{{192, 864}, {576, 648}});
+        REQUIRE(regionToRender.toPixelRegion(Resolution(1920, 1080)) == PixelRegion{{192, 648}, {576, 864}});
     }
 }
 

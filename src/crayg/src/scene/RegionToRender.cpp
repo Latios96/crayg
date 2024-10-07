@@ -42,9 +42,9 @@ PixelRegion RegionToRender::toPixelRegion(const Resolution &resolution) const {
 
     PixelRegion pixelRegion;
     pixelRegion.min.x = ndcRegion.min.x * resolution.getWidth();
-    pixelRegion.min.y = resolution.getHeight() - ndcRegion.min.y * resolution.getHeight();
+    pixelRegion.min.y = resolution.getHeight() - ndcRegion.max.y * resolution.getHeight();
     pixelRegion.max.x = ndcRegion.max.x * resolution.getWidth();
-    pixelRegion.max.y = resolution.getHeight() - ndcRegion.max.y * resolution.getHeight();
+    pixelRegion.max.y = resolution.getHeight() - ndcRegion.min.y * resolution.getHeight();
 
     return pixelRegion;
 }
