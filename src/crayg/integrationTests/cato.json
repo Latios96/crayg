@@ -209,6 +209,27 @@
       ]
     },
     {
+      "name": "RegionToRender",
+      "comparisonSettings": {
+        "method": "FLIP",
+        "threshold": 0.01
+      },
+      "tests": [
+        {
+          "name": "PixelRegion",
+          "variables": {
+            "crayg_additional_args": "--regionToRender=px:[(100,150),(350,300)]"
+          }
+        },
+        {
+          "name": "NDCRegion",
+          "variables": {
+            "crayg_additional_args": "--regionToRender=ndc:[(0.1,0.2),(0.3,0.4)]"
+          }
+        }
+      ]
+    },
+    {
       "name": "UsdPreviewSurface",
       "tests": [
         {
@@ -228,7 +249,8 @@
   ],
   "variables": {
     "crayg_bin_folder": "<to-be-supplied-via-commandline>",
-    "crayg_render_command": "{{crayg_bin_folder}}/crayg-standalone -s {{test_resources}}/{{test_name}}.usda -o \"{{image_output_png}}\"",
+    "crayg_render_command": "{{crayg_bin_folder}}/crayg-standalone -s {{test_resources}}/{{test_name}}.usda -o \"{{image_output_png}}\" {{crayg_additional_args}}",
+    "crayg_additional_args": "",
     "cray_integration_test_command": "{{crayg_bin_folder}}/crayg-binary-integration-tests {{suite_name}}/{{test_name}}",
     "reference_image_no_extension": "{{test_resources}}/{{test_name}}"
   }
