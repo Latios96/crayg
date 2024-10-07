@@ -11,6 +11,8 @@ namespace crayg {
 typedef Bounds2di PixelRegion;
 typedef Bounds2df NDCRegion;
 
+// NDC is as specified in https://openusd.org/dev/api/usd_render_page_front.html#UsdRenderCroppingTilingOverscan
+
 class RegionToRender {
   public:
     RegionToRender() = default;
