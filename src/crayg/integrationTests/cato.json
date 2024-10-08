@@ -218,13 +218,13 @@
         {
           "name": "PixelRegion",
           "variables": {
-            "crayg_additional_args": "--regionToRender=px:[(100,150),(350,300)]"
+            "crayg_additional_args": "\"--regionToRender=px:[(100,150),(350,300)]\""
           }
         },
         {
           "name": "NDCRegion",
           "variables": {
-            "crayg_additional_args": "--regionToRender=ndc:[(0.1,0.2),(0.3,0.4)]"
+            "crayg_additional_args": "\"--regionToRender=ndc:[(0.1,0.2),(0.3,0.4)]\""
           }
         }
       ]
