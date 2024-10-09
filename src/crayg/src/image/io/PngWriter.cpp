@@ -54,9 +54,12 @@ void PngWriter::writeImage(const Image &image, std::string image_name) {
             bufferToWrite = convertedPixelBuffer.get();
         }
 
-        out->open(channelPath, spec);
-        write(out, *bufferToWrite);
-        out->close();
+        {
+            CRG_IF_TRACE(MTR_SCOPE("PngWriter", "OpenImageIO::write_image"));
+            out->open(channelPath, spec);
+            write(out, *bufferToWrite);
+            out->close();
+        }
     }
 }
 
