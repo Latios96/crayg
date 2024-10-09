@@ -20,13 +20,20 @@ OIIO::TypeDesc mapPixelFormat(PixelFormat pixelFormat) {
 
 void write(std::unique_ptr<OIIO::ImageOutput> &out, PixelBuffer &pixelBuffer) {
     auto pixelFormat = pixelBuffer.getPixelFormat();
+
+    void *data;
+    OIIO::TypeDesc typeDesc;
+
     if (pixelFormat == PixelFormat::FLOAT) {
-        out->write_image(OIIO::TypeDesc::FLOAT, std::get<float *>(pixelBuffer.getData()));
+        typeDesc = OIIO::TypeDesc::FLOAT;
+        data = std::get<float *>(pixelBuffer.getData());
     } else if (pixelFormat == PixelFormat::UINT8) {
-        out->write_image(OIIO::TypeDesc::UINT8, std::get<std::uint8_t *>(pixelBuffer.getData()));
+        typeDesc = OIIO::TypeDesc::UINT8;
+        data = std::get<uint8_t *>(pixelBuffer.getData());
     } else {
         CRAYG_LOG_AND_THROW(std::runtime_error("Unsupported pixel format"));
     }
+    out->write_image(typeDesc, data);
 }
 
 void PngWriter::writeImage(const Image &image, std::string image_name) {
