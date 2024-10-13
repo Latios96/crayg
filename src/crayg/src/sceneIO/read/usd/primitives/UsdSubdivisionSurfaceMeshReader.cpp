@@ -85,7 +85,8 @@ void UsdSubdivisionSurfaceMeshReader::translateUvs(
     const pxr::TfToken uvsInterpolation = uvsPrimVar->GetInterpolation();
 
     if (uvsInterpolation != pxr::UsdGeomTokens->faceVarying) {
-        Logger::warning(R"(UV interpolation "{}" of mesh {} is not supported)", uvsInterpolation, usdPrim.GetPath());
+        Logger::warning(R"(UV interpolation "{}" of subdivision surface mesh {} is not supported)", uvsInterpolation,
+                        usdPrim.GetPath());
         return;
     }
 
