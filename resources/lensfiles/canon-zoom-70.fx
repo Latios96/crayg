@@ -43,3 +43,9 @@ Radius    Thickness IOR  Housing-Radius Abbe-No Material        Geometry
 148       3.62      1.74 21             49.3    SCHOTT_N_LAF35  SPHERICAL 
 -206      54.5      1    21             0       AIR             SPHERICAL 
 
+[Variable Distances]
+Focal Length Points: 72.10 135.0 194.01
+6:           8.78  26.15 32.85
+10:          1.64  12.89 17.23
+17:          30.32 15.72 1.32
+22:          14.70 0.69  4.05

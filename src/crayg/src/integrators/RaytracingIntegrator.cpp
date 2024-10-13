@@ -43,8 +43,9 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
         contributingLobes++;
     }
     if (!lobes.diffuse.weight.isBlack()) {
-        lobesResult +=
-            lobes.diffuse.weight * (integratorContext.integrateRay(lobes.diffuse.sampleDirection) + radiance);
+        const Color indirectLight =
+            useGi ? integratorContext.integrateRay(lobes.diffuse.sampleDirection) : Color::createBlack();
+        lobesResult += lobes.diffuse.weight * (radiance + indirectLight);
         contributingLobes++;
     }
 
