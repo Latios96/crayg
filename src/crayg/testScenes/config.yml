@@ -155,6 +155,8 @@ scenes:
         - 'realistic_Panavision_anamorphic'
         - 'realistic_Navarro_anamorphic'
         - 'realistic_Canon_anamorphic'
+        - 'realistic_arri_master_prime'
+        - 'realistic_sigma_21mm_art'
   - name: Attic_NVIDIA
     cameras:
       - /Root/Camera
