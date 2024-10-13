@@ -109,6 +109,28 @@ TEST_CASE("UsdTriangleMeshWriter::write") {
                 pxr::VtVec2fArray(
                     {{0, 1}, {1, 1}, {0, 0}, {1, 1}, {1, 0}, {0, 0}, {1, 1}, {2, 1}, {1, 0}, {2, 1}, {2, 0}, {1, 0}}));
     }
+
+    SECTION("should write per point uvs") {
+        auto triangleMesh = TriangleMeshFixtures::createPrimVarFixtureMesh();
+        auto primVar = triangleMesh->addUvsPrimVar<TriangleMeshPerPointPrimVar<Vector2f>>();
+        primVar->write(0, Vector2f(1, 0));
+        primVar->write(1, Vector2f(0, 1));
+        primVar->write(2, Vector2f(1, 1));
+        primVar->write(3, Vector2f(0, 0));
+        primVar->write(4, Vector2f(1, 0));
+        primVar->write(5, Vector2f(0, 1));
+
+        UsdTriangleMeshWriter usdTriangleMeshWriter(*triangleMesh, usdMaterialWriteCache);
+        usdTriangleMeshWriter.write(stage, usdPathFactory);
+
+        auto usdGeomMesh = pxr::UsdGeomMesh(stage->GetPrimAtPath(pxr::SdfPath("/TriangleMesh0")));
+        pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
+
+        auto uvsPrimvar = primvarsApi.GetPrimvar(pxr::TfToken("st"));
+        REQUIRE(uvsPrimvar.GetInterpolation() == pxr::UsdGeomTokens->vertex);
+        auto uvs = UsdUtils::getStaticAttributeValueAs<pxr::VtVec2fArray>(uvsPrimvar);
+        REQUIRE(uvs == pxr::VtVec2fArray({{1, 0}, {0, 1}, {1, 1}, {0, 0}, {1, 0}, {0, 1}}));
+    }
 }
 
 }

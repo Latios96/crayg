@@ -21,6 +21,7 @@ class UsdTriangleMeshWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, 
     void writePerPointNormals(pxr::UsdGeomMesh &mesh) const;
     void writePerVertexNormals(pxr::UsdGeomMesh &mesh) const;
     void writePerVertexUvs(pxr::UsdGeomMesh &mesh) const;
+    void writePerPointUvs(pxr::UsdGeomMesh &mesh) const;
 };
 
 } // crayg

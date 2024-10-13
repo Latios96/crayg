@@ -100,6 +100,8 @@ void UsdTriangleMeshWriter::writeUvs(pxr::UsdGeomMesh &usdGeomMesh) const {
     }
     if (this->craygObject.uvsPrimVar->getType() == PrimVarType::PER_VERTEX) {
         writePerVertexUvs(usdGeomMesh);
+    } else if (this->craygObject.uvsPrimVar->getType() == PrimVarType::PER_POINT) {
+        writePerPointUvs(usdGeomMesh);
     } else {
         Logger::warning(R"(UV interpolation "{}" of mesh {} is not supported)",
                         this->craygObject.normalsPrimVar->getType(), this->craygObject.getName());
@@ -125,6 +127,21 @@ void UsdTriangleMeshWriter::writePerVertexUvs(pxr::UsdGeomMesh &mesh) const {
 
 void UsdTriangleMeshWriter::writeSubdivisionScheme(const pxr::UsdGeomMesh &usdGeomMesh) const {
     usdGeomMesh.GetSubdivisionSchemeAttr().Set(pxr::UsdGeomTokens->none);
+}
+
+void UsdTriangleMeshWriter::writePerPointUvs(pxr::UsdGeomMesh &mesh) const {
+    pxr::VtVec2fArray uvs;
+    uvs.reserve(this->craygObject.points.size());
+    auto uvsPrimvar = this->craygObject.getUvsPrimVarAs<TriangleMeshPerPointPrimVar<Vector2f>>();
+
+    for (int i = 0; i < craygObject.points.size(); i++) {
+        uvs.push_back(UsdConversions::convert(uvsPrimvar->read(i)));
+    }
+
+    pxr::UsdGeomPrimvarsAPI primvarsApi(mesh);
+    auto usdUvsPrimvar = primvarsApi.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+                                                   pxr::UsdGeomTokens->vertex);
+    usdUvsPrimvar.Set(uvs);
 }
 
 } // crayg
