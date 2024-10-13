@@ -15,7 +15,10 @@ class UsdPrimVarReaderVector2fReader : public BaseUsdShadingNodeReader<PrimVarRe
     void readPrimVarReaderTypeFromUsd(std::shared_ptr<PrimVarReaderVector2f> &primVarReader);
     void readPrimVarReaderTypeFromCrayg(std::shared_ptr<PrimVarReaderVector2f> &primVarReader);
     std::string getTranslatedType() override;
-    std::string getVarname(const pxr::UsdShadeInput &varnameInput) const;
+    std::optional<std::string> getVarname();
+    std::optional<std::string> getVarnameFromCurrentNode();
+    std::optional<std::string> getVarnameFromConnectedNode();
+    std::string readVarname(const pxr::UsdShadeInput &varnameInput) const;
 };
 
 } // crayg

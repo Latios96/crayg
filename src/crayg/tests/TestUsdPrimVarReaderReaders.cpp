@@ -37,5 +37,16 @@ TEST_CASE("UsdPrimVarReaderVector2fReader::read") {
 
         REQUIRE(primVarReaderVector2f->primVarReaderType == PrimVarReaderType::UV);
     }
+
+    SECTION("should read UsdPrimvarReader_float2 correctly for varname authored with no connection") {
+        auto usdPrimVarReaderVector2f = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/UsdPrimvarReader_float2"));
+        usdPrimVarReaderVector2f.CreateIdAttr(pxr::VtValue(pxr::TfToken("UsdPrimvarReader_float2")));
+        usdPrimVarReaderVector2f.CreateInput(pxr::TfToken("varname"), pxr::SdfValueTypeNames->String).Set("st");
+        UsdPrimVarReaderVector2fReader readerVector2fReader(usdPrimVarReaderVector2f, usdShadingNodeReadCache);
+
+        auto primVarReaderVector2f = readerVector2fReader.read();
+
+        REQUIRE(primVarReaderVector2f->primVarReaderType == PrimVarReaderType::UV);
+    }
 }
 }
