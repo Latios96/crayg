@@ -15,4 +15,8 @@ Ray SurfaceInteraction::spawnReflectionRayFromSurface() const {
     return spawnRayFromSurface(ray.direction.reflect(normal));
 }
 
+OrthonormalBasis SurfaceInteraction::getOrthonormalBasis() const {
+    return OrthonormalBasis(normal);
+}
+
 }

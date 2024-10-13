@@ -1,5 +1,6 @@
 #pragma once
 
+#include "basics/OrthonormalBasis.h"
 #include "basics/Ray.h"
 #include "basics/Vector3f.h"
 
@@ -18,6 +19,8 @@ class SurfaceInteraction {
     Ray spawnRayFromSurface(const Vector3f &direction) const;
 
     Ray spawnReflectionRayFromSurface() const;
+
+    OrthonormalBasis getOrthonormalBasis() const;
 };
 
 }
