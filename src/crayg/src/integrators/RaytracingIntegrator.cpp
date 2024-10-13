@@ -1,4 +1,5 @@
 #include "RaytracingIntegrator.h"
+#include "Logger.h"
 #include "sampling/Sampling.h"
 
 namespace crayg {
@@ -26,19 +27,32 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
     const Vector3f normal = object.getNormal(location);
     const SurfaceInteraction surfaceInteraction = SurfaceInteraction(object, location, normal, ray);
     IntegratorContext integratorContext = createIntegratorContext(recursionDepth);
-    Color shadedColor = object.getMaterial()->evaluate(surfaceInteraction, integratorContext);
 
     Color radiance = Color::createBlack();
     for (auto &light : scene.lights) {
         radiance = radiance + calculateDirectLight(light, location, normal);
     }
 
-    Color gi = Color::createBlack();
-    if (useGi) {
-        gi = calculateIndirectLight(surfaceInteraction, object.getOrthonormalBasis(location), integratorContext);
+    Lobes lobes;
+    object.getMaterial()->getLobes(surfaceInteraction, lobes);
+
+    Color lobesResult = Color::createBlack();
+    int contributingLobes = 0;
+    if (!lobes.specular.weight.isBlack()) {
+        lobesResult += lobes.specular.weight * integratorContext.integrateRay(lobes.specular.sampleDirection);
+        contributingLobes++;
+    }
+    if (!lobes.diffuse.weight.isBlack()) {
+        lobesResult +=
+            lobes.diffuse.weight * (integratorContext.integrateRay(lobes.diffuse.sampleDirection) + radiance);
+        contributingLobes++;
     }
 
-    return shadedColor * (radiance + gi); // FIXME: this is only correct for completly diffuse surfaces..
+    if (contributingLobes) {
+        lobesResult = lobesResult / static_cast<float>(contributingLobes);
+    }
+
+    return lobesResult;
 }
 
 Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light, const Vector3f &location,
@@ -64,12 +78,4 @@ Color RaytracingIntegrator::calculateDirectLight(std::shared_ptr<Light> &light, 
     return lightRadiance.radiance;
 }
 
-Color RaytracingIntegrator::calculateIndirectLight(const SurfaceInteraction &surfaceInteraction,
-                                                   const OrthonormalBasis &orthonormalBasis,
-                                                   IntegratorContext &integratorContext) {
-    const Vector3f randomDirOnHemisphere = Sampling::uniformSampleHemisphere();
-    const Vector3f giDir = orthonormalBasis.toLocalCoordinates(randomDirOnHemisphere);
-    const Ray giRay = surfaceInteraction.spawnRayFromSurface(giDir);
-    return integratorContext.integrateRay(giRay);
-}
 }

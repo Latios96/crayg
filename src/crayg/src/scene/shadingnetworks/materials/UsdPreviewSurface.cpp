@@ -1,4 +1,7 @@
 #include "UsdPreviewSurface.h"
+#include "Logger.h"
+#include "sampling/Sampling.h"
+#include "scene/Imageable.h"
 
 namespace crayg {
 
@@ -15,17 +18,6 @@ UsdPreviewSurface::UsdPreviewSurface(const std::string &name, const Color &diffu
     : Material(name), diffuseColor(diffuseColor) {
 }
 
-Color UsdPreviewSurface::evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) {
-    const Color reflectivity = getReflectivity(surfaceInteraction);
-
-    if (reflectivity.isBlack()) {
-        return diffuseColor.evaluate(surfaceInteraction);
-    }
-
-    const Ray reflectionRay = surfaceInteraction.spawnReflectionRayFromSurface();
-    return diffuseColor.evaluate(surfaceInteraction) + reflectivity * integratorContext.integrateRay(reflectionRay);
-}
-
 std::string UsdPreviewSurface::getType() const {
     return "UsdPreviewSurface";
 }
@@ -39,6 +31,21 @@ Color UsdPreviewSurface::getReflectivity(const SurfaceInteraction &surfaceIntera
         return specularColor.evaluate(surfaceInteraction);
     }
     return Color::createGrey(metallic.evaluate(surfaceInteraction));
+}
+
+void UsdPreviewSurface::getLobes(const SurfaceInteraction &surfaceInteraction, Lobes &lobes) {
+    lobes.specular.weight = getReflectivity(surfaceInteraction);
+    if (!lobes.specular.weight.isBlack()) {
+        lobes.specular.sampleDirection = surfaceInteraction.spawnReflectionRayFromSurface();
+    }
+
+    lobes.diffuse.weight = (Color::createWhite() - lobes.specular.weight) * diffuseColor.evaluate(surfaceInteraction);
+    if (!lobes.diffuse.weight.isBlack()) {
+        const Vector3f randomDirOnHemisphere = Sampling::uniformSampleHemisphere();
+        auto orthonormalBasis = surfaceInteraction.getOrthonormalBasis();
+        const Vector3f giDir = orthonormalBasis.toLocalCoordinates(randomDirOnHemisphere);
+        lobes.diffuse.sampleDirection = surfaceInteraction.spawnRayFromSurface(giDir);
+    }
 }
 
 }

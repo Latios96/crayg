@@ -8,12 +8,22 @@
 
 namespace crayg {
 
+struct Lobe {
+    Color weight;
+    Ray sampleDirection;
+};
+
+struct Lobes {
+    Lobe specular;
+    Lobe diffuse;
+};
+
 class Material : public ShadingNode {
   public:
     explicit Material();
     explicit Material(const std::string &name);
 
-    virtual Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) = 0;
+    virtual void getLobes(const SurfaceInteraction &surfaceInteraction, Lobes &lobes);
 };
 
 } // namespace crayg

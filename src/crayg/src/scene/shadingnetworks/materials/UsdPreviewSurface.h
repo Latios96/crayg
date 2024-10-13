@@ -9,7 +9,7 @@ class UsdPreviewSurface : public Material {
     explicit UsdPreviewSurface(const Color &diffuseColor);
     explicit UsdPreviewSurface(const std::string &name);
     UsdPreviewSurface(const std::string &name, const Color &diffuseColor);
-    Color evaluate(const SurfaceInteraction &surfaceInteraction, IntegratorContext &integratorContext) override;
+    void getLobes(const SurfaceInteraction &surfaceInteraction, Lobes &lobes) override;
     std::string getType() const override;
     ShadingNodeOutputType getOutputType() override;
 
