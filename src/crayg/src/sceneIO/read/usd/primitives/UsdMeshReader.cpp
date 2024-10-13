@@ -133,6 +133,8 @@ void UsdMeshReader::translateUvs(std::shared_ptr<TriangleMesh> &triangleMesh, px
 
     if (uvsInterpolation == pxr::UsdGeomTokens->faceVarying) {
         translateFaceVaryingUvs(triangleMesh, meshUtil, *uvsPrimVar);
+    } else if (uvsInterpolation == pxr::UsdGeomTokens->vertex) {
+        translatePerVertexUvs(triangleMesh, *uvsPrimVar);
     } else {
         Logger::warning(R"(UV interpolation "{}" of mesh {} is not supported)", uvsInterpolation, usdPrim.GetPath());
     }
@@ -169,4 +171,15 @@ pxr::VtValue &UsdMeshReader::computeTriangulatedFaceVaryingUvs(const pxr::HdMesh
     return triangulated;
 }
 
+void UsdMeshReader::translatePerVertexUvs(std::shared_ptr<TriangleMesh> &triangleMesh,
+                                          pxr::UsdGeomPrimvar &uvsPrimvar) const {
+
+    pxr::VtVec2fArray uvs;
+    uvsPrimvar.Get(&uvs, timeCodeToRead);
+
+    auto *primVar = triangleMesh->addUvsPrimVar<TriangleMeshPerPointPrimVar<Vector2f>>();
+    for (int i = 0; i < triangleMesh->points.size(); i++) {
+        primVar->write(i, UsdConversions::convert(uvs[i]));
+    }
+}
 }

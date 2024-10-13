@@ -173,6 +173,23 @@ TEST_CASE("UsdMeshReader::read") {
                 }));
     }
 
+    SECTION("authored vertex uvs should be translated for triangle mesh") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createTrianglePlane(stage);
+        pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
+
+        auto uvsPrimvar = primvarsApi.CreatePrimvar(pxr::TfToken("st"), pxr::SdfValueTypeNames->TexCoord2fArray,
+                                                    pxr::UsdGeomTokens->vertex);
+        pxr::VtVec2fArray uvs({{1, 0}, {1, 1}, {0, 0}, {1, 0}});
+        uvsPrimvar.Set(uvs);
+
+        UsdMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto triangleMesh = usdMeshReader.read();
+
+        REQUIRE(triangleMesh->uvsPrimVar != nullptr);
+        REQUIRE(*triangleMesh->getUvsPrimVarAs<TriangleMeshPerPointPrimVar<Vector2f>>() ==
+                std::vector<Vector2f>({{1, 0}, {1, 1}, {0, 0}, {1, 0}}));
+    }
+
     SECTION("authored uvs with unsupported interpolation should not be translated") {
         auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage);
         pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
