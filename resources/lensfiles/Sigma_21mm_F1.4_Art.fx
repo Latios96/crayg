@@ -1,0 +1,40 @@
+[Metadata]
+Name: Sigma 21mm F1.4 Art
+
+[Surfaces]
+Radius    Thickness IOR     Housing-Radius Abbe-No Material Geometry   
+55.8667   2.0000    1.92286 36.105         20.88   UNKNOWN  SPHERICAL
+32.1880   11.1453   1       29.25          0       AIR      SPHERICAL
+39.6726   3.0000    1.69350 29.555         53.20   UNKNOWN  ASPHERICAL
+20.4304   19.6930   1       25.51          0       AIR      ASPHERICAL 
+518.9274  1.9000    1.49700 25.08          81.61   UNKNOWN  SPHERICAL
+46.5995   7.4808    1       23.37          0       AIR      SPHERICAL  
+88.5605   8.0408    1.88300 23.845         40.80   UNKNOWN  SPHERICAL
+-88.5605  2.8258    1       23.845         0       AIR      SPHERICAL
+-48.6468  1.9000    1.43700 22.95          95.10   UNKNOWN  SPHERICAL
+63.2408   6.9907    2.00100 23.845         29.13   UNKNOWN  SPHERICAL
+-165.6233 7.5732    1       23.845         0       AIR      SPHERICAL
+48.7700   5.3297    1.59282 17.29          68.63   UNKNOWN  SPHERICAL
+-173.3714 0.2000    1       17.29          0       AIR      SPHERICAL
+55.4982   5.8716    1.59282 15.91          68.63   UNKNOWN  SPHERICAL
+-55.4982  0.9000    1.80610 15.91          33.27   UNKNOWN  SPHERICAL
+26.2988   5.2496    1       13.24          0       AIR      SPHERICAL
+0         3.1958    1       12.6315        0       AIR      SPHERICAL
+-149.9250 8.4815    1.43700 14.29          95.10   UNKNOWN  SPHERICAL
+-17.7149  0.9000    1.80610 14.29          33.27   UNKNOWN  SPHERICAL
+112.1600  3.2223    1.59282 15.005         68.63   UNKNOWN  SPHERICAL
+-112.1600 0.1500    1       15.005         0       AIR      SPHERICAL
+61.3754   7.6624    1.59282 16.215         68.63   UNKNOWN  SPHERICAL
+-36.1032  0.1500    1       16.215         0       AIR      SPHERICAL
+-205.2853 0.9000    1.70154 16.36          41.15   UNKNOWN  SPHERICAL
+51.6317   0.3905    1       16.36          0       AIR      SPHERICAL
+54.8683   7.1599    1.76450 16.36          49.10   UNKNOWN  ASPHERICAL
+-39.1917  36.5001   1       16.36          0       AIR      ASPHERICAL
+
+
+
+[Aspheric Coefficients]
+2:  k=-2.4116 a2=6.66830E-07  a4=-8.65320E-09 a6=1.57870E-11 a8=-1.44600E-14 a10=5.75550E-18
+3:  k=-0.9479 a2=-1.12480E-07 a4=-1.99500E-08 a6=3.17347E-11 a8=-3.47710E-14 a10=1.78990E-17
+25: k=0       a2=-3.08870E-06 a4=-3.81950E-09 a6=1.59760E-11 a8=-2.59380E-14 
+26: k=0       a2=4.54650E-06  a4=-3.84130E-09 a6=1.68370E-11 a8=-1.13420E-14 
