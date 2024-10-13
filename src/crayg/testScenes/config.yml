@@ -155,3 +155,14 @@ scenes:
         - 'realistic_Panavision_anamorphic'
         - 'realistic_Navarro_anamorphic'
         - 'realistic_Canon_anamorphic'
+  - name: Attic_NVIDIA
+    cameras:
+      - /Root/Camera
+    hero_camera: /Root/Camera
+    integrators:
+      - debug
+      - ambient_occlusion
+      - raytracing
+    intersectors:
+      - embree
+    scene_path: "M:/Test_Scene_Collection/Attic_NVIDIA/Attic_NVIDIA_Crayg.usda"
