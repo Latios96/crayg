@@ -101,7 +101,7 @@ void UsdTriangleMeshWriter::writeUvs(pxr::UsdGeomMesh &usdGeomMesh) const {
     if (this->craygObject.uvsPrimVar->getType() == PrimVarType::PER_VERTEX) {
         writePerVertexUvs(usdGeomMesh);
     } else {
-        Logger::warning(R"(Normals interpolation "{}" of mesh {} is not supported)",
+        Logger::warning(R"(UV interpolation "{}" of mesh {} is not supported)",
                         this->craygObject.normalsPrimVar->getType(), this->craygObject.getName());
     }
 }
