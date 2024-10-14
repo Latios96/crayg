@@ -145,6 +145,10 @@ class Vector3f {
         return {y, z};
     }
 
+    bool isNan() const {
+        return std::isnan(x) || std::isnan(y) || std::isnan(z);
+    }
+
     friend std::ostream &operator<<(std::ostream &os, const Vector3f &f);
 };
 

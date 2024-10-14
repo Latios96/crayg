@@ -200,4 +200,19 @@ TEST_CASE("Vector3f::to Vector2f conversion") {
     }
 }
 
+TEST_CASE("Vector3f::isNan", "[Vector3f]") {
+    SECTION("should return false for zero vector") {
+        REQUIRE_FALSE(Vector3f().isNan());
+    }
+    SECTION("should return true if x in NaN") {
+        REQUIRE(Vector3f(std::nan(""), 2.f, 3.f).isNan());
+    }
+    SECTION("should return true if y in NaN") {
+        REQUIRE(Vector3f(1.f, std::nan(""), 3).isNan());
+    }
+    SECTION("should return true if z in NaN") {
+        REQUIRE(Vector3f(1.f, 2.f, std::nan("")).isNan());
+    }
+}
+
 }
