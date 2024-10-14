@@ -10,7 +10,7 @@ Color FileTexture::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
     const Vector2f &uv = uvInput.evaluate(surfaceInteraction);
 
     float result[3];
-    const bool ok = textureSystem->texture(filePath, textureOpt, uv.x, uv.y, 0, 0, 0, 0, 3, result);
+    const bool ok = textureSystem->texture(filePath, textureOpt, uv.x, 1 - uv.y, 0, 0, 0, 0, 3, result);
 
     if (!ok) {
         badTexture = true;
