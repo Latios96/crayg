@@ -131,6 +131,16 @@ scenes:
     intersectors:
       - embree
     scene_path: "M:/Test_Scene_Collection/DailyDweeb/DailyDweeb.usda"
+    variants_combinations:
+      prim_path: /Camera/Camera
+      hero_combination: 'thin_lens'
+      combinations:
+        - name: 'thin_lens'
+          sets:
+            - name: 'camera_lens'
+              variant: 'thin_lens'
+            - name: 'position_correction'
+              variant: '50mm'
   - name: CameraTestGround
     cameras:
       - /Camera/Camera/VariantCamera
@@ -140,23 +150,82 @@ scenes:
     intersectors:
       - embree
     scene_path: "M:/Test_Scene_Collection/DailyDweeb/DailyDweeb.usda"
-    variant_set:
+    variants_combinations:
       prim_path: /Camera/Camera
-      variant_set: camera_lens
-      variants:
-        - 'thin_lens'
-        - 'realistic_realistic_canon_60mm'
-        - 'realistic_realistic_canon_50mm'
-        - 'realistic_petzval_kodak_50mm'
-        - 'realistic_double_gauss_angenieux_50mm'
-        - 'realistic_canon_70_200mm_70mm'
-        - 'realistic_brendel_tessar_100mm'
-        - 'realistic_Schneider_anamorphic'
-        - 'realistic_Panavision_anamorphic'
-        - 'realistic_Navarro_anamorphic'
-        - 'realistic_Canon_anamorphic'
-        - 'realistic_arri_master_prime'
-        - 'realistic_sigma_21mm_art'
+      hero_combination: 'realistic_canon_70_200mm_70mm'
+      combinations:
+        - name: 'thin_lens'
+          sets:
+            - name: 'camera_lens'
+              variant: 'thin_lens'
+            - name: 'position_correction'
+              variant: '50mm'
+        - name: 'realistic_realistic_canon_60mm'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_realistic_canon_60mm'
+            - name: 'position_correction'
+              variant: '60mm'
+        - name: 'realistic_realistic_canon_50mm'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_realistic_canon_50mm'
+            - name: 'position_correction'
+              variant: '50mm'
+        - name: 'realistic_petzval_kodak_50mm'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_petzval_kodak_50mm'
+            - name: 'position_correction'
+              variant: '50mm'
+        - name: 'realistic_double_gauss_angenieux_50mm'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_double_gauss_angenieux_50mm'
+            - name: 'position_correction'
+              variant: '50mm'
+        - name: 'realistic_canon_70_200mm_70mm'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_canon_70_200mm_70mm'
+            - name: 'position_correction'
+              variant: '60mm'
+        - name: 'realistic_brendel_tessar_100mm'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_brendel_tessar_100mm'
+            - name: 'position_correction'
+              variant: '100mm'
+        - name: 'realistic_Panavision_anamorphic'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_Panavision_anamorphic'
+            - name: 'position_correction'
+              variant: '18mm'
+        - name: 'realistic_Navarro_anamorphic'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_Navarro_anamorphic'
+            - name: 'position_correction'
+              variant: '60mm'
+        - name: 'realistic_Canon_anamorphic'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_Canon_anamorphic'
+            - name: 'position_correction'
+              variant: '100mm'
+        - name: 'realistic_arri_master_prime'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_arri_master_prime'
+            - name: 'position_correction'
+              variant: '100mm'
+        - name: 'realistic_sigma_21mm_art'
+          sets:
+            - name: 'camera_lens'
+              variant: 'realistic_sigma_21mm_art'
+            - name: 'position_correction'
+              variant: '30mm'
   - name: Attic_NVIDIA
     cameras:
       - /Root/Camera

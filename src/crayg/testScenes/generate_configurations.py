@@ -2,7 +2,7 @@ import itertools
 import json
 import os
 from pathlib import Path
-from typing import Set, Optional, List
+from typing import Set, Optional, List, Tuple, Iterable
 from pydantic import BaseModel
 
 import typer
@@ -21,9 +21,19 @@ TEMPLATE = {
 
 
 class VariantSet(BaseModel):
+    name: str
+    variant: str
+
+
+class VariantCombination(BaseModel):
+    name: str
+    sets: List[VariantSet]
+
+
+class VariantCombinations(BaseModel):
     prim_path: str
-    variant_set: str
-    variants: List[str]
+    hero_combination: str
+    combinations: List[VariantCombination]
 
 
 class Scene(BaseModel):
@@ -34,7 +44,7 @@ class Scene(BaseModel):
     intersectors: List[str]
     hero_camera: Optional[str] = None
     resolution: Optional[str] = None
-    variant_set: Optional[VariantSet] = None
+    variants_combinations: Optional[VariantCombinations] = None
 
 
 def load_config() -> List[Scene]:
@@ -56,6 +66,7 @@ def remove_unselected_configurations(
     only_hero_cam: bool = False,
     integrators: Set[str] = None,
     scene_names: Set[str] = None,
+    only_hero_combination: bool = False,
 ) -> List[Scene]:
     filtered_scenes = []
     for scene in scenes:
@@ -63,14 +74,22 @@ def remove_unselected_configurations(
         if scene_names and scene.name not in scene_names:
             continue
         if only_hero_cam:
-            if not scene.hero_camera:
-                continue
-            scene.cameras = [scene.hero_camera]
+            if scene.hero_camera:
+                scene.cameras = [scene.hero_camera]
         if integrators:
             filtered_integrators = filter_string_list(scene.integrators, integrators)
             if not filtered_integrators:
                 continue
             scene.integrators = filtered_integrators
+        if only_hero_combination:
+            if scene.variants_combinations:
+                scene.variants_combinations.combinations = list(
+                    filter(
+                        lambda comb: comb.name
+                        == scene.variants_combinations.hero_combination,
+                        scene.variants_combinations.combinations,
+                    )
+                )
         filtered_scenes.append(scene)
 
     return filtered_scenes
@@ -93,10 +112,11 @@ def generate_config(
     max_samples: Optional[int] = 1024,
     resolution: Optional[str] = None,
     use_spectral_lensing: Optional[bool] = False,
+    only_hero_combination: bool = False,
 ):
     scenes = load_config()
     scenes = remove_unselected_configurations(
-        scenes, only_hero_cam, integrators, scene_names
+        scenes, only_hero_cam, integrators, scene_names, only_hero_combination
     )
 
     suite_count = 0
@@ -106,19 +126,29 @@ def generate_config(
         TEMPLATE["suites"].append(suite)
         suite["name"] = scene.name
         suite["tests"] = []
-        settings_variations = itertools.product(
-            scene.integrators,
-            scene.intersectors,
-            scene.cameras,
-            scene.variant_set.variants if scene.variant_set else [None],
+        settings_variations: Iterable[Tuple[str, str, str, VariantCombination]] = (
+            itertools.product(
+                scene.integrators,
+                scene.intersectors,
+                scene.cameras,
+                (
+                    scene.variants_combinations.combinations
+                    if scene.variants_combinations
+                    else [None]
+                ),
+            )
         )
         for (
             chosen_integrator,
             chosen_intersector,
             chosen_camera,
-            chosen_variant,
+            chosen_variant_combination,
         ) in settings_variations:
-            variant_str = "-" + chosen_variant.lower() if chosen_variant else ""
+            variant_str = (
+                "-" + chosen_variant_combination.name.lower()
+                if chosen_variant_combination
+                else ""
+            )
             spectral_lensing_str = "-spectral" if use_spectral_lensing else ""
             test_name = f"{scene.name}-{os.path.basename(chosen_camera)}-{chosen_integrator.lower()}-{chosen_intersector.lower()}{variant_str}{spectral_lensing_str}"
 
@@ -134,10 +164,15 @@ def generate_config(
                     "useSpectralLensing": "",
                 },
             }
-            if chosen_variant:
-                test["variables"][
-                    "selectedVariant"
-                ] = f"--variantSelection {scene.variant_set.prim_path}:{scene.variant_set.variant_set}={chosen_variant}"
+            if chosen_variant_combination:
+                variant_seletion_strings = []
+                for variant_set in chosen_variant_combination.sets:
+                    variant_seletion_strings.append(
+                        f"--variantSelection {scene.variants_combinations.prim_path}:{variant_set.name}={variant_set.variant}"
+                    )
+                test["variables"]["selectedVariant"] = " ".join(
+                    variant_seletion_strings
+                )
             if use_spectral_lensing:
                 test["variables"]["useSpectralLensing"] = "--useSpectralLensing"
 
