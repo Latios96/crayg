@@ -35,7 +35,6 @@ TEST_CASE("UsdSubdivisionSurfaceMeshReader::read") {
     SECTION("should not read unsupported normals interpolation") {
         auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage, pxr::UsdGeomTokens->catmullClark);
         usdGeomMesh.SetNormalsInterpolation(pxr::UsdGeomTokens->vertex);
-        pxr::VtVec3fArray normals({{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
 
         UsdSubdivisionSurfaceMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
         auto subdivisionSurfaceMesh = usdMeshReader.read();
