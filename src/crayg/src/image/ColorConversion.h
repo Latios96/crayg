@@ -16,6 +16,10 @@ class ColorConversion {
     static float sRGBToLinear(float sRGBValue);
     static Color sRGBToLinear(const Color &color);
     static void sRGBToLinear(const PixelBuffer &source, PixelBuffer &target);
+
+    static float toneMapHDRtoLDR(float hdrValue);
+    static Color toneMapHDRtoLDR(const Color &color);
+    static void toneMapHDRtoLDR(const PixelBuffer &source, PixelBuffer &target);
 };
 
 } // crayg

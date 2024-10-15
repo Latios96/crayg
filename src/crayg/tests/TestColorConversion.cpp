@@ -58,4 +58,25 @@ TEST_CASE("ColorConversion::sRGBToLinear") {
     }
 }
 
+TEST_CASE("ColorConversion::toneMapHDRtoLDR") {
+
+    SECTION("should convert single pixel") {
+        const Color color(1, 2, 3);
+
+        const Color result = ColorConversion::toneMapHDRtoLDR(color);
+
+        REQUIRE(result == Color(0.8037974f, 0.914855f, 0.9537427f));
+    }
+
+    SECTION("should convert PixelBuffer") {
+        const auto source = PixelBuffer::createRgbFloat({10, 20});
+        const auto target = PixelBuffer::createRgbFloat({10, 20});
+        ImageAlgorithms::fill(*source, {1, 2, 3});
+
+        ColorConversion::toneMapHDRtoLDR(*source, *target);
+
+        REQUIRE(target->getValue({0, 0}) == Color(0.8037974f, 0.914855f, 0.9537427f));
+    }
+}
+
 }
