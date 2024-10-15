@@ -21,7 +21,6 @@ void ImageWidget::writeMetadata(ImageMetadata imageMetadata) {
 }
 
 void ImageWidget::initialize(ImageSpec imageSpec) {
-    Logger::info("imageSpec.regionToRender {}", imageSpec.regionToRender);
     regionToRender = imageSpec.regionToRender;
 }
 
