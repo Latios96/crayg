@@ -4,7 +4,7 @@
   "command": "{{crayg_render_command}}",
   "comparisonSettings": {
     "method": "FLIP",
-    "threshold": 0.25
+    "threshold": 0.1
   },
   "suites": [
     {
@@ -61,13 +61,13 @@
         {
           "name": "CornellBox_Original",
           "comparisonSettings": {
-            "threshold": 0.93
+            "threshold": 0.15
           }
         },
         {
           "name": "CornellBox_Original_GI",
           "comparisonSettings": {
-            "threshold": 0.4
+            "threshold": 0.15
           }
         },
         {
@@ -212,7 +212,7 @@
       "name": "RegionToRender",
       "comparisonSettings": {
         "method": "FLIP",
-        "threshold": 0.01
+        "threshold": 0.005
       },
       "tests": [
         {
@@ -235,13 +235,13 @@
         {
           "name": "SimpleDiffuseMaterial",
           "comparisonSettings": {
-            "threshold": 0.55
+            "threshold": 0.15
           }
         },
         {
           "name": "SimpleReflectiveMaterial",
           "comparisonSettings": {
-            "threshold": 0.55
+            "threshold": 0.15
           }
         }
       ]
