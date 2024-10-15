@@ -28,7 +28,7 @@ def Xform "geo" (
             interpolation = "faceVarying"
         )
         point3f[] points = [(-0.5, 0, 0.5), (0.5, 0, 0.5), (-0.5, 0, -0.5), (0.5, 0, -0.5)]
-        texCoord2f[] primvars:st = [(0, 1), (1, 1), (0, 0), (1, 0)] (
+        texCoord2f[] primvars:st =  [(0, 0), (1, 0), (0, 1), (1, 1)] (
             customData = {
                 dictionary Maya = {
                     token name = "map1"
