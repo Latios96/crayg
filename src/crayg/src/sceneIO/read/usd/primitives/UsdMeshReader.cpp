@@ -149,12 +149,9 @@ void UsdMeshReader::translateFaceVaryingUvs(std::shared_ptr<TriangleMesh> &trian
 
     auto data = static_cast<const pxr::GfVec2f *>(pxr::HdGetValueData(triangulated));
     for (auto id : triangleMesh->faceIds()) {
-        Vector2f v0 = UsdConversions::convert(data[id * 3]);
-        v0.y = 1 - v0.y;
-        Vector2f v1 = UsdConversions::convert(data[id * 3 + 2]);
-        v1.y = 1 - v1.y;
-        Vector2f v2 = UsdConversions::convert(data[id * 3 + 1]);
-        v2.y = 1 - v2.y;
+        const Vector2f v0 = UsdConversions::convert(data[id * 3]);
+        const Vector2f v1 = UsdConversions::convert(data[id * 3 + 2]);
+        const Vector2f v2 = UsdConversions::convert(data[id * 3 + 1]);
         primVar->write(id, v0, v1, v2);
     }
 }
