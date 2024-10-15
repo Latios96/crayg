@@ -23,7 +23,7 @@ TEST_CASE("ColorConversion::linearToSRGB") {
 
         const Color result = ColorConversion::linearToSRGB(color);
 
-        REQUIRE(result == Color(1, 1.370351f, 1.6476816f));
+        REQUIRE(result == Color(0.99697495f, 1.350231f, 1.6094257f));
     }
 
     SECTION("should convert PixelBuffer") {
@@ -33,7 +33,7 @@ TEST_CASE("ColorConversion::linearToSRGB") {
 
         ColorConversion::linearToSRGB(*source, *target);
 
-        REQUIRE(target->getValue({0, 0}) == Color(1, 1.370351f, 1.6476816f));
+        REQUIRE(target->getValue({0, 0}) == Color(0.99697495f, 1.350231f, 1.6094257f));
     }
 }
 

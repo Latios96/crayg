@@ -18,7 +18,7 @@ TEST_CASE("TestFileTexture::evaluateColor") {
 
     SECTION("should use texture") {
         TemporaryDirectory temporaryDirectory;
-        const std::string texturePath = temporaryDirectory.getFilePath("blue.png");
+        const std::string texturePath = temporaryDirectory.getFilePath("blue.exr");
         fileTexture.setFilePath(texturePath);
         fileTexture.colorSpace = FileTexture::ColorSpace::RAW;
         Image image(10, 10);

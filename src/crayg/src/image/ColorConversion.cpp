@@ -16,8 +16,14 @@ void ColorConversion::linearToSRGB(const PixelBuffer &source, PixelBuffer &targe
 }
 
 Color ColorConversion::linearToSRGB(const Color &color) {
-    static const float gamma = 1.0f / 2.2f;
-    return color.pow(gamma);
+    return {linearToSRGB(color.r), linearToSRGB(color.g), linearToSRGB(color.b)};
+}
+
+float ColorConversion::linearToSRGB(float linearValue) {
+    if (linearValue <= 0.0031308) {
+        return 12.92f * linearValue;
+    }
+    return 1.055f * (std::pow(linearValue, 1.f / 2.4f) - 0.055f);
 }
 
 }
