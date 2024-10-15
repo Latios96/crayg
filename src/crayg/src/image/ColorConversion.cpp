@@ -34,7 +34,7 @@ void ColorConversion::sRGBToLinear(const PixelBuffer &source, PixelBuffer &targe
 }
 
 Color ColorConversion::sRGBToLinear(const Color &color) {
-    return {sRGBToLinear(color.r), linearToSRGB(color.g), linearToSRGB(color.b)};
+    return {sRGBToLinear(color.r), sRGBToLinear(color.g), sRGBToLinear(color.b)};
 }
 
 float ColorConversion::sRGBToLinear(float sRGBValue) {
@@ -43,6 +43,27 @@ float ColorConversion::sRGBToLinear(float sRGBValue) {
     } else {
         return std::pow(((sRGBValue + 0.055f) / 1.055f), 2.4f);
     }
+}
+
+void ColorConversion::toneMapHDRtoLDR(const PixelBuffer &source, PixelBuffer &target) {
+    CRG_TRACE_SCOPE("ToneMapping");
+    for (auto pixel : ImageIterators::lineByLine(source)) {
+        target.setValue(pixel, toneMapHDRtoLDR(source.getValue(pixel)));
+    }
+}
+
+Color ColorConversion::toneMapHDRtoLDR(const Color &color) {
+    return {toneMapHDRtoLDR(color.r), toneMapHDRtoLDR(color.g), toneMapHDRtoLDR(color.b)};
+}
+
+float ColorConversion::toneMapHDRtoLDR(float hdrValue) {
+    const float a = 2.51f;
+    const float b = 0.03f;
+    const float c = 2.43f;
+    const float d = 0.59f;
+    const float e = 0.14f;
+
+    return (hdrValue * (a * hdrValue + b)) / (hdrValue * (c * hdrValue + d) + e);
 }
 
 }

@@ -40,21 +40,21 @@ TEST_CASE("ColorConversion::linearToSRGB") {
 TEST_CASE("ColorConversion::sRGBToLinear") {
 
     SECTION("should convert single pixel") {
-        const Color color(1, 2, 3);
+        const Color color(0.1f, 0.2f, 0.3f);
 
         const Color result = ColorConversion::sRGBToLinear(color);
 
-        REQUIRE(result == Color(1.f, 1.350231f, 1.6094257f));
+        REQUIRE(result == Color(0.010022826f, 0.033104762f, 0.07323897f));
     }
 
     SECTION("should convert PixelBuffer") {
         const auto source = PixelBuffer::createRgbFloat({10, 20});
         const auto target = PixelBuffer::createRgbFloat({10, 20});
-        ImageAlgorithms::fill(*source, {1, 2, 3});
+        ImageAlgorithms::fill(*source, {0.1f, 0.2f, 0.3f});
 
         ColorConversion::sRGBToLinear(*source, *target);
 
-        REQUIRE(target->getValue({0, 0}) == Color(1.f, 1.350231f, 1.6094257f));
+        REQUIRE(target->getValue({0, 0}) == Color(0.010022826f, 0.033104762f, 0.07323897f));
     }
 }
 
