@@ -37,4 +37,25 @@ TEST_CASE("ColorConversion::linearToSRGB") {
     }
 }
 
+TEST_CASE("ColorConversion::sRGBToLinear") {
+
+    SECTION("should convert single pixel") {
+        const Color color(1, 2, 3);
+
+        const Color result = ColorConversion::sRGBToLinear(color);
+
+        REQUIRE(result == Color(1.f, 1.350231f, 1.6094257f));
+    }
+
+    SECTION("should convert PixelBuffer") {
+        const auto source = PixelBuffer::createRgbFloat({10, 20});
+        const auto target = PixelBuffer::createRgbFloat({10, 20});
+        ImageAlgorithms::fill(*source, {1, 2, 3});
+
+        ColorConversion::sRGBToLinear(*source, *target);
+
+        REQUIRE(target->getValue({0, 0}) == Color(1.f, 1.350231f, 1.6094257f));
+    }
+}
+
 }
