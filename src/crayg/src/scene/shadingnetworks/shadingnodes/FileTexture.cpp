@@ -1,5 +1,6 @@
 #include "FileTexture.h"
 #include "Logger.h"
+#include "image/ColorConversion.h"
 
 namespace crayg {
 Color FileTexture::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
@@ -18,11 +19,13 @@ Color FileTexture::evaluateColor(const SurfaceInteraction &surfaceInteraction) {
         return fallbackColor;
     }
 
+    const Color color(result);
+
     if (colorSpace == ColorSpace::RAW) {
-        return Color(result);
+        return color;
     }
 
-    return Color(result).pow(2.2f);
+    return ColorConversion::sRGBToLinear(color);
 }
 
 std::string FileTexture::getType() const {
