@@ -21,7 +21,7 @@ class UsdSubdivisionSurfaceMeshReader : public BaseUsdImageableReader<pxr::UsdGe
     void ensureCatmullClarkScheme() const;
 
   private:
-    void translateBoundaryInterpolation(std::shared_ptr<SubdivisionSurfaceMesh> sharedPtr);
+    void translateBoundaryInterpolation(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh);
 };
 
 } // crayg

@@ -65,7 +65,7 @@ void UsdSubdivisionSurfaceMeshReader::translateIndices(
 }
 
 void UsdSubdivisionSurfaceMeshReader::translateBoundaryInterpolation(
-    std::shared_ptr<SubdivisionSurfaceMesh> subdivisionSurfaceMesh) {
+    std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) {
     auto interpolateBoundary =
         UsdUtils::getAttributeValueAs<pxr::TfToken>(usdPrim.GetInterpolateBoundaryAttr(), timeCodeToRead);
     if (interpolateBoundary == pxr::UsdGeomTokens->edgeAndCorner) {
