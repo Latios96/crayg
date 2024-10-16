@@ -122,8 +122,8 @@ scenes:
     resolution: "870x1080"
   - name: DailyDweeb
     cameras:
-      - /Camera/Camera/CameraShape
-    hero_camera: /Camera/Camera/CameraShape
+      - /Camera/Camera/VariantCamera
+    hero_camera: /Camera/Camera/VariantCamera
     integrators:
       - debug
       - ambient_occlusion
