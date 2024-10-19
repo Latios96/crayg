@@ -231,24 +231,18 @@
     },
     {
       "name": "UsdPreviewSurface",
+      "comparisonSettings": {
+        "threshold": 0.15
+      },
       "tests": [
         {
-          "name": "SimpleDiffuseMaterial",
-          "comparisonSettings": {
-            "threshold": 0.15
-          }
+          "name": "SimpleDiffuseMaterial"
         },
         {
-          "name": "SimpleReflectiveMaterial",
-          "comparisonSettings": {
-            "threshold": 0.15
-          }
+          "name": "SimpleReflectiveMaterial"
         },
         {
-          "name": "SimpleMetalMaterial",
-          "comparisonSettings": {
-            "threshold": 0.15
-          }
+          "name": "SimpleMetalMaterial"
         }
       ]
     }
