@@ -57,18 +57,15 @@
     },
     {
       "name": "CornellBox",
+      "comparisonSettings": {
+        "threshold": 0.15
+      },
       "tests": [
         {
-          "name": "CornellBox_Original",
-          "comparisonSettings": {
-            "threshold": 0.15
-          }
+          "name": "CornellBox_Original"
         },
         {
-          "name": "CornellBox_Original_GI",
-          "comparisonSettings": {
-            "threshold": 0.15
-          }
+          "name": "CornellBox_Original_GI"
         },
         {
           "name": "CornellBox_Sphere"
