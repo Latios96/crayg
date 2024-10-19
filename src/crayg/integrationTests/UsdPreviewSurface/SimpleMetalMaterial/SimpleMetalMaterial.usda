@@ -1,0 +1,25 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/_base_scene.usda@
+    ]
+)
+
+
+
+over "Knob"
+{
+    over "Looks"
+    {
+        over "MaterialUnderTestSG"
+        {
+            over "MaterialUnderTest"
+            {
+                color3f inputs:diffuseColor = (0.5,0.5,0.5)
+                color3f inputs:specularColor = (0.95, 0.95, 0.95)
+                int inputs:useSpecularWorkflow = 0
+                float inputs:metallic = 1
+            }
+        }
+    }
+}

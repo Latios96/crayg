@@ -38,6 +38,16 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
 
     Color lobesResult = Color::createBlack();
     int contributingLobes = 0;
+
+    if (!lobes.metallic.weight.isBlack()) {
+        lobesResult += lobes.metallic.weight * integratorContext.integrateRay(lobes.metallic.sampleDirection);
+        contributingLobes++;
+    }
+
+    if (!lobes.specular.weight.isBlack()) {
+        lobesResult += lobes.specular.weight * integratorContext.integrateRay(lobes.specular.sampleDirection);
+        contributingLobes++;
+    }
     if (!lobes.specular.weight.isBlack()) {
         lobesResult += lobes.specular.weight * integratorContext.integrateRay(lobes.specular.sampleDirection);
         contributingLobes++;

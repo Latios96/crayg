@@ -14,6 +14,7 @@ struct Lobe {
 };
 
 struct Lobes {
+    Lobe metallic;
     Lobe specular;
     Lobe diffuse;
 };

@@ -243,6 +243,12 @@
           "comparisonSettings": {
             "threshold": 0.15
           }
+        },
+        {
+          "name": "SimpleMetalMaterial",
+          "comparisonSettings": {
+            "threshold": 0.15
+          }
         }
       ]
     }

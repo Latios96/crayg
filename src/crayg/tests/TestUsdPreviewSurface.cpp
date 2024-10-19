@@ -18,17 +18,32 @@ TEST_CASE("UsdPreviewSurface::evaluate") {
 
         REQUIRE(lobes.diffuse.weight == Color::createGrey(0.5f));
         REQUIRE(lobes.specular.weight == Color::createBlack());
+        REQUIRE(lobes.metallic.weight == Color::createBlack());
     }
 
-    SECTION("should return weighted reflection") {
-        UsdPreviewSurface usdPreviewSurface(Color::createBlack());
-        usdPreviewSurface.metallic = 0.5;
+    SECTION("should return diffuse and spec for dielectric") {
+        UsdPreviewSurface usdPreviewSurface(Color::createGrey(0.5f));
+        usdPreviewSurface.specularColor = Color::createWhite();
+        usdPreviewSurface.metallic = 0;
 
         Lobes lobes;
         usdPreviewSurface.getLobes(surfaceInteraction, lobes);
 
-        REQUIRE(lobes.diffuse.weight == Color::createGrey(0));
-        REQUIRE(lobes.specular.weight == Color::createGrey(0.5));
+        REQUIRE(lobes.diffuse.weight == Color::createGrey(0.48585278f));
+        REQUIRE(lobes.specular.weight == Color::createWhite());
+        REQUIRE(lobes.metallic.weight == Color::createBlack());
+    }
+
+    SECTION("should return only metal for conductor") {
+        UsdPreviewSurface usdPreviewSurface(Color::createGrey(0.5f));
+        usdPreviewSurface.metallic = 1;
+
+        Lobes lobes;
+        usdPreviewSurface.getLobes(surfaceInteraction, lobes);
+
+        REQUIRE(lobes.diffuse.weight == Color::createBlack());
+        REQUIRE(lobes.specular.weight == Color::createBlack());
+        REQUIRE(lobes.metallic.weight == Color::createGrey(0.5));
     }
 }
 
