@@ -382,6 +382,8 @@ set(crayg_SRCS
     utils/StopWatch.h
     utils/TaskReporter.cpp
     utils/TaskReporter.h
+    utils/TextureStats.cpp
+    utils/TextureStats.h
     utils/ToStringHelper.h
     utils/tracing/CraygTracing.h
     utils/tracing/minitrace.c

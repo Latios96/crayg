@@ -11,6 +11,7 @@
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
+#include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
 #include "widgets/GuiTaskReporter.h"
 #include "widgets/ImageWidgetOutputDriver.h"
@@ -104,6 +105,9 @@ int craygMain(int argc, char **argv) {
     std::thread renderThread([&image, &renderer, &imageOutputPath]() {
         try {
             renderer.renderScene();
+
+            TextureStats textureStats;
+            Logger::info(textureStats.getTextureStats());
 
             Logger::info("Writing image to {}..", imageOutputPath);
             ImageWriters::writeImage(image, imageOutputPath);

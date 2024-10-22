@@ -55,6 +55,9 @@ int craygMain(int argc, char *argv[]) {
     Renderer renderer(scene, imageOutputDriver, taskReporter, bucketQueue);
     renderer.renderScene();
 
+    TextureStats textureStats;
+    Logger::info(textureStats.getTextureStats());
+
     Logger::info("Writing image to {}..", imageOutputPath);
     ImageWriters::writeImage(myImage, imageOutputPath);
     Logger::info("Writing image done.");
