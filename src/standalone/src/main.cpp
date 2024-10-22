@@ -3,6 +3,7 @@
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
+#include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
 #include <CraygInfo.h>
 #include <image/io/ImageWriter.h>
