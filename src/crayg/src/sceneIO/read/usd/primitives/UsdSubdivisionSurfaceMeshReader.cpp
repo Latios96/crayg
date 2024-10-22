@@ -20,6 +20,7 @@ std::shared_ptr<SubdivisionSurfaceMesh> UsdSubdivisionSurfaceMeshReader::read() 
     translatePoints(subdivisionSurfaceMesh);
     translateIndices(subdivisionSurfaceMesh);
     translateBoundaryInterpolation(subdivisionSurfaceMesh);
+    translateMaxSubdivisions(subdivisionSurfaceMesh);
     translateUvs(subdivisionSurfaceMesh);
 
     return subdivisionSurfaceMesh;
@@ -103,6 +104,12 @@ void UsdSubdivisionSurfaceMeshReader::translateUvs(
     for (auto &i : indices) {
         subdivisionSurfaceMesh->uvIndices.push_back(i);
     }
+}
+
+void UsdSubdivisionSurfaceMeshReader::translateMaxSubdivisions(
+    std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh) {
+    subdivisionSurfaceMesh->maxSubdivision =
+        UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "crayg:maxSubdivision", 3);
 }
 
 } // crayg

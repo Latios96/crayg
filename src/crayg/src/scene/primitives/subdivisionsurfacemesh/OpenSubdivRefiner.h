@@ -9,7 +9,7 @@ namespace crayg {
 class OpenSubdivRefiner {
   public:
     explicit OpenSubdivRefiner(SubdivisionSurfaceMesh &subdivisionSurfaceMesh);
-    void refine(int maxLevel = 3);
+    void refine(int maxLevel);
 
   private:
     SubdivisionSurfaceMesh &subdivisionSurfaceMesh;

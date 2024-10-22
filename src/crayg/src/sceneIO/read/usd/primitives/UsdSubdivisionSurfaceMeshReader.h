@@ -22,6 +22,7 @@ class UsdSubdivisionSurfaceMeshReader : public BaseUsdImageableReader<pxr::UsdGe
 
   private:
     void translateBoundaryInterpolation(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh);
+    void translateMaxSubdivisions(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh);
 };
 
 } // crayg

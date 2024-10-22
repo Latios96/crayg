@@ -19,6 +19,7 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
     SubdivisionSurfaceMeshFixtures::createUnitPlane(subdivisionSurfaceMesh);
 
     SECTION("should write untesselated subd surface") {
+        subdivisionSurfaceMesh.maxSubdivision = 4;
         UsdSubdivisionSurfaceMeshWriter usdSubdivisionSurfaceMeshWriter(subdivisionSurfaceMesh, usdMaterialWriteCache);
 
         usdSubdivisionSurfaceMeshWriter.write(stage, usdPathFactory);
@@ -36,6 +37,8 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
         pxr::VtIntArray uvIndices;
         uvsPrimVar->Get(&uvs);
         uvsPrimVar->GetIndices(&uvIndices);
+        const int maxSubdivision =
+            UsdUtils::getStaticAttributeValueAs<int>(usdGeomMesh.GetPrim(), "crayg:maxSubdivision", 0);
         REQUIRE(translation == pxr::GfVec3f(1, 2, -3));
         REQUIRE(points == pxr::VtVec3fArray({{-0.5, 0, 0.5}, {0.5, 0, 0.5}, {0.5, 0, -0.5}, {-0.5, 0, -0.5}}));
         REQUIRE(triangleIndices == pxr::VtIntArray({0, 1, 2, 3}));
@@ -43,9 +46,11 @@ TEST_CASE("UsdSubdivisionSurfaceMeshWriter::write") {
         REQUIRE(uvs == pxr::VtVec2fArray({{0, 1}, {1, 1}, {0, 0}, {1, 0}}));
         REQUIRE(uvIndices == pxr::VtIntArray({0, 1, 2, 3}));
         REQUIRE_FALSE(usdGeomMesh.GetNormalsAttr().HasAuthoredValue());
+        REQUIRE(maxSubdivision == 4);
     }
 
     SECTION("should write tesselated subd surface") {
+        subdivisionSurfaceMesh.maxSubdivision = 3;
         subdivisionSurfaceMesh.tessellate();
         UsdSubdivisionSurfaceMeshWriter usdSubdivisionSurfaceMeshWriter(subdivisionSurfaceMesh, usdMaterialWriteCache);
 

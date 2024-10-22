@@ -1,5 +1,6 @@
 #include "UsdSubdivisionSurfaceMeshWriter.h"
 #include "UsdTriangleMeshWriter.h"
+#include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usdGeom/primvar.h>
 #include <pxr/usd/usdGeom/primvarsAPI.h>
 
@@ -35,6 +36,7 @@ pxr::UsdGeomMesh UsdSubdivisionSurfaceMeshWriter::write(pxr::UsdStagePtr stage, 
     writeFaceVertexCounts(usdGeomMesh);
     writeSubdivisionScheme(usdGeomMesh);
     writeUvs(usdGeomMesh);
+    writeMaxSubdivision(usdGeomMesh);
 
     return usdGeomMesh;
 }
@@ -86,5 +88,9 @@ void UsdSubdivisionSurfaceMeshWriter::writeUvs(pxr::UsdGeomMesh usdGeomMesh) con
     pxr::UsdGeomPrimvarsAPI primvarsApi(usdGeomMesh);
     primvarsApi.CreateIndexedPrimvar(pxr::TfToken("uv"), pxr::SdfValueTypeNames->TexCoord2fArray, uvs, uvIndices,
                                      pxr::UsdGeomTokens->faceVarying);
+}
+
+void UsdSubdivisionSurfaceMeshWriter::writeMaxSubdivision(pxr::UsdGeomMesh usdGeomMesh) const {
+    UsdUtils::createAndSetAttribute(usdGeomMesh.GetPrim(), "crayg:maxSubdivision", craygObject.maxSubdivision);
 }
 } // crayg

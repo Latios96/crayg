@@ -20,6 +20,7 @@ class UsdSubdivisionSurfaceMeshWriter : public BaseUsdSceneObjectWriter<pxr::Usd
     void writeFaceVertexCounts(pxr::UsdGeomMesh usdGeomMesh) const;
     void writeSubdivisionScheme(pxr::UsdGeomMesh usdGeomMesh) const;
     void writeUvs(pxr::UsdGeomMesh usdGeomMesh) const;
+    void writeMaxSubdivision(pxr::UsdGeomMesh usdGeomMesh) const;
 };
 
 } // crayg

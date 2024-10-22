@@ -63,6 +63,25 @@ TEST_CASE("UsdSubdivisionSurfaceMeshReader::read") {
         REQUIRE(subdivisionSurfaceMesh->boundaryInterpolation ==
                 SubdivisionSurfaceMesh::BoundaryInterpolation::EDGE_ONLY);
     }
+
+    SECTION("should read crayg:maxSubdivision") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage, pxr::UsdGeomTokens->catmullClark);
+        UsdUtils::createAndSetAttribute(usdGeomMesh.GetPrim(), "crayg:maxSubdivision", 4);
+
+        UsdSubdivisionSurfaceMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto subdivisionSurfaceMesh = usdMeshReader.read();
+
+        REQUIRE(subdivisionSurfaceMesh->maxSubdivision == 4);
+    }
+
+    SECTION("should default crayg:maxSubdivision to 3") {
+        auto usdGeomMesh = UsdGeomMeshFixtures::createQuadPlane(stage, pxr::UsdGeomTokens->catmullClark);
+
+        UsdSubdivisionSurfaceMeshReader usdMeshReader(usdGeomMesh, usdMaterialTranslationCache);
+        auto subdivisionSurfaceMesh = usdMeshReader.read();
+
+        REQUIRE(subdivisionSurfaceMesh->maxSubdivision == 3);
+    }
 }
 
 }

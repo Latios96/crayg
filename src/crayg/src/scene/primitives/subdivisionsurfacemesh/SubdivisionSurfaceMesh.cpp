@@ -50,7 +50,7 @@ size_t SubdivisionSurfaceMesh::primitiveCount() const {
 void SubdivisionSurfaceMesh::tessellate() {
     CRG_TRACE_SCOPE("SubdivisionSurfaceMesh");
     OpenSubdivRefiner openSubdivRefiner(*this);
-    openSubdivRefiner.refine();
+    openSubdivRefiner.refine(maxSubdivision);
 
     FanTriangulator fanTriangulator(*this);
     fanTriangulator.fanTriangulate(triangleMesh.faceVertexIndices);

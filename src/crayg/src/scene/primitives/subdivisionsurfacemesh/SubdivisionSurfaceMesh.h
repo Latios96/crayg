@@ -34,7 +34,7 @@ class SubdivisionSurfaceMesh : public SceneObject {
     enum class BoundaryInterpolation { EDGE_ONLY, EDGE_AND_CORNER };
 
     BoundaryInterpolation boundaryInterpolation = BoundaryInterpolation::EDGE_ONLY;
-
+    int maxSubdivision = 3;
     TriangleMesh triangleMesh;
 
   private:
