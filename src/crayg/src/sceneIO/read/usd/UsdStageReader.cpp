@@ -44,8 +44,7 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
             readPointInstancer(scene, prim);
         } else if (prim.IsA<pxr::UsdLuxDiskLight>() && UsdReadUtils::primIsVisible(prim)) {
             readDiskLight(scene, prim);
-        } else if (prim.IsA<pxr::UsdGeomCamera>() && scene.camera == nullptr &&
-                   cameraPathMatches(prim.GetPath(), readOptions.cameraName)) {
+        } else if (prim.IsA<pxr::UsdGeomCamera>() && shouldReadCamera(scene, prim, readOptions)) {
             readCamera(scene, prim);
         }
     }
@@ -55,10 +54,33 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
             CRAYG_LOG_AND_THROW(std::runtime_error(
                 fmt::format("No camera with path {} found in USD stage!", readOptions.cameraName.value())));
         }
+
+        if (cameraFromUsdRenderSettings) {
+            CRAYG_LOG_AND_THROW(std::runtime_error(
+                fmt::format("No camera with path {} found in USD stage!", *cameraFromUsdRenderSettings)));
+        }
+
         CRAYG_LOG_AND_THROW(std::runtime_error("No camera found in USD stage!"));
     }
 
     removeAccidentlyReadInstancerProtos(scene);
+}
+
+bool UsdStageReader::shouldReadCamera(const Scene &scene, const pxr::UsdPrim &prim,
+                                      const SceneReader::ReadOptions &readOptions) const {
+    if (scene.camera) {
+        return false;
+    }
+
+    if (readOptions.cameraName) {
+        return cameraPathMatches(prim.GetPath(), readOptions.cameraName);
+    }
+
+    if (cameraFromUsdRenderSettings) {
+        return *cameraFromUsdRenderSettings == prim.GetPath();
+    }
+
+    return true;
 }
 
 void UsdStageReader::readUsdGeomMesh(Scene &scene, const std::shared_ptr<Material> &defaultMaterial,
@@ -91,7 +113,7 @@ void UsdStageReader::readCamera(Scene &scene, const pxr::UsdPrim &prim) const {
     scene.camera = camera;
 }
 
-bool UsdStageReader::cameraPathMatches(pxr::SdfPath path, std::optional<std::string> cameraPath) {
+bool UsdStageReader::cameraPathMatches(const pxr::SdfPath &path, const std::optional<std::string> &cameraPath) const {
     return path.GetString() == cameraPath.value_or(path.GetString());
 }
 
@@ -113,7 +135,15 @@ void UsdStageReader::readRenderSettings(Scene &scene) {
     }
     for (pxr::UsdPrim prim : renderPrim.GetDescendants()) {
         if (prim.IsA<pxr::UsdRenderSettings>()) {
-            scene.renderSettings = *UsdRenderSettingsReader(pxr::UsdRenderSettings(prim)).read();
+            pxr::UsdRenderSettings usdRenderSettings(prim);
+            scene.renderSettings = *UsdRenderSettingsReader(usdRenderSettings).read();
+
+            std::vector<pxr::SdfPath> targets;
+            usdRenderSettings.GetCameraRel().GetTargets(&targets);
+            if (!targets.empty()) {
+                cameraFromUsdRenderSettings = targets[0];
+            }
+
             return;
         }
     }
@@ -181,4 +211,5 @@ void UsdStageReader::applyVariantSets(const SceneReader::ReadOptions &readOption
                      variantSelection.primPath, variantSelection.selectedVariant);
     }
 }
+
 }

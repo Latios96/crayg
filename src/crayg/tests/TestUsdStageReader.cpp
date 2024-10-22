@@ -210,6 +210,43 @@ TEST_CASE("UsdStageReader::readStageToScene") {
                                Catch::Message("No camera with path /not_existing found in USD stage!"));
     }
 
+    SECTION("providing a cameraName in UsdRenderSettings relation should use this camera") {
+        SceneReader::ReadOptions readOptions;
+        auto secondUsdCamera = pxr::UsdGeomCamera::Define(stage, pxr::SdfPath("/usdCamera2"));
+        pxr::UsdGeomXformCommonAPI(secondUsdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3));
+        auto usdRenderSettings = pxr::UsdRenderSettings::Define(stage, pxr::SdfPath("/Render/settings"));
+        usdRenderSettings.CreateCameraRel().AddTarget(secondUsdCamera.GetPath());
+
+        UsdStageReader(*stage).readStageToScene(scene, readOptions);
+
+        REQUIRE(scene.camera->getPosition() == Vector3f(1, 2, -3));
+    }
+
+    SECTION("providing a cameraName in translationOptions should take precedence over UsdRenderSettings relation use "
+            "this camera") {
+        SceneReader::ReadOptions readOptions;
+        readOptions.cameraName = "/usdCamera2";
+        auto secondUsdCamera = pxr::UsdGeomCamera::Define(stage, pxr::SdfPath("/usdCamera2"));
+        pxr::UsdGeomXformCommonAPI(secondUsdCamera).SetTranslate(pxr::GfVec3f(1, 2, 3));
+        auto thirdUsdCamera = pxr::UsdGeomCamera::Define(stage, pxr::SdfPath("/usdCamera3"));
+        pxr::UsdGeomXformCommonAPI(thirdUsdCamera).SetTranslate(pxr::GfVec3f(4, 5, 6));
+        auto usdRenderSettings = pxr::UsdRenderSettings::Define(stage, pxr::SdfPath("/Render/settings"));
+        usdRenderSettings.CreateCameraRel().AddTarget(secondUsdCamera.GetPath());
+
+        UsdStageReader(*stage).readStageToScene(scene, readOptions);
+
+        REQUIRE(scene.camera->getPosition() == Vector3f(1, 2, -3));
+    }
+
+    SECTION("providing a non existent camera in UsdRenderSettings relation should throw exception") {
+        stage->RemovePrim(pxr::SdfPath("/usdCamera"));
+        SceneReader::ReadOptions readOptions;
+        readOptions.cameraName = "/not_existing";
+
+        REQUIRE_THROWS_MATCHES(UsdStageReader(*stage).readStageToScene(scene, readOptions), std::runtime_error,
+                               Catch::Message("No camera with path /not_existing found in USD stage!"));
+    }
+
     SECTION("should read point instancer") {
         auto proto = pxr::UsdGeomSphere::Define(stage, pxr::SdfPath("/protos/sphere"));
         auto usdGeomPointInstancer = pxr::UsdGeomPointInstancer::Define(stage, pxr::SdfPath("/usdGeomPointInstancer"));
