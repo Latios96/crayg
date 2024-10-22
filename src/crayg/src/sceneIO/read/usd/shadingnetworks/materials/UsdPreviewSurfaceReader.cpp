@@ -21,7 +21,6 @@ std::shared_ptr<UsdPreviewSurface> UsdPreviewSurfaceReader::read() {
     UsdShadingNodeReadUtils::readShaderAttributeValue<Color, pxr::GfVec3f>(usdPrim, "specularColor",
                                                                            material->specularColor.value);
     UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "metallic", material->metallic.value);
-    UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "metallic", material->metallic.value);
     UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "roughness", material->roughness.value);
     UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "clearcoat", material->clearcoat.value);
     UsdShadingNodeReadUtils::readShaderAttributeValue<float, float>(usdPrim, "clearcoatRoughness",
