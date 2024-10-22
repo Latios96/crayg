@@ -1,0 +1,125 @@
+#usda 1.0
+
+def Xform "world"
+{
+    reorder nameChildren = ["knob_0", "knob_1", "knob_2", "knob_3", "knob_4", "knob_5", "knob_6", "knob_7", "knob_8", "knob_9", "knob_10", "backdrop_and_light", "render_cam"]
+    def Xform "knob_0" (
+        append payload = [
+            @./knob.usda@
+        ]
+    )
+    {
+        double3 xformOp:translate = (6, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "backdrop_and_light" (
+        append payload = @./backdrop_and_light.usda@
+    )
+    {
+    }
+
+    def Camera "render_cam"
+    {
+        float2 clippingRange = (0.1, 10000)
+        float focalLength = 50
+        float focusDistance = 5
+        float horizontalAperture = 35.999928
+        float horizontalApertureOffset = 0
+        token projection = "perspective"
+        float verticalAperture = 23.999952
+        float verticalApertureOffset = 0
+        token visibility = "inherited"
+        float3 xformOp:rotateXYZ = (144.26164, 3.531125e-31, 180)
+        float3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0, 11.58174642289833, -15.499791200915555)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+
+    def Xform "knob_1" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (4.8, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "knob_2" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (3.6, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "knob_3" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (2.4, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "knob_4" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (1.2, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "knob_5" (
+        append payload = @./knob.usda@
+    )
+    {
+    }
+
+    def Xform "knob_6" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (-1.2, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "knob_7" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (-2.4, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "knob_8" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (-3.6, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "knob_9" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (-4.8, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "knob_10" (
+        append payload = @./knob.usda@
+    )
+    {
+        double3 xformOp:translate = (-6, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+}
+
+def Xform "Render"
+{
+    def RenderSettings "RenderSettings"
+    {
+        uniform int2 resolution = (1800, 180)
+    }
+}
+

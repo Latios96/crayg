@@ -1,0 +1,9 @@
+#usda 1.0
+(
+    defaultPrim = "Knob"
+    subLayers = [
+        @./knob_look.usda@,
+        @./knob_geo.usdc@
+    ]
+)
+

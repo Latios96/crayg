@@ -1,0 +1,75 @@
+#usda 1.0
+
+over "Knob"
+{
+    over "InnerSphere" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        float3[] extent = [(-0.37474418, 0.13658828, -0.37454417), (0.37474406, 0.88607657, 0.374944)]
+        rel material:binding = </Knob/mtl/InnerSphereMtl>
+        uniform token subdivisionScheme = "catmullClark"
+    }
+
+    over "OuterSphere" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        float3[] extent = [(-0.45825005, 0.05233284, -0.45805004), (0.4582499, 0.9688328, 0.45844996)]
+        rel material:binding = </Knob/mtl/MaterialUnderTest>
+        uniform token subdivisionScheme = "catmullClark"
+    }
+
+    over "ObjBase" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        float3[] extent = [(-0.5404039, -0.04881542, -0.38338286), (0.5404039, 0.26242596, 0.5406039)]
+        rel material:binding = </Knob/mtl/MaterialUnderTest>
+        uniform token subdivisionScheme = "catmullClark"
+    }
+
+    over "Equation" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Knob/mtl/EquationMtl>
+    }
+
+    def Scope "mtl"
+    {
+        def Material "InnerSphereMtl"
+        {
+            token outputs:surface.connect = </Knob/mtl/InnerSphereMtl/InnerSpherePreviewSurface.outputs:surface>
+
+            def Shader "InnerSpherePreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                token outputs:surface
+            }
+        }
+
+        def Material "EquationMtl"
+        {
+            token outputs:surface.connect = </Knob/mtl/EquationMtl/UsdPreviewSurface1.outputs:surface>
+
+            def Shader "UsdPreviewSurface1"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                token outputs:surface
+            }
+        }
+
+        def Material "MaterialUnderTest"
+        {
+            token outputs:surface.connect = </Knob/mtl/MaterialUnderTest/MaterialUnderTestPreviewSurface.outputs:surface>
+
+            def Shader "MaterialUnderTestPreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                token outputs:surface
+            }
+        }
+    }
+}
+
