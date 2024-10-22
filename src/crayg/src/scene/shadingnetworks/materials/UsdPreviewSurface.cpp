@@ -42,13 +42,28 @@ float F_schlick(float ior, const Vector3f &view, const Vector3f &halfVector) {
     return F_0 + (1.f - F_0) * oneMinus * oneMinus * oneMinus * oneMinus * oneMinus;
 }
 
+Vector3f roughReflect(const SurfaceInteraction &surfaceInteraction, float roughness) {
+    const Vector3f perfectReflection = surfaceInteraction.ray.direction.reflect(surfaceInteraction.normal);
+
+    if (roughness == 0) {
+        return perfectReflection;
+    }
+
+    const Vector3f randomDirOnHemisphere = Sampling::uniformSampleHemisphere();
+    auto orthonormalBasis = surfaceInteraction.getOrthonormalBasis();
+    const Vector3f roughReflection = orthonormalBasis.toLocalCoordinates(randomDirOnHemisphere);
+    return MathUtils::lerp(roughness * roughness, perfectReflection, roughReflection);
+}
+
 void UsdPreviewSurface::getLobes(const SurfaceInteraction &surfaceInteraction, Lobes &lobes) {
     const Color evaluatedDiffuse = diffuseColor.evaluate(surfaceInteraction);
     const float evaluatedMetallic = metallic.evaluate(surfaceInteraction);
 
     if (evaluatedMetallic > 0.f) {
         lobes.metallic.weight = Color::createGrey(evaluatedMetallic) * evaluatedDiffuse;
-        lobes.metallic.sampleDirection = surfaceInteraction.spawnReflectionRayFromSurface();
+        const float evaluatedRoughness = roughness.evaluate(surfaceInteraction);
+        lobes.metallic.sampleDirection =
+            surfaceInteraction.spawnRayFromSurface(roughReflect(surfaceInteraction, evaluatedRoughness));
     }
 
     if (evaluatedMetallic >= 1.f) {
@@ -61,7 +76,9 @@ void UsdPreviewSurface::getLobes(const SurfaceInteraction &surfaceInteraction, L
 
     float reflectance = 0;
     if (!lobes.specular.weight.isBlack()) {
-        lobes.specular.sampleDirection = surfaceInteraction.spawnReflectionRayFromSurface();
+        const float evaluatedRoughness = roughness.evaluate(surfaceInteraction);
+        lobes.specular.sampleDirection =
+            surfaceInteraction.spawnRayFromSurface(roughReflect(surfaceInteraction, evaluatedRoughness));
         const float evaluatedIor = ior.evaluate(surfaceInteraction);
         reflectance = F_schlick(evaluatedIor, surfaceInteraction.ray.direction, halfVector);
     }

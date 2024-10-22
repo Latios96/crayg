@@ -1,0 +1,166 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/material_parameter_progression.usda@
+    ]
+)
+
+over "world"
+{
+    over "knob_0"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0
+                }
+            }
+        }
+    }
+
+    over "knob_1"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.1
+                }
+            }
+        }
+    }
+    over "knob_2"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.2
+                }
+            }
+        }
+    }
+    over "knob_3"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.3
+                }
+            }
+        }
+    }
+    over "knob_4"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.4
+                }
+            }
+        }
+    }
+    over "knob_5"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.5
+                }
+            }
+        }
+    }
+    over "knob_6"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.6
+                }
+            }
+        }
+    }
+    over "knob_7"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.7
+                }
+            }
+        }
+    }
+    over "knob_8"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.8
+                }
+            }
+        }
+    }
+    over "knob_9"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 0.9
+                }
+            }
+        }
+    }
+    over "knob_10"
+    {
+        over "mtl"
+        {
+            over "MaterialUnderTest"
+            {
+                over "MaterialUnderTestPreviewSurface"
+                {
+                    float inputs:metallic = 1
+                    float inputs:roughness = 1
+                }
+            }
+        }
+    }
+}
+
