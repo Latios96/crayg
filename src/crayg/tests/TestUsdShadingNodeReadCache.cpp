@@ -56,6 +56,7 @@ TEST_CASE("UsdShadingNodeReadCache::readCachedGraph") {
     auto usdColorAttr = usdColorConstant.CreateInput(pxr::TfToken("value"), pxr::SdfValueTypeNames->Vector3f)
                             .Set(pxr::GfVec3f(1, 2, 3));
     auto usdColorOutput = usdColorConstant.CreateOutput(pxr::TfToken("out"), pxr::SdfValueTypeNames->Vector3f);
+    auto usdColorOutput_g = usdColorConstant.CreateOutput(pxr::TfToken("g"), pxr::SdfValueTypeNames->Float);
 
     auto usdMaterialShader = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/Material"));
     auto usdFloatInput = usdMaterialShader.CreateInput(pxr::TfToken("floatInput"), pxr::SdfValueTypeNames->Float);
@@ -160,6 +161,21 @@ TEST_CASE("UsdShadingNodeReadCache::readCachedGraph") {
         REQUIRE(targetInput.value == Color(4, 5, 6));
         REQUIRE(targetInput.hasInputConnection());
         REQUIRE(targetInput.inputNode->getType() == "ColorConstant");
+    }
+
+    SECTION("should insert automatic ColorToFloat conversion for color output connected to float input") {
+        usdFloatInput.ConnectToSource(usdColorOutput_g);
+        FloatShadingNodeInput targetInput;
+        std::string str;
+        stage->ExportToString(&str);
+
+        usdShadingNodeReadCache.readCachedGraph(usdMaterialShader, usdFloatInput, targetInput);
+
+        REQUIRE(targetInput.hasInputConnection());
+        REQUIRE(targetInput.inputNode->getType() == "ColorToFloat");
+        auto colorToFloat = std::dynamic_pointer_cast<ColorToFloat>(targetInput.inputNode);
+        REQUIRE(colorToFloat->colorInput.inputNode->getType() == "ColorConstant");
+        REQUIRE(colorToFloat->colorToFloatMode == ColorToFloatMode::G);
     }
 }
 

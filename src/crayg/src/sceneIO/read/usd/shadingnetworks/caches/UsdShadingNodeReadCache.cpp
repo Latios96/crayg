@@ -1,4 +1,5 @@
 #include "UsdShadingNodeReadCache.h"
+#include "scene/shadingnetworks/shadingnodes/ColorToFloat.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdCheckerBoardReader.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h"
 #include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.h"
@@ -53,6 +54,31 @@ std::shared_ptr<ShadingNode> UsdShadingNodeReadCache::translateShadingNode(pxr::
     return nullptr;
 }
 
+std::shared_ptr<ShadingNode> insertAutomaticConversion(std::shared_ptr<ShadingNode> &cachedConnectedShader,
+                                                       const pxr::TfToken &connectedOutputName,
+                                                       ShadingNodeOutputType outputType,
+                                                       ShadingNodeOutputType inputType) {
+    const bool isColorToFloat = outputType == ShadingNodeOutputType::COLOR && inputType == ShadingNodeOutputType::FLOAT;
+
+    if (isColorToFloat) {
+        auto colorToFloat = std::make_shared<ColorToFloat>();
+        colorToFloat->colorInput.connectTo(cachedConnectedShader);
+        if (connectedOutputName == "r") {
+            colorToFloat->colorToFloatMode = ColorToFloatMode::R;
+        } else if (connectedOutputName == "g") {
+            colorToFloat->colorToFloatMode = ColorToFloatMode::G;
+        } else if (connectedOutputName == "b") {
+            colorToFloat->colorToFloatMode = ColorToFloatMode::B;
+        }
+        return colorToFloat;
+    }
+
+    CRAYG_LOG_AND_THROW_MESSAGE(
+        fmt::format("Error when connecting {}.{}. Output type {} can not be connected to input type {} "
+                    "and no automatic conversion is defined",
+                    cachedConnectedShader->getName(), connectedOutputName, outputType, inputType));
+}
+
 template <class InputType, typename UsdType, typename T>
 void _readCachedGraph(UsdShadingNodeReadCache &usdShadingNodeReadCache, pxr::UsdShadeShader &shader,
                       pxr::UsdShadeInput &source, InputType &target) {
@@ -64,6 +90,14 @@ void _readCachedGraph(UsdShadingNodeReadCache &usdShadingNodeReadCache, pxr::Usd
         pxr::TfToken connectedOutputName;
         auto connectedShader = UsdUtils::getConnectedUsdShadeShader(shader, source, connectedOutputName);
         auto cachedConnectedShader = usdShadingNodeReadCache.getCachedOrReadShadingNode(connectedShader);
+
+        const ShadingNodeOutputType outputType = cachedConnectedShader->getOutputType();
+        const ShadingNodeOutputType inputType = target.getOutputType();
+        if (outputType != inputType) {
+            cachedConnectedShader =
+                insertAutomaticConversion(cachedConnectedShader, connectedOutputName, outputType, inputType);
+        }
+
         target.connectTo(cachedConnectedShader);
     }
 }
@@ -87,4 +121,5 @@ void UsdShadingNodeReadCache::readCachedGraph(pxr::UsdShadeShader &shader, pxr::
                                               ColorShadingNodeInput &target) {
     _readCachedGraph<ColorShadingNodeInput, pxr::GfVec3f, Color>(*this, shader, source, target);
 }
+
 } // crayg
