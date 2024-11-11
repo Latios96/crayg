@@ -13,9 +13,10 @@ TEST_CASE("TestUsd{{pascalcase(name)}}Reader::read") {
 
     SECTION("should read correctly") {
         auto usdPrim = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/Usd{{pascalcase(name)}}"));
+        usdPrim.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:{{pascalcase(name)}}")));
         Usd{{pascalcase(name)}}Reader usd{{pascalcase(name)}}Reader(usdPrim, usdShadingNodeReadCache);
 
-        auto {{lower(pascalcase(name))}} = usd{{pascalcase(name)}}Reader.read();
+        auto {{lowerPascalcase(name)}} = usd{{pascalcase(name)}}Reader.read();
     }
 }
 

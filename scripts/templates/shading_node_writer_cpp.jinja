@@ -9,6 +9,8 @@ Usd{{pascalcase(name)}}Writer::Usd{{pascalcase(name)}}Writer({{pascalcase(name)}
 
 pxr::UsdShadeShader Usd{{pascalcase(name)}}Writer::write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) {
     auto usd{{pascalcase(name)}} = BaseUsdShadingNodeWriter::write(stage, usdPathFactory);
+    
+    usd{{pascalcase(name)}}.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:{{pascalcase(name)}}")));
 
     return usd{{pascalcase(name)}};
 }

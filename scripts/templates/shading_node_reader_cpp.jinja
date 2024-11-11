@@ -7,9 +7,9 @@ Usd{{pascalcase(name)}}Reader::Usd{{pascalcase(name)}}Reader(const pxr::UsdShade
 }
 
 std::shared_ptr<{{pascalcase(name)}}> Usd{{pascalcase(name)}}Reader::read() {
-    auto {{lower(pascalcase(name))}} = BaseUsdShadingNodeReader::read();
+    auto {{lowerPascalcase(name)}} = BaseUsdShadingNodeReader::read();
 
-    return {{lower(pascalcase(name))}};
+    return {{lowerPascalcase(name)}};
 }
 
 std::string Usd{{pascalcase(name)}}Reader::getTranslatedType() {

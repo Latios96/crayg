@@ -9,7 +9,7 @@ TEST_CASE("{{pascalcase(name)}}::") {
     auto sphere = std::make_shared<Sphere>();
     auto unitPlaneUvs = std::make_shared<UnitPlaneUvs>();
     
-    {{pascalcase(name)}} {{lower(pascalcase(name))}};
+    {{pascalcase(name)}} {{lowerPascalcase(name)}};
 
     SECTION("should") {
        

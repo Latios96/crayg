@@ -140,8 +140,16 @@ def render_templates(
         autoescape=jinja2.select_autoescape(),
     )
 
+    def lower_first(x):
+        if not x:
+            return x
+        if len(x) == 1:
+            return x.lower()
+        return x[:1].lower() + x[1:]
+
     default_vars = {
         "pascalcase": pascalcase,
+        "lowerPascalcase": lambda x: lower_first(pascalcase(x)),
         "include_path": include_path,
         "lower": lambda x: x.lower(),
         "tests_directory": _get_tests_directory(),

@@ -15,10 +15,10 @@ TEST_CASE("TestUsd{{pascalcase(name)}}Writer::write") {
     UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
 
     SECTION("should write correctly") {
-        {{pascalcase(name)}} {{lower(pascalcase(name))}};
-        {{lower(pascalcase(name))}}.colorA.value = Color(1, 0, 0);
-        {{lower(pascalcase(name))}}.colorB.value = Color(0, 1, 0);
-        Usd{{pascalcase(name)}}Writer usd{{pascalcase(name)}}Writer({{lower(pascalcase(name))}}, usdShadingNodeWriteCache);
+        {{pascalcase(name)}} {{lowerPascalcase(name)}};
+        {{lowerPascalcase(name)}}.colorA.value = Color(1, 0, 0);
+        {{lowerPascalcase(name)}}.colorB.value = Color(0, 1, 0);
+        Usd{{pascalcase(name)}}Writer usd{{pascalcase(name)}}Writer({{lowerPascalcase(name)}}, usdShadingNodeWriteCache);
 
         auto shaderAndOutput = usd{{pascalcase(name)}}Writer.writeAndGetShaderAndOutput(stage, usdPathFactory);
         
