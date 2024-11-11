@@ -11,6 +11,7 @@ TEST_CASE("UsdVector2fToColorWriter::write") {
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdPathFactory usdPathFactory;
     UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
+    pxr::TfToken connectedOutputName;
 
     SECTION("should write correctly") {
         auto vector2fConstant = std::make_shared<Vector2fConstant>(Vector2f(.5f));
@@ -24,7 +25,8 @@ TEST_CASE("UsdVector2fToColorWriter::write") {
         REQUIRE(shaderAndOutput.shader.GetPath() == pxr::SdfPath("/Vector2fToColor0"));
         REQUIRE(shaderAndOutput.output.GetFullName() == pxr::TfToken("outputs:out"));
         auto usdVector2fInput = shaderAndOutput.shader.GetInput(pxr::TfToken("vector2fInput"));
-        auto usdVector2fConstant = UsdUtils::getConnectedUsdShadeShader(shaderAndOutput.shader, usdVector2fInput);
+        auto usdVector2fConstant =
+            UsdUtils::getConnectedUsdShadeShader(shaderAndOutput.shader, usdVector2fInput, connectedOutputName);
         REQUIRE(usdVector2fConstant.GetPath() == pxr::SdfPath("/Vector2fConstant0"));
     }
 }

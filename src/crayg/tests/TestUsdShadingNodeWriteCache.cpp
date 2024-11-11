@@ -14,6 +14,7 @@ TEST_CASE("UsdShadingNodeWriteCache::createInputAndWriteCachedGraph") {
     auto stage = pxr::UsdStage::CreateInMemory();
     UsdShadingNodeWriteCache usdShadingNodeWriteCache(stage, usdPathFactory);
     auto shader = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/shader"));
+    pxr::TfToken connectedOutputName;
 
     SECTION("should write float input graph correctly") {
         auto floatConstant = std::make_shared<FloatConstant>(.5f);
@@ -25,7 +26,8 @@ TEST_CASE("UsdShadingNodeWriteCache::createInputAndWriteCachedGraph") {
         auto myFloatUsdInput = shader.GetInput(pxr::TfToken("myFloat"));
         const auto inputValue = UsdUtils::getStaticAttributeValueAs<float>(myFloatUsdInput);
         REQUIRE(inputValue == .75f);
-        auto usdFloatConstantShader = UsdUtils::getConnectedUsdShadeShader(shader, myFloatUsdInput);
+        auto usdFloatConstantShader =
+            UsdUtils::getConnectedUsdShadeShader(shader, myFloatUsdInput, connectedOutputName);
         REQUIRE(usdFloatConstantShader.GetPath() == pxr::SdfPath("/FloatConstant0"));
         auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdFloatConstantShader.GetIdAttr());
         REQUIRE(id == "crayg:FloatConstant");
@@ -43,7 +45,7 @@ TEST_CASE("UsdShadingNodeWriteCache::createInputAndWriteCachedGraph") {
         auto myIntUsdInput = shader.GetInput(pxr::TfToken("myInt"));
         const auto inputValue = UsdUtils::getStaticAttributeValueAs<int>(myIntUsdInput);
         REQUIRE(inputValue == 7);
-        auto usdIntConstantShader = UsdUtils::getConnectedUsdShadeShader(shader, myIntUsdInput);
+        auto usdIntConstantShader = UsdUtils::getConnectedUsdShadeShader(shader, myIntUsdInput, connectedOutputName);
         REQUIRE(usdIntConstantShader.GetPath() == pxr::SdfPath("/IntConstant0"));
         auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdIntConstantShader.GetIdAttr());
         REQUIRE(id == "crayg:IntConstant");
@@ -61,7 +63,8 @@ TEST_CASE("UsdShadingNodeWriteCache::createInputAndWriteCachedGraph") {
         auto myIntUsdInput = shader.GetInput(pxr::TfToken("myVector2f"));
         const auto inputValue = UsdUtils::getStaticAttributeValueAs<pxr::GfVec2f>(myIntUsdInput);
         REQUIRE(inputValue == pxr::GfVec2f(7));
-        auto usdVector2fConstantShader = UsdUtils::getConnectedUsdShadeShader(shader, myIntUsdInput);
+        auto usdVector2fConstantShader =
+            UsdUtils::getConnectedUsdShadeShader(shader, myIntUsdInput, connectedOutputName);
         REQUIRE(usdVector2fConstantShader.GetPath() == pxr::SdfPath("/Vector2fConstant0"));
         auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdVector2fConstantShader.GetIdAttr());
         REQUIRE(id == "crayg:Vector2fConstant");
@@ -80,7 +83,8 @@ TEST_CASE("UsdShadingNodeWriteCache::createInputAndWriteCachedGraph") {
         auto myColorUsdInput = shader.GetInput(pxr::TfToken("myColor"));
         const auto inputValue = UsdUtils::getStaticAttributeValueAs<pxr::GfVec3f>(myColorUsdInput);
         REQUIRE(inputValue == pxr::GfVec3f(.7f));
-        auto usdColorConstantShader = UsdUtils::getConnectedUsdShadeShader(shader, myColorUsdInput);
+        auto usdColorConstantShader =
+            UsdUtils::getConnectedUsdShadeShader(shader, myColorUsdInput, connectedOutputName);
         REQUIRE(usdColorConstantShader.GetPath() == pxr::SdfPath("/ColorConstant0"));
         auto id = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdColorConstantShader.GetIdAttr());
         REQUIRE(id == "crayg:ColorConstant");
@@ -101,8 +105,8 @@ TEST_CASE("UsdShadingNodeWriteCache::createInputAndWriteCachedGraph") {
 
         auto firstUsdInput = shader.GetInput(pxr::TfToken("firstInput"));
         auto secondUsdInput = shader.GetInput(pxr::TfToken("secondInput"));
-        auto firstInstance = UsdUtils::getConnectedUsdShadeShader(shader, firstUsdInput);
-        auto secondInstance = UsdUtils::getConnectedUsdShadeShader(shader, secondUsdInput);
+        auto firstInstance = UsdUtils::getConnectedUsdShadeShader(shader, firstUsdInput, connectedOutputName);
+        auto secondInstance = UsdUtils::getConnectedUsdShadeShader(shader, secondUsdInput, connectedOutputName);
         REQUIRE(firstInstance.GetPath() == secondInstance.GetPath());
     }
 
@@ -116,9 +120,9 @@ TEST_CASE("UsdShadingNodeWriteCache::createInputAndWriteCachedGraph") {
         usdShadingNodeWriteCache.createInputAndWriteCachedGraph(shader, "myColor", colorShadingNodeInput);
 
         auto usdMyColor = shader.GetInput(pxr::TfToken("myColor"));
-        auto usdVector2fToColor = UsdUtils::getConnectedUsdShadeShader(shader, usdMyColor);
+        auto usdVector2fToColor = UsdUtils::getConnectedUsdShadeShader(shader, usdMyColor, connectedOutputName);
         auto usdVector2fInput = usdVector2fToColor.GetInput(pxr::TfToken("vector2fInput"));
-        auto usdVector2fConstant = UsdUtils::getConnectedUsdShadeShader(shader, usdVector2fInput);
+        auto usdVector2fConstant = UsdUtils::getConnectedUsdShadeShader(shader, usdVector2fInput, connectedOutputName);
     }
 }
 

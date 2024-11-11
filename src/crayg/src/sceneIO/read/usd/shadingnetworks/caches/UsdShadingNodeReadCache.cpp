@@ -61,7 +61,8 @@ void _readCachedGraph(UsdShadingNodeReadCache &usdShadingNodeReadCache, pxr::Usd
     }
 
     if (source.HasConnectedSource()) {
-        auto connectedShader = UsdUtils::getConnectedUsdShadeShader(shader, source);
+        pxr::TfToken connectedOutputName;
+        auto connectedShader = UsdUtils::getConnectedUsdShadeShader(shader, source, connectedOutputName);
         auto cachedConnectedShader = usdShadingNodeReadCache.getCachedOrReadShadingNode(connectedShader);
         target.connectTo(cachedConnectedShader);
     }

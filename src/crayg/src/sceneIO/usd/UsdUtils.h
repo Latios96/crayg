@@ -82,9 +82,9 @@ class UsdUtils {
     }
 
     static pxr::UsdShadeShader getConnectedUsdShadeShader(const pxr::UsdShadeShader &shader,
-                                                          const pxr::UsdShadeInput &usdShadeInput) {
+                                                          const pxr::UsdShadeInput &usdShadeInput,
+                                                          pxr::TfToken &connectedOutputName) {
         pxr::UsdShadeConnectableAPI connectedOutput;
-        pxr::TfToken connectedOutputName;
         pxr::UsdShadeAttributeType type;
         shader.ConnectableAPI().GetConnectedSource(usdShadeInput, &connectedOutput, &connectedOutputName, &type);
         return pxr::UsdShadeShader(connectedOutput.GetPrim());
