@@ -35,6 +35,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestCheckerBoard.cpp
     TestColor.cpp
     TestColorConversion.cpp
+    TestColorToFloat.cpp
     TestConversionNodes.cpp
     TestDebugIntegrator.cpp
     TestDiskLight.cpp
@@ -122,6 +123,8 @@ set(UNIT_TEST_SOURCE_LIST
     TestUsdCameraWriter.cpp
     TestUsdCheckerBoardReader.cpp
     TestUsdCheckerBoardWriter.cpp
+    TestUsdColorToFloatReader.cpp
+    TestUsdColorToFloatWriter.cpp
     TestUsdConstantShadingNodeReaders.cpp
     TestUsdConstantShadingNodeWriters.cpp
     TestUsdConversionNodesReaders.cpp

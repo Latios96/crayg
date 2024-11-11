@@ -5,6 +5,7 @@
 #include "intersectors/IntersectorType.h"
 #include "renderer/bucketsamplers/BucketSamplerType.h"
 #include "scene/camera/CameraType.h"
+#include "scene/shadingnetworks/shadingnodes/ColorToFloat.h"
 #include "scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
 #include <fmt/format.h>
 #include <pxr/usd/sdf/types.h>
@@ -84,6 +85,14 @@ template <> struct UsdTypeUtil<PrimVarReaderType> {
 
     static pxr::TfToken convert(PrimVarReaderType primVarReaderType) {
         return pxr::TfToken(fmt::format("{}", primVarReaderType));
+    }
+};
+
+template <> struct UsdTypeUtil<ColorToFloatMode> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(ColorToFloatMode colorToFloatMode) {
+        return pxr::TfToken(fmt::format("{}", colorToFloatMode));
     }
 };
 

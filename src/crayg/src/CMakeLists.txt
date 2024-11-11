@@ -236,6 +236,8 @@ set(crayg_SRCS
     scene/shadingnetworks/ShadingNode.h
     scene/shadingnetworks/shadingnodes/CheckerBoard.cpp
     scene/shadingnetworks/shadingnodes/CheckerBoard.h
+    scene/shadingnetworks/shadingnodes/ColorToFloat.cpp
+    scene/shadingnetworks/shadingnodes/ColorToFloat.h
     scene/shadingnetworks/shadingnodes/ConstantShadingNodes.cpp
     scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h
     scene/shadingnetworks/shadingnodes/ConversionNodes.cpp
@@ -278,6 +280,8 @@ set(crayg_SRCS
     sceneIO/read/usd/shadingnetworks/materials/UsdPreviewSurfaceReader.h
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdCheckerBoardReader.cpp
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdCheckerBoardReader.h
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdColorToFloatReader.cpp
+    sceneIO/read/usd/shadingnetworks/shadingnodes/UsdColorToFloatReader.h
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.cpp
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h
     sceneIO/read/usd/shadingnetworks/shadingnodes/UsdConversionNodesReaders.cpp
@@ -341,6 +345,8 @@ set(crayg_SRCS
     sceneIO/write/usd/shadingnetworks/materials/UsdPreviewSurfaceWriter.h
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdCheckerBoardWriter.cpp
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdCheckerBoardWriter.h
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdColorToFloatWriter.cpp
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdColorToFloatWriter.h
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.cpp
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.h
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.cpp
@@ -348,6 +354,7 @@ set(crayg_SRCS
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.cpp
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.cpp
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.h
+    sceneIO/write/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderWriters.cpp
     sceneIO/write/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderWriters.cpp
     sceneIO/write/usd/UsdPathFactory.cpp
     sceneIO/write/usd/UsdPathFactory.h
