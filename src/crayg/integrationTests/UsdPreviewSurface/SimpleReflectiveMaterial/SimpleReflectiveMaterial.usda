@@ -19,6 +19,7 @@ over "world"
                    color3f inputs:diffuseColor = (0.5,0.5,0.5)
 				   color3f inputs:specularColor = (0.95, 0.95, 0.95)
 				   int inputs:useSpecularWorkflow = 1
+				   float inputs:roughness = 0
                 }
             }
         }

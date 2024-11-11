@@ -19,6 +19,7 @@ over "world"
 				   color3f inputs:specularColor = (0.95, 0.95, 0.95)
 				   int inputs:useSpecularWorkflow = 0
 				   float inputs:metallic = 1
+				   float inputs:roughness = 0
                 }
             }
         }
