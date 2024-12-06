@@ -17,6 +17,7 @@ struct Lobes {
     Lobe metallic;
     Lobe specular;
     Lobe diffuse;
+    Lobe emission;
 };
 
 class Material : public ShadingNode {

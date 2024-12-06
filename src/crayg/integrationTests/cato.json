@@ -239,6 +239,9 @@
           "name": "SimpleReflectiveMaterial"
         },
         {
+          "name": "SimpleEmissionMaterial"
+        },
+        {
           "name": "SimpleMetalMaterial"
         },
         {
