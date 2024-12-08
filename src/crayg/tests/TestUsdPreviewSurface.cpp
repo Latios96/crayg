@@ -30,7 +30,7 @@ TEST_CASE("UsdPreviewSurface::evaluate") {
         usdPreviewSurface.getLobes(surfaceInteraction, lobes);
 
         REQUIRE(lobes.diffuse.weight == Color::createGrey(0.48585278f));
-        REQUIRE(lobes.specular.weight == Color::createWhite());
+        REQUIRE(lobes.specular.weight == Color::createGrey(0.028294425f));
         REQUIRE(lobes.metallic.weight == Color::createBlack());
     }
 
