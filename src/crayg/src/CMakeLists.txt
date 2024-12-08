@@ -74,8 +74,6 @@ set(crayg_SRCS
     integrators/AmbientOcclusionIntegrator.h
     integrators/DebugIntegrator.cpp
     integrators/DebugIntegrator.h
-    integrators/IntegratorContext.cpp
-    integrators/IntegratorContext.h
     integrators/IntegratorFactory.h
     integrators/IntegratorSettings.cpp
     integrators/IntegratorSettings.h
