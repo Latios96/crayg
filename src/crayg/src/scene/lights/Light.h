@@ -22,7 +22,7 @@ class Light : public Transformable, public Imageable {
     const std::string &getName() const;
     void setName(const std::string &name);
 
-    struct Radiance { // todo move next to light
+    struct Radiance {
         Color radiance;
         Ray ray;
         Radiance(const Color &radiance, const Ray &ray);
