@@ -10,8 +10,8 @@
 namespace crayg {
 
 const Ray RAY_WITH_NO_INTERSECTION = Ray({0, 5, 0}, {1, 0, 0});
-const Ray RAY_WITH_TRIANGLE_INTERSECTION = Ray({0.75f, 1, 1.5f}, {0, -1, 0});
-const Ray RAY_WITH_SUBD_MESH_INTERSECTION = Ray({0.1f, 1, 0}, {0, -1, 0});
+const Ray RAY_WITH_TRIANGLE_INTERSECTION = Ray({0.75f, -1, 1.5f}, {0, 1, 0});
+const Ray RAY_WITH_SUBD_MESH_INTERSECTION = Ray({0.1f, -1, 0}, {0, 1, 0});
 const Ray RAY_WITH_SPHERE_INTERSECTION = Ray({-2, 2, 0}, {1, 0, 0});
 const Ray RAY_ON_TRIANGLE = Ray({0.75f, 0, 1.5f}, {0, 1, 0});
 

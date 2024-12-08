@@ -58,6 +58,7 @@ spdlog:header_only=True
 fakeit:integration=catch
 boost:without_stacktrace=True
 USD:with_imaging=True
+embree3:backface_culling=True
 
 [imports]
 bin,*.dll->./bin
