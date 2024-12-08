@@ -1,5 +1,6 @@
 #include "Light.h"
 #include "intersectors/SceneIntersector.h"
+#include "scene/shadingnetworks/materials/EmissiveMaterial.h"
 
 namespace crayg {
 
@@ -9,6 +10,7 @@ float Light::getIntensity() const {
 
 void Light::setIntensity(float intensity) {
     Light::intensity = intensity;
+    std::dynamic_pointer_cast<EmissiveMaterial>(getMaterial())->emission = color * intensity;
 }
 
 Light::Radiance Light::radiance(const Vector3f &point, const Vector3f &normal) {
@@ -34,7 +36,15 @@ bool Light::isIntersecting(Ray ray) {
     return false;
 }
 
-Light::Light(const Transform &transform, float intensity) : Transformable(transform), intensity(intensity) {
+Light::Light() {
+    setMaterial(std::make_shared<EmissiveMaterial>());
+    imageableType = ImageableType::LIGHT;
+}
+
+Light::Light(const Transform &transform, float intensity) : Transformable(transform) {
+    setMaterial(std::make_shared<EmissiveMaterial>());
+    setIntensity(intensity);
+    imageableType = ImageableType::LIGHT;
 }
 
 BoundingBox Light::getBounds() const {
@@ -48,8 +58,6 @@ const std::string &Light::getName() const {
 void Light::setName(const std::string &name) {
     Light::name = name;
 }
-
-Light::Light() = default;
 
 Light::Radiance::Radiance(const Color &radiance, const Ray &ray) : radiance(radiance), ray(ray) {
 }
@@ -73,5 +81,6 @@ const Color &Light::getColor() const {
 
 void Light::setColor(const Color &color) {
     Light::color = color;
+    std::dynamic_pointer_cast<EmissiveMaterial>(getMaterial())->emission = color * intensity;
 }
 }
