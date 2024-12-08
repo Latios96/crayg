@@ -195,6 +195,12 @@ set(crayg_SRCS
     scene/lights/Light.h
     scene/lights/RectLight.cpp
     scene/lights/RectLight.h
+    scene/lights/shapegenerators/AbstractLightShapeGenerator.cpp
+    scene/lights/shapegenerators/AbstractLightShapeGenerator.h
+    scene/lights/shapegenerators/DiskLightShapeGenerator.cpp
+    scene/lights/shapegenerators/DiskLightShapeGenerator.h
+    scene/lights/shapegenerators/RectLightShapeGenerator.cpp
+    scene/lights/shapegenerators/RectLightShapeGenerator.h
     scene/primitives/GroundPlane.cpp
     scene/primitives/GroundPlane.h
     scene/primitives/PointInstancer.cpp

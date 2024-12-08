@@ -39,6 +39,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestConversionNodes.cpp
     TestDebugIntegrator.cpp
     TestDiskLight.cpp
+    TestDiskLightShapeGenerator.cpp
     TestDtoUtils.cpp
     TestEmbreeBvhBuilder.cpp
     TestEmbreeSceneIntersector.cpp
@@ -93,6 +94,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestRaytracingIntegrator.cpp
     TestReadableFormatter.cpp
     TestRectLight.cpp
+    TestRectLightShapeGenerator.cpp
     TestRegionToRender.cpp
     TestRemainingTimeCalculator.cpp
     TestRenderSettings.cpp
