@@ -38,6 +38,7 @@ class TriangleMesh : public SceneObject {
 
     struct FaceVertexIndices {
         int v0, v1, v2;
+        FaceVertexIndices() = default;
         FaceVertexIndices(int v0, int v1, int v2);
         bool operator==(const FaceVertexIndices &rhs) const;
         bool operator!=(const FaceVertexIndices &rhs) const;
