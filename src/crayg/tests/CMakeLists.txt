@@ -65,7 +65,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestImageOutputDriver.cpp
     TestImagePathResolver.cpp
     TestImageWriters.cpp
-    TestIntegratorContext.cpp
     TestIntegratorSettings.cpp
     TestLensFileExtendedFormatReader.cpp
     TestLensFileExtendedFormatWriter.cpp

@@ -154,7 +154,7 @@ Color Renderer::renderSample(const Vector2f &samplePos, float waveLength) {
     if (!rayWithWeight.ray) {
         return Color::createBlack();
     }
-    return integrator->integrate(*rayWithWeight.ray, 0) * rayWithWeight.weight;
+    return integrator->integrate(*rayWithWeight.ray, 0, RayType::CAMERA) * rayWithWeight.weight;
 }
 
 void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {

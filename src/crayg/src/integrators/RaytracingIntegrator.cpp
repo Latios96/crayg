@@ -10,7 +10,7 @@ RaytracingIntegrator::RaytracingIntegrator(Scene &scene, const std::shared_ptr<S
     useGi = std::get<int>(integratorSettings.getOrDefault("RAYTRACING:useGi", {0})) == 1 ? true : false;
 }
 
-Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
+Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth, RayType rayType) {
     if (recursionDepth == RaytracingIntegrator::MAX_RECURSION_DEPTH) {
         return Color::createBlack();
     }
@@ -26,7 +26,6 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
     Imageable &object = *intersection.imageable;
     const Vector3f normal = object.getNormal(location);
     const SurfaceInteraction surfaceInteraction = SurfaceInteraction(object, location, normal, ray);
-    IntegratorContext integratorContext = createIntegratorContext(recursionDepth);
 
     Color radiance = Color::createBlack();
     for (auto &light : scene.lights) {
@@ -45,18 +44,21 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth) {
     }
 
     if (!lobes.metallic.weight.isBlack()) {
-        lobesResult += lobes.metallic.weight * integratorContext.integrateRay(lobes.metallic.sampleDirection);
+        lobesResult +=
+            lobes.metallic.weight * integrate(lobes.metallic.sampleDirection, recursionDepth + 1, RayType::SPECULAR);
         contributingLobes++;
     }
 
     if (!lobes.specular.weight.isBlack()) {
-        lobesResult += lobes.specular.weight * integratorContext.integrateRay(lobes.specular.sampleDirection);
+        lobesResult +=
+            lobes.specular.weight * integrate(lobes.specular.sampleDirection, recursionDepth + 1, RayType::SPECULAR);
         contributingLobes++;
     }
 
     if (!lobes.diffuse.weight.isBlack()) {
-        const Color indirectLight =
-            useGi ? integratorContext.integrateRay(lobes.diffuse.sampleDirection) : Color::createBlack();
+        const Color indirectLight = useGi
+                                        ? integrate(lobes.diffuse.sampleDirection, recursionDepth + 1, RayType::DIFFUSE)
+                                        : Color::createBlack();
         lobesResult += lobes.diffuse.weight * (radiance + indirectLight);
         contributingLobes++;
     }

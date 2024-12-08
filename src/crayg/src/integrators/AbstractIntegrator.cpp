@@ -5,9 +5,5 @@ AbstractIntegrator::AbstractIntegrator(Scene &scene, const std::shared_ptr<Scene
     : scene(scene), sceneIntersector(sceneIntersector) {
 }
 
-IntegratorContext AbstractIntegrator::createIntegratorContext(int recursionDepth) {
-    return IntegratorContext(*this, recursionDepth);
-}
-
 AbstractIntegrator::~AbstractIntegrator() = default;
 } // crayg

@@ -11,7 +11,7 @@ AmbientOcclusionIntegrator::AmbientOcclusionIntegrator(Scene &scene,
     radius = std::get<float>(integratorSettings.getOrDefault("AMBIENT_OCCLUSION:radius", {3.0f}));
 }
 
-Color AmbientOcclusionIntegrator::integrate(const Ray &ray, int recursionDepth) {
+Color AmbientOcclusionIntegrator::integrate(const Ray &ray, int recursionDepth, RayType rayType) {
     thread_local HitStorage hitStorage;
     auto intersection = sceneIntersector->intersect(ray, hitStorage);
 

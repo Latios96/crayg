@@ -1,6 +1,5 @@
 #pragma once
 
-#include "integrators/IntegratorContext.h"
 #include "integrators/SurfaceInteraction.h"
 #include "scene/shadingnetworks/ShadingNode.h"
 #include <basics/Color.h>
