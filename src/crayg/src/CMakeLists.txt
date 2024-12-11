@@ -232,6 +232,8 @@ set(crayg_SRCS
     scene/Scene.h
     scene/SceneObject.cpp
     scene/SceneObject.h
+    scene/shadingnetworks/materials/EmissiveMaterial.cpp
+    scene/shadingnetworks/materials/EmissiveMaterial.h
     scene/shadingnetworks/materials/Material.cpp
     scene/shadingnetworks/materials/Material.h
     scene/shadingnetworks/materials/UsdPreviewSurface.cpp
