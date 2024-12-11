@@ -10,7 +10,7 @@
 
 namespace crayg {
 
-enum class ImageableType { INVALID, TRIANGLE, SPHERE };
+enum class ImageableType { INVALID, TRIANGLE, SPHERE, LIGHT };
 
 class Imageable {
   public:
