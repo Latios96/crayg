@@ -30,6 +30,8 @@ class EmbreeSceneIntersector : public SceneIntersector {
                                                  const EmbreeMappingEntry &embreeMappingEntry,
                                                  const std::vector<std::shared_ptr<SceneObject>> &objects,
                                                  Transform *instanceTransform, HitStorage &hitStorage) const;
+    Imageable::Intersection mapToLight(const RTCRayHit &rtcRayHit,
+                                       const crayg::EmbreeMappingEntry &embreeMappingEntry) const;
 };
 
 } // crayg

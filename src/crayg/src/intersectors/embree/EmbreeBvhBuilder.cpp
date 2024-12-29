@@ -1,5 +1,9 @@
 #include "EmbreeBvhBuilder.h"
 
+#include "scene/lights/DiskLight.h"
+#include "scene/lights/RectLight.h"
+#include "scene/lights/shapegenerators/DiskLightShapeGenerator.h"
+#include "scene/lights/shapegenerators/RectLightShapeGenerator.h"
 #include "scene/primitives/PointInstancer.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
@@ -44,7 +48,8 @@ unsigned int addSphere(RTCDevice device, RTCScene rtcScene, const std::shared_pt
 RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_ptr<SceneObject>> &objects,
                                GeomToSceneObject &geomIdToSceneObject,
                                std::vector<EmbreeProtoInstanceMappingEntry> *globalProtoGeomToSceneObject,
-                               EmbreeInstanceIdToInstanceInfo *embreeInstanceIdToInstanceInfo);
+                               EmbreeInstanceIdToInstanceInfo *embreeInstanceIdToInstanceInfo,
+                               const std::vector<std::shared_ptr<Light>> *lights);
 
 void convertMatrixToEmbree(float *transform, const Matrix4x4f &matrix) {
     // format: RTC_FORMAT_FLOAT4X4_COLUMN_MAJOR
@@ -80,7 +85,7 @@ void addPointInstancer(RTCDevice device, RTCScene rtcScene, std::shared_ptr<Poin
         embreeInstanceMappingEntry.protoId = protoId;
         protoIdToRtcScene[protoId] =
             buildFromSceneObjects(device, proto->members, embreeInstanceMappingEntry.geomToSceneObject, nullptr,
-                                  nullptr); // nullptr is ok because we have only single level instancing..
+                                  nullptr, nullptr); // nullptr is ok because we have only single level instancing..
 
         auto globalProtoId = globalProtoGeomToSceneObject->size();
         globalProtoGeomToSceneObject->push_back(embreeInstanceMappingEntry);
@@ -105,10 +110,31 @@ void addPointInstancer(RTCDevice device, RTCScene rtcScene, std::shared_ptr<Poin
     }
 }
 
+template <typename L, typename ShapeGenerator>
+unsigned int addRectLight(RTCDevice device, RTCScene rtcScene, const L &light) {
+    RTCGeometry lightMesh = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
+
+    ShapeGenerator shapeGenerator(light);
+
+    auto vertices = (Vector3f *)rtcSetNewGeometryBuffer(lightMesh, RTC_BUFFER_TYPE_VERTEX, 0, RTC_FORMAT_FLOAT3,
+                                                        sizeof(Vector3f), shapeGenerator.getPointCount());
+    auto faceVertexIndices = (TriangleMesh::FaceVertexIndices *)rtcSetNewGeometryBuffer(
+        lightMesh, RTC_BUFFER_TYPE_INDEX, 0, RTC_FORMAT_UINT3, sizeof(TriangleMesh::FaceVertexIndices),
+        shapeGenerator.getIndicesCount());
+
+    shapeGenerator.generateShape(vertices, faceVertexIndices);
+
+    rtcCommitGeometry(lightMesh);
+    unsigned int geomId = rtcAttachGeometry(rtcScene, lightMesh);
+    rtcReleaseGeometry(lightMesh);
+    return geomId;
+}
+
 RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_ptr<SceneObject>> &objects,
                                GeomToSceneObject &geomIdToSceneObject,
                                std::vector<EmbreeProtoInstanceMappingEntry> *globalProtoGeomToSceneObject,
-                               EmbreeInstanceIdToInstanceInfo *embreeInstanceIdToInstanceInfo) {
+                               EmbreeInstanceIdToInstanceInfo *embreeInstanceIdToInstanceInfo,
+                               const std::vector<std::shared_ptr<Light>> *lights) {
     RTCScene rtcScene = rtcNewScene(device);
 
     for (unsigned int i = 0; i < objects.size(); i++) {
@@ -132,6 +158,21 @@ RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_p
         }
     }
 
+    if (lights) {
+        for (unsigned int i = 0; i < lights->size(); i++) {
+            auto &light = (*lights)[i];
+            if (light->getType() == "RectLight") {
+                auto rectLight = std::dynamic_pointer_cast<RectLight>(light);
+                unsigned int geomId = addRectLight<RectLight, RectLightShapeGenerator>(device, rtcScene, *rectLight);
+                geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::LIGHT);
+            } else if (light->getType() == "DiskLight") {
+                auto diskLight = std::dynamic_pointer_cast<DiskLight>(light);
+                unsigned int geomId = addRectLight<DiskLight, DiskLightShapeGenerator>(device, rtcScene, *diskLight);
+                geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::LIGHT);
+            }
+        }
+    }
+
     rtcCommitScene(rtcScene);
 
     return rtcScene;
@@ -144,9 +185,9 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
 
     RTCDevice device = rtcNewDevice(nullptr);
 
-    RTCScene rtcScene =
-        buildFromSceneObjects(device, scene.objects, embreeBvh->geomIdToSceneObject,
-                              &embreeBvh->globalProtoGeomToSceneObject, &embreeBvh->embreeInstanceIdToInstanceInfo);
+    RTCScene rtcScene = buildFromSceneObjects(device, scene.objects, embreeBvh->geomIdToSceneObject,
+                                              &embreeBvh->globalProtoGeomToSceneObject,
+                                              &embreeBvh->embreeInstanceIdToInstanceInfo, &scene.lights);
     embreeBvh->rtcScene = rtcScene;
 
     return embreeBvh;

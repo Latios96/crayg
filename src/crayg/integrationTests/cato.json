@@ -188,6 +188,17 @@
       ]
     },
     {
+      "name": "LightShapes",
+      "tests": [
+        {
+          "name": "RectLightShape"
+        },
+        {
+          "name": "DiskLightShape"
+        }
+      ]
+    },
+    {
       "name": "PointInstancer",
       "comparisonSettings": {
         "method": "FLIP",

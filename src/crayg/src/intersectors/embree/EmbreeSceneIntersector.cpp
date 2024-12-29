@@ -60,7 +60,10 @@ Imageable::Intersection EmbreeSceneIntersector::map(GeomToSceneObject &geomIdToS
             return mapToInstancedSphere(rtcRayHit, sceneObjectMapping, objects, instanceTransform, hitStorage);
         }
         return mapToSphere(rtcRayHit, sceneObjectMapping, objects);
+    } else if (sceneObjectMapping.primitiveType == EmbreePrimitiveType::LIGHT) {
+        return mapToLight(rtcRayHit, sceneObjectMapping);
     }
+
     return Imageable::Intersection::createInvalid();
 }
 
@@ -106,6 +109,12 @@ EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
     hitStorage.triangle = Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID, instanceTransform);
     auto triangle = &hitStorage.triangle;
     return {rtcRayHit.ray.tfar, triangle};
+}
+
+Imageable::Intersection EmbreeSceneIntersector::mapToLight(const RTCRayHit &rtcRayHit,
+                                                           const crayg::EmbreeMappingEntry &embreeMappingEntry) const {
+    auto sceneObject = scene.lights[embreeMappingEntry.sceneObjectIndex];
+    return {rtcRayHit.ray.tfar, sceneObject.get()};
 }
 
 EmbreeSceneIntersector::~EmbreeSceneIntersector() = default;
