@@ -38,7 +38,9 @@ Color RaytracingIntegrator::integrate(const Ray &ray, int recursionDepth, RayTyp
     Color lobesResult = Color::createBlack();
     int contributingLobes = 0;
 
-    if (!lobes.emission.weight.isBlack()) {
+    const bool emissionShouldBeHandled = rayType != RayType::DIFFUSE || object.imageableType != ImageableType::LIGHT;
+
+    if (emissionShouldBeHandled && !lobes.emission.weight.isBlack()) {
         lobesResult += lobes.emission.weight;
         contributingLobes++;
     }
