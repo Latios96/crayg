@@ -42,12 +42,13 @@ void DiskLightShapeGenerator::generatePoints(Vector3f *vertices) const {
 }
 
 void DiskLightShapeGenerator::generateIndices(TriangleMesh::FaceVertexIndices *indices) const {
-    for (int i = 0; i < subdivisions; i++) {
+    for (int i = 0; i < subdivisions - 1; i++) {
         const int middlePointIndex = 0;
         const int previousPointIndex = i + 1;
         const int currentPointIndex = i + 2;
         indices[i] = TriangleMesh::FaceVertexIndices(middlePointIndex, previousPointIndex, currentPointIndex);
     }
+    indices[subdivisions - 1] = TriangleMesh::FaceVertexIndices(subdivisions - 1, 1, 0);
 }
 
 }
