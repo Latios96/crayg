@@ -36,7 +36,7 @@ void DiskLightShapeGenerator::generatePoints(Vector3f *vertices) const {
         vertices[i] = Transform::withRotation(0, 0, (i - 1) * stepSize).applyForPoint(pointOnBorder);
     }
 
-    for (int i = 0; i < subdivisions - 1; i++) {
+    for (int i = 0; i < subdivisions + 1; i++) {
         vertices[i] = light.getTransform().applyForPoint(vertices[i]);
     }
 }
