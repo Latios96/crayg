@@ -1,6 +1,7 @@
 #include "Logger.h"
 #include "basics/Color.h"
 #include "scene/camera/realistic/CameraLens.h"
+#include "scene/camera/realistic/ExitPupilCalculator.h"
 #include "scene/camera/realistic/LensSurface.h"
 #include "scene/camera/realistic/Wavelengths.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
@@ -80,12 +81,12 @@ class CameraLensRenderer {
     }
 
     void drawAperture(cairo_t *cr, const LensSurface &lensElement) const {
-        cairo_move_to(cr, -lensElement.center, lensElement.apertureRadius);
-        cairo_line_to(cr, -lensElement.center, lensElement.apertureRadius + 1.5);
+        cairo_move_to(cr, -lensElement.center - cameraLens.getSurfacesOffset(), lensElement.apertureRadius);
+        cairo_line_to(cr, -lensElement.center - cameraLens.getSurfacesOffset(), lensElement.apertureRadius + 1.5);
         cairo_stroke(cr);
 
-        cairo_move_to(cr, -lensElement.center, -lensElement.apertureRadius);
-        cairo_line_to(cr, -lensElement.center, -lensElement.apertureRadius - 1.5);
+        cairo_move_to(cr, -lensElement.center - cameraLens.getSurfacesOffset(), -lensElement.apertureRadius);
+        cairo_line_to(cr, -lensElement.center - cameraLens.getSurfacesOffset(), -lensElement.apertureRadius - 1.5);
         cairo_stroke(cr);
     }
 
@@ -94,11 +95,11 @@ class CameraLensRenderer {
         float alpha = std::asin((lensElement.apertureRadius * 2) / (2 * curvatureRadius));
         float start = -alpha;
         float end = alpha;
-        float arcCenter = -lensElement.center - curvatureRadius;
+        float arcCenter = -lensElement.center - curvatureRadius - cameraLens.getSurfacesOffset();
         if (lensElement.curvatureRadius > 0) {
             start = -alpha + M_PI;
             end = alpha + M_PI;
-            arcCenter = -lensElement.center + curvatureRadius;
+            arcCenter = -lensElement.center + curvatureRadius - cameraLens.getSurfacesOffset();
         }
         cairo_arc(cr, arcCenter, 0, curvatureRadius, start, end);
         cairo_stroke(cr);
@@ -115,7 +116,7 @@ class CameraLensRenderer {
         for (int i = 0; i < steps; i++) {
             const float x =
                 evaluateAsphericalSurface({0, currentHeight}, lensElement.curvatureRadius, asphericCoefficients);
-            cairo_line_to(cr, -lensElement.center + x, currentHeight);
+            cairo_line_to(cr, -lensElement.center - cameraLens.getSurfacesOffset() + x, currentHeight);
             currentHeight += stepSize;
         }
         cairo_stroke(cr);
@@ -130,17 +131,24 @@ class CameraLensRenderer {
         } else {
             wavelengths.emplace_back(FraunhoferLines::SODIUM.wavelength, Color::createBlack());
         }
+
+        NullTaskReporter nullTaskReporter;
+        ExitPupilCalculator exitPupilCalculator(cameraLens, 5, {}, nullTaskReporter);
+        auto exitPupil = exitPupilCalculator.calculate();
+
         for (auto &wavelength : wavelengths) {
             cairo_set_source_rgba(cr, std::get<1>(wavelength).r, std::get<1>(wavelength).g, std::get<1>(wavelength).b,
-                                  0.333f);
-            const int steps = 6;
-            const float housingRadius = cameraLens.getAperture().apertureRadius - 0.1f;
+                                  1);
+            const int steps = 1;
+            const float housingRadius = exitPupil.pupilBounds[0].getHeight() / 2 - 0.1f;
             const float stepSize = housingRadius * 2.f / steps;
             float currentHeight = -housingRadius;
 
             for (int step = 0; step <= steps; step++) {
-                Ray ray{{0, currentHeight, 50}, {0, 0, -1}};
-                auto points = cameraLens.traceAndRecordFromWorldToFilm(ray, std::get<0>(wavelength));
+                const auto pupilSample = exitPupil.samplePupil({0, 0}, 3.5);
+                const auto pointOnPupil = Vector3f(0, currentHeight, cameraLens.getLastSurface().center);
+                const Ray ray = {{0, 0, 0}, (pointOnPupil).normalize()};
+                auto points = cameraLens.traceAndRecordFromFilmToWorld(ray, std::get<0>(wavelength));
                 for (int i = 0; i < points.size(); i++) {
                     Vector3f &recordedPoint = points[i];
                     if (!i) {
@@ -167,12 +175,15 @@ class CameraLensRenderer {
 int craygMain(int argc, char *argv[]) {
 
     // const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\EdmundOpticsAsphere.fx";
-    const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\AsphericZoomLens.fx";
+    const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\double-gauss-angenieux-50mm.fx";
     auto reader = LensFileReaderFactory::createLensFileReader(lensFilePath);
     auto cameraLens = std::make_unique<CameraLens>(reader->readFile(lensFilePath));
-    // cameraLens->focusLens(100000); // todo move elements during drawing
+    cameraLens->focusLens(1000); // todo move elements during drawing
+    // cameraLens->focusLens(cameraLens->metadata.closestFocalDistance+1);
+    Logger::info("cameraLens->surfacesOffset {}", cameraLens->getSurfacesOffset());
 
     CameraLensRendererOptions cameraLensRendererOptions;
+    cameraLensRendererOptions.drawChromaticRays = true;
     CameraLensRenderer cameraLensRenderer(*cameraLens, cameraLensRendererOptions);
     cameraLensRenderer.render();
 

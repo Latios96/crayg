@@ -75,14 +75,18 @@ struct CameraLens {
     float length() const;
 
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength) const;
+    std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength,
+                                            float *maxRelativeDistanceToOpticalAxis) const;
     std::optional<Ray> traceFromWorldToFilm(const Ray &ray, float wavelength) const;
     std::vector<Vector3f> traceAndRecordFromWorldToFilm(const Ray &ray, float wavelength) const;
+    std::vector<Vector3f> traceAndRecordFromFilmToWorld(const Ray &ray, float wavelength) const;
 
     void focusLens(float focalDistance);
     void changeAperture(float fStop);
 
     Ray refract(const LensSurfaceIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
     bool hasAsphericSurfaces() const;
+    float getSurfacesOffset() const;
     bool operator==(const CameraLens &rhs) const;
     bool operator!=(const CameraLens &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const CameraLens &lens);

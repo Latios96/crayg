@@ -156,6 +156,40 @@ std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray, float wavele
                {tracedRay.direction.x, tracedRay.direction.y, -tracedRay.direction.z});
 }
 
+std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray, float wavelength,
+                                                    float *maxRelativeDistanceToOpticalAxis) const {
+    Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
+                     {ray.direction.x, ray.direction.y, -ray.direction.z}};
+    for (int i = surfaces.size() - 1; i >= 0; i--) {
+        auto surface = surfaces[i];
+        if (surface.isAperture()) {
+            if (exceedsAperture(surface, ray)) {
+                const float t = (surface.center + surfacesOffset - ray.startPoint.z) / ray.direction.z;
+                Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
+                const float relativeDistanceToOpticalAxis = intersectionPosition.xy().length() / surface.apertureRadius;
+                *maxRelativeDistanceToOpticalAxis =
+                    std::max(*maxRelativeDistanceToOpticalAxis, relativeDistanceToOpticalAxis);
+            }
+            continue;
+        }
+
+        auto resultIntersection = intersect(surface, tracedRay);
+        if (!resultIntersection) {
+            *maxRelativeDistanceToOpticalAxis = 1;
+        }
+        float eta_i = surface.material.getIor(wavelength);
+        float eta_t = (i > 0 && surfaces[i - 1].material.getIor(wavelength) != 0)
+                          ? surfaces[i - 1].material.getIor(wavelength)
+                          : 1;
+
+        auto result = refract(*resultIntersection, tracedRay, eta_t, eta_i);
+
+        tracedRay = {result.startPoint, result.direction.invert()};
+    }
+    return Ray({tracedRay.startPoint.x, tracedRay.startPoint.y, -tracedRay.startPoint.z},
+               {tracedRay.direction.x, tracedRay.direction.y, -tracedRay.direction.z});
+}
+
 std::optional<Ray> CameraLens::traceFromWorldToFilm(const Ray &ray, float wavelength) const {
     // todo regeneralize this
     Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
@@ -356,6 +390,44 @@ float CameraLens::length() const {
         length += surface.thickness;
     }
     return length;
+}
+
+std::vector<Vector3f> CameraLens::traceAndRecordFromFilmToWorld(const Ray &ray, float wavelength) const {
+    std::vector<Vector3f> recordedPoints;
+    recordedPoints.reserve(surfaces.size() + 2);
+
+    Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
+                     {ray.direction.x, ray.direction.y, -ray.direction.z}};
+    recordedPoints.push_back(tracedRay.startPoint);
+    for (int i = surfaces.size() - 1; i >= 0; i--) {
+        auto surface = surfaces[i];
+        if (surface.isAperture()) {
+            if (exceedsAperture(surface, ray)) {
+                return recordedPoints;
+            }
+            continue;
+        }
+
+        auto resultIntersection = intersect(surface, tracedRay);
+        if (!resultIntersection) {
+            return recordedPoints;
+        }
+        float eta_i = surface.material.getIor(wavelength);
+        float eta_t = (i > 0 && surfaces[i - 1].material.getIor(wavelength) != 0)
+                          ? surfaces[i - 1].material.getIor(wavelength)
+                          : 1;
+
+        auto result = refract(*resultIntersection, tracedRay, eta_t, eta_i);
+
+        tracedRay = {result.startPoint, result.direction.invert()};
+        recordedPoints.push_back(tracedRay.startPoint);
+    }
+    recordedPoints.push_back(tracedRay.constructIntersectionPoint(5));
+    return recordedPoints;
+}
+
+float CameraLens::getSurfacesOffset() const {
+    return surfacesOffset;
 }
 
 } // crayg
