@@ -380,6 +380,21 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
                             Catch::Equals("Invalid lens file: Line 9: 10 is an invalid lens index, valid is [0-1]"));
     }
 
+    SECTION("should throw error because lens does not have any surfaces") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Surfaces]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
+
+[Aspheric Coefficients]
+10: k=1 a2=0 a4=4.605084e-06 a6=4.544628e-10 a8=-2.257169e-12 a10=5.828326e-16 a12=0 a14=0
+)";
+
+        REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
+                            Catch::Equals("Invalid lens file: [Surfaces] section is empty"));
+    }
+
     SECTION("should throw error because lens with specidied coefficients is not aspheric") {
         const std::string fileContent = R"(# a header comment
 [Metadata]
