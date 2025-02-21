@@ -97,6 +97,9 @@ void _readCachedGraph(UsdShadingNodeReadCache &usdShadingNodeReadCache, pxr::Usd
         pxr::TfToken connectedOutputName;
         auto connectedShader = UsdUtils::getConnectedUsdShadeShader(shader, source, connectedOutputName);
         auto cachedConnectedShader = usdShadingNodeReadCache.getCachedOrReadShadingNode(connectedShader);
+        if (!cachedConnectedShader) {
+            return;
+        }
 
         const ShadingNodeOutputType outputType = cachedConnectedShader->getOutputType();
         const ShadingNodeOutputType inputType = target.getOutputType();

@@ -69,6 +69,10 @@ TEST_CASE("UsdShadingNodeReadCache::readCachedGraph") {
     auto usdColorInput = usdMaterialShader.CreateInput(pxr::TfToken("ColorInput"), pxr::SdfValueTypeNames->Vector3f);
     usdColorInput.Set(pxr::GfVec3f(4, 5, 6));
 
+    auto usdUnknownNode = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/UnknownNode"));
+    usdUnknownNode.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:UnknownNode")));
+    auto usdUnkownNodeColorOutput = usdUnknownNode.CreateOutput(pxr::TfToken("out"), pxr::SdfValueTypeNames->Vector3f);
+
     SECTION("should read connected float constant with no value authored") {
         auto floatConstantNoValueAuthored = pxr::UsdShadeShader::Define(stage, pxr::SdfPath("/FloatConstant"));
         floatConstantNoValueAuthored.CreateIdAttr(pxr::VtValue(pxr::TfToken("crayg:FloatConstant")));
@@ -176,6 +180,16 @@ TEST_CASE("UsdShadingNodeReadCache::readCachedGraph") {
         auto colorToFloat = std::dynamic_pointer_cast<ColorToFloat>(targetInput.inputNode);
         REQUIRE(colorToFloat->colorInput.inputNode->getType() == "ColorConstant");
         REQUIRE(colorToFloat->colorToFloatMode == ColorToFloatMode::G);
+    }
+
+    SECTION("should read graph with unknown shading node without failure") {
+        usdColorInput.ConnectToSource(usdUnkownNodeColorOutput);
+        ColorShadingNodeInput targetInput;
+
+        usdShadingNodeReadCache.readCachedGraph(usdMaterialShader, usdColorInput, targetInput);
+
+        REQUIRE(targetInput.value == Color(4, 5, 6));
+        REQUIRE_FALSE(targetInput.hasInputConnection());
     }
 }
 
