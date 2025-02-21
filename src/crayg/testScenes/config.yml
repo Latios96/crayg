@@ -62,17 +62,6 @@ scenes:
     intersectors:
       - embree
     scene_path: "M:/Test_Scene_Collection/Intel_Sponza/WithKnight.usda"
-  - name: StormTrooper
-    cameras:
-      - /root/Camera/render_cam
-    hero_camera: /root/Camera/render_cam
-    integrators:
-      - debug
-      - ambient_occlusion
-      - raytracing
-    intersectors:
-      - embree
-    scene_path: "M:/Test_Scene_Collection/StormTrooper/StormTrooper.usda"
   - name: HsdLogo
     cameras:
       - /render_cam_1/render_cam_1Shape
