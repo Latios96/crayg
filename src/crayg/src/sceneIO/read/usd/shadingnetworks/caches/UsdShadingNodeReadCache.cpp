@@ -54,6 +54,22 @@ std::shared_ptr<ShadingNode> UsdShadingNodeReadCache::translateShadingNode(pxr::
     return nullptr;
 }
 
+std::shared_ptr<ShadingNode> insertColorToFloatNode(const std::shared_ptr<ShadingNode> &cachedConnectedShader,
+                                                    const pxr::TfToken &connectedOutputName) {
+    auto colorToFloat = std::make_shared<ColorToFloat>();
+    colorToFloat->colorInput.connectTo(cachedConnectedShader);
+
+    if (connectedOutputName == "r") {
+        colorToFloat->colorToFloatMode = ColorToFloatMode::R;
+    } else if (connectedOutputName == "g") {
+        colorToFloat->colorToFloatMode = ColorToFloatMode::G;
+    } else if (connectedOutputName == "b") {
+        colorToFloat->colorToFloatMode = ColorToFloatMode::B;
+    }
+
+    return colorToFloat;
+}
+
 std::shared_ptr<ShadingNode> insertAutomaticConversion(std::shared_ptr<ShadingNode> &cachedConnectedShader,
                                                        const pxr::TfToken &connectedOutputName,
                                                        ShadingNodeOutputType outputType,
@@ -61,16 +77,7 @@ std::shared_ptr<ShadingNode> insertAutomaticConversion(std::shared_ptr<ShadingNo
     const bool isColorToFloat = outputType == ShadingNodeOutputType::COLOR && inputType == ShadingNodeOutputType::FLOAT;
 
     if (isColorToFloat) {
-        auto colorToFloat = std::make_shared<ColorToFloat>();
-        colorToFloat->colorInput.connectTo(cachedConnectedShader);
-        if (connectedOutputName == "r") {
-            colorToFloat->colorToFloatMode = ColorToFloatMode::R;
-        } else if (connectedOutputName == "g") {
-            colorToFloat->colorToFloatMode = ColorToFloatMode::G;
-        } else if (connectedOutputName == "b") {
-            colorToFloat->colorToFloatMode = ColorToFloatMode::B;
-        }
-        return colorToFloat;
+        return insertColorToFloatNode(cachedConnectedShader, connectedOutputName);
     }
 
     CRAYG_LOG_AND_THROW_MESSAGE(
