@@ -93,23 +93,26 @@ void _readCachedGraph(UsdShadingNodeReadCache &usdShadingNodeReadCache, pxr::Usd
         target.value = UsdShadingNodeReadUtils::readValue<T, UsdType>(source);
     }
 
-    if (source.HasConnectedSource()) {
-        pxr::TfToken connectedOutputName;
-        auto connectedShader = UsdUtils::getConnectedUsdShadeShader(shader, source, connectedOutputName);
-        auto cachedConnectedShader = usdShadingNodeReadCache.getCachedOrReadShadingNode(connectedShader);
-        if (!cachedConnectedShader) {
-            return;
-        }
-
-        const ShadingNodeOutputType outputType = cachedConnectedShader->getOutputType();
-        const ShadingNodeOutputType inputType = target.getOutputType();
-        if (outputType != inputType) {
-            cachedConnectedShader =
-                insertAutomaticConversion(cachedConnectedShader, connectedOutputName, outputType, inputType);
-        }
-
-        target.connectTo(cachedConnectedShader);
+    if (!source.HasConnectedSource()) {
+        return;
     }
+
+    pxr::TfToken connectedOutputName;
+    auto connectedShader = UsdUtils::getConnectedUsdShadeShader(shader, source, connectedOutputName);
+    auto cachedConnectedShader = usdShadingNodeReadCache.getCachedOrReadShadingNode(connectedShader);
+
+    if (!cachedConnectedShader) {
+        return;
+    }
+
+    const ShadingNodeOutputType outputType = cachedConnectedShader->getOutputType();
+    const ShadingNodeOutputType inputType = target.getOutputType();
+    if (outputType != inputType) {
+        cachedConnectedShader =
+            insertAutomaticConversion(cachedConnectedShader, connectedOutputName, outputType, inputType);
+    }
+
+    target.connectTo(cachedConnectedShader);
 }
 
 void UsdShadingNodeReadCache::readCachedGraph(pxr::UsdShadeShader &shader, pxr::UsdShadeInput &source,
