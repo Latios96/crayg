@@ -87,6 +87,11 @@ struct CameraLens {
     Ray refract(const LensSurfaceIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
     bool hasAsphericSurfaces() const;
     float getSurfacesOffset() const;
+
+    float getSurfaceCenter(const LensSurface &lensSurface) const {
+        return lensSurface.center + surfacesOffset;
+    }
+
     bool operator==(const CameraLens &rhs) const;
     bool operator!=(const CameraLens &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const CameraLens &lens);

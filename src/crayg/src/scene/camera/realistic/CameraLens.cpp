@@ -164,7 +164,7 @@ std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray, float wavele
         auto surface = surfaces[i];
         if (surface.isAperture()) {
             if (exceedsAperture(surface, ray)) {
-                const float t = (surface.center + surfacesOffset - ray.startPoint.z) / ray.direction.z;
+                const float t = (getSurfaceCenter(surface) - ray.startPoint.z) / ray.direction.z;
                 Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
                 const float relativeDistanceToOpticalAxis = intersectionPosition.xy().length() / surface.apertureRadius;
                 *maxRelativeDistanceToOpticalAxis =
@@ -334,24 +334,23 @@ std::optional<LensSurfaceIntersection> CameraLens::intersect(const LensSurface &
     switch (surface.geometry) {
     case LensGeometry::SPHERICAL:
         intersects = intersectSphericalSurface(
-            surface.curvatureRadius, -(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t, &normal);
+            surface.curvatureRadius, -(getSurfaceCenter(surface)) + surface.curvatureRadius, ray, &t, &normal);
         break;
     case LensGeometry::ASPHERICAL:
-        intersects = intersectAsphericalSurface(surface.curvatureRadius,
-                                                -(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t,
-                                                &normal, asphericCoefficients[*surface.asphericCoefficientsIndex]);
+        intersects =
+            intersectAsphericalSurface(surface.curvatureRadius, -(getSurfaceCenter(surface)) + surface.curvatureRadius,
+                                       ray, &t, &normal, asphericCoefficients[*surface.asphericCoefficientsIndex]);
         break;
     case LensGeometry::CYLINDER_X:
         intersects = intersectCylindricalXSurface(
-            surface.curvatureRadius, -(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t, &normal);
+            surface.curvatureRadius, -(getSurfaceCenter(surface)) + surface.curvatureRadius, ray, &t, &normal);
         break;
     case LensGeometry::CYLINDER_Y:
         intersects = intersectCylindricalYSurface(
-            surface.curvatureRadius, -(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t, &normal);
+            surface.curvatureRadius, -(getSurfaceCenter(surface)) + surface.curvatureRadius, ray, &t, &normal);
         break;
     case LensGeometry::PLANAR:
-        intersects =
-            intersectPlanarSurface(-(surface.center + surfacesOffset) + surface.curvatureRadius, ray, &t, &normal);
+        intersects = intersectPlanarSurface(-(getSurfaceCenter(surface)) + surface.curvatureRadius, ray, &t, &normal);
         break;
     }
 
@@ -368,7 +367,7 @@ std::optional<LensSurfaceIntersection> CameraLens::intersect(const LensSurface &
 }
 
 bool CameraLens::exceedsAperture(const LensSurface &surface, const Ray &ray) const {
-    const float t = (surface.center + surfacesOffset - ray.startPoint.z) / ray.direction.z;
+    const float t = (getSurfaceCenter(surface) - ray.startPoint.z) / ray.direction.z;
     Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
     return exceedsAperture(intersectionPosition, apertureRadius);
 }

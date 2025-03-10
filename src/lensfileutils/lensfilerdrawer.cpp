@@ -81,12 +81,12 @@ class CameraLensRenderer {
     }
 
     void drawAperture(cairo_t *cr, const LensSurface &lensElement) const {
-        cairo_move_to(cr, -lensElement.center - cameraLens.getSurfacesOffset(), lensElement.apertureRadius);
-        cairo_line_to(cr, -lensElement.center - cameraLens.getSurfacesOffset(), lensElement.apertureRadius + 1.5);
+        cairo_move_to(cr, -cameraLens.getSurfaceCenter(lensElement), lensElement.apertureRadius);
+        cairo_line_to(cr, -cameraLens.getSurfaceCenter(lensElement), lensElement.apertureRadius + 1.5);
         cairo_stroke(cr);
 
-        cairo_move_to(cr, -lensElement.center - cameraLens.getSurfacesOffset(), -lensElement.apertureRadius);
-        cairo_line_to(cr, -lensElement.center - cameraLens.getSurfacesOffset(), -lensElement.apertureRadius - 1.5);
+        cairo_move_to(cr, -cameraLens.getSurfaceCenter(lensElement), -lensElement.apertureRadius);
+        cairo_line_to(cr, -cameraLens.getSurfaceCenter(lensElement), -lensElement.apertureRadius - 1.5);
         cairo_stroke(cr);
     }
 
@@ -95,11 +95,11 @@ class CameraLensRenderer {
         float alpha = std::asin((lensElement.apertureRadius * 2) / (2 * curvatureRadius));
         float start = -alpha;
         float end = alpha;
-        float arcCenter = -lensElement.center - curvatureRadius - cameraLens.getSurfacesOffset();
+        float arcCenter = -cameraLens.getSurfaceCenter(lensElement) - curvatureRadius;
         if (lensElement.curvatureRadius > 0) {
             start = -alpha + M_PI;
             end = alpha + M_PI;
-            arcCenter = -lensElement.center + curvatureRadius - cameraLens.getSurfacesOffset();
+            arcCenter = -cameraLens.getSurfaceCenter(lensElement) + curvatureRadius;
         }
         cairo_arc(cr, arcCenter, 0, curvatureRadius, start, end);
         cairo_stroke(cr);
@@ -116,7 +116,7 @@ class CameraLensRenderer {
         for (int i = 0; i < steps; i++) {
             const float x =
                 evaluateAsphericalSurface({0, currentHeight}, lensElement.curvatureRadius, asphericCoefficients);
-            cairo_line_to(cr, -lensElement.center - cameraLens.getSurfacesOffset() + x, currentHeight);
+            cairo_line_to(cr, -cameraLens.getSurfaceCenter(lensElement) + x, currentHeight);
             currentHeight += stepSize;
         }
         cairo_stroke(cr);
