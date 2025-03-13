@@ -1,5 +1,4 @@
 #include "Light.h"
-#include "intersectors/SceneIntersector.h"
 #include "scene/shadingnetworks/materials/EmissiveMaterial.h"
 
 namespace crayg {

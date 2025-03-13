@@ -1,6 +1,4 @@
 #include "RectLight.h"
-#include "Logger.h"
-#include "intersectors/SceneIntersector.h"
 #include "sampling/Random.h"
 
 namespace crayg {

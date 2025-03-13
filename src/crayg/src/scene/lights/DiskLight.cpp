@@ -1,5 +1,4 @@
 #include "DiskLight.h"
-#include "intersectors/SceneIntersector.h"
 #include "sampling/Random.h"
 #include <boost/math/constants/constants.hpp>
 
