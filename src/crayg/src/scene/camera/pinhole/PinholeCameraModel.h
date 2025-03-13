@@ -7,7 +7,7 @@
 
 namespace crayg {
 
-class PineHoleCameraModel : public CameraModel {
+class PinholeCameraModel : public CameraModel {
   private:
     float imageRatio;
     float imagePlaneWidth, imagePlaneHeight;
@@ -17,10 +17,10 @@ class PineHoleCameraModel : public CameraModel {
     Vector3f viewVector = {0, 0, 1};
 
   protected:
-    Vector3f createPineHoleRayDirection(const Vector2f &pixelPos);
+    Vector3f createPinholeRayDirection(const Vector2f &pixelPos);
 
   public:
-    PineHoleCameraModel(Camera &camera, const Resolution &resolution);
+    PinholeCameraModel(Camera &camera, const Resolution &resolution);
 
     RayWithWeight createPrimaryRay(const Vector2f &pixelPos, float wavelength) override;
 };

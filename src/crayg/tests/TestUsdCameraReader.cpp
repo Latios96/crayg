@@ -59,7 +59,7 @@ TEST_CASE("CameraReader::read") {
         expectedCamera->setName("/usdCamera");
         REQUIRE(*camera == *expectedCamera);
     }
-    SECTION("cameraType should default to PineHoleCamera") {
+    SECTION("cameraType should default to PinholeCamera") {
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
 

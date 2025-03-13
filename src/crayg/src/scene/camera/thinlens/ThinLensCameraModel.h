@@ -1,10 +1,10 @@
 #pragma once
 
-#include "scene/camera/pinehole/PineHoleCameraModel.h"
+#include "scene/camera/pinhole/PinholeCameraModel.h"
 
 namespace crayg {
 
-class ThinLensCameraModel : public PineHoleCameraModel {
+class ThinLensCameraModel : public PinholeCameraModel {
   public:
     ThinLensCameraModel(Camera &camera, const Resolution &resolution);
 
