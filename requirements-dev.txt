@@ -6,3 +6,5 @@ requests
 typer
 pydantic
 xlrd
+jinja2
+case-converter
