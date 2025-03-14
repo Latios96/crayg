@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RectLight.h"
+#include "AreaLight.h"
 
 namespace crayg {
 

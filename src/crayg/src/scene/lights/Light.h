@@ -2,7 +2,6 @@
 
 #include "scene/Imageable.h"
 #include "scene/Transformable.h"
-#include <ostream>
 
 namespace crayg {
 
