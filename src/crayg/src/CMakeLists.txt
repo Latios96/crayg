@@ -137,6 +137,8 @@ set(crayg_SRCS
     scene/camera/CameraUtils.h
     scene/camera/pinhole/PinholeCameraModel.cpp
     scene/camera/pinhole/PinholeCameraModel.h
+    scene/camera/realistic/ApertureShape.cpp
+    scene/camera/realistic/ApertureShape.h
     scene/camera/realistic/CameraLens.cpp
     scene/camera/realistic/CameraLens.h
     scene/camera/realistic/CameraLensMetadata.cpp
