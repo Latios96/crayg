@@ -35,4 +35,12 @@ float SampledDistance::getDistance(int firstSampleIndex, float t) const {
 SampledDistance::SampledDistance(int surfaceIndex, const std::vector<float> &samples)
     : surfaceIndex(surfaceIndex), samples(samples) {
 }
+
+bool SampledDistance::operator==(const SampledDistance &rhs) const {
+    return surfaceIndex == rhs.surfaceIndex && samples == rhs.samples;
+}
+
+bool SampledDistance::operator!=(const SampledDistance &rhs) const {
+    return !(rhs == *this);
+}
 }

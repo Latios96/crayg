@@ -27,6 +27,9 @@ struct SampledDistance {
 
     float getDistance(const IndexAndWeight &indexAndWeight) const;
     float getDistance(int firstSampleIndex, float t) const;
+
+    bool operator==(const SampledDistance &rhs) const;
+    bool operator!=(const SampledDistance &rhs) const;
 };
 
 struct VariableLensDistances {
