@@ -226,6 +226,16 @@ void parseAsphericCoefficientsLine(int lineIndex, std::string line, std::vector<
     surfaces[lensIndex].asphericCoefficientsIndex = asphericCoefficients.size() - 1;
 }
 
+void checkAsphericCoefficientsArePresent(const std::vector<LensSurface> &surfaces) {
+    for (int i = 0; i < surfaces.size(); i++) {
+        auto &surface = surfaces[i];
+        if (surface.geometry == LensGeometry::ASPHERICAL && !surface.asphericCoefficientsIndex.has_value()) {
+            CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+                fmt::format("surface {} is aspheric, but has no coefficients", i)));
+        }
+    }
+}
+
 void parseVariableDistancesLine(int lineIndex, std::string line, std::vector<LensSurface> &surfaces,
                                 VariableLensDistances &variableLensDistances) {
     boost::algorithm::to_lower(line);
@@ -323,14 +333,7 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is empty or missing"));
     }
 
-    // todo extract method
-    for (int i = 0; i < surfaces.size(); i++) {
-        auto &surface = surfaces[i];
-        if (surface.geometry == LensGeometry::ASPHERICAL && !surface.asphericCoefficientsIndex.has_value()) {
-            CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
-                fmt::format("surface {} is aspheric, but has no coefficients", i)));
-        }
-    }
+    checkAsphericCoefficientsArePresent(surfaces);
 
     return {cameraLensMetadata, surfaces, asphericCoefficients, variableLensDistances};
 }
