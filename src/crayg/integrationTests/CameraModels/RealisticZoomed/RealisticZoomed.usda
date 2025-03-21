@@ -1,0 +1,25 @@
+#usda 1.0
+(
+    subLayers = [
+        @./../_base_scene/_base_scene.usda@
+    ]
+)
+
+over "render_cam"
+{
+    over "render_camShape"{
+        custom string craygCameraType = "REALISTIC"
+        custom asset craygLensFile = @./canon-zoom-70.fx@
+        float fStop = 4
+        float focalLength = 100
+    }
+}
+
+over "Render"
+{
+    over "settings"
+    {
+        uniform int2 resolution = (240, 135)
+        custom int maxSamples = 64
+    }
+}

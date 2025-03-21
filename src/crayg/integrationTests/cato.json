@@ -48,6 +48,9 @@
           "name": "RealisticSpherical"
         },
         {
+          "name": "RealisticZoomed"
+        },
+        {
           "name": "RealisticAnamorphic"
         },
         {
