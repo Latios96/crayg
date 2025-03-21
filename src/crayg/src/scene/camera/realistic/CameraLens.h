@@ -5,7 +5,9 @@
 #include "LensMaterial.h"
 #include "LensSurface.h"
 #include "ThickLensApproximation.h"
+#include "VariableLensDistances.h"
 #include "basics/Gradient.h"
+#include "basics/MathUtils.h"
 #include "basics/Ray.h"
 #include "utils/DtoUtils.h"
 #include <fmt/ostream.h>
@@ -19,50 +21,18 @@ namespace crayg {
 
 CRAYG_DTO_2(LensSurfaceIntersection, Vector3f, point, Vector3f, normal);
 
-struct SurfaceDistances {
-    int surfaceIndex;
-    std::vector<float> distances;
-};
-
 struct CameraLens {
     CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces);
     CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces,
-               const std::vector<AsphericCoefficients> &asphericCoefficients);
+               const std::vector<AsphericCoefficients> &asphericCoefficients,
+               const VariableLensDistances &variableLensDistances);
     CameraLens(const CameraLens &cameraLens);
     std::vector<LensSurface> surfaces;
     std::vector<AsphericCoefficients> asphericCoefficients;
 
-    struct {
-        std::vector<float> focalLengthSamples;
-        std::vector<SurfaceDistances> distances;
+    VariableLensDistances variableLensDistances;
 
-    } variableDistances;
-
-    // zoom to desired focallength, clamp range
-
-    void zoom(float focalLength) {
-        if (variableDistances.focalLengthSamples.empty()) {
-            return;
-        }
-        const float firstFocalLength = variableDistances.focalLengthSamples[0];
-        const float lastFocalLength =
-            variableDistances.focalLengthSamples[variableDistances.focalLengthSamples.size() - 1];
-        const float focalLengthDistance = lastFocalLength - firstFocalLength;
-        focalLength = std::clamp(focalLength, firstFocalLength, lastFocalLength);
-        const float relativeFocalLength = focalLength / focalLengthDistance;
-
-        for (auto &surfaceDistance : variableDistances.distances) {
-            std::vector<GradientStop<float>> stops;
-            for (int i = 0; i < variableDistances.focalLengthSamples.size(); i++) {
-                stops.emplace_back(variableDistances.focalLengthSamples[i], surfaceDistance.distances[i]);
-            }
-            Gradient<float> distanceGradient(stops);
-            const float distanceForFocalLength = distanceGradient.interpolate(relativeFocalLength);
-            surfaces[surfaceDistance.surfaceIndex].thickness = distanceForFocalLength;
-        }
-
-        // recompute centers
-    }
+    void zoom(float focalLength_mm);
 
     ThickLensApproximation thickLensApproximation;
 
@@ -98,6 +68,8 @@ struct CameraLens {
 
   private:
     void initializeLensMaterials();
+    void initSurfaceCenters();
+    void initializeLensProperties();
     void calculateMetadata();
     void handleAnamorphicFocussing();
     float computeClosestFocalDistance() const;

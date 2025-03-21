@@ -52,7 +52,13 @@ CameraLens CameraLensFixtures::createCanon70_200mm() {
 
     convertMillimetersToCentimeters(surfaces);
 
-    return CameraLens(CameraLensMetadata("Canon F/2.8, 70-200mm"), surfaces);
+    VariableLensDistances variableLensDistances;
+    variableLensDistances.sampledFocalLengths = std::vector<float>({72.10f, 135.0f, 194.0f});
+    variableLensDistances.sampledDistances = std::vector<SampledDistance>(
+        {SampledDistance(5, {0.878, 2.615f, 3.285}), SampledDistance(9, {0.164f, 1.289f, 1.723f}),
+         SampledDistance(16, {3.032f, 1.572f, 0.132f}), SampledDistance(21, {1.470f, 0.069f, 0.405f})});
+
+    return CameraLens(CameraLensMetadata("Canon F/2.8, 70-200mm"), surfaces, {}, variableLensDistances);
 }
 
 CameraLens CameraLensFixtures::createSchneider30mmAnamorphic() {
@@ -110,7 +116,7 @@ CameraLens CameraLensFixtures::createEdmondAsphericLens() {
     }
 
     return CameraLens(crayg::CameraLensMetadata("Edmond Optics Precision Aspheric Lens"), surfaces,
-                      asphericCoefficients);
+                      asphericCoefficients, {});
 }
 
 } // crayg

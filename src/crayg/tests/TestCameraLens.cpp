@@ -203,6 +203,7 @@ TEST_CASE("CameraLens::length") {
 }
 
 TEST_CASE("CameraLens::zoom") {
+    CameraLens canon70_200 = CameraLensFixtures::createCanon70_200mm();
     CameraLens edmondAsphericLens = CameraLensFixtures::createEdmondAsphericLens();
 
     SECTION("should have no effect on a lens with no focal length samples") {
@@ -212,6 +213,36 @@ TEST_CASE("CameraLens::zoom") {
 
         const float firstSurfaceCenterAfterZoom = edmondAsphericLens.getSurfaceCenter(edmondAsphericLens.surfaces[0]);
         REQUIRE(firstSurfaceCenterBeforeZoom == firstSurfaceCenterAfterZoom);
+    }
+
+    SECTION("should zoom Canon 70-200mm to 70mm") {
+        canon70_200.zoom(70);
+
+        REQUIRE_THAT(canon70_200.metadata.focalLength, Catch::WithinRel(7.1f, 0.1f));
+    }
+
+    SECTION("should zoom Canon 70-200mm to 100mm") {
+        canon70_200.zoom(100);
+
+        REQUIRE_THAT(canon70_200.metadata.focalLength, Catch::WithinRel(10.f, 0.1f));
+    }
+
+    SECTION("should zoom Canon 70-200mm to 135mm") {
+        canon70_200.zoom(135);
+
+        REQUIRE_THAT(canon70_200.metadata.focalLength, Catch::WithinRel(13.5f, 0.1f));
+    }
+
+    SECTION("should zoom Canon 70-200mm to 160mm") {
+        canon70_200.zoom(160);
+
+        REQUIRE_THAT(canon70_200.metadata.focalLength, Catch::WithinRel(16.0f, 0.1f));
+    }
+
+    SECTION("should zoom Canon 70-200mm to 194mm") {
+        canon70_200.zoom(194);
+
+        REQUIRE_THAT(canon70_200.metadata.focalLength, Catch::WithinRel(19.4f, 0.1f));
     }
 }
 

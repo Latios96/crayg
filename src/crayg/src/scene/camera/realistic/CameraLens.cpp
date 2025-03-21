@@ -9,18 +9,19 @@
 namespace crayg {
 
 CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces)
-    : CameraLens(metadata, surfaces, {}) {
+    : CameraLens(metadata, surfaces, {}, {}) {
 }
 
 CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces,
-                       const std::vector<AsphericCoefficients> &asphericCoefficients)
-    : metadata(metadata), surfaces(surfaces), asphericCoefficients(asphericCoefficients) {
+                       const std::vector<AsphericCoefficients> &asphericCoefficients,
+                       const VariableLensDistances &variableLensDistances)
+    : metadata(metadata), surfaces(surfaces), asphericCoefficients(asphericCoefficients),
+      variableLensDistances(variableLensDistances) {
 
-    float center = 0;
+    initSurfaceCenters();
+    // todo extract method
     for (int i = surfaces.size() - 1; i >= 0; i--) {
         auto &surface = this->surfaces[i];
-        center += surface.thickness;
-        surface.center = center;
         if (surface.isAperture()) {
             apertureIndex = i;
         }
@@ -28,15 +29,7 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
     apertureRadius = apertureIndex != -1 ? getAperture().apertureRadius : 0;
 
     initializeLensMaterials();
-
-    ThickLensApproximationCalculator thickLensCalculator(*this);
-    thickLensApproximation = thickLensCalculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
-
-    calculateMetadata();
-
-    if (this->metadata.isAnamorphic) {
-        handleAnamorphicFocussing();
-    }
+    initializeLensProperties();
 }
 
 void CameraLens::initializeLensMaterials() {
@@ -61,6 +54,26 @@ void CameraLens::initializeLensMaterials() {
                           searchError.iorError, searchError.abbeNoError);
         }
         surface.material = material;
+    }
+}
+
+void CameraLens::initSurfaceCenters() {
+    float center = surfacesOffset;
+    for (int i = surfaces.size() - 1; i >= 0; i--) {
+        auto &surface = this->surfaces[i];
+        center += surface.thickness;
+        surface.center = center;
+    }
+}
+
+void CameraLens::initializeLensProperties() {
+    ThickLensApproximationCalculator thickLensCalculator(*this);
+    thickLensApproximation = thickLensCalculator.calculate(ThickLensApproximationCalculator::Direction::VERTICAL);
+
+    calculateMetadata();
+
+    if (this->metadata.isAnamorphic) {
+        handleAnamorphicFocussing();
     }
 }
 
@@ -116,7 +129,8 @@ CameraLens::CameraLens(const CameraLens &cameraLens)
     : metadata(cameraLens.metadata), surfaces(cameraLens.surfaces),
       asphericCoefficients(cameraLens.asphericCoefficients), apertureIndex(cameraLens.apertureIndex),
       thickLensApproximation(cameraLens.thickLensApproximation), apertureRadius(cameraLens.apertureRadius),
-      surfacesOffset(cameraLens.surfacesOffset) {
+      surfacesOffset(cameraLens.surfacesOffset), variableLensDistances(cameraLens.variableLensDistances) {
+    initSurfaceCenters();
 }
 
 const LensSurface &CameraLens::getFirstSurface() const {
@@ -427,6 +441,24 @@ std::vector<Vector3f> CameraLens::traceAndRecordFromFilmToWorld(const Ray &ray, 
 
 float CameraLens::getSurfacesOffset() const {
     return surfacesOffset;
+}
+
+void CameraLens::zoom(float focalLength_mm) {
+    if (variableLensDistances.empty()) {
+        return;
+    }
+
+    const auto indexAndWeight = variableLensDistances.getFirstSampleIndex(focalLength_mm);
+
+    for (auto &sampledDistance : variableLensDistances.sampledDistances) {
+        const float interpolatedThickness = sampledDistance.getDistance(indexAndWeight);
+        auto &surface = surfaces[sampledDistance.surfaceIndex];
+        surface.thickness = interpolatedThickness;
+    }
+
+    initSurfaceCenters();
+
+    initializeLensProperties();
 }
 
 } // crayg
