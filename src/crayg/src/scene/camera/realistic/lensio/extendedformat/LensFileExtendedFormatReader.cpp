@@ -139,13 +139,20 @@ void parseSurfaceLine(int lineIndex, std::string line, std::vector<LensSurface> 
                           lensGeometry);
 }
 
+const std::string validSurfaceIndexRange(int surfacesCount) {
+    if (surfacesCount == 1) {
+        return "[0]";
+    }
+    return fmt::format("[0-{}]", surfacesCount - 1);
+}
+
 void checkLensSurfaceIndex(int lineIndex, int indexToCheck, std::vector<LensSurface> &surfaces) {
     if (surfaces.empty()) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is empty"));
     } else if (indexToCheck < 0 || indexToCheck >= surfaces.size()) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
-            lineIndex, fmt::format("{} is an invalid lens index, valid is [0-{}]", indexToCheck,
-                                   surfaces.size()))); // todo should be size-1
+            lineIndex, fmt::format("{} is an invalid lens index, valid is {}", indexToCheck,
+                                   validSurfaceIndexRange(surfaces.size()))));
     }
 }
 

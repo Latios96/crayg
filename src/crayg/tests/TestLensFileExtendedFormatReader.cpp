@@ -377,7 +377,7 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 9: 10 is an invalid lens index, valid is [0-1]"));
+                            Catch::Equals("Invalid lens file: Line 9: 10 is an invalid lens index, valid is [0]"));
     }
 
     SECTION("should throw error because lens does not have any surfaces") {
@@ -494,7 +494,7 @@ Focal Length Samples: 10 20 30
 3:  1 2 3
 )";
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: Line 10: 3 is an invalid lens index, valid is [0-2]"));
+                            Catch::Equals("Invalid lens file: Line 10: 3 is an invalid lens index, valid is [0-1]"));
     }
 
     SECTION("should throw error because distance sample count does not match focal length sample count") {
