@@ -164,6 +164,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestUsdSubdivisionSurfaceMeshWriter.cpp
     TestUsdTriangleMeshWriter.cpp
     TestUsdUtils.cpp
+    TestVariableLensDistances.cpp
     TestVector2.cpp
     TestVector3f.cpp)
 

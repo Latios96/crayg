@@ -202,4 +202,17 @@ TEST_CASE("CameraLens::length") {
     }
 }
 
+TEST_CASE("CameraLens::zoom") {
+    CameraLens edmondAsphericLens = CameraLensFixtures::createEdmondAsphericLens();
+
+    SECTION("should have no effect on a lens with no focal length samples") {
+        const float firstSurfaceCenterBeforeZoom = edmondAsphericLens.getSurfaceCenter(edmondAsphericLens.surfaces[0]);
+
+        edmondAsphericLens.zoom(50.f);
+
+        const float firstSurfaceCenterAfterZoom = edmondAsphericLens.getSurfaceCenter(edmondAsphericLens.surfaces[0]);
+        REQUIRE(firstSurfaceCenterBeforeZoom == firstSurfaceCenterAfterZoom);
+    }
+}
+
 }
