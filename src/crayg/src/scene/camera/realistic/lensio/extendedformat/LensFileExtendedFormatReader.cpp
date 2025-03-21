@@ -312,15 +312,8 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
         }
     }
 
-    const bool surfacesSectionWasNotFound = parseState == ParseState::METADATA;
-    if (surfacesSectionWasNotFound) {
-        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is missing"));
-    }
-
-    // todo this should not work when aspherics are specified, check!
-    const bool surfacesSectionWasEmpty = parseState == ParseState::SURFACES && surfaces.empty();
-    if (surfacesSectionWasEmpty) {
-        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is empty"));
+    if (surfaces.empty()) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is empty or missing"));
     }
 
     // todo extract method

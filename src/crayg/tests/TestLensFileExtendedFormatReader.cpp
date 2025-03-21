@@ -127,7 +127,7 @@ name: A Zoom Lens
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: [Surfaces] section is missing"));
+                            Catch::Equals("Invalid lens file: [Surfaces] section is empty or missing"));
     }
 
     SECTION("should throw exception if surfaces section is empty") {
@@ -138,7 +138,7 @@ name: A Zoom Lens
 )";
 
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
-                            Catch::Equals("Invalid lens file: [Surfaces] section is empty"));
+                            Catch::Equals("Invalid lens file: [Surfaces] section is empty or missing"));
     }
 
     SECTION("should throw exception if an surfaces contains non-float radius") {
