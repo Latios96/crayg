@@ -18,10 +18,10 @@ CameraLens::CameraLens(const CameraLensMetadata &metadata, const std::vector<Len
 
     float center = 0;
     for (int i = surfaces.size() - 1; i >= 0; i--) {
-        auto &lens = this->surfaces[i];
-        center += lens.thickness;
-        lens.center = center;
-        if (lens.isAperture()) {
+        auto &surface = this->surfaces[i];
+        center += surface.thickness;
+        surface.center = center;
+        if (surface.isAperture()) {
             apertureIndex = i;
         }
     }
