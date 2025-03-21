@@ -64,7 +64,14 @@ Radius    Thickness IOR  Housing-Radius Abbe-No Material Geometry
 -39.5     1.8       1.83 21             37.2    UNKNOWN  SPHERICAL 
 -95.7     0.15      1    21             0       UNKNOWN  SPHERICAL 
 148       3.62      1.74 21             49.3    UNKNOWN  SPHERICAL 
--206      54.5      1    21             0       UNKNOWN  SPHERICAL )");
+-206      54.5      1    21             0       UNKNOWN  SPHERICAL 
+[Variable Distances]
+Focal Length Samples: 72.1 135 194
+5: 8.78 26.1 32.9 
+9: 1.64 12.9 17.2 
+16: 30.3 15.7 1.32 
+21: 14.7 0.69 4.05 
+)");
     }
 
     SECTION("should write Aspherics correctly") {

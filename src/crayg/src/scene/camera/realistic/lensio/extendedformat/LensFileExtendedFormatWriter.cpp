@@ -48,6 +48,21 @@ void writeAsphericSurfaces(std::string &content, const CameraLens &cameraLens) {
     }
 }
 
+void writeVariableDistances(std::string &content, const CameraLens &cameraLens) {
+    content += "\n[Variable Distances]\n";
+
+    content +=
+        fmt::format("Focal Length Samples: {}\n", fmt::join(cameraLens.variableLensDistances.sampledFocalLengths, " "));
+
+    for (auto &sampledDistance : cameraLens.variableLensDistances.sampledDistances) {
+        content += fmt::format("{}: ", sampledDistance.surfaceIndex);
+        for (auto sample : sampledDistance.samples) {
+            content += formatFloat(sample * 10) + " ";
+        }
+        content += "\n";
+    }
+}
+
 std::string LensFileExtendedFormatWriter::writeFileContent(const CameraLens &cameraLens) {
     std::string content;
 
@@ -64,6 +79,10 @@ std::string LensFileExtendedFormatWriter::writeFileContent(const CameraLens &cam
 
     if (cameraLens.hasAsphericSurfaces()) {
         writeAsphericSurfaces(content, cameraLens);
+    }
+
+    if (cameraLens.hasVariableDistances()) {
+        writeVariableDistances(content, cameraLens);
     }
 
     return content;
