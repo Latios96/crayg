@@ -55,13 +55,12 @@ struct CameraLens {
     void changeAperture(float fStop);
 
     Ray refract(const LensSurfaceIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
+
     bool hasAsphericSurfaces() const;
     bool hasVariableDistances() const;
-    float getSurfacesOffset() const;
 
-    float getSurfaceCenter(const LensSurface &lensSurface) const {
-        return lensSurface.center + surfacesOffset;
-    }
+    float getSurfacesOffset() const;
+    float getSurfaceCenter(const LensSurface &lensSurface) const;
 
     bool operator==(const CameraLens &rhs) const;
     bool operator!=(const CameraLens &rhs) const;

@@ -447,6 +447,10 @@ float CameraLens::getSurfacesOffset() const {
     return surfacesOffset;
 }
 
+float CameraLens::getSurfaceCenter(const LensSurface &lensSurface) const {
+    return lensSurface.center + surfacesOffset;
+}
+
 void CameraLens::zoom(float focalLength_mm) {
     if (variableLensDistances.empty()) {
         return;
