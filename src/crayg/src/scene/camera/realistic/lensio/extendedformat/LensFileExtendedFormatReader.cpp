@@ -288,7 +288,7 @@ void parseVariableDistancesLine(int lineIndex, std::string line, std::vector<Len
             lineIndex, fmt::format("'{}' has wrong sample count (was {}, expected {})", line, distanceSamples.size(),
                                    variableLensDistances.sampledFocalLengths.size())));
     }
-    variableLensDistances.sampledDistances.push_back(SampledDistance(surfaceIndex, distanceSamples));
+    variableLensDistances.sampledDistances.emplace_back(surfaceIndex, distanceSamples);
 }
 
 CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &content) {
