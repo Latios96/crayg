@@ -13,7 +13,7 @@
 
 namespace crayg {
 
-enum class ParseState { UNDEFINED, METADATA, SURFACES, ASPHERIC_COEFFICIENTS };
+enum class ParseState { UNDEFINED, METADATA, SURFACES, ASPHERIC_COEFFICIENTS, VARIABLE_DISTANCES };
 
 class InvalidExtendedLensFileFormatException : public std::runtime_error {
   public:
@@ -36,6 +36,9 @@ bool checkLineForStateAndChangeIfNeeded(std::string line, ParseState &parseState
         return true;
     } else if (line == "[aspheric coefficients]") {
         parseState = ParseState::ASPHERIC_COEFFICIENTS;
+        return true;
+    } else if (line == "[variable distances]") {
+        parseState = ParseState::VARIABLE_DISTANCES;
         return true;
     }
     return false;
@@ -141,7 +144,8 @@ void checkLensSurfaceIndex(int lineIndex, int indexToCheck, std::vector<LensSurf
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is empty"));
     } else if (indexToCheck < 0 || indexToCheck >= surfaces.size()) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
-            lineIndex, fmt::format("{} is an invalid lens index, valid is [0-{}]", indexToCheck, surfaces.size())));
+            lineIndex, fmt::format("{} is an invalid lens index, valid is [0-{}]", indexToCheck,
+                                   surfaces.size()))); // todo should be size-1
     }
 }
 
@@ -215,9 +219,65 @@ void parseAsphericCoefficientsLine(int lineIndex, std::string line, std::vector<
     surfaces[lensIndex].asphericCoefficientsIndex = asphericCoefficients.size() - 1;
 }
 
+void parseVariableDistancesLine(int lineIndex, std::string line, std::vector<LensSurface> &surfaces,
+                                VariableLensDistances &variableLensDistances) {
+    boost::algorithm::to_lower(line);
+    const bool isFocalLengthSamplesLine = pystring::startswith(line, "focal length samples:");
+
+    if (isFocalLengthSamplesLine) {
+        std::vector<std::string> markerAndFocalLengthSamples;
+        boost::split(markerAndFocalLengthSamples, line, boost::is_any_of(":"));
+
+        if (markerAndFocalLengthSamples.size() < 2) {
+            CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+                lineIndex, fmt::format("'{}' contains no focal length samples", line)));
+        }
+
+        std::vector<std::string> focalLengthSamples;
+        boost::split(focalLengthSamples, markerAndFocalLengthSamples[1], boost::is_any_of(" "));
+
+        for (int i = 1; i < focalLengthSamples.size(); i++) {
+            const auto &focalLengthStr = focalLengthSamples[i];
+            const float focalLength = parseFloat(lineIndex, focalLengthStr, "focal length sample");
+            variableLensDistances.sampledFocalLengths.push_back(focalLength);
+        }
+        return;
+    }
+
+    std::vector<std::string> surfaceIndexAndDistanceSamples;
+    boost::split(surfaceIndexAndDistanceSamples, line, boost::is_any_of(":"));
+
+    if (surfaceIndexAndDistanceSamples.size() < 2) {
+        CRAYG_LOG_AND_THROW(
+            InvalidExtendedLensFileFormatException(lineIndex, fmt::format("'{}' contains no distance samples", line)));
+    }
+
+    const int surfaceIndex = parseInt(lineIndex, surfaceIndexAndDistanceSamples[0], "surface index");
+
+    checkLensSurfaceIndex(lineIndex, surfaceIndex, surfaces);
+
+    std::vector<std::string> distanceSamplesStrs;
+    boost::split(distanceSamplesStrs, surfaceIndexAndDistanceSamples[1], boost::is_any_of(" "));
+
+    std::vector<float> distanceSamples;
+    for (int i = 1; i < distanceSamplesStrs.size(); i++) {
+        const auto &distanceSampleStr = distanceSamplesStrs[i];
+        const float distanceSample = parseFloat(lineIndex, distanceSampleStr, "distance sample");
+        distanceSamples.push_back(distanceSample / 10.f);
+    }
+
+    if (distanceSamples.size() != variableLensDistances.sampledFocalLengths.size()) {
+        CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException(
+            lineIndex, fmt::format("'{}' has wrong sample count (was {}, expected {})", line, distanceSamples.size(),
+                                   variableLensDistances.sampledFocalLengths.size())));
+    }
+    variableLensDistances.sampledDistances.push_back(SampledDistance(surfaceIndex, distanceSamples));
+}
+
 CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &content) {
     std::vector<LensSurface> surfaces;
     std::vector<AsphericCoefficients> asphericCoefficients;
+    VariableLensDistances variableLensDistances;
     std::vector<std::string> lines;
     boost::split(lines, content, boost::is_any_of("\n"));
 
@@ -247,6 +307,8 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
             parseSurfaceLine(i, line, surfaces);
         } else if (parseState == ParseState::ASPHERIC_COEFFICIENTS) {
             parseAsphericCoefficientsLine(i, line, surfaces, asphericCoefficients);
+        } else if (parseState == ParseState::VARIABLE_DISTANCES) {
+            parseVariableDistancesLine(i, line, surfaces, variableLensDistances);
         }
     }
 
@@ -255,11 +317,13 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is missing"));
     }
 
+    // todo this should not work when aspherics are specified, check!
     const bool surfacesSectionWasEmpty = parseState == ParseState::SURFACES && surfaces.empty();
     if (surfacesSectionWasEmpty) {
         CRAYG_LOG_AND_THROW(InvalidExtendedLensFileFormatException("[Surfaces] section is empty"));
     }
 
+    // todo extract method
     for (int i = 0; i < surfaces.size(); i++) {
         auto &surface = surfaces[i];
         if (surface.geometry == LensGeometry::ASPHERICAL && !surface.asphericCoefficientsIndex.has_value()) {
@@ -268,7 +332,7 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
         }
     }
 
-    return {cameraLensMetadata, surfaces, asphericCoefficients, {}};
+    return {cameraLensMetadata, surfaces, asphericCoefficients, variableLensDistances};
 }
 
 } // crayg

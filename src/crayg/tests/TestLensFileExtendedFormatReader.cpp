@@ -459,6 +459,60 @@ Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry
         REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
                             Catch::Equals("Invalid lens file: surface 0 is aspheric, but has no coefficients"));
     }
+
+    SECTION("should read variable distances successfully") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Surfaces]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 SPHERICAL 
+24     21        1    50             25      SCHOTT_N_SF6 SPHERICAL
+[Variable Distances]
+Focal Length Samples: 10 20 30
+0:  1 2 3
+1:  4 5 6
+)";
+        auto cameraLens = lensFileExtendedFormatReader.readFileContent(fileContent);
+
+        REQUIRE(cameraLens.variableLensDistances.sampledFocalLengths == std::vector<float>({10.f, 20.f, 30.f}));
+        REQUIRE(cameraLens.variableLensDistances.sampledDistances ==
+                std::vector<SampledDistance>(
+                    {SampledDistance(0, {0.1f, 0.2f, 0.3f}), SampledDistance(1, {0.4f, 0.5f, 0.6f})}));
+    }
+
+    SECTION("should throw error because of invalid variable distance lens index") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Surfaces]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 SPHERICAL 
+24     21        1    50             25      SCHOTT_N_SF6 SPHERICAL
+[Variable Distances]
+Focal Length Samples: 10 20 30
+3:  1 2 3
+)";
+        REQUIRE_THROWS_WITH(lensFileExtendedFormatReader.readFileContent(fileContent),
+                            Catch::Equals("Invalid lens file: Line 10: 3 is an invalid lens index, valid is [0-2]"));
+    }
+
+    SECTION("should throw error because distance sample count does not match focal length sample count") {
+        const std::string fileContent = R"(# a header comment
+[Metadata]
+Name: Aspheric Lens
+[Surfaces]
+Radius Thickness IOR  Housing-Radius Abbe-No Material     Geometry   
+24     21        1    50             25      SCHOTT_N_SF6 SPHERICAL 
+24     21        1    50             25      SCHOTT_N_SF6 SPHERICAL
+[Variable Distances]
+Focal Length Samples: 10 20 30
+0:  1 2 
+)";
+        REQUIRE_THROWS_WITH(
+            lensFileExtendedFormatReader.readFileContent(fileContent),
+            Catch::Equals("Invalid lens file: Line 10: '0: 1 2' has wrong sample count (was 2, expected 3)"));
+    }
 }
 
 }
