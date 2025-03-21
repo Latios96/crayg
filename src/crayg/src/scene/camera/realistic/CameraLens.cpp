@@ -397,6 +397,10 @@ bool CameraLens::hasAsphericSurfaces() const {
     return !asphericCoefficients.empty();
 }
 
+bool CameraLens::hasVariableDistances() const {
+    return !variableLensDistances.empty();
+}
+
 float CameraLens::length() const {
     float length = 0;
     for (auto &surface : surfaces) {

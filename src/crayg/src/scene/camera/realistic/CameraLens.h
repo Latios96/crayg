@@ -56,6 +56,7 @@ struct CameraLens {
 
     Ray refract(const LensSurfaceIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
     bool hasAsphericSurfaces() const;
+    bool hasVariableDistances() const;
     float getSurfacesOffset() const;
 
     float getSurfaceCenter(const LensSurface &lensSurface) const {
