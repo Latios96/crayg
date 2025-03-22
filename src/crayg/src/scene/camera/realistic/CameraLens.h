@@ -22,27 +22,31 @@ namespace crayg {
 CRAYG_DTO_2(LensSurfaceIntersection, Vector3f, point, Vector3f, normal);
 
 struct CameraLens {
+    std::vector<LensSurface> surfaces;
+    std::vector<AsphericCoefficients> asphericCoefficients;
+    VariableLensDistances variableLensDistances;
+    ThickLensApproximation thickLensApproximation;
+    CameraLensMetadata metadata;
+
     CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces);
     CameraLens(const CameraLensMetadata &metadata, const std::vector<LensSurface> &surfaces,
                const std::vector<AsphericCoefficients> &asphericCoefficients,
                const VariableLensDistances &variableLensDistances);
     CameraLens(const CameraLens &cameraLens);
-    std::vector<LensSurface> surfaces;
-    std::vector<AsphericCoefficients> asphericCoefficients;
-
-    VariableLensDistances variableLensDistances;
-
-    void zoom(float focalLength_mm);
-
-    ThickLensApproximation thickLensApproximation;
-
-    CameraLensMetadata metadata;
 
     const LensSurface &getFirstSurface() const;
     const LensSurface &getLastSurface() const;
     LensSurface &getAperture();
     float getApertureRadius() const;
     float length() const;
+    bool hasAsphericSurfaces() const;
+    bool hasVariableDistances() const;
+    float getSurfacesOffset() const;
+    float getSurfaceCenter(const LensSurface &lensSurface) const;
+
+    void focusLens(float focalDistance);
+    void changeAperture(float fStop);
+    void zoom(float focalLength_mm);
 
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength) const;
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength,
@@ -52,16 +56,7 @@ struct CameraLens {
     void traceAndRecordFromWorldToFilm(std::vector<Vector3f> &recordedPoints, const Ray &ray, float wavelength) const;
     void traceAndRecordFromFilmToWorld(std::vector<Vector3f> &recordedPoints, const Ray &ray, float wavelength) const;
 
-    void focusLens(float focalDistance);
-    void changeAperture(float fStop);
-
     Ray refract(const LensSurfaceIntersection &intersection, const Ray &ray, float iorIn, float iorOut) const;
-
-    bool hasAsphericSurfaces() const;
-    bool hasVariableDistances() const;
-
-    float getSurfacesOffset() const;
-    float getSurfaceCenter(const LensSurface &lensSurface) const;
 
     bool operator==(const CameraLens &rhs) const;
     bool operator!=(const CameraLens &rhs) const;
