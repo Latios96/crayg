@@ -13,7 +13,7 @@ Vector3f RectLight::sampleLightShape() const {
     float positionByWidth = Random::random() * width - width / 2;
     float positionByHeight = Random::random() * height - height / 2;
     Vector3f positionOnPlane = {positionByWidth, positionByHeight, 0};
-    const Vector3f samplePosition = getTransform().applyForPoint(positionOnPlane);
+    const Vector3f samplePosition = transform.applyForPoint(positionOnPlane);
     return samplePosition;
 }
 
@@ -72,8 +72,9 @@ void RectLight::setHeight(float height) {
 }
 
 float RectLight::area() const {
-    const Vector3f widthVector = getPosition() - getTransform().applyForPoint({width / 2, 0, 0});
-    const Vector3f heightVector = getPosition() - getTransform().applyForPoint({0, height / 2, 0});
+    const Vector3f position = getPosition();
+    const Vector3f widthVector = position - transform.applyForPoint({width / 2, 0, 0});
+    const Vector3f heightVector = position - transform.applyForPoint({0, height / 2, 0});
     const float area = widthVector.length() * 2 * heightVector.length() * 2;
     return area;
 }
