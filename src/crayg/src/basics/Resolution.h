@@ -7,7 +7,7 @@ namespace crayg {
 
 struct Resolution {
   public:
-    Resolution();
+    Resolution() = default;
     Resolution(int width, int height);
     Resolution(const Resolution &resolution);
     static Resolution parse(const std::string &resolutionString);

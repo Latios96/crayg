@@ -11,6 +11,9 @@ namespace crayg {
 Resolution::Resolution(int width, int height) : width(width), height(height) {
 }
 
+Resolution::Resolution(const Resolution &resolution) : width(resolution.width), height(resolution.height) {
+}
+
 bool Resolution::operator==(const Resolution &rhs) const {
     return width == rhs.width && height == rhs.height;
 }
@@ -46,18 +49,12 @@ std::ostream &operator<<(std::ostream &os, const Resolution &resolution) {
     return os;
 }
 
-Resolution::Resolution() : width(0), height(0) {
-}
-
 int Resolution::getWidth() const {
     return width;
 }
 
 int Resolution::getHeight() const {
     return height;
-}
-
-Resolution::Resolution(const Resolution &resolution) : width(resolution.width), height(resolution.height) {
 }
 
 Resolution Resolution::parse(const std::string &resolutionString) {
