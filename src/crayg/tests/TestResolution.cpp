@@ -3,7 +3,7 @@
 
 namespace crayg {
 
-TEST_CASE("Resolution/parse") {
+TEST_CASE("Resolution::parse") {
 
     SECTION("parse valid") {
         const Resolution resolution = Resolution::parse("800x600");
