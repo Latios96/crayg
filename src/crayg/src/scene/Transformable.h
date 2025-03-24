@@ -11,10 +11,16 @@ class Transformable {
     explicit Transformable(const Transform &transform);
     explicit Transformable(const Vector3f &position);
 
-    Vector3f getPosition() const;
+    Vector3f getPosition() const {
+        return transform.toPosition();
+    }
+
     void setPosition(const Vector3f &position);
 
-    const Transform getTransform() const;
+    const Transform &getTransform() const {
+        return transform;
+    }
+
     void setTransform(const Transform &transform);
 
   protected:

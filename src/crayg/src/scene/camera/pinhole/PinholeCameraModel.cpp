@@ -13,7 +13,8 @@ PinholeCameraModel::PinholeCameraModel(Camera &camera, const Resolution &resolut
 
 RayWithWeight PinholeCameraModel::createPrimaryRay(const Vector2f &pixelPos, float wavelength) {
     const Vector3f pinholeRayDirection = createPinholeRayDirection(pixelPos);
-    return {Ray(camera.getPosition(), camera.getTransform().applyForNormal(pinholeRayDirection).normalize()), 1};
+    const Transform &transform = camera.getTransform();
+    return {Ray(camera.getPosition(), transform.applyForNormal(pinholeRayDirection).normalize()), 1};
 }
 
 Vector3f PinholeCameraModel::createPinholeRayDirection(const Vector2f &pixelPos) {

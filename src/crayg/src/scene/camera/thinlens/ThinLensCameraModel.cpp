@@ -13,6 +13,7 @@ RayWithWeight ThinLensCameraModel::createPrimaryRay(const Vector2f &pixelPos, fl
     auto apertureSample = Sampling::concentricSampleDisk() * camera.computeApertureRadius();
     auto rayOrigin = Vector3f(apertureSample.x, apertureSample.y, 0);
     auto mutatedDirection = (pointOnFocalPlane - rayOrigin).normalize();
-    return {camera.getTransform().apply(Ray(rayOrigin, mutatedDirection)), 1};
+    const Transform &transform = camera.getTransform();
+    return {transform.apply(Ray(rayOrigin, mutatedDirection)), 1};
 }
 } // crayg

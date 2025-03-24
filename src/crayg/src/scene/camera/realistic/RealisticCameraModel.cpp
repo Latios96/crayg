@@ -49,7 +49,8 @@ RayWithWeight RealisticCameraModel::createPrimaryRay(const Vector2f &pixelPos, f
     }
 
     const float weight = pupilSample.sampleBoundsArea / exitPupil.pupilBounds[0].area();
-    return {camera.getTransform().apply(*tracedRay), weight};
+    const Transform &transform = camera.getTransform();
+    return {transform.apply(*tracedRay), weight};
 }
 
 } // crayg
