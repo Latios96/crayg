@@ -57,6 +57,10 @@ int Resolution::getHeight() const {
     return height;
 }
 
+float Resolution::getRatio() const {
+    return static_cast<float>(width) / static_cast<float>(height);
+}
+
 Resolution Resolution::parse(const std::string &resolutionString) {
     const std::runtime_error error =
         std::runtime_error(fmt::format("Resolution string '{}' has invalid format", resolutionString));

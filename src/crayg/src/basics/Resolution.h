@@ -26,6 +26,8 @@ struct Resolution {
     int getWidth() const;
     int getHeight() const;
 
+    float getRatio() const;
+
   private:
     int width, height;
 };

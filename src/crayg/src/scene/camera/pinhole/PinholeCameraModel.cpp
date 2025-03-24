@@ -4,7 +4,7 @@
 namespace crayg {
 
 PinholeCameraModel::PinholeCameraModel(Camera &camera, const Resolution &resolution) : CameraModel(camera, resolution) {
-    imageRatio = static_cast<float>(resolution.getWidth()) / static_cast<float>(resolution.getHeight());
+    imageRatio = resolution.getRatio();
     imagePlaneHeight = (2.0f * std::tan(camera.getHorizontalFieldOfView() / 2.0f)) / imageRatio;
     imagePlaneWidth = imageRatio * imagePlaneHeight;
     sideVector = sideVector * (imagePlaneWidth / 2.0f);
