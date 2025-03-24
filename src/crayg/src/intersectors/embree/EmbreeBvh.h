@@ -15,13 +15,30 @@ CRAYG_FMT_ENUM_FORMATTER(crayg::EmbreePrimitiveType);
 
 namespace crayg {
 
-CRAYG_DTO_2(EmbreeMappingEntry, std::uint32_t, sceneObjectIndex, EmbreePrimitiveType, primitiveType)
+class PointInstancer;
 
+struct EmbreeMappingEntry {
+    void *objPtr;
+    EmbreePrimitiveType primitiveType;
+    EmbreeMappingEntry() : objPtr(nullptr), primitiveType(EmbreePrimitiveType::TRIANGLE_MESH){};
+    EmbreeMappingEntry(void *objPtr, EmbreePrimitiveType primitiveType)
+        : objPtr(objPtr), primitiveType(primitiveType){};
+
+    bool operator==(const EmbreeMappingEntry &rhs) const {
+        return objPtr == rhs.objPtr && primitiveType == rhs.primitiveType;
+    }
+
+    bool operator!=(const EmbreeMappingEntry &rhs) const {
+        return !(rhs == *this);
+    }
+};
+
+// todo check for better map impls
 typedef std::unordered_map<unsigned int, EmbreeMappingEntry> GeomToSceneObject;
 
 struct EmbreeProtoInstanceMappingEntry {
     GeomToSceneObject geomToSceneObject;
-    std::uint32_t pointInstancerIndex;
+    PointInstancer *pointInstancer;
     std::uint32_t protoId;
 };
 

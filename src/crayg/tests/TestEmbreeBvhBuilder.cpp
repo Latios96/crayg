@@ -37,15 +37,16 @@ TEST_CASE("EmbreeBvhBuilder::build") {
         auto embreeBvh = embreeBvhBuilder.build();
 
         REQUIRE(embreeBvh->geomIdToSceneObject.size() == 3);
-        REQUIRE(embreeBvh->geomIdToSceneObject[0] == EmbreeMappingEntry(0u, EmbreePrimitiveType::TRIANGLE_MESH));
-        REQUIRE(embreeBvh->geomIdToSceneObject[1] == EmbreeMappingEntry(1u, EmbreePrimitiveType::SPHERE));
+        REQUIRE(embreeBvh->geomIdToSceneObject[0] ==
+                EmbreeMappingEntry(triangleMesh.get(), EmbreePrimitiveType::TRIANGLE_MESH));
+        REQUIRE(embreeBvh->geomIdToSceneObject[1] == EmbreeMappingEntry(sphere.get(), EmbreePrimitiveType::SPHERE));
         REQUIRE(embreeBvh->geomIdToSceneObject[2] ==
-                EmbreeMappingEntry(2u, EmbreePrimitiveType::SUBDIVISION_SURFACE_MESH));
+                EmbreeMappingEntry(subdivisionSurfaceMesh.get(), EmbreePrimitiveType::SUBDIVISION_SURFACE_MESH));
         REQUIRE(embreeBvh->embreeInstanceIdToInstanceInfo[0] == EmbreeInstanceInfo(0, 0));
         REQUIRE(embreeBvh->globalProtoGeomToSceneObject[0].protoId == 0);
-        REQUIRE(embreeBvh->globalProtoGeomToSceneObject[0].pointInstancerIndex == 3);
+        REQUIRE(embreeBvh->globalProtoGeomToSceneObject[0].pointInstancer == pointInstancer.get());
         REQUIRE(embreeBvh->globalProtoGeomToSceneObject[0].geomToSceneObject[0] ==
-                EmbreeMappingEntry(0u, EmbreePrimitiveType::TRIANGLE_MESH));
+                EmbreeMappingEntry(pointInstancer->protos[0]->members[0].get(), EmbreePrimitiveType::TRIANGLE_MESH));
     }
 
     SECTION("should add a PointInstancer correctly") {
@@ -63,14 +64,14 @@ TEST_CASE("EmbreeBvhBuilder::build") {
         REQUIRE(embreeBvh->geomIdToSceneObject.empty());
         REQUIRE(embreeBvh->embreeInstanceIdToInstanceInfo[0] == EmbreeInstanceInfo(0, 0));
         REQUIRE(embreeBvh->globalProtoGeomToSceneObject[0].protoId == 0);
-        REQUIRE(embreeBvh->globalProtoGeomToSceneObject[0].pointInstancerIndex == 0);
+        REQUIRE(embreeBvh->globalProtoGeomToSceneObject[0].pointInstancer == pointInstancer1.get());
         REQUIRE(embreeBvh->globalProtoGeomToSceneObject[0].geomToSceneObject[0] ==
-                EmbreeMappingEntry(0u, EmbreePrimitiveType::TRIANGLE_MESH));
+                EmbreeMappingEntry(pointInstancer1->protos[0]->members[0].get(), EmbreePrimitiveType::TRIANGLE_MESH));
         REQUIRE(embreeBvh->embreeInstanceIdToInstanceInfo[1] == EmbreeInstanceInfo(1, 0));
         REQUIRE(embreeBvh->globalProtoGeomToSceneObject[1].protoId == 0);
-        REQUIRE(embreeBvh->globalProtoGeomToSceneObject[1].pointInstancerIndex == 1);
+        REQUIRE(embreeBvh->globalProtoGeomToSceneObject[1].pointInstancer == pointInstancer2.get());
         REQUIRE(embreeBvh->globalProtoGeomToSceneObject[1].geomToSceneObject[0] ==
-                EmbreeMappingEntry(0u, EmbreePrimitiveType::TRIANGLE_MESH));
+                EmbreeMappingEntry(pointInstancer2->protos[0]->members[0].get(), EmbreePrimitiveType::TRIANGLE_MESH));
     }
 }
 

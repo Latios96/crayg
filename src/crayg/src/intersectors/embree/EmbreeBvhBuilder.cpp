@@ -72,7 +72,6 @@ void convertMatrixToEmbree(float *transform, const Matrix4x4f &matrix) {
 }
 
 void addPointInstancer(RTCDevice device, RTCScene rtcScene, std::shared_ptr<PointInstancer> &pointInstancer,
-                       unsigned int pointInstancerIndex,
                        std::vector<EmbreeProtoInstanceMappingEntry> *globalProtoGeomToSceneObject,
                        EmbreeInstanceIdToInstanceInfo *embreeInstanceIdToInstanceInfo) {
     std::unordered_map<size_t, size_t> protoIdToGlobalProtoId;
@@ -81,7 +80,7 @@ void addPointInstancer(RTCDevice device, RTCScene rtcScene, std::shared_ptr<Poin
     for (int protoId = 0; protoId < pointInstancer->protos.size(); protoId++) {
         auto &proto = pointInstancer->protos[protoId];
         EmbreeProtoInstanceMappingEntry embreeInstanceMappingEntry{};
-        embreeInstanceMappingEntry.pointInstancerIndex = pointInstancerIndex;
+        embreeInstanceMappingEntry.pointInstancer = pointInstancer.get();
         embreeInstanceMappingEntry.protoId = protoId;
         protoIdToRtcScene[protoId] =
             buildFromSceneObjects(device, proto->members, embreeInstanceMappingEntry.geomToSceneObject, nullptr,
@@ -142,18 +141,19 @@ RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_p
         if (sceneObject->getType() == "TriangleMesh") {
             auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
             unsigned int geomId = addTriangleMesh(device, rtcScene, *triangleMesh);
-            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::TRIANGLE_MESH);
+            geomIdToSceneObject[geomId] = EmbreeMappingEntry(sceneObject.get(), EmbreePrimitiveType::TRIANGLE_MESH);
         } else if (sceneObject->getType() == "SubdivisionSurfaceMesh") {
             auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
             unsigned int geomId = addTriangleMesh(device, rtcScene, subdivisionSurfaceMesh->triangleMesh);
-            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::SUBDIVISION_SURFACE_MESH);
+            geomIdToSceneObject[geomId] =
+                EmbreeMappingEntry(sceneObject.get(), EmbreePrimitiveType::SUBDIVISION_SURFACE_MESH);
         } else if (sceneObject->getType() == "Sphere") {
             auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
             unsigned int geomId = addSphere(device, rtcScene, sphere);
-            geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::SPHERE);
+            geomIdToSceneObject[geomId] = EmbreeMappingEntry(sceneObject.get(), EmbreePrimitiveType::SPHERE);
         } else if (sceneObject->getType() == "PointInstancer") {
             auto pointInstancer = std::dynamic_pointer_cast<PointInstancer>(sceneObject);
-            addPointInstancer(device, rtcScene, pointInstancer, i, globalProtoGeomToSceneObject,
+            addPointInstancer(device, rtcScene, pointInstancer, globalProtoGeomToSceneObject,
                               embreeInstanceIdToInstanceInfo);
         }
     }
@@ -164,11 +164,11 @@ RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_p
             if (light->getType() == "RectLight") {
                 auto rectLight = std::dynamic_pointer_cast<RectLight>(light);
                 unsigned int geomId = addRectLight<RectLight, RectLightShapeGenerator>(device, rtcScene, *rectLight);
-                geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::LIGHT);
+                geomIdToSceneObject[geomId] = EmbreeMappingEntry(rectLight.get(), EmbreePrimitiveType::LIGHT);
             } else if (light->getType() == "DiskLight") {
                 auto diskLight = std::dynamic_pointer_cast<DiskLight>(light);
                 unsigned int geomId = addRectLight<DiskLight, DiskLightShapeGenerator>(device, rtcScene, *diskLight);
-                geomIdToSceneObject[geomId] = EmbreeMappingEntry(i, EmbreePrimitiveType::LIGHT);
+                geomIdToSceneObject[geomId] = EmbreeMappingEntry(diskLight.get(), EmbreePrimitiveType::LIGHT);
             }
         }
     }

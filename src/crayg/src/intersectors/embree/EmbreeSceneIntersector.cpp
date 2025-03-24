@@ -25,8 +25,7 @@ Imageable::Intersection EmbreeSceneIntersector::intersect(const Ray &ray, HitSto
         auto instanceId = rtcRayHit.hit.instID[0];
         auto embreeInstanceInfo = embreeBvh->embreeInstanceIdToInstanceInfo[instanceId];
         auto &instanceMappingEntry = embreeBvh->globalProtoGeomToSceneObject[embreeInstanceInfo.globalProtoId];
-        auto pointInstancer =
-            std::dynamic_pointer_cast<PointInstancer>(scene.objects[instanceMappingEntry.pointInstancerIndex]);
+        auto pointInstancer = instanceMappingEntry.pointInstancer;
         auto &members = pointInstancer->protos[instanceMappingEntry.protoId]->members;
         return map(instanceMappingEntry.geomToSceneObject, rtcRayHit, members,
                    &pointInstancer->transforms[embreeInstanceInfo.instanceId], hitStorage);
@@ -70,16 +69,15 @@ Imageable::Intersection EmbreeSceneIntersector::map(GeomToSceneObject &geomIdToS
 Imageable::Intersection
 EmbreeSceneIntersector::mapToSphere(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
                                     const std::vector<std::shared_ptr<SceneObject>> &objects) const {
-    auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
-    return {rtcRayHit.ray.tfar, sceneObject.get()};
+    auto sphere = (Imageable *)embreeMappingEntry.objPtr;
+    return {rtcRayHit.ray.tfar, sphere};
 }
 
 Imageable::Intersection
 EmbreeSceneIntersector::mapToInstancedSphere(const RTCRayHit &rtcRayHit, const EmbreeMappingEntry &embreeMappingEntry,
                                              const std::vector<std::shared_ptr<SceneObject>> &objects,
                                              Transform *instanceTransform, HitStorage &hitStorage) const {
-    auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
-    auto sphere = std::dynamic_pointer_cast<Sphere>(sceneObject);
+    auto sphere = (Sphere *)embreeMappingEntry.objPtr;
     hitStorage.sphere = Sphere();
     auto instancedSphere = &hitStorage.sphere;
     instancedSphere->setTransform(*instanceTransform * sphere->getTransform());
@@ -92,9 +90,8 @@ Imageable::Intersection EmbreeSceneIntersector::mapToTriangle(const RTCRayHit &r
                                                               const std::vector<std::shared_ptr<SceneObject>> &objects,
                                                               Transform *instanceTransform,
                                                               HitStorage &hitStorage) const {
-    auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
-    auto triangleMesh = std::dynamic_pointer_cast<TriangleMesh>(sceneObject);
-    hitStorage.triangle = Triangle(triangleMesh.get(), rtcRayHit.hit.primID, instanceTransform);
+    auto triangleMesh = (TriangleMesh *)embreeMappingEntry.objPtr;
+    hitStorage.triangle = Triangle(triangleMesh, rtcRayHit.hit.primID, instanceTransform);
     auto triangle = &hitStorage.triangle;
     return {rtcRayHit.ray.tfar, triangle};
 }
@@ -104,8 +101,7 @@ EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
                                                     const EmbreeMappingEntry &embreeMappingEntry,
                                                     const std::vector<std::shared_ptr<SceneObject>> &objects,
                                                     Transform *instanceTransform, HitStorage &hitStorage) const {
-    auto sceneObject = objects[embreeMappingEntry.sceneObjectIndex];
-    auto subdivisionSurfaceMesh = std::dynamic_pointer_cast<SubdivisionSurfaceMesh>(sceneObject);
+    auto subdivisionSurfaceMesh = (SubdivisionSurfaceMesh *)embreeMappingEntry.objPtr;
     hitStorage.triangle = Triangle(&subdivisionSurfaceMesh->triangleMesh, rtcRayHit.hit.primID, instanceTransform);
     auto triangle = &hitStorage.triangle;
     return {rtcRayHit.ray.tfar, triangle};
@@ -113,8 +109,8 @@ EmbreeSceneIntersector::mapToSubdivisionSurfaceMesh(const RTCRayHit &rtcRayHit,
 
 Imageable::Intersection EmbreeSceneIntersector::mapToLight(const RTCRayHit &rtcRayHit,
                                                            const crayg::EmbreeMappingEntry &embreeMappingEntry) const {
-    auto sceneObject = scene.lights[embreeMappingEntry.sceneObjectIndex];
-    return {rtcRayHit.ray.tfar, sceneObject.get()};
+    auto light = (Light *)embreeMappingEntry.objPtr;
+    return {rtcRayHit.ray.tfar, light};
 }
 
 EmbreeSceneIntersector::~EmbreeSceneIntersector() = default;
