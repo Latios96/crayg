@@ -76,8 +76,8 @@ jobs:
         run: cmake .. -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DCMAKE_UNITY_BUILD=${{matrix.use_unity_build}} -DCMAKE_UNITY_BUILD_BATCH_SIZE=16 -DCRAYG_USE_COMMIT_HASH=ON -DCRAYG_ENABLE_TRACING=${{matrix.with_tracing}}
       - name: upload dependencies
         run: conan upload "*" --all --confirm -r=framebffr --parallel
-      - name: build
-        working-directory: Build (Unix)
+      - name: Build (Unix)
+        working-directory: build
         if: runner.os != 'Windows'
         run: make -j 4
       - name: Build (Windows)
