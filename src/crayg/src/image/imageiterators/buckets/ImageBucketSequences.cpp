@@ -1,4 +1,6 @@
 #include "ImageBucketSequences.h"
+
+#include "HilbertSequence.h"
 #include "LineByLineSequence.h"
 #include "MortonSequence.h"
 #include "SpiralSequence.h"
@@ -18,6 +20,9 @@ std::vector<ImageBucket> ImageBucketSequences::getSequence(const Resolution &res
         break;
     case BucketSequenceType::MORTON:
         bucketSequence = std::make_unique<MortonSequence>(resolution, bucketWidth);
+        break;
+    case BucketSequenceType::HILBERT:
+        bucketSequence = std::make_unique<HilbertSequence>(resolution, bucketWidth);
         break;
     default:
         CRAYG_LOG_AND_THROW(

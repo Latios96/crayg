@@ -44,6 +44,8 @@ set(crayg_SRCS
     image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h
     image/imageiterators/buckets/BucketSequence.h
     image/imageiterators/buckets/BucketSequenceType.h
+    image/imageiterators/buckets/HilbertSequence.cpp
+    image/imageiterators/buckets/HilbertSequence.h
     image/imageiterators/buckets/ImageBucketSequences.cpp
     image/imageiterators/buckets/ImageBucketSequences.h
     image/imageiterators/buckets/LineByLineSequence.cpp
