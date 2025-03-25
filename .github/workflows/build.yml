@@ -77,15 +77,15 @@ jobs:
       - name: upload dependencies
         run: conan upload "*" --all --confirm -r=framebffr --parallel
       - name: build
-        working-directory: build
+        working-directory: Build (Unix)
         if: runner.os != 'Windows'
         run: make -j 4
-      - name: build
+      - name: Build (Windows)
         if: runner.os == 'Windows'
         working-directory: build
         run: cmake --build . --config ${{matrix.build_type}} -- /M:%NUMBER_OF_PROCESSORS%
         shell: cmd
-      - name: switch to nightly branch
+      - name: switch to nightly branch (for scheduled builds)
         if: github.event_name == 'schedule'
         run: git checkout -b nightly
       - name: run tests
