@@ -148,7 +148,8 @@ class CameraLensRenderer {
                 const auto pupilSample = exitPupil.samplePupil({0, 0}, 3.5);
                 const auto pointOnPupil = Vector3f(0, currentHeight, cameraLens.getLastSurface().center);
                 const Ray ray = {{0, 0, 0}, (pointOnPupil).normalize()};
-                auto points = cameraLens.traceAndRecordFromFilmToWorld(ray, std::get<0>(wavelength));
+                std::vector<Vector3f> points;
+                cameraLens.traceAndRecordFromFilmToWorld(points, ray, std::get<0>(wavelength));
                 for (int i = 0; i < points.size(); i++) {
                     Vector3f &recordedPoint = points[i];
                     if (!i) {

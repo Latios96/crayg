@@ -48,8 +48,9 @@ struct CameraLens {
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength,
                                             float *maxRelativeDistanceToOpticalAxis) const;
     std::optional<Ray> traceFromWorldToFilm(const Ray &ray, float wavelength) const;
-    std::vector<Vector3f> traceAndRecordFromWorldToFilm(const Ray &ray, float wavelength) const;
-    std::vector<Vector3f> traceAndRecordFromFilmToWorld(const Ray &ray, float wavelength) const;
+
+    void traceAndRecordFromWorldToFilm(std::vector<Vector3f> &recordedPoints, const Ray &ray, float wavelength) const;
+    void traceAndRecordFromFilmToWorld(std::vector<Vector3f> &recordedPoints, const Ray &ray, float wavelength) const;
 
     void focusLens(float focalDistance);
     void changeAperture(float fStop);
