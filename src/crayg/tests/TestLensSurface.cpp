@@ -167,4 +167,17 @@ TEST_CASE("LensSurface::intersectPlanarSurface") {
     }
 }
 
+TEST_CASE("LensSurface::scaled") {
+    SECTION("should apply scale correctly") {
+        LensSurface surface(1, 2, 1.5f, 3, 4, LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_BK7),
+                            LensGeometry::ASPHERICAL, 1);
+
+        const LensSurface scaledSurface = surface.scaled(0.1);
+
+        REQUIRE(scaledSurface == LensSurface(0.1, 0.2, 1.5f, 0.3, 4,
+                                             LensMaterial::createMaterialById(LensMaterialId::SCHOTT_N_BK7),
+                                             LensGeometry::ASPHERICAL, 1));
+    }
+}
+
 }

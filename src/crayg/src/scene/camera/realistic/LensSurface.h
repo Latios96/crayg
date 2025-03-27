@@ -48,6 +48,14 @@ struct LensSurface {
 
     bool isAperture() const;
 
+    LensSurface scaled(float scaleToApply) {
+        LensSurface surface = *this;
+        surface.curvatureRadius *= scaleToApply;
+        surface.thickness *= scaleToApply;
+        surface.apertureRadius *= scaleToApply;
+        return surface;
+    }
+
     bool operator==(const LensSurface &rhs) const;
     bool operator!=(const LensSurface &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const LensSurface &surface);
