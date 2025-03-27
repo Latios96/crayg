@@ -7,7 +7,7 @@ if(NOT DEFINED CMAKE_BUILD_TYPE)
 endif()
 
 project(crayg)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 enable_testing()
 
