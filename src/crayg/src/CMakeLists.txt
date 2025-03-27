@@ -155,6 +155,8 @@ set(crayg_SRCS
     scene/camera/realistic/lensio/json/LensFileJsonWriter.cpp
     scene/camera/realistic/lensio/json/LensFileJsonWriter.h
     scene/camera/realistic/lensio/LensFileFormat.h
+    scene/camera/realistic/lensio/LensFileParseUtils.cpp
+    scene/camera/realistic/lensio/LensFileParseUtils.h
     scene/camera/realistic/lensio/LensFileReader.cpp
     scene/camera/realistic/lensio/LensFileReader.h
     scene/camera/realistic/lensio/LensFileReaderFactory.cpp
