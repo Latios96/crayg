@@ -5,9 +5,7 @@ namespace crayg {
 void convertMillimetersToCentimeters(std::vector<LensSurface> &surfaces) {
     const float factor = 0.1f;
     for (auto &surface : surfaces) {
-        surface.curvatureRadius *= factor;
-        surface.thickness *= factor;
-        surface.apertureRadius *= factor;
+        surface = surface.scaled(factor);
     }
 }
 
