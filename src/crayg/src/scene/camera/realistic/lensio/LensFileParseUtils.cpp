@@ -1,7 +1,7 @@
 #include "LensFileParseUtils.h"
 #include "utils/Exceptions.h"
-#include <fmt/format.h>
 #include <charconv>
+#include <fmt/format.h>
 
 namespace crayg {
 

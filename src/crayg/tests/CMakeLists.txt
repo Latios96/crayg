@@ -166,7 +166,8 @@ set(UNIT_TEST_SOURCE_LIST
     TestUsdUtils.cpp
     TestVariableLensDistances.cpp
     TestVector2.cpp
-    TestVector3f.cpp)
+    TestVector3f.cpp
+    TestZMXFileFormatReader.cpp)
 
 set(TARGET_NAME crayg-unit-tests)
 

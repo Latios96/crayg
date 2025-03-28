@@ -171,6 +171,8 @@ set(crayg_SRCS
     scene/camera/realistic/lensio/textfile/LensFileTextFileReader.h
     scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.cpp
     scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.h
+    scene/camera/realistic/lensio/zmx/ZMXFileFormatReader.cpp
+    scene/camera/realistic/lensio/zmx/ZMXFileFormatReader.h
     scene/camera/realistic/LensMaterial.cpp
     scene/camera/realistic/LensMaterial.h
     scene/camera/realistic/LensRaytracerTracer.cpp

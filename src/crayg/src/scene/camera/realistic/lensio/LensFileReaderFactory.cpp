@@ -3,6 +3,8 @@
 #include "extendedformat/LensFileExtendedFormatReader.h"
 #include "textfile/LensFileTextFileReader.h"
 #include "utils/Exceptions.h"
+#include "zmx/ZMXFileFormatReader.h"
+
 #include "json/LensFileJsonReader.h"
 #include <filesystem>
 
@@ -18,6 +20,8 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(cons
         return std::make_unique<LensFileJsonReader>();
     } else if (extension == ".fx") {
         return std::make_unique<LensFileExtendedFormatReader>();
+    } else if (extension == ".zmx") {
+        return std::make_unique<ZMXFileFormatReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", extension);
         CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No LensFileReader found for extension {}", extension)));
@@ -31,6 +35,8 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(Lens
         return std::make_unique<LensFileJsonReader>();
     } else if (lensFileFormat == LensFileFormat::EXTENDED_FORMAT) {
         return std::make_unique<LensFileExtendedFormatReader>();
+    } else if (lensFileFormat == LensFileFormat::ZEMAX) {
+        return std::make_unique<ZMXFileFormatReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", lensFileFormat);
         CRAYG_LOG_AND_THROW(
