@@ -83,16 +83,16 @@ class IncompleteSurfaceException : public InvalidLensFileException {
     }
 };
 
-// todo we could use one single method for this
-float parseCurvatureLine(const std::string &line, int lineIndex) {
+float parseSimpleFloatValueLine(const std::string &line, int lineIndex, const std::string &lineType,
+                                const std::string &name) {
     std::vector<std::string> parts;
     boost::split(parts, line, boost::is_any_of(" "));
 
     if (parts.size() < 2) {
-        CRAYG_LOG_AND_THROW(InvalidZMXLineException(lineIndex, "CURV", 2, parts.size()));
+        CRAYG_LOG_AND_THROW(InvalidZMXLineException(lineIndex, lineType, 2, parts.size()));
     }
-    const std::string curvature = parts[1];
-    return LensFileParseUtils::parseFloat(lineIndex, curvature, "curvature");
+    const std::string valueStr = parts[1];
+    return LensFileParseUtils::parseFloat(lineIndex, valueStr, name);
 }
 
 float curvatureToRadius(float curvature) {
@@ -102,26 +102,16 @@ float curvatureToRadius(float curvature) {
     return 0;
 }
 
-float parseDiameterLine(const std::string &line, int lineIndex) {
-    std::vector<std::string> parts;
-    boost::split(parts, line, boost::is_any_of(" "));
+float parseCurvatureLine(const std::string &line, int lineIndex) {
+    return parseSimpleFloatValueLine(line, lineIndex, "CURV", "curvature");
+}
 
-    if (parts.size() < 2) {
-        CRAYG_LOG_AND_THROW(InvalidZMXLineException(lineIndex, "DIAM", 2, parts.size()));
-    }
-    const std::string diameter = parts[1];
-    return LensFileParseUtils::parseFloat(lineIndex, diameter, "diameter");
+float parseDiameterLine(const std::string &line, int lineIndex) {
+    return parseSimpleFloatValueLine(line, lineIndex, "DIAM", "diameter");
 }
 
 float parseDistanceZ(const std::string &line, int lineIndex) {
-    std::vector<std::string> parts;
-    boost::split(parts, line, boost::is_any_of(" "));
-
-    if (parts.size() < 2) {
-        CRAYG_LOG_AND_THROW(InvalidZMXLineException(lineIndex, "DISZ", 2, parts.size()));
-    }
-    const std::string distanceZ = parts[1];
-    return LensFileParseUtils::parseFloat(lineIndex, distanceZ, "distance Z");
+    return parseSimpleFloatValueLine(line, lineIndex, "DISZ", "distance Z");
 }
 
 LensMaterial parseGlass(const std::string &line, int lineIndex) {
