@@ -44,8 +44,7 @@ struct IncompleteLensSurface {
     std::optional<float> curvatureRadius;
     std::optional<float> thickness;
     std::optional<float> apertureRadius;
-    std::optional<float> ior;
-    std::optional<float> abbeNo;
+    std::optional<LensMaterial> glass;
 
     bool isComplete() const {
         return curvatureRadius.has_value() && thickness.has_value() && apertureRadius.has_value();
@@ -70,7 +69,8 @@ struct IncompleteLensSurface {
     }
 
     LensSurface get() const {
-        return LensSurface(*curvatureRadius, *thickness, *ior, *apertureRadius, *abbeNo);
+        return LensSurface(*curvatureRadius, *thickness, glass->ior, *apertureRadius, glass->abbeNo, *glass,
+                           LensGeometry::SPHERICAL);
     }
 };
 
@@ -162,14 +162,12 @@ IncompleteLensSurface parseSurface(const std::vector<std::string> &lines, int li
 
         if (pystring::startswith(line, "GLAS")) {
             LensMaterial glass = parseGlass(line, i);
-            incompleteLensSurface.ior = glass.ior;
-            incompleteLensSurface.abbeNo = glass.abbeNo;
+            incompleteLensSurface.glass = glass;
         }
     }
 
-    if (!incompleteLensSurface.ior && !incompleteLensSurface.abbeNo) {
-        incompleteLensSurface.ior = 1;
-        incompleteLensSurface.abbeNo = 0;
+    if (!incompleteLensSurface.glass) {
+        incompleteLensSurface.glass = LensMaterial::createMaterialById(LensMaterialId::AIR);
     }
 
     return incompleteLensSurface;
@@ -177,7 +175,8 @@ IncompleteLensSurface parseSurface(const std::vector<std::string> &lines, int li
 
 void removeObjectAndImagePlanes(std::vector<IncompleteLensSurface> &surfaces) {
     const auto isImageOrObjectPlane = [](const IncompleteLensSurface &lensSurface) {
-        return lensSurface.curvatureRadius == 0 && lensSurface.ior == 1 && lensSurface.abbeNo == 0;
+        return lensSurface.curvatureRadius == 0 && lensSurface.glass && lensSurface.glass->ior == 1 &&
+               lensSurface.glass->abbeNo == 0;
     };
 
     if (isImageOrObjectPlane(*surfaces.begin())) {
@@ -243,5 +242,3 @@ CameraLens ZMXFileFormatReader::readFileContent(const std::string &content) {
 }
 
 }
-
-// todo instead of unknown, we can name the material AIR
