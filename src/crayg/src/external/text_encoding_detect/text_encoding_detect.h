@@ -1,6 +1,7 @@
 #pragma once
 #ifndef TEXT_ENCODING_DETECT_H_
 #define TEXT_ENCODING_DETECT_H_
+// clang-format off
 
 //
 // Copyright 2015 Jonathan Bennett <jon@autoitscript.com>
@@ -76,5 +77,5 @@ namespace Common
 } // AutoIt
 
 //////////////////////////////////////////////////////////////////////
-
+// clang-format on
 #endif
