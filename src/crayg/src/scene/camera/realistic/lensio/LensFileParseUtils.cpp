@@ -1,6 +1,7 @@
 #include "LensFileParseUtils.h"
 #include "utils/Exceptions.h"
 #include <fmt/format.h>
+#include <charconv>
 
 namespace crayg {
 
@@ -13,21 +14,27 @@ InvalidLensFileException::InvalidLensFileException(int lineIndex, const std::str
 }
 
 float LensFileParseUtils::parseFloat(int lineIndex, const std::string &floatStr, const std::string &name) {
-    try {
-        return std::stof(floatStr);
-    } catch (std::invalid_argument &e) {
-        CRAYG_LOG_AND_THROW(
-            InvalidLensFileException(lineIndex, fmt::format("Value '{}' for {} is not a float", floatStr, name)));
+    float value;
+    const auto [ptr, errc] = std::from_chars(floatStr.data(), floatStr.data() + floatStr.size(), value);
+
+    if (errc == std::errc()) {
+        return value;
     }
+
+    CRAYG_LOG_AND_THROW(
+        InvalidLensFileException(lineIndex, fmt::format("Value '{}' for {} is not a float", floatStr, name)));
 }
 
 int LensFileParseUtils::parseInt(int lineIndex, const std::string &intStr, const std::string &name) {
-    try {
-        return std::stoi(intStr);
-    } catch (std::invalid_argument &e) {
-        CRAYG_LOG_AND_THROW(
-            InvalidLensFileException(lineIndex, fmt::format("Value '{}' for {} is not a int", intStr, name)));
+    int value;
+    const auto [ptr, errc] = std::from_chars(intStr.data(), intStr.data() + intStr.size(), value);
+
+    if (errc == std::errc()) {
+        return value;
     }
+
+    CRAYG_LOG_AND_THROW(
+        InvalidLensFileException(lineIndex, fmt::format("Value '{}' for {} is not an int", intStr, name)));
 }
 
 }
