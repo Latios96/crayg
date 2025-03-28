@@ -39,6 +39,9 @@ struct LensMaterial {
     static LensMaterial findMaterialByIorAndAbbe(float ior, float abbeNo, MaterialSearchError *searchError);
     static LensMaterial findMaterialByIorAndAbbe(float ior, float abbeNo, MaterialSearchError *searchError,
                                                  const std::vector<LensMaterial> &allMaterials);
+    static std::optional<LensMaterialId> findMaterialIdByName(const std::string &name);
+    static std::optional<LensMaterialId> findMaterialIdByName(const std::string &name,
+                                                              const std::vector<LensMaterial> &allMaterials);
 
     static bool compareByIor(const LensMaterial &a, const LensMaterial &b) {
         return a.ior < b.ior;

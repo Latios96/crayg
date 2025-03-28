@@ -1,6 +1,7 @@
 #include "LensMaterial.h"
 #include "Logger.h"
 #include "utils/ToStringHelper.h"
+#include <pystring.h>
 
 namespace crayg {
 
@@ -38,9 +39,26 @@ LensMaterial LensMaterial::createMaterialById(LensMaterialId lensMaterialId) {
     case LensMaterialId::AIR:
         return LensMaterial(LensMaterialId::AIR, 1, 0, {0, 0, 0, 0, 0, 0});
 #include "materials/LensMaterialConstants_ohara.h"
+
 #include "materials/LensMaterialConstants_schott.h"
     }
     CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Unsupported material id: {}", lensMaterialId)));
+}
+
+std::optional<LensMaterialId> LensMaterial::findMaterialIdByName(const std::string &searchTerm,
+                                                                 const std::vector<LensMaterial> &allMaterials) {
+    constexpr auto materialIdNames = magic_enum::enum_names<LensMaterialId>();
+    for (auto &materialIdName : materialIdNames) {
+        if (pystring::endswith(std::string(materialIdName), searchTerm)) {
+            return magic_enum::enum_cast<LensMaterialId>(materialIdName);
+        }
+    }
+
+    return std::nullopt;
+}
+
+std::optional<LensMaterialId> LensMaterial::findMaterialIdByName(const std::string &searchTerm) {
+    return findMaterialIdByName(searchTerm, getAllMaterials());
 }
 
 std::vector<LensMaterial> collectAllMaterials() {

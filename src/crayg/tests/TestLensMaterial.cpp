@@ -63,6 +63,27 @@ TEST_CASE("LensMaterial::findMaterialByIorAndAbbe") {
     }
 }
 
+TEST_CASE("LensMaterial::findMaterialIdByName") {
+    std::vector<LensMaterial> testMaterials = {
+        {LensMaterialId::SCHOTT_LF5HTI, 1.4, 5, {}},      {LensMaterialId::SCHOTT_LLF1, 1.4, 5.01, {}},
+        {LensMaterialId::SCHOTT_LLF1HTI, 1.4, 5.02, {}},  {LensMaterialId::SCHOTT_N_BAF10, 1.41, 5.01, {}},
+        {LensMaterialId::SCHOTT_N_BAF4, 1.412, 5.12, {}}, {LensMaterialId::SCHOTT_N_BAF51, 1.5, 5.13, {}},
+        {LensMaterialId::SCHOTT_N_BAF52, 1.51, 5.5, {}},
+    };
+
+    SECTION("should find BAF4") {
+        auto lensId = LensMaterial::findMaterialIdByName("BAF4", testMaterials);
+
+        REQUIRE(lensId == LensMaterialId::SCHOTT_N_BAF4);
+    }
+
+    SECTION("should return empty optional if material could not be found") {
+        auto lensId = LensMaterial::findMaterialIdByName("invalid", testMaterials);
+
+        REQUIRE_FALSE(lensId);
+    }
+}
+
 TEST_CASE("LensMaterial::getIor") {
 
     SECTION("should return correct ior for sodium line from Schott catalog") {
