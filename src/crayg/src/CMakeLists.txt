@@ -23,6 +23,8 @@ set(crayg_SRCS
     basics/Vector3f.h
     CraygInfo.cpp
     CraygInfo.h
+    external/text_encoding_detect/text_encoding_detect.cpp
+    external/text_encoding_detect/text_encoding_detect.h
     image/BucketImageBuffer.cpp
     image/BucketImageBuffer.h
     image/ColorConversion.cpp
