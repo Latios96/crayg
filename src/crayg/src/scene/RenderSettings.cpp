@@ -1,4 +1,5 @@
 #include "RenderSettings.h"
+#include <fmt/std.h>
 #include <regex>
 #include <utils/ToStringHelper.h>
 

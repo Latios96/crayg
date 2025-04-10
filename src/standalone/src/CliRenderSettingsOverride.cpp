@@ -1,6 +1,7 @@
 #include "CliRenderSettingsOverride.h"
 #include "Logger.h"
 #include <boost/algorithm/string/join.hpp>
+#include <fmt/std.h>
 
 namespace crayg {
 

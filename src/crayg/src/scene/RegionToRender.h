@@ -38,14 +38,3 @@ class RegionToRender {
 }
 
 template <> struct fmt::formatter<crayg::RegionToRender> : ostream_formatter {};
-
-template <> struct fmt::formatter<std::optional<crayg::RegionToRender>> {
-    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(std::optional<crayg::RegionToRender> const &bounds, FormatContext &ctx) {
-        return fmt::format_to(ctx.out(), "{}", bounds.has_value() ? fmt::format("{}", *bounds) : "<empty>");
-    };
-};
