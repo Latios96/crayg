@@ -3,6 +3,7 @@
 #include "Wavelengths.h"
 #include "basics/MathUtils.h"
 #include "scene/camera/CameraUtils.h"
+#include <fmt/ranges.h>
 #include <iostream>
 #include <utils/Preconditions.h>
 

@@ -6,6 +6,7 @@
 #include "utils/TaskReporter.h"
 #include <basics/Ray.h>
 #include <basics/Vector2.h>
+#include <fmt/std.h>
 #include <optional>
 
 namespace crayg {

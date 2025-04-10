@@ -76,6 +76,3 @@ float evaluateAsphericalSurface(const Vector2f &position, float radius,
 template <> struct fmt::formatter<crayg::LensSurface> : ostream_formatter {};
 
 template <> struct fmt::formatter<crayg::AsphericCoefficients> : ostream_formatter {};
-
-CRAYG_DTO_UTILS_VECTOR_FORMATTER(LensSurface);
-CRAYG_DTO_UTILS_VECTOR_FORMATTER(AsphericCoefficients);

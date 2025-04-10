@@ -5,6 +5,7 @@
 #include "basics/Resolution.h"
 #include "scene/RegionToRender.h"
 #include "utils/DtoUtils.h"
+#include <fmt/ranges.h>
 #include <vector>
 
 namespace crayg {

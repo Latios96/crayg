@@ -4,6 +4,7 @@
 #include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
 #include "utils/ToStringHelper.h"
 #include <fmt/ostream.h>
+#include <fmt/ranges.h>
 #include <ostream>
 
 namespace crayg {
@@ -96,16 +97,5 @@ template <typename T> class TriangleMeshPerVertexPrimVar : public TriangleMeshAb
 }
 
 template <typename T> struct fmt::formatter<crayg::VertexData<T>> : ostream_formatter {};
-
-template <typename T> struct fmt::formatter<std::vector<crayg::VertexData<T>>> {
-    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(std::vector<crayg::VertexData<T>> const &dtos, FormatContext &ctx) const {
-        return fmt::format_to(ctx.out(), "[{}]", fmt::join(dtos, ", "));
-    };
-};
 
 template <typename T> struct fmt::formatter<crayg::TriangleMeshPerVertexPrimVar<T>> : ostream_formatter {};

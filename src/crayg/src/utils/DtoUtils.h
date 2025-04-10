@@ -5,16 +5,6 @@
 #include <string>
 #include <vector>
 
-#define CRAYG_DTO_UTILS_VECTOR_FORMATTER(Name)                                                                         \
-    template <> struct fmt::formatter<std::vector<crayg::Name>> {                                                      \
-        template <typename ParseContext> constexpr auto parse(ParseContext &ctx) { return ctx.begin(); }               \
-                                                                                                                       \
-        template <typename FormatContext>                                                                              \
-        auto format(std::vector<crayg::Name> const &dtos, FormatContext &ctx) const {                                  \
-            return fmt::format_to(ctx.out(), "[{}]", fmt::join(dtos, ", "));                                           \
-        };                                                                                                             \
-    };
-
 #define CRAYG_DTO_2(Name, FirstType, FirstName, SecondType, SecondName)                                                \
     struct Name {                                                                                                      \
         FirstType FirstName = FirstType();                                                                             \
@@ -42,7 +32,6 @@
                                   dto.SecondName);                                                                     \
         };                                                                                                             \
     };                                                                                                                 \
-    CRAYG_DTO_UTILS_VECTOR_FORMATTER(Name)                                                                             \
     namespace crayg {
 
 #define CRAYG_DTO_3(Name, FirstType, FirstName, SecondType, SecondName, ThirdType, ThirdName)                          \
@@ -76,5 +65,4 @@
                                   dto.SecondName, #ThirdName, dto.ThirdName);                                          \
         };                                                                                                             \
     };                                                                                                                 \
-    CRAYG_DTO_UTILS_VECTOR_FORMATTER(Name)                                                                             \
     namespace crayg {
