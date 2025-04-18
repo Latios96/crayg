@@ -169,3 +169,16 @@ Absolute Largest improvements:
 
 Baseline: https://cato.frmbffr.com/projects/5/runs/1217 \
 With returning reference to shared_ptr: https://cato.frmbffr.com/projects/5/runs/1218
+
+## 18.04.2025 - Hilbert Bucket Sequences
+
+I added support for Hilbert curves as bucket sequences. I expected this to give a little bit of spedup compared to the Morton Squence, since the Hilbert curve has better locality. It showed some performance gains in some scenes, but overall no performance gain could be archived.
+
+Relative Largest improvements:
+![Hilbert Bucket Sequences](figures/18.04.2025/hilbert-relative.svg)
+
+Absolute Largest improvements:
+![Hilbert Bucket Sequences](figures/18.04.2025/hilbert-absolute.svg)
+
+Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
+With returning reference to shared_ptr: https://cato.frmbffr.com/projects/5/runs/2009
