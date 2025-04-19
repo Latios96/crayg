@@ -181,7 +181,7 @@ Absolute Largest improvements:
 ![Hilbert Bucket Sequences](figures/18.04.2025/hilbert-absolute.svg)
 
 Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
-With returning reference to shared_ptr: https://cato.frmbffr.com/projects/5/runs/2009
+With Hilbert Bucket Sequences: https://cato.frmbffr.com/projects/5/runs/2009
 
 ## 19.04.2025 - Optimize getTransform()
 
