@@ -182,3 +182,16 @@ Absolute Largest improvements:
 
 Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
 With returning reference to shared_ptr: https://cato.frmbffr.com/projects/5/runs/2009
+
+## 19.04.2025 - Optimize getTransform()
+
+Previously, `getTransform()` was returning a copy. Now it returns a const reference instead. Where possible, I access the `transform` member directly instead of calling `getTransform()`. It showed only marginal improvements, impact seemst o be higher in scenes where performance mainly depends on light evaluation.
+
+Relative Largest improvements:
+![getTransform()](figures/19.04.2025/get-transform-relative.svg)
+
+Absolute Largest improvements:
+![getTransform()](figures/19.04.2025/get-transform-absolute.svg)
+
+Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
+With optimized `getTransform()`: https://cato.frmbffr.com/projects/5/runs/2011
