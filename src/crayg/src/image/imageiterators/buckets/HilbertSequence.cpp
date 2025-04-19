@@ -1,7 +1,7 @@
 #include "HilbertSequence.h"
 #include "LineByLineSequence.h"
 
-#include "gilbert.h"
+#include "external/gilbert/gilbert.h"
 
 namespace crayg {
 
@@ -14,8 +14,8 @@ std::vector<ImageBucket> HilbertSequence::getTiles() {
     std::vector<ImageBucket> tiles = lineByLineSequence.getTiles();
 
     std::sort(tiles.begin(), tiles.end(), [this](ImageBucket &a, ImageBucket &b) {
-        return gilbert_xy2d(a.getPosition().x, a.getPosition().y,resolution.getWidth(), resolution.getHeight()) <
-               gilbert_xy2d(b.getPosition().x, b.getPosition().y,resolution.getWidth(), resolution.getHeight());
+        return gilbert_xy2d(a.getPosition().x, a.getPosition().y, resolution.getWidth(), resolution.getHeight()) <
+               gilbert_xy2d(b.getPosition().x, b.getPosition().y, resolution.getWidth(), resolution.getHeight());
     });
 
     return tiles;
