@@ -170,6 +170,7 @@ Absolute Largest improvements:
 Baseline: https://cato.frmbffr.com/projects/5/runs/1217 \
 With returning reference to shared_ptr: https://cato.frmbffr.com/projects/5/runs/1218
 
+
 ## 18.04.2025 - Hilbert Bucket Sequences
 
 I added support for Hilbert curves as bucket sequences. I expected this to give a little bit of spedup compared to the Morton Squence, since the Hilbert curve has better locality. It showed some performance gains in some scenes, but overall no performance gain could be archived.
@@ -183,6 +184,7 @@ Absolute Largest improvements:
 Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
 With Hilbert Bucket Sequences: https://cato.frmbffr.com/projects/5/runs/2009
 
+
 ## 19.04.2025 - Optimize getTransform()
 
 Previously, `getTransform()` was returning a copy. Now it returns a const reference instead. Where possible, I access the `transform` member directly instead of calling `getTransform()`. It showed only marginal improvements, impact seemst o be higher in scenes where performance mainly depends on light evaluation.
@@ -195,3 +197,17 @@ Absolute Largest improvements:
 
 Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
 With optimized `getTransform()`: https://cato.frmbffr.com/projects/5/runs/2011
+
+
+## 19.04.2025 - Store SceneObject pointers in EmbreeBVH instead of indices
+
+I found storing pointers to the scene objects in the Embree BVH is slightly more efficient. Otherwise, there is random access to the `scene.objects` vector to get the pointer to the object, which is also randomly accessed
+
+Relative Largest improvements:
+![Store SceneObject pointers Relative](figures/19.04.2025/scene-object-pointers-relative.svg)
+
+Absolute Largest improvements:
+![Store SceneObject pointers Absolute](figures/19.04.2025/scene-object-pointers-absolute.svg)
+
+Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
+With storing pointers instead of indices: https://cato.frmbffr.com/projects/5/runs/2018
