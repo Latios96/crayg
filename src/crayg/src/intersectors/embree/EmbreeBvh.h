@@ -7,7 +7,7 @@
 
 namespace crayg {
 
-enum class EmbreePrimitiveType { TRIANGLE_MESH, SUBDIVISION_SURFACE_MESH, SPHERE, LIGHT };
+enum class EmbreePrimitiveType : uint8_t { TRIANGLE_MESH, SUBDIVISION_SURFACE_MESH, SPHERE, LIGHT };
 
 }
 
@@ -33,8 +33,7 @@ struct EmbreeMappingEntry {
     }
 };
 
-// todo check for better map impls
-typedef std::unordered_map<unsigned int, EmbreeMappingEntry> GeomToSceneObject;
+typedef std::unordered_map<std::uint32_t, EmbreeMappingEntry> GeomToSceneObject;
 
 struct EmbreeProtoInstanceMappingEntry {
     GeomToSceneObject geomToSceneObject;
@@ -44,7 +43,7 @@ struct EmbreeProtoInstanceMappingEntry {
 
 CRAYG_DTO_2(EmbreeInstanceInfo, std::uint32_t, globalProtoId, std::uint32_t, instanceId);
 
-typedef std::unordered_map<unsigned int, EmbreeInstanceInfo> EmbreeInstanceIdToInstanceInfo;
+typedef std::unordered_map<std::uint32_t, EmbreeInstanceInfo> EmbreeInstanceIdToInstanceInfo;
 
 struct EmbreeBvh {
     RTCDevice rtcDevice;
