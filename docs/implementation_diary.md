@@ -229,3 +229,21 @@ With storing pointers instead of indices: https://cato.frmbffr.com/projects/5/ru
 ## 20.04.2025 - Use tsl::robin_map for EmbreeBvh 
 
 This did not show measurable performance benefits.
+
+
+## 20.04.2025 - Combined small performance improvements
+
+Combined performance improvements of:
+
+- Optimize getTransform()
+- Store SceneObject pointers in EmbreeBVH instead of indices
+- Use smaller integers for indices and smaller underlying type for enum
+
+Relative Largest improvements:
+![Small optimizations combined Relative](figures/20.04.2025/all-small-opts-combined-relative.svg)
+
+Absolute Largest improvements:
+![Small optimizations combined Absolute](figures/20.04.2025/all-small-opts-combined-absolute.svg)
+
+Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
+With storing pointers instead of indices: https://cato.frmbffr.com/projects/5/runs/2022
