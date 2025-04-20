@@ -225,3 +225,7 @@ Absolute Largest improvements:
 
 Baseline (note that baseline is with previous optimization, but only that): https://cato.frmbffr.com/projects/5/runs/2018 \
 With storing pointers instead of indices: https://cato.frmbffr.com/projects/5/runs/2019
+
+## 20.04.2025 - Use tsl::robin_map for EmbreeBvh 
+
+This did not show measurable performance benefits.
