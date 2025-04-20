@@ -211,3 +211,17 @@ Absolute Largest improvements:
 
 Baseline: https://cato.frmbffr.com/projects/5/runs/2008 \
 With storing pointers instead of indices: https://cato.frmbffr.com/projects/5/runs/2018
+
+
+## 20.04.2025 - Use smaller integers for indices and smaller underlying type for enum
+
+I found that I could use smaller integers in EmbreeBvh to store the indices and the primitive type. Improvements are not large, but for all scenes there is some improvement.
+
+Relative Largest improvements:
+![Use smaller integers Relative](figures/19.04.2025/use-smaller-integers-relative.svg)
+
+Absolute Largest improvements:
+![Use smaller integers  Absolute](figures/19.04.2025/use-smaller-integers-absolute.svg)
+
+Baseline (note that baseline is with previous optimization, but only that): https://cato.frmbffr.com/projects/5/runs/2018 \
+With storing pointers instead of indices: https://cato.frmbffr.com/projects/5/runs/2019
