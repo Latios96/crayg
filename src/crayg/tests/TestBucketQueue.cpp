@@ -5,8 +5,7 @@
 #include <thread>
 
 namespace crayg {
-// constructing should default to FOLLOW_SEQUENCE
-// should return buckets thread safe
+
 TEST_CASE("TestBucketQueue::construct") {
 
     std::vector<ImageBucket> buckets(
