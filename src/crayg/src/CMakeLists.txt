@@ -404,6 +404,7 @@ set(crayg_SRCS
     utils/ReadableFormatter.h
     utils/RemainingTimeCalculator.cpp
     utils/RemainingTimeCalculator.h
+    utils/StopWatch.cpp
     utils/StopWatch.h
     utils/TaskReporter.cpp
     utils/TaskReporter.h
