@@ -1,7 +1,7 @@
 #pragma once
 
 #include "utils/DtoUtils.h"
-#include "utils/EnumUtils.h"
+#include "utils/EnumParser.h"
 #include <embree3/rtcore.h>
 #include <unordered_map>
 

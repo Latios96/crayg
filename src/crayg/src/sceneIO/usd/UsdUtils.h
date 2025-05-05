@@ -2,7 +2,7 @@
 
 #include "CraygUsdBase.h"
 #include "UsdTypeUtil.h"
-#include "utils/EnumUtils.h"
+#include "utils/EnumParser.h"
 #include "utils/Exceptions.h"
 #include <magic_enum.hpp>
 #include <pxr/usd/usd/attribute.h>
@@ -95,21 +95,21 @@ class UsdUtils {
     static T getEnumValueFromTokenAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
                                        T defaultValue) {
         auto tokenValue = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(usdAttr).GetString();
-        return EnumUtils::parseOrDefault(tokenValue, defaultValue);
+        return EnumParser::parseOrDefault(tokenValue, defaultValue);
     }
 
     template <typename T>
     static T getEnumValueFromIntAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
                                      T defaultValue) {
         auto tokenValue = UsdUtils::getStaticAttributeValueAs<int>(usdAttr);
-        return EnumUtils::parseOrDefault(tokenValue, defaultValue);
+        return EnumParser::parseOrDefault(tokenValue, defaultValue);
     }
 
     template <typename T>
     static T getEnumValueFromStringAttr(const pxr::UsdAttribute usdAttr, const std::string &attributeName,
                                         T defaultValue) {
         auto tokenValue = UsdUtils::getStaticAttributeValueAs<std::string>(usdAttr);
-        return EnumUtils::parseOrDefault(tokenValue, defaultValue);
+        return EnumParser::parseOrDefault(tokenValue, defaultValue);
     }
 };
 

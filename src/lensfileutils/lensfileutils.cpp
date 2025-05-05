@@ -8,7 +8,7 @@
 #include "scene/camera/realistic/lensio/LensFileWriterFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/DtoUtils.h"
-#include "utils/EnumUtils.h"
+#include "utils/EnumParser.h"
 #include <nlohmann/json.hpp>
 
 namespace crayg {
@@ -26,7 +26,7 @@ void convertLensFile(const LensFileConversionOptions &options) {
     auto cameraLens = lensFileReader->readFile(options.inputFile);
 
     if (options.outputFile.empty()) {
-        auto format = EnumUtils::parseOrThrow<LensFileFormat>(options.format);
+        auto format = EnumParser::parseOrThrow<LensFileFormat>(options.format);
         auto writer = LensFileWriterFactory::createLensFileWriter(format);
         auto content = writer->writeFileContent(cameraLens);
         std::cout << content << std::endl;

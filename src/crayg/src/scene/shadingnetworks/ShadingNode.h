@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils/EnumUtils.h"
+#include "utils/EnumParser.h"
 #include <basics/Color.h>
 #include <basics/Vector2.h>
 #include <functional>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils/EnumUtils.h"
+#include "utils/EnumParser.h"
 #include <fmt/format.h>
 
 namespace crayg {

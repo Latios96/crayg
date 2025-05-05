@@ -16,7 +16,7 @@
 
 namespace crayg {
 
-class EnumUtils {
+class EnumParser {
   public:
     template <typename T> static std::optional<T> parse(const std::string &string) {
         std::string upper = string;
@@ -31,7 +31,7 @@ class EnumUtils {
     }
 
     template <typename T> static T parseOrThrow(const std::string &string) {
-        auto maybeValue = EnumUtils::parse<T>(string);
+        auto maybeValue = EnumParser::parse<T>(string);
         if (!maybeValue.has_value()) {
             CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", string)));
         }
@@ -39,7 +39,7 @@ class EnumUtils {
     }
 
     template <typename T> static T parseOrThrow(int value) {
-        auto maybeValue = EnumUtils::parse<T>(value);
+        auto maybeValue = EnumParser::parse<T>(value);
         if (!maybeValue.has_value()) {
             CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", value)));
         }
@@ -47,12 +47,12 @@ class EnumUtils {
     }
 
     template <typename T> static T parseOrDefault(const std::string &string, T defaultValue) {
-        auto maybeValue = EnumUtils::parse<T>(string);
+        auto maybeValue = EnumParser::parse<T>(string);
         return maybeValue.value_or(defaultValue);
     }
 
     template <typename T> static T parseOrDefault(int value, T defaultValue) {
-        auto maybeValue = EnumUtils::parse<T>(value);
+        auto maybeValue = EnumParser::parse<T>(value);
         return maybeValue.value_or(defaultValue);
     }
 };

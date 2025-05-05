@@ -1,109 +1,109 @@
-#include "utils/EnumUtils.h"
+#include "utils/EnumParser.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
 
 enum class MyTestEnum { VALUE_1, VALUE_2 };
 
-TEST_CASE("EnumUtils::parse(string)") {
+TEST_CASE("EnumParser::parse(string)") {
 
     SECTION("should parse value successfully") {
-        auto value = EnumUtils::parse<MyTestEnum>("VALUE_1");
+        auto value = EnumParser::parse<MyTestEnum>("VALUE_1");
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should parse value case insensitive") {
-        auto value = EnumUtils::parse<MyTestEnum>("value_1");
+        auto value = EnumParser::parse<MyTestEnum>("value_1");
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should return empty enum if value does not exist") {
-        auto value = EnumUtils::parse<MyTestEnum>("value_!t ru");
+        auto value = EnumParser::parse<MyTestEnum>("value_!t ru");
 
         REQUIRE(value == std::nullopt);
     }
 }
 
-TEST_CASE("EnumUtils::parse(int)") {
+TEST_CASE("EnumParser::parse(int)") {
 
     SECTION("should parse value successfully") {
-        auto value = EnumUtils::parse<MyTestEnum>(0);
+        auto value = EnumParser::parse<MyTestEnum>(0);
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should throw if value does not exist") {
-        auto value = EnumUtils::parse<MyTestEnum>(4);
+        auto value = EnumParser::parse<MyTestEnum>(4);
 
         REQUIRE(value == std::nullopt);
     }
 }
 
-TEST_CASE("EnumUtils::parseOrThrow(string)") {
+TEST_CASE("EnumParser::parseOrThrow(string)") {
 
     SECTION("should parse value successfully") {
-        auto value = EnumUtils::parseOrThrow<MyTestEnum>("VALUE_1");
+        auto value = EnumParser::parseOrThrow<MyTestEnum>("VALUE_1");
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should parse value case insensitive") {
-        auto value = EnumUtils::parseOrThrow<MyTestEnum>("value_1");
+        auto value = EnumParser::parseOrThrow<MyTestEnum>("value_1");
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should throw if value does not exist") {
-        REQUIRE_THROWS_AS(EnumUtils::parseOrThrow<MyTestEnum>("VALUE_!"), std::runtime_error);
+        REQUIRE_THROWS_AS(EnumParser::parseOrThrow<MyTestEnum>("VALUE_!"), std::runtime_error);
     }
 }
 
-TEST_CASE("EnumUtils::parseOrThrow(int)") {
+TEST_CASE("EnumParser::parseOrThrow(int)") {
 
     SECTION("should parse value successfully") {
-        auto value = EnumUtils::parseOrThrow<MyTestEnum>(0);
+        auto value = EnumParser::parseOrThrow<MyTestEnum>(0);
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should throw if value does not exist") {
-        REQUIRE_THROWS_AS(EnumUtils::parseOrThrow<MyTestEnum>(4), std::runtime_error);
+        REQUIRE_THROWS_AS(EnumParser::parseOrThrow<MyTestEnum>(4), std::runtime_error);
     }
 }
 
-TEST_CASE("EnumUtils::parseOrDefault(string)") {
+TEST_CASE("EnumParser::parseOrDefault(string)") {
 
     SECTION("should parse value successfully") {
-        auto value = EnumUtils::parseOrDefault<MyTestEnum>("VALUE_1", MyTestEnum::VALUE_2);
+        auto value = EnumParser::parseOrDefault<MyTestEnum>("VALUE_1", MyTestEnum::VALUE_2);
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should parse value case insensitive") {
-        auto value = EnumUtils::parseOrDefault<MyTestEnum>("value_1", MyTestEnum::VALUE_2);
+        auto value = EnumParser::parseOrDefault<MyTestEnum>("value_1", MyTestEnum::VALUE_2);
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should throw if value does not exist") {
-        auto value = EnumUtils::parseOrDefault<MyTestEnum>("VALUE_!", MyTestEnum::VALUE_2);
+        auto value = EnumParser::parseOrDefault<MyTestEnum>("VALUE_!", MyTestEnum::VALUE_2);
 
         REQUIRE(value == MyTestEnum::VALUE_2);
     }
 }
 
-TEST_CASE("EnumUtils::parseOrDefault(int)") {
+TEST_CASE("EnumParser::parseOrDefault(int)") {
 
     SECTION("should parse value successfully") {
-        auto value = EnumUtils::parseOrDefault<MyTestEnum>(0, MyTestEnum::VALUE_2);
+        auto value = EnumParser::parseOrDefault<MyTestEnum>(0, MyTestEnum::VALUE_2);
 
         REQUIRE(value == MyTestEnum::VALUE_1);
     }
 
     SECTION("should throw if value does not exist") {
-        auto value = EnumUtils::parseOrDefault<MyTestEnum>(4, MyTestEnum::VALUE_2);
+        auto value = EnumParser::parseOrDefault<MyTestEnum>(4, MyTestEnum::VALUE_2);
 
         REQUIRE(value == MyTestEnum::VALUE_2);
     }

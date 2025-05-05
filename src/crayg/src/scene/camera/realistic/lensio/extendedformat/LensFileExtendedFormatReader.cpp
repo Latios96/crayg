@@ -2,7 +2,7 @@
 #include "scene/camera/realistic/LensGeometry.h"
 #include "scene/camera/realistic/LensMaterial.h"
 #include "scene/camera/realistic/lensio/LensFileParseUtils.h"
-#include "utils/EnumUtils.h"
+#include "utils/EnumParser.h"
 #include "utils/Exceptions.h"
 #include "utils/utils.h"
 #include <boost/algorithm/string/case_conv.hpp>
@@ -62,7 +62,7 @@ void parseMetadataLine(int lineIndex, const std::string &line, CameraLensMetadat
 
 LensMaterial parseMaterial(int lineIndex, std::string &material) {
     boost::algorithm::trim_all(material);
-    auto lensMaterial = EnumUtils::parse<LensMaterialId>(material);
+    auto lensMaterial = EnumParser::parse<LensMaterialId>(material);
     if (!lensMaterial) {
         CRAYG_LOG_AND_THROW(
             InvalidLensFileException(lineIndex, fmt::format("'{}' is an unsupported material value", material)));
@@ -72,7 +72,7 @@ LensMaterial parseMaterial(int lineIndex, std::string &material) {
 
 LensGeometry parseLensGeometry(int lineIndex, std::string &geometry) {
     boost::algorithm::trim_all(geometry);
-    auto lensGeometry = EnumUtils::parse<LensGeometry>(geometry);
+    auto lensGeometry = EnumParser::parse<LensGeometry>(geometry);
     if (!lensGeometry) {
         CRAYG_LOG_AND_THROW(
             InvalidLensFileException(lineIndex, fmt::format("'{}' is an unsupported LensGeometry", geometry)));

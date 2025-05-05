@@ -44,7 +44,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestEmbreeBvhBuilder.cpp
     TestEmbreeSceneIntersector.cpp
     TestEmbreeUtils.cpp
-    TestEnumUtils.cpp
+    TestEnumParser.cpp
     TestExitPupilCalculator.cpp
     TestFanTriangulator.cpp
     TestFileSystemUtils.cpp
