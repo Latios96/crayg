@@ -1,6 +1,6 @@
 #include "Resolution.h"
 #include "utils/Exceptions.h"
-#include "utils/FromStringUtils.h"
+#include "utils/NumberParsing.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <fmt/format.h>
@@ -73,8 +73,8 @@ Resolution Resolution::parse(const std::string &resolutionString) {
     int width = 0;
     int height = 0;
     try {
-        width = FromStringUtils::parseIntOrThrow(splitResults[0]);
-        height = FromStringUtils::parseIntOrThrow(splitResults[1]);
+        width = NumberParsing::parseIntOrThrow(splitResults[0]);
+        height = NumberParsing::parseIntOrThrow(splitResults[1]);
     } catch (std::runtime_error &e) {
         CRAYG_LOG_AND_THROW(error);
     }

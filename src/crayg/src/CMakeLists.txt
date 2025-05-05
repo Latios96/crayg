@@ -387,8 +387,6 @@ set(crayg_SRCS
     utils/Exceptions.h
     utils/FileSystemUtils.cpp
     utils/FileSystemUtils.h
-    utils/FromStringUtils.cpp
-    utils/FromStringUtils.h
     utils/Heatmap.cpp
     utils/Heatmap.h
     utils/ImageChannelPathResolver.cpp
@@ -397,6 +395,8 @@ set(crayg_SRCS
     utils/ImageMetadataCollector.h
     utils/ImagePathResolver.cpp
     utils/ImagePathResolver.h
+    utils/NumberParsing.cpp
+    utils/NumberParsing.h
     utils/Preconditions.h
     utils/ProgressReporter.cpp
     utils/ProgressReporter.h

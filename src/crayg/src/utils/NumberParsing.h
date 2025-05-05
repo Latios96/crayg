@@ -3,7 +3,7 @@
 
 namespace crayg {
 
-class FromStringUtils {
+class NumberParsing {
   public:
     static int parseIntOrThrow(const std::string &str);
 };

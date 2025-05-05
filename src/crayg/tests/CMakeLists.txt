@@ -51,7 +51,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestFileTexture.cpp
     TestFollowMouseBucketQueue.cpp
     TestFollowSequenceBucketQueue.cpp
-    TestFromStringUtils.cpp
     TestGradient.cpp
     TestGroundPlane.cpp
     TestHeatMap.cpp
@@ -82,6 +81,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestLineByLineSequence.cpp
     TestMathUtils.cpp
     TestMatrix4x4f.cpp
+    TestNumberParsing.cpp
     TestOpenExrWriter.cpp
     TestOpenSubdivRefiner.cpp
     TestOrthonormalBasis.cpp

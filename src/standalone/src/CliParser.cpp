@@ -2,7 +2,7 @@
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
 #include "utils/Exceptions.h"
-#include "utils/FromStringUtils.h"
+#include "utils/NumberParsing.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <sstream>
@@ -52,7 +52,7 @@ std::vector<SceneReaderVariantSelection> parseVariantSelections(const std::vecto
 template <typename T> T parseIntegratorSettingsValue(const std::string &str);
 
 template <> int parseIntegratorSettingsValue(const std::string &str) {
-    return FromStringUtils::parseIntOrThrow(str);
+    return NumberParsing::parseIntOrThrow(str);
 }
 
 template <> float parseIntegratorSettingsValue(const std::string &str) {
