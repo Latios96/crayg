@@ -1,6 +1,7 @@
 #include "ReadableFormatter.h"
 #include <fmt/format.h>
 
+namespace crayg {
 std::string ReadableFormatter::formatDuration(std::chrono::seconds seconds) {
     std::chrono::hours hours = std::chrono::duration_cast<std::chrono::hours>(seconds);
     seconds -= hours;
@@ -26,4 +27,5 @@ std::string ReadableFormatter::formatDuration(std::chrono::seconds seconds) {
         return "less than one second";
     }
     return result;
+}
 }

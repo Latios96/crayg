@@ -1,6 +1,8 @@
 #include <catch2/catch.hpp>
 #include <utils/ReadableFormatter.h>
 
+namespace crayg {
+
 TEST_CASE("ReadableFormatter should format time", "[TestReadableFormatter]") {
 
     ReadableFormatter readableFormatter;
@@ -70,4 +72,6 @@ TEST_CASE("ReadableFormatter should format time", "[TestReadableFormatter]") {
         std::string result = readableFormatter.formatDuration(std::chrono::seconds(64581));
         REQUIRE(result == "17 hours 56 minutes 21 seconds");
     }
+}
+
 }
