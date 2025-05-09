@@ -424,7 +424,7 @@ target_include_directories(crayg PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 if(WIN32)
     target_compile_definitions(crayg PUBLIC NOMINMAX _USE_MATH_DEFINES)
 endif()
-target_compile_definitions(crayg PUBLIC MAGIC_ENUM_RANGE_MAX=256)
+target_compile_definitions(crayg PUBLIC MAGIC_ENUM_RANGE_MAX=256 CATCH_CONFIG_ENABLE_ALL_STRINGMAKERS=1)
 
 add_custom_command(
     TARGET crayg
