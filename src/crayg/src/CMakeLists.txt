@@ -23,6 +23,8 @@ set(crayg_SRCS
     basics/Vector3f.h
     CraygInfo.cpp
     CraygInfo.h
+    external/minitrace/minitrace.c
+    external/minitrace/minitrace.h
     external/text_encoding_detect/text_encoding_detect.cpp
     external/text_encoding_detect/text_encoding_detect.h
     image/BucketImageBuffer.cpp
@@ -412,8 +414,6 @@ set(crayg_SRCS
     utils/TextureStats.h
     utils/ToStringHelper.h
     utils/tracing/CraygTracing.h
-    utils/tracing/minitrace.c
-    utils/tracing/minitrace.h
     utils/utils.cpp
     utils/utils.h)
 
