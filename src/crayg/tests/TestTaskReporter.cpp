@@ -130,6 +130,37 @@ TEST_CASE("BaseTaskReporter::TaskProgressController::iterationDone") {
 
         REQUIRE(testingTaskReporter.onTaskProgressUpdatedCalled);
     }
+
+    SECTION("should return NO_INCREMENT, if not a new percentage is reached") {
+        TestingTaskReporter testingTaskReporter;
+        auto progressController = testingTaskReporter.startTask("test task", 200);
+
+        const auto status = progressController.iterationDone();
+
+        REQUIRE(status == BaseTaskReporter::IterationStatus::NO_PROGRESS_INCREMENT);
+    }
+
+    SECTION("should return PROGRESS_INCREMENT if a new percentage is reached") {
+        TestingTaskReporter testingTaskReporter;
+        auto progressController = testingTaskReporter.startTask("test task", 200);
+
+        progressController.iterationDone();
+        const auto status = progressController.iterationDone();
+
+        REQUIRE(status == BaseTaskReporter::IterationStatus::PROGRESS_INCREMENT);
+    }
+
+    SECTION("should return LAST_ITERATION if last update") {
+        TestingTaskReporter testingTaskReporter;
+        auto progressController = testingTaskReporter.startTask("test task", 10);
+
+        for (int i = 0; i < 9; i++) {
+            progressController.iterationDone();
+        }
+        const auto status = progressController.iterationDone();
+
+        REQUIRE(status == BaseTaskReporter::IterationStatus::LAST_ITERATION);
+    }
 }
 
 TEST_CASE("BaseTaskReporter::TaskProgressController::finish") {

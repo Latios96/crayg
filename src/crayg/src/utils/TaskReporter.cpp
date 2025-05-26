@@ -51,14 +51,16 @@ BaseTaskReporter::TaskProgressController::TaskProgressController(const std::stri
     : taskNameData(taskName.data()), taskReporter(taskReporter) {
 }
 
-void BaseTaskReporter::TaskProgressController::iterationDone() {
+BaseTaskReporter::IterationStatus BaseTaskReporter::TaskProgressController::iterationDone() {
     requireCurrentTaskDidNotChange();
     const int oldProgress = taskReporter.currentTask->progress();
     taskReporter.currentTask->iterationsDone++;
     const int newProgress = taskReporter.currentTask->progress();
     if (newProgress > oldProgress) {
         taskReporter.onTaskProgressUpdated();
+        return newProgress == 100 ? IterationStatus::LAST_ITERATION : IterationStatus::PROGRESS_INCREMENT;
     }
+    return IterationStatus::NO_PROGRESS_INCREMENT;
 }
 
 std::chrono::seconds BaseTaskReporter::TaskProgressController::finish() {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Logger.h"
+#include "utils/EnumParser.h"
 #include <chrono>
 #include <fmt/chrono.h>
 #include <optional>
@@ -10,11 +11,14 @@ namespace crayg {
 
 class BaseTaskReporter {
   public:
+    enum class IterationStatus { NO_PROGRESS_INCREMENT, PROGRESS_INCREMENT, LAST_ITERATION };
+
     class TaskProgressController {
+
       public:
         TaskProgressController(const std::string &taskName, BaseTaskReporter &taskReporter);
 
-        void iterationDone();
+        IterationStatus iterationDone();
 
         std::chrono::seconds finish();
 
@@ -73,4 +77,11 @@ class TaskReporter : public BaseTaskReporter {
     void onTaskProgressUpdated() override;
 };
 
-} // crayg
+inline std::ostream &operator<<(std::ostream &os, const BaseTaskReporter::IterationStatus &v) {
+    os << fmt::format("{}", v);
+    return os;
+}
+
+}
+
+CRAYG_FMT_ENUM_FORMATTER(crayg::BaseTaskReporter::IterationStatus);
