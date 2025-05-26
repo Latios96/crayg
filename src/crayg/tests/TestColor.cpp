@@ -261,4 +261,17 @@ TEST_CASE("Color::isNan", "[Color]") {
     }
 }
 
+TEST_CASE("Color::data", "[Color]") {
+
+    SECTION("should correct data ptr") {
+        Color color(1, 2, 3);
+
+        const float *data = color.data();
+
+        REQUIRE(data[0] == 1);
+        REQUIRE(data[1] == 2);
+        REQUIRE(data[2] == 3);
+    }
+}
+
 }
