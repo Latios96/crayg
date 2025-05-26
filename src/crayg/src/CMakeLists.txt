@@ -71,6 +71,13 @@ set(crayg_SRCS
     image/io/OpenImageIoImageWriter.h
     image/io/PngWriter.cpp
     image/io/PngWriter.h
+    image/newbufferapi/AccumulationBuffer.cpp
+    image/newbufferapi/AccumulationBuffer.h
+    image/newbufferapi/BufferBase.cpp
+    image/newbufferapi/BufferBase.h
+    image/newbufferapi/ValueBuffer.cpp
+    image/newbufferapi/ValueBuffer.h
+    image/newbufferapi/ValueTrait.h
     image/PixelBuffer.cpp
     image/PixelBuffer.h
     image/PixelFormat.h
