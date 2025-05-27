@@ -15,6 +15,7 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/UnitPlaneUvs.h
     fixtures/UsdGeomMeshFixtures.cpp
     fixtures/UsdGeomMeshFixtures.h
+    newbufferapi/TestAtomicFloats.cpp
     newbufferapi/TestBitCast.cpp
     newbufferapi/TestBufferBase.cpp
     newbufferapi/TestValueBuffer.cpp

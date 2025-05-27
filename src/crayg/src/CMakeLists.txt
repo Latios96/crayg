@@ -72,6 +72,7 @@ set(crayg_SRCS
     image/io/PngWriter.cpp
     image/io/PngWriter.h
     image/newbufferapi/AccumulationBuffer.h
+    image/newbufferapi/AtomicFloats.h
     image/newbufferapi/BitCast.h
     image/newbufferapi/BufferBase.h
     image/newbufferapi/ValueBuffer.h
