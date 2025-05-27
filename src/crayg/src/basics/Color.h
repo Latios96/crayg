@@ -192,6 +192,10 @@ class Color {
         return &r;
     }
 
+    float *data() {
+        return &r;
+    }
+
     std::tuple<int, int, int> getRgbValues() const {
         const Color clamped = clamp();
         int int_r = static_cast<int>(clamped.r * 255);
