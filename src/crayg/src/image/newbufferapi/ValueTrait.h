@@ -19,7 +19,7 @@ template <> struct ValueTrait<float> {
         return value;
     }
 
-    static constexpr std::string_view name = "float";
+    static constexpr std::string_view name = "f32";
 };
 
 template <> struct ValueTrait<uint8_t> {

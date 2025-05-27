@@ -14,7 +14,7 @@ TEST_CASE("ValueTrait<float>") {
     }
 
     SECTION("should have correct name") {
-        REQUIRE(ValueTrait<float>::name == "float");
+        REQUIRE(ValueTrait<float>::name == "f32");
     }
 }
 
