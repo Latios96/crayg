@@ -7,28 +7,31 @@
 
 namespace crayg {
 
-template <typename T, int channelCount> struct ValueBuffer : BufferBase<T, channelCount> {
+template <typename T, int channelCount> struct ValueBuffer : public BufferBase<T, channelCount> {
 
-    void write(const Vector2i &pixelPosition, float value) { // todo test
-        float fValue;
-        ValueTrait<T>::fromFloat(value, &fValue);
-        for (int i = 0; i < channelCount; i++) {
-            BufferBase<T, channelCount>::values[i] = fValue;
-        }
+    ValueBuffer(int width, int height) : BufferBase<T, channelCount>(width, height) {
     }
 
-    void write(const Vector2i &pixelPosition, const Color &value) { // todo test
-        static_assert(channelCount == 1 || channelCount == 3);
+    explicit ValueBuffer(const Resolution &resolution) : BufferBase<T, channelCount>(resolution) {
+    }
+
+    void write(const Vector2i &pixelPosition, float value) {
+        const int index = BufferBase<T, channelCount>::index(pixelPosition);
+        BufferBase<T, channelCount>::data[index].value[0] = ValueTrait<T>::fromFloat(value);
+    }
+
+    void write(const Vector2i &pixelPosition, const Color &value) {
         for (int i = 0; i < channelCount; i++) {
-            ValueTrait<T>::fromFloat(value.data()[i], BufferBase<T, channelCount>::values[i]);
+            const int index = BufferBase<T, channelCount>::index(pixelPosition);
+            BufferBase<T, channelCount>::data[index].value[i] = ValueTrait<T>::fromFloat(value.data()[i]);
         }
     }
 };
 
-// todo test every single variant
 typedef ValueBuffer<float, 1> FloatValueBuffer;
 typedef ValueBuffer<uint8_t, 1> IntValueBuffer;
 typedef ValueBuffer<float, 3> Color3fValueBuffer;
 typedef ValueBuffer<uint8_t, 3> Color3iValueBuffer;
+typedef std::variant<FloatValueBuffer, IntValueBuffer, Color3fValueBuffer, Color3iValueBuffer> ValueBufferVariant;
 
 }

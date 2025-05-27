@@ -16,6 +16,7 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/UsdGeomMeshFixtures.cpp
     fixtures/UsdGeomMeshFixtures.h
     newbufferapi/TestBufferBase.cpp
+    newbufferapi/TestValueBuffer.cpp
     newbufferapi/TestValueTrait.cpp
     TestAdaptiveBucketSampler.cpp
     TestAreaLight.cpp
