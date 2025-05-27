@@ -51,15 +51,6 @@ template <typename T, int channelCount> struct BufferBase {
         return *this;
     }
 
-    struct PixelValue {
-        T value[channelCount];
-    };
-
-    PixelValue *data = nullptr;
-    int width = 0;
-    int height = 0;
-    const int chCount = channelCount;
-
     float getFloat(const Vector2i &pixelPosition) const {
         CRAYG_CHECKD_IS_VALID_INDEX(index(pixelPosition), width * height);
 
@@ -114,6 +105,15 @@ template <typename T, int channelCount> struct BufferBase {
     virtual ~BufferBase() {
         delete[] data;
     }
+
+    struct PixelValue {
+        T value[channelCount];
+    };
+
+    PixelValue *data = nullptr;
+    int width = 0;
+    int height = 0;
+    const int chCount = channelCount;
 
   protected:
     int index(const Vector2i &pixelPosition) const {
