@@ -1,49 +1,130 @@
 #pragma once
 #include "ValueTrait.h"
 #include "basics/Color.h"
+#include "basics/Resolution.h"
 #include "basics/Vector2.h"
+#include "utils/Preconditions.h"
+
 #include <fmt/format.h>
 #include <string>
+#include <variant>
 
 namespace crayg {
 
 template <typename T, int channelCount> struct BufferBase {
-    // todo static_assert that channelCount is 1 or 3
-    BufferBase() = default;
+    static_assert(channelCount == 1 || channelCount == 3);
 
     BufferBase(int width, int height) : width(width), height(height) {
-        values = new T[valueCount()](); // todo make sure this is zero initialized
+        data = new PixelValue[pixelCount()]();
+    }
+
+    explicit BufferBase(const Resolution &resolution) : width(resolution.getWidth()), height(resolution.getHeight()) {
+        data = new PixelValue[pixelCount()]();
+    }
+
+    BufferBase(const BufferBase &other) : width(other.width), height(other.height) {
+        data = new PixelValue[pixelCount()]();
+        memcpy(data, other.data, pixelCount() * sizeof(PixelValue));
+    }
+
+    BufferBase(BufferBase &&other) noexcept : data(other.data), width(other.width), height(other.height) {
+        other.data = nullptr;
+    }
+
+    BufferBase &operator=(const BufferBase &other) {
+        if (this == &other) {
+            return *this;
+        }
+        width = other.width;
+        height = other.height;
+        memcpy(data, other.data, pixelCount() * sizeof(PixelValue));
+        return *this;
+    }
+
+    BufferBase &operator=(BufferBase &&other) noexcept {
+        if (this == &other) {
+            return *this;
+        }
+        width = other.width;
+        height = other.height;
+        memcpy(data, other.data, pixelCount() * sizeof(PixelValue));
+        return *this;
     }
 
     struct PixelValue {
         T value[channelCount];
     };
 
-    PixelValue *values = nullptr;
+    PixelValue *data = nullptr;
     int width = 0;
     int height = 0;
+    const int chCount = channelCount;
 
-    float getFloat(const Vector2i &pixelPosition) const { // todo test
-        // return the value of the first channel
+    float getFloat(const Vector2i &pixelPosition) const {
+        CRAYG_CHECKD_IS_VALID_INDEX(index(pixelPosition), width * height);
+
+        return ValueTrait<T>::toFloat(data[index(pixelPosition)].value[0]);
     }
 
-    Color getColor(const Vector2i &pixelPosition) const { // todo test
-        // return the value of the first channel if only one else return all three
+    Color getColor(const Vector2i &pixelPosition) const {
+        CRAYG_CHECKD_IS_VALID_INDEX(index(pixelPosition), width * height);
+        Color color;
+        for (int i = 0; i < channelCount; i++) {
+            color.data()[i] = ValueTrait<T>::toFloat(data[index(pixelPosition)].value[i]);
+        }
+        return color;
     }
 
-    int pixelCount() const { // todo test
+    bool isWhite() const {
+        return isColor(Color::createWhite());
+    }
+
+    bool isBlack() const {
+        return isColor(Color::createBlack());
+    }
+
+    bool isColor(const Color &color) const {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (getColor({x, y}) != color) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    int pixelCount() const {
         return width * height;
     }
 
-    std::string describe() const { // todo test
-        return fmt::format("{}, {}bit", ValueTrait<T>::name, sizeof(T) * 8);
+    std::string describe() const {
+        return fmt::format("{}x {}", channelCount, ValueTrait<T>::name);
     }
 
-    // todo operators like equal and ostream
+    friend std::ostream &operator<<(std::ostream &os, const BufferBase<T, channelCount> &buffer) {
+        os << ToStringHelper("PixelBuffer")
+                  .addMember("width", buffer.width)
+                  .addMember("height", buffer.height)
+                  .addMember("format", fmt::format(R"('{}')", describe()))
+                  .finish();
+        return os;
+    }
 
     virtual ~BufferBase() {
-        delete[] values;
+        delete[] data;
+    }
+
+  private:
+    int index(const Vector2i &pixelPosition) const {
+        return (pixelPosition.x + width * pixelPosition.y);
     }
 };
+
+typedef BufferBase<float, 1> FloatBufferBase;
+typedef BufferBase<uint8_t, 1> IntBufferBase;
+typedef BufferBase<float, 3> Color3fBufferBase;
+typedef BufferBase<uint8_t, 3> Color3iBufferBase;
+typedef std::variant<FloatBufferBase, IntBufferBase, Color3fBufferBase, Color3iBufferBase> BufferVariant;
 
 }
