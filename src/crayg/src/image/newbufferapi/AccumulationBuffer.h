@@ -4,6 +4,7 @@
 #include "basics/Color.h"
 #include "basics/Vector2.h"
 #include "image/ImageBucket.h"
+#include "utils/Preconditions.h"
 
 namespace crayg {
 
@@ -49,8 +50,8 @@ template <typename T, int channelCount> struct AccumulationBuffer : public Buffe
 
     void add(const Vector2i &pixelPosition, float value) {
         const auto index = BufferBase<T, channelCount>::index(pixelPosition);
-        CRAYG_CHECK_IS_VALID_INDEX((BufferBase<T, channelCount>::index(pixelPosition)),
-                                   (BufferBase<T, channelCount>::pixelCount()));
+        CRAYG_CHECKD_IS_VALID_INDEX((BufferBase<T, channelCount>::index(pixelPosition)),
+                                    (BufferBase<T, channelCount>::pixelCount()));
 
         for (int i = 0; i < channelCount; i++) {
             sum[index].value[i].atomicAdd(value);
@@ -60,8 +61,8 @@ template <typename T, int channelCount> struct AccumulationBuffer : public Buffe
 
     void add(const Vector2i &pixelPosition, const Color &value) {
         const auto index = BufferBase<T, channelCount>::index(pixelPosition);
-        CRAYG_CHECK_IS_VALID_INDEX((BufferBase<T, channelCount>::index(pixelPosition)),
-                                   (BufferBase<T, channelCount>::pixelCount()));
+        CRAYG_CHECKD_IS_VALID_INDEX((BufferBase<T, channelCount>::index(pixelPosition)),
+                                    (BufferBase<T, channelCount>::pixelCount()));
 
         for (int i = 0; i < channelCount; i++) {
             sum[index].value[i].atomicAdd(value.data()[i]);

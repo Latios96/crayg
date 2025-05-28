@@ -142,47 +142,63 @@ TEST_CASE("BufferBase::getFloat") {
     }
 }
 
-TEST_CASE("BufferBase::getColor") {
+TEST_CASE("BufferBase::getColor"){
 
-    SECTION("should get color from FloatBufferBase") {
-        FloatBufferBase buffer(10, 5);
+    SECTION("should get color from FloatBufferBase"){FloatBufferBase buffer(10, 5);
 
-        buffer.data[0].value[0] = 1;
-        buffer.data[1].value[0] = 2;
+buffer.data[0].value[0] = 1;
+buffer.data[1].value[0] = 2;
 
-        REQUIRE(buffer.getColor({0, 0}) == Color::createRed());
-        REQUIRE(buffer.getColor({1, 0}) == Color(2, 0, 0));
-    }
+REQUIRE(buffer.getColor({0, 0}) == Color::createRed());
+REQUIRE(buffer.getColor({1, 0}) == Color(2, 0, 0));
+}
 
-    SECTION("should get color from Color3fBufferBase") {
-        Color3fBufferBase buffer(10, 5);
+SECTION("should get color from Color3fBufferBase") {
+    Color3fBufferBase buffer(10, 5);
 
-        buffer.data[0].value[0] = 1;
-        buffer.data[0].value[1] = 2;
-        buffer.data[0].value[2] = 3;
+    buffer.data[0].value[0] = 1;
+    buffer.data[0].value[1] = 2;
+    buffer.data[0].value[2] = 3;
 
-        REQUIRE(buffer.getColor({0, 0}) == Color(1, 2, 3));
-    }
+    REQUIRE(buffer.getColor({0, 0}) == Color(1, 2, 3));
+}
 
-    SECTION("should get color from IntBufferBase") {
-        IntBufferBase buffer(10, 5);
+SECTION("should get color from IntBufferBase") {
+    IntBufferBase buffer(10, 5);
 
-        buffer.data[0].value[0] = 1;
-        buffer.data[1].value[0] = 2;
-        buffer.data[2].value[0] = 3;
+    buffer.data[0].value[0] = 1;
+    buffer.data[1].value[0] = 2;
+    buffer.data[2].value[0] = 3;
 
-        REQUIRE(buffer.getColor({0, 0}) == Color(0.003921569f, 0, 0));
-    }
+    REQUIRE(buffer.getColor({0, 0}) == Color(0.003921569f, 0, 0));
+}
 
-    SECTION("should get color from Color3iBufferBase") {
-        Color3iBufferBase buffer(10, 5);
+SECTION("should get color from Color3iBufferBase") {
+    Color3iBufferBase buffer(10, 5);
 
-        buffer.data[0].value[0] = 1;
-        buffer.data[0].value[1] = 2;
-        buffer.data[0].value[2] = 3;
+    buffer.data[0].value[0] = 1;
+    buffer.data[0].value[1] = 2;
+    buffer.data[0].value[2] = 3;
 
-        REQUIRE(buffer.getColor({0, 0}) == Color(0.003921569f, 0.007843138f, 0.011764706f));
-    }
+    REQUIRE(buffer.getColor({0, 0}) == Color(0.003921569f, 0.007843138f, 0.011764706f));
+}
+
+#ifdef CRAYG_DEBUG_CHECKS
+
+SECTION("should fail for invalid pixel") {
+    const auto &testData = GENERATE(table<BufferBaseVariant>(
+        {FloatBufferBase(10, 5), IntBufferBase(10, 5), Color3fBufferBase(10, 5), Color3iBufferBase(10, 5)}));
+    const auto &buffer = std::get<0>(testData);
+
+    std::visit(
+        [](auto &buf) {
+            REQUIRE_THROWS(buf.getFloat({10, 10}));
+            REQUIRE_THROWS(buf.getColor({10, 10}));
+        },
+        buffer);
+}
+
+#endif
 }
 
 TEST_CASE("BufferBase::isColor") {
@@ -223,5 +239,4 @@ TEST_CASE("BufferBase::describe") {
         std::visit([&description](auto &buf) { REQUIRE(buf.describe() == description); }, buffer);
     }
 }
-
 }

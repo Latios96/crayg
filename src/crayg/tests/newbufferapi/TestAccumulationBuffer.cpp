@@ -196,53 +196,75 @@ TEST_CASE("AccumulationBuffer::weightIsConstant") {
     }
 }
 
-TEST_CASE("AccumulationBuffer::add float") {
+TEST_CASE("AccumulationBuffer::add float"){
 
-    SECTION("should add float correctly") {
-        auto &testData = GENERATE(table<AccumulationBufferVariant>({
-            FloatAccumulationBuffer(10, 5),
-            Color3fAccumulationBuffer(10, 5),
-        }));
-        auto buffer = std::get<0>(testData);
+    SECTION("should add float correctly"){auto &testData = GENERATE(table<AccumulationBufferVariant>({
+                                              FloatAccumulationBuffer(10, 5),
+                                              Color3fAccumulationBuffer(10, 5),
+                                          }));
+auto buffer = std::get<0>(testData);
 
-        std::visit(
-            [](auto &buf) {
-                buf.add({4, 4}, 1);
-                buf.add({4, 4}, 2);
+std::visit(
+    [](auto &buf) {
+        buf.add({4, 4}, 1);
+        buf.add({4, 4}, 2);
 
-                REQUIRE(buf.isBlack());
-                REQUIRE(buf.sum[buf.index({4, 4})].value[0].get() == 3);
-                REQUIRE(buf.weight[buf.index({4, 4})].get() == 2);
-            },
-            buffer);
-    }
+        REQUIRE(buf.isBlack());
+        REQUIRE(buf.sum[buf.index({4, 4})].value[0].get() == 3);
+        REQUIRE(buf.weight[buf.index({4, 4})].get() == 2);
+    },
+    buffer);
 }
 
-TEST_CASE("AccumulationBuffer::add Color") {
+#ifdef CRAYG_DEBUG_CHECKS
 
-    SECTION("should add Color correctly for FloatAccumulationBuffer") {
-        FloatAccumulationBuffer buffer(10, 5);
+SECTION("should fail for invalid pixel") {
+    const auto &testData =
+        GENERATE(table<AccumulationBufferVariant>({FloatAccumulationBuffer(10, 5), Color3fAccumulationBuffer(10, 5)}));
+    auto buffer = std::get<0>(testData);
 
-        buffer.add({4, 4}, Color(1, 2, 3));
-        buffer.add({4, 4}, Color(1, 2, 3));
+    std::visit([](auto &buf) { REQUIRE_THROWS(buf.add({10, 10}, 1)); }, buffer);
+}
 
-        REQUIRE(buffer.isBlack());
-        REQUIRE(buffer.sum[buffer.index({4, 4})].value[0].get() == 2);
-        REQUIRE(buffer.weight[buffer.index({4, 4})].get() == 2);
-    }
+#endif
+}
 
-    SECTION("should add Color correctly for Color3fAccumulationBuffer") {
-        Color3fAccumulationBuffer buffer(10, 5);
+TEST_CASE("AccumulationBuffer::add Color"){
 
-        buffer.add({4, 4}, Color(1, 2, 3));
-        buffer.add({4, 4}, Color(1, 2, 3));
+    SECTION("should add Color correctly for FloatAccumulationBuffer"){FloatAccumulationBuffer buffer(10, 5);
 
-        REQUIRE(buffer.isBlack());
-        REQUIRE(buffer.sum[buffer.index({4, 4})].value[0].get() == 2);
-        REQUIRE(buffer.sum[buffer.index({4, 4})].value[1].get() == 4);
-        REQUIRE(buffer.sum[buffer.index({4, 4})].value[2].get() == 6);
-        REQUIRE(buffer.weight[buffer.index({4, 4})].get() == 2);
-    }
+buffer.add({4, 4}, Color(1, 2, 3));
+buffer.add({4, 4}, Color(1, 2, 3));
+
+REQUIRE(buffer.isBlack());
+REQUIRE(buffer.sum[buffer.index({4, 4})].value[0].get() == 2);
+REQUIRE(buffer.weight[buffer.index({4, 4})].get() == 2);
+}
+
+SECTION("should add Color correctly for Color3fAccumulationBuffer") {
+    Color3fAccumulationBuffer buffer(10, 5);
+
+    buffer.add({4, 4}, Color(1, 2, 3));
+    buffer.add({4, 4}, Color(1, 2, 3));
+
+    REQUIRE(buffer.isBlack());
+    REQUIRE(buffer.sum[buffer.index({4, 4})].value[0].get() == 2);
+    REQUIRE(buffer.sum[buffer.index({4, 4})].value[1].get() == 4);
+    REQUIRE(buffer.sum[buffer.index({4, 4})].value[2].get() == 6);
+    REQUIRE(buffer.weight[buffer.index({4, 4})].get() == 2);
+}
+
+#ifdef CRAYG_DEBUG_CHECKS
+
+SECTION("should fail for invalid pixel") {
+    const auto &testData =
+        GENERATE(table<AccumulationBufferVariant>({FloatAccumulationBuffer(10, 5), Color3fAccumulationBuffer(10, 5)}));
+    auto buffer = std::get<0>(testData);
+
+    std::visit([](auto &buf) { REQUIRE_THROWS(buf.add({10, 10}, Color(1, 2, 3))); }, buffer);
+}
+
+#endif
 }
 
 TEST_CASE("AccumulationBuffer::updateAverages") {
@@ -327,5 +349,4 @@ TEST_CASE("AccumulationBuffer::getColor should work through BaseBuffer ptr") {
         REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 0, 0));
     }
 }
-
 }
