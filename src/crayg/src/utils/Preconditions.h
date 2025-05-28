@@ -11,7 +11,6 @@
 #ifdef CRAYG_DEBUG_CHECKS
 
 #include "Exceptions.h"
-#include <basics/Vector3f.h>
 #include <fmt/format.h>
 
 #define CRAYG_CHECKD_IS_NORMALIZED_VECTOR(vector) CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector)
