@@ -245,68 +245,68 @@ TEST_CASE("AccumulationBuffer::add Color") {
     }
 }
 
-TEST_CASE("AccumulationBuffer::updateValues") {
+TEST_CASE("AccumulationBuffer::updateAverages") {
 
     SECTION("should not end up with NaNs if weight is zero") {
         FloatAccumulationBuffer buffer(10, 5);
         REQUIRE(buffer.isBlack());
         REQUIRE(buffer.weightIsZero());
 
-        buffer.updateValues();
+        buffer.updateAverages();
 
         REQUIRE_FALSE(buffer.getColor({0, 0}).isNan());
     }
 
-    SECTION("should update values correctly for FloatAccumulationBuffer") {
+    SECTION("should update average values correctly for FloatAccumulationBuffer") {
         FloatAccumulationBuffer buffer(10, 5);
 
         buffer.add({4, 4}, Color(1, 2, 3));
         buffer.add({4, 4}, Color(2, 4, 6));
         REQUIRE(buffer.isBlack());
 
-        buffer.updateValues();
+        buffer.updateAverages();
 
         REQUIRE_FALSE(buffer.isBlack());
         REQUIRE(buffer.getColor({4, 4}) == Color(1.5, 0, 0));
     }
 
-    SECTION("should update values correctly for Color3fAccumulationBuffer") {
+    SECTION("should update average values correctly for Color3fAccumulationBuffer") {
         Color3fAccumulationBuffer buffer(10, 5);
 
         buffer.add({4, 4}, Color(1, 2, 3));
         buffer.add({4, 4}, Color(2, 4, 6));
 
         REQUIRE(buffer.isBlack());
-        buffer.updateValues();
+        buffer.updateAverages();
         REQUIRE_FALSE(buffer.isBlack());
         REQUIRE(buffer.getColor({4, 4}) == Color(1.5, 3, 4.5));
     }
 }
 
-TEST_CASE("AccumulationBuffer::updateValues for ImageBucket") {
+TEST_CASE("AccumulationBuffer::updateAverages for ImageBucket") {
 
-    SECTION("should update values correctly for FloatAccumulationBuffer") {
+    SECTION("should update average values correctly for FloatAccumulationBuffer") {
         FloatAccumulationBuffer buffer(10, 5);
 
         buffer.add({0, 0}, Color(1, 2, 3));
         buffer.add({2, 2}, Color(2, 4, 6));
         REQUIRE(buffer.isBlack());
 
-        buffer.updateValuesForBucket(ImageBucket(Vector2i(2, 2), 2, 2));
+        buffer.updateAveragesInBucket(ImageBucket(Vector2i(2, 2), 2, 2));
 
         REQUIRE_FALSE(buffer.isBlack());
         REQUIRE(buffer.getColor({0, 0}).isBlack());
         REQUIRE(buffer.getColor({2, 2}) == Color(2, 0, 0));
     }
 
-    SECTION("should update values correctly for Color3fAccumulationBuffer") {
+    SECTION("should update average values correctly for Color3fAccumulationBuffer") {
         Color3fAccumulationBuffer buffer(10, 5);
 
         buffer.add({0, 0}, Color(1, 2, 3));
         buffer.add({2, 2}, Color(2, 4, 6));
         REQUIRE(buffer.isBlack());
 
-        buffer.updateValuesForBucket(ImageBucket(Vector2i(2, 2), 2, 2));
+        buffer.updateAveragesInBucket(ImageBucket(Vector2i(2, 2), 2, 2));
 
         REQUIRE_FALSE(buffer.isBlack());
         REQUIRE(buffer.getColor({0, 0}).isBlack());
@@ -321,7 +321,7 @@ TEST_CASE("AccumulationBuffer::getColor should work through BaseBuffer ptr") {
         FloatBufferBase *bufferBase = &buffer;
 
         buffer.add({0, 0}, 1);
-        buffer.updateValues();
+        buffer.updateAverages();
 
         REQUIRE(bufferBase->getFloat({0, 0}) == 1);
         REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 0, 0));

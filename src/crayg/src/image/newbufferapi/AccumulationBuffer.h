@@ -61,22 +61,22 @@ template <typename T, int channelCount> struct AccumulationBuffer : public Buffe
         weight[index].atomicAdd(1);
     }
 
-    void updateValues() {
+    void updateAverages() {
         for (int i = 0; i < BufferBase<T, channelCount>::pixelCount(); i++) {
-            updateValue(i);
+            updateAverage(i);
         }
     }
 
-    void updateValuesForBucket(const ImageBucket &imageBucket) {
+    void updateAveragesInBucket(const ImageBucket &imageBucket) {
         for (int bucketY = 0; bucketY < imageBucket.getHeight(); bucketY++) {
             for (int bucketX = 0; bucketX < imageBucket.getWidth(); bucketX++) {
                 const Vector2i globalPosition = imageBucket.getPosition() + Vector2i(bucketX, bucketY);
-                updateValue(BufferBase<T, channelCount>::index(globalPosition));
+                updateAverage(BufferBase<T, channelCount>::index(globalPosition));
             }
         }
     }
 
-    void updateValue(int index) {
+    void updateAverage(int index) {
         double w = weight[index].get();
         if (w != 0) {
             for (int c = 0; c < channelCount; c++) {
