@@ -140,7 +140,7 @@ if __name__ == "__main__":
         f.write("// clang-format off\n")
         for check in checks:
             f.write(
-                f"#define CRAYGD_CHECK_{check.name}({check.args_str}) CRAYG_EMPTY_CHECK\n"
+                f"#define CRAYG_CHECKD_{check.name}({check.args_str}) CRAYG_EMPTY_CHECK\n"
             )
         f.write("// clang-format on\n")
 
