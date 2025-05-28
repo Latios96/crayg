@@ -1,57 +1,138 @@
 #pragma once
+#include "AtomicFloats.h"
 #include "BufferBase.h"
-#include "ValueTrait.h"
 #include "basics/Color.h"
 #include "basics/Vector2.h"
 #include "image/ImageBucket.h"
-#include <atomic>
-#include <cstdint>
 
 namespace crayg {
 
-template <typename T, int channelCount> struct AccumulationBuffer : BufferBase<T, channelCount> {
-    struct SumType {
-        std::atomic<double> value[channelCount];
-    };
+template <typename T, int channelCount> struct AccumulationBuffer : public BufferBase<T, channelCount> {
+    static_assert(std::is_floating_point_v<T>);
 
-    SumType *sum;
-    std::atomic<double> *weight;
+    AccumulationBuffer(int width, int height) : BufferBase<T, channelCount>(width, height) {
+        sum = new SumType[BufferBase<T, channelCount>::pixelCount()]();
+        weight = new AtomicDouble[BufferBase<T, channelCount>::pixelCount()]();
+    }
+
+    explicit AccumulationBuffer(const Resolution &resolution) : BufferBase<T, channelCount>(resolution) {
+        sum = new SumType[BufferBase<T, channelCount>::pixelCount()]();
+        weight = new AtomicDouble[BufferBase<T, channelCount>::pixelCount()]();
+    }
+
+    AccumulationBuffer(const AccumulationBuffer &other) : BufferBase<T, channelCount>(other) {
+        sum = new SumType[BufferBase<T, channelCount>::pixelCount()]();
+        memcpy(other.sum, sum, BufferBase<T, channelCount>::pixelCount() * sizeof(SumType));
+        weight = new AtomicDouble[BufferBase<T, channelCount>::pixelCount()]();
+        memcpy(other.weight, weight, BufferBase<T, channelCount>::pixelCount() * sizeof(AtomicDouble));
+    }
+
+    AccumulationBuffer &operator=(const AccumulationBuffer &other) {
+        if (this == &other) {
+            return *this;
+        }
+        BufferBase<T, channelCount>::operator=(other);
+        sum = new SumType[BufferBase<T, channelCount>::pixelCount()]();
+        memcpy(other.sum, sum, BufferBase<T, channelCount>::pixelCount() * sizeof(SumType));
+        weight = new AtomicDouble[BufferBase<T, channelCount>::pixelCount()]();
+        memcpy(other.weight, weight, BufferBase<T, channelCount>::pixelCount() * sizeof(AtomicDouble));
+        return *this;
+    }
+
+    void add(const Vector2i &pixelPosition, float value) {
+        const auto index = BufferBase<T, channelCount>::index(pixelPosition);
+        CRAYG_CHECK_IS_VALID_INDEX((BufferBase<T, channelCount>::index(pixelPosition)),
+                                   (BufferBase<T, channelCount>::pixelCount()));
+
+        for (int i = 0; i < channelCount; i++) {
+            sum[index].value[i].atomicAdd(value);
+        }
+        weight[index].atomicAdd(1);
+    }
+
+    void add(const Vector2i &pixelPosition, const Color &value) {
+        const auto index = BufferBase<T, channelCount>::index(pixelPosition);
+        CRAYG_CHECK_IS_VALID_INDEX((BufferBase<T, channelCount>::index(pixelPosition)),
+                                   (BufferBase<T, channelCount>::pixelCount()));
+
+        for (int i = 0; i < channelCount; i++) {
+            sum[index].value[i].atomicAdd(value.data()[i]);
+        }
+        weight[index].atomicAdd(1);
+    }
 
     void updateValues() {
-        for (int i = 0; i < valueCount(); i++) { // todo test
-            for (int c = 0; c < channelCount; c++) {
-                BufferBase<T, channelCount>::values[i].value[c] = sum[i] / weight[i];
+        for (int i = 0; i < BufferBase<T, channelCount>::pixelCount(); i++) {
+            updateValue(i);
+        }
+    }
+
+    void updateValuesForBucket(const ImageBucket &imageBucket) {
+        for (int bucketY = 0; bucketY < imageBucket.getHeight(); bucketY++) {
+            for (int bucketX = 0; bucketX < imageBucket.getWidth(); bucketX++) {
+                const Vector2i globalPosition = imageBucket.getPosition() + Vector2i(bucketX, bucketY);
+                updateValue(BufferBase<T, channelCount>::index(globalPosition));
             }
         }
     }
 
-    void updateValuesForBucket(const ImageBucket &imageBucket) { // todo test
-        // update values for values in bucket
-    }
-
-    void add(const Vector2i &pixelPosition, float value) { // todo test
-        float fValue;
-        ValueTrait<T>::fromFloat(value, &fValue);
-        for (int i = 0; i < channelCount; i++) {
-            sum[i].fetch_add(fValue);
-            weight[i].fetch_add(1);
+    void updateValue(int index) {
+        double w = weight[index].get();
+        if (w != 0) {
+            for (int c = 0; c < channelCount; c++) {
+                BufferBase<T, channelCount>::data[index].value[c] = sum[index].value[c].get() / w;
+            }
         }
     }
 
-    void add(const Vector2i &pixelPosition, const Color &value) { // todo test
-        float fValue;
-        ValueTrait<T>::fromFloat(value, &fValue);
-        for (int i = 0; i < channelCount; i++) {
-            sum[i].fetch_add(fValue);
-            weight[i].fetch_add(1);
+    bool sumIsConstant(const double &constantSum) const {
+        for (int i = 0; i < BufferBase<T, channelCount>::pixelCount(); i++) {
+            if (sum[i].value[0].get() != constantSum) {
+                return false;
+            }
         }
+        return true;
     }
+
+    bool sumIsConstant(const Color &color) const {
+        for (int i = 0; i < BufferBase<T, channelCount>::pixelCount(); i++) {
+            for (int c = 0; c < channelCount; c++) {
+                if (sum[i].value[c].get() != color.data()[c]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    bool sumIsZero() const {
+        return sumIsConstant(0);
+    }
+
+    bool weightIsConstant(const double &constantWeight) const {
+        for (int i = 0; i < BufferBase<T, channelCount>::pixelCount(); i++) {
+            if (weight[i].get() != constantWeight) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool weightIsZero() const {
+        return weightIsConstant(0);
+    }
+
+    struct SumType {
+        AtomicDouble value[channelCount];
+    };
+
+    // todo use Array2D
+    SumType *sum;
+    AtomicDouble *weight;
 };
 
-// todo test every single variant
 typedef AccumulationBuffer<float, 1> FloatAccumulationBuffer;
-typedef AccumulationBuffer<uint8_t, 1> IntAccumulationBuffer;
 typedef AccumulationBuffer<float, 3> Color3fAccumulationBuffer;
-typedef AccumulationBuffer<uint8_t, 3> Color3iAccumulationBuffer;
+typedef std::variant<FloatAccumulationBuffer, Color3fAccumulationBuffer> AccumulationBufferVariant;
 
 }
