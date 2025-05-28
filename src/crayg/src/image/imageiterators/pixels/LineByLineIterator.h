@@ -1,7 +1,6 @@
 #pragma once
 
 #include "basics/Vector2.h"
-#include "image/Image.h"
 
 namespace crayg {
 
