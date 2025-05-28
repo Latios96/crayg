@@ -117,4 +117,17 @@ TEST_CASE("ValueBuffer::writeColor") {
     }
 }
 
+TEST_CASE("ValueBuffer::getColor should work through BaseBuffer ptr") {
+
+    SECTION("should write float correctly for FloatValueBuffer") {
+        FloatValueBuffer buffer(10, 5);
+        FloatBufferBase *bufferBase = &buffer;
+
+        buffer.write({0, 0}, 1);
+
+        REQUIRE(bufferBase->getFloat({0, 0}) == 1);
+        REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 0, 0));
+    }
+}
+
 }
