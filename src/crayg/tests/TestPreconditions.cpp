@@ -311,7 +311,7 @@ SECTION("should fail (debug mode)") {
 #endif
 }
 
-TEST_CASE("Preconditions:: is not NaN", "[Preconditions]"){SECTION("should pass"){CRAYG_CHECK_IS_NOT_NAN(1);
+TEST_CASE("Preconditions:: is not NaN", "[Preconditions]"){SECTION("should pass"){CRAYG_CHECK_IS_NOT_NAN(1.f);
 }
 
 SECTION("should fail") {
@@ -320,7 +320,7 @@ SECTION("should fail") {
 #ifdef CRAYG_DEBUG_CHECKS
 
 SECTION("should pass (debug mode)") {
-    CRAYG_CHECKD_IS_NOT_NAN(1);
+    CRAYG_CHECKD_IS_NOT_NAN(1.f);
 }
 
 SECTION("should fail (debug mode)") {
