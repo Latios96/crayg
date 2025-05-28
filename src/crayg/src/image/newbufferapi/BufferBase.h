@@ -115,7 +115,6 @@ template <typename T, int channelCount> struct BufferBase {
     int height = 0;
     const int chCount = channelCount;
 
-  protected:
     int index(const Vector2i &pixelPosition) const {
         return (pixelPosition.x + width * pixelPosition.y);
     }
