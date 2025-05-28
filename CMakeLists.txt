@@ -70,6 +70,10 @@ if(MSVC)
     )
 endif()
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_definitions(CRAYG_DEBUG_BUILD=1)
+endif()
+
 add_subdirectory(src)
 
 # Create distribution target

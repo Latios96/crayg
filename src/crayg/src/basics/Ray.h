@@ -4,7 +4,6 @@
 #include <fmt/ostream.h>
 #include <optional>
 #include <ostream>
-#include <utils/Preconditions.h>
 
 namespace crayg {
 
@@ -16,14 +15,12 @@ struct Ray {
     Ray() = default;
 
     Ray(Vector3f startPoint, Vector3f direction) {
-        CRAYG_CHECKD_IS_NORMALIZED_VECTOR(direction);
         this->startPoint = startPoint;
         this->direction = direction;
         this->length = std::numeric_limits<float>::min();
     }
 
     Ray(Vector3f startPoint, Vector3f direction, float length) {
-        CRAYG_CHECKD_IS_NORMALIZED_VECTOR(direction);
         this->startPoint = startPoint;
         this->direction = direction;
         this->length = length;

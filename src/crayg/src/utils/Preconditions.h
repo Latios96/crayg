@@ -3,6 +3,10 @@
 #define CRAYG_CHECK_IS_NORMALIZED_VECTOR(vector) CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector)
 #define CRAYG_CHECK_IS_VALID_INDEX(index, size) CRAYG_CHECK_IS_VALID_INDEX_IMPL(index, size)
 
+#ifdef CRAYG_DEBUG_BUILD
+#define CRAYG_DEBUG_CHECKS
+#endif
+
 #ifdef CRAYG_DEBUG_CHECKS
 
 #include "Exceptions.h"
