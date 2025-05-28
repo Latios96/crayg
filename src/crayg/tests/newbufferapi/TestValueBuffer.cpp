@@ -7,7 +7,7 @@ namespace crayg {
 TEST_CASE("ValueBuffer::construct") {
 
     SECTION("should construct from Dimensions") {
-        const auto &testData = GENERATE(table<BufferVariant>(
+        const auto &testData = GENERATE(table<BufferBaseVariant>(
             {FloatValueBuffer(10, 5), IntValueBuffer(10, 5), Color3fValueBuffer(10, 5), Color3iValueBuffer(10, 5)}));
         const auto &buffer = std::get<0>(testData);
 
@@ -22,8 +22,8 @@ TEST_CASE("ValueBuffer::construct") {
 
     SECTION("should construct from Resolution") {
         const auto &testData = GENERATE(
-            table<BufferVariant>({FloatValueBuffer(Resolution(10, 5)), IntValueBuffer(Resolution(10, 5)),
-                                  Color3fValueBuffer(Resolution(10, 5)), Color3iValueBuffer(Resolution(10, 5))}));
+            table<BufferBaseVariant>({FloatValueBuffer(Resolution(10, 5)), IntValueBuffer(Resolution(10, 5)),
+                                      Color3fValueBuffer(Resolution(10, 5)), Color3iValueBuffer(Resolution(10, 5))}));
         const auto &buffer = std::get<0>(testData);
 
         std::visit(

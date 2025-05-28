@@ -8,7 +8,7 @@ namespace crayg {
 TEST_CASE("BufferBase::construct") {
 
     SECTION("should construct from Dimensions") {
-        const auto &testData = GENERATE(table<BufferVariant>(
+        const auto &testData = GENERATE(table<BufferBaseVariant>(
             {FloatBufferBase(10, 5), IntBufferBase(10, 5), Color3fBufferBase(10, 5), Color3iBufferBase(10, 5)}));
         const auto &buffer = std::get<0>(testData);
 
@@ -23,8 +23,8 @@ TEST_CASE("BufferBase::construct") {
 
     SECTION("should construct from Resolution") {
         const auto &testData = GENERATE(
-            table<BufferVariant>({FloatBufferBase(Resolution(10, 5)), IntBufferBase(Resolution(10, 5)),
-                                  Color3fBufferBase(Resolution(10, 5)), Color3iBufferBase(Resolution(10, 5))}));
+            table<BufferBaseVariant>({FloatBufferBase(Resolution(10, 5)), IntBufferBase(Resolution(10, 5)),
+                                      Color3fBufferBase(Resolution(10, 5)), Color3iBufferBase(Resolution(10, 5))}));
         const auto &buffer = std::get<0>(testData);
 
         std::visit(
@@ -40,7 +40,7 @@ TEST_CASE("BufferBase::construct") {
 TEST_CASE("BufferBase::copy") {
 
     SECTION("should copy") {
-        const auto &testData = GENERATE(table<BufferVariant>(
+        const auto &testData = GENERATE(table<BufferBaseVariant>(
             {FloatBufferBase(10, 5), IntBufferBase(10, 5), Color3fBufferBase(10, 5), Color3iBufferBase(10, 5)}));
         const auto &buffer = std::get<0>(testData);
 
@@ -59,7 +59,7 @@ TEST_CASE("BufferBase::copy") {
 TEST_CASE("BufferBase::assignment") {
 
     SECTION("should assign from const") {
-        const auto &testData = GENERATE(table<BufferVariant>(
+        const auto &testData = GENERATE(table<BufferBaseVariant>(
             {FloatBufferBase(10, 5), IntBufferBase(10, 5), Color3fBufferBase(10, 5), Color3iBufferBase(10, 5)}));
         const auto &buffer = std::get<0>(testData);
 
@@ -78,7 +78,7 @@ TEST_CASE("BufferBase::assignment") {
     }
 
     SECTION("should assign from non-const") {
-        const auto &testData = GENERATE(table<BufferVariant>(
+        const auto &testData = GENERATE(table<BufferBaseVariant>(
             {FloatBufferBase(10, 5), IntBufferBase(10, 5), Color3fBufferBase(10, 5), Color3iBufferBase(10, 5)}));
         const auto &buffer = std::get<0>(testData);
 
@@ -188,7 +188,7 @@ TEST_CASE("BufferBase::getColor") {
 TEST_CASE("BufferBase::isColor") {
 
     SECTION("should return true for black buffers") {
-        const auto &testData = GENERATE(table<BufferVariant>(
+        const auto &testData = GENERATE(table<BufferBaseVariant>(
             {FloatBufferBase(10, 5), IntBufferBase(10, 5), Color3fBufferBase(10, 5), Color3iBufferBase(10, 5)}));
         const auto &buffer = std::get<0>(testData);
 
@@ -196,7 +196,7 @@ TEST_CASE("BufferBase::isColor") {
     }
 
     SECTION("should return false for buffer with one black pixel") {
-        const auto &testData = GENERATE(table<BufferVariant>(
+        const auto &testData = GENERATE(table<BufferBaseVariant>(
             {FloatBufferBase(10, 5), IntBufferBase(10, 5), Color3fBufferBase(10, 5), Color3iBufferBase(10, 5)}));
         const auto &buffer = std::get<0>(testData);
 
@@ -212,10 +212,11 @@ TEST_CASE("BufferBase::isColor") {
 TEST_CASE("BufferBase::describe") {
 
     SECTION("should describe BufferBase correctly") {
-        const auto &testData = GENERATE(table<BufferVariant, std::string>({{FloatBufferBase(10, 5), "1x f32"},
-                                                                           {IntBufferBase(10, 5), "1x uint8"},
-                                                                           {Color3fBufferBase(10, 5), "3x f32"},
-                                                                           {Color3iBufferBase(10, 5), "3x uint8"}}));
+        const auto &testData =
+            GENERATE(table<BufferBaseVariant, std::string>({{FloatBufferBase(10, 5), "1x f32"},
+                                                            {IntBufferBase(10, 5), "1x uint8"},
+                                                            {Color3fBufferBase(10, 5), "3x f32"},
+                                                            {Color3iBufferBase(10, 5), "3x uint8"}}));
         const auto &buffer = std::get<0>(testData);
         const auto &description = std::get<1>(testData);
 

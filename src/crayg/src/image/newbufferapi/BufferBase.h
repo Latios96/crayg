@@ -9,6 +9,8 @@
 #include <string>
 #include <variant>
 
+// todo what is better naming for all of this? PixelBuffer? RenderBuffer?
+
 namespace crayg {
 
 template <typename T, int channelCount> struct BufferBase {
@@ -110,6 +112,8 @@ template <typename T, int channelCount> struct BufferBase {
         T value[channelCount];
     };
 
+    // todo use an Array2d instead
+    // todo rename to color? pixel? pixelValue? find better name than "data"
     PixelValue *data = nullptr;
     int width = 0;
     int height = 0;
@@ -124,6 +128,6 @@ typedef BufferBase<float, 1> FloatBufferBase;
 typedef BufferBase<uint8_t, 1> IntBufferBase;
 typedef BufferBase<float, 3> Color3fBufferBase;
 typedef BufferBase<uint8_t, 3> Color3iBufferBase;
-typedef std::variant<FloatBufferBase, IntBufferBase, Color3fBufferBase, Color3iBufferBase> BufferVariant;
+typedef std::variant<FloatBufferBase, IntBufferBase, Color3fBufferBase, Color3iBufferBase> BufferBaseVariant;
 
 }
