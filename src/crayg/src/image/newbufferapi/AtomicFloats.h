@@ -16,12 +16,18 @@ template <typename FloatingPointType, typename StorageType> struct AtomicFloatin
         do {
             double old_val = BitCast::floatingFromBits<FloatingPointType, StorageType>(old_bits);
             double new_val = old_val + x;
+#ifdef CRAYG_DEBUG_BUILD
+            value = new_val;
+#endif
             new_bits = BitCast::floatingToBits<FloatingPointType, StorageType>(new_val);
         } while (!bits.compare_exchange_weak(old_bits, new_bits));
     }
 
   private:
     std::atomic<StorageType> bits;
+#ifdef CRAYG_DEBUG_BUILD
+    double value = 0;
+#endif
 };
 
 typedef AtomicFloatingPoint<float, uint32_t> AtomicFloat;

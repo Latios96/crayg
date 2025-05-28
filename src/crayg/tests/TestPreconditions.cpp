@@ -41,4 +41,31 @@ TEST_CASE("check array index", "[Preconditions]") {
     }
 }
 
+TEST_CASE("check nullptr", "[Preconditions]") {
+
+    SECTION("should pass") {
+        const auto ptr = std::make_unique<int>();
+        CRAYG_CHECK_NOT_NULLPTR(ptr.get());
+    }
+
+    SECTION("should fail for variable") {
+        int *ptr = nullptr;
+        try {
+            CRAYG_CHECK_NOT_NULLPTR(ptr);
+            REQUIRE(false);
+        } catch (std::exception &e) {
+            REQUIRE(true);
+        }
+    }
+
+    SECTION("should fail for nullptr passed directly") {
+        try {
+            CRAYG_CHECK_NOT_NULLPTR(nullptr);
+            REQUIRE(false);
+        } catch (std::exception &e) {
+            REQUIRE(true);
+        }
+    }
+}
+
 }
