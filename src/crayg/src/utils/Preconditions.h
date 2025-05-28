@@ -18,9 +18,9 @@
 #define CRAYG_CHECKD_IS_VALID_INDEX(index, size) CRAYG_CHECK_IS_VALID_INDEX_IMPL(index, size)
 #define CRAYG_CHECKD_NOT_NULLPTR(ptr) CRAYG_CHECK_NOT_NULLPTR_IMPL(ptr)
 #else
-#define CRAYG_CHECKD_IS_NORMALIZED_VECTOR(vector) EMPTY_CHECK
-#define CRAYG_CHECKD_IS_VALID_INDEX(index, size) EMPTY_CHECK
-#define CRAYG_CHECK_NOT_NULLPTR(index, size) EMPTY_CHECK
+#define CRAYG_CHECKD_IS_NORMALIZED_VECTOR(vector) CRAYG_EMPTY_CHECK
+#define CRAYG_CHECKD_IS_VALID_INDEX(index, size) CRAYG_EMPTY_CHECK
+#define CRAYG_CHECK_NOT_NULLPTR(index, size) CRAYG_EMPTY_CHECK
 #endif
 
 #define CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector)                                                                  \
@@ -37,6 +37,6 @@
         CRAYG_LOG_AND_THROW_MESSAGE(message)                                                                           \
     }
 
-#define EMPTY_CHECK                                                                                                    \
+#define CRAYG_EMPTY_CHECK                                                                                              \
     do {                                                                                                               \
     } while (false)
