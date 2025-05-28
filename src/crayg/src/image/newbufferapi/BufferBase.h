@@ -18,14 +18,17 @@ template <typename T, int channelCount> struct BufferBase {
 
     BufferBase(int width, int height) : width(width), height(height) {
         data = new PixelValue[pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(data);
     }
 
     explicit BufferBase(const Resolution &resolution) : width(resolution.getWidth()), height(resolution.getHeight()) {
         data = new PixelValue[pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(data);
     }
 
     BufferBase(const BufferBase &other) : width(other.width), height(other.height) {
         data = new PixelValue[pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(data);
         memcpy(data, other.data, pixelCount() * sizeof(PixelValue));
     }
 

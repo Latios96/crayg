@@ -12,18 +12,24 @@ template <typename T, int channelCount> struct AccumulationBuffer : public Buffe
 
     AccumulationBuffer(int width, int height) : BufferBase<T, channelCount>(width, height) {
         sum = new SumType[BufferBase<T, channelCount>::pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(sum);
         weight = new AtomicDouble[BufferBase<T, channelCount>::pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(weight);
     }
 
     explicit AccumulationBuffer(const Resolution &resolution) : BufferBase<T, channelCount>(resolution) {
         sum = new SumType[BufferBase<T, channelCount>::pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(sum);
         weight = new AtomicDouble[BufferBase<T, channelCount>::pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(weight);
     }
 
     AccumulationBuffer(const AccumulationBuffer &other) : BufferBase<T, channelCount>(other) {
         sum = new SumType[BufferBase<T, channelCount>::pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(sum);
         memcpy(other.sum, sum, BufferBase<T, channelCount>::pixelCount() * sizeof(SumType));
         weight = new AtomicDouble[BufferBase<T, channelCount>::pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(weight);
         memcpy(other.weight, weight, BufferBase<T, channelCount>::pixelCount() * sizeof(AtomicDouble));
     }
 
@@ -33,8 +39,10 @@ template <typename T, int channelCount> struct AccumulationBuffer : public Buffe
         }
         BufferBase<T, channelCount>::operator=(other);
         sum = new SumType[BufferBase<T, channelCount>::pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(sum);
         memcpy(other.sum, sum, BufferBase<T, channelCount>::pixelCount() * sizeof(SumType));
         weight = new AtomicDouble[BufferBase<T, channelCount>::pixelCount()]();
+        CRAYG_CHECK_NOT_NULLPTR(weight);
         memcpy(other.weight, weight, BufferBase<T, channelCount>::pixelCount() * sizeof(AtomicDouble));
         return *this;
     }
