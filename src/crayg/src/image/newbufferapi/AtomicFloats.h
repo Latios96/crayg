@@ -5,6 +5,7 @@
 namespace crayg {
 
 template <typename FloatingPointType, typename StorageType> struct AtomicFloatingPoint {
+    AtomicFloatingPoint() = default;
 
     FloatingPointType get() const {
         return BitCast::floatingFromBits<FloatingPointType, StorageType>(bits);
@@ -24,7 +25,7 @@ template <typename FloatingPointType, typename StorageType> struct AtomicFloatin
     }
 
   private:
-    std::atomic<StorageType> bits;
+    std::atomic<StorageType> bits = 0;
 #ifdef CRAYG_DEBUG_BUILD
     double value = 0;
 #endif
