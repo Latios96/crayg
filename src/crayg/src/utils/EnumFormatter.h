@@ -3,10 +3,10 @@
 #include <magic_enum.hpp>
 
 #define CRAYG_FMT_ENUM_FORMATTER(FullQualifiedType)                                                                    \
-    template <> struct fmt::formatter<FullQualifiedType> {                                                             \
-        template <typename ParseContext> constexpr auto parse(ParseContext &ctx) { return ctx.begin(); }               \
+    template <> struct fmt::formatter<FullQualifiedType> : formatter<string_view> {                                    \
                                                                                                                        \
-        template <typename FormatContext> auto format(FullQualifiedType const &integratorType, FormatContext &ctx) {   \
-            return fmt::format_to(ctx.out(), magic_enum::enum_name(integratorType));                                   \
-        };                                                                                                             \
-    }
+        auto format(const FullQualifiedType &enumValue, format_context &ctx) const -> format_context::iterator {       \
+            const std::string_view name = magic_enum::enum_name(enumValue);                                            \
+            return formatter<string_view>::format(name, ctx);                                                          \
+        }                                                                                                              \
+    };
