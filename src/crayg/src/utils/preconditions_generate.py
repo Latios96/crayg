@@ -97,7 +97,7 @@ if __name__ == "__main__":
         Check(
             name="HAS_NO_NAN",
             args=["value"],
-            condition="(!value.isNan())",
+            condition="(!value.hasNaN())",
             message='fmt::format("{} should not have NaN!", #value)',
         ),
         Check(

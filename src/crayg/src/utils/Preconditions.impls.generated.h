@@ -12,7 +12,7 @@
 #define CRAYG_CHECK_WITHIN_RANGE_EXCLUSIVE_IMPL(actual, min, max) CRAYG_CHECK_OR_THROW((actual > min && actual < max), fmt::format("Expected {} to be in interval ]{},{}[, was {}!", #actual, min, max, actual))
 #define CRAYG_CHECK_NOT_WITHIN_RANGE_EXCLUSIVE_IMPL(actual, min, max) CRAYG_CHECK_OR_THROW((actual <= min || actual >= max), fmt::format("Expected {} not to be in interval ]{},{}[, was {}!", #actual, min, max, actual))
 #define CRAYG_CHECK_IS_NOT_NAN_IMPL(value) CRAYG_CHECK_OR_THROW((!std::isnan(value)), fmt::format("{} should not be NaN!", #value))
-#define CRAYG_CHECK_HAS_NO_NAN_IMPL(value) CRAYG_CHECK_OR_THROW((!value.isNan()), fmt::format("{} should not have NaN!", #value))
+#define CRAYG_CHECK_HAS_NO_NAN_IMPL(value) CRAYG_CHECK_OR_THROW((!value.hasNaN()), fmt::format("{} should not have NaN!", #value))
 #define CRAYG_CHECK_STATE_IMPL(actualState, expectedState) CRAYG_CHECK_OR_THROW((actualState == expectedState), fmt::format("Expected {} to have state {}, was {}!", #actualState, actualState, expectedState))
 #define CRAYG_CHECK_OPTIONAL_HAS_VALUE_IMPL(optional) CRAYG_CHECK_OR_THROW((optional.has_value()), fmt::format("{} has no value!", #optional))
 #define CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector) CRAYG_CHECK_OR_THROW((std::fabs((vector).length() - 1) < 0.001f), fmt::format("{} is not unit vector!: {}", #vector, vector))

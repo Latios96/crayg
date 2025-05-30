@@ -63,7 +63,7 @@ void AdaptiveBucketSampler::samplePixel(const Vector2<int> &samplePos, Color &fu
 }
 
 float AdaptiveBucketSampler::evaluateErrorMetric(const Color &fullySampled, const Color &halfSampled) const {
-    if (fullySampled.isNan() || halfSampled.isNan()) {
+    if (fullySampled.hasNaN() || halfSampled.hasNaN()) {
         return 0;
     }
     if (fullySampled.isBlack()) {

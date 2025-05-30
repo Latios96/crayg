@@ -276,7 +276,7 @@ TEST_CASE("AccumulationBuffer::updateAverages") {
 
         buffer.updateAverages();
 
-        REQUIRE_FALSE(buffer.getColor({0, 0}).isNan());
+        REQUIRE_FALSE(buffer.getColor({0, 0}).hasNaN());
     }
 
     SECTION("should update average values correctly for FloatAccumulationBuffer") {

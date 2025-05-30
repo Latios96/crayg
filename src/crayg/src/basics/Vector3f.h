@@ -145,7 +145,7 @@ class Vector3f {
         return {y, z};
     }
 
-    bool isNan() const {
+    bool hasNaN() const {
         return std::isnan(x) || std::isnan(y) || std::isnan(z);
     }
 

@@ -184,7 +184,7 @@ class Color {
         return r == 0 && g == 0 && b == 0;
     }
 
-    bool isNan() const {
+    bool hasNaN() const {
         return std::isnan(r) || std::isnan(g) || std::isnan(b);
     }
 
