@@ -390,6 +390,7 @@ set(crayg_SRCS
     sceneIO/write/usd/UsdSceneWriter.h
     utils/CraygMain.h
     utils/DtoUtils.h
+    utils/EnumFormatter.h
     utils/EnumParser.h
     utils/Exceptions.cpp
     utils/Exceptions.h

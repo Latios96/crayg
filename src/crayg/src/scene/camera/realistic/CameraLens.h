@@ -75,6 +75,7 @@ struct CameraLens {
     bool exceedsAperture(const LensSurface &surface, const Ray &ray) const;
     bool exceedsAperture(const Vector3f &intersectionPosition, float apertureRadius) const;
 
+  public:
     int apertureIndex = -1;
     float apertureRadius;
     float surfacesOffset = 0;

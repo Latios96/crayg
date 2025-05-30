@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scene/shadingnetworks/ShadingNode.h"
+#include "utils/EnumFormatter.h"
 
 namespace crayg {
 

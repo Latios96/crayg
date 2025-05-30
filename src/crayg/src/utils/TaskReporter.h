@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Logger.h"
-#include "utils/EnumParser.h"
+#include "utils/EnumFormatter.h"
 #include <chrono>
 #include <fmt/chrono.h>
 #include <optional>
