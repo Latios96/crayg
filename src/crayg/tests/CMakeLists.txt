@@ -1,5 +1,6 @@
 set(UNIT_TEST_SOURCE_LIST
     # cmake-format: sortable
+    containers/TestArray2d.cpp
     fixtures/CameraLensFixtures.cpp
     fixtures/CameraLensFixtures.h
     fixtures/PointInstancerFixtures.cpp

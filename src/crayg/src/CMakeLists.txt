@@ -5,6 +5,7 @@ set(crayg_SRCS
     basics/BoundingBox.h
     basics/Color.cpp
     basics/Color.h
+    basics/containers/Array2d.h
     basics/Gradient.h
     basics/MathUtils.cpp
     basics/MathUtils.h
