@@ -19,19 +19,12 @@
         bool operator==(const Name &rhs) const { return FirstName == rhs.FirstName && SecondName == rhs.SecondName; }  \
         bool operator!=(const Name &rhs) const { return !(rhs == *this); }                                             \
         friend std::ostream &operator<<(std::ostream &os, const Name &dto) {                                           \
-            os << fmt::format("{}", dto);                                                                              \
+            os << fmt::format("{}{{{}={},{}={}}}", #Name, #FirstName, dto.FirstName, #SecondName, dto.SecondName);     \
             return os;                                                                                                 \
         }                                                                                                              \
     };                                                                                                                 \
     } /*namespace*/                                                                                                    \
-    template <> struct fmt::formatter<crayg::Name> {                                                                   \
-        template <typename ParseContext> constexpr auto parse(ParseContext &ctx) { return ctx.begin(); }               \
-                                                                                                                       \
-        template <typename FormatContext> auto format(crayg::Name const &dto, FormatContext &ctx) const {              \
-            return fmt::format_to(ctx.out(), "{}{{{}={},{}={}}}", #Name, #FirstName, dto.FirstName, #SecondName,       \
-                                  dto.SecondName);                                                                     \
-        };                                                                                                             \
-    };                                                                                                                 \
+    template <> struct fmt::formatter<crayg::Name> : ostream_formatter {};                                             \
     namespace crayg {
 
 #define CRAYG_DTO_3(Name, FirstType, FirstName, SecondType, SecondName, ThirdType, ThirdName)                          \
@@ -52,17 +45,11 @@
         }                                                                                                              \
         bool operator!=(const Name &rhs) const { return !(rhs == *this); }                                             \
         friend std::ostream &operator<<(std::ostream &os, const Name &dto) {                                           \
-            os << fmt::format("{}", dto);                                                                              \
+            os << fmt::format("{}{{{}={},{}={},{}={}}}", #Name, #FirstName, dto.FirstName, #SecondName,                \
+                              dto.SecondName, #ThirdName, dto.ThirdName);                                              \
             return os;                                                                                                 \
         }                                                                                                              \
     };                                                                                                                 \
     } /*namespace*/                                                                                                    \
-    template <> struct fmt::formatter<crayg::Name> {                                                                   \
-        template <typename ParseContext> constexpr auto parse(ParseContext &ctx) { return ctx.begin(); }               \
-                                                                                                                       \
-        template <typename FormatContext> auto format(crayg::Name const &dto, FormatContext &ctx) const {              \
-            return fmt::format_to(ctx.out(), "{}{{{}={},{}={},{}={}}}", #Name, #FirstName, dto.FirstName, #SecondName, \
-                                  dto.SecondName, #ThirdName, dto.ThirdName);                                          \
-        };                                                                                                             \
-    };                                                                                                                 \
+    template <> struct fmt::formatter<crayg::Name> : ostream_formatter {};                                             \
     namespace crayg {
