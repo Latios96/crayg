@@ -1,4 +1,6 @@
 #include "UsdPrimVarReaderReaders.h"
+#include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
+#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/sdf/types.h>
 
 namespace crayg {
@@ -36,7 +38,7 @@ void UsdPrimVarReaderVector2fReader::readPrimVarReaderTypeFromUsd(
     if (!varname) {
         primVarReader->primVarReaderType = PrimVarReaderType::UNKNOWN;
         Logger::warning("PrimVarReader {} has no varname {} specified, falling back to PrimVarReaderType::UNKNOWN",
-                        usdPrim.GetPath());
+                        usdPrim.GetPath(), *varname);
         return;
     }
 

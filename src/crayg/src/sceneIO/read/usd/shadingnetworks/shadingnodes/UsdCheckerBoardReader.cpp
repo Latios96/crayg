@@ -1,4 +1,5 @@
 #include "UsdCheckerBoardReader.h"
+#include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
 
 namespace crayg {
 UsdCheckerBoardReader::UsdCheckerBoardReader(const pxr::UsdShadeShader &usdPrim,

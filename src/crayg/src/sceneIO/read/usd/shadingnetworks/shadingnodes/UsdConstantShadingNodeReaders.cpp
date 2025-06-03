@@ -1,4 +1,5 @@
 #include "UsdConstantShadingNodeReaders.h"
+#include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
 
 namespace crayg {
 

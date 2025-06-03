@@ -1,4 +1,5 @@
 #include "UsdFileTextureReader.h"
+#include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
 #include <filesystem>
 
 namespace crayg {

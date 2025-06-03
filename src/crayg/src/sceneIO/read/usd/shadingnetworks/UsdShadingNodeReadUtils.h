@@ -1,13 +1,12 @@
 #pragma once
 
+#include "sceneIO/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usdShade/shader.h>
 #include <string>
 
 namespace crayg {
-
-class UsdShadingNodeReadCache;
 
 class UsdShadingNodeReadUtils {
   public:
