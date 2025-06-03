@@ -77,11 +77,6 @@ class TaskReporter : public BaseTaskReporter {
     void onTaskProgressUpdated() override;
 };
 
-inline std::ostream &operator<<(std::ostream &os, const BaseTaskReporter::IterationStatus &v) {
-    os << fmt::format("{}", v);
-    return os;
-}
-
 }
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::BaseTaskReporter::IterationStatus);
