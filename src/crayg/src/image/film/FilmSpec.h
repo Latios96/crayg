@@ -26,6 +26,11 @@ struct FilmBufferSpec {
     bool operator!=(const FilmBufferSpec &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const FilmBufferSpec &spec);
 };
+}
+
+template <> struct fmt::formatter<crayg::FilmBufferSpec> : ostream_formatter {};
+
+namespace crayg {
 
 CRAYG_DTO_3(FilmSpec, Resolution, resolution, std::vector<FilmBufferSpec>, channels, std::optional<Bounds2di>,
             regionToRender);
@@ -43,5 +48,3 @@ class FilmSpecBuilder {
 };
 
 }
-
-template <> struct fmt::formatter<crayg::FilmBufferSpec> : ostream_formatter {};
