@@ -115,7 +115,7 @@ TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
 
         REQUIRE(onlyUseSpectralLensing.reportOverrides() == R"(useSpectralLensing -> true)");
 
-        REQUIRE(onlyIntegratorSettingsOverrides.reportOverrides() == R"(test -> 1)");
+        REQUIRE(onlyIntegratorSettingsOverrides.reportOverrides() == R"(test -> variant(1))");
     }
 
     SECTION("has no overrides") {
