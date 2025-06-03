@@ -1,4 +1,5 @@
 #pragma once
+#include <cstring>
 
 namespace crayg {
 
@@ -8,7 +9,7 @@ struct BitCast {
         static_assert(sizeof(FloatingPointType) == sizeof(StorageType));
 
         StorageType bitStorage;
-        memcpy(&bitStorage, &f, sizeof(FloatingPointType));
+        std::memcpy(&bitStorage, &f, sizeof(FloatingPointType));
         return bitStorage;
     }
 
@@ -17,7 +18,7 @@ struct BitCast {
         static_assert(sizeof(FloatingPointType) == sizeof(StorageType));
 
         FloatingPointType f;
-        memcpy(&f, &bits, sizeof(StorageType));
+        std::memcpy(&f, &bits, sizeof(StorageType));
         return f;
     }
 };
