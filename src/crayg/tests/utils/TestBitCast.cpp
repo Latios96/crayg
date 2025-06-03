@@ -1,5 +1,5 @@
+#include "utils/BitCast.h"
 #include <catch2/catch.hpp>
-#include <image/newbufferapi/BitCast.h>
 
 namespace crayg {
 

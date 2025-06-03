@@ -1,12 +1,12 @@
 #pragma once
 
 #include "FilmSpec.h"
-#include "film/buffers/AccumulationBuffer.h"
-#include "film/buffers/BufferBase.h"
-#include "film/buffers/BufferVariantConversion.h"
-#include "film/buffers/FilmBufferFactory.h"
-#include "film/buffers/FilmBufferVariants.h"
-#include "film/buffers/ValueBuffer.h"
+#include "buffers/AccumulationBuffer.h"
+#include "buffers/BufferBase.h"
+#include "buffers/BufferVariantConversion.h"
+#include "buffers/FilmBufferFactory.h"
+#include "buffers/FilmBufferVariants.h"
+#include "buffers/ValueBuffer.h"
 #include <optional>
 #include <tsl/ordered_map.h>
 

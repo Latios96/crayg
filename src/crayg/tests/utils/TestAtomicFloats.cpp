@@ -1,5 +1,5 @@
+#include "utils/AtomicFloats.h"
 #include <catch2/catch.hpp>
-#include <image/newbufferapi/AtomicFloats.h>
 #include <tbb/parallel_for.h>
 
 namespace crayg {

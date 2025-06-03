@@ -3,7 +3,7 @@
 #include "basics/Color.h"
 #include "basics/Vector2.h"
 #include "image/ImageBucket.h"
-#include "image/newbufferapi/AtomicFloats.h"
+#include "utils/AtomicFloats.h"
 #include "utils/Exceptions.h"
 #include "utils/Preconditions.h"
 

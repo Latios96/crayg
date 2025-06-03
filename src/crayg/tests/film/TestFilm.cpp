@@ -1,4 +1,4 @@
-#include "image/newbufferapi/Film.h"
+#include "image/film/Film.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

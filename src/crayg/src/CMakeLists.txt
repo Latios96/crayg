@@ -32,6 +32,21 @@ set(crayg_SRCS
     image/BucketImageBuffer.h
     image/ColorConversion.cpp
     image/ColorConversion.h
+    image/film/buffers/AccumulationBuffer.h
+    image/film/buffers/BufferBase.h
+    image/film/buffers/BufferVariantConversion.cpp
+    image/film/buffers/BufferVariantConversion.h
+    image/film/buffers/FilmBufferFactory.cpp
+    image/film/buffers/FilmBufferFactory.h
+    image/film/buffers/FilmBufferType.h
+    image/film/buffers/FilmBufferVariants.h
+    image/film/buffers/FilmPixelDepth.h
+    image/film/buffers/ValueBuffer.h
+    image/film/buffers/ValueTrait.h
+    image/film/Film.cpp
+    image/film/Film.h
+    image/film/FilmSpec.cpp
+    image/film/FilmSpec.h
     image/Image.cpp
     image/Image.h
     image/ImageAlgorithms.cpp

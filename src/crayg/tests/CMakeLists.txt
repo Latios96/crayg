@@ -1,6 +1,13 @@
 set(UNIT_TEST_SOURCE_LIST
     # cmake-format: sortable
     containers/TestArray2d.cpp
+    film/buffers/TestAccumulationBuffer.cpp
+    film/buffers/TestBufferBase.cpp
+    film/buffers/TestBufferVariantConversion.cpp
+    film/buffers/TestFilmBufferFactory.cpp
+    film/buffers/TestValueBuffer.cpp
+    film/buffers/TestValueTrait.cpp
+    film/TestFilm.cpp
     fixtures/CameraLensFixtures.cpp
     fixtures/CameraLensFixtures.h
     fixtures/PointInstancerFixtures.cpp
@@ -16,15 +23,6 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/UnitPlaneUvs.h
     fixtures/UsdGeomMeshFixtures.cpp
     fixtures/UsdGeomMeshFixtures.h
-    newbufferapi/TestAccumulationBuffer.cpp
-    newbufferapi/TestAtomicFloats.cpp
-    newbufferapi/TestBitCast.cpp
-    newbufferapi/TestBufferBase.cpp
-    newbufferapi/TestBufferVariantConversion.cpp
-    newbufferapi/TestFilm.cpp
-    newbufferapi/TestFilmBufferFactory.cpp
-    newbufferapi/TestValueBuffer.cpp
-    newbufferapi/TestValueTrait.cpp
     TestAdaptiveBucketSampler.cpp
     TestAreaLight.cpp
     TestBarycentricCoordinates.cpp
@@ -177,7 +175,9 @@ set(UNIT_TEST_SOURCE_LIST
     TestVariableLensDistances.cpp
     TestVector2.cpp
     TestVector3f.cpp
-    TestZMXFileFormatReader.cpp)
+    TestZMXFileFormatReader.cpp
+    utils/TestAtomicFloats.cpp
+    utils/TestBitCast.cpp)
 
 set(TARGET_NAME crayg-unit-tests)
 

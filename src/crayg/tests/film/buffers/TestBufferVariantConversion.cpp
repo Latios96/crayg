@@ -1,4 +1,4 @@
-#include "image/newbufferapi/film/buffers/BufferVariantConversion.h"
+#include "image/film/buffers/BufferVariantConversion.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

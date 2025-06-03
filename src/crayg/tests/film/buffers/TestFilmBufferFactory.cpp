@@ -1,4 +1,4 @@
-#include "image/newbufferapi/film/buffers/FilmBufferFactory.h"
+#include "image/film/buffers/FilmBufferFactory.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

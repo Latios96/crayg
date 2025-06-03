@@ -2,8 +2,8 @@
 
 #include "basics/Bound2d.h"
 #include "basics/Resolution.h"
-#include "film/buffers/FilmBufferType.h"
-#include "film/buffers/FilmPixelDepth.h"
+#include "buffers/FilmBufferType.h"
+#include "buffers/FilmPixelDepth.h"
 #include "scene/RegionToRender.h"
 #include "utils/DtoUtils.h"
 #include <fmt/ranges.h>

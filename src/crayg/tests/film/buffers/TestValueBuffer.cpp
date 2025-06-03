@@ -1,5 +1,5 @@
 #include "basics/Resolution.h"
-#include "image/newbufferapi/film/buffers/ValueBuffer.h"
+#include "image/film/buffers/ValueBuffer.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
