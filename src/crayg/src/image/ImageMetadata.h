@@ -3,6 +3,7 @@
 #include <chrono>
 #include <fmt/chrono.h>
 #include <fmt/format.h>
+#include <fmt/std.h>
 #include <ostream>
 #include <string>
 #include <unordered_map>
@@ -101,14 +102,3 @@ class ImageMetadata {
 };
 
 } // crayg
-
-template <> struct fmt::formatter<crayg::ImageMetadataValue> {
-    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(crayg::ImageMetadataValue const &imageMetadataValue, FormatContext &ctx) {
-        return std::visit([&ctx](auto &value) { return fmt::format_to(ctx.out(), "{}", value); }, imageMetadataValue);
-    };
-};
