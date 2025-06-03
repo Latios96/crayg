@@ -1,6 +1,7 @@
 #include "Logger.h"
 #include "utils/DtoUtils.h"
 #include <catch2/catch.hpp>
+#include <fmt/ranges.h>
 #include <sstream>
 #include <string>
 
