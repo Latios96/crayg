@@ -1,6 +1,7 @@
 #include "RenderSettings.h"
 #include <fmt/std.h>
 #include <regex>
+#include <utils/Exceptions.h>
 #include <utils/ToStringHelper.h>
 
 namespace crayg {
