@@ -67,10 +67,6 @@ struct LensMaterial {
     }
 };
 
-inline std::ostream &operator<<(std::ostream &os, const crayg::LensMaterialId &v) {
-    os << fmt::format("{}", v);
-    return os;
-}
 }
 
 template <> struct fmt::formatter<crayg::LensMaterial> : ostream_formatter {};
