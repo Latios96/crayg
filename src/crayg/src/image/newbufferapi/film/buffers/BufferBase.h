@@ -3,6 +3,7 @@
 #include "basics/Color.h"
 #include "basics/Resolution.h"
 #include "basics/Vector2.h"
+#include "utils/Exceptions.h"
 #include "utils/Preconditions.h"
 
 #include <fmt/format.h>

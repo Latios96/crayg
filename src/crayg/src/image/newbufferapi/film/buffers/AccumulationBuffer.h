@@ -1,9 +1,10 @@
 #pragma once
-#include "AtomicFloats.h"
 #include "BufferBase.h"
 #include "basics/Color.h"
 #include "basics/Vector2.h"
 #include "image/ImageBucket.h"
+#include "image/newbufferapi/AtomicFloats.h"
+#include "utils/Exceptions.h"
 #include "utils/Preconditions.h"
 
 namespace crayg {
@@ -142,6 +143,11 @@ template <typename T, int channelCount> struct AccumulationBuffer : public Buffe
 
 typedef AccumulationBuffer<float, 1> FloatAccumulationBuffer;
 typedef AccumulationBuffer<float, 3> Color3fAccumulationBuffer;
-typedef std::variant<FloatAccumulationBuffer, Color3fAccumulationBuffer> AccumulationBufferVariant;
+
+#define EnumerateAllAccumulationBuffers FloatAccumulationBuffer, Color3fAccumulationBuffer
+#define EnumerateAllAccumulationBufferPtrs FloatAccumulationBuffer *, Color3fAccumulationBuffer *
+
+typedef std::variant<EnumerateAllAccumulationBuffers> AccumulationBufferVariant;
+typedef std::variant<EnumerateAllAccumulationBufferPtrs> AccumulationBufferVariantPtr;
 
 }

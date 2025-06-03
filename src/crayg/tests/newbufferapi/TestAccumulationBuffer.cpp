@@ -1,4 +1,4 @@
-#include "image/newbufferapi/AccumulationBuffer.h"
+#include "image/newbufferapi/film/buffers/AccumulationBuffer.h"
 
 #include <catch2/catch.hpp>
 

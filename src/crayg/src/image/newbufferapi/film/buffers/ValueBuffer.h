@@ -37,6 +37,11 @@ typedef ValueBuffer<float, 1> FloatValueBuffer;
 typedef ValueBuffer<uint8_t, 1> IntValueBuffer;
 typedef ValueBuffer<float, 3> Color3fValueBuffer;
 typedef ValueBuffer<uint8_t, 3> Color3iValueBuffer;
-typedef std::variant<FloatValueBuffer, IntValueBuffer, Color3fValueBuffer, Color3iValueBuffer> ValueBufferVariant;
+
+#define EnumerateAllValueBuffers FloatValueBuffer, IntValueBuffer, Color3fValueBuffer, Color3iValueBuffer
+#define EnumerateAllValueBufferPtrs FloatValueBuffer *, IntValueBuffer *, Color3fValueBuffer *, Color3iValueBuffer *
+
+typedef std::variant<EnumerateAllValueBuffers> ValueBufferVariant;
+typedef std::variant<EnumerateAllValueBufferPtrs> ValueBufferVariantPtr;
 
 }

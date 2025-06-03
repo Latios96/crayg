@@ -20,6 +20,9 @@ set(UNIT_TEST_SOURCE_LIST
     newbufferapi/TestAtomicFloats.cpp
     newbufferapi/TestBitCast.cpp
     newbufferapi/TestBufferBase.cpp
+    newbufferapi/TestBufferVariantConversion.cpp
+    newbufferapi/TestFilm.cpp
+    newbufferapi/TestFilmBufferFactory.cpp
     newbufferapi/TestValueBuffer.cpp
     newbufferapi/TestValueTrait.cpp
     TestAdaptiveBucketSampler.cpp
