@@ -1,6 +1,5 @@
 #pragma once
 
-#include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <memory>

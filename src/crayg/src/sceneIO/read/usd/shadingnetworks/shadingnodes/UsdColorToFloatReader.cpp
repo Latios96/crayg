@@ -1,4 +1,5 @@
 #include "UsdColorToFloatReader.h"
+#include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
 
 namespace crayg {
 UsdColorToFloatReader::UsdColorToFloatReader(const pxr::UsdShadeShader &usdPrim,
