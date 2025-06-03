@@ -87,23 +87,6 @@ set(crayg_SRCS
     image/io/OpenImageIoImageWriter.h
     image/io/PngWriter.cpp
     image/io/PngWriter.h
-    image/newbufferapi/AtomicFloats.h
-    image/newbufferapi/BitCast.h
-    image/newbufferapi/Film.cpp
-    image/newbufferapi/Film.h
-    image/newbufferapi/film/buffers/AccumulationBuffer.h
-    image/newbufferapi/film/buffers/BufferBase.h
-    image/newbufferapi/film/buffers/BufferVariantConversion.cpp
-    image/newbufferapi/film/buffers/BufferVariantConversion.h
-    image/newbufferapi/film/buffers/FilmBufferFactory.cpp
-    image/newbufferapi/film/buffers/FilmBufferFactory.h
-    image/newbufferapi/film/buffers/FilmBufferType.h
-    image/newbufferapi/film/buffers/FilmBufferVariants.h
-    image/newbufferapi/film/buffers/FilmPixelDepth.h
-    image/newbufferapi/film/buffers/ValueBuffer.h
-    image/newbufferapi/film/buffers/ValueTrait.h
-    image/newbufferapi/FilmSpec.cpp
-    image/newbufferapi/FilmSpec.h
     image/PixelBuffer.cpp
     image/PixelBuffer.h
     image/PixelFormat.h
@@ -415,6 +398,8 @@ set(crayg_SRCS
     sceneIO/write/usd/UsdRenderSettingsWriter.h
     sceneIO/write/usd/UsdSceneWriter.cpp
     sceneIO/write/usd/UsdSceneWriter.h
+    utils/AtomicFloats.h
+    utils/BitCast.h
     utils/CraygMain.h
     utils/DtoUtils.h
     utils/EnumFormatter.h
