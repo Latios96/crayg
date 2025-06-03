@@ -1,5 +1,6 @@
 #include "LensMaterial.h"
 #include "Logger.h"
+#include "utils/Exceptions.h"
 #include "utils/ToStringHelper.h"
 #include <pystring.h>
 
