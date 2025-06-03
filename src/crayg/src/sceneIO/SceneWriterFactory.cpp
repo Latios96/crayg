@@ -1,4 +1,5 @@
 #include "SceneWriterFactory.h"
+#include "Logger.h"
 #include "sceneIO/write/usd/UsdSceneWriter.h"
 #include "utils/Exceptions.h"
 #include <filesystem>
