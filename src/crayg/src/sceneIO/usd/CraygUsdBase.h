@@ -11,7 +11,7 @@ template <> struct fmt::formatter<pxr::TfToken> {
     }
 
     template <typename FormatContext> auto format(pxr::TfToken const &tfToken, FormatContext &ctx) {
-        return fmt::format_to(ctx.out(), tfToken.GetString());
+        return fmt::format_to(ctx.out(), "{}", tfToken.GetString());
     };
 };
 
@@ -21,7 +21,7 @@ template <> struct fmt::formatter<pxr::SdfPath> {
     }
 
     template <typename FormatContext> auto format(pxr::SdfPath const &sdfPath, FormatContext &ctx) {
-        return fmt::format_to(ctx.out(), sdfPath.GetString());
+        return fmt::format_to(ctx.out(), "{}", sdfPath.GetString());
     };
 };
 
@@ -31,7 +31,7 @@ template <> struct fmt::formatter<pxr::SdfValueTypeName> {
     }
 
     template <typename FormatContext> auto format(pxr::SdfValueTypeName const &sdfValueTypeName, FormatContext &ctx) {
-        return fmt::format_to(ctx.out(), sdfValueTypeName.GetAsToken().GetString());
+        return fmt::format_to(ctx.out(), "{}", sdfValueTypeName.GetAsToken().GetString());
     };
 };
 
