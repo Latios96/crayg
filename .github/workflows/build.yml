@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ "windows-2019", "ubuntu-22.04"]
+        os: [ "windows-2022", "ubuntu-22.04"]
         use_unity_build: ${{ github.event_name == 'schedule' && fromJSON('["True", "False"]') || fromJSON('["True"]') }}
         build_type: ${{ github.event_name == 'schedule' && fromJSON('["RelWithDebInfo ", "Debug"]') || fromJSON('["RelWithDebInfo"]') }}
         with_tracing: ${{ github.event_name == 'schedule' && fromJSON('["True"]') || fromJSON('["False"]') }}
