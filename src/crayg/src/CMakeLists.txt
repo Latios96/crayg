@@ -434,7 +434,8 @@ set(crayg_SRCS
     utils/ToStringHelper.h
     utils/tracing/CraygTracing.h
     utils/utils.cpp
-    utils/utils.h)
+    utils/utils.h
+    utils/ValueMapper.h)
 
 add_library(crayg STATIC ${crayg_SRCS})
 
