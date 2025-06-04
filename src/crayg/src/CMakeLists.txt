@@ -41,7 +41,7 @@ set(crayg_SRCS
     image/film/buffers/FilmBufferVariants.h
     image/film/buffers/FilmPixelDepth.h
     image/film/buffers/FilmValueBuffer.h
-    image/film/buffers/ValueTrait.h
+    image/film/buffers/FilmValueTrait.h
     image/film/Film.cpp
     image/film/Film.h
     image/film/FilmSpec.cpp

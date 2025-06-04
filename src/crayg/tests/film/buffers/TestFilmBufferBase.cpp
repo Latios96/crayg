@@ -1,6 +1,6 @@
 #include "basics/Resolution.h"
 #include "image/film/buffers/FilmBufferBase.h"
-#include "image/film/buffers/ValueTrait.h"
+#include "image/film/buffers/FilmValueTrait.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

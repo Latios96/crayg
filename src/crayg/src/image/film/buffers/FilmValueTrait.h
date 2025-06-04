@@ -7,12 +7,12 @@
 
 namespace crayg {
 
-template <typename T> struct ValueTrait {
+template <typename T> struct FilmValueTrait {
     static float toFloat(const T &value);
     static T fromFloat(const float &value);
 };
 
-template <> struct ValueTrait<float> {
+template <> struct FilmValueTrait<float> {
     static float toFloat(const float &value) {
         return value;
     }
@@ -25,7 +25,7 @@ template <> struct ValueTrait<float> {
     static constexpr FilmPixelDepth pixelDepth = FilmPixelDepth::FLOAT32;
 };
 
-template <> struct ValueTrait<uint8_t> {
+template <> struct FilmValueTrait<uint8_t> {
     static float toFloat(const uint8_t &value) {
         return static_cast<float>(value) / 255.f;
     }

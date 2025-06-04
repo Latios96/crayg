@@ -1,6 +1,6 @@
 #pragma once
 #include "FilmBufferBase.h"
-#include "ValueTrait.h"
+#include "FilmValueTrait.h"
 #include "basics/Color.h"
 #include "basics/Vector2.h"
 #include "utils/Preconditions.h"
@@ -20,7 +20,7 @@ template <typename T, int channelCount> struct FilmValueBuffer : public FilmBuff
         CRAYG_CHECKD_IS_VALID_INDEX((FilmBufferBase<T, channelCount>::index(pixelPosition)),
                                     (FilmBufferBase<T, channelCount>::pixelCount()));
         const int index = FilmBufferBase<T, channelCount>::index(pixelPosition);
-        FilmBufferBase<T, channelCount>::data[index].value[0] = ValueTrait<T>::fromFloat(value);
+        FilmBufferBase<T, channelCount>::data[index].value[0] = FilmValueTrait<T>::fromFloat(value);
     }
 
     void write(const Vector2i &pixelPosition, const Color &value) {
@@ -28,7 +28,7 @@ template <typename T, int channelCount> struct FilmValueBuffer : public FilmBuff
                                     (FilmBufferBase<T, channelCount>::pixelCount()));
         for (int i = 0; i < channelCount; i++) {
             const int index = FilmBufferBase<T, channelCount>::index(pixelPosition);
-            FilmBufferBase<T, channelCount>::data[index].value[i] = ValueTrait<T>::fromFloat(value.data()[i]);
+            FilmBufferBase<T, channelCount>::data[index].value[i] = FilmValueTrait<T>::fromFloat(value.data()[i]);
         }
     }
 };

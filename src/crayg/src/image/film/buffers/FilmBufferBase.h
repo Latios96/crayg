@@ -1,5 +1,5 @@
 #pragma once
-#include "ValueTrait.h"
+#include "FilmValueTrait.h"
 #include "basics/Color.h"
 #include "basics/Resolution.h"
 #include "basics/Vector2.h"
@@ -11,7 +11,6 @@
 #include <string>
 #include <variant>
 
-// todo prefix all buffers with "Film" -> "FilmBufferBase", "FilmValueBuffer", "FilmAccumulationBuffer"
 namespace crayg {
 
 template <typename T, int channelCount> struct FilmBufferBase {
@@ -61,14 +60,14 @@ template <typename T, int channelCount> struct FilmBufferBase {
     float getFloat(const Vector2i &pixelPosition) const {
         CRAYG_CHECKD_IS_VALID_INDEX(index(pixelPosition), width * height);
 
-        return ValueTrait<T>::toFloat(data[index(pixelPosition)].value[0]);
+        return FilmValueTrait<T>::toFloat(data[index(pixelPosition)].value[0]);
     }
 
     Color getColor(const Vector2i &pixelPosition) const {
         CRAYG_CHECKD_IS_VALID_INDEX(index(pixelPosition), width * height);
         Color color;
         for (int i = 0; i < channelCount; i++) {
-            color.data()[i] = ValueTrait<T>::toFloat(data[index(pixelPosition)].value[i]);
+            color.data()[i] = FilmValueTrait<T>::toFloat(data[index(pixelPosition)].value[i]);
         }
         return color;
     }
@@ -97,7 +96,7 @@ template <typename T, int channelCount> struct FilmBufferBase {
     }
 
     std::string describe() const {
-        return fmt::format("{}x {}", channelCount, ValueTrait<T>::name);
+        return fmt::format("{}x {}", channelCount, FilmValueTrait<T>::name);
     }
 
     friend std::ostream &operator<<(std::ostream &os, const FilmBufferBase<T, channelCount> &buffer) {
@@ -123,7 +122,7 @@ template <typename T, int channelCount> struct FilmBufferBase {
     int width = 0;
     int height = 0;
     const int chCount = channelCount;
-    const FilmPixelDepth pixelDepth = ValueTrait<T>::pixelDepth;
+    const FilmPixelDepth pixelDepth = FilmValueTrait<T>::pixelDepth;
 
     int index(const Vector2i &pixelPosition) const {
         return (pixelPosition.x + width * pixelPosition.y);
