@@ -1,8 +1,9 @@
 #pragma once
-
-#include "TriangleMeshAbstractPrimVar.h"
-#include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
+// clang-format off
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include "TriangleMeshAbstractPrimVar.h"
+// clang-format on
+#include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
 #include "utils/ToStringHelper.h"
 #include <fmt/ostream.h>
 
