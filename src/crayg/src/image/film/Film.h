@@ -27,7 +27,9 @@ struct Film {
     virtual void addSample(const std::string &channelName, const Vector2i &pixelPosition, float value);
 
     void updateAverages();
+    void updateAveragesForChannel(const std::string &channelName);
     void updateAveragesInBucket(const ImageBucket &imageBucket);
+    void updateAveragesForChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName);
 
     void toImage(Image &image);
 

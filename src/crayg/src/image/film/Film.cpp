@@ -144,4 +144,28 @@ void Film::toImage(Image &image) {
     }
 }
 
+void Film::updateAveragesForChannel(const std::string &channelName) {
+    auto buffer = getBufferVariantPtrByName(channelName);
+    if (!buffer) {
+        return;
+    }
+    auto accumulationBuffer = FilmBufferVariants::getAsAccumulationBufferVariantPtr(*buffer);
+    if (!accumulationBuffer) {
+        return;
+    }
+    std::visit([](auto *buf) { buf->updateAverages(); }, *accumulationBuffer);
+}
+
+void Film::updateAveragesForChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName) {
+    auto buffer = getBufferVariantPtrByName(channelName);
+    if (!buffer) {
+        return;
+    }
+    auto accumulationBuffer = FilmBufferVariants::getAsAccumulationBufferVariantPtr(*buffer);
+    if (!accumulationBuffer) {
+        return;
+    }
+    std::visit([&imageBucket](auto *buf) { buf->updateAveragesInBucket(imageBucket); }, *accumulationBuffer);
+}
+
 }

@@ -281,6 +281,40 @@ TEST_CASE("Film::updateAverages()") {
     }
 }
 
+TEST_CASE("Film::updateAveragesForChannel()") {
+
+    SECTION("should update only accumulation buffer") {
+        auto custom = new Color3fAccumulationBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("test", custom);
+        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
+        film.addSample("test", {0, 0}, Color(1, 2, 3));
+        REQUIRE(custom->isBlack());
+
+        film.updateAveragesForChannel("test");
+
+        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
+        REQUIRE_FALSE(custom->isBlack());
+    }
+
+    SECTION("should not update custom non-accumulation buffer") {
+        auto customValueBuffer = new Color3fValueBuffer(10, 5);
+        auto customAccumulationBuffer = new Color3fAccumulationBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("accumulation", customAccumulationBuffer);
+        film.addChannel("value", customValueBuffer);
+        film.addSample("accumulation", {0, 0}, Color(1, 2, 3));
+        REQUIRE(customAccumulationBuffer->isBlack());
+        REQUIRE(customValueBuffer->isBlack());
+
+        film.updateAveragesForChannel("accumulation");
+
+        REQUIRE_FALSE(customAccumulationBuffer->isBlack());
+        REQUIRE(customValueBuffer->isBlack());
+    }
+}
+
 TEST_CASE("Film::updateAveragesInBucket()") {
 
     SECTION("should update rgb channel") {
@@ -322,6 +356,57 @@ TEST_CASE("Film::updateAveragesInBucket()") {
         REQUIRE(customValueBuffer->isBlack());
 
         film.updateAveragesInBucket(ImageBucket({0, 0}, 3, 3));
+
+        REQUIRE(customAccumulationBuffer->getColor({0, 0}) == Color(1, 2, 3));
+        REQUIRE(customAccumulationBuffer->getColor({4, 4}) == Color(0, 0, 0));
+        REQUIRE(customValueBuffer->isBlack());
+    }
+}
+
+TEST_CASE("Film::updateAveragesForChannelInBucket()") {
+
+    SECTION("should update rgb channel") {
+        Film film(10, 5);
+        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
+        film.addSample("rgb", {4, 4}, Color(1, 2, 3));
+        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
+
+        film.updateAveragesForChannelInBucket(ImageBucket({0, 0}, 3, 3), "rgb");
+
+        REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->getColor({0, 0}) == Color(1, 2, 3));
+        REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->getColor({4, 4}).isBlack());
+    }
+
+    SECTION("should update custom accumulation buffer") {
+        auto custom = new Color3fAccumulationBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("test", custom);
+        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
+        film.addSample("test", {0, 0}, Color(1, 2, 3));
+        film.addSample("test", {4, 4}, Color(1, 2, 3));
+        REQUIRE(custom->isBlack());
+
+        film.updateAveragesForChannelInBucket(ImageBucket({0, 0}, 3, 3), "test");
+
+        REQUIRE(custom->getColor({0, 0}) == Color(1, 2, 3));
+        REQUIRE(custom->getColor({4, 4}).isBlack());
+        auto bufferVariant = film.getBufferVariantPtrByName("test");
+        REQUIRE_FALSE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
+    }
+
+    SECTION("should not update custom non-accumulation buffer") {
+        auto customValueBuffer = new Color3fValueBuffer(10, 5);
+        auto customAccumulationBuffer = new Color3fAccumulationBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("accumulation", customAccumulationBuffer);
+        film.addChannel("value", customValueBuffer);
+        film.addSample("accumulation", {0, 0}, Color(1, 2, 3));
+        film.addSample("accumulation", {4, 4}, Color(1, 2, 3));
+        REQUIRE(customAccumulationBuffer->isBlack());
+        REQUIRE(customValueBuffer->isBlack());
+
+        film.updateAveragesForChannelInBucket(ImageBucket({0, 0}, 3, 3), "accumulation");
 
         REQUIRE(customAccumulationBuffer->getColor({0, 0}) == Color(1, 2, 3));
         REQUIRE(customAccumulationBuffer->getColor({4, 4}) == Color(0, 0, 0));
