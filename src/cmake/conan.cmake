@@ -66,7 +66,7 @@ function(_get_msvc_ide_version result)
         set(${result}
             16
             PARENT_SCOPE)
-    elseif(NOT MSVC_VERSION VERSION_LESS 1930 AND MSVC_VERSION VERSION_LESS 1940)
+    elseif(NOT MSVC_VERSION VERSION_LESS 1930 AND MSVC_VERSION VERSION_LESS 1949)
         set(${result}
             17
             PARENT_SCOPE)
