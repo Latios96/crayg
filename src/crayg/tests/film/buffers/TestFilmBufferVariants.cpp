@@ -13,7 +13,7 @@ TEST_CASE("FilmBufferVariants::getAsAccumulationBufferVariantPtr") {
 
         REQUIRE(FilmBufferVariants::getAsAccumulationBufferVariantPtr(buffer).has_value());
 
-        std::visit([](auto buf) { delete buf; }, buffer);
+        FilmBufferVariants::freeFilmBufferVariantPtr(buffer);
     }
 
     SECTION("should return empty optional for non-accumulation buffer") {
@@ -25,7 +25,7 @@ TEST_CASE("FilmBufferVariants::getAsAccumulationBufferVariantPtr") {
 
         REQUIRE_FALSE(FilmBufferVariants::getAsAccumulationBufferVariantPtr(buffer).has_value());
 
-        std::visit([](auto buf) { delete buf; }, buffer);
+        FilmBufferVariants::freeFilmBufferVariantPtr(buffer);
     }
 }
 
