@@ -3,7 +3,9 @@
 #include "FilmValueTrait.h"
 #include "basics/Color.h"
 #include "basics/Vector2.h"
+#include "utils/AtomicFloats.h"
 #include "utils/Preconditions.h"
+#include <atomic>
 #include <cstdint>
 
 namespace crayg {
