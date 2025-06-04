@@ -8,7 +8,7 @@ template <typename Left, typename Right> struct ValueMapper {
     ValueMapper(const std::vector<std::pair<Left, Right>> &values) : values(values) {
     }
 
-    std::optional<Right> mapFromLeft(const Left &left) {
+    std::optional<Right> mapFromLeft(const Left &left) const {
         for (auto &pair : values) {
             if (pair.first == left) {
                 return pair.second;
@@ -17,7 +17,7 @@ template <typename Left, typename Right> struct ValueMapper {
         return std::nullopt;
     }
 
-    std::optional<Left> mapFromRight(const Right &right) {
+    std::optional<Left> mapFromRight(const Right &right) const {
         for (auto &pair : values) {
             if (pair.second == right) {
                 return pair.first;
