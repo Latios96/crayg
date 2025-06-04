@@ -17,14 +17,9 @@ void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
         if (channelSpec.name == "rgb") {
             continue;
         }
-        switch (channelSpec.bufferType) {
-        case FilmBufferType::VALUE:
-            addChannel(channelSpec.name, FilmBufferFactory::createValueBuffer(resolution, channelSpec.pixelDepth,
-                                                                              channelSpec.channelCount));
-        case FilmBufferType::ACCUMULATION:
-            addChannel(channelSpec.name, FilmBufferFactory::createAccumulationBuffer(resolution, channelSpec.pixelDepth,
-                                                                                     channelSpec.channelCount));
-        }
+        addChannel(channelSpec.name,
+                   FilmBufferFactory::createFilmBuffer(resolution, channelSpec.bufferType, channelSpec.pixelDepth,
+                                                       channelSpec.channelCount));
     }
 }
 
