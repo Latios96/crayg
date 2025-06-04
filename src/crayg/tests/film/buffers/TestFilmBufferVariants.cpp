@@ -66,4 +66,23 @@ TEST_CASE("FilmBufferVariants::getChannelCount") {
     }
 }
 
+TEST_CASE("FilmBufferVariants::getDataPtr") {
+
+    SECTION("should return data ptr correctly for ValueBuffer") {
+        FilmBufferVariantPtr ptr = new FloatValueBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getDataPtr(ptr) != nullptr);
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
+    }
+
+    SECTION("should return data ptr correctly for AccumulationBuffer") {
+        FilmBufferVariantPtr ptr = new Color3fAccumulationBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getDataPtr(ptr) != nullptr);
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
+    }
+}
+
 }

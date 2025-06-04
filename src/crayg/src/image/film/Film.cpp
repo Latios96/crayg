@@ -122,8 +122,7 @@ void Film::toImage(Image &image) {
     for (auto channel : getChannels()) {
         const FilmPixelDepth pixelDepth = FilmBufferVariants::getPixelDepth(channel.channelBuffer);
         const int channelCount = FilmBufferVariants::getChannelCount(channel.channelBuffer);
-        // todo extract method to variants
-        const void *channelDataPtr = std::visit([](auto buf) { return (void *)buf->data; }, channel.channelBuffer);
+        const void *channelDataPtr = FilmBufferVariants::getDataPtr(channel.channelBuffer);
         // todo extract mapping
         const PixelFormat pixelFormat = pixelDepth == FilmPixelDepth::FLOAT32 ? PixelFormat::FLOAT : PixelFormat::UINT8;
         const int bytesPerPixel = pixelDepth == FilmPixelDepth::FLOAT32 ? 4 : 1;

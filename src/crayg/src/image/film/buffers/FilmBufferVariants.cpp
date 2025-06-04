@@ -42,4 +42,8 @@ int FilmBufferVariants::getChannelCount(const FilmBufferVariantPtr &variantPtr) 
     return std::visit([](auto buf) { return buf->chCount; }, variantPtr);
 }
 
+void *FilmBufferVariants::getDataPtr(const FilmBufferVariantPtr &variantPtr) {
+    return std::visit([](auto buf) { return (void *)buf->data; }, variantPtr);
+}
+
 }
