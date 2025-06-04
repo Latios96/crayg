@@ -1,5 +1,6 @@
 #include "Film.h"
 #include "image/Image.h"
+#include "utils/ValueMapper.h"
 
 namespace crayg {
 Film::Film(int width, int height) : rgb(width, height), resolution(Resolution(width, height)) {
@@ -118,14 +119,19 @@ Film::ChannelView::ChannelView(const std::string &channelName, FilmBufferVariant
     : channelName(channelName), channelBuffer(channelBuffer) {
 }
 
+const auto filmPixelDepthAndPixelFormat = ValueMapper<FilmPixelDepth, PixelFormat>(
+    {{FilmPixelDepth::FLOAT32, PixelFormat::FLOAT}, {FilmPixelDepth::UINT8, PixelFormat::UINT8}});
+const auto filmPixelDepthAndByteCount =
+    ValueMapper<FilmPixelDepth, int>({{FilmPixelDepth::FLOAT32, 4}, {FilmPixelDepth::UINT8, 1}});
+
 void Film::toImage(Image &image) {
     for (auto channel : getChannels()) {
         const FilmPixelDepth pixelDepth = FilmBufferVariants::getPixelDepth(channel.channelBuffer);
         const int channelCount = FilmBufferVariants::getChannelCount(channel.channelBuffer);
         const void *channelDataPtr = FilmBufferVariants::getDataPtr(channel.channelBuffer);
-        // todo extract mapping
-        const PixelFormat pixelFormat = pixelDepth == FilmPixelDepth::FLOAT32 ? PixelFormat::FLOAT : PixelFormat::UINT8;
-        const int bytesPerPixel = pixelDepth == FilmPixelDepth::FLOAT32 ? 4 : 1;
+
+        const PixelFormat pixelFormat = *filmPixelDepthAndPixelFormat.mapFromLeft(pixelDepth);
+        const int bytesPerPixel = *filmPixelDepthAndByteCount.mapFromLeft(pixelDepth);
 
         if (channel.channelName != "rgb") {
             image.addChannel(channel.channelName, std::make_unique<PixelBuffer>(resolution, pixelFormat, channelCount));
