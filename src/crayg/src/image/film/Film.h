@@ -5,7 +5,7 @@
 #include "buffers/FilmBufferBase.h"
 #include "buffers/FilmBufferFactory.h"
 #include "buffers/FilmBufferVariants.h"
-#include "buffers/ValueBuffer.h"
+#include "buffers/FilmValueBuffer.h"
 #include "image/ImageBucket.h"
 
 #include <optional>

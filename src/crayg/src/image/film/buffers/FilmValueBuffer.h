@@ -8,12 +8,12 @@
 
 namespace crayg {
 
-template <typename T, int channelCount> struct ValueBuffer : public FilmBufferBase<T, channelCount> {
+template <typename T, int channelCount> struct FilmValueBuffer : public FilmBufferBase<T, channelCount> {
 
-    ValueBuffer(int width, int height) : FilmBufferBase<T, channelCount>(width, height) {
+    FilmValueBuffer(int width, int height) : FilmBufferBase<T, channelCount>(width, height) {
     }
 
-    explicit ValueBuffer(const Resolution &resolution) : FilmBufferBase<T, channelCount>(resolution) {
+    explicit FilmValueBuffer(const Resolution &resolution) : FilmBufferBase<T, channelCount>(resolution) {
     }
 
     void write(const Vector2i &pixelPosition, float value) {
@@ -33,10 +33,10 @@ template <typename T, int channelCount> struct ValueBuffer : public FilmBufferBa
     }
 };
 
-typedef ValueBuffer<float, 1> FloatValueBuffer;
-typedef ValueBuffer<uint8_t, 1> IntValueBuffer;
-typedef ValueBuffer<float, 3> Color3fValueBuffer;
-typedef ValueBuffer<uint8_t, 3> Color3iValueBuffer;
+typedef FilmValueBuffer<float, 1> FloatValueBuffer;
+typedef FilmValueBuffer<uint8_t, 1> IntValueBuffer;
+typedef FilmValueBuffer<float, 3> Color3fValueBuffer;
+typedef FilmValueBuffer<uint8_t, 3> Color3iValueBuffer;
 
 #define EnumerateAllValueBuffers FloatValueBuffer, IntValueBuffer, Color3fValueBuffer, Color3iValueBuffer
 #define EnumerateAllValueBufferPtrs FloatValueBuffer *, IntValueBuffer *, Color3fValueBuffer *, Color3iValueBuffer *

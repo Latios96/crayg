@@ -1,7 +1,7 @@
 #pragma once
 #include "FilmAccumulationBuffer.h"
 #include "FilmPixelDepth.h"
-#include "ValueBuffer.h"
+#include "FilmValueBuffer.h"
 #include "utils/Exceptions.h"
 #include <optional>
 

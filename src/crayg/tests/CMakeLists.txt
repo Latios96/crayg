@@ -5,7 +5,7 @@ set(UNIT_TEST_SOURCE_LIST
     film/buffers/TestFilmAccumulationBuffer.cpp
     film/buffers/TestFilmBufferBase.cpp
     film/buffers/TestFilmBufferFactory.cpp
-    film/buffers/TestValueBuffer.cpp
+    film/buffers/TestFilmValueBuffer.cpp
     film/buffers/TestValueTrait.cpp
     film/TestFilm.cpp
     fixtures/CameraLensFixtures.cpp
