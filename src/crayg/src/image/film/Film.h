@@ -2,7 +2,7 @@
 
 #include "FilmSpec.h"
 #include "buffers/AccumulationBuffer.h"
-#include "buffers/BufferBase.h"
+#include "buffers/FilmBufferBase.h"
 #include "buffers/FilmBufferFactory.h"
 #include "buffers/FilmBufferVariants.h"
 #include "buffers/ValueBuffer.h"

@@ -1,5 +1,5 @@
 #pragma once
-#include "BufferBase.h"
+#include "FilmBufferBase.h"
 #include "ValueTrait.h"
 #include "basics/Color.h"
 #include "basics/Vector2.h"
@@ -8,27 +8,27 @@
 
 namespace crayg {
 
-template <typename T, int channelCount> struct ValueBuffer : public BufferBase<T, channelCount> {
+template <typename T, int channelCount> struct ValueBuffer : public FilmBufferBase<T, channelCount> {
 
-    ValueBuffer(int width, int height) : BufferBase<T, channelCount>(width, height) {
+    ValueBuffer(int width, int height) : FilmBufferBase<T, channelCount>(width, height) {
     }
 
-    explicit ValueBuffer(const Resolution &resolution) : BufferBase<T, channelCount>(resolution) {
+    explicit ValueBuffer(const Resolution &resolution) : FilmBufferBase<T, channelCount>(resolution) {
     }
 
     void write(const Vector2i &pixelPosition, float value) {
-        CRAYG_CHECKD_IS_VALID_INDEX((BufferBase<T, channelCount>::index(pixelPosition)),
-                                    (BufferBase<T, channelCount>::pixelCount()));
-        const int index = BufferBase<T, channelCount>::index(pixelPosition);
-        BufferBase<T, channelCount>::data[index].value[0] = ValueTrait<T>::fromFloat(value);
+        CRAYG_CHECKD_IS_VALID_INDEX((FilmBufferBase<T, channelCount>::index(pixelPosition)),
+                                    (FilmBufferBase<T, channelCount>::pixelCount()));
+        const int index = FilmBufferBase<T, channelCount>::index(pixelPosition);
+        FilmBufferBase<T, channelCount>::data[index].value[0] = ValueTrait<T>::fromFloat(value);
     }
 
     void write(const Vector2i &pixelPosition, const Color &value) {
-        CRAYG_CHECKD_IS_VALID_INDEX((BufferBase<T, channelCount>::index(pixelPosition)),
-                                    (BufferBase<T, channelCount>::pixelCount()));
+        CRAYG_CHECKD_IS_VALID_INDEX((FilmBufferBase<T, channelCount>::index(pixelPosition)),
+                                    (FilmBufferBase<T, channelCount>::pixelCount()));
         for (int i = 0; i < channelCount; i++) {
-            const int index = BufferBase<T, channelCount>::index(pixelPosition);
-            BufferBase<T, channelCount>::data[index].value[i] = ValueTrait<T>::fromFloat(value.data()[i]);
+            const int index = FilmBufferBase<T, channelCount>::index(pixelPosition);
+            FilmBufferBase<T, channelCount>::data[index].value[i] = ValueTrait<T>::fromFloat(value.data()[i]);
         }
     }
 };

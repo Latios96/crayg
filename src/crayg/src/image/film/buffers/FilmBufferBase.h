@@ -11,34 +11,34 @@
 #include <string>
 #include <variant>
 
-// todo what is better naming for all of this? PixelBuffer? RenderBuffer?
-
+// todo prefix all buffers with "Film" -> "FilmBufferBase", "FilmValueBuffer", "FilmAccumulationBuffer"
 namespace crayg {
 
-template <typename T, int channelCount> struct BufferBase {
+template <typename T, int channelCount> struct FilmBufferBase {
     static_assert(channelCount == 1 || channelCount == 3);
 
-    BufferBase(int width, int height) : width(width), height(height) {
+    FilmBufferBase(int width, int height) : width(width), height(height) {
         data = new PixelValue[pixelCount()]();
         CRAYG_CHECK_NOT_NULLPTR(data);
     }
 
-    explicit BufferBase(const Resolution &resolution) : width(resolution.getWidth()), height(resolution.getHeight()) {
+    explicit FilmBufferBase(const Resolution &resolution)
+        : width(resolution.getWidth()), height(resolution.getHeight()) {
         data = new PixelValue[pixelCount()]();
         CRAYG_CHECK_NOT_NULLPTR(data);
     }
 
-    BufferBase(const BufferBase &other) : width(other.width), height(other.height) {
+    FilmBufferBase(const FilmBufferBase &other) : width(other.width), height(other.height) {
         data = new PixelValue[pixelCount()]();
         CRAYG_CHECK_NOT_NULLPTR(data);
         memcpy(data, other.data, pixelCount() * sizeof(PixelValue));
     }
 
-    BufferBase(BufferBase &&other) noexcept : data(other.data), width(other.width), height(other.height) {
+    FilmBufferBase(FilmBufferBase &&other) noexcept : data(other.data), width(other.width), height(other.height) {
         other.data = nullptr;
     }
 
-    BufferBase &operator=(const BufferBase &other) {
+    FilmBufferBase &operator=(const FilmBufferBase &other) {
         if (this == &other) {
             return *this;
         }
@@ -48,7 +48,7 @@ template <typename T, int channelCount> struct BufferBase {
         return *this;
     }
 
-    BufferBase &operator=(BufferBase &&other) noexcept {
+    FilmBufferBase &operator=(FilmBufferBase &&other) noexcept {
         if (this == &other) {
             return *this;
         }
@@ -100,7 +100,7 @@ template <typename T, int channelCount> struct BufferBase {
         return fmt::format("{}x {}", channelCount, ValueTrait<T>::name);
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const BufferBase<T, channelCount> &buffer) {
+    friend std::ostream &operator<<(std::ostream &os, const FilmBufferBase<T, channelCount> &buffer) {
         os << ToStringHelper("PixelBuffer")
                   .addMember("width", buffer.width)
                   .addMember("height", buffer.height)
@@ -109,7 +109,7 @@ template <typename T, int channelCount> struct BufferBase {
         return os;
     }
 
-    virtual ~BufferBase() {
+    virtual ~FilmBufferBase() {
         delete[] data;
     }
 
@@ -130,10 +130,10 @@ template <typename T, int channelCount> struct BufferBase {
     }
 };
 
-typedef BufferBase<float, 1> FloatBufferBase;
-typedef BufferBase<uint8_t, 1> IntBufferBase;
-typedef BufferBase<float, 3> Color3fBufferBase;
-typedef BufferBase<uint8_t, 3> Color3iBufferBase;
+typedef FilmBufferBase<float, 1> FloatBufferBase;
+typedef FilmBufferBase<uint8_t, 1> IntBufferBase;
+typedef FilmBufferBase<float, 3> Color3fBufferBase;
+typedef FilmBufferBase<uint8_t, 3> Color3iBufferBase;
 typedef std::variant<FloatBufferBase, IntBufferBase, Color3fBufferBase, Color3iBufferBase> BufferBaseVariant;
 
 }

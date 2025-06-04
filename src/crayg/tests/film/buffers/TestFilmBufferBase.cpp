@@ -1,5 +1,5 @@
 #include "basics/Resolution.h"
-#include "image/film/buffers/BufferBase.h"
+#include "image/film/buffers/FilmBufferBase.h"
 #include "image/film/buffers/ValueTrait.h"
 #include <catch2/catch.hpp>
 
