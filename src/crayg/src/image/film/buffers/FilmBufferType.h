@@ -4,7 +4,7 @@
 
 namespace crayg {
 
-enum class FilmBufferType { UNKNOWN, VALUE, ACCUMULATION };
+enum class FilmBufferType { UNKNOWN, VALUE, ACCUMULATION, SUM };
 
 }
 

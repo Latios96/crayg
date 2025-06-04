@@ -13,5 +13,8 @@ class FilmBufferFactory {
 
     static FilmBufferVariantPtr createAccumulationBuffer(const Resolution &resolution, FilmPixelDepth filmPixelDepth,
                                                          int channelCount);
+
+    static FilmBufferVariantPtr createSumBuffer(const Resolution &resolution, FilmPixelDepth filmPixelDepth,
+                                                int channelCount);
 };
 }

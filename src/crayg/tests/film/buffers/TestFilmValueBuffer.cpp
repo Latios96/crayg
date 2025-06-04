@@ -54,7 +54,6 @@ TEST_CASE("ValueBuffer::writeFloat") {
         buffer.write({0, 0}, 2);
 
         REQUIRE(buffer.getFloat({0, 0}) == 1);
-        REQUIRE(buffer.getFloat({0, 0}) == 1);
         REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
     }
 
@@ -72,7 +71,6 @@ TEST_CASE("ValueBuffer::writeFloat") {
 
         buffer.write({0, 0}, 1);
 
-        REQUIRE(buffer.getFloat({0, 0}) == 1);
         REQUIRE(buffer.getFloat({0, 0}) == 1);
         REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
     }

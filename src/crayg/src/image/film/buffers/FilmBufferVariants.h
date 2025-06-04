@@ -1,14 +1,16 @@
 #pragma once
 #include "FilmAccumulationBuffer.h"
 #include "FilmPixelDepth.h"
+#include "FilmSumBuffer.h"
 #include "FilmValueBuffer.h"
 #include "utils/Exceptions.h"
 #include <optional>
 
 namespace crayg {
 
-#define EnumerateAllFilmBuffers EnumerateAllValueBuffers, EnumerateAllAccumulationBuffers
-#define EnumerateAllFilmBufferPtrs EnumerateAllValueBufferPtrs, EnumerateAllAccumulationBufferPtrs
+#define EnumerateAllFilmBuffers EnumerateAllValueBuffers, EnumerateAllAccumulationBuffers, EnumerateAllSumBuffers
+#define EnumerateAllFilmBufferPtrs                                                                                     \
+    EnumerateAllValueBufferPtrs, EnumerateAllAccumulationBufferPtrs, EnumerateAllSumBufferPtrs
 
 typedef std::variant<EnumerateAllFilmBuffers> FilmBufferVariant;
 typedef std::variant<EnumerateAllFilmBufferPtrs> FilmBufferVariantPtr;

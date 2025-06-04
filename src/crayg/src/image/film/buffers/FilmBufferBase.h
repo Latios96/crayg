@@ -60,7 +60,8 @@ template <typename T, int channelCount> struct FilmBufferBase {
     float getFloat(const Vector2i &pixelPosition) const {
         CRAYG_CHECKD_IS_VALID_INDEX(index(pixelPosition), width * height);
 
-        return FilmValueTrait<T>::toFloat(data[index(pixelPosition)].value[0]);
+        auto unknown = data[index(pixelPosition)].value[0];
+        return FilmValueTrait<T>::toFloat(unknown);
     }
 
     Color getColor(const Vector2i &pixelPosition) const {
