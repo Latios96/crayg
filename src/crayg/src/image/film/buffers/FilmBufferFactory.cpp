@@ -4,9 +4,9 @@ namespace crayg {
 
 FilmBufferVariantPtr FilmBufferFactory::createValueBuffer(const Resolution &resolution, FilmPixelDepth filmPixelDepth,
                                                           int channelCount) {
-    if (filmPixelDepth == FilmPixelDepth::FLOAT && channelCount == 1) {
+    if (filmPixelDepth == FilmPixelDepth::FLOAT32 && channelCount == 1) {
         return new FloatValueBuffer(resolution);
-    } else if (filmPixelDepth == FilmPixelDepth::FLOAT && channelCount == 3) {
+    } else if (filmPixelDepth == FilmPixelDepth::FLOAT32 && channelCount == 3) {
         return new Color3fValueBuffer(resolution);
     } else if (filmPixelDepth == FilmPixelDepth::UINT8 && channelCount == 1) {
         return new IntValueBuffer(resolution);
@@ -19,9 +19,9 @@ FilmBufferVariantPtr FilmBufferFactory::createValueBuffer(const Resolution &reso
 
 FilmBufferVariantPtr FilmBufferFactory::createAccumulationBuffer(const Resolution &resolution,
                                                                  FilmPixelDepth filmPixelDepth, int channelCount) {
-    if (filmPixelDepth == FilmPixelDepth::FLOAT && channelCount == 1) {
+    if (filmPixelDepth == FilmPixelDepth::FLOAT32 && channelCount == 1) {
         return new FloatAccumulationBuffer(resolution);
-    } else if (filmPixelDepth == FilmPixelDepth::FLOAT && channelCount == 3) {
+    } else if (filmPixelDepth == FilmPixelDepth::FLOAT32 && channelCount == 3) {
         return new Color3fAccumulationBuffer(resolution);
     }
     CRAYG_LOG_AND_THROW_MESSAGE(

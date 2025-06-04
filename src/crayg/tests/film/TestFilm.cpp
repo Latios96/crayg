@@ -332,7 +332,7 @@ TEST_CASE("Film::addChannelsFromSpec") {
 
     SECTION("should throw if resolutions do not match") {
         Film film(10, 20);
-        FilmSpec filmSpec({1, 1}, {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT, 3}}, std::nullopt);
+        FilmSpec filmSpec({1, 1}, {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT32, 3}}, std::nullopt);
 
         REQUIRE_THROWS_AS(film.addChannelsFromSpec(filmSpec), std::runtime_error);
     }
@@ -340,9 +340,9 @@ TEST_CASE("Film::addChannelsFromSpec") {
     SECTION("should add channels from spec") {
         Film film(10, 20);
         FilmSpec filmSpec({10, 20},
-                          {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT, 3},
-                           {"alpha", FilmBufferType::VALUE, FilmPixelDepth::FLOAT, 1},
-                           {"depth", FilmBufferType::VALUE, FilmPixelDepth::FLOAT, 1}},
+                          {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT32, 3},
+                           {"alpha", FilmBufferType::VALUE, FilmPixelDepth::FLOAT32, 1},
+                           {"depth", FilmBufferType::VALUE, FilmPixelDepth::FLOAT32, 1}},
                           std::nullopt);
 
         film.addChannelsFromSpec(filmSpec);

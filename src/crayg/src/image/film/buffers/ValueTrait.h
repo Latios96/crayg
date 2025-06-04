@@ -22,7 +22,7 @@ template <> struct ValueTrait<float> {
     }
 
     static constexpr std::string_view name = "f32";
-    static constexpr FilmPixelDepth pixelDepth = FilmPixelDepth::FLOAT;
+    static constexpr FilmPixelDepth pixelDepth = FilmPixelDepth::FLOAT32;
 };
 
 template <> struct ValueTrait<uint8_t> {

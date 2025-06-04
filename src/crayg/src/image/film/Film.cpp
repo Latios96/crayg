@@ -132,8 +132,8 @@ void Film::toImage(Image &image) {
         // todo extract method to variants
         const void *channelDataPtr = std::visit([](auto buf) { return (void *)buf->data; }, channel.channelBuffer);
         // todo extract mapping
-        const PixelFormat pixelFormat = pixelDepth == FilmPixelDepth::FLOAT ? PixelFormat::FLOAT : PixelFormat::UINT8;
-        const int bytesPerPixel = pixelDepth == FilmPixelDepth::FLOAT ? 4 : 1;
+        const PixelFormat pixelFormat = pixelDepth == FilmPixelDepth::FLOAT32 ? PixelFormat::FLOAT : PixelFormat::UINT8;
+        const int bytesPerPixel = pixelDepth == FilmPixelDepth::FLOAT32 ? 4 : 1;
 
         if (channel.channelName != "rgb") {
             image.addChannel(channel.channelName, std::make_unique<PixelBuffer>(resolution, pixelFormat, channelCount));

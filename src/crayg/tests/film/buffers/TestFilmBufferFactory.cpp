@@ -6,7 +6,7 @@ namespace crayg {
 TEST_CASE("FilmBufferFactory::createValueBuffer") {
 
     SECTION("should create FloatValueBuffer") {
-        auto bufferVariant = FilmBufferFactory::createValueBuffer({10, 5}, FilmPixelDepth::FLOAT, 1);
+        auto bufferVariant = FilmBufferFactory::createValueBuffer({10, 5}, FilmPixelDepth::FLOAT32, 1);
 
         REQUIRE(std::holds_alternative<FloatValueBuffer *>(bufferVariant));
 
@@ -22,7 +22,7 @@ TEST_CASE("FilmBufferFactory::createValueBuffer") {
     }
 
     SECTION("should create Color3fValueBuffer") {
-        auto bufferVariant = FilmBufferFactory::createValueBuffer({10, 5}, FilmPixelDepth::FLOAT, 3);
+        auto bufferVariant = FilmBufferFactory::createValueBuffer({10, 5}, FilmPixelDepth::FLOAT32, 3);
 
         REQUIRE(std::holds_alternative<Color3fValueBuffer *>(bufferVariant));
 
@@ -45,7 +45,7 @@ TEST_CASE("FilmBufferFactory::createValueBuffer") {
 TEST_CASE("FilmBufferFactory::createAccumulationBuffer") {
 
     SECTION("should create FloatValueBuffer") {
-        auto bufferVariant = FilmBufferFactory::createAccumulationBuffer({10, 5}, FilmPixelDepth::FLOAT, 1);
+        auto bufferVariant = FilmBufferFactory::createAccumulationBuffer({10, 5}, FilmPixelDepth::FLOAT32, 1);
 
         REQUIRE(std::holds_alternative<FloatAccumulationBuffer *>(bufferVariant));
 
@@ -53,7 +53,7 @@ TEST_CASE("FilmBufferFactory::createAccumulationBuffer") {
     }
 
     SECTION("should create Color3fValueBuffer") {
-        auto bufferVariant = FilmBufferFactory::createAccumulationBuffer({10, 5}, FilmPixelDepth::FLOAT, 3);
+        auto bufferVariant = FilmBufferFactory::createAccumulationBuffer({10, 5}, FilmPixelDepth::FLOAT32, 3);
 
         REQUIRE(std::holds_alternative<Color3fAccumulationBuffer *>(bufferVariant));
 

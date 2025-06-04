@@ -4,7 +4,7 @@
 
 namespace crayg {
 
-enum class FilmPixelDepth { FLOAT, UINT8 };
+enum class FilmPixelDepth { FLOAT32, UINT8 };
 
 }
 
