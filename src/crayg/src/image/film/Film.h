@@ -7,10 +7,14 @@
 #include "buffers/FilmBufferFactory.h"
 #include "buffers/FilmBufferVariants.h"
 #include "buffers/ValueBuffer.h"
+#include "image/ImageBucket.h"
+
 #include <optional>
 #include <tsl/ordered_map.h>
 
 namespace crayg {
+
+class Image;
 
 struct Film {
     Film(int width, int height);
@@ -25,6 +29,8 @@ struct Film {
 
     void updateAverages();
     void updateAveragesInBucket(const ImageBucket &imageBucket);
+
+    void toImage(Image &image);
 
     struct ChannelView {
         ChannelView(const std::string &channelName, FilmBufferVariantPtr channelBuffer);

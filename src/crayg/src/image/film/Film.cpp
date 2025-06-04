@@ -1,4 +1,5 @@
 #include "Film.h"
+#include "image/Image.h"
 
 namespace crayg {
 Film::Film(int width, int height) : rgb(width, height), resolution(Resolution(width, height)) {
@@ -121,4 +122,28 @@ Film::~Film() {
 Film::ChannelView::ChannelView(const std::string &channelName, FilmBufferVariantPtr channelBuffer)
     : channelName(channelName), channelBuffer(channelBuffer) {
 }
+
+void Film::toImage(Image &image) {
+    for (auto channel : getChannels()) {
+        // todo extract method to variants
+        const FilmPixelDepth pixelDepth = std::visit([](auto buf) { return buf->pixelDepth; }, channel.channelBuffer);
+        // todo extract method to variants
+        const int channelCount = std::visit([](auto buf) { return buf->chCount; }, channel.channelBuffer);
+        // todo extract method to variants
+        const void *channelDataPtr = std::visit([](auto buf) { return (void *)buf->data; }, channel.channelBuffer);
+        // todo extract mapping
+        const PixelFormat pixelFormat = pixelDepth == FilmPixelDepth::FLOAT ? PixelFormat::FLOAT : PixelFormat::UINT8;
+        const int bytesPerPixel = pixelDepth == FilmPixelDepth::FLOAT ? 4 : 1;
+
+        if (channel.channelName != "rgb") {
+            image.addChannel(channel.channelName, std::make_unique<PixelBuffer>(resolution, pixelFormat, channelCount));
+        }
+
+        auto imageChannel = image.getChannel(channel.channelName);
+        void *dstPtr = std::visit([](auto data) { return (void *)data; }, imageChannel->getData());
+        std::memcpy(dstPtr, channelDataPtr,
+                    resolution.getWidth() * resolution.getHeight() * bytesPerPixel * channelCount);
+    }
+}
+
 }

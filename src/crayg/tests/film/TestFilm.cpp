@@ -328,7 +328,7 @@ TEST_CASE("Film::updateAveragesInBucket()") {
     }
 }
 
-TEST_CASE("Film::addChannelsFromSpec", "[Image]") {
+TEST_CASE("Film::addChannelsFromSpec") {
 
     SECTION("should throw if resolutions do not match") {
         Film film(10, 20);
@@ -350,6 +350,103 @@ TEST_CASE("Film::addChannelsFromSpec", "[Image]") {
         REQUIRE(film.channelNames() == std::vector<std::string>({"rgb", "alpha", "depth"}));
         REQUIRE(std::holds_alternative<FloatValueBuffer *>(*film.getBufferVariantPtrByName("alpha")));
         REQUIRE(std::holds_alternative<FloatValueBuffer *>(*film.getBufferVariantPtrByName("depth")));
+    }
+}
+
+TEST_CASE("Film::toImage") {
+
+    SECTION("should convert rgb only image") {
+        Film film(10, 5);
+        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.updateAverages();
+
+        Image image(10, 5);
+        film.toImage(image);
+
+        REQUIRE(image.channelNames() == std::vector<std::string>({"rgb"}));
+        REQUIRE_FALSE(image.rgb.isBlack());
+        REQUIRE(image.rgb.getPixelFormat() == PixelFormat::FLOAT);
+        REQUIRE(image.rgb.getColorChannelCount() == 3);
+    }
+
+    SECTION("should convert custom float channel") {
+        auto customValueBuffer = new FloatValueBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("test", customValueBuffer);
+
+        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("test", {3, 3}, Color(1, 2, 3));
+        film.updateAverages();
+
+        Image image(10, 5);
+        film.toImage(image);
+
+        REQUIRE(image.channelNames() == std::vector<std::string>({"rgb", "test"}));
+        REQUIRE_FALSE(image.rgb.isBlack());
+        auto testChannel = image.getChannel("test");
+        REQUIRE_FALSE(testChannel->isBlack());
+        REQUIRE(testChannel->getPixelFormat() == PixelFormat::FLOAT);
+        REQUIRE(testChannel->getColorChannelCount() == 1);
+    }
+
+    SECTION("should convert custom int channel") {
+        auto customValueBuffer = new IntValueBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("test", customValueBuffer);
+
+        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("test", {3, 3}, Color(1, 2, 3));
+        film.updateAverages();
+
+        Image image(10, 5);
+        film.toImage(image);
+
+        REQUIRE(image.channelNames() == std::vector<std::string>({"rgb", "test"}));
+        REQUIRE_FALSE(image.rgb.isBlack());
+        auto testChannel = image.getChannel("test");
+        REQUIRE_FALSE(testChannel->isBlack());
+        REQUIRE(testChannel->getPixelFormat() == PixelFormat::UINT8);
+        REQUIRE(testChannel->getColorChannelCount() == 1);
+    }
+
+    SECTION("should convert custom Color3f channel") {
+        auto customValueBuffer = new Color3fValueBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("test", customValueBuffer);
+
+        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("test", {3, 3}, Color(1, 2, 3));
+        film.updateAverages();
+
+        Image image(10, 5);
+        film.toImage(image);
+
+        REQUIRE(image.channelNames() == std::vector<std::string>({"rgb", "test"}));
+        REQUIRE_FALSE(image.rgb.isBlack());
+        auto testChannel = image.getChannel("test");
+        REQUIRE_FALSE(testChannel->isBlack());
+        REQUIRE(testChannel->getPixelFormat() == PixelFormat::FLOAT);
+        REQUIRE(testChannel->getColorChannelCount() == 3);
+    }
+
+    SECTION("should convert custom Color3i channel") {
+        auto customValueBuffer = new Color3iValueBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("test", customValueBuffer);
+
+        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("test", {3, 3}, Color(1, 2, 3));
+        film.updateAverages();
+
+        Image image(10, 5);
+        film.toImage(image);
+
+        REQUIRE(image.channelNames() == std::vector<std::string>({"rgb", "test"}));
+        REQUIRE_FALSE(image.rgb.isBlack());
+        auto testChannel = image.getChannel("test");
+        REQUIRE_FALSE(testChannel->isBlack());
+        REQUIRE(testChannel->getPixelFormat() == PixelFormat::UINT8);
+        REQUIRE(testChannel->getColorChannelCount() == 3);
     }
 }
 
