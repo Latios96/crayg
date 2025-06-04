@@ -121,6 +121,8 @@ set(crayg_SRCS
     Logger.h
     outputdrivers/ImageOutputDriver.cpp
     outputdrivers/ImageOutputDriver.h
+    outputdrivers/NextGenOutputDriver.cpp
+    outputdrivers/NextGenOutputDriver.h
     outputdrivers/OutputDriver.h
     outputdrivers/TeeOutputDriver.cpp
     outputdrivers/TeeOutputDriver.h
