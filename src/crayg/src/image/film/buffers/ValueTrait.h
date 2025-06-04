@@ -1,4 +1,6 @@
 #pragma once
+#include "FilmPixelDepth.h"
+
 #include <algorithm>
 #include <cstdint>
 #include <string_view>
@@ -20,6 +22,7 @@ template <> struct ValueTrait<float> {
     }
 
     static constexpr std::string_view name = "f32";
+    static constexpr FilmPixelDepth pixelDepth = FilmPixelDepth::FLOAT;
 };
 
 template <> struct ValueTrait<uint8_t> {
@@ -32,6 +35,7 @@ template <> struct ValueTrait<uint8_t> {
     }
 
     static constexpr std::string_view name = "uint8";
+    static constexpr FilmPixelDepth pixelDepth = FilmPixelDepth::UINT8;
 };
 
 }
