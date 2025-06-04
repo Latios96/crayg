@@ -9,24 +9,24 @@
 
 namespace crayg {
 
-template <typename T, int channelCount> struct AccumulationBuffer : public FilmBufferBase<T, channelCount> {
+template <typename T, int channelCount> struct FilmAccumulationBuffer : public FilmBufferBase<T, channelCount> {
     static_assert(std::is_floating_point_v<T>);
 
-    AccumulationBuffer(int width, int height) : FilmBufferBase<T, channelCount>(width, height) {
+    FilmAccumulationBuffer(int width, int height) : FilmBufferBase<T, channelCount>(width, height) {
         sum = new SumType[FilmBufferBase<T, channelCount>::pixelCount()]();
         CRAYG_CHECK_NOT_NULLPTR(sum);
         weight = new AtomicDouble[FilmBufferBase<T, channelCount>::pixelCount()]();
         CRAYG_CHECK_NOT_NULLPTR(weight);
     }
 
-    explicit AccumulationBuffer(const Resolution &resolution) : FilmBufferBase<T, channelCount>(resolution) {
+    explicit FilmAccumulationBuffer(const Resolution &resolution) : FilmBufferBase<T, channelCount>(resolution) {
         sum = new SumType[FilmBufferBase<T, channelCount>::pixelCount()]();
         CRAYG_CHECK_NOT_NULLPTR(sum);
         weight = new AtomicDouble[FilmBufferBase<T, channelCount>::pixelCount()]();
         CRAYG_CHECK_NOT_NULLPTR(weight);
     }
 
-    AccumulationBuffer(const AccumulationBuffer &other) : FilmBufferBase<T, channelCount>(other) {
+    FilmAccumulationBuffer(const FilmAccumulationBuffer &other) : FilmBufferBase<T, channelCount>(other) {
         sum = new SumType[FilmBufferBase<T, channelCount>::pixelCount()]();
         CRAYG_CHECK_NOT_NULLPTR(sum);
         memcpy(other.sum, sum, FilmBufferBase<T, channelCount>::pixelCount() * sizeof(SumType));
@@ -35,7 +35,7 @@ template <typename T, int channelCount> struct AccumulationBuffer : public FilmB
         memcpy(other.weight, weight, FilmBufferBase<T, channelCount>::pixelCount() * sizeof(AtomicDouble));
     }
 
-    AccumulationBuffer &operator=(const AccumulationBuffer &other) {
+    FilmAccumulationBuffer &operator=(const FilmAccumulationBuffer &other) {
         if (this == &other) {
             return *this;
         }
@@ -141,8 +141,8 @@ template <typename T, int channelCount> struct AccumulationBuffer : public FilmB
     AtomicDouble *weight;
 };
 
-typedef AccumulationBuffer<float, 1> FloatAccumulationBuffer;
-typedef AccumulationBuffer<float, 3> Color3fAccumulationBuffer;
+typedef FilmAccumulationBuffer<float, 1> FloatAccumulationBuffer;
+typedef FilmAccumulationBuffer<float, 3> Color3fAccumulationBuffer;
 
 #define EnumerateAllAccumulationBuffers FloatAccumulationBuffer, Color3fAccumulationBuffer
 #define EnumerateAllAccumulationBufferPtrs FloatAccumulationBuffer *, Color3fAccumulationBuffer *

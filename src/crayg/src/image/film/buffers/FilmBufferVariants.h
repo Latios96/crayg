@@ -1,5 +1,5 @@
 #pragma once
-#include "AccumulationBuffer.h"
+#include "FilmAccumulationBuffer.h"
 #include "FilmPixelDepth.h"
 #include "ValueBuffer.h"
 #include "utils/Exceptions.h"

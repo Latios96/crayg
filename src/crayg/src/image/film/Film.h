@@ -1,7 +1,7 @@
 #pragma once
 
 #include "FilmSpec.h"
-#include "buffers/AccumulationBuffer.h"
+#include "buffers/FilmAccumulationBuffer.h"
 #include "buffers/FilmBufferBase.h"
 #include "buffers/FilmBufferFactory.h"
 #include "buffers/FilmBufferVariants.h"
@@ -74,7 +74,7 @@ struct Film {
     }
 
     Resolution resolution;
-    AccumulationBuffer<float, 3> rgb;
+    FilmAccumulationBuffer<float, 3> rgb;
     tsl::ordered_map<std::string, FilmBufferVariantPtr> additionalChannels;
 };
 

@@ -1,4 +1,4 @@
-#include "image/film/buffers/AccumulationBuffer.h"
+#include "image/film/buffers/FilmAccumulationBuffer.h"
 
 #include <catch2/catch.hpp>
 

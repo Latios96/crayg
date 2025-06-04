@@ -32,7 +32,7 @@ set(crayg_SRCS
     image/BucketImageBuffer.h
     image/ColorConversion.cpp
     image/ColorConversion.h
-    image/film/buffers/AccumulationBuffer.h
+    image/film/buffers/FilmAccumulationBuffer.h
     image/film/buffers/FilmBufferBase.h
     image/film/buffers/FilmBufferFactory.cpp
     image/film/buffers/FilmBufferFactory.h
