@@ -15,7 +15,7 @@ typedef std::variant<EnumerateAllFilmBufferPtrs> FilmBufferVariantPtr;
 
 class FilmBufferVariants {
   public:
-    static void freeFilmBufferVariantPtr(FilmBufferVariantPtr &ptr);
+    static void freeFilmBufferVariantPtr(const FilmBufferVariantPtr &ptr);
 
     static std::optional<AccumulationBufferVariantPtr>
     getAsAccumulationBufferVariantPtr(const FilmBufferVariantPtr &bufferVariantPtr);

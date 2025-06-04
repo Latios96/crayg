@@ -2,7 +2,7 @@
 
 namespace crayg {
 
-void FilmBufferVariants::freeFilmBufferVariantPtr(FilmBufferVariantPtr &ptr) {
+void FilmBufferVariants::freeFilmBufferVariantPtr(const FilmBufferVariantPtr &ptr) {
     std::visit([](auto *buf) { delete buf; }, ptr);
 }
 
