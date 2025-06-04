@@ -1,10 +1,10 @@
 set(UNIT_TEST_SOURCE_LIST
     # cmake-format: sortable
     containers/TestArray2d.cpp
-    film/buffers/TestBufferVariantConversion.cpp
     film/buffers/TestFilmAccumulationBuffer.cpp
     film/buffers/TestFilmBufferBase.cpp
     film/buffers/TestFilmBufferFactory.cpp
+    film/buffers/TestFilmBufferVariants.cpp
     film/buffers/TestFilmValueBuffer.cpp
     film/buffers/TestFilmValueTrait.cpp
     film/TestFilm.cpp

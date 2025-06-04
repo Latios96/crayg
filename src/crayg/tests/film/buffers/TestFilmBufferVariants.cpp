@@ -2,7 +2,6 @@
 #include <catch2/catch.hpp>
 
 namespace crayg {
-
 TEST_CASE("FilmBufferVariants::getAsAccumulationBufferVariantPtr") {
 
     SECTION("should return accumulation buffer ptr") {
@@ -26,6 +25,25 @@ TEST_CASE("FilmBufferVariants::getAsAccumulationBufferVariantPtr") {
         REQUIRE_FALSE(FilmBufferVariants::getAsAccumulationBufferVariantPtr(buffer).has_value());
 
         FilmBufferVariants::freeFilmBufferVariantPtr(buffer);
+    }
+}
+
+TEST_CASE("FilmBufferVariants::getPixelDepth") {
+
+    SECTION("should return pixel depth correctly for float") {
+        FilmBufferVariantPtr ptr = new FloatValueBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getPixelDepth(ptr) == FilmPixelDepth::FLOAT32);
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
+    }
+
+    SECTION("should return pixel depth correctly for int") {
+        FilmBufferVariantPtr ptr = new IntValueBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getPixelDepth(ptr) == FilmPixelDepth::UINT8);
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
     }
 }
 

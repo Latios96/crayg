@@ -22,6 +22,8 @@ class FilmBufferVariants {
 
     static std::optional<ValueBufferVariantPtr>
     getAsValueBufferVariantPtr(const FilmBufferVariantPtr &bufferVariantPtr);
+
+    static FilmPixelDepth getPixelDepth(const FilmBufferVariantPtr &variantPtr);
 };
 
 }
