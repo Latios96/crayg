@@ -54,7 +54,7 @@ void Film::addSample(const std::string &channelName, const Vector2i &pixelPositi
 void Film::updateAverages() {
     rgb.updateAverages();
     for (auto &channel : additionalChannels) {
-        auto accumulationBufferVariantPtr = BufferVariantConversion::getAsAccumulationBufferVariantPtr(channel.second);
+        auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(channel.second);
         if (accumulationBufferVariantPtr) {
             std::visit([](auto *buf) { buf->updateAverages(); }, *accumulationBufferVariantPtr);
         }
@@ -64,7 +64,7 @@ void Film::updateAverages() {
 void Film::updateAveragesInBucket(const ImageBucket &imageBucket) {
     rgb.updateAveragesInBucket(imageBucket);
     for (auto &channel : additionalChannels) {
-        auto accumulationBufferVariantPtr = BufferVariantConversion::getAsAccumulationBufferVariantPtr(channel.second);
+        auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(channel.second);
         if (accumulationBufferVariantPtr) {
             std::visit([&imageBucket](auto *buf) { buf->updateAveragesInBucket(imageBucket); },
                        *accumulationBufferVariantPtr);

@@ -1,9 +1,9 @@
-#include "image/film/buffers/BufferVariantConversion.h"
+#include "image/film/buffers/FilmBufferVariants.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
 
-TEST_CASE("BufferVariantConversion::getAsAccumulationBufferVariantPtr") {
+TEST_CASE("FilmBufferVariants::getAsAccumulationBufferVariantPtr") {
 
     SECTION("should return accumulation buffer ptr") {
         const auto &testData = GENERATE(
@@ -11,7 +11,7 @@ TEST_CASE("BufferVariantConversion::getAsAccumulationBufferVariantPtr") {
 
         const auto buffer = std::get<0>(testData);
 
-        REQUIRE(BufferVariantConversion::getAsAccumulationBufferVariantPtr(buffer).has_value());
+        REQUIRE(FilmBufferVariants::getAsAccumulationBufferVariantPtr(buffer).has_value());
 
         std::visit([](auto buf) { delete buf; }, buffer);
     }
@@ -23,7 +23,7 @@ TEST_CASE("BufferVariantConversion::getAsAccumulationBufferVariantPtr") {
 
         const auto buffer = std::get<0>(testData);
 
-        REQUIRE_FALSE(BufferVariantConversion::getAsAccumulationBufferVariantPtr(buffer).has_value());
+        REQUIRE_FALSE(FilmBufferVariants::getAsAccumulationBufferVariantPtr(buffer).has_value());
 
         std::visit([](auto buf) { delete buf; }, buffer);
     }

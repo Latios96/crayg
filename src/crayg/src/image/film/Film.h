@@ -3,7 +3,6 @@
 #include "FilmSpec.h"
 #include "buffers/AccumulationBuffer.h"
 #include "buffers/BufferBase.h"
-#include "buffers/BufferVariantConversion.h"
 #include "buffers/FilmBufferFactory.h"
 #include "buffers/FilmBufferVariants.h"
 #include "buffers/ValueBuffer.h"
@@ -61,14 +60,13 @@ struct Film {
 
         auto bufferVariantPtr = getBufferVariantPtrByName(channelName);
 
-        auto accumulationBufferVariantPtr =
-            BufferVariantConversion::getAsAccumulationBufferVariantPtr(*bufferVariantPtr);
+        auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(*bufferVariantPtr);
         if (accumulationBufferVariantPtr) {
             std::visit([&pixelPosition, &value](auto *buf) { buf->add(pixelPosition, value); },
                        *accumulationBufferVariantPtr);
         }
 
-        auto valueBufferVariantPtr = BufferVariantConversion::getAsValueBufferVariantPtr(*bufferVariantPtr);
+        auto valueBufferVariantPtr = FilmBufferVariants::getAsValueBufferVariantPtr(*bufferVariantPtr);
         if (valueBufferVariantPtr) {
             std::visit([&pixelPosition, &value](auto *buf) { buf->write(pixelPosition, value); },
                        *valueBufferVariantPtr);

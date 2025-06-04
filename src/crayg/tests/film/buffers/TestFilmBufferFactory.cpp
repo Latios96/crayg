@@ -10,7 +10,7 @@ TEST_CASE("FilmBufferFactory::createValueBuffer") {
 
         REQUIRE(std::holds_alternative<FloatValueBuffer *>(bufferVariant));
 
-        freeFilmBufferVariantPtr(bufferVariant);
+        FilmBufferVariants::freeFilmBufferVariantPtr(bufferVariant);
     }
 
     SECTION("should create IntValueBuffer") {
@@ -18,7 +18,7 @@ TEST_CASE("FilmBufferFactory::createValueBuffer") {
 
         REQUIRE(std::holds_alternative<IntValueBuffer *>(bufferVariant));
 
-        freeFilmBufferVariantPtr(bufferVariant);
+        FilmBufferVariants::freeFilmBufferVariantPtr(bufferVariant);
     }
 
     SECTION("should create Color3fValueBuffer") {
@@ -26,7 +26,7 @@ TEST_CASE("FilmBufferFactory::createValueBuffer") {
 
         REQUIRE(std::holds_alternative<Color3fValueBuffer *>(bufferVariant));
 
-        freeFilmBufferVariantPtr(bufferVariant);
+        FilmBufferVariants::freeFilmBufferVariantPtr(bufferVariant);
     }
 
     SECTION("should create Color3iValueBuffer") {
@@ -34,7 +34,7 @@ TEST_CASE("FilmBufferFactory::createValueBuffer") {
 
         REQUIRE(std::holds_alternative<Color3iValueBuffer *>(bufferVariant));
 
-        freeFilmBufferVariantPtr(bufferVariant);
+        FilmBufferVariants::freeFilmBufferVariantPtr(bufferVariant);
     }
 
     SECTION("should throw for unsupported") {
@@ -49,7 +49,7 @@ TEST_CASE("FilmBufferFactory::createAccumulationBuffer") {
 
         REQUIRE(std::holds_alternative<FloatAccumulationBuffer *>(bufferVariant));
 
-        freeFilmBufferVariantPtr(bufferVariant);
+        FilmBufferVariants::freeFilmBufferVariantPtr(bufferVariant);
     }
 
     SECTION("should create Color3fValueBuffer") {
@@ -57,7 +57,7 @@ TEST_CASE("FilmBufferFactory::createAccumulationBuffer") {
 
         REQUIRE(std::holds_alternative<Color3fAccumulationBuffer *>(bufferVariant));
 
-        freeFilmBufferVariantPtr(bufferVariant);
+        FilmBufferVariants::freeFilmBufferVariantPtr(bufferVariant);
     }
 
     SECTION("should throw for unsupported") {

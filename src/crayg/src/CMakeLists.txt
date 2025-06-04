@@ -34,11 +34,10 @@ set(crayg_SRCS
     image/ColorConversion.h
     image/film/buffers/AccumulationBuffer.h
     image/film/buffers/BufferBase.h
-    image/film/buffers/BufferVariantConversion.cpp
-    image/film/buffers/BufferVariantConversion.h
     image/film/buffers/FilmBufferFactory.cpp
     image/film/buffers/FilmBufferFactory.h
     image/film/buffers/FilmBufferType.h
+    image/film/buffers/FilmBufferVariants.cpp
     image/film/buffers/FilmBufferVariants.h
     image/film/buffers/FilmPixelDepth.h
     image/film/buffers/ValueBuffer.h

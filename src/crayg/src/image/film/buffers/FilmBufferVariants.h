@@ -13,8 +13,15 @@ namespace crayg {
 typedef std::variant<EnumerateAllFilmBuffers> FilmBufferVariant;
 typedef std::variant<EnumerateAllFilmBufferPtrs> FilmBufferVariantPtr;
 
-inline void freeFilmBufferVariantPtr(FilmBufferVariantPtr &ptr) {
-    std::visit([](auto *buf) { delete buf; }, ptr);
-}
+class FilmBufferVariants {
+  public:
+    static void freeFilmBufferVariantPtr(FilmBufferVariantPtr &ptr);
+
+    static std::optional<AccumulationBufferVariantPtr>
+    getAsAccumulationBufferVariantPtr(const FilmBufferVariantPtr &bufferVariantPtr);
+
+    static std::optional<ValueBufferVariantPtr>
+    getAsValueBufferVariantPtr(const FilmBufferVariantPtr &bufferVariantPtr);
+};
 
 }
