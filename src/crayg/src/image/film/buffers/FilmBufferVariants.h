@@ -24,6 +24,7 @@ class FilmBufferVariants {
     getAsValueBufferVariantPtr(const FilmBufferVariantPtr &bufferVariantPtr);
 
     static FilmPixelDepth getPixelDepth(const FilmBufferVariantPtr &variantPtr);
+    static int getChannelCount(const FilmBufferVariantPtr &variantPtr);
 };
 
 }

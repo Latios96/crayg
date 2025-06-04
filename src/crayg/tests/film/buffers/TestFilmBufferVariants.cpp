@@ -47,4 +47,23 @@ TEST_CASE("FilmBufferVariants::getPixelDepth") {
     }
 }
 
+TEST_CASE("FilmBufferVariants::getChannelCount") {
+
+    SECTION("should return channel count correctly for float") {
+        FilmBufferVariantPtr ptr = new FloatValueBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getChannelCount(ptr) == 1);
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
+    }
+
+    SECTION("should return channel count correctly for Color3f") {
+        FilmBufferVariantPtr ptr = new Color3fValueBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getChannelCount(ptr) == 3);
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
+    }
+}
+
 }

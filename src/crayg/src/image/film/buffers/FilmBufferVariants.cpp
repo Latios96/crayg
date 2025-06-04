@@ -38,4 +38,8 @@ FilmPixelDepth FilmBufferVariants::getPixelDepth(const FilmBufferVariantPtr &var
     return std::visit([](auto buf) { return buf->pixelDepth; }, variantPtr);
 }
 
+int FilmBufferVariants::getChannelCount(const FilmBufferVariantPtr &variantPtr) {
+    return std::visit([](auto buf) { return buf->chCount; }, variantPtr);
+}
+
 }

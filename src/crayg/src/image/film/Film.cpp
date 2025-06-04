@@ -121,8 +121,7 @@ Film::ChannelView::ChannelView(const std::string &channelName, FilmBufferVariant
 void Film::toImage(Image &image) {
     for (auto channel : getChannels()) {
         const FilmPixelDepth pixelDepth = FilmBufferVariants::getPixelDepth(channel.channelBuffer);
-        // todo extract method to variants
-        const int channelCount = std::visit([](auto buf) { return buf->chCount; }, channel.channelBuffer);
+        const int channelCount = FilmBufferVariants::getChannelCount(channel.channelBuffer);
         // todo extract method to variants
         const void *channelDataPtr = std::visit([](auto buf) { return (void *)buf->data; }, channel.channelBuffer);
         // todo extract mapping
