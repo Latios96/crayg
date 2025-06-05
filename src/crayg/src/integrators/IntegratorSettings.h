@@ -1,6 +1,5 @@
 #pragma once
 #include <fmt/ostream.h>
-#include <fmt/std.h>
 #include <ostream>
 #include <unordered_map>
 #include <variant>
@@ -24,3 +23,13 @@ class IntegratorSettings {
 } // crayg
 
 template <> struct fmt::formatter<crayg::IntegratorSettings> : ostream_formatter {};
+
+template <> struct fmt::formatter<crayg::IntegratorSettingsValue> {
+    template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext> auto format(crayg::IntegratorSettingsValue const &value, FormatContext &ctx) {
+        return std::visit([&ctx](auto &v) { return fmt::format_to(ctx.out(), fmt::format("{}", v)); }, value);
+    };
+};
