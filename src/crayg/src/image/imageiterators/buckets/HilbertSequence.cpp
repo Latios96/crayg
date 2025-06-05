@@ -1,7 +1,7 @@
 #include "HilbertSequence.h"
 #include "LineByLineSequence.h"
 
-#include "external/gilbert/gilbert.h"
+#include <gilbert.h>
 
 namespace crayg {
 

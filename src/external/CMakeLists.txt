@@ -1,0 +1,3 @@
+add_subdirectory(gilbert)
+add_subdirectory(minitrace)
+add_subdirectory(text_encoding_detect)

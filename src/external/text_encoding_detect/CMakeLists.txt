@@ -1,0 +1,4 @@
+set(text_encoding_detect_sources text_encoding_detect.h text_encoding_detect.cpp)
+
+add_library(text_encoding_detect STATIC ${text_encoding_detect_sources})
+target_include_directories(text_encoding_detect PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

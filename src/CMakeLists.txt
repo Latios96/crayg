@@ -1,3 +1,4 @@
+add_subdirectory(external)
 add_subdirectory(crayg)
 add_subdirectory(qtcrayg)
 add_subdirectory(standalone)

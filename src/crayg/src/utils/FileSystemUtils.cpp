@@ -1,9 +1,9 @@
 #include "FileSystemUtils.h"
-#include "external/text_encoding_detect/text_encoding_detect.h"
 #include <codecvt>
 #include <filesystem>
 #include <fstream>
 #include <sstream>
+#include <text_encoding_detect.h>
 
 namespace crayg {
 

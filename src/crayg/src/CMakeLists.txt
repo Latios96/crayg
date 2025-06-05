@@ -24,10 +24,6 @@ set(crayg_SRCS
     basics/Vector3f.h
     CraygInfo.cpp
     CraygInfo.h
-    external/minitrace/minitrace.c
-    external/minitrace/minitrace.h
-    external/text_encoding_detect/text_encoding_detect.cpp
-    external/text_encoding_detect/text_encoding_detect.h
     image/BucketImageBuffer.cpp
     image/BucketImageBuffer.h
     image/ColorConversion.cpp
@@ -453,4 +449,11 @@ add_custom_command(
     PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_LIB_DIRS_USD}/usd ${CMAKE_BINARY_DIR}/bin/usd)
 
-target_link_libraries(crayg ${CONAN_LIBS} ${CMAKE_DL_LIBS} cpptrace)
+target_link_libraries(
+    crayg
+    ${CONAN_LIBS}
+    ${CMAKE_DL_LIBS}
+    cpptrace
+    gilbert
+    minitrace
+    text_encoding_detect)
