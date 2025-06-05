@@ -29,6 +29,7 @@ void ImageWidget::writeBucketImageBuffer(std::shared_ptr<BucketImageBuffer> buck
     updateBufferToShow(bucketImageBuffer->imageBucket);
 }
 
+// todo extract this into utility class
 void drawHLine(QImage &image, int x_start, int y_start, int length, int width, const QColor &color) {
     for (int x = 0; x < length; x++) {
         for (int y = 0; y < width; y++) {

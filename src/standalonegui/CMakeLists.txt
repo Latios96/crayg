@@ -17,6 +17,10 @@ add_library(
     widgets/ImageWidget.h
     widgets/ImageWidgetOutputDriver.cpp
     widgets/ImageWidgetOutputDriver.h
+    widgets/NextGenImageWidget.cpp
+    widgets/NextGenImageWidget.h
+    widgets/NextGenImageWidgetOutputDriver.cpp
+    widgets/NextGenImageWidgetOutputDriver.h
     widgets/PanAndZoomArea.cpp
     widgets/PanAndZoomArea.h)
 
