@@ -3,6 +3,7 @@
 #include "basics/Resolution.h"
 #include "scene/RenderSettings.h"
 #include "utils/DtoUtils.h"
+#include <fmt/std.h>
 #include <optional>
 
 namespace crayg {
