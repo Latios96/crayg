@@ -6,28 +6,20 @@ namespace crayg {
 
 class NextGenOutputDriver {
   public:
-    void initialize(const FilmSpec &filmSpec);
-    void startBucket(const ImageBucket &imageBucket);
-    void updateAllChannelsInBucket(const ImageBucket &imageBucket);
-    void updateChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName);
-    void finishBucket(const ImageBucket &imageBucket);
-    void updateAllChannels();
-    void updateChannel(const std::string &channelName);
-    void writeImageMetadata(const ImageMetadata &imageMetadata_);
-    Film &getFilm();
+    virtual void initialize(const FilmSpec &filmSpec);
+    virtual void startBucket(const ImageBucket &imageBucket);
+    virtual void updateAllChannelsInBucket(const ImageBucket &imageBucket);
+    virtual void updateChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName);
+    virtual void finishBucket(const ImageBucket &imageBucket);
+    virtual void updateAllChannels();
+    virtual void updateChannel(const std::string &channelName);
+    virtual void writeImageMetadata(const ImageMetadata &imageMetadata_);
 
-    virtual void onInitialize();
-    virtual void onStartBucket(const ImageBucket &imageBucket);
-    virtual void onUpdateAllChannelsInBucket(const ImageBucket &imageBucket);
-    virtual void onUpdateChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName);
-    virtual void onFinishBucket();
-    virtual void onUpdateAllChannels();
-    virtual void onUpdateChannel(const std::string &channelName);
-    virtual void onWriteImageMetadata();
+    Film &getFilm();
 
     virtual ~NextGenOutputDriver() = default;
 
-  private:
+  protected:
     std::unique_ptr<Film> film;
     ImageMetadata imageMetadata;
 };
