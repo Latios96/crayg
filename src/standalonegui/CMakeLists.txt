@@ -48,3 +48,13 @@ target_link_libraries(
     Qt5::Widgets
     Qt5::Core
     ${CONAN_LIBS})
+
+add_executable(crayg-flarerenderer-gui main_flarerenderer.cpp)
+target_link_libraries(
+    crayg-flarerenderer-gui
+    crayg
+    crayg-framebuffer
+    crayg-standalone-lib
+    Qt5::Widgets
+    Qt5::Core
+    ${CONAN_LIBS})
