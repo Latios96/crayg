@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ImageWidget.h"
 #include "PanAndZoomArea.h"
 #include "image/ImageMetadata.h"
+#include "image/ImageSpec.h"
 #include "qtcrayg/widgets/IconToggleButton.h"
 #include "utils/TaskReporter.h"
 #include <QGuiApplication>
@@ -22,7 +22,7 @@ namespace crayg {
 class FrameBufferWidget : public QWidget {
     Q_OBJECT
   public:
-    FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent = nullptr);
+    FrameBufferWidget(QWidget &imageWidget, QWidget *parent = nullptr);
 
     void connectToggleFollowMouse(const std::function<void()> &toggle);
 
@@ -39,7 +39,7 @@ class FrameBufferWidget : public QWidget {
 
   private:
     void setupUI();
-    ImageWidget &imageWidget;
+    QWidget &imageWidget;
     PanAndZoomArea *panAndZoomArea;
     SmallIconToggleButton *metadataButton;
     QTreeWidget *imageMetadataWidget;

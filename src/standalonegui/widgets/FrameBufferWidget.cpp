@@ -12,7 +12,7 @@
 
 namespace crayg {
 
-FrameBufferWidget::FrameBufferWidget(ImageWidget &imageWidget, QWidget *parent)
+FrameBufferWidget::FrameBufferWidget(QWidget &imageWidget, QWidget *parent)
     : QWidget(parent), imageWidget(imageWidget) {
     setupUI();
 }
