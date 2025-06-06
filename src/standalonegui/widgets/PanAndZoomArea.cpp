@@ -108,6 +108,10 @@ void PanAndZoomArea::setOriginalSize(const QSize &originalSize) {
     PanAndZoomArea::originalSize = originalSize;
 }
 
+ZoomFactor PanAndZoomArea::getZoomFactor() const {
+    return zoomFactor;
+}
+
 int ZoomFactor::getValue() const {
     return value;
 }
