@@ -29,7 +29,6 @@ class PanAndZoomArea : public QScrollArea {
   public:
     explicit PanAndZoomArea(QWidget *parent = nullptr);
     void setWidget(QWidget *widget);
-    const QSize &getOriginalSize() const;
     void setOriginalSize(const QSize &originalSize);
     ZoomFactor getZoomFactor() const;
 
@@ -44,7 +43,6 @@ class PanAndZoomArea : public QScrollArea {
   private:
     ZoomFactor zoomFactor;
     int newScrollValue(float mousePosition, float oldImageSize, int oldScrollbarValue, float newImageSize);
-    QSize originalSize;
     void startMove(const QPoint &point);
     QPoint move(const QPoint &point);
     QPoint endMove(const QPoint &point);

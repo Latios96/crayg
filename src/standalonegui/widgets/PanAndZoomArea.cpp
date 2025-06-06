@@ -56,7 +56,6 @@ int PanAndZoomArea::newScrollValue(float mousePosition, float oldImageSize, int 
 
 void PanAndZoomArea::setWidget(QWidget *widget) {
     QScrollArea::setWidget(widget);
-    originalSize = widget->size();
 }
 
 void PanAndZoomArea::mousePressEvent(QMouseEvent *event) {
@@ -98,14 +97,6 @@ QPoint PanAndZoomArea::move(const QPoint &point) {
 QPoint PanAndZoomArea::endMove(const QPoint &point) {
     isMoving = false;
     return move(point);
-}
-
-const QSize &PanAndZoomArea::getOriginalSize() const {
-    return originalSize;
-}
-
-void PanAndZoomArea::setOriginalSize(const QSize &originalSize) {
-    PanAndZoomArea::originalSize = originalSize;
 }
 
 ZoomFactor PanAndZoomArea::getZoomFactor() const {
