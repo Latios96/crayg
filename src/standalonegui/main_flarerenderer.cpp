@@ -6,6 +6,7 @@
 #include "CliParser.h"
 #include "CraygInfo.h"
 #include "Logger.h"
+#include "image/film/io/FilmWriter.h"
 #include "image/imageiterators/buckets/ImageBucketSequences.h"
 #include "image/imageiterators/pixels/ImageIterators.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
@@ -116,7 +117,7 @@ int craygMain(int argc, char **argv) {
             while (true) {
                 const auto imageBucket = bucketQueue.nextBucket();
                 if (!imageBucket) {
-                    return;
+                    break;
                 }
                 nextGenImageWidgetOutputDriver.startBucket(*imageBucket);
                 std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -134,6 +135,7 @@ int craygMain(int argc, char **argv) {
         } catch (std::exception &e) {
             Logger::error("Caught exception: {}", e.what());
         }
+        FilmWriter::writeFilm(nextGenImageWidgetOutputDriver.getFilm(), "filmWriteTest.exr");
     });
     renderThread.detach();
 

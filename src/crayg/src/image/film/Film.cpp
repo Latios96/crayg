@@ -129,7 +129,7 @@ const auto filmPixelDepthAndPixelFormat = ValueMapper<FilmPixelDepth, PixelForma
 const auto filmPixelDepthAndByteCount =
     ValueMapper<FilmPixelDepth, int>({{FilmPixelDepth::FLOAT32, 4}, {FilmPixelDepth::UINT8, 1}});
 
-void Film::toImage(Image &image) {
+void Film::toImage(Image &image) const {
     for (auto channel : getChannels()) {
         const FilmPixelDepth pixelDepth = FilmBufferVariants::getPixelDepth(channel.channelBuffer);
         const int channelCount = FilmBufferVariants::getChannelCount(channel.channelBuffer);

@@ -43,6 +43,8 @@ set(crayg_SRCS
     image/film/Film.h
     image/film/FilmSpec.cpp
     image/film/FilmSpec.h
+    image/film/io/FilmWriter.cpp
+    image/film/io/FilmWriter.h
     image/Image.cpp
     image/Image.h
     image/ImageAlgorithms.cpp

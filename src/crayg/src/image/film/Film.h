@@ -32,7 +32,7 @@ struct Film {
     void updateAveragesInBucket(const ImageBucket &imageBucket);
     void updateAveragesForChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName);
 
-    void toImage(Image &image);
+    void toImage(Image &image) const;
 
     struct ChannelView {
         ChannelView(const std::string &channelName, FilmBufferVariantPtr channelBuffer);
