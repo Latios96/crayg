@@ -44,8 +44,7 @@ struct Film {
     std::vector<std::string> channelNames() const;
     bool hasChannel(const std::string &name) const;
     std::optional<FilmBufferVariantPtr> getBufferVariantPtrByName(const std::string &name);
-    Resolution getResolution() const;
-    std::optional<Bounds2di> getRegionToRender() const;
+    FilmSpec getFilmSpec() const;
 
     virtual ~Film();
 
@@ -76,8 +75,7 @@ struct Film {
         }
     }
 
-    Resolution resolution;
-    std::optional<Bounds2di> regionToRender;
+    FilmSpec filmSpec;
     FilmAccumulationBuffer<float, 3> rgb;
     tsl::ordered_map<std::string, FilmBufferVariantPtr> additionalChannels;
 };

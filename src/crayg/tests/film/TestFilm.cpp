@@ -9,13 +9,19 @@ TEST_CASE("Film::construct") {
     SECTION("should construct correctly from dimensions") {
         Film film(10, 5);
 
-        REQUIRE(film.getResolution() == Resolution(10, 5));
+        REQUIRE(film.getFilmSpec() == FilmSpec(Resolution(10, 5),
+                                               std::vector<FilmBufferSpec>(
+                                                   {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT32, 3}}),
+                                               std::nullopt));
     }
 
     SECTION("should construct correctly from dimensions") {
         Film film(Resolution(10, 5));
 
-        REQUIRE(film.getResolution() == Resolution(10, 5));
+        REQUIRE(film.getFilmSpec() == FilmSpec(Resolution(10, 5),
+                                               std::vector<FilmBufferSpec>(
+                                                   {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT32, 3}}),
+                                               std::nullopt));
     }
 }
 

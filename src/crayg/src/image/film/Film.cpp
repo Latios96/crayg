@@ -3,35 +3,34 @@
 #include "utils/ValueMapper.h"
 
 namespace crayg {
-Film::Film(int width, int height) : rgb(width, height), resolution(Resolution(width, height)) {
+Film::Film(int width, int height) : rgb(width, height), filmSpec(FilmSpecBuilder(Resolution(width, height)).finish()) {
 }
 
-Film::Film(const Resolution &resolution) : rgb(resolution), resolution(resolution) {
+Film::Film(const Resolution &resolution) : rgb(resolution), filmSpec(FilmSpecBuilder(resolution).finish()) {
 }
 
 void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
-    if (getResolution() != filmSpec.resolution) {
+    if (this->filmSpec.resolution != filmSpec.resolution) {
         CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Image resolution does not match, was {}, required was {}",
-                                                           getResolution(), filmSpec.resolution)));
+                                                           this->filmSpec.resolution, filmSpec.resolution)));
     }
     for (auto &channelSpec : filmSpec.channels) {
         if (channelSpec.name == "rgb") {
             continue;
         }
         addChannel(channelSpec.name,
-                   FilmBufferFactory::createFilmBuffer(resolution, channelSpec.bufferType, channelSpec.pixelDepth,
-                                                       channelSpec.channelCount));
+                   FilmBufferFactory::createFilmBuffer(filmSpec.resolution, channelSpec.bufferType,
+                                                       channelSpec.pixelDepth, channelSpec.channelCount));
     }
-
-    regionToRender = filmSpec.regionToRender;
+    this->filmSpec = filmSpec;
 }
 
 void Film::addChannel(const std::string &name, FilmBufferVariantPtr filmBufferVariantPtr) {
     std::visit(
         [this](auto buf) {
-            if (this->resolution != Resolution(buf->width, buf->height)) {
+            if (this->filmSpec.resolution != Resolution(buf->width, buf->height)) {
                 CRAYG_LOG_AND_THROW_MESSAGE(fmt::format("Resolutions don't match, expected {}, was {}x{}",
-                                                        this->resolution, buf->width, buf->height));
+                                                        this->filmSpec.resolution, buf->width, buf->height));
             }
         },
         filmBufferVariantPtr);
@@ -107,12 +106,8 @@ std::optional<FilmBufferVariantPtr> Film::getBufferVariantPtrByName(const std::s
     return additionalChannels.at(name);
 }
 
-Resolution Film::getResolution() const {
-    return resolution;
-}
-
-std::optional<Bounds2di> Film::getRegionToRender() const {
-    return regionToRender;
+FilmSpec Film::getFilmSpec() const {
+    return filmSpec;
 }
 
 Film::~Film() {
@@ -140,13 +135,14 @@ void Film::toImage(Image &image) {
         const int bytesPerPixel = *filmPixelDepthAndByteCount.mapFromLeft(pixelDepth);
 
         if (channel.channelName != "rgb") {
-            image.addChannel(channel.channelName, std::make_unique<PixelBuffer>(resolution, pixelFormat, channelCount));
+            image.addChannel(channel.channelName,
+                             std::make_unique<PixelBuffer>(filmSpec.resolution, pixelFormat, channelCount));
         }
 
         auto imageChannel = image.getChannel(channel.channelName);
         void *dstPtr = std::visit([](auto data) { return (void *)data; }, imageChannel->getData());
         std::memcpy(dstPtr, channelDataPtr,
-                    resolution.getWidth() * resolution.getHeight() * bytesPerPixel * channelCount);
+                    filmSpec.resolution.getWidth() * filmSpec.resolution.getHeight() * bytesPerPixel * channelCount);
     }
 }
 
