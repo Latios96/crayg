@@ -14,11 +14,13 @@ void NextGenImageWidgetOutputDriver::startBucket(const ImageBucket &imageBucket)
 
 void NextGenImageWidgetOutputDriver::updateAllChannelsInBucket(const ImageBucket &imageBucket) {
     NextGenOutputDriver::updateAllChannelsInBucket(imageBucket);
+    emit allChannelsInBucketUpdated(imageBucket);
 }
 
 void NextGenImageWidgetOutputDriver::updateChannelInBucket(const ImageBucket &imageBucket,
                                                            const std::string &channelName) {
     NextGenOutputDriver::updateChannelInBucket(imageBucket, channelName);
+    emit channelInBucketUpdated(imageBucket, channelName);
 }
 
 void NextGenImageWidgetOutputDriver::finishBucket(const ImageBucket &imageBucket) {
@@ -47,8 +49,9 @@ void NextGenImageWidgetOutputDriver::processInitialize() {
 
 void NextGenImageWidgetOutputDriver::processBucketStarted(ImageBucket imageBucket) {
     activeBuckets.insert(imageBucket);
-    // todo drawBucket(bufferToShow, imageBucket);
-    // todo drawRegionToRenderIfNeeded(bufferToShow, regionToRender);
+    FrameBufferDrawUtils::drawBucket(nextGenImageWidget.displayBuffer, imageBucket);
+    FrameBufferDrawUtils::drawRegionToRenderIfNeeded(nextGenImageWidget.displayBuffer, film->getRegionToRender());
+    nextGenImageWidget.update();
 }
 
 void NextGenImageWidgetOutputDriver::processAllChannelsInBucketUpdated(ImageBucket imageBucket) {
@@ -78,17 +81,40 @@ void NextGenImageWidgetOutputDriver::processChannelUpdated(std::string channelNa
     updateDisplayBuffer();
 }
 
+inline void NextGenImageWidgetOutputDriver::processCurrentChannelChanged(std::string newChannel) {
+    currentChannel = newChannel;
+    updateDisplayBuffer();
+}
+
 void NextGenImageWidgetOutputDriver::updateDisplayBuffer() {
     Resolution filmResolution = film->getResolution();
     updateDisplayBuffer(ImageBucket({0, 0}, filmResolution.getWidth(), filmResolution.getHeight()));
 }
 
 void NextGenImageWidgetOutputDriver::updateDisplayBuffer(const ImageBucket &imageBucket) {
-    // get current channel
-    // copy current channel within display bounds to display buffer, convert colors if needed
-    // draw buckets
-    // draw regionToRender if needed
-    // call update() on NextGenImageWidget
+    auto bufferVariantPtr = film->getBufferVariantPtrByName(currentChannel);
+    if (!bufferVariantPtr) {
+        return;
+    }
+
+    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+        const Vector2i globalPosition = pixel + imageBucket.getPosition();
+        Color color =
+            std::visit([&globalPosition](auto buf) { return buf->getColor(globalPosition); }, *bufferVariantPtr);
+        if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {
+            color = ColorConversion::linearToSRGB(color);
+        }
+        const auto rgbValues = color.getRgbValues();
+        nextGenImageWidget.displayBuffer.setPixelColor(
+            globalPosition.x, globalPosition.y,
+            QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
+    }
+
+    for (auto &bucket : activeBuckets) {
+        FrameBufferDrawUtils::drawBucket(nextGenImageWidget.displayBuffer, bucket);
+    }
+    FrameBufferDrawUtils::drawRegionToRenderIfNeeded(nextGenImageWidget.displayBuffer, film->getRegionToRender());
+    nextGenImageWidget.update();
 }
 
 }
