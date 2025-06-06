@@ -7,6 +7,7 @@
 #include "buffers/FilmBufferVariants.h"
 #include "buffers/FilmValueBuffer.h"
 #include "image/ImageBucket.h"
+#include "image/ImageMetadata.h"
 
 #include <optional>
 #include <tsl/ordered_map.h>

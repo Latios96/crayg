@@ -1,5 +1,9 @@
 #include "NextGenImageWidgetOutputDriver.h"
 
+#include "FrameBufferDrawUtils.h"
+#include "image/ColorConversion.h"
+#include "image/imageiterators/pixels/ImageIterators.h"
+
 namespace crayg {
 
 void NextGenImageWidgetOutputDriver::initialize(const FilmSpec &filmSpec) {
@@ -81,7 +85,7 @@ void NextGenImageWidgetOutputDriver::processChannelUpdated(std::string channelNa
     updateDisplayBuffer();
 }
 
-inline void NextGenImageWidgetOutputDriver::processCurrentChannelChanged(std::string newChannel) {
+void NextGenImageWidgetOutputDriver::processCurrentChannelChanged(std::string newChannel) {
     currentChannel = newChannel;
     updateDisplayBuffer();
 }

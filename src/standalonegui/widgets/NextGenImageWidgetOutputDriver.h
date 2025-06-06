@@ -2,6 +2,8 @@
 #include "NextGenImageWidget.h"
 #include "outputdrivers/NextGenOutputDriver.h"
 
+#include <unordered_set>
+
 namespace crayg {
 
 class NextGenImageWidgetOutputDriver : public QObject, public NextGenOutputDriver {
