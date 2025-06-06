@@ -8,6 +8,8 @@ set(CMAKE_AUTORCC ON)
 
 add_library(
     crayg-framebuffer
+    widgets/FrameBufferDrawUtils.cpp
+    widgets/FrameBufferDrawUtils.h
     widgets/FrameBufferWidget.cpp
     widgets/FrameBufferWidget.h
     widgets/GuiTaskReporter.cpp
