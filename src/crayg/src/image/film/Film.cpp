@@ -22,6 +22,8 @@ void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
                    FilmBufferFactory::createFilmBuffer(resolution, channelSpec.bufferType, channelSpec.pixelDepth,
                                                        channelSpec.channelCount));
     }
+
+    regionToRender = filmSpec.regionToRender;
 }
 
 void Film::addChannel(const std::string &name, FilmBufferVariantPtr filmBufferVariantPtr) {
@@ -105,8 +107,12 @@ std::optional<FilmBufferVariantPtr> Film::getBufferVariantPtrByName(const std::s
     return additionalChannels.at(name);
 }
 
-const Resolution &Film::getResolution() const {
+Resolution Film::getResolution() const {
     return resolution;
+}
+
+std::optional<Bounds2di> Film::getRegionToRender() const {
+    return regionToRender;
 }
 
 Film::~Film() {
