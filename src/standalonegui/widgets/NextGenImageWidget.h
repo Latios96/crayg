@@ -14,8 +14,8 @@ class NextGenImageWidget : public QWidget {
   protected:
     void paintEvent(QPaintEvent *event) override;
 
-  private:
+  public:
     QImage displayBuffer;
 };
 
-} // crayg
+}
