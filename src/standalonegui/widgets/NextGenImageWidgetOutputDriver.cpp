@@ -44,13 +44,14 @@ void NextGenImageWidgetOutputDriver::writeImageMetadata(const ImageMetadata &ima
 }
 
 void NextGenImageWidgetOutputDriver::processInitialize() {
-    nextGenImageWidget.initBuffer(film->getResolution());
+    nextGenImageWidget.initBuffer(film->getFilmSpec().resolution);
 }
 
 void NextGenImageWidgetOutputDriver::processBucketStarted(ImageBucket imageBucket) {
     activeBuckets.insert(imageBucket);
     FrameBufferDrawUtils::drawBucket(nextGenImageWidget.displayBuffer, imageBucket);
-    FrameBufferDrawUtils::drawRegionToRenderIfNeeded(nextGenImageWidget.displayBuffer, film->getRegionToRender());
+    FrameBufferDrawUtils::drawRegionToRenderIfNeeded(nextGenImageWidget.displayBuffer,
+                                                     film->getFilmSpec().regionToRender);
     nextGenImageWidget.update();
 }
 
@@ -87,7 +88,7 @@ inline void NextGenImageWidgetOutputDriver::processCurrentChannelChanged(std::st
 }
 
 void NextGenImageWidgetOutputDriver::updateDisplayBuffer() {
-    Resolution filmResolution = film->getResolution();
+    Resolution filmResolution = film->getFilmSpec().resolution;
     updateDisplayBuffer(ImageBucket({0, 0}, filmResolution.getWidth(), filmResolution.getHeight()));
 }
 
@@ -113,7 +114,8 @@ void NextGenImageWidgetOutputDriver::updateDisplayBuffer(const ImageBucket &imag
     for (auto &bucket : activeBuckets) {
         FrameBufferDrawUtils::drawBucket(nextGenImageWidget.displayBuffer, bucket);
     }
-    FrameBufferDrawUtils::drawRegionToRenderIfNeeded(nextGenImageWidget.displayBuffer, film->getRegionToRender());
+    FrameBufferDrawUtils::drawRegionToRenderIfNeeded(nextGenImageWidget.displayBuffer,
+                                                     film->getFilmSpec().regionToRender);
     nextGenImageWidget.update();
 }
 

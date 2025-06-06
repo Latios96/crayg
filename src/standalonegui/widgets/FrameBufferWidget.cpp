@@ -204,6 +204,15 @@ void FrameBufferWidget::setImageSpec(ImageSpec imageSpec) {
     }
 }
 
+void FrameBufferWidget::setFilmSpec(FilmSpec filmSpec) {
+    channelComboBox->clear();
+    for (auto &channelSpec : filmSpec.channels) {
+        channelComboBox->addItem(QString::fromStdString(channelSpec.name));
+        channelComboBox->setItemData(channelComboBox->count() - 1, QString::fromStdString(channelSpec.name),
+                                     Qt::ToolTipRole);
+    }
+}
+
 void FrameBufferWidget::startTask(BaseTaskReporter::Task task) {
     statusPreviousTask->hide();
     statusProgressBar->setFormat(qformat("{}..", task.name));

@@ -3,6 +3,7 @@
 #include "PanAndZoomArea.h"
 #include "image/ImageMetadata.h"
 #include "image/ImageSpec.h"
+#include "image/film/FilmSpec.h"
 #include "qtcrayg/widgets/IconToggleButton.h"
 #include "utils/TaskReporter.h"
 #include <QGuiApplication>
@@ -31,6 +32,7 @@ class FrameBufferWidget : public QWidget {
     void setZoomFactor(ZoomFactor zoomFactor);
     void setImageMetadata(ImageMetadata imageMetadata);
     void setImageSpec(ImageSpec imageSpec);
+    void setFilmSpec(FilmSpec filmSpec);
     void startTask(BaseTaskReporter::Task task);
     void finishTask(BaseTaskReporter::Task task);
     void updateTask(BaseTaskReporter::Task task);
