@@ -45,6 +45,7 @@ struct Film {
     bool hasChannel(const std::string &name) const;
     std::optional<FilmBufferVariantPtr> getBufferVariantPtrByName(const std::string &name);
     FilmSpec getFilmSpec() const;
+    ImageMetadata getMetadata() const;
 
     virtual ~Film();
 
@@ -76,6 +77,7 @@ struct Film {
     }
 
     FilmSpec filmSpec;
+    ImageMetadata metadata;
     FilmAccumulationBuffer<float, 3> rgb;
     tsl::ordered_map<std::string, FilmBufferVariantPtr> additionalChannels;
 };

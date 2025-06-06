@@ -13,7 +13,7 @@
 namespace crayg {
 
 FrameBufferWidget::FrameBufferWidget(QWidget &imageWidget, QWidget *parent)
-    : QWidget(parent), imageWidget(imageWidget) {
+    : QWidget(parent), imageWidget(imageWidget), resolution(Resolution()) {
     setupUI();
 }
 
@@ -142,10 +142,7 @@ void FrameBufferWidget::setupUI() {
 }
 
 void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
-    const auto title =
-        qformat("Crayg Frame Buffer - [{} of {}x{}]", zoomFactor, this->panAndZoomArea->getOriginalSize().width(),
-                this->panAndZoomArea->getOriginalSize().height());
-    this->setWindowTitle(title);
+    generateWindowTitle();
 }
 
 QTreeWidgetItem *findChildByName(QTreeWidgetItem *item, const QString &name) {
@@ -196,6 +193,8 @@ void FrameBufferWidget::setImageMetadata(ImageMetadata imageMetadata) {
 }
 
 void FrameBufferWidget::setImageSpec(ImageSpec imageSpec) {
+    resolution = imageSpec.resolution;
+    generateWindowTitle();
     channelComboBox->clear();
     for (auto &channelSpec : imageSpec.channels) {
         channelComboBox->addItem(QString::fromStdString(channelSpec.name));
@@ -205,6 +204,8 @@ void FrameBufferWidget::setImageSpec(ImageSpec imageSpec) {
 }
 
 void FrameBufferWidget::setFilmSpec(FilmSpec filmSpec) {
+    resolution = filmSpec.resolution;
+    generateWindowTitle();
     channelComboBox->clear();
     for (auto &channelSpec : filmSpec.channels) {
         channelComboBox->addItem(QString::fromStdString(channelSpec.name));
@@ -249,6 +250,12 @@ void FrameBufferWidget::updateTask(BaseTaskReporter::Task task) {
     statusElapsed->setText(formatElapsed(elapsedTime));
     statusRemaining->setText(formatRemaining(estimatedTimeRemaining));
     statusEstimatedTotal->setText(formatEstimatedTotal(estimatedTotalTime));
+}
+
+void FrameBufferWidget::generateWindowTitle() {
+    const auto title = qformat("Crayg Frame Buffer - [{} of {}x{}]", panAndZoomArea->getZoomFactor(),
+                               resolution.getWidth(), resolution.getHeight());
+    this->setWindowTitle(title);
 }
 
 void FrameBufferWidget::connectToggleFollowMouse(const std::function<void()> &toggle) {

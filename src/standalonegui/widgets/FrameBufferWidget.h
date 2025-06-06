@@ -29,13 +29,14 @@ class FrameBufferWidget : public QWidget {
 
     ~FrameBufferWidget() override = default;
   public slots:
-    void setZoomFactor(ZoomFactor zoomFactor);
+    void setZoomFactor(ZoomFactor zoomFactor); // todo remove, connect to generateWindowTitle
     void setImageMetadata(ImageMetadata imageMetadata);
     void setImageSpec(ImageSpec imageSpec);
     void setFilmSpec(FilmSpec filmSpec);
     void startTask(BaseTaskReporter::Task task);
     void finishTask(BaseTaskReporter::Task task);
     void updateTask(BaseTaskReporter::Task task);
+    void generateWindowTitle();
   signals:
     void channelChanged(std::string newChannel);
 
@@ -52,6 +53,7 @@ class FrameBufferWidget : public QWidget {
     QLabel *statusEstimatedTotal;
     QLabel *statusPreviousTask;
     IconToggleButton *followMouseToggle;
+    Resolution resolution;
 };
 
 }

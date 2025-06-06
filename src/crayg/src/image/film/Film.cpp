@@ -110,6 +110,10 @@ FilmSpec Film::getFilmSpec() const {
     return filmSpec;
 }
 
+ImageMetadata Film::getMetadata() const {
+    return metadata;
+}
+
 Film::~Film() {
     for (auto &channel : additionalChannels) {
         std::visit([](auto *buf) { delete buf; }, channel.second);

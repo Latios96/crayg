@@ -32,7 +32,7 @@ class NextGenImageWidgetOutputDriver : public QObject, public NextGenOutputDrive
     void finishBucket(const ImageBucket &imageBucket) override;
     void updateAllChannels() override;
     void updateChannel(const std::string &channelName) override;
-    void writeImageMetadata(const ImageMetadata &imageMetadata_) override;
+    void updateImageMetadata() override;
 
   signals:
     void initialized();
@@ -42,7 +42,7 @@ class NextGenImageWidgetOutputDriver : public QObject, public NextGenOutputDrive
     void bucketFinished(ImageBucket imageBucket);
     void allChannelsUpdated();
     void channelUpdated(std::string channelName);
-    void imageMetadataWritten();
+    void imageMetadataUpdated();
 
   public slots:
     void processInitialize();

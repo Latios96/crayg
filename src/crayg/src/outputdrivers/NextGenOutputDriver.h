@@ -13,7 +13,7 @@ class NextGenOutputDriver {
     virtual void finishBucket(const ImageBucket &imageBucket);
     virtual void updateAllChannels();
     virtual void updateChannel(const std::string &channelName);
-    virtual void writeImageMetadata(const ImageMetadata &imageMetadata_);
+    virtual void updateImageMetadata();
 
     Film &getFilm();
 

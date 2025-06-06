@@ -38,9 +38,8 @@ void NextGenImageWidgetOutputDriver::updateChannel(const std::string &channelNam
     emit channelUpdated(channelName);
 }
 
-void NextGenImageWidgetOutputDriver::writeImageMetadata(const ImageMetadata &imageMetadata_) {
-    NextGenOutputDriver::writeImageMetadata(imageMetadata_);
-    emit imageMetadataWritten();
+void NextGenImageWidgetOutputDriver::updateImageMetadata() {
+    emit imageMetadataUpdated();
 }
 
 void NextGenImageWidgetOutputDriver::processInitialize() {

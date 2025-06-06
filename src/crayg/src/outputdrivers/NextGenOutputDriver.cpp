@@ -29,8 +29,7 @@ void NextGenOutputDriver::updateChannel(const std::string &channelName) {
     film->updateAveragesForChannel(channelName);
 }
 
-void NextGenOutputDriver::writeImageMetadata(const ImageMetadata &imageMetadata_) {
-    this->imageMetadata = imageMetadata_;
+void NextGenOutputDriver::updateImageMetadata() {
 }
 
 Film &NextGenOutputDriver::getFilm() {
