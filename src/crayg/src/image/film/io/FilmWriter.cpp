@@ -8,7 +8,7 @@ bool FilmWriter::writeFilm(const Film &film, const std::filesystem::path &path) 
     Image image(film.getFilmSpec().resolution);
 
     film.toImage(image);
-    ImageWriters::writeImage(image, path);
+    ImageWriters::writeImage(image, path.string());
 }
 
 }
