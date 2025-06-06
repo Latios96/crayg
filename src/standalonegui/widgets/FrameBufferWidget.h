@@ -42,6 +42,7 @@ class FrameBufferWidget : public QWidget {
 
   private:
     void setupUI();
+    void adaptToAvailableSize();
     QWidget &imageWidget;
     PanAndZoomArea *panAndZoomArea;
     SmallIconToggleButton *metadataButton;

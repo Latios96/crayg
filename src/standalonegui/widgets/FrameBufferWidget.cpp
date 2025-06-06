@@ -129,9 +129,11 @@ void FrameBufferWidget::setupUI() {
     statusPreviousTask = this->findChild<QLabel *>(IDs::statusPreviousTask);
 
     setZoomFactor(ZoomFactor());
+    adaptToAvailableSize();
+}
 
+void FrameBufferWidget::adaptToAvailableSize() {
     const QSize availableSize = QGuiApplication::primaryScreen()->availableSize();
-
     if (imageWidget.size().width() > availableSize.width() - 100 &&
         imageWidget.size().height() > availableSize.height() - 100) {
         resize(availableSize * 3.0f / 5.0f);
@@ -205,6 +207,7 @@ void FrameBufferWidget::setImageSpec(ImageSpec imageSpec) {
 
 void FrameBufferWidget::setFilmSpec(FilmSpec filmSpec) {
     resolution = filmSpec.resolution;
+    adaptToAvailableSize();
     generateWindowTitle();
     channelComboBox->clear();
     for (auto &channelSpec : filmSpec.channels) {
