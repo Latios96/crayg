@@ -7,7 +7,6 @@
 #include "ThickLensApproximation.h"
 #include "VariableLensDistances.h"
 #include "basics/Gradient.h"
-#include "basics/MathUtils.h"
 #include "basics/Ray.h"
 #include "utils/DtoUtils.h"
 #include <fmt/ostream.h>

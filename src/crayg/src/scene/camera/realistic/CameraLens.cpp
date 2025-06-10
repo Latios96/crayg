@@ -1,7 +1,6 @@
 #include "CameraLens.h"
 #include "Logger.h"
 #include "Wavelengths.h"
-#include "basics/MathUtils.h"
 #include "scene/camera/CameraUtils.h"
 #include <fmt/ranges.h>
 #include <iostream>
