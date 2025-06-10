@@ -1,6 +1,5 @@
 #include "UsdPreviewSurface.h"
 #include "Logger.h"
-#include "basics/MathUtils.h"
 #include "sampling/Sampling.h"
 #include "scene/Imageable.h"
 
