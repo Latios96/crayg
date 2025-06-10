@@ -1,4 +1,5 @@
 #include "OpenExrWriter.h"
+#include "image/InvalidPixelFormat.h"
 #include "utils/Exceptions.h"
 #include "utils/tracing/CraygTracing.h"
 
@@ -54,8 +55,9 @@ void OpenExrWriter::collectPixelDataIntoSingleBuffer(unsigned int pixelCount,
         for (auto &channel : channels) {
             int colorChannelCount = channel.channelBuffer.getColorChannelCount();
 
-            const bool isFloat = channel.channelBuffer.getPixelFormat() == PixelFormat::FLOAT;
-            const bool isUInt8 = channel.channelBuffer.getPixelFormat() == PixelFormat::UINT8;
+            const PixelFormat pixelFormat = channel.channelBuffer.getPixelFormat();
+            const bool isFloat = pixelFormat == PixelFormat::FLOAT;
+            const bool isUInt8 = pixelFormat == PixelFormat::UINT8;
 
             if (isFloat) {
                 float *channelData = std::get<float *>(channel.channelBuffer.getData());
@@ -68,7 +70,7 @@ void OpenExrWriter::collectPixelDataIntoSingleBuffer(unsigned int pixelCount,
                 memcpy(data, channelData + pixel * colorChannelCount, amount);
                 data += amount;
             } else {
-                CRAYG_LOG_AND_THROW(std::runtime_error("Unsupported pixel format"));
+                CRAYG_LOG_AND_THROW(UnsupportedPixelFormat(pixelFormat));
             }
         }
     }
@@ -122,7 +124,7 @@ void OpenExrWriter::writeChannelFormats(OIIO::ImageSpec &spec, const PixelBuffer
         } else if (channelBuffer.getPixelFormat() == PixelFormat::UINT8) {
             spec.channelformats.push_back(OIIO::TypeUInt8);
         } else {
-            CRAYG_LOG_AND_THROW(std::runtime_error("Unsupported pixel format"));
+            CRAYG_LOG_AND_THROW(UnsupportedPixelFormat(channelBuffer.getPixelFormat()));
         }
     }
 }

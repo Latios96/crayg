@@ -76,6 +76,7 @@ set(crayg_SRCS
     image/ImageMetadata.h
     image/ImageSpec.cpp
     image/ImageSpec.h
+    image/InvalidPixelFormat.h
     image/io/ImageWriter.h
     image/io/ImageWriters.cpp
     image/io/ImageWriters.h
