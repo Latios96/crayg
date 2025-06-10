@@ -85,8 +85,7 @@ std::unique_ptr<CameraLens> readEmbeddedLensFile(const pxr::UsdAttribute &lensFi
 void UsdCameraReader::readCameraLens(std::shared_ptr<Camera> &camera) const {
     auto lensFileAttribute = usdPrim.GetPrim().GetAttribute(pxr::TfToken("craygLensFile"));
     if (!lensFileAttribute) {
-        CRAYG_LOG_AND_THROW(std::runtime_error(
-            fmt::format("craygLensFile attribute was not authored for camera {}", usdPrim.GetPath())));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("craygLensFile attribute was not authored for camera {}", usdPrim.GetPath());
     }
     auto type = lensFileAttribute.GetTypeName().GetAsToken().GetString();
 

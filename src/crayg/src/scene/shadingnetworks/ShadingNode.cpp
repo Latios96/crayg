@@ -10,9 +10,8 @@ void ShadingNodeInput::connectTo(const std::shared_ptr<ShadingNode> &newInput) {
         return;
     }
     if (!isCompatibleTo(newInput->getOutputType())) {
-        CRAYG_LOG_AND_THROW(
-            std::runtime_error(fmt::format("Can not connect ShadingNode '{}' of type {} to Input of type {}",
-                                           newInput->getName(), newInput->getOutputType(), getOutputType())));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Can not connect ShadingNode '{}' of type {} to Input of type {}",
+                                          newInput->getName(), newInput->getOutputType(), getOutputType());
     }
     inputNode = newInput;
 }

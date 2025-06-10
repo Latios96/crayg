@@ -93,10 +93,9 @@ IntegratorSettingsValue UsdRenderSettingsReader::readIntegratorSettingsValue(con
         return {UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(attribute).GetString()};
     }
 
-    CRAYG_LOG_AND_THROW(
-        std::runtime_error(fmt::format("The attribute {} is of type {}, which is not supported. Only token, int and "
-                                       "float are suppored as Integrator settings values",
-                                       attribute.GetName(), attribute.GetTypeName())));
+    CRAYG_LOG_AND_THROW_RUNTIME_ERROR("The attribute {} is of type {}, which is not supported. Only token, int and "
+                                      "float are suppored as Integrator settings values",
+                                      attribute.GetName(), attribute.GetTypeName());
 }
 
 IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {

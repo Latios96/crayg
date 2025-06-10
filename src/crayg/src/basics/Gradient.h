@@ -77,7 +77,7 @@ template <typename T> T Gradient<T>::interpolate(float position) const {
         }
     }
 
-    CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Did not find a stop for position {}", position)));
+    CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Did not find a stop for position {}", position);
 }
 
 template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondValue, float position) const {

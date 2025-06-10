@@ -21,9 +21,9 @@ class UsdUtils {
         if (attribute.Get(&value, timeCodeToRead)) {
             return value;
         }
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR(
             "Attribute '{}': There was no attribute value to read or attribute was not of the type requested",
-            attribute.GetName())));
+            attribute.GetName());
     };
 
     template <typename T> static T getStaticAttributeValueAs(const pxr::UsdAttribute attribute) {
@@ -57,9 +57,8 @@ class UsdUtils {
         const bool enumValueAuthoredAsInt = usdAttr.GetTypeName() == pxr::SdfValueTypeNames->Int;
 
         if (!enumValueAuthoredAsToken && !enumValueAuthoredAsInt && !enumValueAuthoredAsString) {
-            CRAYG_LOG_AND_THROW(
-                std::runtime_error(fmt::format("USD attribute {} has type {}, which is not supported for enum",
-                                               attributeName, usdAttr.GetTypeName())));
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR("USD attribute {} has type {}, which is not supported for enum",
+                                              attributeName, usdAttr.GetTypeName());
         }
 
         if (enumValueAuthoredAsToken) {

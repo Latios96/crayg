@@ -24,7 +24,7 @@ class EnumParser {
     template <typename T> static T parseOrThrow(const std::string &string) {
         auto maybeValue = EnumParser::parse<T>(string);
         if (!maybeValue.has_value()) {
-            CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", string)));
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported enum value '{}')", string);
         }
         return maybeValue.value();
     }
@@ -32,7 +32,7 @@ class EnumParser {
     template <typename T> static T parseOrThrow(int value) {
         auto maybeValue = EnumParser::parse<T>(value);
         if (!maybeValue.has_value()) {
-            CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported enum value '{}')", value)));
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported enum value '{}')", value);
         }
         return maybeValue.value();
     }

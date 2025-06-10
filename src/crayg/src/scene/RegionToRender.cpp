@@ -123,8 +123,7 @@ RegionToRender RegionToRender::fromString(const std::string &str) {
         return RegionToRender(region);
     } else {
         // invalid
-        CRAYG_LOG_AND_THROW(
-            std::runtime_error(fmt::format("Invalid format specified, allowed are px and ndc, was '{}'", str)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Invalid format specified, allowed are px and ndc, was '{}'", str);
     }
 }
 

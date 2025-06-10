@@ -14,7 +14,7 @@ std::shared_ptr<SceneReader> SceneReaderFactory::createSceneReader(const std::st
     if (extension == ".usd" || extension == ".usda" || extension == ".usdc") {
         return std::shared_ptr<SceneReader>(new UsdSceneReader(scenePath, scene, readOptions));
     } else {
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No SceneReader found for extension '{}'", extension)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No SceneReader found for extension '{}'", extension);
     }
 }
 

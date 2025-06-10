@@ -20,7 +20,7 @@ std::unique_ptr<LensFileWriter> LensFileWriterFactory::createLensFileWriter(cons
         return std::make_unique<LensFileExtendedFormatWriter>();
     } else {
         Logger::error("No LensFileWriter found for extension {}", extension);
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No LensFileWriter found for extension {}", extension)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No LensFileWriter found for extension {}", extension);
     }
 }
 
@@ -33,8 +33,7 @@ std::unique_ptr<LensFileWriter> LensFileWriterFactory::createLensFileWriter(Lens
         return std::make_unique<LensFileExtendedFormatWriter>();
     } else {
         Logger::error("No LensFileWriter found for LensFileFormat {}", lensFileFormat);
-        CRAYG_LOG_AND_THROW(
-            std::runtime_error(fmt::format("No LensFileWriter found for LensFileFormat {}", lensFileFormat)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No LensFileWriter found for LensFileFormat {}", lensFileFormat);
     }
 }
 } // crayg

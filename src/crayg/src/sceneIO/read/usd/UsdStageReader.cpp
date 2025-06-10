@@ -51,13 +51,13 @@ void UsdStageReader::readStageToScene(Scene &scene, const SceneReader::ReadOptio
     const bool noCameraFound = scene.camera == nullptr;
     if (noCameraFound) {
         if (readOptions.cameraName) {
-            CRAYG_LOG_AND_THROW(std::runtime_error(
-                fmt::format("No camera with path {} found in USD stage!", readOptions.cameraName.value())));
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No camera with path {} found in USD stage!",
+                                              readOptions.cameraName.value());
         }
 
         if (cameraFromUsdRenderSettings) {
-            CRAYG_LOG_AND_THROW(std::runtime_error(
-                fmt::format("No camera with path {} found in USD stage!", *cameraFromUsdRenderSettings)));
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No camera with path {} found in USD stage!",
+                                              *cameraFromUsdRenderSettings);
         }
 
         CRAYG_LOG_AND_THROW(std::runtime_error("No camera found in USD stage!"));
@@ -174,8 +174,8 @@ void UsdStageReader::applyVariantSets(const SceneReader::ReadOptions &readOption
     for (auto &variantSelection : readOptions.variantSelections) {
         pxr::UsdPrim prim = stage.GetPrimAtPath(pxr::SdfPath(variantSelection.primPath));
         if (!prim.IsValid()) {
-            CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(
-                "Error when applying variant selections: invalid prim path {}.", variantSelection.primPath)));
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Error when applying variant selections: invalid prim path {}.",
+                                              variantSelection.primPath);
         }
 
         const auto variantSetNames = prim.GetVariantSets().GetNames();
@@ -184,9 +184,9 @@ void UsdStageReader::applyVariantSets(const SceneReader::ReadOptions &readOption
                                                       return variantSetName == variantSelection.variantSetName;
                                                   });
         if (!variantSetExists) {
-            CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR(
                 "Error when applying variant selections: variant set with name '{}' does not exist on prim {}.",
-                variantSelection.variantSetName, variantSelection.primPath)));
+                variantSelection.variantSetName, variantSelection.primPath);
         }
         auto variantSet = prim.GetVariantSet(variantSelection.variantSetName);
 
@@ -196,16 +196,16 @@ void UsdStageReader::applyVariantSets(const SceneReader::ReadOptions &readOption
                 return variantName == variantSelection.selectedVariant;
             });
         if (!variantExists) {
-            CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(
-                "Error when applying variant selections: variant with name '{}' does "
-                "not exist on variant set '{}'on prim {}.",
-                variantSelection.selectedVariant, variantSelection.variantSetName, variantSelection.primPath)));
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Error when applying variant selections: variant with name '{}' does "
+                                              "not exist on variant set '{}'on prim {}.",
+                                              variantSelection.selectedVariant, variantSelection.variantSetName,
+                                              variantSelection.primPath);
         }
         if (!variantSet.SetVariantSelection(variantSelection.selectedVariant)) {
-            CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(
-                "Error when applying variant selections: could not set variant with "
-                "name '{}' does on variant set '{}'on prim {}.",
-                variantSelection.selectedVariant, variantSelection.variantSetName, variantSelection.primPath)));
+            CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Error when applying variant selections: could not set variant with "
+                                              "name '{}' does on variant set '{}'on prim {}.",
+                                              variantSelection.selectedVariant, variantSelection.variantSetName,
+                                              variantSelection.primPath);
         }
         Logger::info("Applied variant selection: set variant set '{}' on {} to '{}'", variantSelection.variantSetName,
                      variantSelection.primPath, variantSelection.selectedVariant);

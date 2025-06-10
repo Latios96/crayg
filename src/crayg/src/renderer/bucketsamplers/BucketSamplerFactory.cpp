@@ -16,8 +16,7 @@ BucketSamplerFactory::createBucketSampler(const RenderSettings &renderSettings,
                                                        renderSettings.samplesPerAdaptivePass,
                                                        renderSettings.adaptiveMaxError);
     default:
-        CRAYG_LOG_AND_THROW(std::runtime_error(
-            fmt::format(R"(Unsupported BucketSamplerType : "{}")", renderSettings.bucketSamplerType)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported BucketSamplerType : "{}")", renderSettings.bucketSamplerType);
     }
 }
 } // crayg

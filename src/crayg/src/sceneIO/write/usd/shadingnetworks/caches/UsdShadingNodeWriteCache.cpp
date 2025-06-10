@@ -71,7 +71,7 @@ UsdShaderAndOutput UsdShadingNodeWriteCache::translateShadingNode(ShadingNode &s
         return UsdFileTextureWriter(dynamic_cast<FileTexture &>(shadingNode), *this)
             .writeAndGetShaderAndOutput(stage, usdPathFactory);
     }
-    CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("ShadingNode of type '{}' is not supported!", type)));
+    CRAYG_LOG_AND_THROW_RUNTIME_ERROR("ShadingNode of type '{}' is not supported!", type);
 }
 
 } // crayg

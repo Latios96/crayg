@@ -30,8 +30,7 @@ void UsdSubdivisionSurfaceMeshReader::ensureCatmullClarkScheme() const {
     auto subdivisionScheme =
         UsdUtils::getAttributeValueAs<pxr::TfToken>(usdPrim.GetSubdivisionSchemeAttr(), timeCodeToRead);
     if (subdivisionScheme != pxr::UsdGeomTokens->catmullClark) {
-        CRAYG_LOG_AND_THROW(
-            std::runtime_error(fmt::format("Can not read mesh with subdivision scheme {}", subdivisionScheme)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Can not read mesh with subdivision scheme {}", subdivisionScheme);
     }
 }
 

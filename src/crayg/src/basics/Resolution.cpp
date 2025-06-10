@@ -80,12 +80,10 @@ Resolution Resolution::parse(const std::string &resolutionString) {
     }
 
     if (width < 0) {
-        CRAYG_LOG_AND_THROW(
-            std::runtime_error(fmt::format("Invalid resolution string '{}', width needs to be >=0", resolutionString)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Invalid resolution string '{}', width needs to be >=0", resolutionString);
     }
     if (height < 0) {
-        CRAYG_LOG_AND_THROW(
-            std::runtime_error(fmt::format("Invalid resolution string '{}', width needs to be >=0", resolutionString)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Invalid resolution string '{}', width needs to be >=0", resolutionString);
     }
 
     return {width, height};

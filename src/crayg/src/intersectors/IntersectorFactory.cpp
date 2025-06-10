@@ -11,7 +11,7 @@ std::shared_ptr<SceneIntersector> IntersectorFactory::createSceneIntersector(con
     case IntersectorType::EMBREE:
         return createEmbreeBvh(scene);
     default:
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported Intersector type: "{}")", intersectorType)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported Intersector type: "{}")", intersectorType);
     }
 }
 

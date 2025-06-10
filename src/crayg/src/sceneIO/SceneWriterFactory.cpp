@@ -14,7 +14,7 @@ std::shared_ptr<SceneWriter> SceneWriterFactory::createSceneWriter(std::string s
         return std::shared_ptr<SceneWriter>(new UsdSceneWriter(scene));
     } else {
         Logger::error("No SceneWriter found for extension {}", extension);
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No SceneWriter found for extension {}", extension)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No SceneWriter found for extension {}", extension);
     }
 }
 } // crayg

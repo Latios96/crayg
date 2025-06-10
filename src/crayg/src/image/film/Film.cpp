@@ -11,8 +11,8 @@ Film::Film(const Resolution &resolution) : rgb(resolution), filmSpec(FilmSpecBui
 
 void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
     if (this->filmSpec.resolution != filmSpec.resolution) {
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Image resolution does not match, was {}, required was {}",
-                                                           this->filmSpec.resolution, filmSpec.resolution)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Image resolution does not match, was {}, required was {}",
+                                          this->filmSpec.resolution, filmSpec.resolution);
     }
     for (auto &channelSpec : filmSpec.channels) {
         if (channelSpec.name == "rgb") {

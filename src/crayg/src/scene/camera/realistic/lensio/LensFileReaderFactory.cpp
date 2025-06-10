@@ -24,7 +24,7 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(cons
         return std::make_unique<ZMXFileFormatReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", extension);
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No LensFileReader found for extension {}", extension)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No LensFileReader found for extension {}", extension);
     }
 }
 
@@ -39,8 +39,7 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(Lens
         return std::make_unique<ZMXFileFormatReader>();
     } else {
         Logger::error("No LensFileReader found for extension {}", lensFileFormat);
-        CRAYG_LOG_AND_THROW(
-            std::runtime_error(fmt::format("No LensFileReader found for extension {}", lensFileFormat)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No LensFileReader found for extension {}", lensFileFormat);
     }
 }
 

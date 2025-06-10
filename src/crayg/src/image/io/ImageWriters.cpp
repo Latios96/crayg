@@ -22,7 +22,7 @@ bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) 
         imageWriter = std::unique_ptr<ImageWriter>(new OpenExrWriter());
     } else {
         Logger::error("No ImageWriter found for extension {}", extension);
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("No ImageWriter found for extension {}", extension)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No ImageWriter found for extension {}", extension);
     }
 
     if (!imageWriter) {

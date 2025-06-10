@@ -17,7 +17,7 @@ AbstractIntegrator *IntegratorFactory::createIntegrator(const IntegratorType &in
     case IntegratorType::AMBIENT_OCCLUSION:
         return new AmbientOcclusionIntegrator(scene, sceneIntersector, integratorSettings);
     default:
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported Integrator type: "{}")", integratorType)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported Integrator type: "{}")", integratorType);
     }
 }
 }

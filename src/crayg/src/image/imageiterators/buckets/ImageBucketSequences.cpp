@@ -25,8 +25,7 @@ std::vector<ImageBucket> ImageBucketSequences::getSequence(const Resolution &res
         bucketSequence = std::make_unique<HilbertSequence>(resolution, bucketWidth);
         break;
     default:
-        CRAYG_LOG_AND_THROW(
-            std::runtime_error(fmt::format(R"(Unsupported BucketSequenceType : "{}")", bucketSequenceType)));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported BucketSequenceType : "{}")", bucketSequenceType);
     }
     return bucketSequence->getTiles();
 }

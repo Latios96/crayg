@@ -14,7 +14,7 @@ std::unique_ptr<CameraModel> CameraModelFactory::createCameraModel(Camera &camer
     case CameraType::REALISTIC:
         return std::make_unique<RealisticCameraModel>(camera, resolution);
     default:
-        CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(R"(Unsupported CameraType: "{}")", camera.getCameraType())));
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported CameraType: "{}")", camera.getCameraType());
     }
 }
 } // crayg

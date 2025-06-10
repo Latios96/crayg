@@ -43,7 +43,7 @@ LensMaterial LensMaterial::createMaterialById(LensMaterialId lensMaterialId) {
 
 #include "materials/LensMaterialConstants_schott.h"
     }
-    CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format("Unsupported material id: {}", lensMaterialId)));
+    CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Unsupported material id: {}", lensMaterialId);
 }
 
 std::optional<LensMaterialId> LensMaterial::findMaterialIdByName(const std::string &searchTerm,
