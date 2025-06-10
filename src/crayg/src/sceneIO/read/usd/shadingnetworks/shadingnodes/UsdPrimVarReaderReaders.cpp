@@ -102,8 +102,8 @@ std::string UsdPrimVarReaderVector2fReader::readVarname(const pxr::UsdShadeInput
         const auto varnameToken = UsdUtils::getStaticAttributeValueAs<pxr::TfToken>(varnameInput);
         return varnameToken.GetString();
     }
-    CRAYG_LOG_AND_THROW_MESSAGE("varname attribute has unknown type {} on {}", varnameInput.GetTypeName().GetAsToken(),
-                                varnameInput.GetPrim().GetPath())
+    CRAYG_LOG_AND_THROW_RUNTIME_ERROR("varname attribute has unknown type {} on {}",
+                                      varnameInput.GetTypeName().GetAsToken(), varnameInput.GetPrim().GetPath())
 }
 
 } // crayg

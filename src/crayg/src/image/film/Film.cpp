@@ -29,8 +29,8 @@ void Film::addChannel(const std::string &name, FilmBufferVariantPtr filmBufferVa
     std::visit(
         [this](auto buf) {
             if (this->filmSpec.resolution != Resolution(buf->width, buf->height)) {
-                CRAYG_LOG_AND_THROW_MESSAGE("Resolutions don't match, expected {}, was {}x{}",
-                                            this->filmSpec.resolution, buf->width, buf->height);
+                CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Resolutions don't match, expected {}, was {}x{}",
+                                                  this->filmSpec.resolution, buf->width, buf->height);
             }
         },
         filmBufferVariantPtr);

@@ -84,7 +84,7 @@ Bounds2di parseRegionFromString(const std::string &str) {
     }
 
     if (integers.size() != 4) {
-        CRAYG_LOG_AND_THROW_MESSAGE("Invalid format for region: {}, supported is [(0,1),(2,3)]", str);
+        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Invalid format for region: {}, supported is [(0,1),(2,3)]", str);
     }
 
     return Bounds2di({integers[0], integers[1]}, {integers[2], integers[3]});

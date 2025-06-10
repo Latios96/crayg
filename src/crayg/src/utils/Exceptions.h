@@ -5,8 +5,8 @@
     logAndThrow(exception, __FILE__, __LINE__);                                                                        \
     throw(exception);
 
-#define CRAYG_LOG_AND_THROW_MESSAGE_NO_FMT(message) CRAYG_LOG_AND_THROW(std::runtime_error(message))
-#define CRAYG_LOG_AND_THROW_MESSAGE(formatStr, ...)                                                                    \
+#define CRAYG_LOG_AND_THROW_RUNTIME_ERROR_NO_FMT(message) CRAYG_LOG_AND_THROW(std::runtime_error(message))
+#define CRAYG_LOG_AND_THROW_RUNTIME_ERROR(formatStr, ...)                                                              \
     CRAYG_LOG_AND_THROW(std::runtime_error(fmt::format(formatStr, __VA_ARGS__)))
 
 namespace crayg {
