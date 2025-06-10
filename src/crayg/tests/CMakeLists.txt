@@ -24,6 +24,8 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/UnitPlaneUvs.h
     fixtures/UsdGeomMeshFixtures.cpp
     fixtures/UsdGeomMeshFixtures.h
+    math/TestCommonMath.cpp
+    math/TestQuadraticEquations.cpp
     TestAdaptiveBucketSampler.cpp
     TestAreaLight.cpp
     TestBarycentricCoordinates.cpp
@@ -88,7 +90,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestLight.cpp
     TestLineByLineIterator.cpp
     TestLineByLineSequence.cpp
-    TestMathUtils.cpp
     TestMatrix4x4f.cpp
     TestNumberParsing.cpp
     TestOpenExrWriter.cpp

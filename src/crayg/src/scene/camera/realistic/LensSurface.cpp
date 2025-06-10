@@ -1,6 +1,6 @@
 #include "LensSurface.h"
 
-#include "basics/MathUtils.h"
+#include "basics/math/QuadraticEquations.h"
 #include "utils/ToStringHelper.h"
 #include <cmath>
 
@@ -71,7 +71,7 @@ bool intersectSphericalSurface(float radius, float zCenter, const Ray &ray, floa
     float B = 2 * (ray.direction.dot(o));
     float C = o.dot(o) - radius * radius;
 
-    auto solutions = MathUtils::solveQuadratic(A, B, C);
+    auto solutions = QuadraticEquations::solveQuadratic(A, B, C);
     if (!solutions) {
         return false;
     }
@@ -171,7 +171,7 @@ bool intersectCylindricalYSurface(float radius, float zCenter, const Ray &ray, f
     const float C =
         transformedOrigin.x * transformedOrigin.x + transformedOrigin.z * transformedOrigin.z - radius * radius;
 
-    auto solutions = MathUtils::solveQuadratic(A, B, C);
+    auto solutions = QuadraticEquations::solveQuadratic(A, B, C);
     if (!solutions) {
         return false;
     }
@@ -197,7 +197,7 @@ bool intersectCylindricalXSurface(float radius, float zCenter, const Ray &ray, f
     const float C =
         transformedOrigin.y * transformedOrigin.y + transformedOrigin.z * transformedOrigin.z - radius * radius;
 
-    auto solutions = MathUtils::solveQuadratic(A, B, C);
+    auto solutions = QuadraticEquations::solveQuadratic(A, B, C);
     if (!solutions) {
         return false;
     }

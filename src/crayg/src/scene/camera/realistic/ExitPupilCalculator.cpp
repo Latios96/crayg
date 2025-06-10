@@ -1,6 +1,6 @@
 #include "ExitPupilCalculator.h"
 #include "Wavelengths.h"
-#include "basics/MathUtils.h"
+#include "basics/math/CommonMath.h"
 #include "sampling/Random.h"
 #include "utils/StopWatch.h"
 #include "utils/tracing/CraygTracing.h"
@@ -60,8 +60,8 @@ Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) 
     Bounds2df pupilBounds;
     int exitingRays = 0;
     for (int sampleIndex = 0; sampleIndex < maxSamples; sampleIndex++) {
-        const float filmX = MathUtils::lerp(static_cast<float>(sampleIndex) / static_cast<float>(maxSamples),
-                                            filmIntervalStart, filmIntervalEnd);
+        const float filmX = CommonMath::lerp(static_cast<float>(sampleIndex) / static_cast<float>(maxSamples),
+                                             filmIntervalStart, filmIntervalEnd);
         const Vector3f positionOnFilm = {filmX, 0, 0};
         const Vector2f posOnExtend = rearSurfaceExtend.lerp(Random::random(), Random::random());
         const Vector3f positionOnRearExtend(posOnExtend.x, posOnExtend.y, lens.getLastSurface().center);

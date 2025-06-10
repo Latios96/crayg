@@ -29,7 +29,7 @@ float SampledDistance::getDistance(const IndexAndWeight &indexAndWeight) const {
 float SampledDistance::getDistance(int firstSampleIndex, float t) const {
     const auto firstSample = samples[firstSampleIndex];
     const auto secondSample = samples[firstSampleIndex + 1];
-    return MathUtils::lerp(t, firstSample, secondSample);
+    return CommonMath::lerp(t, firstSample, secondSample);
 }
 
 SampledDistance::SampledDistance(int surfaceIndex, const std::vector<float> &samples)

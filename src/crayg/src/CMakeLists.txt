@@ -7,8 +7,8 @@ set(crayg_SRCS
     basics/Color.h
     basics/containers/Array2d.h
     basics/Gradient.h
-    basics/MathUtils.cpp
-    basics/MathUtils.h
+    basics/math/CommonMath.h
+    basics/math/QuadraticEquations.h
     basics/Matrix4x4f.cpp
     basics/Matrix4x4f.h
     basics/OrthonormalBasis.cpp

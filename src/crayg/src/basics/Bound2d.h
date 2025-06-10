@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MathUtils.h"
 #include "Vector2.h"
+#include "basics/math/CommonMath.h"
 #include "utils/ToStringHelper.h"
 #include <fmt/ostream.h>
 #include <ostream>
@@ -36,7 +36,7 @@ template <typename T> class Bounds2d {
     }
 
     Vector2<T> lerp(float u, float v) const {
-        return {MathUtils::lerp(u, min.x, max.x), MathUtils::lerp(v, min.y, max.y)};
+        return {CommonMath::lerp(u, min.x, max.x), CommonMath::lerp(v, min.y, max.y)};
     }
 
     Vector2<T> diagonal() const {

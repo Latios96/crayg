@@ -1,5 +1,4 @@
 #pragma once
-
 #include "utils/DtoUtils.h"
 #include <optional>
 
@@ -7,7 +6,7 @@ namespace crayg {
 
 CRAYG_DTO_2(QuadraticSolutions, float, t0, float, t1);
 
-class MathUtils {
+class QuadraticEquations {
   public:
     template <typename T, typename V> static V lerp(T t, V val1, V val2) {
         return val1 * (1 - t) + val2 * t;
@@ -40,4 +39,4 @@ class MathUtils {
     }
 };
 
-} // crayg
+}
