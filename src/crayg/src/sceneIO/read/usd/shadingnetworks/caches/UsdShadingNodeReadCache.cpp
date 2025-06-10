@@ -81,10 +81,9 @@ std::shared_ptr<ShadingNode> insertAutomaticConversion(std::shared_ptr<ShadingNo
         return insertColorToFloatNode(cachedConnectedShader, connectedOutputName);
     }
 
-    CRAYG_LOG_AND_THROW_MESSAGE(
-        fmt::format("Error when connecting {}.{}. Output type {} can not be connected to input type {} "
-                    "and no automatic conversion is defined",
-                    cachedConnectedShader->getName(), connectedOutputName, outputType, inputType));
+    CRAYG_LOG_AND_THROW_MESSAGE("Error when connecting {}.{}. Output type {} can not be connected to input type {} "
+                                "and no automatic conversion is defined",
+                                cachedConnectedShader->getName(), connectedOutputName, outputType, inputType);
 }
 
 template <class InputType, typename UsdType, typename T>

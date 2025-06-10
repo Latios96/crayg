@@ -12,7 +12,7 @@ FilmBufferVariantPtr FilmBufferFactory::createFilmBuffer(const Resolution &resol
     case FilmBufferType::SUM:
         return createSumBuffer(resolution, pixelDepth, channelCount);
     default:
-        CRAYG_LOG_AND_THROW_MESSAGE(fmt::format("Unsupported buffer type {}", bufferType));
+        CRAYG_LOG_AND_THROW_MESSAGE("Unsupported buffer type {}", bufferType);
     }
 }
 
@@ -30,8 +30,8 @@ FilmBufferVariantPtr FilmBufferFactory::createValueBuffer(const Resolution &reso
     if (filmPixelDepth == FilmPixelDepth::UINT8 && channelCount == 3) {
         return new Color3iValueBuffer(resolution);
     }
-    CRAYG_LOG_AND_THROW_MESSAGE(
-        fmt::format("Can not create value buffer with depth {} and channel count {}", filmPixelDepth, channelCount));
+    CRAYG_LOG_AND_THROW_MESSAGE("Can not create value buffer with depth {} and channel count {}", filmPixelDepth,
+                                channelCount);
 }
 
 FilmBufferVariantPtr FilmBufferFactory::createAccumulationBuffer(const Resolution &resolution,
@@ -42,8 +42,8 @@ FilmBufferVariantPtr FilmBufferFactory::createAccumulationBuffer(const Resolutio
     if (filmPixelDepth == FilmPixelDepth::FLOAT32 && channelCount == 3) {
         return new Color3fAccumulationBuffer(resolution);
     }
-    CRAYG_LOG_AND_THROW_MESSAGE(
-        fmt::format("Can not create value buffer with depth {} and channel count {}", filmPixelDepth, channelCount));
+    CRAYG_LOG_AND_THROW_MESSAGE("Can not create value buffer with depth {} and channel count {}", filmPixelDepth,
+                                channelCount);
 }
 
 FilmBufferVariantPtr FilmBufferFactory::createSumBuffer(const Resolution &resolution, FilmPixelDepth filmPixelDepth,
@@ -60,8 +60,8 @@ FilmBufferVariantPtr FilmBufferFactory::createSumBuffer(const Resolution &resolu
     if (filmPixelDepth == FilmPixelDepth::UINT8 && channelCount == 3) {
         return new Color3iSumBuffer(resolution);
     }
-    CRAYG_LOG_AND_THROW_MESSAGE(
-        fmt::format("Can not create value buffer with depth {} and channel count {}", filmPixelDepth, channelCount));
+    CRAYG_LOG_AND_THROW_MESSAGE("Can not create value buffer with depth {} and channel count {}", filmPixelDepth,
+                                channelCount);
 }
 
 }

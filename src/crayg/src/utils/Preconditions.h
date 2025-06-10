@@ -21,7 +21,7 @@
 
 #define CRAYG_CHECK_OR_THROW(condition, message)                                                                       \
     if (!(condition)) {                                                                                                \
-        CRAYG_LOG_AND_THROW_MESSAGE(message)                                                                           \
+        CRAYG_LOG_AND_THROW_MESSAGE_NO_FMT(message)                                                                    \
     }
 
 #define CRAYG_EMPTY_CHECK                                                                                              \
