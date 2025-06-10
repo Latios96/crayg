@@ -65,29 +65,4 @@ std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings)
     return os;
 }
 
-Bounds2di parseRegionFromString(const std::string &str) {
-    std::vector<int> integers;
-    std::regex integerRegex("\\d+");
-    std::sregex_iterator iter(str.begin(), str.end(), integerRegex);
-    std::sregex_iterator end;
-
-    while (iter != end) {
-        std::smatch match = *iter;
-        try {
-            integers.push_back(std::stoi(match.str()));
-        } catch (const std::invalid_argument &e) {
-            // Not a valid integer
-        } catch (const std::out_of_range &e) {
-            // Integer out of range
-        }
-        ++iter;
-    }
-
-    if (integers.size() != 4) {
-        CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Invalid format for region: {}, supported is [(0,1),(2,3)]", str);
-    }
-
-    return Bounds2di({integers[0], integers[1]}, {integers[2], integers[3]});
-}
-
 }
