@@ -1,6 +1,5 @@
 #pragma once
 
-#include "basics/math/CommonMath.h"
 #include <ostream>
 #include <vector>
 
