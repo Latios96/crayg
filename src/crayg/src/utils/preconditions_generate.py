@@ -14,7 +14,7 @@ class Check:
         return ", ".join(self.args)
 
 
-if __name__ == "__main__":
+def main():
     checks = [
         Check(
             name="NOT_NULLPTR",
@@ -163,3 +163,7 @@ if __name__ == "__main__":
                 f"#define CRAYG_CHECK_{check.name}_IMPL({check.args_str}) CRAYG_CHECK_OR_THROW({check.condition}, {check.message})\n"
             )
         f.write("// clang-format on\n")
+
+
+if __name__ == "__main__":
+    main()
