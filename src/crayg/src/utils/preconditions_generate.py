@@ -118,6 +118,18 @@ if __name__ == "__main__":
             condition="(std::fabs((vector).length() - 1) < 0.001f)",
             message='fmt::format("{} is not unit vector!: {}", #vector, vector)',
         ),
+        Check(
+            name="IS_EMPTY",
+            args=["obj"],
+            condition="obj.empty()",
+            message='fmt::format("{} should be empty!", #obj)',
+        ),
+        Check(
+            name="IS_NOT_EMPTY",
+            args=["obj"],
+            condition="(!obj.empty())",
+            message='fmt::format("{} should not be empty!", #obj)',
+        ),
     ]
 
     with open("Preconditions.normal.generated.h", "w") as f:

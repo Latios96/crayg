@@ -16,4 +16,6 @@
 #define CRAYG_CHECK_STATE_IMPL(actualState, expectedState) CRAYG_CHECK_OR_THROW((actualState == expectedState), fmt::format("Expected {} to have state {}, was {}!", #actualState, actualState, expectedState))
 #define CRAYG_CHECK_OPTIONAL_HAS_VALUE_IMPL(optional) CRAYG_CHECK_OR_THROW((optional.has_value()), fmt::format("{} has no value!", #optional))
 #define CRAYG_CHECK_IS_NORMALIZED_VECTOR_IMPL(vector) CRAYG_CHECK_OR_THROW((std::fabs((vector).length() - 1) < 0.001f), fmt::format("{} is not unit vector!: {}", #vector, vector))
+#define CRAYG_CHECK_IS_EMPTY_IMPL(obj) CRAYG_CHECK_OR_THROW(obj.empty(), fmt::format("{} should be empty!", #obj))
+#define CRAYG_CHECK_IS_NOT_EMPTY_IMPL(obj) CRAYG_CHECK_OR_THROW((!obj.empty()), fmt::format("{} should not be empty!", #obj))
 // clang-format on

@@ -389,4 +389,84 @@ TEST_CASE("Preconditions:: optional has value", "[Preconditions]") {
     }
 #endif
 }
+
+TEST_CASE("Preconditions:: is empty", "[Preconditions]") {
+    const std::vector<int> emptyVector;
+    const std::vector<int> notEmptyVector(1);
+    const std::string emptyStr;
+    const std::string notEmptyStr = "test";
+
+    SECTION("should pass for vector") {
+        CRAYG_CHECK_IS_EMPTY(emptyVector);
+    };
+    SECTION("should pass for string") {
+        CRAYG_CHECK_IS_EMPTY(emptyStr);
+    };
+
+    SECTION("should fail for vector") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECK_IS_EMPTY(notEmptyVector));
+    }
+
+    SECTION("should fail for string") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECK_IS_EMPTY(notEmptyStr));
+    }
+
+#ifdef CRAYG_DEBUG_CHECKS
+
+    SECTION("should pass for vector") {
+        CRAYG_CHECKD_IS_EMPTY(emptyVector);
+    };
+    SECTION("should pass for string") {
+        CRAYG_CHECKD_IS_EMPTY(emptyStr);
+    };
+
+    SECTION("should fail for vector") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECKD_IS_EMPTY(notEmptyVector));
+    };
+
+    SECTION("should fail for string") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECKD_IS_EMPTY(notEmptyStr));
+    };
+#endif
+}
+
+TEST_CASE("Preconditions:: is not empty", "[Preconditions]") {
+    const std::vector<int> emptyVector;
+    const std::vector<int> notEmptyVector(1);
+    const std::string emptyStr;
+    const std::string notEmptyStr = "test";
+
+    SECTION("should pass for vector") {
+        CRAYG_CHECK_IS_NOT_EMPTY(notEmptyVector);
+    };
+    SECTION("should pass for string") {
+        CRAYG_CHECK_IS_NOT_EMPTY(notEmptyStr);
+    };
+
+    SECTION("should fail for vector") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECK_IS_NOT_EMPTY(emptyVector));
+    }
+
+    SECTION("should fail for string") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECK_IS_NOT_EMPTY(emptyStr));
+    }
+
+#ifdef CRAYG_DEBUG_CHECKS
+
+    SECTION("should pass for vector") {
+        CRAYG_CHECKD_IS_NOT_EMPTY(notEmptyVector);
+    };
+    SECTION("should pass for string") {
+        CRAYG_CHECKD_IS_NOT_EMPTY(notEmptyStr);
+    };
+
+    SECTION("should fail for vector") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECKD_IS_NOT_EMPTY(emptyVector));
+    };
+
+    SECTION("should fail for string") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECKD_IS_NOT_EMPTY(emptyStr));
+    };
+#endif
+}
 }
