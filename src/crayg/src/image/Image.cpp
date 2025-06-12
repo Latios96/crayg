@@ -3,10 +3,10 @@
 
 namespace crayg {
 
-Image::Image(int width, int height) : rgb(PixelBuffer({width, height}, PixelFormat::FLOAT, 3)) {
+Image::Image(int width, int height) : rgb(PixelBuffer({width, height}, PixelFormat::FLOAT32, 3)) {
 }
 
-Image::Image(const Resolution &resolution) : rgb(PixelBuffer(resolution, PixelFormat::FLOAT, 3)) {
+Image::Image(const Resolution &resolution) : rgb(PixelBuffer(resolution, PixelFormat::FLOAT32, 3)) {
 }
 
 Image::Image(const Image &image) : rgb(image.rgb), metadata(image.metadata) {
@@ -135,7 +135,7 @@ bool Image::operator!=(const Image &rhs) const {
 }
 
 ImageSpec Image::getImageSpec() const {
-    std::vector<ChannelSpec> channelSpecs({{"rgb", PixelFormat::FLOAT, 3}});
+    std::vector<ChannelSpec> channelSpecs({{"rgb", PixelFormat::FLOAT32, 3}});
 
     for (auto &channel : additionalChannels) {
         channelSpecs.emplace_back(channel.first, channel.second->getPixelFormat(),

@@ -8,7 +8,7 @@ TEST_CASE("PixelBuffer::construct") {
 
     SECTION("should construct a PixelBuffer with given dimensions") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, channelCount);
 
         REQUIRE(pixelBuffer.getWidth() == 5);
         REQUIRE(pixelBuffer.getHeight() == 10);
@@ -19,7 +19,7 @@ TEST_CASE("PixelBuffer::construct") {
     SECTION("should construct a PixelBuffer with given resolution") {
         auto channelCount = GENERATE(1, 3);
         Resolution resolution(5, 10);
-        PixelBuffer pixelBuffer(resolution, PixelFormat::FLOAT, channelCount);
+        PixelBuffer pixelBuffer(resolution, PixelFormat::FLOAT32, channelCount);
 
         REQUIRE(pixelBuffer.getWidth() == 5);
         REQUIRE(pixelBuffer.getHeight() == 10);
@@ -42,7 +42,7 @@ TEST_CASE("PixelBuffer::copy construct") {
 
     SECTION("should construct a FLOAT PixelBuffer with given resolution") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, channelCount);
         pixelBuffer.setValue({2, 3}, Color::createWhite());
 
         PixelBuffer copy = pixelBuffer;
@@ -102,23 +102,23 @@ TEST_CASE("PixelBuffer::comparison") {
 
     SECTION("two buffers with same data ptr should be equal") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, channelCount);
 
         REQUIRE(pixelBuffer == pixelBuffer);
     }
 
     SECTION("two black buffers should be equal") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer left(5, 10, PixelFormat::FLOAT, channelCount);
-        PixelBuffer right(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer left(5, 10, PixelFormat::FLOAT32, channelCount);
+        PixelBuffer right(5, 10, PixelFormat::FLOAT32, channelCount);
 
         REQUIRE(left == right);
     }
 
     SECTION("black and black with one white pixel should not be equal") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer left(5, 10, PixelFormat::FLOAT, channelCount);
-        PixelBuffer right(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer left(5, 10, PixelFormat::FLOAT32, channelCount);
+        PixelBuffer right(5, 10, PixelFormat::FLOAT32, channelCount);
         right.setValue({2, 3}, Color::createWhite());
 
         REQUIRE(left != right);
@@ -126,29 +126,29 @@ TEST_CASE("PixelBuffer::comparison") {
 
     SECTION("black and white buffer should not be equal") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer black(5, 10, PixelFormat::FLOAT, channelCount);
-        PixelBuffer white(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer black(5, 10, PixelFormat::FLOAT32, channelCount);
+        PixelBuffer white(5, 10, PixelFormat::FLOAT32, channelCount);
         white.fill(Color::createWhite());
 
         REQUIRE(black != white);
     }
 
     SECTION("different resolution should not be equal") {
-        PixelBuffer left(5, 10, PixelFormat::FLOAT, 3);
-        PixelBuffer right(5, 11, PixelFormat::FLOAT, 3);
+        PixelBuffer left(5, 10, PixelFormat::FLOAT32, 3);
+        PixelBuffer right(5, 11, PixelFormat::FLOAT32, 3);
 
         REQUIRE(left != right);
     }
 
     SECTION("different channel count should not be equal") {
-        PixelBuffer left(5, 10, PixelFormat::FLOAT, 1);
-        PixelBuffer right(5, 10, PixelFormat::FLOAT, 3);
+        PixelBuffer left(5, 10, PixelFormat::FLOAT32, 1);
+        PixelBuffer right(5, 10, PixelFormat::FLOAT32, 3);
 
         REQUIRE(left != right);
     }
 
     SECTION("different pixel format should not be equal") {
-        PixelBuffer left(5, 10, PixelFormat::FLOAT, 3);
+        PixelBuffer left(5, 10, PixelFormat::FLOAT32, 3);
         PixelBuffer right(5, 10, PixelFormat::UINT8, 3);
 
         REQUIRE(left != right);
@@ -158,7 +158,7 @@ TEST_CASE("PixelBuffer::comparison") {
 TEST_CASE("PixelBuffer::fill") {
     SECTION("should fill buffer with color") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, channelCount);
 
         pixelBuffer.fill(Color::createGrey(0.5f));
 
@@ -169,7 +169,7 @@ TEST_CASE("PixelBuffer::fill") {
 TEST_CASE("PixelBuffer::isColor") {
     SECTION("should return true") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, channelCount);
 
         pixelBuffer.fill(Color::createGrey(0.5f));
 
@@ -178,7 +178,7 @@ TEST_CASE("PixelBuffer::isColor") {
 
     SECTION("should return false") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, channelCount);
 
         REQUIRE_FALSE(pixelBuffer.isColor(Color::createGrey(0.5f)));
     }
@@ -187,7 +187,7 @@ TEST_CASE("PixelBuffer::isColor") {
 TEST_CASE("PixelBuffer::get/setValue") {
     SECTION("should set color and return float color ") {
         auto channelCount = GENERATE(1, 3);
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, channelCount);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, channelCount);
 
         pixelBuffer.setValue({2, 3}, Color::createGrey(0.1f));
 
@@ -208,7 +208,7 @@ TEST_CASE("PixelBuffer::formatting") {
 
     SECTION("should format to ostream") {
         std::ostringstream os;
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, 3);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, 3);
 
         os << pixelBuffer;
 
@@ -216,7 +216,7 @@ TEST_CASE("PixelBuffer::formatting") {
     }
 
     SECTION("should format using fmt") {
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, 3);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, 3);
 
         REQUIRE(fmt::format("{}", pixelBuffer) ==
                 "PixelBuffer{width=5,height=10,colorChannelCount=3,pixelFormat=FLOAT}");
@@ -225,7 +225,7 @@ TEST_CASE("PixelBuffer::formatting") {
 
 TEST_CASE("PixelBuffer::addToPixel") {
     SECTION("should add to pixel") {
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, 3);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, 3);
 
         pixelBuffer.addToPixel({2, 3}, Color::createGrey(0.1f));
 
@@ -235,7 +235,7 @@ TEST_CASE("PixelBuffer::addToPixel") {
 
 TEST_CASE("PixelBuffer::dividePixel") {
     SECTION("should add to pixel") {
-        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT, 3);
+        PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, 3);
 
         pixelBuffer.setValue({2, 3}, Color::createWhite());
         pixelBuffer.dividePixel({2, 3}, 2.f);

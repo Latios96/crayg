@@ -15,7 +15,7 @@ TEST_CASE("AdaptiveBucketSampler::addRequiredImageSpecs") {
         auto imageSpec = builder.finish();
 
         REQUIRE(imageSpec.channels ==
-                std::vector<ChannelSpec>({{"rgb", PixelFormat::FLOAT, 3}, {"sampleCount", PixelFormat::FLOAT, 3}}));
+                std::vector<ChannelSpec>({{"rgb", PixelFormat::FLOAT32, 3}, {"sampleCount", PixelFormat::FLOAT32, 3}}));
     }
 }
 

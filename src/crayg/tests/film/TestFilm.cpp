@@ -457,7 +457,7 @@ TEST_CASE("Film::toImage") {
 
         REQUIRE(image.channelNames() == std::vector<std::string>({"rgb"}));
         REQUIRE_FALSE(image.rgb.isBlack());
-        REQUIRE(image.rgb.getPixelFormat() == PixelFormat::FLOAT);
+        REQUIRE(image.rgb.getPixelFormat() == PixelFormat::FLOAT32);
         REQUIRE(image.rgb.getColorChannelCount() == 3);
     }
 
@@ -477,7 +477,7 @@ TEST_CASE("Film::toImage") {
         REQUIRE_FALSE(image.rgb.isBlack());
         auto testChannel = image.getChannel("test");
         REQUIRE_FALSE(testChannel->isBlack());
-        REQUIRE(testChannel->getPixelFormat() == PixelFormat::FLOAT);
+        REQUIRE(testChannel->getPixelFormat() == PixelFormat::FLOAT32);
         REQUIRE(testChannel->getColorChannelCount() == 1);
     }
 
@@ -517,7 +517,7 @@ TEST_CASE("Film::toImage") {
         REQUIRE_FALSE(image.rgb.isBlack());
         auto testChannel = image.getChannel("test");
         REQUIRE_FALSE(testChannel->isBlack());
-        REQUIRE(testChannel->getPixelFormat() == PixelFormat::FLOAT);
+        REQUIRE(testChannel->getPixelFormat() == PixelFormat::FLOAT32);
         REQUIRE(testChannel->getColorChannelCount() == 3);
     }
 

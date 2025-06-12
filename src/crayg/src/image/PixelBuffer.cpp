@@ -90,7 +90,7 @@ PixelBuffer::PixelBuffer(const PixelBuffer &pixelBuffer)
       colorChannelCount(pixelBuffer.colorChannelCount) {
     int count = pixelBuffer.pixelCount() * colorChannelCount;
 
-    if (pixelBuffer.pixelFormat == PixelFormat::FLOAT) {
+    if (pixelBuffer.pixelFormat == PixelFormat::FLOAT32) {
         data = new float[count];
         std::memcpy(std::get<float *>(data), std::get<float *>(pixelBuffer.data),
                     pixelCount() * colorChannelCount * sizeof(float));
@@ -104,11 +104,11 @@ PixelBuffer::PixelBuffer(const PixelBuffer &pixelBuffer)
 }
 
 std::unique_ptr<PixelBuffer> PixelBuffer::createRgbFloat(const Resolution &resolution) {
-    return std::make_unique<PixelBuffer>(resolution, PixelFormat::FLOAT, 3);
+    return std::make_unique<PixelBuffer>(resolution, PixelFormat::FLOAT32, 3);
 }
 
 std::unique_ptr<PixelBuffer> PixelBuffer::createGreyFloat(const Resolution &resolution) {
-    return std::make_unique<PixelBuffer>(resolution, PixelFormat::FLOAT, 1);
+    return std::make_unique<PixelBuffer>(resolution, PixelFormat::FLOAT32, 1);
 }
 
 std::unique_ptr<PixelBuffer> PixelBuffer::createRgbUInt8(const Resolution &resolution) {
@@ -120,7 +120,7 @@ std::unique_ptr<PixelBuffer> PixelBuffer::createGreyUInt8(const Resolution &reso
 }
 
 std::unique_ptr<PixelBuffer> PixelBuffer::createVector3f(const Resolution &resolution) {
-    return std::make_unique<PixelBuffer>(resolution, PixelFormat::FLOAT, 3);
+    return std::make_unique<PixelBuffer>(resolution, PixelFormat::FLOAT32, 3);
 }
 
 void PixelBuffer::fill(const Color &color) {
@@ -152,7 +152,7 @@ int PixelBuffer::pixelNumber(const Vector2i &pixelPosition) const {
 
 void PixelBuffer::init(PixelFormat pixelFormat) {
     int count = pixelCount() * colorChannelCount;
-    if (pixelFormat == PixelFormat::FLOAT) {
+    if (pixelFormat == PixelFormat::FLOAT32) {
         data = new float[count];
     } else if (pixelFormat == PixelFormat::UINT8) {
         data = new uint8_t[count];

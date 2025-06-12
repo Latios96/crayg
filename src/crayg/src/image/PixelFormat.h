@@ -4,7 +4,7 @@
 
 namespace crayg {
 
-enum class PixelFormat { FLOAT, UINT8 };
+enum class PixelFormat { FLOAT32, UINT8 };
 
 }
 

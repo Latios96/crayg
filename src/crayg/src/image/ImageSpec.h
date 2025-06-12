@@ -19,7 +19,7 @@ CRAYG_DTO_3(ImageSpec, Resolution, resolution, std::vector<ChannelSpec>, channel
 class ImageSpecBuilder {
   public:
     ImageSpecBuilder(const Resolution &resolution) {
-        imageSpec = ImageSpec(resolution, {{"rgb", PixelFormat::FLOAT, 3}}, std::nullopt);
+        imageSpec = ImageSpec(resolution, {{"rgb", PixelFormat::FLOAT32, 3}}, std::nullopt);
     }
 
     ImageSpecBuilder &addAlphaChannel() {
@@ -33,12 +33,12 @@ class ImageSpecBuilder {
     }
 
     ImageSpecBuilder &createRgbFloatChannel(const std::string &name) {
-        imageSpec.channels.emplace_back(name, PixelFormat::FLOAT, 3);
+        imageSpec.channels.emplace_back(name, PixelFormat::FLOAT32, 3);
         return *this;
     }
 
     ImageSpecBuilder &createGreyFloatChannel(const std::string &name) {
-        imageSpec.channels.emplace_back(name, PixelFormat::FLOAT, 1);
+        imageSpec.channels.emplace_back(name, PixelFormat::FLOAT32, 1);
         return *this;
     }
 
@@ -53,7 +53,7 @@ class ImageSpecBuilder {
     }
 
     ImageSpecBuilder &createVector3fChannel(const std::string &name) {
-        imageSpec.channels.emplace_back(name, PixelFormat::FLOAT, 3);
+        imageSpec.channels.emplace_back(name, PixelFormat::FLOAT32, 3);
         return *this;
     }
 

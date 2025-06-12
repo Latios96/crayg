@@ -40,7 +40,7 @@ void OpenExrWriter::countChannelsAndPixels(const std::vector<Image::ChannelView>
     for (auto &channel : channels) {
         PixelBuffer &channelBuffer = channel.channelBuffer;
         unsigned int bytesForChannel =
-            channelBuffer.getPixelFormat() == PixelFormat::FLOAT ? sizeof(float) : sizeof(uint8_t);
+            channelBuffer.getPixelFormat() == PixelFormat::FLOAT32 ? sizeof(float) : sizeof(uint8_t);
         totalValuesCount += channelBuffer.getColorChannelCount() * bytesForChannel;
         colorChannelCount += channelBuffer.getColorChannelCount();
     }
@@ -56,7 +56,7 @@ void OpenExrWriter::collectPixelDataIntoSingleBuffer(unsigned int pixelCount,
             int colorChannelCount = channel.channelBuffer.getColorChannelCount();
 
             const PixelFormat pixelFormat = channel.channelBuffer.getPixelFormat();
-            const bool isFloat = pixelFormat == PixelFormat::FLOAT;
+            const bool isFloat = pixelFormat == PixelFormat::FLOAT32;
             const bool isUInt8 = pixelFormat == PixelFormat::UINT8;
 
             if (isFloat) {
@@ -119,7 +119,7 @@ void OpenExrWriter::writeChannelNames(OIIO::ImageSpec &spec, const Image::Channe
 void OpenExrWriter::writeChannelFormats(OIIO::ImageSpec &spec, const PixelBuffer &channelBuffer) const {
     CRG_TRACE_SCOPE("OpenExrWriter");
     for (int i = 0; i < channelBuffer.getColorChannelCount(); i++) {
-        if (channelBuffer.getPixelFormat() == PixelFormat::FLOAT) {
+        if (channelBuffer.getPixelFormat() == PixelFormat::FLOAT32) {
             spec.channelformats.push_back(OIIO::TypeFloat);
         } else if (channelBuffer.getPixelFormat() == PixelFormat::UINT8) {
             spec.channelformats.push_back(OIIO::TypeUInt8);

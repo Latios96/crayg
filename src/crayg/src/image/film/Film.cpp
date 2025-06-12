@@ -125,7 +125,7 @@ Film::ChannelView::ChannelView(const std::string &channelName, FilmBufferVariant
 }
 
 const auto filmPixelDepthAndPixelFormat = ValueMapper<FilmPixelDepth, PixelFormat>(
-    {{FilmPixelDepth::FLOAT32, PixelFormat::FLOAT}, {FilmPixelDepth::UINT8, PixelFormat::UINT8}});
+    {{FilmPixelDepth::FLOAT32, PixelFormat::FLOAT32}, {FilmPixelDepth::UINT8, PixelFormat::UINT8}});
 const auto filmPixelDepthAndByteCount =
     ValueMapper<FilmPixelDepth, int>({{FilmPixelDepth::FLOAT32, 4}, {FilmPixelDepth::UINT8, 1}});
 

@@ -13,7 +13,7 @@ TEST_CASE("UniformBucketSampler::addRequiredImageSpecs") {
         uniformBucketSampler.addRequiredImageSpecs(builder);
         auto imageSpec = builder.finish();
 
-        REQUIRE(imageSpec.channels == std::vector<ChannelSpec>({{"rgb", PixelFormat::FLOAT, 3}}));
+        REQUIRE(imageSpec.channels == std::vector<ChannelSpec>({{"rgb", PixelFormat::FLOAT32, 3}}));
     }
 }
 

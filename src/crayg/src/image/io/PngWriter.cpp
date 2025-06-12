@@ -10,7 +10,7 @@
 namespace crayg {
 
 OIIO::TypeDesc mapPixelFormat(PixelFormat pixelFormat) {
-    if (pixelFormat == PixelFormat::FLOAT) {
+    if (pixelFormat == PixelFormat::FLOAT32) {
         return OIIO::TypeDesc::FLOAT;
     } else if (pixelFormat == PixelFormat::UINT8) {
         return OIIO::TypeDesc::UINT8;
@@ -25,7 +25,7 @@ void write(std::unique_ptr<OIIO::ImageOutput> &out, PixelBuffer &pixelBuffer) {
     void *data;
     OIIO::TypeDesc typeDesc;
 
-    if (pixelFormat == PixelFormat::FLOAT) {
+    if (pixelFormat == PixelFormat::FLOAT32) {
         typeDesc = OIIO::TypeDesc::FLOAT;
         data = std::get<float *>(pixelBuffer.getData());
     } else if (pixelFormat == PixelFormat::UINT8) {
