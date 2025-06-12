@@ -59,20 +59,6 @@ CameraLens CameraLensFixtures::createCanon70_200mm() {
     return CameraLens(CameraLensMetadata("Canon F/2.8, 70-200mm"), surfaces, {}, variableLensDistances);
 }
 
-CameraLens CameraLensFixtures::createLgInnotek() {
-    std::vector<LensSurface> surfaces = {
-
-        {28.9, 2, 1.86, 5.96 / 2.f, 0},   {15.7, 2.21, 1, 5.62 / 2.f, 0},    {-43.7, 5, 1.55, 5.53 / 2.f, 0},
-        {-15.7, 1e-10, 1, 5.49 / 2.f, 0}, {0, 0.82, 1, 5.49 / 2.f, 0},       {20, 3.72, 1.62, 6.28 / 2.f, 0},
-        {-28.3, 0.1, 1, 6.28 / 2.f, 0},   {10.9, 4.46, 1.65, 6.08 / 2.f, 0}, {97.7, 2, 1.75, 5.23 / 2.f, 0},
-        {6.24, 2.13, 1, 4.2 / 2.f, 0},    {24.8, 2.71, 1.54, 4.36 / 2.f, 0}, {-259, 0.906, 1, 4.18 / 2.f, 0},
-        {27.4, 2, 1.66, 4.14 / 2.f, 0},   {14.7, 2.6, 1, 4.6 / 2.f, 0}};
-
-    convertMillimetersToCentimeters(surfaces);
-
-    return CameraLens(CameraLensMetadata("LG Innotek"), surfaces, {}, {});
-}
-
 CameraLens CameraLensFixtures::createSchneider30mmAnamorphic() {
     // US Patent 6310731B1
     std::vector<LensSurface> surfaces = {
