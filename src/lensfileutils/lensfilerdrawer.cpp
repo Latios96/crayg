@@ -176,12 +176,13 @@ class CameraLensRenderer {
 int craygMain(int argc, char *argv[]) {
 
     // const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\EdmundOpticsAsphere.fx";
-    const std::string lensFilePath = "C:\\workspace\\crayg\\resources\\lensfiles\\double-gauss-angenieux-50mm.fx";
+    const std::string lensFilePath = "/home/jan/workspace/ROSS/SOLAS/KrakenOS/LensCat/US03006249-1.zmx";
     auto reader = LensFileReaderFactory::createLensFileReader(lensFilePath);
     auto cameraLens = std::make_unique<CameraLens>(reader->readFile(lensFilePath));
     cameraLens->focusLens(1000); // todo move elements during drawing
     // cameraLens->focusLens(cameraLens->metadata.closestFocalDistance+1);
-    Logger::info("cameraLens->surfacesOffset {}", cameraLens->getSurfacesOffset());
+    CRAYG_LOG_VALUE_INFO(cameraLens->getSurfacesOffset());
+    CRAYG_LOG_VALUE_INFO(cameraLens->metadata);
 
     CameraLensRendererOptions cameraLensRendererOptions;
     cameraLensRendererOptions.drawChromaticRays = true;

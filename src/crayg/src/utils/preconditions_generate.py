@@ -15,6 +15,7 @@ class Check:
 
 
 def main():
+    prefix = "CRAYG"
     checks = [
         Check(
             name="NOT_NULLPTR",
@@ -136,7 +137,7 @@ def main():
         f.write("// clang-format off\n")
         for check in checks:
             f.write(
-                f"#define CRAYG_CHECK_{check.name}({check.args_str}) CRAYG_CHECK_{check.name}_IMPL({check.args_str})\n"
+                f"#define {prefix}_CHECK_{check.name}({check.args_str}) {prefix}_CHECK_{check.name}_IMPL({check.args_str})\n"
             )
         f.write("// clang-format on\n")
 
@@ -144,7 +145,7 @@ def main():
         f.write("// clang-format off\n")
         for check in checks:
             f.write(
-                f"#define CRAYG_CHECKD_{check.name}({check.args_str}) CRAYG_CHECK_{check.name}_IMPL({check.args_str})\n"
+                f"#define {prefix}_CHECKD_{check.name}({check.args_str}) {prefix}_CHECK_{check.name}_IMPL({check.args_str})\n"
             )
         f.write("// clang-format on\n")
 
@@ -152,7 +153,7 @@ def main():
         f.write("// clang-format off\n")
         for check in checks:
             f.write(
-                f"#define CRAYG_CHECKD_{check.name}({check.args_str}) CRAYG_EMPTY_CHECK\n"
+                f"#define {prefix}_CHECKD_{check.name}({check.args_str}) {prefix}_EMPTY_CHECK\n"
             )
         f.write("// clang-format on\n")
 
@@ -160,7 +161,7 @@ def main():
         f.write("// clang-format off\n")
         for check in checks:
             f.write(
-                f"#define CRAYG_CHECK_{check.name}_IMPL({check.args_str}) CRAYG_CHECK_OR_THROW({check.condition}, {check.message})\n"
+                f"#define {prefix}_CHECK_{check.name}_IMPL({check.args_str}) {prefix}_CHECK_OR_THROW({check.condition}, {check.message})\n"
             )
         f.write("// clang-format on\n")
 

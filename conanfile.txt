@@ -1,5 +1,5 @@
 [requires]
-fmt/10.2.1
+fmt/10.2.0
 spdlog/1.13.0
 catch2/2.13.9
 fakeit/2.3.2
@@ -40,6 +40,7 @@ qt:qtmultimedia=False
 qt:openssl=False
 qt:with_pcre2=False
 qt:shared=True
+qt:with_vulkan=True
 openimageio:with_ffmpeg=False
 openimageio:with_freetype=False
 openimageio:with_giflib=False
