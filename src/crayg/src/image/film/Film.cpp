@@ -20,7 +20,7 @@ void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
         }
         addChannel(channelSpec.name,
                    FilmBufferFactory::createFilmBuffer(filmSpec.resolution, channelSpec.bufferType,
-                                                       channelSpec.pixelDepth, channelSpec.channelCount));
+                                                       channelSpec.pixelFormat, channelSpec.channelCount));
     }
     this->filmSpec = filmSpec;
 }
@@ -124,19 +124,16 @@ Film::ChannelView::ChannelView(const std::string &channelName, FilmBufferVariant
     : channelName(channelName), channelBuffer(channelBuffer) {
 }
 
-const auto filmPixelDepthAndPixelFormat = ValueMapper<FilmPixelDepth, PixelFormat>(
-    {{FilmPixelDepth::FLOAT32, PixelFormat::FLOAT32}, {FilmPixelDepth::UINT8, PixelFormat::UINT8}});
-const auto filmPixelDepthAndByteCount =
-    ValueMapper<FilmPixelDepth, int>({{FilmPixelDepth::FLOAT32, 4}, {FilmPixelDepth::UINT8, 1}});
+const auto pixelFormatAndByteCount =
+    ValueMapper<PixelFormat, int>({{PixelFormat::FLOAT32, 4}, {PixelFormat::UINT8, 1}});
 
 void Film::toImage(Image &image) const {
     for (auto channel : getChannels()) {
-        const FilmPixelDepth pixelDepth = FilmBufferVariants::getPixelDepth(channel.channelBuffer);
+        const PixelFormat pixelFormat = FilmBufferVariants::getPixelFormat(channel.channelBuffer);
         const int channelCount = FilmBufferVariants::getChannelCount(channel.channelBuffer);
         const void *channelDataPtr = FilmBufferVariants::getDataPtr(channel.channelBuffer);
 
-        const PixelFormat pixelFormat = *filmPixelDepthAndPixelFormat.mapFromLeft(pixelDepth);
-        const int bytesPerPixel = *filmPixelDepthAndByteCount.mapFromLeft(pixelDepth);
+        const int bytesPerPixel = *pixelFormatAndByteCount.mapFromLeft(pixelFormat);
 
         if (channel.channelName != "rgb") {
             image.addChannel(channel.channelName,

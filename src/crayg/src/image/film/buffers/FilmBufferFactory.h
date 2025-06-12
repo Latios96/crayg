@@ -7,14 +7,14 @@ namespace crayg {
 class FilmBufferFactory {
   public:
     static FilmBufferVariantPtr createFilmBuffer(const Resolution &resolution, FilmBufferType filmBuffer,
-                                                 FilmPixelDepth pixelDepth, int channelCount);
-    static FilmBufferVariantPtr createValueBuffer(const Resolution &resolution, FilmPixelDepth filmPixelDepth,
+                                                 PixelFormat pixelFormat, int channelCount);
+    static FilmBufferVariantPtr createValueBuffer(const Resolution &resolution, PixelFormat pixelFormat,
                                                   int channelCount);
 
-    static FilmBufferVariantPtr createAccumulationBuffer(const Resolution &resolution, FilmPixelDepth filmPixelDepth,
+    static FilmBufferVariantPtr createAccumulationBuffer(const Resolution &resolution, PixelFormat pixelFormat,
                                                          int channelCount);
 
-    static FilmBufferVariantPtr createSumBuffer(const Resolution &resolution, FilmPixelDepth filmPixelDepth,
+    static FilmBufferVariantPtr createSumBuffer(const Resolution &resolution, PixelFormat pixelFormat,
                                                 int channelCount);
 };
 }

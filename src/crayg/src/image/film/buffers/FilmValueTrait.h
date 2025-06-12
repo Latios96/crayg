@@ -1,8 +1,8 @@
 #pragma once
-#include "FilmPixelDepth.h"
 
 #include <algorithm>
 #include <cstdint>
+#include <image/PixelFormat.h>
 #include <string_view>
 
 namespace crayg {
@@ -22,7 +22,7 @@ template <> struct FilmValueTrait<float> {
     }
 
     static constexpr std::string_view name = "f32";
-    static constexpr FilmPixelDepth pixelDepth = FilmPixelDepth::FLOAT32;
+    static constexpr PixelFormat pixelFormat = PixelFormat::FLOAT32;
 };
 
 template <> struct FilmValueTrait<uint8_t> {
@@ -35,7 +35,7 @@ template <> struct FilmValueTrait<uint8_t> {
     }
 
     static constexpr std::string_view name = "uint8";
-    static constexpr FilmPixelDepth pixelDepth = FilmPixelDepth::UINT8;
+    static constexpr PixelFormat pixelFormat = PixelFormat::UINT8;
 };
 
 }

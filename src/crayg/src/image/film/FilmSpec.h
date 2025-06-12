@@ -3,7 +3,7 @@
 #include "basics/Bound2d.h"
 #include "basics/Resolution.h"
 #include "buffers/FilmBufferType.h"
-#include "buffers/FilmPixelDepth.h"
+#include "image/PixelFormat.h"
 #include "scene/RegionToRender.h"
 #include "utils/DtoUtils.h"
 #include <fmt/ranges.h>
@@ -15,11 +15,11 @@ namespace crayg {
 
 struct FilmBufferSpec {
 
-    FilmBufferSpec(const std::string &name, FilmBufferType bufferType, FilmPixelDepth pixelDepth, int channelCount);
+    FilmBufferSpec(const std::string &name, FilmBufferType bufferType, PixelFormat pixelFormat, int channelCount);
 
     std::string name;
     FilmBufferType bufferType;
-    FilmPixelDepth pixelDepth;
+    PixelFormat pixelFormat;
     int channelCount;
 
     bool operator==(const FilmBufferSpec &rhs) const;

@@ -9,19 +9,19 @@ TEST_CASE("Film::construct") {
     SECTION("should construct correctly from dimensions") {
         Film film(10, 5);
 
-        REQUIRE(film.getFilmSpec() == FilmSpec(Resolution(10, 5),
-                                               std::vector<FilmBufferSpec>(
-                                                   {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT32, 3}}),
-                                               std::nullopt));
+        REQUIRE(film.getFilmSpec() ==
+                FilmSpec(Resolution(10, 5),
+                         std::vector<FilmBufferSpec>({{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}),
+                         std::nullopt));
     }
 
     SECTION("should construct correctly from dimensions") {
         Film film(Resolution(10, 5));
 
-        REQUIRE(film.getFilmSpec() == FilmSpec(Resolution(10, 5),
-                                               std::vector<FilmBufferSpec>(
-                                                   {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT32, 3}}),
-                                               std::nullopt));
+        REQUIRE(film.getFilmSpec() ==
+                FilmSpec(Resolution(10, 5),
+                         std::vector<FilmBufferSpec>({{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}),
+                         std::nullopt));
     }
 }
 
@@ -424,7 +424,7 @@ TEST_CASE("Film::addChannelsFromSpec") {
 
     SECTION("should throw if resolutions do not match") {
         Film film(10, 20);
-        FilmSpec filmSpec({1, 1}, {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT32, 3}}, std::nullopt);
+        FilmSpec filmSpec({1, 1}, {{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}, std::nullopt);
 
         REQUIRE_THROWS_AS(film.addChannelsFromSpec(filmSpec), std::runtime_error);
     }
@@ -432,9 +432,9 @@ TEST_CASE("Film::addChannelsFromSpec") {
     SECTION("should add channels from spec") {
         Film film(10, 20);
         FilmSpec filmSpec({10, 20},
-                          {{"rgb", FilmBufferType::ACCUMULATION, FilmPixelDepth::FLOAT32, 3},
-                           {"alpha", FilmBufferType::VALUE, FilmPixelDepth::FLOAT32, 1},
-                           {"depth", FilmBufferType::VALUE, FilmPixelDepth::FLOAT32, 1}},
+                          {{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3},
+                           {"alpha", FilmBufferType::VALUE, PixelFormat::FLOAT32, 1},
+                           {"depth", FilmBufferType::VALUE, PixelFormat::FLOAT32, 1}},
                           std::nullopt);
 
         film.addChannelsFromSpec(filmSpec);

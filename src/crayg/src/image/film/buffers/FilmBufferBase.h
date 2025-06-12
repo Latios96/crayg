@@ -3,7 +3,7 @@
 #include "basics/Color.h"
 #include "basics/Resolution.h"
 #include "basics/Vector2.h"
-#include "image/film/buffers/FilmPixelDepth.h"
+#include "image/PixelFormat.h"
 #include "utils/Exceptions.h"
 #include "utils/Preconditions.h"
 
@@ -123,7 +123,7 @@ template <typename T, int channelCount> struct FilmBufferBase {
     int width = 0;
     int height = 0;
     const int chCount = channelCount;
-    const FilmPixelDepth pixelDepth = FilmValueTrait<T>::pixelDepth;
+    const PixelFormat pixelFormat = FilmValueTrait<T>::pixelFormat;
 
     int index(const Vector2i &pixelPosition) const {
         return (pixelPosition.x + width * pixelPosition.y);

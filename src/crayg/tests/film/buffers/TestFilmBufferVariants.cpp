@@ -28,20 +28,20 @@ TEST_CASE("FilmBufferVariants::getAsAccumulationBufferVariantPtr") {
     }
 }
 
-TEST_CASE("FilmBufferVariants::getPixelDepth") {
+TEST_CASE("FilmBufferVariants::getPixelFormat") {
 
-    SECTION("should return pixel depth correctly for float") {
+    SECTION("should return pixel format correctly for float") {
         FilmBufferVariantPtr ptr = new FloatValueBuffer(10, 5);
 
-        REQUIRE(FilmBufferVariants::getPixelDepth(ptr) == FilmPixelDepth::FLOAT32);
+        REQUIRE(FilmBufferVariants::getPixelFormat(ptr) == PixelFormat::FLOAT32);
 
         FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
     }
 
-    SECTION("should return pixel depth correctly for int") {
+    SECTION("should return pixel format correctly for int") {
         FilmBufferVariantPtr ptr = new IntValueBuffer(10, 5);
 
-        REQUIRE(FilmBufferVariants::getPixelDepth(ptr) == FilmPixelDepth::UINT8);
+        REQUIRE(FilmBufferVariants::getPixelFormat(ptr) == PixelFormat::UINT8);
 
         FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
     }
