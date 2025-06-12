@@ -40,9 +40,9 @@ Color ColorConversion::sRGBToLinear(const Color &color) {
 float ColorConversion::sRGBToLinear(float sRGBValue) {
     if (sRGBValue <= 0.04045f) {
         return sRGBValue / 12.92f;
-    } else {
-        return std::pow(((sRGBValue + 0.055f) / 1.055f), 2.4f);
     }
+
+    return std::pow(((sRGBValue + 0.055f) / 1.055f), 2.4f);
 }
 
 void ColorConversion::toneMapHDRtoLDR(const PixelBuffer &source, PixelBuffer &target) {
