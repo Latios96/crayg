@@ -83,6 +83,4 @@ struct Film {
     tsl::ordered_map<std::string, FilmBufferVariantPtr> additionalChannels;
 };
 
-// todo convert to image
-
 }
