@@ -75,6 +75,11 @@ struct Film {
             std::visit([&pixelPosition, &value](auto *buf) { buf->write(pixelPosition, value); },
                        *valueBufferVariantPtr);
         }
+
+        auto sumBufferVariantPtr = FilmBufferVariants::getAsSumBufferVariantPtr(*bufferVariantPtr);
+        if (sumBufferVariantPtr) {
+            std::visit([&pixelPosition, &value](auto *buf) { buf->add(pixelPosition, value); }, *sumBufferVariantPtr);
+        }
     }
 
     FilmSpec filmSpec;

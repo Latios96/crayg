@@ -243,6 +243,30 @@ TEST_CASE("Film::addSample()") {
         REQUIRE(bufferVariant.has_value());
         REQUIRE_FALSE(std::get<Color3fValueBuffer *>(*bufferVariant)->isBlack());
     }
+
+    SECTION("should add color sample to custom sum buffer channel") {
+        auto buffer = new Color3fSumBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("test", buffer);
+
+        film.addSample("test", {0, 0}, Color(1, 2, 3));
+
+        auto bufferVariant = film.getBufferVariantPtrByName("test");
+        REQUIRE(bufferVariant.has_value());
+        REQUIRE_FALSE(std::get<Color3fSumBuffer *>(*bufferVariant)->isBlack());
+    }
+
+    SECTION("should add float sample to custom sum buffer channel") {
+        auto buffer = new Color3fSumBuffer(10, 5);
+        Film film(10, 5);
+        film.addChannel("test", buffer);
+
+        film.addSample("test", {0, 0}, 1);
+
+        auto bufferVariant = film.getBufferVariantPtrByName("test");
+        REQUIRE(bufferVariant.has_value());
+        REQUIRE_FALSE(std::get<Color3fSumBuffer *>(*bufferVariant)->isBlack());
+    }
 }
 
 TEST_CASE("Film::updateAverages()") {
