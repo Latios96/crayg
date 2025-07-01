@@ -34,6 +34,23 @@ FilmBufferVariants::getAsValueBufferVariantPtr(const FilmBufferVariantPtr &buffe
     return std::nullopt;
 }
 
+std::optional<SumBufferVariantPtr>
+FilmBufferVariants::getAsSumBufferVariantPtr(const FilmBufferVariantPtr &bufferVariantPtr) {
+    if (std::holds_alternative<FloatSumBuffer *>(bufferVariantPtr)) {
+        return std::get<FloatSumBuffer *>(bufferVariantPtr);
+    }
+    if (std::holds_alternative<IntSumBuffer *>(bufferVariantPtr)) {
+        return std::get<IntSumBuffer *>(bufferVariantPtr);
+    }
+    if (std::holds_alternative<Color3fSumBuffer *>(bufferVariantPtr)) {
+        return std::get<Color3fSumBuffer *>(bufferVariantPtr);
+    }
+    if (std::holds_alternative<Color3iSumBuffer *>(bufferVariantPtr)) {
+        return std::get<Color3iSumBuffer *>(bufferVariantPtr);
+    }
+    return std::nullopt;
+}
+
 PixelFormat FilmBufferVariants::getPixelFormat(const FilmBufferVariantPtr &variantPtr) {
     return std::visit([](auto buf) { return buf->pixelFormat; }, variantPtr);
 }

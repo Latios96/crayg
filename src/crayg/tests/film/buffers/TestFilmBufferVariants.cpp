@@ -54,6 +54,32 @@ TEST_CASE("FilmBufferVariants::getAsValueBufferVariantPtr") {
     }
 }
 
+TEST_CASE("FilmBufferVariants::getAsSumBufferVariantPtr") {
+
+    SECTION("should return accumulation buffer ptr") {
+        const auto &testData =
+            GENERATE(table<FilmBufferVariantPtr>({new FloatSumBuffer(10, 5), new IntSumBuffer(10, 5),
+                                                  new Color3fSumBuffer(10, 5), new Color3iSumBuffer(10, 5)}));
+
+        const auto buffer = std::get<0>(testData);
+
+        REQUIRE(FilmBufferVariants::getAsSumBufferVariantPtr(buffer).has_value());
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(buffer);
+    }
+
+    SECTION("should return empty optional for non-accumulation buffer") {
+        const auto &testData =
+            GENERATE(table<FilmBufferVariantPtr>({new FloatAccumulationBuffer(10, 5), new FloatValueBuffer(10, 5)}));
+
+        const auto buffer = std::get<0>(testData);
+
+        REQUIRE_FALSE(FilmBufferVariants::getAsSumBufferVariantPtr(buffer).has_value());
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(buffer);
+    }
+}
+
 TEST_CASE("FilmBufferVariants::getPixelFormat") {
 
     SECTION("should return pixel format correctly for float") {

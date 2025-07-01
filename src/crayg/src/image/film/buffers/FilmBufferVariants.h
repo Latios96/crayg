@@ -25,6 +25,8 @@ class FilmBufferVariants {
     static std::optional<ValueBufferVariantPtr>
     getAsValueBufferVariantPtr(const FilmBufferVariantPtr &bufferVariantPtr);
 
+    static std::optional<SumBufferVariantPtr> getAsSumBufferVariantPtr(const FilmBufferVariantPtr &bufferVariantPtr);
+
     static PixelFormat getPixelFormat(const FilmBufferVariantPtr &variantPtr);
     static int getChannelCount(const FilmBufferVariantPtr &variantPtr);
     static void *getDataPtr(const FilmBufferVariantPtr &variantPtr);
