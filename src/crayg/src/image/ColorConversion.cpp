@@ -5,7 +5,7 @@
 namespace crayg {
 
 bool ColorConversion::channelNeedsLinearToSRgbConversion(const std::string &channelName) {
-    return channelName == "rgb";
+    return channelName == "rgb" || channelName == "color";
 }
 
 void ColorConversion::linearToSRGB(const PixelBuffer &source, PixelBuffer &target) {

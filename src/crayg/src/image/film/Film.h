@@ -57,11 +57,6 @@ struct Film {
             return;
         }
 
-        if (channelName == "rgb") {
-            rgb.add(pixelPosition, value);
-            return;
-        }
-
         auto bufferVariantPtr = getBufferVariantPtrByName(channelName);
 
         auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(*bufferVariantPtr);
@@ -84,7 +79,7 @@ struct Film {
 
     FilmSpec filmSpec;
     ImageMetadata metadata;
-    FilmAccumulationBuffer<float, 3> rgb;
+    FilmBufferVariantPtr color;
     tsl::ordered_map<std::string, FilmBufferVariantPtr> additionalChannels;
 };
 

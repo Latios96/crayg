@@ -57,7 +57,7 @@ class NextGenImageWidgetOutputDriver : public QObject, public NextGenOutputDrive
     void processCurrentChannelChanged(std::string newChannel);
 
   private:
-    std::string currentChannel = "rgb";
+    std::string currentChannel = "color";
     void updateDisplayBuffer();
     void updateDisplayBuffer(const ImageBucket &imageBucket);
     NextGenImageWidget &nextGenImageWidget;

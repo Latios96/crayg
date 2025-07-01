@@ -9,35 +9,35 @@ TEST_CASE("Film::construct") {
     SECTION("should construct correctly from dimensions") {
         Film film(10, 5);
 
-        REQUIRE(film.getFilmSpec() ==
-                FilmSpec(Resolution(10, 5),
-                         std::vector<FilmBufferSpec>({{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}),
-                         std::nullopt));
+        REQUIRE(film.getFilmSpec() == FilmSpec(Resolution(10, 5),
+                                               std::vector<FilmBufferSpec>(
+                                                   {{"color", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}),
+                                               std::nullopt));
     }
 
     SECTION("should construct correctly from dimensions") {
         Film film(Resolution(10, 5));
 
-        REQUIRE(film.getFilmSpec() ==
-                FilmSpec(Resolution(10, 5),
-                         std::vector<FilmBufferSpec>({{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}),
-                         std::nullopt));
+        REQUIRE(film.getFilmSpec() == FilmSpec(Resolution(10, 5),
+                                               std::vector<FilmBufferSpec>(
+                                                   {{"color", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}),
+                                               std::nullopt));
     }
 }
 
 TEST_CASE("Film::channelNames()") {
 
-    SECTION("should return only rgb") {
+    SECTION("should return only color") {
         Film film(10, 5);
 
-        REQUIRE(film.channelNames() == std::vector<std::string>({"rgb"}));
+        REQUIRE(film.channelNames() == std::vector<std::string>({"color"}));
     }
     SECTION("should return all names") {
         auto buffer = new FloatValueBuffer(10, 5);
         Film film(10, 5);
         film.addChannel("test", buffer);
 
-        REQUIRE(film.channelNames() == std::vector<std::string>({"rgb", "test"}));
+        REQUIRE(film.channelNames() == std::vector<std::string>({"color", "test"}));
     }
 }
 
@@ -48,17 +48,17 @@ TEST_CASE("Film::addChannel()") {
 
         film.addChannel("test", buffer);
 
-        REQUIRE(film.channelNames() == std::vector<std::string>({"rgb", "test"}));
+        REQUIRE(film.channelNames() == std::vector<std::string>({"color", "test"}));
     }
 
-    SECTION("should not add rgb") {
-        film.addSample("rgb", {0, 0}, 1);
+    SECTION("should not add color") {
+        film.addSample("color", {0, 0}, 1);
         auto buffer = new FloatValueBuffer(10, 5);
 
-        film.addChannel("rgb", buffer);
+        film.addChannel("color", buffer);
 
-        REQUIRE(film.channelNames() == std::vector<std::string>({"rgb"}));
-        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        REQUIRE(film.channelNames() == std::vector<std::string>({"color"}));
+        auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE_FALSE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->sumIsZero());
     }
 
@@ -75,7 +75,7 @@ TEST_CASE("Film::addChannel()") {
         film.addSample("test", {0, 0}, 1);
         film.addChannel("test", buffer);
 
-        REQUIRE(film.channelNames() == std::vector<std::string>({"rgb", "test"}));
+        REQUIRE(film.channelNames() == std::vector<std::string>({"color", "test"}));
         auto bufferVariant = film.getBufferVariantPtrByName("test");
         REQUIRE_FALSE(std::get<FloatValueBuffer *>(*bufferVariant)->isBlack());
     }
@@ -83,10 +83,10 @@ TEST_CASE("Film::addChannel()") {
 
 TEST_CASE("Film::hasChannel()") {
 
-    SECTION("should return true for rgb") {
+    SECTION("should return true for color") {
         Film film(10, 5);
 
-        REQUIRE(film.hasChannel("rgb"));
+        REQUIRE(film.hasChannel("color"));
     }
 
     SECTION("should return true for existing custom channel") {
@@ -106,13 +106,13 @@ TEST_CASE("Film::hasChannel()") {
 
 TEST_CASE("Film::getChannels()") {
 
-    SECTION("should return only rgb channel") {
+    SECTION("should return only color channel") {
         Film film(10, 5);
 
         const auto channels = film.getChannels();
 
         REQUIRE(channels.size() == 1);
-        REQUIRE(channels[0].channelName == "rgb");
+        REQUIRE(channels[0].channelName == "color");
         REQUIRE(std::holds_alternative<Color3fAccumulationBuffer *>(channels[0].channelBuffer));
     }
 
@@ -124,7 +124,7 @@ TEST_CASE("Film::getChannels()") {
         const auto channels = film.getChannels();
 
         REQUIRE(channels.size() == 2);
-        REQUIRE(channels[0].channelName == "rgb");
+        REQUIRE(channels[0].channelName == "color");
         REQUIRE(std::holds_alternative<Color3fAccumulationBuffer *>(channels[0].channelBuffer));
         REQUIRE(channels[1].channelName == "test");
         REQUIRE(std::holds_alternative<FloatValueBuffer *>(channels[1].channelBuffer));
@@ -133,10 +133,10 @@ TEST_CASE("Film::getChannels()") {
 
 TEST_CASE("Film::getBufferVariantPtrByName()") {
 
-    SECTION("should return rgb channel") {
+    SECTION("should return color channel") {
         Film film(10, 5);
 
-        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        auto bufferVariant = film.getBufferVariantPtrByName("color");
 
         REQUIRE(bufferVariant.has_value());
         REQUIRE(std::holds_alternative<Color3fAccumulationBuffer *>(*bufferVariant));
@@ -150,7 +150,7 @@ TEST_CASE("Film::getBufferVariantPtrByName()") {
         REQUIRE_FALSE(bufferVariant.has_value());
     }
 
-    SECTION("should return rgb channel") {
+    SECTION("should return color channel") {
         auto buffer = new FloatValueBuffer(10, 5);
         Film film(10, 5);
         film.addChannel("test", buffer);
@@ -164,22 +164,22 @@ TEST_CASE("Film::getBufferVariantPtrByName()") {
 
 TEST_CASE("Film::addSample()") {
 
-    SECTION("should add Color sample to rgb") {
+    SECTION("should add Color sample to color") {
         Film film(10, 5);
 
-        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
+        film.addSample("color", {0, 0}, Color(1, 2, 3));
 
-        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE(bufferVariant.has_value());
         REQUIRE_FALSE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->sumIsZero());
     }
 
-    SECTION("should add float sample to rgb") {
+    SECTION("should add float sample to color") {
         Film film(10, 5);
 
-        film.addSample("rgb", {0, 0}, 1);
+        film.addSample("color", {0, 0}, 1);
 
-        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE(bufferVariant.has_value());
         REQUIRE_FALSE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->sumIsZero());
     }
@@ -190,7 +190,7 @@ TEST_CASE("Film::addSample()") {
         film.addSample("test", {0, 0}, Color(1, 2, 3));
     }
 
-    SECTION("should add float sample to rgb") {
+    SECTION("should add float sample to color") {
         Film film(10, 5);
 
         film.addSample("test", {0, 0}, 1);
@@ -271,10 +271,10 @@ TEST_CASE("Film::addSample()") {
 
 TEST_CASE("Film::updateAverages()") {
 
-    SECTION("should update rgb channel") {
+    SECTION("should update color channel") {
         Film film(10, 5);
-        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
-        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        film.addSample("color", {0, 0}, Color(1, 2, 3));
+        auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
 
         film.updateAverages();
@@ -317,13 +317,13 @@ TEST_CASE("Film::updateAveragesForChannel()") {
         auto custom = new Color3fAccumulationBuffer(10, 5);
         Film film(10, 5);
         film.addChannel("test", custom);
-        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
+        film.addSample("color", {0, 0}, Color(1, 2, 3));
         film.addSample("test", {0, 0}, Color(1, 2, 3));
         REQUIRE(custom->isBlack());
 
         film.updateAveragesForChannel("test");
 
-        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
         REQUIRE_FALSE(custom->isBlack());
     }
@@ -347,11 +347,11 @@ TEST_CASE("Film::updateAveragesForChannel()") {
 
 TEST_CASE("Film::updateAveragesInBucket()") {
 
-    SECTION("should update rgb channel") {
+    SECTION("should update color channel") {
         Film film(10, 5);
-        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
-        film.addSample("rgb", {4, 4}, Color(1, 2, 3));
-        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        film.addSample("color", {0, 0}, Color(1, 2, 3));
+        film.addSample("color", {4, 4}, Color(1, 2, 3));
+        auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
 
         film.updateAveragesInBucket(ImageBucket({0, 0}, 3, 3));
@@ -395,14 +395,14 @@ TEST_CASE("Film::updateAveragesInBucket()") {
 
 TEST_CASE("Film::updateAveragesForChannelInBucket()") {
 
-    SECTION("should update rgb channel") {
+    SECTION("should update color channel") {
         Film film(10, 5);
-        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
-        film.addSample("rgb", {4, 4}, Color(1, 2, 3));
-        auto bufferVariant = film.getBufferVariantPtrByName("rgb");
+        film.addSample("color", {0, 0}, Color(1, 2, 3));
+        film.addSample("color", {4, 4}, Color(1, 2, 3));
+        auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
 
-        film.updateAveragesForChannelInBucket(ImageBucket({0, 0}, 3, 3), "rgb");
+        film.updateAveragesForChannelInBucket(ImageBucket({0, 0}, 3, 3), "color");
 
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->getColor({0, 0}) == Color(1, 2, 3));
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->getColor({4, 4}).isBlack());
@@ -412,7 +412,7 @@ TEST_CASE("Film::updateAveragesForChannelInBucket()") {
         auto custom = new Color3fAccumulationBuffer(10, 5);
         Film film(10, 5);
         film.addChannel("test", custom);
-        film.addSample("rgb", {0, 0}, Color(1, 2, 3));
+        film.addSample("color", {0, 0}, Color(1, 2, 3));
         film.addSample("test", {0, 0}, Color(1, 2, 3));
         film.addSample("test", {4, 4}, Color(1, 2, 3));
         REQUIRE(custom->isBlack());
@@ -448,7 +448,7 @@ TEST_CASE("Film::addChannelsFromSpec") {
 
     SECTION("should throw if resolutions do not match") {
         Film film(10, 20);
-        FilmSpec filmSpec({1, 1}, {{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}, std::nullopt);
+        FilmSpec filmSpec({1, 1}, {{"color", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}, std::nullopt);
 
         REQUIRE_THROWS_AS(film.addChannelsFromSpec(filmSpec), std::runtime_error);
     }
@@ -456,14 +456,14 @@ TEST_CASE("Film::addChannelsFromSpec") {
     SECTION("should add channels from spec") {
         Film film(10, 20);
         FilmSpec filmSpec({10, 20},
-                          {{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3},
+                          {{"color", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3},
                            {"alpha", FilmBufferType::VALUE, PixelFormat::FLOAT32, 1},
                            {"depth", FilmBufferType::VALUE, PixelFormat::FLOAT32, 1}},
                           std::nullopt);
 
         film.addChannelsFromSpec(filmSpec);
 
-        REQUIRE(film.channelNames() == std::vector<std::string>({"rgb", "alpha", "depth"}));
+        REQUIRE(film.channelNames() == std::vector<std::string>({"color", "alpha", "depth"}));
         REQUIRE(std::holds_alternative<FloatValueBuffer *>(*film.getBufferVariantPtrByName("alpha")));
         REQUIRE(std::holds_alternative<FloatValueBuffer *>(*film.getBufferVariantPtrByName("depth")));
     }
@@ -471,9 +471,9 @@ TEST_CASE("Film::addChannelsFromSpec") {
 
 TEST_CASE("Film::toImage") {
 
-    SECTION("should convert rgb only image") {
+    SECTION("should convert color only image") {
         Film film(10, 5);
-        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("color", {3, 3}, Color(1, 2, 3));
         film.updateAverages();
 
         Image image(10, 5);
@@ -490,7 +490,7 @@ TEST_CASE("Film::toImage") {
         Film film(10, 5);
         film.addChannel("test", customValueBuffer);
 
-        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("color", {3, 3}, Color(1, 2, 3));
         film.addSample("test", {3, 3}, Color(1, 2, 3));
         film.updateAverages();
 
@@ -510,7 +510,7 @@ TEST_CASE("Film::toImage") {
         Film film(10, 5);
         film.addChannel("test", customValueBuffer);
 
-        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("color", {3, 3}, Color(1, 2, 3));
         film.addSample("test", {3, 3}, Color(1, 2, 3));
         film.updateAverages();
 
@@ -530,7 +530,7 @@ TEST_CASE("Film::toImage") {
         Film film(10, 5);
         film.addChannel("test", customValueBuffer);
 
-        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("color", {3, 3}, Color(1, 2, 3));
         film.addSample("test", {3, 3}, Color(1, 2, 3));
         film.updateAverages();
 
@@ -550,7 +550,7 @@ TEST_CASE("Film::toImage") {
         Film film(10, 5);
         film.addChannel("test", customValueBuffer);
 
-        film.addSample("rgb", {3, 3}, Color(1, 2, 3));
+        film.addSample("color", {3, 3}, Color(1, 2, 3));
         film.addSample("test", {3, 3}, Color(1, 2, 3));
         film.updateAverages();
 

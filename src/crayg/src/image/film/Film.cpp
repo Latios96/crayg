@@ -3,10 +3,13 @@
 #include "utils/ValueMapper.h"
 
 namespace crayg {
-Film::Film(int width, int height) : rgb(width, height), filmSpec(FilmSpecBuilder(Resolution(width, height)).finish()) {
+Film::Film(int width, int height)
+    : color(new Color3fAccumulationBuffer(width, height)),
+      filmSpec(FilmSpecBuilder(Resolution(width, height)).finish()) {
 }
 
-Film::Film(const Resolution &resolution) : rgb(resolution), filmSpec(FilmSpecBuilder(resolution).finish()) {
+Film::Film(const Resolution &resolution)
+    : color(new Color3fAccumulationBuffer(resolution)), filmSpec(FilmSpecBuilder(resolution).finish()) {
 }
 
 void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
@@ -15,7 +18,7 @@ void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
                                           this->filmSpec.resolution, filmSpec.resolution);
     }
     for (auto &channelSpec : filmSpec.channels) {
-        if (channelSpec.name == "rgb") {
+        if (channelSpec.name == "color") {
             continue;
         }
         addChannel(channelSpec.name,
@@ -49,7 +52,10 @@ void Film::addSample(const std::string &channelName, const Vector2i &pixelPositi
 }
 
 void Film::updateAverages() {
-    rgb.updateAverages();
+    auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(color);
+    if (accumulationBufferVariantPtr) {
+        std::visit([](auto *buf) { buf->updateAverages(); }, *accumulationBufferVariantPtr);
+    }
     for (auto &channel : additionalChannels) {
         auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(channel.second);
         if (accumulationBufferVariantPtr) {
@@ -59,7 +65,11 @@ void Film::updateAverages() {
 }
 
 void Film::updateAveragesInBucket(const ImageBucket &imageBucket) {
-    rgb.updateAveragesInBucket(imageBucket);
+    auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(color);
+    if (accumulationBufferVariantPtr) {
+        std::visit([&imageBucket](auto *buf) { buf->updateAveragesInBucket(imageBucket); },
+                   *accumulationBufferVariantPtr);
+    }
     for (auto &channel : additionalChannels) {
         auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(channel.second);
         if (accumulationBufferVariantPtr) {
@@ -71,7 +81,7 @@ void Film::updateAveragesInBucket(const ImageBucket &imageBucket) {
 
 std::vector<Film::ChannelView> Film::getChannels() const {
     std::vector<ChannelView> channels;
-    channels.emplace_back("rgb", FilmBufferVariantPtr(const_cast<Color3fAccumulationBuffer *>(&rgb)));
+    channels.emplace_back("color", color);
     for (auto &channel : additionalChannels) {
         channels.emplace_back(channel.first, channel.second);
     }
@@ -80,7 +90,7 @@ std::vector<Film::ChannelView> Film::getChannels() const {
 
 std::vector<std::string> Film::channelNames() const {
     std::vector<std::string> names;
-    names.emplace_back("rgb");
+    names.emplace_back("color");
     for (auto &channel : additionalChannels) {
         names.push_back(channel.first);
     }
@@ -88,7 +98,7 @@ std::vector<std::string> Film::channelNames() const {
 }
 
 bool Film::hasChannel(const std::string &name) const {
-    if (name == "rgb") {
+    if (name == "color") {
         return true;
     }
     return additionalChannels.find(name) != additionalChannels.end();
@@ -99,8 +109,8 @@ std::optional<FilmBufferVariantPtr> Film::getBufferVariantPtrByName(const std::s
         return std::nullopt;
     }
 
-    if (name == "rgb") {
-        return &rgb;
+    if (name == "color") {
+        return color;
     }
 
     return additionalChannels.at(name);
@@ -115,6 +125,7 @@ ImageMetadata Film::getMetadata() const {
 }
 
 Film::~Film() {
+    std::visit([](auto *buf) { delete buf; }, color);
     for (auto &channel : additionalChannels) {
         std::visit([](auto *buf) { delete buf; }, channel.second);
     }
@@ -129,18 +140,19 @@ const auto pixelFormatAndByteCount =
 
 void Film::toImage(Image &image) const {
     for (auto channel : getChannels()) {
+        const std::string mappedChannelName = channel.channelName == "color" ? "rgb" : channel.channelName;
         const PixelFormat pixelFormat = FilmBufferVariants::getPixelFormat(channel.channelBuffer);
         const int channelCount = FilmBufferVariants::getChannelCount(channel.channelBuffer);
         const void *channelDataPtr = FilmBufferVariants::getDataPtr(channel.channelBuffer);
 
         const int bytesPerPixel = *pixelFormatAndByteCount.mapFromLeft(pixelFormat);
 
-        if (channel.channelName != "rgb") {
-            image.addChannel(channel.channelName,
+        if (mappedChannelName != "rgb") {
+            image.addChannel(mappedChannelName,
                              std::make_unique<PixelBuffer>(filmSpec.resolution, pixelFormat, channelCount));
         }
 
-        auto imageChannel = image.getChannel(channel.channelName);
+        auto imageChannel = image.getChannel(mappedChannelName);
         void *dstPtr = std::visit([](auto data) { return (void *)data; }, imageChannel->getData());
         std::memcpy(dstPtr, channelDataPtr,
                     filmSpec.resolution.getWidth() * filmSpec.resolution.getHeight() * bytesPerPixel * channelCount);

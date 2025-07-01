@@ -27,7 +27,7 @@ std::ostream &operator<<(std::ostream &os, const FilmBufferSpec &spec) {
 }
 
 FilmSpecBuilder::FilmSpecBuilder(const Resolution &resolution) {
-    filmSpec = FilmSpec(resolution, {{"rgb", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}, std::nullopt);
+    filmSpec = FilmSpec(resolution, {{"color", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}, std::nullopt);
 }
 
 FilmSpecBuilder &FilmSpecBuilder::addChannel(const FilmBufferSpec &spec) {
