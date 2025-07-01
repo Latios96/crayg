@@ -12,14 +12,20 @@ Film::Film(const Resolution &resolution)
     : color(new Color3fAccumulationBuffer(resolution)), filmSpec(FilmSpecBuilder(resolution).finish()) {
 }
 
+Film::Film(const FilmSpec &filmSpec) {
+    addChannelsFromSpec(filmSpec);
+}
+
 void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
-    if (this->filmSpec.resolution != filmSpec.resolution) {
+    const bool isEmpty = this->filmSpec.resolution == Resolution();
+    if ((!isEmpty) && this->filmSpec.resolution != filmSpec.resolution) {
         CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Image resolution does not match, was {}, required was {}",
                                           this->filmSpec.resolution, filmSpec.resolution);
     }
     for (auto &channelSpec : filmSpec.channels) {
         if (channelSpec.name == "color") {
-            continue;
+            color = FilmBufferFactory::createFilmBuffer(filmSpec.resolution, channelSpec.bufferType,
+                                                        channelSpec.pixelFormat, channelSpec.channelCount);
         }
         addChannel(channelSpec.name,
                    FilmBufferFactory::createFilmBuffer(filmSpec.resolution, channelSpec.bufferType,
@@ -29,9 +35,10 @@ void Film::addChannelsFromSpec(const FilmSpec &filmSpec) {
 }
 
 void Film::addChannel(const std::string &name, FilmBufferVariantPtr filmBufferVariantPtr) {
+    const bool isEmpty = this->filmSpec.resolution == Resolution();
     std::visit(
-        [this](auto buf) {
-            if (this->filmSpec.resolution != Resolution(buf->width, buf->height)) {
+        [this, isEmpty](auto buf) {
+            if ((!isEmpty) && this->filmSpec.resolution != Resolution(buf->width, buf->height)) {
                 CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Resolutions don't match, expected {}, was {}x{}",
                                                   this->filmSpec.resolution, buf->width, buf->height);
             }

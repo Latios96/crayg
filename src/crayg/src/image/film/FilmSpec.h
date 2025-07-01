@@ -38,6 +38,8 @@ CRAYG_DTO_3(FilmSpec, Resolution, resolution, std::vector<FilmBufferSpec>, chann
 class FilmSpecBuilder {
   public:
     FilmSpecBuilder(const Resolution &resolution);
+    FilmSpecBuilder(const Resolution &resolution, FilmBufferType colorChannelBufferType,
+                    PixelFormat colorChannelPixelFormat);
 
     FilmSpecBuilder &addChannel(const FilmBufferSpec &spec);
     FilmSpecBuilder &addRenderRegion(const RegionToRender &regionToRender);

@@ -21,6 +21,8 @@ struct Film {
 
     Film(const Resolution &resolution);
 
+    Film(const FilmSpec &filmSpec);
+
     void addChannelsFromSpec(const FilmSpec &filmSpec);
     void addChannel(const std::string &name, FilmBufferVariantPtr filmBufferVariantPtr);
 

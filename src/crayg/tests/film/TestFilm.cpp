@@ -23,6 +23,15 @@ TEST_CASE("Film::construct") {
                                                    {{"color", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}),
                                                std::nullopt));
     }
+
+    SECTION("should construct from FilmSpec") {
+        Film film(FilmSpecBuilder(Resolution(10, 5), FilmBufferType::SUM, PixelFormat::FLOAT32).finish());
+
+        REQUIRE(film.getFilmSpec() ==
+                FilmSpec(Resolution(10, 5),
+                         std::vector<FilmBufferSpec>({{"color", FilmBufferType::SUM, PixelFormat::FLOAT32, 3}}),
+                         std::nullopt));
+    }
 }
 
 TEST_CASE("Film::channelNames()") {

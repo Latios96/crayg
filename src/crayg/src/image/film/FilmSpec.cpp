@@ -30,6 +30,11 @@ FilmSpecBuilder::FilmSpecBuilder(const Resolution &resolution) {
     filmSpec = FilmSpec(resolution, {{"color", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}, std::nullopt);
 }
 
+FilmSpecBuilder::FilmSpecBuilder(const Resolution &resolution, FilmBufferType colorChannelBufferType,
+                                 PixelFormat colorChannelPixelFormat) {
+    filmSpec = FilmSpec(resolution, {{"color", colorChannelBufferType, colorChannelPixelFormat, 3}}, std::nullopt);
+}
+
 FilmSpecBuilder &FilmSpecBuilder::addChannel(const FilmBufferSpec &spec) {
     filmSpec.channels.emplace_back(spec);
     return *this;
