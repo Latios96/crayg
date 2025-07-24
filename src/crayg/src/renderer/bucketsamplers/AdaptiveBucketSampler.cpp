@@ -46,7 +46,8 @@ void AdaptiveBucketSampler::sampleBucket(BucketImageBuffer &bucketImageBuffer) c
 }
 
 void AdaptiveBucketSampler::drawSampleHeatmap(const BucketImageBuffer &bucketImageBuffer, int samplesTaken) const {
-    const float relativeSampleCount = static_cast<float>(samplesTaken) / static_cast<float>(maxSamples);
+    const float relativeSampleCount =
+        static_cast<float>(samplesTaken - samplesPerPass) / static_cast<float>(maxSamples - samplesPerPass);
 
     ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("sampleCount"),
                           MagmaHeatmap::lookup(relativeSampleCount));
