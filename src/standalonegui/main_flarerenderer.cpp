@@ -11,6 +11,7 @@
 #include "image/imageiterators/pixels/ImageIterators.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
+#include "renderer/FlareRenderer.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
@@ -98,44 +99,16 @@ int craygMain(int argc, char **argv) {
     QObject::connect(&taskReporterQtSignalAdapter, &TaskReporterQtSignalAdapter::taskProgressUpdated,
                      &frameBufferWidget, &FrameBufferWidget::updateTask);
 
-    const std::function<Vector2i()> getMousePosition = [imageWidget, &scene]() {
-        auto point = imageWidget->mapFromGlobal(QCursor::pos());
-        const int x = static_cast<float>(point.x()) / imageWidget->width() * scene.renderSettings.resolution.getWidth();
-        const int y =
-            static_cast<float>(point.y()) / imageWidget->height() * scene.renderSettings.resolution.getHeight();
-        return Vector2i(x, y);
-    };
-    BucketQueue bucketQueue(getMousePosition);
+    FlareRenderer flareRenderer(scene, nextGenImageWidgetOutputDriver, taskReporter);
+    flareRenderer.initialize();
 
-    frameBufferWidget.connectToggleFollowMouse([&bucketQueue]() { bucketQueue.switchMode(); });
-    nextGenImageWidgetOutputDriver.initialize(FilmSpecBuilder(Resolution(1820, 720)).finish());
-
-    auto buckets = ImageBucketSequences::getSequence(Resolution(1820, 720), 8, BucketSequenceType::HILBERT);
-    bucketQueue.start(buckets);
-    std::thread renderThread([&nextGenImageWidgetOutputDriver, &bucketQueue]() {
+    std::thread renderThread([&flareRenderer, &nextGenImageWidgetOutputDriver]() {
         try {
-            while (true) {
-                const auto imageBucket = bucketQueue.nextBucket();
-                if (!imageBucket) {
-                    break;
-                }
-                nextGenImageWidgetOutputDriver.startBucket(*imageBucket);
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
-                for (int i = 0; i < 3; i++) {
-                    Color color = Color::createRandom();
-                    for (auto pixel : ImageIterators::lineByLine(*imageBucket)) {
-                        nextGenImageWidgetOutputDriver.getFilm().addSample("rgb", imageBucket->getPosition() + pixel,
-                                                                           color);
-                    }
-                    nextGenImageWidgetOutputDriver.updateAllChannelsInBucket(*imageBucket);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(250));
-                }
-                nextGenImageWidgetOutputDriver.finishBucket(*imageBucket);
-            }
+            flareRenderer.renderScene();
         } catch (std::exception &e) {
             Logger::error("Caught exception: {}", e.what());
         }
-        FilmWriter::writeFilm(nextGenImageWidgetOutputDriver.getFilm(), "filmWriteTest.exr");
+        FilmWriter::writeFilm(nextGenImageWidgetOutputDriver.getFilm(), "filmWriteTest.exr"); // todo take from cli
     });
     renderThread.detach();
 

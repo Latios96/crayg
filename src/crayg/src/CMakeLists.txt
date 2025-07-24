@@ -137,6 +137,8 @@ set(crayg_SRCS
     renderer/BucketSizeEstimator.h
     renderer/BucketStats.cpp
     renderer/BucketStats.h
+    renderer/FlareRenderer.cpp
+    renderer/FlareRenderer.h
     renderer/GeometryCompiler.cpp
     renderer/GeometryCompiler.h
     renderer/Renderer.cpp
