@@ -82,7 +82,7 @@ int craygMain(int argc, char **argv) {
 
     QObject::connect(&nextGenImageWidgetOutputDriver, &NextGenImageWidgetOutputDriver::imageMetadataUpdated,
                      [&frameBufferWidget, &nextGenImageWidgetOutputDriver]() {
-                         frameBufferWidget.setImageMetadata(nextGenImageWidgetOutputDriver.getFilm().getMetadata());
+                         frameBufferWidget.setImageMetadata(nextGenImageWidgetOutputDriver.getFilm().metadata);
                      });
     QObject::connect(&nextGenImageWidgetOutputDriver, &NextGenImageWidgetOutputDriver::initialized,
                      [&frameBufferWidget, &nextGenImageWidgetOutputDriver]() {
