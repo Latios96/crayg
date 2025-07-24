@@ -46,7 +46,8 @@ struct CameraLens {
     void focusLens(float focalDistance);
     void changeAperture(float fStop);
     void zoom(float focalLength_mm);
-
+    std::optional<Ray> traceUntil(const Ray &inputRay, int startIndex, int endIndex, int increment, float wavelength,
+                                  Vector3f *surfaceNormal);
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength) const;
     std::optional<Ray> traceFromFilmToWorld(const Ray &ray, float wavelength,
                                             float *maxRelativeDistanceToOpticalAxis) const;

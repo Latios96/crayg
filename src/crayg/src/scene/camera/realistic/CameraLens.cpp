@@ -141,6 +141,35 @@ const LensSurface &CameraLens::getLastSurface() const {
     return surfaces[surfaces.size() - 1];
 }
 
+std::optional<Ray> CameraLens::traceUntil(const Ray &inputRay, int startIndex, int endIndex, int increment,
+                                          float wavelength, Vector3f *surfaceNormal) {
+    Ray tracedRay = inputRay;
+    for (int i = startIndex; i != endIndex; i += increment) {
+        auto surface = surfaces[i];
+        if (surface.isAperture()) {
+            if (exceedsAperture(surface, tracedRay)) {
+                return std::nullopt;
+            }
+            continue;
+        }
+
+        auto resultIntersection = intersect(surface, tracedRay);
+        if (!resultIntersection) {
+            return std::nullopt;
+        }
+        float eta_i = surface.material.getIor(wavelength);
+        float eta_t = (i > 0 && surfaces[i - 1].material.getIor(wavelength) != 0)
+                          ? surfaces[i - 1].material.getIor(wavelength)
+                          : 1;
+
+        auto result = refract(*resultIntersection, tracedRay, eta_t, eta_i);
+
+        tracedRay = {result.startPoint, result.direction.invert()};
+        *surfaceNormal = resultIntersection->normal;
+    }
+    return tracedRay;
+}
+
 std::optional<Ray> CameraLens::traceFromFilmToWorld(const Ray &ray, float wavelength) const {
     Ray tracedRay = {{ray.startPoint.x, ray.startPoint.y, -ray.startPoint.z},
                      {ray.direction.x, ray.direction.y, -ray.direction.z}};
@@ -379,6 +408,10 @@ std::optional<LensSurfaceIntersection> CameraLens::intersect(const LensSurface &
 }
 
 bool CameraLens::exceedsAperture(const LensSurface &surface, const Ray &ray) const {
+    /*const float t = (-getSurfaceCenter(surface) - ray.startPoint.z) / ray.direction.z;
+if (t < 0) {
+    return false;
+}*/
     const float t = (getSurfaceCenter(surface) - ray.startPoint.z) / ray.direction.z;
     Vector3f intersectionPosition = ray.constructIntersectionPoint(t);
     return exceedsAperture(intersectionPosition, apertureRadius);
