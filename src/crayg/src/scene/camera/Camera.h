@@ -5,6 +5,7 @@
 #include "realistic/CameraLens.h"
 #include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"
+#include "utils/Preconditions.h"
 #include <fmt/ostream.h>
 #include <ostream>
 
@@ -52,6 +53,7 @@ class Camera : public Transformable {
     float computeApertureRadius() const;
 
     CameraLens &getLens() const {
+        CRAYG_CHECKD_NOT_NULLPTR(lens);
         return *lens;
     }
 
