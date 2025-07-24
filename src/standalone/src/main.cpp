@@ -1,13 +1,12 @@
 #include "CliParser.h"
 #include "Logger.h"
+#include "image/film/io/FilmWriter.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
 #include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
 #include <CraygInfo.h>
-#include <image/io/ImageWriter.h>
-#include <image/io/ImageWriters.h>
 #include <iostream>
 #include <renderer/Renderer.h>
 #include <scene/Scene.h>
@@ -49,18 +48,19 @@ int craygMain(int argc, char *argv[]) {
 
     Image myImage(scene.renderSettings.resolution);
 
-    ImageOutputDriver imageOutputDriver(myImage);
+    NextGenOutputDriver outputDriver;
 
     TaskReporter taskReporter;
     BucketQueue bucketQueue([]() { return Vector2i(); });
-    Renderer renderer(scene, imageOutputDriver, taskReporter, bucketQueue);
+    Renderer renderer(scene, outputDriver, taskReporter, bucketQueue);
+    renderer.initOutputDriver();
     renderer.renderScene();
 
     TextureStats textureStats;
     Logger::info(textureStats.getTextureStats());
 
     Logger::info("Writing image to {}..", imageOutputPath);
-    ImageWriters::writeImage(myImage, imageOutputPath);
+    FilmWriter::writeFilm(outputDriver.getFilm(), imageOutputPath);
     Logger::info("Writing image done.");
 
     CRG_IF_TRACE({

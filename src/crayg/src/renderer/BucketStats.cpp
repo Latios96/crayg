@@ -15,21 +15,30 @@ void BucketStats::processBucketTime(BucketImageBuffer &bucketImageBuffer,
     imageBucketTimes.push_back({bucketImageBuffer.imageBucket, secondsForBucket});
 }
 
-void BucketStats::processBucketTimes(OutputDriver &outputDriver, const Resolution &resolution) {
+void BucketStats::processBucketTimes(NextGenOutputDriver &outputDriver, const Resolution &resolution) {
     const ImageBucketTime bucketWithMaxTime =
         *std::max_element(imageBucketTimes.begin(), imageBucketTimes.end(),
                           [](ImageBucketTime &a, ImageBucketTime &b) { return a.seconds < b.seconds; });
     const float maxTime = bucketWithMaxTime.seconds;
 
-    auto pixelBuffer = PixelBuffer::createRgbFloat(resolution);
+    auto maybeBuffer = outputDriver.getFilm().getBufferVariantPtrByName("relativeRenderTime");
+    if (!maybeBuffer) {
+        return;
+    }
+
+    auto buffer = FilmBufferVariants::getAsValueBufferVariantPtr(*maybeBuffer);
 
     for (auto &imageBucketTime : imageBucketTimes) {
         float relativeTime = imageBucketTime.seconds / maxTime;
         relativeTime = std::isnan(relativeTime) ? 0 : relativeTime;
         const Color relativeTimeColor = MagmaHeatmap::lookup(relativeTime);
-        ImageAlgorithms::fill(*pixelBuffer, relativeTimeColor, imageBucketTime.imageBucket);
+        for (auto pixel : ImageIterators::lineByLine(imageBucketTime.imageBucket)) {
+            const auto globalPos = imageBucketTime.imageBucket.getPosition() + pixel;
+            std::visit([&globalPos, &relativeTimeColor](auto buf) { buf->write(globalPos, relativeTimeColor); },
+                       *buffer);
+        }
     }
 
-    outputDriver.updateChannel("relativeRenderTime", pixelBuffer.get());
+    outputDriver.updateChannel("relativeRenderTime");
 }
 } // crayg

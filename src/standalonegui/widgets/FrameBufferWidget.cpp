@@ -215,6 +215,7 @@ void FrameBufferWidget::setFilmSpec(FilmSpec filmSpec) {
         channelComboBox->setItemData(channelComboBox->count() - 1, QString::fromStdString(channelSpec.name),
                                      Qt::ToolTipRole);
     }
+    channelComboBox->setCurrentIndex(0);
 }
 
 void FrameBufferWidget::startTask(BaseTaskReporter::Task task) {

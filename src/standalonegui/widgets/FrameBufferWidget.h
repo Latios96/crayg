@@ -17,6 +17,7 @@
 #include <QtWidgets/qscrollarea.h>
 #include <fmt/format.h>
 #include <iostream>
+#include <qdebug>
 
 namespace crayg {
 

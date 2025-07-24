@@ -26,15 +26,14 @@
 
 namespace crayg {
 
-Renderer::Renderer(Scene &scene, OutputDriver &outputDriver, BaseTaskReporter &taskReporter, BucketQueue &bucketQueue)
+Renderer::Renderer(Scene &scene, NextGenOutputDriver &outputDriver, BaseTaskReporter &taskReporter,
+                   BucketQueue &bucketQueue)
     : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter), bucketQueue(bucketQueue) {
 }
 
 void Renderer::renderScene() {
     init();
     Logger::info("Starting rendering..");
-
-    outputDriver.initialize(requiredImageSpec(scene.renderSettings.resolution));
 
     initBuckets();
 
@@ -48,8 +47,10 @@ void Renderer::renderScene() {
     }
 
     Logger::info("Rendering done.");
+
     const auto renderTime = taskProgressController.finish();
     writeImageMetadata(renderTime);
+
     bucketStats.processBucketTimes(outputDriver, scene.renderSettings.resolution);
 }
 
@@ -91,19 +92,28 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
 
     BucketImageBuffer bucketImageBuffer(imageBucket);
     bucketImageBuffer.image.addChannelsFromSpec(requiredImageSpec({imageBucket.getWidth(), imageBucket.getHeight()}));
-    outputDriver.prepareBucket(bucketImageBuffer.imageBucket);
+
+    outputDriver.startBucket(bucketImageBuffer.imageBucket);
 
     bucketSampler->sampleBucket(bucketImageBuffer);
-
     bucketStats.processBucketTime(bucketImageBuffer, startTime);
 
-    outputDriver.writeBucketImageBuffer(bucketImageBuffer);
+    for (auto &channel : bucketImageBuffer.image.getChannels()) {
+        for (auto pixel : ImageIterators::lineByLine(bucketImageBuffer.image)) {
+            Vector2i globalPixelPos = pixel + bucketImageBuffer.imageBucket.getPosition();
+            const Color color = channel.channelBuffer.getValue(pixel);
+            outputDriver.getFilm().addSample(channel.channelName == "rgb" ? "color" : channel.channelName,
+                                             globalPixelPos, color);
+        }
+    }
+    outputDriver.finishBucket(imageBucket);
 }
 
 void Renderer::init() {
     CRG_TRACE_SCOPE("Renderer");
-    bucketSampler = BucketSamplerFactory::createBucketSampler(
-        scene.renderSettings, [this](Vector2f samplePos) { return renderSample(samplePos); });
+
+    initOutputDriver();
+
     {
         InformativeScopedStopWatch initializeCamera("Initialize camera");
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
@@ -120,6 +130,30 @@ void Renderer::init() {
     integrator = std::unique_ptr<AbstractIntegrator>(IntegratorFactory::createIntegrator(
         scene.renderSettings.integratorType, scene, sceneIntersector, scene.renderSettings.integratorSettings));
     progressController.finish();
+}
+
+void Renderer::initOutputDriver() {
+    bucketSampler = BucketSamplerFactory::createBucketSampler(
+        scene.renderSettings, [this](Vector2f samplePos) { return renderSample(samplePos); });
+
+    ImageSpec imageSpec = requiredImageSpec(scene.renderSettings.resolution);
+
+    FilmSpecBuilder filmSpecBuilder(scene.renderSettings.resolution, FilmBufferType::VALUE, PixelFormat::FLOAT32);
+
+    for (auto &channel : imageSpec.channels) {
+        if (channel.name == "rgb") {
+            continue;
+        }
+        FilmBufferSpec filmBufferSpec{channel.name, FilmBufferType::VALUE, channel.pixelFormat,
+                                      channel.colorChannelCount};
+        filmSpecBuilder.addChannel(filmBufferSpec);
+    }
+
+    if (scene.renderSettings.regionToRender) {
+        filmSpecBuilder.addRenderRegion(*scene.renderSettings.regionToRender);
+    }
+
+    outputDriver.initialize(filmSpecBuilder.finish());
 }
 
 void Renderer::initBuckets() {
@@ -162,7 +196,8 @@ void Renderer::writeImageMetadata(std::chrono::seconds renderTime) {
 
     ImageMetadata imageMetadata = imageMetadataCollector.collectMetadata();
 
-    outputDriver.writeImageMetadata(imageMetadata);
+    outputDriver.getFilm().metadata = imageMetadata;
+    outputDriver.updateImageMetadata();
 }
 
 ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {

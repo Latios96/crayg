@@ -6,6 +6,7 @@
 #include "CliParser.h"
 #include "CraygInfo.h"
 #include "Logger.h"
+#include "image/film/io/FilmWriter.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
 #include "sceneIO/SceneReaderFactory.h"
@@ -15,6 +16,8 @@
 #include "utils/tracing/CraygTracing.h"
 #include "widgets/GuiTaskReporter.h"
 #include "widgets/ImageWidgetOutputDriver.h"
+#include "widgets/NextGenImageWidget.h"
+#include "widgets/NextGenImageWidgetOutputDriver.h"
 #include <QResource>
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
@@ -67,18 +70,22 @@ int craygMain(int argc, char **argv) {
     TaskReporterQtSignalAdapter taskReporterQtSignalAdapter;
     GuiTaskReporter taskReporter(taskReporterQtSignalAdapter);
     Image image(scene.renderSettings.resolution);
-    auto imageWidget = new ImageWidget(image);
-    ImageWidgetOutputDriver imageWidgetOutputDriver(*imageWidget);
+    auto imageWidget = new NextGenImageWidget();
+    NextGenImageWidgetOutputDriver nextGenImageWidgetOutputDriver(*imageWidget);
     FrameBufferWidget frameBufferWidget(*imageWidget);
     frameBufferWidget.show();
 
-    QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter, &QtSignalAdapter::metadataWritten, &frameBufferWidget,
-                     &FrameBufferWidget::setImageMetadata);
+    QObject::connect(&nextGenImageWidgetOutputDriver, &NextGenImageWidgetOutputDriver::imageMetadataUpdated,
+                     [&frameBufferWidget, &nextGenImageWidgetOutputDriver]() {
+                         frameBufferWidget.setImageMetadata(nextGenImageWidgetOutputDriver.getFilm().metadata);
+                     });
+    QObject::connect(&nextGenImageWidgetOutputDriver, &NextGenImageWidgetOutputDriver::initialized,
+                     [&frameBufferWidget, &nextGenImageWidgetOutputDriver]() {
+                         frameBufferWidget.setFilmSpec(nextGenImageWidgetOutputDriver.getFilm().getFilmSpec());
+                     });
 
-    QObject::connect(&imageWidgetOutputDriver.qtSignalAdapter, &QtSignalAdapter::initialized, &frameBufferWidget,
-                     &FrameBufferWidget::setImageSpec);
-
-    QObject::connect(&frameBufferWidget, &FrameBufferWidget::channelChanged, imageWidget, &ImageWidget::changeChannel);
+    QObject::connect(&frameBufferWidget, &FrameBufferWidget::channelChanged, &nextGenImageWidgetOutputDriver,
+                     &NextGenImageWidgetOutputDriver::processCurrentChannelChanged);
 
     QObject::connect(&taskReporterQtSignalAdapter, &TaskReporterQtSignalAdapter::taskStarted, &frameBufferWidget,
                      &FrameBufferWidget::startTask);
@@ -86,9 +93,6 @@ int craygMain(int argc, char **argv) {
                      &FrameBufferWidget::finishTask);
     QObject::connect(&taskReporterQtSignalAdapter, &TaskReporterQtSignalAdapter::taskProgressUpdated,
                      &frameBufferWidget, &FrameBufferWidget::updateTask);
-
-    ImageOutputDriver imageOutputDriver(image);
-    TeeOutputDriver teeOutputDriver(imageOutputDriver, imageWidgetOutputDriver);
 
     const std::function<Vector2i()> getMousePosition = [imageWidget, &scene]() {
         auto point = imageWidget->mapFromGlobal(QCursor::pos());
@@ -99,10 +103,11 @@ int craygMain(int argc, char **argv) {
     };
     BucketQueue bucketQueue(getMousePosition);
 
-    Renderer renderer(scene, teeOutputDriver, taskReporter, bucketQueue);
+    Renderer renderer(scene, nextGenImageWidgetOutputDriver, taskReporter, bucketQueue);
+    renderer.initOutputDriver();
     frameBufferWidget.connectToggleFollowMouse([&bucketQueue]() { bucketQueue.switchMode(); });
 
-    std::thread renderThread([&image, &renderer, &imageOutputPath]() {
+    std::thread renderThread([&nextGenImageWidgetOutputDriver, &renderer, &imageOutputPath]() {
         try {
             renderer.renderScene();
 
@@ -110,7 +115,7 @@ int craygMain(int argc, char **argv) {
             Logger::info(textureStats.getTextureStats());
 
             Logger::info("Writing image to {}..", imageOutputPath);
-            ImageWriters::writeImage(image, imageOutputPath);
+            FilmWriter::writeFilm(nextGenImageWidgetOutputDriver.getFilm(), imageOutputPath);
             Logger::info("Writing image done.");
 
             CRG_IF_TRACE({

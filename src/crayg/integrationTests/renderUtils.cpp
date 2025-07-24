@@ -1,11 +1,11 @@
 #include "renderUtils.h"
+#include "image/film/io/FilmWriter.h"
 #include "utils/TaskReporter.h"
 
 namespace crayg {
 
 void renderScene(const std::string &scenePath, const std::string imageOutputPath, const Resolution resolution) {
-    Image myImage(resolution);
-    ImageOutputDriver imageOutputDriver(myImage);
+    NextGenOutputDriver outputDriver;
 
     Scene scene;
     scene.renderSettings.resolution = resolution;
@@ -16,10 +16,10 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
 
     TaskReporter taskReporter;
     BucketQueue bucketQueue([]() { return Vector2i(); });
-    Renderer renderer(scene, imageOutputDriver, taskReporter, bucketQueue);
+    Renderer renderer(scene, outputDriver, taskReporter, bucketQueue);
     renderer.renderScene();
 
-    ImageWriters::writeImage(myImage, imageOutputPath);
+    FilmWriter::writeFilm(outputDriver.getFilm(), imageOutputPath);
 }
 
 }

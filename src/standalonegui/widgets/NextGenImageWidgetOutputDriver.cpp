@@ -3,6 +3,7 @@
 #include "FrameBufferDrawUtils.h"
 #include "image/ColorConversion.h"
 #include "image/imageiterators/pixels/ImageIterators.h"
+#include "utils/StopWatch.h"
 
 namespace crayg {
 
@@ -101,18 +102,21 @@ void NextGenImageWidgetOutputDriver::updateDisplayBuffer(const ImageBucket &imag
         return;
     }
 
-    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
-        const Vector2i globalPosition = pixel + imageBucket.getPosition();
-        Color color =
-            std::visit([&globalPosition](auto buf) { return buf->getColor(globalPosition); }, *bufferVariantPtr);
-        if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {
-            color = ColorConversion::linearToSRGB(color);
-        }
-        const auto rgbValues = color.getRgbValues();
-        nextGenImageWidget.displayBuffer.setPixelColor(
-            globalPosition.x, globalPosition.y,
-            QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
-    }
+    std::visit(
+        [&imageBucket, this](auto buf) {
+            for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+                const Vector2i globalPosition = pixel + imageBucket.getPosition();
+                Color color = buf->getColor(globalPosition);
+                if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {
+                    color = ColorConversion::linearToSRGB(color);
+                }
+                const auto rgbValues = color.getRgbValues();
+                nextGenImageWidget.displayBuffer.setPixelColor(
+                    globalPosition.x, globalPosition.y,
+                    QColor::fromRgb(std::get<0>(rgbValues), std::get<1>(rgbValues), std::get<2>(rgbValues)));
+            }
+        },
+        *bufferVariantPtr);
 
     for (auto &bucket : activeBuckets) {
         FrameBufferDrawUtils::drawBucket(nextGenImageWidget.displayBuffer, bucket);

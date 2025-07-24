@@ -10,7 +10,7 @@
 #include <basics/Resolution.h>
 #include <image/Image.h>
 #include <intersectors/SceneIntersector.h>
-#include <outputdrivers/ImageOutputDriver.h>
+#include <outputdrivers/NextGenOutputDriver.h>
 #include <scene/RenderSettings.h>
 #include <scene/Scene.h>
 #include <scene/camera/Camera.h>
@@ -20,13 +20,14 @@ namespace crayg {
 
 class Renderer {
   public:
-    Renderer(Scene &scene, OutputDriver &outputDriver, BaseTaskReporter &taskReporter, BucketQueue &bucketQueue);
+    Renderer(Scene &scene, NextGenOutputDriver &outputDriver, BaseTaskReporter &taskReporter, BucketQueue &bucketQueue);
 
+    void initOutputDriver();
     void renderScene();
 
   private:
     Scene &scene;
-    OutputDriver &outputDriver;
+    NextGenOutputDriver &outputDriver;
     std::unique_ptr<CameraModel> cameraModel;
     std::shared_ptr<SceneIntersector> sceneIntersector;
     BaseTaskReporter &taskReporter;

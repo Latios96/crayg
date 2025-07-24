@@ -1,7 +1,7 @@
 #pragma once
 
 #include "image/BucketImageBuffer.h"
-#include "outputdrivers/OutputDriver.h"
+#include "outputdrivers/NextGenOutputDriver.h"
 #include <chrono>
 #include <tbb/concurrent_vector.h>
 #include <utils/DtoUtils.h>
@@ -14,7 +14,7 @@ class BucketStats {
   public:
     void processBucketTime(BucketImageBuffer &bucketImageBuffer,
                            const std::chrono::steady_clock::time_point &startTime);
-    void processBucketTimes(OutputDriver &outputDriver, const Resolution &resolution);
+    void processBucketTimes(NextGenOutputDriver &outputDriver, const Resolution &resolution);
 
   private:
     tbb::concurrent_vector<ImageBucketTime> imageBucketTimes;
