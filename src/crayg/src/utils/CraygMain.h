@@ -1,7 +1,7 @@
 #pragma once
 
 #define CRAYG_MAIN_IMPL                                                                                                \
-    crayg::Logger::initialize();                                                                                       \
+    crayg::Initialization::initialize();                                                                               \
     try {                                                                                                              \
         return crayg::craygMain(argc, argv);                                                                           \
     } catch (std::exception & e) {                                                                                     \

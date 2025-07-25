@@ -1,4 +1,5 @@
 #include "CliParser.h"
+#include "Initialization.h"
 #include "Logger.h"
 #include "image/film/io/FilmWriter.h"
 #include "sceneIO/SceneReaderFactory.h"
