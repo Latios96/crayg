@@ -141,6 +141,10 @@ void FrameBufferWidget::adaptToAvailableSize() {
         resize(QSize(imageWidget.size().width() + 40,
                      imageWidget.size().height() + 40 + metadataButton->size().height() + 45));
     }
+
+    int x = (availableSize.width() - size().width()) / 2;
+    int y = (availableSize.height() - size().height()) / 2;
+    move(x, y);
 }
 
 void FrameBufferWidget::setZoomFactor(ZoomFactor zoomFactor) {
