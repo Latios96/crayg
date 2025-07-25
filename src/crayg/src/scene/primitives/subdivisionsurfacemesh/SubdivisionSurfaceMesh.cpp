@@ -48,7 +48,7 @@ size_t SubdivisionSurfaceMesh::primitiveCount() const {
 }
 
 void SubdivisionSurfaceMesh::tessellate() {
-    CRG_TRACE_SCOPE("SubdivisionSurfaceMesh");
+    CRAYG_TRACE_SCOPE("SubdivisionSurfaceMesh");
     OpenSubdivRefiner openSubdivRefiner(*this);
     openSubdivRefiner.refine(maxSubdivision);
 

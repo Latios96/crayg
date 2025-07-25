@@ -13,7 +13,7 @@ template <class UsdType, class CraygType> class BaseUsdReader {
     }
 
     virtual std::shared_ptr<CraygType> read() {
-        CRG_TRACE_SCOPE("UsdSceneReader");
+        CRAYG_TRACE_SCOPE("UsdSceneReader");
         Logger::debug("Read {} {}", getTranslatedType(), usdPrim.GetPath());
 
         auto craygObject = std::make_shared<CraygType>();

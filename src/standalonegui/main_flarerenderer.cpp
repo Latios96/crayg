@@ -52,7 +52,7 @@ int craygMain(int argc, char **argv) {
     std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
     std::string logFilePath = FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
     Logger::logToFile(logFilePath);
-    CRG_IF_TRACE({
+    CRAYG_IF_TRACING_ENABLED({
         std::string traceFilePath = FileSystemUtils::swapFileExtension(imageOutputPath, "json");
         Logger::info("Tracing enabled, tracing to {}", traceFilePath);
         mtr_init(traceFilePath.c_str());

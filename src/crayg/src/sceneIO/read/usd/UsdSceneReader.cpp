@@ -11,7 +11,7 @@ UsdSceneReader::UsdSceneReader(const std::string &path, Scene &scene, const Scen
 }
 
 void UsdSceneReader::read() {
-    CRG_TRACE_SCOPE("UsdSceneReader");
+    CRAYG_TRACE_SCOPE("UsdSceneReader");
     InformativeScopedStopWatch informativeScopedStopWatch(fmt::format("Reading USD Stage {}", path));
     auto stage = pxr::UsdStage::Open(path);
     UsdStageReader translator(*stage);

@@ -55,7 +55,7 @@ void Renderer::renderScene() {
 }
 
 void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController) {
-    CRG_TRACE_SCOPE("Renderer");
+    CRAYG_TRACE_SCOPE("Renderer");
     bucketQueue.start(bucketSequence);
     tbb::task_group task_group;
 
@@ -75,7 +75,7 @@ void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProg
 }
 
 void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController) {
-    CRG_TRACE_SCOPE("Renderer");
+    CRAYG_TRACE_SCOPE("Renderer");
     bucketQueue.start(bucketSequence);
     while (true) {
         const auto imageBucket = bucketQueue.nextBucket();
@@ -110,10 +110,9 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
 }
 
 void Renderer::init() {
-    CRG_TRACE_SCOPE("Renderer");
+    CRAYG_TRACE_SCOPE("Renderer");
 
     initOutputDriver();
-
     {
         InformativeScopedStopWatch initializeCamera("Initialize camera");
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);

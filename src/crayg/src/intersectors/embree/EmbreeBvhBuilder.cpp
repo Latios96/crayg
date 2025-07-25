@@ -179,7 +179,7 @@ RTCScene buildFromSceneObjects(RTCDevice device, const std::vector<std::shared_p
 }
 
 std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
-    CRG_TRACE_SCOPE("EmbreeBvhBuilder");
+    CRAYG_TRACE_SCOPE("EmbreeBvhBuilder");
     InformativeScopedStopWatch informativeScopedStopWatch("Building Embree BVH");
     auto embreeBvh = std::make_unique<EmbreeBvh>();
 
