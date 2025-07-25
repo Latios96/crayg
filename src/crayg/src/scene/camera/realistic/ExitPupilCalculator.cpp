@@ -13,7 +13,7 @@ ExitPupilCalculator::ExitPupilCalculator(CameraLens &lens, float filmDiagonalLen
 }
 
 ExitPupil ExitPupilCalculator::calculate() {
-    CRG_TRACE_SCOPE("RealisticCamera");
+    CRAYG_TRACE_SCOPE("RealisticCamera");
     ExitPupil exitPupil;
     exitPupil.pupilBounds.resize(calculationSettings.samplesFilmX);
 

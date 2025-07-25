@@ -1,6 +1,6 @@
 #pragma once
 
-#define CRG_EMPTY_TRACE                                                                                                \
+#define CRAYG_EMPTY_TRACE                                                                                              \
     do {                                                                                                               \
     } while (false)
 
@@ -8,12 +8,12 @@
 
 #include "external/minitrace/minitrace.h"
 
-#define CRG_TRACE_SCOPE(c) MTR_SCOPE(c, __FUNCTION__)
-#define CRG_IF_TRACE(s) s
+#define CRAYG_TRACE_SCOPE(c) MTR_SCOPE(c, __FUNCTION__)
+#define CRG_IF_TRACING_ENABLED(s) s
 
 #else
 
-#define CRG_TRACE_SCOPE(c) CRG_EMPTY_TRACE
-#define CRG_IF_TRACE(s) CRG_EMPTY_TRACE
+#define CRAYG_TRACE_SCOPE(c) CRAYG_EMPTY_TRACE
+#define CRAYG_IF_TRACING_ENABLED(s) CRAYG_EMPTY_TRACE
 
 #endif

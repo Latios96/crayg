@@ -38,7 +38,7 @@ void write(std::unique_ptr<OIIO::ImageOutput> &out, PixelBuffer &pixelBuffer) {
 }
 
 void PngWriter::writeImage(const Image &image, std::string image_name) {
-    CRG_TRACE_SCOPE("PngWriter");
+    CRAYG_TRACE_SCOPE("PngWriter");
     ImageChannelPathResolver imageChannelPathResolver;
     for (auto &channel : image.getChannels()) {
         auto channelBuffer = channel.channelBuffer;
@@ -63,7 +63,7 @@ void PngWriter::writeImage(const Image &image, std::string image_name) {
         }
 
         {
-            CRG_IF_TRACE(MTR_SCOPE("PngWriter", "OpenImageIO::write_image"));
+            CRAYG_IF_TRACING_ENABLED(MTR_SCOPE("PngWriter", "OpenImageIO::write_image"));
             out->open(channelPath, spec);
             write(out, *bufferToWrite);
             out->close();
@@ -72,7 +72,7 @@ void PngWriter::writeImage(const Image &image, std::string image_name) {
 }
 
 void PngWriter::writeImageMetadata(const Image &image, OIIO::ImageSpec &spec) {
-    CRG_TRACE_SCOPE("PngWriter");
+    CRAYG_TRACE_SCOPE("PngWriter");
     for (auto &metadata : image.metadata) {
         if (std::holds_alternative<std::string>(metadata.second)) {
             spec.attribute(metadata.first, std::get<std::string>(metadata.second));

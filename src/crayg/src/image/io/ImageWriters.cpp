@@ -11,7 +11,7 @@
 namespace crayg {
 
 bool ImageWriters::writeImage(const Image &image, const std::string &imagePath) {
-    CRG_TRACE_SCOPE("ImageWriters");
+    CRAYG_TRACE_SCOPE("ImageWriters");
     std::filesystem::path path(imagePath);
     std::string extension = path.extension().string();
     std::unique_ptr<ImageWriter> imageWriter;

@@ -9,7 +9,7 @@ bool ColorConversion::channelNeedsLinearToSRgbConversion(const std::string &chan
 }
 
 void ColorConversion::linearToSRGB(const PixelBuffer &source, PixelBuffer &target) {
-    CRG_TRACE_SCOPE("ColorConversion");
+    CRAYG_TRACE_SCOPE("ColorConversion");
     for (auto pixel : ImageIterators::lineByLine(source)) {
         target.setValue(pixel, linearToSRGB(source.getValue(pixel)));
     }
@@ -27,7 +27,7 @@ Color ColorConversion::linearToSRGB(const Color &color) {
 }
 
 void ColorConversion::sRGBToLinear(const PixelBuffer &source, PixelBuffer &target) {
-    CRG_TRACE_SCOPE("ColorConversion");
+    CRAYG_TRACE_SCOPE("ColorConversion");
     for (auto pixel : ImageIterators::lineByLine(source)) {
         target.setValue(pixel, sRGBToLinear(source.getValue(pixel)));
     }
@@ -46,7 +46,7 @@ float ColorConversion::sRGBToLinear(float sRGBValue) {
 }
 
 void ColorConversion::toneMapHDRtoLDR(const PixelBuffer &source, PixelBuffer &target) {
-    CRG_TRACE_SCOPE("ToneMapping");
+    CRAYG_TRACE_SCOPE("ToneMapping");
     for (auto pixel : ImageIterators::lineByLine(source)) {
         target.setValue(pixel, toneMapHDRtoLDR(source.getValue(pixel)));
     }

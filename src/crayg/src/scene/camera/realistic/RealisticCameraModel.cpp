@@ -18,7 +18,7 @@ RealisticCameraModel::RealisticCameraModel(Camera &camera, const Resolution &res
 }
 
 void RealisticCameraModel::init(BaseTaskReporter &taskReporter) {
-    CRG_TRACE_SCOPE("Renderer");
+    CRAYG_TRACE_SCOPE("Renderer");
     Logger::info("Effective focal length: {:.2f}mm", camera.getLens().metadata.focalLength * 10);
 
     Logger::info("Request zooming to {}", camera.getFocalLength());

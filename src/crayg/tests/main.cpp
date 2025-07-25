@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]) {
     crayg::TemporaryDirectory temporaryDirectory;
     crayg::Initialization::initialize();
-    CRG_IF_TRACE({
+    CRAYG_IF_TRACING_ENABLED({
         std::string traceFilePath = temporaryDirectory.getFilePath("trace.json");
         std::cout << fmt::format("Tracing enabled, tracing to {}", traceFilePath) << std::endl;
         mtr_init(traceFilePath.c_str());
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
     int result = Catch::Session().run(argc, argv);
 
-    CRG_IF_TRACE({
+    CRAYG_IF_TRACING_ENABLED({
         mtr_flush();
         std::cout << "Shutting down trace." << std::endl;
         mtr_shutdown();
