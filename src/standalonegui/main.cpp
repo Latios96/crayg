@@ -5,6 +5,7 @@
 
 #include "CliParser.h"
 #include "CraygInfo.h"
+#include "Initialization.h"
 #include "Logger.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"

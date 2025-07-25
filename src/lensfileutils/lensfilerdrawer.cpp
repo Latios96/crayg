@@ -1,3 +1,4 @@
+#include "Initialization.h"
 #include "Logger.h"
 #include "basics/Color.h"
 #include "scene/camera/realistic/CameraLens.h"

@@ -5,6 +5,7 @@
 
 #include "CliParser.h"
 #include "CraygInfo.h"
+#include "Initialization.h"
 #include "Logger.h"
 #include "image/film/io/FilmWriter.h"
 #include "image/imageiterators/buckets/ImageBucketSequences.h"

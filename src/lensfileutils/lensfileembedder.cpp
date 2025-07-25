@@ -1,5 +1,6 @@
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
+#include "Initialization.h"
 #include "Logger.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "sceneIO/usd/UsdLensFileUtils.h"

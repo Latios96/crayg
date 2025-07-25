@@ -1,4 +1,5 @@
 #include "CliParser.h"
+#include "Initialization.h"
 #include "Logger.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"

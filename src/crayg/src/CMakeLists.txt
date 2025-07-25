@@ -88,6 +88,10 @@ set(crayg_SRCS
     image/PixelBuffer.cpp
     image/PixelBuffer.h
     image/PixelFormat.h
+    Initialization.cpp
+    Initialization.cpp
+    Initialization.h
+    Initialization.h
     integrators/AbstractIntegrator.cpp
     integrators/AbstractIntegrator.h
     integrators/AmbientOcclusionIntegrator.cpp

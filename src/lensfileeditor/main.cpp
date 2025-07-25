@@ -1,3 +1,4 @@
+#include "Initialization.h"
 #include "qtcrayg/foundation/QtMetaTypes.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "utils/CraygMain.h"

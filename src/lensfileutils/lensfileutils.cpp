@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include <filesystem>
 
+#include "Initialization.h"
 #include "scene/camera/realistic/ExitPupilCalculator.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "scene/camera/realistic/lensio/LensFileWriterFactory.h"
