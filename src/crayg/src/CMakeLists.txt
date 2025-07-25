@@ -124,6 +124,8 @@ set(crayg_SRCS
     outputdrivers/OutputDriver.h
     outputdrivers/TeeOutputDriver.cpp
     outputdrivers/TeeOutputDriver.h
+    parallel/ThreadCount.cpp
+    parallel/ThreadCount.h
     renderer/bucketsamplers/AdaptiveBucketSampler.cpp
     renderer/bucketsamplers/AdaptiveBucketSampler.h
     renderer/bucketsamplers/BucketSampler.cpp
