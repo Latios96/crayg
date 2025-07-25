@@ -26,6 +26,7 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/UsdGeomMeshFixtures.h
     math/TestCommonMath.cpp
     math/TestQuadraticEquations.cpp
+    parallel/TestParallelLoops.cpp
     parallel/TestThreadCount.cpp
     TestAdaptiveBucketSampler.cpp
     TestAreaLight.cpp

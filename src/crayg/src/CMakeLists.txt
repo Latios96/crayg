@@ -123,6 +123,7 @@ set(crayg_SRCS
     Logger.h
     outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.h
+    parallel/ParallelLoops.h
     parallel/ThreadCount.cpp
     parallel/ThreadCount.h
     renderer/bucketsamplers/AdaptiveBucketSampler.cpp
@@ -447,7 +448,8 @@ target_include_directories(crayg PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 if(WIN32)
     target_compile_definitions(crayg PUBLIC NOMINMAX _USE_MATH_DEFINES)
 endif()
-target_compile_definitions(crayg PUBLIC MAGIC_ENUM_RANGE_MAX=256 CATCH_CONFIG_ENABLE_ALL_STRINGMAKERS=1)
+target_compile_definitions(crayg PUBLIC MAGIC_ENUM_RANGE_MAX=256 CATCH_CONFIG_ENABLE_ALL_STRINGMAKERS=1
+                                        TBB_PREVIEW_CONCURRENT_ORDERED_CONTAINERS=1)
 
 add_custom_command(
     TARGET crayg
