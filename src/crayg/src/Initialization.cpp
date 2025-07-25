@@ -1,6 +1,7 @@
 #include "Initialization.h"
 
 #include <ImfThreading.h>
+#include <cpuinfo.h>
 #include <thread>
 
 namespace crayg {
@@ -18,6 +19,8 @@ void Initialization::initialize(const InitializationOptions &options) {
     }
 
     Imf::setGlobalThreadCount(options.openExrThreadCount.getThreadCount());
+
+    cpuinfo_initialize();
 
     isInitialized = true;
 }

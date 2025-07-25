@@ -32,7 +32,6 @@ void ImageMetadataCollector::collectCraygVersion(ImageMetadata &imageMetadata) c
 }
 
 void ImageMetadataCollector::collectCpuName(ImageMetadata &imageMetadata) const {
-    cpuinfo_initialize();
     imageMetadata.write(ImageMetadataTokens::CPU, cpuinfo_get_package(0)->name);
 }
 
