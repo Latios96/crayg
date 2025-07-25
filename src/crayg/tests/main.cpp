@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_RUNNER
 
+#include "Initialization.h"
 #include "fixtures/TemporaryDirectory.h"
 #include "utils/tracing/CraygTracing.h"
 #include <catch2/catch.hpp>
@@ -7,6 +8,7 @@
 
 int main(int argc, char *argv[]) {
     crayg::TemporaryDirectory temporaryDirectory;
+    crayg::Initialization::initialize();
     CRG_IF_TRACE({
         std::string traceFilePath = temporaryDirectory.getFilePath("trace.json");
         std::cout << fmt::format("Tracing enabled, tracing to {}", traceFilePath) << std::endl;
