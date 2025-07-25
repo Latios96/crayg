@@ -73,6 +73,7 @@ set(crayg_SRCS
     image/imageiterators/pixels/LineByLineIterator.h
     image/ImageMetadata.cpp
     image/ImageMetadata.h
+    image/ImageMetadataValue.h
     image/ImageSpec.cpp
     image/ImageSpec.h
     image/InvalidPixelFormat.h
