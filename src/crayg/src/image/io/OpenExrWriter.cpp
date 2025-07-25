@@ -1,5 +1,5 @@
 #include "OpenExrWriter.h"
-#include "image/InvalidPixelFormat.h"
+#include "image/UnsupportedPixelFormat.h"
 #include "utils/Exceptions.h"
 #include "utils/tracing/CraygTracing.h"
 

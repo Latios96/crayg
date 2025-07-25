@@ -1,7 +1,7 @@
 #include "PngWriter.h"
 #include "Logger.h"
 #include "image/ColorConversion.h"
-#include "image/InvalidPixelFormat.h"
+#include "image/UnsupportedPixelFormat.h"
 #include "utils/Exceptions.h"
 #include "utils/ImageChannelPathResolver.h"
 #include "utils/tracing/CraygTracing.h"

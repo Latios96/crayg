@@ -1,5 +1,5 @@
 #include "PixelBuffer.h"
-#include "InvalidPixelFormat.h"
+#include "UnsupportedPixelFormat.h"
 #include "imageiterators/pixels/ImageIterators.h"
 #include "utils/Exceptions.h"
 #include <utils/Preconditions.h>
