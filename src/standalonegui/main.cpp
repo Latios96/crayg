@@ -15,13 +15,11 @@
 #include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
 #include "widgets/GuiTaskReporter.h"
-#include "widgets/ImageWidgetOutputDriver.h"
 #include "widgets/NextGenImageWidget.h"
 #include "widgets/NextGenImageWidgetOutputDriver.h"
 #include <QResource>
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
-#include <outputdrivers/TeeOutputDriver.h>
 #include <renderer/Renderer.h>
 #include <scene/Scene.h>
 #include <thread>

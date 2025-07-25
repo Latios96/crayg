@@ -15,10 +15,6 @@ add_library(
     widgets/GuiTaskReporter.cpp
     widgets/GuiTaskReporter.h
     widgets/IdConstants.h
-    widgets/ImageWidget.cpp
-    widgets/ImageWidget.h
-    widgets/ImageWidgetOutputDriver.cpp
-    widgets/ImageWidgetOutputDriver.h
     widgets/NextGenImageWidget.cpp
     widgets/NextGenImageWidget.h
     widgets/NextGenImageWidgetOutputDriver.cpp

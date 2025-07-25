@@ -4,7 +4,6 @@
 #include <image/ImageAlgorithms.h>
 #include <image/io/ImageWriters.h>
 #include <iostream>
-#include <outputdrivers/ImageOutputDriver.h>
 
 namespace crayg {
 
@@ -96,23 +95,6 @@ TEST_CASE("ImageIO/createVector3f") {
     createGradientImage(image.rgb);
 
     ImageWriters::writeImage(image, getOutputFilename("ImageIO", "createVector3f", ".exr"));
-}
-
-TEST_CASE("ImageIO/writeToImageOutputDriver") {
-    Image image(1000, 500);
-    ImageOutputDriver imageOutputDriver(image);
-
-    for (int x = 0; x < 1000; x += 50) {
-        for (int y = 0; y < 500; y += 50) {
-            BucketImageBuffer bucketImageBuffer({x, y}, 25, 25);
-            ImageAlgorithms::fill(bucketImageBuffer.image, Color::createGrey(static_cast<float>(x)));
-
-            imageOutputDriver.prepareBucket(bucketImageBuffer.imageBucket);
-            imageOutputDriver.writeBucketImageBuffer(bucketImageBuffer);
-        }
-    }
-
-    ImageWriters::writeImage(image, getOutputFilename("ImageIO", "writeToImageOutputDriver", ".exr"));
 }
 
 }

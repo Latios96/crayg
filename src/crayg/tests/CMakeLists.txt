@@ -72,7 +72,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestImageIterators.cpp
     TestImageMetadata.cpp
     TestImageMetadataCollector.cpp
-    TestImageOutputDriver.cpp
     TestImagePathResolver.cpp
     TestImageWriters.cpp
     TestIntegratorSettings.cpp
@@ -118,7 +117,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestSubdivisionSurfaceMesh.cpp
     TestSurfaceInteraction.cpp
     TestTaskReporter.cpp
-    TestTeeOutputDriver.cpp
     TestThickLensApproximation.cpp
     TestToStringHelper.cpp
     TestTransform.cpp

@@ -117,13 +117,8 @@ set(crayg_SRCS
     intersectors/SceneIntersector.h
     Logger.cpp
     Logger.h
-    outputdrivers/ImageOutputDriver.cpp
-    outputdrivers/ImageOutputDriver.h
     outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.h
-    outputdrivers/OutputDriver.h
-    outputdrivers/TeeOutputDriver.cpp
-    outputdrivers/TeeOutputDriver.h
     renderer/bucketsamplers/AdaptiveBucketSampler.cpp
     renderer/bucketsamplers/AdaptiveBucketSampler.h
     renderer/bucketsamplers/BucketSampler.cpp
