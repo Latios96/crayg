@@ -1,4 +1,6 @@
 #pragma once
+#include "basics/Vector2.h"
+#include "utils/Exceptions.h"
 #include "utils/Preconditions.h"
 #include <vector>
 
@@ -11,48 +13,81 @@ template <typename T> class Array2d {
     Array2d() = default;
 
     Array2d(size_t width, size_t height) : width(width), height(height) {
-        storage.resize(size());
+        storage = std::vector<T>(width * height);
     }
 
-    Array2d(Array2d<T> &&other) noexcept {
-        storage = std::move(other.storage);
-        height = other.height;
-        width = other.width;
+    Array2d(size_t width, size_t height, std::initializer_list<T> initializer) : width(width), height(height) {
+        CRAYG_CHECK_EQUALS(width * height, initializer.size());
+        storage = initializer;
     }
 
-    const T &get(size_t xIndex, size_t yIndex) const {
-        CRAYG_CHECKD_IS_VALID_INDEX(index(xIndex, yIndex), size());
-        return storage[index(xIndex, yIndex)];
+    Array2d(size_t width, size_t height, float *data) : width(width), height(height) {
+        storage = std::vector<T>(width * height);
+        for (size_t i = 0; i < storage.size(); i++) {
+            storage[i] = data[i];
+        }
     }
 
-    T &get(size_t xIndex, size_t yIndex) {
-        CRAYG_CHECKD_IS_VALID_INDEX(index(xIndex, yIndex), size());
-        return storage[index(xIndex, yIndex)];
+    T &operator[](const Vector2i &i) {
+        CRAYG_CHECKD_IS_VALID_INDEX(index(i.x, i.y), size());
+        return storage[index(i.x, i.y)];
     }
 
-    void set(size_t xIndex, size_t yIndex, const T &value) {
-        CRAYG_CHECKD_IS_VALID_INDEX(index(xIndex, yIndex), size());
-        storage[index(xIndex, yIndex)] = value;
+    const T &operator[](const Vector2i &i) const {
+        CRAYG_CHECKD_IS_VALID_INDEX(index(i.x, i.y), size());
+        return storage[index(i.x, i.y)];
     }
 
     size_t index(size_t xIndex, size_t yIndex) const {
         return xIndex + width * yIndex;
     }
 
+    friend bool operator==(const Array2d &lhs, const Array2d &rhs) {
+        return lhs.storage == rhs.storage && lhs.width == rhs.width && lhs.height == rhs.height;
+    }
+
+    friend bool operator!=(const Array2d &lhs, const Array2d &rhs) {
+        return !(lhs == rhs);
+    }
+
     T *data() {
         return storage.data();
     }
 
-    size_t size() {
+    size_t size() const {
         return width * height;
     }
 
-    T *begin() {
-        return storage.data();
+    auto begin() {
+        return storage.begin();
     }
 
-    T *end() {
-        return storage.data() + size();
+    auto end() {
+        return storage.end();
+    }
+
+    auto begin() const {
+        return storage.begin();
+    }
+
+    auto end() const {
+        return storage.end();
+    }
+
+    auto front() {
+        return storage.front();
+    }
+
+    auto back() {
+        return storage.back();
+    }
+
+    auto front() const {
+        return storage.front();
+    }
+
+    auto back() const {
+        return storage.back();
     }
 
   private:
