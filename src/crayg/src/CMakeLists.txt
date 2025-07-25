@@ -119,6 +119,8 @@ set(crayg_SRCS
     Logger.h
     outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.h
+    parallel/ThreadCount.cpp
+    parallel/ThreadCount.h
     renderer/bucketsamplers/AdaptiveBucketSampler.cpp
     renderer/bucketsamplers/AdaptiveBucketSampler.h
     renderer/bucketsamplers/BucketSampler.cpp
