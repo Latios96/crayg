@@ -1,4 +1,4 @@
-#include "crayg_standalone/cli/CliParser.h"
+#include "craygstandalone/cli/CliParser.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

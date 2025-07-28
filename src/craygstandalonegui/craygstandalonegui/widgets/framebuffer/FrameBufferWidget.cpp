@@ -1,6 +1,6 @@
 #include "FrameBufferWidget.h"
 
-#include "crayg_standalone_gui/IdConstants.h"
+#include "craygstandalonegui/IdConstants.h"
 #include "qtcrayg/utils/QtUtils.h"
 #include "qtcrayg/widgets/QtWidgetsBuilderDsl.h"
 #include <QProgressBar>

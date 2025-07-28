@@ -8,19 +8,19 @@ set(CMAKE_AUTORCC ON)
 
 add_library(
     crayg-framebuffer
-    crayg_standalone_gui/IdConstants.h
-    crayg_standalone_gui/widgets/framebuffer/FrameBufferDrawUtils.cpp
-    crayg_standalone_gui/widgets/framebuffer/FrameBufferDrawUtils.h
-    crayg_standalone_gui/widgets/framebuffer/FrameBufferWidget.cpp
-    crayg_standalone_gui/widgets/framebuffer/FrameBufferWidget.h
-    crayg_standalone_gui/widgets/framebuffer/NextGenImageWidget.cpp
-    crayg_standalone_gui/widgets/framebuffer/NextGenImageWidget.h
-    crayg_standalone_gui/widgets/framebuffer/NextGenImageWidgetOutputDriver.cpp
-    crayg_standalone_gui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h
-    crayg_standalone_gui/widgets/panandzoomarea/PanAndZoomArea.cpp
-    crayg_standalone_gui/widgets/panandzoomarea/PanAndZoomArea.h
-    crayg_standalone_gui/widgets/taskreporter/GuiTaskReporter.cpp
-    crayg_standalone_gui/widgets/taskreporter/GuiTaskReporter.h)
+    craygstandalonegui/IdConstants.h
+    craygstandalonegui/widgets/framebuffer/FrameBufferDrawUtils.cpp
+    craygstandalonegui/widgets/framebuffer/FrameBufferDrawUtils.h
+    craygstandalonegui/widgets/framebuffer/FrameBufferWidget.cpp
+    craygstandalonegui/widgets/framebuffer/FrameBufferWidget.h
+    craygstandalonegui/widgets/framebuffer/NextGenImageWidget.cpp
+    craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h
+    craygstandalonegui/widgets/framebuffer/NextGenImageWidgetOutputDriver.cpp
+    craygstandalonegui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h
+    craygstandalonegui/widgets/panandzoomarea/PanAndZoomArea.cpp
+    craygstandalonegui/widgets/panandzoomarea/PanAndZoomArea.h
+    craygstandalonegui/widgets/taskreporter/GuiTaskReporter.cpp
+    craygstandalonegui/widgets/taskreporter/GuiTaskReporter.h)
 
 target_include_directories(crayg-framebuffer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(crayg-framebuffer crayg qtcrayg Qt5::Core Qt5::Widgets ${CONAN_LIBS})

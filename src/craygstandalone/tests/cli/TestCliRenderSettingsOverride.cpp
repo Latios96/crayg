@@ -1,4 +1,4 @@
-#include "crayg_standalone/cli/CliRenderSettingsOverride.h"
+#include "craygstandalone/cli/CliRenderSettingsOverride.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

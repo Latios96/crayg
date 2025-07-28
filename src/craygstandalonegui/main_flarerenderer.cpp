@@ -1,4 +1,4 @@
-#include "crayg_standalone_gui/widgets/framebuffer/FrameBufferWidget.h"
+#include "craygstandalonegui/widgets/framebuffer/FrameBufferWidget.h"
 #include "qtcrayg/foundation/QtBase.h"
 #include "qtcrayg/foundation/QtMetaTypes.h"
 #include <QtWidgets/qapplication.h>
@@ -6,25 +6,30 @@
 #include "CraygInfo.h"
 #include "Initialization.h"
 #include "Logger.h"
-#include "crayg_standalone/cli/CliParser.h"
-#include "crayg_standalone_gui/widgets/framebuffer/NextGenImageWidget.h"
-#include "crayg_standalone_gui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h"
-#include "crayg_standalone_gui/widgets/taskreporter/GuiTaskReporter.h"
+#include "craygstandalone/cli/CliParser.h"
+#include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"
+#include "craygstandalonegui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h"
+#include "craygstandalonegui/widgets/taskreporter/GuiTaskReporter.h"
 #include "image/film/io/FilmWriter.h"
+#include "image/imageiterators/buckets/ImageBucketSequences.h"
+#include "image/imageiterators/pixels/ImageIterators.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
+#include "renderer/FlareRenderer.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
 #include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
+
+#include "image/io/ImageWriter.h"
+#include "image/io/ImageWriters.h"
+#include "renderer/Renderer.h"
+#include "scene/Scene.h"
+#include "utils/ImagePathResolver.h"
 #include <QResource>
-#include <image/io/ImageWriter.h>
-#include <image/io/ImageWriters.h>
-#include <renderer/Renderer.h>
-#include <scene/Scene.h>
+#include <tbb/task_group.h>
 #include <thread>
-#include <utils/ImagePathResolver.h>
 
 namespace crayg {
 
@@ -35,7 +40,7 @@ int craygMain(int argc, char **argv) {
 
     registerQMetaTypes();
 
-    CliParser cliParser("crayg-standalone-gui", argc, argv);
+    CliParser cliParser("crayg-flarerenderer-gui", argc, argv);
     CliParseResult parseResult = cliParser.parse();
 
     if (!parseResult.isValid()) {
@@ -53,7 +58,7 @@ int craygMain(int argc, char **argv) {
         mtr_init(traceFilePath.c_str());
     });
 
-    Logger::info("Crayg Renderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
+    Logger::info("Crayg FlareRenderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
 
     Scene scene;
 
@@ -93,40 +98,16 @@ int craygMain(int argc, char **argv) {
     QObject::connect(&taskReporterQtSignalAdapter, &TaskReporterQtSignalAdapter::taskProgressUpdated,
                      &frameBufferWidget, &FrameBufferWidget::updateTask);
 
-    const std::function<Vector2i()> getMousePosition = [imageWidget, &scene]() {
-        auto point = imageWidget->mapFromGlobal(QCursor::pos());
-        const int x = static_cast<float>(point.x()) / imageWidget->width() * scene.renderSettings.resolution.getWidth();
-        const int y =
-            static_cast<float>(point.y()) / imageWidget->height() * scene.renderSettings.resolution.getHeight();
-        return Vector2i(x, y);
-    };
-    BucketQueue bucketQueue(getMousePosition);
+    FlareRenderer flareRenderer(scene, nextGenImageWidgetOutputDriver, taskReporter);
+    flareRenderer.initialize();
 
-    Renderer renderer(scene, nextGenImageWidgetOutputDriver, taskReporter, bucketQueue);
-    renderer.initOutputDriver();
-    frameBufferWidget.connectToggleFollowMouse([&bucketQueue]() { bucketQueue.switchMode(); });
-
-    std::thread renderThread([&nextGenImageWidgetOutputDriver, &renderer, &imageOutputPath]() {
+    std::thread renderThread([&flareRenderer, &nextGenImageWidgetOutputDriver]() {
         try {
-            renderer.renderScene();
-
-            TextureStats textureStats;
-            Logger::info(textureStats.getTextureStats());
-
-            Logger::info("Writing image to {}..", imageOutputPath);
-            FilmWriter::writeFilm(nextGenImageWidgetOutputDriver.getFilm(), imageOutputPath);
-            Logger::info("Writing image done.");
-
-            CRAYG_IF_TRACING_ENABLED({
-                mtr_flush();
-                Logger::info("Shutting down trace.");
-                mtr_shutdown();
-                Logger::info("Flushing trace.");
-            });
-
+            flareRenderer.renderScene();
         } catch (std::exception &e) {
             Logger::error("Caught exception: {}", e.what());
         }
+        FilmWriter::writeFilm(nextGenImageWidgetOutputDriver.getFilm(), "filmWriteTest.exr"); // todo take from cli
     });
     renderThread.detach();
 
