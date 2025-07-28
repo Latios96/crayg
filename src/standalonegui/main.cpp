@@ -3,10 +3,10 @@
 #include "widgets/FrameBufferWidget.h"
 #include <QtWidgets/qapplication.h>
 
-#include "CliParser.h"
 #include "CraygInfo.h"
 #include "Initialization.h"
 #include "Logger.h"
+#include "crayg_standalone/cli/CliParser.h"
 #include "image/film/io/FilmWriter.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
