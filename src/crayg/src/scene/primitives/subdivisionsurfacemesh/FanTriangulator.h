@@ -15,4 +15,4 @@ class FanTriangulator {
     std::vector<int> &faceVertexCounts;
 };
 
-} // crayg
+}

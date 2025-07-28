@@ -17,4 +17,4 @@ class UsdSphereReader : public BaseUsdImageableReader<pxr::UsdGeomSphere, Sphere
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

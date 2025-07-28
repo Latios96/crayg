@@ -84,7 +84,7 @@ template <typename T> T Gradient<T>::lerp(const T &firstValue, const T &secondVa
     return firstValue * (1 - position) + secondValue * position;
 }
 
-} // crayg
+}
 
 template <typename T> struct fmt::formatter<crayg::Gradient<T>> : ostream_formatter {};
 

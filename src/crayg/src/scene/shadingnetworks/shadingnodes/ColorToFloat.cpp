@@ -23,4 +23,4 @@ float ColorToFloat::evaluateFloat(const SurfaceInteraction &surfaceInteraction) 
         return 0;
     }
 }
-} // crayg
+}

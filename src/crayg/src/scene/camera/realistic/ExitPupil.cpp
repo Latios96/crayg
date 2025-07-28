@@ -16,4 +16,4 @@ PositionAndArea ExitPupil::samplePupil(const Vector2f &filmPos, float filmDiagon
     return {point, pupil.area()};
 }
 
-} // crayg
+}

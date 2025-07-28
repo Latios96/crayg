@@ -9,4 +9,4 @@ class SceneWriterFactory {
     static std::shared_ptr<SceneWriter> createSceneWriter(std::string scenePath, Scene &scene);
 };
 
-} // crayg
+}

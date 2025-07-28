@@ -12,4 +12,4 @@ pxr::UsdLuxDiskLight UsdDiskLightWriter::write(pxr::UsdStagePtr stage, UsdPathFa
 
     return usdLuxDiskLight;
 }
-} // crayg
+}

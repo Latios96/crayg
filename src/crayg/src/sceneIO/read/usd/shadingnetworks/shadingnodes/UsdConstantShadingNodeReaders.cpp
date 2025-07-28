@@ -72,4 +72,4 @@ std::string UsdColorConstantReader::getTranslatedType() {
     return "ColorConstant";
 }
 
-} // crayg
+}

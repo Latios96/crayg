@@ -20,4 +20,4 @@ template <class UsdType, class CraygType> class BaseUsdXformableReader : public 
     }
 };
 
-} // crayg
+}

@@ -16,4 +16,4 @@ class EmbreeBvhBuilder {
     const Scene &scene;
 };
 
-} // crayg
+}

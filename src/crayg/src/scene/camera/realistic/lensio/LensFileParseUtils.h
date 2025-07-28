@@ -17,4 +17,4 @@ class LensFileParseUtils {
     static int parseInt(int lineIndex, const std::string &intStr, const std::string &name);
 };
 
-} // crayg
+}

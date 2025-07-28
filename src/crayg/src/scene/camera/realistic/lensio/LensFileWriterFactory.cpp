@@ -36,4 +36,4 @@ std::unique_ptr<LensFileWriter> LensFileWriterFactory::createLensFileWriter(Lens
         CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No LensFileWriter found for LensFileFormat {}", lensFileFormat);
     }
 }
-} // crayg
+}

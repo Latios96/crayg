@@ -93,4 +93,4 @@ std::string UsdPointInstancerWriter::getTranslatedType() {
     return "PointInstancer";
 }
 
-} // crayg
+}

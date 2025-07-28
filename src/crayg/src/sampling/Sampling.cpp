@@ -51,4 +51,4 @@ Vector2f Sampling::concentricSampleDisk(float u, float v) {
     }
     return Vector2f(std::cos(theta), std::sin(theta)) * r;
 }
-} // crayg
+}

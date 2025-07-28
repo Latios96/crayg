@@ -17,4 +17,4 @@ class UsdPreviewSurfaceWriter : public BaseUsdMaterialWriter<UsdPreviewSurface> 
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

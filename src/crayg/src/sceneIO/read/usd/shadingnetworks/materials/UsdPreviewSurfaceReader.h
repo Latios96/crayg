@@ -15,4 +15,4 @@ class UsdPreviewSurfaceReader : public BaseUsdShadingNodeReader<UsdPreviewSurfac
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

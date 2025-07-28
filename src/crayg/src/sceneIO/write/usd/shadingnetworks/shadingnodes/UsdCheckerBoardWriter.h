@@ -14,4 +14,4 @@ class UsdCheckerBoardWriter : public BaseUsdShadingNodeWriter<CheckerBoard> {
   protected:
     std::string getTranslatedType() override;
 };
-} // crayg
+}

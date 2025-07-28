@@ -16,4 +16,4 @@ RayWithWeight ThinLensCameraModel::createPrimaryRay(const Vector2f &pixelPos, fl
     const Transform &transform = camera.getTransform();
     return {transform.apply(Ray(rayOrigin, mutatedDirection)), 1};
 }
-} // crayg
+}

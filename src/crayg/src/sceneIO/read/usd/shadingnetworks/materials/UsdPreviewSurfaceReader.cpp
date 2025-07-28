@@ -40,4 +40,4 @@ std::shared_ptr<UsdPreviewSurface> UsdPreviewSurfaceReader::read() {
 std::string UsdPreviewSurfaceReader::getTranslatedType() {
     return "UsdPreviewSurface";
 }
-} // crayg
+}

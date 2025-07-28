@@ -44,4 +44,4 @@ pxr::UsdShadeShader UsdMaterialWriteCache::createUsdPreviewSurface(const pxr::Us
     return usdShadeShader;
 }
 
-} // crayg
+}

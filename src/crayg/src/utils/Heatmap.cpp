@@ -103,4 +103,4 @@ Color MagmaHeatmap::lookup(float normalized) {
     const int heatMapIndex = static_cast<int>(normalized * 255);
     return magmaHeatmap[heatMapIndex];
 }
-} // crayg
+}

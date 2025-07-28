@@ -4,4 +4,4 @@ namespace crayg {
 
 ShaderForTesting::ShaderForTesting() {
 }
-} // crayg
+}

@@ -30,4 +30,4 @@ UniformBucketSampler::UniformBucketSampler(int maxSamples, const std::function<C
     : BucketSampler(maxSamples, renderSample) {
 }
 
-} // crayg
+}

@@ -499,4 +499,4 @@ void CameraLens::zoom(float focalLength_mm) {
     initializeLensProperties();
 }
 
-} // crayg
+}

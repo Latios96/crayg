@@ -14,4 +14,4 @@ class UsdColorToFloatReader : public BaseUsdShadingNodeReader<ColorToFloat> {
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

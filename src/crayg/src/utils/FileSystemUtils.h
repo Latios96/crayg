@@ -10,4 +10,4 @@ class FileSystemUtils {
     static std::string readFileAsString(const std::string &path);
 };
 
-} // crayg
+}

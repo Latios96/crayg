@@ -28,4 +28,4 @@ class SpiralSequence : public BucketSequence {
     int iterationsWithSize = 0;
 };
 
-} // crayg
+}

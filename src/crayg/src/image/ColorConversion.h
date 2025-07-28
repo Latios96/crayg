@@ -22,4 +22,4 @@ class ColorConversion {
     static void toneMapHDRtoLDR(const PixelBuffer &source, PixelBuffer &target);
 };
 
-} // crayg
+}

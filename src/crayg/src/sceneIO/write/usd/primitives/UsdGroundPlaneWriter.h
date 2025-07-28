@@ -17,4 +17,4 @@ class UsdGroundPlaneWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, G
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

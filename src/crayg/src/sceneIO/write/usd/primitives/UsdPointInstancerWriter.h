@@ -19,4 +19,4 @@ class UsdPointInstancerWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomPoin
                      UsdPathFactory &usdPathFactory);
 };
 
-} // crayg
+}

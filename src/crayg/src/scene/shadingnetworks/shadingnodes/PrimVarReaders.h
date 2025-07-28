@@ -20,6 +20,6 @@ class PrimVarReaderVector2f : public ShadingNode {
     Vector2f readUvs(const SurfaceInteraction &surfaceInteraction);
 };
 
-} // crayg
+}
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::PrimVarReaderType);

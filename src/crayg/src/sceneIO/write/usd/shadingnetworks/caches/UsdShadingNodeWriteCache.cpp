@@ -74,4 +74,4 @@ UsdShaderAndOutput UsdShadingNodeWriteCache::translateShadingNode(ShadingNode &s
     CRAYG_LOG_AND_THROW_RUNTIME_ERROR("ShadingNode of type '{}' is not supported!", type);
 }
 
-} // crayg
+}

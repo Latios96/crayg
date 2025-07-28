@@ -43,4 +43,4 @@ Color AmbientOcclusionIntegrator::calculateAmbientOcclusionAtPoint(Imageable::In
     return Color::createGrey(static_cast<float>(countClear) / static_cast<float>(sampleCount));
 }
 
-} // crayg
+}

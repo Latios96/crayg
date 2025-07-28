@@ -87,4 +87,4 @@ std::string LensFileExtendedFormatWriter::writeFileContent(const CameraLens &cam
 
     return content;
 }
-} // crayg
+}

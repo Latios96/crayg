@@ -26,4 +26,4 @@ class UsdRenderSettingsWriter {
     void writeRegionToRender(const pxr::UsdRenderSettings &usdRenderSettings) const;
 };
 
-} // crayg
+}

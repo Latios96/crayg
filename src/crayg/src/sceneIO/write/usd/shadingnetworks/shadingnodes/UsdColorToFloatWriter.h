@@ -14,4 +14,4 @@ class UsdColorToFloatWriter : public BaseUsdShadingNodeWriter<ColorToFloat> {
   protected:
     std::string getTranslatedType() override;
 };
-} // crayg
+}

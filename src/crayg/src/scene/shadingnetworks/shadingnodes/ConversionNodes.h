@@ -14,4 +14,4 @@ class Vector2fToColor : public ShadingNode {
     Vector2fShadingNodeInput vector2fInput;
 };
 
-} // crayg
+}

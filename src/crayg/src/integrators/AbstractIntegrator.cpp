@@ -6,4 +6,4 @@ AbstractIntegrator::AbstractIntegrator(Scene &scene, const std::shared_ptr<Scene
 }
 
 AbstractIntegrator::~AbstractIntegrator() = default;
-} // crayg
+}

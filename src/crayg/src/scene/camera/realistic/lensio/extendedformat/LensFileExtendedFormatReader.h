@@ -10,4 +10,4 @@ class LensFileExtendedFormatReader : public LensFileReader {
     CameraLens readFileContent(const std::string &content) override;
 };
 
-} // crayg
+}

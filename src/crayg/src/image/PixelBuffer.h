@@ -57,6 +57,6 @@ class PixelBuffer {
     int width, height;
 };
 
-} // crayg
+}
 
 template <> struct fmt::formatter<crayg::PixelBuffer> : ostream_formatter {};

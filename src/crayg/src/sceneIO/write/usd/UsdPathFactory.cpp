@@ -16,4 +16,4 @@ pxr::SdfPath UsdPathFactory::nameToPath(const std::string &name) {
     }
     return pxr::SdfPath("/" + name);
 }
-} // crayg
+}

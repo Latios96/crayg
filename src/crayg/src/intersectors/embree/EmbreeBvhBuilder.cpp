@@ -193,4 +193,4 @@ std::unique_ptr<EmbreeBvh> EmbreeBvhBuilder::build() const {
     return embreeBvh;
 }
 
-} // crayg
+}

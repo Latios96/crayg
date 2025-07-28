@@ -41,4 +41,4 @@ class UsdColorConstantReader : public BaseUsdShadingNodeReader<ColorConstant> {
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

@@ -42,4 +42,4 @@ std::string FileSystemUtils::readFileAsString(const std::string &path) {
     return utf16ToUtf8(fileContent);
 }
 
-} // crayg
+}

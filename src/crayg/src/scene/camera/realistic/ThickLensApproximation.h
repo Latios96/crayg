@@ -26,4 +26,4 @@ class ThickLensApproximationCalculator {
     const CameraLens &lens;
 };
 
-} // crayg
+}

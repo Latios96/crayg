@@ -30,4 +30,4 @@ const std::string TemporaryDirectory::getFilePath(const std::string &fileName) c
     return (path / fileName).string();
 }
 
-} // crayg
+}

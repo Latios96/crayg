@@ -12,4 +12,4 @@ float Random::random() {
 Vector2f Random::randomVector2f() {
     return {Random::random(), Random::random()};
 }
-} // crayg
+}

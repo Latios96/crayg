@@ -43,4 +43,4 @@ std::unique_ptr<LensFileReader> LensFileReaderFactory::createLensFileReader(Lens
     }
 }
 
-} // crayg
+}

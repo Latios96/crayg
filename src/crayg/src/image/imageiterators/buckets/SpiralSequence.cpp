@@ -108,4 +108,4 @@ ImageBucket SpiralSequence::fitToImage(Vector2i currentPoint) {
     return {currentPoint, calculatedBucketWidth, calculatedBucketHeight};
 }
 
-} // crayg
+}

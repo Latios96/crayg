@@ -15,4 +15,4 @@ ShadingNodeOutputType Vector2fToColor::getOutputType() {
     return ShadingNodeOutputType::COLOR;
 }
 
-} // crayg
+}

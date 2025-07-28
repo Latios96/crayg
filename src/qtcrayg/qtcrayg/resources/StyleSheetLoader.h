@@ -29,4 +29,4 @@ class StyleSheetLoader {
     QApplication &application;
 };
 
-} // crayg
+}

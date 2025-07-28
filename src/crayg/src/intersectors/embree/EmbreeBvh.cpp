@@ -5,4 +5,4 @@ EmbreeBvh::~EmbreeBvh() {
     rtcReleaseScene(rtcScene);
     rtcReleaseDevice(rtcDevice);
 }
-} // crayg
+}

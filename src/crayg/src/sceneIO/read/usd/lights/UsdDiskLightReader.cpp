@@ -18,4 +18,4 @@ std::shared_ptr<DiskLight> UsdDiskLightReader::read() {
 
     return diskLight;
 }
-} // crayg
+}

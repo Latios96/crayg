@@ -88,4 +88,4 @@ void UsdRenderSettingsWriter::writeRegionToRender(const pxr::UsdRenderSettings &
         pxr::GfVec4f(ndcRegion.min.x, ndcRegion.min.y, ndcRegion.max.x, ndcRegion.max.y));
 }
 
-} // crayg
+}

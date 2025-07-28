@@ -61,4 +61,4 @@ Color ColorConstant::evaluateColor(const SurfaceInteraction &surfaceInteraction)
 
 ColorConstant::ColorConstant(const Color &value) : value(value) {
 }
-} // crayg
+}

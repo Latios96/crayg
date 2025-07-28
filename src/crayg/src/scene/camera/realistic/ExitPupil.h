@@ -14,4 +14,4 @@ struct ExitPupil {
     PositionAndArea samplePupil(const Vector2f &filmPos, float filmDiagonal) const;
 };
 
-} // crayg
+}

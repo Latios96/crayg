@@ -117,4 +117,4 @@ CameraLens CameraLensFixtures::createEdmondAsphericLens() {
                       asphericCoefficients, {});
 }
 
-} // crayg
+}

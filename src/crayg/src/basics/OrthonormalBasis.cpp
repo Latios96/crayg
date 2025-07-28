@@ -10,4 +10,4 @@ bool OrthonormalBasis::operator!=(const OrthonormalBasis &rhs) const {
     return !(rhs == *this);
 }
 
-} // crayg
+}

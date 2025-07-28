@@ -25,4 +25,4 @@ std::string EmissiveMaterial::getType() const {
 ShadingNodeOutputType EmissiveMaterial::getOutputType() {
     return ShadingNodeOutputType::COLOR;
 }
-} // crayg
+}

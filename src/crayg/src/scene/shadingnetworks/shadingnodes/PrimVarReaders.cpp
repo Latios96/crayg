@@ -46,4 +46,4 @@ ShadingNodeOutputType PrimVarReaderVector2f::getOutputType() {
     return ShadingNodeOutputType::VECTOR2F;
 }
 
-} // crayg
+}

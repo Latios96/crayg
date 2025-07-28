@@ -27,4 +27,4 @@ class ImageMetadataCollector {
     void collectSceneStats(ImageMetadata &imageMetadata);
 };
 
-} // crayg
+}

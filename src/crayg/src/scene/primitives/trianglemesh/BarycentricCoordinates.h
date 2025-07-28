@@ -26,6 +26,6 @@ template <typename T> T BarycentricCoordinates::interpolateLinear(const T &value
     return value1 * alpha + value2 * beta + value3 * gamma;
 }
 
-} // crayg
+}
 
 template <> struct fmt::formatter<crayg::BarycentricCoordinates> : ostream_formatter {};

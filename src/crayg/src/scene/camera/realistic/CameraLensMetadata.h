@@ -26,6 +26,6 @@ struct CameraLensMetadata {
     friend std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata);
 };
 
-} // crayg
+}
 
 template <> struct fmt::formatter<crayg::CameraLensMetadata> : ostream_formatter {};

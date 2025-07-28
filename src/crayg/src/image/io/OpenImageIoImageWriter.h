@@ -11,4 +11,4 @@ class OpenImageIoImageWriter : public ImageWriter {
     ~OpenImageIoImageWriter() override = default;
 };
 
-} // crayg
+}

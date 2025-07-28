@@ -18,4 +18,4 @@ class FraunhoferLines {
     static const FraunhoferLine MERCURY;
 };
 
-} // crayg
+}

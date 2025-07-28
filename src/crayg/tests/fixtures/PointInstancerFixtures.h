@@ -15,4 +15,4 @@ class PointInstancerFixtures {
                                                    std::shared_ptr<SceneObject> &sceneObject);
 };
 
-} // crayg
+}

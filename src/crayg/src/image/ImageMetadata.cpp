@@ -35,4 +35,4 @@ const std::string ImageMetadataTokens::CAMERA_LENS_DESCRIPTION = "crayg/camera/l
 const std::string ImageMetadataTokens::SCENE_STATS_OBJECT_COUNT = "crayg/scene/stats/objectCount";
 const std::string ImageMetadataTokens::SCENE_STATS_PRIMITIVE_COUNT = "crayg/scene/stats/primitiveCount";
 
-} // crayg
+}

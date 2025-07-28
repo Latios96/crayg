@@ -25,4 +25,4 @@ class UsdShadingNodeReadCache {
     std::map<pxr::SdfPath, std::shared_ptr<ShadingNode>> shadingNodeCache;
 };
 
-} // crayg
+}

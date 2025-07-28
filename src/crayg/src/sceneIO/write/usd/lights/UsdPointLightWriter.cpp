@@ -13,4 +13,4 @@ pxr::UsdLuxSphereLight UsdPointLightWriter::write(pxr::UsdStagePtr stage, UsdPat
     return usdLuxSphereLight;
 }
 
-} // crayg
+}

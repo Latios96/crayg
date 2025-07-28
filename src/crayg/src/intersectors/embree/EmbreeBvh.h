@@ -54,4 +54,4 @@ struct EmbreeBvh {
     virtual ~EmbreeBvh();
 };
 
-} // crayg
+}

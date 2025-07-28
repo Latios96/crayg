@@ -11,4 +11,4 @@ class ShaderForTesting : public Material {
     ColorShadingNodeInput colorInput;
     FloatShadingNodeInput reflectivity;
 };
-} // crayg
+}

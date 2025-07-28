@@ -44,4 +44,4 @@ class SubdivisionSurfaceMesh : public SceneObject {
     void copyUvsToTriangleMesh();
 };
 
-} // crayg
+}

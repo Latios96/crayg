@@ -52,4 +52,4 @@ void GeometryCompiler::findAllSubdivisionSurfaceMeshes(
     }
 }
 
-} // crayg
+}

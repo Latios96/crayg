@@ -17,4 +17,4 @@ class BucketSizeEstimator {
     static constexpr int BUCKETS_PER_THREAD = 4;
 };
 
-} // crayg
+}

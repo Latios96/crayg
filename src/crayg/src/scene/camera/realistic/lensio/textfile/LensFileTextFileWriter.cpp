@@ -19,4 +19,4 @@ std::string LensFileTextFileWriter::writeFileContent(const CameraLens &cameraLen
     return content;
 }
 
-} // crayg
+}

@@ -29,4 +29,4 @@ class BaseUsdImageableReader : public BaseUsdXformableReader<UsdType, CraygType>
     UsdMaterialReadCache &usdMaterialTranslationCache;
 };
 
-} // crayg
+}

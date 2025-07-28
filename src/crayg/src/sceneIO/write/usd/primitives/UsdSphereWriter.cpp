@@ -13,4 +13,4 @@ pxr::UsdGeomSphere UsdSphereWriter::write(pxr::UsdStagePtr stage, UsdPathFactory
 
     return usdGeomSphere;
 }
-} // crayg
+}

@@ -20,4 +20,4 @@ std::string UsdSphereReader::getTranslatedType() {
     return "sphere";
 }
 
-} // crayg
+}

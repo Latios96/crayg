@@ -11,4 +11,4 @@ class CameraLensFixtures {
     static CameraLens createEdmondAsphericLens();
 };
 
-} // crayg
+}

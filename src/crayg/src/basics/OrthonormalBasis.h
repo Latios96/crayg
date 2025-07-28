@@ -42,6 +42,6 @@ class OrthonormalBasis {
     }
 };
 
-} // crayg
+}
 
 template <> struct fmt::formatter<crayg::OrthonormalBasis> : ostream_formatter {};

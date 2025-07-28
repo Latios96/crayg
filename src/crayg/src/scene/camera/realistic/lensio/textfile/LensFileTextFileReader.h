@@ -13,4 +13,4 @@ class LensFileTextFileReader : public LensFileReader {
     LensSurface readLensSurface(const std::string &line) const;
 };
 
-} // crayg
+}

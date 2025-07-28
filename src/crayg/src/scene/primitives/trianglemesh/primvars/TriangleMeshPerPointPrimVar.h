@@ -64,6 +64,6 @@ template <typename T> class TriangleMeshPerPointPrimVar : public TriangleMeshAbs
     std::vector<T> pointData;
 };
 
-} // crayg
+}
 
 template <typename T> struct fmt::formatter<crayg::TriangleMeshPerPointPrimVar<T>> : ostream_formatter {};

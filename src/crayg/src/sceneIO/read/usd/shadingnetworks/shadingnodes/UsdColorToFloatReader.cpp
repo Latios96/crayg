@@ -21,4 +21,4 @@ std::shared_ptr<ColorToFloat> UsdColorToFloatReader::read() {
 std::string UsdColorToFloatReader::getTranslatedType() {
     return "ColorToFloat";
 }
-} // crayg
+}

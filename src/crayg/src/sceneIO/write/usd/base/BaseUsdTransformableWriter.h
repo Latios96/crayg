@@ -24,4 +24,4 @@ template <class UsdType, class CraygType> class BaseUsdTransformableWriter : pub
     }
 };
 
-} // crayg
+}

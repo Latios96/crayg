@@ -34,6 +34,6 @@ class FileTexture : public ShadingNode {
     std::atomic<bool> badTexture = false;
     OIIO::TextureOpt textureOpt;
 };
-} // crayg
+}
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::FileTexture::ColorSpace);

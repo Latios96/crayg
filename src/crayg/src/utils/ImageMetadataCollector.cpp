@@ -121,4 +121,4 @@ void ImageMetadataCollector::collectSceneStats(crayg::ImageMetadata &imageMetada
     imageMetadata.write(ImageMetadataTokens::SCENE_STATS_PRIMITIVE_COUNT, static_cast<int>(scene->primitiveCount()));
 }
 
-} // crayg
+}

@@ -87,4 +87,4 @@ void UsdPointInstancerReader::readProtos(std::shared_ptr<PointInstancer> &pointI
         pointInstancer->protos.push_back(proto);
     }
 }
-} // crayg
+}

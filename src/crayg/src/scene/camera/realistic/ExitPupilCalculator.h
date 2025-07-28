@@ -31,4 +31,4 @@ class ExitPupilCalculator {
     BaseTaskReporter &taskReporter;
 };
 
-} // crayg
+}

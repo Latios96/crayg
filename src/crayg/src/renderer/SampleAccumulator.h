@@ -15,4 +15,4 @@ class SampleAccumulator {
     Color sum;
 };
 
-} // crayg
+}

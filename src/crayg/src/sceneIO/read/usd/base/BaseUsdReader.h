@@ -27,4 +27,4 @@ template <class UsdType, class CraygType> class BaseUsdReader {
     pxr::UsdTimeCode timeCodeToRead = pxr::UsdTimeCode::EarliestTime();
 };
 
-} // crayg
+}

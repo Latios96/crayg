@@ -31,4 +31,4 @@ class GuiTaskReporter : public TaskReporter {
     TaskReporterQtSignalAdapter &appController;
 };
 
-} // crayg
+}

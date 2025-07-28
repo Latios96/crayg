@@ -10,4 +10,4 @@ class TriangleMeshConversion {
     static void toTriangleMesh(GroundPlane &groundPlane, TriangleMesh &triangleMesh);
 };
 
-} // crayg
+}

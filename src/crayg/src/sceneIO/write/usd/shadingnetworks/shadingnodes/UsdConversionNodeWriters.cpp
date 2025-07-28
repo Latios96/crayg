@@ -27,4 +27,4 @@ std::string UsdVector2fToColorWriter::getTranslatedType() {
     return "Vector2fToColor";
 }
 
-} // crayg
+}

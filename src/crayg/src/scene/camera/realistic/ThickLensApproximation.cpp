@@ -55,4 +55,4 @@ CardinalPoints ThickLensApproximationCalculator::computeVerticalCardinalPoints(c
     return {pz, fz};
 }
 
-} // crayg
+}

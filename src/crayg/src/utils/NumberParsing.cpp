@@ -15,4 +15,4 @@ int NumberParsing::parseIntOrThrow(const std::string &str) {
     return result;
 }
 
-} // crayg
+}

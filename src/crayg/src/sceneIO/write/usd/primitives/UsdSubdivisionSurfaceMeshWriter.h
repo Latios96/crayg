@@ -23,4 +23,4 @@ class UsdSubdivisionSurfaceMeshWriter : public BaseUsdSceneObjectWriter<pxr::Usd
     void writeMaxSubdivision(pxr::UsdGeomMesh usdGeomMesh) const;
 };
 
-} // crayg
+}

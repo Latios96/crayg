@@ -18,4 +18,4 @@ class BucketSampler {
     std::function<Color(Vector2f)> renderSample;
 };
 
-} // crayg
+}

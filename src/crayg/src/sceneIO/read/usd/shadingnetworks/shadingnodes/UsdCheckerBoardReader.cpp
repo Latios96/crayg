@@ -25,4 +25,4 @@ std::shared_ptr<CheckerBoard> UsdCheckerBoardReader::read() {
 std::string UsdCheckerBoardReader::getTranslatedType() {
     return "CheckerBoard";
 }
-} // crayg
+}

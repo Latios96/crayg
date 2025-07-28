@@ -20,4 +20,4 @@ std::vector<ImageBucket> MortonSequence::getTiles() {
     return tiles;
 }
 
-} // crayg
+}

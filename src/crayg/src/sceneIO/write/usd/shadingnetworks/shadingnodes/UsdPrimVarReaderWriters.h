@@ -16,4 +16,4 @@ class UsdPrimVarReaderVector2fWriter : public BaseUsdShadingNodeWriter<PrimVarRe
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

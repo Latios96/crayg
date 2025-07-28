@@ -55,4 +55,4 @@ void FrameBufferDrawUtils::drawVLine(QImage &image, int x_start, int y_start, in
         }
     }
 }
-} // crayg
+}

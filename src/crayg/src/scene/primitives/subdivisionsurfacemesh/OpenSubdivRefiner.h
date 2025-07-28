@@ -28,4 +28,4 @@ class OpenSubdivRefiner {
     OpenSubdiv::Far::TopologyDescriptor::FVarChannel channels[1];
 };
 
-} // crayg
+}

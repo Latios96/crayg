@@ -17,4 +17,4 @@ class LensFileWriter {
     std::string filePath;
 };
 
-} // crayg
+}

@@ -27,4 +27,4 @@ pxr::UsdShadeOutput UsdCheckerBoardWriter::getOutput(pxr::UsdShadeShader &usdSha
 std::string UsdCheckerBoardWriter::getTranslatedType() {
     return "CheckerBoard";
 }
-} // crayg
+}

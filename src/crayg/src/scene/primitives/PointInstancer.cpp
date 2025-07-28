@@ -29,4 +29,4 @@ void PointInstancer::init() {
     }
 }
 
-} // crayg
+}

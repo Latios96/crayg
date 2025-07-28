@@ -47,4 +47,4 @@ class UsdShadingNodeWriteCache {
     UsdPathFactory &usdPathFactory;
 };
 
-} // crayg
+}

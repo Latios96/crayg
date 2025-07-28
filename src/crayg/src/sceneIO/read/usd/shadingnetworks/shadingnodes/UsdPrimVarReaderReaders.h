@@ -21,4 +21,4 @@ class UsdPrimVarReaderVector2fReader : public BaseUsdShadingNodeReader<PrimVarRe
     std::string readVarname(const pxr::UsdShadeInput &varnameInput) const;
 };
 
-} // crayg
+}

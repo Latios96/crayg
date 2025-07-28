@@ -91,4 +91,4 @@ void AdaptiveBucketSampler::divideSampleSumBySampleCount(PixelBuffer *fullySampl
     }
 }
 
-} // crayg
+}

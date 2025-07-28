@@ -19,4 +19,4 @@ int BucketSizeEstimator::estimateBucketSize(int threadCount) const {
 
 BucketSizeEstimator::BucketSizeEstimator(const RenderSettings &renderSettings) : renderSettings(renderSettings) {
 }
-} // crayg
+}

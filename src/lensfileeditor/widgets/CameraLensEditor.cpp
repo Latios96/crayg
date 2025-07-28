@@ -41,4 +41,4 @@ void CameraLensEditor::setupUI() {
     setLayout(layout);
 }
 
-} // crayg
+}

@@ -18,4 +18,4 @@ void EmbreeUtils::createRtcRay(const Ray &ray, RTCRay *rtcRay, float tFar) {
     rtcRay->tfar = tFar;
 }
 
-} // crayg
+}

@@ -48,4 +48,4 @@ class UsdColorConstantWriter : public BaseUsdShadingNodeWriter<ColorConstant> {
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

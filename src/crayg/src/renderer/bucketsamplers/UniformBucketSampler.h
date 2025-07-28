@@ -13,4 +13,4 @@ class UniformBucketSampler : public BucketSampler {
     Color renderPixel(const Vector2i &pixel) const;
 };
 
-} // crayg
+}

@@ -29,4 +29,4 @@ struct BucketQueue {
     std::mutex delegateMutex;
 };
 
-} // crayg
+}

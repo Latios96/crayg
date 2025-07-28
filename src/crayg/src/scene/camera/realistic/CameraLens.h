@@ -81,4 +81,4 @@ struct CameraLens {
     float surfacesOffset = 0;
 };
 
-} // crayg
+}

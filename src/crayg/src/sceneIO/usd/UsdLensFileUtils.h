@@ -10,4 +10,4 @@ class UsdLensFileUtils {
     static void writeEmbeddedLensFile(const CameraLens &cameraLens, pxr::UsdPrim prim);
 };
 
-} // crayg
+}

@@ -109,4 +109,4 @@ void SubdivisionSurfaceMesh::copyUvsToTriangleMesh() {
 bool SubdivisionSurfaceMesh::hasUvs() const {
     return !uvs.empty() && !uvIndices.empty();
 }
-} // crayg
+}

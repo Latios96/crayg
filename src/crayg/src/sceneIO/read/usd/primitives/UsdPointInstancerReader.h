@@ -21,4 +21,4 @@ class UsdPointInstancerReader : public BaseUsdImageableReader<pxr::UsdGeomPointI
     void readProtos(std::shared_ptr<PointInstancer> &pointInstancer) const;
 };
 
-} // crayg
+}

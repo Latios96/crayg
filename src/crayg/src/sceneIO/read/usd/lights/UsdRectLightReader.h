@@ -16,4 +16,4 @@ class UsdRectLightReader : public BaseUsdLightReader<pxr::UsdLuxRectLight, RectL
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

@@ -72,4 +72,4 @@ UsdFileTextureReader::getDefaultColorSpaceFromFilePath(std::shared_ptr<FileTextu
     return FileTexture::ColorSpace::S_RGB;
 }
 
-} // crayg
+}

@@ -17,4 +17,4 @@ class RaytracingIntegrator : public AbstractIntegrator {
     bool useGi = false;
 };
 
-} // crayg
+}

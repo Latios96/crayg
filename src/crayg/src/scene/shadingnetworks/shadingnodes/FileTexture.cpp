@@ -59,4 +59,4 @@ void FileTexture::setFilePath(const std::string &path) {
     filePath = OIIO::ustring(path);
 }
 
-} // crayg
+}

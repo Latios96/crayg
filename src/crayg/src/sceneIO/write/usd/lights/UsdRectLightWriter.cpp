@@ -14,4 +14,4 @@ pxr::UsdLuxRectLight UsdRectLightWriter::write(pxr::UsdStagePtr stage, UsdPathFa
     return usdLuxRectLight;
 }
 
-} // crayg
+}

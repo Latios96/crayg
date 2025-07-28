@@ -22,4 +22,4 @@ void FanTriangulator::fanTriangulate(std::vector<TriangleMesh::FaceVertexIndices
     }
 }
 
-} // crayg
+}

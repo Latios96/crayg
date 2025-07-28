@@ -70,4 +70,4 @@ class ImageSpecBuilder {
     ImageSpec imageSpec;
 };
 
-} // crayg
+}

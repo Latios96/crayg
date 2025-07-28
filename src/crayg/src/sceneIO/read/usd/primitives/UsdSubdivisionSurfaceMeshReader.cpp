@@ -111,4 +111,4 @@ void UsdSubdivisionSurfaceMeshReader::translateMaxSubdivisions(
         UsdUtils::getStaticAttributeValueAs<int>(usdPrim.GetPrim(), "crayg:maxSubdivision", 3);
 }
 
-} // crayg
+}

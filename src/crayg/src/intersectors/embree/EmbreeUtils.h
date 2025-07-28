@@ -12,4 +12,4 @@ class EmbreeUtils {
                                 float tFar = std::numeric_limits<float>::infinity());
 };
 
-} // crayg
+}

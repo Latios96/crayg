@@ -11,4 +11,4 @@ class LensFileReaderFactory {
     static std::unique_ptr<LensFileReader> createLensFileReader(const std::string &filePath);
     static std::unique_ptr<LensFileReader> createLensFileReader(LensFileFormat lensFileFormat);
 };
-} // crayg
+}

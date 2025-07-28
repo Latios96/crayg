@@ -93,4 +93,4 @@ void UsdSubdivisionSurfaceMeshWriter::writeUvs(pxr::UsdGeomMesh usdGeomMesh) con
 void UsdSubdivisionSurfaceMeshWriter::writeMaxSubdivision(pxr::UsdGeomMesh usdGeomMesh) const {
     UsdUtils::createAndSetAttribute(usdGeomMesh.GetPrim(), "crayg:maxSubdivision", craygObject.maxSubdivision);
 }
-} // crayg
+}

@@ -50,4 +50,4 @@ void LensRaytracerTracer::emit(const std::filesystem::path &path) {
     o << std::setw(4) << j << std::endl;
     o.close();
 }
-} // crayg
+}

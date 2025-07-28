@@ -246,4 +246,4 @@ void PixelBuffer::dividePixel(const crayg::Vector2i &pixelPosition, float value)
     setValue(pixelPosition, currentColor / value);
 }
 
-} // crayg
+}

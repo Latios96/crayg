@@ -16,4 +16,4 @@ CameraLens LensFileJsonReader::readFileContent(const std::string &content) {
     return {CameraLensMetadata(name), surfaces};
 }
 
-} // crayg
+}

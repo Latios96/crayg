@@ -53,4 +53,4 @@ QLayout *inVBox(const std::vector<Renderable> &children) {
 
     return vBox;
 }
-} // crayg
+}

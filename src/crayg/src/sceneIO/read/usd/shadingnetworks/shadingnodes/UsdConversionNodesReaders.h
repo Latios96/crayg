@@ -15,4 +15,4 @@ class UsdVector2fToColorReader : public BaseUsdShadingNodeReader<Vector2fToColor
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

@@ -45,4 +45,4 @@ LensSurface LensFileTextFileReader::readLensSurface(const std::string &line) con
     return {radius * 0.1f, thickness * 0.1f, ior, diameter / 2.f * 0.1f};
 }
 
-} // crayg
+}

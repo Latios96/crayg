@@ -41,4 +41,4 @@ void BucketStats::processBucketTimes(NextGenOutputDriver &outputDriver, const Re
 
     outputDriver.updateChannel("relativeRenderTime");
 }
-} // crayg
+}

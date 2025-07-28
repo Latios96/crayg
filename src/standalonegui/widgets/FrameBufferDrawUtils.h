@@ -14,4 +14,4 @@ class FrameBufferDrawUtils {
     static void drawVLine(QImage &image, int x_start, int y_start, int length, int width, const QColor &color);
 };
 
-} // crayg
+}

@@ -9,4 +9,4 @@ class MagmaHeatmap {
     static Color lookup(float normalized);
 };
 
-} // crayg
+}

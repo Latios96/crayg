@@ -25,5 +25,3 @@ std::string UsdPrimVarReaderVector2fWriter::getTranslatedType() {
     return "PrimVarReaderVector2f";
 }
 }
-
-// crayg

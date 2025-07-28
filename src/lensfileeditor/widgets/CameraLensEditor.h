@@ -14,4 +14,4 @@ class CameraLensEditor : public QWidget {
     std::unique_ptr<CameraLens> cameraLens;
 };
 
-} // crayg
+}

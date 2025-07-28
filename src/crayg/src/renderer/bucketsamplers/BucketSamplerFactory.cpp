@@ -19,4 +19,4 @@ BucketSamplerFactory::createBucketSampler(const RenderSettings &renderSettings,
         CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported BucketSamplerType : "{}")", renderSettings.bucketSamplerType);
     }
 }
-} // crayg
+}

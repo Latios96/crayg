@@ -14,4 +14,4 @@ void TriangleMeshConversion::toTriangleMesh(GroundPlane &groundPlane, TriangleMe
     triangleMesh.setTransform(groundPlane.getTransform());
     triangleMesh.init();
 }
-} // crayg
+}

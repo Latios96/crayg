@@ -21,4 +21,4 @@ std::string LensFileJsonWriter::writeFileContent(const CameraLens &cameraLens) {
     return lensJson.dump(4);
 }
 
-} // crayg
+}

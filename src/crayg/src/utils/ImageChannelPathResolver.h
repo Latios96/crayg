@@ -9,4 +9,4 @@ class ImageChannelPathResolver {
     std::string resolve(const std::string &path, const std::string &channelName);
 };
 
-} // crayg
+}

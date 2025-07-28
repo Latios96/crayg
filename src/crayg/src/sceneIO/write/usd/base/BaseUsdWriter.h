@@ -27,4 +27,4 @@ template <class UsdType, class CraygType> class BaseUsdWriter {
     CraygType &craygObject;
 };
 
-} // crayg
+}

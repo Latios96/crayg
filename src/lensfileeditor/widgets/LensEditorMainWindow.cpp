@@ -27,4 +27,4 @@ void LensEditorMainWindow::setupMenus() {
     fileMenu->addAction(newAction);
     fileMenu->addSeparator();
 }
-} // crayg
+}

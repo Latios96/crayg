@@ -37,4 +37,4 @@ template <class CraygType> class BaseUsdMaterialWriter : public BaseUsdWriter<px
     UsdShadingNodeWriteCache &usdShadingNodeWriteCache;
 };
 
-} // crayg
+}

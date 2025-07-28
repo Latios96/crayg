@@ -13,4 +13,4 @@ class UsdRectLightWriter : public BaseUsdLightWriter<pxr::UsdLuxRectLight, RectL
     pxr::UsdLuxRectLight write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 };
 
-} // crayg
+}

@@ -86,4 +86,4 @@ Bounds2df ExitPupilCalculator::calculateExitPupilForInterval(int intervalIndex) 
     return pupilBounds;
 }
 
-} // crayg
+}

@@ -29,4 +29,4 @@ template <class UsdType, class CraygType> class BaseUsdLightReader : public Base
     }
 };
 
-} // crayg
+}

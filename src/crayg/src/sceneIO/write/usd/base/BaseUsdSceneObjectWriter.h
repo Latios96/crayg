@@ -39,4 +39,4 @@ class BaseUsdSceneObjectWriter : public BaseUsdTransformableWriter<UsdType, Cray
     UsdMaterialWriteCache &usdMaterialWriteCache;
 };
 
-} // crayg
+}

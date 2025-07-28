@@ -31,4 +31,4 @@ void UsdCameraWriter::writeLens(pxr::UsdGeomCamera usdCamera) {
     UsdLensFileUtils::writeEmbeddedLensFile(craygObject.getLens(), usdCamera.GetPrim());
 }
 
-} // crayg
+}

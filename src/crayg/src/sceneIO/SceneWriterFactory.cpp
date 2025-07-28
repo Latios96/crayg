@@ -17,4 +17,4 @@ std::shared_ptr<SceneWriter> SceneWriterFactory::createSceneWriter(std::string s
         CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No SceneWriter found for extension {}", extension);
     }
 }
-} // crayg
+}

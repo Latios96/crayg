@@ -12,4 +12,4 @@ SmallIconToggleButton::SmallIconToggleButton(QWidget *parent) : IconToggleButton
     this->setMinimumWidth(size);
     this->setMaximumWidth(size);
 }
-} // crayg
+}

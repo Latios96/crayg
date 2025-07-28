@@ -15,4 +15,4 @@ class SmallIconToggleButton : public IconToggleButton {
     explicit SmallIconToggleButton(QWidget *parent = nullptr);
 };
 
-} // crayg
+}

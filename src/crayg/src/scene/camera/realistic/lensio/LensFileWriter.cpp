@@ -16,4 +16,4 @@ void LensFileWriter::writeFile(const std::string &filePath, const crayg::CameraL
     o.close();
 }
 
-} // crayg
+}

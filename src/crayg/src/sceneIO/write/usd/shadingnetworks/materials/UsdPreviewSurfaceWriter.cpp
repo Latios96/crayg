@@ -42,4 +42,4 @@ pxr::UsdShadeMaterial UsdPreviewSurfaceWriter::write(pxr::UsdStagePtr stage, Usd
     return usdPreviewSurfaceMaterial;
 }
 
-} // crayg
+}

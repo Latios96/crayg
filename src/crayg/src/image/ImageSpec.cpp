@@ -1,3 +1,3 @@
 #include "ImageSpec.h"
 
-namespace crayg {} // crayg
+namespace crayg {}

@@ -311,4 +311,4 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
     return {cameraLensMetadata, surfaces, asphericCoefficients, variableLensDistances};
 }
 
-} // crayg
+}

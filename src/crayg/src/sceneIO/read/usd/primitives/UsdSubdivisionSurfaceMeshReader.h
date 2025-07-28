@@ -25,4 +25,4 @@ class UsdSubdivisionSurfaceMeshReader : public BaseUsdImageableReader<pxr::UsdGe
     void translateMaxSubdivisions(std::shared_ptr<SubdivisionSurfaceMesh> &subdivisionSurfaceMesh);
 };
 
-} // crayg
+}

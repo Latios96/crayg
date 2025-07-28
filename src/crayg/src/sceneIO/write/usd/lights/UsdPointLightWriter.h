@@ -13,4 +13,4 @@ class UsdPointLightWriter : public BaseUsdLightWriter<pxr::UsdLuxSphereLight, Li
     pxr::UsdLuxSphereLight write(pxr::UsdStagePtr stage, UsdPathFactory &usdPathFactory) override;
 };
 
-} // crayg
+}

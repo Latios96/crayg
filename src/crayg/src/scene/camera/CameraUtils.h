@@ -7,4 +7,4 @@ class CameraUtils {
     static float computeApertureRadius(float focalLength_mm, float fStop);
 };
 
-} // crayg
+}

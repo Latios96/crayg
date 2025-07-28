@@ -71,7 +71,7 @@ bool intersectPlanarSurface(float zCenter, const Ray &ray, float *t, Vector3f *n
 float evaluateAsphericalSurface(const Vector2f &position, float radius,
                                 const AsphericCoefficients &asphericCoefficients);
 
-} // crayg
+}
 
 template <> struct fmt::formatter<crayg::LensSurface> : ostream_formatter {};
 

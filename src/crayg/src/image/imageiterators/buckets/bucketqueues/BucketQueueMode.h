@@ -18,4 +18,4 @@ struct BucketQueueMode {
     std::vector<ImageBucket> &buckets;
 };
 
-} // crayg
+}

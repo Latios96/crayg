@@ -1,3 +1,3 @@
 #include "AbstractLightShapeGenerator.h"
 
-namespace crayg {} // crayg
+namespace crayg {}

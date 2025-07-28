@@ -97,4 +97,4 @@ class ImageMetadata {
     std::unordered_map<std::string, ImageMetadataValue> values;
 };
 
-} // crayg
+}

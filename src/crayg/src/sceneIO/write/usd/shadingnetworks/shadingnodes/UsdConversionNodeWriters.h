@@ -14,4 +14,4 @@ class UsdVector2fToColorWriter : public BaseUsdShadingNodeWriter<Vector2fToColor
   protected:
     std::string getTranslatedType() override;
 };
-} // crayg
+}

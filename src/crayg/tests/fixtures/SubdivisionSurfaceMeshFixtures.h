@@ -11,4 +11,4 @@ class SubdivisionSurfaceMeshFixtures {
     static void createUnitCube(SubdivisionSurfaceMesh &subdivisionSurfaceMesh);
 };
 
-} // crayg
+}

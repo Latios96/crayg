@@ -96,4 +96,4 @@ void TaskReporter::onTaskProgressUpdated() {
                  "{:%Hh %Mm %Ss}",
                  currentTask->name, currentTask->progress(), elapsedTime, estimatedTimeRemaining, estimatedTotalTime);
 }
-} // crayg
+}

@@ -39,4 +39,4 @@ bool CameraLensMetadata::operator!=(const CameraLensMetadata &rhs) const {
     return !(rhs == *this);
 }
 
-} // crayg
+}

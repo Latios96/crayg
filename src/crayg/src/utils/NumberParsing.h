@@ -8,4 +8,4 @@ class NumberParsing {
     static int parseIntOrThrow(const std::string &str);
 };
 
-} // crayg
+}

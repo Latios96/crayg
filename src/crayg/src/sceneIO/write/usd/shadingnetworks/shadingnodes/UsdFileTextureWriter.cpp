@@ -29,4 +29,4 @@ std::string UsdFileTextureWriter::getTranslatedType() {
     return "FileTexture";
 }
 
-} // crayg
+}

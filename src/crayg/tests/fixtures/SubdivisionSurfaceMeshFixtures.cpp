@@ -59,4 +59,4 @@ void SubdivisionSurfaceMeshFixtures::createUnitCube(SubdivisionSurfaceMesh &subd
     subdivisionSurfaceMesh.faceVertexCounts.resize(6, 4);
 }
 
-} // crayg
+}

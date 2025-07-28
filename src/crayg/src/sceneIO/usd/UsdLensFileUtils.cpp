@@ -19,4 +19,4 @@ void UsdLensFileUtils::writeEmbeddedLensFile(const CameraLens &cameraLens, pxr::
 
     craygLensFileAttribute.SetCustomDataByKey(pxr::TfToken("lens"), pxr::VtValue(lensDict));
 }
-} // crayg
+}

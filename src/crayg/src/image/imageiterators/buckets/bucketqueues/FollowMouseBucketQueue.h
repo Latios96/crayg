@@ -17,4 +17,4 @@ class FollowMouseBucketQueue : public BucketQueueMode {
     const std::function<Vector2i()> getMousePosition;
 };
 
-} // crayg
+}

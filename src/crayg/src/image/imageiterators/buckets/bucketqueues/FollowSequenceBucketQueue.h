@@ -14,4 +14,4 @@ class FollowSequenceBucketQueue : public BucketQueueMode {
     int lastBucketIndex = -1;
 };
 
-} // crayg
+}

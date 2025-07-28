@@ -13,4 +13,4 @@ class LineByLineSequence : public BucketSequence {
     int fitImage(int pos, int bucketWidth, int dimension);
 };
 
-} // crayg
+}

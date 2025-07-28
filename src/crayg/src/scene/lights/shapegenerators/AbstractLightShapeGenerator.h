@@ -22,4 +22,4 @@ template <typename T> class AbstractLightShapeGenerator {
 template <typename T> AbstractLightShapeGenerator<T>::AbstractLightShapeGenerator(const T &light) : light(light) {
 }
 
-} // crayg
+}

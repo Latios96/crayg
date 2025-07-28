@@ -26,4 +26,4 @@ pxr::UsdShadeOutput UsdColorToFloatWriter::getOutput(pxr::UsdShadeShader &usdSha
 std::string UsdColorToFloatWriter::getTranslatedType() {
     return "ColorToFloat";
 }
-} // crayg
+}

@@ -34,4 +34,4 @@ std::ostream &operator<<(std::ostream &os, const IntegratorSettings &settings) {
     return os;
 }
 
-} // crayg
+}

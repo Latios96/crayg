@@ -19,4 +19,4 @@ class AbstractIntegrator {
     std::shared_ptr<SceneIntersector> sceneIntersector;
 };
 
-} // crayg
+}

@@ -33,4 +33,4 @@ void PointInstancerFixtures::createInstancerWithSingleProtoType(PointInstancer &
     pointInstancer.protos.push_back(proto);
 }
 
-} // crayg
+}

@@ -6,4 +6,4 @@ BucketSampler::BucketSampler(int maxSamples, const std::function<Color(Vector2f)
     : maxSamples(maxSamples), renderSample(renderSample) {
 }
 
-} // crayg
+}

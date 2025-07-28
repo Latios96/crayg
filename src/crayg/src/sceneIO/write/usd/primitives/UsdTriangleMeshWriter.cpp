@@ -144,4 +144,4 @@ void UsdTriangleMeshWriter::writePerPointUvs(pxr::UsdGeomMesh &mesh) const {
     usdUvsPrimvar.Set(uvs);
 }
 
-} // crayg
+}

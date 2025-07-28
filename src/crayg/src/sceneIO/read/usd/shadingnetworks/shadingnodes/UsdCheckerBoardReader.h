@@ -14,4 +14,4 @@ class UsdCheckerBoardReader : public BaseUsdShadingNodeReader<CheckerBoard> {
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

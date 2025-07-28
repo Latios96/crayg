@@ -25,4 +25,4 @@ int LineByLineSequence::fitImage(int pos, int bucketWidth, int dimension) {
     }
     return bucketWidth;
 }
-} // crayg
+}

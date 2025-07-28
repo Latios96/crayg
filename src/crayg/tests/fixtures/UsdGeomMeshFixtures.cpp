@@ -1,3 +1,3 @@
 #include "UsdGeomMeshFixtures.h"
 
-namespace crayg {} // crayg
+namespace crayg {}

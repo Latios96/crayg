@@ -106,4 +106,4 @@ std::string UsdPrimVarReaderVector2fReader::readVarname(const pxr::UsdShadeInput
                                       varnameInput.GetTypeName().GetAsToken(), varnameInput.GetPrim().GetPath())
 }
 
-} // crayg
+}

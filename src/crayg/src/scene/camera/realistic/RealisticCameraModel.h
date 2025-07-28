@@ -20,4 +20,4 @@ class RealisticCameraModel : public CameraModel {
     float filmDiagonal;
 };
 
-} // crayg
+}

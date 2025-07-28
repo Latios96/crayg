@@ -136,4 +136,4 @@ void UsdShadingNodeReadCache::readCachedGraph(pxr::UsdShadeShader &shader, pxr::
     _readCachedGraph<ColorShadingNodeInput, pxr::GfVec3f, Color>(*this, shader, source, target);
 }
 
-} // crayg
+}

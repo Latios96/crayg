@@ -10,4 +10,4 @@ class CameraModelFactory {
   public:
     static std::unique_ptr<CameraModel> createCameraModel(Camera &camera, const Resolution &resolution);
 };
-} // crayg
+}

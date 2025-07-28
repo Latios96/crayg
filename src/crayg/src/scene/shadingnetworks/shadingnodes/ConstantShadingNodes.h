@@ -47,4 +47,4 @@ class ColorConstant : public ShadingNode {
     Color value;
 };
 
-} // crayg
+}

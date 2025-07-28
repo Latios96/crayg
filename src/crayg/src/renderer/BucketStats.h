@@ -20,4 +20,4 @@ class BucketStats {
     tbb::concurrent_vector<ImageBucketTime> imageBucketTimes;
 };
 
-} // crayg
+}

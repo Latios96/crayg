@@ -9,4 +9,4 @@ class LensFileTextFileWriter : public LensFileWriter {
     std::string writeFileContent(const CameraLens &cameraLens) override;
 };
 
-} // crayg
+}

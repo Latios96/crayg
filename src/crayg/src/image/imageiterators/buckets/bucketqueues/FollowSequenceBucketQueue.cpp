@@ -22,4 +22,4 @@ FollowSequenceBucketQueue::~FollowSequenceBucketQueue() {
     buckets.erase(buckets.begin(), buckets.begin() + lastBucketIndex + 1);
 }
 
-} // crayg
+}

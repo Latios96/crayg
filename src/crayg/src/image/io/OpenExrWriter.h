@@ -19,4 +19,4 @@ class OpenExrWriter : public OpenImageIoImageWriter {
                            const PixelBuffer &channelBuffer) const;
 };
 
-} // crayg
+}

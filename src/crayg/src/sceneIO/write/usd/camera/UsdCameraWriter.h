@@ -17,4 +17,4 @@ class UsdCameraWriter : public BaseUsdTransformableWriter<pxr::UsdGeomCamera, Ca
     void writeLens(pxr::UsdGeomCamera camera);
 };
 
-} // crayg
+}

@@ -10,4 +10,4 @@ class HilbertSequence : public BucketSequence {
     std::vector<ImageBucket> getTiles() override;
 };
 
-} // crayg
+}

@@ -15,4 +15,4 @@ class LensEditorMainWindow : public QMainWindow {
   private:
     QAction *newAction;
 };
-} // crayg
+}

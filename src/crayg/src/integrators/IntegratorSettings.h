@@ -42,7 +42,7 @@ class IntegratorSettings {
     std::unordered_map<std::string, IntegratorSettingsValue> settings;
 };
 
-} // crayg
+}
 
 template <> struct fmt::formatter<crayg::IntegratorSettingsValue> : ostream_formatter {};
 

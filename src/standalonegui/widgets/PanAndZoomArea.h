@@ -51,6 +51,6 @@ class PanAndZoomArea : public QScrollArea {
     QPoint panStartPoint;
 };
 
-} // crayg
+}
 
 template <> struct fmt::formatter<crayg::ZoomFactor> : ostream_formatter {};

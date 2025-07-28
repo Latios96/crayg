@@ -11,4 +11,4 @@ class ThinLensCameraModel : public PinholeCameraModel {
     RayWithWeight createPrimaryRay(const Vector2f &pixelPos, float wavelength) override;
 };
 
-} // crayg
+}

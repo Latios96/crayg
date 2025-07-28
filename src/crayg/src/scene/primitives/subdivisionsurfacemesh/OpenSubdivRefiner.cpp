@@ -207,4 +207,4 @@ void OpenSubdivRefiner::refineUvs(const std::unique_ptr<OpenSubdiv::Far::Topolog
     subdivisionSurfaceMesh.uvIndices = newUvIndices;
 }
 
-} // crayg
+}

@@ -34,4 +34,4 @@ class EmbreeSceneIntersector : public SceneIntersector {
                                        const crayg::EmbreeMappingEntry &embreeMappingEntry) const;
 };
 
-} // crayg
+}

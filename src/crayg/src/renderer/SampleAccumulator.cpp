@@ -13,4 +13,4 @@ Color SampleAccumulator::getValue() {
     return sum / static_cast<float>(sampleCount);
 }
 
-} // crayg
+}

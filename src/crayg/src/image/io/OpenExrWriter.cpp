@@ -129,4 +129,4 @@ void OpenExrWriter::writeChannelFormats(OIIO::ImageSpec &spec, const PixelBuffer
     }
 }
 
-} // crayg
+}

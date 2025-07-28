@@ -141,4 +141,4 @@ ZoomFactor &ZoomFactor::operator--(int) {
 ZoomFactor::ZoomFactor(int value) : value(value) {
 }
 
-} // crayg
+}

@@ -24,4 +24,4 @@ class UsdTriangleMeshWriter : public BaseUsdSceneObjectWriter<pxr::UsdGeomMesh, 
     void writePerPointUvs(pxr::UsdGeomMesh &mesh) const;
 };
 
-} // crayg
+}

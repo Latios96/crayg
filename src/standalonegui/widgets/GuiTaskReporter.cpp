@@ -31,4 +31,4 @@ void GuiTaskReporter::onTaskProgressUpdated() {
 
 GuiTaskReporter::GuiTaskReporter(TaskReporterQtSignalAdapter &appController) : appController(appController) {
 }
-} // crayg
+}

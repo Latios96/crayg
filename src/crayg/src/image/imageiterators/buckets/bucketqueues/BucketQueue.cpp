@@ -36,4 +36,4 @@ BucketQueue::BucketFollowMode BucketQueue::getCurrentMode() const {
     return currentMode;
 }
 
-} // crayg
+}

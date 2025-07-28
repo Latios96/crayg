@@ -16,4 +16,4 @@ class CheckerBoard : public ShadingNode {
     ShadingNodeOutputType getOutputType() override;
 };
 
-} // crayg
+}

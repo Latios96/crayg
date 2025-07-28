@@ -17,4 +17,4 @@ std::unique_ptr<CameraModel> CameraModelFactory::createCameraModel(Camera &camer
         CRAYG_LOG_AND_THROW_RUNTIME_ERROR(R"(Unsupported CameraType: "{}")", camera.getCameraType());
     }
 }
-} // crayg
+}

@@ -9,4 +9,4 @@ class Random {
     static Vector2f randomVector2f();
 };
 
-} // crayg
+}

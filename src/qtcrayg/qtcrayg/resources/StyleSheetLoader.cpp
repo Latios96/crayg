@@ -101,4 +101,4 @@ std::string StyleSheetLoader::compileSass(const std::string &stylesheetString) {
     return compiledStylesheet;
 }
 
-} // crayg
+}

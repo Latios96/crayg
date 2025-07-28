@@ -31,4 +31,4 @@ std::string UsdGroundPlaneWriter::getTranslatedType() {
     return BaseUsdSceneObjectWriter::getTranslatedType();
 }
 
-} // crayg
+}

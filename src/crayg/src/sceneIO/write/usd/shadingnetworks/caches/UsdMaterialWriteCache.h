@@ -24,4 +24,4 @@ class UsdMaterialWriteCache {
     UsdShadingNodeWriteCache &usdShadingNodeWriteCache;
 };
 
-} // crayg
+}

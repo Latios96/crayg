@@ -18,4 +18,4 @@ class GeometryCompiler {
     void findAllSubdivisionSurfaceMeshes(std::vector<std::shared_ptr<SubdivisionSurfaceMesh>> &subdivisionSurfaces);
 };
 
-} // crayg
+}

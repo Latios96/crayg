@@ -17,4 +17,4 @@ class AmbientOcclusionIntegrator : public AbstractIntegrator {
     float radius;
 };
 
-} // crayg
+}

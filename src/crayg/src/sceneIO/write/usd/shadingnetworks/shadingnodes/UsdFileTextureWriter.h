@@ -15,4 +15,4 @@ class UsdFileTextureWriter : public BaseUsdShadingNodeWriter<FileTexture> {
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

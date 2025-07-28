@@ -35,4 +35,4 @@ int FollowMouseBucketQueue::findNearestBucket(const Vector2i &mousePosition) {
     return index;
 }
 
-} // crayg
+}

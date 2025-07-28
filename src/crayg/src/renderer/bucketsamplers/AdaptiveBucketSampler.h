@@ -25,4 +25,4 @@ class AdaptiveBucketSampler : public BucketSampler {
     void drawSampleHeatmap(const BucketImageBuffer &bucketImageBuffer, int samplesTaken) const;
 };
 
-} // crayg
+}

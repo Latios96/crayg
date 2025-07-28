@@ -18,4 +18,4 @@ void OpenImageIoImageWriter::writeImageMetadata(const Image &image, OIIO::ImageS
         }
     }
 }
-} // crayg
+}

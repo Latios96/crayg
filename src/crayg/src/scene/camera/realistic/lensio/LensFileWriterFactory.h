@@ -13,4 +13,4 @@ class LensFileWriterFactory {
     static std::unique_ptr<LensFileWriter> createLensFileWriter(LensFileFormat lensFileFormat);
 };
 
-} // crayg
+}

@@ -16,4 +16,4 @@ class UsdDiskLightReader : public BaseUsdLightReader<pxr::UsdLuxDiskLight, DiskL
     std::string getTranslatedType() override;
 };
 
-} // crayg
+}

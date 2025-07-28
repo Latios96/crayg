@@ -30,4 +30,4 @@ class PointInstancer : public SceneObject {
     std::vector<std::shared_ptr<Prototype>> protos;
 };
 
-} // crayg
+}

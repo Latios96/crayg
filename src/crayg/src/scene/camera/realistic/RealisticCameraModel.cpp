@@ -53,4 +53,4 @@ RayWithWeight RealisticCameraModel::createPrimaryRay(const Vector2f &pixelPos, f
     return {transform.apply(*tracedRay), weight};
 }
 
-} // crayg
+}

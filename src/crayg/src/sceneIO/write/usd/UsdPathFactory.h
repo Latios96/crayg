@@ -14,4 +14,4 @@ class UsdPathFactory {
     pxr::SdfPath nameToPath(const std::string &name);
 };
 
-} // crayg
+}

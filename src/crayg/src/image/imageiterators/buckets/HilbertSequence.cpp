@@ -21,4 +21,4 @@ std::vector<ImageBucket> HilbertSequence::getTiles() {
     return tiles;
 }
 
-} // crayg
+}

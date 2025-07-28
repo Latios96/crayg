@@ -17,4 +17,4 @@ class UsdFileTextureReader : public BaseUsdShadingNodeReader<FileTexture> {
     FileTexture::ColorSpace getDefaultColorSpaceFromFilePath(std::shared_ptr<FileTexture> &fileTexture);
 };
 
-} // crayg
+}

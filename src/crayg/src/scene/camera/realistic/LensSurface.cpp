@@ -270,4 +270,4 @@ bool AsphericCoefficients::operator==(const AsphericCoefficients &rhs) const {
 bool AsphericCoefficients::operator!=(const AsphericCoefficients &rhs) const {
     return !(rhs == *this);
 }
-} // crayg
+}

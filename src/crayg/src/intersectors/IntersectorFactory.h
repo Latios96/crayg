@@ -13,4 +13,4 @@ class IntersectorFactory {
     static std::shared_ptr<SceneIntersector> createEmbreeBvh(Scene &scene);
 };
 
-} // crayg
+}

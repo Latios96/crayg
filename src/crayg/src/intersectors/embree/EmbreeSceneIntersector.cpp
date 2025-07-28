@@ -119,4 +119,4 @@ EmbreeSceneIntersector::EmbreeSceneIntersector(Scene &scene, std::unique_ptr<Emb
     : SceneIntersector(scene), embreeBvh(std::move(embreeBvh)) {
 }
 
-} // crayg
+}

@@ -17,4 +17,4 @@ std::string CheckerBoard::getType() const {
 ShadingNodeOutputType CheckerBoard::getOutputType() {
     return ShadingNodeOutputType::COLOR;
 }
-} // crayg
+}

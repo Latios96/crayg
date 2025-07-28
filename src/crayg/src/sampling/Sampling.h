@@ -15,4 +15,4 @@ class Sampling {
     static Vector2f concentricSampleDisk(float u, float v);
 };
 
-} // crayg
+}
