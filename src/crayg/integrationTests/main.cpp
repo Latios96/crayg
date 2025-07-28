@@ -1,10 +1,12 @@
 #define CATCH_CONFIG_RUNNER
 
+#include "Initialization.h"
 #include "utils/tracing/CraygTracing.h"
 #include <catch2/catch.hpp>
 #include <fmt/format.h>
 
 int main(int argc, char *argv[]) {
+    crayg::Initialization::initialize();
     CRAYG_IF_TRACING_ENABLED({
         std::string traceFilePath = "trace.json";
         std::cout << fmt::format("Tracing enabled, tracing to {}", traceFilePath) << std::endl;
