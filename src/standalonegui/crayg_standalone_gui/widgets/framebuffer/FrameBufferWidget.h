@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PanAndZoomArea.h"
+#include "crayg_standalone_gui/widgets/panandzoomarea/PanAndZoomArea.h"
 #include "image/ImageMetadata.h"
 #include "image/ImageSpec.h"
 #include "image/film/FilmSpec.h"

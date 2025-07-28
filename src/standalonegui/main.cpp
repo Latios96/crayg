@@ -1,12 +1,15 @@
+#include "crayg_standalone_gui/widgets/framebuffer/FrameBufferWidget.h"
 #include "qtcrayg/foundation/QtBase.h"
 #include "qtcrayg/foundation/QtMetaTypes.h"
-#include "widgets/FrameBufferWidget.h"
 #include <QtWidgets/qapplication.h>
 
 #include "CraygInfo.h"
 #include "Initialization.h"
 #include "Logger.h"
 #include "crayg_standalone/cli/CliParser.h"
+#include "crayg_standalone_gui/widgets/framebuffer/NextGenImageWidget.h"
+#include "crayg_standalone_gui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h"
+#include "crayg_standalone_gui/widgets/taskreporter/GuiTaskReporter.h"
 #include "image/film/io/FilmWriter.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
@@ -15,9 +18,6 @@
 #include "utils/FileSystemUtils.h"
 #include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
-#include "widgets/GuiTaskReporter.h"
-#include "widgets/NextGenImageWidget.h"
-#include "widgets/NextGenImageWidgetOutputDriver.h"
 #include <QResource>
 #include <image/io/ImageWriter.h>
 #include <image/io/ImageWriters.h>
