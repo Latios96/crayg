@@ -13,6 +13,7 @@ Q_DECLARE_METATYPE(crayg::BucketImageBuffer);
 Q_DECLARE_METATYPE(std::shared_ptr<crayg::BucketImageBuffer>);
 Q_DECLARE_METATYPE(crayg::ImageSpec);
 Q_DECLARE_METATYPE(crayg::BaseTaskReporter::Task);
+Q_DECLARE_METATYPE(std::string);
 
 void registerQMetaTypes() {
     qRegisterMetaType<crayg::ImageMetadata>("ImageMetadata");
@@ -21,4 +22,5 @@ void registerQMetaTypes() {
     qRegisterMetaType<std::shared_ptr<crayg::BucketImageBuffer>>("std::shared_ptr<BucketImageBuffer>");
     qRegisterMetaType<crayg::ImageSpec>("ImageSpec");
     qRegisterMetaType<crayg::BaseTaskReporter::Task>("BaseTaskReporter::Task");
+    qRegisterMetaType<std::string>("std::string");
 }
