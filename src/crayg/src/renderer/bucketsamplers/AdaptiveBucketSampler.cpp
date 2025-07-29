@@ -15,42 +15,39 @@ void AdaptiveBucketSampler::addRequiredImageSpecs(ImageSpecBuilder &imageSpecBui
     imageSpecBuilder.createRgbFloatChannel("sampleCount");
 }
 
-void AdaptiveBucketSampler::sampleBucket(BucketImageBuffer &bucketImageBuffer) const {
-    auto fullySampledBuffer = bucketImageBuffer.image.getChannel("rgb");
-    auto halfSampledBuffer = PixelBuffer::createRgbFloat(Resolution::deduce(bucketImageBuffer.imageBucket));
-
+void AdaptiveBucketSampler::sampleBucket(const ImageBucket &imageBucket) const {
     int samplesTaken = 0;
     float error = std::numeric_limits<float>::max();
 
     while (!shouldTerminate(samplesTaken, error)) {
         error = 0;
         samplesTaken += samplesPerPass;
-        for (auto pixel : ImageIterators::lineByLine(bucketImageBuffer.imageBucket)) {
+        for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
             Color fullySampled = Color::createBlack();
             Color halfSampled = Color::createBlack();
 
-            const auto samplePos = bucketImageBuffer.imageBucket.getPosition() + pixel;
+            const auto samplePos = imageBucket.getPosition() + pixel;
             samplePixel(samplePos, fullySampled, halfSampled);
 
-            fullySampledBuffer->addToPixel(pixel, fullySampled);
-            halfSampledBuffer->addToPixel(pixel, halfSampled);
+            film->addSample("color", samplePos, fullySampled / samplesPerPass);
 
             error += evaluateErrorMetric(fullySampled / static_cast<float>(samplesTaken),
                                          halfSampled / (samplesTaken / 2.f));
         }
-        error = error / (bucketImageBuffer.imageBucket.getWidth() * bucketImageBuffer.imageBucket.getHeight());
+        error = error / (imageBucket.getWidth() * imageBucket.getHeight());
     }
 
-    divideSampleSumBySampleCount(fullySampledBuffer, samplesTaken);
-    drawSampleHeatmap(bucketImageBuffer, samplesTaken);
+    drawSampleHeatmap(imageBucket, samplesTaken);
 }
 
-void AdaptiveBucketSampler::drawSampleHeatmap(const BucketImageBuffer &bucketImageBuffer, int samplesTaken) const {
+void AdaptiveBucketSampler::drawSampleHeatmap(const ImageBucket &imageBucket, int samplesTaken) const {
     const float relativeSampleCount =
         static_cast<float>(samplesTaken - samplesPerPass) / static_cast<float>(maxSamples - samplesPerPass);
 
-    ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("sampleCount"),
-                          MagmaHeatmap::lookup(relativeSampleCount));
+    for (auto bucketPos : ImageIterators::lineByLine(imageBucket)) {
+        const Vector2i pixel = bucketPos + imageBucket.getPosition();
+        film->addSample("sampleCount", pixel, MagmaHeatmap::lookup(relativeSampleCount));
+    }
 }
 
 void AdaptiveBucketSampler::samplePixel(const Vector2<int> &samplePos, Color &fullySampled, Color &halfSampled) const {
@@ -83,12 +80,6 @@ bool AdaptiveBucketSampler::shouldTerminate(int samplesTaken, float error) const
         return true;
     }
     return false;
-}
-
-void AdaptiveBucketSampler::divideSampleSumBySampleCount(PixelBuffer *fullySampledBuffer, int samplesTaken) const {
-    for (auto pixel : ImageIterators::lineByLine(*fullySampledBuffer)) {
-        fullySampledBuffer->dividePixel(pixel, samplesTaken);
-    }
 }
 
 }

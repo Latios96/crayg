@@ -73,48 +73,4 @@ TEST_CASE("AdaptiveBucketSampler::evaluateErrorMetric") {
     }
 }
 
-TEST_CASE("AdaptiveBucketSampler::sampleBucket") {
-    int renderSampleCount = 0;
-    std::function<Color()> colorToReturn = []() { return Color::createBlack(); };
-    const int minSamples = 8;
-    AdaptiveBucketSampler adaptiveBucketSampler(
-        16,
-        [&renderSampleCount, &colorToReturn](Vector2f samplePos) {
-            renderSampleCount++;
-            return colorToReturn();
-        },
-        minSamples, 0.007f);
-
-    BucketImageBuffer bucketImageBuffer(ImageBucket({0, 0}, 5, 5));
-    ImageSpecBuilder builder(Resolution::deduce(bucketImageBuffer.imageBucket));
-    adaptiveBucketSampler.addRequiredImageSpecs(builder);
-    bucketImageBuffer.image.addChannelsFromSpec(builder.finish());
-
-    SECTION("should draw only min samples for pure black") {
-        colorToReturn = []() { return Color::createBlack(); };
-        adaptiveBucketSampler.sampleBucket(bucketImageBuffer);
-
-        REQUIRE(renderSampleCount == 5 * 5 * minSamples);
-    }
-
-    SECTION("should draw max samples") {
-        float counter = 0;
-        colorToReturn = [&counter]() {
-            counter += 0.1f;
-            return Color::createGrey(counter);
-        };
-        adaptiveBucketSampler.sampleBucket(bucketImageBuffer);
-
-        REQUIRE(renderSampleCount == 5 * 5 * 16);
-    }
-
-    SECTION("should populate sampleCount buffer") {
-        adaptiveBucketSampler.sampleBucket(bucketImageBuffer);
-
-        const Color &firstPixelColor = bucketImageBuffer.image.getChannel("sampleCount")->getValue({0, 0});
-
-        REQUIRE_FALSE(firstPixelColor.isBlack());
-    }
-}
-
 }

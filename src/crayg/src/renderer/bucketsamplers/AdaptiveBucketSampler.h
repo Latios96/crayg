@@ -13,7 +13,7 @@ class AdaptiveBucketSampler : public BucketSampler {
     AdaptiveBucketSampler(int maxSamples, const std::function<Color(Vector2f)> &renderSample, int samplesPerPass,
                           float maxError);
     void addRequiredImageSpecs(ImageSpecBuilder &imageSpecBuilder) const override;
-    void sampleBucket(BucketImageBuffer &bucketImageBuffer) const override;
+    void sampleBucket(const ImageBucket &imageBucket) const override;
     float evaluateErrorMetric(const Color &fullySampled, const Color &halfSampled) const;
     bool shouldTerminate(int samplesTaken, float error) const;
 
@@ -21,8 +21,7 @@ class AdaptiveBucketSampler : public BucketSampler {
     int samplesPerPass;
     float maxError;
     void samplePixel(const Vector2<int> &samplePos, Color &fullySampled, Color &halfSampled) const;
-    void divideSampleSumBySampleCount(PixelBuffer *fullySampledBuffer, int samplesTaken) const;
-    void drawSampleHeatmap(const BucketImageBuffer &bucketImageBuffer, int samplesTaken) const;
+    void drawSampleHeatmap(const ImageBucket &imageBucket, int samplesTaken) const;
 };
 
 }

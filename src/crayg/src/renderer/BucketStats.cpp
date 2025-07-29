@@ -4,15 +4,18 @@
 
 namespace crayg {
 
-void BucketStats::processBucketTime(BucketImageBuffer &bucketImageBuffer,
+void BucketStats::processBucketTime(Film &film, const ImageBucket &imageBucket,
                                     const std::chrono::steady_clock::time_point &startTime) {
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     const auto secondsForBucket =
         std::chrono::duration_cast<std::chrono::milliseconds>(end - startTime).count() / 1000.f;
-    ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("absoluteRenderTime"),
-                          Color::createGrey(secondsForBucket));
 
-    imageBucketTimes.push_back({bucketImageBuffer.imageBucket, secondsForBucket});
+    for (auto bucketPos : ImageIterators::lineByLine(imageBucket)) {
+        const Vector2i pixel = bucketPos + imageBucket.getPosition();
+        film.addSample("absoluteRenderTime", pixel, Color::createGrey(secondsForBucket));
+    }
+
+    imageBucketTimes.push_back({imageBucket, secondsForBucket});
 }
 
 void BucketStats::processBucketTimes(NextGenOutputDriver &outputDriver, const Resolution &resolution) {

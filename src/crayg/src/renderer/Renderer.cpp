@@ -90,22 +90,11 @@ void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgre
 void Renderer::renderBucket(const ImageBucket &imageBucket) {
     std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
 
-    BucketImageBuffer bucketImageBuffer(imageBucket);
-    bucketImageBuffer.image.addChannelsFromSpec(requiredImageSpec({imageBucket.getWidth(), imageBucket.getHeight()}));
+    outputDriver.startBucket(imageBucket);
 
-    outputDriver.startBucket(bucketImageBuffer.imageBucket);
+    bucketSampler->sampleBucket(imageBucket);
+    bucketStats.processBucketTime(outputDriver.getFilm(), imageBucket, startTime);
 
-    bucketSampler->sampleBucket(bucketImageBuffer);
-    bucketStats.processBucketTime(bucketImageBuffer, startTime);
-
-    for (auto &channel : bucketImageBuffer.image.getChannels()) {
-        for (auto pixel : ImageIterators::lineByLine(bucketImageBuffer.image)) {
-            Vector2i globalPixelPos = pixel + bucketImageBuffer.imageBucket.getPosition();
-            const Color color = channel.channelBuffer.getValue(pixel);
-            outputDriver.getFilm().addSample(channel.channelName == "rgb" ? "color" : channel.channelName,
-                                             globalPixelPos, color);
-        }
-    }
     outputDriver.finishBucket(imageBucket);
 }
 
@@ -152,6 +141,7 @@ void Renderer::initOutputDriver() {
     }
 
     outputDriver.initialize(filmSpecBuilder.finish());
+    bucketSampler->setFilm(outputDriver.getFilm());
 }
 
 void Renderer::initBuckets() {

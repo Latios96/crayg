@@ -8,11 +8,11 @@ namespace crayg {
 void UniformBucketSampler::addRequiredImageSpecs(ImageSpecBuilder &imageSpecBuilder) const {
 }
 
-void UniformBucketSampler::sampleBucket(BucketImageBuffer &bucketImageBuffer) const {
-    for (auto pixel : ImageIterators::lineByLine(bucketImageBuffer.image)) {
-        const auto samplePos = bucketImageBuffer.imageBucket.getPosition() + pixel;
+void UniformBucketSampler::sampleBucket(const ImageBucket &imageBucket) const {
+    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+        const auto samplePos = imageBucket.getPosition() + pixel;
         const Color pixelColor = renderPixel(samplePos);
-        bucketImageBuffer.image.setValue(pixel, pixelColor);
+        film->addSample("color", samplePos, pixelColor);
     }
 }
 

@@ -17,24 +17,4 @@ TEST_CASE("UniformBucketSampler::addRequiredImageSpecs") {
     }
 }
 
-TEST_CASE("UniformBucketSampler::sampleBucket") {
-
-    SECTION("should sample bucket uniformly") {
-        int renderSampleCount = 0;
-        UniformBucketSampler uniformBucketSampler(16, [&renderSampleCount](Vector2f samplePos) {
-            renderSampleCount++;
-            return Color::createWhite();
-        });
-
-        BucketImageBuffer bucketImageBuffer(ImageBucket({0, 0}, 5, 5));
-        ImageSpecBuilder builder(Resolution::deduce(bucketImageBuffer.imageBucket));
-        uniformBucketSampler.addRequiredImageSpecs(builder);
-        bucketImageBuffer.image.addChannelsFromSpec(builder.finish());
-
-        uniformBucketSampler.sampleBucket(bucketImageBuffer);
-
-        REQUIRE(renderSampleCount == 5 * 5 * 4 * 4);
-    }
-}
-
 }

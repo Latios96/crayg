@@ -12,7 +12,7 @@ CRAYG_DTO_2(ImageBucketTime, ImageBucket, imageBucket, float, seconds);
 
 class BucketStats {
   public:
-    void processBucketTime(BucketImageBuffer &bucketImageBuffer,
+    void processBucketTime(Film &film, const ImageBucket &imageBucket,
                            const std::chrono::steady_clock::time_point &startTime);
     void processBucketTimes(NextGenOutputDriver &outputDriver, const Resolution &resolution);
 
