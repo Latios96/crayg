@@ -112,7 +112,6 @@ void Renderer::renderBucket(const ImageBucket &imageBucket) {
 void Renderer::init() {
     CRAYG_TRACE_SCOPE("Renderer");
 
-    initOutputDriver();
     {
         InformativeScopedStopWatch initializeCamera("Initialize camera");
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
