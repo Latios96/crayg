@@ -30,6 +30,9 @@ class FilmBufferVariants {
     static PixelFormat getPixelFormat(const FilmBufferVariantPtr &variantPtr);
     static int getChannelCount(const FilmBufferVariantPtr &variantPtr);
     static void *getDataPtr(const FilmBufferVariantPtr &variantPtr);
+    static int getWidth(const FilmBufferVariantPtr &variantPtr);
+    static int getHeight(const FilmBufferVariantPtr &variantPtr);
+    static Resolution getResolution(const FilmBufferVariantPtr &variantPtr);
 };
 
 }

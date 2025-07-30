@@ -137,4 +137,37 @@ TEST_CASE("FilmBufferVariants::getDataPtr") {
     }
 }
 
+TEST_CASE("FilmBufferVariants::getWidth") {
+
+    SECTION("should return width") {
+        FilmBufferVariantPtr ptr = new FloatValueBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getWidth(ptr) == 10);
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
+    }
+}
+
+TEST_CASE("FilmBufferVariants::getHeight") {
+
+    SECTION("should return height") {
+        FilmBufferVariantPtr ptr = new FloatValueBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getHeight(ptr) == 5);
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
+    }
+}
+
+TEST_CASE("FilmBufferVariants::getResolution") {
+
+    SECTION("should return resolution") {
+        FilmBufferVariantPtr ptr = new FloatValueBuffer(10, 5);
+
+        REQUIRE(FilmBufferVariants::getResolution(ptr) == Resolution(10, 5));
+
+        FilmBufferVariants::freeFilmBufferVariantPtr(ptr);
+    }
+}
+
 }

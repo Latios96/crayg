@@ -63,4 +63,16 @@ void *FilmBufferVariants::getDataPtr(const FilmBufferVariantPtr &variantPtr) {
     return std::visit([](auto buf) { return (void *)buf->data; }, variantPtr);
 }
 
+int FilmBufferVariants::getWidth(const FilmBufferVariantPtr &variantPtr) {
+    return std::visit([](auto buf) { return buf->width; }, variantPtr);
+}
+
+int FilmBufferVariants::getHeight(const FilmBufferVariantPtr &variantPtr) {
+    return std::visit([](auto buf) { return buf->height; }, variantPtr);
+}
+
+Resolution FilmBufferVariants::getResolution(const FilmBufferVariantPtr &variantPtr) {
+    return std::visit([](auto buf) { return Resolution(buf->width, buf->height); }, variantPtr);
+}
+
 }
