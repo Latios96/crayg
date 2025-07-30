@@ -17,6 +17,7 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
     TaskReporter taskReporter;
     BucketQueue bucketQueue([]() { return Vector2i(); });
     Renderer renderer(scene, outputDriver, taskReporter, bucketQueue);
+    renderer.initOutputDriver();
     renderer.renderScene();
 
     FilmWriter::writeFilm(outputDriver.getFilm(), imageOutputPath);
