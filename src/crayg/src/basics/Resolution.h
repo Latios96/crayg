@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Bound2d.h"
 #include <fmt/ostream.h>
 #include <ostream>
 
@@ -27,6 +28,7 @@ struct Resolution {
     int getHeight() const;
 
     float getRatio() const;
+    Bounds2di toBounds() const;
 
   private:
     int width, height;
