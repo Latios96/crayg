@@ -25,15 +25,15 @@ void appendImageMetadata(const ImageMetadata &imageMetadata, PngWriteData &write
     }
 }
 
-template <typename BufferType> struct BufferTypeTrait {
-    static int getWidth(const BufferType &bufferType);
-    static int getHeight(const BufferType &bufferType);
-    static PixelFormat getPixelFormat(const BufferType &bufferType);
-    static int getColorChannelCount(const BufferType &bufferType);
-    static void *getDataPtr(const BufferType &bufferType);
+template <typename ImageBufferType> struct ImageBufferTypeTrait {
+    static int getWidth(const ImageBufferType &bufferType);
+    static int getHeight(const ImageBufferType &bufferType);
+    static PixelFormat getPixelFormat(const ImageBufferType &bufferType);
+    static int getColorChannelCount(const ImageBufferType &bufferType);
+    static void *getDataPtr(const ImageBufferType &bufferType);
 };
 
-template <> struct BufferTypeTrait<PixelBuffer> {
+template <> struct ImageBufferTypeTrait<PixelBuffer> {
     static int getWidth(const PixelBuffer &pixelBuffer) {
         return pixelBuffer.getWidth();
     }
@@ -55,7 +55,7 @@ template <> struct BufferTypeTrait<PixelBuffer> {
     }
 };
 
-template <> struct BufferTypeTrait<FilmBufferVariantPtr> {
+template <> struct ImageBufferTypeTrait<FilmBufferVariantPtr> {
     static int getWidth(const FilmBufferVariantPtr &filmBufferVariant) {
         return FilmBufferVariants::getWidth(filmBufferVariant);
     }
@@ -78,19 +78,19 @@ template <> struct BufferTypeTrait<FilmBufferVariantPtr> {
 };
 
 template <typename BufferType> void getWriteDataForChannel(PngWriteData &pngWriteData, const BufferType &buffer) {
-    pngWriteData.width = BufferTypeTrait<BufferType>::getWidth(buffer);
-    pngWriteData.height = BufferTypeTrait<BufferType>::getHeight(buffer);
-    const PixelFormat pixelFormat = BufferTypeTrait<BufferType>::getPixelFormat(buffer);
-    const int colorChannelCount = BufferTypeTrait<BufferType>::getColorChannelCount(buffer);
+    pngWriteData.width = ImageBufferTypeTrait<BufferType>::getWidth(buffer);
+    pngWriteData.height = ImageBufferTypeTrait<BufferType>::getHeight(buffer);
+    const PixelFormat pixelFormat = ImageBufferTypeTrait<BufferType>::getPixelFormat(buffer);
+    const int colorChannelCount = ImageBufferTypeTrait<BufferType>::getColorChannelCount(buffer);
 
     if (pixelFormat == PixelFormat::UINT8) {
-        pngWriteData.pixelBuffer = (unsigned char *)BufferTypeTrait<BufferType>::getDataPtr(buffer);
+        pngWriteData.pixelBuffer = (unsigned char *)ImageBufferTypeTrait<BufferType>::getDataPtr(buffer);
     } else if (pixelFormat == PixelFormat::FLOAT32) {
         size_t numberOfValues = pngWriteData.width * pngWriteData.height * colorChannelCount;
         pngWriteData.pixelBuffer = (unsigned char *)malloc(numberOfValues);
         pngWriteData.isOwning = true;
 
-        const float *data = (float *)BufferTypeTrait<BufferType>::getDataPtr(buffer);
+        const float *data = (float *)ImageBufferTypeTrait<BufferType>::getDataPtr(buffer);
 
         tbb::parallel_for(0UL, numberOfValues, [&pngWriteData, data](size_t i) {
             pngWriteData.pixelBuffer[i] = std::clamp<float>(data[i], 0, 1) * 255;
@@ -138,8 +138,8 @@ std::filesystem::path resolveChannelPath(const std::filesystem::path &imagePath,
 }
 
 template <typename ImageType>
-void writeImpl(const std::filesystem::path &path, const ImageType &imageType,
-               const ImageFormatWriteOptions &imageFormatWriteOptions) {
+void pngWriteImpl(const std::filesystem::path &path, const ImageType &imageType,
+                  const ImageFormatWriteOptions &imageFormatWriteOptions) {
     const auto channelViews = imageType.getChannels();
     tbb::parallel_for(0UL, channelViews.size(), [&channelViews, &path](int channelIndex) {
         auto &channelView = channelViews[channelIndex];
@@ -164,7 +164,7 @@ void PngImageFormatWriter::write(const std::filesystem::path &path, const Image 
 
 void PngImageFormatWriter::write(const std::filesystem::path &path, const Image &image,
                                  const ImageFormatWriteOptions &imageFormatWriteOptions) {
-    internal::writeImpl(path, image, imageFormatWriteOptions);
+    internal::pngWriteImpl(path, image, imageFormatWriteOptions);
 }
 
 void PngImageFormatWriter::write(const std::filesystem::path &path, const Film &film) {
@@ -173,7 +173,7 @@ void PngImageFormatWriter::write(const std::filesystem::path &path, const Film &
 
 void PngImageFormatWriter::write(const std::filesystem::path &path, const Film &film,
                                  const ImageFormatWriteOptions &imageFormatWriteOptions) {
-    internal::writeImpl(path, film, imageFormatWriteOptions);
+    internal::pngWriteImpl(path, film, imageFormatWriteOptions);
 }
 
 }
