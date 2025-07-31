@@ -127,6 +127,10 @@ FilmSpec Film::getFilmSpec() const {
     return filmSpec;
 }
 
+Resolution Film::getResolution() const {
+    return FilmBufferVariants::getResolution(color);
+}
+
 Film::~Film() {
     std::visit([](auto *buf) { delete buf; }, color);
     for (auto &channel : additionalChannels) {
