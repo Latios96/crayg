@@ -13,7 +13,7 @@ namespace internal {
 struct PngWriteData {
     unsigned char *pixelBuffer;
     bool isOwning = false;
-    lodepng::State state;
+    LodePNGState state;
     int width;
     int height;
 };
@@ -50,8 +50,10 @@ template <typename BufferType> void getWriteDataForChannel(PngWriteData &pngWrit
 
     if (colorChannelCount == 1) {
         pngWriteData.state.info_raw.colortype = LodePNGColorType::LCT_GREY;
+        // pngWriteData.state.info_raw.bitdepth = 8;
     } else {
         pngWriteData.state.info_raw.colortype = LodePNGColorType::LCT_RGB;
+        // pngWriteData.state.info_raw.bitdepth = 8;
     }
 }
 
@@ -90,11 +92,13 @@ template <typename ImageType>
 void pngWriteImpl(const std::filesystem::path &path, const ImageType &imageType,
                   const ImageFormatWriteOptions &imageFormatWriteOptions) {
     const auto channelViews = imageType.getChannels();
-    tbb::parallel_for(0UL, channelViews.size(), [&channelViews, &path](int channelIndex) {
+    tbb::parallel_for(0UL, channelViews.size(), [&channelViews, &path, &imageType](int channelIndex) {
         auto &channelView = channelViews[channelIndex];
 
         PngWriteData pngWriteData{};
+        lodepng_state_init(&pngWriteData.state);
         getWriteDataForChannel(pngWriteData, channelView.channelBuffer);
+        appendImageMetadata(imageType.metadata, pngWriteData);
 
         const std::filesystem::path channelPath = resolveChannelPath(path, channelView.channelName);
         writePngFile(channelView.channelName, channelPath, pngWriteData);
