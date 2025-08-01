@@ -24,6 +24,7 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/UnitPlaneUvs.h
     fixtures/UsdGeomMeshFixtures.cpp
     fixtures/UsdGeomMeshFixtures.h
+    image/io/imageformatwriters/png/TestPngImageFormatWriter.cpp
     math/TestCommonMath.cpp
     math/TestQuadraticEquations.cpp
     parallel/TestParallelLoops.cpp
@@ -188,5 +189,6 @@ add_executable(${TARGET_NAME} # cmake-format: unsortable
                main.cpp ${UNIT_TEST_SOURCE_LIST})
 
 target_link_libraries(${TARGET_NAME} PUBLIC crayg)
+target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_test(NAME ${TARGET_NAME} COMMAND ${TARGET_NAME} --durations yes)

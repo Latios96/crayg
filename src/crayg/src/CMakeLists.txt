@@ -77,6 +77,8 @@ set(crayg_SRCS
     image/ImageSpec.cpp
     image/ImageSpec.h
     image/InvalidPixelFormat.h
+    image/io/imageformatwriters/exr/OpenExrImageFormatWriter.cpp
+    image/io/imageformatwriters/exr/OpenExrImageFormatWriter.h
     image/io/imageformatwriters/ImageBufferTypeTrait.h
     image/io/imageformatwriters/ImageFormatWriter.h
     image/io/imageformatwriters/ImageFormatWriters.cpp
