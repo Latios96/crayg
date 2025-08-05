@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "sceneIO/usd/UsdReadUtils.h"
 #include "utils/tracing/CraygTracing.h"
+#include <compatibility/usd/fmt/SdfPath_formatter.h>
 #include <memory>
 
 namespace crayg {

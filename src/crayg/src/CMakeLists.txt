@@ -24,6 +24,10 @@ set(crayg_SRCS
     basics/Vector3f.h
     compatibility/openexr/fmt/ImfCompression_formatter.h
     compatibility/openexr/fmt/ImfPixelType_formatter.h
+    compatibility/usd/fmt/SdfPath_formatter.h
+    compatibility/usd/fmt/SdfValueTypeName_formatter.h
+    compatibility/usd/fmt/TfToken_formatter.h
+    compatibility/usd/fmt/UsdStagePtr_formatter.h
     CraygInfo.cpp
     CraygInfo.h
     image/BucketImageBuffer.cpp
@@ -358,7 +362,6 @@ set(crayg_SRCS
     sceneIO/SceneReaderFactory.h
     sceneIO/SceneWriterFactory.cpp
     sceneIO/SceneWriterFactory.h
-    sceneIO/usd/CraygUsdBase.h
     sceneIO/usd/UsdConversions.cpp
     sceneIO/usd/UsdConversions.h
     sceneIO/usd/UsdLensFileUtils.cpp

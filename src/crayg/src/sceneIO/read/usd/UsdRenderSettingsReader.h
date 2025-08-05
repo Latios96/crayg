@@ -2,7 +2,6 @@
 
 #include "scene/RenderSettings.h"
 #include "sceneIO/read/usd/base/BaseUsdReader.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdRender/settings.h>
 
 namespace crayg {

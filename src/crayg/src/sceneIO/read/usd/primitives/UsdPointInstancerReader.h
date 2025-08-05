@@ -2,7 +2,6 @@
 
 #include "scene/primitives/PointInstancer.h"
 #include "sceneIO/read/usd/base/BaseUsdImageableReader.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdGeom/pointInstancer.h>
 
 namespace crayg {

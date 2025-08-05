@@ -2,7 +2,6 @@
 
 #include "scene/primitives/Sphere.h"
 #include "sceneIO/read/usd/base/BaseUsdImageableReader.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usdGeom/sphere.h>
 

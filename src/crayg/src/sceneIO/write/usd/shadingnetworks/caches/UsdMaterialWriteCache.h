@@ -2,7 +2,6 @@
 
 #include "UsdShadingNodeWriteCache.h"
 #include "scene/shadingnetworks/materials/Material.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include <map>
 #include <pxr/usd/usdShade/materialBindingAPI.h>

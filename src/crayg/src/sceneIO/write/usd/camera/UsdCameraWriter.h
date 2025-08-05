@@ -1,7 +1,6 @@
 #pragma once
 
 #include "scene/camera/Camera.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/write/usd/base/BaseUsdTransformableWriter.h"
 #include <pxr/usd/usdGeom/camera.h>
 

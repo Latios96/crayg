@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Logger.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include "sceneIO/write/usd/base/BaseUsdWriter.h"
 #include "sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"

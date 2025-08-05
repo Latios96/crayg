@@ -4,7 +4,6 @@
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/read/SceneReader.h"
 #include "sceneIO/read/usd/shadingnetworks/caches/UsdMaterialReadCache.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include <optional>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdRender/settings.h>

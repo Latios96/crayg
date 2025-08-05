@@ -2,7 +2,6 @@
 
 #include "scene/camera/Camera.h"
 #include "sceneIO/read/usd/base/BaseUsdXformableReader.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdGeom/camera.h>
 
 namespace crayg {

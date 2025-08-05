@@ -2,7 +2,6 @@
 
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "sceneIO/read/usd/base/BaseUsdImageableReader.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/imaging/hd/meshUtil.h>
 #include <pxr/usd/usdGeom/mesh.h>
 

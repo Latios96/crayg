@@ -2,7 +2,6 @@
 
 #include "scene/lights/DiskLight.h"
 #include "sceneIO/read/usd/base/BaseUsdLightReader.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/usd/usdLux/diskLight.h>
 
 namespace crayg {

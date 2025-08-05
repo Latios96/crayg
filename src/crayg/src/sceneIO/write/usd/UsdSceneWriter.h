@@ -2,7 +2,6 @@
 
 #include "UsdPathFactory.h"
 #include "scene/Scene.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/write/SceneWriter.h"
 #include <pxr/usd/usd/stage.h>
 #include <string>

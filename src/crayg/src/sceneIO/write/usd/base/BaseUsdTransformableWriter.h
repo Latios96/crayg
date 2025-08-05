@@ -2,7 +2,6 @@
 
 #include "BaseUsdWriter.h"
 #include "Logger.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include <memory>

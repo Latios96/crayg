@@ -3,7 +3,6 @@
 #include "basics/Color.h"
 #include "basics/Matrix4x4f.h"
 #include "basics/Resolution.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include <pxr/base/gf/matrix4d.h>
 #include <pxr/base/gf/vec2f.h>
 #include <pxr/base/gf/vec2i.h>

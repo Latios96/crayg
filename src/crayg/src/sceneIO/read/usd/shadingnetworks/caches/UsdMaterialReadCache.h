@@ -2,7 +2,6 @@
 
 #include "UsdShadingNodeReadCache.h"
 #include "scene/shadingnetworks/materials/Material.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/usd/schemaBase.h>

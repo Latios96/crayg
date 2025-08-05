@@ -1,7 +1,6 @@
 #pragma once
 
 #include "BaseUsdXformableReader.h"
-#include "sceneIO/usd/CraygUsdBase.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdUtils.h"
 
