@@ -1,5 +1,6 @@
 #include "OpenExrImageFormatWriter.h"
 
+#include "OpenExrFormatWriteOptions.h"
 #include "image/io/imageformatwriters/ImageBufferTypeTrait.h"
 #include "parallel/ParallelLoops.h"
 
@@ -216,7 +217,7 @@ void exrWriteImpl(const std::filesystem::path &path, const ImageType &imageType,
                                channelView.channelBuffer);
     }
 
-    Imf::OutputFile file(path.c_str(), header);
+    Imf::OutputFile file(reinterpret_cast<const char *>(path.u8string().c_str()), header);
     file.setFrameBuffer(openExrWriteData.frameBuffer);
     file.writePixels(header.dataWindow().size().y);
 
@@ -232,7 +233,7 @@ void OpenExrImageFormatWriter::write(const std::filesystem::path &path, const Im
 }
 
 void OpenExrImageFormatWriter::write(const std::filesystem::path &path, const Image &image,
-                                     const ImageFormatWriteOptions &imageFormatWriteOptions) {
+                                     const BaseImageFormatWriteOptions &imageFormatWriteOptions) {
     internal::exrWriteImpl(path, image, reinterpret_cast<const OpenExrFormatWriteOptions &>(imageFormatWriteOptions));
 }
 
@@ -241,7 +242,7 @@ void OpenExrImageFormatWriter::write(const std::filesystem::path &path, const Fi
 }
 
 void OpenExrImageFormatWriter::write(const std::filesystem::path &path, const Film &film,
-                                     const ImageFormatWriteOptions &imageFormatWriteOptions) {
+                                     const BaseImageFormatWriteOptions &imageFormatWriteOptions) {
     internal::exrWriteImpl(path, film, reinterpret_cast<const OpenExrFormatWriteOptions &>(imageFormatWriteOptions));
 }
 

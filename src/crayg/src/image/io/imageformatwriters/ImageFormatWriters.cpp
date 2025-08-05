@@ -15,6 +15,7 @@ void writeImpl(const std::filesystem::path &path, const ImageType &image,
 
     if (extension == ".png") {
         imageFormatWriter = std::make_unique<PngImageFormatWriter>();
+        imageFormatWriter->write(path, image, imageFormatWriteOptions.pngImageFormatWriteOptions);
     } else {
         Logger::error("No ImageWriter found for extension {}", extension);
         CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No ImageWriter found for extension {}", extension);
@@ -23,8 +24,6 @@ void writeImpl(const std::filesystem::path &path, const ImageType &image,
     if (!imageFormatWriter) {
         return;
     }
-
-    imageFormatWriter->write(path, image, imageFormatWriteOptions);
 }
 
 void ImageFormatWriters::write(const std::filesystem::path &path, const Image &image) {

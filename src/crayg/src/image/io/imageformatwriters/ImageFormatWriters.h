@@ -1,4 +1,5 @@
 #pragma once
+#include "ImageFormatWriteOptions.h"
 #include "ImageFormatWriter.h"
 #include <filesystem>
 

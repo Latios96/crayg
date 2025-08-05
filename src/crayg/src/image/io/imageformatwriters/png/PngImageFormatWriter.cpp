@@ -41,7 +41,7 @@ template <typename BufferType> void getWriteDataForChannel(PngWriteData &pngWrit
 
         const float *data = (float *)ImageBufferTypeTrait<BufferType>::getDataPtr(buffer);
 
-        tbb::parallel_for(0UL, numberOfValues, [&pngWriteData, data](size_t i) {
+        tbb::parallel_for(size_t(0), numberOfValues, [&pngWriteData, data](size_t i) {
             pngWriteData.pixelBuffer[i] = std::clamp<float>(data[i], 0, 1) * 255;
         });
     } else {
@@ -50,10 +50,8 @@ template <typename BufferType> void getWriteDataForChannel(PngWriteData &pngWrit
 
     if (colorChannelCount == 1) {
         pngWriteData.state.info_raw.colortype = LodePNGColorType::LCT_GREY;
-        // pngWriteData.state.info_raw.bitdepth = 8;
     } else {
         pngWriteData.state.info_raw.colortype = LodePNGColorType::LCT_RGB;
-        // pngWriteData.state.info_raw.bitdepth = 8;
     }
 }
 
@@ -90,9 +88,9 @@ std::filesystem::path resolveChannelPath(const std::filesystem::path &imagePath,
 
 template <typename ImageType>
 void pngWriteImpl(const std::filesystem::path &path, const ImageType &imageType,
-                  const ImageFormatWriteOptions &imageFormatWriteOptions) {
+                  const BaseImageFormatWriteOptions &imageFormatWriteOptions) {
     const auto channelViews = imageType.getChannels();
-    tbb::parallel_for(0UL, channelViews.size(), [&channelViews, &path, &imageType](int channelIndex) {
+    tbb::parallel_for((size_t)0, channelViews.size(), [&channelViews, &path, &imageType](int channelIndex) {
         auto &channelView = channelViews[channelIndex];
 
         PngWriteData pngWriteData{};
@@ -116,7 +114,7 @@ void PngImageFormatWriter::write(const std::filesystem::path &path, const Image 
 }
 
 void PngImageFormatWriter::write(const std::filesystem::path &path, const Image &image,
-                                 const ImageFormatWriteOptions &imageFormatWriteOptions) {
+                                 const BaseImageFormatWriteOptions &imageFormatWriteOptions) {
     internal::pngWriteImpl(path, image, imageFormatWriteOptions);
 }
 
@@ -125,7 +123,7 @@ void PngImageFormatWriter::write(const std::filesystem::path &path, const Film &
 }
 
 void PngImageFormatWriter::write(const std::filesystem::path &path, const Film &film,
-                                 const ImageFormatWriteOptions &imageFormatWriteOptions) {
+                                 const BaseImageFormatWriteOptions &imageFormatWriteOptions) {
     internal::pngWriteImpl(path, film, imageFormatWriteOptions);
 }
 
