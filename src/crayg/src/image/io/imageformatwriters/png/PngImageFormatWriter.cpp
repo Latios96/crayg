@@ -79,7 +79,7 @@ void writePngFile(const std::string &channelName, const std::filesystem::path &c
 }
 
 std::filesystem::path resolveChannelPath(const std::filesystem::path &imagePath, const std::string &channelName) {
-    if (channelName == "rgb") {
+    if (channelName == "rgb" || channelName == "color") {
         return imagePath;
     }
 
