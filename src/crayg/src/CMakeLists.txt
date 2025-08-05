@@ -22,6 +22,8 @@ set(crayg_SRCS
     basics/Vector2.h
     basics/Vector3f.cpp
     basics/Vector3f.h
+    compatibility/openexr/fmt/ImfCompression_formatter.h
+    compatibility/openexr/fmt/ImfPixelType_formatter.h
     CraygInfo.cpp
     CraygInfo.h
     image/BucketImageBuffer.cpp

@@ -18,5 +18,3 @@ struct OpenExrFormatWriteOptions : BaseImageFormatWriteOptions {
 }
 
 CRAYG_FMT_ENUM_FORMATTER(crayg::OpenExrDataWindow);
-CRAYG_FMT_ENUM_FORMATTER(Imf::Compression);
-CRAYG_FMT_ENUM_FORMATTER(Imf::PixelType);

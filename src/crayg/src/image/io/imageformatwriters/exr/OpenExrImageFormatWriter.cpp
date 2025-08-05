@@ -1,6 +1,8 @@
 #include "OpenExrImageFormatWriter.h"
 
 #include "OpenExrFormatWriteOptions.h"
+#include "compatibility/openexr/fmt/ImfCompression_formatter.h"
+#include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
 #include "image/io/imageformatwriters/ImageBufferTypeTrait.h"
 #include "parallel/ParallelLoops.h"
 
