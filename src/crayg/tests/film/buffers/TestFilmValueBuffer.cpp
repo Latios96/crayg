@@ -44,7 +44,7 @@ TEST_CASE("ValueBuffer::writeFloat") {
         buffer.write({0, 0}, 1);
 
         REQUIRE(buffer.getFloat({0, 0}) == 1);
-        REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
+        REQUIRE(buffer.getColor({0, 0}) == Color(1, 1, 1));
     }
 
     SECTION("should write float correctly for IntValueBuffer") {
@@ -54,7 +54,7 @@ TEST_CASE("ValueBuffer::writeFloat") {
         buffer.write({0, 0}, 2);
 
         REQUIRE(buffer.getFloat({0, 0}) == 1);
-        REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
+        REQUIRE(buffer.getColor({0, 0}) == Color(1, 1, 1));
     }
 
     SECTION("should write float correctly for Color3fValueBuffer") {
@@ -83,7 +83,7 @@ TEST_CASE("ValueBuffer::writeColor"){
 buffer.write({0, 0}, Color(1, 2, 3));
 
 REQUIRE(buffer.getFloat({0, 0}) == 1);
-REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
+REQUIRE(buffer.getColor({0, 0}) == Color(1, 1, 1));
 }
 
 SECTION("should write color correctly for IntValueBuffer") {
@@ -92,7 +92,7 @@ SECTION("should write color correctly for IntValueBuffer") {
     buffer.write({0, 0}, Color(1, 2, 3));
 
     REQUIRE(buffer.getFloat({0, 0}) == 1);
-    REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
+    REQUIRE(buffer.getColor({0, 0}) == Color(1, 1, 1));
 }
 
 SECTION("should write color correctly for Color3fValueBuffer") {
@@ -140,7 +140,7 @@ TEST_CASE("ValueBuffer::getColor should work through BaseBuffer ptr") {
         buffer.write({0, 0}, 1);
 
         REQUIRE(bufferBase->getFloat({0, 0}) == 1);
-        REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 0, 0));
+        REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 1, 1));
     }
 }
 }

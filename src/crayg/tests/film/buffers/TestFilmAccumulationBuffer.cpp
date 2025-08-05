@@ -289,7 +289,7 @@ TEST_CASE("AccumulationBuffer::updateAverages") {
         buffer.updateAverages();
 
         REQUIRE_FALSE(buffer.isBlack());
-        REQUIRE(buffer.getColor({4, 4}) == Color(1.5, 0, 0));
+        REQUIRE(buffer.getColor({4, 4}) == Color(1.5, 1.5, 1.5));
     }
 
     SECTION("should update average values correctly for Color3fAccumulationBuffer") {
@@ -318,7 +318,7 @@ TEST_CASE("AccumulationBuffer::updateAverages for ImageBucket") {
 
         REQUIRE_FALSE(buffer.isBlack());
         REQUIRE(buffer.getColor({0, 0}).isBlack());
-        REQUIRE(buffer.getColor({2, 2}) == Color(2, 0, 0));
+        REQUIRE(buffer.getColor({2, 2}) == Color(2, 2, 2));
     }
 
     SECTION("should update average values correctly for Color3fAccumulationBuffer") {
@@ -346,7 +346,7 @@ TEST_CASE("AccumulationBuffer::getColor should work through BaseBuffer ptr") {
         buffer.updateAverages();
 
         REQUIRE(bufferBase->getFloat({0, 0}) == 1);
-        REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 0, 0));
+        REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 1, 1));
     }
 }
 }

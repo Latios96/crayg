@@ -149,8 +149,8 @@ TEST_CASE("BufferBase::getColor"){
 buffer.data[0].value[0] = 1;
 buffer.data[1].value[0] = 2;
 
-REQUIRE(buffer.getColor({0, 0}) == Color::createRed());
-REQUIRE(buffer.getColor({1, 0}) == Color(2, 0, 0));
+REQUIRE(buffer.getColor({0, 0}) == Color(1, 1, 1));
+REQUIRE(buffer.getColor({1, 0}) == Color(2, 2, 2));
 }
 
 SECTION("should get color from Color3fBufferBase") {
@@ -170,7 +170,7 @@ SECTION("should get color from IntBufferBase") {
     buffer.data[1].value[0] = 2;
     buffer.data[2].value[0] = 3;
 
-    REQUIRE(buffer.getColor({0, 0}) == Color(0.003921569f, 0, 0));
+    REQUIRE(buffer.getColor({0, 0}) == Color(0.003921569f, 0.003921569f, 0.003921569f));
 }
 
 SECTION("should get color from Color3iBufferBase") {

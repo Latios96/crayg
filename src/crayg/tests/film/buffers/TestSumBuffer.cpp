@@ -44,7 +44,7 @@ TEST_CASE("SumBuffer::add Float") {
         buffer.add({0, 0}, 1);
 
         REQUIRE(buffer.getFloat({0, 0}) == 1);
-        REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
+        REQUIRE(buffer.getColor({0, 0}) == Color(1, 1, 1));
     }
 
     SECTION("should add float correctly for IntSumBuffer") {
@@ -84,7 +84,7 @@ TEST_CASE("SumBuffer::add Color"){
 buffer.add({0, 0}, Color(1, 2, 3));
 
 REQUIRE(buffer.getFloat({0, 0}) == 1);
-REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
+REQUIRE(buffer.getColor({0, 0}) == Color(1, 1, 1));
 }
 
 SECTION("should add color correctly for IntSumBuffer") {
@@ -93,7 +93,7 @@ SECTION("should add color correctly for IntSumBuffer") {
     buffer.add({0, 0}, Color(1, 2, 3));
 
     REQUIRE(buffer.getFloat({0, 0}) == 1);
-    REQUIRE(buffer.getColor({0, 0}) == Color(1, 0, 0));
+    REQUIRE(buffer.getColor({0, 0}) == Color(1, 1, 1));
 }
 
 SECTION("should add color correctly for Color3fSumBuffer") {
@@ -141,7 +141,7 @@ TEST_CASE("SumBuffer::getColor should work through BaseBuffer ptr") {
         buffer.add({0, 0}, 1);
 
         REQUIRE(bufferBase->getFloat({0, 0}) == 1);
-        REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 0, 0));
+        REQUIRE(bufferBase->getColor({0, 0}) == Color(1, 1, 1));
     }
 }
 }

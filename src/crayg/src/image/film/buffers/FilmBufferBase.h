@@ -70,6 +70,12 @@ template <typename T, int channelCount> struct FilmBufferBase {
         for (int i = 0; i < channelCount; i++) {
             color.data()[i] = FilmValueTrait<T>::toFloat(data[index(pixelPosition)].value[i]);
         }
+
+        if (channelCount == 1) {
+            color.g = color.r;
+            color.b = color.r;
+        }
+
         return color;
     }
 
