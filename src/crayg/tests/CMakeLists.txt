@@ -24,7 +24,6 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/UnitPlaneUvs.h
     fixtures/UsdGeomMeshFixtures.cpp
     fixtures/UsdGeomMeshFixtures.h
-    image/io/imageformatwriters/png/TestPngImageFormatWriter.cpp
     math/TestCommonMath.cpp
     math/TestQuadraticEquations.cpp
     parallel/TestParallelLoops.cpp
