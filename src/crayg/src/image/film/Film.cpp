@@ -111,7 +111,7 @@ bool Film::hasChannel(const std::string &name) const {
     return additionalChannels.find(name) != additionalChannels.end();
 }
 
-std::optional<FilmBufferVariantPtr> Film::getBufferVariantPtrByName(const std::string &name) { // todo test
+std::optional<FilmBufferVariantPtr> Film::getBufferVariantPtrByName(const std::string &name) const {
     if (!hasChannel(name)) {
         return std::nullopt;
     }

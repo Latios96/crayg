@@ -46,7 +46,7 @@ struct Film {
     std::vector<ChannelView> getChannels() const;
     std::vector<std::string> channelNames() const;
     bool hasChannel(const std::string &name) const;
-    std::optional<FilmBufferVariantPtr> getBufferVariantPtrByName(const std::string &name);
+    std::optional<FilmBufferVariantPtr> getBufferVariantPtrByName(const std::string &name) const;
     FilmSpec getFilmSpec() const;
     Resolution getResolution() const;
 
