@@ -7,6 +7,7 @@
 #include "sceneIO/usd/UsdUtils.h"
 #include "utils/CraygMain.h"
 
+#include "compatibility/usd/fmt/SdfPath_formatter.h"
 #include <pxr/usd/usd/primRange.h>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>
