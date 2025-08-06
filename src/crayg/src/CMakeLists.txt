@@ -23,6 +23,7 @@ set(crayg_SRCS
     basics/Vector3f.cpp
     basics/Vector3f.h
     compatibility/lodepng/fmt/LodePNG_formatter.h
+    compatibility/openexr/fmt/ImathBox_formatter.h
     compatibility/openexr/fmt/ImfCompression_formatter.h
     compatibility/openexr/fmt/ImfPixelType_formatter.h
     compatibility/usd/fmt/SdfPath_formatter.h
