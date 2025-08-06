@@ -1,6 +1,7 @@
 #include "ImageFormatWriters.h"
 
 #include "Logger.h"
+#include "exr/OpenExrImageFormatWriter.h"
 #include "png/PngImageFormatWriter.h"
 #include "utils/tracing/CraygTracing.h"
 
@@ -16,6 +17,9 @@ void writeImpl(const std::filesystem::path &path, const ImageType &image,
     if (extension == ".png") {
         imageFormatWriter = std::make_unique<PngImageFormatWriter>();
         imageFormatWriter->write(path, image, imageFormatWriteOptions.pngImageFormatWriteOptions);
+    } else if (extension == ".exr") {
+        imageFormatWriter = std::make_unique<OpenExrImageFormatWriter>();
+        imageFormatWriter->write(path, image, imageFormatWriteOptions.openExrFormatWriteOptions);
     } else {
         Logger::error("No ImageWriter found for extension {}", extension);
         CRAYG_LOG_AND_THROW_RUNTIME_ERROR("No ImageWriter found for extension {}", extension);
