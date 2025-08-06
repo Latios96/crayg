@@ -10,9 +10,9 @@ namespace crayg {
 enum class OpenExrDataWindow { WHOLE_IMAGE, RENDER_REGION, AUTO };
 
 struct OpenExrFormatWriteOptions : BaseImageFormatWriteOptions {
-    Imf::Compression compression;
-    Imf::PixelType pixelType;
-    OpenExrDataWindow openExrDataWindow;
+    Imf::Compression compression = Imf::ZIP_COMPRESSION;
+    Imf::PixelType pixelType = Imf::HALF;
+    OpenExrDataWindow openExrDataWindow = OpenExrDataWindow::WHOLE_IMAGE;
 };
 
 }
