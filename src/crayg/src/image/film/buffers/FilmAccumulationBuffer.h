@@ -132,6 +132,14 @@ template <typename T, int channelCount> struct FilmAccumulationBuffer : public F
         return weightIsConstant(0);
     }
 
+    double getWeight(const Vector2i &pixelPosition) const {
+        const int i = FilmBufferBase<T, channelCount>::index(pixelPosition);
+        const int size = FilmBufferBase<T, channelCount>::width * FilmBufferBase<T, channelCount>::height;
+        CRAYG_CHECKD_IS_VALID_INDEX(i, size);
+
+        return weight[i].get();
+    }
+
     struct SumType {
         AtomicDouble value[channelCount];
     };
