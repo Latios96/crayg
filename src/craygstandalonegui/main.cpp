@@ -10,7 +10,6 @@
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h"
 #include "craygstandalonegui/widgets/taskreporter/GuiTaskReporter.h"
-#include "image/film/io/FilmWriter.h"
 #include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
@@ -22,8 +21,7 @@
 #include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
 #include <QResource>
-#include <image/io/ImageWriter.h>
-#include <image/io/ImageWriters.h>
+
 #include <renderer/Renderer.h>
 #include <scene/Scene.h>
 #include <thread>

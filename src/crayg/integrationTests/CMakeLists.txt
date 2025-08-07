@@ -1,6 +1,5 @@
 set(INTEGRATION_TEST_SRCS
     ImageAndFilmFixture.h
-    imageTests.cpp
     pngImageFormatWriter.cpp
     openExrImageFormatWriter.cpp
     renderUtils.cpp

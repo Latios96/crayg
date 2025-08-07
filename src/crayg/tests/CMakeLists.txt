@@ -75,7 +75,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestImageMetadata.cpp
     TestImageMetadataCollector.cpp
     TestImagePathResolver.cpp
-    TestImageWriters.cpp
     TestIntegratorSettings.cpp
     TestLensFileExtendedFormatReader.cpp
     TestLensFileExtendedFormatWriter.cpp
@@ -93,11 +92,9 @@ set(UNIT_TEST_SOURCE_LIST
     TestLineByLineSequence.cpp
     TestMatrix4x4f.cpp
     TestNumberParsing.cpp
-    TestOpenExrWriter.cpp
     TestOpenSubdivRefiner.cpp
     TestOrthonormalBasis.cpp
     TestPixelBuffer.cpp
-    TestPngWriter.cpp
     TestPreconditions.cpp
     TestProgressReporter.cpp
     TestRay.cpp

@@ -2,7 +2,7 @@
 #include "fixtures/UnitPlaneUvs.h"
 #include "image/Image.h"
 #include "image/ImageAlgorithms.h"
-#include "image/io/ImageWriters.h"
+#include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "scene/primitives/Sphere.h"
 #include "scene/shadingnetworks/shadingnodes/FileTexture.h"
 #include <catch2/catch.hpp>
@@ -23,7 +23,7 @@ TEST_CASE("TestFileTexture::evaluateColor") {
         fileTexture.colorSpace = FileTexture::ColorSpace::RAW;
         Image image(10, 10);
         ImageAlgorithms::fill(image, Color(0, 1, 0));
-        ImageWriters::writeImage(image, texturePath);
+        ImageFormatWriters::write(texturePath, image);
 
         auto color = fileTexture.evaluateColor(SurfaceInteraction(*sphere, {0.5, 0.5, 0}, {}, {}));
 

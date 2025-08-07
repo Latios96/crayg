@@ -50,8 +50,6 @@ set(crayg_SRCS
     image/film/Film.h
     image/film/FilmSpec.cpp
     image/film/FilmSpec.h
-    image/film/io/FilmWriter.cpp
-    image/film/io/FilmWriter.h
     image/Image.cpp
     image/Image.h
     image/ImageAlgorithms.cpp
@@ -98,15 +96,6 @@ set(crayg_SRCS
     image/io/imageformatwriters/png/PngImageFormatWriteOptions.h
     image/io/imageformatwriters/png/PngImageFormatWriter.cpp
     image/io/imageformatwriters/png/PngImageFormatWriter.h
-    image/io/ImageWriter.h
-    image/io/ImageWriters.cpp
-    image/io/ImageWriters.h
-    image/io/OpenExrWriter.cpp
-    image/io/OpenExrWriter.h
-    image/io/OpenImageIoImageWriter.cpp
-    image/io/OpenImageIoImageWriter.h
-    image/io/PngWriter.cpp
-    image/io/PngWriter.h
     image/PixelBuffer.cpp
     image/PixelBuffer.h
     image/PixelFormat.h

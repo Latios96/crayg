@@ -1,5 +1,4 @@
 #include "renderUtils.h"
-#include "image/film/io/FilmWriter.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "utils/TaskReporter.h"
 

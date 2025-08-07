@@ -1,7 +1,6 @@
 #include "Initialization.h"
 #include "Logger.h"
 #include "craygstandalone/cli/CliParser.h"
-#include "image/film/io/FilmWriter.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
