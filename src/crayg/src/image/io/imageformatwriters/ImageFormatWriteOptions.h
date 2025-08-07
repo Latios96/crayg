@@ -8,6 +8,14 @@ namespace crayg {
 struct ImageFormatWriteOptions {
     PngImageFormatWriteOptions pngImageFormatWriteOptions;
     OpenExrFormatWriteOptions openExrFormatWriteOptions;
+
+    bool operator==(const ImageFormatWriteOptions &rhs) const {
+        return openExrFormatWriteOptions == rhs.openExrFormatWriteOptions;
+    }
+
+    bool operator!=(const ImageFormatWriteOptions &rhs) const {
+        return !(rhs == *this);
+    }
 };
 
 }
