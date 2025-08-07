@@ -1,6 +1,7 @@
 #pragma once
 #include <ImfPixelType.h>
 #include <fmt/ostream.h>
+#include <magic_enum.hpp>
 
 namespace std {
 

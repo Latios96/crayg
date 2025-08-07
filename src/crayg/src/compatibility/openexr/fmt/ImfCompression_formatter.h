@@ -1,6 +1,7 @@
 #pragma once
 #include <ImfCompression.h>
 #include <fmt/ostream.h>
+#include <magic_enum.hpp>
 
 namespace std {
 
