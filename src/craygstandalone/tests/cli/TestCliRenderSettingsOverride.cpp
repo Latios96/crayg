@@ -97,17 +97,17 @@ TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
 
     SECTION("has overrides") {
         REQUIRE(fullOverrides.reportOverrides() ==
-                R"(resolution -> 800x600, maxSamples -> 8, integratorType -> "DEBUG")");
+                R"(resolution -> 800x600, maxSamples -> 8, integratorType -> DEBUG)");
 
         REQUIRE(onlyResolution.reportOverrides() == "resolution -> 800x600");
 
         REQUIRE(onlyMaxSamples.reportOverrides() == "maxSamples -> 8");
 
-        REQUIRE(onlyIntegratorType.reportOverrides() == R"(integratorType -> "DEBUG")");
+        REQUIRE(onlyIntegratorType.reportOverrides() == R"(integratorType -> DEBUG)");
 
-        REQUIRE(onlyBucketSequenceType.reportOverrides() == R"(bucketSequenceType -> "LINE_BY_LINE")");
+        REQUIRE(onlyBucketSequenceType.reportOverrides() == R"(bucketSequenceType -> LINE_BY_LINE)");
 
-        REQUIRE(onlyBucketSamplerType.reportOverrides() == R"(bucketSamplerType -> "UNIFORM")");
+        REQUIRE(onlyBucketSamplerType.reportOverrides() == R"(bucketSamplerType -> UNIFORM)");
 
         REQUIRE(onlyAdaptiveMaxError.reportOverrides() == R"(adaptiveMaxError -> 0.1)");
 
