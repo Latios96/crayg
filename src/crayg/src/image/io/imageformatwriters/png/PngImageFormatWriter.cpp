@@ -1,6 +1,7 @@
 #include "PngImageFormatWriter.h"
 
 #include "Logger.h"
+#include "image/ColorConversion.h"
 #include "image/io/imageformatwriters/ImageBufferTypeTrait.h"
 
 #include <lodepng.h>
@@ -26,7 +27,8 @@ void appendImageMetadata(const ImageMetadata &imageMetadata, PngWriteData &write
     }
 }
 
-template <typename BufferType> void getWriteDataForChannel(PngWriteData &pngWriteData, const BufferType &buffer) {
+template <typename BufferType>
+void getWriteDataForChannel(PngWriteData &pngWriteData, const BufferType &buffer, const std::string &channelName) {
     pngWriteData.width = ImageBufferTypeTrait<BufferType>::getWidth(buffer);
     pngWriteData.height = ImageBufferTypeTrait<BufferType>::getHeight(buffer);
     const PixelFormat pixelFormat = ImageBufferTypeTrait<BufferType>::getPixelFormat(buffer);
@@ -41,8 +43,12 @@ template <typename BufferType> void getWriteDataForChannel(PngWriteData &pngWrit
 
         const float *data = (float *)ImageBufferTypeTrait<BufferType>::getDataPtr(buffer);
 
-        tbb::parallel_for(size_t(0), numberOfValues, [&pngWriteData, data](size_t i) {
-            pngWriteData.pixelBuffer[i] = std::clamp<float>(data[i], 0, 1) * 255;
+        tbb::parallel_for(size_t(0), numberOfValues, [&pngWriteData, data, &channelName](size_t i) {
+            float value = data[i];
+            if (ColorConversion::channelNeedsLinearToSRgbConversion(channelName)) {
+                value = ColorConversion::linearToSRGB(value);
+            }
+            pngWriteData.pixelBuffer[i] = std::clamp<float>(value, 0, 1) * 255;
         });
     } else {
         CRAYG_LOG_AND_THROW_RUNTIME_ERROR("Unsupported PixelFormat '{}'", pixelFormat);
@@ -95,7 +101,7 @@ void pngWriteImpl(const std::filesystem::path &path, const ImageType &imageType,
 
         PngWriteData pngWriteData{};
         lodepng_state_init(&pngWriteData.state);
-        getWriteDataForChannel(pngWriteData, channelView.channelBuffer);
+        getWriteDataForChannel(pngWriteData, channelView.channelBuffer, channelView.channelName);
         appendImageMetadata(imageType.metadata, pngWriteData);
 
         const std::filesystem::path channelPath = resolveChannelPath(path, channelView.channelName);
