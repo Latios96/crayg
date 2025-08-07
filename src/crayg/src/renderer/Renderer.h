@@ -2,7 +2,7 @@
 
 #include "BucketStats.h"
 #include "bucketsamplers/BucketSampler.h"
-#include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
+#include "crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueue.h"
 #include "integrators/AbstractIntegrator.h"
 #include "scene/camera/pinhole/PinholeCameraModel.h"
 #include "utils/TaskReporter.h"

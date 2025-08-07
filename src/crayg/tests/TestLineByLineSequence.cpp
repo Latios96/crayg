@@ -1,4 +1,4 @@
-#include "image/imageiterators/buckets/LineByLineSequence.h"
+#include "crayg/foundation/areaiterators/buckets/LineByLineSequence.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

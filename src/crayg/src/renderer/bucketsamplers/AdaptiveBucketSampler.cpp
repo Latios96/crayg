@@ -1,6 +1,6 @@
 #include "AdaptiveBucketSampler.h"
+#include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "image/ImageAlgorithms.h"
-#include "image/imageiterators/pixels/ImageIterators.h"
 #include "sampling/Random.h"
 #include "utils/Heatmap.h"
 
@@ -22,7 +22,7 @@ void AdaptiveBucketSampler::sampleBucket(const ImageBucket &imageBucket) const {
     while (!shouldTerminate(samplesTaken, error)) {
         error = 0;
         samplesTaken += samplesPerPass;
-        for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+        for (auto pixel : AreaIterators::lineByLine(imageBucket)) {
             Color fullySampled = Color::createBlack();
             Color halfSampled = Color::createBlack();
 
@@ -44,7 +44,7 @@ void AdaptiveBucketSampler::drawSampleHeatmap(const ImageBucket &imageBucket, in
     const float relativeSampleCount =
         static_cast<float>(samplesTaken - samplesPerPass) / static_cast<float>(maxSamples - samplesPerPass);
 
-    for (auto bucketPos : ImageIterators::lineByLine(imageBucket)) {
+    for (auto bucketPos : AreaIterators::lineByLine(imageBucket)) {
         const Vector2i pixel = bucketPos + imageBucket.getPosition();
         film->addSample("sampleCount", pixel, MagmaHeatmap::lookup(relativeSampleCount));
     }

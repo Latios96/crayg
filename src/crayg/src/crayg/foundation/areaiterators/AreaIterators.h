@@ -21,7 +21,7 @@ template <typename T, typename I> class IteratorAdapter {
     const I &i;
 };
 
-class ImageIterators {
+class AreaIterators {
   public:
     template <typename I> static IteratorAdapter<LineByLineIterator<I>, I> lineByLine(I &i) {
         return {i};

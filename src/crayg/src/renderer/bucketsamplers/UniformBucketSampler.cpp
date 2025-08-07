@@ -1,5 +1,5 @@
 #include "UniformBucketSampler.h"
-#include "image/imageiterators/pixels/ImageIterators.h"
+#include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "renderer/SampleAccumulator.h"
 #include "sampling/Random.h"
 
@@ -9,7 +9,7 @@ void UniformBucketSampler::addRequiredImageSpecs(ImageSpecBuilder &imageSpecBuil
 }
 
 void UniformBucketSampler::sampleBucket(const ImageBucket &imageBucket) const {
-    for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+    for (auto pixel : AreaIterators::lineByLine(imageBucket)) {
         const auto samplePos = imageBucket.getPosition() + pixel;
         const Color pixelColor = renderPixel(samplePos);
         film->addSample("color", samplePos, pixelColor);

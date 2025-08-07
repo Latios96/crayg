@@ -3,7 +3,7 @@
 #include "OpenExrFormatWriteOptions.h"
 #include "compatibility/openexr/fmt/ImfCompression_formatter.h"
 #include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
-#include "image/imageiterators/pixels/ImageIterators.h"
+#include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "image/io/imageformatwriters/ImageBufferTypeTrait.h"
 #include "parallel/ParallelLoops.h"
 
@@ -28,7 +28,7 @@ struct OpenExrWriteData {
 
 Bounds2di minimalDataWindow(const Image &image) {
     Bounds2di minimalDataWindow;
-    for (const auto &coord : ImageIterators::lineByLine(image)) {
+    for (const auto &coord : AreaIterators::lineByLine(image)) {
         auto color = image.getValue(coord);
         const bool alreadyInCrop = minimalDataWindow.contains(coord);
         if (color > Color::createBlack() && !alreadyInCrop) {
@@ -51,7 +51,7 @@ Bounds2di minimalDataWindow(const Film &film) {
         return std::visit(
             [&resolution](auto ptr) {
                 Bounds2di minimalDataWindow;
-                for (const auto &coord : ImageIterators::lineByLine(resolution)) {
+                for (const auto &coord : AreaIterators::lineByLine(resolution)) {
                     auto color = ptr->getColor(coord);
                     const bool alreadyInCrop = minimalDataWindow.contains(coord);
                     if (color > Color::createBlack() && !alreadyInCrop) {
@@ -66,7 +66,7 @@ Bounds2di minimalDataWindow(const Film &film) {
     return std::visit(
         [&resolution](auto ptr) {
             Bounds2di minimalDataWindow;
-            for (const auto &coord : ImageIterators::lineByLine(resolution)) {
+            for (const auto &coord : AreaIterators::lineByLine(resolution)) {
                 auto weight = ptr->getWeight(coord);
                 const bool alreadyInCrop = minimalDataWindow.contains(coord);
                 if (weight > 0 && !alreadyInCrop) {

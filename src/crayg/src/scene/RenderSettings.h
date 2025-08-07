@@ -1,6 +1,6 @@
 #pragma once
 
-#include "image/imageiterators/buckets/BucketSequenceType.h"
+#include "crayg/foundation/areaiterators/buckets/BucketSequenceType.h"
 #include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
 #include "integrators/IntegratorSettings.h"
 #include "integrators/IntegratorType.h"

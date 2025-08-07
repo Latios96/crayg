@@ -1,5 +1,5 @@
+#include "crayg/foundation/areaiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h"
 #include "image/ImageBucket.h"
-#include "image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

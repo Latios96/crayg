@@ -2,7 +2,7 @@
 
 #include "compatibility/openexr/fmt/ImfCompression_formatter.h"
 #include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
-#include "image/imageiterators/buckets/BucketSequenceType.h"
+#include "crayg/foundation/areaiterators/buckets/BucketSequenceType.h"
 #include "image/io/imageformatwriters/exr/OpenExrFormatWriteOptions.h"
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"

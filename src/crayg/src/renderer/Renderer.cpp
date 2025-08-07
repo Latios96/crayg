@@ -2,8 +2,8 @@
 #include "GeometryCompiler.h"
 #include "Logger.h"
 #include "SampleAccumulator.h"
+#include "crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueue.h"
 #include "image/ImageAlgorithms.h"
-#include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
@@ -17,8 +17,8 @@
 #include "utils/TaskReporter.h"
 #include "utils/tracing/CraygTracing.h"
 #include <Imath/half.h>
+#include <crayg/foundation/areaiterators/buckets/ImageBucketSequences.h>
 #include <image/BucketImageBuffer.h>
-#include <image/imageiterators/buckets/ImageBucketSequences.h>
 #include <memory>
 #include <numeric>
 #include <tbb/task_group.h>

@@ -1,5 +1,5 @@
-#include "image/imageiterators/buckets/ImageBucketSequences.h"
-#include "image/imageiterators/buckets/bucketqueues/BucketQueue.h"
+#include "crayg/foundation/areaiterators/buckets/ImageBucketSequences.h"
+#include "crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueue.h"
 #include <catch2/catch.hpp>
 #include <tbb/task_group.h>
 #include <thread>

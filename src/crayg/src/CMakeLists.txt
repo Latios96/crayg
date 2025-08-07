@@ -35,6 +35,28 @@ set(crayg_SRCS
     compatibility/usd/fmt/SdfValueTypeName_formatter.h
     compatibility/usd/fmt/TfToken_formatter.h
     compatibility/usd/fmt/UsdStagePtr_formatter.h
+    crayg/foundation/areaiterators/AreaIterators.h
+    crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueue.cpp
+    crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueue.h
+    crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueueMode.h
+    crayg/foundation/areaiterators/buckets/bucketqueues/FollowMouseBucketQueue.cpp
+    crayg/foundation/areaiterators/buckets/bucketqueues/FollowMouseBucketQueue.h
+    crayg/foundation/areaiterators/buckets/bucketqueues/FollowSequenceBucketQueue.cpp
+    crayg/foundation/areaiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h
+    crayg/foundation/areaiterators/buckets/BucketSequence.h
+    crayg/foundation/areaiterators/buckets/BucketSequenceType.cpp
+    crayg/foundation/areaiterators/buckets/BucketSequenceType.h
+    crayg/foundation/areaiterators/buckets/HilbertSequence.cpp
+    crayg/foundation/areaiterators/buckets/HilbertSequence.h
+    crayg/foundation/areaiterators/buckets/ImageBucketSequences.cpp
+    crayg/foundation/areaiterators/buckets/ImageBucketSequences.h
+    crayg/foundation/areaiterators/buckets/LineByLineSequence.cpp
+    crayg/foundation/areaiterators/buckets/LineByLineSequence.h
+    crayg/foundation/areaiterators/buckets/MortonSequence.cpp
+    crayg/foundation/areaiterators/buckets/MortonSequence.h
+    crayg/foundation/areaiterators/buckets/SpiralSequence.cpp
+    crayg/foundation/areaiterators/buckets/SpiralSequence.h
+    crayg/foundation/areaiterators/LineByLineIterator.h
     CraygInfo.cpp
     CraygInfo.h
     image/BucketImageBuffer.cpp
@@ -62,28 +84,6 @@ set(crayg_SRCS
     image/ImageAlgorithms.h
     image/ImageBucket.cpp
     image/ImageBucket.h
-    image/imageiterators/buckets/bucketqueues/BucketQueue.cpp
-    image/imageiterators/buckets/bucketqueues/BucketQueue.h
-    image/imageiterators/buckets/bucketqueues/BucketQueueMode.h
-    image/imageiterators/buckets/bucketqueues/FollowMouseBucketQueue.cpp
-    image/imageiterators/buckets/bucketqueues/FollowMouseBucketQueue.h
-    image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.cpp
-    image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h
-    image/imageiterators/buckets/BucketSequence.h
-    image/imageiterators/buckets/BucketSequenceType.cpp
-    image/imageiterators/buckets/BucketSequenceType.h
-    image/imageiterators/buckets/HilbertSequence.cpp
-    image/imageiterators/buckets/HilbertSequence.h
-    image/imageiterators/buckets/ImageBucketSequences.cpp
-    image/imageiterators/buckets/ImageBucketSequences.h
-    image/imageiterators/buckets/LineByLineSequence.cpp
-    image/imageiterators/buckets/LineByLineSequence.h
-    image/imageiterators/buckets/MortonSequence.cpp
-    image/imageiterators/buckets/MortonSequence.h
-    image/imageiterators/buckets/SpiralSequence.cpp
-    image/imageiterators/buckets/SpiralSequence.h
-    image/imageiterators/pixels/ImageIterators.h
-    image/imageiterators/pixels/LineByLineIterator.h
     image/ImageMetadata.cpp
     image/ImageMetadata.h
     image/ImageMetadataValue.h

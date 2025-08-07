@@ -1,6 +1,6 @@
+#include "crayg/foundation/areaiterators/buckets/BucketSequenceType.h"
+#include "crayg/foundation/areaiterators/buckets/ImageBucketSequences.h"
 #include "image/Image.h"
-#include "image/imageiterators/buckets/BucketSequenceType.h"
-#include "image/imageiterators/buckets/ImageBucketSequences.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

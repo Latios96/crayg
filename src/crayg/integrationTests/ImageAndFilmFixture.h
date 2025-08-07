@@ -1,7 +1,7 @@
 #pragma once
+#include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "image/Image.h"
 #include "image/film/Film.h"
-#include "image/imageiterators/pixels/ImageIterators.h"
 
 namespace crayg {
 
@@ -38,7 +38,7 @@ struct ImageFixture {
 
   private:
     void createRgbGradientImage(PixelBuffer &pixelBuffer, const Bounds2di &valueBounds) {
-        for (auto pixel : ImageIterators::lineByLine(pixelBuffer)) {
+        for (auto pixel : AreaIterators::lineByLine(pixelBuffer)) {
             if (!valueBounds.contains(pixel)) {
                 continue;
             }
@@ -95,7 +95,7 @@ struct FilmFixture {
   private:
     void createRgbGradientImage(const std::string &channelName, const Bounds2di &valueBounds) {
         const Resolution resolution = film.getResolution();
-        for (auto pixel : ImageIterators::lineByLine(resolution)) {
+        for (auto pixel : AreaIterators::lineByLine(resolution)) {
             if (!valueBounds.contains(pixel)) {
                 continue;
             }

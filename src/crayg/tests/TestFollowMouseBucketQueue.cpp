@@ -1,6 +1,6 @@
 #include "basics/Resolution.h"
-#include "image/imageiterators/buckets/ImageBucketSequences.h"
-#include "image/imageiterators/buckets/bucketqueues/FollowMouseBucketQueue.h"
+#include "crayg/foundation/areaiterators/buckets/ImageBucketSequences.h"
+#include "crayg/foundation/areaiterators/buckets/bucketqueues/FollowMouseBucketQueue.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

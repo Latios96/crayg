@@ -1,6 +1,6 @@
+#include "crayg/foundation/areaiterators/AreaIterators.h"
 #include <catch2/catch.hpp>
 #include <image/Image.h>
-#include <image/imageiterators/pixels/ImageIterators.h>
 
 namespace crayg {
 
@@ -36,7 +36,7 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
             }
         }
         int counter = 0;
-        for (auto pixel : ImageIterators::lineByLine(image)) {
+        for (auto pixel : AreaIterators::lineByLine(image)) {
             REQUIRE(pixel.x == positions[counter].x);
             REQUIRE(pixel.y == positions[counter].y);
             counter++;

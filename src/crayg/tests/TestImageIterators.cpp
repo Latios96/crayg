@@ -1,7 +1,7 @@
+#include "crayg/foundation/areaiterators/AreaIterators.h"
 #include <catch2/catch.hpp>
+#include <crayg/foundation/areaiterators/buckets/ImageBucketSequences.h>
 #include <image/Image.h>
-#include <image/imageiterators/buckets/ImageBucketSequences.h>
-#include <image/imageiterators/pixels/ImageIterators.h>
 #include <iostream>
 
 namespace crayg {
@@ -19,7 +19,7 @@ TEST_CASE("ImageIterators", "[ImageIterators]") {
         Image image(5, 5);
         std::vector<Vector2i> visitedPositions;
 
-        for (auto pixel : ImageIterators::lineByLine(image)) {
+        for (auto pixel : AreaIterators::lineByLine(image)) {
             visitedPositions.push_back(pixel);
         }
         REQUIRE(visitedPositions == positions);
@@ -29,7 +29,7 @@ TEST_CASE("ImageIterators", "[ImageIterators]") {
         ImageBucket bucket({0, 0}, 5, 5);
         std::vector<Vector2i> visitedPositions;
 
-        for (auto pixel : ImageIterators::lineByLine(bucket)) {
+        for (auto pixel : AreaIterators::lineByLine(bucket)) {
             visitedPositions.push_back(pixel);
         }
         REQUIRE(visitedPositions == positions);

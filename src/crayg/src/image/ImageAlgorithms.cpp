@@ -19,7 +19,7 @@ void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bu
         }
         auto imageChannel = image.getChannel(channelName);
         auto bucketImageBufferChannel = bucketImageBuffer.image.getChannel(channelName);
-        for (auto pixel : ImageIterators::lineByLine(*bucketImageBufferChannel)) {
+        for (auto pixel : AreaIterators::lineByLine(*bucketImageBufferChannel)) {
             imageChannel->setValue(pixel + bucketImageBuffer.imageBucket.getPosition(),
                                    bucketImageBufferChannel->getValue(pixel));
         }
@@ -33,7 +33,7 @@ void ImageAlgorithms::updateChannel(Image &image, const std::string &channelName
 
     auto imageChannel = image.getChannel(channelName);
 
-    for (auto pixel : ImageIterators::lineByLine(*pixelBuffer)) {
+    for (auto pixel : AreaIterators::lineByLine(*pixelBuffer)) {
         imageChannel->setValue(pixel, pixelBuffer->getValue(pixel));
     }
 }

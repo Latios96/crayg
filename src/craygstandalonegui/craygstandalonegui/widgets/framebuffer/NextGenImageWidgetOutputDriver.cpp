@@ -1,8 +1,8 @@
 #include "NextGenImageWidgetOutputDriver.h"
 
 #include "FrameBufferDrawUtils.h"
+#include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "image/ColorConversion.h"
-#include "image/imageiterators/pixels/ImageIterators.h"
 #include "utils/StopWatch.h"
 
 namespace crayg {
@@ -104,7 +104,7 @@ void NextGenImageWidgetOutputDriver::updateDisplayBuffer(const ImageBucket &imag
 
     std::visit(
         [&imageBucket, this](auto buf) {
-            for (auto pixel : ImageIterators::lineByLine(imageBucket)) {
+            for (auto pixel : AreaIterators::lineByLine(imageBucket)) {
                 const Vector2i globalPosition = pixel + imageBucket.getPosition();
                 Color color = buf->getColor(globalPosition);
                 if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {

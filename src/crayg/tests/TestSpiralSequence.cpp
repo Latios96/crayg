@@ -1,4 +1,4 @@
-#include "image/imageiterators/buckets/SpiralSequence.h"
+#include "crayg/foundation/areaiterators/buckets/SpiralSequence.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
