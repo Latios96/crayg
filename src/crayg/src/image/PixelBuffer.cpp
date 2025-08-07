@@ -188,7 +188,7 @@ bool PixelBuffer::operator==(const PixelBuffer &rhs) const {
         return false;
     }
 
-    for (auto pixel : AreaIterators::lineByLine(*this)) {
+    for (auto pixel : AreaIterators::scanlines(*this)) {
         if (getValue(pixel) != rhs.getValue(pixel)) {
             return false;
         }
@@ -214,7 +214,7 @@ bool PixelBuffer::isWhite() const {
 }
 
 bool PixelBuffer::isColor(const Color &color) const {
-    for (auto pixel : AreaIterators::lineByLine(*this)) {
+    for (auto pixel : AreaIterators::scanlines(*this)) {
         if (getValue(pixel) != color) {
             return false;
         }

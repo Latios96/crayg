@@ -58,8 +58,8 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         REQUIRE(*renderSettings ==
                 RenderSettings(crayg::Resolution(800, 600), 2, IntegratorType::DEBUG,
                                IntegratorSettings({{"DEBUG:someToken", {std::string("someTokenValue")}}}),
-                               IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::UNIFORM,
-                               0.1f, 16, true, RegionToRender(NDCRegion({0, 1}, {2, 3})), imageFormatWriteOptions));
+                               IntersectorType::EMBREE, BucketSequenceType::SCANLINE, BucketSamplerType::UNIFORM, 0.1f,
+                               16, true, RegionToRender(NDCRegion({0, 1}, {2, 3})), imageFormatWriteOptions));
     }
 
     SECTION("should fallback to default values") {

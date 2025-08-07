@@ -1,14 +1,14 @@
-#include "crayg/foundation/areaiterators/buckets/LineByLineSequence.h"
+#include "crayg/foundation/areaiterators/buckets/ScanlineSequence.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
 
-TEST_CASE("LineByLineSequence::getTiles") {
+TEST_CASE("ScanlineSequence::getTiles") {
 
-    SECTION("testLineByLineSequenceWorksCorrectly") {
-        LineByLineSequence lineByLineSequence({20, 10}, 2);
+    SECTION("testScanlineSequenceWorksCorrectly") {
+        ScanlineSequence scanlineSequence({20, 10}, 2);
 
-        const std::vector<ImageBucket> buckets = lineByLineSequence.getTiles();
+        const std::vector<ImageBucket> buckets = scanlineSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket({0, 0}, 2, 2),  ImageBucket({2, 0}, 2, 2),  ImageBucket({4, 0}, 2, 2),
@@ -37,10 +37,10 @@ TEST_CASE("LineByLineSequence::getTiles") {
                                 ImageBucket({18, 8}, 2, 2)}));
     }
 
-    SECTION("testLineByLineSequenceWorksCorrectlyNotFullBucket") {
-        LineByLineSequence lineByLineSequence({22, 11}, 5);
+    SECTION("testScanlineSequenceWorksCorrectlyNotFullBucket") {
+        ScanlineSequence scanlineSequence({22, 11}, 5);
 
-        const std::vector<ImageBucket> buckets = lineByLineSequence.getTiles();
+        const std::vector<ImageBucket> buckets = scanlineSequence.getTiles();
 
         REQUIRE(buckets == std::vector<ImageBucket>(
                                {ImageBucket({0, 0}, 5, 5), ImageBucket({5, 0}, 5, 5), ImageBucket({10, 0}, 5, 5),
@@ -53,10 +53,10 @@ TEST_CASE("LineByLineSequence::getTiles") {
                                 ImageBucket({15, 10}, 5, 1), ImageBucket({20, 10}, 2, 1)}));
     }
 
-    SECTION("testLineByLineSequenceEmptyImage") {
-        LineByLineSequence lineByLineSequence({0, 0}, 5);
+    SECTION("testScanlineSequenceEmptyImage") {
+        ScanlineSequence scanlineSequence({0, 0}, 5);
 
-        const std::vector<ImageBucket> buckets = lineByLineSequence.getTiles();
+        const std::vector<ImageBucket> buckets = scanlineSequence.getTiles();
 
         REQUIRE(buckets.empty());
     }

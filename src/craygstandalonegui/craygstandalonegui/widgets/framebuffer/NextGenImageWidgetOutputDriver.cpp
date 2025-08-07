@@ -104,7 +104,7 @@ void NextGenImageWidgetOutputDriver::updateDisplayBuffer(const ImageBucket &imag
 
     std::visit(
         [&imageBucket, this](auto buf) {
-            for (auto pixel : AreaIterators::lineByLine(imageBucket)) {
+            for (auto pixel : AreaIterators::scanlines(imageBucket)) {
                 const Vector2i globalPosition = pixel + imageBucket.getPosition();
                 Color color = buf->getColor(globalPosition);
                 if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {

@@ -10,7 +10,7 @@ void BucketStats::processBucketTime(Film &film, const ImageBucket &imageBucket,
     const auto secondsForBucket =
         std::chrono::duration_cast<std::chrono::milliseconds>(end - startTime).count() / 1000.f;
 
-    for (auto bucketPos : AreaIterators::lineByLine(imageBucket)) {
+    for (auto bucketPos : AreaIterators::scanlines(imageBucket)) {
         const Vector2i pixel = bucketPos + imageBucket.getPosition();
         film.addSample("absoluteRenderTime", pixel, Color::createGrey(secondsForBucket));
     }
@@ -35,7 +35,7 @@ void BucketStats::processBucketTimes(NextGenOutputDriver &outputDriver, const Re
         float relativeTime = imageBucketTime.seconds / maxTime;
         relativeTime = std::isnan(relativeTime) ? 0 : relativeTime;
         const Color relativeTimeColor = MagmaHeatmap::lookup(relativeTime);
-        for (auto pixel : AreaIterators::lineByLine(imageBucketTime.imageBucket)) {
+        for (auto pixel : AreaIterators::scanlines(imageBucketTime.imageBucket)) {
             const auto globalPos = imageBucketTime.imageBucket.getPosition() + pixel;
             std::visit([&globalPos, &relativeTimeColor](auto buf) { buf->write(globalPos, relativeTimeColor); },
                        *buffer);

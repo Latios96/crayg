@@ -15,21 +15,21 @@ TEST_CASE("ImageIterators", "[ImageIterators]") {
         }
     }
 
-    SECTION("testLineByLineWithImage") {
+    SECTION("testScanlineWithImage") {
         Image image(5, 5);
         std::vector<Vector2i> visitedPositions;
 
-        for (auto pixel : AreaIterators::lineByLine(image)) {
+        for (auto pixel : AreaIterators::scanlines(image)) {
             visitedPositions.push_back(pixel);
         }
         REQUIRE(visitedPositions == positions);
     }
 
-    SECTION("testLineByLineWithBucket") {
+    SECTION("testScanlineWithBucket") {
         ImageBucket bucket({0, 0}, 5, 5);
         std::vector<Vector2i> visitedPositions;
 
-        for (auto pixel : AreaIterators::lineByLine(bucket)) {
+        for (auto pixel : AreaIterators::scanlines(bucket)) {
             visitedPositions.push_back(pixel);
         }
         REQUIRE(visitedPositions == positions);

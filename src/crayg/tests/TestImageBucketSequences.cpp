@@ -10,7 +10,7 @@ TEST_CASE("ImageBucketSequences::getSequence") {
     Image image(20, 10);
 
     SECTION("should get line by line sequence") {
-        auto buckets = ImageBucketSequences::getSequence(image, 5, BucketSequenceType::LINE_BY_LINE);
+        auto buckets = ImageBucketSequences::getSequence(image, 5, BucketSequenceType::SCANLINE);
 
         REQUIRE(buckets[0].getPosition() == Vector2i(0, 0));
     }

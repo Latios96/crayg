@@ -88,8 +88,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestLensRaytracerTracer.cpp
     TestLensSurface.cpp
     TestLight.cpp
-    TestLineByLineIterator.cpp
-    TestLineByLineSequence.cpp
     TestMatrix4x4f.cpp
     TestNumberParsing.cpp
     TestOpenSubdivRefiner.cpp
@@ -107,6 +105,8 @@ set(UNIT_TEST_SOURCE_LIST
     TestRenderSettings.cpp
     TestResolution.cpp
     TestSampleAccumulator.cpp
+    TestScanlineIterator.cpp
+    TestScanlineSequence.cpp
     TestScene.cpp
     TestSceneReaderFactory.cpp
     TestSceneWriterFactory.cpp

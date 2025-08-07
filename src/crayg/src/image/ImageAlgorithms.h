@@ -15,7 +15,7 @@ class ImageAlgorithms {
     static void updateChannel(Image &image, const std::string &channelName, PixelBuffer *pixelBuffer);
 
     template <typename I> static void fill(I &image, const Color &color) {
-        for (auto pixel : AreaIterators::lineByLine(image)) {
+        for (auto pixel : AreaIterators::scanlines(image)) {
             image.setValue(pixel, color);
         }
     }
@@ -27,7 +27,7 @@ class ImageAlgorithms {
             return;
         }
 
-        for (auto pixel : AreaIterators::lineByLine(region)) {
+        for (auto pixel : AreaIterators::scanlines(region)) {
             const auto globalPos = region.getPosition() + pixel;
             image.setValue(globalPos, color);
         }
@@ -35,7 +35,7 @@ class ImageAlgorithms {
 
     template <typename I> static Color minValue(I &image) {
         Color min = image.getValue({0, 0});
-        for (auto pixel : AreaIterators::lineByLine(image)) {
+        for (auto pixel : AreaIterators::scanlines(image)) {
             auto pixelColor = image.getValue(pixel);
             if (pixelColor < min) {
                 min = pixelColor;
@@ -46,7 +46,7 @@ class ImageAlgorithms {
 
     template <typename I> static Color maxValue(I &image) {
         Color max = image.getValue({0, 0});
-        for (auto pixel : AreaIterators::lineByLine(image)) {
+        for (auto pixel : AreaIterators::scanlines(image)) {
             auto pixelColor = image.getValue(pixel);
             if (pixelColor > max) {
                 max = pixelColor;
@@ -64,7 +64,7 @@ class ImageAlgorithms {
     template <typename I>
     static void fillWithRelativeGradient(I &source, I &target, const Gradient<Color> &gradient, Color min, Color max) {
         const Color rangeEnd = max - min;
-        for (auto pixel : AreaIterators::lineByLine(source)) {
+        for (auto pixel : AreaIterators::scanlines(source)) {
             auto pixelColor = source.getValue(pixel) - min;
             auto gradientPosition = (pixelColor / rangeEnd).clamp();
             auto gradientColor = gradient.interpolate(gradientPosition.r);

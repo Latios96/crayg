@@ -4,14 +4,14 @@
 
 namespace crayg {
 
-template <typename I> class LineByLineIterator {
+template <typename I> class ScanlineIterator {
   public:
-    explicit LineByLineIterator(int lX, int lY, const I &i) : i(i) {
+    explicit ScanlineIterator(int lX, int lY, const I &i) : i(i) {
         lastX = lX;
         lastY = lY;
     }
 
-    LineByLineIterator &operator++() {
+    ScanlineIterator &operator++() {
         if (lastX + 1 < i.getWidth()) {
             lastX++;
         } else {
@@ -26,7 +26,7 @@ template <typename I> class LineByLineIterator {
         return {lastX, lastY};
     }
 
-    bool operator!=(const LineByLineIterator &o) const {
+    bool operator!=(const ScanlineIterator &o) const {
         return lastX < i.getWidth() && lastY < i.getHeight();
     };
 

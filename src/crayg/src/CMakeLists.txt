@@ -50,13 +50,13 @@ set(crayg_SRCS
     crayg/foundation/areaiterators/buckets/HilbertSequence.h
     crayg/foundation/areaiterators/buckets/ImageBucketSequences.cpp
     crayg/foundation/areaiterators/buckets/ImageBucketSequences.h
-    crayg/foundation/areaiterators/buckets/LineByLineSequence.cpp
-    crayg/foundation/areaiterators/buckets/LineByLineSequence.h
     crayg/foundation/areaiterators/buckets/MortonSequence.cpp
     crayg/foundation/areaiterators/buckets/MortonSequence.h
+    crayg/foundation/areaiterators/buckets/ScanlineSequence.cpp
+    crayg/foundation/areaiterators/buckets/ScanlineSequence.h
     crayg/foundation/areaiterators/buckets/SpiralSequence.cpp
     crayg/foundation/areaiterators/buckets/SpiralSequence.h
-    crayg/foundation/areaiterators/LineByLineIterator.h
+    crayg/foundation/areaiterators/ScanlineIterator.h
     CraygInfo.cpp
     CraygInfo.h
     image/BucketImageBuffer.cpp

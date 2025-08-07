@@ -21,7 +21,7 @@ TEST_CASE("CliRenderSettingsOverride::hasAnyOverrides") {
     onlyIntersector.intersectorType = IntersectorType::EMBREE;
 
     CliRenderSettingsOverride onlyBucketSequenceType;
-    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::LINE_BY_LINE;
+    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::SCANLINE;
 
     CliRenderSettingsOverride onlyBucketSamplerType;
     onlyBucketSamplerType.bucketSamplerType = BucketSamplerType::UNIFORM;
@@ -78,7 +78,7 @@ TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
     onlyIntegratorType.integratorType = IntegratorType::DEBUG;
 
     CliRenderSettingsOverride onlyBucketSequenceType;
-    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::LINE_BY_LINE;
+    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::SCANLINE;
 
     CliRenderSettingsOverride onlyBucketSamplerType;
     onlyBucketSamplerType.bucketSamplerType = BucketSamplerType::UNIFORM;
@@ -140,7 +140,7 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
     onlyIntegratorType.integratorType = IntegratorType::DEBUG;
 
     CliRenderSettingsOverride onlyBucketSequenceType;
-    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::LINE_BY_LINE;
+    onlyBucketSequenceType.bucketSequenceType = BucketSequenceType::SCANLINE;
 
     CliRenderSettingsOverride onlyBucketSamplerType;
     onlyBucketSamplerType.bucketSamplerType = BucketSamplerType::UNIFORM;
@@ -173,22 +173,22 @@ TEST_CASE("CliRenderSettingsOverride::resolveOverrides") {
 
         REQUIRE(onlyResolution.resolveOverrides(renderSettings) ==
                 RenderSettings({800, 600}, 4, IntegratorType::RAYTRACING, IntegratorSettings(), IntersectorType::EMBREE,
-                               BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
+                               BucketSequenceType::SCANLINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
                                std::nullopt, ImageFormatWriteOptions{}));
 
         REQUIRE(onlyMaxSamples.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 8, IntegratorType::RAYTRACING, IntegratorSettings(),
-                               IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE,
+                               IntersectorType::EMBREE, BucketSequenceType::SCANLINE, BucketSamplerType::ADAPTIVE,
                                0.007f, 8, false, std::nullopt, ImageFormatWriteOptions{}));
 
         REQUIRE(onlyIntegratorType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::DEBUG, IntegratorSettings(), IntersectorType::EMBREE,
-                               BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
+                               BucketSequenceType::SCANLINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
                                std::nullopt, ImageFormatWriteOptions{}));
 
         REQUIRE(onlyBucketSequenceType.resolveOverrides(renderSettings) ==
                 RenderSettings({1280, 720}, 4, IntegratorType::RAYTRACING, IntegratorSettings(),
-                               IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE,
+                               IntersectorType::EMBREE, BucketSequenceType::SCANLINE, BucketSamplerType::ADAPTIVE,
                                0.007f, 8, false, std::nullopt, ImageFormatWriteOptions{}));
 
         REQUIRE(onlyBucketSamplerType.resolveOverrides(renderSettings) ==

@@ -1,8 +1,8 @@
 #include "ImageBucketSequences.h"
 
 #include "HilbertSequence.h"
-#include "LineByLineSequence.h"
 #include "MortonSequence.h"
+#include "ScanlineSequence.h"
 #include "SpiralSequence.h"
 #include "utils/Exceptions.h"
 #include <fmt/format.h>
@@ -12,8 +12,8 @@ std::vector<ImageBucket> ImageBucketSequences::getSequence(const Resolution &res
                                                            BucketSequenceType bucketSequenceType) {
     std::unique_ptr<BucketSequence> bucketSequence = nullptr;
     switch (bucketSequenceType) {
-    case BucketSequenceType::LINE_BY_LINE:
-        bucketSequence = std::make_unique<LineByLineSequence>(resolution, bucketWidth);
+    case BucketSequenceType::SCANLINE:
+        bucketSequence = std::make_unique<ScanlineSequence>(resolution, bucketWidth);
         break;
     case BucketSequenceType::SPIRAL:
         bucketSequence = std::make_unique<SpiralSequence>(resolution, bucketWidth);

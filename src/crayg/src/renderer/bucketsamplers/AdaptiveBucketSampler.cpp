@@ -22,7 +22,7 @@ void AdaptiveBucketSampler::sampleBucket(const ImageBucket &imageBucket) const {
     while (!shouldTerminate(samplesTaken, error)) {
         error = 0;
         samplesTaken += samplesPerPass;
-        for (auto pixel : AreaIterators::lineByLine(imageBucket)) {
+        for (auto pixel : AreaIterators::scanlines(imageBucket)) {
             Color fullySampled = Color::createBlack();
             Color halfSampled = Color::createBlack();
 
@@ -44,7 +44,7 @@ void AdaptiveBucketSampler::drawSampleHeatmap(const ImageBucket &imageBucket, in
     const float relativeSampleCount =
         static_cast<float>(samplesTaken - samplesPerPass) / static_cast<float>(maxSamples - samplesPerPass);
 
-    for (auto bucketPos : AreaIterators::lineByLine(imageBucket)) {
+    for (auto bucketPos : AreaIterators::scanlines(imageBucket)) {
         const Vector2i pixel = bucketPos + imageBucket.getPosition();
         film->addSample("sampleCount", pixel, MagmaHeatmap::lookup(relativeSampleCount));
     }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LineByLineIterator.h"
+#include "ScanlineIterator.h"
 
 namespace crayg {
 
@@ -23,7 +23,7 @@ template <typename T, typename I> class IteratorAdapter {
 
 class AreaIterators {
   public:
-    template <typename I> static IteratorAdapter<LineByLineIterator<I>, I> lineByLine(I &i) {
+    template <typename I> static IteratorAdapter<ScanlineIterator<I>, I> scanlines(I &i) {
         return {i};
     }
 };

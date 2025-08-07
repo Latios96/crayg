@@ -1,12 +1,12 @@
-#include "LineByLineSequence.h"
+#include "ScanlineSequence.h"
 
 namespace crayg {
 
-LineByLineSequence::LineByLineSequence(const Resolution &resolution, int bucketWidth)
+ScanlineSequence::ScanlineSequence(const Resolution &resolution, int bucketWidth)
     : BucketSequence(resolution, bucketWidth) {
 }
 
-std::vector<ImageBucket> LineByLineSequence::getTiles() {
+std::vector<ImageBucket> ScanlineSequence::getTiles() {
     std::vector<ImageBucket> buckets;
 
     for (int y = 0; y < resolution.getHeight(); y += bucketWidth) {
@@ -19,7 +19,7 @@ std::vector<ImageBucket> LineByLineSequence::getTiles() {
     return buckets;
 }
 
-int LineByLineSequence::fitImage(int pos, int bucketWidth, int dimension) {
+int ScanlineSequence::fitImage(int pos, int bucketWidth, int dimension) {
     if (pos + bucketWidth > dimension) {
         return dimension - pos;
     }

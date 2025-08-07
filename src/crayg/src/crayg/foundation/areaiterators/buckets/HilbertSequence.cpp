@@ -1,5 +1,5 @@
 #include "HilbertSequence.h"
-#include "LineByLineSequence.h"
+#include "ScanlineSequence.h"
 
 #include <gilbert.h>
 
@@ -10,8 +10,8 @@ HilbertSequence::HilbertSequence(const Resolution &resolution, int bucketWidth)
 }
 
 std::vector<ImageBucket> HilbertSequence::getTiles() {
-    LineByLineSequence lineByLineSequence(resolution, bucketWidth);
-    std::vector<ImageBucket> tiles = lineByLineSequence.getTiles();
+    ScanlineSequence scanlineSequence(resolution, bucketWidth);
+    std::vector<ImageBucket> tiles = scanlineSequence.getTiles();
 
     std::sort(tiles.begin(), tiles.end(), [this](ImageBucket &a, ImageBucket &b) {
         return gilbert_xy2d(a.getPosition().x, a.getPosition().y, resolution.getWidth(), resolution.getHeight()) <

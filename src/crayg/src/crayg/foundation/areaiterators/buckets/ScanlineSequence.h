@@ -4,9 +4,9 @@
 
 namespace crayg {
 
-class LineByLineSequence : public BucketSequence {
+class ScanlineSequence : public BucketSequence {
   public:
-    LineByLineSequence(const Resolution &resolution, int bucketWidth);
+    ScanlineSequence(const Resolution &resolution, int bucketWidth);
     std::vector<ImageBucket> getTiles() override;
 
   private:

@@ -4,26 +4,26 @@
 
 namespace crayg {
 
-TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
+TEST_CASE("ScanlineIterator", "[ScanlineIterator]") {
     Image image(20, 10);
 
     SECTION("testIncrementNormal") {
-        LineByLineIterator<Image> iterator(0, 0, image);
+        ScanlineIterator<Image> iterator(0, 0, image);
         ++iterator;
         REQUIRE((*iterator).x == 1);
         REQUIRE((*iterator).y == 0);
     }
 
     SECTION("testIncrementLineEnd") {
-        LineByLineIterator<Image> iterator(19, 0, image);
+        ScanlineIterator<Image> iterator(19, 0, image);
         ++iterator;
         REQUIRE((*iterator).x == 0);
         REQUIRE((*iterator).y == 1);
     }
 
     SECTION("testEqual") {
-        LineByLineIterator<Image> iterator(19, 0, image);
-        LineByLineIterator<Image> otherIterator(19, 9, image);
+        ScanlineIterator<Image> iterator(19, 0, image);
+        ScanlineIterator<Image> otherIterator(19, 9, image);
 
         REQUIRE(iterator != otherIterator);
     }
@@ -36,7 +36,7 @@ TEST_CASE("LineByLineIterator", "[LineByLineIterator]") {
             }
         }
         int counter = 0;
-        for (auto pixel : AreaIterators::lineByLine(image)) {
+        for (auto pixel : AreaIterators::scanlines(image)) {
             REQUIRE(pixel.x == positions[counter].x);
             REQUIRE(pixel.y == positions[counter].y);
             counter++;

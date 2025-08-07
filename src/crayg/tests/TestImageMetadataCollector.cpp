@@ -34,7 +34,7 @@ TEST_CASE("TestImageMetadataCollector::collect") {
         scene.renderSettings =
             RenderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
                            IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}), IntersectorType::EMBREE,
-                           BucketSequenceType::LINE_BY_LINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
+                           BucketSequenceType::SCANLINE, BucketSamplerType::ADAPTIVE, 0.007f, 8, false,
                            RegionToRender(PixelRegion({0, 1}, {2, 3})), ImageFormatWriteOptions{});
         ImageMetadataCollector imageMetadataCollector;
         imageMetadataCollector.scene = &scene;
@@ -44,7 +44,7 @@ TEST_CASE("TestImageMetadataCollector::collect") {
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR) == "EMBREE");
         REQUIRE(imageMetadata.read<int>(ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES) == 4);
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SEQUENCE_TYPE) ==
-                "LINE_BY_LINE");
+                "SCANLINE");
         REQUIRE(imageMetadata.read<std::string>(ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SAMPLER_TYPE) ==
                 "ADAPTIVE");
         REQUIRE(imageMetadata.read<float>(ImageMetadataTokens::RENDER_SETTINGS_ADAPTIVE_MAX_ERROR) == 0.007f);

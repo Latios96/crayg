@@ -12,7 +12,7 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
     SECTION("should write rendersettings correctly") {
         const RenderSettings renderSettings(Resolution(1280, 720), 4, IntegratorType::RAYTRACING,
                                             IntegratorSettings({{"AMBIENT_OCCLUSION:sampleCount", {8}}}),
-                                            IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE,
+                                            IntersectorType::EMBREE, BucketSequenceType::SCANLINE,
                                             BucketSamplerType::ADAPTIVE, 0.007f, 8, true,
                                             RegionToRender(NDCRegion({0, 1}, {2, 3})), ImageFormatWriteOptions{});
 
@@ -55,7 +55,7 @@ TEST_CASE("UsdRenderSettingsWriter::write") {
         REQUIRE(integratorType == pxr::TfToken("RAYTRACING"));
         REQUIRE(sampleCount == 8);
         REQUIRE(intersectorType == pxr::TfToken("EMBREE"));
-        REQUIRE(bucketSequenceType == pxr::TfToken("LINE_BY_LINE"));
+        REQUIRE(bucketSequenceType == pxr::TfToken("SCANLINE"));
         REQUIRE(bucketSamplerType == pxr::TfToken("ADAPTIVE"));
         REQUIRE(adaptiveMaxError == 0.007f);
         REQUIRE(samplesPerAdaptivePass == 8);

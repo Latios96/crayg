@@ -38,7 +38,7 @@ struct ImageFixture {
 
   private:
     void createRgbGradientImage(PixelBuffer &pixelBuffer, const Bounds2di &valueBounds) {
-        for (auto pixel : AreaIterators::lineByLine(pixelBuffer)) {
+        for (auto pixel : AreaIterators::scanlines(pixelBuffer)) {
             if (!valueBounds.contains(pixel)) {
                 continue;
             }
@@ -95,7 +95,7 @@ struct FilmFixture {
   private:
     void createRgbGradientImage(const std::string &channelName, const Bounds2di &valueBounds) {
         const Resolution resolution = film.getResolution();
-        for (auto pixel : AreaIterators::lineByLine(resolution)) {
+        for (auto pixel : AreaIterators::scanlines(resolution)) {
             if (!valueBounds.contains(pixel)) {
                 continue;
             }

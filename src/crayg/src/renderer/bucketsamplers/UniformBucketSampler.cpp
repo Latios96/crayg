@@ -9,7 +9,7 @@ void UniformBucketSampler::addRequiredImageSpecs(ImageSpecBuilder &imageSpecBuil
 }
 
 void UniformBucketSampler::sampleBucket(const ImageBucket &imageBucket) const {
-    for (auto pixel : AreaIterators::lineByLine(imageBucket)) {
+    for (auto pixel : AreaIterators::scanlines(imageBucket)) {
         const auto samplePos = imageBucket.getPosition() + pixel;
         const Color pixelColor = renderPixel(samplePos);
         film->addSample("color", samplePos, pixelColor);
