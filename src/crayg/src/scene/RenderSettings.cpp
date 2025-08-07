@@ -10,11 +10,13 @@ RenderSettings::RenderSettings(const Resolution &resolution, int maxSamples, Int
                                IntegratorSettings integratorSettings, IntersectorType intersectorType,
                                BucketSequenceType bucketSequenceType, BucketSamplerType bucketSamplerType,
                                float maxError, int samplesPerAdaptivePass, bool useSpectralLensing,
-                               const std::optional<RegionToRender> &regionToRender)
+                               const std::optional<RegionToRender> &regionToRender,
+                               const ImageFormatWriteOptions &imageFormatWriteOptions)
     : resolution(resolution), maxSamples(maxSamples), integratorType(integratorType),
       integratorSettings(integratorSettings), intersectorType(intersectorType), bucketSequenceType(bucketSequenceType),
       bucketSamplerType(bucketSamplerType), adaptiveMaxError(maxError), samplesPerAdaptivePass(samplesPerAdaptivePass),
-      useSpectralLensing(useSpectralLensing), regionToRender(regionToRender) {
+      useSpectralLensing(useSpectralLensing), regionToRender(regionToRender),
+      imageFormatWriteOptions(imageFormatWriteOptions) {
 }
 
 RenderSettings::RenderSettings() : resolution(Resolution(0, 0)) {
@@ -27,7 +29,8 @@ RenderSettings::RenderSettings(const RenderSettings &renderSettings)
       intersectorType(renderSettings.intersectorType), bucketSequenceType(renderSettings.bucketSequenceType),
       bucketSamplerType(renderSettings.bucketSamplerType), adaptiveMaxError(renderSettings.adaptiveMaxError),
       samplesPerAdaptivePass(renderSettings.samplesPerAdaptivePass),
-      useSpectralLensing(renderSettings.useSpectralLensing), regionToRender(renderSettings.regionToRender) {
+      useSpectralLensing(renderSettings.useSpectralLensing), regionToRender(renderSettings.regionToRender),
+      imageFormatWriteOptions(renderSettings.imageFormatWriteOptions) {
 }
 
 bool RenderSettings::operator==(const RenderSettings &rhs) const {
@@ -35,7 +38,7 @@ bool RenderSettings::operator==(const RenderSettings &rhs) const {
            integratorSettings == rhs.integratorSettings && intersectorType == rhs.intersectorType &&
            bucketSamplerType == rhs.bucketSamplerType && adaptiveMaxError == rhs.adaptiveMaxError &&
            samplesPerAdaptivePass == rhs.samplesPerAdaptivePass && useSpectralLensing == rhs.useSpectralLensing &&
-           regionToRender == rhs.regionToRender;
+           regionToRender == rhs.regionToRender && imageFormatWriteOptions == rhs.imageFormatWriteOptions;
 }
 
 bool RenderSettings::operator!=(const RenderSettings &rhs) const {
@@ -45,7 +48,7 @@ bool RenderSettings::operator!=(const RenderSettings &rhs) const {
 RenderSettings RenderSettings::createDefault() {
     return RenderSettings(crayg::Resolution(1280, 720), 16, IntegratorType::RAYTRACING, IntegratorSettings(),
                           IntersectorType::EMBREE, BucketSequenceType::MORTON, BucketSamplerType::ADAPTIVE, 0.007f, 8,
-                          false, std::nullopt);
+                          false, std::nullopt, ImageFormatWriteOptions{});
 }
 
 std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings) {
@@ -61,6 +64,7 @@ std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings)
               .addMember("samplesPerAdaptivePass", renderSettings.samplesPerAdaptivePass)
               .addMember("useSpectralLensing", renderSettings.useSpectralLensing)
               .addMember("regionToRender", renderSettings.regionToRender)
+              .addMember("openExrFormatWriteOptions", renderSettings.imageFormatWriteOptions.openExrFormatWriteOptions)
               .finish();
     return os;
 }

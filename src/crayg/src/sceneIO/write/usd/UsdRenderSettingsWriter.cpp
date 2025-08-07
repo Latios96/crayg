@@ -25,6 +25,7 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
     writeSamplesPerAdaptivePass(usdRenderSettings);
     writeUseSpectralLensing(usdRenderSettings);
     writeRegionToRender(usdRenderSettings);
+    writeOpenExrFormatWriteOptions(usdRenderSettings);
 
     return usdRenderSettings;
 }
@@ -86,6 +87,15 @@ void UsdRenderSettingsWriter::writeRegionToRender(const pxr::UsdRenderSettings &
     NDCRegion ndcRegion = renderSettings.regionToRender->toNDCRegion(renderSettings.resolution);
     usdRenderSettings.CreateDataWindowNDCAttr().Set(
         pxr::GfVec4f(ndcRegion.min.x, ndcRegion.min.y, ndcRegion.max.x, ndcRegion.max.y));
+}
+
+void UsdRenderSettingsWriter::writeOpenExrFormatWriteOptions(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "openExrCompression",
+                                    renderSettings.imageFormatWriteOptions.openExrFormatWriteOptions.compression);
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "openExrPixelType",
+                                    renderSettings.imageFormatWriteOptions.openExrFormatWriteOptions.pixelType);
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "openExrDataWindow",
+                                    renderSettings.imageFormatWriteOptions.openExrFormatWriteOptions.openExrDataWindow);
 }
 
 }

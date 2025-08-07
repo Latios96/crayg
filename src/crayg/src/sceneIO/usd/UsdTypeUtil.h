@@ -1,12 +1,17 @@
 #pragma once
 
+#include "compatibility/openexr/fmt/ImfCompression_formatter.h"
+#include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
 #include "image/imageiterators/buckets/BucketSequenceType.h"
+#include "image/io/imageformatwriters/exr/OpenExrFormatWriteOptions.h"
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"
 #include "renderer/bucketsamplers/BucketSamplerType.h"
 #include "scene/camera/CameraType.h"
 #include "scene/shadingnetworks/shadingnodes/ColorToFloat.h"
 #include "scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
+#include <ImfCompression.h>
+#include <ImfPixelType.h>
 #include <fmt/format.h>
 #include <pxr/usd/sdf/types.h>
 #include <pxr/usd/sdf/valueTypeName.h>
@@ -93,6 +98,30 @@ template <> struct UsdTypeUtil<ColorToFloatMode> {
 
     static pxr::TfToken convert(ColorToFloatMode colorToFloatMode) {
         return pxr::TfToken(fmt::format("{}", colorToFloatMode));
+    }
+};
+
+template <> struct UsdTypeUtil<Imf::Compression> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(Imf::Compression compression) {
+        return pxr::TfToken(fmt::format("{}", compression));
+    }
+};
+
+template <> struct UsdTypeUtil<Imf::PixelType> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(Imf::PixelType pixelType) {
+        return pxr::TfToken(fmt::format("{}", pixelType));
+    }
+};
+
+template <> struct UsdTypeUtil<OpenExrDataWindow> {
+    inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
+
+    static pxr::TfToken convert(OpenExrDataWindow openExrDataWindow) {
+        return pxr::TfToken(fmt::format("{}", openExrDataWindow));
     }
 };
 

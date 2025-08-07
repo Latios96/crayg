@@ -24,6 +24,7 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     const int samplesPerAdaptivePass = readSamplesPerAdaptivePass();
     const int useSpectralLensing = readUseSpectralLensing();
     const std::optional<RegionToRender> regionToRender = readRegionToRender();
+    const ImageFormatWriteOptions imageFormatWriteOptions = readImageFormatWriteOptions();
 
     renderSettings->resolution = resolution;
     renderSettings->maxSamples = maxSamples;
@@ -36,6 +37,7 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     renderSettings->samplesPerAdaptivePass = samplesPerAdaptivePass;
     renderSettings->useSpectralLensing = useSpectralLensing;
     renderSettings->regionToRender = regionToRender;
+    renderSettings->imageFormatWriteOptions = imageFormatWriteOptions;
 
     return renderSettings;
 }
@@ -141,6 +143,22 @@ std::optional<RegionToRender> UsdRenderSettingsReader::readRegionToRender() {
     }
 
     return RegionToRender(NDCRegion({regionToRender[0], regionToRender[1]}, {regionToRender[2], regionToRender[3]}));
+}
+
+ImageFormatWriteOptions UsdRenderSettingsReader::readImageFormatWriteOptions() {
+    ImageFormatWriteOptions imageFormatWriteOptions{};
+
+    imageFormatWriteOptions.openExrFormatWriteOptions.compression = UsdUtils::getAttributeValueAsEnum(
+        usdPrim.GetPrim(), "openExrCompression",
+        RenderSettings::createDefault().imageFormatWriteOptions.openExrFormatWriteOptions.compression);
+    imageFormatWriteOptions.openExrFormatWriteOptions.pixelType = UsdUtils::getAttributeValueAsEnum(
+        usdPrim.GetPrim(), "openExrPixelType",
+        RenderSettings::createDefault().imageFormatWriteOptions.openExrFormatWriteOptions.pixelType);
+    imageFormatWriteOptions.openExrFormatWriteOptions.openExrDataWindow = UsdUtils::getAttributeValueAsEnum(
+        usdPrim.GetPrim(), "openExrDataWindow",
+        RenderSettings::createDefault().imageFormatWriteOptions.openExrFormatWriteOptions.openExrDataWindow);
+
+    return imageFormatWriteOptions;
 }
 
 }

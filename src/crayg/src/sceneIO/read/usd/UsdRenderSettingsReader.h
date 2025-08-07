@@ -28,6 +28,7 @@ class UsdRenderSettingsReader : public BaseUsdReader<pxr::UsdRenderSettings, Ren
     int readSamplesPerAdaptivePass();
     int readUseSpectralLensing();
     std::optional<RegionToRender> readRegionToRender();
+    ImageFormatWriteOptions readImageFormatWriteOptions();
 };
 
 }

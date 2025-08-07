@@ -1,6 +1,7 @@
 #pragma once
 
 #include "image/imageiterators/buckets/BucketSequenceType.h"
+#include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
 #include "integrators/IntegratorSettings.h"
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"
@@ -20,7 +21,8 @@ class RenderSettings {
                             IntegratorSettings integratorSettings, IntersectorType intersectorType,
                             BucketSequenceType bucketSequenceType, BucketSamplerType bucketSamplerType, float maxError,
                             int samplesPerAdaptivePass, bool useSpectralLensing,
-                            const std::optional<RegionToRender> &regionToRender);
+                            const std::optional<RegionToRender> &regionToRender,
+                            const ImageFormatWriteOptions &imageFormatWriteOptions);
 
     static RenderSettings createDefault();
 
@@ -40,6 +42,7 @@ class RenderSettings {
     int samplesPerAdaptivePass = 8;
     bool useSpectralLensing = false;
     std::optional<RegionToRender> regionToRender;
+    ImageFormatWriteOptions imageFormatWriteOptions;
 };
 
 }

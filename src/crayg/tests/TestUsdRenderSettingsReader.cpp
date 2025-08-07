@@ -37,15 +37,29 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         usdRenderSettings.GetPrim()
             .CreateAttribute(pxr::TfToken("useSpectralLensing"), pxr::SdfValueTypeNames->Int)
             .Set(1);
+        usdRenderSettings.GetPrim()
+            .CreateAttribute(pxr::TfToken("openExrCompression"), pxr::SdfValueTypeNames->Token)
+            .Set(pxr::TfToken("NO_COMPRESSION"));
+        usdRenderSettings.GetPrim()
+            .CreateAttribute(pxr::TfToken("openExrPixelType"), pxr::SdfValueTypeNames->Token)
+            .Set(pxr::TfToken("FLOAT"));
+        usdRenderSettings.GetPrim()
+            .CreateAttribute(pxr::TfToken("openExrDataWindow"), pxr::SdfValueTypeNames->Token)
+            .Set(pxr::TfToken("RENDER_REGION"));
 
         UsdRenderSettingsReader usdRenderSettingsReader(usdRenderSettings);
         auto renderSettings = usdRenderSettingsReader.read();
+
+        ImageFormatWriteOptions imageFormatWriteOptions{};
+        imageFormatWriteOptions.openExrFormatWriteOptions.compression = Imf::NO_COMPRESSION;
+        imageFormatWriteOptions.openExrFormatWriteOptions.pixelType = Imf::FLOAT;
+        imageFormatWriteOptions.openExrFormatWriteOptions.openExrDataWindow = OpenExrDataWindow::RENDER_REGION;
 
         REQUIRE(*renderSettings ==
                 RenderSettings(crayg::Resolution(800, 600), 2, IntegratorType::DEBUG,
                                IntegratorSettings({{"DEBUG:someToken", {std::string("someTokenValue")}}}),
                                IntersectorType::EMBREE, BucketSequenceType::LINE_BY_LINE, BucketSamplerType::UNIFORM,
-                               0.1f, 16, true, RegionToRender(NDCRegion({0, 1}, {2, 3}))));
+                               0.1f, 16, true, RegionToRender(NDCRegion({0, 1}, {2, 3})), imageFormatWriteOptions));
     }
 
     SECTION("should fallback to default values") {
