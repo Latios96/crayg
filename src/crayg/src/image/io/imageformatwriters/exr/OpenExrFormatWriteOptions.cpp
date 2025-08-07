@@ -14,4 +14,12 @@ std::ostream &operator<<(std::ostream &os, const OpenExrFormatWriteOptions &opti
     return os;
 }
 
+bool OpenExrFormatWriteOptions::operator==(const OpenExrFormatWriteOptions &rhs) const {
+    return compression == rhs.compression && pixelType == rhs.pixelType && openExrDataWindow == rhs.openExrDataWindow;
+}
+
+bool OpenExrFormatWriteOptions::operator!=(const OpenExrFormatWriteOptions &rhs) const {
+    return !(rhs == *this);
+}
+
 }

@@ -16,6 +16,8 @@ struct OpenExrFormatWriteOptions : BaseImageFormatWriteOptions {
     OpenExrDataWindow openExrDataWindow = OpenExrDataWindow::WHOLE_IMAGE;
 
     friend std::ostream &operator<<(std::ostream &os, const OpenExrFormatWriteOptions &options);
+    bool operator==(const OpenExrFormatWriteOptions &rhs) const;
+    bool operator!=(const OpenExrFormatWriteOptions &rhs) const;
 };
 
 }
