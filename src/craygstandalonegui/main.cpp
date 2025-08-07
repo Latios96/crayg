@@ -11,11 +11,14 @@
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h"
 #include "craygstandalonegui/widgets/taskreporter/GuiTaskReporter.h"
 #include "image/film/io/FilmWriter.h"
+#include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
+#include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
+#include "utils/StopWatch.h"
 #include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
 #include <QResource>
@@ -106,7 +109,7 @@ int craygMain(int argc, char **argv) {
     renderer.initOutputDriver();
     frameBufferWidget.connectToggleFollowMouse([&bucketQueue]() { bucketQueue.switchMode(); });
 
-    std::thread renderThread([&nextGenImageWidgetOutputDriver, &renderer, &imageOutputPath]() {
+    std::thread renderThread([&nextGenImageWidgetOutputDriver, &renderer, &imageOutputPath, &scene]() {
         try {
             renderer.renderScene();
 
@@ -114,7 +117,8 @@ int craygMain(int argc, char **argv) {
             Logger::info(textureStats.getTextureStats());
 
             Logger::info("Writing image to {}..", imageOutputPath);
-            FilmWriter::writeFilm(nextGenImageWidgetOutputDriver.getFilm(), imageOutputPath);
+            ImageFormatWriters::write(imageOutputPath, nextGenImageWidgetOutputDriver.getFilm(),
+                                      scene.renderSettings.imageFormatWriteOptions);
             Logger::info("Writing image done.");
 
             CRAYG_IF_TRACING_ENABLED({

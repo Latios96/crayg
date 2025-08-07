@@ -24,6 +24,7 @@
 
 #include "image/io/ImageWriter.h"
 #include "image/io/ImageWriters.h"
+#include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "renderer/Renderer.h"
 #include "scene/Scene.h"
 #include "utils/ImagePathResolver.h"
@@ -107,7 +108,8 @@ int craygMain(int argc, char **argv) {
         } catch (std::exception &e) {
             Logger::error("Caught exception: {}", e.what());
         }
-        FilmWriter::writeFilm(nextGenImageWidgetOutputDriver.getFilm(), "filmWriteTest.exr"); // todo take from cli
+        // todo take from cli
+        ImageFormatWriters::write("filmWriteTest.exr", nextGenImageWidgetOutputDriver.getFilm());
     });
     renderThread.detach();
 

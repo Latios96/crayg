@@ -1,5 +1,6 @@
 #include "renderUtils.h"
 #include "image/film/io/FilmWriter.h"
+#include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "utils/TaskReporter.h"
 
 namespace crayg {
@@ -20,7 +21,7 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
     renderer.initOutputDriver();
     renderer.renderScene();
 
-    FilmWriter::writeFilm(outputDriver.getFilm(), imageOutputPath);
+    ImageFormatWriters::write(imageOutputPath, outputDriver.getFilm(), scene.renderSettings.imageFormatWriteOptions);
 }
 
 }

@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "image/film/io/FilmWriter.h"
+#include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
@@ -61,7 +62,7 @@ int craygMain(int argc, char *argv[]) {
     Logger::info(textureStats.getTextureStats());
 
     Logger::info("Writing image to {}..", imageOutputPath);
-    FilmWriter::writeFilm(outputDriver.getFilm(), imageOutputPath);
+    ImageFormatWriters::write(imageOutputPath, outputDriver.getFilm(), scene.renderSettings.imageFormatWriteOptions);
     Logger::info("Writing image done.");
 
     CRAYG_IF_TRACING_ENABLED({
