@@ -85,6 +85,7 @@ set(crayg_SRCS
     image/ImageSpec.cpp
     image/ImageSpec.h
     image/io/imageformatwriters/BaseImageFormatWriteOptions.h
+    image/io/imageformatwriters/exr/OpenExrFormatWriteOptions.cpp
     image/io/imageformatwriters/exr/OpenExrFormatWriteOptions.h
     image/io/imageformatwriters/exr/OpenExrImageFormatWriter.cpp
     image/io/imageformatwriters/exr/OpenExrImageFormatWriter.h
@@ -93,6 +94,7 @@ set(crayg_SRCS
     image/io/imageformatwriters/ImageFormatWriter.h
     image/io/imageformatwriters/ImageFormatWriters.cpp
     image/io/imageformatwriters/ImageFormatWriters.h
+    image/io/imageformatwriters/png/PngImageFormatWriteOptions.cpp
     image/io/imageformatwriters/png/PngImageFormatWriteOptions.h
     image/io/imageformatwriters/png/PngImageFormatWriter.cpp
     image/io/imageformatwriters/png/PngImageFormatWriter.h
