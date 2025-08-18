@@ -164,8 +164,6 @@ set(crayg_SRCS
     sampling/Random.h
     sampling/Sampling.cpp
     sampling/Sampling.h
-    sampling/UnitSphereSampler.cpp
-    sampling/UnitSphereSampler.h
     scene/camera/Camera.cpp
     scene/camera/Camera.h
     scene/camera/CameraModel.h

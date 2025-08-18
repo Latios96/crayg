@@ -126,7 +126,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestTriangleMeshPerPointPrimVar.cpp
     TestTriangleMeshPerVertexPrimVar.cpp
     TestUniformBucketSampler.cpp
-    TestUnitImageSampler.cpp
     TestUsdCameraReader.cpp
     TestUsdCameraWriter.cpp
     TestUsdCheckerBoardReader.cpp
