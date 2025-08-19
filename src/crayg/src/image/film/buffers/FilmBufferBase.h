@@ -110,7 +110,7 @@ template <typename T, int channelCount> struct FilmBufferBase {
         os << ToStringHelper("PixelBuffer")
                   .addMember("width", buffer.width)
                   .addMember("height", buffer.height)
-                  .addMember("format", fmt::format(R"('{}')", describe()))
+                  .addMember("format", fmt::format(R"('{}')", buffer.describe()))
                   .finish();
         return os;
     }

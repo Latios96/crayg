@@ -10,6 +10,11 @@ namespace crayg {
 struct Index2d {
     int x, y;
 
+    Index2d() = default;
+
+    Index2d(int x, int y) : x(x), y(y) {
+    }
+
     friend bool operator==(const Index2d &lhs, const Index2d &rhs) {
         return lhs.x == rhs.x && lhs.y == rhs.y;
     }
