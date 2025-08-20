@@ -53,9 +53,6 @@ conan_cmake_run(
     BUILD_TYPE
     ${CMAKE_BUILD_TYPE_FOR_CONAN})
 
-# for some reasons we can not link against this under Ubuntu-20.04
-list(REMOVE_ITEM CONAN_LIBS "Qt5XcbQpa")
-
 if(MSVC)
     add_compile_options(
         /wd4305 # double constant assigned to float
