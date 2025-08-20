@@ -1,4 +1,3 @@
-#pragma once
 #include "ImfCompression_formatter.h"
 #include <magic_enum.hpp>
 
