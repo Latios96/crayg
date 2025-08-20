@@ -79,4 +79,4 @@ class TaskReporter : public BaseTaskReporter {
 
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::BaseTaskReporter::IterationStatus);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::BaseTaskReporter::IterationStatus);

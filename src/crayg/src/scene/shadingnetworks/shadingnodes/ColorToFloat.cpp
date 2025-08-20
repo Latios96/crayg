@@ -24,3 +24,5 @@ float ColorToFloat::evaluateFloat(const SurfaceInteraction &surfaceInteraction) 
     }
 }
 }
+
+CRAYG_FMT_ENUM_FORMATTER_IMPL(crayg::ColorToFloatMode);

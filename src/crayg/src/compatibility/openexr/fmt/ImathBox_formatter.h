@@ -1,13 +1,10 @@
 #pragma once
 #include <ImathBox.h>
-#include <fmt/format.h>
+#include <fmt/ostream.h>
 
 namespace std {
 
-inline std::ostream &operator<<(std::ostream &os, const Imath::Box2i &box) {
-    os << fmt::format("[({},{}),({},{})]", box.min.x, box.min.y, box.max.x, box.max.y);
-    return os;
-}
+std::ostream &operator<<(std::ostream &os, const Imath::Box2i &box);
 
 }
 

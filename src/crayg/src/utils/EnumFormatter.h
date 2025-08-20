@@ -13,3 +13,20 @@
     }                                                                                                                  \
                                                                                                                        \
     template <> struct fmt::formatter<FullQualifiedType> : ostream_formatter {};
+
+#define CRAYG_FMT_ENUM_FORMATTER_H(FullQualifiedType)                                                                  \
+    namespace crayg {                                                                                                  \
+                                                                                                                       \
+    std::ostream &operator<<(std::ostream &os, const FullQualifiedType &v);                                            \
+    }                                                                                                                  \
+                                                                                                                       \
+    template <> struct fmt::formatter<FullQualifiedType> : ostream_formatter {};
+
+#define CRAYG_FMT_ENUM_FORMATTER_IMPL(FullQualifiedType)                                                               \
+    namespace crayg {                                                                                                  \
+                                                                                                                       \
+    std::ostream &operator<<(std::ostream &os, const FullQualifiedType &v) {                                           \
+        os << magic_enum::enum_name(v);                                                                                \
+        return os;                                                                                                     \
+    }                                                                                                                  \
+    }

@@ -120,4 +120,4 @@ class ShadingNode {
 
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::ShadingNodeOutputType);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::ShadingNodeOutputType);

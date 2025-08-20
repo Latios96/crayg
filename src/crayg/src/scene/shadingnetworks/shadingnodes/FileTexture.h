@@ -36,4 +36,4 @@ class FileTexture : public ShadingNode {
 };
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::FileTexture::ColorSpace);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::FileTexture::ColorSpace);

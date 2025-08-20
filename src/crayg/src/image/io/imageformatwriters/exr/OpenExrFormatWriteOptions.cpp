@@ -23,3 +23,5 @@ bool OpenExrFormatWriteOptions::operator!=(const OpenExrFormatWriteOptions &rhs)
 }
 
 }
+
+CRAYG_FMT_ENUM_FORMATTER_IMPL(crayg::OpenExrDataWindow);

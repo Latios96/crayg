@@ -11,7 +11,7 @@ enum class EmbreePrimitiveType : uint8_t { TRIANGLE_MESH, SUBDIVISION_SURFACE_ME
 
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::EmbreePrimitiveType);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::EmbreePrimitiveType);
 
 namespace crayg {
 

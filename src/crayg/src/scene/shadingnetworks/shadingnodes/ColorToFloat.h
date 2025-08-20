@@ -19,4 +19,4 @@ class ColorToFloat : public ShadingNode {
 
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::ColorToFloatMode);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::ColorToFloatMode);

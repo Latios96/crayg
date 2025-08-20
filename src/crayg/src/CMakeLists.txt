@@ -22,9 +22,14 @@ set(crayg_SRCS
     basics/Vector2.h
     basics/Vector3f.cpp
     basics/Vector3f.h
+    compatibility/lodepng/fmt/LodePNG_formatter.cpp
     compatibility/lodepng/fmt/LodePNG_formatter.h
+    compatibility/openexr/fmt/ImathBox_formatter.cpp
+    compatibility/openexr/fmt/ImathBox_formatter.cpp
     compatibility/openexr/fmt/ImathBox_formatter.h
+    compatibility/openexr/fmt/ImfCompression_formatter.cpp
     compatibility/openexr/fmt/ImfCompression_formatter.h
+    compatibility/openexr/fmt/ImfPixelType_formatter.cpp
     compatibility/openexr/fmt/ImfPixelType_formatter.h
     compatibility/usd/fmt/SdfPath_formatter.h
     compatibility/usd/fmt/SdfValueTypeName_formatter.h
@@ -40,6 +45,7 @@ set(crayg_SRCS
     image/film/buffers/FilmBufferBase.h
     image/film/buffers/FilmBufferFactory.cpp
     image/film/buffers/FilmBufferFactory.h
+    image/film/buffers/FilmBufferType.cpp
     image/film/buffers/FilmBufferType.h
     image/film/buffers/FilmBufferVariants.cpp
     image/film/buffers/FilmBufferVariants.h
@@ -64,6 +70,7 @@ set(crayg_SRCS
     image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.cpp
     image/imageiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h
     image/imageiterators/buckets/BucketSequence.h
+    image/imageiterators/buckets/BucketSequenceType.cpp
     image/imageiterators/buckets/BucketSequenceType.h
     image/imageiterators/buckets/HilbertSequence.cpp
     image/imageiterators/buckets/HilbertSequence.h
@@ -98,6 +105,7 @@ set(crayg_SRCS
     image/io/imageformatwriters/png/PngImageFormatWriter.h
     image/PixelBuffer.cpp
     image/PixelBuffer.h
+    image/PixelFormat.cpp
     image/PixelFormat.h
     image/UnsupportedPixelFormat.h
     Initialization.cpp
@@ -115,6 +123,7 @@ set(crayg_SRCS
     integrators/IntegratorSettings.cpp
     integrators/IntegratorSettings.h
     integrators/IntegratorSettingsValue.h
+    integrators/IntegratorType.cpp
     integrators/IntegratorType.h
     integrators/RaytracingIntegrator.cpp
     integrators/RaytracingIntegrator.h
@@ -130,6 +139,7 @@ set(crayg_SRCS
     intersectors/embree/EmbreeUtils.h
     intersectors/IntersectorFactory.cpp
     intersectors/IntersectorFactory.h
+    intersectors/IntersectorType.cpp
     intersectors/IntersectorType.h
     intersectors/SceneIntersector.h
     Logger.cpp
@@ -145,6 +155,7 @@ set(crayg_SRCS
     renderer/bucketsamplers/BucketSampler.h
     renderer/bucketsamplers/BucketSamplerFactory.cpp
     renderer/bucketsamplers/BucketSamplerFactory.h
+    renderer/bucketsamplers/BucketSamplerType.cpp
     renderer/bucketsamplers/BucketSamplerType.h
     renderer/bucketsamplers/UniformBucketSampler.cpp
     renderer/bucketsamplers/UniformBucketSampler.h
@@ -169,6 +180,7 @@ set(crayg_SRCS
     scene/camera/CameraModel.h
     scene/camera/CameraModelFactory.cpp
     scene/camera/CameraModelFactory.h
+    scene/camera/CameraType.cpp
     scene/camera/CameraType.h
     scene/camera/CameraUtils.cpp
     scene/camera/CameraUtils.h
@@ -182,6 +194,7 @@ set(crayg_SRCS
     scene/camera/realistic/ExitPupil.h
     scene/camera/realistic/ExitPupilCalculator.cpp
     scene/camera/realistic/ExitPupilCalculator.h
+    scene/camera/realistic/LensGeometry.cpp
     scene/camera/realistic/LensGeometry.h
     scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.cpp
     scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.h
@@ -191,6 +204,7 @@ set(crayg_SRCS
     scene/camera/realistic/lensio/json/LensFileJsonReader.h
     scene/camera/realistic/lensio/json/LensFileJsonWriter.cpp
     scene/camera/realistic/lensio/json/LensFileJsonWriter.h
+    scene/camera/realistic/lensio/LensFileFormat.cpp
     scene/camera/realistic/lensio/LensFileFormat.h
     scene/camera/realistic/lensio/LensFileParseUtils.cpp
     scene/camera/realistic/lensio/LensFileParseUtils.h
@@ -258,6 +272,7 @@ set(crayg_SRCS
     scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h
     scene/primitives/trianglemesh/BarycentricCoordinates.cpp
     scene/primitives/trianglemesh/BarycentricCoordinates.h
+    scene/primitives/trianglemesh/primvars/PrimVarType.cpp
     scene/primitives/trianglemesh/primvars/PrimVarType.h
     scene/primitives/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h
     scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h

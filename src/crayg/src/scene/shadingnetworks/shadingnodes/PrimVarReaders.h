@@ -22,4 +22,4 @@ class PrimVarReaderVector2f : public ShadingNode {
 
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::PrimVarReaderType);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::PrimVarReaderType);

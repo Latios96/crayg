@@ -47,3 +47,5 @@ ShadingNodeOutputType PrimVarReaderVector2f::getOutputType() {
 }
 
 }
+
+CRAYG_FMT_ENUM_FORMATTER_IMPL(crayg::PrimVarReaderType);

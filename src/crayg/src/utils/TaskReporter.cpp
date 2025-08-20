@@ -97,3 +97,5 @@ void TaskReporter::onTaskProgressUpdated() {
                  currentTask->name, currentTask->progress(), elapsedTime, estimatedTimeRemaining, estimatedTotalTime);
 }
 }
+
+CRAYG_FMT_ENUM_FORMATTER_IMPL(crayg::BaseTaskReporter::IterationStatus);

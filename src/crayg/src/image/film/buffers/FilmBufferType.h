@@ -8,4 +8,4 @@ enum class FilmBufferType { UNKNOWN, VALUE, ACCUMULATION, SUM };
 
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::FilmBufferType);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::FilmBufferType);

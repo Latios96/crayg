@@ -22,6 +22,6 @@ struct OpenExrFormatWriteOptions : BaseImageFormatWriteOptions {
 
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::OpenExrDataWindow);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::OpenExrDataWindow);
 
 template <> struct fmt::formatter<crayg::OpenExrFormatWriteOptions> : ostream_formatter {};

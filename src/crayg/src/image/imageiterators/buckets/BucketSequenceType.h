@@ -8,4 +8,4 @@ enum class BucketSequenceType { LINE_BY_LINE = 1, SPIRAL = 2, MORTON = 3, HILBER
 
 }
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::BucketSequenceType);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::BucketSequenceType);

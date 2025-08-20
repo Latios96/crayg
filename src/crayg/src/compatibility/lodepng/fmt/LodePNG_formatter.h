@@ -5,9 +5,6 @@
 #include <magic_enum.hpp>
 #include <ostream>
 
-std::ostream &operator<<(std::ostream &os, const LodePNGColorType &value) {
-    os << magic_enum::enum_name(value);
-    return os;
-}
+std::ostream &operator<<(std::ostream &os, const LodePNGColorType &value);
 
-CRAYG_FMT_ENUM_FORMATTER(LodePNGColorType);
+template <> struct fmt::formatter<LodePNGColorType> : ostream_formatter {};

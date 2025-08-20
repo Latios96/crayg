@@ -71,4 +71,4 @@ struct LensMaterial {
 
 template <> struct fmt::formatter<crayg::LensMaterial> : ostream_formatter {};
 
-CRAYG_FMT_ENUM_FORMATTER(crayg::LensMaterialId);
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::LensMaterialId);

@@ -128,3 +128,5 @@ bool LensMaterial::MaterialSearchError::isCriticalError() const {
     return std::abs(iorError) > 0.1 || std::abs(abbeNoError) >= 1;
 }
 }
+
+CRAYG_FMT_ENUM_FORMATTER_IMPL(crayg::LensMaterialId);

@@ -17,7 +17,11 @@ ENUM_TEMPLATES = [
     Template(
         name="enum_header.jinja",
         path="{{directory}}/{{pascalcase(name)}}.h",
-    )
+    ),
+    Template(
+        name="enum_cpp.jinja",
+        path="{{directory}}/{{pascalcase(name)}}.h",
+    ),
 ]
 
 CLASS_TEMPLATES = [
