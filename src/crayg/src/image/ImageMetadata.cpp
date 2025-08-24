@@ -10,8 +10,8 @@ const std::string ImageMetadataTokens::CPU = "crayg/info/cpu";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_INTEGRATOR = "crayg/renderSettings/integrator";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR = "crayg/renderSettings/intersector";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES = "crayg/renderSettings/maxSamples";
-const std::string ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SEQUENCE_TYPE = "crayg/renderSettings/bucketSequenceType";
-const std::string ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SAMPLER_TYPE = "crayg/renderSettings/bucketSamplerType";
+const std::string ImageMetadataTokens::RENDER_SETTINGS_TILE_SEQUENCE_TYPE = "crayg/renderSettings/tileSequenceType";
+const std::string ImageMetadataTokens::RENDER_SETTINGS_TILE_SAMPLER_TYPE = "crayg/renderSettings/tileSamplerType";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_ADAPTIVE_MAX_ERROR = "crayg/renderSettings/adaptiveMaxError";
 const std::string ImageMetadataTokens::RENDER_SETTINGS_SAMPLES_PER_ADAPTIVE_PASS =
     "crayg/renderSettings/samplesPerAdaptivePass";

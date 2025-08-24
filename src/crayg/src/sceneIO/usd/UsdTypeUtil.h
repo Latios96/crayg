@@ -2,11 +2,11 @@
 
 #include "compatibility/openexr/fmt/ImfCompression_formatter.h"
 #include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
-#include "crayg/foundation/areaiterators/buckets/BucketSequenceType.h"
+#include "crayg/foundation/areaiterators/tiles/TileSequenceType.h"
 #include "image/io/imageformatwriters/exr/OpenExrFormatWriteOptions.h"
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"
-#include "renderer/bucketsamplers/BucketSamplerType.h"
+#include "renderer/tilesamplers/TileSamplerType.h"
 #include "scene/camera/CameraType.h"
 #include "scene/shadingnetworks/shadingnodes/ColorToFloat.h"
 #include "scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
@@ -69,19 +69,19 @@ template <> struct UsdTypeUtil<IntersectorType> {
     }
 };
 
-template <> struct UsdTypeUtil<BucketSequenceType> {
+template <> struct UsdTypeUtil<TileSequenceType> {
     inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
 
-    static pxr::TfToken convert(BucketSequenceType bucketSequenceType) {
-        return pxr::TfToken(fmt::format("{}", bucketSequenceType));
+    static pxr::TfToken convert(TileSequenceType tileSequenceType) {
+        return pxr::TfToken(fmt::format("{}", tileSequenceType));
     }
 };
 
-template <> struct UsdTypeUtil<BucketSamplerType> {
+template <> struct UsdTypeUtil<TileSamplerType> {
     inline static pxr::SdfValueTypeName sdfValueTypeName = pxr::SdfValueTypeNames->Token;
 
-    static pxr::TfToken convert(BucketSamplerType bucketSamplerType) {
-        return pxr::TfToken(fmt::format("{}", bucketSamplerType));
+    static pxr::TfToken convert(TileSamplerType tileSamplerType) {
+        return pxr::TfToken(fmt::format("{}", tileSamplerType));
     }
 };
 

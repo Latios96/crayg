@@ -9,12 +9,12 @@ TEST_CASE("ImageOutputDriver") {
     Image image(200, 200);
     ImageOutputDriver imageOutputDriver(image);
 
-    SECTION("shouldWriteBucket") {
-        BucketImageBuffer bucketImageBuffer({0, 0}, 30, 30);
-        ImageAlgorithms::fill(bucketImageBuffer.image, Color::createWhite());
+    SECTION("shouldWriteTile") {
+        TileImageBuffer tileImageBuffer({0, 0}, 30, 30);
+        ImageAlgorithms::fill(tileImageBuffer.image, Color::createWhite());
 
-        imageOutputDriver.prepareBucket(bucketImageBuffer.imageBucket);
-        imageOutputDriver.writeBucketImageBuffer(bucketImageBuffer);
+        imageOutputDriver.prepareTile(tileImageBuffer.imageTile);
+        imageOutputDriver.writeTileImageBuffer(tileImageBuffer);
 
         REQUIRE(image.getValue({10, 10}) == Color::createWhite());
     }

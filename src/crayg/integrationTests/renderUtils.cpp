@@ -15,8 +15,8 @@ void renderScene(const std::string &scenePath, const std::string imageOutputPath
     sceneReader->read();
 
     TaskReporter taskReporter;
-    BucketQueue bucketQueue([]() { return Vector2i(); });
-    Renderer renderer(scene, outputDriver, taskReporter, bucketQueue);
+    TileQueue tileQueue([]() { return Vector2i(); });
+    Renderer renderer(scene, outputDriver, taskReporter, tileQueue);
     renderer.initOutputDriver();
     renderer.renderScene();
 

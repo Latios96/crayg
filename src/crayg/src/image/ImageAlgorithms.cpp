@@ -2,13 +2,13 @@
 
 namespace crayg {
 
-void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image) {
-    copyBucketImageBufferIntoImage(bucketImageBuffer, image, bucketImageBuffer.image.channelNames());
+void ImageAlgorithms::copyTileImageBufferIntoImage(const ImageTile &imageTile, Image &image) {
+    copyTileImageBufferIntoImage(imageTile, image, imageTile.image.channelNames());
 }
 
-void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image,
-                                                     const std::vector<std::string> &channelsToUpdate) {
-    const bool isContained = bucketIsContainedInImage(bucketImageBuffer.imageBucket, image);
+void ImageAlgorithms::copyTileImageBufferIntoImage(const ImageTile &imageTile, Image &image,
+                                                   const std::vector<std::string> &channelsToUpdate) {
+    const bool isContained = tileIsContainedInImage(imageTile.tile, image);
 
     if (!isContained) {
         return;
@@ -18,10 +18,9 @@ void ImageAlgorithms::copyBucketImageBufferIntoImage(const BucketImageBuffer &bu
             continue;
         }
         auto imageChannel = image.getChannel(channelName);
-        auto bucketImageBufferChannel = bucketImageBuffer.image.getChannel(channelName);
-        for (auto pixel : AreaIterators::scanlines(*bucketImageBufferChannel)) {
-            imageChannel->setValue(pixel + bucketImageBuffer.imageBucket.getPosition(),
-                                   bucketImageBufferChannel->getValue(pixel));
+        auto tileImageBufferChannel = imageTile.image.getChannel(channelName);
+        for (auto pixel : AreaIterators::scanlines(*tileImageBufferChannel)) {
+            imageChannel->setValue(pixel + imageTile.tile.getPosition(), tileImageBufferChannel->getValue(pixel));
         }
     }
 }

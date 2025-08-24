@@ -18,8 +18,8 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     const IntegratorType integratorType = readIntegratorType();
     const IntegratorSettings integratorSettings = readIntegratorSettings();
     const IntersectorType intersectorType = readIntersectorType();
-    const BucketSequenceType bucketSequenceType = readBucketSequenceType();
-    const BucketSamplerType bucketSamplerType = readBucketSamplerType();
+    const TileSequenceType tileSequenceType = readTileSequenceType();
+    const TileSamplerType tileSamplerType = readTileSamplerType();
     const float adaptiveMaxError = readAdaptiveMaxError();
     const int samplesPerAdaptivePass = readSamplesPerAdaptivePass();
     const int useSpectralLensing = readUseSpectralLensing();
@@ -31,8 +31,8 @@ std::shared_ptr<crayg::RenderSettings> crayg::UsdRenderSettingsReader::read() {
     renderSettings->integratorType = integratorType;
     renderSettings->integratorSettings = integratorSettings;
     renderSettings->intersectorType = intersectorType;
-    renderSettings->bucketSequenceType = bucketSequenceType;
-    renderSettings->bucketSamplerType = bucketSamplerType;
+    renderSettings->tileSequenceType = tileSequenceType;
+    renderSettings->tileSamplerType = tileSamplerType;
     renderSettings->adaptiveMaxError = adaptiveMaxError;
     renderSettings->samplesPerAdaptivePass = samplesPerAdaptivePass;
     renderSettings->useSpectralLensing = useSpectralLensing;
@@ -105,14 +105,14 @@ IntersectorType crayg::UsdRenderSettingsReader::readIntersectorType() const {
                                              RenderSettings::createDefault().intersectorType);
 }
 
-BucketSequenceType UsdRenderSettingsReader::readBucketSequenceType() const {
-    return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "bucketSequenceType",
-                                             RenderSettings::createDefault().bucketSequenceType);
+TileSequenceType UsdRenderSettingsReader::readTileSequenceType() const {
+    return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "tileSequenceType",
+                                             RenderSettings::createDefault().tileSequenceType);
 }
 
-BucketSamplerType UsdRenderSettingsReader::readBucketSamplerType() {
-    return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "bucketSamplerType",
-                                             RenderSettings::createDefault().bucketSamplerType);
+TileSamplerType UsdRenderSettingsReader::readTileSamplerType() {
+    return UsdUtils::getAttributeValueAsEnum(usdPrim.GetPrim(), "tileSamplerType",
+                                             RenderSettings::createDefault().tileSamplerType);
 }
 
 float UsdRenderSettingsReader::readAdaptiveMaxError() {

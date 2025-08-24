@@ -36,31 +36,31 @@ set(crayg_SRCS
     compatibility/usd/fmt/TfToken_formatter.h
     compatibility/usd/fmt/UsdStagePtr_formatter.h
     crayg/foundation/areaiterators/AreaIterators.h
-    crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueue.cpp
-    crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueue.h
-    crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueueMode.h
-    crayg/foundation/areaiterators/buckets/bucketqueues/FollowMouseBucketQueue.cpp
-    crayg/foundation/areaiterators/buckets/bucketqueues/FollowMouseBucketQueue.h
-    crayg/foundation/areaiterators/buckets/bucketqueues/FollowSequenceBucketQueue.cpp
-    crayg/foundation/areaiterators/buckets/bucketqueues/FollowSequenceBucketQueue.h
-    crayg/foundation/areaiterators/buckets/BucketSequence.h
-    crayg/foundation/areaiterators/buckets/BucketSequenceType.cpp
-    crayg/foundation/areaiterators/buckets/BucketSequenceType.h
-    crayg/foundation/areaiterators/buckets/HilbertSequence.cpp
-    crayg/foundation/areaiterators/buckets/HilbertSequence.h
-    crayg/foundation/areaiterators/buckets/ImageBucketSequences.cpp
-    crayg/foundation/areaiterators/buckets/ImageBucketSequences.h
-    crayg/foundation/areaiterators/buckets/MortonSequence.cpp
-    crayg/foundation/areaiterators/buckets/MortonSequence.h
-    crayg/foundation/areaiterators/buckets/ScanlineSequence.cpp
-    crayg/foundation/areaiterators/buckets/ScanlineSequence.h
-    crayg/foundation/areaiterators/buckets/SpiralSequence.cpp
-    crayg/foundation/areaiterators/buckets/SpiralSequence.h
     crayg/foundation/areaiterators/ScanlineIterator.h
+    crayg/foundation/areaiterators/tiles/HilbertSequence.cpp
+    crayg/foundation/areaiterators/tiles/HilbertSequence.h
+    crayg/foundation/areaiterators/tiles/MortonSequence.cpp
+    crayg/foundation/areaiterators/tiles/MortonSequence.h
+    crayg/foundation/areaiterators/tiles/ScanlineSequence.cpp
+    crayg/foundation/areaiterators/tiles/ScanlineSequence.h
+    crayg/foundation/areaiterators/tiles/SpiralSequence.cpp
+    crayg/foundation/areaiterators/tiles/SpiralSequence.h
+    crayg/foundation/areaiterators/tiles/tilequeues/FollowMouseTileQueue.cpp
+    crayg/foundation/areaiterators/tiles/tilequeues/FollowMouseTileQueue.h
+    crayg/foundation/areaiterators/tiles/tilequeues/FollowSequenceTileQueue.cpp
+    crayg/foundation/areaiterators/tiles/tilequeues/FollowSequenceTileQueue.h
+    crayg/foundation/areaiterators/tiles/tilequeues/TileQueue.cpp
+    crayg/foundation/areaiterators/tiles/tilequeues/TileQueue.h
+    crayg/foundation/areaiterators/tiles/tilequeues/TileQueueMode.h
+    crayg/foundation/areaiterators/tiles/TileSequence.h
+    crayg/foundation/areaiterators/tiles/TileSequences.cpp
+    crayg/foundation/areaiterators/tiles/TileSequences.h
+    crayg/foundation/areaiterators/tiles/TileSequenceType.cpp
+    crayg/foundation/areaiterators/tiles/TileSequenceType.h
+    crayg/foundation/math/geometry/Tile.cpp
+    crayg/foundation/math/geometry/Tile.h
     CraygInfo.cpp
     CraygInfo.h
-    image/BucketImageBuffer.cpp
-    image/BucketImageBuffer.h
     image/ColorConversion.cpp
     image/ColorConversion.h
     image/film/buffers/FilmAccumulationBuffer.h
@@ -82,13 +82,13 @@ set(crayg_SRCS
     image/Image.h
     image/ImageAlgorithms.cpp
     image/ImageAlgorithms.h
-    image/ImageBucket.cpp
-    image/ImageBucket.h
     image/ImageMetadata.cpp
     image/ImageMetadata.h
     image/ImageMetadataValue.h
     image/ImageSpec.cpp
     image/ImageSpec.h
+    image/ImageTile.cpp
+    image/ImageTile.h
     image/io/imageformatwriters/BaseImageFormatWriteOptions.h
     image/io/imageformatwriters/exr/OpenExrFormatWriteOptions.cpp
     image/io/imageformatwriters/exr/OpenExrFormatWriteOptions.h
@@ -149,20 +149,6 @@ set(crayg_SRCS
     parallel/ParallelLoops.h
     parallel/ThreadCount.cpp
     parallel/ThreadCount.h
-    renderer/bucketsamplers/AdaptiveBucketSampler.cpp
-    renderer/bucketsamplers/AdaptiveBucketSampler.h
-    renderer/bucketsamplers/BucketSampler.cpp
-    renderer/bucketsamplers/BucketSampler.h
-    renderer/bucketsamplers/BucketSamplerFactory.cpp
-    renderer/bucketsamplers/BucketSamplerFactory.h
-    renderer/bucketsamplers/BucketSamplerType.cpp
-    renderer/bucketsamplers/BucketSamplerType.h
-    renderer/bucketsamplers/UniformBucketSampler.cpp
-    renderer/bucketsamplers/UniformBucketSampler.h
-    renderer/BucketSizeEstimator.cpp
-    renderer/BucketSizeEstimator.h
-    renderer/BucketStats.cpp
-    renderer/BucketStats.h
     renderer/FlareRenderer.cpp
     renderer/FlareRenderer.h
     renderer/GeometryCompiler.cpp
@@ -171,6 +157,20 @@ set(crayg_SRCS
     renderer/Renderer.h
     renderer/SampleAccumulator.cpp
     renderer/SampleAccumulator.h
+    renderer/tilesamplers/AdaptiveTileSampler.cpp
+    renderer/tilesamplers/AdaptiveTileSampler.h
+    renderer/tilesamplers/TileSampler.cpp
+    renderer/tilesamplers/TileSampler.h
+    renderer/tilesamplers/TileSamplerFactory.cpp
+    renderer/tilesamplers/TileSamplerFactory.h
+    renderer/tilesamplers/TileSamplerType.cpp
+    renderer/tilesamplers/TileSamplerType.h
+    renderer/tilesamplers/UniformTileSampler.cpp
+    renderer/tilesamplers/UniformTileSampler.h
+    renderer/TileSizeEstimator.cpp
+    renderer/TileSizeEstimator.h
+    renderer/TileStats.cpp
+    renderer/TileStats.h
     sampling/Random.cpp
     sampling/Random.h
     sampling/Sampling.cpp

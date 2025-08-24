@@ -6,19 +6,19 @@ void NextGenOutputDriver::initialize(const FilmSpec &filmSpec) {
     film->addChannelsFromSpec(filmSpec);
 }
 
-void NextGenOutputDriver::startBucket(const ImageBucket &imageBucket) {
+void NextGenOutputDriver::startTile(const Tile &tile) {
 }
 
-void NextGenOutputDriver::updateAllChannelsInBucket(const ImageBucket &imageBucket) {
-    film->updateAveragesInBucket(imageBucket);
+void NextGenOutputDriver::updateAllChannelsInTile(const Tile &tile) {
+    film->updateAveragesInTile(tile);
 }
 
-void NextGenOutputDriver::updateChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName) {
-    film->updateAveragesForChannelInBucket(imageBucket, channelName);
+void NextGenOutputDriver::updateChannelInTile(const Tile &tile, const std::string &channelName) {
+    film->updateAveragesForChannelInTile(tile, channelName);
 }
 
-void NextGenOutputDriver::finishBucket(const ImageBucket &imageBucket) {
-    film->updateAveragesInBucket(imageBucket);
+void NextGenOutputDriver::finishTile(const Tile &tile) {
+    film->updateAveragesInTile(tile);
 }
 
 void NextGenOutputDriver::updateAllChannels() {

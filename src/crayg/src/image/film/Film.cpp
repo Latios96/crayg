@@ -71,17 +71,15 @@ void Film::updateAverages() {
     }
 }
 
-void Film::updateAveragesInBucket(const ImageBucket &imageBucket) {
+void Film::updateAveragesInTile(const Tile &tile) {
     auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(color);
     if (accumulationBufferVariantPtr) {
-        std::visit([&imageBucket](auto *buf) { buf->updateAveragesInBucket(imageBucket); },
-                   *accumulationBufferVariantPtr);
+        std::visit([&tile](auto *buf) { buf->updateAveragesInTile(tile); }, *accumulationBufferVariantPtr);
     }
     for (auto &channel : additionalChannels) {
         auto accumulationBufferVariantPtr = FilmBufferVariants::getAsAccumulationBufferVariantPtr(channel.second);
         if (accumulationBufferVariantPtr) {
-            std::visit([&imageBucket](auto *buf) { buf->updateAveragesInBucket(imageBucket); },
-                       *accumulationBufferVariantPtr);
+            std::visit([&tile](auto *buf) { buf->updateAveragesInTile(tile); }, *accumulationBufferVariantPtr);
         }
     }
 }
@@ -178,7 +176,7 @@ void Film::updateAveragesForChannel(const std::string &channelName) {
     std::visit([](auto *buf) { buf->updateAverages(); }, *accumulationBuffer);
 }
 
-void Film::updateAveragesForChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName) {
+void Film::updateAveragesForChannelInTile(const Tile &tile, const std::string &channelName) {
     auto buffer = getBufferVariantPtrByName(channelName);
     if (!buffer) {
         return;
@@ -187,7 +185,7 @@ void Film::updateAveragesForChannelInBucket(const ImageBucket &imageBucket, cons
     if (!accumulationBuffer) {
         return;
     }
-    std::visit([&imageBucket](auto *buf) { buf->updateAveragesInBucket(imageBucket); }, *accumulationBuffer);
+    std::visit([&tile](auto *buf) { buf->updateAveragesInTile(tile); }, *accumulationBuffer);
 }
 
 }

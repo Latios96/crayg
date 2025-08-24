@@ -1,35 +1,35 @@
 #include "catch2/catch.hpp"
-#include <image/Image.h>
-#include <image/ImageAlgorithms.h>
-#include <image/ImageBucket.h>
+#include "crayg/foundation/math/geometry/Tile.h"
+#include "image/Image.h"
+#include "image/ImageAlgorithms.h"
 
 namespace crayg {
 
-TEST_CASE("ImageAlgorithmsBucketIsContainedInImage") {
+TEST_CASE("ImageAlgorithmsTileIsContainedInImage") {
     Image image(100, 100);
 
-    SECTION("bucketIsContained") {
-        REQUIRE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket({0, 0}, 10, 10), image));
-        REQUIRE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket({0, 0}, 100, 100), image));
-        REQUIRE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket({20, 30}, 40, 50), image));
-        REQUIRE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket({99, 99}, 1, 1), image));
+    SECTION("tileIsContained") {
+        REQUIRE(ImageAlgorithms::tileIsContainedInImage(Tile({0, 0}, 10, 10), image));
+        REQUIRE(ImageAlgorithms::tileIsContainedInImage(Tile({0, 0}, 100, 100), image));
+        REQUIRE(ImageAlgorithms::tileIsContainedInImage(Tile({20, 30}, 40, 50), image));
+        REQUIRE(ImageAlgorithms::tileIsContainedInImage(Tile({99, 99}, 1, 1), image));
     }
 
-    SECTION("bucketIsNotContained") {
-        REQUIRE_FALSE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket({-1, -1}, 10, 10), image));
-        REQUIRE_FALSE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket({0, 0}, 110, 110), image));
-        REQUIRE_FALSE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket({90, 80}, 40, 50), image));
-        REQUIRE_FALSE(ImageAlgorithms::bucketIsContainedInImage(ImageBucket({99, 99}, 10, 10), image));
+    SECTION("tileIsNotContained") {
+        REQUIRE_FALSE(ImageAlgorithms::tileIsContainedInImage(Tile({-1, -1}, 10, 10), image));
+        REQUIRE_FALSE(ImageAlgorithms::tileIsContainedInImage(Tile({0, 0}, 110, 110), image));
+        REQUIRE_FALSE(ImageAlgorithms::tileIsContainedInImage(Tile({90, 80}, 40, 50), image));
+        REQUIRE_FALSE(ImageAlgorithms::tileIsContainedInImage(Tile({99, 99}, 10, 10), image));
     }
 }
 
-TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
+TEST_CASE("ImageAlgorithmsCopyTileImageBufferIntoImage") {
     Image image(10, 10);
 
-    SECTION("shouldNotCopyBecauseNotBucketIsNotContained") {
-        BucketImageBuffer bucketImageBuffer({0, 0}, 50, 5);
+    SECTION("shouldNotCopyBecauseNotTileIsNotContained") {
+        ImageTile imageTile({0, 0}, 50, 5);
 
-        ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
+        ImageAlgorithms::copyTileImageBufferIntoImage(imageTile, image);
 
         REQUIRE(image.getValue({0, 0}) == Color::createBlack());
         REQUIRE(image.getValue({4, 4}) == Color::createBlack());
@@ -38,10 +38,10 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
     }
 
     SECTION("shouldCopyCorrectly") {
-        BucketImageBuffer bucketImageBuffer({0, 0}, 5, 5);
-        ImageAlgorithms::fill(bucketImageBuffer.image, Color::createWhite());
+        ImageTile imageTile({0, 0}, 5, 5);
+        ImageAlgorithms::fill(imageTile.image, Color::createWhite());
 
-        ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
+        ImageAlgorithms::copyTileImageBufferIntoImage(imageTile, image);
 
         REQUIRE(image.getValue({0, 0}) == Color::createWhite());
         REQUIRE(image.getValue({4, 4}) == Color::createWhite());
@@ -50,25 +50,24 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
     }
 
     SECTION("should copy image channels if they exist in target image") {
-        BucketImageBuffer bucketImageBuffer({0, 0}, 5, 5);
-        auto specImageBucket = ImageSpecBuilder({5, 5})
-                                   .createGreyFloatChannel("channelExistingInTargetImage")
-                                   .createGreyUInt8Channel("channelExistingButInOtherFormat")
-                                   .createGreyFloatChannel("channelNotExisting")
-                                   .finish();
-        bucketImageBuffer.image.addChannelsFromSpec(specImageBucket);
-        ImageAlgorithms::fill(bucketImageBuffer.image, Color::createWhite());
-        ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("channelExistingInTargetImage"),
-                              Color::createWhite());
+        ImageTile imageTile({0, 0}, 5, 5);
+        auto specImageTile = ImageSpecBuilder({5, 5})
+                                 .createGreyFloatChannel("channelExistingInTargetImage")
+                                 .createGreyUInt8Channel("channelExistingButInOtherFormat")
+                                 .createGreyFloatChannel("channelNotExisting")
+                                 .finish();
+        imageTile.image.addChannelsFromSpec(specImageTile);
+        ImageAlgorithms::fill(imageTile.image, Color::createWhite());
+        ImageAlgorithms::fill(*imageTile.image.getChannel("channelExistingInTargetImage"), Color::createWhite());
 
-        ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("channelNotExisting"), Color::createWhite());
+        ImageAlgorithms::fill(*imageTile.image.getChannel("channelNotExisting"), Color::createWhite());
         auto specImage = ImageSpecBuilder({10, 10})
                              .createGreyFloatChannel("channelExistingInTargetImage")
                              .createGreyFloatChannel("untouchedChannel")
                              .finish();
         image.addChannelsFromSpec(specImage);
 
-        ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image);
+        ImageAlgorithms::copyTileImageBufferIntoImage(imageTile, image);
 
         REQUIRE(image.getValue({0, 0}) == Color::createWhite());
         REQUIRE(image.getChannel("channelExistingInTargetImage")->getValue({0, 0}) == Color::createWhite());
@@ -76,14 +75,14 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
     }
 
     SECTION("should copy image channel that are in update list") {
-        BucketImageBuffer bucketImageBuffer({0, 0}, 5, 5);
-        auto specImageBucket = ImageSpecBuilder({5, 5})
-                                   .createGreyFloatChannel("updatedChannel")
-                                   .createGreyFloatChannel("untouchedChannel")
-                                   .finish();
-        bucketImageBuffer.image.addChannelsFromSpec(specImageBucket);
-        ImageAlgorithms::fill(bucketImageBuffer.image, Color::createWhite());
-        ImageAlgorithms::fill(*bucketImageBuffer.image.getChannel("updatedChannel"), Color::createWhite());
+        ImageTile tileImageBuffer({0, 0}, 5, 5);
+        auto specImageTile = ImageSpecBuilder({5, 5})
+                                 .createGreyFloatChannel("updatedChannel")
+                                 .createGreyFloatChannel("untouchedChannel")
+                                 .finish();
+        tileImageBuffer.image.addChannelsFromSpec(specImageTile);
+        ImageAlgorithms::fill(tileImageBuffer.image, Color::createWhite());
+        ImageAlgorithms::fill(*tileImageBuffer.image.getChannel("updatedChannel"), Color::createWhite());
 
         auto specImage = ImageSpecBuilder({10, 10})
                              .createGreyFloatChannel("updatedChannel")
@@ -91,7 +90,7 @@ TEST_CASE("ImageAlgorithmsCopyBucketImageBufferIntoImage") {
                              .finish();
         image.addChannelsFromSpec(specImage);
 
-        ImageAlgorithms::copyBucketImageBufferIntoImage(bucketImageBuffer, image, {"updatedChannel"});
+        ImageAlgorithms::copyTileImageBufferIntoImage(tileImageBuffer, image, {"updatedChannel"});
 
         REQUIRE(image.getValue({0, 0}) == Color::createBlack());
         REQUIRE(image.getChannel("updatedChannel")->getValue({0, 0}) == Color::createWhite());
@@ -258,10 +257,10 @@ TEST_CASE("ImageAlgorithms::fillWithRelativeGradient") {
     }
 }
 
-TEST_CASE("ImageAlgorithms::fill Image Bucket") {
-    SECTION("should fill bucket") {
+TEST_CASE("ImageAlgorithms::fill Image Tile") {
+    SECTION("should fill tile") {
         Image image(10, 10);
-        ImageBucket region({5, 5}, 2, 2);
+        Tile region({5, 5}, 2, 2);
 
         ImageAlgorithms::fill(image, Color::createWhite(), region);
 

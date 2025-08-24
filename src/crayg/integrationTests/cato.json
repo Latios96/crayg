@@ -22,13 +22,13 @@
       ]
     },
     {
-      "name": "BucketSamplers",
+      "name": "TileSamplers",
       "tests": [
         {
-          "name": "AdaptiveBucketSampler"
+          "name": "AdaptiveTileSampler"
         },
         {
-          "name": "UniformBucketSampler"
+          "name": "UniformTileSampler"
         }
       ],
       "variables": {

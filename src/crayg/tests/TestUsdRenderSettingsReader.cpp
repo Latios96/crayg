@@ -22,10 +22,10 @@ TEST_CASE("UsdRenderSettingsReader::read") {
             .CreateAttribute(pxr::TfToken("intersectorType"), pxr::SdfValueTypeNames->Token)
             .Set(pxr::TfToken("EMBREE"));
         usdRenderSettings.GetPrim()
-            .CreateAttribute(pxr::TfToken("bucketSequenceType"), pxr::SdfValueTypeNames->Token)
+            .CreateAttribute(pxr::TfToken("tileSequenceType"), pxr::SdfValueTypeNames->Token)
             .Set(pxr::TfToken("LINE_BY_LINE"));
         usdRenderSettings.GetPrim()
-            .CreateAttribute(pxr::TfToken("bucketSamplerType"), pxr::SdfValueTypeNames->Token)
+            .CreateAttribute(pxr::TfToken("tileSamplerType"), pxr::SdfValueTypeNames->Token)
             .Set(pxr::TfToken("UNIFORM"));
         usdRenderSettings.GetPrim()
             .CreateAttribute(pxr::TfToken("adaptiveMaxError"), pxr::SdfValueTypeNames->Float)
@@ -58,8 +58,8 @@ TEST_CASE("UsdRenderSettingsReader::read") {
         REQUIRE(*renderSettings ==
                 RenderSettings(crayg::Resolution(800, 600), 2, IntegratorType::DEBUG,
                                IntegratorSettings({{"DEBUG:someToken", {std::string("someTokenValue")}}}),
-                               IntersectorType::EMBREE, BucketSequenceType::SCANLINE, BucketSamplerType::UNIFORM, 0.1f,
-                               16, true, RegionToRender(NDCRegion({0, 1}, {2, 3})), imageFormatWriteOptions));
+                               IntersectorType::EMBREE, TileSequenceType::SCANLINE, TileSamplerType::UNIFORM, 0.1f, 16,
+                               true, RegionToRender(NDCRegion({0, 1}, {2, 3})), imageFormatWriteOptions));
     }
 
     SECTION("should fallback to default values") {

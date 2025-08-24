@@ -1,6 +1,6 @@
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include <catch2/catch.hpp>
-#include <crayg/foundation/areaiterators/buckets/ImageBucketSequences.h>
+#include <crayg/foundation/areaiterators/tiles/TileSequences.h>
 #include <image/Image.h>
 #include <iostream>
 
@@ -25,11 +25,11 @@ TEST_CASE("ImageIterators", "[ImageIterators]") {
         REQUIRE(visitedPositions == positions);
     }
 
-    SECTION("testScanlineWithBucket") {
-        ImageBucket bucket({0, 0}, 5, 5);
+    SECTION("testScanlineWithTile") {
+        Tile tile({0, 0}, 5, 5);
         std::vector<Vector2i> visitedPositions;
 
-        for (auto pixel : AreaIterators::scanlines(bucket)) {
+        for (auto pixel : AreaIterators::scanlines(tile)) {
             visitedPositions.push_back(pixel);
         }
         REQUIRE(visitedPositions == positions);

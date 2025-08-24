@@ -122,11 +122,11 @@ CliParseResult CliParser::parse() {
     app.add_option("--intersector", renderSettingsOverride.intersectorType, "Override intersector")
         ->transform(createEnumTransformer<IntersectorType>());
 
-    app.add_option("--bucketSequence", renderSettingsOverride.bucketSequenceType, "Override bucket sequence")
-        ->transform(createEnumTransformer<BucketSequenceType>());
+    app.add_option("--tileSequence", renderSettingsOverride.tileSequenceType, "Override tile sequence")
+        ->transform(createEnumTransformer<TileSequenceType>());
 
-    app.add_option("--bucketSamplerType", renderSettingsOverride.bucketSamplerType, "Use adaptive sampling")
-        ->transform(createEnumTransformer<BucketSamplerType>());
+    app.add_option("--tileSamplerType", renderSettingsOverride.tileSamplerType, "Use adaptive sampling")
+        ->transform(createEnumTransformer<TileSamplerType>());
 
     app.add_option("--adaptiveMaxError", renderSettingsOverride.adaptiveMaxError, "Override adaptive max error");
 

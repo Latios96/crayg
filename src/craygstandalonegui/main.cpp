@@ -101,11 +101,11 @@ int craygMain(int argc, char **argv) {
             static_cast<float>(point.y()) / imageWidget->height() * scene.renderSettings.resolution.getHeight();
         return Vector2i(x, y);
     };
-    BucketQueue bucketQueue(getMousePosition);
+    TileQueue tileQueue(getMousePosition);
 
-    Renderer renderer(scene, nextGenImageWidgetOutputDriver, taskReporter, bucketQueue);
+    Renderer renderer(scene, nextGenImageWidgetOutputDriver, taskReporter, tileQueue);
     renderer.initOutputDriver();
-    frameBufferWidget.connectToggleFollowMouse([&bucketQueue]() { bucketQueue.switchMode(); });
+    frameBufferWidget.connectToggleFollowMouse([&tileQueue]() { tileQueue.switchMode(); });
 
     std::thread renderThread([&nextGenImageWidgetOutputDriver, &renderer, &imageOutputPath, &scene]() {
         try {

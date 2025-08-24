@@ -12,25 +12,24 @@ void NextGenImageWidgetOutputDriver::initialize(const FilmSpec &filmSpec) {
     emit initialized();
 }
 
-void NextGenImageWidgetOutputDriver::startBucket(const ImageBucket &imageBucket) {
-    NextGenOutputDriver::startBucket(imageBucket);
-    emit bucketStarted(imageBucket);
+void NextGenImageWidgetOutputDriver::startTile(const Tile &tile) {
+    NextGenOutputDriver::startTile(tile);
+    emit tileStarted(tile);
 }
 
-void NextGenImageWidgetOutputDriver::updateAllChannelsInBucket(const ImageBucket &imageBucket) {
-    NextGenOutputDriver::updateAllChannelsInBucket(imageBucket);
-    emit allChannelsInBucketUpdated(imageBucket);
+void NextGenImageWidgetOutputDriver::updateAllChannelsInTile(const Tile &tile) {
+    NextGenOutputDriver::updateAllChannelsInTile(tile);
+    emit allChannelsInTileUpdated(tile);
 }
 
-void NextGenImageWidgetOutputDriver::updateChannelInBucket(const ImageBucket &imageBucket,
-                                                           const std::string &channelName) {
-    NextGenOutputDriver::updateChannelInBucket(imageBucket, channelName);
-    emit channelInBucketUpdated(imageBucket, channelName);
+void NextGenImageWidgetOutputDriver::updateChannelInTile(const Tile &tile, const std::string &channelName) {
+    NextGenOutputDriver::updateChannelInTile(tile, channelName);
+    emit channelInTileUpdated(tile, channelName);
 }
 
-void NextGenImageWidgetOutputDriver::finishBucket(const ImageBucket &imageBucket) {
-    NextGenOutputDriver::finishBucket(imageBucket);
-    emit bucketFinished(imageBucket);
+void NextGenImageWidgetOutputDriver::finishTile(const Tile &tile) {
+    NextGenOutputDriver::finishTile(tile);
+    emit tileFinished(tile);
 }
 
 void NextGenImageWidgetOutputDriver::updateAllChannels() {
@@ -51,28 +50,28 @@ void NextGenImageWidgetOutputDriver::processInitialize() {
     nextGenImageWidget.initBuffer(film->getFilmSpec().resolution);
 }
 
-void NextGenImageWidgetOutputDriver::processBucketStarted(ImageBucket imageBucket) {
-    activeBuckets.insert(imageBucket);
-    FrameBufferDrawUtils::drawBucket(nextGenImageWidget.displayBuffer, imageBucket);
+void NextGenImageWidgetOutputDriver::processTileStarted(Tile imageTile) {
+    activeTiles.insert(imageTile);
+    FrameBufferDrawUtils::drawTile(nextGenImageWidget.displayBuffer, imageTile);
     FrameBufferDrawUtils::drawRegionToRenderIfNeeded(nextGenImageWidget.displayBuffer,
                                                      film->getFilmSpec().regionToRender);
     nextGenImageWidget.update();
 }
 
-void NextGenImageWidgetOutputDriver::processAllChannelsInBucketUpdated(ImageBucket imageBucket) {
-    updateDisplayBuffer(imageBucket);
+void NextGenImageWidgetOutputDriver::processAllChannelsInTileUpdated(Tile imageTile) {
+    updateDisplayBuffer(imageTile);
 }
 
-void NextGenImageWidgetOutputDriver::processChannelInBucketUpdated(ImageBucket imageBucket, std::string channelName) {
+void NextGenImageWidgetOutputDriver::processChannelInTileUpdated(Tile imageTile, std::string channelName) {
     if (channelName != currentChannel) {
         return;
     }
-    updateDisplayBuffer(imageBucket);
+    updateDisplayBuffer(imageTile);
 }
 
-void NextGenImageWidgetOutputDriver::processBucketFinished(ImageBucket imageBucket) {
-    activeBuckets.erase(imageBucket);
-    updateDisplayBuffer(imageBucket);
+void NextGenImageWidgetOutputDriver::processTileFinished(Tile imageTile) {
+    activeTiles.erase(imageTile);
+    updateDisplayBuffer(imageTile);
 }
 
 void NextGenImageWidgetOutputDriver::processAllChannelsUpdated() {
@@ -93,19 +92,19 @@ void NextGenImageWidgetOutputDriver::processCurrentChannelChanged(std::string ne
 
 void NextGenImageWidgetOutputDriver::updateDisplayBuffer() {
     Resolution filmResolution = film->getFilmSpec().resolution;
-    updateDisplayBuffer(ImageBucket({0, 0}, filmResolution.getWidth(), filmResolution.getHeight()));
+    updateDisplayBuffer(Tile({0, 0}, filmResolution.getWidth(), filmResolution.getHeight()));
 }
 
-void NextGenImageWidgetOutputDriver::updateDisplayBuffer(const ImageBucket &imageBucket) {
+void NextGenImageWidgetOutputDriver::updateDisplayBuffer(const Tile &imageTile) {
     auto bufferVariantPtr = film->getBufferVariantPtrByName(currentChannel);
     if (!bufferVariantPtr) {
         return;
     }
 
     std::visit(
-        [&imageBucket, this](auto buf) {
-            for (auto pixel : AreaIterators::scanlines(imageBucket)) {
-                const Vector2i globalPosition = pixel + imageBucket.getPosition();
+        [&imageTile, this](auto buf) {
+            for (auto pixel : AreaIterators::scanlines(imageTile)) {
+                const Vector2i globalPosition = pixel + imageTile.getPosition();
                 Color color = buf->getColor(globalPosition);
                 if (ColorConversion::channelNeedsLinearToSRgbConversion(currentChannel)) {
                     color = ColorConversion::linearToSRGB(color);
@@ -118,8 +117,8 @@ void NextGenImageWidgetOutputDriver::updateDisplayBuffer(const ImageBucket &imag
         },
         *bufferVariantPtr);
 
-    for (auto &bucket : activeBuckets) {
-        FrameBufferDrawUtils::drawBucket(nextGenImageWidget.displayBuffer, bucket);
+    for (auto &tile : activeTiles) {
+        FrameBufferDrawUtils::drawTile(nextGenImageWidget.displayBuffer, tile);
     }
     FrameBufferDrawUtils::drawRegionToRenderIfNeeded(nextGenImageWidget.displayBuffer,
                                                      film->getFilmSpec().regionToRender);

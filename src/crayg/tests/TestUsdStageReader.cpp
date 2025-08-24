@@ -186,8 +186,8 @@ TEST_CASE("UsdStageReader::readStageToScene") {
 
         REQUIRE(scene.renderSettings == RenderSettings(Resolution(800, 600), 2, IntegratorType::RAYTRACING,
                                                        IntegratorSettings(), IntersectorType::EMBREE,
-                                                       BucketSequenceType::SCANLINE, BucketSamplerType::ADAPTIVE,
-                                                       0.007f, 8, false, std::nullopt, ImageFormatWriteOptions{}));
+                                                       TileSequenceType::SCANLINE, TileSamplerType::ADAPTIVE, 0.007f, 8,
+                                                       false, std::nullopt, ImageFormatWriteOptions{}));
     }
 
     SECTION("providing a cameraName in translationOptions should use this camera") {

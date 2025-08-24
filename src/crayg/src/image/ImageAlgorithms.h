@@ -1,7 +1,7 @@
 #pragma once
 
-#include "BucketImageBuffer.h"
 #include "Image.h"
+#include "ImageTile.h"
 #include "basics/Gradient.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 
@@ -9,9 +9,9 @@ namespace crayg {
 
 class ImageAlgorithms {
   public:
-    static void copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image);
-    static void copyBucketImageBufferIntoImage(const BucketImageBuffer &bucketImageBuffer, Image &image,
-                                               const std::vector<std::string> &channelsToUpdate);
+    static void copyTileImageBufferIntoImage(const ImageTile &imageTile, Image &image);
+    static void copyTileImageBufferIntoImage(const ImageTile &imageTile, Image &image,
+                                             const std::vector<std::string> &channelsToUpdate);
     static void updateChannel(Image &image, const std::string &channelName, PixelBuffer *pixelBuffer);
 
     template <typename I> static void fill(I &image, const Color &color) {
@@ -20,8 +20,8 @@ class ImageAlgorithms {
         }
     }
 
-    template <typename I> static void fill(I &image, const Color &color, const ImageBucket &region) {
-        const bool isContained = bucketIsContainedInImage(region, image);
+    template <typename I> static void fill(I &image, const Color &color, const Tile &region) {
+        const bool isContained = tileIsContainedInImage(region, image);
 
         if (!isContained) {
             return;
@@ -72,10 +72,10 @@ class ImageAlgorithms {
         }
     }
 
-    template <typename I> static bool bucketIsContainedInImage(const ImageBucket &bucket, I &image) {
-        return bucket.getPosition().x >= 0 && bucket.getPosition().y >= 0 &&
-               bucket.getPosition().x + bucket.getWidth() <= image.getWidth() &&
-               bucket.getPosition().y + bucket.getHeight() <= image.getHeight();
+    template <typename I> static bool tileIsContainedInImage(const Tile &tile, I &image) {
+        return tile.getPosition().x >= 0 && tile.getPosition().y >= 0 &&
+               tile.getPosition().x + tile.getWidth() <= image.getWidth() &&
+               tile.getPosition().y + tile.getHeight() <= image.getHeight();
     }
 };
 

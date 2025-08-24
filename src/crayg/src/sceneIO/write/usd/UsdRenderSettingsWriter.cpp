@@ -19,8 +19,8 @@ pxr::UsdRenderSettings UsdRenderSettingsWriter::write(pxr::UsdStagePtr stage) {
     writeIntegratorType(usdRenderSettings);
     writeIntegratorSettings(usdRenderSettings);
     writeIntersectorType(usdRenderSettings);
-    writeBucketSequenceType(usdRenderSettings);
-    writeBucketSamplerType(usdRenderSettings);
+    writeTileSequenceType(usdRenderSettings);
+    writeTileSamplerType(usdRenderSettings);
     writeAdaptiveMaxError(usdRenderSettings);
     writeSamplesPerAdaptivePass(usdRenderSettings);
     writeUseSpectralLensing(usdRenderSettings);
@@ -56,13 +56,12 @@ void UsdRenderSettingsWriter::writeIntersectorType(const pxr::UsdRenderSettings 
     UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "intersectorType", renderSettings.intersectorType);
 }
 
-void UsdRenderSettingsWriter::writeBucketSequenceType(const pxr::UsdRenderSettings &usdRenderSettings) const {
-    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "bucketSequenceType",
-                                    renderSettings.bucketSequenceType);
+void UsdRenderSettingsWriter::writeTileSequenceType(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "tileSequenceType", renderSettings.tileSequenceType);
 }
 
-void UsdRenderSettingsWriter::writeBucketSamplerType(const pxr::UsdRenderSettings &usdRenderSettings) const {
-    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "bucketSamplerType", renderSettings.bucketSamplerType);
+void UsdRenderSettingsWriter::writeTileSamplerType(const pxr::UsdRenderSettings &usdRenderSettings) const {
+    UsdUtils::createAndSetAttribute(usdRenderSettings.GetPrim(), "tileSamplerType", renderSettings.tileSamplerType);
 }
 
 void UsdRenderSettingsWriter::writeAdaptiveMaxError(const pxr::UsdRenderSettings &usdRenderSettings) const {

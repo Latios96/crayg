@@ -69,15 +69,13 @@ class CraygPlugin(DeadlinePlugin):
         if intersector:
             renderArguments += " --integrator={}".format(intersector)
 
-        bucket_sequence = self.GetPluginInfoEntryWithDefault("BucketSequence", None)
-        if bucket_sequence:
-            renderArguments += " --bucketSequence={}".format(bucket_sequence)
+        tile_sequence = self.GetPluginInfoEntryWithDefault("TileSequence", None)
+        if tile_sequence:
+            renderArguments += " --tileSequence={}".format(tile_sequence)
 
-        bucket_sampler_type = self.GetPluginInfoEntryWithDefault(
-            "BucketSamplerType", None
-        )
-        if bucket_sampler_type:
-            renderArguments += " --bucketSamplerType={}".format(bucket_sampler_type)
+        tile_sampler_type = self.GetPluginInfoEntryWithDefault("TileSamplerType", None)
+        if tile_sampler_type:
+            renderArguments += " --tileSamplerType={}".format(tile_sampler_type)
 
         adaptive_max_error = self.GetPluginInfoEntryWithDefault(
             "AdaptiveMaxError", None

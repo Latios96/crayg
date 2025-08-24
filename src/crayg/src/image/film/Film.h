@@ -6,7 +6,7 @@
 #include "buffers/FilmBufferFactory.h"
 #include "buffers/FilmBufferVariants.h"
 #include "buffers/FilmValueBuffer.h"
-#include "image/ImageBucket.h"
+#include "crayg/foundation/math/geometry/Tile.h"
 #include "image/ImageMetadata.h"
 
 #include <optional>
@@ -31,8 +31,8 @@ struct Film {
 
     void updateAverages();
     void updateAveragesForChannel(const std::string &channelName);
-    void updateAveragesInBucket(const ImageBucket &imageBucket);
-    void updateAveragesForChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName);
+    void updateAveragesInTile(const Tile &tile);
+    void updateAveragesForChannelInTile(const Tile &tile, const std::string &channelName);
 
     void toImage(Image &image) const;
 

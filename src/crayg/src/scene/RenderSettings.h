@@ -1,11 +1,11 @@
 #pragma once
 
-#include "crayg/foundation/areaiterators/buckets/BucketSequenceType.h"
+#include "crayg/foundation/areaiterators/tiles/TileSequenceType.h"
 #include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
 #include "integrators/IntegratorSettings.h"
 #include "integrators/IntegratorType.h"
 #include "intersectors/IntersectorType.h"
-#include "renderer/bucketsamplers/BucketSamplerType.h"
+#include "renderer/tilesamplers/TileSamplerType.h"
 #include "scene/RegionToRender.h"
 #include <basics/Resolution.h>
 #include <fmt/ostream.h>
@@ -19,7 +19,7 @@ class RenderSettings {
     RenderSettings(const RenderSettings &renderSettings);
     explicit RenderSettings(const Resolution &resolution, int maxSamples, IntegratorType integratorType,
                             IntegratorSettings integratorSettings, IntersectorType intersectorType,
-                            BucketSequenceType bucketSequenceType, BucketSamplerType bucketSamplerType, float maxError,
+                            TileSequenceType tileSequenceType, TileSamplerType tileSamplerType, float maxError,
                             int samplesPerAdaptivePass, bool useSpectralLensing,
                             const std::optional<RegionToRender> &regionToRender,
                             const ImageFormatWriteOptions &imageFormatWriteOptions);
@@ -36,8 +36,8 @@ class RenderSettings {
     IntegratorType integratorType = IntegratorType::RAYTRACING;
     IntegratorSettings integratorSettings;
     IntersectorType intersectorType = IntersectorType::EMBREE;
-    BucketSequenceType bucketSequenceType = BucketSequenceType::MORTON;
-    BucketSamplerType bucketSamplerType = BucketSamplerType::ADAPTIVE;
+    TileSequenceType tileSequenceType = TileSequenceType::MORTON;
+    TileSamplerType tileSamplerType = TileSamplerType::ADAPTIVE;
     float adaptiveMaxError = 0.007f;
     int samplesPerAdaptivePass = 8;
     bool useSpectralLensing = false;

@@ -2,7 +2,7 @@
 #include "FilmBufferBase.h"
 #include "basics/Color.h"
 #include "basics/Vector2.h"
-#include "image/ImageBucket.h"
+#include "crayg/foundation/math/geometry/Tile.h"
 #include "utils/AtomicFloats.h"
 #include "utils/Exceptions.h"
 #include "utils/Preconditions.h"
@@ -77,10 +77,10 @@ template <typename T, int channelCount> struct FilmAccumulationBuffer : public F
         }
     }
 
-    void updateAveragesInBucket(const ImageBucket &imageBucket) {
-        for (int bucketY = 0; bucketY < imageBucket.getHeight(); bucketY++) {
-            for (int bucketX = 0; bucketX < imageBucket.getWidth(); bucketX++) {
-                const Vector2i globalPosition = imageBucket.getPosition() + Vector2i(bucketX, bucketY);
+    void updateAveragesInTile(const Tile &tile) {
+        for (int tileY = 0; tileY < tile.getHeight(); tileY++) {
+            for (int tileX = 0; tileX < tile.getWidth(); tileX++) {
+                const Vector2i globalPosition = tile.getPosition() + Vector2i(tileX, tileY);
                 updateAverage(FilmBufferBase<T, channelCount>::index(globalPosition));
             }
         }

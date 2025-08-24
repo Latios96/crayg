@@ -2,17 +2,17 @@
 
 namespace crayg {
 
-void FrameBufferDrawUtils::drawBucket(QImage &bufferToShow, const ImageBucket &imageBucket) {
-    const int x = imageBucket.getPosition().x;
-    const int y = imageBucket.getPosition().y;
+void FrameBufferDrawUtils::drawTile(QImage &bufferToShow, const Tile &tile) {
+    const int x = tile.getPosition().x;
+    const int y = tile.getPosition().y;
     const int CROSS_WIDTH = 1;
     static const QColor color = QColor::fromRgb(255, 255, 255);
 
-    drawHLine(bufferToShow, x, y, imageBucket.getWidth(), CROSS_WIDTH, color);
-    drawHLine(bufferToShow, x, y + imageBucket.getHeight() - 1, imageBucket.getWidth(), CROSS_WIDTH, color);
+    drawHLine(bufferToShow, x, y, tile.getWidth(), CROSS_WIDTH, color);
+    drawHLine(bufferToShow, x, y + tile.getHeight() - 1, tile.getWidth(), CROSS_WIDTH, color);
 
-    drawVLine(bufferToShow, x, y, imageBucket.getHeight(), CROSS_WIDTH, color);
-    drawVLine(bufferToShow, x + imageBucket.getWidth() - 1, y, imageBucket.getHeight(), CROSS_WIDTH, color);
+    drawVLine(bufferToShow, x, y, tile.getHeight(), CROSS_WIDTH, color);
+    drawVLine(bufferToShow, x + tile.getWidth() - 1, y, tile.getHeight(), CROSS_WIDTH, color);
 }
 
 void FrameBufferDrawUtils::drawRegionToRenderIfNeeded(QImage &bufferToShow, std::optional<Bounds2di> regionToRender) {

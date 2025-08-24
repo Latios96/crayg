@@ -48,7 +48,7 @@ TEST_CASE("CliParser::parse") {
                                               "8",
                                               "--intersector",
                                               "EMBREE",
-                                              "--bucketSamplerType",
+                                              "--tileSamplerType",
                                               "UNIFORM",
                                               "--adaptiveMaxError",
                                               "0.1",
@@ -76,7 +76,7 @@ TEST_CASE("CliParser::parse") {
         REQUIRE(result.args->cliRenderSettingsOverride.resolution == Resolution(1280, 720));
         REQUIRE(result.args->cliRenderSettingsOverride.maxSamples == 8);
         REQUIRE(result.args->cliRenderSettingsOverride.intersectorType == IntersectorType::EMBREE);
-        REQUIRE(result.args->cliRenderSettingsOverride.bucketSamplerType == BucketSamplerType::UNIFORM);
+        REQUIRE(result.args->cliRenderSettingsOverride.tileSamplerType == TileSamplerType::UNIFORM);
         REQUIRE(result.args->cliRenderSettingsOverride.adaptiveMaxError == 0.1f);
         REQUIRE(result.args->cliRenderSettingsOverride.samplesPerAdaptivePass == 16);
         REQUIRE(result.args->variantSelections[0] ==

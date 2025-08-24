@@ -7,7 +7,7 @@
 #include "Initialization.h"
 #include "Logger.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
-#include "crayg/foundation/areaiterators/buckets/ImageBucketSequences.h"
+#include "crayg/foundation/areaiterators/tiles/TileSequences.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h"

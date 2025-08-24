@@ -354,7 +354,7 @@ TEST_CASE("Film::updateAveragesForChannel()") {
     }
 }
 
-TEST_CASE("Film::updateAveragesInBucket()") {
+TEST_CASE("Film::updateAveragesInTile()") {
 
     SECTION("should update color channel") {
         Film film(10, 5);
@@ -363,7 +363,7 @@ TEST_CASE("Film::updateAveragesInBucket()") {
         auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
 
-        film.updateAveragesInBucket(ImageBucket({0, 0}, 3, 3));
+        film.updateAveragesInTile(Tile({0, 0}, 3, 3));
 
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->getColor({0, 0}) == Color(1, 2, 3));
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->getColor({4, 4}).isBlack());
@@ -377,7 +377,7 @@ TEST_CASE("Film::updateAveragesInBucket()") {
         film.addSample("test", {4, 4}, Color(1, 2, 3));
         REQUIRE(custom->isBlack());
 
-        film.updateAveragesInBucket(ImageBucket({0, 0}, 3, 3));
+        film.updateAveragesInTile(Tile({0, 0}, 3, 3));
 
         REQUIRE(custom->getColor({0, 0}) == Color(1, 2, 3));
         REQUIRE(custom->getColor({4, 4}).isBlack());
@@ -394,7 +394,7 @@ TEST_CASE("Film::updateAveragesInBucket()") {
         REQUIRE(customAccumulationBuffer->isBlack());
         REQUIRE(customValueBuffer->isBlack());
 
-        film.updateAveragesInBucket(ImageBucket({0, 0}, 3, 3));
+        film.updateAveragesInTile(Tile({0, 0}, 3, 3));
 
         REQUIRE(customAccumulationBuffer->getColor({0, 0}) == Color(1, 2, 3));
         REQUIRE(customAccumulationBuffer->getColor({4, 4}) == Color(0, 0, 0));
@@ -402,7 +402,7 @@ TEST_CASE("Film::updateAveragesInBucket()") {
     }
 }
 
-TEST_CASE("Film::updateAveragesForChannelInBucket()") {
+TEST_CASE("Film::updateAveragesForChannelInTile()") {
 
     SECTION("should update color channel") {
         Film film(10, 5);
@@ -411,7 +411,7 @@ TEST_CASE("Film::updateAveragesForChannelInBucket()") {
         auto bufferVariant = film.getBufferVariantPtrByName("color");
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->isBlack());
 
-        film.updateAveragesForChannelInBucket(ImageBucket({0, 0}, 3, 3), "color");
+        film.updateAveragesForChannelInTile(Tile({0, 0}, 3, 3), "color");
 
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->getColor({0, 0}) == Color(1, 2, 3));
         REQUIRE(std::get<Color3fAccumulationBuffer *>(*bufferVariant)->getColor({4, 4}).isBlack());
@@ -426,7 +426,7 @@ TEST_CASE("Film::updateAveragesForChannelInBucket()") {
         film.addSample("test", {4, 4}, Color(1, 2, 3));
         REQUIRE(custom->isBlack());
 
-        film.updateAveragesForChannelInBucket(ImageBucket({0, 0}, 3, 3), "test");
+        film.updateAveragesForChannelInTile(Tile({0, 0}, 3, 3), "test");
 
         REQUIRE(custom->getColor({0, 0}) == Color(1, 2, 3));
         REQUIRE(custom->getColor({4, 4}).isBlack());
@@ -445,7 +445,7 @@ TEST_CASE("Film::updateAveragesForChannelInBucket()") {
         REQUIRE(customAccumulationBuffer->isBlack());
         REQUIRE(customValueBuffer->isBlack());
 
-        film.updateAveragesForChannelInBucket(ImageBucket({0, 0}, 3, 3), "accumulation");
+        film.updateAveragesForChannelInTile(Tile({0, 0}, 3, 3), "accumulation");
 
         REQUIRE(customAccumulationBuffer->getColor({0, 0}) == Color(1, 2, 3));
         REQUIRE(customAccumulationBuffer->getColor({4, 4}) == Color(0, 0, 0));

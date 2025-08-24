@@ -2,12 +2,13 @@
 #include "GeometryCompiler.h"
 #include "Logger.h"
 #include "SampleAccumulator.h"
-#include "crayg/foundation/areaiterators/buckets/bucketqueues/BucketQueue.h"
+#include "crayg/foundation/areaiterators/tiles/TileSequences.h"
+#include "crayg/foundation/areaiterators/tiles/tilequeues/TileQueue.h"
 #include "image/ImageAlgorithms.h"
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
 #include "intersectors/IntersectorFactory.h"
-#include "renderer/bucketsamplers/BucketSamplerFactory.h"
+#include "renderer/tilesamplers/TileSamplerFactory.h"
 #include "sampling/Random.h"
 #include "scene/camera/CameraModelFactory.h"
 #include "scene/camera/realistic/Wavelengths.h"
@@ -17,8 +18,8 @@
 #include "utils/TaskReporter.h"
 #include "utils/tracing/CraygTracing.h"
 #include <Imath/half.h>
-#include <crayg/foundation/areaiterators/buckets/ImageBucketSequences.h>
-#include <image/BucketImageBuffer.h>
+#include <crayg/foundation/areaiterators/tiles/TileSequence.h>
+#include <image/ImageTile.h>
 #include <memory>
 #include <numeric>
 #include <tbb/task_group.h>
@@ -27,17 +28,17 @@
 namespace crayg {
 
 Renderer::Renderer(Scene &scene, NextGenOutputDriver &outputDriver, BaseTaskReporter &taskReporter,
-                   BucketQueue &bucketQueue)
-    : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter), bucketQueue(bucketQueue) {
+                   TileQueue &tileQueue)
+    : scene(scene), outputDriver(outputDriver), taskReporter(taskReporter), tileQueue(tileQueue) {
 }
 
 void Renderer::renderScene() {
     init();
     Logger::info("Starting rendering..");
 
-    initBuckets();
+    initTiles();
 
-    auto taskProgressController = taskReporter.startTask("Rendering", bucketSequence.size());
+    auto taskProgressController = taskReporter.startTask("Rendering", tileSequence.size());
 
     bool serialRendering = false;
     if (serialRendering) {
@@ -51,22 +52,22 @@ void Renderer::renderScene() {
     const auto renderTime = taskProgressController.finish();
     writeImageMetadata(renderTime);
 
-    bucketStats.processBucketTimes(outputDriver, scene.renderSettings.resolution);
+    tileStats.processTileTimes(outputDriver, scene.renderSettings.resolution);
 }
 
 void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProgressController) {
     CRAYG_TRACE_SCOPE("Renderer");
-    bucketQueue.start(bucketSequence);
+    tileQueue.start(tileSequence);
     tbb::task_group task_group;
 
     for (unsigned int i = 0; i < std::thread::hardware_concurrency(); i++) {
         task_group.run([&taskProgressController, this]() {
             while (true) {
-                const auto imageBucket = bucketQueue.nextBucket();
-                if (!imageBucket) {
+                const auto tile = tileQueue.nextTile();
+                if (!tile) {
                     return;
                 }
-                renderBucket(*imageBucket);
+                renderTile(*tile);
                 taskProgressController.iterationDone();
             }
         });
@@ -76,26 +77,26 @@ void Renderer::renderParallel(BaseTaskReporter::TaskProgressController &taskProg
 
 void Renderer::renderSerial(BaseTaskReporter::TaskProgressController &taskProgressController) {
     CRAYG_TRACE_SCOPE("Renderer");
-    bucketQueue.start(bucketSequence);
+    tileQueue.start(tileSequence);
     while (true) {
-        const auto imageBucket = bucketQueue.nextBucket();
-        if (!imageBucket) {
+        const auto tile = tileQueue.nextTile();
+        if (!tile) {
             return;
         }
-        renderBucket(*imageBucket);
+        renderTile(*tile);
         taskProgressController.iterationDone();
     }
 }
 
-void Renderer::renderBucket(const ImageBucket &imageBucket) {
+void Renderer::renderTile(const Tile &tile) {
     std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
 
-    outputDriver.startBucket(imageBucket);
+    outputDriver.startTile(tile);
 
-    bucketSampler->sampleBucket(imageBucket);
-    bucketStats.processBucketTime(outputDriver.getFilm(), imageBucket, startTime);
+    tileSampler->sampleTile(tile);
+    tileStats.processTileTime(outputDriver.getFilm(), tile, startTime);
 
-    outputDriver.finishBucket(imageBucket);
+    outputDriver.finishTile(tile);
 }
 
 void Renderer::init() {
@@ -120,8 +121,8 @@ void Renderer::init() {
 }
 
 void Renderer::initOutputDriver() {
-    bucketSampler = BucketSamplerFactory::createBucketSampler(
-        scene.renderSettings, [this](Vector2f samplePos) { return renderSample(samplePos); });
+    tileSampler = TileSamplerFactory::createTileSampler(scene.renderSettings,
+                                                        [this](Vector2f samplePos) { return renderSample(samplePos); });
 
     ImageSpec imageSpec = requiredImageSpec(scene.renderSettings.resolution);
 
@@ -141,24 +142,24 @@ void Renderer::initOutputDriver() {
     }
 
     outputDriver.initialize(filmSpecBuilder.finish());
-    bucketSampler->setFilm(outputDriver.getFilm());
+    tileSampler->setFilm(outputDriver.getFilm());
 }
 
-void Renderer::initBuckets() {
+void Renderer::initTiles() {
     if (!scene.renderSettings.regionToRender) {
-        bucketSequence = ImageBucketSequences::getSequence(scene.renderSettings.resolution, 8,
-                                                           scene.renderSettings.bucketSequenceType);
+        tileSequence =
+            TileSequences::getSequence(scene.renderSettings.resolution, 8, scene.renderSettings.tileSequenceType);
         return;
     }
 
     PixelRegion pixelRegion = scene.renderSettings.regionToRender->toPixelRegion(scene.renderSettings.resolution);
     Logger::info("Cropping rendered region to {}", pixelRegion);
-    auto buckets = ImageBucketSequences::getSequence(pixelRegion, 8, scene.renderSettings.bucketSequenceType);
+    auto tiles = TileSequences::getSequence(pixelRegion, 8, scene.renderSettings.tileSequenceType);
 
-    for (auto &bucket : buckets) {
-        bucket = ImageBucket(bucket.getPosition() + pixelRegion.min, bucket.getWidth(), bucket.getHeight());
+    for (auto &tile : tiles) {
+        tile = Tile(tile.getPosition() + pixelRegion.min, tile.getWidth(), tile.getHeight());
     }
-    bucketSequence = buckets;
+    tileSequence = tiles;
 }
 
 Color Renderer::renderSample(const Vector2f &samplePos) {
@@ -193,7 +194,7 @@ ImageSpec Renderer::requiredImageSpec(const Resolution &resolution) const {
     if (scene.renderSettings.regionToRender) {
         builder.addRenderRegion(*scene.renderSettings.regionToRender);
     }
-    bucketSampler->addRequiredImageSpecs(builder);
+    tileSampler->addRequiredImageSpecs(builder);
     builder.createGreyFloatChannel("absoluteRenderTime");
     builder.createRgbFloatChannel("relativeRenderTime");
     return builder.finish();

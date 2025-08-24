@@ -305,7 +305,7 @@ TEST_CASE("AccumulationBuffer::updateAverages") {
     }
 }
 
-TEST_CASE("AccumulationBuffer::updateAverages for ImageBucket") {
+TEST_CASE("AccumulationBuffer::updateAverages for Tile") {
 
     SECTION("should update average values correctly for FloatAccumulationBuffer") {
         FloatAccumulationBuffer buffer(10, 5);
@@ -314,7 +314,7 @@ TEST_CASE("AccumulationBuffer::updateAverages for ImageBucket") {
         buffer.add({2, 2}, Color(2, 4, 6));
         REQUIRE(buffer.isBlack());
 
-        buffer.updateAveragesInBucket(ImageBucket(Vector2i(2, 2), 2, 2));
+        buffer.updateAveragesInTile(Tile(Vector2i(2, 2), 2, 2));
 
         REQUIRE_FALSE(buffer.isBlack());
         REQUIRE(buffer.getColor({0, 0}).isBlack());
@@ -328,7 +328,7 @@ TEST_CASE("AccumulationBuffer::updateAverages for ImageBucket") {
         buffer.add({2, 2}, Color(2, 4, 6));
         REQUIRE(buffer.isBlack());
 
-        buffer.updateAveragesInBucket(ImageBucket(Vector2i(2, 2), 2, 2));
+        buffer.updateAveragesInTile(Tile(Vector2i(2, 2), 2, 2));
 
         REQUIRE_FALSE(buffer.isBlack());
         REQUIRE(buffer.getColor({0, 0}).isBlack());

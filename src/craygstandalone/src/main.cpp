@@ -52,8 +52,8 @@ int craygMain(int argc, char *argv[]) {
     NextGenOutputDriver outputDriver;
 
     TaskReporter taskReporter;
-    BucketQueue bucketQueue([]() { return Vector2i(); });
-    Renderer renderer(scene, outputDriver, taskReporter, bucketQueue);
+    TileQueue tileQueue([]() { return Vector2i(); });
+    Renderer renderer(scene, outputDriver, taskReporter, tileQueue);
     renderer.initOutputDriver();
     renderer.renderScene();
 

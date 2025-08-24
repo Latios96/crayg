@@ -28,7 +28,7 @@ set(UNIT_TEST_SOURCE_LIST
     math/TestQuadraticEquations.cpp
     parallel/TestParallelLoops.cpp
     parallel/TestThreadCount.cpp
-    TestAdaptiveBucketSampler.cpp
+    TestAdaptiveTileSampler.cpp
     TestAreaLight.cpp
     TestBarycentricCoordinates.cpp
     TestBaseUsdImageableReader.cpp
@@ -40,9 +40,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestBaseUsdXformableReader.cpp
     TestBoundingBox.cpp
     TestBounds2d.cpp
-    TestBucketImageBuffer.cpp
-    TestBucketQueue.cpp
-    TestBucketSizeEstimator.cpp
     TestCamera.cpp
     TestCameraLens.cpp
     TestCheckerBoard.cpp
@@ -62,19 +59,19 @@ set(UNIT_TEST_SOURCE_LIST
     TestFanTriangulator.cpp
     TestFileSystemUtils.cpp
     TestFileTexture.cpp
-    TestFollowMouseBucketQueue.cpp
-    TestFollowSequenceBucketQueue.cpp
+    TestFollowMouseTileQueue.cpp
+    TestFollowSequenceTileQueue.cpp
     TestGradient.cpp
     TestGroundPlane.cpp
     TestHeatMap.cpp
     TestImage.cpp
     TestImageAlgorithms.cpp
-    TestImageBucketSequences.cpp
     TestImageChannelPathResolver.cpp
     TestImageIterators.cpp
     TestImageMetadata.cpp
     TestImageMetadataCollector.cpp
     TestImagePathResolver.cpp
+    TestImageTile.cpp
     TestIntegratorSettings.cpp
     TestLensFileExtendedFormatReader.cpp
     TestLensFileExtendedFormatWriter.cpp
@@ -117,6 +114,9 @@ set(UNIT_TEST_SOURCE_LIST
     TestSurfaceInteraction.cpp
     TestTaskReporter.cpp
     TestThickLensApproximation.cpp
+    TestTileQueue.cpp
+    TestTileSequence.cpp
+    TestTileSizeEstimator.cpp
     TestToStringHelper.cpp
     TestTransform.cpp
     TestTriangle.cpp
@@ -125,7 +125,7 @@ set(UNIT_TEST_SOURCE_LIST
     TestTriangleMeshPerFacePrimVar.cpp
     TestTriangleMeshPerPointPrimVar.cpp
     TestTriangleMeshPerVertexPrimVar.cpp
-    TestUniformBucketSampler.cpp
+    TestUniformTileSampler.cpp
     TestUsdCameraReader.cpp
     TestUsdCameraWriter.cpp
     TestUsdCheckerBoardReader.cpp

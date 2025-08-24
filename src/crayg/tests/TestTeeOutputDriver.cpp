@@ -8,13 +8,13 @@ namespace crayg {
 TEST_CASE("TeeOutputDriver should forward methods") {
     fakeit::Mock<OutputDriver> mockLeft;
     fakeit::When(Method(mockLeft, initialize)).AlwaysReturn();
-    fakeit::When(Method(mockLeft, prepareBucket)).AlwaysReturn();
-    fakeit::When(Method(mockLeft, writeBucketImageBuffer)).AlwaysReturn();
+    fakeit::When(Method(mockLeft, prepareTile)).AlwaysReturn();
+    fakeit::When(Method(mockLeft, writeTileImageBuffer)).AlwaysReturn();
     fakeit::When(Method(mockLeft, writeImageMetadata)).AlwaysReturn();
     fakeit::Mock<OutputDriver> mockRight;
     fakeit::When(Method(mockRight, initialize)).AlwaysReturn();
-    fakeit::When(Method(mockRight, prepareBucket)).AlwaysReturn();
-    fakeit::When(Method(mockRight, writeBucketImageBuffer)).AlwaysReturn();
+    fakeit::When(Method(mockRight, prepareTile)).AlwaysReturn();
+    fakeit::When(Method(mockRight, writeTileImageBuffer)).AlwaysReturn();
     fakeit::When(Method(mockRight, writeImageMetadata)).AlwaysReturn();
     TeeOutputDriver teeOutputDriver(mockLeft.get(), mockRight.get());
 
@@ -25,18 +25,18 @@ TEST_CASE("TeeOutputDriver should forward methods") {
         fakeit::Verify(Method(mockRight, initialize)).Once();
     }
 
-    SECTION("should forward prepareBucket") {
-        teeOutputDriver.prepareBucket(ImageBucket());
+    SECTION("should forward prepareTile") {
+        teeOutputDriver.prepareTile(ImageTile());
 
-        fakeit::Verify(Method(mockLeft, prepareBucket)).Once();
-        fakeit::Verify(Method(mockRight, prepareBucket)).Once();
+        fakeit::Verify(Method(mockLeft, prepareTile)).Once();
+        fakeit::Verify(Method(mockRight, prepareTile)).Once();
     }
 
-    SECTION("should forward writeBucketImageBuffer") {
-        teeOutputDriver.writeBucketImageBuffer(BucketImageBuffer({0, 0}, 10, 10));
+    SECTION("should forward writeTileImageBuffer") {
+        teeOutputDriver.writeTileImageBuffer(TileImageBuffer({0, 0}, 10, 10));
 
-        fakeit::Verify(Method(mockLeft, writeBucketImageBuffer)).Once();
-        fakeit::Verify(Method(mockRight, writeBucketImageBuffer)).Once();
+        fakeit::Verify(Method(mockLeft, writeTileImageBuffer)).Once();
+        fakeit::Verify(Method(mockRight, writeTileImageBuffer)).Once();
     }
 
     SECTION("should forward writeImageMetadata") {

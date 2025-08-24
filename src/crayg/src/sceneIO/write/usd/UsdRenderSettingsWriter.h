@@ -18,8 +18,8 @@ class UsdRenderSettingsWriter {
     void writeIntegratorType(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeIntegratorSettings(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeIntersectorType(const pxr::UsdRenderSettings &usdRenderSettings) const;
-    void writeBucketSequenceType(const pxr::UsdRenderSettings &usdRenderSettings) const;
-    void writeBucketSamplerType(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeTileSequenceType(const pxr::UsdRenderSettings &usdRenderSettings) const;
+    void writeTileSamplerType(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeAdaptiveMaxError(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeSamplesPerAdaptivePass(const pxr::UsdRenderSettings &usdRenderSettings) const;
     void writeUseSpectralLensing(const pxr::UsdRenderSettings &usdRenderSettings) const;

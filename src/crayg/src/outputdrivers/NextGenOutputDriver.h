@@ -7,10 +7,10 @@ namespace crayg {
 class NextGenOutputDriver {
   public:
     virtual void initialize(const FilmSpec &filmSpec);
-    virtual void startBucket(const ImageBucket &imageBucket);
-    virtual void updateAllChannelsInBucket(const ImageBucket &imageBucket);
-    virtual void updateChannelInBucket(const ImageBucket &imageBucket, const std::string &channelName);
-    virtual void finishBucket(const ImageBucket &imageBucket);
+    virtual void startTile(const Tile &tile);
+    virtual void updateAllChannelsInTile(const Tile &tile);
+    virtual void updateChannelInTile(const Tile &tile, const std::string &channelName);
+    virtual void finishTile(const Tile &tile);
     virtual void updateAllChannels();
     virtual void updateChannel(const std::string &channelName);
     virtual void updateImageMetadata();

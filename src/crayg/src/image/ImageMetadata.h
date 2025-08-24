@@ -19,8 +19,8 @@ class ImageMetadataTokens {
     static const std::string RENDER_SETTINGS_INTEGRATOR;
     static const std::string RENDER_SETTINGS_INTERSECTOR;
     static const std::string RENDER_SETTINGS_MAX_SAMPLES;
-    static const std::string RENDER_SETTINGS_BUCKET_SEQUENCE_TYPE;
-    static const std::string RENDER_SETTINGS_BUCKET_SAMPLER_TYPE;
+    static const std::string RENDER_SETTINGS_TILE_SEQUENCE_TYPE;
+    static const std::string RENDER_SETTINGS_TILE_SAMPLER_TYPE;
     static const std::string RENDER_SETTINGS_ADAPTIVE_MAX_ERROR;
     static const std::string RENDER_SETTINGS_SAMPLES_PER_ADAPTIVE_PASS;
     static const std::string RENDER_SETTINGS_USE_SPECTRAL_LENSING;

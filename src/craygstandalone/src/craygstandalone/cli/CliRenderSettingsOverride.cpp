@@ -16,8 +16,8 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     resolvedRenderSettings.maxSamples = maxSamples.value_or(renderSettings.maxSamples);
     resolvedRenderSettings.integratorType = integratorType.value_or(renderSettings.integratorType);
     resolvedRenderSettings.intersectorType = intersectorType.value_or(renderSettings.intersectorType);
-    resolvedRenderSettings.bucketSequenceType = bucketSequenceType.value_or(renderSettings.bucketSequenceType);
-    resolvedRenderSettings.bucketSamplerType = bucketSamplerType.value_or(renderSettings.bucketSamplerType);
+    resolvedRenderSettings.tileSequenceType = tileSequenceType.value_or(renderSettings.tileSequenceType);
+    resolvedRenderSettings.tileSamplerType = tileSamplerType.value_or(renderSettings.tileSamplerType);
     resolvedRenderSettings.adaptiveMaxError = adaptiveMaxError.value_or(renderSettings.adaptiveMaxError);
     resolvedRenderSettings.samplesPerAdaptivePass =
         samplesPerAdaptivePass.value_or(renderSettings.samplesPerAdaptivePass);
@@ -32,7 +32,7 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
 }
 
 bool CliRenderSettingsOverride::hasAnyOverrides() const {
-    return resolution || maxSamples || integratorType || intersectorType || bucketSequenceType || bucketSamplerType ||
+    return resolution || maxSamples || integratorType || intersectorType || tileSequenceType || tileSamplerType ||
            adaptiveMaxError || samplesPerAdaptivePass || useSpectralLensing || regionToRender ||
            (!integratorSettingsOverrides.empty());
 }
@@ -52,11 +52,11 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
     if (intersectorType) {
         report.push_back(fmt::format("intersectorType -> {}", *intersectorType));
     }
-    if (bucketSequenceType) {
-        report.push_back(fmt::format("bucketSequenceType -> {}", *bucketSequenceType));
+    if (tileSequenceType) {
+        report.push_back(fmt::format("tileSequenceType -> {}", *tileSequenceType));
     }
-    if (bucketSamplerType) {
-        report.push_back(fmt::format("bucketSamplerType -> {}", *bucketSamplerType));
+    if (tileSamplerType) {
+        report.push_back(fmt::format("tileSamplerType -> {}", *tileSamplerType));
     }
     if (adaptiveMaxError) {
         report.push_back(fmt::format("adaptiveMaxError -> {}", *adaptiveMaxError));

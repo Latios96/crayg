@@ -52,10 +52,10 @@ void ImageMetadataCollector::collectRenderSettingsIfPresent(ImageMetadata &image
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_INTERSECTOR,
                         fmt::format("{}", scene->renderSettings.intersectorType));
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_MAX_SAMPLES, scene->renderSettings.maxSamples);
-    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SEQUENCE_TYPE,
-                        fmt::format("{}", scene->renderSettings.bucketSequenceType));
-    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_BUCKET_SAMPLER_TYPE,
-                        fmt::format("{}", scene->renderSettings.bucketSamplerType));
+    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_TILE_SEQUENCE_TYPE,
+                        fmt::format("{}", scene->renderSettings.tileSequenceType));
+    imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_TILE_SAMPLER_TYPE,
+                        fmt::format("{}", scene->renderSettings.tileSamplerType));
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_ADAPTIVE_MAX_ERROR,
                         scene->renderSettings.adaptiveMaxError);
     imageMetadata.write(ImageMetadataTokens::RENDER_SETTINGS_SAMPLES_PER_ADAPTIVE_PASS,
