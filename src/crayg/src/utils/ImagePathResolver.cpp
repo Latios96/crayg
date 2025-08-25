@@ -6,7 +6,7 @@
 
 namespace crayg {
 
-std::string ImagePathResolver::resolve(const std::string &pathTemplate) const {
+std::filesystem::path ImagePathResolver::resolve(const std::filesystem::path &pathTemplate) const {
     const std::filesystem::path boostPathTemplate = std::filesystem::absolute(std::filesystem::path(pathTemplate));
     const std::filesystem::path target_path(boostPathTemplate.parent_path());
 
@@ -25,23 +25,25 @@ std::string ImagePathResolver::resolve(const std::string &pathTemplate) const {
             frameNumber = f;
         }
     }
-    return boost::regex_replace(pathTemplate, boost::regex("\\.#\\."), fmt::format(".{:0>4}.", frameNumber + 1));
+    return boost::regex_replace(pathTemplate.string(), boost::regex("\\.#\\."),
+                                fmt::format(".{:0>4}.", frameNumber + 1));
 }
 
-int ImagePathResolver::parseImageNumber(const std::string path) const {
+int ImagePathResolver::parseImageNumber(const std::filesystem::path &path) const {
     boost::smatch what;
-    if (!boost::regex_search(path, what, boost::regex("\\.(\\d+)\\."))) {
+    if (!boost::regex_search(path.string(), what, boost::regex("\\.(\\d+)\\."))) {
         return -1;
     }
     const auto str = what[1].str();
     return std::stoi(str);
 }
 
-bool ImagePathResolver::matchesTemplate(const std::string &pathTemplate, const std::string path) const {
+bool ImagePathResolver::matchesTemplate(const std::filesystem::path &pathTemplate,
+                                        const std::filesystem::path &path) const {
     boost::smatch what;
     const std::string filenameWithFilter =
-        boost::regex_replace(pathTemplate, boost::regex(R"(\.#\.)"), R"(\\.(\\d+)\\.)");
-    return boost::regex_search(path, what, boost::regex(filenameWithFilter));
+        boost::regex_replace(pathTemplate.string(), boost::regex(R"(\.#\.)"), R"(\\.(\\d+)\\.)");
+    return boost::regex_search(path.string(), what, boost::regex(filenameWithFilter));
 }
 
 }

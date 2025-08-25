@@ -1,14 +1,14 @@
 #pragma once
 
-#include <string>
+#include <filesystem>
 
 namespace crayg {
 
 class ImagePathResolver {
   public:
-    std::string resolve(const std::string &pathTemplate) const;
-    int parseImageNumber(const std::string path) const;
-    bool matchesTemplate(const std::string &pathTemplate, const std::string path) const;
+    std::filesystem::path resolve(const std::filesystem::path &pathTemplate) const;
+    int parseImageNumber(const std::filesystem::path &path) const;
+    bool matchesTemplate(const std::filesystem::path &pathTemplate, const std::filesystem::path &path) const;
 };
 
 }
