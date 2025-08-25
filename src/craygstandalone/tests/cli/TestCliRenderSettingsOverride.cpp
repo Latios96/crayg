@@ -105,7 +105,7 @@ TEST_CASE("CliRenderSettingsOverride::reportOverrides") {
 
         REQUIRE(onlyIntegratorType.reportOverrides() == R"(integratorType -> DEBUG)");
 
-        REQUIRE(onlyTileSequenceType.reportOverrides() == R"(tileSequenceType -> LINE_BY_LINE)");
+        REQUIRE(onlyTileSequenceType.reportOverrides() == R"(tileSequenceType -> SCANLINE)");
 
         REQUIRE(onlyTileSamplerType.reportOverrides() == R"(tileSamplerType -> UNIFORM)");
 
