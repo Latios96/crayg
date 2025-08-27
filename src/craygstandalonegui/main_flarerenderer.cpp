@@ -46,8 +46,7 @@ int craygMain(int argc, char **argv) {
         exit(1);
     }
 
-    ImagePathResolver imagePathResolver;
-    const std::filesystem::path imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
+    const std::filesystem::path imageOutputPath = ImagePathResolver::resolve(parseResult.args->imageOutputPath);
     const std::filesystem::path logFilePath = std::filesystem::path(imageOutputPath).replace_extension(".txt");
     Logger::logToFile(logFilePath);
     CRAYG_IF_TRACING_ENABLED({
