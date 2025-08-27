@@ -59,6 +59,8 @@ set(crayg_SRCS
     crayg/foundation/areaiterators/tiles/TileSequenceType.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
+    crayg/foundation/strings/Humanize.cpp
+    crayg/foundation/strings/Humanize.h
     CraygInfo.cpp
     CraygInfo.h
     image/ColorConversion.cpp

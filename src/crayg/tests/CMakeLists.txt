@@ -28,6 +28,7 @@ set(UNIT_TEST_SOURCE_LIST
     math/TestQuadraticEquations.cpp
     parallel/TestParallelLoops.cpp
     parallel/TestThreadCount.cpp
+    strings/TestHumanize.cpp
     TestAdaptiveTileSampler.cpp
     TestAreaLight.cpp
     TestBarycentricCoordinates.cpp
