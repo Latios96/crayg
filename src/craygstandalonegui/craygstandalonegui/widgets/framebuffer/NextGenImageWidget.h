@@ -1,6 +1,10 @@
 #pragma once
-#include "basics/Resolution.h"
+
+// clang-format off
 #include <QtWidgets/qwidget.h>
+// clang-format on
+
+#include "basics/Resolution.h"
 
 namespace crayg {
 

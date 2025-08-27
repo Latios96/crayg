@@ -1,7 +1,12 @@
 #pragma once
+
+// clang-format off
+#include <QImage>
+// clang-format on
+
 #include "basics/Bound2d.h"
 #include "crayg/foundation/math/geometry/Tile.h"
-#include <QImage>
+
 #include <optional>
 
 namespace crayg {

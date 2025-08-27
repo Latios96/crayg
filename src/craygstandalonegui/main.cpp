@@ -1,7 +1,10 @@
+// clang-format off
+#include <QResource>
+#include <QtWidgets/qapplication.h>
+// clang-format on
 #include "craygstandalonegui/widgets/framebuffer/FrameBufferWidget.h"
 #include "qtcrayg/foundation/QtBase.h"
 #include "qtcrayg/foundation/QtMetaTypes.h"
-#include <QtWidgets/qapplication.h>
 
 #include "CraygInfo.h"
 #include "Initialization.h"
@@ -20,7 +23,6 @@
 #include "utils/StopWatch.h"
 #include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
-#include <QResource>
 
 #include <renderer/Renderer.h>
 #include <scene/Scene.h>
