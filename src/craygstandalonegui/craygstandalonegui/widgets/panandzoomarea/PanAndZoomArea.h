@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Logger.h"
 #include <QtWidgets/qscrollarea.h>
+
 #include <fmt/ostream.h>
 #include <ostream>
 
