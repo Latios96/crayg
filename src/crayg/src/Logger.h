@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
 
@@ -47,7 +48,7 @@ class Logger {
     template <typename T> static void critical(const T &msg);
 
     static void initialize();
-    static void logToFile(const std::string &fileName);
+    static void logToFile(const std::filesystem::path &fileName);
     static void backtrace();
 };
 

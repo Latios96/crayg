@@ -37,7 +37,7 @@ void Logger::initialize() {
     spdlog::enable_backtrace(32);
 }
 
-void Logger::logToFile(const std::string &fileName) {
+void Logger::logToFile(const std::filesystem::path &fileName) {
     const auto file_synk = std::make_shared<spdlog::sinks::basic_file_sink_mt>(fileName, true);
     file_synk->set_level(spdlog::level::info);
     spdlog::default_logger()->sinks().push_back(file_synk);
