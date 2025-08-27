@@ -38,7 +38,7 @@ void Logger::initialize() {
 }
 
 void Logger::logToFile(const std::filesystem::path &fileName) {
-    const auto file_synk = std::make_shared<spdlog::sinks::basic_file_sink_mt>(fileName, true);
+    const auto file_synk = std::make_shared<spdlog::sinks::basic_file_sink_mt>(fileName.string(), true);
     file_synk->set_level(spdlog::level::info);
     spdlog::default_logger()->sinks().push_back(file_synk);
 }
