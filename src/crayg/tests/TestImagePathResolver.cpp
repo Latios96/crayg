@@ -33,13 +33,13 @@ TEST_CASE("ImagePathResolver should replace #") {
     SECTION("no # should not change") {
         FileFixture fileFixture("1203e5c176ab4e7fbe124ae4258131b4.1000.png");
 
-        std::string result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.1000.png");
+        const std::filesystem::path result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.1000.png");
 
         REQUIRE(result == "1203e5c176ab4e7fbe124ae4258131b4.1000.png");
     }
 
     SECTION("not existing before") {
-        std::string result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.#.png");
+        const std::filesystem::path result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.#.png");
 
         REQUIRE(result == "1203e5c176ab4e7fbe124ae4258131b4.0001.png");
     }
@@ -47,7 +47,7 @@ TEST_CASE("ImagePathResolver should replace #") {
     SECTION("existing file") {
         FileFixture fileFixture("1203e5c176ab4e7fbe124ae4258131b4.0001.png");
 
-        std::string result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.#.png");
+        const std::filesystem::path result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.#.png");
 
         REQUIRE(result == "1203e5c176ab4e7fbe124ae4258131b4.0002.png");
     }
