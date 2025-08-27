@@ -2,32 +2,30 @@
 #include <QResource>
 #include <QtWidgets/qapplication.h>
 // clang-format on
-#include "craygstandalonegui/widgets/framebuffer/FrameBufferWidget.h"
-#include "qtcrayg/foundation/QtBase.h"
-#include "qtcrayg/foundation/QtMetaTypes.h"
-
 #include "CraygInfo.h"
 #include "Initialization.h"
 #include "Logger.h"
 #include "craygstandalone/cli/CliParser.h"
+#include "craygstandalonegui/widgets/framebuffer/FrameBufferWidget.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h"
 #include "craygstandalonegui/widgets/taskreporter/GuiTaskReporter.h"
 #include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
+#include "qtcrayg/foundation/QtBase.h"
+#include "qtcrayg/foundation/QtMetaTypes.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
+#include "renderer/Renderer.h"
+#include "scene/Scene.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
+#include "utils/ImagePathResolver.h"
 #include "utils/StopWatch.h"
 #include "utils/TextureStats.h"
 #include "utils/tracing/CraygTracing.h"
-
-#include <renderer/Renderer.h>
-#include <scene/Scene.h>
 #include <thread>
-#include <utils/ImagePathResolver.h>
 
 namespace crayg {
 
