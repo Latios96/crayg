@@ -3,7 +3,7 @@
 #include <spdlog/spdlog.h>
 
 #include "Logger.h"
-#include "ReadableFormatter.h"
+#include "crayg/foundation/strings/Humanize.h"
 #include "fmt/format.h"
 #include <utility>
 
@@ -20,11 +20,10 @@ StopWatch StopWatch::createStopWatch(std::string name) {
 }
 
 void StopWatch::end() {
-    ReadableFormatter readableFormatter;
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
 
-    outputCallback(fmt::format("{} took {}.", name, readableFormatter.formatDuration(std::chrono::seconds(seconds))));
+    outputCallback(fmt::format("{} took {}.", name, Humanize::naturalDuration(std::chrono::seconds(seconds))));
 }
 
 ScopedStopWatch::ScopedStopWatch(const std::string &name) : stopWatch(StopWatch::createStopWatch(name)) {

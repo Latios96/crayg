@@ -452,8 +452,6 @@ set(crayg_SRCS
     utils/Preconditions.h
     utils/ProgressReporter.cpp
     utils/ProgressReporter.h
-    utils/ReadableFormatter.cpp
-    utils/ReadableFormatter.h
     utils/RemainingTimeCalculator.cpp
     utils/RemainingTimeCalculator.h
     utils/StopWatch.cpp

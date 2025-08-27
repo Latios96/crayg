@@ -94,7 +94,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestProgressReporter.cpp
     TestRay.cpp
     TestRaytracingIntegrator.cpp
-    TestReadableFormatter.cpp
     TestRectLight.cpp
     TestRectLightShapeGenerator.cpp
     TestRegionToRender.cpp

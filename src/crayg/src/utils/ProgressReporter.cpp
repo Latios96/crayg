@@ -1,5 +1,5 @@
 #include "ProgressReporter.h"
-#include "ReadableFormatter.h"
+#include "crayg/foundation/strings/Humanize.h"
 
 namespace crayg {
 
@@ -22,17 +22,15 @@ ProgressReporter::ProgressReporter(const ProgressReporter &progressReporter) {
 ProgressReporter ProgressReporter::createLoggingProgressReporter(int maxIterations, const std::string &taskName) {
     std::function<void(int, float, float)> logProgress = [taskName](int progress, float timeElapsed,
                                                                     float timeRemaining) -> void {
-        ReadableFormatter readableFormatter;
         const auto formattedTimeElapsed =
-            readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeElapsed)));
+            Humanize::naturalDuration(std::chrono::seconds(static_cast<int>(timeElapsed)));
         const auto formattedTimeRemaining =
-            readableFormatter.formatDuration(std::chrono::seconds(static_cast<int>(timeRemaining)));
+            Humanize::naturalDuration(std::chrono::seconds(static_cast<int>(timeRemaining)));
         Logger::info("{} done by {}%, elapsed time: {}, remaining time: {}", taskName, progress, formattedTimeElapsed,
                      formattedTimeRemaining);
     };
     std::function<void(std::chrono::seconds)> finishCallback = [taskName](std::chrono::seconds seconds) -> void {
-        ReadableFormatter readableFormatter;
-        Logger::info("{} took {}.", taskName, readableFormatter.formatDuration(seconds));
+        Logger::info("{} took {}.", taskName, Humanize::naturalDuration(seconds));
     };
     Logger::info("{}..", taskName);
     return {maxIterations, logProgress, finishCallback};
