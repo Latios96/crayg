@@ -1,11 +1,5 @@
 #pragma once
 
-#include "craygstandalonegui/widgets/panandzoomarea/PanAndZoomArea.h"
-#include "image/ImageMetadata.h"
-#include "image/ImageSpec.h"
-#include "image/film/FilmSpec.h"
-#include "qtcrayg/widgets/IconToggleButton.h"
-#include "utils/TaskReporter.h"
 #include <QGuiApplication>
 #include <QProgressBar>
 #include <QScreen>
@@ -15,6 +9,14 @@
 #include <QtWidgets/qlabel.h>
 #include <QtWidgets/qpushbutton.h>
 #include <QtWidgets/qscrollarea.h>
+
+#include "craygstandalonegui/widgets/panandzoomarea/PanAndZoomArea.h"
+#include "image/ImageMetadata.h"
+#include "image/ImageSpec.h"
+#include "image/film/FilmSpec.h"
+#include "qtcrayg/widgets/IconToggleButton.h"
+#include "utils/TaskReporter.h"
+
 #include <fmt/format.h>
 #include <iostream>
 
