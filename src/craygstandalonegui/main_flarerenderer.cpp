@@ -47,13 +47,13 @@ int craygMain(int argc, char **argv) {
     }
 
     ImagePathResolver imagePathResolver;
-    std::string imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
-    std::string logFilePath = FileSystemUtils::swapFileExtension(imageOutputPath, "txt");
+    const std::filesystem::path imageOutputPath = imagePathResolver.resolve(parseResult.args->imageOutputPath);
+    const std::filesystem::path logFilePath = std::filesystem::path(imageOutputPath).replace_extension(".txt");
     Logger::logToFile(logFilePath);
     CRAYG_IF_TRACING_ENABLED({
-        std::string traceFilePath = FileSystemUtils::swapFileExtension(imageOutputPath, "json");
+        const std::filesystem::path traceFilePath = std::filesystem::path(imageOutputPath).replace_extension(".json");
         Logger::info("Tracing enabled, tracing to {}", traceFilePath);
-        mtr_init(traceFilePath.c_str());
+        mtr_init(traceFilePath.string().c_str());
     });
 
     Logger::info("Crayg FlareRenderer version {}, commit {}", CraygInfo::VERSION, CraygInfo::COMMIT_HASH);
