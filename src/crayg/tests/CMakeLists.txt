@@ -57,7 +57,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestEnumParser.cpp
     TestExitPupilCalculator.cpp
     TestFanTriangulator.cpp
-    TestFileSystemUtils.cpp
     TestFileTexture.cpp
     TestFollowMouseTileQueue.cpp
     TestFollowSequenceTileQueue.cpp

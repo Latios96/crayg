@@ -7,11 +7,6 @@
 
 namespace crayg {
 
-std::string FileSystemUtils::swapFileExtension(const std::string &path, const std::string &newExtension) {
-    auto boostPath = std::filesystem::path(path);
-    return boostPath.replace_extension(newExtension).string();
-}
-
 bool needsNoConversion(AutoIt::Common::TextEncodingDetect::Encoding encoding) {
     return encoding == AutoIt::Common::TextEncodingDetect::Encoding::None ||
            encoding == AutoIt::Common::TextEncodingDetect::Encoding::ANSI ||
