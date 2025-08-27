@@ -1,3 +1,5 @@
+#include "fixtures/TemporaryDirectory.h"
+
 #include <boost/regex.hpp>
 #include <catch2/catch.hpp>
 #include <filesystem>
@@ -7,35 +9,17 @@
 
 namespace crayg {
 
-class FileFixture {
-  public:
-    explicit FileFixture(const std::filesystem::path &path) : path(path) {
-        const std::filesystem::path folder = path.parent_path();
-        if (!folder.empty()) {
-            std::filesystem::create_directories(folder);
-        }
-        std::ofstream outfile(path.string());
-        outfile.close();
-    }
-
-    ~FileFixture() {
-        std::filesystem::remove(path);
-    }
-
-  private:
-    std::filesystem::path path;
-};
-
 TEST_CASE("ImagePathResolver should replace #") {
 
     ImagePathResolver imagePathResolver;
 
     SECTION("no # should not change") {
-        FileFixture fileFixture("1203e5c176ab4e7fbe124ae4258131b4.1000.png");
+        TemporaryDirectory temporaryDirectory;
+        const auto path = temporaryDirectory.writeToFile("1203e5c176ab4e7fbe124ae4258131b4.1000.png", "");
 
-        const std::filesystem::path result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.1000.png");
+        const std::filesystem::path result = imagePathResolver.resolve(path);
 
-        REQUIRE(result == "1203e5c176ab4e7fbe124ae4258131b4.1000.png");
+        REQUIRE(result == temporaryDirectory.getPath() / "1203e5c176ab4e7fbe124ae4258131b4.1000.png");
     }
 
     SECTION("not existing before") {
@@ -45,11 +29,13 @@ TEST_CASE("ImagePathResolver should replace #") {
     }
 
     SECTION("existing file") {
-        FileFixture fileFixture("1203e5c176ab4e7fbe124ae4258131b4.0001.png");
+        TemporaryDirectory temporaryDirectory;
+        const auto path = temporaryDirectory.writeToFile("1203e5c176ab4e7fbe124ae4258131b4.0001.png", "");
 
-        const std::filesystem::path result = imagePathResolver.resolve("1203e5c176ab4e7fbe124ae4258131b4.#.png");
+        const std::filesystem::path result =
+            imagePathResolver.resolve(temporaryDirectory.getPath() / "1203e5c176ab4e7fbe124ae4258131b4.#.png");
 
-        REQUIRE(result == "1203e5c176ab4e7fbe124ae4258131b4.0002.png");
+        REQUIRE(result == temporaryDirectory.getPath() / "1203e5c176ab4e7fbe124ae4258131b4.0002.png");
     }
 }
 
