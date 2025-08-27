@@ -1,7 +1,9 @@
 #pragma once
 
-#include "utils/TaskReporter.h"
+// clang-format off
 #include <QObject>
+// clang-format on
+#include "utils/TaskReporter.h"
 
 namespace crayg {
 
