@@ -79,7 +79,7 @@ Resolution Resolution::parse(const std::string &resolutionString) {
     try {
         width = NumberParsing::parseIntOrThrow(splitResults[0]);
         height = NumberParsing::parseIntOrThrow(splitResults[1]);
-    } catch (std::runtime_error &e) {
+    } catch (...) {
         CRAYG_LOG_AND_THROW(error);
     }
 

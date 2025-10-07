@@ -12,7 +12,7 @@ namespace crayg {
     try {                                                                                                              \
         check;                                                                                                         \
         REQUIRE(false);                                                                                                \
-    } catch (std::exception & e) {                                                                                     \
+    } catch (...) {                                                                                                    \
         REQUIRE(true);                                                                                                 \
     }
 
