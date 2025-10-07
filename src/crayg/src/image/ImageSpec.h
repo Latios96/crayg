@@ -2,7 +2,9 @@
 
 #include "PixelFormat.h"
 #include "basics/Bound2d.h"
+#include "basics/Bound2d_formatter.h"
 #include "basics/Resolution.h"
+#include "basics/Resolution_formatter.h"
 #include "scene/RegionToRender.h"
 #include "utils/DtoUtils.h"
 #include <fmt/ranges.h>

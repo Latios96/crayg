@@ -1,5 +1,6 @@
 #pragma once
 #include "basics/Vector2.h"
+#include "basics/Vector2_formatter.h"
 #include "utils/Exceptions.h"
 #include "utils/Preconditions.h"
 #include <vector>

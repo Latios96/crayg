@@ -3,6 +3,7 @@
 #include "TriangleMeshAbstractPrimVar.h"
 #include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
 #include "utils/ToStringHelper.h"
+#include <basics/Vector3f_formatter.h>
 #include <fmt/ostream.h>
 #include <fmt/ranges.h>
 #include <ostream>

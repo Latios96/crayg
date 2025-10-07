@@ -2,7 +2,6 @@
 
 #include "Vector2.h"
 #include <cmath>
-#include <fmt/ostream.h>
 #include <limits>
 #include <ostream>
 
@@ -153,5 +152,3 @@ class Vector3f {
 };
 
 }
-
-template <> struct fmt::formatter<crayg::Vector3f> : ostream_formatter {};

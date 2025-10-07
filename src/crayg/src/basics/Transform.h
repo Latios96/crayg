@@ -3,7 +3,6 @@
 #include "Matrix4x4f.h"
 #include "Ray.h"
 #include "utils/Exceptions.h"
-#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -134,5 +133,3 @@ class Transform {
 };
 
 }
-
-template <> struct fmt::formatter<crayg::Transform> : ostream_formatter {};

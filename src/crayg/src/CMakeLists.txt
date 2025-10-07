@@ -1,10 +1,12 @@
 set(crayg_SRCS
     # cmake-format: sortable
+    basics/Bound2d.cpp
     basics/Bound2d.h
     basics/BoundingBox.cpp
     basics/BoundingBox.h
     basics/Color.cpp
     basics/Color.h
+    basics/Color_formatter.h
     basics/containers/Array2d.h
     basics/Gradient.h
     basics/math/CommonMath.h
@@ -20,8 +22,10 @@ set(crayg_SRCS
     basics/Transform.cpp
     basics/Transform.h
     basics/Vector2.h
+    basics/Vector2_formatter.h
     basics/Vector3f.cpp
     basics/Vector3f.h
+    basics/Vector3f_formatter.h
     compatibility/lodepng/fmt/LodePNG_formatter.cpp
     compatibility/lodepng/fmt/LodePNG_formatter.h
     compatibility/openexr/fmt/ImathBox_formatter.cpp
@@ -146,6 +150,7 @@ set(crayg_SRCS
     intersectors/SceneIntersector.h
     Logger.cpp
     Logger.h
+    outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.h
     parallel/ParallelLoops.h

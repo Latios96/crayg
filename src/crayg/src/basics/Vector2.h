@@ -1,7 +1,5 @@
 #pragma once
 
-#include "utils/ToStringHelper.h"
-#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -90,7 +88,7 @@ template <typename T> class Vector2 {
     }
 
     friend std::ostream &operator<<(std::ostream &os, const Vector2<T> &f) {
-        os << ToStringHelper("Vector2").addMember("x", f.x).addMember("y", f.y).finish();
+        os << "Vector2{x=" << f.x << ",y=" << f.y << "}";
         return os;
     }
 };
@@ -99,5 +97,3 @@ typedef Vector2<float> Vector2f;
 typedef Vector2<int> Vector2i;
 
 }
-
-template <typename T> struct fmt::formatter<crayg::Vector2<T>> : ostream_formatter {};

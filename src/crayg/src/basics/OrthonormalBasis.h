@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Vector3f.h"
-#include "utils/ToStringHelper.h"
-#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -32,16 +30,7 @@ class OrthonormalBasis {
     bool operator==(const OrthonormalBasis &rhs) const;
     bool operator!=(const OrthonormalBasis &rhs) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const OrthonormalBasis &basis) {
-        os << ToStringHelper("OrthonormalBasis")
-                  .addMember("u", basis.u)
-                  .addMember("v", basis.v)
-                  .addMember("w", basis.w)
-                  .finish();
-        return os;
-    }
+    friend std::ostream &operator<<(std::ostream &os, const OrthonormalBasis &basis);
 };
 
 }
-
-template <> struct fmt::formatter<crayg::OrthonormalBasis> : ostream_formatter {};

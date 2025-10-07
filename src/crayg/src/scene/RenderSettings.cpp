@@ -1,4 +1,5 @@
 #include "RenderSettings.h"
+#include "basics/Resolution_formatter.h"
 #include <fmt/std.h>
 #include <regex>
 #include <utils/Exceptions.h>

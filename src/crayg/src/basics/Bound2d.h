@@ -3,7 +3,6 @@
 #include "Vector2.h"
 #include "basics/math/CommonMath.h"
 #include "utils/ToStringHelper.h"
-#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -67,16 +66,12 @@ template <typename T> class Bounds2d {
     bool operator!=(const Bounds2d &rhs) const {
         return !(rhs == *this);
     }
-
-    friend std::ostream &operator<<(std::ostream &os, const Bounds2d &d) {
-        os << ToStringHelper("Bounds2d").addMember("min", d.min).addMember("max", d.max).finish();
-        return os;
-    }
 };
 
 typedef Bounds2d<float> Bounds2df;
 typedef Bounds2d<int> Bounds2di;
 
-}
+std::ostream &operator<<(std::ostream &os, const Bounds2df &v);
+std::ostream &operator<<(std::ostream &os, const Bounds2di &v);
 
-template <typename T> struct fmt::formatter<crayg::Bounds2d<T>> : ostream_formatter {};
+}

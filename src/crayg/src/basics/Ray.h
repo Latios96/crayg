@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Vector3f.h"
-#include <fmt/ostream.h>
 #include <optional>
 #include <ostream>
 
@@ -58,5 +57,3 @@ struct Ray {
 };
 
 }
-
-template <> struct fmt::formatter<crayg::Ray> : ostream_formatter {};

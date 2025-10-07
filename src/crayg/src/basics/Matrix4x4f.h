@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Vector3f.h"
-#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -44,5 +43,3 @@ class Matrix4x4f {
 };
 
 }
-
-template <> struct fmt::formatter<crayg::Matrix4x4f> : ostream_formatter {};

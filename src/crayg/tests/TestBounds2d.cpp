@@ -1,4 +1,5 @@
 #include "basics/Bound2d.h"
+#include "basics/Bound2d_formatter.h"
 #include <catch2/catch.hpp>
 #include <sstream>
 

@@ -1,7 +1,9 @@
 #pragma once
 
 #include "basics/Bound2d.h"
+#include "basics/Bound2d_formatter.h"
 #include "basics/Resolution.h"
+#include "basics/Resolution_formatter.h"
 #include "buffers/FilmBufferType.h"
 #include "image/PixelFormat.h"
 #include "scene/RegionToRender.h"

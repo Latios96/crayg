@@ -1,8 +1,6 @@
 #pragma once
 
-#include "sampling/Random.h"
 #include <algorithm>
-#include <fmt/ostream.h>
 #include <ostream>
 #include <tuple>
 
@@ -52,9 +50,7 @@ class Color {
         return {static_cast<float>(r) / 255.f, static_cast<float>(g) / 255.f, static_cast<float>(b) / 255.f};
     }
 
-    static Color createRandom() {
-        return {Random::random(), Random::random(), Random::random()};
-    }
+    static Color createRandom();
 
     Color operator+(const Color &otherColor) const {
         return {r + otherColor.r, g + otherColor.g, b + otherColor.b};
@@ -220,5 +216,3 @@ class Color {
 };
 
 } // namespace crayg
-
-template <> struct fmt::formatter<crayg::Color> : ostream_formatter {};

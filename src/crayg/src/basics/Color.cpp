@@ -11,4 +11,8 @@ std::ostream &operator<<(std::ostream &os, const Color &color) {
     return os;
 }
 
+Color Color::createRandom() {
+    return {Random::random(), Random::random(), Random::random()};
+}
+
 } // namespace crayg

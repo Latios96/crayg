@@ -8,6 +8,7 @@
 #include "VariableLensDistances.h"
 #include "basics/Gradient.h"
 #include "basics/Ray.h"
+#include "basics/Vector3f_formatter.h"
 #include "utils/DtoUtils.h"
 #include <fmt/ostream.h>
 #include <functional>

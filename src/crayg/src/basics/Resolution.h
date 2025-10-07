@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Bound2d.h"
-#include <fmt/ostream.h>
 #include <ostream>
 
 namespace crayg {
@@ -35,5 +34,3 @@ struct Resolution {
 };
 
 }
-
-template <> struct fmt::formatter<crayg::Resolution> : ostream_formatter {};

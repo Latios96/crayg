@@ -1,4 +1,5 @@
 #include "FlareRenderer.h"
+#include "sampling/Random.h"
 #include "sampling/Sampling.h"
 #include "scene/camera/realistic/Wavelengths.h"
 #include "scene/lights/AreaLight.h"

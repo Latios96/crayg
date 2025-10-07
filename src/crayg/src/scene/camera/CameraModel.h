@@ -5,6 +5,7 @@
 #include "utils/DtoUtils.h"
 #include "utils/TaskReporter.h"
 #include <basics/Ray.h>
+#include <basics/Ray_formatter.h>
 #include <basics/Vector2.h>
 #include <fmt/std.h>
 #include <optional>

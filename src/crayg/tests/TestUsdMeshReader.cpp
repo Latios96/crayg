@@ -1,3 +1,4 @@
+#include "basics/Vector2_formatter.h"
 #include "fixtures/UsdGeomMeshFixtures.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"

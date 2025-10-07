@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "CameraUtils.h"
+#include "basics/Transform_formatter.h"
 #include "utils/ToStringHelper.h"
 
 namespace crayg {

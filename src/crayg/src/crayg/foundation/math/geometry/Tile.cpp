@@ -1,4 +1,5 @@
 #include "Tile.h"
+#include "basics/Vector2_formatter.h"
 #include <boost/functional/hash.hpp>
 #include <utils/ToStringHelper.h>
 

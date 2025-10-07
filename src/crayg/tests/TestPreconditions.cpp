@@ -1,6 +1,7 @@
 #include "utils/Exceptions.h"
 #include <basics/Color.h>
 #include <basics/Vector3f.h>
+#include <basics/Vector3f_formatter.h>
 #include <catch2/catch.hpp>
 #include <fmt/format.h>
 #include <utils/Preconditions.h>
