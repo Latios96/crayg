@@ -1,0 +1,1 @@
+python generate_configurations.py --only-hero-cam --only-hero-combination --max-samples 1024
