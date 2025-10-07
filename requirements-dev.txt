@@ -8,3 +8,4 @@ pydantic
 xlrd
 jinja2
 case-converter
+pygount
