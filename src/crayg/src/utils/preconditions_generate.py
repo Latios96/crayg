@@ -1,3 +1,4 @@
+import itertools
 from dataclasses import dataclass
 from typing import List
 
@@ -12,6 +13,14 @@ class Check:
     @property
     def args_str(self):
         return ", ".join(self.args)
+
+    @property
+    def fmt_args_str(self):
+        fmt_args = map(
+            lambda x: (f'fmt::arg("{x}", {x})', f'fmt::arg("{x}Stringified", #{x})'),
+            self.args,
+        )
+        return ", ".join(itertools.chain(*fmt_args))
 
 
 def main():
@@ -131,6 +140,18 @@ def main():
             condition="(!obj.empty())",
             message='fmt::format("{} should not be empty!", #obj)',
         ),
+        Check(
+            name="IS_WITHIN_BOUNDS",
+            args=["point", "bounds"],
+            condition="(bounds.contains(point))",
+            message='fmt::format("({},{}) should be contained within bounds [({},{}),({},{})]!", point.x, point.y, bounds.min.x, bounds.min.y,bounds.max.x, bounds.max.y)',
+        ),
+        Check(
+            name="IS_NOT_WITHIN_BOUNDS",
+            args=["point", "bounds"],
+            condition="(!bounds.contains(point))",
+            message='fmt::format("({},{}) should be contained within bounds [({},{}),({},{})]!", point.x, point.y, bounds.min.x, bounds.min.y,bounds.max.x, bounds.max.y)',
+        ),
     ]
 
     with open("Preconditions.normal.generated.h", "w") as f:
@@ -138,6 +159,9 @@ def main():
         for check in checks:
             f.write(
                 f"#define {prefix}_CHECK_{check.name}({check.args_str}) {prefix}_CHECK_{check.name}_IMPL({check.args_str})\n"
+            )
+            f.write(
+                f"#define {prefix}_CHECK_{check.name}_F({check.args_str}, formatStr, ...) {prefix}_CHECK_{check.name}_IMPL_F({check.args_str}, formatStr __VA_OPT__(,) __VA_ARGS__)\n"
             )
         f.write("// clang-format on\n")
 
@@ -147,6 +171,9 @@ def main():
             f.write(
                 f"#define {prefix}_CHECKD_{check.name}({check.args_str}) {prefix}_CHECK_{check.name}_IMPL({check.args_str})\n"
             )
+            f.write(
+                f"#define {prefix}_CHECKD_{check.name}_F({check.args_str}, formatStr, ...) {prefix}_CHECK_{check.name}_IMPL_F({check.args_str}, formatStr __VA_OPT__(,) __VA_ARGS__)\n"
+            )
         f.write("// clang-format on\n")
 
     with open("Preconditions.debugdisabled.generated.h", "w") as f:
@@ -155,6 +182,9 @@ def main():
             f.write(
                 f"#define {prefix}_CHECKD_{check.name}({check.args_str}) {prefix}_EMPTY_CHECK\n"
             )
+            f.write(
+                f"#define {prefix}_CHECKD_{check.name}_F({check.args_str}, formatStr, ...) {prefix}_EMPTY_CHECK\n"
+            )
         f.write("// clang-format on\n")
 
     with open("Preconditions.impls.generated.h", "w") as f:
@@ -162,6 +192,9 @@ def main():
         for check in checks:
             f.write(
                 f"#define {prefix}_CHECK_{check.name}_IMPL({check.args_str}) {prefix}_CHECK_OR_THROW({check.condition}, {check.message})\n"
+            )
+            f.write(
+                f"#define {prefix}_CHECK_{check.name}_IMPL_F({check.args_str}, formatStr, ...) {prefix}_CHECK_OR_THROW({check.condition}, fmt::format(formatStr __VA_OPT__(,) __VA_ARGS__, {check.fmt_args_str}))\n"
             )
         f.write("// clang-format on\n")
 

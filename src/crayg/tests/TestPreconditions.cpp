@@ -1,4 +1,5 @@
 #include "utils/Exceptions.h"
+#include <basics/Bound2d.h>
 #include <basics/Color.h>
 #include <basics/Vector3f.h>
 #include <basics/Vector3f_formatter.h>
@@ -490,6 +491,48 @@ TEST_CASE("Preconditions:: is not empty", "[Preconditions]") {
 
     SECTION("should fail for string") {
         CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECKD_IS_NOT_EMPTY(emptyStr));
+    };
+#endif
+}
+
+TEST_CASE("Precondisions:: is within bounds") {
+
+    SECTION("should pass") {
+        CRAYG_CHECK_IS_WITHIN_BOUNDS(Vector2i(1, 1), Bounds2di({0, 0}, {2, 2}));
+    };
+
+    SECTION("should fail") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECK_IS_WITHIN_BOUNDS(Vector2i(-1, -1), Bounds2di({0, 0}, {2, 2})));
+    };
+
+#ifdef CRAYG_DEBUG_CHECKS
+    SECTION("should pass") {
+        CRAYG_CHECKD_IS_WITHIN_BOUNDS(Vector2i(1, 1), Bounds2di({0, 0}, {2, 2}));
+    };
+
+    SECTION("should fail") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECKD_IS_WITHIN_BOUNDS(Vector2i(-1, -1), Bounds2di({0, 0}, {2, 2})));
+    };
+#endif
+}
+
+TEST_CASE("Precondisions:: is not within bounds") {
+
+    SECTION("should pass") {
+        CRAYG_CHECK_IS_WITHIN_BOUNDS(Vector2i(1, 1), Bounds2di({0, 0}, {2, 2}));
+    };
+
+    SECTION("should fail") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECK_IS_WITHIN_BOUNDS(Vector2i(-1, -1), Bounds2di({0, 0}, {2, 2})));
+    };
+
+#ifdef CRAYG_DEBUG_CHECKS
+    SECTION("should pass") {
+        CRAYG_CHECKD_IS_WITHIN_BOUNDS(Vector2i(1, 1), Bounds2di({0, 0}, {2, 2}));
+    };
+
+    SECTION("should fail") {
+        CRAYG_VERIFY_CHECK_FAILS(CRAYG_CHECKD_IS_WITHIN_BOUNDS(Vector2i(-1, -1), Bounds2di({0, 0}, {2, 2})));
     };
 #endif
 }
