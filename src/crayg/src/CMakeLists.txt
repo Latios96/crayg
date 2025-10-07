@@ -61,6 +61,7 @@ set(crayg_SRCS
     crayg/foundation/areaiterators/tiles/TileSequences.h
     crayg/foundation/areaiterators/tiles/TileSequenceType.cpp
     crayg/foundation/areaiterators/tiles/TileSequenceType.h
+    crayg/foundation/assertions/Preconditions.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/strings/Humanize.cpp
@@ -455,7 +456,6 @@ set(crayg_SRCS
     utils/ImagePathResolver.h
     utils/NumberParsing.cpp
     utils/NumberParsing.h
-    utils/Preconditions.h
     utils/ProgressReporter.cpp
     utils/ProgressReporter.h
     utils/RemainingTimeCalculator.cpp

@@ -1,8 +1,8 @@
 #include "PixelBuffer.h"
 #include "UnsupportedPixelFormat.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
+#include "crayg/foundation/assertions/Preconditions.h"
 #include "utils/Exceptions.h"
-#include <utils/Preconditions.h>
 
 namespace crayg {
 

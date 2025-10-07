@@ -3,7 +3,7 @@
 #include "FilmValueTrait.h"
 #include "basics/Color.h"
 #include "basics/Vector2.h"
-#include "utils/Preconditions.h"
+#include "crayg/foundation/assertions/Preconditions.h"
 #include <cstdint>
 
 namespace crayg {

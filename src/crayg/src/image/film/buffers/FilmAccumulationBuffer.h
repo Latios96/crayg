@@ -2,10 +2,10 @@
 #include "FilmBufferBase.h"
 #include "basics/Color.h"
 #include "basics/Vector2.h"
+#include "crayg/foundation/assertions/Preconditions.h"
 #include "crayg/foundation/math/geometry/Tile.h"
 #include "utils/AtomicFloats.h"
 #include "utils/Exceptions.h"
-#include "utils/Preconditions.h"
 
 namespace crayg {
 

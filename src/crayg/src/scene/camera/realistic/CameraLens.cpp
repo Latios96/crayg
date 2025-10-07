@@ -1,10 +1,10 @@
 #include "CameraLens.h"
 #include "Logger.h"
 #include "Wavelengths.h"
+#include "crayg/foundation/assertions/Preconditions.h"
 #include "scene/camera/CameraUtils.h"
 #include <fmt/ranges.h>
 #include <iostream>
-#include <utils/Preconditions.h>
 
 namespace crayg {
 
