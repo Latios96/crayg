@@ -1,0 +1,1 @@
+pygount --format=summary --suffix=h,cpp,css,scss,py %~dp0\..\src %~dp0\..\scripts
