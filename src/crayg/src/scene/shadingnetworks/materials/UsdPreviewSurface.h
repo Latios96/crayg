@@ -27,4 +27,4 @@ class UsdPreviewSurface : public Material {
     Color getReflectivity(const SurfaceInteraction &surfaceInteraction);
 };
 
-} // namespace crayg
+}

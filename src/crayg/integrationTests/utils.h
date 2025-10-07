@@ -9,4 +9,4 @@ std::string getOutputFolder(const std::string &suiteName, const std::string &tes
 std::string getOutputFilename(const std::string &suiteName, const std::string &testName,
                               const std::string &extension = ".png");
 
-} // namespace crayg
+}

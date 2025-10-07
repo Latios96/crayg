@@ -16,4 +16,4 @@ class EmissiveMaterial : public Material {
     Color emission;
 };
 
-} // namespace crayg
+}

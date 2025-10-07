@@ -48,5 +48,5 @@ TEST_CASE("SceneIO/sceneWriteReadRendersCorrectly") {
     renderScene(scenePath, getOutputFilename("SceneIO", "sceneWriteReadRendersCorrectly", ".png"));
 }
 
-} // namespace crayg
+}
 #endif // CRAYG_SRC_CRAYG_INTEGRATIONTESTS_SCENEIO_CPP_

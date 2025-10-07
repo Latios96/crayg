@@ -27,4 +27,4 @@ class Material : public ShadingNode {
     virtual void getLobes(const SurfaceInteraction &surfaceInteraction, Lobes &lobes);
 };
 
-} // namespace crayg
+}

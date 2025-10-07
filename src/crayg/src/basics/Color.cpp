@@ -15,4 +15,4 @@ Color Color::createRandom() {
     return {Random::random(), Random::random(), Random::random()};
 }
 
-} // namespace crayg
+}
