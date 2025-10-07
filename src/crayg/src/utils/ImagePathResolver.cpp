@@ -31,7 +31,8 @@ std::filesystem::path ImagePathResolver::resolve(const std::filesystem::path &pa
 
 int ImagePathResolver::parseImageNumber(const std::filesystem::path &path) {
     boost::smatch what;
-    if (!boost::regex_search(path.string(), what, boost::regex("\\.(\\d+)\\."))) {
+    std::string pathString = path.string();
+    if (!boost::regex_search(pathString, what, boost::regex("\\.(\\d+)\\."))) {
         return -1;
     }
     const auto str = what[1].str();
