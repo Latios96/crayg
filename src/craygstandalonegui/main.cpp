@@ -5,6 +5,7 @@
 #include "CraygInfo.h"
 #include "Initialization.h"
 #include "Logger.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "craygstandalonegui/widgets/framebuffer/FrameBufferWidget.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"
@@ -24,7 +25,6 @@
 #include "utils/ImagePathResolver.h"
 #include "utils/StopWatch.h"
 #include "utils/TextureStats.h"
-#include "utils/tracing/CraygTracing.h"
 #include <thread>
 
 namespace crayg {

@@ -2,8 +2,8 @@
 #include "ExitPupilCalculator.h"
 #include "Logger.h"
 #include "Wavelengths.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 #include "sampling/Random.h"
-#include "utils/tracing/CraygTracing.h"
 
 namespace crayg {
 

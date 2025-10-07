@@ -1,9 +1,9 @@
 #include "SubdivisionSurfaceMesh.h"
 #include "FanTriangulator.h"
 #include "OpenSubdivRefiner.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
-#include "utils/tracing/CraygTracing.h"
 
 namespace crayg {
 

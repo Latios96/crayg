@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Logger.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 #include "sceneIO/usd/UsdReadUtils.h"
-#include "utils/tracing/CraygTracing.h"
 #include <compatibility/usd/fmt/SdfPath_formatter.h>
 #include <memory>
 

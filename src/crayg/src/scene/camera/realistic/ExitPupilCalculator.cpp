@@ -1,9 +1,9 @@
 #include "ExitPupilCalculator.h"
 #include "Wavelengths.h"
 #include "basics/math/CommonMath.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 #include "sampling/Random.h"
 #include "utils/StopWatch.h"
-#include "utils/tracing/CraygTracing.h"
 #include <tbb/parallel_for.h>
 
 namespace crayg {

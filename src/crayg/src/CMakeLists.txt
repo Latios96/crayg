@@ -65,6 +65,7 @@ set(crayg_SRCS
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/strings/Humanize.cpp
     crayg/foundation/strings/Humanize.h
+    crayg/foundation/tracing/CraygTracing.h
     CraygInfo.cpp
     CraygInfo.h
     image/ColorConversion.cpp
@@ -466,7 +467,6 @@ set(crayg_SRCS
     utils/TextureStats.cpp
     utils/TextureStats.h
     utils/ToStringHelper.h
-    utils/tracing/CraygTracing.h
     utils/utils.cpp
     utils/utils.h
     utils/ValueMapper.h)

@@ -1,6 +1,6 @@
 #include "ColorConversion.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
-#include "utils/tracing/CraygTracing.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 
 namespace crayg {
 

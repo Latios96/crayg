@@ -1,8 +1,8 @@
 #define CATCH_CONFIG_RUNNER
 
 #include "Initialization.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 #include "fixtures/TemporaryDirectory.h"
-#include "utils/tracing/CraygTracing.h"
 #include <catch2/catch.hpp>
 #include <fmt/format.h>
 

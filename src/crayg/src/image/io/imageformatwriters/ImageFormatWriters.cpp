@@ -1,9 +1,9 @@
 #include "ImageFormatWriters.h"
 
 #include "Logger.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 #include "exr/OpenExrImageFormatWriter.h"
 #include "png/PngImageFormatWriter.h"
-#include "utils/tracing/CraygTracing.h"
 
 namespace crayg {
 

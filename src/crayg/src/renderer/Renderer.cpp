@@ -4,6 +4,7 @@
 #include "SampleAccumulator.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequences.h"
 #include "crayg/foundation/areaiterators/tiles/tilequeues/TileQueue.h"
+#include "crayg/foundation/tracing/CraygTracing.h"
 #include "image/ImageAlgorithms.h"
 #include "integrators/IntegratorFactory.h"
 #include "integrators/RaytracingIntegrator.h"
@@ -16,7 +17,6 @@
 #include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
 #include "utils/TaskReporter.h"
-#include "utils/tracing/CraygTracing.h"
 #include <Imath/half.h>
 #include <crayg/foundation/areaiterators/tiles/TileSequence.h>
 #include <image/ImageTile.h>
