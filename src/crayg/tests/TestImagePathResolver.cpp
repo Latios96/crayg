@@ -40,23 +40,27 @@ TEST_CASE("ImagePathResolver should replace #") {
 TEST_CASE("ImagePathResolver::parseImageNumber") {
 
     SECTION("should parse '1001'") {
-        int frameNumber = ImagePathResolver::parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.1001.png");
-        REQUIRE(frameNumber == 1001);
+        const std::optional<int> frameNumber =
+            ImagePathResolver::parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.1001.png");
+        REQUIRE(*frameNumber == 1001);
     }
 
     SECTION("should parse '0001'") {
-        int frameNumber = ImagePathResolver::parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.0001.png");
-        REQUIRE(frameNumber == 0001);
+        const std::optional<int> frameNumber =
+            ImagePathResolver::parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.0001.png");
+        REQUIRE(*frameNumber == 0001);
     }
 
     SECTION("should parse '0000'") {
-        int frameNumber = ImagePathResolver::parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.0000.png");
-        REQUIRE(frameNumber == 0000);
+        const std::optional<int> frameNumber =
+            ImagePathResolver::parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.0000.png");
+        REQUIRE(*frameNumber == 0000);
     }
 
     SECTION("should parse '-1'") {
-        int frameNumber = ImagePathResolver::parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.png");
-        REQUIRE(frameNumber == -1);
+        const std::optional<int> frameNumber =
+            ImagePathResolver::parseImageNumber("1203e5c176ab4e7fbe124ae4258131b4.png");
+        REQUIRE_FALSE(frameNumber.has_value());
     }
 }
 

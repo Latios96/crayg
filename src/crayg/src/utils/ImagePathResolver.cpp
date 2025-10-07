@@ -20,20 +20,20 @@ std::filesystem::path ImagePathResolver::resolve(const std::filesystem::path &pa
         if (!isRegularFile | !isMatching) {
             continue;
         }
-        int f = parseImageNumber(entry.path().string());
-        if (f > frameNumber) {
-            frameNumber = f;
+        auto parsedFrameNumber = parseImageNumber(entry.path().string());
+        if (parsedFrameNumber.has_value()) {
+            frameNumber = *parsedFrameNumber;
         }
     }
     return boost::regex_replace(pathTemplate.string(), boost::regex("\\.#\\."),
                                 fmt::format(".{:0>4}.", frameNumber + 1));
 }
 
-int ImagePathResolver::parseImageNumber(const std::filesystem::path &path) {
+std::optional<int> ImagePathResolver::parseImageNumber(const std::filesystem::path &path) {
     boost::smatch what;
     std::string pathString = path.string();
     if (!boost::regex_search(pathString, what, boost::regex("\\.(\\d+)\\."))) {
-        return -1;
+        return std::nullopt;
     }
     const auto str = what[1].str();
     return std::stoi(str);
