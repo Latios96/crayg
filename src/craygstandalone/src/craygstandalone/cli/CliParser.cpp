@@ -167,10 +167,10 @@ CliParseResult CliParser::parse() {
     } catch (const CLI::Error &e) {
         std::stringstream out;
         app.exit(e, out, out);
-        return CliParseResult(std::nullopt, std::optional<std::string>(out.str()));
+        return CliParseResult(std::nullopt, out.str());
     } catch (const std::runtime_error &e) {
         const std::string &right = app.help("", CLI::AppFormatMode::All);
-        return CliParseResult(std::nullopt, std::optional<std::string>(right));
+        return CliParseResult(std::nullopt, right);
     }
 }
 
