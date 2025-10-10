@@ -1,7 +1,7 @@
 #pragma once
 
 #include "UsdTypeUtil.h"
-#include "utils/EnumParser.h"
+#include "crayg/foundation/enums/EnumParser.h"
 #include "utils/Exceptions.h"
 #include <compatibility/usd/fmt/SdfValueTypeName_formatter.h>
 #include <compatibility/usd/fmt/TfToken_formatter.h>

@@ -1,7 +1,7 @@
 #pragma once
 
+#include "crayg/foundation/enums/EnumFormatter.h"
 #include "scene/shadingnetworks/ShadingNode.h"
-#include "utils/EnumFormatter.h"
 
 namespace crayg {
 

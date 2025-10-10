@@ -1,5 +1,5 @@
 #pragma once
-#include "utils/EnumFormatter.h"
+#include "crayg/foundation/enums/EnumFormatter.h"
 #include <fmt/format.h>
 #include <lodepng.h>
 #include <magic_enum.hpp>

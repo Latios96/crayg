@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils/EnumFormatter.h"
+#include "crayg/foundation/enums/EnumFormatter.h"
 #include "utils/Exceptions.h"
 #include <basics/Color.h>
 #include <basics/Vector2.h>

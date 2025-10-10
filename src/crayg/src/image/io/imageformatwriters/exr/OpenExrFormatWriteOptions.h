@@ -1,7 +1,7 @@
 #pragma once
 
+#include "crayg/foundation/enums/EnumFormatter.h"
 #include "image/io/imageformatwriters/BaseImageFormatWriteOptions.h"
-#include "utils/EnumFormatter.h"
 #include <ImfCompression.h>
 #include <ImfPixelType.h>
 #include <ostream>

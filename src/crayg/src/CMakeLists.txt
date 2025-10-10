@@ -62,6 +62,8 @@ set(crayg_SRCS
     crayg/foundation/areaiterators/tiles/TileSequenceType.cpp
     crayg/foundation/areaiterators/tiles/TileSequenceType.h
     crayg/foundation/assertions/Preconditions.h
+    crayg/foundation/enums/EnumFormatter.h
+    crayg/foundation/enums/EnumParser.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/strings/Humanize.cpp
@@ -440,8 +442,6 @@ set(crayg_SRCS
     utils/BitCast.h
     utils/CraygMain.h
     utils/DtoUtils.h
-    utils/EnumFormatter.h
-    utils/EnumParser.h
     utils/Exceptions.cpp
     utils/Exceptions.h
     utils/FileSystemUtils.cpp

@@ -1,8 +1,8 @@
 #include "LensFileExtendedFormatReader.h"
+#include "crayg/foundation/enums/EnumParser.h"
 #include "scene/camera/realistic/LensGeometry.h"
 #include "scene/camera/realistic/LensMaterial.h"
 #include "scene/camera/realistic/lensio/LensFileParseUtils.h"
-#include "utils/EnumParser.h"
 #include "utils/Exceptions.h"
 #include "utils/utils.h"
 #include <boost/algorithm/string/case_conv.hpp>

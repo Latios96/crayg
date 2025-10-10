@@ -1,4 +1,4 @@
-#include "utils/EnumParser.h"
+#include "crayg/foundation/enums/EnumParser.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

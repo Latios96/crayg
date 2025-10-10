@@ -1,7 +1,7 @@
 #pragma once
 
+#include "crayg/foundation/enums/EnumFormatter.h"
 #include "scene/shadingnetworks/ShadingNode.h"
-#include "utils/EnumFormatter.h"
 #include <OpenImageIO/imagecache.h>
 #include <OpenImageIO/texture.h>
 #include <atomic>

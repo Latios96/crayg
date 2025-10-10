@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Logger.h"
-#include "utils/EnumFormatter.h"
+#include "crayg/foundation/enums/EnumFormatter.h"
 #include <chrono>
 #include <fmt/chrono.h>
 #include <optional>

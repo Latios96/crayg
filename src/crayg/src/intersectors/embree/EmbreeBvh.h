@@ -1,7 +1,7 @@
 #pragma once
 
+#include "crayg/foundation/enums/EnumFormatter.h"
 #include "utils/DtoUtils.h"
-#include "utils/EnumFormatter.h"
 #include <embree3/rtcore.h>
 #include <unordered_map>
 
