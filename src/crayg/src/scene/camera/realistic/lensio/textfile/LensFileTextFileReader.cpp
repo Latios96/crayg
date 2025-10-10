@@ -1,5 +1,5 @@
 #include "LensFileTextFileReader.h"
-#include "utils/utils.h"
+#include "crayg/foundation/strings/CommentStripper.h"
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim_all.hpp>
 #include <regex>
@@ -19,7 +19,7 @@ CameraLens LensFileTextFileReader::readFileContent(const std::string &content) {
 
     bool hasSeenLensCount = false;
     for (auto &line : lines) {
-        line = stripCommentFromLine(line);
+        line = CommentStripper::stripCommentFromLine(line);
         if (line.empty()) {
             continue;
         }

@@ -66,6 +66,8 @@ set(crayg_SRCS
     crayg/foundation/enums/EnumParser.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
+    crayg/foundation/strings/CommentStripper.cpp
+    crayg/foundation/strings/CommentStripper.h
     crayg/foundation/strings/Humanize.cpp
     crayg/foundation/strings/Humanize.h
     crayg/foundation/strings/NumberParsing.cpp
@@ -467,8 +469,6 @@ set(crayg_SRCS
     utils/TextureStats.cpp
     utils/TextureStats.h
     utils/ToStringHelper.h
-    utils/utils.cpp
-    utils/utils.h
     utils/ValueMapper.h)
 
 add_library(crayg STATIC ${crayg_SRCS})

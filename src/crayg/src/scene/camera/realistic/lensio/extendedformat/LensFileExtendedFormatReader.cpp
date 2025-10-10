@@ -1,10 +1,10 @@
 #include "LensFileExtendedFormatReader.h"
 #include "crayg/foundation/enums/EnumParser.h"
+#include "crayg/foundation/strings/CommentStripper.h"
 #include "scene/camera/realistic/LensGeometry.h"
 #include "scene/camera/realistic/LensMaterial.h"
 #include "scene/camera/realistic/lensio/LensFileParseUtils.h"
 #include "utils/Exceptions.h"
-#include "utils/utils.h"
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -276,7 +276,7 @@ CameraLens LensFileExtendedFormatReader::readFileContent(const std::string &cont
 
     for (int i = 0; i < lines.size(); i++) {
         auto &line = lines[i];
-        line = stripCommentFromLine(line);
+        line = CommentStripper::stripCommentFromLine(line);
         if (line.empty()) {
             continue;
         }
