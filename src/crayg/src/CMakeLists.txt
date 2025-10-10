@@ -164,6 +164,8 @@ set(crayg_SRCS
     renderer/FlareRenderer.h
     renderer/GeometryCompiler.cpp
     renderer/GeometryCompiler.h
+    renderer/ImageMetadataCollector.cpp
+    renderer/ImageMetadataCollector.h
     renderer/Renderer.cpp
     renderer/Renderer.h
     renderer/SampleAccumulator.cpp

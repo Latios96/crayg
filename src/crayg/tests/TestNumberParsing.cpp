@@ -1,4 +1,4 @@
-#include "utils/NumberParsing.h"
+#include "../src/crayg/foundation/strings/NumberParsing.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

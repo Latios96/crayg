@@ -1,6 +1,6 @@
+#include "../src/renderer/ImageMetadataCollector.h"
 #include "fixtures/CameraLensFixtures.h"
 #include "scene/primitives/Sphere.h"
-#include "utils/ImageMetadataCollector.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
