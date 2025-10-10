@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Logger.h"
+#include "crayg/foundation/objects/DtoUtils.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include "sceneIO/write/usd/base/BaseUsdWriter.h"
-#include "utils/DtoUtils.h"
 #include <memory>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdShade/shader.h>

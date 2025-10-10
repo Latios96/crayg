@@ -1,5 +1,5 @@
 #pragma once
-#include "utils/DtoUtils.h"
+#include "crayg/foundation/objects/DtoUtils.h"
 
 namespace crayg {
 

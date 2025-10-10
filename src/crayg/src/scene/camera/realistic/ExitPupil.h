@@ -3,7 +3,7 @@
 #include "basics/Bound2d.h"
 #include "basics/Vector2.h"
 #include "basics/Vector2_formatter.h"
-#include "utils/DtoUtils.h"
+#include "crayg/foundation/objects/DtoUtils.h"
 
 namespace crayg {
 

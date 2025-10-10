@@ -66,6 +66,7 @@ set(crayg_SRCS
     crayg/foundation/enums/EnumParser.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
+    crayg/foundation/objects/DtoUtils.h
     crayg/foundation/strings/CommentStripper.cpp
     crayg/foundation/strings/CommentStripper.h
     crayg/foundation/strings/Humanize.cpp
@@ -447,7 +448,6 @@ set(crayg_SRCS
     utils/AtomicFloats.h
     utils/BitCast.h
     utils/CraygMain.h
-    utils/DtoUtils.h
     utils/Exceptions.cpp
     utils/Exceptions.h
     utils/FileSystemUtils.cpp

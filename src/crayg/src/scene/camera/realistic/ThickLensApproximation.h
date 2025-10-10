@@ -1,7 +1,7 @@
 #pragma once
 
 #include "basics/Ray.h"
-#include "utils/DtoUtils.h"
+#include "crayg/foundation/objects/DtoUtils.h"
 
 namespace crayg {
 

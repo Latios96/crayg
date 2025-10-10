@@ -5,11 +5,11 @@
 
 #include "Initialization.h"
 #include "crayg/foundation/enums/EnumParser.h"
+#include "crayg/foundation/objects/DtoUtils.h"
 #include "scene/camera/realistic/ExitPupilCalculator.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "scene/camera/realistic/lensio/LensFileWriterFactory.h"
 #include "utils/CraygMain.h"
-#include "utils/DtoUtils.h"
 #include <nlohmann/json.hpp>
 
 namespace crayg {

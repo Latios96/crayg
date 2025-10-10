@@ -1,10 +1,10 @@
 #pragma once
 
+#include "crayg/foundation/objects/DtoUtils.h"
 #include "image/ImageTile.h"
 #include "outputdrivers/NextGenOutputDriver.h"
 #include <chrono>
 #include <tbb/concurrent_vector.h>
-#include <utils/DtoUtils.h>
 
 namespace crayg {
 

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "basics/Resolution.h"
+#include "crayg/foundation/objects/DtoUtils.h"
 #include "scene/RenderSettings.h"
-#include "utils/DtoUtils.h"
 #include <fmt/std.h>
 #include <optional>
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "crayg/foundation/enums/EnumFormatter.h"
-#include "utils/DtoUtils.h"
+#include "crayg/foundation/objects/DtoUtils.h"
 #include <ostream>
 
 namespace crayg {
