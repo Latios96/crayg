@@ -68,6 +68,8 @@ set(crayg_SRCS
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/strings/Humanize.cpp
     crayg/foundation/strings/Humanize.h
+    crayg/foundation/strings/NumberParsing.cpp
+    crayg/foundation/strings/NumberParsing.h
     crayg/foundation/tracing/CraygTracing.h
     CraygInfo.cpp
     CraygInfo.h
@@ -452,12 +454,8 @@ set(crayg_SRCS
     utils/Heatmap.h
     utils/ImageChannelPathResolver.cpp
     utils/ImageChannelPathResolver.h
-    utils/ImageMetadataCollector.cpp
-    utils/ImageMetadataCollector.h
     utils/ImagePathResolver.cpp
     utils/ImagePathResolver.h
-    utils/NumberParsing.cpp
-    utils/NumberParsing.h
     utils/ProgressReporter.cpp
     utils/ProgressReporter.h
     utils/RemainingTimeCalculator.cpp
