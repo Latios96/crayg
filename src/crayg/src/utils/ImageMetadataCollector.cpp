@@ -112,7 +112,7 @@ void ImageMetadataCollector::collectCamera(ImageMetadata &imageMetadata) {
     }
 }
 
-void ImageMetadataCollector::collectSceneStats(crayg::ImageMetadata &imageMetadata) {
+void ImageMetadataCollector::collectSceneStats(ImageMetadata &imageMetadata) {
     if (scene == nullptr) {
         return;
     }
