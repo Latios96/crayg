@@ -12,7 +12,7 @@ namespace crayg {
 
 typedef std::variant<std::string, int, float, std::chrono::seconds> _ImageMetadataValue;
 
-struct ImageMetadataValue : std::variant<std::string, int, float, std::chrono::seconds> {
+struct ImageMetadataValue : _ImageMetadataValue {
 
     ImageMetadataValue() = default;
 
