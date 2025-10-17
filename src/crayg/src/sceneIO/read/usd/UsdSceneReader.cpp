@@ -1,7 +1,7 @@
 #include "sceneIO/read/usd/UsdSceneReader.h"
 #include "UsdStageReader.h"
+#include "crayg/foundation/progress/StopWatch.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
-#include "utils/StopWatch.h"
 #include <pxr/usd/usd/stage.h>
 
 namespace crayg {

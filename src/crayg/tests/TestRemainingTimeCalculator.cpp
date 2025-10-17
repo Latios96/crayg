@@ -1,5 +1,5 @@
+#include "crayg/foundation/progress/RemainingTimeCalculator.h"
 #include <catch2/catch.hpp>
-#include <utils/RemainingTimeCalculator.h>
 
 namespace crayg {
 

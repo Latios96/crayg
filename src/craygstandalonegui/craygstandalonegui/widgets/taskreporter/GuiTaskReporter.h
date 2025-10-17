@@ -3,7 +3,7 @@
 // clang-format off
 #include <QObject>
 // clang-format on
-#include "utils/TaskReporter.h"
+#include "crayg/foundation/progress/TaskReporter.h"
 
 namespace crayg {
 

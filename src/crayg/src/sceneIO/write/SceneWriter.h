@@ -1,7 +1,6 @@
 #pragma once
 
 #include "scene/Scene.h"
-#include <utils/StopWatch.h>
 
 namespace crayg {
 

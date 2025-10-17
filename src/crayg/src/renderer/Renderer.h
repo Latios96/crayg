@@ -2,10 +2,10 @@
 
 #include "TileStats.h"
 #include "crayg/foundation/areaiterators/tiles/tilequeues/TileQueue.h"
+#include "crayg/foundation/progress/TaskReporter.h"
 #include "integrators/AbstractIntegrator.h"
 #include "scene/camera/pinhole/PinholeCameraModel.h"
 #include "tilesamplers/TileSampler.h"
-#include "utils/TaskReporter.h"
 #include <basics/Color.h>
 #include <basics/Resolution.h>
 #include <image/Image.h>

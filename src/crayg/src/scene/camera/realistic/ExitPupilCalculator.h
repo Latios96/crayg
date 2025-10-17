@@ -4,7 +4,7 @@
 #include "ExitPupil.h"
 #include "basics/Bound2d.h"
 #include "crayg/foundation/objects/DtoUtils.h"
-#include "utils/TaskReporter.h"
+#include "crayg/foundation/progress/TaskReporter.h"
 #include <array>
 
 namespace crayg {

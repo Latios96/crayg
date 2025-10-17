@@ -1,8 +1,8 @@
 #pragma once
 
+#include "crayg/foundation/progress/TaskReporter.h"
 #include "outputdrivers/NextGenOutputDriver.h"
 #include "scene/Scene.h"
-#include "utils/TaskReporter.h"
 
 namespace crayg {
 

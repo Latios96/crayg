@@ -1,8 +1,8 @@
 #pragma once
 
 #include "crayg/foundation/math/geometry/Tile.h"
+#include "crayg/foundation/progress/TaskReporter.h"
 #include "image/ImageTile.h"
-#include "utils/TaskReporter.h"
 #include <QMetaType>
 #include <image/ImageMetadata.h>
 #include <image/ImageSpec.h>

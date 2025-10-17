@@ -1,8 +1,8 @@
 #pragma once
 
+#include "crayg/foundation/progress/TaskReporter.h"
 #include "scene/Scene.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
-#include "utils/TaskReporter.h"
 
 namespace crayg {
 

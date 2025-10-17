@@ -3,7 +3,7 @@
 #include "Camera.h"
 #include "basics/Resolution.h"
 #include "crayg/foundation/objects/DtoUtils.h"
-#include "utils/TaskReporter.h"
+#include "crayg/foundation/progress/TaskReporter.h"
 #include <basics/Ray.h>
 #include <basics/Ray_formatter.h>
 #include <basics/Vector2.h>

@@ -5,6 +5,8 @@
 #include "SampleAccumulator.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequences.h"
 #include "crayg/foundation/areaiterators/tiles/tilequeues/TileQueue.h"
+#include "crayg/foundation/progress/StopWatch.h"
+#include "crayg/foundation/progress/TaskReporter.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "image/ImageAlgorithms.h"
 #include "integrators/IntegratorFactory.h"
@@ -14,8 +16,6 @@
 #include "sampling/Random.h"
 #include "scene/camera/CameraModelFactory.h"
 #include "scene/camera/realistic/Wavelengths.h"
-#include "utils/StopWatch.h"
-#include "utils/TaskReporter.h"
 #include <Imath/half.h>
 #include <crayg/foundation/areaiterators/tiles/TileSequence.h>
 #include <image/ImageTile.h>

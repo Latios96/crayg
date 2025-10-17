@@ -70,6 +70,12 @@ set(crayg_SRCS
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/objects/DtoUtils.h
+    crayg/foundation/progress/RemainingTimeCalculator.cpp
+    crayg/foundation/progress/RemainingTimeCalculator.h
+    crayg/foundation/progress/StopWatch.cpp
+    crayg/foundation/progress/StopWatch.h
+    crayg/foundation/progress/TaskReporter.cpp
+    crayg/foundation/progress/TaskReporter.h
     crayg/foundation/strings/CommentStripper.cpp
     crayg/foundation/strings/CommentStripper.h
     crayg/foundation/strings/Humanize.cpp
@@ -459,12 +465,6 @@ set(crayg_SRCS
     utils/ImageChannelPathResolver.h
     utils/ImagePathResolver.cpp
     utils/ImagePathResolver.h
-    utils/RemainingTimeCalculator.cpp
-    utils/RemainingTimeCalculator.h
-    utils/StopWatch.cpp
-    utils/StopWatch.h
-    utils/TaskReporter.cpp
-    utils/TaskReporter.h
     utils/TextureStats.cpp
     utils/TextureStats.h
     utils/ToStringHelper.h)

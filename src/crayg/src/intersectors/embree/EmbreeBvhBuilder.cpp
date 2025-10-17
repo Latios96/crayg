@@ -1,5 +1,6 @@
 #include "EmbreeBvhBuilder.h"
 
+#include "crayg/foundation/progress/StopWatch.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "scene/lights/DiskLight.h"
 #include "scene/lights/RectLight.h"
@@ -8,7 +9,6 @@
 #include "scene/primitives/PointInstancer.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
-#include "utils/StopWatch.h"
 
 namespace crayg {
 EmbreeBvhBuilder::EmbreeBvhBuilder(const Scene &scene) : scene(scene) {

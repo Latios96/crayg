@@ -1,4 +1,4 @@
-#include "utils/TaskReporter.h"
+#include "crayg/foundation/progress/TaskReporter.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
