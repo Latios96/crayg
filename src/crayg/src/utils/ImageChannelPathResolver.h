@@ -7,7 +7,7 @@ namespace crayg {
 
 class ImageChannelPathResolver {
   public:
-    std::string resolve(const std::filesystem::path &path, const std::string &channelName);
+    std::filesystem::path resolve(const std::filesystem::path &path, const std::string &channelName);
 };
 
 }

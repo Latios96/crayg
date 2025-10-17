@@ -4,7 +4,8 @@
 #include <fmt/format.h>
 
 namespace crayg {
-std::string ImageChannelPathResolver::resolve(const std::filesystem::path &path, const std::string &channelName) {
+std::filesystem::path ImageChannelPathResolver::resolve(const std::filesystem::path &path,
+                                                        const std::string &channelName) {
     if (channelName == "rgb") {
         return path;
     }
