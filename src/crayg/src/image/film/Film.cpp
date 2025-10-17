@@ -1,6 +1,6 @@
 #include "Film.h"
+#include "crayg/foundation/enums/ValueMapper.h"
 #include "image/Image.h"
-#include "utils/ValueMapper.h"
 
 namespace crayg {
 Film::Film(int width, int height)

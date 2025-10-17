@@ -1,4 +1,4 @@
-#include "utils/ValueMapper.h"
+#include "crayg/foundation/enums/ValueMapper.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {
