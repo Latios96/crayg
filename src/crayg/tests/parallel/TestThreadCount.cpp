@@ -1,5 +1,5 @@
 
-#include "parallel/ThreadCount.h"
+#include "crayg/foundation/parallel/ThreadCount.h"
 
 #include <catch2/catch.hpp>
 #include <thread>

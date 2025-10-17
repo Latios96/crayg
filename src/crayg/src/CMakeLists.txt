@@ -71,6 +71,9 @@ set(crayg_SRCS
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/objects/DtoUtils.h
     crayg/foundation/objects/ToStringHelper.h
+    crayg/foundation/parallel/ParallelLoops.h
+    crayg/foundation/parallel/ThreadCount.cpp
+    crayg/foundation/parallel/ThreadCount.h
     crayg/foundation/progress/RemainingTimeCalculator.cpp
     crayg/foundation/progress/RemainingTimeCalculator.h
     crayg/foundation/progress/StopWatch.cpp
@@ -172,9 +175,6 @@ set(crayg_SRCS
     outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.h
-    parallel/ParallelLoops.h
-    parallel/ThreadCount.cpp
-    parallel/ThreadCount.h
     renderer/FlareRenderer.cpp
     renderer/FlareRenderer.h
     renderer/GeometryCompiler.cpp

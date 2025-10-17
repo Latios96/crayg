@@ -1,5 +1,5 @@
 #include "basics/Resolution.h"
-#include "parallel/ParallelLoops.h"
+#include "crayg/foundation/parallel/ParallelLoops.h"
 #include <catch2/catch.hpp>
 #include <set>
 #include <tbb/concurrent_set.h>

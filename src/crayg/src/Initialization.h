@@ -1,5 +1,5 @@
 #pragma once
-#include "parallel/ThreadCount.h"
+#include "crayg/foundation/parallel/ThreadCount.h"
 
 namespace crayg {
 
