@@ -4,8 +4,8 @@
 
 namespace crayg {
 
-std::string normalize(const std::string &p) {
-    return (std::filesystem::absolute(std::filesystem::path(p))).string();
+std::filesystem::path normalize(const std::string &p) {
+    return std::filesystem::absolute(std::filesystem::path(p));
 }
 
 TEST_CASE("ImageChannelPathResolver::resolve") {
