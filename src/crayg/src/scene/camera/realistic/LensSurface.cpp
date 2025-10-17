@@ -1,7 +1,7 @@
 #include "LensSurface.h"
 
 #include "basics/math/QuadraticEquations.h"
-#include "utils/ToStringHelper.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 #include <cmath>
 
 namespace crayg {

@@ -1,7 +1,7 @@
 #include "LensMaterial.h"
 #include "Logger.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
-#include "utils/ToStringHelper.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 #include <pystring.h>
 
 namespace crayg {

@@ -1,8 +1,8 @@
 #include "Light.h"
 #include "basics/Color_formatter.h"
 #include "basics/Ray_formatter.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 #include "scene/shadingnetworks/materials/EmissiveMaterial.h"
-#include "utils/ToStringHelper.h"
 
 namespace crayg {
 

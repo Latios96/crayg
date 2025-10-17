@@ -1,6 +1,6 @@
 #include "OrthonormalBasis.h"
 #include "basics/Vector3f_formatter.h"
-#include "utils/ToStringHelper.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 
 namespace crayg {
 

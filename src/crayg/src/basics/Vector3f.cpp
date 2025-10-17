@@ -1,5 +1,5 @@
 #include "Vector3f.h"
-#include <utils/ToStringHelper.h>
+#include "crayg/foundation/objects/ToStringHelper.h"
 
 namespace crayg {
 std::ostream &operator<<(std::ostream &os, const Vector3f &f) {

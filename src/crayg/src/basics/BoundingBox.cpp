@@ -1,5 +1,5 @@
 #include "BoundingBox.h"
-#include <utils/ToStringHelper.h>
+#include "crayg/foundation/objects/ToStringHelper.h"
 
 namespace crayg {
 

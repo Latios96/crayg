@@ -1,7 +1,7 @@
 #include "Tile.h"
 #include "basics/Vector2_formatter.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 #include <boost/functional/hash.hpp>
-#include <utils/ToStringHelper.h>
 
 namespace crayg {
 

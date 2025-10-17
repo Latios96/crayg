@@ -1,8 +1,8 @@
 #pragma once
 
 #include "TriangleMeshAbstractPrimVar.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 #include "scene/primitives/trianglemesh/BarycentricCoordinates.h"
-#include "utils/ToStringHelper.h"
 #include <basics/Vector3f_formatter.h>
 #include <fmt/ostream.h>
 #include <fmt/ranges.h>

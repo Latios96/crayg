@@ -2,7 +2,7 @@
 
 #include "Vector2.h"
 #include "basics/math/CommonMath.h"
-#include "utils/ToStringHelper.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 #include <ostream>
 
 namespace crayg {

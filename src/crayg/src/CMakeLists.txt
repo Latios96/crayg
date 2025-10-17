@@ -70,6 +70,7 @@ set(crayg_SRCS
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/objects/DtoUtils.h
+    crayg/foundation/objects/ToStringHelper.h
     crayg/foundation/progress/RemainingTimeCalculator.cpp
     crayg/foundation/progress/RemainingTimeCalculator.h
     crayg/foundation/progress/StopWatch.cpp
@@ -466,8 +467,7 @@ set(crayg_SRCS
     utils/ImagePathResolver.cpp
     utils/ImagePathResolver.h
     utils/TextureStats.cpp
-    utils/TextureStats.h
-    utils/ToStringHelper.h)
+    utils/TextureStats.h)
 
 add_library(crayg STATIC ${crayg_SRCS})
 

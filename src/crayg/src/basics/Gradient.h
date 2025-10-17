@@ -2,7 +2,7 @@
 
 #include "Color.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
-#include "utils/ToStringHelper.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 #include <ostream>

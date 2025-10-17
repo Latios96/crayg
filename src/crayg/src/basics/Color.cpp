@@ -1,8 +1,8 @@
 #include "Color.h"
+#include "crayg/foundation/objects/ToStringHelper.h"
 #include "sampling/Random.h"
 #include <algorithm>
 #include <tuple>
-#include <utils/ToStringHelper.h>
 
 namespace crayg {
 
