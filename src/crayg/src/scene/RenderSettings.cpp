@@ -1,8 +1,8 @@
 #include "RenderSettings.h"
 #include "basics/Resolution_formatter.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <fmt/std.h>
 #include <regex>
-#include <utils/Exceptions.h>
 #include <utils/ToStringHelper.h>
 
 namespace crayg {

@@ -2,7 +2,7 @@
 #include "AmbientOcclusionIntegrator.h"
 #include "DebugIntegrator.h"
 #include "RaytracingIntegrator.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 
 namespace crayg {
 

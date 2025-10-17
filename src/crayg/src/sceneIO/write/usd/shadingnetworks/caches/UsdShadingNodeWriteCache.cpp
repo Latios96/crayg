@@ -1,4 +1,5 @@
 #include "UsdShadingNodeWriteCache.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "scene/shadingnetworks/shadingnodes/CheckerBoard.h"
 #include "scene/shadingnetworks/shadingnodes/ConversionNodes.h"
 #include "scene/shadingnetworks/shadingnodes/FileTexture.h"
@@ -7,7 +8,6 @@
 #include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.h"
 #include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.h"
 #include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderWriters.h"
-#include "utils/Exceptions.h"
 
 namespace crayg {
 

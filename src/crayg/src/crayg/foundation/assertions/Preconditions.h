@@ -8,7 +8,7 @@
 
 #ifdef CRAYG_DEBUG_CHECKS
 
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <fmt/format.h>
 
 #include "Preconditions.debug.generated.h"

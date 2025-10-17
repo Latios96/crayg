@@ -4,7 +4,7 @@
 #include "MortonSequence.h"
 #include "ScanlineSequence.h"
 #include "SpiralSequence.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <fmt/format.h>
 
 namespace crayg {

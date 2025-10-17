@@ -1,7 +1,7 @@
 #pragma once
 
 #include "crayg/foundation/enums/EnumFormatter.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <basics/Color.h>
 #include <basics/Vector2.h>
 #include <functional>

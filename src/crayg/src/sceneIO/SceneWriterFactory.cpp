@@ -1,7 +1,7 @@
 #include "SceneWriterFactory.h"
 #include "Logger.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "sceneIO/write/usd/UsdSceneWriter.h"
-#include "utils/Exceptions.h"
 #include <filesystem>
 
 namespace crayg {

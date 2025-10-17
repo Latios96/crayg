@@ -1,7 +1,7 @@
 #include "TileSamplerFactory.h"
 #include "AdaptiveTileSampler.h"
 #include "UniformTileSampler.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 
 namespace crayg {
 

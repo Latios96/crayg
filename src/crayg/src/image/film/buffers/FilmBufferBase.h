@@ -4,8 +4,8 @@
 #include "basics/Resolution.h"
 #include "basics/Vector2.h"
 #include "crayg/foundation/assertions/Preconditions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "image/PixelFormat.h"
-#include "utils/Exceptions.h"
 
 #include <fmt/format.h>
 #include <string>

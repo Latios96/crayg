@@ -1,6 +1,7 @@
 #include "UsdStageReader.h"
 #include "Logger.h"
 #include "UsdRenderSettingsReader.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "scene/primitives/GroundPlane.h"
 #include "sceneIO/read/usd/camera/UsdCameraReader.h"
 #include "sceneIO/read/usd/lights/UsdDiskLightReader.h"
@@ -10,7 +11,6 @@
 #include "sceneIO/read/usd/primitives/UsdPointInstancerReader.h"
 #include "sceneIO/read/usd/primitives/UsdSphereReader.h"
 #include "sceneIO/read/usd/primitives/UsdSubdivisionSurfaceMeshReader.h"
-#include "utils/Exceptions.h"
 #include <fmt/format.h>
 #include <pxr/usd/usd/prim.h>
 #include <pxr/usd/usd/primFlags.h>

@@ -2,7 +2,7 @@
 
 #include "Matrix4x4f.h"
 #include "Ray.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <ostream>
 
 namespace crayg {

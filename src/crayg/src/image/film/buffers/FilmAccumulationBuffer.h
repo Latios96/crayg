@@ -3,9 +3,9 @@
 #include "basics/Color.h"
 #include "basics/Vector2.h"
 #include "crayg/foundation/assertions/Preconditions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/math/geometry/Tile.h"
 #include "utils/AtomicFloats.h"
-#include "utils/Exceptions.h"
 
 namespace crayg {
 

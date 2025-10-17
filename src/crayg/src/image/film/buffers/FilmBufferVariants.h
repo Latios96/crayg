@@ -2,8 +2,8 @@
 #include "FilmAccumulationBuffer.h"
 #include "FilmSumBuffer.h"
 #include "FilmValueBuffer.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "image/PixelFormat.h"
-#include "utils/Exceptions.h"
 #include <optional>
 
 namespace crayg {

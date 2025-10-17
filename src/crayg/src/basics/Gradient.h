@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Color.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "utils/ToStringHelper.h"
 #include <fmt/format.h>
 #include <fmt/ostream.h>

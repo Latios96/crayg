@@ -2,7 +2,7 @@
 #include "basics/Vector2.h"
 #include "basics/Vector2_formatter.h"
 #include "crayg/foundation/assertions/Preconditions.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <vector>
 
 #include <cstddef>

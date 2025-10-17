@@ -2,7 +2,7 @@
 #include "UnsupportedPixelFormat.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "crayg/foundation/assertions/Preconditions.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 
 namespace crayg {
 

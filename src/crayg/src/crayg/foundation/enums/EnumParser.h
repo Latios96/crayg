@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <fmt/format.h>
 #include <magic_enum.hpp>
 #include <string>

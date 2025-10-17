@@ -64,6 +64,8 @@ set(crayg_SRCS
     crayg/foundation/assertions/Preconditions.h
     crayg/foundation/enums/EnumFormatter.h
     crayg/foundation/enums/EnumParser.h
+    crayg/foundation/exceptions/Exceptions.cpp
+    crayg/foundation/exceptions/Exceptions.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/objects/DtoUtils.h
@@ -448,8 +450,6 @@ set(crayg_SRCS
     utils/AtomicFloats.h
     utils/BitCast.h
     utils/CraygMain.h
-    utils/Exceptions.cpp
-    utils/Exceptions.h
     utils/FileSystemUtils.cpp
     utils/FileSystemUtils.h
     utils/Heatmap.cpp

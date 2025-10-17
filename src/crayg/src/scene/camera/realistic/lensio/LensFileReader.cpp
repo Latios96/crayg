@@ -1,5 +1,5 @@
 #include "LensFileReader.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "utils/FileSystemUtils.h"
 #include <filesystem>
 #include <sstream>

@@ -1,5 +1,5 @@
 #include "LensFileParseUtils.h"
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <charconv>
 #include <fmt/format.h>
 

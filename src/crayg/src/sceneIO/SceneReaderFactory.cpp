@@ -1,7 +1,7 @@
 #include "SceneReaderFactory.h"
 #include "Logger.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "sceneIO/read/usd/UsdSceneReader.h"
-#include "utils/Exceptions.h"
 #include <filesystem>
 
 namespace crayg {

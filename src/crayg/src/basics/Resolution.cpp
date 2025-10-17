@@ -1,6 +1,6 @@
 #include "Resolution.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/strings/NumberParsing.h"
-#include "utils/Exceptions.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <fmt/format.h>

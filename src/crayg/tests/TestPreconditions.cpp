@@ -1,4 +1,4 @@
-#include "utils/Exceptions.h"
+#include "crayg/foundation/exceptions/Exceptions.h"
 #include <../src/crayg/foundation/assertions/Preconditions.h>
 #include <basics/Bound2d.h>
 #include <basics/Color.h>
