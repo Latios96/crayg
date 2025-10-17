@@ -459,8 +459,6 @@ set(crayg_SRCS
     utils/ImageChannelPathResolver.h
     utils/ImagePathResolver.cpp
     utils/ImagePathResolver.h
-    utils/ProgressReporter.cpp
-    utils/ProgressReporter.h
     utils/RemainingTimeCalculator.cpp
     utils/RemainingTimeCalculator.h
     utils/StopWatch.cpp

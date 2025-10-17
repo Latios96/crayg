@@ -91,7 +91,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestOrthonormalBasis.cpp
     TestPixelBuffer.cpp
     TestPreconditions.cpp
-    TestProgressReporter.cpp
     TestRay.cpp
     TestRaytracingIntegrator.cpp
     TestRectLight.cpp

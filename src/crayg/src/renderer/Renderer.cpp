@@ -14,7 +14,6 @@
 #include "sampling/Random.h"
 #include "scene/camera/CameraModelFactory.h"
 #include "scene/camera/realistic/Wavelengths.h"
-#include "utils/ProgressReporter.h"
 #include "utils/StopWatch.h"
 #include "utils/TaskReporter.h"
 #include <Imath/half.h>

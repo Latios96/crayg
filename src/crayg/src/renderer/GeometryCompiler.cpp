@@ -2,7 +2,6 @@
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "scene/primitives/PointInstancer.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
-#include "utils/ProgressReporter.h"
 #include <tbb/parallel_for.h>
 
 namespace crayg {

@@ -14,7 +14,6 @@
 #include <scene/RenderSettings.h>
 #include <scene/Scene.h>
 #include <scene/camera/Camera.h>
-#include <utils/ProgressReporter.h>
 
 namespace crayg {
 
