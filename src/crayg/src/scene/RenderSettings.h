@@ -1,5 +1,6 @@
 #pragma once
 
+#include "basics/Resolution.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequenceType.h"
 #include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
 #include "integrators/IntegratorSettings.h"
@@ -7,7 +8,6 @@
 #include "intersectors/IntersectorType.h"
 #include "renderer/tilesamplers/TileSamplerType.h"
 #include "scene/RegionToRender.h"
-#include <basics/Resolution.h>
 #include <fmt/ostream.h>
 #include <optional>
 

@@ -1,11 +1,11 @@
 #pragma once
 
+#include "basics/BoundingBox.h"
+#include "basics/Color.h"
 #include "basics/OrthonormalBasis.h"
+#include "basics/Ray.h"
 #include "basics/Transform.h"
 #include "shadingnetworks/materials/Material.h"
-#include <basics/BoundingBox.h>
-#include <basics/Color.h>
-#include <basics/Ray.h>
 #include <memory>
 
 namespace crayg {

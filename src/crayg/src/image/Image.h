@@ -4,9 +4,9 @@
 #include "ImageSpec.h"
 #include "PixelBuffer.h"
 #include "basics/Color.h"
+#include "basics/Resolution.h"
 #include "basics/Vector2.h"
 #include "basics/Vector3f.h"
-#include <basics/Resolution.h>
 #include <ostream>
 #include <tsl/ordered_map.h>
 

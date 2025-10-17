@@ -3,8 +3,8 @@
 #include "CameraLens.h"
 #include "ExitPupilCalculator.h"
 #include "ThickLensApproximation.h"
+#include "basics/Ray.h"
 #include "scene/camera/CameraModel.h"
-#include <basics/Ray.h>
 
 namespace crayg {
 
