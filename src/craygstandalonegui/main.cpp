@@ -9,6 +9,7 @@
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/progress/StopWatch.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
+#include "craygstandalone/ImagePathResolver.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "craygstandalonegui/widgets/framebuffer/FrameBufferWidget.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"
@@ -24,7 +25,6 @@
 #include "renderer/TextureStats.h"
 #include "scene/Scene.h"
 #include "sceneIO/SceneReaderFactory.h"
-#include "utils/ImagePathResolver.h"
 #include <thread>
 
 namespace crayg {

@@ -21,10 +21,10 @@
 #include "renderer/TextureStats.h"
 #include "sceneIO/SceneReaderFactory.h"
 
+#include "craygstandalone/ImagePathResolver.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "renderer/Renderer.h"
 #include "scene/Scene.h"
-#include "utils/ImagePathResolver.h"
 #include <QResource>
 #include <tbb/task_group.h>
 #include <thread>

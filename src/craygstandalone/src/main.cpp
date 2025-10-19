@@ -8,10 +8,10 @@
 #include "renderer/TextureStats.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include <CraygInfo.h>
+#include <craygstandalone/ImagePathResolver.h>
 #include <iostream>
 #include <renderer/Renderer.h>
 #include <scene/Scene.h>
-#include <utils/ImagePathResolver.h>
 
 namespace crayg {
 

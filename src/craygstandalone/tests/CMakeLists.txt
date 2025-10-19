@@ -1,6 +1,6 @@
 set(CRAYG_STANDALONE_TESTS crayg-standalone-tests)
 
-set(CRAYG_STANDALONE_TESTS_SRC cli/TestArgsParsing.cpp cli/TestCliRenderSettingsOverride.cpp)
+set(CRAYG_STANDALONE_TESTS_SRC cli/TestArgsParsing.cpp cli/TestCliRenderSettingsOverride.cpp TestImagePathResolver.cpp)
 
 add_executable(${CRAYG_STANDALONE_TESTS} # cmake-format: unsortable
                main.cpp ${CRAYG_STANDALONE_TESTS_SRC})

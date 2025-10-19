@@ -1,11 +1,11 @@
 #include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
+#include "craygstandalone/ImagePathResolver.h"
 
 #include <boost/regex.hpp>
 #include <catch2/catch.hpp>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <utils/ImagePathResolver.h>
 
 namespace crayg {
 

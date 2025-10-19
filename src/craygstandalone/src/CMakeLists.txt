@@ -2,6 +2,7 @@ set(CRAYG_STANDALONE_LIB crayg-standalone-lib)
 
 set(CRAYG_STANDALONE_LIB_SRCS
     craygstandalone/cli/CliParser.cpp craygstandalone/cli/CliParser.h craygstandalone/cli/CliRenderSettingsOverride.cpp
+    craygstandalone/ImagePathResolver.h craygstandalone/ImagePathResolver.cpp
     craygstandalone/cli/CliRenderSettingsOverride.h)
 
 set(Main_Executable_SRCS main.cpp)

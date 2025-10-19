@@ -467,9 +467,7 @@ set(crayg_SRCS
     sceneIO/write/usd/UsdRenderSettingsWriter.cpp
     sceneIO/write/usd/UsdRenderSettingsWriter.h
     sceneIO/write/usd/UsdSceneWriter.cpp
-    sceneIO/write/usd/UsdSceneWriter.h
-    utils/ImagePathResolver.cpp
-    utils/ImagePathResolver.h)
+    sceneIO/write/usd/UsdSceneWriter.h)
 
 add_library(crayg STATIC ${crayg_SRCS})
 

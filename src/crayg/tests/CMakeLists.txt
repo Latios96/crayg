@@ -68,7 +68,6 @@ set(UNIT_TEST_SOURCE_LIST
     TestImageIterators.cpp
     TestImageMetadata.cpp
     TestImageMetadataCollector.cpp
-    TestImagePathResolver.cpp
     TestImageTile.cpp
     TestIntegratorSettings.cpp
     TestLensFileExtendedFormatReader.cpp
