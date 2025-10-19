@@ -1,7 +1,7 @@
 #include "Initialization.h"
+#include "crayg/foundation/executable/CraygMain.h"
 #include "qtcrayg/foundation/QtMetaTypes.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
-#include "utils/CraygMain.h"
 #include "widgets/CameraLensEditor.h"
 #include "widgets/LensEditorMainWindow.h"
 #include <QLabel>

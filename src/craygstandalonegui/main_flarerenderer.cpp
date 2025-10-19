@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequences.h"
+#include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"
@@ -17,7 +18,6 @@
 #include "qtcrayg/utils/QtUtils.h"
 #include "renderer/FlareRenderer.h"
 #include "sceneIO/SceneReaderFactory.h"
-#include "utils/CraygMain.h"
 #include "utils/FileSystemUtils.h"
 #include "utils/TextureStats.h"
 

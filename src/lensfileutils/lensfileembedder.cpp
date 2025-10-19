@@ -2,10 +2,10 @@
 #include "CraygInfo.h"
 #include "Initialization.h"
 #include "Logger.h"
+#include "crayg/foundation/executable/CraygMain.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "sceneIO/usd/UsdLensFileUtils.h"
 #include "sceneIO/usd/UsdUtils.h"
-#include "utils/CraygMain.h"
 
 #include "crayg/compatibility/usd/fmt/SdfPath_formatter.h"
 #include <pxr/usd/usd/primRange.h>

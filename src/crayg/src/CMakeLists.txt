@@ -67,6 +67,7 @@ set(crayg_SRCS
     crayg/foundation/enums/ValueMapper.h
     crayg/foundation/exceptions/Exceptions.cpp
     crayg/foundation/exceptions/Exceptions.h
+    crayg/foundation/executable/CraygMain.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/numerics/AtomicFloats.h
