@@ -119,6 +119,8 @@ set(crayg_SRCS
     image/Image.h
     image/ImageAlgorithms.cpp
     image/ImageAlgorithms.h
+    image/ImageChannelPathResolver.cpp
+    image/ImageChannelPathResolver.h
     image/ImageMetadata.cpp
     image/ImageMetadata.h
     image/ImageMetadataValue.h
@@ -464,8 +466,6 @@ set(crayg_SRCS
     sceneIO/write/usd/UsdRenderSettingsWriter.h
     sceneIO/write/usd/UsdSceneWriter.cpp
     sceneIO/write/usd/UsdSceneWriter.h
-    utils/ImageChannelPathResolver.cpp
-    utils/ImageChannelPathResolver.h
     utils/ImagePathResolver.cpp
     utils/ImagePathResolver.h)
 

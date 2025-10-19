@@ -1,4 +1,4 @@
-#include "utils/ImageChannelPathResolver.h"
+#include "image/ImageChannelPathResolver.h"
 #include <catch2/catch.hpp>
 #include <filesystem>
 
