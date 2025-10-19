@@ -1,5 +1,5 @@
 #include "VariableLensDistances.h"
-#include "basics/math/CommonMath.h"
+#include "crayg/foundation/math/CommonMath.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
 
 namespace crayg {

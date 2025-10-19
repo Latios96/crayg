@@ -1,6 +1,6 @@
 #include "LensSurface.h"
 
-#include "basics/math/QuadraticEquations.h"
+#include "crayg/foundation/math/QuadraticEquations.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
 #include <cmath>
 

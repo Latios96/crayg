@@ -8,8 +8,6 @@ set(crayg_SRCS
     basics/Color.h
     basics/Color_formatter.h
     basics/Gradient.h
-    basics/math/CommonMath.h
-    basics/math/QuadraticEquations.h
     basics/Matrix4x4f.cpp
     basics/Matrix4x4f.h
     basics/OrthonormalBasis.cpp
@@ -72,8 +70,10 @@ set(crayg_SRCS
     crayg/foundation/filesystem/FileAsString.h
     crayg/foundation/logging/Logger.cpp
     crayg/foundation/logging/Logger.h
+    crayg/foundation/math/CommonMath.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
+    crayg/foundation/math/QuadraticEquations.h
     crayg/foundation/numerics/AtomicFloats.h
     crayg/foundation/numerics/BitCast.h
     crayg/foundation/objects/DtoUtils.h

@@ -1,5 +1,5 @@
 #include "basics/Color.h"
-#include "basics/math/QuadraticEquations.h"
+#include "crayg/foundation/math/QuadraticEquations.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

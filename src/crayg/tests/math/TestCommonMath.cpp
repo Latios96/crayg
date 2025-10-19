@@ -1,5 +1,5 @@
 #include "basics/Color.h"
-#include "basics/math/CommonMath.h"
+#include "crayg/foundation/math/CommonMath.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

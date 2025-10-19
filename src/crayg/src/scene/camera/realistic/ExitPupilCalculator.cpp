@@ -1,6 +1,6 @@
 #include "ExitPupilCalculator.h"
 #include "Wavelengths.h"
-#include "basics/math/CommonMath.h"
+#include "crayg/foundation/math/CommonMath.h"
 #include "crayg/foundation/progress/StopWatch.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "sampling/Random.h"
