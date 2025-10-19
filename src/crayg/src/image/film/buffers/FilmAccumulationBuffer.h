@@ -5,7 +5,7 @@
 #include "crayg/foundation/assertions/Preconditions.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/math/geometry/Tile.h"
-#include "utils/AtomicFloats.h"
+#include "crayg/foundation/numerics/AtomicFloats.h"
 
 namespace crayg {
 

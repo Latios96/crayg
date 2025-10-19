@@ -69,6 +69,8 @@ set(crayg_SRCS
     crayg/foundation/exceptions/Exceptions.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
+    crayg/foundation/numerics/AtomicFloats.h
+    crayg/foundation/numerics/BitCast.h
     crayg/foundation/objects/DtoUtils.h
     crayg/foundation/objects/ToStringHelper.h
     crayg/foundation/parallel/ParallelLoops.h
@@ -455,8 +457,6 @@ set(crayg_SRCS
     sceneIO/write/usd/UsdRenderSettingsWriter.h
     sceneIO/write/usd/UsdSceneWriter.cpp
     sceneIO/write/usd/UsdSceneWriter.h
-    utils/AtomicFloats.h
-    utils/BitCast.h
     utils/CraygMain.h
     utils/FileSystemUtils.cpp
     utils/FileSystemUtils.h

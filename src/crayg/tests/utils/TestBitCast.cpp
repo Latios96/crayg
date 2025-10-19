@@ -1,4 +1,4 @@
-#include "utils/BitCast.h"
+#include "crayg/foundation/numerics/BitCast.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

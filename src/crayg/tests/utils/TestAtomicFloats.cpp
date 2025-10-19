@@ -1,4 +1,4 @@
-#include "utils/AtomicFloats.h"
+#include "crayg/foundation/numerics/AtomicFloats.h"
 #include <catch2/catch.hpp>
 #include <tbb/parallel_for.h>
 
