@@ -1,6 +1,6 @@
 #include "ImageFormatWriters.h"
 
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "exr/OpenExrImageFormatWriter.h"
 #include "png/PngImageFormatWriter.h"

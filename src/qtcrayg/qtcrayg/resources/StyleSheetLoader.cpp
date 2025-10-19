@@ -1,5 +1,5 @@
 #include "StyleSheetLoader.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "qtcrayg/foundation/QtBase.h"
 #include "utils/FileSystemUtils.h"
 #include <QFontDatabase>

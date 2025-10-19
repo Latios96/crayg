@@ -1,7 +1,7 @@
 #include "RealisticCameraModel.h"
 #include "ExitPupilCalculator.h"
-#include "Logger.h"
 #include "Wavelengths.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "sampling/Random.h"
 

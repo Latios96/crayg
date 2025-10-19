@@ -1,5 +1,5 @@
 #include "TileQueue.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 
 namespace crayg {
 

@@ -1,7 +1,7 @@
 #include "Initialization.h"
-#include "Logger.h"
 #include "basics/Color.h"
 #include "crayg/foundation/executable/CraygMain.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "scene/camera/realistic/CameraLens.h"
 #include "scene/camera/realistic/ExitPupilCalculator.h"
 #include "scene/camera/realistic/LensSurface.h"

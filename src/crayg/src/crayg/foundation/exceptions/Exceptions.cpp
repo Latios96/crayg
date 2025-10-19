@@ -1,4 +1,4 @@
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include <cpptrace/cpptrace.hpp>
 
 namespace crayg {

@@ -4,8 +4,8 @@
 // clang-format on
 #include "CraygInfo.h"
 #include "Initialization.h"
-#include "Logger.h"
 #include "crayg/foundation/executable/CraygMain.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/progress/StopWatch.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "craygstandalone/cli/CliParser.h"

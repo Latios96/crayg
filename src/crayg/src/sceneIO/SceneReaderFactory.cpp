@@ -1,6 +1,6 @@
 #include "SceneReaderFactory.h"
-#include "Logger.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "sceneIO/read/usd/UsdSceneReader.h"
 #include <filesystem>
 

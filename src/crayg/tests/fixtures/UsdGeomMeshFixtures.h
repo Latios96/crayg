@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/usdGeom/primvarsAPI.h>

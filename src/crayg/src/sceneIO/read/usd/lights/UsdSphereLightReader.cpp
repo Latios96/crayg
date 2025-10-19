@@ -1,5 +1,5 @@
 #include "UsdSphereLightReader.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/usd/UsdReadUtils.h"
 #include "sceneIO/usd/UsdUtils.h"

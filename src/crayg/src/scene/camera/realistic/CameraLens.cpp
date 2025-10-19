@@ -1,7 +1,7 @@
 #include "CameraLens.h"
-#include "Logger.h"
 #include "Wavelengths.h"
 #include "crayg/foundation/assertions/Preconditions.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "scene/camera/CameraUtils.h"
 #include <fmt/ranges.h>
 #include <iostream>

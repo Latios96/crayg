@@ -1,6 +1,6 @@
 #include "PngImageFormatWriter.h"
 
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "image/ColorConversion.h"
 #include "image/io/imageformatwriters/ImageBufferTypeTrait.h"
 

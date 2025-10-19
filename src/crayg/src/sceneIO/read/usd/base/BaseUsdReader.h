@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Logger.h"
 #include "crayg/compatibility/usd/fmt/SdfPath_formatter.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "sceneIO/usd/UsdReadUtils.h"
 #include <memory>

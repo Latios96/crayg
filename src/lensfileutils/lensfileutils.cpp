@@ -1,6 +1,6 @@
 #include "CLI/CLI.hpp"
 #include "CraygInfo.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include <filesystem>
 
 #include "Initialization.h"

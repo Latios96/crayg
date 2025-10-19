@@ -1,5 +1,5 @@
 #include "FileTexture.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "image/ColorConversion.h"
 
 namespace crayg {

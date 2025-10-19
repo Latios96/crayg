@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include "sceneIO/write/usd/base/BaseUsdWriter.h"

@@ -1,4 +1,4 @@
-#include <Logger.h>
+#include "crayg/foundation/logging/Logger.h"
 #include <spdlog/sinks/basic_file_sink.h>
 
 namespace crayg {

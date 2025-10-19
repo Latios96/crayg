@@ -1,6 +1,6 @@
 #include "LensFileReaderFactory.h"
-#include "Logger.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "extendedformat/LensFileExtendedFormatReader.h"
 #include "textfile/LensFileTextFileReader.h"
 #include "zmx/ZMXFileFormatReader.h"

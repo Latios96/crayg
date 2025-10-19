@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BaseUsdWriter.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/write/usd/UsdPathFactory.h"
 #include <memory>

@@ -1,5 +1,5 @@
 #include "UsdMaterialWriteCache.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "sceneIO/usd/UsdConversions.h"
 #include "sceneIO/write/usd/shadingnetworks/materials/UsdPreviewSurfaceWriter.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include <QApplication>
 #include <QFile>
 #include <QFileSystemWatcher>

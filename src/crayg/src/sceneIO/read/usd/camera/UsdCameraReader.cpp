@@ -1,7 +1,7 @@
 #include "UsdCameraReader.h"
-#include "Logger.h"
 #include "basics/Transform.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include "sceneIO/usd/UsdUtils.h"
 #include <pxr/usd/ar/resolver.h>

@@ -68,6 +68,8 @@ set(crayg_SRCS
     crayg/foundation/exceptions/Exceptions.cpp
     crayg/foundation/exceptions/Exceptions.h
     crayg/foundation/executable/CraygMain.h
+    crayg/foundation/logging/Logger.cpp
+    crayg/foundation/logging/Logger.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
     crayg/foundation/numerics/AtomicFloats.h
@@ -173,8 +175,6 @@ set(crayg_SRCS
     intersectors/IntersectorType.cpp
     intersectors/IntersectorType.h
     intersectors/SceneIntersector.h
-    Logger.cpp
-    Logger.h
     outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.cpp
     outputdrivers/NextGenOutputDriver.h
@@ -458,7 +458,6 @@ set(crayg_SRCS
     sceneIO/write/usd/UsdRenderSettingsWriter.h
     sceneIO/write/usd/UsdSceneWriter.cpp
     sceneIO/write/usd/UsdSceneWriter.h
-    utils/CraygMain.h
     utils/FileSystemUtils.cpp
     utils/FileSystemUtils.h
     utils/Heatmap.cpp

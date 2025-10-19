@@ -1,7 +1,7 @@
 #include "UsdStageReader.h"
-#include "Logger.h"
 #include "UsdRenderSettingsReader.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "scene/primitives/GroundPlane.h"
 #include "sceneIO/read/usd/camera/UsdCameraReader.h"
 #include "sceneIO/read/usd/lights/UsdDiskLightReader.h"

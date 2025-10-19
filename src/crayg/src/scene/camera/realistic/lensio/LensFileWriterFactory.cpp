@@ -1,6 +1,6 @@
 #include "LensFileWriterFactory.h"
-#include "Logger.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "extendedformat/LensFileExtendedFormatWriter.h"
 #include "textfile/LensFileTextFileWriter.h"
 #include "json/LensFileJsonWriter.h"

@@ -1,4 +1,4 @@
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 #include <catch2/catch.hpp>
 #include <fmt/ranges.h>

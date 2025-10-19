@@ -1,5 +1,5 @@
 #include "TriangleMesh.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"

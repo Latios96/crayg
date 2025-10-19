@@ -1,6 +1,6 @@
 #include "CliRenderSettingsOverride.h"
-#include "Logger.h"
 #include "basics/Resolution_formatter.h"
+#include "crayg/foundation/logging/Logger.h"
 #include <boost/algorithm/string/join.hpp>
 #include <fmt/std.h>
 

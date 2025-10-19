@@ -1,6 +1,6 @@
 #include "Initialization.h"
-#include "Logger.h"
 #include "crayg/foundation/executable/CraygMain.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"

@@ -1,5 +1,5 @@
 #include "LensEditorMainWindow.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include <QAction>
 #include <QMenu>
 #include <QMenuBar>

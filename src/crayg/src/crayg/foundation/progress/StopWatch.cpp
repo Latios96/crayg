@@ -2,7 +2,7 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/strings/Humanize.h"
 #include "fmt/format.h"
 #include <utility>

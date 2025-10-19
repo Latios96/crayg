@@ -5,10 +5,10 @@
 
 #include "CraygInfo.h"
 #include "Initialization.h"
-#include "Logger.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequences.h"
 #include "crayg/foundation/executable/CraygMain.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"

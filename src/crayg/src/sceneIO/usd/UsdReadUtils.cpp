@@ -1,7 +1,7 @@
 #include "UsdReadUtils.h"
-#include "Logger.h"
 #include "UsdConversions.h"
 #include "UsdUtils.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "pxr/base/gf/rotation.h"
 #include "pxr/usd/usdGeom/mesh.h"
 

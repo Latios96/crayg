@@ -1,6 +1,6 @@
 #include "SceneWriterFactory.h"
-#include "Logger.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "sceneIO/write/usd/UsdSceneWriter.h"
 #include <filesystem>
 

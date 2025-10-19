@@ -1,5 +1,5 @@
 #include "UsdPreviewSurface.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "sampling/Random.h"
 #include "sampling/Sampling.h"
 #include "scene/Imageable.h"
