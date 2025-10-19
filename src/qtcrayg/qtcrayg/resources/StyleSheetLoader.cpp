@@ -1,7 +1,7 @@
 #include "StyleSheetLoader.h"
+#include "crayg/foundation/filesystem/FileAsString.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "qtcrayg/foundation/QtBase.h"
-#include "utils/FileSystemUtils.h"
 #include <QFontDatabase>
 #include <filesystem>
 
@@ -48,11 +48,11 @@ void StyleSheetLoader::startWatching() {
 
     QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, [this](const QString &path) {
         const std::string inputPath = path.toStdString();
-        const std::string fileContent = FileSystemUtils::readFileAsString(inputPath);
+        const std::string fileContent = FileAsString::readFileAsString(inputPath);
         compileAndApply(fileContent);
     });
 
-    const std::string fileContent = FileSystemUtils::readFileAsString(stylesheetPath.toStdString());
+    const std::string fileContent = FileAsString::readFileAsString(stylesheetPath.toStdString());
     compileAndApply(fileContent);
     Logger::info("Started to watch stylesheet file {}", stylesheetPath);
 }

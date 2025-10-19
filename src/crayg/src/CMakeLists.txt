@@ -68,6 +68,8 @@ set(crayg_SRCS
     crayg/foundation/exceptions/Exceptions.cpp
     crayg/foundation/exceptions/Exceptions.h
     crayg/foundation/executable/CraygMain.h
+    crayg/foundation/filesystem/FileAsString.cpp
+    crayg/foundation/filesystem/FileAsString.h
     crayg/foundation/logging/Logger.cpp
     crayg/foundation/logging/Logger.h
     crayg/foundation/math/geometry/Tile.cpp
@@ -458,8 +460,6 @@ set(crayg_SRCS
     sceneIO/write/usd/UsdRenderSettingsWriter.h
     sceneIO/write/usd/UsdSceneWriter.cpp
     sceneIO/write/usd/UsdSceneWriter.h
-    utils/FileSystemUtils.cpp
-    utils/FileSystemUtils.h
     utils/Heatmap.cpp
     utils/Heatmap.h
     utils/ImageChannelPathResolver.cpp

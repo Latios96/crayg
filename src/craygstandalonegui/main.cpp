@@ -5,6 +5,7 @@
 #include "CraygInfo.h"
 #include "Initialization.h"
 #include "crayg/foundation/executable/CraygMain.h"
+#include "crayg/foundation/filesystem/FileAsString.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/progress/StopWatch.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
@@ -22,7 +23,6 @@
 #include "renderer/Renderer.h"
 #include "scene/Scene.h"
 #include "sceneIO/SceneReaderFactory.h"
-#include "utils/FileSystemUtils.h"
 #include "utils/ImagePathResolver.h"
 #include "utils/TextureStats.h"
 #include <thread>

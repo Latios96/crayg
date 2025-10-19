@@ -1,11 +1,11 @@
 #include "Initialization.h"
 #include "crayg/foundation/executable/CraygMain.h"
+#include "crayg/foundation/filesystem/FileAsString.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "sceneIO/SceneReaderFactory.h"
-#include "utils/FileSystemUtils.h"
 #include "utils/TextureStats.h"
 #include <CraygInfo.h>
 #include <iostream>

@@ -1,4 +1,4 @@
-#include "FileSystemUtils.h"
+#include "FileAsString.h"
 #include <codecvt>
 #include <filesystem>
 #include <fstream>
@@ -21,7 +21,7 @@ std::string utf16ToUtf8(const std::string &bytes) {
     return converter.to_bytes(utf16_str);
 }
 
-std::string FileSystemUtils::readFileAsString(const std::string &path) {
+std::string FileAsString::readFileAsString(const std::string &path) {
     std::ifstream inputStream(path);
     std::stringstream buffer;
     buffer << inputStream.rdbuf();

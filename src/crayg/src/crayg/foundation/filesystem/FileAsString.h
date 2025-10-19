@@ -4,7 +4,7 @@
 
 namespace crayg {
 
-class FileSystemUtils {
+class FileAsString {
   public:
     static std::string readFileAsString(const std::string &path);
 };
