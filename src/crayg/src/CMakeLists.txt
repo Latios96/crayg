@@ -153,49 +153,53 @@ set(crayg_SRCS
     Initialization.cpp
     Initialization.h
     Initialization.h
-    integrators/AbstractIntegrator.cpp
-    integrators/AbstractIntegrator.h
-    integrators/AmbientOcclusionIntegrator.cpp
-    integrators/AmbientOcclusionIntegrator.h
-    integrators/DebugIntegrator.cpp
-    integrators/DebugIntegrator.h
-    integrators/IntegratorFactory.cpp
-    integrators/IntegratorFactory.h
-    integrators/IntegratorSettings.cpp
-    integrators/IntegratorSettings.h
-    integrators/IntegratorSettingsValue.h
-    integrators/IntegratorType.cpp
-    integrators/IntegratorType.h
-    integrators/RaytracingIntegrator.cpp
-    integrators/RaytracingIntegrator.h
-    integrators/SurfaceInteraction.cpp
-    integrators/SurfaceInteraction.h
-    intersectors/embree/EmbreeBvh.cpp
-    intersectors/embree/EmbreeBvh.h
-    intersectors/embree/EmbreeBvhBuilder.cpp
-    intersectors/embree/EmbreeBvhBuilder.h
-    intersectors/embree/EmbreeSceneIntersector.cpp
-    intersectors/embree/EmbreeSceneIntersector.h
-    intersectors/embree/EmbreeUtils.cpp
-    intersectors/embree/EmbreeUtils.h
-    intersectors/IntersectorFactory.cpp
-    intersectors/IntersectorFactory.h
-    intersectors/IntersectorType.cpp
-    intersectors/IntersectorType.h
-    intersectors/SceneIntersector.h
-    outputdrivers/NextGenOutputDriver.cpp
-    outputdrivers/NextGenOutputDriver.cpp
-    outputdrivers/NextGenOutputDriver.h
     renderer/FlareRenderer.cpp
     renderer/FlareRenderer.h
     renderer/GeometryCompiler.cpp
     renderer/GeometryCompiler.h
     renderer/ImageMetadataCollector.cpp
     renderer/ImageMetadataCollector.h
+    renderer/integrators/AbstractIntegrator.cpp
+    renderer/integrators/AbstractIntegrator.h
+    renderer/integrators/AmbientOcclusionIntegrator.cpp
+    renderer/integrators/AmbientOcclusionIntegrator.h
+    renderer/integrators/DebugIntegrator.cpp
+    renderer/integrators/DebugIntegrator.h
+    renderer/integrators/IntegratorFactory.cpp
+    renderer/integrators/IntegratorFactory.h
+    renderer/integrators/IntegratorSettings.cpp
+    renderer/integrators/IntegratorSettings.h
+    renderer/integrators/IntegratorSettingsValue.h
+    renderer/integrators/IntegratorType.cpp
+    renderer/integrators/IntegratorType.h
+    renderer/integrators/RaytracingIntegrator.cpp
+    renderer/integrators/RaytracingIntegrator.h
+    renderer/integrators/SurfaceInteraction.cpp
+    renderer/integrators/SurfaceInteraction.h
+    renderer/intersectors/embree/EmbreeBvh.cpp
+    renderer/intersectors/embree/EmbreeBvh.h
+    renderer/intersectors/embree/EmbreeBvhBuilder.cpp
+    renderer/intersectors/embree/EmbreeBvhBuilder.h
+    renderer/intersectors/embree/EmbreeSceneIntersector.cpp
+    renderer/intersectors/embree/EmbreeSceneIntersector.h
+    renderer/intersectors/embree/EmbreeUtils.cpp
+    renderer/intersectors/embree/EmbreeUtils.h
+    renderer/intersectors/IntersectorFactory.cpp
+    renderer/intersectors/IntersectorFactory.h
+    renderer/intersectors/IntersectorType.cpp
+    renderer/intersectors/IntersectorType.h
+    renderer/intersectors/SceneIntersector.h
+    renderer/outputdrivers/NextGenOutputDriver.cpp
+    renderer/outputdrivers/NextGenOutputDriver.cpp
+    renderer/outputdrivers/NextGenOutputDriver.h
     renderer/Renderer.cpp
     renderer/Renderer.h
     renderer/SampleAccumulator.cpp
     renderer/SampleAccumulator.h
+    renderer/sampling/Random.cpp
+    renderer/sampling/Random.h
+    renderer/sampling/Sampling.cpp
+    renderer/sampling/Sampling.h
     renderer/TextureStats.cpp
     renderer/TextureStats.h
     renderer/tilesamplers/AdaptiveTileSampler.cpp
@@ -212,10 +216,6 @@ set(crayg_SRCS
     renderer/TileSizeEstimator.h
     renderer/TileStats.cpp
     renderer/TileStats.h
-    sampling/Random.cpp
-    sampling/Random.h
-    sampling/Sampling.cpp
-    sampling/Sampling.h
     scene/camera/Camera.cpp
     scene/camera/Camera.h
     scene/camera/CameraModel.h

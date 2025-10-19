@@ -1,4 +1,4 @@
-#include "integrators/AbstractIntegrator.h"
+#include "renderer/integrators/AbstractIntegrator.h"
 #include "scene/primitives/Sphere.h"
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include <catch2/catch.hpp>

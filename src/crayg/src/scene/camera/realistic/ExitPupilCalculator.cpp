@@ -3,7 +3,7 @@
 #include "crayg/foundation/math/CommonMath.h"
 #include "crayg/foundation/progress/StopWatch.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
-#include "sampling/Random.h"
+#include "renderer/sampling/Random.h"
 #include <tbb/parallel_for.h>
 
 namespace crayg {

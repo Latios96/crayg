@@ -1,5 +1,5 @@
 #include "RectLight.h"
-#include "sampling/Random.h"
+#include "renderer/sampling/Random.h"
 
 namespace crayg {
 

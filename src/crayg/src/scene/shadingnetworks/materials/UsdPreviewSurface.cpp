@@ -1,7 +1,7 @@
 #include "UsdPreviewSurface.h"
 #include "crayg/foundation/logging/Logger.h"
-#include "sampling/Random.h"
-#include "sampling/Sampling.h"
+#include "renderer/sampling/Random.h"
+#include "renderer/sampling/Sampling.h"
 #include "scene/Imageable.h"
 
 namespace crayg {

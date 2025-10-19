@@ -1,6 +1,6 @@
 #pragma once
 #include "NextGenImageWidget.h"
-#include "outputdrivers/NextGenOutputDriver.h"
+#include "renderer/outputdrivers/NextGenOutputDriver.h"
 
 #include <unordered_set>
 

@@ -3,7 +3,7 @@
 #include "Wavelengths.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
-#include "sampling/Random.h"
+#include "renderer/sampling/Random.h"
 
 namespace crayg {
 

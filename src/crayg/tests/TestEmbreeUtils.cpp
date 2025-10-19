@@ -1,4 +1,4 @@
-#include "intersectors/embree/EmbreeUtils.h"
+#include "renderer/intersectors/embree/EmbreeUtils.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

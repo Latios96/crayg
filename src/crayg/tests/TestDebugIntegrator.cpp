@@ -1,5 +1,5 @@
-#include "integrators/DebugIntegrator.h"
-#include "intersectors/SceneIntersector.h"
+#include "renderer/integrators/DebugIntegrator.h"
+#include "renderer/intersectors/SceneIntersector.h"
 #include "scene/Scene.h"
 #include "scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>

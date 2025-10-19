@@ -6,11 +6,11 @@
 #include "crayg/foundation/math/geometry/Resolution.h"
 #include "crayg/foundation/progress/TaskReporter.h"
 #include "integrators/AbstractIntegrator.h"
+#include "renderer/intersectors/SceneIntersector.h"
+#include "renderer/outputdrivers/NextGenOutputDriver.h"
 #include "scene/camera/pinhole/PinholeCameraModel.h"
 #include "tilesamplers/TileSampler.h"
 #include <image/Image.h>
-#include <intersectors/SceneIntersector.h>
-#include <outputdrivers/NextGenOutputDriver.h>
 #include <scene/RenderSettings.h>
 #include <scene/Scene.h>
 #include <scene/camera/Camera.h>

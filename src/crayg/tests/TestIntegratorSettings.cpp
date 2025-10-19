@@ -1,4 +1,4 @@
-#include "integrators/IntegratorSettings.h"
+#include "renderer/integrators/IntegratorSettings.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

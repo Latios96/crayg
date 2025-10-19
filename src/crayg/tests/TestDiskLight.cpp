@@ -1,4 +1,4 @@
-#include "intersectors/SceneIntersector.h"
+#include "renderer/intersectors/SceneIntersector.h"
 #include <catch2/catch.hpp>
 #include <scene/lights/DiskLight.h>
 

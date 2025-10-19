@@ -1,7 +1,7 @@
 #include "UniformTileSampler.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "renderer/SampleAccumulator.h"
-#include "sampling/Random.h"
+#include "renderer/sampling/Random.h"
 
 namespace crayg {
 

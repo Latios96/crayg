@@ -1,7 +1,7 @@
 #include "fixtures/PointInstancerFixtures.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
 #include "fixtures/TriangleMeshFixtures.h"
-#include "intersectors/embree/EmbreeBvhBuilder.h"
+#include "renderer/intersectors/embree/EmbreeBvhBuilder.h"
 #include "scene/primitives/PointInstancer.h"
 #include "scene/primitives/Sphere.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"

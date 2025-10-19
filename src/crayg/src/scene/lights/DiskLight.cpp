@@ -1,5 +1,5 @@
 #include "DiskLight.h"
-#include "sampling/Random.h"
+#include "renderer/sampling/Random.h"
 #include <boost/math/constants/constants.hpp>
 
 namespace crayg {

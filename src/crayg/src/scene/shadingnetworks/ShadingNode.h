@@ -4,8 +4,8 @@
 #include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/math/geometry/Color.h"
 #include "crayg/foundation/math/geometry/Vector2.h"
+#include "renderer/integrators/SurfaceInteraction.h"
 #include <functional>
-#include <integrators/SurfaceInteraction.h>
 #include <ostream>
 #include <utility>
 

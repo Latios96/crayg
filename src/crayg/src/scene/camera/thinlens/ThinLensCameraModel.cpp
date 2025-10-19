@@ -1,5 +1,5 @@
 #include "ThinLensCameraModel.h"
-#include "sampling/Sampling.h"
+#include "renderer/sampling/Sampling.h"
 
 namespace crayg {
 ThinLensCameraModel::ThinLensCameraModel(Camera &camera, const Resolution &resolution)

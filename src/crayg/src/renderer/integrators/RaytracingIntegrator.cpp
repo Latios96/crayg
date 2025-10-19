@@ -1,6 +1,6 @@
 #include "RaytracingIntegrator.h"
 #include "crayg/foundation/logging/Logger.h"
-#include "sampling/Sampling.h"
+#include "renderer/sampling/Sampling.h"
 
 namespace crayg {
 

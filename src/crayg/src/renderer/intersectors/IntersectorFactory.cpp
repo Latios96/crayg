@@ -1,7 +1,7 @@
 #include "IntersectorFactory.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
-#include "intersectors/embree/EmbreeBvhBuilder.h"
-#include "intersectors/embree/EmbreeSceneIntersector.h"
+#include "renderer/intersectors/embree/EmbreeBvhBuilder.h"
+#include "renderer/intersectors/embree/EmbreeSceneIntersector.h"
 
 namespace crayg {
 

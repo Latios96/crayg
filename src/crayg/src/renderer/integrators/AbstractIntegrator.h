@@ -2,7 +2,7 @@
 
 #include "crayg/foundation/math/geometry/Color.h"
 #include "crayg/foundation/math/geometry/Ray.h"
-#include "intersectors/SceneIntersector.h"
+#include "renderer/intersectors/SceneIntersector.h"
 
 namespace crayg {
 

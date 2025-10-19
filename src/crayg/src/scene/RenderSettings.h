@@ -3,9 +3,9 @@
 #include "crayg/foundation/areaiterators/tiles/TileSequenceType.h"
 #include "crayg/foundation/math/geometry/Resolution.h"
 #include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
-#include "integrators/IntegratorSettings.h"
-#include "integrators/IntegratorType.h"
-#include "intersectors/IntersectorType.h"
+#include "renderer/integrators/IntegratorSettings.h"
+#include "renderer/integrators/IntegratorType.h"
+#include "renderer/intersectors/IntersectorType.h"
 #include "renderer/tilesamplers/TileSamplerType.h"
 #include "scene/RegionToRender.h"
 #include <fmt/ostream.h>

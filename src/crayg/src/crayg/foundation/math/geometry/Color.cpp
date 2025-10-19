@@ -1,6 +1,6 @@
 #include "Color.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
-#include "sampling/Random.h"
+#include "renderer/sampling/Random.h"
 #include <algorithm>
 #include <tuple>
 

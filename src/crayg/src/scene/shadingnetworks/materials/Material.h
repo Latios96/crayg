@@ -2,7 +2,7 @@
 
 #include "crayg/foundation/math/geometry/Color.h"
 #include "crayg/foundation/math/geometry/Ray.h"
-#include "integrators/SurfaceInteraction.h"
+#include "renderer/integrators/SurfaceInteraction.h"
 #include "scene/shadingnetworks/ShadingNode.h"
 
 namespace crayg {
