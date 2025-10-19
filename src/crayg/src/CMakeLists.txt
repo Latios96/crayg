@@ -26,19 +26,19 @@ set(crayg_SRCS
     basics/Vector3f.cpp
     basics/Vector3f.h
     basics/Vector3f_formatter.h
-    compatibility/lodepng/fmt/LodePNG_formatter.cpp
-    compatibility/lodepng/fmt/LodePNG_formatter.h
-    compatibility/openexr/fmt/ImathBox_formatter.cpp
-    compatibility/openexr/fmt/ImathBox_formatter.cpp
-    compatibility/openexr/fmt/ImathBox_formatter.h
-    compatibility/openexr/fmt/ImfCompression_formatter.cpp
-    compatibility/openexr/fmt/ImfCompression_formatter.h
-    compatibility/openexr/fmt/ImfPixelType_formatter.cpp
-    compatibility/openexr/fmt/ImfPixelType_formatter.h
-    compatibility/usd/fmt/SdfPath_formatter.h
-    compatibility/usd/fmt/SdfValueTypeName_formatter.h
-    compatibility/usd/fmt/TfToken_formatter.h
-    compatibility/usd/fmt/UsdStagePtr_formatter.h
+    crayg/compatibility/lodepng/fmt/LodePNG_formatter.cpp
+    crayg/compatibility/lodepng/fmt/LodePNG_formatter.h
+    crayg/compatibility/openexr/fmt/ImathBox_formatter.cpp
+    crayg/compatibility/openexr/fmt/ImathBox_formatter.cpp
+    crayg/compatibility/openexr/fmt/ImathBox_formatter.h
+    crayg/compatibility/openexr/fmt/ImfCompression_formatter.cpp
+    crayg/compatibility/openexr/fmt/ImfCompression_formatter.h
+    crayg/compatibility/openexr/fmt/ImfPixelType_formatter.cpp
+    crayg/compatibility/openexr/fmt/ImfPixelType_formatter.h
+    crayg/compatibility/usd/fmt/SdfPath_formatter.h
+    crayg/compatibility/usd/fmt/SdfValueTypeName_formatter.h
+    crayg/compatibility/usd/fmt/TfToken_formatter.h
+    crayg/compatibility/usd/fmt/UsdStagePtr_formatter.h
     crayg/foundation/areaiterators/AreaIterators.h
     crayg/foundation/areaiterators/ScanlineIterator.h
     crayg/foundation/areaiterators/tiles/HilbertSequence.cpp

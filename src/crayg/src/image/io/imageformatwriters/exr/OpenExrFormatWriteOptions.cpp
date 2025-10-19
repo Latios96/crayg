@@ -1,6 +1,6 @@
 #include "OpenExrFormatWriteOptions.h"
-#include "compatibility/openexr/fmt/ImfCompression_formatter.h"
-#include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
+#include "crayg/compatibility/openexr/fmt/ImfCompression_formatter.h"
+#include "crayg/compatibility/openexr/fmt/ImfPixelType_formatter.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
 
 namespace crayg {

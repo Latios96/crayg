@@ -1,10 +1,10 @@
 #pragma once
 
 #include "UsdTypeUtil.h"
+#include "crayg/compatibility/usd/fmt/SdfValueTypeName_formatter.h"
+#include "crayg/compatibility/usd/fmt/TfToken_formatter.h"
 #include "crayg/foundation/enums/EnumParser.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
-#include <compatibility/usd/fmt/SdfValueTypeName_formatter.h>
-#include <compatibility/usd/fmt/TfToken_formatter.h>
 #include <magic_enum.hpp>
 #include <pxr/usd/usd/attribute.h>
 #include <pxr/usd/usdShade/connectableAPI.h>

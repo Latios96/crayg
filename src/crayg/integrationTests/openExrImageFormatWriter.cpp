@@ -1,6 +1,6 @@
 #include "ImageAndFilmFixture.h"
-#include "compatibility/openexr/fmt/ImathBox_formatter.h"
-#include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
+#include "crayg/compatibility/openexr/fmt/ImathBox_formatter.h"
+#include "crayg/compatibility/openexr/fmt/ImfPixelType_formatter.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "utils.h"
 #include <ImathBox.h>

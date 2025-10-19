@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Logger.h"
+#include "crayg/compatibility/usd/fmt/SdfPath_formatter.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "sceneIO/usd/UsdReadUtils.h"
-#include <compatibility/usd/fmt/SdfPath_formatter.h>
 #include <memory>
 
 namespace crayg {

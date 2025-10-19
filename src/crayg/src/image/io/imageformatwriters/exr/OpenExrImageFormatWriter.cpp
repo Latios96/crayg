@@ -1,8 +1,8 @@
 #include "OpenExrImageFormatWriter.h"
 
 #include "OpenExrFormatWriteOptions.h"
-#include "compatibility/openexr/fmt/ImfCompression_formatter.h"
-#include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
+#include "crayg/compatibility/openexr/fmt/ImfCompression_formatter.h"
+#include "crayg/compatibility/openexr/fmt/ImfPixelType_formatter.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "crayg/foundation/parallel/ParallelLoops.h"
 #include "image/io/imageformatwriters/ImageBufferTypeTrait.h"

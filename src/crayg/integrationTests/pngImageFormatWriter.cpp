@@ -1,5 +1,5 @@
 #include "ImageAndFilmFixture.h"
-#include "compatibility/lodepng/fmt/LodePNG_formatter.h"
+#include "crayg/compatibility/lodepng/fmt/LodePNG_formatter.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "utils.h"

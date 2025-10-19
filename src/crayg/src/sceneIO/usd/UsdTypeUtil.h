@@ -1,7 +1,7 @@
 #pragma once
 
-#include "compatibility/openexr/fmt/ImfCompression_formatter.h"
-#include "compatibility/openexr/fmt/ImfPixelType_formatter.h"
+#include "crayg/compatibility/openexr/fmt/ImfCompression_formatter.h"
+#include "crayg/compatibility/openexr/fmt/ImfPixelType_formatter.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequenceType.h"
 #include "image/io/imageformatwriters/exr/OpenExrFormatWriteOptions.h"
 #include "integrators/IntegratorType.h"
