@@ -1,4 +1,5 @@
-#include "fixtures/TemporaryDirectory.h"
+#include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
+
 #include "scene/camera/realistic/lensio/LensFileReader.h"
 #include <catch2/catch.hpp>
 

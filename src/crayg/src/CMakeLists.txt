@@ -96,6 +96,8 @@ set(crayg_SRCS
     crayg/foundation/strings/NumberParsing.cpp
     crayg/foundation/strings/NumberParsing.h
     crayg/foundation/tracing/CraygTracing.h
+    crayg/testfoundation/fixtures/TemporaryDirectory.cpp
+    crayg/testfoundation/fixtures/TemporaryDirectory.h
     CraygInfo.cpp
     CraygInfo.h
     image/ColorConversion.cpp

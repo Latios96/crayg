@@ -2,7 +2,7 @@
 
 #include "Initialization.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
-#include "fixtures/TemporaryDirectory.h"
+#include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
 #include <catch2/catch.hpp>
 #include <fmt/format.h>
 

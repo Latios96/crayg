@@ -1,5 +1,6 @@
+#include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
+
 #include "fixtures/CameraLensFixtures.h"
-#include "fixtures/TemporaryDirectory.h"
 #include "scene/camera/realistic/LensRaytracerTracer.h"
 #include <catch2/catch.hpp>
 #include <filesystem>

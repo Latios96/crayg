@@ -1,4 +1,5 @@
-#include "fixtures/TemporaryDirectory.h"
+#include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
+
 #include "sceneIO/read/usd/camera/UsdCameraReader.h"
 #include "sceneIO/usd/UsdLensFileUtils.h"
 #include "sceneIO/usd/UsdUtils.h"

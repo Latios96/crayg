@@ -17,8 +17,6 @@ set(UNIT_TEST_SOURCE_LIST
     fixtures/ShadingNodeFixtures.h
     fixtures/SubdivisionSurfaceMeshFixtures.cpp
     fixtures/SubdivisionSurfaceMeshFixtures.h
-    fixtures/TemporaryDirectory.cpp
-    fixtures/TemporaryDirectory.h
     fixtures/TriangleMeshFixtures.cpp
     fixtures/TriangleMeshFixtures.h
     fixtures/UnitPlaneUvs.h

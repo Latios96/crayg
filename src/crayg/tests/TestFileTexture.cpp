@@ -1,4 +1,5 @@
-#include "fixtures/TemporaryDirectory.h"
+#include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
+
 #include "fixtures/UnitPlaneUvs.h"
 #include "image/Image.h"
 #include "image/ImageAlgorithms.h"
