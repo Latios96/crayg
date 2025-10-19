@@ -18,8 +18,8 @@
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
 #include "renderer/FlareRenderer.h"
+#include "renderer/TextureStats.h"
 #include "sceneIO/SceneReaderFactory.h"
-#include "utils/TextureStats.h"
 
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "renderer/Renderer.h"

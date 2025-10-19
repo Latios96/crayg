@@ -5,8 +5,8 @@
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
+#include "renderer/TextureStats.h"
 #include "sceneIO/SceneReaderFactory.h"
-#include "utils/TextureStats.h"
 #include <CraygInfo.h>
 #include <iostream>
 #include <renderer/Renderer.h>

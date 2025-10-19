@@ -192,6 +192,8 @@ set(crayg_SRCS
     renderer/Renderer.h
     renderer/SampleAccumulator.cpp
     renderer/SampleAccumulator.h
+    renderer/TextureStats.cpp
+    renderer/TextureStats.h
     renderer/tilesamplers/AdaptiveTileSampler.cpp
     renderer/tilesamplers/AdaptiveTileSampler.h
     renderer/tilesamplers/TileSampler.cpp
@@ -465,9 +467,7 @@ set(crayg_SRCS
     utils/ImageChannelPathResolver.cpp
     utils/ImageChannelPathResolver.h
     utils/ImagePathResolver.cpp
-    utils/ImagePathResolver.h
-    utils/TextureStats.cpp
-    utils/TextureStats.h)
+    utils/ImagePathResolver.h)
 
 add_library(crayg STATIC ${crayg_SRCS})
 

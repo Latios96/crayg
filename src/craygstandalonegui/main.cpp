@@ -21,10 +21,10 @@
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
 #include "renderer/Renderer.h"
+#include "renderer/TextureStats.h"
 #include "scene/Scene.h"
 #include "sceneIO/SceneReaderFactory.h"
 #include "utils/ImagePathResolver.h"
-#include "utils/TextureStats.h"
 #include <thread>
 
 namespace crayg {
