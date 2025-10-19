@@ -1,5 +1,5 @@
 #include "catch2/catch.hpp"
-#include <image/ImageTile.h>
+#include "crayg/image/ImageTile.h"
 
 namespace crayg {
 

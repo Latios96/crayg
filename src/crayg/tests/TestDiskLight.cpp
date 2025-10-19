@@ -1,6 +1,6 @@
-#include "renderer/intersectors/SceneIntersector.h"
+#include "crayg/renderer/intersectors/SceneIntersector.h"
+#include "crayg/scene/lights/DiskLight.h"
 #include <catch2/catch.hpp>
-#include <scene/lights/DiskLight.h>
 
 namespace crayg {
 

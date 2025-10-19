@@ -1,4 +1,4 @@
-#include "scene/io/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h"
+#include "crayg/scene/io/read/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeReaders.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdShade/shader.h>

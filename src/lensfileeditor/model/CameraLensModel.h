@@ -1,7 +1,7 @@
 #ifndef CRAYG_SRC_STANDALONEGUI_WIDGETS_MYTABLEMODEL_H_
 #define CRAYG_SRC_STANDALONEGUI_WIDGETS_MYTABLEMODEL_H_
+#include "crayg/scene/camera/realistic/CameraLens.h"
 #include "qtcrayg/utils/QtUtils.h"
-#include "scene/camera/realistic/CameraLens.h"
 #include <QAbstractTableModel>
 
 namespace crayg {

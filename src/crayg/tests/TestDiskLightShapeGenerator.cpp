@@ -1,4 +1,4 @@
-#include "scene/lights/shapegenerators/DiskLightShapeGenerator.h"
+#include "crayg/scene/lights/shapegenerators/DiskLightShapeGenerator.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

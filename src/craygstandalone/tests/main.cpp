@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_RUNNER
 
-#include "Initialization.h"
+#include "../../crayg/src/crayg/Initialization.h"
 
 #include <catch2/catch.hpp>
 

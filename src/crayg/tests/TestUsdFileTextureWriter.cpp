@@ -1,9 +1,9 @@
-#include "scene/io/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
-#include "scene/io/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
-#include "scene/io/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.h"
-#include "scene/primitives/Sphere.h"
-#include "scene/shadingnetworks/shadingnodes/FileTexture.h"
-#include "scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
+#include "crayg/scene/io/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
+#include "crayg/scene/io/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
+#include "crayg/scene/io/write/usd/shadingnetworks/shadingnodes/UsdFileTextureWriter.h"
+#include "crayg/scene/primitives/Sphere.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/FileTexture.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 

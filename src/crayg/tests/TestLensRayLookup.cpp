@@ -1,4 +1,4 @@
-#include "scene/camera/lookup/LensRayLookupTable.h"
+#include "crayg/scene/camera/lookup/LensRayLookupTable.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

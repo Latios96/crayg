@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scene/shadingnetworks/materials/Material.h"
+#include "crayg/scene/shadingnetworks/materials/Material.h"
 
 namespace crayg {
 

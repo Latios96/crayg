@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scene/primitives/PointInstancer.h"
+#include "crayg/scene/primitives/PointInstancer.h"
 
 namespace crayg {
 

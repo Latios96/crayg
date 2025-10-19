@@ -1,7 +1,7 @@
-#include "scene/io/usd/UsdUtils.h"
-#include "scene/io/write/usd/primitives/UsdPointInstancerWriter.h"
-#include "scene/primitives/PointInstancer.h"
-#include "scene/primitives/Sphere.h"
+#include "crayg/scene/io/usd/UsdUtils.h"
+#include "crayg/scene/io/write/usd/primitives/UsdPointInstancerWriter.h"
+#include "crayg/scene/primitives/PointInstancer.h"
+#include "crayg/scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <pxr/usd/usd/stage.h>

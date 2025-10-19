@@ -1,4 +1,4 @@
-#include "image/ImageMetadata.h"
+#include "crayg/image/ImageMetadata.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

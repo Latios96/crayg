@@ -3,7 +3,7 @@
 #include "FrameBufferDrawUtils.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "crayg/foundation/progress/StopWatch.h"
-#include "image/ColorConversion.h"
+#include "crayg/image/ColorConversion.h"
 
 namespace crayg {
 

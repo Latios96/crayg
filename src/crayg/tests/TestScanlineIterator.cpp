@@ -1,6 +1,6 @@
 #include "crayg/foundation/areaiterators/AreaIterators.h"
+#include "crayg/image/Image.h"
 #include <catch2/catch.hpp>
-#include <image/Image.h>
 
 namespace crayg {
 

@@ -1,5 +1,5 @@
-#include "scene/lights/Light.h"
-#include "scene/shadingnetworks/materials/EmissiveMaterial.h"
+#include "crayg/scene/lights/Light.h"
+#include "crayg/scene/shadingnetworks/materials/EmissiveMaterial.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

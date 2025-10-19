@@ -1,4 +1,4 @@
-#include "scene/io/write/usd/UsdPathFactory.h"
+#include "crayg/scene/io/write/usd/UsdPathFactory.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

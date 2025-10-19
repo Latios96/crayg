@@ -1,4 +1,4 @@
-#include "scene/lights/shapegenerators/RectLightShapeGenerator.h"
+#include "crayg/scene/lights/shapegenerators/RectLightShapeGenerator.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

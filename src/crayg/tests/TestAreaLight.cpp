@@ -1,6 +1,6 @@
-#include "scene/lights/AreaLight.h"
+#include "crayg/scene/Scene.h"
+#include "crayg/scene/lights/AreaLight.h"
 #include <catch2/catch.hpp>
-#include <scene/Scene.h>
 
 namespace crayg {
 

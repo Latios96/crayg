@@ -1,6 +1,6 @@
+#include "crayg/scene/camera/realistic/CameraLens.h"
+#include "crayg/scene/camera/realistic/ExitPupilCalculator.h"
 #include "fixtures/CameraLensFixtures.h"
-#include "scene/camera/realistic/CameraLens.h"
-#include "scene/camera/realistic/ExitPupilCalculator.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

@@ -1,0 +1,22 @@
+#pragma once
+
+#include "crayg/foundation/objects/DtoUtils.h"
+#include "crayg/image/ImageTile.h"
+#include "outputdrivers/NextGenOutputDriver.h"
+#include <chrono>
+#include <tbb/concurrent_vector.h>
+
+namespace crayg {
+
+CRAYG_DTO_2(TileTime, Tile, tile, float, seconds);
+
+class TileStats {
+  public:
+    void processTileTime(Film &film, const Tile &tile, const std::chrono::steady_clock::time_point &startTime);
+    void processTileTimes(NextGenOutputDriver &outputDriver, const Resolution &resolution);
+
+  private:
+    tbb::concurrent_vector<TileTime> tileTimes;
+};
+
+}

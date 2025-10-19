@@ -1,6 +1,6 @@
+#include "crayg/scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "crayg/scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
-#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

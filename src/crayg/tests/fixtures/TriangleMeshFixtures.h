@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scene/primitives/trianglemesh/TriangleMesh.h"
+#include "crayg/scene/primitives/trianglemesh/TriangleMesh.h"
 
 namespace crayg {
 

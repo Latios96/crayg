@@ -1,5 +1,5 @@
-#include "scene/io/read/usd/base/BaseUsdImageableReader.h"
-#include "scene/primitives/Sphere.h"
+#include "crayg/scene/io/read/usd/base/BaseUsdImageableReader.h"
+#include "crayg/scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>

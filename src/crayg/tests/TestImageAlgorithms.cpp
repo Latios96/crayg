@@ -1,7 +1,7 @@
 #include "catch2/catch.hpp"
 #include "crayg/foundation/math/geometry/Tile.h"
-#include "image/Image.h"
-#include "image/ImageAlgorithms.h"
+#include "crayg/image/Image.h"
+#include "crayg/image/ImageAlgorithms.h"
 
 namespace crayg {
 

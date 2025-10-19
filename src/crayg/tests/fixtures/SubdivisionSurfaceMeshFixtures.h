@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "crayg/scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 
 namespace crayg {
 

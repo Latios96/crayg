@@ -1,5 +1,5 @@
+#include "crayg/scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>
-#include <scene/primitives/Sphere.h>
 
 namespace crayg {
 

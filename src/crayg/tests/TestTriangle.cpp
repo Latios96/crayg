@@ -1,6 +1,6 @@
+#include "crayg/scene/primitives/trianglemesh/Triangle.h"
+#include "crayg/scene/primitives/trianglemesh/TriangleMesh.h"
 #include "fixtures/TriangleMeshFixtures.h"
-#include "scene/primitives/trianglemesh/Triangle.h"
-#include "scene/primitives/trianglemesh/TriangleMesh.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 

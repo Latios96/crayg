@@ -1,5 +1,5 @@
-#include "scene/io/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h"
-#include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
+#include "crayg/scene/io/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdShade/shader.h>

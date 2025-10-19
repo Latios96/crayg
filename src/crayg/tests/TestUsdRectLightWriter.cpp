@@ -1,8 +1,8 @@
-#include "scene/io/usd/UsdUtils.h"
-#include "scene/io/write/usd/UsdPathFactory.h"
-#include "scene/io/write/usd/base/BaseUsdLightWriter.h"
-#include "scene/io/write/usd/lights/UsdRectLightWriter.h"
-#include "scene/lights/RectLight.h"
+#include "crayg/scene/io/usd/UsdUtils.h"
+#include "crayg/scene/io/write/usd/UsdPathFactory.h"
+#include "crayg/scene/io/write/usd/base/BaseUsdLightWriter.h"
+#include "crayg/scene/io/write/usd/lights/UsdRectLightWriter.h"
+#include "crayg/scene/lights/RectLight.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usdLux/rectLight.h>
 

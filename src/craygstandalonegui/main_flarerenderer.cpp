@@ -3,28 +3,28 @@
 #include "qtcrayg/foundation/QtMetaTypes.h"
 #include <QtWidgets/qapplication.h>
 
-#include "CraygInfo.h"
-#include "Initialization.h"
+#include "../crayg/src/crayg/CraygInfo.h"
+#include "../crayg/src/crayg/Initialization.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequences.h"
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/filesystem/FileAsString.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
+#include "crayg/renderer/FlareRenderer.h"
+#include "crayg/renderer/TextureStats.h"
+#include "crayg/scene/io/SceneReaderFactory.h"
 #include "craygstandalone/cli/CliParser.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidget.h"
 #include "craygstandalonegui/widgets/framebuffer/NextGenImageWidgetOutputDriver.h"
 #include "craygstandalonegui/widgets/taskreporter/GuiTaskReporter.h"
 #include "qtcrayg/resources/StyleSheetLoader.h"
 #include "qtcrayg/utils/QtUtils.h"
-#include "renderer/FlareRenderer.h"
-#include "renderer/TextureStats.h"
-#include "scene/io/SceneReaderFactory.h"
 
+#include "crayg/image/io/imageformatwriters/ImageFormatWriters.h"
+#include "crayg/renderer/Renderer.h"
+#include "crayg/scene/Scene.h"
 #include "craygstandalone/ImagePathResolver.h"
-#include "image/io/imageformatwriters/ImageFormatWriters.h"
-#include "renderer/Renderer.h"
-#include "scene/Scene.h"
 #include <QResource>
 #include <tbb/task_group.h>
 #include <thread>

@@ -1,4 +1,4 @@
-#include "scene/RegionToRender.h"
+#include "crayg/scene/RegionToRender.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

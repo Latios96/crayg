@@ -1,6 +1,6 @@
+#include "crayg/scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.h"
+#include "crayg/scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
-#include "scene/primitives/subdivisionsurfacemesh/OpenSubdivRefiner.h"
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

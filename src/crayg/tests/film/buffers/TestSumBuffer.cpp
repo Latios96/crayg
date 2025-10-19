@@ -1,5 +1,5 @@
 #include "crayg/foundation/math/geometry/Resolution.h"
-#include "image/film/buffers/FilmSumBuffer.h"
+#include "crayg/image/film/buffers/FilmSumBuffer.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

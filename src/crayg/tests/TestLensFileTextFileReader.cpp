@@ -1,4 +1,4 @@
-#include "scene/camera/realistic/lensio/textfile/LensFileTextFileReader.h"
+#include "crayg/scene/camera/realistic/lensio/textfile/LensFileTextFileReader.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

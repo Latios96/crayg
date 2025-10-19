@@ -1,7 +1,7 @@
 #include "crayg/foundation/math/geometry/Color_formatter.h"
+#include "crayg/scene/primitives/trianglemesh/TriangleMesh.h"
+#include "crayg/scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include "fixtures/TriangleMeshFixtures.h"
-#include "scene/primitives/trianglemesh/TriangleMesh.h"
-#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

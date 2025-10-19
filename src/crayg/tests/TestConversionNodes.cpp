@@ -1,6 +1,6 @@
-#include "scene/primitives/Sphere.h"
-#include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
-#include "scene/shadingnetworks/shadingnodes/ConversionNodes.h"
+#include "crayg/scene/primitives/Sphere.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/ConversionNodes.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

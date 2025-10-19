@@ -1,4 +1,4 @@
-#include "renderer/tilesamplers/UniformTileSampler.h"
+#include "crayg/renderer/tilesamplers/UniformTileSampler.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

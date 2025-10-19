@@ -1,6 +1,6 @@
-#include "renderer/integrators/AbstractIntegrator.h"
-#include "scene/primitives/Sphere.h"
-#include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
+#include "crayg/renderer/integrators/AbstractIntegrator.h"
+#include "crayg/scene/primitives/Sphere.h"
+#include "crayg/scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
 

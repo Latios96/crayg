@@ -1,10 +1,10 @@
-#include "scene/io/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
-#include "scene/io/usd/UsdUtils.h"
-#include "scene/io/write/usd/UsdPathFactory.h"
-#include "scene/io/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
-#include "scene/io/write/usd/shadingnetworks/shadingnodes/UsdColorToFloatWriter.h"
-#include "scene/shadingnetworks/shadingnodes/ColorToFloat.h"
-#include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
+#include "crayg/scene/io/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
+#include "crayg/scene/io/usd/UsdUtils.h"
+#include "crayg/scene/io/write/usd/UsdPathFactory.h"
+#include "crayg/scene/io/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
+#include "crayg/scene/io/write/usd/shadingnetworks/shadingnodes/UsdColorToFloatWriter.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/ColorToFloat.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 

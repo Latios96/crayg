@@ -1,5 +1,5 @@
-#include "renderer/integrators/RaytracingIntegrator.h"
-#include "scene/primitives/Sphere.h"
+#include "crayg/renderer/integrators/RaytracingIntegrator.h"
+#include "crayg/scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>
 #include <fakeit.hpp>
 

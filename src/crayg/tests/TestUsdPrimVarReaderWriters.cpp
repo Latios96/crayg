@@ -1,8 +1,8 @@
-#include "scene/io/usd/UsdUtils.h"
-#include "scene/io/write/usd/UsdPathFactory.h"
-#include "scene/io/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
-#include "scene/io/write/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderWriters.h"
-#include "scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
+#include "crayg/scene/io/usd/UsdUtils.h"
+#include "crayg/scene/io/write/usd/UsdPathFactory.h"
+#include "crayg/scene/io/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
+#include "crayg/scene/io/write/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderWriters.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/PrimVarReaders.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 

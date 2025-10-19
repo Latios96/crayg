@@ -1,11 +1,11 @@
 #include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
 
+#include "crayg/image/Image.h"
+#include "crayg/image/ImageAlgorithms.h"
+#include "crayg/image/io/imageformatwriters/ImageFormatWriters.h"
+#include "crayg/scene/primitives/Sphere.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/FileTexture.h"
 #include "fixtures/UnitPlaneUvs.h"
-#include "image/Image.h"
-#include "image/ImageAlgorithms.h"
-#include "image/io/imageformatwriters/ImageFormatWriters.h"
-#include "scene/primitives/Sphere.h"
-#include "scene/shadingnetworks/shadingnodes/FileTexture.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

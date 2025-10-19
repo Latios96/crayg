@@ -1,4 +1,4 @@
-#include "image/ImageChannelPathResolver.h"
+#include "crayg/image/ImageChannelPathResolver.h"
 #include <catch2/catch.hpp>
 #include <filesystem>
 

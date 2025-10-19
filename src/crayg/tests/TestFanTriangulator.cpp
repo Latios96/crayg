@@ -1,7 +1,7 @@
+#include "crayg/scene/io/write/usd/UsdSceneWriter.h"
+#include "crayg/scene/primitives/subdivisionsurfacemesh/FanTriangulator.h"
+#include "crayg/scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
-#include "scene/io/write/usd/UsdSceneWriter.h"
-#include "scene/primitives/subdivisionsurfacemesh/FanTriangulator.h"
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

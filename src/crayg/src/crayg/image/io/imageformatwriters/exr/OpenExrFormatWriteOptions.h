@@ -1,0 +1,27 @@
+#pragma once
+
+#include "crayg/foundation/enums/EnumFormatter.h"
+#include "crayg/image/io/imageformatwriters/BaseImageFormatWriteOptions.h"
+#include <ImfCompression.h>
+#include <ImfPixelType.h>
+#include <ostream>
+
+namespace crayg {
+
+enum class OpenExrDataWindow { WHOLE_IMAGE, RENDER_REGION, AUTO };
+
+struct OpenExrFormatWriteOptions : BaseImageFormatWriteOptions {
+    Imf::Compression compression = Imf::ZIP_COMPRESSION;
+    Imf::PixelType pixelType = Imf::HALF;
+    OpenExrDataWindow openExrDataWindow = OpenExrDataWindow::WHOLE_IMAGE;
+
+    friend std::ostream &operator<<(std::ostream &os, const OpenExrFormatWriteOptions &options);
+    bool operator==(const OpenExrFormatWriteOptions &rhs) const;
+    bool operator!=(const OpenExrFormatWriteOptions &rhs) const;
+};
+
+}
+
+CRAYG_FMT_ENUM_FORMATTER_H(crayg::OpenExrDataWindow);
+
+template <> struct fmt::formatter<crayg::OpenExrFormatWriteOptions> : ostream_formatter {};

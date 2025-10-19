@@ -11,10 +11,10 @@
 #include <QtWidgets/qscrollarea.h>
 
 #include "crayg/foundation/progress/TaskReporter.h"
+#include "crayg/image/ImageMetadata.h"
+#include "crayg/image/ImageSpec.h"
+#include "crayg/image/film/FilmSpec.h"
 #include "craygstandalonegui/widgets/panandzoomarea/PanAndZoomArea.h"
-#include "image/ImageMetadata.h"
-#include "image/ImageSpec.h"
-#include "image/film/FilmSpec.h"
 #include "qtcrayg/widgets/IconToggleButton.h"
 
 #include <fmt/format.h>

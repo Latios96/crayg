@@ -1,6 +1,6 @@
 #include "crayg/foundation/math/geometry/Resolution.h"
-#include "image/film/buffers/FilmBufferBase.h"
-#include "image/film/buffers/FilmValueTrait.h"
+#include "crayg/image/film/buffers/FilmBufferBase.h"
+#include "crayg/image/film/buffers/FilmValueTrait.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

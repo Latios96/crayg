@@ -1,5 +1,5 @@
+#include "crayg/scene/primitives/GroundPlane.h"
 #include <catch2/catch.hpp>
-#include <scene/primitives/GroundPlane.h>
 
 namespace crayg {
 

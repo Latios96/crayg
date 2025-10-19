@@ -1,4 +1,4 @@
-#include "scene/camera/realistic/lensio/json/LensFileJsonReader.h"
+#include "crayg/scene/camera/realistic/lensio/json/LensFileJsonReader.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

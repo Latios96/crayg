@@ -1,7 +1,7 @@
+#include "crayg/scene/primitives/trianglemesh/TriangleMesh.h"
+#include "crayg/scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
+#include "crayg/scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "fixtures/TriangleMeshFixtures.h"
-#include "scene/primitives/trianglemesh/TriangleMesh.h"
-#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerFacePrimVar.h"
-#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include <catch2/catch.hpp>
 #include <numeric>
 

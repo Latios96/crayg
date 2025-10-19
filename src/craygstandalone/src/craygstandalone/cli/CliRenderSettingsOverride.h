@@ -2,7 +2,7 @@
 
 #include "crayg/foundation/math/geometry/Resolution.h"
 #include "crayg/foundation/objects/DtoUtils.h"
-#include "scene/RenderSettings.h"
+#include "crayg/scene/RenderSettings.h"
 #include <fmt/std.h>
 #include <optional>
 

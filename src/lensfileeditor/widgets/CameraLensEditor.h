@@ -1,5 +1,5 @@
 #pragma once
-#include "scene/camera/realistic/CameraLens.h"
+#include "crayg/scene/camera/realistic/CameraLens.h"
 #include <QWidget>
 
 namespace crayg {

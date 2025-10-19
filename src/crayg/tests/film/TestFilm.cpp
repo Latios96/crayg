@@ -1,5 +1,5 @@
-#include "image/Image.h"
-#include "image/film/Film.h"
+#include "crayg/image/Image.h"
+#include "crayg/image/film/Film.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

@@ -1,8 +1,8 @@
 #include "PointInstancerFixtures.h"
 #include "SubdivisionSurfaceMeshFixtures.h"
 #include "TriangleMeshFixtures.h"
-#include "scene/primitives/Sphere.h"
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "crayg/scene/primitives/Sphere.h"
+#include "crayg/scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 
 namespace crayg {
 

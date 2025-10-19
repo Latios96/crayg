@@ -1,17 +1,17 @@
-#include "Initialization.h"
+#include "crayg/CraygInfo.h"
+#include "crayg/Initialization.h"
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/filesystem/FileAsString.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
+#include "crayg/image/io/imageformatwriters/ImageFormatWriters.h"
+#include "crayg/renderer/Renderer.h"
+#include "crayg/renderer/TextureStats.h"
+#include "crayg/scene/Scene.h"
+#include "crayg/scene/io/SceneReaderFactory.h"
 #include "craygstandalone/cli/CliParser.h"
-#include "image/io/imageformatwriters/ImageFormatWriters.h"
-#include "renderer/TextureStats.h"
-#include "scene/io/SceneReaderFactory.h"
-#include <CraygInfo.h>
 #include <craygstandalone/ImagePathResolver.h>
 #include <iostream>
-#include <renderer/Renderer.h>
-#include <scene/Scene.h>
 
 namespace crayg {
 

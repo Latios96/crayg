@@ -1,7 +1,7 @@
 #include "crayg/foundation/areaiterators/AreaIterators.h"
+#include "crayg/foundation/areaiterators/tiles/TileSequences.h"
+#include "crayg/image/Image.h"
 #include <catch2/catch.hpp>
-#include <crayg/foundation/areaiterators/tiles/TileSequences.h>
-#include <image/Image.h>
 #include <iostream>
 
 namespace crayg {

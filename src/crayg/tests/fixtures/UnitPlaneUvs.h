@@ -1,7 +1,7 @@
 #pragma once
 
-#include "renderer/integrators/SurfaceInteraction.h"
-#include "scene/shadingnetworks/ShadingNode.h"
+#include "crayg/renderer/integrators/SurfaceInteraction.h"
+#include "crayg/scene/shadingnetworks/ShadingNode.h"
 
 namespace crayg {
 

@@ -1,4 +1,4 @@
-#include "scene/camera/realistic/VariableLensDistances.h"
+#include "crayg/scene/camera/realistic/VariableLensDistances.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

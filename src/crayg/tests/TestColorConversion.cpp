@@ -1,5 +1,5 @@
-#include "image/ColorConversion.h"
-#include "image/ImageAlgorithms.h"
+#include "crayg/image/ColorConversion.h"
+#include "crayg/image/ImageAlgorithms.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

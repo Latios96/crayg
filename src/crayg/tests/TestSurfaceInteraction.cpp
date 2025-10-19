@@ -1,5 +1,5 @@
-#include "renderer/integrators/SurfaceInteraction.h"
-#include "scene/primitives/Sphere.h"
+#include "crayg/renderer/integrators/SurfaceInteraction.h"
+#include "crayg/scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

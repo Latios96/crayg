@@ -1,7 +1,7 @@
 #pragma once
 #include "crayg/foundation/areaiterators/AreaIterators.h"
-#include "image/Image.h"
-#include "image/film/Film.h"
+#include "crayg/image/Image.h"
+#include "crayg/image/film/Film.h"
 
 namespace crayg {
 

@@ -1,6 +1,6 @@
 #include "renderUtils.h"
 #include "crayg/foundation/progress/TaskReporter.h"
-#include "image/io/imageformatwriters/ImageFormatWriters.h"
+#include "crayg/image/io/imageformatwriters/ImageFormatWriters.h"
 
 namespace crayg {
 

@@ -1,4 +1,4 @@
-#include "renderer/SampleAccumulator.h"
+#include "crayg/renderer/SampleAccumulator.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

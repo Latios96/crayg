@@ -1,5 +1,5 @@
-#include "scene/io/read/usd/UsdStageReader.h"
-#include "scene/primitives/Sphere.h"
+#include "crayg/scene/io/read/usd/UsdStageReader.h"
+#include "crayg/scene/primitives/Sphere.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/sdf/types.h>
 #include <pxr/usd/usd/editContext.h>

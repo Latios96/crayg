@@ -1,6 +1,6 @@
 #include "crayg/foundation/areaiterators/tiles/TileSequenceType.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequences.h"
-#include "image/Image.h"
+#include "crayg/image/Image.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

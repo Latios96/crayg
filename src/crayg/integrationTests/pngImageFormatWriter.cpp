@@ -1,7 +1,7 @@
 #include "ImageAndFilmFixture.h"
 #include "crayg/compatibility/lodepng/fmt/LodePNG_formatter.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
-#include "image/io/imageformatwriters/ImageFormatWriters.h"
+#include "crayg/image/io/imageformatwriters/ImageFormatWriters.h"
 #include "utils.h"
 #include <catch2/catch.hpp>
 #include <lodepng.h>

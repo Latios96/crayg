@@ -1,7 +1,7 @@
-#include "scene/primitives/Sphere.h"
+#include "crayg/scene/Scene.h"
+#include "crayg/scene/primitives/Sphere.h"
+#include "crayg/scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include <catch2/catch.hpp>
-#include <scene/Scene.h>
-#include <scene/shadingnetworks/materials/UsdPreviewSurface.h>
 
 namespace crayg {
 

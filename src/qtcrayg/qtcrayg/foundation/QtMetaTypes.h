@@ -2,10 +2,10 @@
 
 #include "crayg/foundation/math/geometry/Tile.h"
 #include "crayg/foundation/progress/TaskReporter.h"
-#include "image/ImageTile.h"
+#include "crayg/image/ImageMetadata.h"
+#include "crayg/image/ImageSpec.h"
+#include "crayg/image/ImageTile.h"
 #include <QMetaType>
-#include <image/ImageMetadata.h>
-#include <image/ImageSpec.h>
 
 Q_DECLARE_METATYPE(crayg::ImageMetadata);
 Q_DECLARE_METATYPE(crayg::Tile);

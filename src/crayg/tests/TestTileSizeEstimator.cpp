@@ -1,4 +1,4 @@
-#include "renderer/TileSizeEstimator.h"
+#include "crayg/renderer/TileSizeEstimator.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

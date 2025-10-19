@@ -1,7 +1,7 @@
 #pragma once
-#include <renderer/Renderer.h>
-#include <scene/Scene.h>
-#include <scene/io/SceneReaderFactory.h>
+#include "crayg/renderer/Renderer.h"
+#include "crayg/scene/Scene.h"
+#include "crayg/scene/io/SceneReaderFactory.h"
 
 namespace crayg {
 

@@ -1,8 +1,8 @@
+#include "crayg/scene/io/usd/UsdUtils.h"
+#include "crayg/scene/io/write/usd/primitives/UsdTriangleMeshWriter.h"
+#include "crayg/scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
+#include "crayg/scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include "fixtures/TriangleMeshFixtures.h"
-#include "scene/io/usd/UsdUtils.h"
-#include "scene/io/write/usd/primitives/UsdTriangleMeshWriter.h"
-#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
-#include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>

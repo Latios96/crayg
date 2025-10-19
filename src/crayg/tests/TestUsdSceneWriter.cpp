@@ -1,9 +1,9 @@
-#include "scene/Scene.h"
-#include "scene/io/write/usd/UsdSceneWriter.h"
-#include "scene/lights/DiskLight.h"
-#include "scene/lights/RectLight.h"
-#include "scene/primitives/Sphere.h"
-#include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
+#include "crayg/scene/Scene.h"
+#include "crayg/scene/io/write/usd/UsdSceneWriter.h"
+#include "crayg/scene/lights/DiskLight.h"
+#include "crayg/scene/lights/RectLight.h"
+#include "crayg/scene/primitives/Sphere.h"
+#include "crayg/scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/primRange.h>
 #include <pxr/usd/usdGeom/camera.h>

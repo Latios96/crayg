@@ -1,7 +1,7 @@
+#include "crayg/scene/primitives/Sphere.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/ColorToFloat.h"
+#include "crayg/scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
 #include "fixtures/UnitPlaneUvs.h"
-#include "scene/primitives/Sphere.h"
-#include "scene/shadingnetworks/shadingnodes/ColorToFloat.h"
-#include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

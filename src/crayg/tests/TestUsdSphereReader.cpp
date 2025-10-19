@@ -1,4 +1,4 @@
-#include "scene/io/read/usd/primitives/UsdSphereReader.h"
+#include "crayg/scene/io/read/usd/primitives/UsdSphereReader.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>

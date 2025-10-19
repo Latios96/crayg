@@ -5,7 +5,7 @@ import jinja2
 HEADER_TEMPLATE_STR = """#pragma once
 
 #include "basics/Resolution.h"
-#include "scene/RenderSettings.h"
+#include "crayg/scene/RenderSettings.h"
 #include "utils/DtoUtils.h"
 #include <fmt/std.h>
 #include <optional>

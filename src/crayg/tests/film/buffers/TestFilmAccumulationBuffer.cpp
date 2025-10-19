@@ -1,4 +1,4 @@
-#include "image/film/buffers/FilmAccumulationBuffer.h"
+#include "crayg/image/film/buffers/FilmAccumulationBuffer.h"
 
 #include <catch2/catch.hpp>
 
