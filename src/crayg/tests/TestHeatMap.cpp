@@ -1,4 +1,4 @@
-#include "utils/Heatmap.h"
+#include "crayg/foundation/reporting/Heatmap.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

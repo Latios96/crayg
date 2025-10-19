@@ -1,8 +1,8 @@
 #include "AdaptiveTileSampler.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
+#include "crayg/foundation/reporting/Heatmap.h"
 #include "image/ImageAlgorithms.h"
 #include "sampling/Random.h"
-#include "utils/Heatmap.h"
 
 namespace crayg {
 

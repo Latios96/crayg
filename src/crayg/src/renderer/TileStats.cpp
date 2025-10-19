@@ -1,5 +1,5 @@
 #include "TileStats.h"
-#include "utils/Heatmap.h"
+#include "crayg/foundation/reporting/Heatmap.h"
 #include <image/ImageAlgorithms.h>
 
 namespace crayg {

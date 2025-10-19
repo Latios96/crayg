@@ -87,6 +87,8 @@ set(crayg_SRCS
     crayg/foundation/progress/StopWatch.h
     crayg/foundation/progress/TaskReporter.cpp
     crayg/foundation/progress/TaskReporter.h
+    crayg/foundation/reporting/Heatmap.cpp
+    crayg/foundation/reporting/Heatmap.h
     crayg/foundation/strings/CommentStripper.cpp
     crayg/foundation/strings/CommentStripper.h
     crayg/foundation/strings/Humanize.cpp
@@ -460,8 +462,6 @@ set(crayg_SRCS
     sceneIO/write/usd/UsdRenderSettingsWriter.h
     sceneIO/write/usd/UsdSceneWriter.cpp
     sceneIO/write/usd/UsdSceneWriter.h
-    utils/Heatmap.cpp
-    utils/Heatmap.h
     utils/ImageChannelPathResolver.cpp
     utils/ImageChannelPathResolver.h
     utils/ImagePathResolver.cpp
