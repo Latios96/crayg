@@ -1,4 +1,4 @@
-#include "sceneIO/SceneReaderFactory.h"
+#include "scene/io/SceneReaderFactory.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

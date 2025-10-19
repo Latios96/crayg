@@ -1,8 +1,8 @@
 #include "fixtures/TriangleMeshFixtures.h"
+#include "scene/io/usd/UsdUtils.h"
+#include "scene/io/write/usd/primitives/UsdTriangleMeshWriter.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/primitives/UsdTriangleMeshWriter.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/mesh.h>

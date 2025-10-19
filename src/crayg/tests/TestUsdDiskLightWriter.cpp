@@ -1,9 +1,9 @@
+#include "scene/io/usd/UsdUtils.h"
+#include "scene/io/write/usd/UsdPathFactory.h"
+#include "scene/io/write/usd/lights/UsdDiskLightWriter.h"
+#include "scene/io/write/usd/primitives/UsdSphereWriter.h"
 #include "scene/lights/DiskLight.h"
 #include "scene/primitives/Sphere.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/UsdPathFactory.h"
-#include "sceneIO/write/usd/lights/UsdDiskLightWriter.h"
-#include "sceneIO/write/usd/primitives/UsdSphereWriter.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 

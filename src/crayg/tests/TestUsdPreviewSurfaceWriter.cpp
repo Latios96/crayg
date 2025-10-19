@@ -1,7 +1,7 @@
+#include "scene/io/usd/UsdUtils.h"
+#include "scene/io/write/usd/shadingnetworks/caches/UsdMaterialWriteCache.h"
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
 #include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/shadingnetworks/caches/UsdMaterialWriteCache.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 

@@ -1,4 +1,4 @@
-#include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderReaders.h"
+#include "scene/io/read/usd/shadingnetworks/shadingnodes/UsdPrimVarReaderReaders.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdShade/shader.h>

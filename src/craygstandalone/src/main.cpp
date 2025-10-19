@@ -6,7 +6,7 @@
 #include "craygstandalone/cli/CliParser.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"
 #include "renderer/TextureStats.h"
-#include "sceneIO/SceneReaderFactory.h"
+#include "scene/io/SceneReaderFactory.h"
 #include <CraygInfo.h>
 #include <craygstandalone/ImagePathResolver.h>
 #include <iostream>

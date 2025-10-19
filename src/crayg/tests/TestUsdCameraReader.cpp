@@ -1,8 +1,8 @@
 #include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
 
-#include "sceneIO/read/usd/camera/UsdCameraReader.h"
-#include "sceneIO/usd/UsdLensFileUtils.h"
-#include "sceneIO/usd/UsdUtils.h"
+#include "scene/io/read/usd/camera/UsdCameraReader.h"
+#include "scene/io/usd/UsdLensFileUtils.h"
+#include "scene/io/usd/UsdUtils.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <pxr/usd/usd/stage.h>

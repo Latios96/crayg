@@ -1,10 +1,10 @@
+#include "scene/io/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
+#include "scene/io/usd/UsdUtils.h"
+#include "scene/io/write/usd/UsdPathFactory.h"
+#include "scene/io/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
+#include "scene/io/write/usd/shadingnetworks/shadingnodes/UsdCheckerBoardWriter.h"
+#include "scene/io/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.h"
 #include "scene/shadingnetworks/shadingnodes/CheckerBoard.h"
-#include "sceneIO/read/usd/shadingnetworks/UsdShadingNodeReadUtils.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/UsdPathFactory.h"
-#include "sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
-#include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdCheckerBoardWriter.h"
-#include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConstantShadingNodeWriters.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 

@@ -1,7 +1,7 @@
+#include "scene/io/usd/UsdUtils.h"
+#include "scene/io/write/usd/UsdPathFactory.h"
+#include "scene/io/write/usd/base/BaseUsdTransformableWriter.h"
 #include "scene/primitives/Sphere.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/UsdPathFactory.h"
-#include "sceneIO/write/usd/base/BaseUsdTransformableWriter.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>

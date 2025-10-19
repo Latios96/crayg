@@ -1,8 +1,8 @@
+#include "scene/io/usd/UsdUtils.h"
+#include "scene/io/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
+#include "scene/io/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.h"
 #include "scene/shadingnetworks/shadingnodes/ConstantShadingNodes.h"
 #include "scene/shadingnetworks/shadingnodes/ConversionNodes.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/shadingnetworks/caches/UsdShadingNodeWriteCache.h"
-#include "sceneIO/write/usd/shadingnetworks/shadingnodes/UsdConversionNodeWriters.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

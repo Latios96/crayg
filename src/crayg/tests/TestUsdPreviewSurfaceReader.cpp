@@ -1,7 +1,7 @@
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "scene/io/read/usd/shadingnetworks/caches/UsdMaterialReadCache.h"
 #include "scene/shadingnetworks/materials/Material.h"
 #include "scene/shadingnetworks/materials/UsdPreviewSurface.h"
-#include "sceneIO/read/usd/shadingnetworks/caches/UsdMaterialReadCache.h"
 #include <catch2/catch.hpp>
 #include <pxr/base/gf/vec3f.h>
 #include <pxr/usd/sdf/types.h>

@@ -1,5 +1,5 @@
-#include "sceneIO/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h"
-#include "sceneIO/read/usd/shadingnetworks/shadingnodes/UsdColorToFloatReader.h"
+#include "scene/io/read/usd/shadingnetworks/caches/UsdShadingNodeReadCache.h"
+#include "scene/io/read/usd/shadingnetworks/shadingnodes/UsdColorToFloatReader.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdShade/shader.h>

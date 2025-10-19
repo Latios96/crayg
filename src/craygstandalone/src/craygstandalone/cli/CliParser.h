@@ -2,7 +2,7 @@
 
 #include "CliRenderSettingsOverride.h"
 #include "crayg/foundation/math/geometry/Resolution.h"
-#include "sceneIO/read/SceneReader.h"
+#include "scene/io/read/SceneReader.h"
 #include <optional>
 #include <string>
 #include <utility>

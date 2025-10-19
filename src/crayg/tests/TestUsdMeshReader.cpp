@@ -1,8 +1,8 @@
 #include "crayg/foundation/math/geometry/Vector2_formatter.h"
 #include "fixtures/UsdGeomMeshFixtures.h"
+#include "scene/io/read/usd/primitives/UsdMeshReader.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerPointPrimVar.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshPerVertexPrimVar.h"
-#include "sceneIO/read/usd/primitives/UsdMeshReader.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <pxr/usd/usd/stage.h>

@@ -1,5 +1,5 @@
-#include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/UsdRenderSettingsWriter.h"
+#include "scene/io/usd/UsdUtils.h"
+#include "scene/io/write/usd/UsdRenderSettingsWriter.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdRender/settings.h>

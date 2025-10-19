@@ -1,4 +1,4 @@
-#include "sceneIO/read/usd/UsdRenderSettingsReader.h"
+#include "scene/io/read/usd/UsdRenderSettingsReader.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdRender/settings.h>

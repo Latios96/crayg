@@ -19,7 +19,7 @@
 #include "qtcrayg/utils/QtUtils.h"
 #include "renderer/FlareRenderer.h"
 #include "renderer/TextureStats.h"
-#include "sceneIO/SceneReaderFactory.h"
+#include "scene/io/SceneReaderFactory.h"
 
 #include "craygstandalone/ImagePathResolver.h"
 #include "image/io/imageformatwriters/ImageFormatWriters.h"

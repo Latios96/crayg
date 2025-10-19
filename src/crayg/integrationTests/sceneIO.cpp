@@ -1,14 +1,14 @@
 #ifndef CRAYG_SRC_CRAYG_INTEGRATIONTESTS_SCENEIO_CPP_
 #define CRAYG_SRC_CRAYG_INTEGRATIONTESTS_SCENEIO_CPP_
 #include "renderUtils.h"
-#include "sceneIO/SceneWriterFactory.h"
-#include "sceneIO/write/usd/UsdSceneWriter.h"
+#include "scene/io/SceneWriterFactory.h"
+#include "scene/io/write/usd/UsdSceneWriter.h"
 #include "utils.h"
 #include <catch2/catch.hpp>
+#include <scene/io/write/SceneWriter.h>
 #include <scene/primitives/GroundPlane.h>
 #include <scene/primitives/Sphere.h>
 #include <scene/shadingnetworks/materials/UsdPreviewSurface.h>
-#include <sceneIO/write/SceneWriter.h>
 
 namespace crayg {
 

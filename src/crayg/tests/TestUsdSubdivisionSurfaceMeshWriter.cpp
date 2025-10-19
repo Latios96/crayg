@@ -1,8 +1,8 @@
 #include "fixtures/SubdivisionSurfaceMeshFixtures.h"
+#include "scene/io/usd/UsdReadUtils.h"
+#include "scene/io/usd/UsdUtils.h"
+#include "scene/io/write/usd/primitives/UsdSubdivisionSurfaceMeshWriter.h"
 #include "scene/primitives/subdivisionsurfacemesh/SubdivisionSurfaceMesh.h"
-#include "sceneIO/usd/UsdReadUtils.h"
-#include "sceneIO/usd/UsdUtils.h"
-#include "sceneIO/write/usd/primitives/UsdSubdivisionSurfaceMeshWriter.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

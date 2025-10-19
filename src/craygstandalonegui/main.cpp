@@ -24,7 +24,7 @@
 #include "renderer/Renderer.h"
 #include "renderer/TextureStats.h"
 #include "scene/Scene.h"
-#include "sceneIO/SceneReaderFactory.h"
+#include "scene/io/SceneReaderFactory.h"
 #include <thread>
 
 namespace crayg {

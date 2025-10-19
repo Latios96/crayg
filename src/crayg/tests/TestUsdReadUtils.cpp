@@ -1,4 +1,4 @@
-#include "sceneIO/usd/UsdReadUtils.h"
+#include "scene/io/usd/UsdReadUtils.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/camera.h>

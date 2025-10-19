@@ -1,4 +1,4 @@
-#include "sceneIO/usd/UsdUtils.h"
+#include "scene/io/usd/UsdUtils.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/sphere.h>

@@ -1,4 +1,4 @@
-#include "sceneIO/usd/UsdConversions.h"
+#include "scene/io/usd/UsdConversions.h"
 #include <catch2/catch.hpp>
 #include <pxr/base/gf/matrix4d.h>
 

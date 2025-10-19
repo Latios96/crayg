@@ -1,4 +1,4 @@
-#include "sceneIO/read/usd/lights/UsdDiskLightReader.h"
+#include "scene/io/read/usd/lights/UsdDiskLightReader.h"
 #include <catch2/catch.hpp>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
