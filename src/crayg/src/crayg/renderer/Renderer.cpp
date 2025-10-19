@@ -2,6 +2,7 @@
 #include "GeometryCompiler.h"
 #include "ImageMetadataCollector.h"
 #include "SampleAccumulator.h"
+#include "crayg/foundation/areaiterators/tiles/TileSequence.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequences.h"
 #include "crayg/foundation/areaiterators/tiles/tilequeues/TileQueue.h"
 #include "crayg/foundation/logging/Logger.h"
@@ -18,7 +19,6 @@
 #include "intersectors/IntersectorFactory.h"
 #include "sampling/Random.h"
 #include <Imath/half.h>
-#include <crayg/foundation/areaiterators/tiles/TileSequence.h>
 #include <memory>
 #include <numeric>
 #include <tbb/task_group.h>

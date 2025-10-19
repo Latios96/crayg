@@ -1,9 +1,9 @@
 #pragma once
 
 #include "TriangleMeshAbstractPrimVar.h"
+#include "crayg/foundation/math/geometry/Vector3f_formatter.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
 #include "crayg/scene/primitives/trianglemesh/BarycentricCoordinates.h"
-#include <crayg/foundation/math/geometry/Vector3f_formatter.h>
 #include <fmt/ostream.h>
 #include <fmt/ranges.h>
 #include <ostream>

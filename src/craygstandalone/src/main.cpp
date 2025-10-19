@@ -9,8 +9,8 @@
 #include "crayg/renderer/TextureStats.h"
 #include "crayg/scene/Scene.h"
 #include "crayg/scene/io/SceneReaderFactory.h"
+#include "craygstandalone/ImagePathResolver.h"
 #include "craygstandalone/cli/CliParser.h"
-#include <craygstandalone/ImagePathResolver.h>
 #include <iostream>
 
 namespace crayg {
