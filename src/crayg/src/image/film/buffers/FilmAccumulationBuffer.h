@@ -1,10 +1,10 @@
 #pragma once
 #include "FilmBufferBase.h"
-#include "basics/Color.h"
-#include "basics/Vector2.h"
 #include "crayg/foundation/assertions/Preconditions.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "crayg/foundation/math/geometry/Color.h"
 #include "crayg/foundation/math/geometry/Tile.h"
+#include "crayg/foundation/math/geometry/Vector2.h"
 #include "crayg/foundation/numerics/AtomicFloats.h"
 
 namespace crayg {

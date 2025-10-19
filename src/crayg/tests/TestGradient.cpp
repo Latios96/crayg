@@ -1,5 +1,5 @@
-#include "basics/Color.h"
-#include "basics/Gradient.h"
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/Gradient.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

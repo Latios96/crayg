@@ -1,10 +1,10 @@
 #pragma once
 #include "FilmValueTrait.h"
-#include "basics/Color.h"
-#include "basics/Resolution.h"
-#include "basics/Vector2.h"
 #include "crayg/foundation/assertions/Preconditions.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
+#include "crayg/foundation/math/geometry/Vector2.h"
 #include "image/PixelFormat.h"
 
 #include <fmt/format.h>

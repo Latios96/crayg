@@ -2,8 +2,8 @@
 
 #include "crayg/foundation/enums/EnumFormatter.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
-#include <basics/Color.h>
-#include <basics/Vector2.h>
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/Vector2.h"
 #include <functional>
 #include <integrators/SurfaceInteraction.h>
 #include <ostream>

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "basics/Ray.h"
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Ray.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "scene/camera/Camera.h"
 #include "scene/camera/CameraModel.h"
 

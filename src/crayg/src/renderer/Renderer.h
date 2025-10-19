@@ -2,12 +2,12 @@
 
 #include "TileStats.h"
 #include "crayg/foundation/areaiterators/tiles/tilequeues/TileQueue.h"
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "crayg/foundation/progress/TaskReporter.h"
 #include "integrators/AbstractIntegrator.h"
 #include "scene/camera/pinhole/PinholeCameraModel.h"
 #include "tilesamplers/TileSampler.h"
-#include <basics/Color.h>
-#include <basics/Resolution.h>
 #include <image/Image.h>
 #include <intersectors/SceneIntersector.h>
 #include <outputdrivers/NextGenOutputDriver.h>

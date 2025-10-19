@@ -1,6 +1,6 @@
 #pragma once
 
-#include "basics/Color.h"
+#include "crayg/foundation/math/geometry/Color.h"
 
 namespace crayg {
 

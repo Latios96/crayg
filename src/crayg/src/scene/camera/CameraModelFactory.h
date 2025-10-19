@@ -1,7 +1,7 @@
 #pragma once
 #include "Camera.h"
 #include "CameraModel.h"
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include <memory>
 
 namespace crayg {

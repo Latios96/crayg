@@ -1,4 +1,4 @@
-#include <basics/BoundingBox.h>
+#include "crayg/foundation/math/geometry/BoundingBox.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

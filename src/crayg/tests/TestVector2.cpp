@@ -1,5 +1,5 @@
-#include "basics/Vector2.h"
-#include "basics/Vector2_formatter.h"
+#include "crayg/foundation/math/geometry/Vector2.h"
+#include "crayg/foundation/math/geometry/Vector2_formatter.h"
 #include <catch2/catch.hpp>
 #include <sstream>
 

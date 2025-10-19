@@ -1,8 +1,8 @@
 #pragma once
 
-#include "basics/Color.h"
-#include "basics/Matrix4x4f.h"
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/Matrix4x4f.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include <pxr/base/gf/matrix4d.h>
 #include <pxr/base/gf/vec2f.h>
 #include <pxr/base/gf/vec2i.h>

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "PixelFormat.h"
-#include "basics/Color.h"
-#include "basics/Resolution.h"
-#include "basics/Vector2.h"
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
+#include "crayg/foundation/math/geometry/Vector2.h"
 #include <fmt/ostream.h>
 #include <memory>
 #include <ostream>

@@ -3,10 +3,10 @@
 #include "ImageMetadata.h"
 #include "ImageSpec.h"
 #include "PixelBuffer.h"
-#include "basics/Color.h"
-#include "basics/Resolution.h"
-#include "basics/Vector2.h"
-#include "basics/Vector3f.h"
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
+#include "crayg/foundation/math/geometry/Vector2.h"
+#include "crayg/foundation/math/geometry/Vector3f.h"
 #include <ostream>
 #include <tsl/ordered_map.h>
 

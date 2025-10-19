@@ -1,4 +1,4 @@
-#include "basics/Ray.h"
+#include "crayg/foundation/math/geometry/Ray.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

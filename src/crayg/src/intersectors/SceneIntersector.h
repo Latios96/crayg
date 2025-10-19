@@ -1,8 +1,8 @@
 #pragma once
 
+#include "crayg/foundation/math/geometry/Ray.h"
 #include "scene/primitives/Sphere.h"
 #include "scene/primitives/trianglemesh/Triangle.h"
-#include <basics/Ray.h>
 #include <scene/Scene.h>
 
 namespace crayg {

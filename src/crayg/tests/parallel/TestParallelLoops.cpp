@@ -1,4 +1,4 @@
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "crayg/foundation/parallel/ParallelLoops.h"
 #include <catch2/catch.hpp>
 #include <set>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TileSequenceType.h"
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "crayg/foundation/math/geometry/Tile.h"
 #include <vector>
 

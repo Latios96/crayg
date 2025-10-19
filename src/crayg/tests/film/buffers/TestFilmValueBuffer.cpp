@@ -1,4 +1,4 @@
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "image/film/buffers/FilmValueBuffer.h"
 #include <catch2/catch.hpp>
 

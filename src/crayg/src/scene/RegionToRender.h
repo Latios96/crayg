@@ -1,7 +1,7 @@
 #pragma once
 
-#include "basics/Bound2d.h"
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Bound2d.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include <fmt/ostream.h>
 #include <ostream>
 #include <variant>

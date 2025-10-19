@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CliRenderSettingsOverride.h"
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "sceneIO/read/SceneReader.h"
 #include <optional>
 #include <string>

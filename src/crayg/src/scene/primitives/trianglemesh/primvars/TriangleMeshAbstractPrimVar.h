@@ -1,7 +1,7 @@
 #pragma once
 
 #include "PrimVarType.h"
-#include "basics/Vector3f.h"
+#include "crayg/foundation/math/geometry/Vector3f.h"
 
 class TriangleMesh;
 

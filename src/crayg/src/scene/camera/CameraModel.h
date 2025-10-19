@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Camera.h"
-#include "basics/Ray.h"
-#include "basics/Ray_formatter.h"
-#include "basics/Resolution.h"
-#include "basics/Vector2.h"
+#include "crayg/foundation/math/geometry/Ray.h"
+#include "crayg/foundation/math/geometry/Ray_formatter.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
+#include "crayg/foundation/math/geometry/Vector2.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 #include "crayg/foundation/progress/TaskReporter.h"
 #include <fmt/std.h>

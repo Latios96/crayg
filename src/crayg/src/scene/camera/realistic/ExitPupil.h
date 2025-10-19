@@ -1,8 +1,8 @@
 #pragma once
 
-#include "basics/Bound2d.h"
-#include "basics/Vector2.h"
-#include "basics/Vector2_formatter.h"
+#include "crayg/foundation/math/geometry/Bound2d.h"
+#include "crayg/foundation/math/geometry/Vector2.h"
+#include "crayg/foundation/math/geometry/Vector2_formatter.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 
 namespace crayg {

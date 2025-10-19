@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TileSampler.h"
-#include "basics/Color.h"
+#include "crayg/foundation/math/geometry/Color.h"
 #include "image/ImageSpec.h"
 #include "image/ImageTile.h"
 

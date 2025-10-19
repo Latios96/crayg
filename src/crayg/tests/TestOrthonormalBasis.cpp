@@ -1,5 +1,5 @@
-#include "basics/OrthonormalBasis.h"
-#include "basics/Vector3f.h"
+#include "crayg/foundation/math/geometry/OrthonormalBasis.h"
+#include "crayg/foundation/math/geometry/Vector3f.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

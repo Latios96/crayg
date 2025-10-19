@@ -1,10 +1,10 @@
 #pragma once
 
-#include "basics/BoundingBox.h"
-#include "basics/Color.h"
-#include "basics/OrthonormalBasis.h"
-#include "basics/Ray.h"
-#include "basics/Transform.h"
+#include "crayg/foundation/math/geometry/BoundingBox.h"
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/OrthonormalBasis.h"
+#include "crayg/foundation/math/geometry/Ray.h"
+#include "crayg/foundation/math/geometry/Transform.h"
 #include "shadingnetworks/materials/Material.h"
 #include <memory>
 

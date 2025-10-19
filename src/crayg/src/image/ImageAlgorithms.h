@@ -2,8 +2,8 @@
 
 #include "Image.h"
 #include "ImageTile.h"
-#include "basics/Gradient.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
+#include "crayg/foundation/math/geometry/Gradient.h"
 
 namespace crayg {
 

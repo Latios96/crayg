@@ -1,6 +1,6 @@
 #pragma once
 
-#include "basics/Color.h"
+#include "crayg/foundation/math/geometry/Color.h"
 #include "image/ImageSpec.h"
 #include "image/ImageTile.h"
 #include "image/film/Film.h"

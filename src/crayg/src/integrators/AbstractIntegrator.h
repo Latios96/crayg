@@ -1,7 +1,7 @@
 #pragma once
 
-#include "basics/Color.h"
-#include "basics/Ray.h"
+#include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/math/geometry/Ray.h"
 #include "intersectors/SceneIntersector.h"
 
 namespace crayg {

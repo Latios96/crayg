@@ -1,10 +1,10 @@
 #pragma once
 
-#include "basics/Bound2d.h"
-#include "basics/Bound2d_formatter.h"
-#include "basics/Resolution.h"
-#include "basics/Resolution_formatter.h"
 #include "buffers/FilmBufferType.h"
+#include "crayg/foundation/math/geometry/Bound2d.h"
+#include "crayg/foundation/math/geometry/Bound2d_formatter.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution_formatter.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 #include "image/PixelFormat.h"
 #include "scene/RegionToRender.h"

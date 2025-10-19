@@ -4,7 +4,7 @@
 #include <QtWidgets/qwidget.h>
 // clang-format on
 
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 
 namespace crayg {
 

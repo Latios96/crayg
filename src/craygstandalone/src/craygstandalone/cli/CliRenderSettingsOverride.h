@@ -1,6 +1,6 @@
 #pragma once
 
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 #include "scene/RenderSettings.h"
 #include <fmt/std.h>

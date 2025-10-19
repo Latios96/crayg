@@ -1,5 +1,5 @@
 #include "OrthonormalBasis.h"
-#include "basics/Vector3f_formatter.h"
+#include "Vector3f_formatter.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
 
 namespace crayg {

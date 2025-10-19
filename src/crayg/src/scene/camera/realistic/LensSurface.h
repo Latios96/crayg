@@ -2,8 +2,8 @@
 
 #include "LensGeometry.h"
 #include "LensMaterial.h"
-#include "basics/Ray.h"
-#include "basics/Vector3f.h"
+#include "crayg/foundation/math/geometry/Ray.h"
+#include "crayg/foundation/math/geometry/Vector3f.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 #include <fmt/ostream.h>
 #include <ostream>

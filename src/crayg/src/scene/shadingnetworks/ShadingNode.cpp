@@ -1,6 +1,6 @@
 #include "ShadingNode.h"
-#include "basics/Color_formatter.h"
-#include "basics/Vector2_formatter.h"
+#include "crayg/foundation/math/geometry/Color_formatter.h"
+#include "crayg/foundation/math/geometry/Vector2_formatter.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
 #include <fmt/format.h>
 #include <utility>

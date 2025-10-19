@@ -1,8 +1,8 @@
 #pragma once
 
 #include "CameraType.h"
-#include "basics/Vector3f.h"
 #include "crayg/foundation/assertions/Preconditions.h"
+#include "crayg/foundation/math/geometry/Vector3f.h"
 #include "realistic/CameraLens.h"
 #include "scene/Transformable.h"
 #include "spdlog/fmt/ostr.h"

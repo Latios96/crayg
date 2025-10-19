@@ -1,6 +1,6 @@
 #pragma once
 
-#include "basics/Vector3f.h"
+#include "crayg/foundation/math/geometry/Vector3f.h"
 #include "scene/primitives/trianglemesh/TriangleMesh.h"
 
 namespace crayg {

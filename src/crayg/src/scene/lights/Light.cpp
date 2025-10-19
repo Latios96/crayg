@@ -1,6 +1,6 @@
 #include "Light.h"
-#include "basics/Color_formatter.h"
-#include "basics/Ray_formatter.h"
+#include "crayg/foundation/math/geometry/Color_formatter.h"
+#include "crayg/foundation/math/geometry/Ray_formatter.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
 #include "scene/shadingnetworks/materials/EmissiveMaterial.h"
 

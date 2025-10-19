@@ -4,7 +4,7 @@
 #include <QImage>
 // clang-format on
 
-#include "basics/Bound2d.h"
+#include "crayg/foundation/math/geometry/Bound2d.h"
 #include "crayg/foundation/math/geometry/Tile.h"
 
 #include <optional>

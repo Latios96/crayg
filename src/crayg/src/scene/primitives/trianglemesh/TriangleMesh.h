@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Triangle.h"
-#include "basics/BoundingBox.h"
+#include "crayg/foundation/math/geometry/BoundingBox.h"
 #include "scene/SceneObject.h"
 #include "scene/primitives/trianglemesh/primvars/TriangleMeshAbstractPrimVar.h"
 #include <ostream>

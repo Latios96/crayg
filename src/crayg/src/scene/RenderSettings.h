@@ -1,7 +1,7 @@
 #pragma once
 
-#include "basics/Resolution.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequenceType.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "image/io/imageformatwriters/ImageFormatWriteOptions.h"
 #include "integrators/IntegratorSettings.h"
 #include "integrators/IntegratorType.h"

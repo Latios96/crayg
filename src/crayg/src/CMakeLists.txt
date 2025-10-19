@@ -1,28 +1,5 @@
 set(crayg_SRCS
     # cmake-format: sortable
-    basics/Bound2d.cpp
-    basics/Bound2d.h
-    basics/BoundingBox.cpp
-    basics/BoundingBox.h
-    basics/Color.cpp
-    basics/Color.h
-    basics/Color_formatter.h
-    basics/Gradient.h
-    basics/Matrix4x4f.cpp
-    basics/Matrix4x4f.h
-    basics/OrthonormalBasis.cpp
-    basics/OrthonormalBasis.h
-    basics/Ray.cpp
-    basics/Ray.h
-    basics/Resolution.cpp
-    basics/Resolution.h
-    basics/Transform.cpp
-    basics/Transform.h
-    basics/Vector2.h
-    basics/Vector2_formatter.h
-    basics/Vector3f.cpp
-    basics/Vector3f.h
-    basics/Vector3f_formatter.h
     crayg/compatibility/lodepng/fmt/LodePNG_formatter.cpp
     crayg/compatibility/lodepng/fmt/LodePNG_formatter.h
     crayg/compatibility/openexr/fmt/ImathBox_formatter.cpp
@@ -71,8 +48,31 @@ set(crayg_SRCS
     crayg/foundation/logging/Logger.cpp
     crayg/foundation/logging/Logger.h
     crayg/foundation/math/CommonMath.h
+    crayg/foundation/math/geometry/Bound2d.cpp
+    crayg/foundation/math/geometry/Bound2d.h
+    crayg/foundation/math/geometry/BoundingBox.cpp
+    crayg/foundation/math/geometry/BoundingBox.h
+    crayg/foundation/math/geometry/Color.cpp
+    crayg/foundation/math/geometry/Color.h
+    crayg/foundation/math/geometry/Color_formatter.h
+    crayg/foundation/math/geometry/Gradient.h
+    crayg/foundation/math/geometry/Matrix4x4f.cpp
+    crayg/foundation/math/geometry/Matrix4x4f.h
+    crayg/foundation/math/geometry/OrthonormalBasis.cpp
+    crayg/foundation/math/geometry/OrthonormalBasis.h
+    crayg/foundation/math/geometry/Ray.cpp
+    crayg/foundation/math/geometry/Ray.h
+    crayg/foundation/math/geometry/Resolution.cpp
+    crayg/foundation/math/geometry/Resolution.h
     crayg/foundation/math/geometry/Tile.cpp
     crayg/foundation/math/geometry/Tile.h
+    crayg/foundation/math/geometry/Transform.cpp
+    crayg/foundation/math/geometry/Transform.h
+    crayg/foundation/math/geometry/Vector2.h
+    crayg/foundation/math/geometry/Vector2_formatter.h
+    crayg/foundation/math/geometry/Vector3f.cpp
+    crayg/foundation/math/geometry/Vector3f.h
+    crayg/foundation/math/geometry/Vector3f_formatter.h
     crayg/foundation/math/QuadraticEquations.h
     crayg/foundation/numerics/AtomicFloats.h
     crayg/foundation/numerics/BitCast.h

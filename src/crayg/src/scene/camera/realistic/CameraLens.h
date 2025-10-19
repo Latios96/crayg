@@ -6,9 +6,9 @@
 #include "LensSurface.h"
 #include "ThickLensApproximation.h"
 #include "VariableLensDistances.h"
-#include "basics/Gradient.h"
-#include "basics/Ray.h"
-#include "basics/Vector3f_formatter.h"
+#include "crayg/foundation/math/geometry/Gradient.h"
+#include "crayg/foundation/math/geometry/Ray.h"
+#include "crayg/foundation/math/geometry/Vector3f_formatter.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 #include <fmt/ostream.h>
 #include <functional>

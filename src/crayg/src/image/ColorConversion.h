@@ -1,7 +1,7 @@
 #pragma once
 
 #include "PixelBuffer.h"
-#include "basics/Color.h"
+#include "crayg/foundation/math/geometry/Color.h"
 
 namespace crayg {
 

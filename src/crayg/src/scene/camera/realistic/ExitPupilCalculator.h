@@ -2,7 +2,7 @@
 
 #include "CameraLens.h"
 #include "ExitPupil.h"
-#include "basics/Bound2d.h"
+#include "crayg/foundation/math/geometry/Bound2d.h"
 #include "crayg/foundation/objects/DtoUtils.h"
 #include "crayg/foundation/progress/TaskReporter.h"
 #include <array>

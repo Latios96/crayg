@@ -1,6 +1,6 @@
 #pragma once
 
-#include "basics/Vector2.h"
+#include "Vector2.h"
 #include <fmt/ostream.h>
 #include <ostream>
 

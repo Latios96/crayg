@@ -1,6 +1,6 @@
 #pragma once
 
-#include "basics/Ray.h"
+#include "crayg/foundation/math/geometry/Ray.h"
 #include <embree3/rtcore_ray.h>
 
 namespace crayg {
