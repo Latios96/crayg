@@ -7,7 +7,6 @@ set(crayg_SRCS
     basics/Color.cpp
     basics/Color.h
     basics/Color_formatter.h
-    basics/containers/Array2d.h
     basics/Gradient.h
     basics/math/CommonMath.h
     basics/math/QuadraticEquations.h
@@ -62,6 +61,7 @@ set(crayg_SRCS
     crayg/foundation/areaiterators/tiles/TileSequenceType.cpp
     crayg/foundation/areaiterators/tiles/TileSequenceType.h
     crayg/foundation/assertions/Preconditions.h
+    crayg/foundation/containers/Array2d.h
     crayg/foundation/enums/EnumFormatter.h
     crayg/foundation/enums/EnumParser.h
     crayg/foundation/enums/ValueMapper.h
