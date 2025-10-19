@@ -4,7 +4,7 @@
 
 namespace crayg {
 
-std::filesystem::path normalize(const std::string &p) {
+std::filesystem::path normalize(const std::filesystem::path &p) {
     return std::filesystem::absolute(std::filesystem::path(p));
 }
 
