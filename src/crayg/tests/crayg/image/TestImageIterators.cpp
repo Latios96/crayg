@@ -1,6 +1,6 @@
-#include "crayg/foundation/areaiterators/AreaIterators.h"
-#include "crayg/foundation/areaiterators/tiles/TileSequences.h"
-#include "crayg/image/Image.h"
+#include "../../../src/crayg/foundation/areaiterators/AreaIterators.h"
+#include "../../../src/crayg/foundation/areaiterators/tiles/TileSequences.h"
+#include "../../../src/crayg/image/Image.h"
 #include <catch2/catch.hpp>
 #include <iostream>
 
