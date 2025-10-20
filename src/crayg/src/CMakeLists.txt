@@ -83,6 +83,8 @@ set(crayg_SRCS
     crayg/foundation/parallel/ParallelLoops.h
     crayg/foundation/parallel/ThreadCount.cpp
     crayg/foundation/parallel/ThreadCount.h
+    crayg/foundation/physics/Wavelengths.cpp
+    crayg/foundation/physics/Wavelengths.h
     crayg/foundation/progress/RemainingTimeCalculator.cpp
     crayg/foundation/progress/RemainingTimeCalculator.h
     crayg/foundation/progress/StopWatch.cpp
@@ -277,8 +279,6 @@ set(crayg_SRCS
     crayg/scene/camera/realistic/ThickLensApproximation.h
     crayg/scene/camera/realistic/VariableLensDistances.cpp
     crayg/scene/camera/realistic/VariableLensDistances.h
-    crayg/scene/camera/realistic/Wavelengths.cpp
-    crayg/scene/camera/realistic/Wavelengths.h
     crayg/scene/camera/thinlens/ThinLensCameraModel.cpp
     crayg/scene/camera/thinlens/ThinLensCameraModel.h
     crayg/scene/Imageable.cpp

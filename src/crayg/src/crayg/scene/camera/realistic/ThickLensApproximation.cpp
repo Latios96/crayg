@@ -1,6 +1,6 @@
 #include "ThickLensApproximation.h"
 #include "CameraLens.h"
-#include "Wavelengths.h"
+#include "crayg/foundation/physics/Wavelengths.h"
 
 namespace crayg {
 

@@ -1,5 +1,5 @@
+#include "crayg/foundation/physics/Wavelengths.h"
 #include "crayg/scene/camera/realistic/LensMaterial.h"
-#include "crayg/scene/camera/realistic/Wavelengths.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

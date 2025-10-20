@@ -2,10 +2,10 @@
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/math/geometry/Color.h"
+#include "crayg/foundation/physics/Wavelengths.h"
 #include "crayg/scene/camera/realistic/CameraLens.h"
 #include "crayg/scene/camera/realistic/ExitPupilCalculator.h"
 #include "crayg/scene/camera/realistic/LensSurface.h"
-#include "crayg/scene/camera/realistic/Wavelengths.h"
 #include "crayg/scene/camera/realistic/lensio/LensFileReaderFactory.h"
 #include <cairo-svg.h>
 #include <iostream>

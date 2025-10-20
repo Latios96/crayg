@@ -1,5 +1,5 @@
 #include "FlareRenderer.h"
-#include "crayg/scene/camera/realistic/Wavelengths.h"
+#include "crayg/foundation/physics/Wavelengths.h"
 #include "crayg/scene/lights/AreaLight.h"
 #include "sampling/Random.h"
 #include "sampling/Sampling.h"
