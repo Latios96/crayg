@@ -1,4 +1,4 @@
-#include "../crayg/src/crayg/Initialization.h"
+#include "crayg/Initialization.h"
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/math/geometry/Color.h"

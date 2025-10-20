@@ -1,5 +1,5 @@
 #include "ExitPupil.h"
-#include "../renderer/sampling/Random.h"
+#include "crayg/renderer/sampling/Random.h"
 
 namespace crayg {
 

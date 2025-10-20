@@ -1,9 +1,9 @@
-#include "../crayg/src/crayg/CraygInfo.h"
 #include "CLI/CLI.hpp"
+#include "crayg/CraygInfo.h"
 #include "crayg/foundation/logging/Logger.h"
 #include <filesystem>
 
-#include "../crayg/src/crayg/Initialization.h"
+#include "crayg/Initialization.h"
 #include "crayg/foundation/enums/EnumParser.h"
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/objects/DtoUtils.h"

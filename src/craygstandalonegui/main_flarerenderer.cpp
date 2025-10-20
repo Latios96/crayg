@@ -3,8 +3,8 @@
 #include "qtcrayg/foundation/QtMetaTypes.h"
 #include <QtWidgets/qapplication.h>
 
-#include "../crayg/src/crayg/CraygInfo.h"
-#include "../crayg/src/crayg/Initialization.h"
+#include "crayg/CraygInfo.h"
+#include "crayg/Initialization.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
 #include "crayg/foundation/areaiterators/tiles/TileSequences.h"
 #include "crayg/foundation/executable/CraygMain.h"

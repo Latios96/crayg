@@ -2,8 +2,8 @@
 #include <QResource>
 #include <QtWidgets/qapplication.h>
 // clang-format on
-#include "../crayg/src/crayg/CraygInfo.h"
-#include "../crayg/src/crayg/Initialization.h"
+#include "crayg/CraygInfo.h"
+#include "crayg/Initialization.h"
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/filesystem/FileAsString.h"
 #include "crayg/foundation/logging/Logger.h"

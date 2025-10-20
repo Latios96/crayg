@@ -1,6 +1,6 @@
 #include "CliParser.h"
-#include "../../../../crayg/src/crayg/CraygInfo.h"
 #include "CLI/CLI.hpp"
+#include "crayg/CraygInfo.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/strings/NumberParsing.h"
 #include <boost/algorithm/string/classification.hpp>

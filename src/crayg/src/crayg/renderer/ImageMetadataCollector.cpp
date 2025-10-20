@@ -1,5 +1,5 @@
 #include "ImageMetadataCollector.h"
-#include "../CraygInfo.h"
+#include "crayg/CraygInfo.h"
 #include <cpuinfo.h>
 #include <fmt/chrono.h>
 

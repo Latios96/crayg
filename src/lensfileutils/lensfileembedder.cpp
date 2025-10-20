@@ -1,6 +1,6 @@
-#include "../crayg/src/crayg/CraygInfo.h"
-#include "../crayg/src/crayg/Initialization.h"
 #include "CLI/CLI.hpp"
+#include "crayg/CraygInfo.h"
+#include "crayg/Initialization.h"
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/imaging/lensio/LensFileReaderFactory.h"

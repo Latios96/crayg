@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_RUNNER
 
-#include "../src/crayg/Initialization.h"
+#include "crayg/Initialization.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
 #include <catch2/catch.hpp>
 #include <fmt/format.h>
