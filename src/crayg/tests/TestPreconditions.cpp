@@ -1,9 +1,9 @@
+#include "crayg/foundation/assertions/Preconditions.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/math/geometry/Bound2d.h"
 #include "crayg/foundation/math/geometry/Color.h"
 #include "crayg/foundation/math/geometry/Vector3f.h"
 #include "crayg/foundation/math/geometry/Vector3f_formatter.h"
-#include <../src/crayg/foundation/assertions/Preconditions.h>
 #include <catch2/catch.hpp>
 #include <fmt/format.h>
 
