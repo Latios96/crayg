@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Bound2d.h"
 #include "Vector2_formatter.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
