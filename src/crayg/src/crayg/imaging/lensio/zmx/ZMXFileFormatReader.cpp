@@ -1,6 +1,6 @@
 #include "ZMXFileFormatReader.h"
 
-#include "crayg/scene/camera/realistic/lensio/LensFileParseUtils.h"
+#include "crayg/imaging/lensio/LensFileParseUtils.h"
 
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/classification.hpp>

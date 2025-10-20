@@ -3,8 +3,8 @@
 #include "CameraType.h"
 #include "crayg/foundation/assertions/Preconditions.h"
 #include "crayg/foundation/math/geometry/Vector3f.h"
+#include "crayg/imaging/CameraLens.h"
 #include "crayg/scene/Transformable.h"
-#include "realistic/CameraLens.h"
 #include "spdlog/fmt/ostr.h"
 #include <fmt/ostream.h>
 #include <ostream>

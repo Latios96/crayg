@@ -3,7 +3,7 @@
 #include "CLI/CLI.hpp"
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/logging/Logger.h"
-#include "crayg/scene/camera/realistic/lensio/LensFileReaderFactory.h"
+#include "crayg/imaging/lensio/LensFileReaderFactory.h"
 #include "crayg/scene/io/usd/UsdLensFileUtils.h"
 #include "crayg/scene/io/usd/UsdUtils.h"
 

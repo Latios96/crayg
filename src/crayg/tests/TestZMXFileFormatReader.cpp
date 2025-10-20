@@ -1,4 +1,4 @@
-#include "crayg/scene/camera/realistic/lensio/zmx/ZMXFileFormatReader.h"
+#include "crayg/imaging/lensio/zmx/ZMXFileFormatReader.h"
 
 #include <catch2/catch.hpp>
 

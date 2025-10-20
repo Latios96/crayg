@@ -1,4 +1,4 @@
-#include "crayg/scene/camera/realistic/lensio/json/LensFileJsonWriter.h"
+#include "crayg/imaging/lensio/json/LensFileJsonWriter.h"
 #include <catch2/catch.hpp>
 #include <nlohmann/json.hpp>
 

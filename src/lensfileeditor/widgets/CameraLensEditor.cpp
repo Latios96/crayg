@@ -1,5 +1,5 @@
 #include "CameraLensEditor.h"
-#include "crayg/scene/camera/realistic/lensio/LensFileReaderFactory.h"
+#include "crayg/imaging/lensio/LensFileReaderFactory.h"
 #include "model/CameraLensModel.h"
 #include "qtcrayg/widgets/QtWidgetsBuilderDsl.h"
 #include <QHeaderView>

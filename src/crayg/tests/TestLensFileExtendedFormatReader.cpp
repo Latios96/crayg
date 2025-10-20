@@ -1,4 +1,4 @@
-#include "crayg/scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.h"
+#include "crayg/imaging/lensio/extendedformat/LensFileExtendedFormatReader.h"
 #include "fixtures/CameraLensFixtures.h"
 #include <catch2/catch.hpp>
 

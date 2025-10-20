@@ -1,6 +1,5 @@
 #include "ImageMetadataCollector.h"
 #include "../CraygInfo.h"
-#include "crayg/scene/camera/realistic/ThickLensApproximation.h"
 #include <cpuinfo.h>
 #include <fmt/chrono.h>
 

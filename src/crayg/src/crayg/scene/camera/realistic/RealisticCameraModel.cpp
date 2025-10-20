@@ -1,8 +1,8 @@
 #include "RealisticCameraModel.h"
-#include "ExitPupilCalculator.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/physics/Wavelengths.h"
 #include "crayg/foundation/tracing/CraygTracing.h"
+#include "crayg/imaging/ExitPupilCalculator.h"
 #include "crayg/renderer/sampling/Random.h"
 
 namespace crayg {

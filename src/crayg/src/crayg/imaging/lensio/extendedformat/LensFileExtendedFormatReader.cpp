@@ -2,9 +2,9 @@
 #include "crayg/foundation/enums/EnumParser.h"
 #include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/strings/CommentStripper.h"
-#include "crayg/scene/camera/realistic/LensGeometry.h"
-#include "crayg/scene/camera/realistic/LensMaterial.h"
-#include "crayg/scene/camera/realistic/lensio/LensFileParseUtils.h"
+#include "crayg/imaging/LensGeometry.h"
+#include "crayg/imaging/LensMaterial.h"
+#include "crayg/imaging/lensio/LensFileParseUtils.h"
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>

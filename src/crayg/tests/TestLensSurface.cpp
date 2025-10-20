@@ -1,4 +1,4 @@
-#include "crayg/scene/camera/realistic/LensSurface.h"
+#include "crayg/imaging/LensSurface.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

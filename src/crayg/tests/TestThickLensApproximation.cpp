@@ -1,5 +1,5 @@
-#include "crayg/scene/camera/realistic/CameraLens.h"
-#include "crayg/scene/camera/realistic/ThickLensApproximation.h"
+#include "crayg/imaging/CameraLens.h"
+#include "crayg/imaging/ThickLensApproximation.h"
 #include "fixtures/CameraLensFixtures.h"
 #include <catch2/catch.hpp>
 

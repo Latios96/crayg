@@ -1,6 +1,6 @@
 #pragma once
 
-#include "crayg/scene/camera/realistic/lensio/LensFileReader.h"
+#include "crayg/imaging/lensio/LensFileReader.h"
 
 namespace crayg {
 

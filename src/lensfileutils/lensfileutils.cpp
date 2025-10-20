@@ -7,9 +7,9 @@
 #include "crayg/foundation/enums/EnumParser.h"
 #include "crayg/foundation/executable/CraygMain.h"
 #include "crayg/foundation/objects/DtoUtils.h"
-#include "crayg/scene/camera/realistic/ExitPupilCalculator.h"
-#include "crayg/scene/camera/realistic/lensio/LensFileReaderFactory.h"
-#include "crayg/scene/camera/realistic/lensio/LensFileWriterFactory.h"
+#include "crayg/imaging/ExitPupilCalculator.h"
+#include "crayg/imaging/lensio/LensFileReaderFactory.h"
+#include "crayg/imaging/lensio/LensFileWriterFactory.h"
 #include <nlohmann/json.hpp>
 
 namespace crayg {

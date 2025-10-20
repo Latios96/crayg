@@ -19,9 +19,8 @@ def get_lens_materials_src_folder():
         / "src"
         / "crayg"
         / "src"
-        / "scene"
-        / "camera"
-        / "realistic"
+        / "crayg"
+        / "imaging"
         / "materials"
     )
 

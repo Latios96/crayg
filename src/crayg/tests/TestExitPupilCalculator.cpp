@@ -1,5 +1,5 @@
-#include "crayg/scene/camera/realistic/CameraLens.h"
-#include "crayg/scene/camera/realistic/ExitPupilCalculator.h"
+#include "crayg/imaging/CameraLens.h"
+#include "crayg/imaging/ExitPupilCalculator.h"
 #include "fixtures/CameraLensFixtures.h"
 #include <catch2/catch.hpp>
 

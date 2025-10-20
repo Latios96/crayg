@@ -1,6 +1,6 @@
 #include "crayg/testfoundation/fixtures/TemporaryDirectory.h"
 
-#include "crayg/scene/camera/realistic/lensio/LensFileReader.h"
+#include "crayg/imaging/lensio/LensFileReader.h"
 #include <catch2/catch.hpp>
 
 namespace crayg {

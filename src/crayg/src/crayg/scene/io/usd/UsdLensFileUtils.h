@@ -1,6 +1,6 @@
 #pragma once
 
-#include "crayg/scene/camera/realistic/CameraLens.h"
+#include "crayg/imaging/CameraLens.h"
 #include <pxr/usd/usd/prim.h>
 
 namespace crayg {

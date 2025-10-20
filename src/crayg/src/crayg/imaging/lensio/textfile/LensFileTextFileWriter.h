@@ -1,10 +1,10 @@
 #pragma once
 
-#include "crayg/scene/camera/realistic/lensio/LensFileWriter.h"
+#include "crayg/imaging/lensio/LensFileWriter.h"
 
 namespace crayg {
 
-class LensFileJsonWriter : public LensFileWriter {
+class LensFileTextFileWriter : public LensFileWriter {
   public:
     std::string writeFileContent(const CameraLens &cameraLens) override;
 };

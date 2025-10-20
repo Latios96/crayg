@@ -149,6 +149,56 @@ set(crayg_SRCS
     crayg/image/PixelFormat.cpp
     crayg/image/PixelFormat.h
     crayg/image/UnsupportedPixelFormat.h
+    crayg/imaging/CameraLens.cpp
+    crayg/imaging/CameraLens.h
+    crayg/imaging/CameraLensMetadata.cpp
+    crayg/imaging/CameraLensMetadata.h
+    crayg/imaging/ExitPupil.cpp
+    crayg/imaging/ExitPupil.h
+    crayg/imaging/ExitPupilCalculator.cpp
+    crayg/imaging/ExitPupilCalculator.h
+    crayg/imaging/LensGeometry.cpp
+    crayg/imaging/LensGeometry.h
+    crayg/imaging/lensio/extendedformat/LensFileExtendedFormatReader.cpp
+    crayg/imaging/lensio/extendedformat/LensFileExtendedFormatReader.h
+    crayg/imaging/lensio/extendedformat/LensFileExtendedFormatWriter.cpp
+    crayg/imaging/lensio/extendedformat/LensFileExtendedFormatWriter.h
+    crayg/imaging/lensio/json/LensFileJsonReader.cpp
+    crayg/imaging/lensio/json/LensFileJsonReader.h
+    crayg/imaging/lensio/json/LensFileJsonWriter.cpp
+    crayg/imaging/lensio/json/LensFileJsonWriter.h
+    crayg/imaging/lensio/LensFileFormat.cpp
+    crayg/imaging/lensio/LensFileFormat.h
+    crayg/imaging/lensio/LensFileParseUtils.cpp
+    crayg/imaging/lensio/LensFileParseUtils.h
+    crayg/imaging/lensio/LensFileReader.cpp
+    crayg/imaging/lensio/LensFileReader.h
+    crayg/imaging/lensio/LensFileReaderFactory.cpp
+    crayg/imaging/lensio/LensFileReaderFactory.h
+    crayg/imaging/lensio/LensFileWriter.cpp
+    crayg/imaging/lensio/LensFileWriter.h
+    crayg/imaging/lensio/LensFileWriterFactory.cpp
+    crayg/imaging/lensio/LensFileWriterFactory.h
+    crayg/imaging/lensio/textfile/LensFileTextFileReader.cpp
+    crayg/imaging/lensio/textfile/LensFileTextFileReader.h
+    crayg/imaging/lensio/textfile/LensFileTextFileWriter.cpp
+    crayg/imaging/lensio/textfile/LensFileTextFileWriter.h
+    crayg/imaging/lensio/zmx/ZMXFileFormatReader.cpp
+    crayg/imaging/lensio/zmx/ZMXFileFormatReader.h
+    crayg/imaging/LensMaterial.cpp
+    crayg/imaging/LensMaterial.h
+    crayg/imaging/LensRaytracerTracer.cpp
+    crayg/imaging/LensRaytracerTracer.h
+    crayg/imaging/LensSurface.cpp
+    crayg/imaging/LensSurface.h
+    crayg/imaging/materials/LensMaterialConstants_ohara.h
+    crayg/imaging/materials/LensMaterialConstants_schott.h
+    crayg/imaging/materials/LensMaterialIds_ohara.h
+    crayg/imaging/materials/LensMaterialIds_schott.h
+    crayg/imaging/ThickLensApproximation.cpp
+    crayg/imaging/ThickLensApproximation.h
+    crayg/imaging/VariableLensDistances.cpp
+    crayg/imaging/VariableLensDistances.h
     crayg/Initialization.cpp
     crayg/Initialization.cpp
     crayg/Initialization.h
@@ -227,58 +277,8 @@ set(crayg_SRCS
     crayg/scene/camera/CameraUtils.h
     crayg/scene/camera/pinhole/PinholeCameraModel.cpp
     crayg/scene/camera/pinhole/PinholeCameraModel.h
-    crayg/scene/camera/realistic/CameraLens.cpp
-    crayg/scene/camera/realistic/CameraLens.h
-    crayg/scene/camera/realistic/CameraLensMetadata.cpp
-    crayg/scene/camera/realistic/CameraLensMetadata.h
-    crayg/scene/camera/realistic/ExitPupil.cpp
-    crayg/scene/camera/realistic/ExitPupil.h
-    crayg/scene/camera/realistic/ExitPupilCalculator.cpp
-    crayg/scene/camera/realistic/ExitPupilCalculator.h
-    crayg/scene/camera/realistic/LensGeometry.cpp
-    crayg/scene/camera/realistic/LensGeometry.h
-    crayg/scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.cpp
-    crayg/scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatReader.h
-    crayg/scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatWriter.cpp
-    crayg/scene/camera/realistic/lensio/extendedformat/LensFileExtendedFormatWriter.h
-    crayg/scene/camera/realistic/lensio/json/LensFileJsonReader.cpp
-    crayg/scene/camera/realistic/lensio/json/LensFileJsonReader.h
-    crayg/scene/camera/realistic/lensio/json/LensFileJsonWriter.cpp
-    crayg/scene/camera/realistic/lensio/json/LensFileJsonWriter.h
-    crayg/scene/camera/realistic/lensio/LensFileFormat.cpp
-    crayg/scene/camera/realistic/lensio/LensFileFormat.h
-    crayg/scene/camera/realistic/lensio/LensFileParseUtils.cpp
-    crayg/scene/camera/realistic/lensio/LensFileParseUtils.h
-    crayg/scene/camera/realistic/lensio/LensFileReader.cpp
-    crayg/scene/camera/realistic/lensio/LensFileReader.h
-    crayg/scene/camera/realistic/lensio/LensFileReaderFactory.cpp
-    crayg/scene/camera/realistic/lensio/LensFileReaderFactory.h
-    crayg/scene/camera/realistic/lensio/LensFileWriter.cpp
-    crayg/scene/camera/realistic/lensio/LensFileWriter.h
-    crayg/scene/camera/realistic/lensio/LensFileWriterFactory.cpp
-    crayg/scene/camera/realistic/lensio/LensFileWriterFactory.h
-    crayg/scene/camera/realistic/lensio/textfile/LensFileTextFileReader.cpp
-    crayg/scene/camera/realistic/lensio/textfile/LensFileTextFileReader.h
-    crayg/scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.cpp
-    crayg/scene/camera/realistic/lensio/textfile/LensFileTextFileWriter.h
-    crayg/scene/camera/realistic/lensio/zmx/ZMXFileFormatReader.cpp
-    crayg/scene/camera/realistic/lensio/zmx/ZMXFileFormatReader.h
-    crayg/scene/camera/realistic/LensMaterial.cpp
-    crayg/scene/camera/realistic/LensMaterial.h
-    crayg/scene/camera/realistic/LensRaytracerTracer.cpp
-    crayg/scene/camera/realistic/LensRaytracerTracer.h
-    crayg/scene/camera/realistic/LensSurface.cpp
-    crayg/scene/camera/realistic/LensSurface.h
-    crayg/scene/camera/realistic/materials/LensMaterialConstants_ohara.h
-    crayg/scene/camera/realistic/materials/LensMaterialConstants_schott.h
-    crayg/scene/camera/realistic/materials/LensMaterialIds_ohara.h
-    crayg/scene/camera/realistic/materials/LensMaterialIds_schott.h
     crayg/scene/camera/realistic/RealisticCameraModel.cpp
     crayg/scene/camera/realistic/RealisticCameraModel.h
-    crayg/scene/camera/realistic/ThickLensApproximation.cpp
-    crayg/scene/camera/realistic/ThickLensApproximation.h
-    crayg/scene/camera/realistic/VariableLensDistances.cpp
-    crayg/scene/camera/realistic/VariableLensDistances.h
     crayg/scene/camera/thinlens/ThinLensCameraModel.cpp
     crayg/scene/camera/thinlens/ThinLensCameraModel.h
     crayg/scene/Imageable.cpp

@@ -1,9 +1,8 @@
 #pragma once
 
-#include "CameraLens.h"
-#include "ExitPupilCalculator.h"
-#include "ThickLensApproximation.h"
 #include "crayg/foundation/math/geometry/Ray.h"
+#include "crayg/imaging/CameraLens.h"
+#include "crayg/imaging/ExitPupilCalculator.h"
 #include "crayg/scene/camera/CameraModel.h"
 
 namespace crayg {

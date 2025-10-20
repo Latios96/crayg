@@ -2,7 +2,7 @@
 #include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/math/geometry/Transform.h"
-#include "crayg/scene/camera/realistic/lensio/LensFileReaderFactory.h"
+#include "crayg/imaging/lensio/LensFileReaderFactory.h"
 #include "crayg/scene/io/usd/UsdUtils.h"
 #include <pxr/usd/ar/resolver.h>
 #include <pxr/usd/ar/resolverContextBinder.h>
