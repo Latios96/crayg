@@ -22,9 +22,9 @@ def show(handler=None, use_maya_parent=True):
         handler = MayaHandler()
     parent = None
     if use_maya_parent:
-        from shiboken2 import wrapInstance
+        from shiboken6 import wrapInstance
         from maya import OpenMayaUI
-        from PySide2 import QtWidgets
+        from PySide6 import QtWidgets
 
         ptr = OpenMayaUI.MQtUtil.mainWindow()
         parent = wrapInstance(int(ptr), QtWidgets.QMainWindow)
