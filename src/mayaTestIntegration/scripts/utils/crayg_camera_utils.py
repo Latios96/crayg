@@ -35,7 +35,7 @@ def _add_camera_type_attribute(camera):
     )
     camera.craygCameraType.set("Pine Hole")
     _add_usd_user_exported_attribute(
-        camera, CRAYG_CAMERA_TYPE_ATTRIBUTE_NAME, "craygLensFileString"
+        camera, CRAYG_CAMERA_TYPE_ATTRIBUTE_NAME, "craygCameraType"
     )
 
 
