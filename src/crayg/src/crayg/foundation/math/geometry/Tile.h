@@ -17,6 +17,7 @@ class Tile {
     Vector2i getPosition() const;
     int getWidth() const;
     int getHeight() const;
+    int getPixelCount() const;
 
   private:
     Vector2i position;

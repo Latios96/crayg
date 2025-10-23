@@ -37,6 +37,10 @@ int Tile::getHeight() const {
     return height;
 }
 
+int Tile::getPixelCount() const {
+    return width * height;
+}
+
 Tile::Tile(const Tile &tile) : position(tile.position), width(tile.width), height(tile.height) {
 }
 
