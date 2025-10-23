@@ -18,6 +18,7 @@ class AdaptiveTileSampler : public TileSampler {
     bool shouldTerminate(int samplesTaken, float error) const;
 
   private:
+    int minSamples;
     int samplesPerPass;
     float maxError;
     void samplePixel(const Vector2<int> &samplePos, Color &fullySampled, Color &halfSampled) const;

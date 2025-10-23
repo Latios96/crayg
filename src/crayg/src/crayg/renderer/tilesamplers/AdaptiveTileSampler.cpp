@@ -1,5 +1,7 @@
 #include "AdaptiveTileSampler.h"
 #include "crayg/foundation/areaiterators/AreaIterators.h"
+#include "crayg/foundation/containers/Array2d.h"
+#include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/reporting/Heatmap.h"
 #include "crayg/image/ImageAlgorithms.h"
 #include "crayg/renderer/sampling/Random.h"
@@ -8,7 +10,9 @@ namespace crayg {
 
 AdaptiveTileSampler::AdaptiveTileSampler(int maxSamples, const std::function<Color(Vector2f)> &renderSample,
                                          int samplesPerPass, float maxError)
-    : TileSampler(maxSamples, renderSample), samplesPerPass(samplesPerPass), maxError(maxError) {
+    : TileSampler(maxSamples, renderSample), samplesPerPass(samplesPerPass), maxError(maxError),
+      minSamples(std::ceil(16.0f / std::pow(maxError, 0.3f))) {
+    Logger::info("Adaptive sampler will draw at least {} samples per pixel", minSamples);
 }
 
 void AdaptiveTileSampler::addRequiredImageSpecs(ImageSpecBuilder &imageSpecBuilder) const {
@@ -19,30 +23,35 @@ void AdaptiveTileSampler::sampleTile(const Tile &tile) const {
     int samplesTaken = 0;
     float error = std::numeric_limits<float>::max();
 
+    Array2d<Color> fullySampled(tile.getWidth(), tile.getHeight());
+    Array2d<Color> halfSampled(tile.getWidth(), tile.getHeight());
+
     while (!shouldTerminate(samplesTaken, error)) {
         error = 0;
         samplesTaken += samplesPerPass;
-        for (auto pixel : AreaIterators::scanlines(tile)) {
-            Color fullySampled = Color::createBlack();
-            Color halfSampled = Color::createBlack();
+        for (const auto &pixelInTile : AreaIterators::scanlines(tile)) {
 
-            const auto samplePos = tile.getPosition() + pixel;
-            samplePixel(samplePos, fullySampled, halfSampled);
+            const auto samplePos = tile.getPosition() + pixelInTile;
+            samplePixel(samplePos, fullySampled[pixelInTile], halfSampled[pixelInTile]);
 
-            film->addSample("color", samplePos, fullySampled / samplesPerPass);
-
-            error += evaluateErrorMetric(fullySampled / static_cast<float>(samplesTaken),
-                                         halfSampled / (samplesTaken / 2.f));
+            float pixelError = evaluateErrorMetric(fullySampled[pixelInTile] / static_cast<float>(samplesTaken),
+                                                   halfSampled[pixelInTile] / (samplesTaken / 2.f));
+            error += pixelError;
+            film->addSample("pixelError", samplePos, pixelError);
         }
-        error = error / (tile.getWidth() * tile.getHeight());
+        error = error / (tile.getPixelCount());
+    }
+
+    for (const auto &pixelInTile : AreaIterators::scanlines(tile)) {
+        const auto samplePos = tile.getPosition() + pixelInTile;
+        film->addSample("color", samplePos, fullySampled[pixelInTile] / samplesTaken);
     }
 
     drawSampleHeatmap(tile, samplesTaken);
 }
 
 void AdaptiveTileSampler::drawSampleHeatmap(const Tile &tile, int samplesTaken) const {
-    const float relativeSampleCount =
-        static_cast<float>(samplesTaken - samplesPerPass) / static_cast<float>(maxSamples - samplesPerPass);
+    const float relativeSampleCount = static_cast<float>(samplesTaken) / static_cast<float>(maxSamples);
 
     for (auto tilePos : AreaIterators::scanlines(tile)) {
         const Vector2i pixel = tilePos + tile.getPosition();
@@ -73,6 +82,9 @@ float AdaptiveTileSampler::evaluateErrorMetric(const Color &fullySampled, const 
 }
 
 bool AdaptiveTileSampler::shouldTerminate(int samplesTaken, float error) const {
+    if (samplesTaken < minSamples) {
+        return false;
+    }
     if (samplesTaken >= maxSamples) {
         return true;
     }
