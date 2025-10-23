@@ -11,13 +11,12 @@ class Tile {
     Tile(const Vector2i &position, int width, int height);
     Tile(const Tile &tile);
     Tile();
-    ~Tile() = default;
     bool operator==(const Tile &rhs) const;
     bool operator!=(const Tile &rhs) const;
     friend std::ostream &operator<<(std::ostream &os, const Tile &tile);
     Vector2i getPosition() const;
-    const int getWidth() const;
-    const int getHeight() const;
+    int getWidth() const;
+    int getHeight() const;
 
   private:
     Vector2i position;

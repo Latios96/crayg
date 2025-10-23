@@ -29,11 +29,11 @@ Vector2i Tile::getPosition() const {
     return position;
 }
 
-const int Tile::getWidth() const {
+int Tile::getWidth() const {
     return width;
 }
 
-const int Tile::getHeight() const {
+int Tile::getHeight() const {
     return height;
 }
 
