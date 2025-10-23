@@ -14,6 +14,7 @@ struct CliRenderSettingsOverride {
     std::optional<Resolution> resolution;
     std::optional<int> maxSamples;
     std::optional<IntegratorType> integratorType;
+    std::optional<IntegratorSettings> integratorSettings;
     std::optional<IntersectorType> intersectorType;
     std::optional<TileSequenceType> tileSequenceType;
     std::optional<TileSamplerType> tileSamplerType;

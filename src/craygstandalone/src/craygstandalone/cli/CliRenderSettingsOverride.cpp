@@ -12,10 +12,11 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     if (!hasAnyOverrides()) {
         return renderSettings;
     }
-    crayg::Logger::info("Applying rendersetting overrides: {}", reportOverrides());
+    Logger::info("Applying rendersetting overrides: {}", reportOverrides());
     resolvedRenderSettings.resolution = resolution.value_or(renderSettings.resolution);
     resolvedRenderSettings.maxSamples = maxSamples.value_or(renderSettings.maxSamples);
     resolvedRenderSettings.integratorType = integratorType.value_or(renderSettings.integratorType);
+    resolvedRenderSettings.integratorSettings = integratorSettings.value_or(renderSettings.integratorSettings);
     resolvedRenderSettings.intersectorType = intersectorType.value_or(renderSettings.intersectorType);
     resolvedRenderSettings.tileSequenceType = tileSequenceType.value_or(renderSettings.tileSequenceType);
     resolvedRenderSettings.tileSamplerType = tileSamplerType.value_or(renderSettings.tileSamplerType);
@@ -33,8 +34,8 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
 }
 
 bool CliRenderSettingsOverride::hasAnyOverrides() const {
-    return resolution || maxSamples || integratorType || intersectorType || tileSequenceType || tileSamplerType ||
-           adaptiveMaxError || samplesPerAdaptivePass || useSpectralLensing || regionToRender ||
+    return resolution || maxSamples || integratorType || integratorSettings || intersectorType || tileSequenceType ||
+           tileSamplerType || adaptiveMaxError || samplesPerAdaptivePass || useSpectralLensing || regionToRender ||
            (!integratorSettingsOverrides.empty());
 }
 
@@ -49,6 +50,9 @@ std::string CliRenderSettingsOverride::reportOverrides() const {
     }
     if (integratorType) {
         report.push_back(fmt::format("integratorType -> {}", *integratorType));
+    }
+    if (integratorSettings) {
+        report.push_back(fmt::format("integratorSettings -> {}", *integratorSettings));
     }
     if (intersectorType) {
         report.push_back(fmt::format("intersectorType -> {}", *intersectorType));

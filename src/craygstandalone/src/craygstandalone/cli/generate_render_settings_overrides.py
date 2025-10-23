@@ -4,9 +4,9 @@ import jinja2
 
 HEADER_TEMPLATE_STR = """#pragma once
 
-#include "basics/Resolution.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "crayg/scene/RenderSettings.h"
-#include "utils/DtoUtils.h"
+#include "crayg/foundation/objects/DtoUtils.h"
 #include <fmt/std.h>
 #include <optional>
 
@@ -32,7 +32,8 @@ struct CliRenderSettingsOverride {
 """
 
 CPP_TEMPLATE = """#include "CliRenderSettingsOverride.h"
-#include "Logger.h"
+#include "crayg/foundation/logging/Logger.h"
+#include "crayg/foundation/math/geometry/Resolution_formatter.h"
 #include <boost/algorithm/string/join.hpp>
 #include <fmt/std.h>
 
@@ -44,7 +45,7 @@ RenderSettings crayg::CliRenderSettingsOverride::resolveOverrides(const RenderSe
     if (!hasAnyOverrides()) {
         return renderSettings;
     }
-    crayg::Logger::info("Applying rendersetting overrides: {}", reportOverrides());
+    Logger::info("Applying rendersetting overrides: {}", reportOverrides());
 {% for member in members %}
     {% if member.name == 'regionToRender' %}
         resolvedRenderSettings.{{member.name}} =  {{member.name}}.has_value() ? *{{member.name}} : renderSettings.{{member.name}};
@@ -103,6 +104,7 @@ def main():
         RenderSettingsMember("Resolution", "resolution"),
         RenderSettingsMember("int", "maxSamples"),
         RenderSettingsMember("IntegratorType", "integratorType"),
+        RenderSettingsMember("IntegratorSettings", "integratorSettings"),
         RenderSettingsMember("IntersectorType", "intersectorType"),
         RenderSettingsMember("TileSequenceType", "tileSequenceType"),
         RenderSettingsMember("TileSamplerType", "tileSamplerType"),
