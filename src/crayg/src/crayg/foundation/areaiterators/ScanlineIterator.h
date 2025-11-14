@@ -1,18 +1,19 @@
 #pragma once
 
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include "crayg/foundation/math/geometry/Vector2.h"
 
 namespace crayg {
 
-template <typename I> class ScanlineIterator {
+class ScanlineIterator {
   public:
-    explicit ScanlineIterator(int lX, int lY, const I &i) : i(i) {
+    explicit ScanlineIterator(int lX, int lY, const Resolution &resolution) : resolution(resolution) {
         lastX = lX;
         lastY = lY;
     }
 
     ScanlineIterator &operator++() {
-        if (lastX + 1 < i.getWidth()) {
+        if (lastX + 1 < resolution.getWidth()) {
             lastX++;
         } else {
             lastY++;
@@ -27,12 +28,12 @@ template <typename I> class ScanlineIterator {
     }
 
     bool operator!=(const ScanlineIterator &o) const {
-        return lastX < i.getWidth() && lastY < i.getHeight();
+        return lastX < resolution.getWidth() && lastY < resolution.getHeight();
     };
 
   private:
     int lastX, lastY;
-    const I &i;
+    Resolution resolution;
 };
 
 }

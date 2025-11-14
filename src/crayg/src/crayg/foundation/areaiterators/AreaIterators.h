@@ -4,27 +4,27 @@
 
 namespace crayg {
 
-template <typename T, typename I> class IteratorAdapter {
+template <typename T> class IteratorAdapter {
   public:
-    IteratorAdapter(const I &i) : i(i) {
+    IteratorAdapter(const Resolution &resolution) : resolution(resolution) {
     }
 
     T begin() {
-        return T(0, 0, i);
+        return T(0, 0, resolution);
     }
 
     T end() {
-        return T(i.getWidth() - 1, i.getHeight() - 1, i);
+        return T(resolution.getWidth() - 1, resolution.getHeight() - 1, resolution);
     }
 
   private:
-    const I &i;
+    Resolution resolution;
 };
 
 class AreaIterators {
   public:
-    template <typename I> static IteratorAdapter<ScanlineIterator<I>, I> scanlines(I &i) {
-        return {i};
+    template <typename I> static IteratorAdapter<ScanlineIterator> scanlines(const I &i) {
+        return IteratorAdapter<ScanlineIterator>(Resolution::deduce(i));
     }
 };
 
