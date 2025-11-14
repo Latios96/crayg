@@ -17,6 +17,8 @@ class AdaptiveTileSampler : public TileSampler {
     float evaluateErrorMetric(const Color &fullySampled, const Color &halfSampled) const;
     bool shouldTerminate(int samplesTaken, float error) const;
 
+    int getMinSamples() const;
+
   private:
     int minSamples;
     int samplesPerPass;

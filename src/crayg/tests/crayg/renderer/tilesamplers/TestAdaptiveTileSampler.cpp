@@ -29,16 +29,49 @@ TEST_CASE("AdaptiveTileSampler::shouldTerminate") {
         REQUIRE_FALSE(shouldTerminate);
     }
 
-    SECTION("should return true if error is smaller than max error and max samples are not reached") {
+    SECTION("should return false if error is smaller than max error and min samples are not reached") {
         auto shouldTerminate = adaptiveTileSampler.shouldTerminate(2, 0.001f);
+
+        REQUIRE_FALSE(shouldTerminate);
+    }
+
+    SECTION(
+        "should return true if error is smaller than max error, min samples are reached max samples are not reached") {
+        auto shouldTerminate = adaptiveTileSampler.shouldTerminate(5, 0.001f);
 
         REQUIRE(shouldTerminate);
     }
 
-    SECTION("should return true if error is larger than max error and max samples are reached") {
+    SECTION("should return false if error is larger than max error and max samples are reached") {
         auto shouldTerminate = adaptiveTileSampler.shouldTerminate(17, 0.1f);
 
         REQUIRE(shouldTerminate);
+    }
+
+    SECTION("should return false if error is larger than max error, min samples are reached, but max samples are not "
+            "reached") {
+        AdaptiveTileSampler adaptiveTileSampler(
+            1024, [](Vector2f samplePos) { return Color::createWhite(); }, 8, 0.007f);
+
+        auto shouldTerminate = adaptiveTileSampler.shouldTerminate(128, 0.1f);
+
+        REQUIRE_FALSE(shouldTerminate);
+    }
+}
+
+TEST_CASE("AdaptiveTileSampler::minSamples") {
+
+    SECTION("should calculate min samples correctly") {
+        auto testData = GENERATE(table<float, int, int>(
+            {{0.1, 1, 1024}, {0.04, 1, 1024}, {0.01, 1, 1024}, {0.001, 1, 1024}, {0.001, 16, 16}}));
+        auto maxError = std::get<0>(testData);
+        auto minSamples = std::get<1>(testData);
+        auto maxSamples = std::get<1>(testData);
+
+        AdaptiveTileSampler adaptiveTileSampler(
+            maxSamples, [](Vector2f samplePos) { return Color::createWhite(); }, 8, maxError);
+
+        REQUIRE(adaptiveTileSampler.getMinSamples() == minSamples);
     }
 }
 

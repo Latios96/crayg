@@ -11,7 +11,7 @@ namespace crayg {
 AdaptiveTileSampler::AdaptiveTileSampler(int maxSamples, const std::function<Color(Vector2f)> &renderSample,
                                          int samplesPerPass, float maxError)
     : TileSampler(maxSamples, renderSample), samplesPerPass(samplesPerPass), maxError(maxError),
-      minSamples(std::ceil(16.0f / std::pow(maxError, 0.3f))) {
+      minSamples(std::min<int>(std::ceil(16.0f / std::pow(maxError, 0.3f)), maxSamples)) {
     Logger::info("Adaptive sampler will draw at least {} samples per pixel", minSamples);
 }
 
@@ -92,6 +92,10 @@ bool AdaptiveTileSampler::shouldTerminate(int samplesTaken, float error) const {
         return true;
     }
     return false;
+}
+
+int AdaptiveTileSampler::getMinSamples() const {
+    return minSamples;
 }
 
 }
