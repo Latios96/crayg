@@ -36,6 +36,10 @@ std::shared_ptr<Camera> UsdCameraReader::read() {
     const auto fStop = UsdUtils::getAttributeValueAs<float>(usdPrim.GetFStopAttr(), this->timeCodeToRead);
     camera->setFStop(fStop);
 
+    const auto bokehVerticalScale =
+        UsdUtils::getAttributeValueAs<float>(usdPrim.GetPrim(), "craygBokehVerticalScale", 1, this->timeCodeToRead);
+    camera->setBokehVerticalScale(bokehVerticalScale);
+
     return camera;
 }
 

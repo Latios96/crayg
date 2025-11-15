@@ -25,6 +25,7 @@ TEST_CASE("CameraReader::read") {
         usdCamera.GetFocusDistanceAttr().Set(50.0f);
         usdCamera.GetFStopAttr().Set(2.8f);
         UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygCameraType", CameraType::THIN_LENS);
+        UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygBokehVerticalScale", 2.f);
 
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
@@ -34,6 +35,7 @@ TEST_CASE("CameraReader::read") {
         expectedCamera->setFocusDistance(50.f);
         expectedCamera->setFStop(2.8f);
         expectedCamera->setCameraType(CameraType::THIN_LENS);
+        expectedCamera->setBokehVerticalScale(2);
         REQUIRE(*camera == *expectedCamera);
     }
 
@@ -60,11 +62,19 @@ TEST_CASE("CameraReader::read") {
         expectedCamera->setName("/usdCamera");
         REQUIRE(*camera == *expectedCamera);
     }
+
     SECTION("cameraType should default to PinholeCamera") {
         UsdCameraReader usdCameraReader(usdCamera);
         auto camera = usdCameraReader.read();
 
         REQUIRE(camera->getCameraType() == CameraType::PINHOLE);
+    }
+
+    SECTION("bokevVerticalScale should default to 1") {
+        UsdCameraReader usdCameraReader(usdCamera);
+        auto camera = usdCameraReader.read();
+
+        REQUIRE(camera->getBokehVerticalScale() == 1);
     }
 
     SECTION("should require lens file when reading realistic lens") {

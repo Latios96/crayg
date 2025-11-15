@@ -20,6 +20,7 @@ TEST_CASE("UsdCameraReader::write") {
         myCamera.setCameraType(CameraType::REALISTIC);
         CameraLens cameraLens(CameraLensMetadata("Canon"), {{1.f, 2.f, 3.f, 4.f}});
         myCamera.lens = std::make_unique<CameraLens>(cameraLens);
+        myCamera.setBokehVerticalScale(2);
 
         UsdCameraWriter usdCameraWriter(myCamera);
         usdCameraWriter.write(stage, usdPathFactory);
@@ -31,7 +32,8 @@ TEST_CASE("UsdCameraReader::write") {
         auto fStop = UsdUtils::getStaticAttributeValueAs<float>(usdGeomCamera.GetFStopAttr());
         auto cameraType = UsdUtils::getAttributeValueAsEnum<CameraType>(usdGeomCamera.GetPrim(), "craygCameraType",
                                                                         CameraType::THIN_LENS);
-
+        auto bokehScale =
+            UsdUtils::getStaticAttributeValueAs<float>(usdGeomCamera.GetPrim(), "craygBokehVerticalScale", 1.f);
         REQUIRE(focalLength == 50.0f);
         REQUIRE(horizontalAperture == 35.0f);
         REQUIRE(focusDistance == 50.f);
@@ -43,6 +45,7 @@ TEST_CASE("UsdCameraReader::write") {
                     .GetAttribute(pxr::TfToken("craygLensFile"))
                     .GetCustomDataByKey(pxr::TfToken("lens"))
                     .CanCast<pxr::VtDictionary>());
+        REQUIRE(bokehScale == 2);
     }
 }
 

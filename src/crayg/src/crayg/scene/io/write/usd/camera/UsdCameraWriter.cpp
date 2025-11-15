@@ -12,6 +12,8 @@ pxr::UsdGeomCamera UsdCameraWriter::write(pxr::UsdStagePtr stage, UsdPathFactory
     usdCamera.GetFocusDistanceAttr().Set(craygObject.getFocusDistance());
     usdCamera.GetFStopAttr().Set(craygObject.getFStop());
     UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygCameraType", craygObject.getCameraType());
+    UsdUtils::createAndSetAttribute(usdCamera.GetPrim(), "craygBokehVerticalScale",
+                                    craygObject.getBokehVerticalScale());
 
     if (craygObject.getCameraType() == CameraType::REALISTIC) {
         writeLens(usdCamera);

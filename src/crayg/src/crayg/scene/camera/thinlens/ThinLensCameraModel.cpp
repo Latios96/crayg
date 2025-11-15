@@ -11,6 +11,7 @@ RayWithWeight ThinLensCameraModel::createPrimaryRay(const Vector2f &pixelPos, fl
     const float ft = camera.getFocusDistance() / rayDirection.z;
     const Vector3f pointOnFocalPlane = rayDirection * ft;
     auto apertureSample = Sampling::concentricSampleDisk() * camera.computeApertureRadius();
+    apertureSample.y *= camera.getBokehVerticalScale();
     auto rayOrigin = Vector3f(apertureSample.x, apertureSample.y, 0);
     auto mutatedDirection = (pointOnFocalPlane - rayOrigin).normalize();
     const Transform &transform = camera.getTransform();

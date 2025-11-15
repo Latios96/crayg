@@ -19,6 +19,7 @@ class Camera : public Transformable {
     CameraType cameraType = CameraType::PINHOLE;
     float focusDistance = 0;
     float fStop = 0;
+    float bokehVerticalScale = 1;
 
   public:
     std::unique_ptr<CameraLens> lens;
@@ -49,6 +50,9 @@ class Camera : public Transformable {
 
     float getFStop() const;
     void setFStop(float fStop);
+
+    float getBokehVerticalScale() const;
+    void setBokehVerticalScale(float verticalBokehScale);
 
     float computeApertureRadius() const;
 

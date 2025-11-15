@@ -36,7 +36,7 @@ float Camera::getFilmbackSize() const {
 bool Camera::operator==(const Camera &rhs) const {
     return name == rhs.name && transform == rhs.transform && focalLength == rhs.focalLength &&
            filmbackSize == rhs.filmbackSize && cameraType == rhs.cameraType && focusDistance == rhs.focusDistance &&
-           fStop == rhs.fStop && lens == rhs.lens;
+           fStop == rhs.fStop && lens == rhs.lens && bokehVerticalScale == rhs.bokehVerticalScale;
 }
 
 bool Camera::operator!=(const Camera &rhs) const {
@@ -83,9 +83,18 @@ void Camera::setFStop(float fStop) {
     Camera::fStop = fStop;
 }
 
+float Camera::getBokehVerticalScale() const {
+    return bokehVerticalScale;
+}
+
+void Camera::setBokehVerticalScale(float verticalBokehScale) {
+    Camera::bokehVerticalScale = verticalBokehScale;
+}
+
 float Camera::computeApertureRadius() const {
     return CameraUtils::computeApertureRadius(focalLength, fStop);
 }
-CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Camera, transform, focalLength, filmbackSize, cameraType, focusDistance, fStop)
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Camera, transform, focalLength, filmbackSize, cameraType, focusDistance, fStop,
+                                    bokehVerticalScale)
 
 }
