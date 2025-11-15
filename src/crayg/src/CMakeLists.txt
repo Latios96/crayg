@@ -81,7 +81,6 @@ set(crayg_SRCS
     crayg/foundation/numerics/BitCast.h
     crayg/foundation/objects/DtoUtils.h
     crayg/foundation/objects/ToStringHelper.h
-    crayg/foundation/objects/ToStringHelperMacros.h
     crayg/foundation/parallel/ParallelLoops.h
     crayg/foundation/parallel/ThreadCount.cpp
     crayg/foundation/parallel/ThreadCount.h

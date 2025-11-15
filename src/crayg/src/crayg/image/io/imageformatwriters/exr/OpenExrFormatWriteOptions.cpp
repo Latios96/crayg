@@ -5,14 +5,7 @@
 
 namespace crayg {
 
-std::ostream &operator<<(std::ostream &os, const OpenExrFormatWriteOptions &options) {
-    os << ToStringHelper("OpenExrFormatWriteOptions")
-              .addMember("compression", options.compression)
-              .addMember("pixelType", options.pixelType)
-              .addMember("openExrDataWindow", options.openExrDataWindow)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(OpenExrFormatWriteOptions, compression, pixelType, openExrDataWindow);
 
 bool OpenExrFormatWriteOptions::operator==(const OpenExrFormatWriteOptions &rhs) const {
     return compression == rhs.compression && pixelType == rhs.pixelType && openExrDataWindow == rhs.openExrDataWindow;

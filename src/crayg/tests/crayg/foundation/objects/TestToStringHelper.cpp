@@ -1,5 +1,4 @@
 #include "crayg/foundation/objects/ToStringHelper.h"
-#include "crayg/foundation/objects/ToStringHelperMacros.h"
 
 #include <catch2/catch.hpp>
 #include <ostream>
