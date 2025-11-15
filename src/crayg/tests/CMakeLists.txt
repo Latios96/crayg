@@ -31,6 +31,7 @@ set(UNIT_TEST_SOURCE_LIST
     crayg/foundation/parallel/TestParallelLoops.cpp
     crayg/foundation/parallel/TestThreadCount.cpp
     crayg/foundation/progress/TestRemainingTimeCalculator.cpp
+    crayg/foundation/progress/TestStopWatch.cpp
     crayg/foundation/progress/TestTaskReporter.cpp
     crayg/foundation/reporting/TestHeatMap.cpp
     crayg/foundation/strings/TestHumanize.cpp

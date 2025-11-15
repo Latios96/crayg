@@ -89,6 +89,7 @@ set(crayg_SRCS
     crayg/foundation/progress/RemainingTimeCalculator.h
     crayg/foundation/progress/StopWatch.cpp
     crayg/foundation/progress/StopWatch.h
+    crayg/foundation/progress/StopWatchHelperMacros.h
     crayg/foundation/progress/TaskReporter.cpp
     crayg/foundation/progress/TaskReporter.h
     crayg/foundation/reporting/Heatmap.cpp

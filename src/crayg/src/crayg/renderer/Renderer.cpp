@@ -102,7 +102,7 @@ void Renderer::init() {
     CRAYG_TRACE_SCOPE("Renderer");
 
     {
-        InformativeScopedStopWatch initializeCamera("Initialize camera");
+        ScopedStopWatch scopedStopWatch("Initialize camera");
         cameraModel = CameraModelFactory::createCameraModel(*scene.camera, scene.renderSettings.resolution);
         cameraModel->init(taskReporter);
     }

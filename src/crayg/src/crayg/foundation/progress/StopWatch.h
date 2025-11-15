@@ -1,15 +1,16 @@
 #pragma once
 
 #include <chrono>
-#include <functional>
 
 namespace crayg {
 
+enum class StopWatchReportFormat { HUMAN, SECONDS, MILLISECONDS };
+
 class StopWatch {
   public:
-    explicit StopWatch(std::string name, std::function<void(std::string)> outputCallback);
+    StopWatch(std::string name, std::function<void(std::string)> outputCallback, StopWatchReportFormat reportFormat);
 
-    static StopWatch createStopWatch(std::string name);
+    StopWatch(std::string name, StopWatchReportFormat reportFormat = StopWatchReportFormat::HUMAN);
 
     void end();
 
@@ -17,21 +18,18 @@ class StopWatch {
     std::chrono::steady_clock::time_point begin;
     std::string name;
     std::function<void(std::string)> outputCallback;
+    StopWatchReportFormat reportFormat;
 };
 
 class ScopedStopWatch {
   public:
-    explicit ScopedStopWatch(const std::string &name);
+    explicit ScopedStopWatch(const std::string &name,
+                             StopWatchReportFormat reportFormat = StopWatchReportFormat::HUMAN);
 
     virtual ~ScopedStopWatch();
 
   private:
     StopWatch stopWatch;
-};
-
-class InformativeScopedStopWatch : public ScopedStopWatch {
-  public:
-    explicit InformativeScopedStopWatch(const std::string &name);
 };
 
 }
