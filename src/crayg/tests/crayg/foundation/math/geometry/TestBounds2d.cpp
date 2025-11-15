@@ -1,12 +1,12 @@
 #include "crayg/foundation/math/geometry/Bound2d.h"
 #include "crayg/foundation/math/geometry/Bound2d_formatter.h"
+#include "crayg/foundation/math/geometry/Resolution.h"
 #include <catch2/catch.hpp>
 #include <sstream>
 
 namespace crayg {
 
 TEST_CASE("Bounds2d::construct") {
-
     SECTION("should default construct") {
         Bounds2df bounds2Df;
 
@@ -25,6 +25,23 @@ TEST_CASE("Bounds2d::construct") {
         Bounds2df copy = bounds2Df;
 
         REQUIRE(copy == bounds2Df);
+    }
+}
+
+TEST_CASE("Bounds2d::deduce") {
+
+    SECTION("should deduce correctly for int") {
+        const Bounds2di bounds = Bounds2di::deduce(Resolution(1920, 1080));
+
+        REQUIRE(bounds.getWidth() == 1919);
+        REQUIRE(bounds.getHeight() == 1079);
+    }
+
+    SECTION("should deduce correctly for float") {
+        const Bounds2df bounds = Bounds2df::deduce(Resolution(1920, 1080));
+
+        REQUIRE(bounds.getWidth() == 1919);
+        REQUIRE(bounds.getHeight() == 1079);
     }
 }
 

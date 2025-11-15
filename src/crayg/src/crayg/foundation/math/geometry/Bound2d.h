@@ -18,6 +18,10 @@ template <typename T> class Bounds2d {
     Bounds2d(const Bounds2d<T> &vec) : min(vec.min), max(vec.max) {
     }
 
+    template <typename TypeWithBounds> static Bounds2d<T> deduce(const TypeWithBounds &t) {
+        return Bounds2d(Vector2<T>(0), Vector2<T>(t.getWidth() - 1, t.getHeight() - 1));
+    }
+
     Vector2<T> min, max;
 
     template <typename OT> Bounds2d<T> unionWith(const Bounds2d<OT> &other) {
