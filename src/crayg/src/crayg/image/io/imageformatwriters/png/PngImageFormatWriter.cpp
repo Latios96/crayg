@@ -2,6 +2,7 @@
 
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/image/ColorConversion.h"
+#include "crayg/image/ImageChannelPathResolver.h"
 #include "crayg/image/io/imageformatwriters/ImageBufferTypeTrait.h"
 
 #include <lodepng.h>
@@ -85,11 +86,8 @@ void writePngFile(const std::string &channelName, const std::filesystem::path &c
 }
 
 std::filesystem::path resolveChannelPath(const std::filesystem::path &imagePath, const std::string &channelName) {
-    if (channelName == "rgb" || channelName == "color") {
-        return imagePath;
-    }
-
-    return imagePath.parent_path() / fmt::format("{}.{}.png", imagePath.stem(), channelName);
+    ImageChannelPathResolver imageChannelPathResolver;
+    return imageChannelPathResolver.resolve(imagePath, channelName);
 }
 
 template <typename ImageType>
