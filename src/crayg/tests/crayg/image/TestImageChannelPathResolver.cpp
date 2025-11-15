@@ -34,6 +34,30 @@ TEST_CASE("ImageChannelPathResolver::resolve") {
         REQUIRE(newPath == "some/path/test.0001.png");
     }
 
+    SECTION("should resolve path for color channel to unchanged path") {
+        ImageChannelPathResolver imageChannelPathResolver;
+
+        const auto newPath = imageChannelPathResolver.resolve("some/path/test.png", "color");
+
+        REQUIRE(newPath == "some/path/test.png");
+    }
+
+    SECTION("should resolve path with # for color channel to unchanged path") {
+        ImageChannelPathResolver imageChannelPathResolver;
+
+        const auto newPath = imageChannelPathResolver.resolve("some/path/test.#.png", "color");
+
+        REQUIRE(newPath == "some/path/test.#.png");
+    }
+
+    SECTION("should resolve path with digits for color channel to unchanged path") {
+        ImageChannelPathResolver imageChannelPathResolver;
+
+        const auto newPath = imageChannelPathResolver.resolve("some/path/test.0001.png", "color");
+
+        REQUIRE(newPath == "some/path/test.0001.png");
+    }
+
     SECTION("should resolve path for alpha channel to unchanged path") {
         ImageChannelPathResolver imageChannelPathResolver;
 

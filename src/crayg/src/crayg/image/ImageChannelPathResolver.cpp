@@ -6,7 +6,7 @@
 namespace crayg {
 std::filesystem::path ImageChannelPathResolver::resolve(const std::filesystem::path &path,
                                                         const std::string &channelName) {
-    if (channelName == "rgb") {
+    if (channelName == "rgb" || channelName == "color") {
         return path;
     }
 
