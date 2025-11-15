@@ -7,6 +7,32 @@
 
 namespace crayg {
 
+template <typename T> struct Bounds2dWidthHeightCalculator {
+    static T getWidth(const Vector2<T> &min, const Vector2<T> &max);
+
+    static T getHeight(const Vector2<T> &min, const Vector2<T> &max);
+};
+
+template <> struct Bounds2dWidthHeightCalculator<float> {
+    static float getWidth(const Vector2<float> &min, const Vector2<float> &max) {
+        return max.x - min.x;
+    }
+
+    static float getHeight(const Vector2<float> &min, const Vector2<float> &max) {
+        return max.y - min.y;
+    }
+};
+
+template <> struct Bounds2dWidthHeightCalculator<int> {
+    static int getWidth(const Vector2<int> &min, const Vector2<int> &max) {
+        return (max.x - min.x) + 1;
+    }
+
+    static int getHeight(const Vector2<int> &min, const Vector2<int> &max) {
+        return (max.y - min.y) + 1;
+    }
+};
+
 template <typename T> class Bounds2d {
   public:
     Bounds2d() : min({std::numeric_limits<T>::max()}), max({std::numeric_limits<T>::lowest()}) {
@@ -52,11 +78,11 @@ template <typename T> class Bounds2d {
     }
 
     T getWidth() const {
-        return max.x - min.x;
+        return Bounds2dWidthHeightCalculator<T>::getWidth(min, max);
     }
 
     T getHeight() const {
-        return max.y - min.y;
+        return Bounds2dWidthHeightCalculator<T>::getHeight(min, max);
     }
 
     template <typename OT> bool contains(const Vector2<OT> &other) const {

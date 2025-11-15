@@ -33,15 +33,13 @@ TEST_CASE("Bounds2d::deduce") {
     SECTION("should deduce correctly for int") {
         const Bounds2di bounds = Bounds2di::deduce(Resolution(1920, 1080));
 
-        REQUIRE(bounds.getWidth() == 1919);
-        REQUIRE(bounds.getHeight() == 1079);
+        REQUIRE(bounds == Bounds2di(Vector2i(0, 0), Vector2i(1919, 1079)));
     }
 
     SECTION("should deduce correctly for float") {
         const Bounds2df bounds = Bounds2df::deduce(Resolution(1920, 1080));
 
-        REQUIRE(bounds.getWidth() == 1919);
-        REQUIRE(bounds.getHeight() == 1079);
+        REQUIRE(bounds == Bounds2df(Vector2f(0, 0), Vector2f(1919, 1079)));
     }
 }
 
@@ -279,6 +277,36 @@ TEST_CASE("Bounds2d::formatting") {
         Bounds2df bounds2Df({1, 2}, {3, 4});
 
         REQUIRE(fmt::format("{}", bounds2Df) == "Bounds2df{min=Vector2{x=1,y=2},max=Vector2{x=3,y=4}}");
+    }
+}
+
+TEST_CASE("Bounds2d::getWidth") {
+
+    SECTION("float should be non-inclusive") {
+        Bounds2df bounds({1, 1}, {2, 3});
+
+        REQUIRE(bounds.getWidth() == 1);
+    }
+
+    SECTION("int should be non-inclusive") {
+        Bounds2di bounds({1, 1}, {2, 3});
+
+        REQUIRE(bounds.getWidth() == 2);
+    }
+}
+
+TEST_CASE("Bounds2d::getHeight") {
+
+    SECTION("float should be non-inclusive") {
+        Bounds2df bounds({1, 1}, {2, 3});
+
+        REQUIRE(bounds.getHeight() == 2);
+    }
+
+    SECTION("int should be non-inclusive") {
+        Bounds2di bounds({1, 1}, {2, 3});
+
+        REQUIRE(bounds.getHeight() == 3);
     }
 }
 
