@@ -348,14 +348,7 @@ bool CameraLens::operator!=(const CameraLens &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const CameraLens &lens) {
-    os << ToStringHelper("CameraLens")
-              .addMember("metadata", lens.metadata)
-              .addMember("surfaces", lens.surfaces)
-              .addMember("asphericCoefficients", lens.asphericCoefficients)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(CameraLens, metadata, surfaces, asphericCoefficients);
 
 float CameraLens::getApertureRadius() const {
     return apertureRadius;

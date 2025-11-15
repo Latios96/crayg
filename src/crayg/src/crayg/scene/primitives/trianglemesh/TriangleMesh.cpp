@@ -126,14 +126,7 @@ bool TriangleMesh::FaceVertexIndices::operator!=(const TriangleMesh::FaceVertexI
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const TriangleMesh::FaceVertexIndices &indices) {
-    os << ToStringHelper("FaceVertexIndices")
-              .addMember("v0", indices.v0)
-              .addMember("v1", indices.v1)
-              .addMember("v2", indices.v2)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(TriangleMesh::FaceVertexIndices, v0, v1, v2);
 
 TriangleMesh::FaceIdIterator TriangleMesh::FaceIdIterator::operator++() {
     return FaceIdIterator(++id);

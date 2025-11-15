@@ -222,15 +222,7 @@ bool PixelBuffer::isColor(const Color &color) const {
     return true;
 }
 
-std::ostream &operator<<(std::ostream &os, const PixelBuffer &buffer) {
-    os << ToStringHelper("PixelBuffer")
-              .addMember("width", buffer.width)
-              .addMember("height", buffer.height)
-              .addMember("colorChannelCount", buffer.colorChannelCount)
-              .addMember("pixelFormat", buffer.data.index() == 0 ? "FLOAT" : "UINT8")
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(PixelBuffer, width, height, colorChannelCount, pixelFormat);
 
 PixelFormat PixelBuffer::getPixelFormat() const {
     return pixelFormat;

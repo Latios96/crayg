@@ -16,15 +16,7 @@ bool FilmBufferSpec::operator!=(const FilmBufferSpec &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const FilmBufferSpec &spec) {
-    os << ToStringHelper("FilmBufferSpec")
-              .addMember("name", spec.name)
-              .addMember("bufferType", spec.bufferType)
-              .addMember("pixelFormat", spec.pixelFormat)
-              .addMember("channelCount", spec.channelCount)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(FilmBufferSpec, name, bufferType, pixelFormat, channelCount);
 
 FilmSpecBuilder::FilmSpecBuilder(const Resolution &resolution) {
     filmSpec = FilmSpec(resolution, {{"color", FilmBufferType::ACCUMULATION, PixelFormat::FLOAT32, 3}}, std::nullopt);

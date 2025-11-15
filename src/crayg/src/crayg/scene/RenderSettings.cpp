@@ -52,22 +52,9 @@ RenderSettings RenderSettings::createDefault() {
                           false, std::nullopt, ImageFormatWriteOptions{});
 }
 
-std::ostream &operator<<(std::ostream &os, const RenderSettings &renderSettings) {
-    os << ToStringHelper("RenderSettings")
-              .addMember("resolution", renderSettings.resolution)
-              .addMember("maxSamples", renderSettings.maxSamples)
-              .addMember("integratorType", renderSettings.integratorType)
-              .addMember("integratorSettings", renderSettings.integratorSettings)
-              .addMember("intersectorType", renderSettings.intersectorType)
-              .addMember("tileSequenceType", renderSettings.tileSequenceType)
-              .addMember("tileSamplerType", renderSettings.tileSamplerType)
-              .addMember("adaptiveMaxError", renderSettings.adaptiveMaxError)
-              .addMember("samplesPerAdaptivePass", renderSettings.samplesPerAdaptivePass)
-              .addMember("useSpectralLensing", renderSettings.useSpectralLensing)
-              .addMember("regionToRender", renderSettings.regionToRender)
-              .addMember("openExrFormatWriteOptions", renderSettings.imageFormatWriteOptions.openExrFormatWriteOptions)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(RenderSettings, resolution, maxSamples, integratorType, integratorSettings,
+                                    intersectorType, tileSequenceType, tileSamplerType, adaptiveMaxError,
+                                    samplesPerAdaptivePass, useSpectralLensing, regionToRender,
+                                    imageFormatWriteOptions);
 
 }

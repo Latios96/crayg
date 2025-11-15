@@ -72,10 +72,7 @@ bool Light::Radiance::operator!=(const Light::Radiance &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const Light::Radiance &radiance) {
-    os << ToStringHelper("Radiance").addMember("radiance", radiance.radiance).addMember("ray", radiance.ray).finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Light::Radiance, radiance, ray);
 
 const Color &Light::getColor() const {
     return color;

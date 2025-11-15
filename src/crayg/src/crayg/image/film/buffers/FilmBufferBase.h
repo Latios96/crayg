@@ -106,12 +106,8 @@ template <typename T, int channelCount> struct FilmBufferBase {
         return fmt::format("{}x {}", channelCount, FilmValueTrait<T>::name);
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const FilmBufferBase<T, channelCount> &buffer) {
-        os << ToStringHelper("PixelBuffer")
-                  .addMember("width", buffer.width)
-                  .addMember("height", buffer.height)
-                  .addMember("format", fmt::format(R"('{}')", buffer.describe()))
-                  .finish();
+    friend std::ostream &operator<<(std::ostream &os, const FilmBufferBase<T, channelCount> &obj) {
+        CRAYG_TO_STRING_HELPER(os, PixelBuffer, width, height, format);
         return os;
     }
 

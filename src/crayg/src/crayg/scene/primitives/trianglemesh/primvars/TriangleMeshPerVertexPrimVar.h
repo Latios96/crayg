@@ -28,12 +28,8 @@ template <typename T> struct VertexData {
         return !(rhs == *this);
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const VertexData &data) {
-        os << ToStringHelper("VertexData")
-                  .addMember("v0", data.v0)
-                  .addMember("v1", data.v1)
-                  .addMember("v2", data.v2)
-                  .finish();
+    friend std::ostream &operator<<(std::ostream &os, const VertexData &obj) {
+        CRAYG_TO_STRING_HELPER(os, VertexData, v0, v1, v2);
         return os;
     }
 
@@ -75,8 +71,8 @@ template <typename T> class TriangleMeshPerVertexPrimVar : public TriangleMeshAb
         return vertexData != otherVertexData;
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerVertexPrimVar<T> &var) {
-        os << ToStringHelper("TriangleMeshPerVertexPrimVar").addMember("vertexData", var.vertexData).finish();
+    friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerVertexPrimVar<T> &obj) {
+        CRAYG_TO_STRING_HELPER(os, TriangleMeshPerVertexPrimVar, vertexData);
         return os;
     }
 

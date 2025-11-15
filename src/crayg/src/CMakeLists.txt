@@ -138,6 +138,7 @@ set(crayg_SRCS
     crayg/image/io/imageformatwriters/exr/OpenExrImageFormatWriter.cpp
     crayg/image/io/imageformatwriters/exr/OpenExrImageFormatWriter.h
     crayg/image/io/imageformatwriters/ImageBufferTypeTrait.h
+    crayg/image/io/imageformatwriters/ImageFormatWriteOptions.cpp
     crayg/image/io/imageformatwriters/ImageFormatWriteOptions.h
     crayg/image/io/imageformatwriters/ImageFormatWriter.h
     crayg/image/io/imageformatwriters/ImageFormatWriters.cpp

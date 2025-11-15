@@ -26,12 +26,11 @@ bool IntegratorSettings::operator!=(const IntegratorSettings &rhs) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const IntegratorSettings &settings) {
-    ToStringHelper toStringHelper("IntegratorSettings");
+    ToStringHelper2 toStringHelper(os, "IntegratorSettings");
     for (const auto &entry : settings.settings) {
         toStringHelper.addMember(entry.first, fmt::format("{}", entry.second));
     }
-    os << toStringHelper.finish();
-    return os;
+    return toStringHelper.finish();
 }
 
 }

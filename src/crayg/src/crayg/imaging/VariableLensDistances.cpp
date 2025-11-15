@@ -15,13 +15,7 @@ bool IndexAndWeight::operator!=(const IndexAndWeight &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const IndexAndWeight &indexAndWheight) {
-    os << ToStringHelper("IndexAndWeight")
-              .addMember("firstSampleIndex", indexAndWheight.firstSampleIndex)
-              .addMember("weight", indexAndWheight.weight)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(IndexAndWeight, firstSampleIndex, weight);
 
 float SampledDistance::getDistance(const IndexAndWeight &indexAndWeight) const {
     return getDistance(indexAndWeight.firstSampleIndex, indexAndWeight.weight);

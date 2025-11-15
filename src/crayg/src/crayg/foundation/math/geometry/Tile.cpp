@@ -16,14 +16,7 @@ bool Tile::operator!=(const Tile &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const Tile &tile) {
-    os << ToStringHelper("Tile")
-              .addMember("position", tile.position)
-              .addMember("width", tile.width)
-              .addMember("height", tile.height)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Tile, position, width, height);
 
 Vector2i Tile::getPosition() const {
     return position;

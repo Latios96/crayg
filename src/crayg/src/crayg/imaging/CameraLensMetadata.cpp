@@ -13,21 +13,8 @@ CameraLensMetadata::CameraLensMetadata(const std::string &name, float focalLengt
       squeeze(squeeze), surfaceCount(lensCount), closestFocalDistance(closestFocalDistance), patent(patent),
       description(description) {
 }
-
-std::ostream &operator<<(std::ostream &os, const CameraLensMetadata &metadata) {
-    os << ToStringHelper("CameraLensMetadata")
-              .addMember("name", metadata.name)
-              .addMember("focalLength", metadata.focalLength)
-              .addMember("maximumAperture", metadata.maximumAperture)
-              .addMember("isAnamorphic", metadata.isAnamorphic)
-              .addMember("squeeze", metadata.squeeze)
-              .addMember("surfaceCount", metadata.surfaceCount)
-              .addMember("closestFocalDistance", metadata.closestFocalDistance)
-              .addMember("patent", metadata.patent)
-              .addMember("description", metadata.description)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(CameraLensMetadata, name, focalLength, maximumAperture, isAnamorphic, squeeze,
+                                    surfaceCount, closestFocalDistance, patent, description)
 
 bool CameraLensMetadata::operator==(const CameraLensMetadata &rhs) const {
     return name == rhs.name && focalLength == rhs.focalLength && maximumAperture == rhs.maximumAperture &&

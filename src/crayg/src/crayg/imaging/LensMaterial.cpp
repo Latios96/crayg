@@ -2,6 +2,7 @@
 #include "crayg/foundation/exceptions/Exceptions.h"
 #include "crayg/foundation/logging/Logger.h"
 #include "crayg/foundation/objects/ToStringHelper.h"
+#include <fmt/ranges.h>
 #include <pystring.h>
 
 namespace crayg {
@@ -19,19 +20,7 @@ bool LensMaterial::operator!=(const LensMaterial &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const LensMaterial &material) {
-    os << ToStringHelper("LensMaterial")
-              .addMember("id", material.id)
-              .addMember("ior", material.ior)
-              .addMember("abbeNo", material.abbeNo)
-              .addMember("sellmeierCoefficients",
-                         fmt::format("{}, {}, {}, {}, {}, {}", material.sellmeierCoefficients[0],
-                                     material.sellmeierCoefficients[1], material.sellmeierCoefficients[2],
-                                     material.sellmeierCoefficients[3], material.sellmeierCoefficients[4],
-                                     material.sellmeierCoefficients[5]))
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(LensMaterial, id, ior, abbeNo, sellmeierCoefficients);
 
 LensMaterial LensMaterial::createMaterialById(LensMaterialId lensMaterialId) {
     switch (lensMaterialId) {

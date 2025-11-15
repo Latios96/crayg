@@ -12,13 +12,6 @@ bool OrthonormalBasis::operator!=(const OrthonormalBasis &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const OrthonormalBasis &basis) {
-    os << ToStringHelper("OrthonormalBasis")
-              .addMember("u", basis.u)
-              .addMember("v", basis.v)
-              .addMember("w", basis.w)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(OrthonormalBasis, u, v, w);
 
 }

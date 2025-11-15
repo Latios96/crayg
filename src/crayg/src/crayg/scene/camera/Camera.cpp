@@ -86,17 +86,6 @@ void Camera::setFStop(float fStop) {
 float Camera::computeApertureRadius() const {
     return CameraUtils::computeApertureRadius(focalLength, fStop);
 }
-
-std::ostream &operator<<(std::ostream &os, const Camera &camera) {
-    os << ToStringHelper("Camera")
-              .addMember("transform", camera.transform)
-              .addMember("focalLength", camera.focalLength)
-              .addMember("filmbackSize", camera.filmbackSize)
-              .addMember("cameraType", camera.cameraType)
-              .addMember("focusDistance", camera.focusDistance)
-              .addMember("fStop", camera.fStop)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Camera, transform, focalLength, filmbackSize, cameraType, focusDistance, fStop)
 
 }

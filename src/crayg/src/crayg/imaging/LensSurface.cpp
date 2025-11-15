@@ -234,33 +234,10 @@ bool LensSurface::operator!=(const LensSurface &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const LensSurface &surface) {
-    os << ToStringHelper("LensSurface")
-              .addMember("curvatureRadius", surface.curvatureRadius)
-              .addMember("thickness", surface.thickness)
-              .addMember("ior", surface.ior)
-              .addMember("apertureRadius", surface.apertureRadius)
-              .addMember("center", surface.center)
-              .addMember("abbeNumber", surface.abbeNumber)
-              .addMember("material", surface.material)
-              .addMember("geometry", surface.geometry)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(LensSurface, curvatureRadius, thickness, ior, apertureRadius, center, abbeNumber,
+                                    material, geometry)
 
-std::ostream &operator<<(std::ostream &os, const AsphericCoefficients &coefficients) {
-    os << ToStringHelper("AsphericCoefficients")
-              .addMember("k", coefficients.k)
-              .addMember("a2", coefficients.a2)
-              .addMember("a4", coefficients.a4)
-              .addMember("a6", coefficients.a6)
-              .addMember("a8", coefficients.a8)
-              .addMember("a10", coefficients.a10)
-              .addMember("a12", coefficients.a12)
-              .addMember("a14", coefficients.a14)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(AsphericCoefficients, k, a2, a4, a6, a8, a10, a12, a14)
 
 bool AsphericCoefficients::operator==(const AsphericCoefficients &rhs) const {
     return k == rhs.k && a2 == rhs.a2 && a4 == rhs.a4 && a6 == rhs.a6 && a8 == rhs.a8 && a10 == rhs.a10 &&

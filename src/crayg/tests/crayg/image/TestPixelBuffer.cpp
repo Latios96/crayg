@@ -212,14 +212,14 @@ TEST_CASE("PixelBuffer::formatting") {
 
         os << pixelBuffer;
 
-        REQUIRE(os.str() == "PixelBuffer{width=5,height=10,colorChannelCount=3,pixelFormat=FLOAT}");
+        REQUIRE(os.str() == "PixelBuffer{width=5,height=10,colorChannelCount=3,pixelFormat=FLOAT32}");
     }
 
     SECTION("should format using fmt") {
         PixelBuffer pixelBuffer(5, 10, PixelFormat::FLOAT32, 3);
 
         REQUIRE(fmt::format("{}", pixelBuffer) ==
-                "PixelBuffer{width=5,height=10,colorChannelCount=3,pixelFormat=FLOAT}");
+                "PixelBuffer{width=5,height=10,colorChannelCount=3,pixelFormat=FLOAT32}");
     }
 }
 

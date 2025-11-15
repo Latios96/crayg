@@ -6,10 +6,7 @@
 
 namespace crayg {
 
-std::ostream &operator<<(std::ostream &os, const Color &color) {
-    os << ToStringHelper("Color").addMember("r", color.r).addMember("g", color.g).addMember("b", color.b).finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Color, r, g, b);
 
 Color Color::createRandom() {
     return {Random::random(), Random::random(), Random::random()};

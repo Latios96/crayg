@@ -29,13 +29,6 @@ bool BarycentricCoordinates::operator!=(const BarycentricCoordinates &rhs) const
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const BarycentricCoordinates &coordinates) {
-    os << ToStringHelper("BarycentricCoordinates")
-              .addMember("alpha", coordinates.alpha)
-              .addMember("beta", coordinates.beta)
-              .addMember("gamma", coordinates.gamma)
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(BarycentricCoordinates, alpha, beta, gamma);
 
 }

@@ -4,14 +4,7 @@
 
 namespace crayg {
 
-std::ostream &operator<<(std::ostream &os, const Bounds2df &d) {
-    os << ToStringHelper("Bounds2d").addMember("min", d.min).addMember("max", d.max).finish();
-    return os;
-}
-
-std::ostream &operator<<(std::ostream &os, const Bounds2di &d) {
-    os << ToStringHelper("Bounds2d").addMember("min", d.min).addMember("max", d.max).finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Bounds2df, min, max);
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Bounds2di, min, max);
 
 }

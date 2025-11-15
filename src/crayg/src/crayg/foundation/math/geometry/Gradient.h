@@ -25,11 +25,8 @@ template <typename T> struct GradientStop {
         return !(rhs == *this);
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const GradientStop &stop) {
-        os << ToStringHelper("GradientStop")
-                  .addMember("position", stop.position)
-                  .addMember("value", stop.value)
-                  .finish();
+    friend std::ostream &operator<<(std::ostream &os, const GradientStop &obj) {
+        CRAYG_TO_STRING_HELPER(os, GradientStop, position, value);
         return os;
     }
 };

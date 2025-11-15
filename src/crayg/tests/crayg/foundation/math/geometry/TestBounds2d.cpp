@@ -255,13 +255,13 @@ TEST_CASE("Bounds2d::formatting") {
 
         os << bounds2Df;
 
-        REQUIRE(os.str() == "Bounds2d{min=Vector2{x=1,y=2},max=Vector2{x=3,y=4}}");
+        REQUIRE(os.str() == "Bounds2df{min=Vector2{x=1,y=2},max=Vector2{x=3,y=4}}");
     }
 
     SECTION("should be formatable") {
         Bounds2df bounds2Df({1, 2}, {3, 4});
 
-        REQUIRE(fmt::format("{}", bounds2Df) == "Bounds2d{min=Vector2{x=1,y=2},max=Vector2{x=3,y=4}}");
+        REQUIRE(fmt::format("{}", bounds2Df) == "Bounds2df{min=Vector2{x=1,y=2},max=Vector2{x=3,y=4}}");
     }
 }
 

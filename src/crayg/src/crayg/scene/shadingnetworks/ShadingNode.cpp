@@ -61,13 +61,7 @@ bool FloatShadingNodeInput::operator!=(const FloatShadingNodeInput &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const FloatShadingNodeInput &input) {
-    os << ToStringHelper("FloatShadingNodeInput")
-              .addMember("value", input.value)
-              .addMember("inputNode", input.inputNode->getName())
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(FloatShadingNodeInput, value, inputNode->getName());
 
 ShadingNodeOutputType IntShadingNodeInput::getOutputType() const {
     return ShadingNodeOutputType::INT;
@@ -96,13 +90,7 @@ bool IntShadingNodeInput::operator!=(const IntShadingNodeInput &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const IntShadingNodeInput &input) {
-    os << ToStringHelper("IntShadingNodeInput")
-              .addMember("value", input.value)
-              .addMember("inputNode", input.inputNode->getName())
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(IntShadingNodeInput, value, inputNode->getName());
 
 ShadingNodeOutputType Vector2fShadingNodeInput::getOutputType() const {
     return ShadingNodeOutputType::VECTOR2F;
@@ -131,13 +119,7 @@ bool Vector2fShadingNodeInput::operator!=(const Vector2fShadingNodeInput &rhs) c
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const Vector2fShadingNodeInput &input) {
-    os << ToStringHelper("Vector2fShadingNodeInput")
-              .addMember("value", input.value)
-              .addMember("inputNode", input.inputNode->getName())
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(Vector2fShadingNodeInput, value, inputNode->getName());
 
 ShadingNodeOutputType ColorShadingNodeInput::getOutputType() const {
     return ShadingNodeOutputType::COLOR;
@@ -166,13 +148,7 @@ bool ColorShadingNodeInput::operator!=(const ColorShadingNodeInput &rhs) const {
     return !(rhs == *this);
 }
 
-std::ostream &operator<<(std::ostream &os, const ColorShadingNodeInput &input) {
-    os << ToStringHelper("ColorShadingNodeInput")
-              .addMember("value", input.value)
-              .addMember("inputNode", input.inputNode->getName())
-              .finish();
-    return os;
-}
+CRAYG_TO_STRING_HELPER_OSTREAM_IMPL(ColorShadingNodeInput, value, inputNode->getName());
 
 ShadingNode::ShadingNode() {
 }
