@@ -3,7 +3,7 @@
 
 namespace crayg {
 std::ostream &operator<<(std::ostream &os, const crayg::PngImageFormatWriteOptions &options) {
-    os << ToStringHelper("PngImageFormatWriteOptions").finish();
+    ToStringHelper(os, "PngImageFormatWriteOptions").finish();
     return os;
 }
 }

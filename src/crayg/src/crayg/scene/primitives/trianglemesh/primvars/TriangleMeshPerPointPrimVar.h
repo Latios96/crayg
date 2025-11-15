@@ -43,8 +43,8 @@ template <typename T> class TriangleMeshPerPointPrimVar : public TriangleMeshAbs
     }
 
     template <typename OStream>
-    friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerPointPrimVar<T> &var) {
-        os << ToStringHelper("TriangleMeshPerPointPrimVar").addMember("pointData", var.pointData).finish();
+    friend std::ostream &operator<<(std::ostream &os, const TriangleMeshPerPointPrimVar<T> &obj) {
+        CRAYG_TO_STRING_HELPER(os, TriangleMeshPerPointPrimVar, pointData);
         return os;
     }
 
