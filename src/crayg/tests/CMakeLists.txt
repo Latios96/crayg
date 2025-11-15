@@ -11,6 +11,7 @@ set(UNIT_TEST_SOURCE_LIST
     crayg/foundation/containers/TestArray2d.cpp
     crayg/foundation/enums/TestEnumParser.cpp
     crayg/foundation/enums/TestValueMapper.cpp
+    crayg/foundation/macros/TestForeachVararg.cpp
     crayg/foundation/math/geometry/TestBoundingBox.cpp
     crayg/foundation/math/geometry/TestBounds2d.cpp
     crayg/foundation/math/geometry/TestColor.cpp

@@ -49,6 +49,7 @@ set(crayg_SRCS
     crayg/foundation/filesystem/FileAsString.h
     crayg/foundation/logging/Logger.cpp
     crayg/foundation/logging/Logger.h
+    crayg/foundation/macros/ForeachVararg.h
     crayg/foundation/math/CommonMath.h
     crayg/foundation/math/geometry/Bound2d.cpp
     crayg/foundation/math/geometry/Bound2d.h
