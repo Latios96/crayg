@@ -199,7 +199,7 @@
         {
           "name": "PixelRegion",
           "variables": {
-            "crayg_additional_args": "\"--regionToRender=px:[(100,150),(350,300)]\""
+            "crayg_additional_args": "\"--regionToRender=px:[(100,150),(349,299)]\""
           }
         },
         {
